@@ -212,20 +212,23 @@ export interface PublishEmit {
  * catalogVersion (pushing `catalog-v*` is the publish button); the bundle's
  * own git-sha catalogVersion stamp is compile metadata and does not ride
  * into the manifest.
+ *
+ * `publishDir` overrides the output root (tests emit into a temp dir).
  */
 export async function emitPublish(
     bundle: Bundle,
     tag: string,
+    publishDir: string = PUBLISH_DIR,
 ): Promise<PublishEmit> {
-    await Deno.remove(PUBLISH_DIR, { recursive: true }).catch(() => {});
-    const objectsDir = join(PUBLISH_DIR, "publishes", "objects", "sha256");
-    const manifestDir = join(PUBLISH_DIR, "publishes", tag);
+    await Deno.remove(publishDir, { recursive: true }).catch(() => {});
+    const objectsDir = join(publishDir, "publishes", "objects", "sha256");
+    const manifestDir = join(publishDir, "publishes", tag);
     await ensureDir(objectsDir);
     await ensureDir(manifestDir);
 
     const writeObject = async (hash: string, value: Json) => {
         await Deno.writeTextFile(
-            join(PUBLISH_DIR, objectRelKey(hash)),
+            join(publishDir, objectRelKey(hash)),
             stableStringify(value),
         );
     };
@@ -251,10 +254,17 @@ export async function emitPublish(
             key: objectRelKey(doc.hash),
         });
     }
+    // The fnTable key hashes only the normalized `src`, but the stored
+    // object is the FULL entry (api/kind/src/provenance) — provenance can
+    // change while src stays identical. Pooled objects must be addressed by
+    // the bytes they contain, so the STORAGE key is the hash of the whole
+    // entry; the fnTable key stays the logical id in the manifest.
     const fns: Array<Record<string, Json>> = [];
     for (const [key, entry] of Object.entries(bundle.fnTable)) {
-        await writeObject(key, entry as unknown as Json);
-        fns.push({ key, objectKey: objectRelKey(key) });
+        const value = entry as unknown as Json;
+        const objectHash = `sha256:${await sha256Hex(stableStringify(value))}`;
+        await writeObject(objectHash, value);
+        fns.push({ key, objectKey: objectRelKey(objectHash) });
     }
 
     const manifestKey = `publishes/${tag}/manifest.json`;
@@ -273,11 +283,11 @@ export async function emitPublish(
         stableStringify(manifest),
     );
     await Deno.writeTextFile(
-        join(PUBLISH_DIR, "latest.json"),
+        join(publishDir, "latest.json"),
         stableStringify({ catalogVersion: tag, manifestKey }),
     );
     return {
-        publishDir: PUBLISH_DIR,
+        publishDir,
         manifestKey,
         docCount: docs.length,
         fnCount: fns.length,

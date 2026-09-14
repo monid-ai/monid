@@ -1,10 +1,11 @@
 /**
- * deno task compiler:compile [--force] [--frozen-meta]
+ * deno task compiler:compile [--force] [--frozen-meta] [--publish <tag>]
  *
  * Compiles ALL connector Defs into the flat bundle (docs + fnTable) under
  * the gitignored .output/ cache — always the whole repo, one artifact
- * (provider/endpoint lookups read the compiled bundle; design D28). CI
- * uploads .output/catalog.json as the release artifact; nothing compiled is
+ * (provider/endpoint lookups read the compiled bundle; design D28). With
+ * --publish, also emits the split publish tree (.output/publish/) that CI
+ * tars and attaches to the catalog-v* GitHub Release; nothing compiled is
  * checked in.
  */
 import { Command } from "@cliffy/command";
@@ -41,9 +42,14 @@ console.log(
 );
 
 if (options.publish) {
-    if (!/^catalog-v.+$/.test(options.publish)) {
+    // Strict: the tag is used verbatim as a directory name and S3 key
+    // segment, so no `/` or other path-hostile characters.
+    if (
+        !/^catalog-v\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/.test(options.publish)
+    ) {
         console.error(
-            `--publish expects a catalog-v* tag, got: ${options.publish}`,
+            `--publish expects a catalog-v<semver> tag ` +
+                `(e.g. catalog-v1.2.3), got: ${options.publish}`,
         );
         Deno.exit(1);
     }
