@@ -16,6 +16,11 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    env:
+      # The tag rides through env everywhere — never expanded inside a run
+      # script, where a hostile-but-valid tag name like `catalog-v$(id)`
+      # would be parsed as shell (template injection). Env values are data.
+      TAG: ${{ github.ref_name }}
     steps:
       - uses: actions/checkout@v4
       - uses: denoland/setup-deno@v2
@@ -24,9 +29,10 @@ jobs:
       # Never release a red build.
       - run: deno task check
       - run: deno task test
-      # Emit the split publish tree stamped with THIS tag.
-      - run: deno task compiler:compile --force --publish "${{ github.ref_name }}"
-      - run: tar -czf "${{ github.ref_name }}.tar.gz" -C .output/publish .
+      # Emit the split publish tree stamped with THIS tag (also hard-rejects
+      # any tag that is not catalog-v<semver>).
+      - run: deno task compiler:compile --force --publish "$TAG"
+      - run: tar -czf "$TAG.tar.gz" -C .output/publish .
       # Idempotent so a failed downstream step is recoverable by a plain
       # re-run: create only when missing, upload with --clobber.
       - run: |
@@ -35,7 +41,6 @@ jobs:
           gh release upload "$TAG" "$TAG.tar.gz" --clobber
         env:
           GH_TOKEN: ${{ github.token }}
-          TAG: ${{ github.ref_name }}
       # DIRECT GitLab trigger — both values are secrets, no coordinates here.
       # inputs[], not variables[]: monid-services blocks trigger tokens from
       # setting pipeline variables (403), and declares catalog_publish_tag
@@ -45,4 +50,4 @@ jobs:
           curl -sS --fail-with-body -X POST "https://gitlab.com/api/v4/projects/${{ secrets.CATALOG_PUBLISHER_PROJECT_ID }}/trigger/pipeline" \
             -F "token=${{ secrets.CATALOG_PUBLISHER_TRIGGER_TOKEN }}" \
             -F "ref=main" \
-            -F "inputs[catalog_publish_tag]=${{ github.ref_name }}"
+            -F "inputs[catalog_publish_tag]=$TAG"
