@@ -1,0 +1,207 @@
+# Design: add-connector-clay
+
+Decision record for the clay port (v1 `adaptors/clay`, 10 defs). Only the
+choices the declarative model forced are recorded; everything else mirrors
+v1 verbatim.
+
+## D1 — Three pools, declared once on the provider
+
+Clay meters against three INDEPENDENT vendor units, and a run of one family
+never touches the other's: data credits and actions (enrichment), and the
+subscription's annual search-results quota (search). v1 collapsed all three
+into dollars at Launch-plan rates; the pool rule (2026-09-15) keeps the
+vendor's own units, so the doc declares `data_credit`, `action` and
+`search_result` and the broker card converts. This is only declarable in ONE
+place because of the pdl fix (its D6): credits resolve key-wise and a
+provider-declared pool must be drained by at least one ENDPOINT, not by every
+one. Each compiled doc then narrows to the pools its own lines drain —
+`clay#enrichment/mobile-phone` carries `data_credit` + `action`,
+`clay#search/query-mode/run` carries `search_result`, and the two FREE docs
+carry none. Rejected: declaring the pools per endpoint (correct, but states
+an account-wide fact ten times); a single "US dollars" pool (violates the
+rule, and cannot express a quota row — `consumes.amount` must be positive,
+so a $0 row would force the doc FREE and lose the quota gate entirely).
+
+## D2 — One line per pool per quantum
+
+A line pins exactly one `consumes.credit`, but ONE routine run draws from two
+pools simultaneously. So each quantum is expressed as a PAIR of PER_UNIT
+lines over the same unit — `enrichment_credits` (data credits) and
+`enrichment_actions` (actions) — both counted by the same quantity. The
+alternative, a flat PER_CALL pair, was rejected for D3's reason: a flat line
+always bills on success, and a Clay miss is a success that draws nothing.
+Consequence: `usage.evidence` reports the same number twice under two ids.
+That reads redundantly but is exactly right — the evidence is the quantity
+each line is folded at, and the two lines fold into different pools.
+
+## D3 — The miss is a quantum, and mobile-phone prices it
+
+Measured (drills 2026-08-20 / 2026-09-08, `clay credits balance` diffs closed
+to ±0): six of the seven functions draw NOTHING when the waterfall completes
+empty, and Mobile Phone draws a reduced 0.5 data credit + 1 action. v1 billed
+the caller 0 units in both cases and recorded Mobile Phone's charge as an
+internal `actualCost` the platform absorbed. The doc is the vendor's rate
+card, not a pricing policy, so the reduced draw is now a pair of real lines
+(`miss_credits` / `miss_actions`) and the settle reports what Clay took;
+whether the caller pays is the broker's decision, made with the fact in hand
+instead of without it. The condition stays a COUNTING rule (D19): the model
+prices four lines, and `usage.evidence` — the one doc-specific fn in the
+connector — partitions completed items into filled and empty. A `failed` item
+is neither: Clay charges nothing for it, so it counts toward no line.
+Verified live: a deliberate miss settles `{data_credit: 0.5, action: 1}`.
+
+## D4 — Search rows draw the quota pool, not dollars
+
+Rows cost us nothing incremental — the annual quota is bundled with the
+subscription — but they are strictly finite (Launch: 1M/year, HTTP 402 past
+the cap; prod burned 70% in 45 days while rows were free). v1 answered with
+an authored $0.001/result user price that bypassed markup. That is a platform
+gate, not a vendor rate, and has no home in a doc. The honest model is that a
+row draws one unit of a real, exhaustible pool: `search_result`. Clay's own
+meter counts rows RETURNED, not the requested limit (drill-verified against
+`period_quota.used`), so evidence counts `data.length` and an exhausted
+iterator draws nothing.
+
+## D5 — The lifecycle lives on the provider; the search docs relay
+
+The routine protocol (submit one item → 202 `routine_run_id` → poll results,
+202 = pending) is identical across all seven enrichment docs, so it belongs
+at provider level like apify's. But `lifecycle.poll` only resolves when a
+`start` does, so a provider-level poll obliges EVERY clay doc to have a
+start — including the two free search lookups. Chosen: the provider owns the
+routine-shaped pair, and the three search docs override `start` with a plain
+relay (`utils.request()` → COMPLETED), inheriting a poll that can never fire.
+Rejected: writing the routine pair on each of the seven docs (identical
+source interns to one fnTable entry, so the artifact is the same — but a
+later fix must be applied seven times or it silently forks). Cost, eyes open:
+a free GET now runs through the lifecycle machine; it settles at
+`timing.attempts: 0`, indistinguishable from the declarative path.
+
+## D6 — `utils.http({path})` is ORIGIN-relative, so the poll repeats `/public/v0`
+
+The lifecycle http port resolves `path` against the doc request's ORIGIN
+(`engine/fn-utils.ts`: `url: o.url ?? origin + o.path`), not against
+`request.baseUrl`. Clay's base carries a `/public/v0` prefix, so the poll
+path is `/public/v0/routines/run/{id}/results` — a repetition that looks like
+a mistake and is not. Apify never hit this (its baseUrl is a bare origin).
+Pinned by the recorded fixture urls, which are what the engine actually
+issued.
+
+## D7 — Clay's own answer reaches the caller: no output hooks
+
+v1 shaped Clay's payloads in two places, and neither is ported:
+
+- **HTTP 402 substitution.** Clay's 402 body names our plan cap ("you have
+  requested N of your M yearly limit"); v1 replaced it with a neutral message
+  at the transport. Faithful relay wins here (owner call): the vendor's own
+  answer is the run's answer. `output.fromError` receives no HTTP status, so
+  a status-conditional swap would have to live in the lifecycle fns — the
+  reversal is small and localized if the info-leak is later judged to
+  outweigh fidelity.
+- **`period_quota` strip.** It is Clay's own response field and is useful to
+  whoever is paging (limit / used / remaining / resets_at). Nothing
+  billing-related reads it. Kept.
+
+Net: clay declares neither `output.fromResponse` nor `output.fromError`
+(neither do akta, exa, octen, tinyfish, fundable, pdl or ploid — apify is the
+catalog's only output-hook user).
+
+Two further v1 behaviours did not survive the port, both consequences rather
+than choices, recorded so the diff is not silent:
+
+- **The run-correlated item id.** v1 named the submitted item after the
+  platform's run id when it had one (`runId ?? "item-1"`), for upstream
+  traceability. `zLifecycleStartData` carries no run id, so the start
+  hardcodes `"item-1"`. Nothing depends on it — Clay does not dedupe item
+  ids, so it was naming, never idempotency.
+- **The defensive 2xx-without-`routine_run_id` bill.** v1's
+  `extractBilledUnits` returned 1 for any object body with no `data` array,
+  so that path billed a full unit; here the evidence fn counts items and
+  such a body yields 0. The honest answer: we have no evidence a routine ran.
+
+## D7a — The rates have no runtime cross-check, so the test pins literals
+
+D8's consequence deserves its own note. Where a vendor reports its own meter,
+a drifted pinned rate surfaces as `usage.mismatch.derived` on every run.
+Clay reports nothing, so nothing catches a wrong `consumes.amount` at
+runtime — and a test that recomputes the expectation from the doc's own model
+(`assembleUsage(doc.usage.model, …)`) catches nothing either, because the
+engine folds credits FROM that model: both sides move together. So
+`lifecycle.test.ts` carries the seven measured draws as LITERALS, asserts the
+table covers exactly the enrichment ids, and holds the estimate to the same
+numbers. One live enrichment case (`company-domain`, the cheapest
+deterministic function) checks a real run against the same literal — and is
+also the only thing that exercises the start's `items` wrapping, since replay
+matches on method + url and never on a request body.
+
+## D8 — No `usage.consolidate`: Clay reports no meter
+
+Clay responses carry no cost field, so there is no vendor claim to lift and
+the hook is simply omitted (D27 makes it optional; pdl is the precedent). The
+routine envelope's `estimatedCreditCost` is NOT a meter and must never be
+lifted as one: the drills found it wrong in both directions (Company Domain
+quoted 0.8, measured 1.0; Work Email quoted 1.1, measured 0.6; Mobile Phone
+quoted 10.8, measured 10.0). Consequence: the derived fold is always the
+settled answer and no `mismatch` key can ever appear, so the pinned rates
+have no per-run cross-check — see D7a for what stands in for one.
+
+## D9 — `search_id` is a path param; the identity is pinned brace-free
+
+The upstream path is `/search/query-mode/{search_id}/run`. v1 took the handle
+in the BODY and re-homed it onto the path inside a lifecycle hook, "for one
+uniform input surface for agents". The engine now validates `pathParams` as a
+first-class slot and substitutes + URI-encodes them (fundable's `/deal`
+precedent), so the hook is unnecessary: `search_id` is declared where it goes
+and shows up in the compiled url. `zEndpointPath` admits no braces, so the
+public identity is pinned to the v1 id `/search/query-mode/run`. Cost, eyes
+open: callers move one field from `body` to `pathParams`.
+
+## D10 — Routine ids are baked into `request.path`, percent-encoded
+
+The Clay-managed routine ids are workspace-scoped (`function:t_…`, minted
+into our workspace, enumerated once via `clay routines list` — the Public API
+has no listing endpoint). v1 substituted them through a path param; here each
+doc bakes its own into `request.path` as `/routines/function%3At_…/run` —
+percent-encoded exactly as v1's `encodeURIComponent` sent it, which is the
+form the vendor is known to accept. The raw `/routines/{routine_id}/run`
+surface stays unexposed: users cannot discover ids, and a raw id parameter
+would make our workspace's custom functions addressable. If Clay ever
+re-mints them the docs start answering 404 error-as-data — re-enumerate and
+update the paths.
+
+## D11 — v1's `notes` and `hints` become description prose
+
+`zEndpointMeta` has no `notes`, no `hints` and no `tags` (the last was removed
+deliberately — nothing consumed it). Every v1 note and every `runHint` is
+carried into `meta.description`, the field whose role is agent-facing
+capability text: company-domain's fuzzy-matcher caveat, the search iterator's
+expiry and its 404, the "not billed" notes, the enrich-person
+at-least-one-identifier rule, and the whole cross-endpoint chain (name →
+domain → the three company functions; work-email ↔ person ↔ mobile-phone).
+One note is REWORDED rather than copied: mobile-phone's "an empty result is
+not billed" is false under D3, and now says the miss is charged at a reduced
+rate. v1's long `summary` strings became `description`; a fresh one-line
+`summary` was written for catalog rows.
+
+## D12 — Fixtures are recorded, then sanitized
+
+Every committed chain is a real 2026-09-16 recording, hand-minimized the way
+the recorder's own docstring prescribes (the work-email run took 22 calls,
+the mobile-phone miss 59; both are committed as three). The company-domain
+recording behind `routine-hit` happened to settle on its FIRST poll, so its
+still-running 202 tick is spliced from the work-email recording — the
+RUNNING arm is exercised on a chain whose terminal call is the one we
+actually got back.
+
+Three classes of value are replaced before committing, because this repo is
+public: our account's quota watermark in `period_quota`
+(`used`/`remaining`/`resets_at`); the real people the search returned (names,
+LinkedIn urls, employers — the recorder scrubs emails and phones by pattern,
+not identities); and the vendor's run and search handles, normalized to
+`RUN1` / `SEARCH1` so the shared chains bind. Every field, type and nesting
+is the recording's; only identifying values are stand-ins, and each fixture's
+`description` says so.
+
+One chain is NOT a recording: `routine-failed-item` uses the shape v1's
+provider tests pinned, because a failed item could not be provoked through
+the public surface at port time — its description says that too.
