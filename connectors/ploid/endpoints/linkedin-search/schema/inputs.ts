@@ -2,9 +2,11 @@ import { z } from "zod";
 
 const zStringOrList = z.union([z.string().min(1), z.array(z.string().min(1))]);
 
-/** `POST /v1/linkedin/search` — structured LinkedIn people search. */
+/** `POST /v1/linkedin/search` — structured LinkedIn people search. Strict
+ *  at every level: a typo inside `filters` must fail INVALID_INPUT, not
+ *  run an unfiltered paid search. */
 export const zPloidLinkedinSearchBody = z.strictObject({
-    filters: z.object({
+    filters: z.strictObject({
         keywords: z.string().max(500).optional(),
         location: zStringOrList.optional(),
         title: zStringOrList.optional(),

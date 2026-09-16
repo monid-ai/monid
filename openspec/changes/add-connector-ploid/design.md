@@ -24,8 +24,9 @@ Ploid's one denomination is the ACU (`acu_value_usd` const 0.1). v1
 multiplied every meter reading by `PLOID_USD_PER_ACU`; the pool rule
 (2026-09-15) keeps the vendor's unit — pool "Ploid ACU", every
 `consumes.amount` in ACU: search blocks 0.1, socials 1, enrich 1 / 1 /
-10, agent 1 per ACU, LinkedIn reads 0.06 (the settled partnership rate,
-USD 0.006, which is also what the meter reports). For the same reason
+10, agent 1 per ACU, LinkedIn reads 0.06 ACU (the settled partnership
+rate — USD 0.006 at USD 0.10/ACU; the meter reports the same 0.06 ACU,
+never a dollar figure). For the same reason
 the agent exposes the vendor's integer `max_acu` (1–64, default 2)
 instead of v1's `max_spend_usd` dollar ceiling that a custom start
 converted (owner 2026-09-15, option a). Both meter fields are ACU, so ONE

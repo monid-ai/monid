@@ -1,6 +1,6 @@
 {
     "name": "provider-error",
-    "description": "recorded chain for ploid#search, scenario 'provider-error' (per-endpoint recording; real traffic, headers dropped)",
+    "description": "recorded chain for ploid#search, scenario 'provider-error' (per-endpoint recording; real traffic, headers dropped, request_id replaced by a placeholder)",
     "calls": [
         {
             "req": {
@@ -17,7 +17,7 @@
                     "error": {
                         "code": "invalid_api_key",
                         "message": "Invalid API key.",
-                        "request_id": "6571cd58-528e-47e6-bea8-f06a08a05b2c"
+                        "request_id": "req_recorded_401_09"
                     }
                 }
             }

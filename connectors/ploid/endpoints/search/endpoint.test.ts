@@ -138,7 +138,7 @@ Deno.test("ploid#v1/search provider error (recorded 401): the vendor envelope is
     );
 });
 
-Deno.test("ploid#v1/search: num_results required, unknown fields rejected, bounds 1-100", async () => {
+Deno.test("ploid#v1/search: num_results required, unknown fields rejected at every level, bounds 1-100", async () => {
     const unit = await testSealedUnit("ploid#v1/search");
     const fixture = await loadFixture(`${fixturesDir}synthetic-happy.json`);
     const rejected: Json[] = [
@@ -146,6 +146,9 @@ Deno.test("ploid#v1/search: num_results required, unknown fields rejected, bound
         { query: "x", num_results: 7, unknown_field: true },
         { query: "x", num_results: 101 },
         { query: "x", num_results: 7, type: "fast" },
+        // a typo inside filters must not silently become an unfiltered search
+        { query: "x", num_results: 7, filters: { locaton: "Boston" } },
+        { query: "x", num_results: 7, contents: { field: ["name"] } },
     ];
     for (const body of rejected) {
         await assertRejects(

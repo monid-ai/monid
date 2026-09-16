@@ -46,6 +46,8 @@ Deno.test("ploid#v1/linkedin/search: limit required (1-100); filters take a valu
         { filters: { keywords: "engineer" } },
         { limit: 0 },
         { limit: 15, filters: { title: 7 } },
+        // a typo inside filters must not silently become an unfiltered search
+        { limit: 15, filters: { current_company: "Stripe" } },
     ];
     for (const body of rejected) {
         await assertRejects(

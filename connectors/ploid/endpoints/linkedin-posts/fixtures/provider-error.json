@@ -1,6 +1,6 @@
 {
     "name": "provider-error",
-    "description": "recorded chain for ploid#linkedin-posts, scenario 'provider-error' (per-endpoint recording; real traffic, headers dropped)",
+    "description": "recorded chain for ploid#linkedin-posts, scenario 'provider-error' (per-endpoint recording; real traffic, headers dropped, request_id replaced by a placeholder)",
     "calls": [
         {
             "req": {
@@ -13,7 +13,7 @@
                     "error": {
                         "code": "invalid_api_key",
                         "message": "Invalid API key.",
-                        "request_id": "d7bdde97-3f7c-496d-a5dc-c6f569a21297"
+                        "request_id": "req_recorded_401_06"
                     }
                 }
             }

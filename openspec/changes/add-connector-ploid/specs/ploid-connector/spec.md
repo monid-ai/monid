@@ -28,8 +28,9 @@ the ACU balance fields from `meta`, drops an emptied `meta`, and keeps
 `lifecycle.poll` with `timeouts.pollMs` 5000 and `runMs` 600000; a 2xx
 with `data.status` queued/running SHALL park RUNNING with
 `externalRunId = data.run_id`; the poll SHALL GET the stashed
-`data.poll_url`; a 2xx body with a top-level `error` SHALL complete under
-`error.http_status` (fallback 502) with providerHttpStatus 200; the
+`data.poll_url`; a 2xx body with a top-level `error` SHALL complete with
+providerHttpStatus 200 and `httpStatus` = `error.http_status` when that is
+an integer in 400–599, else 502; the
 completed body's `meta.acu_used` SHALL settle as CREDIT units.
 
 #### Scenario: A queued run completes with one ACU used
