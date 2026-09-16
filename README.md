@@ -51,10 +51,10 @@ deno task check && deno task test            # types + replay tests (zero networ
 ```
 connectors/<name>/
 ├── provider.ts                    # defineProvider: name, meta, auth, defaults
-├── schema/                        # provider-shared zod
+├── schema/                        # provider-shared zod: fragments used by 2+ endpoints
 └── endpoints/<endpoint>/
     ├── endpoint.ts                # defineEndpoint (id "<provider>#<endpoint>" inferred)
-    ├── schema/inputs.ts           # request schemas
+    ├── schema/inputs.ts           # request schemas — this endpoint's only, never re-exported
     ├── endpoint.test.ts           # replay + gated live tests
     └── fixtures/*.json
 ```
