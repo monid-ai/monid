@@ -44,6 +44,7 @@ deno task check && deno task test            # types + replay tests (zero networ
 | `tinyfish` | search, fetch (multi-host)                                                                   | `X-API-Key` | free — 1 call                                                    |
 | `akta`     | company-search, company-enrichment, news, industry-search, product-reviews, employee-reviews | `x-api-key` | credits (+ derived $, $1 = 20 credits)                           |
 | `octen`    | search, broad-search, extract, embedding                                                     | `x-api-key` | calls / sub-queries / successful URLs / tokens from `meta.usage` |
+| `pdl`      | v5/person/enrich, v5/person/search, v5/company/enrich, v5/company/search                     | `X-Api-Key` | credits: 1 per match, 1 per search record                        |
 
 ## Adding a connector
 
