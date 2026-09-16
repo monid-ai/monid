@@ -23,6 +23,10 @@ export default defineEndpoint({
             "Pass at least one of `condition_id` or `address`; " +
             "`condition_id` takes priority when several are given. A " +
             "request with none is rejected before the wire.",
+            "Vendor combination rule, not checked here: " +
+            "`type=redemption` and `type=all` need `address`; a " +
+            "`condition_id`-only request with one of them is passed " +
+            "through and Surf answers it.",
         ],
     },
     request: { method: "GET", path: "/prediction-market/polymarket/trades" },

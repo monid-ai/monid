@@ -29,6 +29,14 @@ export default defineEndpoint({
             "history).",
         docsUrl: "https://docs.asksurf.ai/data-api/hyperliquid/fills",
         categories: ["derivatives"],
+        notes: [
+            "Vendor combination rules, not checked here: `cursor` " +
+            "travels alone (only `symbol` and `limit` beside it; `from`, " +
+            "`to`, `to_ms` or `to_fill_id` alongside it is answered 400); " +
+            "`to_fill_id` needs `to_ms`; `to_ms` and `to_fill_id` are " +
+            "`order=desc` only; `order=asc` needs `from`. Surf answers " +
+            "a bad combination and a non-2xx is not charged.",
+        ],
     },
     request: { method: "GET", path: "/hyperliquid/fills" },
     input: {

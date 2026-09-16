@@ -346,6 +346,24 @@ Deno.test("surf meta: the credits_used caveat rides every doc; identifier rules 
             "exactly one of `project` or `address`",
         ),
     );
+    assert(
+        notesOf("surf#heatscore/detail").includes(
+            "with neither or with both is rejected",
+        ),
+    );
+    // the vendor's field-combination rules ride notes (CodeRabbit #24)
+    const COMBINATION_NOTES: Record<string, string> = {
+        "surf#hyperliquid/fills": "`cursor` travels alone",
+        "surf#hyperliquid/trades": "`cursor` travels alone",
+        "surf#hyperliquid/trades/aggregate": "`fill_gaps=true` needs `from`",
+        "surf#prediction-market/polymarket/smart-money":
+            "only for `view=trades`",
+        "surf#prediction-market/polymarket/trades":
+            "`type=redemption` and `type=all` need `address`",
+    };
+    for (const [id, phrase] of Object.entries(COMBINATION_NOTES)) {
+        assert(notesOf(id).includes(phrase), id);
+    }
     assert(!notesOf("surf#news/feed").includes("Pass"), "no rule, no note");
 });
 
@@ -519,6 +537,22 @@ Deno.test("surf schema gates: enum, pattern, url and the identifier alternatives
     await validates("surf#fund/detail", { queryParams: { q: "a16z" } });
     await validates("surf#fund/detail", {
         queryParams: { id: "ef3b6da9-283d-4080-b3c7-87b1b45924dc" },
+    });
+    // exactly one of id | project_slug (vendor: "Pass exactly one"): both
+    // together is rejected before the wire, either alone passes
+    await assertRejects(
+        () =>
+            validates("surf#heatscore/detail", {
+                queryParams: {
+                    id: "ef3b6da9-283d-4080-b3c7-87b1b45924dc",
+                    project_slug: "synapse",
+                },
+            }),
+        Error,
+        "INVALID_INPUT",
+    );
+    await validates("surf#heatscore/detail", {
+        queryParams: { project_slug: "synapse" },
     });
     // exactly one of project | address: neither AND both are rejected
     // before the wire (each arm omits the other identifier, design D4)

@@ -15,19 +15,21 @@ export default defineEndpoint({
         docsUrl: "https://docs.asksurf.ai/data-api/signal/detail",
         categories: ["crypto-signals"],
         notes: [
-            "Pass exactly one of `id` or `project_slug`; the request " +
-            "is rejected before the wire when neither is given, and " +
-            "upstream rejects both together.",
+            "Pass exactly one of `id` or `project_slug`; a request " +
+            "with neither or with both is rejected before the wire.",
         ],
     },
     request: { method: "GET", path: "/heatscore/detail" },
     input: {
         schema: {
-            // the identifier alternatives compile to anyOf (D4); a union arm
-            // takes no binding default (ajv never applies defaults inside anyOf)
+            // "exactly one": each arm omits the other identifier, so both
+            // together match neither arm (D4); a union arm takes no binding
+            // default (ajv never applies defaults inside anyOf)
             queryParams: z.union([
-                zHeatscoreDetailQueryParams.required({ id: true }),
-                zHeatscoreDetailQueryParams.required({ project_slug: true }),
+                zHeatscoreDetailQueryParams.omit({ project_slug: true })
+                    .required({ id: true }),
+                zHeatscoreDetailQueryParams.omit({ id: true })
+                    .required({ project_slug: true }),
             ]),
         },
     },

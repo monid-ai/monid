@@ -17,6 +17,12 @@ export default defineEndpoint({
         docsUrl:
             "https://docs.asksurf.ai/data-api/prediction-market/polymarket-smart-money",
         categories: ["prediction-markets"],
+        notes: [
+            "Vendor combination rule, not checked here: `direction` is " +
+            "only for `view=positioning`; `whale_tier`, `from` and `to` " +
+            "are only for `view=trades`. An off-view field is passed " +
+            "through and Surf answers it.",
+        ],
     },
     request: {
         method: "GET",

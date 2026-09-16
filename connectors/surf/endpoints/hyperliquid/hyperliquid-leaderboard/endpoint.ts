@@ -17,8 +17,8 @@ export default defineEndpoint({
             "Metric basis — does NOT reconcile with /performance: " +
             "the leaderboard is built on the upstream Hydromancer " +
             "trade model, whose total_pnl is funding-INCLUSIVE over " +
-            "an all-markets trade universe, while " +
-            "/hyperliquid/performance//trades//trades/aggregate are " +
+            "an all-markets trade universe, while /hyperliquid/performance, " +
+            "/hyperliquid/trades and /hyperliquid/trades/aggregate are " +
             "funding-EXCLUDED over our episode warehouse. A " +
             "leaderboard PnL and the same trader's /performance net " +
             "can differ severalfold — do not display them " +

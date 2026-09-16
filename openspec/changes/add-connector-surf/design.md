@@ -122,8 +122,14 @@ Two consequences:
   neither arm and fail INVALID_INPUT before the wire, the same as neither.
   (The vendor docs say "exactly one" but state no behaviour for both; their
   own example sends both, so what upstream does is unknown — the gate does
-  not depend on it.) `onchain/dex/activity` carries this in layer 2;
-  `heatscore/detail` (layer 1) still ships the plain arms.
+  not depend on it.) `onchain/dex/activity` carries this in layer 2,
+  `heatscore/detail` in layer 3.
+- Every other documented field-combination rule ("`cursor` travels alone",
+  "`type=redemption` needs `address`", "`fill_gaps=true` needs `from`",
+  view-specific filters) is a `meta.notes` entry, not a gate
+  (DEVELOPMENT.md): the vendor answers a bad combination and a non-2xx is
+  not charged. A union per combination would also drop the binding
+  defaults those docs carry (the ajv rule below).
 - ajv's `useDefaults` never enters `anyOf` arms (contactout D7), so a union
   binding carries NO defaults — the vendor's server defaults apply on the
   wire instead of v1's always-serialized ones. Same values, absent rather

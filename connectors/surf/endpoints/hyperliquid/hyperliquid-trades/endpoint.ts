@@ -41,6 +41,12 @@ export default defineEndpoint({
             "they are deliberately NOT accepted here.",
         docsUrl: "https://docs.asksurf.ai/data-api/hyperliquid/trades",
         categories: ["derivatives"],
+        notes: [
+            "Vendor combination rule, not checked here: `cursor` " +
+            "travels alone (only `address` and `limit` beside it, and " +
+            "only the address it was issued for); `from` or `to` " +
+            "alongside it is passed through and Surf answers it.",
+        ],
     },
     request: { method: "GET", path: "/hyperliquid/trades" },
     input: {

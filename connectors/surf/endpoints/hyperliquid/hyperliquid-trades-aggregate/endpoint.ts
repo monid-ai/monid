@@ -42,6 +42,11 @@ export default defineEndpoint({
         docsUrl:
             "https://docs.asksurf.ai/data-api/hyperliquid/trades-aggregate",
         categories: ["derivatives"],
+        notes: [
+            "Vendor combination rule, not checked here: `fill_gaps=true` " +
+            "needs `from` (a bounded window) and applies to " +
+            "`group_by=day` only; it is passed through and Surf answers it.",
+        ],
     },
     request: { method: "GET", path: "/hyperliquid/trades/aggregate" },
     input: {
