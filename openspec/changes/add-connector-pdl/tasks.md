@@ -22,8 +22,10 @@
 - [x] 3.2 Tests: provenance + pool + wire form, happy / empty / 404 /
       schema gates (size required, query XOR sql), live gated
 - [ ] 3.3 Replace synthetic fixtures via `deno task record` when
-      PDL_API_KEY exists; confirm `x-call-credits-type` per endpoint matches
-      its pool and `x-call-credits-spent` is 1 per record / match (D2)
+      PDL_API_KEY exists; confirm `x-call-credits-type` per endpoint maps to
+      its pool per the D2 table (enrich → people_enrich, search →
+      people_search, enrich_company → company_enrich, search_company →
+      company_search) and `x-call-credits-spent` is 1 per record / match
 
 ## 4. Wiring + docs
 

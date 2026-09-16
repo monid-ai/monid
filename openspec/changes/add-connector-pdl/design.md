@@ -28,11 +28,33 @@ usage-limits: `enrich`, `search`, `search_company`, `enrich_company`,
 and the `x-totallimit-remaining` beside it is that type's balance. The
 four ported endpoints map 1:1 onto four types. The PROVIDER declares all
 four (the account holds all four balances) and each endpoint's
-`consumes.credit` names the one it drains, id = the vendor's type string
-verbatim, at 1 credit per match / record — the first multi-pool provider
-in the catalog. The compiler rule that blocked exactly this — every
-declared pool drained by EVERY doc — is corrected in D6. First version
-declared ONE pool
+`consumes.credit` names the one it drains, at 1 credit per match / record
+— the first multi-pool provider in the catalog. The compiler rule that
+blocked exactly this — every declared pool drained by EVERY doc — is
+corrected in D6.
+
+Pool ids are OURS, not the vendor's spelling: `<dataset>_<operation>`,
+the D28 minted-id rule (line ids are minted from the vendor's native
+names by one transform, never copied). PDL's own type strings are
+lopsided — the person pools carry no dataset prefix while the company
+ones carry a suffix — so the symmetric form reads better at every
+billing surface and survives the day PDL adds a third dataset. The join
+is a documented mapping, carried in provider.ts:
+
+| pool id          | `x-call-credits-type` |
+| ---------------- | --------------------- |
+| `people_enrich`  | `enrich`              |
+| `people_search`  | `search`              |
+| `company_enrich` | `enrich_company`      |
+| `company_search` | `search_company`      |
+
+Nothing machine-readable depends on the verbatim string: the broker's
+card is keyed by (provider, creditId) — our id — and no hook can read the
+header anyway. The mapping matters the day a balance probe or a
+header-reading settle exists; it is one table lookup, and tasks 3.3
+verifies it against a real call.
+
+First version declared ONE pool
 (`default`), reasoning from v1's balance probe — which read a single
 `x-totallimit-remaining` off a person-enrich miss and therefore saw the
 `enrich` balance only; corrected on PR #7 review (2026-09-16, "There are

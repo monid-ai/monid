@@ -18,11 +18,13 @@ capability.
     one credit per record in `data[]`; `size` REQUIRED at the binding
     (vendor bounds 1–100), estimate = `size`; `query` XOR `sql` as two
     strict variants.
-- **Four credit pools**, one per PDL credit type (design D2): `enrich`,
-  `search`, `enrich_company`, `search_company` — the vendor's own
-  `x-call-credits-type` values, declared once on the PROVIDER (the
-  account holds all four balances); each endpoint drains its own at 1
-  credit per record or match.
+- **Four credit pools**, one per PDL credit type (design D2):
+  `people_enrich`, `people_search`, `company_enrich`, `company_search` —
+  our symmetric ids (D28 minted-id rule), mapped in provider.ts onto the
+  vendor's `x-call-credits-type` values (`enrich`, `search`,
+  `enrich_company`, `search_company`) and declared once on the PROVIDER
+  (the account holds all four balances); each endpoint drains its own at
+  1 credit per record or match.
 - **The compiler's credit rule, corrected** (design D6): `usage.credits`
   resolves KEY-WISE endpoint over provider, a declared pool must be
   drained at its declaration site (a PROVIDER pool by at least ONE

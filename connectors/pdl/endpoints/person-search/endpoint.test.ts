@@ -59,10 +59,10 @@ Deno.test("pdl: usage fn provenance — one evidence + one auth fn for all 4; se
     // declares all four, and each doc compiles down to exactly the one
     // its own lines drain (design D6c)
     const drains = {
-        "pdl#v5/person/enrich": "enrich",
-        "pdl#v5/person/search": "search",
-        "pdl#v5/company/enrich": "enrich_company",
-        "pdl#v5/company/search": "search_company",
+        "pdl#v5/person/enrich": "people_enrich",
+        "pdl#v5/person/search": "people_search",
+        "pdl#v5/company/enrich": "company_enrich",
+        "pdl#v5/company/search": "company_search",
     };
     for (const [id, pool] of Object.entries(drains)) {
         const doc = bundle.endpoints[id];
@@ -104,7 +104,7 @@ Deno.test("pdl#v5/person/search happy (synthetic): each record is one person cre
     // no consolidate ⇒ no claim ⇒ the DERIVED fold is the bill:
     // 3 records × 1 person credit (zUsage is strict — no mismatch key)
     assertEquals(result.usage, {
-        credits: { search: 3 },
+        credits: { people_search: 3 },
         evidence: { RESULT: 3 },
     });
     const output = result.output as Record<string, unknown>;

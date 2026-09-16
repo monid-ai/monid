@@ -38,14 +38,14 @@ export default defineEndpoint({
     },
     usage: {
         /** One credit per company record in `data[]` (PDL docs) — v1
-         *  makePerResultPrice(0.1), from the `search_company` pool (PDL's
-         *  `x-call-credits-type`), declared on the provider. Settle is
-         *  inherited. */
+         *  makePerResultPrice(0.1), from the `company_search` pool (PDL's
+         *  `x-call-credits-type: search_company`), declared on the
+         *  provider. Settle is inherited. */
         model: {
             kind: UsageModelKind.PER_UNIT,
             unit: Unit.RESULT,
             label: "records",
-            consumes: { credit: "search_company", amount: 1 },
+            consumes: { credit: "company_search", amount: 1 },
         },
         estimate: ({ data }) => ({
             counts: { "RESULT": data.input.body.size },

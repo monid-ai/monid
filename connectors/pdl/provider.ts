@@ -16,15 +16,23 @@ import { defineProvider, presets } from "@shared/core";
  * `x-totallimit-remaining`), which hook fns cannot read — so there is no
  * `usage.consolidate` (no claim, nothing to strip; the derived fold
  * settles). FOUR credit pools, one per PDL credit TYPE: every response's
- * `x-call-credits-type` names which pool the call drew from (docs
- * usage-limits: enrich, search, search_company, enrich_company, …) and
- * the `x-totallimit-remaining` beside it is THAT type's balance — so the
+ * `x-call-credits-type` names which pool the call drew from and the
+ * `x-totallimit-remaining` beside it is THAT type's balance — so the
  * ACCOUNT holds all four and the PROVIDER declares them, each endpoint's
  * model draining exactly one (PR #7 review, 2026-09-16: "There are more
- * than one type of credits in PDL"). Pool ids are the vendor's type
- * strings verbatim so the header joins 1:1. v1's balance probe read one
- * number off a person-enrich miss — that was the `enrich` balance only,
- * not the account.
+ * than one type of credits in PDL"). Pool ids are OURS —
+ * `<dataset>_<operation>`, symmetric, the D28 minted-id rule — and map
+ * onto the vendor's own type strings (docs usage-limits) by dataset:
+ *
+ *     people_enrich   <- x-call-credits-type "enrich"
+ *     people_search   <- x-call-credits-type "search"
+ *     company_enrich  <- x-call-credits-type "enrich_company"
+ *     company_search  <- x-call-credits-type "search_company"
+ *
+ * (PDL's other types — enrich_skill, enrich_job_title, preview_search,
+ * person_identify — belong to surfaces this port does not carry.) v1's
+ * balance probe read one number off a person-enrich miss — that was the
+ * `enrich` balance only, not the account.
  *
  * `usage.evidence` is the generic quantities default: a search doc counts
  * `data[]` (PDL: "each record in the data array counts as a single
@@ -56,10 +64,10 @@ export default defineProvider({
          *  `consumes.credit` names the one it drains, and the compiler
          *  checks every pool is drained by at least one endpoint (D6). */
         credits: {
-            enrich: { label: "PDL person enrichment credits" },
-            search: { label: "PDL person search credits" },
-            enrich_company: { label: "PDL company enrichment credits" },
-            search_company: { label: "PDL company search credits" },
+            people_enrich: { label: "PDL person enrichment credits" },
+            people_search: { label: "PDL person search credits" },
+            company_enrich: { label: "PDL company enrichment credits" },
+            company_search: { label: "PDL company search credits" },
         },
         /** The generic QUANTITIES default (design D27): a PER_UNIT (search)
          *  doc counts the records in `data[]`; flat enrichment docs have

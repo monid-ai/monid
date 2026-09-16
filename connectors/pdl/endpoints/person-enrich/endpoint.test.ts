@@ -23,7 +23,7 @@ Deno.test("pdl#v5/person/enrich happy (synthetic): identifier rides the query st
     // flat model: the engine appends the CALL line and folds the one
     // person credit — no vendor claim exists in the body
     assertEquals(result.usage, {
-        credits: { enrich: 1 },
+        credits: { people_enrich: 1 },
         evidence: { CALL: 1 },
     });
     const output = result.output as Record<string, unknown>;
@@ -91,7 +91,7 @@ Deno.test({
             JSON.stringify(result.output),
         );
         assertEquals(result.usage, {
-            credits: { enrich: 1 },
+            credits: { people_enrich: 1 },
             evidence: { CALL: 1 },
         });
     },

@@ -26,12 +26,12 @@ export default defineEndpoint({
     usage: {
         /** "We charge per match" — one credit per 200 (v1
          *  makePerCallPrice(0.1) = one company record) from the
-         *  `enrich_company` pool (PDL's `x-call-credits-type`), declared
-         *  on the provider. */
+         *  `company_enrich` pool (PDL's `x-call-credits-type:
+         *  enrich_company`), declared on the provider. */
         model: {
             kind: UsageModelKind.PER_CALL,
             label: "match",
-            consumes: { credit: "enrich_company", amount: 1 },
+            consumes: { credit: "company_enrich", amount: 1 },
         },
     },
 });

@@ -45,7 +45,7 @@ deno task check && deno task test            # types + replay tests (zero networ
 | `akta`     | company-search, company-enrichment, news, industry-search, product-reviews, employee-reviews | `x-api-key` | credits (+ derived $, $1 = 20 credits)                           |
 | `octen`    | search, broad-search, extract, embedding                                                     | `x-api-key` | calls / sub-queries / successful URLs / tokens from `meta.usage` |
 | `fundable` | deals, deal, deal/investors, companies, company, company/deals, company/search, investors, investor, investor/deals, investor/search, people, person, person/deals, person/search, industry/search, location/search | `Bearer` | credits (1 per row or lookup, 0.1 per fuzzy search; permalink resolvers free) |
-| `pdl`      | v5/person/enrich, v5/person/search, v5/company/enrich, v5/company/search                     | `X-Api-Key` | credits by PDL type (enrich / search / enrich_company / search_company): 1 per match or record |
+| `pdl`      | v5/person/enrich, v5/person/search, v5/company/enrich, v5/company/search                     | `X-Api-Key` | credits by PDL type (people_enrich / people_search / company_enrich / company_search): 1 per match or record |
 
 ## Adding a connector
 

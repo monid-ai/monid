@@ -40,14 +40,14 @@ export default defineEndpoint({
     usage: {
         /** "Each person record in the data array of the response counts
          *  as a single credit" (PDL docs) — v1 makePerResultPrice(0.265),
-         *  from the `search` pool (PDL's `x-call-credits-type`), declared
-         *  on the provider. Settle is inherited: the provider evidence
-         *  counts `data[]`. */
+         *  from the `people_search` pool (PDL's `x-call-credits-type:
+         *  search`), declared on the provider. Settle is inherited: the
+         *  provider evidence counts `data[]`. */
         model: {
             kind: UsageModelKind.PER_UNIT,
             unit: Unit.RESULT,
             label: "records",
-            consumes: { credit: "search", amount: 1 },
+            consumes: { credit: "people_search", amount: 1 },
         },
         /** The caller-stated size IS the record promise (typed read of the
          *  pre-toRequest validated input — design D25). */
