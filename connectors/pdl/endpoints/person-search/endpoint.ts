@@ -32,12 +32,8 @@ export default defineEndpoint({
     input: {
         schema: {
             body: z.union([
-                zQueryVariant.extend({
-                    size: zQueryVariant.shape.size.unwrap(),
-                }),
-                zSqlVariant.extend({
-                    size: zSqlVariant.shape.size.unwrap(),
-                }),
+                zQueryVariant.required({ size: true }),
+                zSqlVariant.required({ size: true }),
             ]),
         },
     },

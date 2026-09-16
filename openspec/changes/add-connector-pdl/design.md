@@ -39,8 +39,10 @@ call can say; re-pin `consumes.amount` when a key exists (tasks 3.3).
 D25's standing rule (the primary limiting knob is REQUIRED even when the
 vendor publishes a default — PDL's is 1). The mirror is a union of two
 strict variants (`query` | `sql`); the binding rebuilds the union with
-`size` unwrapped on each, so `data.input.body.size` is typed `number` in
-the estimate. Vendor bounds 1–100 stay in the mirror.
+`size` required on each (`.required({ size: true })` — the akta form; it
+keeps the field's describe, which `.unwrap()` would drop from the
+compiled doc), so `data.input.body.size` is typed `number` in the
+estimate. Vendor bounds 1–100 stay in the mirror.
 
 ## D4 — One v1 refinement dies, one survives
 
