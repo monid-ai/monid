@@ -2,8 +2,9 @@
 
 ## 1. Provider + schemas
 
-- [x] 1.1 provider.ts: X-Api-Key auth, baseUrl, timeouts, one `default`
-      pool, generic evidence (no consolidate — meter is header-only)
+- [x] 1.1 provider.ts: X-Api-Key auth, baseUrl, timeouts, the FOUR credit
+      pools (one per `x-call-credits-type`), generic evidence (no
+      consolidate — meter is header-only)
 - [x] 1.2 schema/common.ts: shared enrichment/search fragments; refinement
       rules documented in describes
 
@@ -29,3 +30,18 @@
 - [x] 4.1 README connector row
 - [x] 4.2 Verify: fmt · lint · check · test · double-compile · version:check
       · catalog smoke
+
+## 5. Compiler: credits per declaration site (design D6)
+
+- [x] 5.1 compile.ts: credits resolve KEY-WISE endpoint over provider;
+      endpoint-declared pools drained by that endpoint; provider-declared
+      pools drained by ≥1 endpoint (post-pass per provider); compiled doc
+      narrowed to the pools its lines drain
+- [x] 5.2 Contract comments corrected (`sections/usage.ts`,
+      `usage/model/consumes.ts`) + engine 0.0.1 → 0.0.2 (comment-only
+      CONTRACT_PATH touch; `doc_format_since`/`fn_abi_since` unchanged)
+- [x] 5.3 compiler.test.ts: provider pool undrained by ANY endpoint fails;
+      the multi-pool provider compiles (each doc narrowed); endpoint pool
+      undrained by its own lines fails; key-wise endpoint override; the
+      FREE-credits test regrouped around a billable sibling
+- [x] 5.4 connector-schema MODIFIED delta + AGENT.md rule line

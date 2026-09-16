@@ -20,8 +20,15 @@ capability.
     strict variants.
 - **Four credit pools**, one per PDL credit type (design D2): `enrich`,
   `search`, `enrich_company`, `search_company` — the vendor's own
-  `x-call-credits-type` values; each endpoint drains its own at 1 credit
-  per record or match.
+  `x-call-credits-type` values, declared once on the PROVIDER (the
+  account holds all four balances); each endpoint drains its own at 1
+  credit per record or match.
+- **The compiler's credit rule, corrected** (design D6): `usage.credits`
+  resolves KEY-WISE endpoint over provider, a declared pool must be
+  drained at its declaration site (a PROVIDER pool by at least ONE
+  endpoint, an ENDPOINT pool by that endpoint), and the compiled doc
+  narrows to the pools its own lines drain. The old rule — every declared
+  pool drained by EVERY doc — made a multi-pool provider undeclarable.
 - **No `usage.consolidate`**: PDL reports its meter only in response
   headers, which hooks cannot read; the derived fold settles.
 - Synthetic fixtures (`synthetic-` prefix) — no `PDL_API_KEY` is held.
@@ -29,6 +36,7 @@ capability.
 ## Capabilities
 
 - `pdl-connector`.
+- `connector-schema` (MODIFIED — the credits declaration/drain rule, D6).
 
 ## Non-goals
 
@@ -41,4 +49,10 @@ capability.
 
 ## Impact
 
-New connector tree + README row; no schema/engine contract changes.
+New connector tree + README row, plus one compiler rule (design D6:
+credits resolve key-wise, drain per declaration site, doc narrows to what
+it drains). No hook-ABI and no doc-format change — the compiled catalog is
+byte-identical apart from `builtWithEngineVersion`; the engine moves
+0.0.1 → 0.0.2 solely because the corrected comment in
+`shared/core/schema/sections/usage.ts` sits on a `version:check`
+CONTRACT_PATH.

@@ -37,12 +37,10 @@ export default defineEndpoint({
         },
     },
     usage: {
-        /** THE credit pool this doc drains (design D26 / D2): PDL's
-         *  `x-call-credits-type` for these calls is `search_company` — the id is
-         *  the vendor's type string verbatim. */
-        credits: { search_company: { label: "PDL company search credits" } },
         /** One credit per company record in `data[]` (PDL docs) — v1
-         *  makePerResultPrice(0.1). Settle is inherited. */
+         *  makePerResultPrice(0.1), from the `search_company` pool (PDL's
+         *  `x-call-credits-type`), declared on the provider. Settle is
+         *  inherited. */
         model: {
             kind: UsageModelKind.PER_UNIT,
             unit: Unit.RESULT,

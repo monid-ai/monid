@@ -26,11 +26,13 @@ pools are declarations. PDL meters per credit TYPE: every call's
 usage-limits: `enrich`, `search`, `search_company`, `enrich_company`,
 `enrich_skill`, `enrich_job_title`, `preview_search`, `person_identify`)
 and the `x-totallimit-remaining` beside it is that type's balance. The
-four ported endpoints map 1:1 onto four types. The compiler resolves
-`credits` provider ?? endpoint and requires every declared pool to be
-drained by the doc, so the provider declares NO pool and each endpoint
-declares the one it drains, id = the vendor's type string verbatim, at 1
-credit per match / record (first endpoint-level `credits` in the catalog). First version declared ONE pool
+four ported endpoints map 1:1 onto four types. The PROVIDER declares all
+four (the account holds all four balances) and each endpoint's
+`consumes.credit` names the one it drains, id = the vendor's type string
+verbatim, at 1 credit per match / record — the first multi-pool provider
+in the catalog. The compiler rule that blocked exactly this — every
+declared pool drained by EVERY doc — is corrected in D6. First version
+declared ONE pool
 (`default`), reasoning from v1's balance probe — which read a single
 `x-totallimit-remaining` off a person-enrich miss and therefore saw the
 `enrich` balance only; corrected on PR #7 review (2026-09-16, "There are
@@ -66,3 +68,46 @@ enrichment flat (record fields beside `status`/`likelihood` — no `data`
 wrapper), search `{status, data[], total, scroll_token}`, and the
 documented error envelope `{status, error: {type, message}}`. Unverified
 against real traffic; replace via `deno task record`.
+
+## D6 — Credit pools: declared per provider, drained per endpoint
+
+PDL is the first vendor metering more than one pool, and it did not fit.
+D26 resolved `usage.credits` provider ?? endpoint as a WHOLE MAP and then
+required every declared pool to be drained by the doc under compilation —
+lawful for a single-pool vendor, impossible for four: a provider-level
+set of four failed on all four endpoints (each drains one), so the first
+fix pushed the declarations down onto the endpoints. That inverted the
+fact being modeled: the pool set belongs to the ACCOUNT, not to any one
+call. Three changes, all in the compiler:
+
+1. **Resolution is KEY-WISE, endpoint over provider** — the D20 leaf-wise
+   rule the rest of the def already follows (`request.headers` merges the
+   same way), reversing D26's deliberate "OPPOSITE of hooks". A provider
+   declares the pool SET once; an endpoint adds a pool unique to it or
+   restates one, and a provider-level set is never silently shadowed by a
+   stray endpoint-level map.
+2. **The drain check moves to the DECLARATION SITE.** A pool is dead
+   config only where it was declared: a PROVIDER pool must be drained by
+   at least ONE of its endpoints (checked once, after the provider's
+   endpoints compile — both compile entrypoints load the whole connectors
+   tree, so the set is complete); an ENDPOINT pool must be drained by that
+   endpoint. Neither check weakens: the undeclared-`consumes.credit` gate
+   and the FREE rules are untouched. A consequence worth stating: a
+   provider whose endpoints are ALL FREE may declare no pools — nothing
+   drains them.
+3. **The compiled doc NARROWS to what it drains.** `doc.usage.credits` is
+   the resolved declaration filtered to the ids the doc's own lines
+   consume. The doc keeps its meaning ("the credit systems the model's
+   lines drain"), the engine's FN_CONTRACT check on a consolidate claim
+   stays tight (a fn cannot claim a pool the doc has no line for), and
+   monid-services prices what it already prices — the run's `credits`
+   keys against (provider, creditId). The compiled catalog is unchanged
+   byte-for-byte: every existing provider drains its one pool.
+
+No ABI and no doc-format change — the docs' shape, hashes and
+`minEngineVersion` all hold (verified: the only catalog diff is
+`builtWithEngineVersion`). The engine version moves 0.0.1 → 0.0.2 for one
+reason only: `shared/core/schema/sections/usage.ts` documents the
+resolution rule and is a `version:check` CONTRACT_PATH, so correcting its
+comment obliges the version to differ. `doc_format_since`, `fn_abi_since`
+and `async_since` stay at 0.0.1.

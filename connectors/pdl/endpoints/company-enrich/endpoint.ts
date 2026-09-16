@@ -24,14 +24,10 @@ export default defineEndpoint({
     request: { method: "GET", path: "/v5/company/enrich" },
     input: { schema: { queryParams: zPdlCompanyEnrichQueryParams } },
     usage: {
-        /** THE credit pool this doc drains (design D26 / D2): PDL's
-         *  `x-call-credits-type` for these calls is `enrich_company` — the id is
-         *  the vendor's type string verbatim. */
-        credits: {
-            enrich_company: { label: "PDL company enrichment credits" },
-        },
         /** "We charge per match" — one credit per 200 (v1
-         *  makePerCallPrice(0.1) = one company record). */
+         *  makePerCallPrice(0.1) = one company record) from the
+         *  `enrich_company` pool (PDL's `x-call-credits-type`), declared
+         *  on the provider. */
         model: {
             kind: UsageModelKind.PER_CALL,
             label: "match",

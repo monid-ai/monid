@@ -55,9 +55,9 @@ Deno.test("pdl: usage fn provenance — one evidence + one auth fn for all 4; se
         bundle.fnTable[synthesizedKey].provenance,
         "core#usage.synthesizedEmpty",
     );
-    // one pool per PDL credit TYPE (`x-call-credits-type`): the provider
-    // declares none, each doc declares and drains exactly the one its
-    // calls report
+    // one pool per PDL credit TYPE (`x-call-credits-type`): the PROVIDER
+    // declares all four, and each doc compiles down to exactly the one
+    // its own lines drain (design D6c)
     const drains = {
         "pdl#v5/person/enrich": "enrich",
         "pdl#v5/person/search": "search",
