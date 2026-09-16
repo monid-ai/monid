@@ -23,19 +23,21 @@ export default defineEndpoint({
         docsUrl: "https://docs.asksurf.ai/data-api/onchain/dex-activity",
         categories: ["defi"],
         notes: [
-            "Pass exactly one of `project` or `address`; the request " +
-            "is rejected before the wire when neither is given, and " +
-            "upstream rejects both together.",
+            "Pass exactly one of `project` or `address`; a request " +
+            "with neither or with both is rejected before the wire.",
         ],
     },
     request: { method: "GET", path: "/onchain/dex/activity" },
     input: {
         schema: {
-            // the identifier alternatives compile to anyOf (D4); a union arm
-            // takes no binding default (ajv never applies defaults inside anyOf)
+            // "exactly one": each arm omits the other identifier, so both
+            // together match neither arm (D4); a union arm takes no binding
+            // default (ajv never applies defaults inside anyOf)
             queryParams: z.union([
-                zOnchainDexActivityQueryParams.required({ project: true }),
-                zOnchainDexActivityQueryParams.required({ address: true }),
+                zOnchainDexActivityQueryParams.omit({ address: true })
+                    .required({ project: true }),
+                zOnchainDexActivityQueryParams.omit({ project: true })
+                    .required({ address: true }),
             ]),
         },
     },

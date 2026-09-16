@@ -118,8 +118,12 @@ person precedent). The rule also rides `meta.notes` in words.
 Two consequences:
 
 - `oneOf` ("exactly one" — `onchain/dex/activity`, `heatscore/detail`) is
-  not expressible: a union accepts both together, and the vendor answers 400
-  (error-as-data, zero-billed). The note says "exactly one".
+  each arm `.omit()`-ing the other identifier: both together then match
+  neither arm and fail INVALID_INPUT before the wire, the same as neither.
+  (The vendor docs say "exactly one" but state no behaviour for both; their
+  own example sends both, so what upstream does is unknown — the gate does
+  not depend on it.) `onchain/dex/activity` carries this in layer 2;
+  `heatscore/detail` (layer 1) still ships the plain arms.
 - ajv's `useDefaults` never enters `anyOf` arms (contactout D7), so a union
   binding carries NO defaults — the vendor's server defaults apply on the
   wire instead of v1's always-serialized ones. Same values, absent rather

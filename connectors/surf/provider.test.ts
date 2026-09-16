@@ -467,8 +467,8 @@ Deno.test("surf schema gates: enum, pattern, url and the identifier alternatives
     await validates("surf#fund/detail", {
         queryParams: { id: "ef3b6da9-283d-4080-b3c7-87b1b45924dc" },
     });
-    // exactly one of project | address: neither is rejected before the
-    // wire; both together is the vendor's 400 (a note, not a gate)
+    // exactly one of project | address: neither AND both are rejected
+    // before the wire (each arm omits the other identifier, design D4)
     await assertRejects(
         () =>
             validates("surf#onchain/dex/activity", {
@@ -480,6 +480,18 @@ Deno.test("surf schema gates: enum, pattern, url and the identifier alternatives
     await validates("surf#onchain/dex/activity", {
         queryParams: { chain: "ethereum", address: "0x" + "ab".repeat(20) },
     });
+    await assertRejects(
+        () =>
+            validates("surf#onchain/dex/activity", {
+                queryParams: {
+                    chain: "ethereum",
+                    project: "uniswap",
+                    address: "0x" + "ab".repeat(20),
+                },
+            }),
+        Error,
+        "INVALID_INPUT",
+    );
 });
 
 // ---------------------------------------------------------------------------
