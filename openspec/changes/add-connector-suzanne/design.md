@@ -48,14 +48,39 @@ headers are a different set — but `set-cookie` is a response header too, and s
 are account-identifying ratelimit and tracing headers.
 
 So the recorder captures an explicit allowlist, `RECORDED_RES_HEADERS =
-["location"]`, and nothing else reaches disk. Growing the list is a deliberate
+["location"]`, and no other header is kept. Growing the list is a deliberate
 edit in the same PR as the connector that needs it — the categories.ts posture.
+The allowlist is enforced by `zRecordedCall`, not merely by the recorder: a
+fixture is a file, and a hand-edited one carrying `set-cookie` must fail to
+LOAD rather than replay.
+
+**The allowlist alone is not enough (review finding, PR #13).** An earlier
+draft of this entry claimed fixtures stay "credential-free by construction"
+once the list is bounded. That was wrong, and wrong about precisely the header
+the list exists to carry: a `location` pointing at a presigned URL IS a bearer
+credential — the authorization rides the query string. Recording one verbatim
+would commit temporary read access to the vendor's object, in a repo whose
+fixtures are public.
+
+Nothing leaked — the committed chain is synthetic and no key has ever worked
+here — but task 5.2 is "record the real chains when a key arrives", so the
+tripwire was armed for whoever does that. So `scrubCalls` now runs
+`scrubUrlCredentials` over recorded header values: every query VALUE collapses
+to `REDACTED`, while scheme, host, path and parameter NAMES survive. Shape is
+what a fixture is for; the signature is not part of the shape.
+
+Value-level, not a denylist of known-secret parameter names (`X-Amz-Signature`,
+`Signature`, `token`, …): a denylist is wrong the first time a vendor signs
+with a parameter nobody thought to list. Replay-safe because matching reads
+request method + URL only, never response headers — and assertions that care
+read `searchParams.has(...)`, which a value redaction leaves intact.
 
 Implementation note worth its own line: `recordingFetch` rebuilds the `Response`
 it relays (with `content-type` only). Without re-attaching the allowlisted
 headers there, `record` mode would capture a `location` into the fixture while
 the live run that produced it saw none — the fixture would pass and the recording
-run would fail. Both sides carry them.
+run would fail. Both sides carry them (the LIVE side keeps the real value; only
+what is written to disk is scrubbed).
 
 ## D3 — Lifecycle placement for a MIXED-mode provider
 
@@ -224,6 +249,15 @@ arrives; the live suite is written and gated, not stubbed.
 v1 carried `hints` (cross-endpoint pointers) and `notes` (the uploads
 `Content-Type` / S3 `403 SignatureDoesNotMatch` trap). Neither has a v2 doc slot.
 The upload pitfall is real and costs an agent a confusing S3 403, so it moves
-into `meta.description` — the field agents actually read — rather than being
-dropped. The cross-endpoint pointers are carried the same way ("call the uploads
-endpoint first", "fetch the mesh with the model-download endpoint").
+into **the uploads endpoint's** `meta.description` — the field agents actually
+read, on the doc they are reading when it matters — rather than being dropped.
+v1's `notes` lived on that same def, so the endpoint is the faithful target.
+
+NOT the provider's `meta.description`: that paragraph is the catalog blurb shown
+for all four endpoints, three of which never touch an upload URL, and a
+client-specific `PUT` warning does not belong there. (Raised in review — the
+guidance is present, one level down from where a reader might first look.)
+
+The cross-endpoint pointers are carried the same way, on the endpoints that need
+them ("call the uploads endpoint first", "fetch the mesh with the model-download
+endpoint").

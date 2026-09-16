@@ -20,6 +20,21 @@ import { type Json, zJson } from "@shared/core";
  * by `scrubJson` (structural placeholders; keys/shape intact). The
  * fixture-size lint (fixture-size.test.ts) bounds files.
  */
+/**
+ * The ONLY response headers a fixture may carry. Request headers are never
+ * recorded (credentials); response headers are a different set, but
+ * `set-cookie` and account-identifying ratelimit/tracing headers live there
+ * too — so the recorder captures an explicit allowlist and nothing else is
+ * kept. Growing it is a deliberate edit in the same PR as the connector that
+ * needs it (the categories.ts posture).
+ *
+ * The allowlist bounds WHICH headers survive; it does not make the survivor
+ * safe by itself — a `location` can BE a credential (a presigned URL). That
+ * is `scrubUrlCredentials`' job, applied by `scrubCalls` before anything is
+ * written.
+ */
+export const RECORDED_RES_HEADERS = ["location"] as const;
+
 export const zRecordedCall = z.object({
     req: z.object({
         method: z.string(),
@@ -28,24 +43,34 @@ export const zRecordedCall = z.object({
     }).strict(),
     res: z.object({
         status: z.number().int(),
-        /** ALLOWLISTED response headers (RECORDED_RES_HEADERS) — envelope
-         *  facts a fn reads, e.g. a 302's `location`. Absent on every chain
-         *  that does not need one. */
-        headers: z.record(z.string(), z.string()).optional(),
+        /** ALLOWLISTED response headers — envelope facts a fn reads, e.g. a
+         *  302's `location`. Absent on every chain that does not need one.
+         *  Keys are CHECKED against the allowlist, not merely typed
+         *  `z.string()`: the recorder is not the only way a fixture gets
+         *  written, and a hand-edited one carrying `set-cookie` must fail to
+         *  load rather than replay. (A refinement rather than
+         *  `z.record(z.enum(...))`, which is EXHAUSTIVE — that would demand
+         *  every allowlisted key on every fixture the moment the list grows
+         *  past one.) */
+        headers: z.record(z.string(), z.string())
+            .refine(
+                (headers) =>
+                    Object.keys(headers).every((key) =>
+                        (RECORDED_RES_HEADERS as readonly string[]).includes(
+                            key,
+                        )
+                    ),
+                {
+                    message: `response headers must be one of: ${
+                        RECORDED_RES_HEADERS.join(", ")
+                    }`,
+                },
+            )
+            .optional(),
         body: zJson,
     }).strict(),
 }).strict();
 export type RecordedCall = z.infer<typeof zRecordedCall>;
-
-/**
- * The ONLY response headers a fixture may carry. Request headers are never
- * recorded (credentials); response headers are a different set, but
- * `set-cookie` and account-identifying ratelimit/tracing headers live there
- * too — so the recorder captures an explicit allowlist and nothing else
- * reaches disk. Growing it is a deliberate edit in the same PR as the
- * connector that needs it (the categories.ts posture).
- */
-export const RECORDED_RES_HEADERS: readonly string[] = ["location"];
 
 /** The allowlisted subset of a real response's headers, keys lowercased. */
 export function pickRecordedHeaders(
@@ -143,13 +168,50 @@ export function scrubJson(value: Json): Json {
     return value;
 }
 
+/** The placeholder every redacted query value collapses to. */
+export const REDACTED_QUERY_VALUE = "REDACTED";
+
+/**
+ * Strip credentials out of a URL-valued header (`location`).
+ *
+ * A redirect target can BE a bearer credential: a presigned S3 URL carries
+ * its authorization in the query string (`X-Amz-Signature`, `Signature`,
+ * `token`, …), and recording one verbatim would commit temporary read access
+ * to the vendor's object. So every query VALUE collapses to a placeholder
+ * while the scheme, host, path and parameter NAMES survive — which is all a
+ * fixture needs, since it exists to pin SHAPE.
+ *
+ * Value-level, not a denylist of known-secret parameter names: a denylist is
+ * wrong the first time a vendor signs with a parameter nobody listed.
+ *
+ * Non-URL values and URLs without a query pass through untouched (a plain
+ * trailing-slash 307 `location` is not a secret and stays readable).
+ */
+export function scrubUrlCredentials(value: string): string {
+    let url: URL;
+    try {
+        url = new URL(value);
+    } catch {
+        return value; // not a URL (relative location, junk) — leave it alone
+    }
+    if ([...url.searchParams.keys()].length === 0) return value;
+    for (const key of [...url.searchParams.keys()]) {
+        url.searchParams.set(key, REDACTED_QUERY_VALUE);
+    }
+    return url.toString();
+}
+
 /** Scrub over a recorded chain — REQUEST bodies included: request payloads
  *  are exactly where caller-supplied PII lives, and replay matches calls by
  *  method + URL only, so scrubbing the body is replay-safe (PR #2 finding).
- *  The URL is deliberately KEPT verbatim — the replay matcher and the
- *  `{{request.url}}` fixture binding depend on it; recorded inputs come
+ *  The REQUEST URL is deliberately KEPT verbatim — the replay matcher and
+ *  the `{{request.url}}` fixture binding depend on it; recorded inputs come
  *  from the curated test-inputs table, which follows the placeholder
- *  identity convention (consented or public-figure names only). */
+ *  identity convention (consented or public-figure names only).
+ *
+ *  RESPONSE HEADERS get the URL-credential scrub: an allowlisted `location`
+ *  may be a presigned (bearer) URL. Replay-safe for the same reason the body
+ *  is — matching never reads response headers. */
 export function scrubCalls(calls: RecordedCall[]): RecordedCall[] {
     return calls.map((call) => ({
         req: {
@@ -158,7 +220,19 @@ export function scrubCalls(calls: RecordedCall[]): RecordedCall[] {
                 ? { body: scrubJson(call.req.body) }
                 : {}),
         },
-        res: { ...call.res, body: scrubJson(call.res.body) },
+        res: {
+            ...call.res,
+            ...(call.res.headers !== undefined
+                ? {
+                    headers: Object.fromEntries(
+                        Object.entries(call.res.headers).map((
+                            [key, value],
+                        ) => [key, scrubUrlCredentials(value)]),
+                    ),
+                }
+                : {}),
+            body: scrubJson(call.res.body),
+        },
     }));
 }
 

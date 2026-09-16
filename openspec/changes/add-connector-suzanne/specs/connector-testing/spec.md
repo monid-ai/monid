@@ -25,3 +25,28 @@ fixtures.
 #### Scenario: Existing fixtures are unaffected
 - **WHEN** a committed fixture has no `res.headers`
 - **THEN** it SHALL parse unchanged and replay SHALL yield `headers: {}`
+
+#### Scenario: A non-allowlisted header fails to load
+- **WHEN** a hand-edited fixture carries `res.headers["set-cookie"]`
+- **THEN** `zRecordedCall` SHALL reject it, so a forbidden header cannot be
+  replayed by editing a file rather than recording one
+
+### Requirement: Recorded URL headers are stripped of credentials
+An allowlisted header value MAY ITSELF be a credential — a redirect `location`
+to a presigned URL carries its authorization in the query string. Before a
+recording is persisted, every query parameter VALUE in a URL-valued response
+header SHALL be replaced with a fixed placeholder, while the scheme, host, path
+and parameter NAMES are preserved. Redaction SHALL be value-level rather than a
+denylist of known-secret parameter names. Header values that are not URLs, and
+URLs with no query string, SHALL pass through untouched.
+
+#### Scenario: A presigned redirect is recorded
+- **WHEN** `deno task record` captures a `302` whose `location` is
+  `https://bucket.s3.amazonaws.com/o.glb?X-Amz-Signature=<secret>&X-Amz-Expires=900`
+- **THEN** the written fixture SHALL contain neither `<secret>` nor any other
+  query value, and SHALL still carry the host, path and the parameter names
+  `X-Amz-Signature` / `X-Amz-Expires`
+
+#### Scenario: A plain redirect stays readable
+- **WHEN** a recorded `location` is `https://api.example.com/v1/news/`
+- **THEN** it SHALL be persisted verbatim
