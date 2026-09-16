@@ -19,8 +19,8 @@ port, so the port has to carry it.
 
 ## What Changes
 
-- **Engine: response headers are data** (`ENGINE_VERSION` 0.0.2 → 0.0.3,
-  `async_since` likewise; `fn_abi_since` stays at 0.0.1 — the changed ABI is
+- **Engine: response headers are data** (`ENGINE_VERSION` 0.1.0 → 0.2.0,
+  `async_since` likewise; `fn_abi_since` stays at 0.1.0 — the changed ABI is
   the lifecycle utils' return, so pure-hook docs gain nothing and must not be
   floored at a newer engine). `TransportResponse` gains an optional lowercased
   `headers` map, `HttpResult` (the fn-facing ABI) gains a required one, and
@@ -82,7 +82,7 @@ port, so the port has to carry it.
 ## Impact
 
 Engine minor bump (contract surface: `HttpResult`, `config.yml`) — every fn
-entry's `api` stamp moves to 0.0.3 and the bundle recompiles. Zero source impact
+entry's `api` stamp moves to 0.2.0 and the bundle recompiles. Zero source impact
 on existing connectors: their fns read `status`/`body`, and the fixture
 `headers` field is optional so every committed fixture still parses. New
 connector tree, one new category leaf, one README row.

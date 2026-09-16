@@ -3,7 +3,7 @@
 Decision record for the Suzanne port (v1 `adaptors/suzanne`, 4 defs) and the one
 engine capability it forced. Everything not recorded here mirrors v1 verbatim.
 
-## D1 — Response headers are DATA (engine ABI, 0.0.2 → 0.0.3)
+## D1 — Response headers are DATA (engine ABI, 0.1.0 → 0.2.0)
 
 `GET /v1/models/{job_id}/download` answers `302 Found` with an empty body and
 `Location: <presigned S3 url>`. The answer is the envelope, not the letter.
@@ -244,20 +244,27 @@ the record about what synthetics have missed before (trailing-slash 307s,
 undocumented envelopes). Replace via `deno task record` when a working key
 arrives; the live suite is written and gated, not stubbed.
 
-## D10 — No hints/notes slot; the pitfalls move into `meta.description`
+## D10 — v1's `notes` land in `meta.notes`; `hints` stay prose
 
 v1 carried `hints` (cross-endpoint pointers) and `notes` (the uploads
-`Content-Type` / S3 `403 SignatureDoesNotMatch` trap). Neither has a v2 doc slot.
-The upload pitfall is real and costs an agent a confusing S3 403, so it moves
-into **the uploads endpoint's** `meta.description` — the field agents actually
-read, on the doc they are reading when it matters — rather than being dropped.
-v1's `notes` lived on that same def, so the endpoint is the faithful target.
+`Content-Type` / S3 `403 SignatureDoesNotMatch` trap).
 
-NOT the provider's `meta.description`: that paragraph is the catalog blurb shown
-for all four endpoints, three of which never touch an upload URL, and a
-client-specific `PUT` warning does not belong there. (Raised in review — the
-guidance is present, one level down from where a reader might first look.)
+AMENDED (rebase onto `main`). When this entry was first written neither had a v2
+slot, so the upload caveat went into the uploads endpoint's `meta.description` —
+the field agents actually read — and a reviewer then flagged it as missing
+because they checked the PROVIDER's description first.
 
-The cross-endpoint pointers are carried the same way, on the endpoints that need
-them ("call the uploads endpoint first", "fetch the mesh with the model-download
-endpoint").
+`add-meta-notes` (#14) has since landed `meta.notes`: "operational CAVEATS —
+what a caller must know before calling, not what the endpoint is for". That is
+precisely this fact, so the caveat moves into its proper slot and v1's `notes`
+are restored rather than approximated — the `Content-Type` trap, the per-client
+suppression recipes, and the expiry windows, as three standalone entries.
+`description` keeps what the endpoint IS for.
+
+It stays on the uploads ENDPOINT, not the provider: provider notes CONCATENATE
+onto every endpoint (the additive resolution of add-meta-notes D1), and three of
+the four never touch an upload URL.
+
+The cross-endpoint pointers have no slot and stay prose in `description`, on the
+endpoints that need them ("call the uploads endpoint first", "fetch the mesh
+with the model-download endpoint") — those are wayfinding, not caveats.

@@ -4,7 +4,7 @@
 
 - [x] 1.1 `HttpResult.headers` (contract) + `TransportResponse.headers?`
 - [x] 1.2 `directTransport` populates them; `fn-utils` threads them to fns
-- [x] 1.3 `ENGINE_VERSION` 0.0.2 → 0.0.3 and `config.yml` `async_since`
+- [x] 1.3 `ENGINE_VERSION` 0.1.0 → 0.2.0 and `config.yml` `async_since`
       likewise — the changed ABI is the LIFECYCLE utils' return, so the bump
       lands on `async_since`, not `fn_abi_since`: a pure-hook doc gained no
       capability and must not be floored at a newer engine

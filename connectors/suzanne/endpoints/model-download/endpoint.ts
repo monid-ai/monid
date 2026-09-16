@@ -8,7 +8,7 @@ import { zDownloadPathParams, zDownloadQueryParams } from "./schema/inputs.ts";
  * Suzanne answers `302 Found` with an EMPTY body and the 15-minute presigned
  * S3 URL in the `Location` header: the payload rides the envelope, not the
  * body. The engine never follows redirects (a credential must not travel to a
- * foreign origin) and, since 0.0.3, hands fns the response headers — so this
+ * foreign origin) and, since 0.2.0, hands fns the response headers — so this
  * `start` reads `location` and shapes it as `{download_url}`. That URL needs
  * no credential, so the caller fetches the bytes directly.
  *

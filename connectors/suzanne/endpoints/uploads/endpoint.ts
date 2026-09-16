@@ -26,11 +26,11 @@ export default defineEndpoint({
         // operational caveats a caller must know BEFORE calling — not what
         // the endpoint is for, which is `description`'s job.
         notes: [
-            'Do NOT send a Content-Type header on the PUT. The presigned URL ' +
+            "Do NOT send a Content-Type header on the PUT. The presigned URL " +
             "is signed without one, so a client that adds it gets 403 " +
             "SignatureDoesNotMatch from S3 — that is S3 rejecting the PUT, " +
             "not a Suzanne error.",
-            'Per client: curl adds Content-Type by default — pass -H ' +
+            "Per client: curl adds Content-Type by default — pass -H " +
             '"Content-Type:" (empty value) to suppress it; with fetch, omit ' +
             "the headers entry entirely; with requests.put, pass data= (not " +
             'files=) and headers={"Content-Type": None}; with axios, pass ' +
