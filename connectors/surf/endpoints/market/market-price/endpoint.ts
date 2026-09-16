@@ -18,6 +18,10 @@ export default defineEndpoint({
             "7d–90d → hourly; 180d+ → daily.",
         docsUrl: "https://docs.asksurf.ai/data-api/market/price",
         categories: ["token-prices"],
+        notes: [
+            "Set `from` and `to` together or not at all (vendor rule); " +
+            "one without the other is passed through, not rejected here.",
+        ],
     },
     request: { method: "GET", path: "/market/price" },
     input: {

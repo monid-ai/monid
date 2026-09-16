@@ -92,7 +92,8 @@ const validates = async (id: string, input: RunInput) => {
  * Surf's PUBLISHED TIER per endpoint — Light 1 / Standard 2 / Heavy 4
  * credits — as v1 authored it (`surfCredits(n)`), verified by the 2026-08
  * balance-differencing drills (13 endpoints measured, thirteen for
- * thirteen on the tier table).
+ * thirteen on the tier table). The vendor publishes the tiers per family,
+ * not per endpoint: https://docs.asksurf.ai/pricing (checked 2026-09-16).
  *
  * Written as LITERALS on purpose (clay D7a). Deriving them from each doc's
  * own model would make this test a tautology — the engine folds credits
@@ -244,6 +245,11 @@ Deno.test("surf meta: the credits_used caveat rides every doc; identifier rules 
     // v1's `.refine + .meta(anyOf)` (at least one) and `.meta(oneOf)`
     // (exactly one) — the arms compile to anyOf, the exclusivity is a note
     assert(notesOf("surf#fund/detail").includes("at least one of `id` or `q`"));
+    // the paired custom range is a cross-field rule: a note, not a gate
+    // (DEVELOPMENT.md; CodeRabbit #22)
+    for (const id of ["surf#market/price", "surf#dex/token/price"]) {
+        assert(notesOf(id).includes("`from` and `to` together"), id);
+    }
     assert(!notesOf("surf#news/feed").includes("Pass"), "no rule, no note");
 });
 
@@ -288,11 +294,12 @@ Deno.test("surf schemas: vendor defaults ride the binding; a union arm carries n
 Deno.test("surf: every relay settles its published tier on a 2xx and relays meta.credits_used", async () => {
     for (const id of await surfIds()) {
         if (id === SQL_JOB) continue;
+        const fixture = await fixtureFor(id, "synthetic-happy");
         const result = await runEndpoint({
             unit: await testSealedUnit(id),
             input: inputFor(id),
             mode: "replay",
-            fixture: await fixtureFor(id, "synthetic-happy"),
+            fixture,
         });
         assertEquals(result.httpStatus, 200, id);
         assertEquals(result.isProviderError, false, id);
@@ -302,10 +309,22 @@ Deno.test("surf: every relay settles its published tier on a 2xx and relays meta
             credits: { default: TIER[id] },
             evidence: { CALL: 1 },
         }, id);
-        // the vendor's own meter stays in the body, verbatim (design D1)
+        // the vendor's own meter stays in the body, verbatim (design D1):
+        // the output carries whatever the fixture said, not the tier
         const output = result.output as { meta?: { credits_used?: number } };
-        assertEquals(output.meta?.credits_used, TIER[id], id);
+        const wire = fixture.calls[0].res.body as {
+            meta: { credits_used: number };
+        };
+        assertEquals(output.meta?.credits_used, wire.meta.credits_used, id);
     }
+    // web/fetch is the measured divergent case (v1 drill: reports 2, charged
+    // 1) — the one fixture whose meter differs from the tier
+    const fetch = await fixtureFor("surf#web/fetch", "synthetic-happy");
+    const meter =
+        (fetch.calls[0].res.body as { meta: { credits_used: number } })
+            .meta.credits_used;
+    assertEquals(meter, 2);
+    assert(meter !== TIER["surf#web/fetch"]);
 });
 
 Deno.test("surf: an empty result still draws the tier", async () => {

@@ -8,12 +8,15 @@ import { defineProvider, presets } from "@shared/core";
  * lifecycle at the endpoint (design D3).
  *
  * BILLING IS THE PUBLISHED TIER, NOT THE RESPONSE FIELD (design D1). Surf
- * prices every call at Light 1 / Standard 2 / Heavy 4 credits, and each
- * endpoint's flat PER_CALL line pins its tier. Every 2xx body also carries
- * `meta.credits_used` — v1 measured it against the account balance in
- * 2026-08 (13 endpoints, both directions wrong: `web/fetch` reports 2 and is
- * charged 1, `heatscore/projects` reports 1 and is charged 4, `onchain/sql`
- * reports 5 which is not a tier) — so it is NOT a vendor claim: no
+ * prices every call at Light 1 / Standard 2 / Heavy 4 credits (the tier
+ * table by family: https://docs.asksurf.ai/pricing, checked 2026-09-16;
+ * the per-endpoint tier is v1's, confirmed by the 2026-08-03/04 balance
+ * drills), and each endpoint's flat PER_CALL line pins its tier. Every 2xx
+ * body also carries `meta.credits_used` — v1 measured it against the
+ * account balance in 2026-08 (13 endpoints, both directions wrong:
+ * `web/fetch` reports 2 and is charged 1, `heatscore/projects` reports 1
+ * and is charged 4, `onchain/sql` reports 5 which is not a tier) — so it is
+ * NOT a vendor claim: no
  * `usage.consolidate`, the derived fold IS the bill, and the tests hold the
  * 105 tiers as literals (clay D7a). The field stays in the body, relayed
  * verbatim, with a provider note saying what it is not; v1 stripped it.
