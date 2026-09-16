@@ -20,7 +20,7 @@ import {
 import type { Logger } from "@shared/logging";
 import { EngineError, EngineErrorCode } from "./errors.ts";
 import type { PreparedRequest, Transport } from "./interfaces/mod.ts";
-import { toScalarQuery } from "./request.ts";
+import { toWireQuery } from "./request.ts";
 import { sniffDecode } from "./transport.ts";
 
 function lastSegment(path: string): string {
@@ -243,10 +243,12 @@ export const fnUtils = Object.freeze({ json: jsonUtil, money: moneyUtil });
  * cross-origin calls (both capabilities) go out BARE. Fns never see
  * credentials either way.
  *
- * Responses come back sniff-decoded `{status, body}`; vendor non-2xx is
- * DATA (returned); transport failures throw EXECUTION_FAILED (retriable)
- * through the fn unless it catches. A malformed call/override shape is a
- * fn bug → FN_CONTRACT, fail-closed.
+ * Responses come back sniff-decoded `{status, headers, body}` — the vendor's
+ * RESPONSE headers ride along (lowercased) because a 3xx's `location` IS the
+ * payload for presigned-URL endpoints and redirects are never followed;
+ * vendor non-2xx is DATA (returned); transport failures throw
+ * EXECUTION_FAILED (retriable) through the fn unless it catches. A malformed
+ * call/override shape is a fn bug → FN_CONTRACT, fail-closed.
  */
 export function makeLifecycleUtils(opts: {
     doc: EndpointDoc;
@@ -264,7 +266,9 @@ export function makeLifecycleUtils(opts: {
         method: PreparedRequest["method"];
         url: string;
         headers?: Record<string, string>;
-        query: Record<string, string>;
+        /** The wire multimap (see PreparedRequest.query) — callers pass
+         *  `toWireQuery` output, never a raw record. */
+        query: Record<string, string[]>;
         body?: Json;
         requestMs?: number;
     }): Promise<HttpResult> => {
@@ -291,7 +295,13 @@ export function makeLifecycleUtils(opts: {
             },
         };
         const response = await transport.execute(prepared);
-        return { status: response.status, body: sniffDecode(response) };
+        return {
+            status: response.status,
+            // a transport that does not surface headers presents `{}` — fns
+            // never branch on presence (the HttpResult contract)
+            headers: response.headers ?? {},
+            body: sniffDecode(response),
+        };
     };
 
     const utils: LifecycleUtils = {
@@ -312,7 +322,9 @@ export function makeLifecycleUtils(opts: {
                 method: c.method,
                 url: c.url ?? origin + c.path,
                 headers: c.headers,
-                query: { ...c.queryParams },
+                // normalized through the ONE serializer, so a lifecycle fn
+                // and the declarative pipeline spell lists identically
+                query: toWireQuery(doc.id, c.queryParams ?? {}),
                 body: c.body,
                 requestMs: c.requestMs,
             });
@@ -335,7 +347,7 @@ export function makeLifecycleUtils(opts: {
                 url: o.url ??
                     (o.path !== undefined ? origin + o.path : requestInfo.url),
                 headers: { ...requestInfo.headers, ...o.headers },
-                query: toScalarQuery(
+                query: toWireQuery(
                     doc.id,
                     o.queryParams ?? input.queryParams ?? {},
                 ),

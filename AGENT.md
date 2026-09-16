@@ -1,4 +1,4 @@
-# AI Agent Instructions for monid-connectors
+# AI Agent Instructions for monid-ai/monid
 
 Guide for AI coding agents working in this repo. Read this first, then the
 relevant `openspec/changes/*/design.md` before touching code.
@@ -81,22 +81,25 @@ deno task apify:scaffold <actorId>   # authoring-time actor input-schema scaffol
   (`COMPOSITE` with components keyed by OUR snake_case ids; the vendor's native
   spelling, when it differs, is the line's `vendor` FIELD — the join is
   `vendor ?? id`) — and every billable line pins `consumes: {credit, amount}`
-  against a credit system declared in `usage.credits` (resolved provider ??
-  endpoint — the pool is a provider-wide fact; single-pool providers declare
-  `default`; a dollar-priced vendor's pool IS dollars).
-  Conditions/offsets/selection are COUNTING rules owned by consolidate/estimate,
-  never model shapes (D19 — no VARIANT/TIERED kinds). The settle splits into TWO
-  one-job fns (D27, subclassing: the PROVIDER states the default, the ENDPOINT
-  overrides only what diverges): `usage.evidence` (envelope → `{counts}` —
-  per-line quantities, estimate's settle-side twin, endpoint-divergent) and
-  `usage.consolidate` (envelope → `{credits, output?}` — the VENDOR'S OWN meter
-  lifted out of the payload in one motion via `utils.json.pluck`,
-  provider-uniform, OPTIONAL: not every vendor reports one). Compiled doc:
-  model/credits/estimate/evidence REQUIRED — for meterless models (FREE/flat)
-  the compiler SYNTHESIZES the one lawful `() => ({counts: {}})`
-  (`core#usage.synthesizedEmpty`, one shared fnTable entry); metered models must
-  resolve both quantities fns. Estimates read the PRE-toRequest validated input
-  (typed body AND queryParams — D25).
+  against a credit system declared in `usage.credits` (resolved KEY-WISE,
+  endpoint over provider — the pool SET is a provider-wide fact: a provider
+  declares every pool its account meters, single-pool providers `default`, a
+  dollar-priced vendor's pool IS dollars, pdl one per `x-call-credits-type`;
+  each declared pool must be DRAINED at its declaration site — a provider's by
+  ≥1 endpoint, an endpoint's by that endpoint — and the compiled doc narrows to
+  the pools its own lines drain, D6). Conditions/offsets/selection are COUNTING
+  rules owned by consolidate/estimate, never model shapes (D19 — no
+  VARIANT/TIERED kinds). The settle splits into TWO one-job fns (D27,
+  subclassing: the PROVIDER states the default, the ENDPOINT overrides only what
+  diverges): `usage.evidence` (envelope → `{counts}` — per-line quantities,
+  estimate's settle-side twin, endpoint-divergent) and `usage.consolidate`
+  (envelope → `{credits, output?}` — the VENDOR'S OWN meter lifted out of the
+  payload in one motion via `utils.json.pluck`, provider-uniform, OPTIONAL: not
+  every vendor reports one). Compiled doc: model/credits/estimate/evidence
+  REQUIRED — for meterless models (FREE/flat) the compiler SYNTHESIZES the one
+  lawful `() => ({counts: {}})` (`core#usage.synthesizedEmpty`, one shared
+  fnTable entry); metered models must resolve both quantities fns. Estimates
+  read the PRE-toRequest validated input (typed body AND queryParams — D25).
 - **Input fidelity (D25)**: `schema/inputs.ts` is the faithful vendor mirror —
   optionality only, no `.default()`, unquoted identifier keys. ALL tightening
   lives at the BINDING, derived: `zBody.required({limit: true})` (primary
@@ -158,9 +161,10 @@ deno task apify:scaffold <actorId>   # authoring-time actor input-schema scaffol
   were unchecked strings); presets survive only at provider seams
   (`presets.auth.*`, `presets.usage.perCall`). Ctx facts live at
   provenance-named paths: `data.usage.model`, `data.lifecycle.state`.
-- **Billing before presentation**: `usage.consolidate` is REQUIRED and runs on
-  the RAW response envelope BEFORE `fromResponse` — presentation changes can
-  never change a bill. Vendor non-2xx is DATA (zero usage), not an exception;
+- **Billing before presentation**: `usage.consolidate` is OPTIONAL (D27 — not
+  every vendor reports a meter; clay, pdl and tinyfish ship without one) and,
+  when present, runs on the RAW response envelope BEFORE `fromResponse` —
+  presentation changes can never change a bill. Vendor non-2xx is DATA (zero usage), not an exception;
   lifecycle fns synthesize error statuses for in-body failures and the engine
   zero-bills every non-2xx envelope (a fn cannot bill an error).
 - **Versioning**: every doc carries compiler-derived `minEngineVersion`.

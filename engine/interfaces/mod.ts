@@ -30,7 +30,10 @@ export interface PreparedRequest {
     /** Absolute, pathParams already substituted. */
     url: string;
     headers: Record<string, string>;
-    query: Record<string, string>;
+    /** Multimap: `["v"]` is one value; `["a","b"]` is a REPEATED key
+     *  (`?k=a&k=b`), appended in order. A list a connector joined for its
+     *  vendor (akta, comma) arrives as the single element `["a,b"]`. */
+    query: Record<string, string[]>;
     body?: Json;
     /** ABSENT ⇒ the request egresses BARE (no credential injection) — the
      *  same-origin credential rule (design D16): lifecycle fns targeting a
@@ -48,6 +51,10 @@ export interface PreparedRequest {
 export interface TransportResponse {
     status: number;
     body: string;
+    /** The vendor's response headers, keys LOWERCASED. OPTIONAL so a
+     *  transport that does not surface them stays source-compatible; the
+     *  engine presents `{}` to fns in that case. */
+    headers?: Record<string, string>;
     contentType?: string;
 }
 

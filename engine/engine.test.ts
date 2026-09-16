@@ -1,7 +1,9 @@
 import { assert, assertEquals, assertRejects, assertThrows } from "@std/assert";
 import { z } from "zod";
-import type { ConnectorSource, RunState, SealedUnit } from "@shared/core";
+import { greaterThan, parse } from "@std/semver";
+import type { ConnectorSource, Json, RunState, SealedUnit } from "@shared/core";
 import {
+    contractConfig,
     defineEndpoint,
     defineProvider,
     presets,
@@ -242,6 +244,131 @@ Deno.test("INVALID_INPUT: RunInput shape enforced before doc schemas", async () 
     for (const input of bad) {
         await expectCode(
             loaded.start(input as Parameters<typeof loaded.start>[0]),
+            EngineErrorCode.INVALID_INPUT,
+        );
+    }
+});
+
+// ---------------------------------------------------------------------------
+// query serialization — the wire multimap: a list is a REPEATED key
+// ---------------------------------------------------------------------------
+
+/** demoUnit with the input moved onto the query string, so the issued URL
+ *  is the assertion surface. `extra` is the list-capable field. */
+async function queryUnit(): Promise<SealedUnit> {
+    const connectors = demoConnector();
+    const endpoint = connectors[0].endpoints[0];
+    endpoint.def.request = { method: "GET", path: "/search" };
+    endpoint.def.input = {
+        schema: {
+            queryParams: z.object({
+                q: z.string(),
+                extra: z.union([z.string(), z.array(z.string())]).optional(),
+            }),
+        },
+    };
+    delete endpoint.def.output;
+    return sealUnit(
+        await compileBundle(connectors, COMPILE_OPTS),
+        "demo#search",
+    );
+}
+
+Deno.test("query: a LIST is a repeated key, in the caller's order", async () => {
+    const seen: { url?: string } = {};
+    const engine = new Engine({
+        transport: jsonTransport(200, { results: [] }, seen),
+    });
+    const loaded = await engine.load(await queryUnit());
+    await loaded.run({ queryParams: { q: "hi", extra: ["b", "a", "b"] } });
+    // repeated, ORDER preserved, duplicates kept — the caller's list is the
+    // wire's list (design D1: an array IS the repeat spelling)
+    assertEquals(
+        seen.url,
+        "https://api.demo.test/search?q=hi&extra=b&extra=a&extra=b",
+    );
+});
+
+Deno.test("query: a one-element list and a bare scalar are the SAME wire", async () => {
+    const urls: string[] = [];
+    for (const extra of ["only", ["only"]] as Json[]) {
+        const seen: { url?: string } = {};
+        const engine = new Engine({
+            transport: jsonTransport(200, { results: [] }, seen),
+        });
+        const loaded = await engine.load(await queryUnit());
+        await loaded.run({ queryParams: { q: "hi", extra } });
+        urls.push(seen.url!);
+    }
+    assertEquals(urls[0], urls[1]);
+    assertEquals(urls[0], "https://api.demo.test/search?q=hi&extra=only");
+});
+
+Deno.test("query: an EMPTY list emits nothing — never a bare `?k=`", async () => {
+    const seen: { url?: string } = {};
+    const engine = new Engine({
+        transport: jsonTransport(200, { results: [] }, seen),
+    });
+    const loaded = await engine.load(await queryUnit());
+    await loaded.run({ queryParams: { q: "hi", extra: [] } });
+    // `?extra=` would be a PRESENT, empty value to a vendor — not the same
+    // as an absent parameter
+    assertEquals(seen.url, "https://api.demo.test/search?q=hi");
+});
+
+Deno.test("query: a list a connector JOINED in toRequest stays ONE value (the akta spelling)", async () => {
+    const seen: { url?: string } = {};
+    const connectors = demoConnector();
+    const endpoint = connectors[0].endpoints[0];
+    endpoint.def.request = { method: "GET", path: "/search" };
+    endpoint.def.input = {
+        schema: {
+            queryParams: z.object({
+                q: z.string(),
+                extra: z.array(z.string()).optional(),
+            }),
+        },
+        // the vendor wants `?extra=a,b` — the spelling is a VENDOR fact and
+        // lives here, not in the engine (design D1)
+        toRequest: ({ data }) => ({
+            ...data.input,
+            queryParams: Object.fromEntries(
+                Object.entries(data.input.queryParams ?? {}).map((
+                    [key, value],
+                ) => [key, Array.isArray(value) ? value.join(",") : value]),
+            ),
+        }),
+    };
+    delete endpoint.def.output;
+    const unit = sealUnit(
+        await compileBundle(connectors, COMPILE_OPTS),
+        "demo#search",
+    );
+    const engine = new Engine({
+        transport: jsonTransport(200, { results: [] }, seen),
+    });
+    const loaded = await engine.load(unit);
+    await loaded.run({ queryParams: { q: "hi", extra: ["a", "b"] } });
+    assertEquals(seen.url, "https://api.demo.test/search?q=hi&extra=a%2Cb");
+});
+
+Deno.test("query: nesting is still refused — a query string cannot encode it", async () => {
+    const engine = new Engine({
+        transport: jsonTransport(200, { results: [] }),
+    });
+    const loaded = await engine.load(await queryUnit());
+    for (
+        const extra of [
+            [["nested"]], // array of arrays
+            [{ deep: 1 }], // array of objects
+        ] as unknown[]
+    ) {
+        await expectCode(
+            loaded.run(
+                { queryParams: { q: "hi", extra } } as Parameters<
+                    typeof loaded.run
+                >[0],
+            ),
             EngineErrorCode.INVALID_INPUT,
         );
     }
@@ -863,7 +990,9 @@ Deno.test("jsonUtil.pluck: one motion — {value, rest}; absent leaves the input
 
 /** Serve a scripted response sequence; capture what the engine sent. */
 function scriptTransport(
-    responses: Array<{ status: number; body: unknown }>,
+    responses: Array<
+        { status: number; body: unknown; headers?: Record<string, string> }
+    >,
     seen?: Array<{ method: string; url: string }>,
 ): Transport {
     let index = 0;
@@ -884,6 +1013,7 @@ function scriptTransport(
             return Promise.resolve(
                 new Response(text, {
                     status: scripted.status,
+                    ...(scripted.headers ? { headers: scripted.headers } : {}),
                 }),
             );
         },
@@ -1046,17 +1176,174 @@ async function asyncUnit(
     return sealUnit(bundle, "asyncdemo#jobs");
 }
 
+/** Highest of the contract floors — the shape `minEngineVersion` is
+ *  derived from. Read from config, never a literal, so a format or ABI
+ *  bump updates what these tests EXPECT, not what they MEAN. */
+function semverMax(...versions: string[]): string {
+    return versions.reduce((a, b) => greaterThan(parse(b), parse(a)) ? b : a);
+}
+
 const INSTANT_SLEEP = { sleep: () => Promise.resolve() };
 
-Deno.test("lifecycle: compiled doc carries lifecycle refs, pollMs, and the 0.0.1 floor", async () => {
+Deno.test("lifecycle: compiled doc carries lifecycle refs, pollMs, and the contract floor", async () => {
     const unit = await asyncUnit();
     assert(unit.doc.lifecycle);
     assertEquals(unit.doc.timeouts.pollMs, 5);
-    assertEquals(unit.doc.minEngineVersion, "0.0.1");
+    // semverMax(doc_format_since, every fn's api) — async_since is one of
+    // those apis, so an async doc can never floor BELOW a sync one. Asserted
+    // against the config constants, not a literal, so a format or ABI bump
+    // does not silently turn this into a test of nothing.
+    const { asyncSince, docFormatSince, fnAbiSince } = contractConfig.schema;
+    assertEquals(
+        unit.doc.minEngineVersion,
+        semverMax(docFormatSince, fnAbiSince, asyncSince),
+    );
     // the sealed unit closes over all three lifecycle fns
     assert(unit.fns[unit.doc.lifecycle.start.$fn.key]);
     assert(unit.fns[unit.doc.lifecycle.poll!.$fn.key]);
     assert(unit.fns[unit.doc.lifecycle.stop!.$fn.key]);
+});
+
+Deno.test("lifecycle: utils.http spells lists like the declarative path — repeat, and empty omits", async () => {
+    const seen: Array<{ method: string; url: string }> = [];
+    const engine = new Engine({
+        transport: scriptTransport([{ status: 200, body: { ok: true } }], seen),
+    });
+    const loaded = await engine.load(
+        await asyncUnit((connectors) => {
+            connectors[0].provider.lifecycle!.start = async ({ utils }) => {
+                await utils.http({
+                    method: "GET",
+                    path: "/jobs",
+                    queryParams: {
+                        // a scalar, a list, and an EMPTY list built
+                        // dynamically — no length guard in the fn
+                        scalar: "one",
+                        ids: ["a", "b"],
+                        none: [],
+                    },
+                });
+                return { kind: "COMPLETED", httpStatus: 200, output: [] };
+            };
+        }),
+    );
+    await loaded.run({ body: { q: "hi" } });
+    // repeated key for the list, one parameter for the scalar, and the
+    // empty list is simply absent — `?none=` would be a present, empty
+    // value to a vendor
+    assertEquals(
+        seen[0].url,
+        "https://api.asyncdemo.test/jobs?scalar=one&ids=a&ids=b",
+    );
+});
+
+// ---------------------------------------------------------------------------
+// response headers are DATA — a 3xx's `location` IS the payload for an
+// endpoint whose answer is the redirect target (a presigned URL minted per
+// request), and redirects are never followed, so the header has to reach
+// the fn.
+// ---------------------------------------------------------------------------
+
+/** A start fn that projects a 3xx Location into the output — the
+ *  presigned-download shape, in miniature. */
+function redirectReadingStart(connectors: ConnectorSource[]): void {
+    connectors[0].provider.lifecycle!.start = async ({ utils }) => {
+        const res = await utils.request();
+        const location = res.headers.location;
+        const redirected = res.status >= 300 && res.status < 400 &&
+            location !== undefined;
+        // annotated: TS normalizes a union of object literals by adding
+        // `?: undefined` siblings, which are not assignable to Json
+        const output: Json = redirected
+            ? { download_url: location }
+            : { headerKeys: Object.keys(res.headers).sort() };
+        return {
+            kind: "COMPLETED",
+            // OURS 200 (the redirect IS the success) / THEIRS the 3xx
+            httpStatus: redirected ? 200 : res.status,
+            providerHttpStatus: res.status,
+            output,
+        };
+    };
+}
+
+Deno.test("response headers: a 302 Location reaches the lifecycle fn", async () => {
+    const seen: Array<{ method: string; url: string }> = [];
+    const engine = new Engine({
+        transport: scriptTransport([{
+            status: 302,
+            body: "",
+            headers: { location: "https://s3.test/mesh.glb?sig=abc" },
+        }], seen),
+        ...INSTANT_SLEEP,
+    });
+    const loaded = await engine.load(await asyncUnit(redirectReadingStart));
+    const result = await loaded.run({ body: { q: "hi" } });
+    assertEquals(result.kind, "COMPLETED");
+    // OURS 200 (the redirect IS the success) / THEIRS 302 — design D12
+    assertEquals(result.httpStatus, 200);
+    assertEquals(result.isProviderError, false);
+    assertEquals(result.output, {
+        download_url: "https://s3.test/mesh.glb?sig=abc",
+    });
+    // the redirect was NOT followed: exactly one exchange, at the doc's url
+    assertEquals(seen.length, 1);
+    assertEquals(seen[0].url, "https://api.asyncdemo.test/jobs");
+});
+
+Deno.test("response headers: a 3xx without Location falls through to the vendor status", async () => {
+    const engine = new Engine({
+        transport: scriptTransport([{ status: 303, body: "" }]),
+        ...INSTANT_SLEEP,
+    });
+    const loaded = await engine.load(await asyncUnit(redirectReadingStart));
+    const result = await loaded.run({ body: { q: "hi" } });
+    // no readable Location ⇒ the fn cannot claim success; the vendor status
+    // stands and the engine zero-bills it (a fn cannot bill an error)
+    assertEquals(result.httpStatus, 303);
+    assertEquals(result.isProviderError, true);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
+});
+
+Deno.test("response headers: keys are lowercased and always present", async () => {
+    const engine = new Engine({
+        transport: scriptTransport([{
+            status: 200,
+            body: { ok: true },
+            headers: { "X-Request-Id": "r1", "Retry-After": "3" },
+        }]),
+        ...INSTANT_SLEEP,
+    });
+    const loaded = await engine.load(await asyncUnit(redirectReadingStart));
+    const result = await loaded.run({ body: { q: "hi" } });
+    const output = result.output as { headerKeys: string[] };
+    // content-type rides along from the scripted Response; the point is the
+    // CASING — a fn reads `res.headers["retry-after"]`, never a guess
+    assert(output.headerKeys.includes("retry-after"));
+    assert(output.headerKeys.includes("x-request-id"));
+    assertEquals(
+        output.headerKeys.filter((key) => key !== key.toLowerCase()),
+        [],
+    );
+});
+
+Deno.test("response headers: a transport that omits them yields {}", async () => {
+    // TransportResponse.headers is OPTIONAL — a host transport predating the
+    // capability stays source-compatible and fns still never branch.
+    const headerlessTransport: Transport = {
+        execute: () =>
+            Promise.resolve({
+                status: 200,
+                body: JSON.stringify({ ok: true }),
+            }),
+    };
+    const engine = new Engine({
+        transport: headerlessTransport,
+        ...INSTANT_SLEEP,
+    });
+    const loaded = await engine.load(await asyncUnit(redirectReadingStart));
+    const result = await loaded.run({ body: { q: "hi" } });
+    assertEquals(result.output, { headerKeys: [] });
 });
 
 Deno.test("lifecycle happy path: start → poll(running) → poll(done) → result fetch → settle", async () => {
@@ -1733,6 +2020,13 @@ async function usageUnit(
         usage !== undefined && usage.estimate === undefined
             ? { ...usage, estimate: () => ({ counts: {} }) }
             : usage;
+    // a FREE splice leaves the connector with NOTHING draining the
+    // provider's pool — dead config (design D6b: a declared pool needs at
+    // least one draining endpoint), so drop it for those cases
+    if (usage?.model?.kind === "FREE") {
+        delete (connectors[0].provider.usage as { credits?: unknown })
+            ?.credits;
+    }
     delete connectors[0].endpoints[0].def.output; // free-form outputs
     const bundle = await compileBundle(connectors, COMPILE_OPTS);
     return sealUnit(bundle, "demo#search");
@@ -1997,13 +2291,19 @@ Deno.test("lifecycle compile checks: poll without start; endpoint pollMs dead co
     }
 });
 
-Deno.test("sync docs: no lifecycle/pollMs; floor = fn_abi_since (ctx ABI), not async machinery", async () => {
+Deno.test("sync docs: no lifecycle/pollMs; floor never includes async_since", async () => {
     const bundle = await compileBundle(demoConnector(), COMPILE_OPTS);
-    // 0.0.1 via fn_abi_since (the pre-release contract floor) — NOT
-    // because of anything async: sync docs carry no lifecycle surface
+    // The floor is semverMax(doc_format_since, fn_abi_since) — NOT
+    // async_since: a sync doc carries no lifecycle surface, so the async
+    // hook family can never pull its floor up. The point of the assertion
+    // is the ABSENCE of async_since from the max, which the lifecycle
+    // assertions above pin.
     assertEquals(
         bundle.endpoints["demo#search"].minEngineVersion,
-        "0.0.1",
+        semverMax(
+            contractConfig.schema.docFormatSince,
+            contractConfig.schema.fnAbiSince,
+        ),
     );
     assertEquals(bundle.endpoints["demo#search"].lifecycle, undefined);
     assertEquals(bundle.endpoints["demo#search"].timeouts.pollMs, undefined);

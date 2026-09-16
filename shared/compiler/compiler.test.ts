@@ -1,8 +1,10 @@
 import { assert, assertEquals, assertRejects, assertThrows } from "@std/assert";
 import { z } from "zod";
 import { fromFileUrl, join } from "@std/path";
+import { greaterThan, parse } from "@std/semver";
 import {
     type ConnectorSource,
+    contractConfig,
     defineEndpoint,
     defineProvider,
     type EndpointDefSeed,
@@ -547,7 +549,7 @@ Deno.test("a line consuming an UNDECLARED credit fails compilation", async () =>
     );
 });
 
-Deno.test("a declared credit no line drains fails compilation", async () => {
+Deno.test("a PROVIDER pool drained by NO endpoint fails compilation", async () => {
     await assertRejects(
         () =>
             compileBundle(
@@ -569,21 +571,120 @@ Deno.test("a declared credit no line drains fails compilation", async () => {
                 OPTS,
             ),
         Error,
-        'declared credit "extra" is drained by no line',
+        'declared credit "extra" is drained by no endpoint',
     );
 });
 
-Deno.test("FREE docs compile with EMPTY credits — nothing drains, nothing declared", async () => {
+// THE regression this rule exists for (pdl's four x-call-credits-type
+// pools, PR #7): a provider-wide pool SET, one pool drained per endpoint.
+Deno.test("a provider declares the POOL SET; ONE endpoint per pool is enough", async () => {
+    const bundle = await compileBundle(
+        source(
+            [
+                {
+                    name: "search",
+                    def: makeEndpoint({
+                        usage: {
+                            model: {
+                                kind: "PER_CALL",
+                                consumes: { credit: "search", amount: 1 },
+                            },
+                        },
+                    }),
+                },
+                {
+                    name: "enrich",
+                    def: makeEndpoint({
+                        request: { method: "POST", path: "/enrich" },
+                        usage: {
+                            model: {
+                                kind: "PER_CALL",
+                                consumes: { credit: "enrich", amount: 1 },
+                            },
+                        },
+                    }),
+                },
+            ],
+            makeProvider({
+                usage: {
+                    credits: {
+                        search: { label: "Search credits" },
+                        enrich: { label: "Enrich credits" },
+                    },
+                } as Partial<ProviderDefSeed>["usage"],
+            }),
+        ),
+        OPTS,
+    );
+    // each doc carries ONLY the pool its own lines drain (design D6c)
+    assertEquals(bundle.endpoints["demo#search"].usage.credits, {
+        search: { label: "Search credits" },
+    });
+    assertEquals(bundle.endpoints["demo#enrich"].usage.credits, {
+        enrich: { label: "Enrich credits" },
+    });
+});
+
+Deno.test("an ENDPOINT-declared pool it does not drain fails compilation", async () => {
+    await assertRejects(
+        () =>
+            compileBundle(
+                source([{
+                    name: "search",
+                    def: makeEndpoint({
+                        usage: {
+                            credits: { extra: { label: "Never drained" } },
+                        },
+                    }),
+                }]),
+                OPTS,
+            ),
+        Error,
+        'endpoint-declared credit "extra" is drained by no line',
+    );
+});
+
+Deno.test("credits resolve KEY-WISE, endpoint over provider (D20 closest wins)", async () => {
     const bundle = await compileBundle(
         source([{
             name: "search",
             def: makeEndpoint({
-                usage: { model: { kind: "FREE" } },
+                usage: {
+                    credits: { default: { label: "Endpoint label wins" } },
+                },
             }),
         }]),
         OPTS,
     );
+    assertEquals(bundle.endpoints["demo#search"].usage.credits, {
+        default: { label: "Endpoint label wins" },
+    });
+});
+
+Deno.test("FREE docs compile with EMPTY credits — the provider's pool is another endpoint's", async () => {
+    const bundle = await compileBundle(
+        source([
+            // the billable sibling drains the provider's `default` pool,
+            // so the declaration is live (design D6b)
+            {
+                name: "paid",
+                def: makeEndpoint({
+                    request: { method: "POST", path: "/paid" },
+                }),
+            },
+            {
+                name: "search",
+                def: makeEndpoint({
+                    usage: { model: { kind: "FREE" } },
+                }),
+            },
+        ]),
+        OPTS,
+    );
     assertEquals(bundle.endpoints["demo#search"].usage.credits, {});
+    assertEquals(bundle.endpoints["demo#paid"].usage.credits, {
+        default: { label: "Demo credits" },
+    });
 });
 
 Deno.test("auth.inject is REQUIRED: endpoint ?? provider, neither fails", async () => {
@@ -644,6 +745,104 @@ Deno.test("leaf-wise fallback: endpoint hook REPLACES provider's; baseUrl/meta f
     // meta leaves fall back to the provider
     assertEquals(doc.meta.docsUrl, "https://demo.test/docs");
     assertEquals(doc.meta.categories, ["demo-cat"]);
+});
+
+Deno.test("meta.notes CONCATENATE provider-then-endpoint (the one additive leaf)", async () => {
+    const bundle = await compileBundle(
+        source(
+            [{
+                name: "search",
+                def: makeEndpoint({
+                    meta: {
+                        displayName: "S",
+                        summary: "s.",
+                        notes: ["endpoint caveat"],
+                    },
+                }),
+            }, {
+                name: "other",
+                def: makeEndpoint({
+                    meta: { displayName: "O", summary: "o." }, // no notes
+                    request: { method: "POST", path: "/other" },
+                }),
+            }],
+            makeProvider({
+                meta: {
+                    displayName: "Demo",
+                    summary: "A demo provider.",
+                    notes: ["provider caveat 1", "provider caveat 2"],
+                },
+            }),
+        ),
+        OPTS,
+    );
+    // additive, NOT closest-wins: both levels survive, general before specific
+    assertEquals(bundle.endpoints["demo#search"].meta.notes, [
+        "provider caveat 1",
+        "provider caveat 2",
+        "endpoint caveat",
+    ]);
+    // provider notes reach an endpoint that declares none
+    assertEquals(bundle.endpoints["demo#other"].meta.notes, [
+        "provider caveat 1",
+        "provider caveat 2",
+    ]);
+    // the provider doc keeps its own
+    assertEquals(bundle.providers["demo"].meta.notes, [
+        "provider caveat 1",
+        "provider caveat 2",
+    ]);
+});
+
+Deno.test("meta.notes: endpoint-only, and absent everywhere leaves NO key", async () => {
+    const bundle = await compileBundle(
+        source(
+            [{
+                name: "search",
+                def: makeEndpoint({
+                    meta: {
+                        displayName: "S",
+                        summary: "s.",
+                        notes: ["only the endpoint speaks"],
+                    },
+                }),
+            }, {
+                name: "other",
+                def: makeEndpoint({
+                    meta: { displayName: "O", summary: "o." },
+                    request: { method: "POST", path: "/other" },
+                }),
+            }],
+            makeProvider(), // no provider notes
+        ),
+        OPTS,
+    );
+    assertEquals(bundle.endpoints["demo#search"].meta.notes, [
+        "only the endpoint speaks",
+    ]);
+    // empty concatenation ⇒ key OMITTED (determinism: note-less docs stay
+    // byte-identical to docs compiled before this capability existed)
+    assert(
+        !("notes" in bundle.endpoints["demo#other"].meta),
+        "no notes anywhere ⇒ no notes key",
+    );
+});
+
+Deno.test("meta.notes rejects empty entries and an empty array", () => {
+    let threw = 0;
+    try {
+        makeEndpoint({
+            meta: { displayName: "S", summary: "s.", notes: [""] },
+        });
+    } catch {
+        threw++;
+    }
+    try {
+        makeEndpoint({ meta: { displayName: "S", summary: "s.", notes: [] } });
+    } catch {
+        threw++;
+    }
+    assertEquals(threw, 2, "an empty note and an empty list both reject");
 });
 
 Deno.test("credentials fallback: endpoint overriding only inject inherits the PROVIDER's shape", async () => {
@@ -918,9 +1117,17 @@ Deno.test("golden: compiled exa#search doc shape (zBundle round-trip)", async ()
     const doc = bundle.endpoints["exa#search"];
     assert(doc, "exa#search compiled");
     assertEquals(doc.provider, "exa");
-    // fn_abi_since 0.0.1: the pre-release contract floor, so every doc
-    // floors here
-    assertEquals(doc.minEngineVersion, "0.0.1");
+    // semverMax(doc_format_since, every fn's api) — read from the config
+    // constants rather than a literal, so a format or ABI bump updates this
+    // test's expectation instead of its meaning. fn_abi_since leads today
+    // (the wire query became a multimap); doc_format_since led before it.
+    const { docFormatSince, fnAbiSince } = contractConfig.schema;
+    assertEquals(
+        doc.minEngineVersion,
+        greaterThan(parse(fnAbiSince), parse(docFormatSince))
+            ? fnAbiSince
+            : docFormatSince,
+    );
     assertEquals(doc.request, {
         method: "POST",
         url: "https://api.exa.ai/search",
@@ -961,8 +1168,8 @@ Deno.test("golden: compiled exa#search doc shape (zBundle round-trip)", async ()
     assertEquals(authEntry.kind, "factory");
     assertEquals(authEntry.provenance, "presets#auth.header");
     assertEquals(bundle.fnTable[doc.usage.evidence.$fn.key].kind, "fn");
-    // every entry declares its ABI floor
-    assertEquals(authEntry.api, "0.0.1");
+    // every entry declares its ABI floor (schema.fn_abi_since)
+    assertEquals(authEntry.api, "0.1.0");
 
     // interning across endpoints: contents shares the provider auth fn
     // AND the provider's ONE vendor-meter consolidate (design D27); the
