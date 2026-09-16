@@ -176,8 +176,9 @@ deliberately — nothing consumed it). Every v1 note and every `runHint` is
 carried into `meta.description`, the field whose role is agent-facing
 capability text: company-domain's fuzzy-matcher caveat, the search iterator's
 expiry and its 404, the "not billed" notes, the enrich-person
-at-least-one-identifier rule, and the whole cross-endpoint chain (name →
-domain → the three company functions; work-email ↔ person ↔ mobile-phone).
+at-least-one-identifier rule (now enforced too — D13), and the whole
+cross-endpoint chain (name → domain → the three company functions;
+work-email ↔ person ↔ mobile-phone).
 One note is REWORDED rather than copied: mobile-phone's "an empty result is
 not billed" is false under D3, and now says the miss is charged at a reduced
 rate. v1's long `summary` strings became `description`; a fresh one-line
@@ -205,3 +206,39 @@ is the recording's; only identifying values are stand-ins, and each fixture's
 One chain is NOT a recording: `routine-failed-item` uses the shape v1's
 provider tests pinned, because a failed item could not be provoked through
 the public surface at port time — its description says that too.
+
+## D13 — Enrich Person's "at least one identifier" binds as a union, not a refinement
+
+Correcting this change's own first cut (PR #16 review). Clay declares neither
+`Professional Profile URL` nor `Email` required, but a body with neither runs
+a search for nobody and can draw for it — v1 guarded that with a `.refine`.
+The first cut dropped the guard, reasoning from fundable's D6 ("cross-field
+refinements cannot survive JSON-Schema compilation, so document them") and
+adding that Clay answers 400 anyway.
+
+Both halves were wrong. Only the REFINEMENT FORM fails to compile; a UNION
+compiles to `anyOf`, which is exactly what pdl's person-search calls "the ONE
+v1 cross-field rule that survives compilation". And the 400 claim was never
+observed — it was read off a v1 openspec line describing v1's own LOCAL
+rejection ("rejected locally, no upstream call"), not Clay's behaviour. The
+guard was removed on the strength of a vendor behaviour nobody had tested;
+v1's own comment says the opposite.
+
+Probed, because the failure mode decides the design: `z.toJSONSchema` drops a
+`.refine` **silently** — no throw, no warning, and the emitted schema is
+byte-identical to the unrefined one. Since the engine validates the COMPILED
+JSON Schema with ajv and never sees the zod object, a refined mirror would
+read as guarded while enforcing nothing. That is strictly worse than no
+guard. The union emits a two-arm `anyOf` with a one-key `required` per arm,
+`additionalProperties: false` preserved on both, and the `.describe()`
+surviving as the schema's own `description` — 941 bytes for this two-property
+body, against pdl shipping the same pattern over ~10 properties per arm.
+
+It binds at the ENDPOINT, not in the mirror — the opposite of pdl. pdl's
+`query` XOR `sql` is the VENDOR's rule and belongs in the mirror; "at least
+one identifier" is OURS, and D25 keeps the mirror vendor-faithful with every
+tightening at the binding. Rejected alternatives: enforcing in a pure
+`input.toRequest` or in `lifecycle.start` — both run at runtime, but both
+report a bad caller input as `FN_CONTRACT` or a provider error instead of
+`INVALID_INPUT`, and the latter pushes one endpoint's rule into the
+provider-wide start the other six share.

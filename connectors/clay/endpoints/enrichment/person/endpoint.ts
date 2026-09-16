@@ -1,5 +1,6 @@
+import { z } from "zod";
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
-import { zEnrichPersonBody } from "./schema/inputs.ts";
+import { AT_LEAST_ONE_IDENTIFIER, zEnrichPersonBody } from "./schema/inputs.ts";
 
 /** Clay-managed "Enrich person" — a structured profile from a URL or email. */
 export default defineEndpoint({
@@ -29,7 +30,22 @@ export default defineEndpoint({
         method: "POST",
         path: "/routines/function%3At_0tkthabYBa6XQgknKwF/run",
     },
-    input: { schema: { body: zEnrichPersonBody } },
+    // "At least one identifier" is OUR rule (Clay declares no required
+    // field), so it binds HERE and the mirror stays vendor-faithful
+    // (design D25). A union is the form that SURVIVES compilation — it
+    // becomes `anyOf` with a one-key `required` per arm, which ajv
+    // enforces pre-wire as INVALID_INPUT; a `.refine` would be dropped
+    // silently and guard nothing (design D13, pdl's precedent).
+    input: {
+        schema: {
+            body: z.union([
+                zEnrichPersonBody.required({
+                    "Professional Profile URL": true,
+                }),
+                zEnrichPersonBody.required({ "Email": true }),
+            ]).describe(AT_LEAST_ONE_IDENTIFIER),
+        },
+    },
     usage: {
         /** Two pools, one quantum — see company-domain. Measured per-run
          *  draw (drill 2026-09-08): 0.5 data credit + 1 action. A person

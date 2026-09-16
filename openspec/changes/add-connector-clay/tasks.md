@@ -38,8 +38,20 @@
 - [x] 3.5 Run test:live end to end (18 passed, including the real
       create → run flow)
 
-## 4. Wiring + docs
+## 4. PR #16 review
 
-- [x] 4.1 README connector row
-- [x] 4.2 Verify: fmt · lint · check · test · double-compile ·
+- [x] 4.1 enrich-person: bind the at-least-one-identifier rule as a
+      compiled `anyOf` at the endpoint (D13), withdrawing the unverified
+      "Clay answers 400" justification; a `.refine` compiles away silently
+- [x] 4.2 Test the gate (rejections, both single-identifier arms, and the
+      compiled `anyOf` surface); verified it fails when the union is
+      flattened back
+- [x] 4.3 spec: scope the non-2xx relay to TERMINAL answers and pin the
+      three poll statuses that keep a run RUNNING; drop the tautological
+      wording from the estimate scenario
+
+## 5. Wiring + docs
+
+- [x] 5.1 README connector row
+- [x] 5.2 Verify: fmt · lint · check · test · double-compile ·
       version:check · catalog smoke · engine:estimate

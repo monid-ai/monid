@@ -16,8 +16,14 @@ and no `output.fromError`.
 - **THEN** `start` SHALL POST the doc's compiled request with the caller's
   body wrapped as `{items: [{id, inputs}]}`, park RUNNING on a
   `routine_run_id`, and `poll` SHALL GET
-  `/public/v0/routines/run/{id}/results?limit=100` until the status leaves
-  202 / 429 / 5xx
+  `/public/v0/routines/run/{id}/results?limit=100`
+
+#### Scenario: Exactly three poll statuses keep the run alive
+- **WHEN** a poll answers `202` (Clay's pending signal), `429` (rate limit)
+  or any `5xx` (upstream infrastructure)
+- **THEN** the run SHALL stay RUNNING, bounded by `runMs`
+- **AND WHEN** a poll answers anything else — `200`, or a terminal non-2xx
+  such as `400`, `401`, `402`, `404` — the run SHALL complete
 
 #### Scenario: Each doc narrows to the pools it drains
 - **WHEN** the bundle is compiled
@@ -87,17 +93,38 @@ the caller-stated `limit`, which is REQUIRED at the binding.
   outside 1-500, or an unknown body key
 - **THEN** the run SHALL fail `INVALID_INPUT` with no upstream call
 
+### Requirement: Enrich Person requires at least one identifier
+Clay declares neither `Professional Profile URL` nor `Email` required, but a
+body with neither starts a run that resolves nobody and can still draw. The
+doc SHALL bind a constraint that survives compilation — an `anyOf` whose arms
+each require one identifier — so the engine rejects such a body before the
+wire. A zod refinement SHALL NOT be used: `z.toJSONSchema` drops refinements
+silently, so the compiled doc would enforce nothing.
+
+#### Scenario: A body with no identifier never reaches Clay
+- **WHEN** `/enrichment/person` is called with `{}`
+- **THEN** the run SHALL fail `INVALID_INPUT` with no upstream call and no
+  draw
+
+#### Scenario: Either identifier alone suffices
+- **WHEN** `/enrichment/person` is called with only `Professional Profile
+  URL`, only `Email`, or both
+- **THEN** the run SHALL proceed
+
 #### Scenario: The estimate performs no IO
 - **WHEN** an enrichment doc is estimated with a transport that rejects every
   request
 - **THEN** the estimate SHALL return `{enrichment_credits: 1,
-  enrichment_actions: 1}` and its `data_credit` draw SHALL equal the model's
-  hit rate
+  enrichment_actions: 1}` and its credits SHALL equal the independently
+  MEASURED hit draw for that endpoint — not a figure re-derived from the
+  doc's own model, which would hold whatever the model happened to say
 
-### Requirement: Vendor answers relay verbatim
-A Clay non-2xx SHALL complete the run as a provider error with zero usage and
-the vendor's own body unchanged — including the HTTP 402 whose text names the
-subscription's quota cap.
+### Requirement: Terminal vendor answers relay verbatim
+A TERMINAL Clay non-2xx SHALL complete the run as a provider error with zero
+usage and the vendor's own body unchanged — including the HTTP 402 whose text
+names the subscription's quota cap. Terminality differs by hook: on `start`
+every non-2xx is terminal (there is no retry arm); on `poll` every non-2xx
+except `202`, `429` and `5xx`, which keep the run RUNNING.
 
 #### Scenario: A rejected start is data
 - **WHEN** the routine start answers 401

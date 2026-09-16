@@ -1,6 +1,6 @@
-import { assert, assertEquals } from "@std/assert";
+import { assert, assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
-import type { RunInput } from "@shared/core";
+import type { Json, RunInput } from "@shared/core";
 import {
     liveSkip,
     loadFixture,
@@ -191,6 +191,59 @@ Deno.test("clay: a rejected start is DATA — 401, zero usage, nothing polled", 
         );
         assertEquals(result.timing.attempts, 0, id);
     }
+});
+
+Deno.test("clay#enrichment/person: a body with no identifier is rejected before the wire", async () => {
+    const unit = await testSealedUnit("clay#enrichment/person");
+    const fixture = await loadFixture(`${HERE}fixtures/routine-hit.json`);
+    const url = "https://www.linkedin.com/in/kareemamin";
+    // Clay declares neither field required, so a no-target body would
+    // start a routine run that resolves nobody and can still draw. OUR
+    // rule binds it (design D13) as a compiled `anyOf` — enforced by the
+    // engine's ajv pass, not by a `.refine` (which compiles away silently).
+    const rejected: Json[] = [
+        {},
+        { "Email": "" },
+        { "Professional Profile URL": "" },
+        // .strict() holds on BOTH arms
+        { "Professional Profile URL": url, "bogus": 1 },
+        { "Email": "kamin@clay.com", "bogus": 1 },
+    ];
+    for (const body of rejected) {
+        await assertRejects(
+            () =>
+                runEndpoint({ unit, input: { body }, mode: "replay", fixture }),
+            Error,
+            "INVALID_INPUT",
+            JSON.stringify(body),
+        );
+    }
+    // either identifier alone satisfies its arm, and both together satisfy
+    // both (anyOf, not oneOf)
+    const accepted: Json[] = [
+        { "Professional Profile URL": url },
+        { "Email": "kamin@clay.com" },
+        { "Professional Profile URL": url, "Email": "kamin@clay.com" },
+    ];
+    for (const body of accepted) {
+        const result = await runEndpoint({
+            unit,
+            input: { body },
+            mode: "replay",
+            fixture,
+        });
+        assertEquals(result.isProviderError, false, JSON.stringify(body));
+    }
+    // the rule reaches the DOC, not just the source: a future edit that
+    // flattens the union back to an all-optional object fails here
+    const body = unit.doc.input.schema.body as Record<string, Json>;
+    const arms = body.anyOf as Record<string, Json>[];
+    assertEquals(arms.length, 2);
+    assertEquals(
+        arms.map((arm) => arm.required).flat().sort(),
+        ["Email", "Professional Profile URL"],
+    );
+    for (const arm of arms) assertEquals(arm.additionalProperties, false);
 });
 
 Deno.test("clay docs: ten endpoints, two families, one lifecycle", async () => {
