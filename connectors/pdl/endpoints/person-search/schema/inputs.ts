@@ -5,21 +5,19 @@ import {
     zSqlQuery,
 } from "../../../schema/common.ts";
 
-const PERSON_DATASETS = [
-    "all",
-    "resume",
-    "email",
-    "phone",
-    "mobile_phone",
-    "street_address",
-    "consumer_social",
-    "developer",
-] as const;
-
 const personSearchShared = {
     ...searchSharedFields,
-    dataset: z.enum(PERSON_DATASETS).optional().describe(
-        "Dataset(s) to search; prefix a value with '-' to exclude it.",
+    // A STRING, not an enum (PR #7 review): PDL's `dataset` is a
+    // comma-separated LIST with an exclusion form ("all,-phone" —
+    // `-` entered once, excluding every name after it), so v1's
+    // `z.enum(PERSON_DATASETS)` rejected valid vendor requests. The
+    // mirror is faithful to the vendor's grammar (design D25); the
+    // names live in the describe, where they document without gating.
+    dataset: z.string().min(1).optional().describe(
+        "Dataset(s) to search, comma-separated — all, resume, email, " +
+            "phone, mobile_phone, street_address, consumer_social, " +
+            "developer. Use `-` once to exclude every name after it " +
+            "(e.g. 'all,-phone,consumer_social'). Default resume.",
     ),
     data_include: z.string().optional().describe(
         "Comma-separated fields to include in each returned record.",

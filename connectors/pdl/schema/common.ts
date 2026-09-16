@@ -8,6 +8,16 @@ import { z } from "zod";
  * include_if_matched / titlecase / pretty false, size 1) are NOT
  * materialized: none feeds an estimate, so absent means PDL's own default.
  *
+ * SINGLE-VALUE ONLY (design D7): PDL lets most enrichment parameters
+ * repeat on the query string — `location=A&location=B`, several
+ * `profile`s — and the engine's query serialization is scalar-only
+ * (`toScalarQuery` rejects arrays: "array/object encodings arrive at a
+ * later engine version"). Every field here is therefore a single value,
+ * as v1's schemas were. This mirror does NOT widen to string-or-array:
+ * a doc promising an array the engine refuses at dispatch is worse than
+ * one that says what it supports. Raised on PR #7; the repeated-param
+ * encoding is its own engine change.
+ *
  * PORT NOTE: v1 guarded the enrichment identifier combinations ("one of
  * pdl_id | profile | email | phone | email_hash | lid, OR a name plus one
  * location-ish field") with `.superRefine()`. That cross-field rule cannot

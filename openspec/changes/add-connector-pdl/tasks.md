@@ -14,6 +14,9 @@
       credit
 - [x] 2.2 person-search / company-search: POST + body union, size required,
       PER_UNIT 1 credit/record, estimate = size
+- [x] 2.3 person-search `dataset`: a STRING carrying PDL's list/exclusion
+      grammar in its describe, not v1's `z.enum` (which rejected the
+      vendor's own valid values at our gate) — PR #7 review, design D7
 
 ## 3. Fixtures + tests
 
@@ -47,3 +50,10 @@
       undrained by its own lines fails; key-wise endpoint override; the
       FREE-credits test regrouped around a billable sibling
 - [x] 5.4 connector-schema MODIFIED delta + AGENT.md rule line
+
+## 6. Follow-ups out of this change (design D7)
+
+- [ ] 6.1 ENGINE: repeated-param query encoding (`location=A&location=B`)
+      — `toScalarQuery` rejects arrays today, so PDL's multi-value
+      enrichment parameters stay single-valued. Its own change, with the
+      RunInput/queryParams contract and a spec requirement.

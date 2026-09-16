@@ -178,6 +178,42 @@ Deno.test("pdl#v5/person/search: size REQUIRED; query XOR sql survives as two st
     assertEquals(ok.isProviderError, false);
 });
 
+Deno.test("pdl#v5/person/search: dataset takes PDL's LIST grammar, not one enum name", async () => {
+    // PR #7 review: v1's z.enum rejected the vendor's own comma-separated
+    // and exclusion forms at OUR gate, before PDL ever saw them (design D7)
+    const unit = await testSealedUnit("pdl#v5/person/search");
+    const fixture = await loadFixture(`${fixturesDir}synthetic-happy.json`);
+    for (
+        const dataset of [
+            "all",
+            "email,phone",
+            "all,-phone,consumer_social",
+            "-email,phone",
+        ]
+    ) {
+        const result = await runEndpoint({
+            unit,
+            input: {
+                body: {
+                    sql: "SELECT * FROM person WHERE job_title='x'",
+                    size: 1,
+                    dataset,
+                },
+            },
+            mode: "replay",
+            fixture,
+        });
+        assertEquals(result.isProviderError, false, dataset);
+    }
+    // the compiled schema documents the names without gating on them
+    const body = unit.doc.input.schema.body as Record<string, Json>;
+    const variant = (body.anyOf as Record<string, Json>[])[0];
+    const dataset = (variant.properties as Record<string, Json>)
+        .dataset as Record<string, Json>;
+    assertEquals(dataset.type, "string");
+    assertEquals(dataset.enum, undefined);
+});
+
 Deno.test({
     name: "pdl#v5/person/search live (gated on PDL_API_KEY)",
     ignore: liveSkip("pdl"),

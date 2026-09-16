@@ -133,3 +133,32 @@ reason only: `shared/core/schema/sections/usage.ts` documents the
 resolution rule and is a `version:check` CONTRACT_PATH, so correcting its
 comment obliges the version to differ. `doc_format_since`, `fn_abi_since`
 and `async_since` stay at 0.0.1.
+
+## D7 — Vendor grammars the mirror keeps, and the one it cannot
+
+Two PR #7 review findings about input fidelity (D25: the mirror is the
+faithful vendor contract, optionality only), landing on opposite sides.
+
+**`dataset` is a STRING, not an enum.** v1 typed person-search `dataset`
+as `z.enum(["all", "resume", …])` and the port inherited it. PDL's
+parameter is a comma-separated LIST with an exclusion form: `-` entered
+once excludes every name after it (`"all,-phone,consumer_social"`), and
+the vendor default is `resume`, not `all`. The enum rejected those valid
+requests at our own INVALID_INPUT gate, before PDL ever saw them — and
+the describe already promised the `-` form, so the schema contradicted
+itself. Now `z.string().min(1)` with the names and the grammar in the
+describe: documentation that does not gate. The compiled body schema
+loses its `enum` for `dataset`; nothing else moves.
+
+**Multi-value parameters stay single.** PDL lets most enrichment
+parameters repeat on the query string (`location=A&location=B`, several
+`profile`s; `locality`/`region`/`country`/`street_address` may NOT
+repeat). The engine's `toScalarQuery` rejects arrays outright —
+"array/object encodings arrive at a later engine version" — so the
+capability is absent at the transport, not at the schema. Widening the
+mirror to string-or-array would compile a doc advertising input the
+engine refuses at dispatch: a worse contract than an honest narrow one.
+The fields stay single-valued (as v1's did), and repeated-param query
+encoding is recorded as what it is — an ENGINE change, with PDL as its
+first concrete need (the reserved-surface rule: return with a concrete
+need, as its own change).

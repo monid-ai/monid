@@ -16,7 +16,10 @@ export default defineEndpoint({
             "both; Elasticsearch recommended). The query runs directly " +
             "against the Person Dataset without cleaning or preprocessing. " +
             "Build queries from any field in the Person Schema (name, job " +
-            "title, company, location, skills, education, etc.). Returns " +
+            "title, company, location, skills, education, etc.); the " +
+            "field descriptions in the Person Schema and the underlying " +
+            "Elasticsearch Mapping are the reference for writing " +
+            "effective queries. Returns " +
             "up to 100 matching person records per request with " +
             "scroll_token pagination; a valid query with no matches is a " +
             "200 with an empty data array. Charged per record retrieved.",

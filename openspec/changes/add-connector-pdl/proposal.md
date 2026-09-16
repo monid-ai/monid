@@ -13,7 +13,8 @@ capability.
 
 - **connectors/pdl** — 4 endpoints, `X-Api-Key` auth, 60 s timeouts:
   - `GET /v5/person/enrich`, `GET /v5/company/enrich`: PER_CALL, one
-    credit per match (a 404 no-match is data, zero usage).
+    credit per match (a 404 no-match is error-as-data: a provider error
+    carrying the vendor envelope, zero usage — never an exception).
   - `POST /v5/person/search`, `POST /v5/company/search`: PER_UNIT·RESULT,
     one credit per record in `data[]`; `size` REQUIRED at the binding
     (vendor bounds 1–100), estimate = `size`; `query` XOR `sql` as two
