@@ -1,0 +1,26 @@
+{
+    "name": "provider-error",
+    "description": "recorded chain for ploid#socials, scenario 'provider-error' (per-endpoint recording; real traffic, headers dropped)",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.ploid.com/v1/socials",
+                "body": {
+                    "platform": "github",
+                    "identifier": "octocat"
+                }
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": {
+                        "code": "invalid_api_key",
+                        "message": "Invalid API key.",
+                        "request_id": "2e7b331b-dab2-4e52-bff7-dec2dc6d62fd"
+                    }
+                }
+            }
+        }
+    ]
+}

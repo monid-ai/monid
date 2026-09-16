@@ -1,0 +1,32 @@
+{
+    "name": "provider-error",
+    "description": "recorded chain for ploid#agent, scenario 'provider-error' (per-endpoint recording; real traffic, headers dropped)",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.ploid.com/v1/agent",
+                "body": {
+                    "prompt": "Research Retool's current stage.",
+                    "max_acu": 12,
+                    "operation": "ask",
+                    "memory": "none",
+                    "sources": [
+                        "people",
+                        "public_web"
+                    ]
+                }
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": {
+                        "code": "invalid_api_key",
+                        "message": "Invalid API key.",
+                        "request_id": "e5e36548-ec78-4904-a537-593bada68431"
+                    }
+                }
+            }
+        }
+    ]
+}
