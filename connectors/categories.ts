@@ -213,5 +213,15 @@ export const LEAF_CATEGORIES = defineLeafCategories([
         displayName: "Content Extraction",
         description:
             "Tools to extract page content, including clean markdown from any URL, and more.",
+        id: "seo",
+        displayName: "SEO",
+        description:
+            "Tools to analyze search performance, including keywords, backlinks, traffic, and more.",
+    },
+    {
+        id: "geo",
+        displayName: "GEO",
+        description:
+            "Tools to measure visibility in AI answers, including brand mentions, cited pages, prompts, and more.",
     },
 ]);
