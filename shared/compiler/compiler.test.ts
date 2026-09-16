@@ -1017,9 +1017,9 @@ Deno.test("golden: compiled exa#search doc shape (zBundle round-trip)", async ()
     const doc = bundle.endpoints["exa#search"];
     assert(doc, "exa#search compiled");
     assertEquals(doc.provider, "exa");
-    // fn_abi_since 0.0.1: the pre-release contract floor, so every doc
+    // fn_abi_since 0.1.0: the current hook-ABI floor, so every doc
     // floors here
-    assertEquals(doc.minEngineVersion, "0.0.1");
+    assertEquals(doc.minEngineVersion, "0.1.0");
     assertEquals(doc.request, {
         method: "POST",
         url: "https://api.exa.ai/search",
@@ -1060,8 +1060,8 @@ Deno.test("golden: compiled exa#search doc shape (zBundle round-trip)", async ()
     assertEquals(authEntry.kind, "factory");
     assertEquals(authEntry.provenance, "presets#auth.header");
     assertEquals(bundle.fnTable[doc.usage.evidence.$fn.key].kind, "fn");
-    // every entry declares its ABI floor
-    assertEquals(authEntry.api, "0.0.1");
+    // every entry declares its ABI floor (schema.fn_abi_since)
+    assertEquals(authEntry.api, "0.1.0");
 
     // interning across endpoints: contents shares the provider auth fn
     // AND the provider's ONE vendor-meter consolidate (design D27); the

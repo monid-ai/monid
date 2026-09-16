@@ -1,6 +1,6 @@
 import { assert, assertEquals, assertRejects, assertThrows } from "@std/assert";
 import { z } from "zod";
-import type { ConnectorSource, RunState, SealedUnit } from "@shared/core";
+import type { ConnectorSource, Json, RunState, SealedUnit } from "@shared/core";
 import {
     defineEndpoint,
     defineProvider,
@@ -242,6 +242,131 @@ Deno.test("INVALID_INPUT: RunInput shape enforced before doc schemas", async () 
     for (const input of bad) {
         await expectCode(
             loaded.start(input as Parameters<typeof loaded.start>[0]),
+            EngineErrorCode.INVALID_INPUT,
+        );
+    }
+});
+
+// ---------------------------------------------------------------------------
+// query serialization — the wire multimap: a list is a REPEATED key
+// ---------------------------------------------------------------------------
+
+/** demoUnit with the input moved onto the query string, so the issued URL
+ *  is the assertion surface. `extra` is the list-capable field. */
+async function queryUnit(): Promise<SealedUnit> {
+    const connectors = demoConnector();
+    const endpoint = connectors[0].endpoints[0];
+    endpoint.def.request = { method: "GET", path: "/search" };
+    endpoint.def.input = {
+        schema: {
+            queryParams: z.object({
+                q: z.string(),
+                extra: z.union([z.string(), z.array(z.string())]).optional(),
+            }),
+        },
+    };
+    delete endpoint.def.output;
+    return sealUnit(
+        await compileBundle(connectors, COMPILE_OPTS),
+        "demo#search",
+    );
+}
+
+Deno.test("query: a LIST is a repeated key, in the caller's order", async () => {
+    const seen: { url?: string } = {};
+    const engine = new Engine({
+        transport: jsonTransport(200, { results: [] }, seen),
+    });
+    const loaded = await engine.load(await queryUnit());
+    await loaded.run({ queryParams: { q: "hi", extra: ["b", "a", "b"] } });
+    // repeated, ORDER preserved, duplicates kept — the caller's list is the
+    // wire's list (design D1: an array IS the repeat spelling)
+    assertEquals(
+        seen.url,
+        "https://api.demo.test/search?q=hi&extra=b&extra=a&extra=b",
+    );
+});
+
+Deno.test("query: a one-element list and a bare scalar are the SAME wire", async () => {
+    const urls: string[] = [];
+    for (const extra of ["only", ["only"]] as Json[]) {
+        const seen: { url?: string } = {};
+        const engine = new Engine({
+            transport: jsonTransport(200, { results: [] }, seen),
+        });
+        const loaded = await engine.load(await queryUnit());
+        await loaded.run({ queryParams: { q: "hi", extra } });
+        urls.push(seen.url!);
+    }
+    assertEquals(urls[0], urls[1]);
+    assertEquals(urls[0], "https://api.demo.test/search?q=hi&extra=only");
+});
+
+Deno.test("query: an EMPTY list emits nothing — never a bare `?k=`", async () => {
+    const seen: { url?: string } = {};
+    const engine = new Engine({
+        transport: jsonTransport(200, { results: [] }, seen),
+    });
+    const loaded = await engine.load(await queryUnit());
+    await loaded.run({ queryParams: { q: "hi", extra: [] } });
+    // `?extra=` would be a PRESENT, empty value to a vendor — not the same
+    // as an absent parameter
+    assertEquals(seen.url, "https://api.demo.test/search?q=hi");
+});
+
+Deno.test("query: a list a connector JOINED in toRequest stays ONE value (the akta spelling)", async () => {
+    const seen: { url?: string } = {};
+    const connectors = demoConnector();
+    const endpoint = connectors[0].endpoints[0];
+    endpoint.def.request = { method: "GET", path: "/search" };
+    endpoint.def.input = {
+        schema: {
+            queryParams: z.object({
+                q: z.string(),
+                extra: z.array(z.string()).optional(),
+            }),
+        },
+        // the vendor wants `?extra=a,b` — the spelling is a VENDOR fact and
+        // lives here, not in the engine (design D1)
+        toRequest: ({ data }) => ({
+            ...data.input,
+            queryParams: Object.fromEntries(
+                Object.entries(data.input.queryParams ?? {}).map((
+                    [key, value],
+                ) => [key, Array.isArray(value) ? value.join(",") : value]),
+            ),
+        }),
+    };
+    delete endpoint.def.output;
+    const unit = sealUnit(
+        await compileBundle(connectors, COMPILE_OPTS),
+        "demo#search",
+    );
+    const engine = new Engine({
+        transport: jsonTransport(200, { results: [] }, seen),
+    });
+    const loaded = await engine.load(unit);
+    await loaded.run({ queryParams: { q: "hi", extra: ["a", "b"] } });
+    assertEquals(seen.url, "https://api.demo.test/search?q=hi&extra=a%2Cb");
+});
+
+Deno.test("query: nesting is still refused — a query string cannot encode it", async () => {
+    const engine = new Engine({
+        transport: jsonTransport(200, { results: [] }),
+    });
+    const loaded = await engine.load(await queryUnit());
+    for (
+        const extra of [
+            [["nested"]], // array of arrays
+            [{ deep: 1 }], // array of objects
+        ] as unknown[]
+    ) {
+        await expectCode(
+            loaded.run(
+                { queryParams: { q: "hi", extra } } as Parameters<
+                    typeof loaded.run
+                >[0],
+            ),
             EngineErrorCode.INVALID_INPUT,
         );
     }
@@ -1048,11 +1173,13 @@ async function asyncUnit(
 
 const INSTANT_SLEEP = { sleep: () => Promise.resolve() };
 
-Deno.test("lifecycle: compiled doc carries lifecycle refs, pollMs, and the 0.0.1 floor", async () => {
+Deno.test("lifecycle: compiled doc carries lifecycle refs, pollMs, and the ABI floor", async () => {
     const unit = await asyncUnit();
     assert(unit.doc.lifecycle);
     assertEquals(unit.doc.timeouts.pollMs, 5);
-    assertEquals(unit.doc.minEngineVersion, "0.0.1");
+    // fn_abi_since 0.1.0 — the wire query became a multimap (a hook-ABI
+    // shape change), so every doc floors there
+    assertEquals(unit.doc.minEngineVersion, "0.1.0");
     // the sealed unit closes over all three lifecycle fns
     assert(unit.fns[unit.doc.lifecycle.start.$fn.key]);
     assert(unit.fns[unit.doc.lifecycle.poll!.$fn.key]);
@@ -2006,11 +2133,11 @@ Deno.test("lifecycle compile checks: poll without start; endpoint pollMs dead co
 
 Deno.test("sync docs: no lifecycle/pollMs; floor = fn_abi_since (ctx ABI), not async machinery", async () => {
     const bundle = await compileBundle(demoConnector(), COMPILE_OPTS);
-    // 0.0.1 via fn_abi_since (the pre-release contract floor) — NOT
-    // because of anything async: sync docs carry no lifecycle surface
+    // 0.1.0 via fn_abi_since (the current hook-ABI floor) — NOT because
+    // of anything async: sync docs carry no lifecycle surface
     assertEquals(
         bundle.endpoints["demo#search"].minEngineVersion,
-        "0.0.1",
+        "0.1.0",
     );
     assertEquals(bundle.endpoints["demo#search"].lifecycle, undefined);
     assertEquals(bundle.endpoints["demo#search"].timeouts.pollMs, undefined);
