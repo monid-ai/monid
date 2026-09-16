@@ -17,7 +17,10 @@ export default defineEndpoint({
             "against the Company Dataset without cleaning or " +
             "preprocessing. Build queries from any field in the Company " +
             "Schema (name, industry, size, location, funding, tech stack, " +
-            "etc.). Returns up to 100 matching company records per request " +
+            "etc.); the field descriptions in the Company Schema and the " +
+            "underlying Elasticsearch Mapping are the reference for " +
+            "writing effective queries. Returns up to 100 matching " +
+            "company records per request " +
             "with scroll_token pagination; a valid query with no matches " +
             "is a 200 with an empty data array. Charged per record " +
             "retrieved.",
