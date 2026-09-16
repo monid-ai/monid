@@ -213,6 +213,8 @@ export const LEAF_CATEGORIES = defineLeafCategories([
         displayName: "Content Extraction",
         description:
             "Tools to extract page content, including clean markdown from any URL, and more.",
+    },
+    {
         id: "seo",
         displayName: "SEO",
         description:
