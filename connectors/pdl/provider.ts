@@ -15,12 +15,14 @@ import { defineProvider, presets } from "@shared/core";
  * PDL reports its meter ONLY in response headers (`x-call-credits-spent`,
  * `x-totallimit-remaining`), which hook fns cannot read — so there is no
  * `usage.consolidate` (no claim, nothing to strip; the derived fold
- * settles). ONE credit pool: one API key serves person and company calls
- * and v1's balance probe reads a single `x-totallimit-remaining` number
- * for the account (monid-services provider-balance, MONID-185). Open
- * item: whether a company record spends a full credit (v1 unit prices
- * $0.265 vs $0.10 per record suggest it may spend less) — only the
- * `x-call-credits-spent` header can say; re-pin when a key exists.
+ * settles). FOUR credit pools, one per PDL credit TYPE: every response's
+ * `x-call-credits-type` names which pool the call drew from (docs
+ * usage-limits: enrich, search, search_company, enrich_company, …) and
+ * the `x-totallimit-remaining` beside it is THAT type's balance. Pool ids
+ * are the vendor's type strings verbatim so the header joins 1:1 (PR #7
+ * review, 2026-09-16: "There are more than one type of credits in PDL").
+ * v1's balance probe read one number off a person-enrich miss — that was
+ * the `enrich` balance only, not the account.
  *
  * `usage.evidence` is the generic quantities default: a search doc counts
  * `data[]` (PDL: "each record in the data array counts as a single
@@ -47,9 +49,11 @@ export default defineProvider({
     // request 60s, run 60s — sync provider, no poll loop
     timeouts: { requestMs: 60_000, runMs: 60_000 },
     usage: {
-        /** THE credit system (design D26) — PDL's own meter, one pool for
-         *  the whole account (single key, single balance header). */
-        credits: { default: { label: "PDL credits" } },
+        // NO provider-level `credits` (design D26): PDL meters per credit
+        // TYPE (`x-call-credits-type`) and the compiler resolves credits
+        // provider ?? endpoint, requiring every declared pool to be drained
+        // by the doc — so each endpoint declares the ONE pool its calls
+        // report (enrich / search / enrich_company / search_company).
         /** The generic QUANTITIES default (design D27): a PER_UNIT (search)
          *  doc counts the records in `data[]`; flat enrichment docs have
          *  nothing to count. A 200 search with no matches carries an

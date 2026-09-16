@@ -17,22 +17,26 @@ enrichment input becomes query-shaped. The SDK's `rateLimit` block that v1
 stripped was assembled client-side from headers — the raw REST body never
 carries it, so nothing is stripped.
 
-## D2 — One credit pool; the per-record draw is a pin to re-verify
+## D2 — One credit pool per PDL credit type
 
-PDL's body carries no meter; the `x-call-credits-spent` /
-`x-totallimit-remaining` headers do, and hooks cannot read headers. So
-there is no vendor claim (no `consolidate`) and the pool is a declaration.
-monid-services models the account as ONE pool: a single `PDL_API_KEY`
-serves person and company calls, and its balance probe (MONID-185) reads
-one `x-totallimit-remaining` number as `{unit: "credits"}` — the
-single-sample path, not the multi-pool array contactout uses. Two typed
-pools (`person` / `company`) were considered because v1's unit prices
-differ ($0.265 vs $0.10 per record); rejected — that ratio is just as
-consistent with one pool where a company record spends less than a full
-credit, and nothing in v1 or the PDL docs shows two balances. Pinned: 1
-credit per person record/match, 1 per company record/match. OPEN: the
-company draw may be fractional — only `x-call-credits-spent` on a real
-call can say; re-pin `consumes.amount` when a key exists (tasks 3.3).
+PDL's body carries no meter; the response headers do, and hooks cannot
+read headers — so there is no vendor claim (no `consolidate`) and the
+pools are declarations. PDL meters per credit TYPE: every call's
+`x-call-credits-type` header names the type it drew from (docs
+usage-limits: `enrich`, `search`, `search_company`, `enrich_company`,
+`enrich_skill`, `enrich_job_title`, `preview_search`, `person_identify`)
+and the `x-totallimit-remaining` beside it is that type's balance. The
+four ported endpoints map 1:1 onto four types. The compiler resolves
+`credits` provider ?? endpoint and requires every declared pool to be
+drained by the doc, so the provider declares NO pool and each endpoint
+declares the one it drains, id = the vendor's type string verbatim, at 1
+credit per match / record (first endpoint-level `credits` in the catalog). First version declared ONE pool
+(`default`), reasoning from v1's balance probe — which read a single
+`x-totallimit-remaining` off a person-enrich miss and therefore saw the
+`enrich` balance only; corrected on PR #7 review (2026-09-16, "There are
+more than one type of credits in PDL"). The per-record draw stays pinned
+at 1 for every type; a real call's `x-call-credits-spent` confirms it
+when a key exists (tasks 3.3).
 
 ## D3 — `size` required at the binding, on both variants
 

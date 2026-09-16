@@ -18,9 +18,10 @@ capability.
     one credit per record in `data[]`; `size` REQUIRED at the binding
     (vendor bounds 1–100), estimate = `size`; `query` XOR `sql` as two
     strict variants.
-- **One credit pool** `default` ("PDL credits", design D2): one API key
-  serves person and company calls and the account exposes one balance
-  header; every record or match draws 1 credit.
+- **Four credit pools**, one per PDL credit type (design D2): `enrich`,
+  `search`, `enrich_company`, `search_company` — the vendor's own
+  `x-call-credits-type` values; each endpoint drains its own at 1 credit
+  per record or match.
 - **No `usage.consolidate`**: PDL reports its meter only in response
   headers, which hooks cannot read; the derived fold settles.
 - Synthetic fixtures (`synthetic-` prefix) — no `PDL_API_KEY` is held.

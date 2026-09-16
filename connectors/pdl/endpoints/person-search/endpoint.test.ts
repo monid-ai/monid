@@ -11,7 +11,7 @@ import {
 
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
 
-Deno.test("pdl: usage fn provenance — one evidence + one auth fn for all 4; searches own one estimate, enrichments synthesized; one pool", async () => {
+Deno.test("pdl: usage fn provenance — one evidence + one auth fn for all 4; searches own one estimate, enrichments synthesized; one pool per credit type", async () => {
     const bundle = await testBundle();
     const ids = Object.keys(bundle.endpoints).filter((id) =>
         id.startsWith("pdl#")
@@ -55,12 +55,24 @@ Deno.test("pdl: usage fn provenance — one evidence + one auth fn for all 4; se
         bundle.fnTable[synthesizedKey].provenance,
         "core#usage.synthesizedEmpty",
     );
-    // ONE pool for the whole account (single key, single balance header —
-    // monid-services provider-balance precedent): every doc drains `default`
-    for (const id of ids) {
-        assertEquals(Object.keys(bundle.endpoints[id].usage.credits), [
-            "default",
-        ], id);
+    // one pool per PDL credit TYPE (`x-call-credits-type`): the provider
+    // declares none, each doc declares and drains exactly the one its
+    // calls report
+    const drains = {
+        "pdl#v5/person/enrich": "enrich",
+        "pdl#v5/person/search": "search",
+        "pdl#v5/company/enrich": "enrich_company",
+        "pdl#v5/company/search": "search_company",
+    };
+    for (const [id, pool] of Object.entries(drains)) {
+        const doc = bundle.endpoints[id];
+        assertEquals(Object.keys(doc.usage.credits), [pool], id);
+        const model = doc.usage.model;
+        assertEquals(
+            "consumes" in model ? model.consumes.credit : undefined,
+            pool,
+            id,
+        );
     }
     // the SDK's wire form: enrichment GET, search POST
     assertEquals(
@@ -73,7 +85,7 @@ Deno.test("pdl: usage fn provenance — one evidence + one auth fn for all 4; se
     );
 });
 
-Deno.test("pdl#v5/person/search happy (synthetic): each record is one person credit; no vendor claim, the fold settles", async () => {
+Deno.test("pdl#v5/person/search happy (synthetic): each record is one person credit; no vendor claim, the fold settles on the search pool", async () => {
     const unit = await testSealedUnit("pdl#v5/person/search");
     const fixture = await loadFixture(`${fixturesDir}synthetic-happy.json`);
     const result = await runEndpoint({
@@ -92,7 +104,7 @@ Deno.test("pdl#v5/person/search happy (synthetic): each record is one person cre
     // no consolidate ⇒ no claim ⇒ the DERIVED fold is the bill:
     // 3 records × 1 person credit (zUsage is strict — no mismatch key)
     assertEquals(result.usage, {
-        credits: { default: 3 },
+        credits: { search: 3 },
         evidence: { RESULT: 3 },
     });
     const output = result.output as Record<string, unknown>;

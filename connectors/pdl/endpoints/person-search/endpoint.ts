@@ -38,6 +38,10 @@ export default defineEndpoint({
         },
     },
     usage: {
+        /** THE credit pool this doc drains (design D26 / D2): PDL's
+         *  `x-call-credits-type` for these calls is `search` — the id is
+         *  the vendor's type string verbatim. */
+        credits: { search: { label: "PDL person search credits" } },
         /** "Each person record in the data array of the response counts
          *  as a single credit" (PDL docs) — v1 makePerResultPrice(0.265).
          *  Settle is inherited: the provider evidence counts `data[]`. */
@@ -45,7 +49,7 @@ export default defineEndpoint({
             kind: UsageModelKind.PER_UNIT,
             unit: Unit.RESULT,
             label: "records",
-            consumes: { credit: "default", amount: 1 },
+            consumes: { credit: "search", amount: 1 },
         },
         /** The caller-stated size IS the record promise (typed read of the
          *  pre-toRequest validated input — design D25). */

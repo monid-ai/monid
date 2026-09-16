@@ -9,7 +9,7 @@ import {
 
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
 
-Deno.test("pdl#v5/person/enrich happy (synthetic): identifier rides the query string (the SDK's wire form); one person credit", async () => {
+Deno.test("pdl#v5/person/enrich happy (synthetic): identifier rides the query string (the SDK's wire form); one enrich credit", async () => {
     const unit = await testSealedUnit("pdl#v5/person/enrich");
     const fixture = await loadFixture(`${fixturesDir}synthetic-happy.json`);
     const result = await runEndpoint({
@@ -23,7 +23,7 @@ Deno.test("pdl#v5/person/enrich happy (synthetic): identifier rides the query st
     // flat model: the engine appends the CALL line and folds the one
     // person credit — no vendor claim exists in the body
     assertEquals(result.usage, {
-        credits: { default: 1 },
+        credits: { enrich: 1 },
         evidence: { CALL: 1 },
     });
     const output = result.output as Record<string, unknown>;
@@ -91,7 +91,7 @@ Deno.test({
             JSON.stringify(result.output),
         );
         assertEquals(result.usage, {
-            credits: { default: 1 },
+            credits: { enrich: 1 },
             evidence: { CALL: 1 },
         });
     },
