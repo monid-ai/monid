@@ -1,6 +1,6 @@
 {
     "name": "synthetic-happy",
-    "description": "Synthetic (no SURF key held at port time, 2026-09-16): the `{ data, meta }` envelope and the `{ error: { code, message } }` error shape follow the v1 adaptor tests and the v1 design's live-verified upstream contract; field values are placeholders. Unverified against live traffic — replace via `deno task record`. A 2xx with rows in `data` — the flat 2-credit line settles once; `meta.credits_used` stays in the body (design D1).",
+    "description": "Synthetic (no SURF key held at port time, 2026-09-16): the `{ data, meta }` envelope and the `{ error: { code, message } }` error shape follow the v1 adaptor tests and the v1 design's live-verified upstream contract; the response body shape is the vendor OpenAPI 0.2.97 200 schema (`api.asksurf.ai/gateway/openapi.json`, fetched 2026-09-16); field values are placeholders. Unverified against live traffic — replace via `deno task record`. A 2xx with rows in `data` — the flat 2-credit line settles once; `meta.credits_used` stays in the body (design D1).",
     "calls": [
         {
             "req": {
@@ -10,14 +10,102 @@
             "res": {
                 "status": 200,
                 "body": {
-                    "data": {
-                        "id": "00000000-0000-4000-8000-000000000001",
-                        "name": "Example",
-                        "value": 1
-                    },
+                    "data": [
+                        {
+                            "accessList": [
+                                {
+                                    "address": "address-1",
+                                    "storageKeys": []
+                                }
+                            ],
+                            "blobVersionedHashes": [
+                                "blobVersionedHashes-1"
+                            ],
+                            "blockHash": "blockHash-1",
+                            "blockNumber": "blockNumber-1",
+                            "chainId": "chainId-1",
+                            "from": "from-1",
+                            "from_label": {
+                                "address": "address-1",
+                                "entity_name": "entity_name-1",
+                                "entity_type": "entity_type-1",
+                                "labels": []
+                            },
+                            "gas": "gas-1",
+                            "gasPrice": "gasPrice-1",
+                            "hash": "hash-1",
+                            "input": "input-1",
+                            "maxFeePerBlobGas": "maxFeePerBlobGas-1",
+                            "maxFeePerGas": "maxFeePerGas-1",
+                            "maxPriorityFeePerGas": "maxPriorityFeePerGas-1",
+                            "nonce": "nonce-1",
+                            "r": "r-1",
+                            "s": "s-1",
+                            "to": "to-1",
+                            "to_label": {
+                                "address": "address-1",
+                                "entity_name": "entity_name-1",
+                                "entity_type": "entity_type-1",
+                                "labels": []
+                            },
+                            "transactionIndex": "transactionIndex-1",
+                            "type": "type-1",
+                            "v": "v-1",
+                            "value": "value-1",
+                            "yParity": "yParity-1"
+                        },
+                        {
+                            "accessList": [
+                                {
+                                    "address": "address-2",
+                                    "storageKeys": []
+                                }
+                            ],
+                            "blobVersionedHashes": [
+                                "blobVersionedHashes-2"
+                            ],
+                            "blockHash": "blockHash-2",
+                            "blockNumber": "blockNumber-2",
+                            "chainId": "chainId-2",
+                            "from": "from-2",
+                            "from_label": {
+                                "address": "address-2",
+                                "entity_name": "entity_name-2",
+                                "entity_type": "entity_type-2",
+                                "labels": []
+                            },
+                            "gas": "gas-2",
+                            "gasPrice": "gasPrice-2",
+                            "hash": "hash-2",
+                            "input": "input-2",
+                            "maxFeePerBlobGas": "maxFeePerBlobGas-2",
+                            "maxFeePerGas": "maxFeePerGas-2",
+                            "maxPriorityFeePerGas": "maxPriorityFeePerGas-2",
+                            "nonce": "nonce-2",
+                            "r": "r-2",
+                            "s": "s-2",
+                            "to": "to-2",
+                            "to_label": {
+                                "address": "address-2",
+                                "entity_name": "entity_name-2",
+                                "entity_type": "entity_type-2",
+                                "labels": []
+                            },
+                            "transactionIndex": "transactionIndex-2",
+                            "type": "type-2",
+                            "v": "v-2",
+                            "value": "value-2",
+                            "yParity": "yParity-2"
+                        }
+                    ],
                     "meta": {
+                        "cached": false,
                         "credits_used": 2,
-                        "cached": false
+                        "has_more": false,
+                        "limit": 2,
+                        "offset": 0,
+                        "total": 2,
+                        "watermark": 1
                     }
                 }
             }

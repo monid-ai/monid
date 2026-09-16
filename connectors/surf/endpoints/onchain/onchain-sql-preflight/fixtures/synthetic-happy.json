@@ -1,6 +1,6 @@
 {
     "name": "synthetic-happy",
-    "description": "Synthetic (no SURF key held at port time, 2026-09-16): the `{ data, meta }` envelope and the `{ error: { code, message } }` error shape follow the v1 adaptor tests and the v1 design's live-verified upstream contract; field values are placeholders. Unverified against live traffic — replace via `deno task record`. A 2xx with rows in `data` — the flat 4-credit line settles once; `meta.credits_used` stays in the body (design D1).",
+    "description": "Synthetic (no SURF key held at port time, 2026-09-16): the `{ data, meta }` envelope and the `{ error: { code, message } }` error shape follow the v1 adaptor tests and the v1 design's live-verified upstream contract; the response body shape is the vendor OpenAPI 0.2.97 200 schema (`api.asksurf.ai/gateway/openapi.json`, fetched 2026-09-16); field values are placeholders. Unverified against live traffic — replace via `deno task record`. A 2xx with rows in `data` — the flat 4-credit line settles once; `meta.credits_used` stays in the body (design D1).",
     "calls": [
         {
             "req": {
@@ -15,13 +15,49 @@
                 "status": 200,
                 "body": {
                     "data": {
-                        "id": "00000000-0000-4000-8000-000000000001",
-                        "name": "Example",
-                        "value": 1
+                        "accepted": false,
+                        "budget": {
+                            "max_bytes_to_read": 1,
+                            "max_execution_time_seconds": 1,
+                            "max_rows_to_read": 1
+                        },
+                        "estimate": {
+                            "by_table": [],
+                            "bytes": 1,
+                            "marks": 1,
+                            "parts": 1,
+                            "rows": 1
+                        },
+                        "executed_sql": "executed_sql-1",
+                        "query_id": "query_id-1",
+                        "request_id": "request_id-1",
+                        "sql": "sql-1",
+                        "tables": [
+                            {
+                                "columns": [],
+                                "database": "database-1",
+                                "engine": "engine-1",
+                                "partition_key": "partition_key-1",
+                                "physical_sources": [],
+                                "primary_key": "primary_key-1",
+                                "sorting_key": "sorting_key-1",
+                                "table": "table-1",
+                                "total_bytes": 1,
+                                "total_rows": 1
+                            }
+                        ],
+                        "warnings": [
+                            {
+                                "code": "code-1",
+                                "message": "message-1",
+                                "recommended_action": "recommended_action-1",
+                                "severity": "warning"
+                            }
+                        ]
                     },
                     "meta": {
-                        "credits_used": 4,
-                        "cached": false
+                        "cached": false,
+                        "credits_used": 4
                     }
                 }
             }
