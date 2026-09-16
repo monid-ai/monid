@@ -237,8 +237,16 @@ Why tag-triggered, why a GitHub Release:
   (exa does) — declare it only for non-standard shapes. No secret VALUE ever
   appears in a def, doc, bundle, or fixture.
 - **Meta roles**: `summary` = one line (list views); `description` = full
-  capability text (inspect/agents). Categories: add the leaf to
-  `connectors/categories.ts` in the same PR.
+  capability text (inspect/agents); `notes` = operational CAVEATS, one
+  standalone fact per entry (latency, result expiry, input shapes the vendor
+  rejects, parameter combinations that are silently wrong rather than errors).
+  `notes` is the ONE additive leaf: the compiled doc concatenates the
+  provider's then the endpoint's, so a provider states what is true of all its
+  endpoints and each endpoint states only what diverges. It is also where a
+  cross-field rule goes, since `.refine`/`.superRefine` cannot survive
+  compilation. A constraint about ONE field stays on that field's
+  `.describe()`. Categories: add the leaf to `connectors/categories.ts` in the
+  same PR.
 - **Schemas**: endpoint-local zod at `endpoints/<name>/schema/inputs.ts` —
   only what that endpoint uses; a fragment two endpoints share goes in
   `connectors/<name>/schema/`, never imported or re-exported across endpoint
