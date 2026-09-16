@@ -25,6 +25,9 @@ export const zUuid = z.uuid();
 /** Non-empty list of UUIDs. */
 export const zUuids = z.array(zUuid).min(1);
 
+/** Path identifier shared by GET /deals/{id} and GET /deals/{id}/investors. */
+export const zDealId = zUuid.describe("Deal UUID.");
+
 // z.iso.date() compiles to a calendar-aware pattern (month/day bounds, leap
 // years) — real validation survives into the compiled doc, unlike a .refine.
 export const zDate = z.iso.date().describe("Date formatted as YYYY-MM-DD.");
