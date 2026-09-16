@@ -1,6 +1,6 @@
 {
     "name": "synthetic-happy",
-    "description": "Synthetic (no SURF key held at port time, 2026-09-16): the `{ data, meta }` envelope and the `{ error: { code, message } }` error shape follow the v1 adaptor tests and the v1 design's live-verified upstream contract; the response body shape is the vendor OpenAPI 0.2.97 200 schema (`api.asksurf.ai/gateway/openapi.json`, fetched 2026-09-16); field values are placeholders. Unverified against live traffic — replace via `deno task record`. A 2xx with rows in `data` — the flat 2-credit line settles once; `meta.credits_used` stays in the body (design D1).",
+    "description": "Synthetic (no SURF key held at port time, 2026-09-16): the `{ data, meta }` envelope and the `{ error: { code, message } }` error shape follow the v1 adaptor tests and the v1 design's live-verified upstream contract; the response body shape is the vendor OpenAPI 0.2.97 200 schema (`api.asksurf.ai/gateway/openapi.json`, fetched 2026-09-16); field values are placeholders; opt-in enrichment fields the request does not ask for are left out. Unverified against live traffic — replace via `deno task record`. A 2xx with rows in `data` — the flat 2-credit line settles once; `meta.credits_used` stays in the body (design D1).",
     "calls": [
         {
             "req": {
@@ -25,12 +25,6 @@
                             "blockNumber": "blockNumber-1",
                             "chainId": "chainId-1",
                             "from": "from-1",
-                            "from_label": {
-                                "address": "address-1",
-                                "entity_name": "entity_name-1",
-                                "entity_type": "entity_type-1",
-                                "labels": []
-                            },
                             "gas": "gas-1",
                             "gasPrice": "gasPrice-1",
                             "hash": "hash-1",
@@ -42,12 +36,6 @@
                             "r": "r-1",
                             "s": "s-1",
                             "to": "to-1",
-                            "to_label": {
-                                "address": "address-1",
-                                "entity_name": "entity_name-1",
-                                "entity_type": "entity_type-1",
-                                "labels": []
-                            },
                             "transactionIndex": "transactionIndex-1",
                             "type": "type-1",
                             "v": "v-1",
@@ -68,12 +56,6 @@
                             "blockNumber": "blockNumber-2",
                             "chainId": "chainId-2",
                             "from": "from-2",
-                            "from_label": {
-                                "address": "address-2",
-                                "entity_name": "entity_name-2",
-                                "entity_type": "entity_type-2",
-                                "labels": []
-                            },
                             "gas": "gas-2",
                             "gasPrice": "gasPrice-2",
                             "hash": "hash-2",
@@ -85,12 +67,6 @@
                             "r": "r-2",
                             "s": "s-2",
                             "to": "to-2",
-                            "to_label": {
-                                "address": "address-2",
-                                "entity_name": "entity_name-2",
-                                "entity_type": "entity_type-2",
-                                "labels": []
-                            },
                             "transactionIndex": "transactionIndex-2",
                             "type": "type-2",
                             "v": "v-2",

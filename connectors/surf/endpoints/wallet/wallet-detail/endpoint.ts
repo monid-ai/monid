@@ -14,7 +14,8 @@ export default defineEndpoint({
             "selectable sub-resources (balance, tokens, labels, " +
             "NFTs). Always includes per-chain USD breakdown across " +
             "15+ EVM chains. Available fields (via fields): balance, " +
-            "tokens, labels, nft. Lookup: by address. Partial " +
+            "tokens, labels, nft, and approvals (opt-in, not in the " +
+            "default set). Lookup: by address. Partial " +
             "failures return available fields with per-field error " +
             "info. Returns 422 if fields is invalid.",
         docsUrl: "https://docs.asksurf.ai/data-api/wallet/detail",

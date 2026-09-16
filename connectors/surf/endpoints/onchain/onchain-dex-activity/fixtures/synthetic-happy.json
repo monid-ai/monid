@@ -5,7 +5,7 @@
         {
             "req": {
                 "method": "GET",
-                "url": "https://api.asksurf.ai/gateway/v1/onchain/dex/activity?chain=ethereum&project=uniswap"
+                "url": "https://api.asksurf.ai/gateway/v1/onchain/dex/activity?chain=ethereum&project=uniswap&group_by=day"
             },
             "res": {
                 "status": 200,

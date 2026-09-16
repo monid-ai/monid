@@ -248,7 +248,8 @@
     "onchain/dex/activity": {
         "queryParams": {
             "chain": "ethereum",
-            "project": "uniswap"
+            "project": "uniswap",
+            "group_by": "day"
         }
     },
     "onchain/gas-price": {
