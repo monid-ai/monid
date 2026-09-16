@@ -1,6 +1,6 @@
 {
     "name": "synthetic-happy",
-    "description": "Synthetic (no SURF key held at port time, 2026-09-16): the `{ data, meta }` envelope and the `{ error: { code, message } }` error shape follow the v1 adaptor tests and the v1 design's live-verified upstream contract; the response body shape is the vendor OpenAPI 0.2.97 200 schema (`api.asksurf.ai/gateway/openapi.json`, fetched 2026-09-16); field values are placeholders. Unverified against live traffic — replace via `deno task record`. A 2xx with rows in `data` — the flat 2-credit line settles once; `meta.credits_used` stays in the body (design D1).",
+    "description": "Synthetic (no SURF key held at port time, 2026-09-16): the `{ data, meta }` envelope and the `{ error: { code, message } }` error shape follow the v1 adaptor tests and the v1 design's live-verified upstream contract; the response body shape is the vendor OpenAPI 0.2.97 200 schema (`api.asksurf.ai/gateway/openapi.json`, fetched 2026-09-16); field values are placeholders; opt-in enrichment fields the request does not ask for are left out. Unverified against live traffic — replace via `deno task record`. A 2xx with rows in `data` — the flat 2-credit line settles once; `meta.credits_used` stays in the body (design D1).",
     "calls": [
         {
             "req": {
@@ -17,20 +17,8 @@
                             "amount_usd": 1,
                             "flow": "flow-1",
                             "from_address": "from_address-1",
-                            "from_label": {
-                                "address": "address-1",
-                                "entity_name": "entity_name-1",
-                                "entity_type": "entity_type-1",
-                                "labels": []
-                            },
                             "timestamp": 1,
                             "to_address": "to_address-1",
-                            "to_label": {
-                                "address": "address-1",
-                                "entity_name": "entity_name-1",
-                                "entity_type": "entity_type-1",
-                                "labels": []
-                            },
                             "token_address": "token_address-1",
                             "token_symbol": "token_symbol-1",
                             "tx_hash": "tx_hash-1"
@@ -41,20 +29,8 @@
                             "amount_usd": 2,
                             "flow": "flow-2",
                             "from_address": "from_address-2",
-                            "from_label": {
-                                "address": "address-2",
-                                "entity_name": "entity_name-2",
-                                "entity_type": "entity_type-2",
-                                "labels": []
-                            },
                             "timestamp": 2,
                             "to_address": "to_address-2",
-                            "to_label": {
-                                "address": "address-2",
-                                "entity_name": "entity_name-2",
-                                "entity_type": "entity_type-2",
-                                "labels": []
-                            },
                             "token_address": "token_address-2",
                             "token_symbol": "token_symbol-2",
                             "tx_hash": "tx_hash-2"
