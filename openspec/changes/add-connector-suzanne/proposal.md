@@ -20,7 +20,9 @@ port, so the port has to carry it.
 ## What Changes
 
 - **Engine: response headers are data** (`ENGINE_VERSION` 0.0.2 → 0.0.3,
-  `fn_abi_since` likewise). `TransportResponse` gains an optional lowercased
+  `async_since` likewise; `fn_abi_since` stays at 0.0.1 — the changed ABI is
+  the lifecycle utils' return, so pure-hook docs gain nothing and must not be
+  floored at a newer engine). `TransportResponse` gains an optional lowercased
   `headers` map, `HttpResult` (the fn-facing ABI) gains a required one, and
   `directTransport` populates it. Vendor RESPONSE headers only — never our
   request's, so no credential ever becomes fn-visible.

@@ -28,8 +28,17 @@ where credentials live, remain invisible to fns.
 
 ### Requirement: Header exposure is a versioned ABI change
 Extending the fn-facing `HttpResult` SHALL bump `ENGINE_VERSION` and
-`schema.fn_abi_since` in lockstep, so a doc whose fns read response headers
-cannot be executed by an engine that does not provide them.
+`schema.async_since` in lockstep, so an ASYNC LIFECYCLE doc whose fns read
+response headers cannot be executed by an engine that does not provide them.
+`schema.fn_abi_since` SHALL NOT move: `utils.http` / `utils.request` are held
+only by the lifecycle family, so a pure-hook doc gains no capability and must
+not be floored at a newer engine.
+
+#### Scenario: Only async docs take the new floor
+- **WHEN** the compiled catalog is inspected after the bump
+- **THEN** every doc resolving a lifecycle fn SHALL carry
+  `minEngineVersion` = `schema.async_since`, and a pure-hook doc (e.g.
+  `exa#search`) SHALL still carry `schema.fn_abi_since`
 
 #### Scenario: The version gate fires
 - **WHEN** `shared/core/schema/hooks/lifecycle.ts` or `config.yml` changes

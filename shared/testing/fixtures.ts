@@ -54,7 +54,11 @@ export function pickRecordedHeaders(
     const out: Record<string, string> = {};
     for (const name of RECORDED_RES_HEADERS) {
         const value = headers.get(name);
-        if (value !== null) out[name] = value;
+        // lowercase the KEY too, not just the (case-insensitive) lookup: the
+        // allowlist is meant to grow, and an entry added as `Retry-After`
+        // would otherwise be written verbatim and never match a fn reading
+        // `res.headers["retry-after"]`
+        if (value !== null) out[name.toLowerCase()] = value;
     }
     return Object.keys(out).length > 0 ? out : undefined;
 }
