@@ -1,0 +1,27 @@
+{
+    "name": "provider-error",
+    "description": "recorded chain for opoint#search-headlines, scenario 'provider-error' (per-endpoint recording; real traffic, headers dropped)",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.opoint.com/search/",
+                "body": {
+                    "searchterm": "tesla",
+                    "params": {
+                        "requestedarticles": 20,
+                        "main": {
+                            "header": 1
+                        },
+                        "allsubject": "0",
+                        "readership": true
+                    }
+                }
+            },
+            "res": {
+                "status": 401,
+                "body": "\n\n\n\n<!DOCTYPE html>\n<html>\n  <head>\n    \n\n      \n        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>\n        <meta name=\"robots\" content=\"NONE,NOARCHIVE\" />\n      \n\n      <title>Expression Search – Django REST framework</title>\n\n      \n        \n          <link rel=\"stylesheet\" type=\"text/css\" href=\"/static/rest_framework/css/bootstrap.min.css\"/>\n          <link rel=\"stylesheet\" type=\"text/css\" href=\"/static/rest_framework/css/bootstrap-tweaks.css\"/>\n        \n\n        <li"
+            }
+        }
+    ]
+}
