@@ -14,7 +14,6 @@ export const SEARCH_SUGGESTIONS_FIELDS = [
     "cpc",
 ] as const;
 
-/** GET /keywords-explorer/search-suggestions query (ported from v1). */
 export const zSearchSuggestionsQueryParams = z.object({
     country: zCountry,
     keywords: zKeywords,

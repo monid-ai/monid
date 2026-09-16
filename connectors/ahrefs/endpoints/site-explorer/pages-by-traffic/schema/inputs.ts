@@ -6,7 +6,6 @@ import {
     zTarget,
 } from "../../../../schema/common.ts";
 
-/** GET /site-explorer/pages-by-traffic query (ported from v1). */
 export const zPagesByTrafficQueryParams = z.object({
     target: zTarget,
     mode: zMode.optional(),

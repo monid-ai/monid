@@ -20,7 +20,6 @@ export const ORGANIC_KEYWORDS_FIELDS = [
     "cpc",
 ] as const;
 
-/** GET /site-explorer/organic-keywords query (ported from v1). */
 export const zOrganicKeywordsQueryParams = z.object({
     target: zTarget,
     date: zDate,

@@ -22,7 +22,6 @@ export const PAGES_BY_BACKLINKS_FIELDS_SORTABLE = PAGES_BY_BACKLINKS_FIELDS
         (field) => !["title_target"].includes(field),
     );
 
-/** GET /site-explorer/pages-by-backlinks query (ported from v1). */
 export const zPagesByBacklinksQueryParams = z.object({
     target: zTarget,
     mode: zMode.optional(),

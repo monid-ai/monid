@@ -16,7 +16,6 @@ export const LINKEDDOMAINS_FIELDS = [
     "linked_pages",
 ] as const;
 
-/** GET /site-explorer/linkeddomains query (ported from v1). */
 export const zLinkeddomainsQueryParams = z.object({
     target: zTarget,
     mode: zMode.optional(),

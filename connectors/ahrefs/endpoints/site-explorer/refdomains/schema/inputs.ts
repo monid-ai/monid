@@ -18,7 +18,6 @@ export const REFDOMAINS_FIELDS = [
     "last_seen",
 ] as const;
 
-/** GET /site-explorer/refdomains query (ported from v1). */
 export const zRefdomainsQueryParams = z.object({
     target: zTarget,
     mode: zMode.optional(),

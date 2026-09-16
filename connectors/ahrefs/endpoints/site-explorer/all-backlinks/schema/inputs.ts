@@ -22,7 +22,6 @@ export const ALL_BACKLINKS_FIELDS = [
     "link_type",
 ] as const;
 
-/** GET /site-explorer/all-backlinks query (ported from v1). */
 export const zAllBacklinksQueryParams = z.object({
     target: zTarget,
     mode: zMode.optional(),

@@ -17,7 +17,6 @@ export const ANCHORS_FIELDS = [
     "last_seen",
 ] as const;
 
-/** GET /site-explorer/anchors query (ported from v1). */
 export const zAnchorsQueryParams = z.object({
     target: zTarget,
     mode: zMode.optional(),

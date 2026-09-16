@@ -16,7 +16,6 @@ export const LINKED_ANCHORS_INTERNAL_FIELDS = [
     "first_seen",
 ] as const;
 
-/** GET /site-explorer/linked-anchors-internal query (ported from v1). */
 export const zLinkedAnchorsInternalQueryParams = z.object({
     target: zTarget,
     mode: zMode.optional(),

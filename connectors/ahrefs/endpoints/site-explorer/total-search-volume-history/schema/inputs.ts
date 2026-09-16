@@ -9,7 +9,6 @@ import {
     zTarget,
 } from "../../../../schema/common.ts";
 
-/** GET /site-explorer/total-search-volume-history query (ported from v1). */
 export const zTotalSearchVolumeHistoryQueryParams = z.object({
     target: zTarget,
     date_from: zDateFrom,

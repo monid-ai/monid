@@ -19,7 +19,6 @@ export const ORGANIC_COMPETITORS_FIELDS = [
     "traffic",
 ] as const;
 
-/** GET /site-explorer/organic-competitors query (ported from v1). */
 export const zOrganicCompetitorsQueryParams = z.object({
     target: zTarget,
     date: zDate,

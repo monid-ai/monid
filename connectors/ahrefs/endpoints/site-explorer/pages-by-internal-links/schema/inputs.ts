@@ -21,7 +21,6 @@ export const PAGES_BY_INTERNAL_LINKS_FIELDS_SORTABLE =
         (field) => !["title_target"].includes(field),
     );
 
-/** GET /site-explorer/pages-by-internal-links query (ported from v1). */
 export const zPagesByInternalLinksQueryParams = z.object({
     target: zTarget,
     mode: zMode.optional(),

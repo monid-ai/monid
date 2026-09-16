@@ -95,7 +95,6 @@ Deno.test({
             false,
             JSON.stringify(result.output),
         );
-        // shape only — the row count is the vendor's
         assertEquals(typeof result.usage.evidence.rows, "number");
     },
 });

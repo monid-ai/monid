@@ -19,7 +19,6 @@ export const TOP_PAGES_FIELDS = [
     "top_keyword_best_position",
 ] as const;
 
-/** GET /site-explorer/top-pages query (ported from v1). */
 export const zTopPagesQueryParams = z.object({
     target: zTarget,
     date: zDate,

@@ -17,7 +17,6 @@ export const LINKED_ANCHORS_EXTERNAL_FIELDS = [
     "first_seen",
 ] as const;
 
-/** GET /site-explorer/linked-anchors-external query (ported from v1). */
 export const zLinkedAnchorsExternalQueryParams = z.object({
     target: zTarget,
     mode: zMode.optional(),

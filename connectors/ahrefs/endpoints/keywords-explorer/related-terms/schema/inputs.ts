@@ -15,7 +15,6 @@ export const RELATED_TERMS_FIELDS = [
     "cpc",
 ] as const;
 
-/** GET /keywords-explorer/related-terms query (ported from v1). */
 export const zRelatedTermsQueryParams = z.object({
     country: zCountry,
     keywords: zKeywords,

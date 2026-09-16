@@ -15,7 +15,6 @@ export const MATCHING_TERMS_FIELDS = [
     "cpc",
 ] as const;
 
-/** GET /keywords-explorer/matching-terms query (ported from v1). */
 export const zMatchingTermsQueryParams = z.object({
     country: zCountry,
     keywords: zKeywords,

@@ -18,7 +18,6 @@ export const CRAWLED_PAGES_FIELDS = [
     "last_crawled",
 ] as const;
 
-/** GET /site-explorer/crawled-pages query (ported from v1). */
 export const zCrawledPagesQueryParams = z.object({
     target: zTarget,
     mode: zMode.optional(),

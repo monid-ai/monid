@@ -18,7 +18,6 @@ export const PAID_PAGES_FIELDS = [
     "ads_count",
 ] as const;
 
-/** GET /site-explorer/paid-pages query (ported from v1). */
 export const zPaidPagesQueryParams = z.object({
     target: zTarget,
     date: zDate,

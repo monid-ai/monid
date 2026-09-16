@@ -26,7 +26,6 @@ export const BROKEN_BACKLINKS_FIELDS_SORTABLE = BROKEN_BACKLINKS_FIELDS.filter(
     (field) => !["http_code_target"].includes(field),
 );
 
-/** GET /site-explorer/broken-backlinks query (ported from v1). */
 export const zBrokenBacklinksQueryParams = z.object({
     target: zTarget,
     mode: zMode.optional(),
