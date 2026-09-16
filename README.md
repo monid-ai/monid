@@ -14,6 +14,8 @@
   <a href="https://github.com/monid-ai/monid/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/monid-ai/monid/actions/workflows/ci.yml/badge.svg"></a>
   <a href="https://www.npmjs.com/package/@monid-ai/cli"><img alt="npm" src="https://img.shields.io/npm/v/@monid-ai/cli?label=%40monid-ai%2Fcli&color=0016D7"></a>
   <img alt="Deno 2.x" src="https://img.shields.io/badge/runtime-Deno%202.x-1E1E1E">
+  <a href="https://x.com/monidhq"><img alt="Follow @monidhq on X" src="https://img.shields.io/badge/follow-%40monidhq-1E1E1E?logo=x&logoColor=white"></a>
+  <a href="https://discord.gg/rQzztcgJV8"><img alt="Join the Monid Discord" src="https://img.shields.io/badge/Discord-join-0016D7?logo=discord&logoColor=white"></a>
 </p>
 
 # Monid (OpenRouter for agent tools)
