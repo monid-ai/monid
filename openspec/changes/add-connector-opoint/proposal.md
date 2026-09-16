@@ -18,9 +18,11 @@ segments) are covered by existing hooks.
   - `/search`, `/search-advanced`, `/search-by-ids`, `/search-headlines`:
     all `POST https://api.opoint.com/search/` with a per-doc wire profile
     layered under the caller's `params`; PER_CALL, 1 Search API call each;
-    the agreement's per-article projection (headline, author, publication
-    time, original URL, ≤256-char snippet; the account-bearing tracking
-    `url` dropped) in a provider-level `output.fromResponse`.
+    the agreement-bound per-article projection (v1's allow-list: headline,
+    author, publication time, original URL, site / language / country /
+    rank / source / media-type / word-count / readership metadata, topics,
+    and a ≤256-char snippet; article bodies and the account-bearing
+    tracking `url` dropped) in a provider-level `output.fromResponse`.
   - `/suggest`: `GET https://suggest.api.opoint.com/…` (public host, no
     credential), query params translated into path segments, rows
     projected to `{type, id, name, url}`; FREE.

@@ -12,7 +12,9 @@ provider-level `lifecycle.start` that completes a 2xx whose
 `httpStatus 422` / `providerHttpStatus 200`, a provider-level
 `input.toRequest` layering the ARTICLE wire profile under the caller's
 `params`, and a provider-level `output.fromResponse` projecting each
-article to the agreement's fields.
+article to v1's allow-list (identity, author, time, original URL, site and
+readership metadata, topics, ≤256-char snippet; bodies and the tracking
+`url` dropped).
 
 #### Scenario: A search consumes one call
 - **WHEN** `/search` returns 200 with two documents

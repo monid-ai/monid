@@ -57,14 +57,21 @@ the only source. Every profile is proven by the RECORDED 401 fixtures'
 
 ## D5 — The agreement projection is `output.fromResponse`
 
-Special Terms (2026-06-25): per article Monid may expose the headline,
-author, publication date, original URL, and at most 256 verbatim
-characters; no summaries. The tracking `url` embeds the account id. This
-is an honest, caller-visible removal — exactly what `fromResponse` is
-for (there is no host redaction in this standard). One provider-level fn
-projects documents (allow-listed fields, `header.text`, `topics` →
-`{id, text}`, snippet = lede + body with tags stripped, sliced to 256);
-`/suggest` overrides with its row projection. Two hooks were considered
+Special Terms (2026-06-25) bound the article TEXT Monid may expose: the
+headline, author, publication date, original URL, and at most 256
+verbatim characters; no summaries. Site and readership METADATA is not
+text and is licensed on this account, so v1's allow-list (`DOCUMENT_KEYS`,
+the ground truth for the port) keeps it: `id_site`, `id_article`,
+`author`, `unix_timestamp`, `local_time`, `orig_url`, `url_common`,
+`language`, `countrycode`, `countryname`, `site_rank`, `first_source`,
+`mediatype`, `word_count`, `similarweb`, plus `header.text`, `topics` →
+`{id, text}`, and the snippet (lede + body, tags stripped, sliced to
+256). Dropped: the tracking `url` (embeds the account id), `body`,
+`summary`, `short_body`, `quotes`, `caption`, `matches`,
+`identical_documents`, and search internals. This is an honest,
+caller-visible removal — exactly what `fromResponse` is for (there is no
+host redaction in this standard); one provider-level fn, `/suggest`
+overrides with its row projection. Two hooks were considered
 instead (strip in `consolidate`): rejected — nothing is a billing field.
 
 ## D6 — `/suggest`: derived path params, credential-less inject

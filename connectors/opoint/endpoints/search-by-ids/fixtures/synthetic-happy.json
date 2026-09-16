@@ -1,6 +1,6 @@
 {
     "name": "synthetic-happy",
-    "description": "SYNTHETIC — shaped from the v1 adaptor tests (drill shape 2026-09-13) and the Opoint search-response docs; not verified against real traffic (no OPOINT_API_KEY held). The two requested articles returned; same article shape as /search.",
+    "description": "SYNTHETIC — shaped from the v1 adaptor tests (drill shape 2026-09-13) and the Opoint search-response docs; not verified against real traffic (no OPOINT_API_KEY held). The two requested articles (11/1, 11/2) returned in order; same article shape as /search.",
     "calls": [
         {
             "req": {
@@ -21,8 +21,8 @@
                         "host": "euler3.opoint.com",
                         "document": [
                             {
-                                "id_site": 239167,
-                                "id_article": 6140,
+                                "id_site": 11,
+                                "id_article": 1,
                                 "header": {
                                     "matches": true,
                                     "text": "Headline 0"
@@ -88,8 +88,8 @@
                                 }
                             },
                             {
-                                "id_site": 239167,
-                                "id_article": 6141,
+                                "id_site": 11,
+                                "id_article": 2,
                                 "header": {
                                     "matches": true,
                                     "text": "Headline 1"

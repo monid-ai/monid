@@ -26,8 +26,14 @@ Deno.test("opoint#search-by-ids happy (synthetic): one call; the requested artic
     });
     const output = result.output as Record<string, unknown>;
     const docs = output.document as Record<string, unknown>[];
-    assertEquals(docs.length, 2);
-    assertEquals(docs[1].id_article, 6141);
+    // the requested pairs come back, in order
+    assertEquals(
+        docs.map((doc) => ({
+            id_site: doc.id_site,
+            id_article: doc.id_article,
+        })),
+        ARTICLES,
+    );
     assertEquals(docs[1].url, undefined, "tracking url leaked");
 });
 
