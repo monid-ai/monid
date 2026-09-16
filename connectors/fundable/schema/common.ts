@@ -47,9 +47,9 @@ export const zPagination = {
     ),
     // upstream default 10, upstream max 500; the platform binding requires
     // it and caps it at PAGE_SIZE_MAX
-    page_size: z.number().int().min(1).max(500).optional().describe(
+    page_size: z.number().int().min(1).max(500).describe(
         "Rows per page. Billing is per row returned.",
-    ),
+    ).optional(),
 };
 
 const PERMALINK_NOTE =
