@@ -10,7 +10,7 @@
 ## 2. Endpoints (17)
 
 - [x] 2.1 Row-billed ×7 with page_size binding + estimate
-- [x] 2.2 Flat lookups ×6 (`/deal`, `/deal/investors` identities pinned)
+- [x] 2.2 Flat lookups ×5 (`/deal`, `/deal/investors` identities pinned)
 - [x] 2.3 Fuzzy resolvers ×3 at 0.1 credit
 - [x] 2.4 FREE permalink resolvers ×2
 

@@ -25,7 +25,7 @@ under `data` for PER_UNIT docs and nothing for flat/FREE docs.
 ### Requirement: Seventeen endpoints, four billing shapes
 The connector SHALL provide 17 sync endpoints: 7 PER_UNIT·RESULT at 1
 credit/row with `page_size` REQUIRED (max 100) and `estimate = page_size`;
-6 PER_CALL at 1 credit; 3 PER_CALL at 0.1 credit; 2 FREE. Public identities
+5 PER_CALL at 1 credit; 3 PER_CALL at 0.1 credit; 2 FREE. Public identities
 SHALL equal the native paths except `/deals/{id}` → `/deal` and
 `/deals/{id}/investors` → `/deal/investors`.
 

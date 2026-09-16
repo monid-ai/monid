@@ -22,7 +22,7 @@ engine capability.
     `GET /company/deals` `/investor/deals` `/person/deals`): PER_UNIT·RESULT
     at 1 credit/row, `page_size` REQUIRED and capped at 100 at the binding,
     estimate = `page_size`.
-  - 6 flat lookups (`GET /deals/{id}`, `/deals/{id}/investors`, `/company`,
+  - 5 flat lookups (`GET /deals/{id}`, `/deals/{id}/investors`, `/company`,
     `/investor`, `/person`): PER_CALL at 1 credit.
   - 3 fuzzy resolvers (`GET /company/search` `/investor/search`
     `/person/search`): PER_CALL at 0.1 credit (charged on zero results).
