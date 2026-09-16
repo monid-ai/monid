@@ -198,11 +198,16 @@ Deno.test("surf docs: every endpoint is in the tier table", async () => {
     // a new endpoint must state its tier
     assertEquals(Object.keys(TIER).sort(), ids);
     // 25 Light, 35 Standard, 8 Heavy — v1's split
+    assertEquals(ids.length, 33);
+    // a new endpoint must state its tier
+    assertEquals(Object.keys(TIER).sort(), ids);
+    // 16 Light, 15 Standard, 2 Heavy — v1's split
     const byTier = ids.reduce<Record<number, number>>((acc, id) => {
         acc[TIER[id]] = (acc[TIER[id]] ?? 0) + 1;
         return acc;
     }, {});
     assertEquals(byTier, { 1: 25, 2: 35, 4: 8 });
+    assertEquals(byTier, { 1: 16, 2: 15, 4: 2 });
 });
 
 Deno.test("surf docs: one auth, one error digest, no consolidate, synthesized quantities, one lifecycle", async () => {
@@ -345,6 +350,7 @@ Deno.test("surf schemas: vendor defaults ride the binding; a union arm carries n
 
 // ---------------------------------------------------------------------------
 // the 104 synchronous relays
+// the synchronous relays
 // ---------------------------------------------------------------------------
 
 Deno.test("surf: every relay settles its published tier on a 2xx and relays meta.credits_used", async () => {

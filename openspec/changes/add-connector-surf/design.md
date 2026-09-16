@@ -124,6 +124,8 @@ Two consequences:
   own example sends both, so what upstream does is unknown — the gate does
   not depend on it.) `onchain/dex/activity` carries this in layer 2;
   `heatscore/detail` (layer 1) still ships the plain arms.
+  not expressible: a union accepts both together, and the vendor answers 400
+  (error-as-data, zero-billed). The note says "exactly one".
 - ajv's `useDefaults` never enters `anyOf` arms (contactout D7), so a union
   binding carries NO defaults — the vendor's server defaults apply on the
   wire instead of v1's always-serialized ones. Same values, absent rather
