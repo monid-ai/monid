@@ -53,10 +53,8 @@ they ride the same hook (`?? 10`) rather than a schema `.default()`. The
 v1 bounds (2000-char expression, 1–100 articles, ≤20 filters, ≤10 lines)
 stay in the mirror: Opoint documents no maxima, so v1's pinned scope is
 the only source. Every profile is proven by the RECORDED 401 fixtures'
-`req.body` (the recorder captures the wire body). Those recordings predate
-the 2026-09-16 profile change (`summary` dropped, D5), so their `main`
-still carries `summary: 1`; replay matches method + url only, so they
-still serve. Re-record once an `OPOINT_API_KEY` is held.
+`req.body` (the recorder captures the wire body); re-recorded 2026-09-16
+after the profile change (`summary` dropped, D5).
 
 ## D5 — The agreement projection is `output.fromResponse`
 
@@ -103,8 +101,22 @@ never sent — the recordings used a placeholder value.
 ## D7 — Recorded where possible, synthetic where a key is needed
 
 No `OPOINT_API_KEY` is held. Recorded anyway: `/suggest` happy + empty
-(public host) and each search's `provider-error` (a real 401 — the DRF
-login page as a string body — which also captures every wire profile).
+(public host) and each search's `provider-error` (a real 401 — DRF's
+`{"detail": "Invalid token."}` — which also captures every wire profile;
+re-recorded 2026-09-16 after D5 and D8 changed the wire).
 Synthetic (`synthetic-` prefix): search successes and the in-band 200
 failure, shaped from the v1 adaptor tests (drill shape 2026-09-13).
 Unverified against real traffic; replace via `deno task record`.
+
+## D8 — `Accept: application/json` pinned at provider level
+
+The first run with a valid token (2026-09-16) came back HTTP 200 with
+Django REST framework's BROWSABLE API page: HTML, the search result
+embedded as XML. DRF content-negotiates on `Accept`, and the engine sends
+none (Deno's `*/*`), so Opoint picked its HTML renderer. v1 never saw this
+because `httpProviderRuntime` always sent `Accept: application/json`.
+The existing mechanism covers it: provider `request.headers` (bytedance
+precedent; compiler merges key-wise into every doc, D20), so `/suggest`
+carries it too — harmless on the public JSON host. Side effect: the 401
+recordings turned from the HTML login page into
+`{"detail": "Invalid token."}`.

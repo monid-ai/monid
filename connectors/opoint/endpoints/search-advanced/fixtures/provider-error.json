@@ -25,7 +25,6 @@
                         "requestedarticles": 10,
                         "main": {
                             "header": 1,
-                            "summary": 1,
                             "text": 1
                         },
                         "max_article_length": 256,
@@ -36,7 +35,9 @@
             },
             "res": {
                 "status": 401,
-                "body": "\n\n\n\n<!DOCTYPE html>\n<html>\n  <head>\n    \n\n      \n        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>\n        <meta name=\"robots\" content=\"NONE,NOARCHIVE\" />\n      \n\n      <title>Expression Search – Django REST framework</title>\n\n      \n        \n          <link rel=\"stylesheet\" type=\"text/css\" href=\"/static/rest_framework/css/bootstrap.min.css\"/>\n          <link rel=\"stylesheet\" type=\"text/css\" href=\"/static/rest_framework/css/bootstrap-tweaks.css\"/>\n        \n\n        <li"
+                "body": {
+                    "detail": "Invalid token."
+                }
             }
         }
     ]

@@ -186,7 +186,7 @@ Deno.test("opoint#search in-band failure (synthetic): HTTP 200 + response_code 5
     );
 });
 
-Deno.test("opoint#search provider error (recorded 401): the DRF login page is data, zero usage", async () => {
+Deno.test("opoint#search provider error (recorded 401): DRF's rejection is data, zero usage", async () => {
     const unit = await testSealedUnit("opoint#search");
     const fixture = await loadFixture(`${fixturesDir}provider-error.json`);
     const result = await runEndpoint({
@@ -203,9 +203,9 @@ Deno.test("opoint#search provider error (recorded 401): the DRF login page is da
     assertEquals(result.httpStatus, 401);
     assertEquals(result.isProviderError, true);
     assertEquals(result.usage, { credits: {}, evidence: {} });
-    // non-JSON body: the engine relays the faithful string (trimmed by the
-    // fixture diet), never throws
-    assert(String(result.output).includes("<!DOCTYPE html>"));
+    // JSON because the provider pins `Accept: application/json` (D8);
+    // without it DRF answered this same 401 as its HTML login page
+    assertEquals(result.output, { detail: "Invalid token." });
 });
 
 Deno.test("opoint#search: strict allow-list — account-state params, unknown keys, and out-of-range pages are rejected before the wire", async () => {

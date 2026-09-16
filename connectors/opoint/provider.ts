@@ -53,7 +53,16 @@ export default defineProvider({
             },
         }),
     },
-    request: { baseUrl: "https://api.opoint.com" },
+    request: {
+        baseUrl: "https://api.opoint.com",
+        /** Opoint is Django REST framework: without an explicit Accept it
+         *  content-negotiates to the BROWSABLE API — an HTTP 200 HTML page
+         *  with the result embedded as XML (observed 2026-09-16 with a
+         *  valid token). v1's httpProviderRuntime always sent this header;
+         *  the engine does not, so the provider pins it (bytedance
+         *  precedent). Reaches `/suggest` too — harmless on that host. */
+        headers: { Accept: "application/json" },
+    },
     // mirrors services/workflows/endpointExecution/config.yml (opoint):
     // request 60s, run 60s
     timeouts: { requestMs: 60_000, runMs: 60_000 },
