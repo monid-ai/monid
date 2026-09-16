@@ -44,6 +44,7 @@ deno task check && deno task test            # types + replay tests (zero networ
 | `tinyfish` | search, fetch (multi-host)                                                                   | `X-API-Key` | free — 1 call                                                    |
 | `akta`     | company-search, company-enrichment, news, industry-search, product-reviews, employee-reviews | `x-api-key` | credits (+ derived $, $1 = 20 credits)                           |
 | `octen`    | search, broad-search, extract, embedding                                                     | `x-api-key` | calls / sub-queries / successful URLs / tokens from `meta.usage` |
+| `fundable` | deals, deal, deal/investors, companies, company, company/deals, company/search, investors, investor, investor/deals, investor/search, people, person, person/deals, person/search, industry/search, location/search | `Bearer` | credits (1 per row or lookup, 0.1 per fuzzy search; permalink resolvers free) |
 
 ## Adding a connector
 
