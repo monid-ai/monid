@@ -37,8 +37,9 @@ export default defineEndpoint({
         notes: [
             "The model infers what you want from the content[] roles and " +
             "your prompt wording. Editing and extension REQUIRE ratio " +
-            '"adaptive" (editing also requires duration "auto"), so when in ' +
-            "doubt leave both at their defaults — they are always safe.",
+            '"adaptive", which is the default — leave it alone when in ' +
+            'doubt. Editing ALSO requires duration "auto"; the default is ' +
+            '5 seconds, so pass duration "auto" explicitly for an edit.',
 
             'To edit or extend a video, say so explicitly: "Video edit: ' +
             'remove everyone in @Video1 except the protagonist", or "Extend ' +

@@ -250,10 +250,16 @@ Why tag-triggered, why a GitHub Release:
 - **Schemas**: endpoint-local zod at `endpoints/<name>/schema/inputs.ts` —
   only what that endpoint uses; a fragment two endpoints share goes in
   `connectors/<name>/schema/`, never imported or re-exported across endpoint
-  directories, and never across providers. `.strict()` compiles to
-  `additionalProperties: false` (unknown keys → INVALID_INPUT);
-  `.refine`/`.superRefine` do NOT survive compilation — document such
-  constraints in describes instead. Write `.describe()` BEFORE `.optional()`:
+  directories, and never across providers. What the engine enforces is the
+  COMPILED JSON Schema, so the test is whether `z.toJSONSchema` can express the
+  rule: `.strict()` → `additionalProperties: false`, `.default(n)` → `default`,
+  `.enum()`/`.min()`/`.max()` → `enum`/`minimum`/`maximum`, `.regex()` →
+  `pattern` — all enforced (unknown keys and bad values → INVALID_INPUT).
+  `.refine`/`.superRefine` compile to NOTHING and are silently dropped, so a
+  CROSS-field rule has to be documented in `notes` instead. Do not read that as
+  "validation does not survive": a single-field constraint belongs in the
+  schema, where it is enforced before the wire. Write `.describe()` BEFORE
+  `.optional()`:
   a binding that derives a field with `.unwrap()` keeps only the inner schema,
   so a describe hung on the optional wrapper is silently dropped from the
   compiled doc (the compiler does not check for it).

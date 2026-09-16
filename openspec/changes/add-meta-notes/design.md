@@ -48,16 +48,24 @@ def's top-level sections meaning "a thing the engine executes or validates"
 ## D4 — This is a doc-format change, so the engine version moves
 
 The compiled doc's `meta` is `zEndpointMeta`, which spreads `zBaseMeta`, and
-both are `strictObject`. An engine at 0.0.1 handed a doc with `meta.notes`
-therefore REJECTS it. That is exactly the condition `doc_format_since`
-describes, so it moves 0.0.1 → 0.0.2 alongside `ENGINE_VERSION`.
+both are `strictObject`. An engine at 0.0.2 — the currently released one —
+handed a doc with `meta.notes` therefore REJECTS it. That is exactly the
+condition `doc_format_since` describes, so it moves **0.0.1 → 0.0.3**, and
+`ENGINE_VERSION` moves **0.0.2 → 0.0.3** alongside it.
+
+The two numbers start apart because they answer different questions, and 0.0.2
+is the case that shows why the split exists: `add-connector-pdl` bumped the
+ENGINE (it changed how `usage.credits` RESOLVES) without moving
+`doc_format_since`, because the shape of the doc it produces did not change. A
+0.0.1 engine can still read a doc compiled by 0.0.2. It cannot read one
+carrying `meta.notes` — hence this change moves both.
 
 `schema.spec_version` stays 1.0.0. `doc_format_since` answers "what is the
 oldest engine that can read this?" and is the right lever for an additive
 optional field; `spec_version` identifies the doc's structural generation and
 is reserved for a change that reshapes it.
 
-Consequence, accepted: every doc's `minEngineVersion` becomes 0.0.2, including
+Consequence, accepted: every doc's `minEngineVersion` becomes 0.0.3, including
 docs with no notes. `doc_format_since` is documented as declared-not-computed
 precisely so that this stays a single fact instead of a per-doc inference.
 

@@ -134,25 +134,44 @@ admitted it; over-holding is released at settle. v1 records a prod bug here:
 ~6×. v2 has no numeric coercion in that path at all — the literal is compared
 directly.
 
-## D6 — Cross-field validation moves from `superRefine` to `meta.notes`
+## D6 — CROSS-FIELD validation moves to `meta.notes`; single-field stays enforced
 
-v1's input schema enforced four cross-field rules locally, for free: at most
-one `first_frame`, `last_frame` requires a `first_frame`, per-role reference
-caps, and `ratio` must be `"adaptive"` when a frame is pinned.
+The line is narrower than "refinements don't survive", and getting it wrong
+costs real enforcement — see the correction at the end of this entry.
 
-None survive here. `z.toJSONSchema` silently drops `.refine`/`.superRefine`,
-and the engine validates against the compiled JSON Schema. `.strict()` and
-`.default()` do survive, so unknown keys, enum values and ranges are still
-rejected before the wire.
+What the engine enforces is the COMPILED JSON Schema, so the question for any
+rule is whether `z.toJSONSchema` can express it:
 
-The rules therefore move into `meta.notes` (the slot `add-meta-notes` adds),
-where an agent reads them before calling. The runtime cost is one Ark round
-trip: Ark rejects these combinations itself with a non-2xx, which the engine
-treats as zero-billed DATA. We trade a local 400 for a free remote 400.
+| authoring | compiles to | enforced |
+| --- | --- | --- |
+| `.strict()` | `additionalProperties: false` | yes |
+| `.default(n)` | `default` (materialized into the input) | yes |
+| `.enum()` / `.min()` / `.max()` | `enum` / `minimum` / `maximum` | yes |
+| `.regex(/…/)` | `pattern` | yes |
+| `.refine()` / `.superRefine()` | *nothing — silently dropped* | **no** |
+
+So SINGLE-field constraints belong in the schema and are enforced before the
+wire. Only rules spanning two or more fields have nowhere to compile to.
+
+v1 enforced four CROSS-field rules that therefore cannot come along: at most one
+`first_frame`, `last_frame` requires a `first_frame`, per-role reference caps,
+and `ratio` must be `"adaptive"` when a frame is pinned. Those move into
+`meta.notes` (the slot `add-meta-notes` adds), where an agent reads them before
+calling. The runtime cost is one Ark round trip: Ark rejects the combination
+itself with a non-2xx, which the engine settles as zero-billed DATA. We trade a
+local 400 for a free remote one.
 
 Rejected alternative: re-implementing the checks in `lifecycle.start` and
 throwing. That turns a caller error into a run FAILURE rather than an input
 rejection, and puts validation logic somewhere no catalog consumer can see it.
+
+**Correction (CodeRabbit, PR #14).** The first cut of this entry stated the rule
+as "refinements do not survive" and, on that basis, `zRefUrl` shipped as
+`z.string().min(1)` — accepting `data:` URLs, `http:`, and arbitrary junk while
+its own describe promised a public `https://` URL. That is a single-field
+constraint: it compiles to a `pattern` and is now enforced. The over-broad
+reading of this rule is what produced the gap, which is why the table above
+replaced the sentence.
 
 ## D7 — Poll non-2xx THROWS; submit non-2xx is DATA
 

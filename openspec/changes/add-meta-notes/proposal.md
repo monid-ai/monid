@@ -29,12 +29,15 @@ error to catch. That belongs in a list an agent reads, not in a paragraph.
   omitted when empty. Deliberately NOT the `endpoint ?? provider` rule used by
   `docsUrl`/`categories`: notes are additive facts, not one overridable value
   (design D1).
-- **`scripts/catalog.ts`** — `inspect` renders the notes block.
-- **Doc-format bump** — `ENGINE_VERSION` 0.0.1 → 0.0.2 and
-  `schema.doc_format_since` 0.0.1 → 0.0.2, so a doc carrying `meta.notes`
-  declares the engine that understands it. `shared/core/schema/meta/base.ts`
-  joins `CONTRACT_PATHS` in `scripts/version-check.ts` — it was missing, even
-  though the doc's `meta` is `zEndpointMeta` spreading this very object.
+- **Surfacing** — no code needed: `catalog inspect` prints the doc itself
+  ("the doc IS the endpoint's contract"), so notes surface with it.
+- **Doc-format bump** — `ENGINE_VERSION` 0.0.2 → 0.0.3 and
+  `schema.doc_format_since` 0.0.1 → 0.0.3, so a doc carrying `meta.notes`
+  declares the engine that understands it. (0.0.2 bumped the engine only —
+  `add-connector-pdl` changed how `usage.credits` resolves, not the shape of
+  the doc it produces.) `shared/core/schema/meta/base.ts` joins
+  `CONTRACT_PATHS` in `scripts/version-check.ts` — it was missing, even though
+  the doc's `meta` is `zEndpointMeta` spreading this very object.
 
 ## Capabilities
 
@@ -52,6 +55,6 @@ error to catch. That belongs in a list an agent reads, not in a paragraph.
 ## Impact
 
 Additive optional field on the compiled doc. Every doc's `minEngineVersion`
-moves to 0.0.2 (the declared floor), which is the intended semantics of
+moves to 0.0.3 (the declared floor), which is the intended semantics of
 `doc_format_since` — it is a declared historical fact, not a per-doc
 computation. No hook ABI change, no fn-table change, no new `Unit`.

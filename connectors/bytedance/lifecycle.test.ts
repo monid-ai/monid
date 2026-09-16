@@ -304,6 +304,21 @@ Deno.test("bytedance: the input schema rejects before the wire", async () => {
     await rejects({ content: text, duration: -1 }, "raw -1 sentinel");
     // content must not be empty — the one cross-item rule JSON Schema keeps
     await rejects({ content: [] }, "empty content");
+
+    // Reference URLs: the schema promises a public https:// URL, so it has to
+    // ENFORCE one. `.regex()` compiles to a JSON Schema `pattern` (a
+    // `.refine()` would be silently dropped), which is what makes these four
+    // fail locally instead of on Ark's dime.
+    const withUrl = (url: string): Json => ({
+        content: [{ type: "image_url", image_url: { url } }],
+    });
+    await rejects(
+        withUrl("data:image/png;base64,iVBOR"),
+        "inline base64 data: URL",
+    );
+    await rejects(withUrl("asset://abc123"), "asset:// reference");
+    await rejects(withUrl("http://example.test/a.png"), "plain http://");
+    await rejects(withUrl("not-a-url"), "malformed reference URL");
 });
 
 Deno.test({

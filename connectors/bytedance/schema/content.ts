@@ -16,20 +16,18 @@ import { z } from "zod";
  */
 
 /**
- * A reference URL: a public `https://` URL, or an `asset://<id>` reference
- * into the BytePlus digital-character/asset library.
+ * A reference URL: a public `https://` URL. Ark fetches these server-side, so
+ * the target has to be reachable from the public internet.
  *
- * Inline base64 `data:` URLs are NOT accepted — v1's reasoning was the
- * DynamoDB 400KB run-record cap, and it holds here for the same reason a run
- * record is not a file store.
+ * `.regex()` rather than `.refine()` on purpose: a refinement is silently
+ * dropped by `z.toJSONSchema`, but a regex compiles to a JSON Schema `pattern`
+ * that the engine's validator enforces. Single-field constraints CAN be
+ * expressed here; only cross-field rules have to fall back to `meta.notes`.
  */
 export const zRefUrl = z
     .string()
-    .min(1)
-    .describe(
-        "A public https:// URL or an asset://<id> reference. Inline base64 " +
-            "data: URLs are not supported.",
-    );
+    .regex(/^https:\/\/\S+$/, "must be a public https:// URL")
+    .describe("A public https:// URL.");
 
 /** Aspect ratios Ark accepts; `adaptive` picks the best fit from the inputs. */
 export const zRatio = z.enum([

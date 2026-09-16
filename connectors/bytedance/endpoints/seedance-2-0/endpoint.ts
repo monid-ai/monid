@@ -30,8 +30,9 @@ export default defineEndpoint({
         categories: ["video-generation"],
         notes: [
             "A lower per-token rate does NOT mean a cheaper video. 4K bills " +
-            "$4.00 per 1M tokens against 720p's $7.00, but uses roughly five " +
-            "times as many tokens — a 4K run is the most expensive one here.",
+            "$4.00 per 1M tokens against 720p's $7.00, but uses nine times " +
+            "as many tokens — so a 4K run costs about five times a 720p " +
+            "run, and is the most expensive one here.",
         ],
     },
     /** PUBLIC identity: the friendly model name. Pinned because all four

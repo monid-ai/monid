@@ -117,6 +117,23 @@ the published output. The quantity remains visible as `usage.evidence`.
 - **THEN** the output carries the task without its `usage` block, and the token
   count appears in `usage.evidence`
 
+### Requirement: Reference URLs are enforced, not merely described
+Every `content[]` reference URL SHALL be constrained to a public `https://` URL
+by a compiled JSON Schema `pattern`, so the rejection happens before the wire
+rather than on the vendor's side. The schema SHALL NOT admit shapes the
+connector does not support.
+
+#### Scenario: Unsupported URL forms are rejected locally
+- **WHEN** a caller passes an inline `data:` URL, an `asset://` reference, a
+  plain `http://` URL, or a malformed string as a reference
+- **THEN** the run is rejected INVALID_INPUT before any upstream call
+
+#### Scenario: The constraint reaches the compiled doc
+- **WHEN** an endpoint doc is inspected
+- **THEN** each of `image_url`, `video_url` and `audio_url` carries the `https`
+  pattern — a `.refine()` would have been dropped by `z.toJSONSchema` and
+  enforced nothing
+
 ### Requirement: Caveats are declared, not buried
 Rules that cannot be expressed in the compiled JSON Schema — single
 `first_frame`, `last_frame` requiring a `first_frame`, per-role reference caps,

@@ -58,8 +58,11 @@ the contract nothing else does:
 - **No drift suite.** BytePlus publishes no machine-readable pricing or schema
   surface; coverage is `test:live` plus the per-run `usage.mismatch` signal
   (`scripts/drift/contract.ts` states this policy).
-- **No cross-field input validation.** See design D6 — refinements do not
-  survive compilation, so those rules move to `meta.notes`.
+- **No CROSS-field input validation.** See design D6 — rules spanning two or
+  more fields have nothing to compile to in JSON Schema, so they move to
+  `meta.notes`. Single-field constraints (enums, ranges, `additionalProperties`,
+  and the reference-URL `pattern`) stay in the schema and ARE enforced before
+  the wire.
 
 ## Impact
 

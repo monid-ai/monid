@@ -57,3 +57,17 @@
       authoring note) — type-only, no doc-format impact
 - [ ] 7.2 Re-read the `requestMs: 60_000` tail once the >30s calls are no
       longer censored by the old cap (design D10)
+
+## 8. Review follow-ups (CodeRabbit, PR #14)
+
+- [x] 8.1 seedance-2.0 note: 4K uses NINE times the tokens (the ~5x is the
+      COST ratio) — the two were conflated, under-reserving a budget by ~1.8x
+- [x] 8.2 seedance-2.5 note: `duration` defaults to 5, not `"auto"`, so
+      "leave both at their defaults" was wrong for editing
+- [x] 8.3 `zRefUrl` enforces `^https:\/\/\S+$` via `.regex()` (a `pattern`
+      survives compilation; a `.refine()` does not) — `asset://` and base64
+      dropped from schema and prose, 4 INVALID_INPUT asserts added
+- [x] 8.4 design D6 narrowed: CROSS-field rules move to notes, single-field
+      constraints stay enforced (the over-broad reading caused 8.3)
+- [x] 8.5 Stale engine versions across add-meta-notes docs — the real bump is
+      ENGINE_VERSION 0.0.2 -> 0.0.3, doc_format_since 0.0.1 -> 0.0.3

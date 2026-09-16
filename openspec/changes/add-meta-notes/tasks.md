@@ -19,8 +19,8 @@
 
 ## 4. Versioning
 
-- [x] 4.1 `ENGINE_VERSION` 0.0.1 → 0.0.2; `schema.doc_format_since` → 0.0.2
-      (design D4)
+- [x] 4.1 `ENGINE_VERSION` 0.0.2 → 0.0.3; `schema.doc_format_since` 0.0.1 →
+      0.0.3 (design D4 — 0.0.2 was pdl's engine-only bump)
 - [x] 4.2 `scripts/version-check.ts`: add `shared/core/schema/meta/*.ts` to
       CONTRACT_PATHS (design D5)
 - [x] 4.3 Three tests pinned the floor as the literal "0.0.1"; re-pointed at
