@@ -59,8 +59,22 @@
       the identifier rule stays out of notes because it survives
       compilation (D13)
 
-## 6. Wiring + docs
+## 6. Review follow-up: the vendor-meter question
 
-- [x] 6.1 README: covered by 5.1 (no connector table on main)
-- [x] 6.2 Verify: fmt · lint · check · test · double-compile ·
+- [x] 6.1 Confirm no `usage.consolidate` is correct — verified against every
+      recorded shape that no Clay response carries a cost field; clay joins
+      pdl and tinyfish (3 of 10 providers ship without one)
+- [x] 6.2 Reverse the `period_quota` decision: it is the WORKSPACE's shared
+      ledger, v1 stripped it, and every sibling strips the same class of
+      field — added a provider `output.fromResponse` (D7)
+- [x] 6.3 Correct D8: `estimatedCreditCost` rides the routine METADATA
+      surface, not the run envelope — the earlier placement was asserted,
+      not observed
+- [x] 6.4 AGENT.md: `usage.consolidate` is OPTIONAL, not REQUIRED (stale vs
+      the compiler, D27, and three shipping providers)
+
+## 7. Wiring + docs
+
+- [x] 7.1 README: covered by 5.1 (no connector table on main)
+- [x] 7.2 Verify: fmt · lint · check · test · double-compile ·
       version:check · catalog smoke · engine:estimate

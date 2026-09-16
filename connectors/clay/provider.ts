@@ -27,10 +27,10 @@ import { defineProvider, presets } from "@shared/core";
  * drained by at least one endpoint. Responses carry NO cost field, so
  * there is no `usage.consolidate`: the derived fold settles (see D8).
  *
- * v1 behaviours deliberately NOT ported (faithful-relay rule): the HTTP
- * 402 body substitution and the `period_quota` strip. Clay's own answer
- * reaches the caller unchanged, so this provider declares no output hooks
- * at all.
+ * Clay's own answer reaches the caller essentially unchanged: the HTTP 402
+ * body substitution v1 did is NOT ported (faithful relay — the vendor's
+ * refusal is the run's answer). The one thing that does not travel is
+ * `period_quota`, OUR shared workspace's annual ledger (design D7).
  */
 export default defineProvider({
     name: "clay",
@@ -87,6 +87,21 @@ export default defineProvider({
          *  The derived fold is the answer; the pinned rates are
          *  re-measured by the monthly `clay credits balance`
          *  reconciliation. */
+    },
+    output: {
+        /** The ONE thing that does not relay (design D7, restoring v1's
+         *  decision 7): every successful search page carries
+         *  `period_quota` — `{limit, used, remaining, resets_at}` for the
+         *  WORKSPACE, not for the caller. One Clay workspace serves every
+         *  tenant, so `remaining` tells a caller how much of a shared pool
+         *  everyone else has burned; the caller's own metering arrives as
+         *  `usage.evidence`. Stripped like fundable's `*_remaining` and
+         *  ploid's `acu_remaining` — billing facts never reach
+         *  user-facing output. A no-op on the other nine docs (the key is
+         *  absent), and it cannot touch a bill: `usage` settles on the RAW
+         *  envelope, before this hook runs. */
+        fromResponse: ({ data, utils }) =>
+            utils.json.omit(data.output, ["period_quota"]),
     },
     lifecycle: {
         /**

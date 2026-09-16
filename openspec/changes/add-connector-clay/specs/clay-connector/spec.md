@@ -119,6 +119,22 @@ silently, so the compiled doc would enforce nothing.
   MEASURED hit draw for that endpoint — not a figure re-derived from the
   doc's own model, which would hold whatever the model happened to say
 
+### Requirement: The workspace quota ledger never reaches the caller
+Every successful search page carries `period_quota` — the limit, consumption
+and reset date of the WORKSPACE, which one Clay account shares across all
+tenants. The connector SHALL strip it from user-facing output. It SHALL NOT be
+lifted as a vendor claim: it is a cumulative ledger, not a per-call draw.
+
+#### Scenario: The ledger is stripped, the page is not
+- **WHEN** a search run returns rows alongside `period_quota`
+- **THEN** the output SHALL retain `data`, `has_more`, `source_type` and
+  `exhaustion_reason`, and SHALL NOT contain `period_quota`
+
+#### Scenario: Stripping cannot change a bill
+- **WHEN** the strip runs
+- **THEN** usage SHALL already have settled on the RAW envelope, so the rows
+  drawn are unaffected
+
 ### Requirement: Terminal vendor answers relay verbatim
 A TERMINAL Clay non-2xx SHALL complete the run as a provider error with zero
 usage and the vendor's own body unchanged — including the HTTP 402 whose text

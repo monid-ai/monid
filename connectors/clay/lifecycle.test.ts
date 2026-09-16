@@ -319,9 +319,18 @@ Deno.test("clay docs: ten endpoints, two families, one lifecycle", async () => {
         );
         assertEquals(doc.timeouts.pollMs, 5_000, id);
         assertEquals(doc.timeouts.runMs, 300_000, id);
-        // Clay reports no meter: no claim to lift, no payload to reshape
+        // Clay reports NO meter, so there is no vendor claim to lift and
+        // no consolidate anywhere in the connector (design D8) — the
+        // derived fold is always the settled answer.
         assertEquals(doc.usage.consolidate, undefined, id);
-        assertEquals(doc.output.fromResponse, undefined, id);
+        // one strip fn, provider-wide (design D7); errors relay verbatim,
+        // so there is no fromError
+        assertEquals(
+            doc.output.fromResponse?.$fn.key,
+            first.output.fromResponse?.$fn.key,
+            id,
+        );
+        assert(doc.output.fromResponse, `${id}: the ledger strip must run`);
         assertEquals(doc.output.fromError, undefined, id);
     }
     // the {search_id} placeholder survives into the compiled url while the

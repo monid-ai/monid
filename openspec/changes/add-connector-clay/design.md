@@ -98,13 +98,47 @@ v1 shaped Clay's payloads in two places, and neither is ported:
   a status-conditional swap would have to live in the lifecycle fns — the
   reversal is small and localized if the info-leak is later judged to
   outweigh fidelity.
-- **`period_quota` strip.** It is Clay's own response field and is useful to
-  whoever is paging (limit / used / remaining / resets_at). Nothing
-  billing-related reads it. Kept.
+- **`period_quota` strip.** REVERSED — v1 was right and the first cut of this
+  change was wrong. See below.
 
-Net: clay declares neither `output.fromResponse` nor `output.fromError`
-(neither do akta, exa, octen, tinyfish, fundable, pdl or ploid — apify is the
-catalog's only output-hook user).
+Net: clay declares one `output.fromResponse` (the ledger strip) and no
+`output.fromError` — a vendor refusal is the run's answer.
+
+### `period_quota` is stripped after all
+
+The first cut kept it, reasoning that it is "Clay's own response field and
+useful to whoever is paging". Four things say otherwise:
+
+1. **v1 stripped it deliberately** (`add-clay-provider` decision 7: "it is our
+   account's quota ledger"). Reversing a considered decision needs a reason,
+   and the one offered was wrong.
+2. **The benefit does not exist.** `{limit, used, remaining, resets_at}`
+   describes the WORKSPACE. One Clay workspace serves every tenant, so
+   `remaining` tells a caller how much of a shared pool everyone else has
+   burned. They cannot act on it: they do not own the quota, and their own
+   metering arrives as `usage.evidence`.
+3. **Every sibling strips this class of field.** fundable removes
+   `credit_source` / `*_remaining` ("billing facts never reach the
+   user-facing output"); ploid removes `remaining_credits` / `acu_remaining` /
+   `acu_limit` and names the reason exactly — "the shared-workspace handle
+   that must never reach a buyer (all tenants share one workspace)".
+4. **We already treat it as secret.** D12 sanitizes these exact numbers out of
+   the committed fixtures BECAUSE they are account state. Scrubbing them from
+   a public repo while shipping them to every caller is incoherent — the
+   runtime path is the one that reaches strangers.
+
+It lands in `output.fromResponse`, not in `usage.consolidate`: consolidate is
+the vendor-CLAIM hook and Clay makes no claim (D8), so using it to strip would
+declare a meter that does not exist. Ordering is unaffected either way —
+`usage` settles on the RAW envelope, before presentation.
+
+Cost, eyes open: this repo's README is explicit that the same artifact "runs
+locally with your own API key", and for a self-hosted user on their own Clay
+key `period_quota` is THEIR ledger and genuinely useful. fundable and ploid
+accept the same loss. It also sits in slight tension with relaying the 402,
+which names the same cap — the line drawn is that a 402 is Clay explaining a
+refusal the caller must understand, while `period_quota` is an account ledger
+riding every successful page.
 
 Two further v1 behaviours did not survive the port, both consequences rather
 than choices, recorded so the diff is not silent:
@@ -137,11 +171,21 @@ matches on method + url and never on a request body.
 ## D8 — No `usage.consolidate`: Clay reports no meter
 
 Clay responses carry no cost field, so there is no vendor claim to lift and
-the hook is simply omitted (D27 makes it optional; pdl is the precedent). The
-routine envelope's `estimatedCreditCost` is NOT a meter and must never be
-lifted as one: the drills found it wrong in both directions (Company Domain
-quoted 0.8, measured 1.0; Work Email quoted 1.1, measured 0.6; Mobile Phone
-quoted 10.8, measured 10.0). Consequence: the derived fold is always the
+the hook is simply omitted (D27 makes it optional; pdl and tinyfish are the
+precedents — three of ten providers ship without one). Verified against the
+recordings rather than assumed: across every captured shape the only
+billing-adjacent key is `period_quota`, and that is a cumulative ledger, not a
+per-call draw — no before-value rides the response, so nothing could derive
+one from it.
+
+`estimatedCreditCost` is NOT a meter and must never be lifted as one: the
+drills found it wrong in both directions (Company Domain quoted 0.8, measured
+1.0; Work Email quoted 1.1, measured 0.6; Mobile Phone quoted 10.8, measured
+10.0). It is a quote on the routine/function METADATA surface, which v1 read
+through the CLI — not a field the run returns. No recording contains it, and
+v1 says plainly that "responses carry NO cost field"; an earlier draft of this
+decision placed it on the routine envelope, which was asserted rather than
+observed. Consequence: the derived fold is always the
 settled answer and no `mismatch` key can ever appear, so the pinned rates
 have no per-run cross-check — see D7a for what stands in for one.
 

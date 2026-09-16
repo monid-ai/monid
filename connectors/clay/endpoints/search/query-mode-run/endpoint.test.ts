@@ -13,7 +13,7 @@ const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
 /** The fixture urls prove the substitution: /search/query-mode/SEARCH1/run */
 const SEARCH_ID = "SEARCH1";
 
-Deno.test("clay#search/query-mode/run happy (recorded): rows are the unit; period_quota rides the output", async () => {
+Deno.test("clay#search/query-mode/run happy (recorded): rows are the unit; the workspace ledger is stripped", async () => {
     const unit = await testSealedUnit("clay#search/query-mode/run");
     const fixture = await loadFixture(`${fixturesDir}happy.json`);
     const result = await runEndpoint({
@@ -36,10 +36,15 @@ Deno.test("clay#search/query-mode/run happy (recorded): rows are the unit; perio
     assertEquals((output.data as unknown[]).length, 2);
     assertEquals(output.has_more, true);
     assertEquals(output.source_type, "people");
-    // v1 stripped `period_quota` as an internal ledger; clay declares no
-    // output hooks, so Clay's own answer reaches the caller intact — the
-    // remaining quota is useful to whoever is paging
-    assert("period_quota" in output);
+    // `period_quota` is OUR shared workspace's annual ledger, not the
+    // caller's — stripped (design D7). The fixture carries it, so its
+    // absence here proves the hook ran, not that the vendor omitted it.
+    assert(
+        "period_quota" in
+            (fixture.calls[0].res.body as Record<string, unknown>),
+        "fixture must carry the ledger for this to prove anything",
+    );
+    assertEquals("period_quota" in output, false);
 });
 
 Deno.test("clay#search/query-mode/run empty (recorded): an exhausted iterator draws nothing", async () => {
@@ -56,10 +61,13 @@ Deno.test("clay#search/query-mode/run empty (recorded): an exhausted iterator dr
     // zero rows ⇒ zero draw (a zero credit entry is pruned), while
     // evidence still reports that we counted
     assertEquals(result.usage, { credits: {}, evidence: { RESULT: 0 } });
-    assertEquals(
-        (result.output as Record<string, unknown>).exhaustion_reason,
-        "no_more_results",
-    );
+    // the strip is surgical: everything the caller actually needs survives
+    const output = result.output as Record<string, unknown>;
+    assertEquals(output.exhaustion_reason, "no_more_results");
+    assertEquals(output.has_more, false);
+    assertEquals(output.source_type, "companies");
+    assertEquals(output.data, []);
+    assertEquals("period_quota" in output, false);
 });
 
 Deno.test("clay#search/query-mode/run provider error (recorded 404): expired search is data, zero usage", async () => {
@@ -160,13 +168,15 @@ Deno.test({
             JSON.stringify(result.output),
         );
         // rows vary; the draw is one-for-one with whatever came back
-        const rows =
-            ((result.output as Record<string, unknown>).data as unknown[])
-                .length;
+        const output = result.output as Record<string, unknown>;
+        const rows = (output.data as unknown[]).length;
         assertEquals(result.usage.evidence, { RESULT: rows });
         assertEquals(
             result.usage.credits,
             rows > 0 ? { search_result: rows } : {},
         );
+        // the live path is the one that would actually leak the shared
+        // workspace's ledger, so prove the strip against a real response
+        assertEquals("period_quota" in output, false);
     },
 });
