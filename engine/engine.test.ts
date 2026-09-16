@@ -1,7 +1,9 @@
 import { assert, assertEquals, assertRejects, assertThrows } from "@std/assert";
 import { z } from "zod";
+import { greaterThan, parse } from "@std/semver";
 import type { ConnectorSource, Json, RunState, SealedUnit } from "@shared/core";
 import {
+    contractConfig,
     defineEndpoint,
     defineProvider,
     presets,
@@ -1171,15 +1173,28 @@ async function asyncUnit(
     return sealUnit(bundle, "asyncdemo#jobs");
 }
 
+/** Highest of the contract floors — the shape `minEngineVersion` is
+ *  derived from. Read from config, never a literal, so a format or ABI
+ *  bump updates what these tests EXPECT, not what they MEAN. */
+function semverMax(...versions: string[]): string {
+    return versions.reduce((a, b) => greaterThan(parse(b), parse(a)) ? b : a);
+}
+
 const INSTANT_SLEEP = { sleep: () => Promise.resolve() };
 
-Deno.test("lifecycle: compiled doc carries lifecycle refs, pollMs, and the ABI floor", async () => {
+Deno.test("lifecycle: compiled doc carries lifecycle refs, pollMs, and the contract floor", async () => {
     const unit = await asyncUnit();
     assert(unit.doc.lifecycle);
     assertEquals(unit.doc.timeouts.pollMs, 5);
-    // fn_abi_since 0.1.0 — the wire query became a multimap (a hook-ABI
-    // shape change), so every doc floors there
-    assertEquals(unit.doc.minEngineVersion, "0.1.0");
+    // semverMax(doc_format_since, every fn's api) — async_since is one of
+    // those apis, so an async doc can never floor BELOW a sync one. Asserted
+    // against the config constants, not a literal, so a format or ABI bump
+    // does not silently turn this into a test of nothing.
+    const { asyncSince, docFormatSince, fnAbiSince } = contractConfig.schema;
+    assertEquals(
+        unit.doc.minEngineVersion,
+        semverMax(docFormatSince, fnAbiSince, asyncSince),
+    );
     // the sealed unit closes over all three lifecycle fns
     assert(unit.fns[unit.doc.lifecycle.start.$fn.key]);
     assert(unit.fns[unit.doc.lifecycle.poll!.$fn.key]);
@@ -2164,13 +2179,19 @@ Deno.test("lifecycle compile checks: poll without start; endpoint pollMs dead co
     }
 });
 
-Deno.test("sync docs: no lifecycle/pollMs; floor = fn_abi_since (ctx ABI), not async machinery", async () => {
+Deno.test("sync docs: no lifecycle/pollMs; floor never includes async_since", async () => {
     const bundle = await compileBundle(demoConnector(), COMPILE_OPTS);
-    // 0.1.0 via fn_abi_since (the current hook-ABI floor) — NOT because
-    // of anything async: sync docs carry no lifecycle surface
+    // The floor is semverMax(doc_format_since, fn_abi_since) — NOT
+    // async_since: a sync doc carries no lifecycle surface, so the async
+    // hook family can never pull its floor up. The point of the assertion
+    // is the ABSENCE of async_since from the max, which the lifecycle
+    // assertions above pin.
     assertEquals(
         bundle.endpoints["demo#search"].minEngineVersion,
-        "0.1.0",
+        semverMax(
+            contractConfig.schema.docFormatSince,
+            contractConfig.schema.fnAbiSince,
+        ),
     );
     assertEquals(bundle.endpoints["demo#search"].lifecycle, undefined);
     assertEquals(bundle.endpoints["demo#search"].timeouts.pollMs, undefined);
