@@ -42,7 +42,7 @@ export default defineEndpoint({
                     params: utils.json.merge(params, {
                         select_by_ids: true,
                         requestedarticles: utils.json.len(params, "$.articles"),
-                        main: { header: 1, summary: 1, text: 1 },
+                        main: { header: 1, text: 1 },
                         max_article_length: 256,
                         allsubject: "0",
                         readership: true,

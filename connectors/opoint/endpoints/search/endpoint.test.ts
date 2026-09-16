@@ -134,7 +134,10 @@ Deno.test("opoint#search happy (synthetic): one call consumed; articles projecte
         assertEquals(doc[dropped], undefined, `${dropped} leaked`);
     }
     const snippet = doc.snippet as string;
-    assert(snippet.startsWith("Lede text. Body"), snippet);
+    // body text only: Opoint's `summary` (the lede) is not an approved
+    // source, even when the response carries it
+    assert(snippet.startsWith("Body "), snippet);
+    assert(!snippet.includes("Lede"), "summary text leaked into the snippet");
     assert(!snippet.includes("<p>"), "HTML tag leaked into the snippet");
     assertEquals(snippet.length, 256);
 });

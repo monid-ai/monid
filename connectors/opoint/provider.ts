@@ -65,7 +65,11 @@ export default defineProvider({
          *  The rest are content toggles the strict input schema does not
          *  expose: text on so the snippet has a source, `max_article_length`
          *  256 = the agreement's verbatim-extract ceiling, subjects and
-         *  readership as licensed metadata. `/search` and
+         *  readership as licensed metadata. `summary` stays OFF: Opoint
+         *  truncates summary + text to `max_article_length` JOINTLY,
+         *  summary first (docs: search-request), so requesting the lede
+         *  would spend the 256 budget on text the projection never emits.
+         *  `/search` and
          *  `/search-advanced` inherit; headlines and by-ids override with
          *  their own profile. */
         toRequest: ({ data, utils }) => {
@@ -80,7 +84,7 @@ export default defineProvider({
                             "$.requestedarticles",
                         ) ??
                             10,
-                        main: { header: 1, summary: 1, text: 1 },
+                        main: { header: 1, text: 1 },
                         max_article_length: 256,
                         allsubject: "0",
                         readership: true,
@@ -143,7 +147,8 @@ export default defineProvider({
          *  tracking `url` (embeds the account id), `body` / `summary` /
          *  `short_body` / `quotes` / `caption` / `matches` /
          *  `identical_documents`, and search internals. The snippet is
-         *  lede then body, tags stripped, hard-capped at 256. Non-search
+         *  body text only (the lede is Opoint's `summary`, which the
+         *  agreement excludes), tags stripped, hard-capped at 256. Non-search
          *  envelopes pass through (suggest overrides anyway). v1 lineage:
          *  projectSearchResult / projectDocument / buildSnippet. */
         fromResponse: ({ data, utils }) => {
@@ -180,10 +185,8 @@ export default defineProvider({
                         utils.json.pick(topic, ["$.id", "$.text"])
                     );
                 }
-                const summary = utils.json.optionalGet(doc, "$.summary.text");
                 const body = utils.json.optionalGet(doc, "$.body.text");
-                const text = ((typeof summary === "string" ? summary : "") +
-                    " " + (typeof body === "string" ? body : ""))
+                const text = (typeof body === "string" ? body : "")
                     .replace(/<[^>]+>/g, " ")
                     .replace(/\s+/g, " ")
                     .trim();
@@ -197,6 +200,9 @@ export default defineProvider({
                     "$.last_timestamp",
                     "$.context",
                     "$.range_count",
+                    // the parser's search-term corrections (docs:
+                    // search-response) — a caller needs to know its query
+                    // was reinterpreted; not a search internal
                     "$.debug",
                 ]),
                 document: projected,

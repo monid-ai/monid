@@ -13,11 +13,11 @@ export default defineEndpoint({
             "Search news with structured expression lines and typed filter ids.",
         description: "Combine required, optional, and excluded search " +
             "lines, each with its own searchterm and a list of {type, id} " +
-            "filters (lang, geo, site, media, content, topic, ent, url, " +
-            "domain) taken straight from the /suggest lookup. Returns the " +
-            "same article shape as /search: headline, author, publication " +
-            "time, original URL, site domain, language, country, site " +
-            "rank, source, media type, word count, subject topics, " +
+            "filters (lang, geo, site, media, content, subject, topic, ent, " +
+            "url, domain) taken straight from the /suggest lookup. Returns " +
+            "the same article shape as /search: headline, author, " +
+            "publication time, original URL, site domain, language, country, " +
+            "site rank, source, media type, word count, subject topics, " +
             "readership estimates, 256-character snippet, and a " +
             "pagination context. Supports a published-time window, " +
             "oldest-first ordering, excluded ids, and 1-100 articles per " +

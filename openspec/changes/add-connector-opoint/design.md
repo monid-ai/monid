@@ -53,7 +53,10 @@ they ride the same hook (`?? 10`) rather than a schema `.default()`. The
 v1 bounds (2000-char expression, 1–100 articles, ≤20 filters, ≤10 lines)
 stay in the mirror: Opoint documents no maxima, so v1's pinned scope is
 the only source. Every profile is proven by the RECORDED 401 fixtures'
-`req.body` (the recorder captures the wire body).
+`req.body` (the recorder captures the wire body). Those recordings predate
+the 2026-09-16 profile change (`summary` dropped, D5), so their `main`
+still carries `summary: 1`; replay matches method + url only, so they
+still serve. Re-record once an `OPOINT_API_KEY` is held.
 
 ## D5 — The agreement projection is `output.fromResponse`
 
@@ -65,13 +68,20 @@ the ground truth for the port) keeps it: `id_site`, `id_article`,
 `author`, `unix_timestamp`, `local_time`, `orig_url`, `url_common`,
 `language`, `countrycode`, `countryname`, `site_rank`, `first_source`,
 `mediatype`, `word_count`, `similarweb`, plus `header.text`, `topics` →
-`{id, text}`, and the snippet (lede + body, tags stripped, sliced to
-256). Dropped: the tracking `url` (embeds the account id), `body`,
-`summary`, `short_body`, `quotes`, `caption`, `matches`,
-`identical_documents`, and search internals. This is an honest,
-caller-visible removal — exactly what `fromResponse` is for (there is no
-host redaction in this standard); one provider-level fn, `/suggest`
-overrides with its row projection. Two hooks were considered
+`{id, text}`, and the snippet (body text only, tags stripped, sliced to
+256). Opoint's `summary` is the article lede (docs: search-response) and
+the agreement excludes summaries, so it is neither projected nor
+requested: `max_article_length` truncates summary + text jointly, summary
+first, and a requested lede would spend the 256 budget on text never
+emitted (CodeRabbit, 2026-09-16). Dropped: the tracking `url` (embeds the
+account id), `body`, `summary`, `short_body`, `quotes`, `caption`,
+`matches`, `identical_documents`, and search internals (`search_start`,
+`host`, `cputime`, …). `debug` is NOT an internal: it is the parser's
+record of search-term corrections (a missing quote, …), which a caller
+needs to know its query was reinterpreted — kept, as v1 did. This is an
+honest, caller-visible removal — exactly what `fromResponse` is for
+(there is no host redaction in this standard); one provider-level fn,
+`/suggest` overrides with its row projection. Two hooks were considered
 instead (strip in `consolidate`): rejected — nothing is a billing field.
 
 ## D6 — `/suggest`: derived path params, credential-less inject
