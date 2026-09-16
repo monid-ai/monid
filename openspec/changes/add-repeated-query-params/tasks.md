@@ -19,7 +19,10 @@
 - [x] 2.3 empty list emits nothing — never `?k=`
 - [x] 2.4 a list joined in `toRequest` stays ONE value (the akta spelling)
 - [x] 2.5 nesting still fails INVALID_INPUT
-- [x] 2.6 the three ABI-floor assertions move to 0.1.0 (engine × 2,
+- [x] 2.6 lifecycle `utils.http` spells lists identically — repeated key,
+      and an EMPTY list omits the key rather than tripping FN_CONTRACT
+      (PR #17 review)
+- [x] 2.7 the three ABI-floor assertions move to 0.1.0 (engine × 2,
       compiler golden)
 
 ## 3. Versioning + guard

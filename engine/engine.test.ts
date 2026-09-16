@@ -1186,6 +1186,39 @@ Deno.test("lifecycle: compiled doc carries lifecycle refs, pollMs, and the ABI f
     assert(unit.fns[unit.doc.lifecycle.stop!.$fn.key]);
 });
 
+Deno.test("lifecycle: utils.http spells lists like the declarative path — repeat, and empty omits", async () => {
+    const seen: Array<{ method: string; url: string }> = [];
+    const engine = new Engine({
+        transport: scriptTransport([{ status: 200, body: { ok: true } }], seen),
+    });
+    const loaded = await engine.load(
+        await asyncUnit((connectors) => {
+            connectors[0].provider.lifecycle!.start = async ({ utils }) => {
+                await utils.http({
+                    method: "GET",
+                    path: "/jobs",
+                    queryParams: {
+                        // a scalar, a list, and an EMPTY list built
+                        // dynamically — no length guard in the fn
+                        scalar: "one",
+                        ids: ["a", "b"],
+                        none: [],
+                    },
+                });
+                return { kind: "COMPLETED", httpStatus: 200, output: [] };
+            };
+        }),
+    );
+    await loaded.run({ body: { q: "hi" } });
+    // repeated key for the list, one parameter for the scalar, and the
+    // empty list is simply absent — `?none=` would be a present, empty
+    // value to a vendor
+    assertEquals(
+        seen[0].url,
+        "https://api.asyncdemo.test/jobs?scalar=one&ids=a&ids=b",
+    );
+});
+
 Deno.test("lifecycle happy path: start → poll(running) → poll(done) → result fetch → settle", async () => {
     const seen: Array<{ method: string; url: string }> = [];
     const engine = new Engine({

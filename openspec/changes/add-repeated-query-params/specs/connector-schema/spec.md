@@ -25,8 +25,17 @@ hook-ABI SHAPE change, so `schema.fn_abi_since` SHALL move with it, while
 at the AUTHORING surface — a fn writing `{k: "v"}` SHALL NOT have to wrap
 it — and the engine SHALL normalize it through the same serializer the
 declarative pipeline uses, so a lifecycle fn cannot spell a list
-differently from its own doc.
+differently from its own doc. An EMPTY list SHALL be accepted there and
+carry the same meaning it does on the declarative path ("no value for
+this key": the key is omitted), so a fn building parameters dynamically
+needs no length guard. The min-1 floor belongs to the WIRE shape
+(`zHttpRequestParts.query`), which is the normalizer's OUTPUT — never to
+the authoring input.
 
 #### Scenario: utils.http sends a list as a repeated key
 - **WHEN** a lifecycle fn calls `utils.http({method: "GET", path: "/x", queryParams: {id: ["1", "2"]}})`
 - **THEN** the issued URL carries `?id=1&id=2`
+
+#### Scenario: utils.http accepts an empty list and omits the key
+- **WHEN** a lifecycle fn passes `queryParams: {scalar: "one", ids: ["a", "b"], none: []}`
+- **THEN** the call is NOT rejected, and the issued URL is `?scalar=one&ids=a&ids=b` — no `none` parameter

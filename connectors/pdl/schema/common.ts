@@ -9,12 +9,14 @@ import { z } from "zod";
  * materialized: none feeds an estimate, so absent means PDL's own default.
  *
  * MULTI-VALUE MATCHING (design D7): PDL widens a match by REPEATING a
- * parameter — "append the parameter with values as many times as needed"
- * — and only `locality`, `region`, `country` and `street_address` may not
- * repeat ("linearly related; multiple inputs would make it impossible to
- * match"). Those fields are `zPdlMatch` below: a LIST, always, which the
- * engine sends as `?k=a&k=b`. Raised on PR #7 and answered by the
- * repeated-query-params engine change.
+ * parameter — "append the parameter with values as many times as needed".
+ * Every REPEATABLE matching field is therefore `zPdlMatch` below: a LIST,
+ * always, which the engine sends as `?k=a&k=b`. The exceptions stay plain
+ * scalars — `locality`, `region`, `country` and `street_address` (company
+ * enrichment adds `postal_code`), which the vendor caps at one value
+ * ("linearly related; multiple inputs would make it impossible to
+ * match"), as do the output-shaping knobs below. Raised on PR #7 and
+ * answered by the repeated-query-params engine change.
  *
  * PORT NOTE: v1 guarded the enrichment identifier combinations ("one of
  * pdl_id | profile | email | phone | email_hash | lid, OR a name plus one

@@ -63,9 +63,20 @@ it is the wrong contract, and one that surprises:
    parameters — exactly the edit here. `input.toRequest` returns a
    `RunInput`, not a URL, so a hook alone can never emit a repeated key.
 
-One shape per field stays the rule: a query property is a string OR a list
-of strings, never `anyOf [string, array]`, so neither a caller nor the
-engine has to decide which of two shapes was meant.
+One shape per field stays the rule **for a connector's compiled input
+schema** — the surface a caller and an agent read: a `queryParams`
+property is a string OR a list of strings, never `anyOf [string, array]`,
+so nobody has to decide which of two shapes was meant. pdl's matching
+fields are lists; its vendor-single fields are strings.
+
+That rule is scoped deliberately and does NOT reach the AUTHORING
+surfaces, which accept both on purpose (D3): `zHttpCall.queryParams` lets
+a lifecycle fn write `{k: "v"}` without wrapping it, and `RunInput`
+carries whatever a doc's schema declares. The distinction is caller-facing
+(one shape, because ambiguity there is a contract defect) versus
+fn-facing (two shapes, because the engine normalizes them into one before
+anything observes the difference). A later tightening of the connector
+rule must not be read as a reason to narrow `zHttpCall`.
 
 ## D3 — The wire query is a MULTIMAP
 
