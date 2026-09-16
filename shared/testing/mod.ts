@@ -1,6 +1,8 @@
 export {
     type Fixture,
     loadFixture,
+    pickRecordedHeaders,
+    RECORDED_RES_HEADERS,
     type RecordedCall,
     recordingFetch,
     replayFetch,

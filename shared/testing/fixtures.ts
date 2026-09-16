@@ -28,10 +28,36 @@ export const zRecordedCall = z.object({
     }).strict(),
     res: z.object({
         status: z.number().int(),
+        /** ALLOWLISTED response headers (RECORDED_RES_HEADERS) — envelope
+         *  facts a fn reads, e.g. a 302's `location`. Absent on every chain
+         *  that does not need one. */
+        headers: z.record(z.string(), z.string()).optional(),
         body: zJson,
     }).strict(),
 }).strict();
 export type RecordedCall = z.infer<typeof zRecordedCall>;
+
+/**
+ * The ONLY response headers a fixture may carry. Request headers are never
+ * recorded (credentials); response headers are a different set, but
+ * `set-cookie` and account-identifying ratelimit/tracing headers live there
+ * too — so the recorder captures an explicit allowlist and nothing else
+ * reaches disk. Growing it is a deliberate edit in the same PR as the
+ * connector that needs it (the categories.ts posture).
+ */
+export const RECORDED_RES_HEADERS: readonly string[] = ["location"];
+
+/** The allowlisted subset of a real response's headers, keys lowercased. */
+export function pickRecordedHeaders(
+    headers: Headers,
+): Record<string, string> | undefined {
+    const out: Record<string, string> = {};
+    for (const name of RECORDED_RES_HEADERS) {
+        const value = headers.get(name);
+        if (value !== null) out[name] = value;
+    }
+    return Object.keys(out).length > 0 ? out : undefined;
+}
 
 export const zFixture = z.object({
     name: z.string().min(1),
@@ -81,7 +107,7 @@ export function trimJson(value: Json): Json {
 export function trimCalls(calls: RecordedCall[]): RecordedCall[] {
     return calls.map((call) => ({
         req: call.req,
-        res: { status: call.res.status, body: trimJson(call.res.body) },
+        res: { ...call.res, body: trimJson(call.res.body) },
     }));
 }
 
@@ -128,7 +154,7 @@ export function scrubCalls(calls: RecordedCall[]): RecordedCall[] {
                 ? { body: scrubJson(call.req.body) }
                 : {}),
         },
-        res: { status: call.res.status, body: scrubJson(call.res.body) },
+        res: { ...call.res, body: scrubJson(call.res.body) },
     }));
 }
 
@@ -177,15 +203,26 @@ export function replayFetch(
         }
         index++;
         return Promise.resolve(
+            // a recorded 3xx replays WITH its allowlisted headers — the
+            // engine's transport is `redirect: "manual"`, so a Response
+            // carrying a `location` is exactly what the live exchange was
             new Response(JSON.stringify(call.res.body), {
                 status: call.res.status,
-                headers: { "content-type": "application/json" },
+                headers: {
+                    "content-type": "application/json",
+                    ...call.res.headers,
+                },
             }),
         );
     };
 }
 
-/** Wrap a real fetch, capturing {req, res} pairs (headers dropped by design). */
+/** Wrap a real fetch, capturing {req, res} pairs. REQUEST headers are never
+ *  recorded (credentials); RESPONSE headers are captured only on the
+ *  RECORDED_RES_HEADERS allowlist — and re-attached to the response relayed
+ *  onward, so the recording run and its later replay observe the SAME
+ *  exchange (without this, a recorded `location` would be in the fixture but
+ *  missing from the live run that produced it). */
 export function recordingFetch(
     realFetch: typeof fetch,
     sink: RecordedCall[],
@@ -205,6 +242,7 @@ export function recordingFetch(
             : undefined;
         const response = await realFetch(input, init);
         const text = await response.text();
+        const headers = pickRecordedHeaders(response.headers);
         sink.push({
             req: {
                 method,
@@ -213,6 +251,7 @@ export function recordingFetch(
             },
             res: {
                 status: response.status,
+                ...(headers !== undefined ? { headers } : {}),
                 body: parseMaybeJson(text) ?? text,
             },
         });
@@ -221,6 +260,7 @@ export function recordingFetch(
             headers: {
                 "content-type": response.headers.get("content-type") ??
                     "application/json",
+                ...headers,
             },
         });
     };
