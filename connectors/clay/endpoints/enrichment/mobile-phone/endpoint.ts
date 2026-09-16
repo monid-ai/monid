@@ -19,19 +19,28 @@ export default defineEndpoint({
             "Find a person's mobile phone number from their LinkedIn URL, name, and company.",
         description: "Cascades a person through multiple phone-data " +
             "vendors, keyed by LinkedIn profile URL + full name + company " +
-            'name. Returns { "Mobile Phone" } in E.164 form — an empty ' +
+            'name. Returns { "Mobile Phone" } in E.164 form, or an empty ' +
             "string when no vendor has a number. Supports company domain, " +
-            "work email, and personal email as extra clues. Unlike the " +
-            "other Clay enrichments, a miss is NOT free: the vendor " +
-            "charges a reduced amount (a fraction of a data credit plus " +
-            "one action) for the exhausted waterfall, and the run reports " +
-            "it. Chain onward: pass the LinkedIn URL as 'Professional " +
-            "Profile URL' to the enrich-person endpoint. Suited for " +
-            "direct-dial outreach and contact-record completion. Async: " +
-            "the run is polled to completion — seconds on a hit, up to " +
-            "~3 minutes on a miss while every vendor is tried.",
+            "work email, and personal email as extra clues. Chain onward: " +
+            "pass the LinkedIn URL as 'Professional Profile URL' to the " +
+            "enrich-person endpoint. Suited for direct-dial outreach and " +
+            "contact-record completion. Async: the run is polled to " +
+            "completion.",
         docsUrl: "https://developers.clay.com/routines/clay-managed-functions",
         categories: ["people-enrichment"],
+        /** The exception to the rule every other Clay enrichment follows,
+         *  and the single most expensive surprise in this connector: a
+         *  caller who budgets misses as free is wrong here, and only
+         *  here. */
+        notes: [
+            "Unlike every other Clay enrichment, a MISS IS CHARGED. An " +
+            "exhausted waterfall draws 0.5 data credits + 1 action, " +
+            "against a hit's 10 + 2. Only an item that FAILS is free.",
+
+            "A miss can take up to ~3 minutes: every phone-data vendor is " +
+            "tried before the run completes empty. A hit usually settles " +
+            "in seconds.",
+        ],
     },
     endpoint: "/enrichment/mobile-phone",
     request: {

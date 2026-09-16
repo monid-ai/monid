@@ -10,18 +10,27 @@ export default defineEndpoint({
         description: "Cascades a person through multiple email vendors in " +
             "sequence until one returns a VERIFIED address, keyed by full " +
             'name + company domain + company name. Returns { "Work ' +
-            'Email" } — an empty result when no vendor verifies an ' +
-            "address, which draws nothing. Supports the person's " +
-            "LinkedIn URL, the company's LinkedIn URL, and a personal " +
-            "email as extra clues. Chain onward: pass the found address " +
-            "as 'Email' to the enrich-person endpoint, or the LinkedIn " +
-            "URL as 'Social Profile URL' with the same name and company to " +
-            "the mobile-phone endpoint. Suited for outreach list building " +
+            'Email" }, or an empty result when no vendor verifies an ' +
+            "address. Supports the person's LinkedIn URL, the company's " +
+            "LinkedIn URL, and a personal email as extra clues. Chain " +
+            "onward: pass the found address as 'Email' to the " +
+            "enrich-person endpoint, or the LinkedIn URL as 'Social " +
+            "Profile URL' with the same name and company to the " +
+            "mobile-phone endpoint. Suited for outreach list building " +
             "and CRM contact completion. Async: the run is polled to " +
-            "completion — seconds on a hit, up to ~3 minutes on a miss " +
-            "while every vendor is tried.",
+            "completion.",
         docsUrl: "https://developers.clay.com/routines/clay-managed-functions",
         categories: ["people-enrichment"],
+        /** A waterfall's worst case is its MISS, not its hit — both the
+         *  latency and the billing surprise land there. */
+        notes: [
+            "A miss can take up to ~3 minutes: every vendor in the " +
+            "waterfall is tried before the run completes empty. A hit " +
+            "usually settles in seconds.",
+
+            "An empty result (no vendor verified an address) draws " +
+            "nothing.",
+        ],
     },
     endpoint: "/enrichment/work-email",
     request: {

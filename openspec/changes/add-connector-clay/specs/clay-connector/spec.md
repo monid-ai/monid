@@ -137,6 +137,23 @@ except `202`, `429` and `5xx`, which keep the run RUNNING.
 - **THEN** the run SHALL complete 404 with the body
   `{message: "Search not found or expired"}` and zero usage
 
+### Requirement: Operational caveats ride `meta.notes`
+Facts a caller must know BEFORE calling SHALL be stated as `meta.notes`
+entries, not buried in `meta.description`: what is metered, how long a miss
+takes, when a handle expires, and where an endpoint answers plausibly rather
+than correctly. `meta.description` SHALL carry capability text and
+cross-endpoint chaining guidance only.
+
+#### Scenario: The charged miss is a note, not prose
+- **WHEN** `clay#enrichment/mobile-phone`'s compiled meta is read
+- **THEN** `notes` SHALL state that a miss is charged and name both draws,
+  and `description` SHALL NOT repeat it
+
+#### Scenario: A compile-surviving rule is not a note
+- **WHEN** `clay#enrichment/person`'s compiled meta is read
+- **THEN** the at-least-one-identifier rule SHALL be absent from `notes` —
+  it rides the input schema's `anyOf`, which notes are not for
+
 ### Requirement: Public identities and unexposed routine ids
 Each enrichment doc SHALL bake its Clay-managed routine id into
 `request.path` percent-encoded, and pin a public identity under

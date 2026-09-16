@@ -24,13 +24,24 @@ export default defineEndpoint({
             "size, annual_revenue, funding, linkedin_url), has_more, " +
             "source_type, and period_quota (the subscription's annual " +
             "results ledger). The iterator is forward-only and " +
-            "server-side — repeat while has_more is true. Rows draw the " +
-            "annual results quota one-for-one; empty pages (an exhausted " +
-            "iterator) draw nothing, and a 404 ('Search not found or " +
-            "expired') means create a new search. Suited for pulling " +
-            "prospect and account lists page by page.",
+            "server-side — repeat while has_more is true. Suited for " +
+            "pulling prospect and account lists page by page.",
         docsUrl: "https://developers.clay.com/searches/advanced",
         categories: ["people-enrichment", "company-enrichment"],
+        /** The two facts that cost a caller something if unknown: what is
+         *  actually metered (rows returned, not the limit asked for), and
+         *  that the handle dies rather than degrading. */
+        notes: [
+            "Rows draw the subscription's annual results quota one for " +
+            "one, counted on rows RETURNED rather than the limit " +
+            "requested — a short final page draws less than it promised. " +
+            "Past the annual cap Clay answers HTTP 402.",
+
+            "Searches expire upstream. A 404 'Search not found or " +
+            "expired' means the handle is dead — create a new search " +
+            "rather than retrying this one. An exhausted iterator is " +
+            "different: it returns an empty page and draws nothing.",
+        ],
     },
     endpoint: "/search/query-mode/run",
     request: { method: "POST", path: "/search/query-mode/{search_id}/run" },

@@ -50,8 +50,17 @@
       three poll statuses that keep a run RUNNING; drop the tautological
       wording from the estimate scenario
 
-## 5. Wiring + docs
+## 5. Merge with main (bytedance + add-meta-notes, #14)
 
-- [x] 5.1 README connector row
-- [x] 5.2 Verify: fmt · lint · check · test · double-compile ·
+- [x] 5.1 Resolve the README conflict: main rebuilt the README and removed
+      the connector table, so the clay row has no home — take main's
+- [x] 5.2 Adopt `meta.notes` (new in #14, added for exactly this): the six
+      caller-facing caveats MOVE out of the descriptions; D11 revised, and
+      the identifier rule stays out of notes because it survives
+      compilation (D13)
+
+## 6. Wiring + docs
+
+- [x] 6.1 README: covered by 5.1 (no connector table on main)
+- [x] 6.2 Verify: fmt · lint · check · test · double-compile ·
       version:check · catalog smoke · engine:estimate

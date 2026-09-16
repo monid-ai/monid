@@ -246,6 +246,50 @@ Deno.test("clay#enrichment/person: a body with no identifier is rejected before 
     for (const arm of arms) assertEquals(arm.additionalProperties, false);
 });
 
+Deno.test("clay meta: caveats ride notes, capability text rides description", async () => {
+    const bundle = await testBundle();
+    // The six facts that cost a caller something if unknown live in
+    // `meta.notes` (design D11, revised at the add-meta-notes merge) — and
+    // MOVED there, rather than being duplicated out of the prose.
+    const notesOf = (id: string) =>
+        (bundle.endpoints[id].meta.notes ?? []).join(" ");
+    const descOf = (id: string) => bundle.endpoints[id].meta.description ?? "";
+
+    // mobile-phone's charged miss: the connector's most expensive surprise
+    const phone = "clay#enrichment/mobile-phone";
+    assert(notesOf(phone).includes("MISS IS CHARGED"), "miss note missing");
+    assert(
+        notesOf(phone).includes("0.5 data credits + 1 action"),
+        "the miss note must name the draw",
+    );
+    assert(
+        !descOf(phone).includes("miss is NOT free"),
+        "the caveat must MOVE out of the description, not be duplicated",
+    );
+    // company-domain cannot miss — the note a chainer needs
+    assert(
+        notesOf("clay#enrichment/company-domain").includes("ALWAYS answers"),
+        "fuzzy-matcher note missing",
+    );
+    // the search handle dies rather than degrading
+    assert(
+        notesOf("clay#search/query-mode/run").includes("expired"),
+        "iterator expiry note missing",
+    );
+    // a rule that SURVIVES compilation is not a note (design D13): it rides
+    // the input schema's anyOf, where a caller's tooling sees it
+    assert(
+        !notesOf("clay#enrichment/person").includes("at least one"),
+        "the identifier rule belongs to the schema, not to notes",
+    );
+    // hints stay capability text — "call this next" is what an endpoint is
+    // FOR, not a caveat
+    assert(
+        descOf("clay#enrichment/company-domain").includes("employee-count"),
+        "the cross-endpoint chain belongs in the description",
+    );
+});
+
 Deno.test("clay docs: ten endpoints, two families, one lifecycle", async () => {
     const bundle = await testBundle();
     const ids = Object.keys(bundle.endpoints).filter((id) =>

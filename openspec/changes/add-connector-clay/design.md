@@ -169,20 +169,37 @@ would make our workspace's custom functions addressable. If Clay ever
 re-mints them the docs start answering 404 error-as-data — re-enumerate and
 update the paths.
 
-## D11 — v1's `notes` and `hints` become description prose
+## D11 — v1's `notes` land in `meta.notes`; its `hints` become description prose
 
-`zEndpointMeta` has no `notes`, no `hints` and no `tags` (the last was removed
-deliberately — nothing consumed it). Every v1 note and every `runHint` is
-carried into `meta.description`, the field whose role is agent-facing
-capability text: company-domain's fuzzy-matcher caveat, the search iterator's
-expiry and its 404, the "not billed" notes, the enrich-person
-at-least-one-identifier rule (now enforced too — D13), and the whole
-cross-endpoint chain (name → domain → the three company functions;
-work-email ↔ person ↔ mobile-phone).
-One note is REWORDED rather than copied: mobile-phone's "an empty result is
-not billed" is false under D3, and now says the miss is charged at a reduced
-rate. v1's long `summary` strings became `description`; a fresh one-line
-`summary` was written for catalog rows.
+REVISED at the merge with `add-meta-notes` (#14), which added `meta.notes`
+after this connector was first written. The original text said the schema had
+no home for v1's `notes` and folded them into `meta.description`; there is one
+now, and it was added for precisely this — "operational CAVEATS: what a caller
+must know before calling, not what the endpoint is for". So the caveats moved
+out of the prose and the split is now the schema's own:
+
+- **`meta.notes`** — the six facts that cost a caller something if unknown:
+  company-domain's fuzzy matcher (it cannot miss, so a wrong answer is
+  indistinguishable from a right one and still draws); the search iterator's
+  expiry-404 and what is actually metered (rows returned, not the limit
+  asked); work-email's and mobile-phone's ~3-minute miss latency; and
+  mobile-phone's charged miss. They MOVED — the sentences were deleted from
+  the descriptions rather than duplicated.
+- **`meta.description`** — capability text only: what the endpoint does, what
+  it returns, and every v1 `runHint` as prose (name → domain → the three
+  company functions; work-email ↔ person ↔ mobile-phone). Hints stay here:
+  "call this next" is what an endpoint is FOR, not a caveat.
+- **`tags`** — dropped; `["verified"]` has no consumer in v2.
+
+Two notes are NOT copies of v1's. mobile-phone's "an empty result is not
+billed" is false under D3 and now states the reduced draw with both figures.
+And the enrich-person at-least-one-identifier rule is deliberately absent from
+`notes`: the schema reserves notes for cross-field rules that CANNOT survive
+`z.toJSONSchema`, and under D13 this one does — it rides the compiled `anyOf`,
+where a caller's tooling sees it.
+
+v1's long `summary` strings became `description`; a fresh one-line `summary`
+was written for catalog rows.
 
 ## D12 — Fixtures are recorded, then sanitized
 

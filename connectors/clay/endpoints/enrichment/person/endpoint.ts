@@ -15,15 +15,21 @@ export default defineEndpoint({
             "company_domain, title, dates, is_current), education[], " +
             "languages[], num_followers, picture_url_orig, url } }. " +
             "Provide at least one of 'Professional Profile URL' or " +
-            "'Email' — a body with neither resolves nobody. A person the " +
-            "waterfall cannot resolve returns an empty result, which " +
-            "draws nothing. Chain onward: pass name, company_domain and " +
-            "org to the work-email endpoint, or url, name and org to the " +
+            "'Email' — a body with neither is rejected before the wire. " +
+            "Chain onward: pass name, company_domain and org to the " +
+            "work-email endpoint, or url, name and org to the " +
             "mobile-phone endpoint. Suited for lead qualification, " +
             "persona checks, and contact-record completion. Async: the " +
             "run is polled to completion (typically seconds).",
         docsUrl: "https://developers.clay.com/routines/clay-managed-functions",
         categories: ["people-enrichment"],
+        // The at-least-one-identifier rule is NOT here: it survives into
+        // the compiled input schema as an `anyOf` (design D13), so the
+        // contract states it where a caller's tooling will see it.
+        notes: [
+            "A person the waterfall cannot resolve completes with an " +
+            "empty result and draws nothing.",
+        ],
     },
     endpoint: "/enrichment/person",
     request: {

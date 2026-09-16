@@ -17,16 +17,23 @@ export default defineEndpoint({
         summary: "Resolve a company name to its primary website domain.",
         description: "Resolves a company name to its primary website " +
             "domain via a Clay-managed enrichment waterfall. Returns " +
-            "{ Domain }. The matcher is FUZZY and always answers with a " +
-            "best guess — an unrecognized or ambiguous name yields a " +
-            "plausible but possibly wrong domain rather than an empty " +
-            "result, so verify before chaining. The domain is the key " +
-            "that unlocks the other company enrichments: pass it as " +
-            "'Company Domain' to the employee-count, industry, and " +
-            "job-openings endpoints. Async: the run is polled to " +
-            "completion (typically seconds).",
+            "{ Domain }. The domain is the key that unlocks the other " +
+            "company enrichments: pass it as 'Company Domain' to the " +
+            "employee-count, industry, and job-openings endpoints. " +
+            "Async: the run is polled to completion (typically seconds).",
         docsUrl: "https://developers.clay.com/routines/clay-managed-functions",
         categories: ["company-enrichment"],
+        /** The one caveat that makes this endpoint dangerous to chain
+         *  blindly: it cannot miss, so a wrong answer is indistinguishable
+         *  from a right one at the call site — and the three company
+         *  functions downstream will happily enrich the wrong company. */
+        notes: [
+            "The matcher is fuzzy and ALWAYS answers. An unrecognized or " +
+            "ambiguous name returns a plausible but wrong domain rather " +
+            "than an empty result — and draws for it — so verify the " +
+            "domain before chaining it into the other company " +
+            "enrichments.",
+        ],
     },
     endpoint: "/enrichment/company-domain",
     request: {
