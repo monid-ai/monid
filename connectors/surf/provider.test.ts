@@ -419,10 +419,12 @@ Deno.test("surf: every relay settles its published tier on a 2xx and relays meta
         // the vendor's own meter stays in the body, verbatim (design D1):
         // the output carries whatever the fixture said, not the tier
         const output = result.output as { meta?: { credits_used?: number } };
+        // (the four v2-shaped prediction-market docs carry no `meta` at all
+        // — design D1 — so both sides are undefined there)
         const wire = fixture.calls[0].res.body as {
-            meta: { credits_used: number };
+            meta?: { credits_used: number };
         };
-        assertEquals(output.meta?.credits_used, wire.meta.credits_used, id);
+        assertEquals(output.meta?.credits_used, wire.meta?.credits_used, id);
     }
     // web/fetch is the measured divergent case (v1 drill: reports 2, charged
     // 1) — the one fixture whose meter differs from the tier
