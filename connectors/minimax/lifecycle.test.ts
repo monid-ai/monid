@@ -198,6 +198,39 @@ Deno.test("minimax blocking: the music flat fee would otherwise ride an envelope
     });
 });
 
+Deno.test("minimax blocking: a 200 with NO base_resp is a 502, not a bill", async () => {
+    // Regression for CodeRabbit PR #15 comment 3. `optionalNum` returns
+    // undefined only when the path is ABSENT, and v1 read that as success.
+    // A malformed 200 would then reach the billing gate and the engine
+    // would append music's flat CALL 1 — charging for a failure. ONLY
+    // status_code 0 counts as success now (design D3).
+    for (const id of BLOCKING) {
+        const unit = await testSealedUnit(id);
+        const result = await runEndpoint({
+            unit,
+            input: { body: INPUTS[id] },
+            mode: "replay",
+            fixture: {
+                name: "no-base-resp",
+                description:
+                    "a 200 whose body carries no base_resp at all — a " +
+                    "malformed success envelope that must not be billed",
+                calls: [{
+                    req: { method: "POST", url: unit.doc.request.url },
+                    res: {
+                        status: 200,
+                        body: { error: "upstream timeout" },
+                    },
+                }],
+            },
+        });
+        assertEquals(result.httpStatus, 502, id);
+        assertEquals(result.providerHttpStatus, 200, id);
+        assertEquals(result.isProviderError, true, id);
+        assertEquals(result.usage, { credits: {}, evidence: {} }, id);
+    }
+});
+
 Deno.test("minimax blocking: a transport 401 is data, zero usage, digested", async () => {
     const result = await run("minimax#v1/t2a_v2", "synthetic-http-error");
     assertEquals(result.httpStatus, 401);
@@ -237,6 +270,26 @@ Deno.test("minimax hailuo: submit -> poll -> poll -> files/retrieve settles a do
         credits: { default: 0.28 },
         evidence: { "768p_6s": 1 },
     });
+});
+
+Deno.test("minimax hailuo: an unrecognized status keeps polling, it does not settle", async () => {
+    // Regression for CodeRabbit PR #15 comment 2. The chain answers
+    // "Queued" (a spelling we do not handle), then a 200 with no status at
+    // all, then Success. Both unknown ticks must be treated as in-flight;
+    // before the guard they fell into the Success path, found no file_id,
+    // and ended a live task with a synthesized 502.
+    const result = await run(
+        "minimax#v1/video/minimax-hailuo-2.3",
+        "synthetic-hailuo-unknown-status",
+    );
+    assertEquals(result.httpStatus, 200);
+    assertEquals(result.isProviderError, false);
+    assertEquals(
+        (result.output as Record<string, unknown>).download_url,
+        "https://cdn.minimax.io/video/TASK3.mp4",
+    );
+    // and it still bills the cell the request selected
+    assertEquals(result.usage.evidence, { "768p_6s": 1 });
 });
 
 Deno.test("minimax hailuo: a failed task synthesizes 500 and bills nothing", async () => {

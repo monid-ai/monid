@@ -5,9 +5,10 @@
 MiniMax is a live v1 monid-services provider — eight AI media-generation
 endpoints (music, image, text-to-speech, and five video models) behind one
 Bearer-auth API at `api.minimax.io`. It is the first media-generation
-connector in this repo and the first port whose whole surface is
-asynchronous: three endpoints block inside a single POST, five submit a task
-and poll it. Everything it needs already exists: the lifecycle hook family
+connector in this repo and the first port where every endpoint runs through
+the lifecycle protocol: three complete inside a single blocking POST, five
+submit a task and poll it. Everything it needs already exists: the lifecycle
+hook family
 carries the async protocol, the D26 billing algebra carries every rate, and
 the identity vocabulary already admits the snake_case native paths. No
 engine or schema change.

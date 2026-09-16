@@ -8,7 +8,12 @@ import {
     testSealedUnit,
 } from "@shared/testing";
 import { directTransport, Engine } from "@monid/connector-engine";
-import { DEFAULT_T2A_MODEL, MINIMAX_HD_MODELS } from "./schema/inputs.ts";
+import {
+    DEFAULT_T2A_MODEL,
+    MAX_T2A_CHARS,
+    MINIMAX_HD_MODELS,
+    MINIMAX_T2A_MODELS,
+} from "./schema/inputs.ts";
 
 const FIXTURES = fromFileUrl(
     new URL("../../fixtures/", import.meta.url),
@@ -134,6 +139,49 @@ Deno.test("minimax#t2a_v2: the estimate holds the submitted length on the select
         (await estimateFor({ text })).evidence,
         { turbo_character: 2500 },
     );
+});
+
+/**
+ * THE drift guard for the tier routing (CodeRabbit PR #15, comment 1).
+ *
+ * `estimate` and `evidence` name the hd models as INLINE LITERALS, and they
+ * have to: hook fns are closed terms (shared/compiler/lint.ts) and may
+ * reference only their own parameters/locals plus a fixed global
+ * whitelist — importing `MINIMAX_HD_MODELS` into a fn body fails the build
+ * with "fn is not a closed term".
+ *
+ * So the coupling lives HERE instead, where imports are legal: adding a
+ * model to the schema enum without teaching BOTH fns about it now fails
+ * this test, rather than silently routing an hd model to the cheaper turbo
+ * line and under-billing it.
+ */
+Deno.test("minimax#t2a_v2: EVERY accepted model routes to the right tier", async () => {
+    // guards the test itself: if a model is ever added to neither list the
+    // expectation below would silently become "turbo" for it
+    assertEquals(
+        MINIMAX_T2A_MODELS.length,
+        MINIMAX_HD_MODELS.length * 2,
+        "the enum is expected to be an even hd/turbo split",
+    );
+
+    for (const model of MINIMAX_T2A_MODELS) {
+        const expected = (MINIMAX_HD_MODELS as readonly string[]).includes(model)
+            ? "hd_character"
+            : "turbo_character";
+        const { evidence } = await estimateFor({ model, text: "x".repeat(100) });
+        assertEquals(
+            Object.keys(evidence),
+            [expected],
+            `${model} must bill on ${expected}`,
+        );
+        assertEquals(evidence[expected], 100, model);
+    }
+});
+
+Deno.test("minimax#t2a_v2: the estimate's inline ceiling tracks MAX_T2A_CHARS", () => {
+    // the fns clamp with a literal 10000 for the same closed-term reason.
+    // If the constant moves, this fails and the literals must move with it.
+    assertEquals(MAX_T2A_CHARS, 10000);
 });
 
 Deno.test({

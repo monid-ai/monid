@@ -88,15 +88,19 @@ export default defineProvider({
                     output: res.body,
                 };
             }
-            // HTTP 200 carrying MiniMax's own envelope error. 0 is success;
-            // any other code is a failure the engine must not bill.
+            // HTTP 200 carrying MiniMax's own envelope. ONLY `0` is
+            // success — an absent or unreadable `base_resp` is a malformed
+            // 200, not a good one, and must not reach the billing gate.
+            // v1 was permissive here (`!== undefined && !== 0`); we are
+            // not, because the engine appends a flat PER_CALL 1 on any 2xx
+            // and music would be charged for a failure (design D3).
             const statusCode = utils.json.optionalNum(
                 res.body,
                 "$.base_resp.status_code",
             );
-            if (statusCode !== undefined && statusCode !== 0) {
+            if (statusCode !== 0) {
                 logger.warn("minimax envelope error — synthesizing 502", {
-                    statusCode,
+                    statusCode: statusCode ?? null,
                 });
                 return {
                     kind: "COMPLETED",

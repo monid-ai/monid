@@ -88,13 +88,16 @@ export default defineEndpoint({
                     output: res.body,
                 };
             }
+            // ONLY `0` is success — an absent or unreadable `base_resp` is
+            // a malformed 200 and must not park a task we would bill for
+            // (design D3; v1 was permissive here).
             const statusCode = utils.json.optionalNum(
                 res.body,
                 "$.base_resp.status_code",
             );
-            if (statusCode !== undefined && statusCode !== 0) {
+            if (statusCode !== 0) {
                 logger.warn("hailuo submit envelope error — synthesizing 502", {
-                    statusCode,
+                    statusCode: statusCode ?? null,
                 });
                 return {
                     kind: "COMPLETED",
@@ -159,6 +162,19 @@ export default defineEndpoint({
                     providerHttpStatus: query.status,
                     output: query.body,
                 };
+            }
+            if (status !== "Success") {
+                // Unknown status on a 2xx — KEEP POLLING rather than
+                // settling on a shape we do not recognize. Bounded by
+                // runMs. Without this, an unrecognized status would fall
+                // into the Success path, find no file_id, and end a
+                // still-running task with a synthesized 502 (the H3 polls
+                // have always guarded this; v1's Hailuo poll did not).
+                logger.warn(
+                    "hailuo task status unrecognized — treating as in flight",
+                    { runId, status: String(status) },
+                );
+                return { kind: "RUNNING" };
             }
             // Success — resolve file_id to a download url.
             const fileId = utils.json.optionalGet(query.body, "$.file_id");

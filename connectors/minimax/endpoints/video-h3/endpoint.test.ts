@@ -295,6 +295,102 @@ Deno.test("minimax#h3-fast: bills 480P seconds plus netted images, and pins styl
 });
 
 // ---------------------------------------------------------------------------
+// media URLs — public http(s) only, ENFORCED (design D6)
+// ---------------------------------------------------------------------------
+
+Deno.test("minimax#h3: the media-URL rule is a compiled pattern, not prose", async () => {
+    // Regression for CodeRabbit PR #15 comment 4. v1 enforced this in a
+    // superRefine, which z.toJSONSchema discards; a .regex() does NOT get
+    // discarded, so the rule reaches the doc as a JSON Schema `pattern`
+    // and the engine validates it before any request leaves.
+    const unit = await unitFor("minimax#v1/video/minimax-h3");
+    const item = (unit.doc.input.schema.body as Record<string, Record<
+        string,
+        Record<string, unknown>
+    >>).properties.content.items as Record<string, unknown>;
+    const variants = item.oneOf as Record<string, Record<string, unknown>>[];
+
+    const patterns = variants.flatMap((variant) => {
+        const properties = variant.properties as Record<
+            string,
+            Record<string, Record<string, Record<string, unknown>>>
+        >;
+        return ["image_url", "video_url", "audio_url"]
+            .filter((key) => key in properties)
+            .map((key) => properties[key].properties.url.pattern);
+    });
+    assertEquals(patterns.length, 3, "image, video and audio all carry it");
+    for (const pattern of patterns) assertEquals(pattern, "^https?:\\/\\/");
+});
+
+Deno.test("minimax#h3: mm_file:// and data: are rejected before any wire call", async () => {
+    const unit = await unitFor("minimax#v1/video/minimax-h3");
+    // a transport that explodes proves validation ran FIRST
+    const reject = (url: string) =>
+        runEndpoint({
+            unit,
+            input: {
+                body: {
+                    model: "MiniMax-H3",
+                    resolution: "768P",
+                    duration: 6,
+                    ratio: "16:9",
+                    content: [
+                        ...textContent,
+                        {
+                            type: "image_url",
+                            image_url: { url },
+                            role: "reference_image",
+                        },
+                    ],
+                },
+            },
+            mode: "replay",
+            fixture: {
+                name: "never-reached",
+                description:
+                    "validation must reject the body before any call, so " +
+                    "this chain is never served",
+                calls: [{
+                    req: { method: "POST", url: unit.doc.request.url },
+                    res: { status: 200, body: { task_id: "NOPE" } },
+                }],
+            },
+        }).catch((error: Error) => error);
+
+    for (
+        const url of [
+            "mm_file://0123456789abcdef", // Monid's own uploaded files
+            "MM_FILE://0123456789abcdef", // scheme is case-insensitive
+            "data:image/jpeg;base64,AAAA", // inlines the asset
+            "ftp://example.com/a.jpg",
+        ]
+    ) {
+        assert(
+            (await reject(url)) instanceof Error,
+            `${url} must not validate`,
+        );
+    }
+
+    // ...and the one accepted form still works
+    const ok = await settle("minimax#v1/video/minimax-h3", {
+        model: "MiniMax-H3",
+        resolution: "768P",
+        duration: 6,
+        ratio: "16:9",
+        content: [
+            ...textContent,
+            {
+                type: "image_url",
+                image_url: { url: "https://example.com/ref.jpg" },
+                role: "reference_image",
+            },
+        ],
+    });
+    assertEquals(ok.httpStatus, 200);
+});
+
+// ---------------------------------------------------------------------------
 // live
 // ---------------------------------------------------------------------------
 

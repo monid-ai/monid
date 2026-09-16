@@ -72,9 +72,11 @@ export const zImageGenerationBody = z.strictObject({
                 image_file: z
                     .string()
                     .min(1)
+                    .regex(/^https?:\/\//, "must be a public http(s) URL")
                     .describe(
-                        "Reference image: public URL or base64 data URL " +
-                            "(data:image/jpeg;base64,...). JPG/JPEG/PNG, " +
+                        "Reference image, as a public http(s) URL. data: " +
+                            "URIs are NOT accepted (design D6 — they inline " +
+                            "the whole asset into the request). JPG/JPEG/PNG, " +
                             "<10MB. A single front-facing portrait works best.",
                     ),
             }),

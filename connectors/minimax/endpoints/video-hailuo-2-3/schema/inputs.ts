@@ -40,12 +40,14 @@ export const zHailuoVideoBody = z.strictObject({
     first_frame_image: z
         .string()
         .min(1)
+        .regex(/^https?:\/\//, "must be a public http(s) URL")
         .describe(
-            "Starting-frame image for image-to-video. Public URL or base64 " +
-                "data URL (data:image/jpeg;base64,...). JPG/PNG/WebP, " +
-                "<20MB, short edge >300px, aspect ratio between 2:5 and " +
-                "5:2. Provide EITHER this or prompt (or both) — a request " +
-                "with neither is rejected.",
+            "Starting-frame image for image-to-video, as a public http(s) " +
+                "URL. data: URIs are NOT accepted (design D6 — they inline " +
+                "the whole asset into the request). JPG/PNG/WebP, <20MB, " +
+                "short edge >300px, aspect ratio between 2:5 and 5:2. " +
+                "Provide EITHER this or prompt (or both) — a request with " +
+                "neither is rejected.",
         )
         .optional(),
     resolution: z

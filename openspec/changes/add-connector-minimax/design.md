@@ -33,9 +33,36 @@ receipt. So the pool is `default` ("US dollars"), declared ONCE on the
 provider per pdl D6, and all eight endpoints' `consumes.credit` name it —
 the provider pool is drained and each compiled doc narrows to `{default}`.
 
-MiniMax's prepaid "Credits" balance is NOT a second pool: it is a
-different key type (Subscription Key) with the same resource coverage as
-the Token Plan, and Monid uses a standard Open Platform API key.
+**Why not MiniMax's own token or credit unit** (asked on PR #15, answered
+here so the next reader does not have to re-derive it):
+
+- **Tokens cannot work.** A pool is only usable if every line can state its
+  rate as a quantity of that pool per unit counted. MiniMax publishes
+  per-token prices ONLY for the LLM models (M3 $0.30/M in, $1.20/M out;
+  M2.7 the same), and this connector wraps none of them. For media the
+  published card is per second, per character, per image, or per video, and
+  four of the five families report no token figure at all (music, image and
+  Hailuo report none; TTS reports characters). H3 is the near-miss — it
+  returns `task.usage.total_tokens` — but there is no published price per
+  token for it and its card says "Billed per second", so the number is
+  provider-internal accounting, which is why `output.fromResponse` strips
+  it. With no conversion available, the only way to express $0.038 per 480P
+  second in tokens would be to mint a pool PER RATE (`480p_second`,
+  `768p_second`, …) — the line list wearing a different hat, and useless
+  for the one thing a pool is for: knowing whether the account has enough
+  left.
+- **MiniMax "Credits" are the wrong balance.** They are real and convert
+  linearly (1,000 credits = $1), so no fan-out would occur — but they are a
+  SUBSCRIPTION-KEY product. Monid authenticates with a standard Open
+  Platform API key, which draws the pay-as-you-go account balance in
+  dollars and never touches Credits. Naming a balance we do not debit, for
+  a unit defined as exactly dollars × 1000, would add indirection carrying
+  no information.
+
+The general rule this settles: **the pool is whatever the vendor actually
+debits for the key we hold.** akta/octen/fundable/ploid/pdl meter our
+account in their own credits, so those are their pools; exa, apify and
+MiniMax debit dollars, so theirs is dollars.
 
 No `usage.consolidate`. The vendor reports QUANTITIES
 (`extra_info.usage_characters`, `task.usage.*_seconds`) but never a
@@ -76,6 +103,23 @@ Consequence stated plainly: `resolve()` has no opt-out, so EVERY minimax
 doc becomes a lifecycle doc. That is correct here — all eight need it
 (three for the envelope check, five for task polling). `poll` is NOT
 provider-level: that would make music, image and TTS pollable.
+
+**ONLY `status_code: 0` is success** (tightened on PR #15 review). v1 read
+`statusCode !== undefined && statusCode !== 0`, which classifies a 200
+carrying NO `base_resp` as a success. `utils.json.optionalNum` returns
+`undefined` only when the path is absent (a present non-number throws), so
+that arm means "malformed envelope" — and letting it through reaches the
+billing gate, where the engine appends music's flat `CALL: 1` and charges
+$0.15 for a failure. The check is now `statusCode !== 0` in both places
+that read the envelope (the provider relay and Hailuo's `start`). This is a
+DELIBERATE divergence from v1: a legitimate 200 omitting `base_resp` would
+now fail the run, but MiniMax documents `base_resp` on every `/v1`
+response, and the failure mode is loud and zero-billed rather than a silent
+charge.
+
+**The V2 surface needs none of this** — `/v2` answers with real HTTP
+statuses and an OpenAI-style error body, so the four H3 `start` fns carry
+no envelope check at all.
 
 ## D4 — Hailuo is a per-CELL composite; H3 is per-resolution-per-second
 
@@ -157,6 +201,37 @@ not survive compilation:
 Music and H3 keep their object shape; only their `superRefine` bodies move
 into prose.
 
+**But a REGEX is not a refinement** (corrected on PR #15 review). The
+reasoning above is right about `.refine`/`.superRefine` and wrong if
+generalized: `z.string().regex(...)` compiles straight through to a JSON
+Schema `pattern`, which the engine validates before any request leaves. So
+rules expressible as a pattern should BE a pattern, not prose. The media
+URL rule is now enforced:
+
+```ts
+z.string().min(1).regex(/^https?:\/\//, "must be a public http(s) URL")
+```
+
+on all three media-URL fields — H3's `zMediaUrl` (image / video / audio
+items), Hailuo's `first_frame_image`, and image's
+`subject_reference[].image_file`.
+
+**Public http(s) links only — a deliberate narrowing from v1.** v1
+documented two accepted forms on these fields ("Public URL or base64 data
+URL") and rejected only `mm_file://`. We accept ONE:
+
+- `mm_file://{file_id}` names a file uploaded to MiniMax under MONID's key,
+  so a caller cannot produce a valid one and a guessed one would read our
+  storage. v1 rejected it too — we now actually enforce it.
+- `data:` URIs are newly rejected. They inline the whole asset into the
+  request body and the run record, against MiniMax's own 64MB body cap and
+  a 30MB image limit. Same reasoning that pins TTS to `output_format:
+  "url"` rather than letting a caller inline ~20MB of hex.
+
+A caller previously sending inline base64 now gets INVALID_INPUT before any
+wire call. Pinned by tests asserting the compiled `pattern` and rejecting
+`mm_file://`, `MM_FILE://`, `data:` and `ftp://`.
+
 ## D7 — Image netting moves from the poll into `evidence`
 
 v1 stamped `task.usage.billable_input_images = max(0, input_image_count −
@@ -165,6 +240,19 @@ only read a field that existed. Here `usage.evidence` computes the netting
 directly from the raw `input_image_count` that already rides the output —
 one fn, no payload mutation, and the raw count stays visible to the caller
 so the arithmetic is checkable. `stampBillableImages` is not ported.
+
+## D7a — Hailuo polls on an unrecognized status, it does not settle
+
+v1's Hailuo poll handled `Preparing`/`Queueing`/`Processing` → running and
+`Fail` → error, then fell through to the Success path for everything else
+(`endpoints/video-common.ts:294`). A 200 carrying a status we do not know,
+or none at all, therefore reached file resolution, found no `file_id`, and
+ended the run with a synthesized 502 — a permanent failure for a task still
+in flight. v1's own H3 poll guarded this; its Hailuo poll did not.
+
+Hailuo now matches the H3 shape: anything that is not `Success` and not a
+known terminal failure returns `RUNNING`, bounded by `runMs` (600 s). A fix
+of a latent v1 gap rather than a porting slip.
 
 ## D8 — Rate provenance
 

@@ -43,22 +43,32 @@ export interface H3ModelShape {
 }
 
 /**
- * Media URL. MiniMax accepts three forms; we accept two.
+ * Media URL — a PUBLIC http(s) link, ENFORCED (design D6).
  *
- * `mm_file://{file_id}` is REJECTED: it names a file uploaded to MiniMax
- * under MONID's API key, so a Monid caller can never produce a valid one.
- * v1 enforced this in a refinement; here it is prose, since the refinement
- * would not survive compilation.
+ * MiniMax accepts three forms; we accept exactly one.
+ *   - `mm_file://{file_id}` names a file uploaded to MiniMax under MONID's
+ *     API key, so a Monid caller can never produce a valid one and a
+ *     guessed one would read our storage. v1 rejected it too.
+ *   - `data:` URIs inline the whole asset into the request body and the
+ *     run record (an image alone may be 30MB, against a 64MB body cap).
+ *     v1 documented them; we do not accept them.
+ *
+ * v1 enforced its rule in a `superRefine`, which `z.toJSONSchema` discards.
+ * A `.regex()` does NOT get discarded — it compiles to a JSON Schema
+ * `pattern` the engine validates before any request leaves — so the rule is
+ * a real gate here rather than prose.
  */
 const zMediaUrl = z
     .string()
     .min(1)
+    .regex(/^https?:\/\//, "must be a public http(s) URL")
     .describe(
-        "Public HTTPS URL, or a data: URI (data:image/jpeg;base64,...). " +
-            "MiniMax mm_file:// references are NOT supported — they name a " +
-            "file uploaded under Monid's own credentials. Limits: image " +
-            "<=30MB, reference video <=50MB, reference audio <=15MB, whole " +
-            "request body <=64MB — prefer URLs over data: URIs for video.",
+        "Public http(s) URL. Nothing else is accepted: data: URIs are " +
+            "rejected (they inline the whole asset into the request), and " +
+            "so are MiniMax mm_file:// references (they name a file " +
+            "uploaded under Monid's own credentials). Size limits still " +
+            "apply at the far end: image <=30MB, reference video <=50MB, " +
+            "reference audio <=15MB, whole request body <=64MB.",
     );
 
 const zTextItem = z.strictObject({
