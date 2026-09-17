@@ -177,6 +177,15 @@ Deno.test("vaquill: every endpoint settles its published draw, and the receipt l
             false,
             id,
         );
+        // `pluck` is EXACT, so a receipt nested under `meta` survives it.
+        // Coverage is the one endpoint that reports there, and it reports 0
+        // because it is free. Asserting only the root would let a metered
+        // endpoint hide a live receipt one level down.
+        const meta = (result.output as Record<string, Json>).meta;
+        if (meta !== undefined && meta !== null && typeof meta === "object") {
+            const nested = (meta as Record<string, Json>).creditsConsumed;
+            assertEquals(nested ?? 0, 0, `${id} carries a nested receipt`);
+        }
     }
 });
 

@@ -22,7 +22,7 @@ export default defineEndpoint({
             "that these are dates we OBSERVED the change, which is not the " +
             "same as the date the legislature made it.",
         docsUrl:
-            "https://www.vaquill.ai/docs/api-reference/statutes/get-section-changes",
+            "https://www.vaquill.ai/docs/api-reference/us-statutes/get-this-sections-change-history",
         categories: ["legal-research"],
         notes: [
             "An empty `changes` list means no change observed within the " +

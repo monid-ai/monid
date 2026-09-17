@@ -35,14 +35,19 @@ export default defineProvider({
             "the equivalent provision in other states. Sourced from " +
             "official government publishers only.",
         homepageUrl: "https://www.vaquill.ai",
-        docsUrl: "https://www.vaquill.ai/docs/api-reference",
+        docsUrl: "https://www.vaquill.ai/docs/api-guide/quickstart",
         categories: ["legal-research"],
         notes: [
             "United States law only.",
             "Every response reports its own charge on `creditsConsumed`, " +
             "and that figure settles the bill. Read it rather than " +
-            "multiplying a list price: a lookup that finds nothing, or a " +
-            "row whose text cannot be resolved, is refunded and bills 0.",
+            "multiplying a list price.",
+            "Most lookups refund an empty answer: an unmatched cross-state " +
+            "comparison, an empty count or browse level, a section nothing " +
+            "cites, a chapter that defines nothing, and a batch row whose " +
+            "text cannot be resolved all bill 0. `#resolve` is the " +
+            "exception and bills every citation submitted, because there " +
+            "the lookup IS the work.",
             "Section identifiers (`actId`) are stable and hierarchical, so " +
             "a hit from search feeds straight into every section endpoint " +
             "with no second lookup.",

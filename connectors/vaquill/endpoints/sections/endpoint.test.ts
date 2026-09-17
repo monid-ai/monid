@@ -104,3 +104,30 @@ Deno.test({
         );
     },
 });
+
+Deno.test(`${ID} estimate counts DISTINCT actIds, because the vendor collapses duplicates before pricing`, async () => {
+    const unit = await testSealedUnit(ID);
+    // verified live: three copies of one actId return count 1 and bill 2
+    assertEquals(
+        await estimateEndpoint(unit, {
+            body: {
+                actIds: [
+                    "USC_T42_C21_S1983",
+                    "USC_T42_C21_S1983",
+                    "USC_T42_C21_S1983",
+                ],
+            },
+        }),
+        { credits: { default: 2 }, evidence: { section: 1 } },
+    );
+    // the body line rides the same distinct count
+    assertEquals(
+        await estimateEndpoint(unit, {
+            body: {
+                actIds: ["USC_T42_C21_S1983", "USC_T42_C21_S1983"],
+                includeBody: true,
+            },
+        }),
+        { credits: { default: 8 }, evidence: { section: 1, body: 1 } },
+    );
+});

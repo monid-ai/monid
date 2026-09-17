@@ -27,7 +27,7 @@ export default defineEndpoint({
             "with `nextCursor`, and a level that does not exist is " +
             "refunded.",
         docsUrl:
-            "https://www.vaquill.ai/docs/api-reference/statutes/list-divisions",
+            "https://www.vaquill.ai/docs/api-reference/us-statutes/browse-the-statutory-hierarchy",
         categories: ["legal-research"],
     },
     request: { method: "GET", path: "/us/statutes/divisions" },

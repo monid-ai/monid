@@ -24,7 +24,7 @@ export default defineEndpoint({
             "the same for four terms or forty; a section whose chapter " +
             "defines nothing is refunded.",
         docsUrl:
-            "https://www.vaquill.ai/docs/api-reference/statutes/get-section-definitions",
+            "https://www.vaquill.ai/docs/api-reference/us-statutes/get-the-defined-terms-that-govern-this-section",
         categories: ["legal-research"],
     },
     request: {

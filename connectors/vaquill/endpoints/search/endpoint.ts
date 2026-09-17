@@ -33,7 +33,7 @@ export default defineEndpoint({
             "inline instead of a second call per hit, and name `fields` to " +
             "cut a 140-field row down to what you actually read.",
         docsUrl:
-            "https://www.vaquill.ai/docs/api-reference/statutes/search-statutes",
+            "https://www.vaquill.ai/docs/api-reference/us-statutes/search-us-statutes-constitutions-court-rules-and-executive-actions",
         categories: ["legal-research"],
         notes: [
             "`offset` + `limit` reaches 120 results at most. A query that " +

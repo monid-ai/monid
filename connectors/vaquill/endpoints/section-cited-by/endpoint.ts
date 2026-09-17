@@ -22,7 +22,7 @@ export default defineEndpoint({
             "same whatever the citer count; a section nothing cites is " +
             "refunded.",
         docsUrl:
-            "https://www.vaquill.ai/docs/api-reference/statutes/get-section-cited-by",
+            "https://www.vaquill.ai/docs/api-reference/us-statutes/find-the-sections-that-cite-this-one",
         categories: ["legal-research"],
     },
     request: { method: "GET", path: "/us/statutes/section/{act_id}/cited-by" },

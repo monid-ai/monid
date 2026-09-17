@@ -27,7 +27,8 @@ export const zActIdPathParams = z.object({
     ),
 });
 
-/** The full corpus vocabulary, as `search` and `count` accept it. */
+/** The 21 corpora `search` and `count` accept. `divisions` and `resolve`
+ *  take narrower vocabularies of their own, declared in their own folders. */
 export const zCorpusType = z.enum([
     "USC",
     "CFR",

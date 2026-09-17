@@ -22,7 +22,7 @@ export default defineEndpoint({
             "whether the count is exact and echoes the scope it counted. " +
             "A scope that holds nothing is refunded.",
         docsUrl:
-            "https://www.vaquill.ai/docs/api-reference/statutes/count-sections",
+            "https://www.vaquill.ai/docs/api-reference/us-statutes/count-the-sections-in-a-scope",
         categories: ["legal-research"],
     },
     request: { method: "POST", path: "/us/statutes/count" },

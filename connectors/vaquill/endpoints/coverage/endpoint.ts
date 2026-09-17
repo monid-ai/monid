@@ -18,7 +18,7 @@ export default defineEndpoint({
             "whether an empty search result means the law says nothing or " +
             "means we do not carry that corpus. Takes no parameters.",
         docsUrl:
-            "https://www.vaquill.ai/docs/api-reference/statutes/get-coverage",
+            "https://www.vaquill.ai/docs/api-reference/us-statutes/coverage-matrix-by-jurisdiction-and-corpustype",
         categories: ["legal-research"],
     },
     request: { method: "GET", path: "/us/statutes/coverage" },

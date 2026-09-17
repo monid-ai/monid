@@ -198,8 +198,11 @@ schema.
 #### Scenario: The one response with no meter
 
 - **WHEN** `#coverage` returns its matrix
-- **THEN** the body carries no `creditsConsumed` at all, the claim is
-  omitted, and usage is `{credits: {}, evidence: {}}`
+- **THEN** the body carries no TOP-LEVEL `creditsConsumed`, so the claim is
+  omitted and usage is `{credits: {}, evidence: {}}`
+- **AND** the `meta.creditsConsumed: 0` this endpoint reports one level down
+  survives the exact `pluck` untouched, as documented response data saying
+  the call was free
 
 ### Requirement: Every endpoint stays on the documented base url
 

@@ -24,7 +24,7 @@ export default defineEndpoint({
             "`includeBody` to pull each section's full text inline rather " +
             "than making one body call per id.",
         docsUrl:
-            "https://www.vaquill.ai/docs/api-reference/statutes/get-sections-batch",
+            "https://www.vaquill.ai/docs/api-reference/us-statutes/get-metadata-for-many-statute-sections",
         categories: ["legal-research"],
     },
     request: { method: "POST", path: "/us/statutes/sections" },
@@ -62,7 +62,11 @@ export default defineEndpoint({
          *  estimate assumes every id resolves. A batch with misses settles
          *  BELOW this, never above. */
         estimate: ({ data }) => {
-            const asked = data.input.body.actIds.length;
+            // DISTINCT ids: the vendor collapses duplicates before pricing,
+            // so three copies of one actId bill 2, not 6 (verified live).
+            // `Set` is not a whitelisted closed-term global.
+            const ids = data.input.body.actIds;
+            const asked = ids.filter((id, at) => ids.indexOf(id) === at).length;
             return {
                 counts: {
                     section: asked,

@@ -23,7 +23,7 @@ export default defineEndpoint({
             "`/us/statutes/sections`, which is cheaper per section than " +
             "looping this one.",
         docsUrl:
-            "https://www.vaquill.ai/docs/api-reference/statutes/get-section",
+            "https://www.vaquill.ai/docs/api-reference/us-statutes/get-statute-section-metadata",
         categories: ["legal-research"],
     },
     request: { method: "GET", path: "/us/statutes/section/{act_id}" },

@@ -105,3 +105,23 @@ Deno.test({
         );
     },
 });
+
+Deno.test(`${ID} estimate counts DISTINCT citations, because the vendor collapses duplicates before pricing`, async () => {
+    const unit = await testSealedUnit(ID);
+    // sixty copies of one citation is one lookup. Verified live: that
+    // request returns 200 and bills 2, so promising 120 would be wrong by
+    // a factor of sixty.
+    assertEquals(
+        await estimateEndpoint(unit, {
+            body: { citations: new Array(60).fill("42 U.S.C. 1983") },
+        }),
+        { credits: { default: 2 }, evidence: { RESULT: 1 } },
+    );
+    // and distinct citations still count individually
+    assertEquals(
+        await estimateEndpoint(unit, {
+            body: { citations: ["42 U.S.C. 1983", "17 U.S.C. 107"] },
+        }),
+        { credits: { default: 4 }, evidence: { RESULT: 2 } },
+    );
+});

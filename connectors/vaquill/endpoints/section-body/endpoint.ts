@@ -24,13 +24,19 @@ export default defineEndpoint({
             "The response carries the source URL and publisher credit " +
             "alongside the text.",
         docsUrl:
-            "https://www.vaquill.ai/docs/api-reference/statutes/get-section-body",
+            "https://www.vaquill.ai/docs/api-reference/us-statutes/get-statute-full-text",
         categories: ["legal-research"],
         notes: [
-            "`asOf` is reconstructed from observed changes, so its " +
-            "`isBounded` flag matters: true means we saw no change " +
-            "affecting that date, which is weaker than there having " +
-            "been none.",
+            "Read `asOf.engine` before trusting `asOf.isBounded`, because " +
+            "the flag means a different thing under each engine. Under " +
+            "`stored_edition` the answer comes from published editions " +
+            "served verbatim, and a date before the earliest edition, or " +
+            "between two of them, is reported out of coverage rather than " +
+            "interpolated from a neighbour. Under `observed_change` the " +
+            "text is rebuilt from the before-side of the first change we " +
+            "observed after your date, so `isBounded: true` means only " +
+            "that no affecting change was observed, which is weaker than " +
+            "there having been none.",
         ],
     },
     request: { method: "GET", path: "/us/statutes/section/{act_id}/body" },

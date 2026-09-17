@@ -30,7 +30,7 @@ export default defineEndpoint({
             "matches. Priced the same whether it finds three states or " +
             "twenty; a section with no equivalents at all is refunded.",
         docsUrl:
-            "https://www.vaquill.ai/docs/api-reference/statutes/get-section-cross-state",
+            "https://www.vaquill.ai/docs/api-reference/us-statutes/compare-this-provision-against-other-states",
         categories: ["legal-research"],
     },
     request: {

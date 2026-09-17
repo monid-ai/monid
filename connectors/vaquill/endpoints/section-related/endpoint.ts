@@ -19,7 +19,7 @@ export default defineEndpoint({
             "definition, the exception or the penalty that changes how the " +
             "one you found reads. Costs the same whatever the window.",
         docsUrl:
-            "https://www.vaquill.ai/docs/api-reference/statutes/get-section-neighbors",
+            "https://www.vaquill.ai/docs/api-reference/us-statutes/get-the-sections-around-this-one",
         categories: ["legal-research"],
     },
     request: { method: "GET", path: "/us/statutes/section/{act_id}/related" },

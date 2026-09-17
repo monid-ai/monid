@@ -28,7 +28,7 @@ export default defineEndpoint({
             "brief, a contract or a model's output becomes something you " +
             "can fetch the text of and check the status of.",
         docsUrl:
-            "https://www.vaquill.ai/docs/api-reference/statutes/resolve-citations-batch",
+            "https://www.vaquill.ai/docs/api-reference/us-statutes/resolve-many-citations-at-once",
         categories: ["legal-research"],
         notes: [
             "A citation that resolves to nothing is still billed: the " +
@@ -49,11 +49,21 @@ export default defineEndpoint({
             consumes: { credit: "default", amount: 2 },
             label: "citations",
         },
-        /** The submitted list, which is the ceiling: duplicates collapse
-         *  before billing, so a list with repeats settles below this. */
-        estimate: ({ data }) => ({
-            counts: { RESULT: data.input.body.citations.length },
-        }),
+        /** DISTINCT citations. The vendor collapses duplicates BEFORE it
+         *  prices the batch, so counting the raw list would promise 120
+         *  credits for sixty copies of one citation that bill 2 (verified
+         *  live). `Set` is not a whitelisted closed-term global, so the
+         *  distinct count is an indexOf filter over the array itself. */
+        estimate: ({ data }) => {
+            const cites = data.input.body.citations;
+            return {
+                counts: {
+                    RESULT: cites.filter((cite, at) =>
+                        cites.indexOf(cite) === at
+                    ).length,
+                },
+            };
+        },
         /** `results` IS the de-duplicated input, one row per citation
          *  whether or not it resolved, which is the billable count. `resolvedCount`
          *  is the hit rate and would under-bill. */
