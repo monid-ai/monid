@@ -90,8 +90,10 @@ Deno.test({
         );
         assertEquals(typeof result.usage.evidence.rows, "number");
         assertEquals(
-            typeof (result.output as Record<string, unknown>).metrics,
-            "object",
+            Object.prototype.toString.call(
+                (result.output as Record<string, unknown>).metrics,
+            ),
+            "[object Object]",
             JSON.stringify(result.output),
         );
     },
