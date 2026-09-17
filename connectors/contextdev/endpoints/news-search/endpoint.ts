@@ -45,7 +45,7 @@ export default defineEndpoint({
         estimate: ({ data }) => ({ counts: { RESULT: data.input.body.limit } }),
         evidence: ({ data, utils }) => ({
             counts: {
-                RESULT: utils.json.optionalLen(data.output, "$.data") ?? 0,
+                RESULT: utils.json.len(data.output, "$.data"),
             },
         }),
     },

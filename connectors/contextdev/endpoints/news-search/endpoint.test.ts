@@ -51,6 +51,17 @@ Deno.test(`${ID} empty (synthetic): no articles, no charge`, async () => {
     assertEquals(result.usage, { credits: {}, evidence: { RESULT: 0 } });
 });
 
+Deno.test(`${ID}: a 200 without data fails instead of settling zero`, async () => {
+    const unit = await testSealedUnit(ID);
+    const fixture = await loadFixture(`${fixturesDir}synthetic-happy.json`);
+    delete (fixture.calls[0].res.body as Record<string, Json>).data;
+    await assertRejects(
+        () => runEndpoint({ unit, input: INPUT, mode: "replay", fixture }),
+        Error,
+        "$.data",
+    );
+});
+
 Deno.test(`${ID} provider error (synthetic 404 unresolved company): zero usage`, async () => {
     const unit = await testSealedUnit(ID);
     const fixture = await loadFixture(
