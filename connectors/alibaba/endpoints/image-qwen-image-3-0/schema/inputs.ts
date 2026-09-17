@@ -12,7 +12,8 @@ import {
  * `{input: {messages}, parameters}` envelope, `model` injected at the wire
  * (D2). Live docs https://www.alibabacloud.com/help/en/model-studio/qwen-image-generation-and-editing-api-reference,
  * read 2026-09-16. `size` is optional upstream (the model recommends one)
- * but REQUIRED at the binding — it selects the output price tier.
+ * but REQUIRED at the binding so the doc reads like its pro sibling; unlike
+ * the pro model, the price does not vary by size.
  */
 export const zQwenImage30Body = z.object({
     input: z.object({
@@ -32,11 +33,10 @@ export const zQwenImage30Body = z.object({
             .string()
             .regex(/^\d+\*\d+$/)
             .describe(
-                'Output resolution "width*height" — also the output price ' +
-                    "tier: at most 2,250,000 total pixels (e.g. 1024*1024, " +
-                    "1500*1500) is the 1K tier, above it (e.g. 2048*2048) " +
-                    "the 2K tier. Total pixels 512*512 to 2048*2048, " +
-                    "aspect ratio 1:8 to 8:1.",
+                'Output resolution "width*height". Total pixels 512*512 ' +
+                    "to 2048*2048, aspect ratio 1:8 to 8:1. The price does " +
+                    "not vary by size (DashScope lists a 1K and a 2K row " +
+                    "for this model at the same rate).",
             )
             .optional(),
         n: z

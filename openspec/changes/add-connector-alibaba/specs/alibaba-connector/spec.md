@@ -47,7 +47,8 @@ no async header. No endpoint SHALL declare `lifecycle.stop`.
 
 #### Scenario: An image call settles in one exchange
 - **WHEN** the blocking call returns 2xx with a clean envelope
-- **THEN** the run COMPLETES with httpStatus 200 and one attempt
+- **THEN** the run COMPLETES with httpStatus 200 in that single HTTP exchange,
+  with zero poll attempts stamped
 
 #### Scenario: The async header is on the video path only
 - **WHEN** the compiled docs are inspected

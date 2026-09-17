@@ -359,6 +359,8 @@ Deno.test("alibaba qwen: the blocking call settles both lines; the output tier f
             Json
         >;
         assertEquals(usage.output_image_count, 1, id);
+        // …and the delivered images match the fixture: one
+        assertEquals(deliveredImages(result.output).length, 1, id);
     }
     // 2048*2048 is above 2,250,000 px: the pro doc bills the 2K line from
     // the request, whatever the response echoes
@@ -401,8 +403,21 @@ Deno.test("alibaba wan image: bills the images actually generated and strips the
         // …the billing basis stays
         assertEquals(usage.image_count, 2, id);
         assertEquals(usage.size, "1488*704", id);
+        // …and the delivered images match the fixture: two
+        assertEquals(deliveredImages(result.output).length, 2, id);
     }
 });
+
+/** The image URLs a DashScope image envelope delivers:
+ *  `output.choices[0].message.content[*].image`. */
+function deliveredImages(output: Json): string[] {
+    const out = (output as Record<string, Json>).output as Record<string, Json>;
+    const choices = out.choices as Record<string, Json>[];
+    const message = choices[0].message as Record<string, Json>;
+    return (message.content as Record<string, Json>[])
+        .map((part) => part.image)
+        .filter((image): image is string => typeof image === "string");
+}
 
 /** Estimates are PURE — a transport that rejects proves no IO happens. */
 async function estimateFor(id: string, body: Json) {
