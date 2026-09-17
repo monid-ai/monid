@@ -19,7 +19,7 @@ export default defineEndpoint({
             "classification) is a 5-credit call upstream and is not " +
             "surfaced by this integration; if Context.dev ever bills " +
             "more than the list rate, the vendor's credits_consumed " +
-            "claim settles the run (v1 note, carried).",
+            "claim settles the run.",
         ],
     },
     request: { method: "GET", path: "/web/scrape/images" },

@@ -19,10 +19,8 @@ export default defineEndpoint({
             "https://docs.context.dev/api-reference/brand-intelligence/search",
         categories: ["company-enrichment"],
         notes: [
-            "Free on the plan Monid buys on - the vendor bills 1 credit " +
-            "only on its Free and Starter plans (measured " +
-            "credits_consumed is 0). Rate-limited like every other " +
-            "endpoint (v1 note, carried).",
+            "Free on this integration's plan tier. Rate-limited like " +
+            "every other endpoint.",
         ],
     },
     request: { method: "GET", path: "/brand/search" },

@@ -41,7 +41,7 @@ export default defineEndpoint({
             "unused portion at settle. Pass an explicit duration for a " +
             "tight hold.",
             "Generation typically takes 1-5 minutes; long or complex " +
-            "requests can take 15+ minutes (v1 note, carried).",
+            "requests can take 15+ minutes.",
         ],
     },
     /** PUBLIC identity: v1's published id. Pinned because all six Wan video

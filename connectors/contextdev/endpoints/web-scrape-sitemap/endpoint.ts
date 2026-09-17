@@ -18,8 +18,7 @@ export default defineEndpoint({
         categories: ["web-extraction"],
         notes: [
             "A crawl with the 'search' filter costs 2 credits instead " +
-            "of 1 (live-confirmed 2026-09-16: vendor claim 2 on a " +
-            "searched crawl, 1 plain).",
+            "of 1.",
         ],
     },
     request: { method: "GET", path: "/web/scrape/sitemap" },

@@ -35,8 +35,8 @@ export default defineEndpoint({
             "/onchain/sql/preflight. Refresh: ~24h.",
         categories: ["onchain-data"],
         notes: [
-            "Billed once at SUBMIT (4 credits) - status polls and the " +
-            "result download are free (measured 2026-08-04).",
+            "Billed once at submit (4 credits) - status polls and the " +
+            "result download are free.",
         ],
     },
     request: { method: "POST", path: "/onchain/sql/jobs" },

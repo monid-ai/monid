@@ -41,7 +41,7 @@ export default defineEndpoint({
             "seconds, the input side capped at 5 s; the estimate holds " +
             "the requested OUTPUT seconds only.",
             "Generation typically takes 1-5 minutes; long or complex " +
-            "requests can take 15+ minutes (v1 note, carried).",
+            "requests can take 15+ minutes.",
         ],
     },
     /** PUBLIC identity: v1's published id (design D1). */

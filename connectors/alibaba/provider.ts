@@ -243,8 +243,6 @@ export default defineProvider({
                 "input_tokens",
                 "output_tokens",
                 "total_tokens",
-                // v1 stripped this 4th usage counter too (WAN_IMAGE_STRIP_
-                // USAGE) — restored in the 2026-09-16 reconcile
                 "characters",
             ]),
     },

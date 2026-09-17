@@ -37,7 +37,7 @@ export default defineEndpoint({
             "the total), so a 15 s continuation of a 3 s clip bills 15 " +
             "seconds.",
             "Generation typically takes 1-5 minutes; long or complex " +
-            "requests can take 15+ minutes (v1 note, carried).",
+            "requests can take 15+ minutes.",
         ],
     },
     /** PUBLIC identity: v1's published id (design D1). */

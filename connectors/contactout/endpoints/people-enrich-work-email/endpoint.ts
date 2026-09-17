@@ -30,10 +30,9 @@ export default defineEndpoint({
         categories: ["people-enrichment"],
         notes: [
             PEOPLE_ENRICH_IDENTIFIER_NOTE,
-            "Billed per match: every matched profile draws one search " +
-            "credit; a returned work email adds one email credit and a " +
-            "returned phone number one phone credit. A 404 miss costs " +
-            "nothing.",
+            "Billed per match: one search credit each, plus one email " +
+            "credit per work email and one phone credit per phone number " +
+            "returned. A 404 miss costs nothing.",
         ],
     },
     endpoint: "/v1/people/enrich/work-email",

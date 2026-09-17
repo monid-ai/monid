@@ -67,8 +67,7 @@ export default defineProvider({
             "Rowed reports return at most 100 rows per request (plan cap); " +
             "state the row budget with limit — it is what the hold is priced " +
             "from.",
-            "Ahrefs API keys expire after ONE YEAR — key rotation is a " +
-            "standing operations calendar item (v1 ops fact, carried).",
+            "Ahrefs API keys expire after one year and must be rotated.",
         ],
     },
     auth: { inject: presets.auth.bearer() },

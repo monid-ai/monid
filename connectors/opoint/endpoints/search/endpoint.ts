@@ -29,8 +29,7 @@ export default defineEndpoint({
         docsUrl: "https://api-docs.opoint.com/references/search-request",
         categories: ["news-search"],
         notes: [
-            "An empty result set still consumes one Search API call - " +
-            "the vendor's band counts the request regardless of hits.",
+            "Zero-hit searches still bill one call.",
         ],
     },
     /** PUBLIC identity (design D22): all four searches relay to the ONE

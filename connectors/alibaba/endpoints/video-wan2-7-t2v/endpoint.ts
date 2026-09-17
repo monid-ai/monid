@@ -32,7 +32,7 @@ export default defineEndpoint({
             "Billed per second of OUTPUT video at the selected resolution; " +
             "a driving audio input is free.",
             "Generation typically takes 1-5 minutes; long or complex " +
-            "requests can take 15+ minutes (v1 note, carried).",
+            "requests can take 15+ minutes.",
         ],
     },
     /** PUBLIC identity: v1's published id (design D1). */
