@@ -1,7 +1,6 @@
 import { defineEndpoint, UsageModelKind } from "@shared/core";
 import { zNaicsQueryParams } from "./schema/inputs.ts";
 
-/** GET /web/naics — a brand resolved to 2022 NAICS codes. */
 export default defineEndpoint({
     meta: {
         displayName: "NAICS Classification",

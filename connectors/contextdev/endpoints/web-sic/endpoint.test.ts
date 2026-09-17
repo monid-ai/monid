@@ -66,10 +66,11 @@ Deno.test(`${ID}: the compiled schema gates the dataset and the code bounds`, as
     ) {
         await assertRejects(() => run(bad), Error, "INVALID_INPUT");
     }
-    const error = await assertRejects(() =>
-        run({ input: "stripe.com", type: "original_sic", minResults: 1 })
+    await assertRejects(
+        () => run({ input: "stripe.com", type: "original_sic", minResults: 1 }),
+        Error,
+        "replay(",
     );
-    assertEquals(String(error).includes("INVALID_INPUT"), false, String(error));
 });
 
 Deno.test({
@@ -88,5 +89,10 @@ Deno.test({
             JSON.stringify(result.output),
         );
         assertEquals(Object.keys(result.usage.evidence), ["CALL"]);
+        assertEquals(
+            Array.isArray((result.output as Record<string, unknown>).codes),
+            true,
+            JSON.stringify(result.output),
+        );
     },
 });

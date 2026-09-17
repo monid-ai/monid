@@ -45,6 +45,17 @@ Deno.test(`${ID} empty (synthetic): no results, no charge`, async () => {
     assertEquals(result.usage, { credits: {}, evidence: { RESULT: 0 } });
 });
 
+Deno.test(`${ID}: a 200 without results fails instead of settling zero`, async () => {
+    const unit = await testSealedUnit(ID);
+    const fixture = await loadFixture(`${fixturesDir}synthetic-happy.json`);
+    delete (fixture.calls[0].res.body as Record<string, Json>).results;
+    await assertRejects(
+        () => runEndpoint({ unit, input: INPUT, mode: "replay", fixture }),
+        Error,
+        "$.results",
+    );
+});
+
 Deno.test(`${ID} provider error (synthetic 429): zero usage`, async () => {
     const unit = await testSealedUnit(ID);
     const fixture = await loadFixture(
@@ -77,6 +88,8 @@ Deno.test(`${ID}: numResults is required and bounded; the body is strict`, async
             { query: "context dev api", numResults: 9 },
             { query: "context dev api", numResults: 10, freshness: "today" },
             { query: "context dev api", numResults: 10, tags: ["x"] },
+            // a proxy-exit country the search list does not carry
+            { query: "context dev api", numResults: 10, country: "bq" },
             {
                 query: "context dev api",
                 numResults: 10,
@@ -113,5 +126,10 @@ Deno.test({
             JSON.stringify(result.output),
         );
         assertEquals(Object.keys(result.usage.evidence), ["RESULT"]);
+        assertEquals(
+            Array.isArray((result.output as Record<string, unknown>).results),
+            true,
+            JSON.stringify(result.output),
+        );
     },
 });

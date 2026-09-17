@@ -68,10 +68,11 @@ Deno.test(`${ID}: the compiled schema gates the query and queryBy`, async () => 
     ) {
         await assertRejects(() => run(bad), Error, "INVALID_INPUT");
     }
-    const error = await assertRejects(() =>
-        run({ query: "nike", queryBy: ["domain"], typoTolerance: 2 })
+    await assertRejects(
+        () => run({ query: "nike", queryBy: ["domain"], typoTolerance: 2 }),
+        Error,
+        "replay(",
     );
-    assertEquals(String(error).includes("INVALID_INPUT"), false, String(error));
 });
 
 Deno.test({
@@ -94,5 +95,10 @@ Deno.test({
             (result.output as { results: Record<string, unknown>[] })
                 .results;
         assertEquals(results.some((entry) => "logo" in entry), false);
+        assertEquals(
+            Array.isArray((result.output as Record<string, unknown>).results),
+            true,
+            JSON.stringify(result.output),
+        );
     },
 });

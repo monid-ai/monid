@@ -54,7 +54,10 @@ export const zExtractBody = z.object({
         "Include iframe contents in the Markdown handed to the extractor. " +
             "Default false.",
     ).optional(),
-    maxAgeMs: zScrapeMaxAgeMs.optional(),
+    maxAgeMs: zScrapeMaxAgeMs.describe(
+        "Reuse cached scrape results younger than this many milliseconds. " +
+            "Default 604800000 (7 days), max 2592000000 (30 days).",
+    ).optional(),
     waitForMs: zWaitForMs.optional(),
     settleAnimations: z.boolean().describe(
         "Wait briefly for animations to settle before each page is read. " +

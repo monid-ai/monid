@@ -71,10 +71,11 @@ Deno.test(`${ID}: the compiled schema gates the url and the options`, async () =
     ) {
         await assertRejects(() => run(bad), Error, "INVALID_INPUT");
     }
-    const error = await assertRejects(() =>
-        run({ url: "https://example.com", maxAgeMs: 2592000000 })
+    await assertRejects(
+        () => run({ url: "https://example.com", maxAgeMs: 2592000000 }),
+        Error,
+        "replay(",
     );
-    assertEquals(String(error).includes("INVALID_INPUT"), false, String(error));
 });
 
 Deno.test({
@@ -93,5 +94,10 @@ Deno.test({
             JSON.stringify(result.output),
         );
         assertEquals(Object.keys(result.usage.evidence), ["CALL"]);
+        assertEquals(
+            typeof (result.output as Record<string, unknown>).html,
+            "string",
+            JSON.stringify(result.output),
+        );
     },
 });

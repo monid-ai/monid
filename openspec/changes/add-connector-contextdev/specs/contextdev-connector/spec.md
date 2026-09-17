@@ -47,8 +47,8 @@ from `raw`.
   `key_metadata`
 
 ### Requirement: Metered lines count what the vendor bills
-`web/crawl` SHALL bill per page (`metadata.numSucceeded`, else the
-delivered `results[]`); `web/search` and `news/search` SHALL bill one credit
+`web/crawl` SHALL bill per page (`metadata.numSucceeded`, a strict read —
+`results[]` also lists failed pages); `web/search` and `news/search` SHALL bill one credit
 per block of ten delivered results (`every: 10`); `people/enrich` SHALL bill
 per candidate (`match.status === "candidate"`); `web/scrape/sitemap` SHALL
 add one credit when the request carries `search`. `maxPages`, `numResults`

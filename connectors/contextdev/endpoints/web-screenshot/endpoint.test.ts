@@ -65,6 +65,7 @@ Deno.test(`${ID}: a domain or a directUrl is required; viewport stays closed`, a
             { domain: "example.com", page: "home" },
             { domain: "example.com", viewport: { width: 1280, height: 720 } },
             { directUrl: "example.com/pricing" },
+            { domain: "example.com", directUrl: "https://example.com/pricing" },
         ]
     ) {
         await assertRejects(() => run(bad), Error, "INVALID_INPUT");
@@ -78,12 +79,7 @@ Deno.test(`${ID}: a domain or a directUrl is required; viewport stays closed`, a
             { domain: "example.com", page: "pricing", scrollOffset: 0 },
         ]
     ) {
-        const error = await assertRejects(() => run(good));
-        assertEquals(
-            String(error).includes("INVALID_INPUT"),
-            false,
-            String(error),
-        );
+        await assertRejects(() => run(good), Error, "replay(");
     }
 });
 
@@ -103,5 +99,10 @@ Deno.test({
             JSON.stringify(result.output),
         );
         assertEquals(Object.keys(result.usage.evidence), ["CALL"]);
+        assertEquals(
+            typeof (result.output as Record<string, unknown>).screenshot,
+            "string",
+            JSON.stringify(result.output),
+        );
     },
 });

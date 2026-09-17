@@ -2,7 +2,6 @@ import { z } from "zod";
 import { defineEndpoint, UsageModelKind } from "@shared/core";
 import { zStyleguideQueryParams } from "./schema/inputs.ts";
 
-/** GET /web/styleguide — a site's design system as structured data. */
 export default defineEndpoint({
     meta: {
         displayName: "Extract Styleguide",
@@ -21,12 +20,15 @@ export default defineEndpoint({
         categories: ["web-extraction"],
     },
     request: { method: "GET", path: "/web/styleguide" },
-    // "domain or directUrl" bound as a union (clay D13; v1 `.refine`).
+    // "domain or directUrl, but not both": each arm omits the other
+    // selector, so both together match neither arm (clay D13; v1 `.refine`).
     input: {
         schema: {
             queryParams: z.union([
-                zStyleguideQueryParams.required({ domain: true }),
-                zStyleguideQueryParams.required({ directUrl: true }),
+                zStyleguideQueryParams.omit({ directUrl: true })
+                    .required({ domain: true }),
+                zStyleguideQueryParams.omit({ domain: true })
+                    .required({ directUrl: true }),
             ]).describe("Provide a domain or a directUrl."),
         },
     },

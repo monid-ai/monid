@@ -1,7 +1,6 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zSearchBody } from "./schema/inputs.ts";
 
-/** POST /web/search — web search, optionally scraping each result inline. */
 export default defineEndpoint({
     meta: {
         displayName: "Web Search",
@@ -30,7 +29,7 @@ export default defineEndpoint({
     input: { schema: { body: zSearchBody.required({ numResults: true }) } },
     // search alone is fast; with markdownOptions.enabled it scrapes every
     // result in the same call (v1's budget)
-    timeouts: { requestMs: 120_000, runMs: 120_000 },
+    timeouts: { requestMs: 310_000, runMs: 310_000 },
     usage: {
         /** 1 credit per 10 results — https://www.context.dev/pricing
          *  (2026-09-17, "1 / ten_results"), a BLOCK rate the vendor's own
@@ -49,7 +48,7 @@ export default defineEndpoint({
         }),
         evidence: ({ data, utils }) => ({
             counts: {
-                RESULT: utils.json.optionalLen(data.output, "$.results") ?? 0,
+                RESULT: utils.json.len(data.output, "$.results"),
             },
         }),
     },

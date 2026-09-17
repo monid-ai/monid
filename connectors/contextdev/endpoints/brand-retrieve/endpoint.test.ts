@@ -134,5 +134,10 @@ Deno.test({
             JSON.stringify(result.output),
         );
         assertEquals(Object.keys(result.usage.evidence), ["CALL"]);
+        assertEquals(
+            typeof (result.output as Record<string, unknown>).brand,
+            "object",
+            JSON.stringify(result.output),
+        );
     },
 });

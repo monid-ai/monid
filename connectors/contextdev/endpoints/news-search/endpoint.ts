@@ -1,7 +1,6 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zNewsSearchBody } from "./schema/inputs.ts";
 
-/** POST /news/search — live + historical company news for ONE company. */
 export default defineEndpoint({
     meta: {
         displayName: "Search Company News",

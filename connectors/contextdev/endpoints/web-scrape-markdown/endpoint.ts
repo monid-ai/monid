@@ -1,7 +1,6 @@
 import { defineEndpoint, UsageModelKind } from "@shared/core";
 import { zScrapeMarkdownQueryParams } from "./schema/inputs.ts";
 
-/** GET /web/scrape/markdown — one URL to clean, LLM-ready Markdown. */
 export default defineEndpoint({
     meta: {
         displayName: "Scrape Markdown",

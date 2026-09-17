@@ -1,7 +1,6 @@
 import { defineEndpoint, UsageModelKind } from "@shared/core";
 import { zProductsBody } from "./schema/inputs.ts";
 
-/** POST /brand/ai/products — a brand site to its product catalog. */
 export default defineEndpoint({
     meta: {
         displayName: "Extract Products",
@@ -25,7 +24,7 @@ export default defineEndpoint({
     },
     request: { method: "POST", path: "/brand/ai/products" },
     input: { schema: { body: zProductsBody } },
-    timeouts: { requestMs: 150_000, runMs: 150_000 },
+    timeouts: { requestMs: 310_000, runMs: 310_000 },
     usage: {
         /** 10 credits per call, however many products —
          *  https://www.context.dev/pricing (2026-09-17). */

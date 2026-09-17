@@ -173,6 +173,16 @@ Deno.test("contextdev: every endpoint's happy run settles its published draw and
     }
 });
 
+Deno.test("contextdev: an endpoint that takes timeoutOpts outlives the vendor's 300s deadline", async () => {
+    const bundle = await testBundle();
+    const short = (await contextdevIds()).filter((id) => {
+        const { input, timeouts } = bundle.endpoints[id];
+        return JSON.stringify(input.schema).includes('"timeoutOpts"') &&
+            Math.min(timeouts.requestMs, timeouts.runMs) <= 300_000;
+    });
+    assertEquals(short, []);
+});
+
 Deno.test("contextdev: a body without the envelope settles the derived fold", async () => {
     const id = "contextdev#web/scrape/markdown";
     const unit = await testSealedUnit(id);

@@ -97,5 +97,10 @@ Deno.test({
             JSON.stringify(result.output),
         );
         assertEquals(Object.keys(result.usage.evidence), ["CALL"]);
+        assertEquals(
+            Array.isArray((result.output as Record<string, unknown>).products),
+            true,
+            JSON.stringify(result.output),
+        );
     },
 });

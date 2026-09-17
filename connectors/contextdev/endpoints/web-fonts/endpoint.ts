@@ -2,7 +2,6 @@ import { z } from "zod";
 import { defineEndpoint, UsageModelKind } from "@shared/core";
 import { zFontsQueryParams } from "./schema/inputs.ts";
 
-/** GET /web/fonts — the typography a site uses. */
 export default defineEndpoint({
     meta: {
         displayName: "Scrape Fonts",
@@ -18,12 +17,15 @@ export default defineEndpoint({
         categories: ["web-extraction"],
     },
     request: { method: "GET", path: "/web/fonts" },
-    // "domain or directUrl" bound as a union (clay D13; v1 `.refine`).
+    // "domain or directUrl, but not both": each arm omits the other
+    // selector, so both together match neither arm (clay D13; v1 `.refine`).
     input: {
         schema: {
             queryParams: z.union([
-                zFontsQueryParams.required({ domain: true }),
-                zFontsQueryParams.required({ directUrl: true }),
+                zFontsQueryParams.omit({ directUrl: true })
+                    .required({ domain: true }),
+                zFontsQueryParams.omit({ domain: true })
+                    .required({ directUrl: true }),
             ]).describe("Provide a domain or a directUrl."),
         },
     },

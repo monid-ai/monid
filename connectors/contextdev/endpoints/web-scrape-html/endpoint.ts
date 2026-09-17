@@ -1,7 +1,6 @@
 import { defineEndpoint, UsageModelKind } from "@shared/core";
 import { zScrapeHtmlQueryParams } from "./schema/inputs.ts";
 
-/** GET /web/scrape/html — the fully rendered DOM of a page. */
 export default defineEndpoint({
     meta: {
         displayName: "Scrape HTML",

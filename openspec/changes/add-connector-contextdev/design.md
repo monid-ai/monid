@@ -70,7 +70,8 @@ quota (v1 `brandSearchFormatOutput`).
 ## D5 — Metered lines count what the vendor bills; evidence is per endpoint
 
 - `web/crawl`: PER_UNIT·PAGE, evidence `metadata.numSucceeded` (failed and
-  skipped pages are free), falling back to `results.length`; the hold is
+  skipped pages are free), read strictly — the vendor marks it required
+  and `results[]` also lists the failed pages; the hold is
   the caller-stated `maxPages` (required at the binding, D25).
 - `web/search`, `news/search`: PER_UNIT·RESULT with `every: 10` — the
   card says "1 / ten_results" and v1's drills measured the block (9 → 1,
@@ -113,18 +114,24 @@ nothing here. Each is the vendor's own one-of, so it lives in the mirror
 `utility/prefetch` identifier two arms, `brand/ai/products` two arms) or,
 where the vendor declares every field optional, binds at the endpoint as
 `.required()` arms: `web/screenshot`, `web/fonts`, `web/styleguide`
-(domain | directUrl) and `people/enrich` (email | social_urls | name +
+(domain | directUrl, each arm `.omit()`s the other — the vendor says "but
+not both") and `people/enrich` (email | social_urls | name +
 company | name + education | name + location — the vendor's stated
-minimum-clue rule). All compile to `anyOf` with `additionalProperties:
-false` per arm; a body naming two keys where the vendor wants one passes
-the gate and is the vendor's free 400 (`oneOf` cannot be expressed —
-surf D4). The unions carry no `.default()` (contactout D7).
+minimum-clue rule; its clues are additive, so its arms keep every field).
+All compile to `anyOf` with `additionalProperties: false` per arm, so an
+input naming two selectors where the vendor wants exactly one matches no
+arm and fails the gate (surf D4). The unions carry no `.default()`
+(contactout D7).
 
-## D8 — Timeouts from v1
+## D8 — Timeouts
 
-Provider 60s / 60s (config.yml `context.dev`); v1's def overrides carried:
-crawl / extract / products 150s, search / screenshot / styleguide / product
-120s, scrape markdown `runMs` 300s.
+Provider 60s / 60s (config.yml `context.dev`). The eight endpoints that
+mirror `timeoutOpts` (brand retrieve, product, products, people enrich,
+prefetch, crawl, extract, search) run at 310s: the vendor accepts a caller deadline
+up to 300000 ms and bills a `return-partial` answer, so the transport must
+outlive it (`provider.test.ts` asserts the relation). v1's overrides are
+carried elsewhere: screenshot / styleguide 120s, scrape markdown `runMs`
+300s.
 
 ## D9 — v1 ↔ live mirror differences
 
@@ -140,7 +147,7 @@ crawl / extract / products 150s, search / screenshot / styleguide / product
 | news `sourceCountry`, `articleLanguage` | 26- / 13-value enums | free strings (max 3) | `^[a-z]{2}$` patterns |
 | news `cursor` | string ≤ 300 | string or null ≤ 300 | string ≤ 300 |
 | `timeoutMS` on every endpoint | present | gone; `timeoutOpts` object | `timeoutOpts` on POSTs only (D6) |
-| `country` | `length(2)` | ~200-value enums per endpoint | `^[a-z]{2}$` (the enums differ per endpoint) |
+| `country` | `length(2)` | 204-value `BrowserCountryCode` (html, markdown, crawl, screenshot); 239-value list on search | the vendor enums: shared `zCountry`, search keeps its own |
 | URLs (`url`, `directUrl`, `sitemapUrl`, `social_urls`) | `z.url()` | `format: uri` | `pattern ^https?://\S+$` |
 | emails (`by_email`, prefetch, people) | `z.email()` | `format: email` | a permissive email pattern |
 | extract `maxAgeMs` default | 1 day | 7 days | described as 7 days |

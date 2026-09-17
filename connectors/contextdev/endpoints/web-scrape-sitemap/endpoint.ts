@@ -1,7 +1,6 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zScrapeSitemapQueryParams } from "./schema/inputs.ts";
 
-/** GET /web/scrape/sitemap — every URL in a site's sitemap. */
 export default defineEndpoint({
     meta: {
         displayName: "Crawl Sitemap",

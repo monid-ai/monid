@@ -93,6 +93,7 @@ Deno.test(`${ID}: the compiled schema gates the url and the options`, async () =
             { url: "https://example.com", not_a_context_param: "x" },
             { url: "https://example.com", waitForMs: 30001 },
             { url: "https://example.com", country: "USA" },
+            { url: "https://example.com", country: "zz" },
             { url: "https://example.com", zdr: "on" },
         ]
     ) {
@@ -100,15 +101,17 @@ Deno.test(`${ID}: the compiled schema gates the url and the options`, async () =
     }
     // the near twin passes validation (it fails later, at replay URL
     // matching — proving the gate let it through)
-    const error = await assertRejects(() =>
-        run({
-            url: "http://example.com/docs",
-            waitForMs: 30000,
-            country: "us",
-            zdr: "enabled",
-        })
+    await assertRejects(
+        () =>
+            run({
+                url: "http://example.com/docs",
+                waitForMs: 30000,
+                country: "us",
+                zdr: "enabled",
+            }),
+        Error,
+        "replay(",
     );
-    assertEquals(String(error).includes("INVALID_INPUT"), false, String(error));
 });
 
 Deno.test({
@@ -130,6 +133,11 @@ Deno.test({
         assertEquals(
             "key_metadata" in (result.output as Record<string, unknown>),
             false,
+        );
+        assertEquals(
+            typeof (result.output as Record<string, unknown>).markdown,
+            "string",
+            JSON.stringify(result.output),
         );
     },
 });

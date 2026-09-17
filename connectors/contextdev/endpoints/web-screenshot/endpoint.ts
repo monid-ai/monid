@@ -2,7 +2,6 @@ import { z } from "zod";
 import { defineEndpoint, UsageModelKind } from "@shared/core";
 import { zScreenshotQueryParams } from "./schema/inputs.ts";
 
-/** GET /web/screenshot — a rendered capture of a page. */
 export default defineEndpoint({
     meta: {
         displayName: "Capture Screenshot",
@@ -25,14 +24,17 @@ export default defineEndpoint({
         notes: ["page is only valid together with domain."],
     },
     request: { method: "GET", path: "/web/screenshot" },
-    // "domain or directUrl" is the vendor's rule (each optional in its
-    // schema), bound as a union so it survives compilation as `anyOf`
-    // (clay D13); v1 enforced it with a `.refine`.
+    // "domain or directUrl, but not both" is the vendor's rule (each
+    // optional in its schema): each arm omits the other selector, so both
+    // together match neither arm of the compiled `anyOf` (clay D13); v1
+    // enforced it with a `.refine`.
     input: {
         schema: {
             queryParams: z.union([
-                zScreenshotQueryParams.required({ domain: true }),
-                zScreenshotQueryParams.required({ directUrl: true }),
+                zScreenshotQueryParams.omit({ directUrl: true })
+                    .required({ domain: true }),
+                zScreenshotQueryParams.omit({ domain: true })
+                    .required({ directUrl: true }),
             ]).describe("Provide a domain or a directUrl."),
         },
     },

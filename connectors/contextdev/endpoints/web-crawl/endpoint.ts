@@ -1,7 +1,6 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zCrawlBody } from "./schema/inputs.ts";
 
-/** POST /web/crawl — a website into one Markdown document per page. */
 export default defineEndpoint({
     meta: {
         displayName: "Crawl Website",
@@ -31,7 +30,7 @@ export default defineEndpoint({
     input: { schema: { body: zCrawlBody.required({ maxPages: true }) } },
     // a crawl runs until its own soft budget (stopAfterMs, max 110s)
     // expires; v1's headroom to return the pages collected so far
-    timeouts: { requestMs: 150_000, runMs: 150_000 },
+    timeouts: { requestMs: 310_000, runMs: 310_000 },
     usage: {
         /** 1 credit per page actually scraped —
          *  https://www.context.dev/pricing (2026-09-17): failed and
@@ -49,17 +48,13 @@ export default defineEndpoint({
             counts: { PAGE: data.input.body.maxPages },
         }),
         /** Settle on the crawl summary's `numSucceeded` (the pages the
-         *  vendor scraped and bills); the delivered `results[]` length is
-         *  the fallback when the summary is absent (v1 extractResultCount). */
-        evidence: ({ data, utils }) => {
-            const succeeded = utils.json.optionalGet(
-                data.output,
-                "$.metadata.numSucceeded",
-            );
-            const pages = typeof succeeded === "number"
-                ? succeeded
-                : utils.json.optionalLen(data.output, "$.results") ?? 0;
-            return { counts: { PAGE: pages } };
-        },
+         *  vendor scraped and bills). A strict read: the vendor marks it
+         *  required, and `results[]` also lists the failed pages, so its
+         *  length is no substitute. */
+        evidence: ({ data, utils }) => ({
+            counts: {
+                PAGE: utils.json.num(data.output, "$.metadata.numSucceeded"),
+            },
+        }),
     },
 });

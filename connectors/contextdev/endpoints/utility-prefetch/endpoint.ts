@@ -1,7 +1,6 @@
 import { defineEndpoint, UsageModelKind } from "@shared/core";
 import { zPrefetchBody } from "./schema/inputs.ts";
 
-/** POST /utility/prefetch — free, fire-and-forget cache warmer. */
 export default defineEndpoint({
     meta: {
         displayName: "Prefetch Brand Data",
@@ -22,6 +21,7 @@ export default defineEndpoint({
     },
     request: { method: "POST", path: "/utility/prefetch" },
     input: { schema: { body: zPrefetchBody } },
+    timeouts: { requestMs: 310_000, runMs: 310_000 },
     /** 0 credits — https://www.context.dev/pricing (2026-09-17). */
     usage: { model: { kind: UsageModelKind.FREE } },
 });

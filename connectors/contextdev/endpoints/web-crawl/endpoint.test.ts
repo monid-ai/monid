@@ -45,6 +45,18 @@ Deno.test(`${ID} empty (synthetic): a crawl that scraped nothing draws nothing`,
     assertEquals(result.usage, { credits: {}, evidence: { PAGE: 0 } });
 });
 
+Deno.test(`${ID}: a 200 without metadata.numSucceeded fails instead of counting failed pages`, async () => {
+    const unit = await testSealedUnit(ID);
+    const fixture = await loadFixture(`${fixturesDir}synthetic-happy.json`);
+    const body = fixture.calls[0].res.body as Record<string, Json>;
+    delete (body.metadata as Record<string, Json>).numSucceeded;
+    await assertRejects(
+        () => runEndpoint({ unit, input: INPUT, mode: "replay", fixture }),
+        Error,
+        "$.metadata.numSucceeded",
+    );
+});
+
 Deno.test(`${ID} provider error (synthetic 404 start URL): zero usage`, async () => {
     const unit = await testSealedUnit(ID);
     const fixture = await loadFixture(
@@ -113,5 +125,10 @@ Deno.test({
             JSON.stringify(result.output),
         );
         assertEquals(Object.keys(result.usage.evidence), ["PAGE"]);
+        assertEquals(
+            Array.isArray((result.output as Record<string, unknown>).results),
+            true,
+            JSON.stringify(result.output),
+        );
     },
 });

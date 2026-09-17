@@ -1,7 +1,6 @@
 import { defineEndpoint, UsageModelKind } from "@shared/core";
 import { zExtractBody } from "./schema/inputs.ts";
 
-/** POST /web/extract — crawl a site and return caller-schema-shaped JSON. */
 export default defineEndpoint({
     meta: {
         displayName: "Extract Structured Data",
@@ -23,7 +22,7 @@ export default defineEndpoint({
     },
     request: { method: "POST", path: "/web/extract" },
     input: { schema: { body: zExtractBody } },
-    timeouts: { requestMs: 150_000, runMs: 150_000 },
+    timeouts: { requestMs: 310_000, runMs: 310_000 },
     usage: {
         /** 10 credits per call, whatever the schema size or page count —
          *  https://www.context.dev/pricing (2026-09-17). */

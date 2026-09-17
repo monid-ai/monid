@@ -98,5 +98,10 @@ Deno.test({
             JSON.stringify(result.output),
         );
         assertEquals(result.usage, { credits: {}, evidence: {} });
+        assertEquals(
+            typeof (result.output as Record<string, unknown>).status,
+            "string",
+            JSON.stringify(result.output),
+        );
     },
 });

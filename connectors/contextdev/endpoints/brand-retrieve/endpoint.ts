@@ -1,7 +1,6 @@
 import { defineEndpoint, UsageModelKind } from "@shared/core";
 import { zBrandRetrieveBody } from "./schema/inputs.ts";
 
-/** POST /brand/retrieve — a company resolved to a full brand profile. */
 export default defineEndpoint({
     meta: {
         displayName: "Retrieve Brand",
@@ -32,6 +31,7 @@ export default defineEndpoint({
     },
     request: { method: "POST", path: "/brand/retrieve" },
     input: { schema: { body: zBrandRetrieveBody } },
+    timeouts: { requestMs: 310_000, runMs: 310_000 },
     usage: {
         /** 10 credits per lookup — https://www.context.dev/pricing
          *  (2026-09-17), whichever key selects the brand; a cached lookup

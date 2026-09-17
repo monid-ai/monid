@@ -1,7 +1,6 @@
 import { defineEndpoint, UsageModelKind } from "@shared/core";
 import { zSicQueryParams } from "./schema/inputs.ts";
 
-/** GET /web/sic — a brand resolved to SIC codes. */
 export default defineEndpoint({
     meta: {
         displayName: "SIC Classification",

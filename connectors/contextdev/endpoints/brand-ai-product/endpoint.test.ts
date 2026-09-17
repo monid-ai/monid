@@ -93,5 +93,10 @@ Deno.test({
             JSON.stringify(result.output),
         );
         assertEquals(Object.keys(result.usage.evidence), ["CALL"]);
+        assertEquals(
+            typeof (result.output as Record<string, unknown>).is_product_page,
+            "boolean",
+            JSON.stringify(result.output),
+        );
     },
 });

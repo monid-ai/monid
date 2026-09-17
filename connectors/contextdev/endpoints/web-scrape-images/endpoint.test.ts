@@ -67,10 +67,11 @@ Deno.test(`${ID}: the compiled schema keeps the enrichment channel closed`, asyn
     ) {
         await assertRejects(() => run(bad), Error, "INVALID_INPUT");
     }
-    const error = await assertRejects(() =>
-        run({ url: "https://example.com", dedupe: false, waitForMs: 0 })
+    await assertRejects(
+        () => run({ url: "https://example.com", dedupe: false, waitForMs: 0 }),
+        Error,
+        "replay(",
     );
-    assertEquals(String(error).includes("INVALID_INPUT"), false, String(error));
 });
 
 Deno.test({
@@ -89,5 +90,10 @@ Deno.test({
             JSON.stringify(result.output),
         );
         assertEquals(Object.keys(result.usage.evidence), ["CALL"]);
+        assertEquals(
+            Array.isArray((result.output as Record<string, unknown>).images),
+            true,
+            JSON.stringify(result.output),
+        );
     },
 });

@@ -1,7 +1,6 @@
 import { defineEndpoint, UsageModelKind } from "@shared/core";
 import { zScrapeImagesQueryParams } from "./schema/inputs.ts";
 
-/** GET /web/scrape/images — every image asset on a page. */
 export default defineEndpoint({
     meta: {
         displayName: "Scrape Images",

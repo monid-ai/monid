@@ -1,7 +1,6 @@
 import { defineEndpoint, UsageModelKind } from "@shared/core";
 import { zBrandSearchQueryParams } from "./schema/inputs.ts";
 
-/** GET /brand/search — indexed-brand autocomplete. */
 export default defineEndpoint({
     meta: {
         displayName: "Search Brands",

@@ -63,14 +63,16 @@ Deno.test(`${ID}: a domain or a directUrl is required`, async () => {
             { maxAgeMs: 0 },
             { domain: "ex" },
             { domain: "example.com", colorScheme: "dark" },
+            { domain: "example.com", directUrl: "https://example.com/design" },
         ]
     ) {
         await assertRejects(() => run(bad), Error, "INVALID_INPUT");
     }
-    const error = await assertRejects(() =>
-        run({ directUrl: "https://example.com/design", maxAgeMs: 0 })
+    await assertRejects(
+        () => run({ directUrl: "https://example.com/design", maxAgeMs: 0 }),
+        Error,
+        "replay(",
     );
-    assertEquals(String(error).includes("INVALID_INPUT"), false, String(error));
 });
 
 Deno.test({
@@ -89,5 +91,10 @@ Deno.test({
             JSON.stringify(result.output),
         );
         assertEquals(Object.keys(result.usage.evidence), ["CALL"]);
+        assertEquals(
+            Array.isArray((result.output as Record<string, unknown>).fonts),
+            true,
+            JSON.stringify(result.output),
+        );
     },
 });

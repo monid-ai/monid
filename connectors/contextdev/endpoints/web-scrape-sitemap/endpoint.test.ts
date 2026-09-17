@@ -82,15 +82,17 @@ Deno.test(`${ID}: the compiled schema gates the domain and the bounds`, async ()
     ) {
         await assertRejects(() => run(bad), Error, "INVALID_INPUT");
     }
-    const error = await assertRejects(() =>
-        run({
-            domain: "example.com",
-            maxLinks: 100000,
-            search: "ab",
-            sitemapUrl: "https://example.com/sitemap.xml",
-        })
+    await assertRejects(
+        () =>
+            run({
+                domain: "example.com",
+                maxLinks: 100000,
+                search: "ab",
+                sitemapUrl: "https://example.com/sitemap.xml",
+            }),
+        Error,
+        "replay(",
     );
-    assertEquals(String(error).includes("INVALID_INPUT"), false, String(error));
 });
 
 Deno.test({
@@ -111,6 +113,11 @@ Deno.test({
         assertEquals(
             Object.keys(result.usage.evidence).sort(),
             ["crawl", "search_surcharge"],
+        );
+        assertEquals(
+            Array.isArray((result.output as Record<string, unknown>).urls),
+            true,
+            JSON.stringify(result.output),
         );
     },
 });

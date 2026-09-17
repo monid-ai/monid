@@ -2,7 +2,6 @@ import { z } from "zod";
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zPeopleEnrichBody } from "./schema/inputs.ts";
 
-/** POST /people/enrich — identity clues to one scored, normalized person. */
 export default defineEndpoint({
     meta: {
         displayName: "Enrich Person",
@@ -46,6 +45,7 @@ export default defineEndpoint({
             ),
         },
     },
+    timeouts: { requestMs: 310_000, runMs: 310_000 },
     usage: {
         /** 20 credits per FOUND person — https://www.context.dev/pricing
          *  (2026-09-17, "per call") with the vendor's own meter reporting
