@@ -23,7 +23,6 @@ export default defineEndpoint({
             "animation, photo-to-clip social content, keyframe-driven " +
             "transitions.",
         categories: ["video-generation"],
-        // v1 per-model docs page (restored, reconcile 2026-09-16)
         docsUrl:
             // the only i2v page Kling publishes for 2.5 Turbo is the legacy
             // reference (Google-index verified, PR review 2026-09-17)

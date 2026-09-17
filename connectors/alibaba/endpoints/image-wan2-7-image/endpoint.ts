@@ -17,7 +17,6 @@ export default defineEndpoint({
         description:
             "Generate images from text, edit or compose from up to nine input images, place objects with bounding boxes (interactive editing), or produce a story-coherent SET of up to 12 images from one request with Wan 2.7 Image — the faster tier, same feature set up to 2K. Supports thinking mode, custom color palettes (3-10 colors), and free width*height sizing. Returns PNG image URLs (24h expiry). Suited for: seasonal and campaign image series with a consistent subject, product placement into scenes, style-guided redesigns, high-resolution art and print assets.",
         categories: ["image-generation"],
-        // v1 per-family docs page (restored, reconcile 2026-09-16)
         docsUrl:
             "https://www.alibabacloud.com/help/en/model-studio/wan-image-generation-and-editing-api-reference",
         /** CROSS-field rules the compiled JSON Schema cannot express (design

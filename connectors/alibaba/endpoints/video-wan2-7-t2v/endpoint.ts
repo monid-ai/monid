@@ -25,7 +25,6 @@ export default defineEndpoint({
             "Shorts clips, ads and marketing b-roll, storyboarding, music " +
             "videos.",
         categories: ["video-generation"],
-        // v1 per-family docs page (restored, reconcile 2026-09-16)
         docsUrl:
             "https://www.alibabacloud.com/help/en/model-studio/text-to-video-api-reference",
         notes: [

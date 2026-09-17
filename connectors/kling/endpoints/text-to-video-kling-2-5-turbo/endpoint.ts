@@ -20,7 +20,6 @@ export default defineEndpoint({
             "1:1. Suited for: short-form social clips, ads and product " +
             "b-roll, storyboards, concept previews.",
         categories: ["video-generation"],
-        // v1 per-model docs page (restored, reconcile 2026-09-16)
         docsUrl:
             "https://kling.ai/document-api/api/video/2-5-turbo/text-to-video",
     },

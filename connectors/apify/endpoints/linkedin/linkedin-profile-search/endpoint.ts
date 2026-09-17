@@ -18,8 +18,9 @@ import { zLinkedinProfileSearchBody } from "./schema/inputs.ts";
  *     $0.0032 / $0.008) remain as FALLBACK only.
  *   - Pages scraped is not reported, but IS reconstructible from the exact
  *     PAY_PER_EVENT total: pages = round((usageTotalUsd − profiles ×
- *     perProfileRate) / pageRate), clamped so a run that returned profiles is
- *     never attributed zero pages (v1 `reconstructSearchPages`).
+ *     perProfileRate) / pageRate), floored at max(1, ceil(profiles/25)) —
+ *     delivered-profile evidence, lag-independent (v1
+ *     `reconstructSearchPages` hardened for the lagging total).
  *   - The poll override stamps the reconstruction ONTO the output
  *     (`{searchPages, profileCount, profiles}`) — the counts users are
  *     billed on are the counts they can see.
@@ -172,10 +173,16 @@ export default defineEndpoint({
                     ) ?? 0.008)
                     : 0;
                 // v1 reconstructSearchPages: exact PAY_PER_EVENT total minus
-                // the profile charges, divided by the LIVE page rate;
-                // clamped ≥1 when profiles came back, degraded to 0/1 on a
-                // missing usage total (money follows evidence)
-                const floor = profiles.length > 0 ? 1 : 0;
+                // the profile charges, divided by the LIVE page rate. The
+                // total LAGS completion (~3-10 s), so the count is floored
+                // by evidence that never lags: a page yields at most 25
+                // profiles (the estimate's own constant) — N delivered
+                // profiles prove ceil(N/25) pages — and a successful run
+                // always charges ≥1 page. Both are lower bounds of the true
+                // count, so the max never over-bills; a lagging total plus
+                // SPARSE pages still under-bills the sparse part (accepted:
+                // closing it needs a settle-wait).
+                const floor = Math.max(1, Math.ceil(profiles.length / 25));
                 const searchPages = typeof totalUsd === "number" && totalUsd > 0
                     ? Math.max(
                         Math.round(

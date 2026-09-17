@@ -38,8 +38,8 @@ export default defineEndpoint({
         categories: ["people-enrichment"],
         notes: [
             "Billed per profile returned (zero results free). With " +
-            "reveal_info, each returned work email adds one email credit " +
-            "and each phone number one phone credit.",
+            "reveal_info, each profile with a work email adds one email " +
+            "credit and each with a phone number one phone credit.",
             ...SEARCH_EXCLUSION_NOTES,
         ],
     },

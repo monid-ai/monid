@@ -31,7 +31,6 @@ export default defineEndpoint({
             "Suited for: marketing posters and banners, UI/slide mockups, " +
             "storyboards, product shots, style transfer and subject edits.",
         categories: ["image-generation"],
-        // v1 per-family docs page (restored, reconcile 2026-09-16)
         docsUrl:
             "https://www.alibabacloud.com/help/en/model-studio/qwen-image-generation-and-editing-api-reference",
         notes: [

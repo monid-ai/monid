@@ -23,7 +23,6 @@ export default defineEndpoint({
             "audio. Suited for: short-form social clips, ads and product " +
             "b-roll, storyboards, concept previews.",
         categories: ["video-generation"],
-        // v1 per-model docs page (restored, reconcile 2026-09-16)
         docsUrl: "https://kling.ai/document-api/api/video/2-6/text-to-video",
         /** The one CROSS-field rule Kling enforces on 2.6, which the
          *  compiled JSON Schema cannot express (design D9). */

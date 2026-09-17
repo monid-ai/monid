@@ -18,7 +18,6 @@ export default defineEndpoint({
         description:
             'Generate video from any mix of inputs with one request: a text prompt (up to 20,000 characters), pinned first/last frames, reference images (up to 10), reference video and audio clips, an office document or PDF, or a web link, with Wan 3.0. Supports smart duration ("auto"), adaptive aspect ratio, and prompt rewriting. Returns a downloadable MP4 video_url (24h expiry) with synchronized audio, 2-30 seconds, 480P/720P/1080P. Suited for: short-form social clips, ads and product demos, storyboard-to-video, document and article explainers, character-consistent scenes.',
         categories: ["video-generation"],
-        // v1 per-family docs page (restored, reconcile 2026-09-16)
         docsUrl:
             "https://www.alibabacloud.com/help/en/model-studio/wan3-video-generation-api-reference",
         /** CROSS-field rules the compiled JSON Schema cannot express (design

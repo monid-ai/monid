@@ -30,7 +30,6 @@ export default defineEndpoint({
             "video framing. Suited for: dance and performance transfer, " +
             "character animation from a single photo, avatar motion clips.",
         categories: ["video-generation"],
-        // v1 per-model docs page (restored, reconcile 2026-09-16)
         docsUrl:
             "https://kling.ai/document-api/api/video/3-0-omni/motion-control",
         notes: [

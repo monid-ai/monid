@@ -22,7 +22,6 @@ export default defineEndpoint({
             "image's aspect ratio. Suited for: product shots to motion, " +
             "character animation, photo-to-clip social content.",
         categories: ["video-generation"],
-        // v1 per-model docs page (restored, reconcile 2026-09-16)
         docsUrl:
             "https://kling.ai/document-api/api/video/3-0-turbo/image-to-video",
         notes: [

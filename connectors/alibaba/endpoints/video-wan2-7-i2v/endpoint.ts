@@ -24,7 +24,6 @@ export default defineEndpoint({
             "animating photos and artwork, cinematic shots from a single " +
             "still, extending existing footage, talking-head clips.",
         categories: ["video-generation"],
-        // v1 per-family docs page (restored, reconcile 2026-09-16)
         docsUrl:
             "https://www.alibabacloud.com/help/en/model-studio/image-to-video-general-api-reference",
         /** CROSS-field rules the compiled JSON Schema cannot express (design

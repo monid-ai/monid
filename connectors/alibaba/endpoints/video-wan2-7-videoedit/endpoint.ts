@@ -25,7 +25,6 @@ export default defineEndpoint({
             "cinematic looks), wardrobe and product swaps, localized " +
             "content variants.",
         categories: ["video-generation"],
-        // v1 per-family docs page (restored, reconcile 2026-09-16)
         docsUrl:
             "https://www.alibabacloud.com/help/en/model-studio/wan-video-editing-api-reference",
         /** CROSS-field rules the compiled JSON Schema cannot express (design

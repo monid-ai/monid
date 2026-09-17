@@ -192,6 +192,55 @@ Deno.test("apify#harvestapi/linkedin-profile-search: pages reconstructed from LI
     assertEquals(output.profileCount, 2);
 });
 
+Deno.test("apify#harvestapi/linkedin-profile-search: zero-profile success still bills one page", async () => {
+    const fixture = await loadFixture(
+        `${HERE}fixtures/pay-per-event-zero-profiles.json`,
+    );
+    const id = "apify#harvestapi/linkedin-profile-search";
+    const result = await runEndpoint({
+        unit: await testSealedUnit(id),
+        input: inputFor(id),
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(result.httpStatus, 200);
+    // no usage total on the record, no profiles in the dataset — the
+    // vendor still charges one search page for any successful search:
+    // floor = max(1, ceil(0/25)) = 1, folded at the pinned $0.05
+    assertEquals(result.usage, {
+        credits: { default: 0.05 },
+        evidence: { search_page: 1 },
+    });
+    const output = result.output as Record<string, unknown>;
+    assertEquals(output.searchPages, 1);
+    assertEquals(output.profileCount, 0);
+});
+
+Deno.test("apify#harvestapi/linkedin-profile-search: lagging total — delivered profiles floor the page count", async () => {
+    const fixture = await loadFixture(
+        `${HERE}fixtures/pay-per-event-lagging-pages.json`,
+    );
+    const id = "apify#harvestapi/linkedin-profile-search";
+    const result = await runEndpoint({
+        unit: await testSealedUnit(id),
+        input: inputFor(id),
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(result.httpStatus, 200);
+    // reconstruction from the lagging $0.0001 total computes ~0 pages,
+    // but 60 delivered profiles PROVE ceil(60/25) = 3 charged pages (a
+    // page yields at most 25) — the lag-independent floor wins and the
+    // fold settles 3 × $0.05. "Short" mode ⇒ profiles are free.
+    assertEquals(result.usage, {
+        credits: { default: 0.05 * 3 },
+        evidence: { search_page: 3 },
+    });
+    const output = result.output as Record<string, unknown>;
+    assertEquals(output.searchPages, 3);
+    assertEquals(output.profileCount, 60);
+});
+
 Deno.test("apify: a lagging PAY_PER_EVENT total is ignored — the derived fold settles (no settle-wait)", async () => {
     const fixture = await loadFixture(
         `${HERE}fixtures/pay-per-event-lagging.json`,
