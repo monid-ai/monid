@@ -2,9 +2,7 @@ import { defineEndpoint, UsageModelKind } from "@shared/core";
 import { z } from "zod";
 import { zDiscoverPeopleBody } from "./schema/inputs.ts";
 
-/** POST /discover/people — the Discover results from a people angle:
- *  same companies, plus aggregate email totals across the whole match
- *  set (free). */
+/** POST /discover/people — reachable-people totals for a company filter. */
 export default defineEndpoint({
     meta: {
         displayName: "Count Reachable People",

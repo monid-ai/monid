@@ -5,7 +5,7 @@
         {
             "req": {
                 "method": "GET",
-                "url": "https://api.hunter.io/v2/email-finder?domain=reddit.com&first_name=Alexis&last_name=Ohanian"
+                "url": "https://api.hunter.io/v2/email-finder?domain=example.com&first_name=Jane&last_name=Doe"
             },
             "res": {
                 "status": 401,

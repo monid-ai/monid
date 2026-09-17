@@ -10,7 +10,7 @@ import {
 
 const ID = "hunterio#email-verifier";
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
-const INPUT = { queryParams: { email: "patrick@stripe.com" } };
+const INPUT = { queryParams: { email: "john.doe@example.com" } };
 
 Deno.test(`${ID} happy (synthetic): a definitive verdict inline: 0.5 credit`, async () => {
     const unit = await testSealedUnit(ID);
@@ -121,7 +121,7 @@ Deno.test(`${ID}: the schema gate — the vendor's rules and strictness`, async 
         const bad of [
             {},
             { email: "not-an-email" },
-            { email: "patrick@stripe.com", source: "web" },
+            { email: "john.doe@example.com", source: "web" },
         ]
     ) {
         await assertRejects(() => run(bad), Error, "INVALID_INPUT");

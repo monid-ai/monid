@@ -39,7 +39,8 @@ export default defineEndpoint({
             unit: Unit.RESULT,
             label: "reveals",
             description:
-                "rows freshly revealed (already-revealed rows are free)",
+                "fresh reveals: one per personal address, one per domain " +
+                "of generic addresses (already-revealed rows are free)",
             consumes: { credit: "default", amount: 1 },
         },
         /** Worst case: every handle is a fresh personal address (typed
@@ -47,20 +48,25 @@ export default defineEndpoint({
         estimate: ({ data }) => ({
             counts: { RESULT: data.input.body.handles.length },
         }),
-        /** Rows Hunter says it revealed fresh on this call. The vendor
-         *  bundles all generic addresses on a domain into one credit, so
-         *  this count is the CROSS-CHECK and the claim below is the
-         *  settlement (v1 drill: 3 revealed rows metered 2). */
+        /** What Hunter bills for the rows it revealed fresh on this call:
+         *  "1 credit per personal email, and 1 credit per domain for generic
+         *  emails" (hunter.io/api-documentation/v2, 2026-09-17; v1 drill: 3
+         *  revealed rows metered 2). The same rule as the meter, so the
+         *  claim below only disagrees when Hunter's billing drifts. */
         evidence: ({ data, utils }) => {
             const rows = utils.json.optionalGet(data.output, "$.data");
-            const revealed = Array.isArray(rows)
-                ? rows.filter((row) =>
-                    typeof row === "object" && row !== null &&
-                    !Array.isArray(row) &&
-                    (row as { outcome?: unknown }).outcome === "revealed"
-                ).length
-                : 0;
-            return { counts: { RESULT: revealed } };
+            const revealed = (Array.isArray(rows) ? rows : []).filter((row) =>
+                typeof row === "object" && row !== null &&
+                !Array.isArray(row) && row.outcome === "revealed"
+            ) as { type?: unknown; domain?: unknown }[];
+            const personal = revealed.filter((row) => row.type !== "generic");
+            const genericDomains = revealed
+                .filter((row) => row.type === "generic")
+                .map((row) => row.domain);
+            const bundles = genericDomains.filter((domain, index) =>
+                genericDomains.indexOf(domain) === index
+            );
+            return { counts: { RESULT: personal.length + bundles.length } };
         },
         /** The vendor's authoritative charge, `meta.credits_charged`, is
          *  the CLAIM (read + strip in one motion; v1 stripped it in

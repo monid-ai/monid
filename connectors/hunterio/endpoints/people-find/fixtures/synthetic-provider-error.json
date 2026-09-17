@@ -5,7 +5,7 @@
         {
             "req": {
                 "method": "GET",
-                "url": "https://api.hunter.io/v2/people/find?email=matt%40hunter.io"
+                "url": "https://api.hunter.io/v2/people/find?email=jane.doe%40example.com"
             },
             "res": {
                 "status": 401,

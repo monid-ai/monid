@@ -5,7 +5,7 @@
         {
             "req": {
                 "method": "GET",
-                "url": "https://api.hunter.io/v2/email-verifier?email=patrick%40stripe.com"
+                "url": "https://api.hunter.io/v2/email-verifier?email=john.doe%40example.com"
             },
             "res": {
                 "status": 401,

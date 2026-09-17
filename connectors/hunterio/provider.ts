@@ -15,13 +15,17 @@ import { defineProvider, presets } from "@shared/core";
  * misbehaved — terminal, zero-billed), two 2xx codes the declarative path
  * would settle as billable success (design D2).
  *
- * The four charging endpoints state their own basis (design D3 — v1's
- * def-level `getActualCost` hooks): `domain-search` per started block of
- * ten addresses, `email-finder` per address found, `email-verifier` per
- * definitive verdict, `multi-domain-search/reveal` per fresh reveal with
- * the vendor's `meta.credits_charged` as the claim. The enrichment trio
- * is a flat 0.2-credit call whose miss is a 404 — error-as-data, zero
- * usage. Everything else is FREE. This provider therefore declares NO
+ * The charging endpoints state their own basis (design D3 — v1's
+ * def-level `getActualCost` hooks; rates from
+ * hunter.io/api-documentation/v2 and
+ * help.hunter.io/en/articles/1970956-hunter-api, 2026-09-17):
+ * `domain-search` per started block of ten addresses, `email-finder` per
+ * address found, `email-verifier` per definitive verdict,
+ * `multi-domain-search/reveal` per fresh reveal with the vendor's
+ * `meta.credits_charged` as the claim, and the enrichment trio 0.2 per
+ * profile carrying every core data point (a partial profile is a free
+ * 200; the miss is a 404 — error-as-data, zero usage). Everything else is
+ * FREE. This provider therefore declares NO
  * consolidate and a generic evidence that counts nothing: only the reveal
  * carries a meter, and it is that endpoint's own.
  */
@@ -64,7 +68,7 @@ export default defineProvider({
          *  "verification" packs top up the same balance. */
         credits: { default: { label: "Hunter credits" } },
         /** The generic QUANTITIES default (design D27): the FREE docs and
-         *  the flat 0.2-credit enrichment calls have nothing to count.
+         *  the flat `discover-ai` gate have nothing to count.
          *  Every metered doc states its own basis (design D3) — there is
          *  no one collection key across them (`data.emails[]`,
          *  `data.email`, `data.status`, `data[].outcome`). */

@@ -41,8 +41,9 @@ output.
 
 #### Scenario: A bundled reveal
 - **WHEN** the reveal answers 3 `revealed` rows and `credits_charged: 2`
-- **THEN** `usage.credits` is `{default: 2}` and `usage.mismatch.derived`
-  is `{default: 3}`; `meta.credits_charged` is absent from the output
+- **WHEN** one row is personal and two are generic on one domain
+- **THEN** `usage` is `{credits: {default: 2}, evidence: {RESULT: 2}}`;
+  `meta.credits_charged` is absent from the output
 
 #### Scenario: A miss is free
 - **WHEN** `email-finder` answers 200 with `data.email: null`

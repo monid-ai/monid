@@ -1,8 +1,7 @@
 import { defineEndpoint, UsageModelKind } from "@shared/core";
 import { zDiscoverAiBody } from "./schema/inputs.ts";
 
-/** POST /discover with a natural-language `query` — the AI assistant
- *  translates it into filters and runs the search. */
+/** POST /discover — company search from a natural-language prompt. */
 export default defineEndpoint({
     meta: {
         displayName: "Search Companies by Prompt",

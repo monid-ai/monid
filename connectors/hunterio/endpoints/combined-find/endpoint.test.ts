@@ -10,7 +10,10 @@ import {
 
 const ID = "hunterio#combined/find";
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
-const INPUT = { queryParams: { email: "matt@hunter.io" } };
+const INPUT = { queryParams: { email: "jane.doe@example.com" } };
+/** The live call needs an address Hunter resolves (an unknown one answers
+ *  404): the vendor docs' own example (hunter.io/api-documentation/v2). */
+const LIVE_INPUT = { queryParams: { email: "matt@hunter.io" } };
 
 Deno.test(`${ID} happy (synthetic): a hit: 0.2 credit flat for both profiles`, async () => {
     const unit = await testSealedUnit(ID);
@@ -25,8 +28,23 @@ Deno.test(`${ID} happy (synthetic): a hit: 0.2 credit flat for both profiles`, a
     assertEquals(result.isProviderError, false);
     assertEquals(result.usage, {
         credits: { default: 0.2 },
-        evidence: { CALL: 1 },
+        evidence: { RESULT: 1 },
     });
+    assertEquals(result.output, fixture.calls[0].res.body);
+});
+
+Deno.test(`${ID} a partial profile (synthetic): a 200 missing a core data point is free`, async () => {
+    const unit = await testSealedUnit(ID);
+    const fixture = await loadFixture(`${fixturesDir}synthetic-partial.json`);
+    const result = await runEndpoint({
+        unit,
+        input: INPUT,
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(result.httpStatus, 200);
+    assertEquals(result.isProviderError, false);
+    assertEquals(result.usage, { credits: {}, evidence: { RESULT: 0 } });
     assertEquals(result.output, fixture.calls[0].res.body);
 });
 
@@ -81,7 +99,7 @@ Deno.test(`${ID}: the schema gate — the vendor's rules and strictness`, async 
         const bad of [
             {},
             { email: "nope" },
-            { email: "matt@hunter.io", domain: "hunter.io" },
+            { email: "jane.doe@example.com", domain: "hunter.io" },
         ]
     ) {
         await assertRejects(() => run(bad), Error, "INVALID_INPUT");
@@ -104,7 +122,7 @@ Deno.test({
         const unit = await testSealedUnit(ID);
         const result = await runEndpoint({
             unit,
-            input: INPUT,
+            input: LIVE_INPUT,
             mode: "live",
         });
         assertEquals(

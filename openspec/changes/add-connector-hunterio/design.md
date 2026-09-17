@@ -48,22 +48,23 @@ mirror views). Every paid line states v1's drill-verified consumption
 | `email-finder` | PER_UNIT·RESULT, 1 | 1 iff `data.email` is a non-empty string (a miss is a 200 with `email: null`, never a 404) |
 | `email-verifier` | PER_UNIT·RESULT, 0.5 | 1 iff `data.status` ∈ {valid, invalid, accept_all} (unknown / disposable / webmail are free upstream) |
 | `multi-domain-search/reveal` | PER_UNIT·RESULT, 1 | `outcome: "revealed"` rows; CLAIM = `meta.credits_charged` |
-| `people/find`, `companies/find`, `combined/find` | PER_CALL, 0.2 | a hit; the 404 miss is error-as-data |
+| `people/find`, `companies/find`, `combined/find` | PER_UNIT·RESULT, 0.2 | 1 iff every core data point is returned — person: email, full name, position; company: name, category / description / tags, location / country code, size; combined: either set (help.hunter.io/en/articles/1970956-hunter-api, 2026-09-17; PR #43 review). A partial 200 is free; the 404 miss is error-as-data |
 | `discover-ai` | PER_CALL, 8.36 | the quota gate (D6) |
 | the other five | FREE | 0 credits measured |
 
 The bases differ (`data.emails[]`, `data.email`, `data.status`,
 `data[].outcome`), so each metered doc states its own `evidence` (v1's
 def-level `getActualCost` hooks) and the provider's generic evidence
-counts nothing — it serves the FREE and flat PER_CALL docs only. Only
+counts nothing — it serves the FREE docs and the flat `discover-ai` gate only. Only
 the reveal carries a meter, so only the reveal has a `consolidate`: it
 plucks `meta.credits_charged` (authoritative — "reconcile against those"
 in the live docs; it matched v1's balance diff exactly), claims it, and
-strips it; per-handle outcomes stay. The revealed-row count is the
-cross-check, not the basis: Hunter bundles all generic addresses on a
-domain into one credit (v1's drill: 3 revealed rows metered 2), so the
-claim wins with a `mismatch` note. An absent meter omits the claim and
-the derived fold settles (never `?? 0`).
+strips it; per-handle outcomes stay. The cross-check counts what Hunter
+says it bills — one per revealed personal row plus one per domain of
+revealed generic rows (v1's drill: 3 revealed rows metered 2) — so claim
+and fold agree and a `mismatch` note means Hunter's billing drifted
+(PR #43 review). An absent meter omits the claim and the derived fold
+settles on the same rule (never `?? 0`).
 
 v1's dollar rate ($0.01196 per Scale-plan credit) and its 2× markup are
 the broker's concern; the doc states the vendor's card in the vendor's

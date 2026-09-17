@@ -1,6 +1,6 @@
 import { assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
-import type { Json, RunInput } from "@shared/core";
+import type { Json } from "@shared/core";
 import { directTransport, Engine } from "@monid/connector-engine";
 import {
     liveSkip,
@@ -56,12 +56,12 @@ Deno.test(`${ID} no meta.credits_charged: the derived fold settles (synthetic)`,
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
     assertEquals(result.usage, {
-        credits: { default: 1 },
-        evidence: { RESULT: 1 },
+        credits: { default: 2 },
+        evidence: { RESULT: 2 },
     });
 });
 
-Deno.test(`${ID} bundled reveal (synthetic): three revealed rows metered two — the claim wins with a mismatch`, async () => {
+Deno.test(`${ID} bundled reveal (synthetic): three revealed rows metered two — the claim (2) and the fold (2) agree`, async () => {
     const unit = await testSealedUnit(ID);
     const fixture = await loadFixture(`${fixturesDir}synthetic-bundled.json`);
     const result = await runEndpoint({
@@ -71,9 +71,10 @@ Deno.test(`${ID} bundled reveal (synthetic): three revealed rows metered two —
         fixture,
     });
     assertEquals(result.httpStatus, 200);
-    assertEquals(result.usage.credits, { default: 2 });
-    assertEquals(result.usage.evidence, { RESULT: 3 });
-    assertEquals(result.usage.mismatch?.derived, { default: 3 });
+    assertEquals(result.usage, {
+        credits: { default: 2 },
+        evidence: { RESULT: 2 },
+    });
 });
 
 Deno.test(`${ID} the balance cannot cover the batch: 429 up front, zero usage (synthetic 429)`, async () => {
@@ -128,111 +129,7 @@ Deno.test(`${ID}: the schema gate — the vendor's rules and strictness`, async 
             {},
             { handles: [] },
             { handles: [""] },
-            {
-                handles: [
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                    "h",
-                ],
-            },
+            { handles: Array(101).fill("h") },
             { handles: ["h"], force: true },
         ]
     ) {
@@ -248,21 +145,20 @@ Deno.test(`${ID}: the schema gate — the vendor's rules and strictness`, async 
     }
 });
 
-const estimateFor = async (body: RunInput["body"]) => {
+Deno.test(`${ID}: the estimate holds the input's worst case`, async () => {
     const loaded = await new Engine({
         transport: directTransport({
             params: () => Promise.resolve({ apiKey: "test-key" }),
             fetch: () => Promise.reject(new Error("estimate must not do IO")),
         }),
     }).load(await testSealedUnit(ID));
-    return loaded.estimate({ body });
-};
-
-Deno.test(`${ID}: the estimate holds the input's worst case`, async () => {
-    assertEquals(await estimateFor({ handles: ["a", "b", "c"] }), {
-        credits: { default: 3 },
-        evidence: { RESULT: 3 },
-    });
+    assertEquals(
+        await loaded.estimate({ body: { handles: ["a", "b", "c"] } }),
+        {
+            credits: { default: 3 },
+            evidence: { RESULT: 3 },
+        },
+    );
 });
 
 Deno.test({

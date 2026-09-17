@@ -12,9 +12,9 @@ const ID = "hunterio#email-finder";
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
 const INPUT = {
     queryParams: {
-        domain: "reddit.com",
-        first_name: "Alexis",
-        last_name: "Ohanian",
+        domain: "example.com",
+        first_name: "Jane",
+        last_name: "Doe",
     },
 };
 
@@ -82,15 +82,15 @@ Deno.test(`${ID}: the schema gate — the vendor's rules and strictness`, async 
     for (
         const bad of [
             {},
-            { first_name: "Alexis", last_name: "Ohanian" },
-            { domain: "reddit.com", first_name: "Alexis" },
-            { domain: "reddit.com" },
+            { first_name: "Jane", last_name: "Doe" },
+            { domain: "example.com", first_name: "Jane" },
+            { domain: "example.com" },
             {
-                domain: "reddit.com",
-                full_name: "Alexis Ohanian",
+                domain: "example.com",
+                full_name: "Jane Doe",
                 max_duration: 21,
             },
-            { linkedin_handle: "alexisohanian", email: "a@b.co" },
+            { linkedin_handle: "janedoe", email: "a@b.co" },
         ]
     ) {
         await assertRejects(() => run(bad), Error, "INVALID_INPUT");
@@ -99,7 +99,7 @@ Deno.test(`${ID}: the schema gate — the vendor's rules and strictness`, async 
         // the near twin passes the gate and fails later, at replay URL
         // matching — proving validation let it through
         const err = await assertRejects(
-            () => run({ linkedin_handle: "alexisohanian" }),
+            () => run({ linkedin_handle: "janedoe" }),
             Error,
         );
         assertEquals(err.message.includes("INVALID_INPUT"), false, err.message);
@@ -111,7 +111,7 @@ Deno.test(`${ID}: the schema gate — the vendor's rules and strictness`, async 
             () =>
                 run({
                     company: "Reddit",
-                    full_name: "Alexis Ohanian",
+                    full_name: "Jane Doe",
                     max_duration: 20,
                 }),
             Error,

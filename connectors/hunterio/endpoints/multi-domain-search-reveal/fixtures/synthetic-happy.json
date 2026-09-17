@@ -25,7 +25,7 @@
                             "last_name": "Doe",
                             "position": "Chief Technology Officer",
                             "phone_number": null,
-                            "linkedin_url": "https://www.linkedin.com/in/johndoe",
+                            "linkedin_url": "https://example.com/in/johndoe",
                             "type": "personal",
                             "domain": "stripe.com",
                             "outcome": "revealed"

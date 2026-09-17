@@ -27,7 +27,8 @@ an address found, a definitive verdict, a fresh reveal).
   (`PER_UNIT`·`RESULT` `every: 10`), email-finder 1 per address found,
   email-verifier 0.5 per definitive verdict, reveal 1 per fresh reveal
   with the vendor's `meta.credits_charged` as the claim, the enrichment
-  trio 0.2 per call; everything else FREE.
+  trio 0.2 per profile carrying every core data point; everything else
+  FREE.
 - **`/email-verifier` owns a `lifecycle.start` / `poll` pair** (owner
   decision, design D2): Hunter's 202 re-polls the same GET every 10 s
   for up to 180 s; its 222 settles as a synthesized 502 with zero usage.

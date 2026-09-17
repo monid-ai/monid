@@ -24,19 +24,19 @@
                         "linked_domains": [],
                         "emails": [
                             {
-                                "value": "ciaran@intercom.com",
+                                "value": "zoe@intercom.com",
                                 "type": "personal",
                                 "confidence": 90,
                                 "sources": [
                                     {
-                                        "domain": "github.com",
-                                        "uri": "http://github.com/ciaran",
+                                        "domain": "example.com",
+                                        "uri": "https://example.com/zoe",
                                         "extracted_on": "2015-07-29",
                                         "last_seen_on": "2017-07-01",
                                         "still_on_page": true
                                     }
                                 ],
-                                "first_name": "Ciaran",
+                                "first_name": "Zoe",
                                 "last_name": "Example",
                                 "position": "Support Engineer",
                                 "position_raw": "Support Engineer",
@@ -57,8 +57,8 @@
                                 "confidence": 89,
                                 "sources": [
                                     {
-                                        "domain": "github.com",
-                                        "uri": "http://github.com/alice",
+                                        "domain": "example.com",
+                                        "uri": "https://example.com/alice",
                                         "extracted_on": "2015-07-29",
                                         "last_seen_on": "2017-07-01",
                                         "still_on_page": true
@@ -85,8 +85,8 @@
                                 "confidence": 88,
                                 "sources": [
                                     {
-                                        "domain": "github.com",
-                                        "uri": "http://github.com/bob",
+                                        "domain": "example.com",
+                                        "uri": "https://example.com/bob",
                                         "extracted_on": "2015-07-29",
                                         "last_seen_on": "2017-07-01",
                                         "still_on_page": true
@@ -113,8 +113,8 @@
                                 "confidence": 87,
                                 "sources": [
                                     {
-                                        "domain": "github.com",
-                                        "uri": "http://github.com/carol",
+                                        "domain": "example.com",
+                                        "uri": "https://example.com/carol",
                                         "extracted_on": "2015-07-29",
                                         "last_seen_on": "2017-07-01",
                                         "still_on_page": true
@@ -141,8 +141,8 @@
                                 "confidence": 86,
                                 "sources": [
                                     {
-                                        "domain": "github.com",
-                                        "uri": "http://github.com/dave",
+                                        "domain": "example.com",
+                                        "uri": "https://example.com/dave",
                                         "extracted_on": "2015-07-29",
                                         "last_seen_on": "2017-07-01",
                                         "still_on_page": true
@@ -169,8 +169,8 @@
                                 "confidence": 85,
                                 "sources": [
                                     {
-                                        "domain": "github.com",
-                                        "uri": "http://github.com/erin",
+                                        "domain": "example.com",
+                                        "uri": "https://example.com/erin",
                                         "extracted_on": "2015-07-29",
                                         "last_seen_on": "2017-07-01",
                                         "still_on_page": true
@@ -197,8 +197,8 @@
                                 "confidence": 84,
                                 "sources": [
                                     {
-                                        "domain": "github.com",
-                                        "uri": "http://github.com/frank",
+                                        "domain": "example.com",
+                                        "uri": "https://example.com/frank",
                                         "extracted_on": "2015-07-29",
                                         "last_seen_on": "2017-07-01",
                                         "still_on_page": true
@@ -225,8 +225,8 @@
                                 "confidence": 83,
                                 "sources": [
                                     {
-                                        "domain": "github.com",
-                                        "uri": "http://github.com/grace",
+                                        "domain": "example.com",
+                                        "uri": "https://example.com/grace",
                                         "extracted_on": "2015-07-29",
                                         "last_seen_on": "2017-07-01",
                                         "still_on_page": true
@@ -253,8 +253,8 @@
                                 "confidence": 82,
                                 "sources": [
                                     {
-                                        "domain": "github.com",
-                                        "uri": "http://github.com/heidi",
+                                        "domain": "example.com",
+                                        "uri": "https://example.com/heidi",
                                         "extracted_on": "2015-07-29",
                                         "last_seen_on": "2017-07-01",
                                         "still_on_page": true
@@ -281,8 +281,8 @@
                                 "confidence": 81,
                                 "sources": [
                                     {
-                                        "domain": "github.com",
-                                        "uri": "http://github.com/ivan",
+                                        "domain": "example.com",
+                                        "uri": "https://example.com/ivan",
                                         "extracted_on": "2015-07-29",
                                         "last_seen_on": "2017-07-01",
                                         "still_on_page": true
@@ -309,8 +309,8 @@
                                 "confidence": 80,
                                 "sources": [
                                     {
-                                        "domain": "github.com",
-                                        "uri": "http://github.com/judy",
+                                        "domain": "example.com",
+                                        "uri": "https://example.com/judy",
                                         "extracted_on": "2015-07-29",
                                         "last_seen_on": "2017-07-01",
                                         "still_on_page": true
@@ -337,8 +337,8 @@
                                 "confidence": 79,
                                 "sources": [
                                     {
-                                        "domain": "github.com",
-                                        "uri": "http://github.com/mallory",
+                                        "domain": "example.com",
+                                        "uri": "https://example.com/mallory",
                                         "extracted_on": "2015-07-29",
                                         "last_seen_on": "2017-07-01",
                                         "still_on_page": true

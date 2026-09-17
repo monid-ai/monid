@@ -5,7 +5,7 @@
         {
             "req": {
                 "method": "GET",
-                "url": "https://api.hunter.io/v2/email-verifier?email=patrick%40stripe.com"
+                "url": "https://api.hunter.io/v2/email-verifier?email=john.doe%40example.com"
             },
             "res": {
                 "status": 200,
@@ -14,7 +14,7 @@
                         "status": "unknown",
                         "result": "risky",
                         "score": 50,
-                        "email": "patrick@stripe.com",
+                        "email": "john.doe@example.com",
                         "regexp": true,
                         "gibberish": false,
                         "disposable": false,
@@ -36,7 +36,7 @@
                     },
                     "meta": {
                         "params": {
-                            "email": "patrick@stripe.com"
+                            "email": "john.doe@example.com"
                         }
                     }
                 }

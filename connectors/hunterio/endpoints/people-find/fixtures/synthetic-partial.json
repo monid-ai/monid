@@ -1,6 +1,6 @@
 {
-    "name": "synthetic-happy",
-    "description": "SYNTHETIC — not recorded (no Hunter key held, 2026-09-17): the shape follows the live reference's own example (hunter.io/api-documentation/v2) and v1's 2026-08-20 ledger drill; values are placeholders. A hit: 0.2 credit.",
+    "name": "synthetic-partial",
+    "description": "SYNTHETIC — not recorded (no Hunter key held, 2026-09-17): the happy fixture with the position blanked. Hunter charges the enrichment only when every core data point is returned (help.hunter.io/en/articles/1970956-hunter-api), so this 200 is free.",
     "calls": [
         {
             "req": {
@@ -36,7 +36,7 @@
                         "employment": {
                             "domain": "hunter.io",
                             "name": "Hunter",
-                            "title": "Chief Executive Officer",
+                            "title": null,
                             "role": "executive",
                             "subRole": null,
                             "seniority": "executive"

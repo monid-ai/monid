@@ -25,8 +25,23 @@ Deno.test(`${ID} happy (synthetic): a hit: 0.2 credit`, async () => {
     assertEquals(result.isProviderError, false);
     assertEquals(result.usage, {
         credits: { default: 0.2 },
-        evidence: { CALL: 1 },
+        evidence: { RESULT: 1 },
     });
+    assertEquals(result.output, fixture.calls[0].res.body);
+});
+
+Deno.test(`${ID} a partial profile (synthetic): a 200 missing a core data point is free`, async () => {
+    const unit = await testSealedUnit(ID);
+    const fixture = await loadFixture(`${fixturesDir}synthetic-partial.json`);
+    const result = await runEndpoint({
+        unit,
+        input: INPUT,
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(result.httpStatus, 200);
+    assertEquals(result.isProviderError, false);
+    assertEquals(result.usage, { credits: {}, evidence: { RESULT: 0 } });
     assertEquals(result.output, fixture.calls[0].res.body);
 });
 
@@ -81,7 +96,7 @@ Deno.test(`${ID}: the schema gate — the vendor's rules and strictness`, async 
         const bad of [
             {},
             { domain: "" },
-            { domain: "hunter.io", email: "matt@hunter.io" },
+            { domain: "hunter.io", email: "jane.doe@example.com" },
         ]
     ) {
         await assertRejects(() => run(bad), Error, "INVALID_INPUT");

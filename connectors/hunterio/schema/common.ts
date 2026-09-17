@@ -176,8 +176,9 @@ export const discoverFilterFields = {
             "other",
         ])).describe("Funding series to include.").optional(),
         amount: z.object({
-            from: z.number().describe("Minimum amount raised.").optional(),
-            to: z.number().describe("Maximum amount raised.").optional(),
+            from: z.number().min(0).describe("Minimum amount raised.")
+                .optional(),
+            to: z.number().min(0).describe("Maximum amount raised.").optional(),
         }).describe("Total funding amount range.").optional(),
         date: z.object({
             from: z.string().describe("YYYY-MM-DD").optional(),

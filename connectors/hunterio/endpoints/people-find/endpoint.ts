@@ -1,4 +1,4 @@
-import { defineEndpoint, UsageModelKind } from "@shared/core";
+import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { z } from "zod";
 import { zPeopleFindQueryParams } from "./schema/inputs.ts";
 
@@ -20,7 +20,10 @@ export default defineEndpoint({
             "profile in the same call, pass the email to /combined/find.",
         docsUrl: "https://hunter.io/api-documentation/v2#email-enrichment",
         categories: ["people-enrichment"],
-        notes: ["A miss (404) costs nothing."],
+        notes: [
+            "A miss (404) costs nothing, and neither does a partial profile: " +
+            "Hunter charges only when every core data point is returned.",
+        ],
     },
     request: { method: "GET", path: "/people/find" },
     input: {
@@ -35,12 +38,30 @@ export default defineEndpoint({
         },
     },
     usage: {
-        /** 0.2 credit per hit — v1's 2026-08-20 ledger drill (design D3);
-         *  a 404 miss is error-as-data, zero usage. */
+        /** 0.2 credit, "charged if all of the following data points are
+         *  returned": email address, full name, position
+         *  (help.hunter.io/en/articles/1970956-hunter-api, 2026-09-17).
+         *  A partial profile is a free 200; a 404 miss is error-as-data. */
         model: {
-            kind: UsageModelKind.PER_CALL,
+            kind: UsageModelKind.PER_UNIT,
+            unit: Unit.RESULT,
             label: "profiles",
+            description:
+                "profiles returned with email, full name, and position (a partial profile counts zero)",
             consumes: { credit: "default", amount: 0.2 },
+        },
+        estimate: () => ({ counts: { RESULT: 1 } }),
+        evidence: ({ data, utils }) => {
+            const filled = (value: unknown) =>
+                Array.isArray(value)
+                    ? value.length > 0
+                    : value !== undefined && value !== null && value !== "";
+            const person = [
+                utils.json.optionalGet(data.output, "$.data.email"),
+                utils.json.optionalGet(data.output, "$.data.name.fullName"),
+                utils.json.optionalGet(data.output, "$.data.employment.title"),
+            ].every(filled);
+            return { counts: { RESULT: person ? 1 : 0 } };
         },
     },
 });

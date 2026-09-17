@@ -16,7 +16,9 @@ const HERE = fromFileUrl(new URL("./", import.meta.url));
  * own statements (hunter.io/api-documentation/v2, 2026-09-17): 1 credit
  * per started block of ten domain-search addresses, 1 per address found,
  * 0.5 per definitive verdict, the reveal's own `meta.credits_charged`,
- * 0.2 per enrichment hit, the 8.36-credit gate on the AI search (owner
+ * 0.2 per enrichment profile carrying every core data point
+ * (help.hunter.io/en/articles/1970956-hunter-api, 2026-09-17), the
+ * 8.36-credit gate on the AI search (owner
  * decision, design D6), and zero for the five free lookups. Only the
  * reveal carries a meter; on its happy chain the claim equals the fold,
  * so no `mismatch` key appears anywhere (zUsage is strict; deep-equality
@@ -35,15 +37,15 @@ const RATE: Record<
     "hunterio#email-finder": {
         input: {
             queryParams: {
-                domain: "reddit.com",
-                first_name: "Alexis",
-                last_name: "Ohanian",
+                domain: "example.com",
+                first_name: "Jane",
+                last_name: "Doe",
             },
         },
         usage: { credits: { default: 1 }, evidence: { RESULT: 1 } },
     },
     "hunterio#email-verifier": {
-        input: { queryParams: { email: "patrick@stripe.com" } },
+        input: { queryParams: { email: "john.doe@example.com" } },
         usage: { credits: { default: 0.5 }, evidence: { RESULT: 1 } },
     },
     "hunterio#email-count": {
@@ -87,16 +89,16 @@ const RATE: Record<
         usage: { credits: { default: 1 }, evidence: { RESULT: 1 } },
     },
     "hunterio#people/find": {
-        input: { queryParams: { email: "matt@hunter.io" } },
-        usage: { credits: { default: 0.2 }, evidence: { CALL: 1 } },
+        input: { queryParams: { email: "jane.doe@example.com" } },
+        usage: { credits: { default: 0.2 }, evidence: { RESULT: 1 } },
     },
     "hunterio#companies/find": {
         input: { queryParams: { domain: "hunter.io" } },
-        usage: { credits: { default: 0.2 }, evidence: { CALL: 1 } },
+        usage: { credits: { default: 0.2 }, evidence: { RESULT: 1 } },
     },
     "hunterio#combined/find": {
-        input: { queryParams: { email: "matt@hunter.io" } },
-        usage: { credits: { default: 0.2 }, evidence: { CALL: 1 } },
+        input: { queryParams: { email: "jane.doe@example.com" } },
+        usage: { credits: { default: 0.2 }, evidence: { RESULT: 1 } },
     },
 };
 
@@ -199,17 +201,20 @@ Deno.test("hunterio: usage fn provenance — one inject, one fromError, the reve
         runMs: 180_000,
         pollMs: 10_000,
     });
-    // the four metered docs state their own evidence; the rest inherit
+    // the seven metered docs state their own evidence; the rest inherit
     // the provider's (design D3)
     const own = ids.filter((id) =>
         bundle.endpoints[id].usage.evidence.$fn.key !==
             count.usage.evidence.$fn.key
     );
     assertEquals(own, [
+        "hunterio#combined/find",
+        "hunterio#companies/find",
         "hunterio#domain-search",
         "hunterio#email-finder",
         "hunterio#email-verifier",
         "hunterio#multi-domain-search/reveal",
+        "hunterio#people/find",
     ]);
     // one wire path, two ids
     assertEquals(

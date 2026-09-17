@@ -29,7 +29,8 @@
 - [x] 3.6 `multi-domain-search/reveal` — PER_UNIT·RESULT per fresh reveal,
       `meta.credits_charged` claim + strip (D3)
 - [x] 3.7 `people/find` (union), `companies/find`, `combined/find` —
-      PER_CALL 0.2; a 404 miss is error-as-data
+      PER_UNIT·RESULT 0.2 on a complete core set; a 404 miss is
+      error-as-data
 
 ## 4. Verify
 

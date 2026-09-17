@@ -5,17 +5,17 @@
         {
             "req": {
                 "method": "GET",
-                "url": "https://api.hunter.io/v2/email-finder?domain=reddit.com&first_name=Alexis&last_name=Ohanian"
+                "url": "https://api.hunter.io/v2/email-finder?domain=example.com&first_name=Jane&last_name=Doe"
             },
             "res": {
                 "status": 200,
                 "body": {
                     "data": {
-                        "first_name": "Alexis",
-                        "last_name": "Ohanian",
+                        "first_name": "Jane",
+                        "last_name": "Doe",
                         "email": null,
                         "score": null,
-                        "domain": "reddit.com",
+                        "domain": "example.com",
                         "accept_all": false,
                         "position": "Cofounder",
                         "twitter": null,
@@ -30,10 +30,10 @@
                     },
                     "meta": {
                         "params": {
-                            "first_name": "Alexis",
-                            "last_name": "Ohanian",
+                            "first_name": "Jane",
+                            "last_name": "Doe",
                             "full_name": null,
-                            "domain": "reddit.com",
+                            "domain": "example.com",
                             "company": null,
                             "max_duration": null
                         }
