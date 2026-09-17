@@ -25,14 +25,12 @@ Deno.test(`${ID} happy (recorded): whole usage, markdown content out`, async () 
         evidence: { CALL: 1 },
     });
     const output = result.output as Record<string, unknown>;
-    // results + the echoed crawlParameters — no billing fields
     assertEquals(Object.keys(output).sort(), [
         "crawlParameters",
         "results",
     ]);
     const results = output.results as Record<string, unknown>;
     assertEquals(typeof results.content, "string");
-    // the payload carries no billing fields
     assertEquals("credits" in results || "usage" in results, false);
 });
 

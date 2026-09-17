@@ -25,7 +25,6 @@ Deno.test(`${ID} happy (recorded): whole usage, trending items out`, async () =>
         evidence: { CALL: 1 },
     });
     const output = result.output as Record<string, unknown>;
-    // results + the echoed trendingParameters — no billing fields
     assertEquals(Object.keys(output).sort(), [
         "results",
         "trendingParameters",

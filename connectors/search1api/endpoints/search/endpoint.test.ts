@@ -32,7 +32,6 @@ Deno.test(`${ID} happy (recorded): whole usage, no billing fields in output`, as
         evidence: { call: 1 },
     });
     const output = result.output as Record<string, unknown>;
-    // results + the echoed searchParameters — no billing fields
     assertEquals(Object.keys(output).sort(), [
         "results",
         "searchParameters",
