@@ -5,18 +5,21 @@
 [Search1API](https://s1.dev) is a live-web-data API — web search across 17
 backends (incl. the Chinese engines), a dedicated news vertical, single-URL
 page crawling to Markdown, sitemap link discovery, and trending topics —
-with one flat price: 1 Search1API credit per call ($0.003 on the public
-card, `x-payment-info` verified). Submitted by the vendor
-(superagents-lab). It widens the web-search category with a provider whose
-entire surface is already five simple synchronous POSTs.
+priced in its own credits (1 credit per call; +1 per crawled page on
+search/news "Deep Search" — https://s1.dev/pricing). Submitted by the
+vendor (superagents-lab). It widens the web-search category with a
+provider whose entire surface is already five simple synchronous POSTs.
 
 ## What Changes
 
 - **connectors/search1api** — provider (`presets.auth.bearer()` on
   `https://api.search1api.com`) + 5 endpoints: `search`, `news`, `crawl`,
-  `sitemap`, `trending`. All leaf `PER_CALL` at 1 credit; quantities fns
-  synthesized. Provider-level `output.fromError` normalizes the vendor's
-  `{detail}` / RFC-9457 problem envelopes.
+  `sitemap`, `trending`. `crawl`/`sitemap`/`trending` are leaf `PER_CALL`
+  at 1 credit; `search` and `news` are COMPOSITE — 1 credit per call plus
+  1 credit per successfully crawled page when `crawl_results > 0`
+  (the vendor's "Deep Search" line on https://s1.dev/pricing). Provider-
+  level `output.fromError` normalizes the vendor's `{detail}` /
+  RFC-9457 problem envelopes.
 - **Shared schema** — `schema/common.ts` mirrors the fields `/search` and
   `/news` share (query, engines, max_results, crawl_results, image,
   include/exclude_sites, language, time_range), including the vendor's

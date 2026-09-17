@@ -10,7 +10,7 @@ import {
 const ID = "search1api#crawl";
 const chains = fromFileUrl(new URL("../../fixtures/", import.meta.url));
 
-Deno.test(`${ID} happy (recorded): flat 1 credit, markdown content out`, async () => {
+Deno.test(`${ID} happy (recorded): whole usage, markdown content out`, async () => {
     const unit = await testSealedUnit(ID);
     const result = await runEndpoint({
         unit,
@@ -20,13 +20,36 @@ Deno.test(`${ID} happy (recorded): flat 1 credit, markdown content out`, async (
     });
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
-    assertEquals(result.usage.credits, { default: 1 });
+    assertEquals(result.usage, {
+        credits: { default: 1 },
+        evidence: { CALL: 1 },
+    });
     const output = result.output as Record<string, unknown>;
+    // results + the echoed crawlParameters — no billing fields
+    assertEquals(Object.keys(output).sort(), [
+        "crawlParameters",
+        "results",
+    ]);
     const results = output.results as Record<string, unknown>;
     assertEquals(typeof results.content, "string");
+    // the payload carries no billing fields
+    assertEquals("credits" in results || "usage" in results, false);
 });
 
-Deno.test(`${ID} schema gate: missing url rejected before the wire`, async () => {
+Deno.test(`${ID} provider error (recorded 401): zero usage`, async () => {
+    const unit = await testSealedUnit(ID);
+    const result = await runEndpoint({
+        unit,
+        input: { body: { url: "https://example.com" } },
+        mode: "replay",
+        fixture: await loadFixture(`${chains}provider-error.json`),
+    });
+    assertEquals(result.httpStatus, 401);
+    assertEquals(result.isProviderError, true);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
+});
+
+Deno.test(`${ID} schema gate: rejects a missing url, passes a valid one`, async () => {
     const unit = await testSealedUnit(ID);
     const fixture = await loadFixture(`${chains}crawl-ok.json`);
     await assertRejects(
@@ -40,6 +63,16 @@ Deno.test(`${ID} schema gate: missing url rejected before the wire`, async () =>
         Error,
         "INVALID_INPUT",
     );
+    // near-twin: the documented flag shape passes the same gate
+    const nearTwin = await runEndpoint({
+        unit,
+        input: {
+            body: { url: "https://example.com", enableFallback: true },
+        },
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(nearTwin.isProviderError, false);
 });
 
 Deno.test({
@@ -57,6 +90,9 @@ Deno.test({
             false,
             JSON.stringify(result.output),
         );
-        assertEquals(result.usage.credits, { default: 1 });
+        const output = result.output as Record<string, unknown>;
+        const results = output.results as Record<string, unknown>;
+        assertEquals(typeof results.content, "string");
+        assertEquals((results.content as string).length > 0, true);
     },
 });

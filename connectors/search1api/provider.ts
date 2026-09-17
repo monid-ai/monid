@@ -4,15 +4,17 @@ import { defineProvider, presets } from "@shared/core";
  * Search1API (s1.dev) — live web data for agents: web search, news, page
  * crawling, sitemap discovery, and trending topics over
  * `https://api.search1api.com` with `Authorization: Bearer <key>`.
- * Five synchronous JSON endpoints, one flat price each: 1 Search1API credit
- * per call (the vendor's published rate — every paid endpoint carries the
- * same `x-payment-info` price of $0.003, i.e. 1 credit at the public
- * $0.003/credit card). Responses carry no usage meter, so there is no
- * `consolidate` — the derived fold is the bill.
  *
- * `/search` and `/news` also accept a BATCH array body (one credit per
- * item); the connector mirrors the single-object form only — batching is
- * the same verb repeated, and one call per run keeps the flat card exact.
+ * Rate card (https://s1.dev/pricing, verified 2026-09-17): every endpoint
+ * here costs 1 Search1API credit per call — except `/search` and `/news`
+ * with `crawl_results > 0` ("Deep Search"), which add 1 credit per
+ * successfully crawled page; the endpoints model that as COMPOSITE.
+ * Responses carry no usage meter, so there is no `consolidate` — the
+ * derived fold is the bill.
+ *
+ * `/search`, `/news` and `/crawl` also accept a BATCH array body (one
+ * credit per item); the connector mirrors the single-object form only —
+ * batching is the same verb repeated.
  *
  * Vendor non-2xx is DATA: errors arrive as `{detail}` or an RFC-9457
  * problem body (`{title, detail, status}` — 402 x402 payment challenges
@@ -25,13 +27,14 @@ export default defineProvider({
         summary: "Live web search, news, page crawling, sitemap, and " +
             "trending topics — flat 1 credit per call.",
         description: "Search1API gives agents live web data through five " +
-            "simple endpoints: web search across Google, Bing, DuckDuckGo, " +
-            "Yahoo, YouTube, X, Reddit, GitHub, arXiv, WeChat, Bilibili, " +
-            "IMDb, Wikipedia and the Chinese engines (Sogou, Baidu, 360, " +
-            "Quark); a dedicated news vertical; single-URL page crawling to " +
-            "clean Markdown; sitemap link discovery; and trending topics " +
-            "from GitHub and Hacker News. One API key, flat per-call " +
-            "pricing — the free plan includes 100 credits at https://s1.dev.",
+            "simple endpoints: web search across Google, Bing, Bing CN, " +
+            "DuckDuckGo, Yahoo, YouTube, X, Reddit, GitHub, arXiv, WeChat, " +
+            "Bilibili, IMDb, Wikipedia and the Chinese engines (Baidu, " +
+            "360, Quark); a dedicated news vertical; single-URL page " +
+            "crawling to clean Markdown; sitemap link discovery; and " +
+            "trending topics from GitHub and Hacker News. One API key, " +
+            "flat per-call pricing — the free plan includes 100 credits " +
+            "at https://s1.dev.",
         homepageUrl: "https://s1.dev",
         docsUrl: "https://docs.s1.dev",
         categories: ["web-search"],

@@ -15,14 +15,26 @@ The search1api provider SHALL declare name `search1api`,
   `search1api#crawl`, `search1api#sitemap`, and `search1api#trending`
   exist
 
-### Requirement: Flat per-call billing
-Every endpoint SHALL model `PER_CALL` consuming 1 `default` credit, with
-no `consolidate` (the vendor reports no per-response meter — the derived
-fold is the bill) and no quantities fns (meterless model ⇒ synthesized).
+### Requirement: Per-call billing with a deep-search meter
+Every endpoint SHALL consume 1 `default` credit per call. `search` and
+`news` SHALL additionally model "Deep Search" as a COMPOSITE: a flat
+`call` component plus a `crawled_page` PER_UNIT component (1 credit per
+successfully crawled page — the vendor rate card,
+https://s1.dev/pricing, verified 2026-09-17) whose estimate is the
+requested `crawl_results` capped by `max_results` and whose evidence
+counts results carrying a `content` field. No `consolidate` (the vendor
+reports no per-response meter — the derived fold is the bill).
 
 #### Scenario: Flat settle
-- **WHEN** a `search1api#search` run returns 200
+- **WHEN** a `search1api#search` run with `crawl_results` unset returns
+  200
 - **THEN** usage is `{credits: {default: 1}, evidence: {call: 1}}`
+
+#### Scenario: Deep-search settle
+- **WHEN** a `search1api#search` run with `crawl_results: 2` returns 2
+  results carrying `content`
+- **THEN** usage is
+  `{credits: {default: 3}, evidence: {call: 1, crawled_page: 2}}`
 
 #### Scenario: Errors are free
 - **WHEN** the vendor answers 401

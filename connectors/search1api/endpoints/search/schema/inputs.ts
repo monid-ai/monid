@@ -12,4 +12,7 @@ export const zSearchBody = z.object({
     search_service: zSearchService.optional().describe(
         "Search backend to use (default: the vendor's routing pick).",
     ),
+    page: z.number().int().min(1).max(100).optional().describe(
+        "Result page to return (vendor default 1, cap 100).",
+    ),
 });
