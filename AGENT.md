@@ -37,7 +37,7 @@ config.yml                    # schema.*/compiler.* = CONTRACT (no env overrides
 
 ```bash
 deno task check && deno task test    # types + replay tests (zero network)
-deno task test:live                  # live tests; auto-skip without <PROVIDER>_API_KEY
+deno task test:live                  # live tests; auto-skip without <PROVIDER>_CREDENTIALS_<FIELD>
 deno task engine:run 'exa#search' --body '{...}'   # JIT-compile + execute one endpoint
 deno task catalog providers|endpoints|inspect <id>
 deno task record <id> ...            # record real fixtures (headers dropped)
@@ -174,9 +174,9 @@ deno task apify:scaffold <actorId>   # authoring-time actor input-schema scaffol
   `fn_abi_since` facts in `config.yml`, guarded by `deno task version:check`.
 - **Tests run the artifact**: `testSealedUnit(id)` compiles the whole repo and
   tests the sealed unit (doc + its fn entries), replaying `fixtures/*.json`.
-  Live tests gate on `<PROVIDER>_API_KEY`; synthetic fixtures carry a
-  `synthetic-` filename prefix until real recordings exist. Fixtures are MINIMAL
-  SHARED CHAINS (fixture strategy v2): provider-level
+  Live tests gate on the credential env convention (below); synthetic fixtures
+  carry a `synthetic-` filename prefix until real recordings exist. Fixtures are
+  MINIMAL SHARED CHAINS (fixture strategy v2): provider-level
   `connectors/<provider>/fixtures/<shape>.json` with a required `description`
   and `{{request.url}}`/`{{request.origin}}` bindings — one chain serves every
   endpoint. `record` trims (arrays/strings capped) and ALWAYS scrubs PII; the
@@ -204,8 +204,21 @@ the contract itself moves.
 ## Conventions
 
 - Deno 2 workspace; fmt `indentWidth: 4`; import aliases `@shared/<name>`.
-- Endpoint ids are `<provider>#<endpoint>`, inferred from folder names — never
-  authored.
+- Endpoint ids are `<provider>#<path minus its leading slash>`, where the path
+  is the def's `endpoint` ?? `request.path` (design D22). Folder names are
+  ORGANIZATIONAL only — they must be unique per provider, but they are never
+  identity. Declare `endpoint` when the native path is transport plumbing
+  (apify's actor slug), empty (tinyfish), or SHARED by two defs (contactout's
+  work/personal twins, where omitting it collides).
+- **Credentials, one convention**: each field of a doc's `auth.credentials`
+  reads from `<PROVIDER>_CREDENTIALS_<FIELD>` — dashes and camelCase humps
+  become underscores (`contactout` + `workApiKey` ⇒
+  `CONTACTOUT_CREDENTIALS_WORK_API_KEY`). One alias, for the near-universal
+  `apiKey` field alone: the bare `<PROVIDER>_API_KEY` still answers, and the
+  canonical name wins when both are set. A variable set but EMPTY is a config
+  error surfaced as `MISSING_CREDENTIAL` naming it, never a silent fallback.
+  Same spelling as monid-services' `AppConfig` path→env derivation, so local env
+  and hosted config agree.
 - New hook = contract file in `shared/core/schema/hooks/` + section carrier +
   doc `zFnRef` slot + `fnKeysOf` entry + `linkFns` branch + engine phase +
   version bump. Follow the existing pattern end-to-end.

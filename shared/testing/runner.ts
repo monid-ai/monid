@@ -9,9 +9,11 @@ import {
     type Usage,
 } from "@shared/core";
 import {
+    credentialFieldsOf,
     directTransport,
     Engine,
     ENGINE_VERSION,
+    envCredentialsPresent,
     envParamsResolver,
     type RunCompleted,
 } from "@monid/connector-engine";
@@ -83,8 +85,15 @@ export async function runEndpoint(
             // carry {{request.url}}/{{request.origin}} placeholders, bound
             // from THIS endpoint's compiled request
             const requestUrl = opts.unit.doc.request.url;
+            // the test key satisfies whatever credential SHAPE the doc
+            // declares (default `{apiKey}`, or a provider's own — contactout
+            // names its two keys), so replay never depends on env
+            const testParams = Object.fromEntries(
+                credentialFieldsOf(opts.unit.doc.auth.credentials)
+                    .map((field) => [field, "test-key"]),
+            );
             transport = directTransport({
-                params: () => Promise.resolve({ apiKey: "test-key" }),
+                params: () => Promise.resolve(testParams),
                 fetch: replayFetch(opts.fixture, {
                     "request.url": requestUrl,
                     "request.origin": new URL(requestUrl).origin,
@@ -136,8 +145,43 @@ export async function estimateEndpoint(
     return loaded.estimate(input);
 }
 
-/** Gate for live tests: `ignore: liveSkip("exa")`. */
-export function liveSkip(providerSlug: string): boolean {
-    const envVar = `${providerSlug.toUpperCase().replaceAll("-", "_")}_API_KEY`;
-    return !Deno.env.get(envVar);
+/**
+ * The PASSING half of a schema gate: `input` clears input validation.
+ *
+ * A gate test that only asserts rejections cannot detect a gate that is too
+ * WIDE — every near-valid bad input fails, and so would every good one. This
+ * asserts the complement: the run may fail afterwards for any other reason
+ * (a replay URL mismatch is the usual one, since proving a variant reaches
+ * the wire would need its own fixture), but it must not fail with
+ * INVALID_INPUT.
+ */
+export async function assertInputAccepted(
+    opts: RunEndpointOptions,
+): Promise<void> {
+    try {
+        await runEndpoint(opts);
+    } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        if (message.includes("INVALID_INPUT")) {
+            throw new Error(
+                `the schema gate REJECTED an input that must pass ` +
+                    `(${JSON.stringify(opts.input)}): ${message}`,
+            );
+        }
+        // any other failure means validation let the input through, which
+        // is the whole claim
+    }
+}
+
+/**
+ * Gate for live tests: `ignore: liveSkip("exa")`. Open only when EVERY
+ * credential field the provider declares is set — a multi-key provider
+ * names its fields: `liveSkip("contactout", ["workApiKey", "personalApiKey"])`.
+ * The env reading itself lives behind the engine's transport boundary.
+ */
+export function liveSkip(
+    providerSlug: string,
+    fields?: readonly string[],
+): boolean {
+    return !envCredentialsPresent(providerSlug, fields);
 }

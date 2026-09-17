@@ -63,8 +63,14 @@ export interface Transport {
     execute(req: PreparedRequest): Promise<TransportResponse>;
 }
 
+/** Credential lookup. `fields` are the credential field names the doc's
+ *  `auth.credentials` declares — the injector passes them so a resolver can
+ *  address each one individually (the env resolver maps them to
+ *  `<PROVIDER>_CREDENTIALS_<FIELD>`). A resolver that ignores `fields`
+ *  stays assignable; absent, it means the default `{apiKey}` shape. */
 export type ParamsResolver = (
     provider: string,
+    fields?: readonly string[],
 ) => Promise<Record<string, string>>;
 
 export interface EngineCtx {

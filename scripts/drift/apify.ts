@@ -513,9 +513,8 @@ async function rescaffold(
 
 export const apifySuite: DriftSuite = {
     provider: "apify",
-    requiresEnv: "APIFY_API_KEY",
     async run(ctx: DriftCtx): Promise<DriftFinding[]> {
-        const token = Deno.env.get(this.requiresEnv)!;
+        const token = ctx.token;
         const now = new Date().toISOString();
         const findings: DriftFinding[] = [];
         const repins: Repin[] = [];
