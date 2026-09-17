@@ -35,6 +35,11 @@ import { zOwnedResource, zResourceTarget } from "../resource/row.ts";
 export const zWebhookVerify = z.strictObject({
     scheme: z.literal("hmac-sha256"),
     signatureHeader: z.string().min(1),
+    /** Literal text the vendor puts BEFORE the hex digest in the
+     *  signature header (saperly: "v1=" — the header reads `v1=<hex>`).
+     *  Absent = the header is the bare hex. A delivery whose header
+     *  lacks a declared prefix is a mismatch. */
+    signaturePrefix: z.string().min(1).optional(),
     timestampHeader: z.string().min(1),
     /** The signed payload TEMPLATE (design D45): `${rawBody}` (the EXACT
      *  raw bytes — a signature that doesn't cover the body verifies
