@@ -1,9 +1,7 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zPagesByInternalLinksQueryParams } from "./schema/inputs.ts";
+import { zLimit } from "../../../schema/common.ts";
 
-/**
- * GET /site-explorer/pages-by-internal-links — Pages by Internal Links: 3 API units per row (the fixed field set below; design D4).
- */
 export default defineEndpoint({
     meta: {
         displayName: "Pages by Internal Links",
@@ -27,13 +25,13 @@ export default defineEndpoint({
     request: { method: "GET", path: "/site-explorer/pages-by-internal-links" },
     input: {
         schema: {
-            // vendor defaults at the binding (D25); the row budget is REQUIRED — the estimate's whole basis
+            // vendor defaults at the binding (D25); the row budget is REQUIRED and plan-capped here, the mirror keeps the vendor's unbounded integer — the estimate's whole basis
             queryParams: zPagesByInternalLinksQueryParams.extend({
                 mode: zPagesByInternalLinksQueryParams.shape.mode.unwrap()
                     .default("subdomains"),
                 protocol: zPagesByInternalLinksQueryParams.shape.protocol
                     .unwrap().default("both"),
-            }).required({ limit: true }),
+            }).extend({ limit: zLimit }),
         },
         /** The fixed `select` (design D4) — callers never supply it. */
         toRequest: ({ data }) => ({

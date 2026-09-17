@@ -1,14 +1,13 @@
 import { z } from "zod";
 import {
-    zLimit,
     zMode,
     zOrderBy,
     zProtocol,
+    zRowBudget,
     zTarget,
     zWhere,
 } from "../../../../schema/common.ts";
 
-/** The fixed `select` list — 10 API units per row (design D4). */
 export const ALL_BACKLINKS_FIELDS = [
     "url_from",
     "url_to",
@@ -26,7 +25,7 @@ export const zAllBacklinksQueryParams = z.object({
     target: zTarget,
     mode: zMode.optional(),
     protocol: zProtocol.optional(),
-    limit: zLimit.optional(),
+    limit: zRowBudget.optional(),
     where: zWhere(ALL_BACKLINKS_FIELDS).optional(),
     order_by: zOrderBy(ALL_BACKLINKS_FIELDS).optional(),
 }).strict();

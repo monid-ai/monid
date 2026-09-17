@@ -1,9 +1,6 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zPagesByTrafficQueryParams } from "./schema/inputs.ts";
 
-/**
- * GET /site-explorer/pages-by-traffic — Traffic Distribution: 56 API units per row (all returned fields, one row).
- */
 export default defineEndpoint({
     meta: {
         displayName: "Traffic Distribution",

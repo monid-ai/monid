@@ -1,10 +1,7 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zAllBacklinksQueryParams } from "./schema/inputs.ts";
+import { zLimit } from "../../../schema/common.ts";
 
-/**
- * GET /site-explorer/all-backlinks — the backlink index itself, one row per
- * link, 10 API units per row (the fixed field set below; design D4).
- */
 export default defineEndpoint({
     meta: {
         displayName: "Backlinks",
@@ -38,7 +35,7 @@ export default defineEndpoint({
                 ),
                 protocol: zAllBacklinksQueryParams.shape.protocol.unwrap()
                     .default("both"),
-            }).required({ limit: true }),
+            }).extend({ limit: zLimit }),
         },
         /** The fixed `select` (design D4) — callers never supply it; the
          *  same list `where` / `order_by` are restricted to. */

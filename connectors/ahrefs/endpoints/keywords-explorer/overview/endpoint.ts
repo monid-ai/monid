@@ -1,9 +1,6 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zOverviewQueryParams } from "./schema/inputs.ts";
 
-/**
- * GET /keywords-explorer/overview — Keyword Metrics: 42 API units per row (the fixed field set below; design D4).
- */
 export default defineEndpoint({
     meta: {
         displayName: "Keyword Metrics",

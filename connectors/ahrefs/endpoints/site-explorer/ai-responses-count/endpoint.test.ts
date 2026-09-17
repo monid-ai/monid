@@ -86,5 +86,11 @@ Deno.test({
             JSON.stringify(result.output),
         );
         assertEquals(typeof result.usage.evidence.rows, "number");
+        assertEquals(
+            typeof (result.output as Record<string, unknown>)
+                .ai_responses_count,
+            "object",
+            JSON.stringify(result.output),
+        );
     },
 });

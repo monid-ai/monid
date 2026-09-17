@@ -1,9 +1,7 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zOrganicCompetitorsQueryParams } from "./schema/inputs.ts";
+import { zLimit } from "../../../schema/common.ts";
 
-/**
- * GET /site-explorer/organic-competitors — Organic Competitors: 14 API units per row (the fixed field set below; design D4).
- */
 export default defineEndpoint({
     meta: {
         displayName: "Organic Competitors",
@@ -29,13 +27,13 @@ export default defineEndpoint({
     request: { method: "GET", path: "/site-explorer/organic-competitors" },
     input: {
         schema: {
-            // vendor defaults at the binding (D25); the row budget is REQUIRED — the estimate's whole basis
+            // vendor defaults at the binding (D25); the row budget is REQUIRED and plan-capped here, the mirror keeps the vendor's unbounded integer — the estimate's whole basis
             queryParams: zOrganicCompetitorsQueryParams.extend({
                 mode: zOrganicCompetitorsQueryParams.shape.mode.unwrap()
                     .default("subdomains"),
                 protocol: zOrganicCompetitorsQueryParams.shape.protocol.unwrap()
                     .default("both"),
-            }).required({ limit: true }),
+            }).extend({ limit: zLimit }),
         },
         /** The fixed `select` (design D4) — callers never supply it. */
         toRequest: ({ data }) => ({

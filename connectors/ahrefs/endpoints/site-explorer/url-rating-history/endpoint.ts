@@ -1,9 +1,6 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zUrlRatingHistoryQueryParams } from "./schema/inputs.ts";
 
-/**
- * GET /site-explorer/url-rating-history — URL Rating History: 2 API units per row (all returned fields, one row).
- */
 export default defineEndpoint({
     meta: {
         displayName: "URL Rating History",

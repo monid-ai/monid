@@ -1,9 +1,6 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zTotalSearchVolumeHistoryQueryParams } from "./schema/inputs.ts";
 
-/**
- * GET /site-explorer/total-search-volume-history — Search Volume History: 11 API units per row (all returned fields, one row).
- */
 export default defineEndpoint({
     meta: {
         displayName: "Search Volume History",

@@ -1,9 +1,7 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zMatchingTermsQueryParams } from "./schema/inputs.ts";
+import { zLimit } from "../../../schema/common.ts";
 
-/**
- * GET /keywords-explorer/matching-terms — Matching Keywords: 22 API units per row (the fixed field set below; design D4).
- */
 export default defineEndpoint({
     meta: {
         displayName: "Matching Keywords",
@@ -27,8 +25,8 @@ export default defineEndpoint({
     request: { method: "GET", path: "/keywords-explorer/matching-terms" },
     input: {
         schema: {
-            // vendor defaults at the binding (D25); the row budget is REQUIRED — the estimate's whole basis
-            queryParams: zMatchingTermsQueryParams.required({ limit: true }),
+            // vendor defaults at the binding (D25); the row budget is REQUIRED and plan-capped here, the mirror keeps the vendor's unbounded integer — the estimate's whole basis
+            queryParams: zMatchingTermsQueryParams.extend({ limit: zLimit }),
         },
         /** The fixed `select` (design D4) — callers never supply it; `keywords` joins onto the vendor's comma-separated parameter (the engine would otherwise repeat the key). */
         toRequest: ({ data }) => ({

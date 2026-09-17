@@ -1,9 +1,6 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zRefdomainsHistoryQueryParams } from "./schema/inputs.ts";
 
-/**
- * GET /site-explorer/refdomains-history — Referring Domains History: 6 API units per row (all returned fields, one row).
- */
 export default defineEndpoint({
     meta: {
         displayName: "Referring Domains History",

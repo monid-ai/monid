@@ -1,14 +1,13 @@
 import { z } from "zod";
 import {
-    zLimit,
     zMode,
     zOrderBy,
     zProtocol,
+    zRowBudget,
     zTarget,
     zWhere,
 } from "../../../../schema/common.ts";
 
-/** The fixed `select` list — 3 API units per row (design D4). */
 export const PAGES_BY_INTERNAL_LINKS_FIELDS = [
     "url_to",
     "title_target",
@@ -25,7 +24,7 @@ export const zPagesByInternalLinksQueryParams = z.object({
     target: zTarget,
     mode: zMode.optional(),
     protocol: zProtocol.optional(),
-    limit: zLimit.optional(),
+    limit: zRowBudget.optional(),
     where: zWhere(PAGES_BY_INTERNAL_LINKS_FIELDS).optional(),
     order_by: zOrderBy(PAGES_BY_INTERNAL_LINKS_FIELDS, {
         sortable: PAGES_BY_INTERNAL_LINKS_FIELDS_SORTABLE,

@@ -1,9 +1,7 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zBrokenBacklinksQueryParams } from "./schema/inputs.ts";
+import { zLimit } from "../../../schema/common.ts";
 
-/**
- * GET /site-explorer/broken-backlinks — Broken Backlinks: 9 API units per row (the fixed field set below; design D4).
- */
 export default defineEndpoint({
     meta: {
         displayName: "Broken Backlinks",
@@ -29,14 +27,14 @@ export default defineEndpoint({
     request: { method: "GET", path: "/site-explorer/broken-backlinks" },
     input: {
         schema: {
-            // vendor defaults at the binding (D25); the row budget is REQUIRED — the estimate's whole basis
+            // vendor defaults at the binding (D25); the row budget is REQUIRED and plan-capped here, the mirror keeps the vendor's unbounded integer — the estimate's whole basis
             queryParams: zBrokenBacklinksQueryParams.extend({
                 mode: zBrokenBacklinksQueryParams.shape.mode.unwrap().default(
                     "subdomains",
                 ),
                 protocol: zBrokenBacklinksQueryParams.shape.protocol.unwrap()
                     .default("both"),
-            }).required({ limit: true }),
+            }).extend({ limit: zLimit }),
         },
         /** The fixed `select` (design D4) — callers never supply it. */
         toRequest: ({ data }) => ({

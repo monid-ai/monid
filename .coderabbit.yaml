@@ -74,6 +74,9 @@ reviews:
         (4) try/catch, null checks, or fallbacks guarding states the zod schema or
         the caller already rule out;
         (5) comments or JSDoc that restate the signature or narrate the next line;
+        A comment above a hook or a binding that states WHY (why the caller
+        never supplies a field, why a knob is required, why a fn is stated
+        verbatim on every endpoint) is rationale, not narration — leave it;
         (6) edits unrelated to the stated purpose of the PR — reformatting,
         renaming, or "improving" untouched neighbouring code.
         Say which lines to delete. Prefer "drop this" over "consider refactoring".
@@ -91,10 +94,12 @@ reviews:
         not.
         A sync-provider endpoint.test.ts has fixed parts; flag a missing one:
         happy (result.usage deep-equalled as a WHOLE {credits, evidence} object,
-        billing fields gone from output, result count = the fixture's), provider
+        billing fields gone from output, result count = the fixture's — a deep-equal
+        of the whole output against the fixture body satisfies this), provider
         error (isProviderError true, empty usage), schema gate (assertRejects
         INVALID_INPUT on a near-valid bad input PLUS a passing near-twin proving
-        the gate is not too wide), live (ignore: liveSkip(slug), asserts shape not
+        the gate is not too wide — the twin may be proven through the engine's
+        pure estimate, no fixture needed), live (ignore: liveSkip(slug), asserts shape not
         amounts). Provenance (testBundle, which docs share the provider's fn keys)
         is one per provider, not per endpoint.
 
@@ -111,6 +116,10 @@ reviews:
         .refine()/.superRefine() (they do not survive compilation), unquoted
         keys; ALL tightening (.required, .default, .min) lives at the binding in
         endpoint.ts. Never invent structure the vendor does not have.
+        A rule shared by every endpoint of one provider (the billing formula, a
+        per-request minimum, a meter header) is cited ONCE, on provider.ts; an
+        endpoint's rate-card comment cites only its own amounts. Do not ask each
+        endpoint to repeat the provider's citation.
         Endpoint ids are inferred from folder names — flag an authored id.
         Schemas are never imported across providers.
         Fixtures: no secret VALUE and no request/response headers ever; PII

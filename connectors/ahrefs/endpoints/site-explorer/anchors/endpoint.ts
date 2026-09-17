@@ -1,9 +1,7 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zAnchorsQueryParams } from "./schema/inputs.ts";
+import { zLimit } from "../../../schema/common.ts";
 
-/**
- * GET /site-explorer/anchors — Backlink Anchors: 9 API units per row (the fixed field set below; design D4).
- */
 export default defineEndpoint({
     meta: {
         displayName: "Backlink Anchors",
@@ -28,7 +26,7 @@ export default defineEndpoint({
     request: { method: "GET", path: "/site-explorer/anchors" },
     input: {
         schema: {
-            // vendor defaults at the binding (D25); the row budget is REQUIRED — the estimate's whole basis
+            // vendor defaults at the binding (D25); the row budget is REQUIRED and plan-capped here, the mirror keeps the vendor's unbounded integer — the estimate's whole basis
             queryParams: zAnchorsQueryParams.extend({
                 mode: zAnchorsQueryParams.shape.mode.unwrap().default(
                     "subdomains",
@@ -36,7 +34,7 @@ export default defineEndpoint({
                 protocol: zAnchorsQueryParams.shape.protocol.unwrap().default(
                     "both",
                 ),
-            }).required({ limit: true }),
+            }).extend({ limit: zLimit }),
         },
         /** The fixed `select` (design D4) — callers never supply it. */
         toRequest: ({ data }) => ({

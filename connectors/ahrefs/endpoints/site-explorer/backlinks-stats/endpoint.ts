@@ -1,9 +1,6 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zBacklinksStatsQueryParams } from "./schema/inputs.ts";
 
-/**
- * GET /site-explorer/backlinks-stats — Backlink Totals: 12 API units per row (all returned fields, one row).
- */
 export default defineEndpoint({
     meta: {
         displayName: "Backlink Totals",

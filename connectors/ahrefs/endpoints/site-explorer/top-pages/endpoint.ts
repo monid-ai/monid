@@ -1,9 +1,7 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zTopPagesQueryParams } from "./schema/inputs.ts";
+import { zLimit } from "../../../schema/common.ts";
 
-/**
- * GET /site-explorer/top-pages — Top Pages by Traffic: 23 API units per row (the fixed field set below; design D4).
- */
 export default defineEndpoint({
     meta: {
         displayName: "Top Pages by Traffic",
@@ -28,7 +26,7 @@ export default defineEndpoint({
     request: { method: "GET", path: "/site-explorer/top-pages" },
     input: {
         schema: {
-            // vendor defaults at the binding (D25); the row budget is REQUIRED — the estimate's whole basis
+            // vendor defaults at the binding (D25); the row budget is REQUIRED and plan-capped here, the mirror keeps the vendor's unbounded integer — the estimate's whole basis
             queryParams: zTopPagesQueryParams.extend({
                 mode: zTopPagesQueryParams.shape.mode.unwrap().default(
                     "subdomains",
@@ -36,7 +34,7 @@ export default defineEndpoint({
                 protocol: zTopPagesQueryParams.shape.protocol.unwrap().default(
                     "both",
                 ),
-            }).required({ limit: true }),
+            }).extend({ limit: zLimit }),
         },
         /** The fixed `select` (design D4) — callers never supply it. */
         toRequest: ({ data }) => ({

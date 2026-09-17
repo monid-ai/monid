@@ -5,8 +5,7 @@ export const zSerpOverviewQueryParams = z.object({
     keyword: zKeyword,
     country: zCountry,
     date: zDate.optional(),
-    top_positions: z.number().int().min(1).max(100).describe(
-        "How many top positions to return (1-100; one billed row per " +
-            "position).",
+    top_positions: z.number().int().describe(
+        "How many top positions to return (one billed row per position).",
     ).optional(),
 }).strict();

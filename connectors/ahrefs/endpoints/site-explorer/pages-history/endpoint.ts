@@ -1,9 +1,6 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zPagesHistoryQueryParams } from "./schema/inputs.ts";
 
-/**
- * GET /site-explorer/pages-history — Ranking Pages History: 2 API units per row (all returned fields, one row).
- */
 export default defineEndpoint({
     meta: {
         displayName: "Ranking Pages History",
