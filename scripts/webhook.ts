@@ -88,10 +88,11 @@ async function sign(
     const timestamp = String(Math.floor(at.getTime() / 1000));
     return {
         [verify.timestampHeader]: timestamp,
-        [verify.signatureHeader]: await hmacHex(
-            secret,
-            renderPayload(verify.payload, timestamp, rawBody),
-        ),
+        [verify.signatureHeader]: (verify.signaturePrefix ?? "") +
+            await hmacHex(
+                secret,
+                renderPayload(verify.payload, timestamp, rawBody),
+            ),
     };
 }
 
@@ -122,7 +123,7 @@ async function checkDelivery(
         secret,
         renderPayload(verify.payload, timestamp, rawBody),
     );
-    if (expected !== signature) {
+    if ((verify.signaturePrefix ?? "") + expected !== signature) {
         return { ok: false, reason: "signature mismatch" };
     }
     return { ok: true };
