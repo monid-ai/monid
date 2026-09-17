@@ -18,14 +18,42 @@ schema:
     # "what is the OLDEST engine that understands X?" — a historical fact set
     # when a change ships (deriving from the current engine version would
     # over-pin every doc to the newest engine).
-    doc_format_since: "0.0.1" # oldest engine understanding the doc format (minEngineVersion floor)
+    # 0.0.3: `meta.notes` (add-meta-notes). The doc's `meta` is zEndpointMeta,
+    # a strictObject — an engine at 0.0.2 REJECTS a doc carrying the new key,
+    # so the floor moves even though the field is optional and additive.
+    # (0.0.2 itself bumped the ENGINE only: add-connector-pdl changed how
+    # `usage.credits` RESOLVES, not the shape of the doc it produces.)
+    # 0.3.0: an endpoint IDENTITY may carry a `{param}` placeholder segment
+    # (`firecrawl#crawl/{id}`), so a resource-style endpoint is named by the
+    # vendor's real path instead of an invented pin. zEndpointId/zEndpointPath
+    # are regexes an engine at 0.2.0 REJECTS, so the floor moves — the same
+    # condition as meta.notes at 0.0.3, with the same accepted consequence:
+    # every doc floors at 0.3.0, including those carrying no placeholder.
+    # Kept a single declared fact rather than a per-doc inference (the D4
+    # rule of add-meta-notes). A per-feature floor is available when a
+    # feature can ride the fn-api table (async_since does); an IDENTITY is
+    # not a fn, so a per-doc floor for it would need its own compiler branch
+    # — not worth it with no consumer yet.
+    doc_format_since: "0.3.0" # oldest engine understanding the doc format (minEngineVersion floor)
     # Pre-release: the whole contract (hook ctx {data, utils, logger},
     # structured run state, UPPERCASE run kinds, usage.model + usage.estimate,
     # zero-default utils.http / full-capability utils.request, the
     # same-origin credential rule) ships UNRELEASED as 0.0.1 — versions stay
     # at the pre-release floor until a first real release mints 0.1.0.
-    fn_abi_since: "0.0.1" # engine release of the current hook ABI; stamped as fn entries' `api`
-    async_since: "0.0.1" # engine release of the lifecycle (async) hook family; stamped as lifecycle fn entries' `api`
+    # 0.1.0: the wire query became a MULTIMAP (`Record<string, string[]>`)
+    # on zHttpRequestParts — a SHAPE change, not a widening, since a fn
+    # constructing `query: {k: "v"}` would now be wrong. Nothing in-tree
+    # does (auth fns spread data.request through), so no connector moved,
+    # but the stamp says what happened.
+    fn_abi_since: "0.1.0" # engine release of the current hook ABI; stamped as fn entries' `api`
+    # 0.1.0 with fn_abi_since: the lifecycle family's OWN surface moved too
+    # — zHttpCall.queryParams now takes a scalar or a list, normalized by
+    # the engine, so a lifecycle fn passing a list needs 0.1.0.
+    # 0.2.0 adds RESPONSE HEADERS to HttpResult — the return of utils.http /
+    # utils.request, which only the LIFECYCLE family holds. So this bump is
+    # alone here, NOT on fn_abi_since: a pure-hook doc gained no capability
+    # and must not be floored at a newer engine.
+    async_since: "0.2.0" # engine release of the lifecycle (async) hook family; stamped as lifecycle fn entries' `api`
     state_max_bytes: 65536 # hard engine cap on serialized lifecycle state (ids + billing signals, never payloads)
 
 compiler:

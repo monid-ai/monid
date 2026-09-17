@@ -55,7 +55,18 @@ export const zHttpCall = z.strictObject({
     /** Resolved against the doc request URL's origin. */
     path: z.string().regex(/^\//, "path must start with /").optional(),
     headers: z.record(z.string(), z.string()).optional(),
-    queryParams: z.record(z.string(), z.string()).optional(),
+    /** Author-friendly: a scalar, or SEVERAL values under one key. The
+     *  engine normalizes both into the wire multimap — an array is sent
+     *  as a repeated key (`?k=a&k=b`). An EMPTY array is allowed and
+     *  means "no value for this key": the engine drops it, exactly as it
+     *  does on the declarative path, so a fn building params dynamically
+     *  (`{ids: someList}`) needs no length guard. The min-1 floor belongs
+     *  on the WIRE shape (`zHttpRequestParts.query`), which is what the
+     *  normalizer produces — never on the authoring input. */
+    queryParams: z.record(
+        z.string(),
+        z.union([z.string(), z.array(z.string())]),
+    ).optional(),
     body: zJson.optional(),
     requestMs: z.number().int().positive().optional(),
 }).refine(
@@ -64,11 +75,21 @@ export const zHttpCall = z.strictObject({
 );
 export type HttpCall = z.infer<typeof zHttpCall>;
 
-/** What utils.http returns: status + sniff-decoded body. Vendor non-2xx is
- *  RETURNED (data), never thrown — the fn decides; transport failures throw
- *  EXECUTION_FAILED through the fn (retriable). */
+/** What utils.http returns: status + response headers + sniff-decoded body.
+ *  Vendor non-2xx is RETURNED (data), never thrown — the fn decides; transport
+ *  failures throw EXECUTION_FAILED through the fn (retriable). */
 export interface HttpResult {
     status: number;
+    /** The VENDOR'S RESPONSE headers, keys LOWERCASED — envelope facts a
+     *  vendor answers WITH instead of a body (a 302's `location` IS the
+     *  payload for an endpoint whose answer is the redirect target — a
+     *  presigned URL minted per request; `retry-after`, `content-range` and
+     *  `link` pagination are the same shape). Always present ({} when the
+     *  transport reports none), so fns never branch on presence. REQUEST
+     *  headers — where credentials live — stay invisible to fns: redirects
+     *  are never followed, so a credential never travels to the target
+     *  either (design D16). */
+    headers: Record<string, string>;
     body: Json;
 }
 

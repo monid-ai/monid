@@ -1,11 +1,15 @@
 export {
     type Fixture,
     loadFixture,
+    pickRecordedHeaders,
+    RECORDED_RES_HEADERS,
     type RecordedCall,
     recordingFetch,
+    REDACTED_QUERY_VALUE,
     replayFetch,
     scrubCalls,
     scrubJson,
+    scrubUrlCredentials,
     TRIM_ARRAY_CAP,
     TRIM_STRING_CAP,
     trimCalls,
@@ -13,6 +17,7 @@ export {
     zFixture,
 } from "./fixtures.ts";
 export {
+    estimateEndpoint,
     liveSkip,
     runEndpoint,
     type RunEndpointOptions,

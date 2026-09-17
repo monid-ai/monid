@@ -8,7 +8,10 @@
 const CONTRACT_PATHS = [
     "engine/fn-utils.ts", // JsonUtil + MoneyUtil impls (hook ABI surface)
     "engine/link.ts", // linking + slot-contract wrapping semantics
-    "engine/request.ts", // PreparedRequest shape
+    "engine/request.ts", // input validation + query serialization
+    "engine/interfaces/mod.ts", // PreparedRequest shape (lives HERE, not request.ts)
+    "engine/transport.ts", // wire encoding of the prepared request
+    "shared/core/schema/common/http.ts", // HttpRequestParts (the auth-fn contract)
     "engine/auth.ts", // injection procedure
     "shared/core/schema/hooks/to-request.ts", // fn slot schemas (the ABI)
     "shared/core/schema/hooks/from-response.ts",
@@ -18,8 +21,13 @@ const CONTRACT_PATHS = [
     "shared/core/schema/hooks/ctx.ts", // ctx shapes + carriers (the ABI)
     "shared/core/schema/sections/lifecycle.ts", // lifecycle def section
     "shared/core/schema/sections/timeouts.ts", // timeouts shape (pollMs)
+    "shared/core/schema/common/ids.ts", // endpoint identity FORMAT (a doc
+    //   minted with an id shape an older engine rejects is a format change)
     "shared/core/schema/endpoint/doc.ts", // structural doc format
     "shared/core/schema/provider/doc.ts", // provider doc format
+    "shared/core/schema/meta/base.ts", // meta shapes the docs COMPOSE — a field
+    "shared/core/schema/meta/endpoint.ts", //   added here changes the doc format
+    "shared/core/schema/meta/provider.ts", //   without touching doc.ts at all
     "shared/core/schema/bundle/sealed-unit.ts", // sealed unit shape
     "shared/core/schema/usage/unit.ts", // Unit enum
     "shared/core/schema/usage/usage.ts", // Usage shape

@@ -60,8 +60,11 @@ export function directTransport(opts: {
                 };
 
             const url = new URL(authed.url);
-            for (const [key, value] of Object.entries(authed.query)) {
-                url.searchParams.append(key, value);
+            for (const [key, values] of Object.entries(authed.query)) {
+                // append (never set) once per value — several values under
+                // one key IS the repeated-parameter spelling, and ORDER is
+                // the caller's
+                for (const value of values) url.searchParams.append(key, value);
             }
 
             const controller = new AbortController();
@@ -88,6 +91,11 @@ export function directTransport(opts: {
                 return {
                     status: response.status,
                     body,
+                    // `redirect: "manual"` above means a 3xx arrives WITH its
+                    // Location intact and an empty body — the header IS the
+                    // payload for presigned-URL endpoints. Header keys are
+                    // lowercased by the Fetch spec's Headers iterator.
+                    headers: Object.fromEntries(response.headers),
                     contentType: response.headers.get("content-type") ??
                         undefined,
                 };
