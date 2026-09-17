@@ -93,10 +93,12 @@ reviews:
         not.
         A sync-provider endpoint.test.ts has fixed parts; flag a missing one:
         happy (result.usage deep-equalled as a WHOLE {credits, evidence} object,
-        billing fields gone from output, result count = the fixture's), provider
+        billing fields gone from output, result count = the fixture's — a deep-equal
+        of the whole output against the fixture body satisfies this), provider
         error (isProviderError true, empty usage), schema gate (assertRejects
         INVALID_INPUT on a near-valid bad input PLUS a passing near-twin proving
-        the gate is not too wide), live (ignore: liveSkip(slug), asserts shape not
+        the gate is not too wide — the twin may be proven through the engine's
+        pure estimate, no fixture needed), live (ignore: liveSkip(slug), asserts shape not
         amounts). Provenance (testBundle, which docs share the provider's fn keys)
         is one per provider, not per endpoint.
 
