@@ -68,6 +68,18 @@ async function hmacHex(secret: string, payload: string): Promise<string> {
         .map((byte) => byte.toString(16).padStart(2, "0")).join("");
 }
 
+/** Constant-time string equality (v1's timingSafeEqual): the fold
+ *  visits EVERY char of the expected value regardless of where a
+ *  mismatch occurs, so response timing does not leak a digest prefix. */
+function timingSafeEqual(expected: string, provided: string): boolean {
+    const width = Math.max(expected.length, provided.length);
+    let diff = expected.length ^ provided.length;
+    for (let i = 0; i < width; i++) {
+        diff |= (expected.charCodeAt(i) || 0) ^ (provided.charCodeAt(i) || 0);
+    }
+    return diff === 0;
+}
+
 function renderPayload(
     template: string,
     timestamp: string,
@@ -78,8 +90,9 @@ function renderPayload(
         .replaceAll("${rawBody}", rawBody);
 }
 
-/** Sign a synthetic delivery exactly as the vendor would. */
-async function sign(
+/** Sign a synthetic delivery exactly as the vendor would. Exported for
+ *  the unit pins in webhook.test.ts. */
+export async function sign(
     verify: ProviderWebhookDoc["verify"],
     secret: string,
     rawBody: string,
@@ -96,8 +109,12 @@ async function sign(
     };
 }
 
-/** The ingress check: recompute over the EXACT raw bytes + replay window. */
-async function checkDelivery(
+/** The ingress check: recompute over the EXACT raw bytes + replay
+ *  window. Signature FIRST (constant-time), THEN the tolerance window —
+ *  v1's documented ordering, so timing cannot distinguish a
+ *  stale-but-valid signature from a fresh-but-invalid one. Exported for
+ *  the unit pins in webhook.test.ts. */
+export async function checkDelivery(
     verify: ProviderWebhookDoc["verify"],
     secret: string,
     headers: Record<string, string>,
@@ -112,19 +129,19 @@ async function checkDelivery(
     if (signature === undefined) {
         return { ok: false, reason: `missing ${verify.signatureHeader}` };
     }
+    const expected = (verify.signaturePrefix ?? "") + await hmacHex(
+        secret,
+        renderPayload(verify.payload, timestamp, rawBody),
+    );
+    if (!timingSafeEqual(expected, signature)) {
+        return { ok: false, reason: "signature mismatch" };
+    }
     const age = Math.abs(now.getTime() - Number(timestamp) * 1000);
     if (!Number.isFinite(age) || age > verify.toleranceMs) {
         return {
             ok: false,
             reason: `timestamp outside ±${verify.toleranceMs}ms window`,
         };
-    }
-    const expected = await hmacHex(
-        secret,
-        renderPayload(verify.payload, timestamp, rawBody),
-    );
-    if ((verify.signaturePrefix ?? "") + expected !== signature) {
-        return { ok: false, reason: "signature mismatch" };
     }
     return { ok: true };
 }
@@ -530,11 +547,15 @@ const listen = new Command()
         await server.finished;
     });
 
-await new Command()
-    .name("webhook")
-    .description(
-        "Local webhook loop: simulate deliveries or listen for real ones.",
-    )
-    .command("simulate", simulate)
-    .command("listen", listen)
-    .parse(Deno.args);
+// import.meta.main guard: webhook.test.ts imports sign/checkDelivery —
+// the CLI must not parse the TEST runner's args on import
+if (import.meta.main) {
+    await new Command()
+        .name("webhook")
+        .description(
+            "Local webhook loop: simulate deliveries or listen for real ones.",
+        )
+        .command("simulate", simulate)
+        .command("listen", listen)
+        .parse(Deno.args);
+}

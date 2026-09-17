@@ -83,6 +83,12 @@ fn returning `{ who, what }` with the existing correlation and action
 vocabularies. `verify.payload` SHALL be a template string containing
 `${rawBody}` AND `${timestamp}` (any composition with literal glue) —
 freshness must be BOUND to the HMAC, or `toleranceMs` is replayable.
+`verify` MAY declare `signaturePrefix`: literal text the vendor puts
+BEFORE the hex digest in the signature header (saperly: `v1=<hex>`);
+absent = the header is the bare hex, and a header missing a declared
+prefix is a mismatch. Verification is signature-FIRST with a
+constant-time comparison, then the tolerance window — timing must not
+distinguish stale-but-valid from fresh-but-invalid.
 
 #### Scenario: Route answers who and what together
 - **WHEN** a verified delivery is routed
