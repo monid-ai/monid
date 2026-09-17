@@ -64,6 +64,7 @@ Deno.test(`${ID}: only this site's URL passes the gate; the body is strict`, asy
         const bad of [
             { "url": "https://www.amazon.com/s?k=laptop" },
             { "url": "https://amazon.attacker.example/dp/B0CP9YB3Q4" },
+            { "url": "https://www.amazon.com.evil/dp/B0CP9YB3Q4" },
             { "url": "https://www.ebay.com/dp/B0CP9YB3Q4" },
         ]
     ) {
