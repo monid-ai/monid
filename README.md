@@ -53,6 +53,13 @@ Three verbs, and the first two are free.
 
 ![discover and inspect are free, run is billed per use](assets/monid-verbs.png)
 
+**Putting limits on `run`.** `run` spends the user's balance, so some operators
+put a gate in front of it: the [governed-monid](https://github.com/ScopeBlind/skills/tree/main/skills/governed-monid)
+skill wraps the Monid CLI in an MCP server behind [protect-mcp](https://www.npmjs.com/package/protect-mcp)
+(MIT), enforcing a signed endpoint allowlist, a per-call price limit, and a
+hold for a named person above a threshold, with a signed receipt for every call.
+`discover` and `inspect` are unaffected.
+
 # Writing a connector
 
 A connector describes one provider and its endpoints. Adding one is a pull
