@@ -2559,8 +2559,6 @@ Deno.test("the gate and the resolver share ONE precedence rule: a blank canonica
         // to fail MISSING_CREDENTIAL.
         assertEquals(envCredentialsPresent("demo-resolver"), false);
     });
-    // and the same rule one level down: resolveCredentialEnv returns the
-    // first DEFINED variable, blank or not
     await withEnv({
         DEMO_RESOLVER_CREDENTIALS_API_KEY: "",
         DEMO_RESOLVER_API_KEY: "aliased",

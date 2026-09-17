@@ -11,7 +11,7 @@ import { CONTACTOUT_KEYS } from "../../schema/auth.ts";
 
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
 const ID = "contactout#v1/people/linkedin/personal_email_status";
-const PROFILE = "https://www.linkedin.com/in/williamhgates";
+const PROFILE = "https://www.linkedin.com/in/example-person";
 
 Deno.test(`${ID} happy (recorded live): FREE flag under the personal key`, async () => {
     const unit = await testSealedUnit(ID);
