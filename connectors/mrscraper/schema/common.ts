@@ -53,6 +53,21 @@ export function siteUrl(i: {
 /** A marketplace scraper body that is just the gated URL. */
 export const urlOnlyBody = (url: z.ZodType) => z.object({ url }).strict();
 
+/** A Lazada page on any Lazada country site (the category and the product
+ *  scrapers). */
+export const zLazadaUrl = siteUrl({
+    site: "Lazada",
+    brands: ["lazada"],
+    example: "https://www.lazada.sg/products/pdp-i3158507329-s22328619522.html",
+});
+
+/** US ZIP or postal code the vendor applies before loading a store page so
+ *  price and availability reflect that location (the CVS, Home Depot,
+ *  Kroger, and Meijer scrapers). */
+export const zZipCode = z.string().min(3).describe(
+    "ZIP or postal code used for localized pricing and availability.",
+);
+
 /** Any page URL (the playground scrapes anything). */
 export const zAnyPageUrl = z.string().regex(/^https?:\/\/\S+$/).describe(
     "Full URL to scrape, including the http:// or https:// scheme.",

@@ -32,11 +32,25 @@
       `tiktok-video` (330 s), `youtube-comments` (330 s), `youtube-video`
       (330 s) — 10 each
 
-## 4. Endpoints, part 2 (18 e-commerce) — next PR
+## 4. Endpoints, part 2 (18 e-commerce)
 
-- [ ] 4.1 The 18 live e-commerce scrapers with their site gates, the
-      e-commerce category leaves, Shein's `render` default, the slow-scraper
-      330 s overrides (homedepot, meijer, cvs, lazada/category, kroger)
+- [x] 4.1 `1688-category` 29, `amazon-product` 50, `autozone-category` 12,
+      `cvs-product` 10, `homedepot-product` 10, `kroger-product` 10,
+      `lazada-category` 10, `lazada-product` 10, `meijer-product` 10,
+      `nordstrom-product` 93, `segari-product` 24, `shein-product` 30,
+      `tiktok-catalog` 36, `tiktok-product` 12, `tiktok-search` 20,
+      `walmart-product` 10, `watsons-category` 21, `zepto-product` 9 —
+      pinned v1 ids, site gates with the marker-anywhere path rule (D6),
+      `zZipCode` / `zLazadaUrl` in `schema/common.ts`, Shein's `render`
+      bound to the vendor default (D11), the 330 s overrides on cvs,
+      homedepot, kroger, lazada/category, meijer (D8)
+- [x] 4.2 `categories.ts`: the fourteen e-commerce leaves (tiktok-shop,
+      1688, autozone, cvs, homedepot, kroger, lazada, meijer, nordstrom,
+      segari, shein, walmart, watsons, zepto) as v1's taxonomy names them
+- [x] 4.3 Verify: the rate table grows to 36 rows; eighteen
+      `endpoint.test.ts` (happy, provider error, gate + twin, live);
+      Shein's binding default pinned; fmt · lint · check · test ·
+      double-compile · version:check; red once
 
 ## 5. Endpoints, part 3 (14 travel) — next PR
 

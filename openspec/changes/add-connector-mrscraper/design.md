@@ -118,8 +118,28 @@ ac|edu|gov|net|org>.<tld>` — the registrable label, so
 `amazon.attacker.example` fails — with any subdomains before it, a
 case-insensitive brand, and an optional `pathPattern` (a regex source
 matched from the first `/` after the host) only where the site's URL
-shape is unambiguous. The e-commerce and travel gates land with their
-parts.
+shape is unambiguous. v1 tested its path regex against the whole
+pathname, so a marker may sit after other segments (`amazon.com/Some-
+Slug/dp/B0…`, `watsons.com.my/health-care/vitamins-minerals/c/110100`):
+the e-commerce gates prefix the marker with `(?:/[^?#]*)?` (part 2); the
+part-1 gates that anchor at the host stay as they are.
+
+## D11 — Shein's `render` is a binding default (part 2)
+
+The Shein marketplace card marks `render` required; v1 supplied
+`render: false` in a def-owned start when the caller omitted it. Here it
+is the documented, caller-visible knob it is: the mirror keeps it
+optional with the vendor's default in the describe, and the binding
+materializes `.default(false)` so the wire always carries it (D24 —
+`.default()` materializes). Unlike the SERP `format` (D2), a caller may
+choose the other value. `tiktok/product`'s `render` has no vendor
+default on the card, so it stays optional and off the wire when omitted
+(v1 posture).
+
+The four ZIP-code scrapers (cvs, homedepot, kroger, meijer) share
+`zZipCode` and the two Lazada scrapers share `zLazadaUrl` in
+`schema/common.ts` (two or more users); Walmart's `zipCode` keeps its
+own describe (v1's wording differs) in its own inputs.
 
 ## D7 — Screenshots and oversized bodies stay inline (owner, 2026-09-17)
 
@@ -137,7 +157,9 @@ Provider 120 s / 120 s (config.yml `mrscraper`: marketplace scrapers
 render pages); the seven playground presets 330 s (the upstream page-load
 budget alone is 300 s); v1's `SLOW_SCRAPER_TIMEOUTS` (330 s) on the
 scrapers the vendor lists at 60 s+ — in part 1: `tiktok/video`,
-`youtube/comments`, `youtube/video`.
+`youtube/comments`, `youtube/video`; in part 2: `cvs/product`,
+`homedepot/product`, `kroger/product`, `lazada/category`,
+`meijer/product`.
 
 ## D9 — What v1 enforced with refines
 

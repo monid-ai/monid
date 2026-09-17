@@ -78,10 +78,26 @@ Every URL-input marketplace endpoint SHALL constrain `url` with a compiled
 `pattern` that accepts only hosts whose registrable label is the site's
 brand and, where v1 gated the path, only that path shape.
 
+#### Scenario: A path marker may follow other segments
+- **WHEN** `amazon/product` receives `https://www.amazon.com/Example-
+  Earbuds/dp/B0CP9YB3Q4`
+- **THEN** the gate passes; `https://www.amazon.com/s?k=laptop` is
+  rejected INVALID_INPUT
+
 #### Scenario: A lookalike host is rejected
 - **WHEN** `google/hotel` receives `https://google.attacker.example/travel/
   hotels/entity/X`
 - **THEN** the run is rejected INVALID_INPUT
+
+### Requirement: Shein renders by default
+`shein/product` SHALL bind `render` to the vendor default `false` so the
+wire always carries the marketplace-required flag; a caller MAY set it
+to `true`.
+
+#### Scenario: The default is compiled
+- **WHEN** the bundle compiles
+- **THEN** `mrscraper#shein/product`'s body schema has `render.default ===
+  false`
 
 ### Requirement: Vendor errors are data
 A non-2xx MrScraper response SHALL settle as a provider error with zero

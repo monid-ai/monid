@@ -122,6 +122,144 @@ const RATE: Record<
         input: { body: { url: "https://www.youtube.com/watch?v=HeyIXwZyR8Y" } },
         usage: { credits: { default: 10 }, evidence: { RESULT: 1 } },
     },
+    "mrscraper#1688/category": {
+        input: {
+            body: {
+                "url":
+                    "https://s.1688.com/selloffer/offer_search.htm?keywords=phone",
+            },
+        },
+        usage: { credits: { default: 29 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#amazon/product": {
+        input: { body: { "url": "https://www.amazon.com/dp/B0CP9YB3Q4" } },
+        usage: { credits: { default: 50 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#autozone/category": {
+        input: {
+            body: {
+                "url":
+                    "https://www.autozone.com/batteries-starting-and-charging/battery",
+            },
+        },
+        usage: { credits: { default: 12 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#cvs/product": {
+        input: {
+            body: {
+                "url":
+                    "https://www.cvs.com/shop/one-other-hand-mask-prodid-633763",
+                "zipCode": "02108",
+            },
+        },
+        usage: { credits: { default: 10 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#homedepot/product": {
+        input: {
+            body: {
+                "url": "https://www.homedepot.com/p/LG-Refrigerator/12345",
+                "zipCode": "30301",
+            },
+        },
+        usage: { credits: { default: 10 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#kroger/product": {
+        input: {
+            body: {
+                "url": "https://www.kroger.com/p/chicken-breasts/0027061550000",
+            },
+        },
+        usage: { credits: { default: 10 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#lazada/category": {
+        input: { body: { "url": "https://www.lazada.sg/catalog/?q=earbuds" } },
+        usage: { credits: { default: 10 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#lazada/product": {
+        input: {
+            body: {
+                "url":
+                    "https://www.lazada.sg/products/pdp-i3158507329-s22328619522.html",
+            },
+        },
+        usage: { credits: { default: 10 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#meijer/product": {
+        input: {
+            body: {
+                "url":
+                    "https://www.meijer.com/shopping/product/highlighters-4pk/71928356637.html",
+            },
+        },
+        usage: { credits: { default: 10 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#nordstrom/product": {
+        input: {
+            body: {
+                "url":
+                    "https://www.nordstrom.com/s/ultra-soft-zip-jacket/8036333",
+            },
+        },
+        usage: { credits: { default: 93 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#segari/product": {
+        input: {
+            body: { "url": "https://segari.id/p/telur-ayam-kampung-curah" },
+        },
+        usage: { credits: { default: 24 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#shein/product": {
+        input: { body: { "url": "https://us.shein.com/--p-98911792.html" } },
+        usage: { credits: { default: 30 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#tiktok/catalog": {
+        input: {
+            body: {
+                "url":
+                    "https://www.tiktok.com/shop/sg/c/cases-screen-protectors/601925",
+            },
+        },
+        usage: { credits: { default: 36 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#tiktok/product": {
+        input: {
+            body: {
+                "url": "https://www.tiktok.com/shop/pdp/1731949430853767209",
+            },
+        },
+        usage: { credits: { default: 12 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#tiktok/search": {
+        input: { body: { "query": "wireless earbuds" } },
+        usage: { credits: { default: 20 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#walmart/product": {
+        input: {
+            body: {
+                "url": "https://www.walmart.com/ip/HP-14-Laptop/17581855155",
+            },
+        },
+        usage: { credits: { default: 10 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#watsons/category": {
+        input: {
+            body: {
+                "url":
+                    "https://www.watsons.com.my/health-care/vitamins-minerals/c/110100",
+            },
+        },
+        usage: { credits: { default: 21 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#zepto/product": {
+        input: {
+            body: {
+                "url":
+                    "https://www.zepto.com/pn/lizol-floor-cleaner/pvid/de4cf5f8-e81e-41d3-aebc-44d019fa5f35",
+                "pincode": "560001",
+            },
+        },
+        usage: { credits: { default: 9 }, evidence: { RESULT: 1 } },
+    },
 };
 
 /** Fixture dir: `endpoints/<v1 id, slashes as dashes>/fixtures/`. */
@@ -141,7 +279,7 @@ const mrscraperIds = async (): Promise<string[]> => {
 
 Deno.test("mrscraper: the literal rate table covers exactly the compiled endpoints", async () => {
     const ids = await mrscraperIds();
-    assertEquals(ids.length, 18);
+    assertEquals(ids.length, 36);
     assertEquals(ids, Object.keys(RATE).sort());
 });
 
