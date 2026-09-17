@@ -16,10 +16,11 @@ import { z } from "zod";
  */
 
 /**
- * A reference URL: a public `https://` URL, or an Ark `asset://<id>` reference
- * (an asset previously uploaded to Ark's Asset Center — v1 accepted and
- * advertised these; restored in the 2026-09-16 reconcile). Ark fetches https
- * targets server-side, so they have to be reachable from the public internet.
+ * A reference URL: a public `https://` URL ONLY (owner decision
+ * 2026-09-17 — provider-private schemes like Ark `asset://` references
+ * are not accepted; callers pass publicly reachable media). Ark fetches
+ * the target server-side, so it has to be reachable from the public
+ * internet.
  *
  * `.regex()` rather than `.refine()` on purpose: a refinement is silently
  * dropped by `z.toJSONSchema`, but a regex compiles to a JSON Schema `pattern`
@@ -29,10 +30,10 @@ import { z } from "zod";
 export const zRefUrl = z
     .string()
     .regex(
-        /^(?:https:\/\/|asset:\/\/)\S+$/,
-        "must be a public https:// URL or an Ark asset:// reference",
+        /^https:\/\/\S+$/,
+        "must be a public https:// URL",
     )
-    .describe("A public https:// URL, or an Ark asset://<id> reference.");
+    .describe("A public https:// URL");
 
 /** Aspect ratios Ark accepts; `adaptive` picks the best fit from the inputs. */
 export const zRatio = z.enum([

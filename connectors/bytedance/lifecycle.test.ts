@@ -145,7 +145,8 @@ Deno.test("bytedance: modelling ONE rate column would have overcharged the recor
     // billed every run at the no-video column; on this real recording that is
     // a ~67% overcharge against what BytePlus actually charges.
     const bundle = await testBundle();
-    const model = bundle.endpoints["bytedance#v1/video/seedance-2.0-mini"].usage.model!;
+    const model = bundle.endpoints["bytedance#v1/video/seedance-2.0-mini"].usage
+        .model!;
     assert(model.kind === "COMPOSITE");
     const actual = REF_VIDEO_TOKENS *
         model.components["480p_with_video"].consumes.amount;
@@ -318,14 +319,10 @@ Deno.test("bytedance: the input schema rejects before the wire", async () => {
     );
     await rejects(withUrl("http://example.test/a.png"), "plain http://");
     await rejects(withUrl("not-a-url"), "malformed reference URL");
-    // asset://<id> is ACCEPTED — v1 took Ark Asset Center references and
-    // advertised them in its notes; the v2 port had silently dropped them
-    // (restored in the 2026-09-16 reconcile)
-    const assetEstimate = await estimateFor(
-        "bytedance#v1/video/seedance-2.5",
-        withUrl("asset://abc123"),
-    );
-    assertEquals(typeof assetEstimate.credits.default, "number");
+    // asset://<id> is REJECTED (owner decision 2026-09-17): only public
+    // https:// media — provider-private Asset Center references are not
+    // part of the caller contract
+    await rejects(withUrl("asset://abc123"), "Ark asset:// reference");
 });
 
 Deno.test({

@@ -1,5 +1,4 @@
 import { defineEndpoint, UsageModelKind } from "@shared/core";
-import { zModel } from "../../schema/common.ts";
 import { zTextTo3dBody } from "./schema/inputs.ts";
 
 /**
@@ -15,7 +14,7 @@ export default defineEndpoint({
             "Generate a production 3D mesh from a text prompt (async; polled to completion).",
         description:
             "Generate a production 3D mesh from a text prompt. Choose a " +
-            "model (required): 'sculptor' for game-ready meshes and fast " +
+            "model: 'sculptor' (default) for game-ready meshes and fast " +
             "iteration, or 'atelier' for premium fidelity with PBR " +
             "materials and detailed textures. Tune polygon count via " +
             "params.faces (200000 / 500000 / 1000000 / 2000000, default " +
@@ -32,23 +31,25 @@ export default defineEndpoint({
         categories: ["3d-generation"],
     },
     request: { method: "POST", path: "/v1/generations/text-to-3d" },
-    // Vendor drift 2026-09-16: TextCreateJobRequest now REQUIRES `model`
-    // (live 400 on omission — pydantic "Field required") — the doc must say
-    // so, so the engine gates it pre-flight instead of the vendor gating it
-    // post-flight. Mirror stays optional (D25); the binding states the
-    // requirement.
     input: {
-        schema: {
-            body: zTextTo3dBody.required({ model: true }).extend({
-                // the shared zModel prose says "Defaults to sculptor
-                // server-side" — untrue HERE, so the binding overrides
-                // the describe along with the optionality (PR review)
-                model: zModel.describe(
-                    "Required. sculptor: game-ready meshes, fast " +
-                        "iteration. atelier: premium fidelity with PBR " +
-                        "materials and detailed textures.",
-                ),
-            }),
+        schema: { body: zTextTo3dBody },
+        /** Vendor drift 2026-09-16: TextCreateJobRequest now REQUIRES
+         *  `model` (live 400 on omission — pydantic "Field required"),
+         *  but the caller contract keeps it optional with the sculptor
+         *  default (owner decision 2026-09-17): the wire always carries
+         *  a model because an omitted one is materialized HERE. Fn-side
+         *  injection, not a schema `.default()` — JSON-Schema defaults
+         *  never materialize (the pdl `dataset: "all"` pattern). An
+         *  explicit caller value wins the merge. */
+        toRequest: ({ data, utils }) => {
+            const body = data.input.body ?? {};
+            const model = utils.json.optionalGet(body, "$.model");
+            return {
+                ...data.input,
+                body: model === undefined
+                    ? utils.json.merge(body, { model: "sculptor" })
+                    : body,
+            };
         },
     },
     // ASYNC generation: a durable poll loop needs a large WHOLE-RUN budget
