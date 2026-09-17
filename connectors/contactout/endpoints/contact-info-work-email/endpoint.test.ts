@@ -2,11 +2,13 @@ import { assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import type { Json } from "@shared/core";
 import {
+    assertInputAccepted,
     liveSkip,
     loadFixture,
     runEndpoint,
     testSealedUnit,
 } from "@shared/testing";
+import { CONTACTOUT_KEYS } from "../../schema/auth.ts";
 
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
 const ID = "contactout#v1/people/linkedin/work-email";
@@ -86,11 +88,25 @@ Deno.test(`${ID} schema gate: the personal email_type does not exist on the work
             JSON.stringify(bad),
         );
     }
+    // the near-twin: this key's own vocabulary and the phone-only switch
+    for (
+        const ok of [
+            { profile: PROFILE, email_type: "work" },
+            { profile: PROFILE, email_type: "none", include_phone: true },
+        ] as Record<string, Json>[]
+    ) {
+        await assertInputAccepted({
+            unit,
+            input: { queryParams: ok },
+            mode: "replay",
+            fixture,
+        });
+    }
 });
 
 Deno.test({
-    name: `${ID} live (gated on CONTACTOUT_CREDENTIALS)`,
-    ignore: liveSkip("contactout"),
+    name: `${ID} live (gated on the contactout credentials)`,
+    ignore: liveSkip("contactout", CONTACTOUT_KEYS),
     fn: async () => {
         const unit = await testSealedUnit(ID);
         const result = await runEndpoint({

@@ -2,11 +2,13 @@ import { assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import type { Json } from "@shared/core";
 import {
+    assertInputAccepted,
     liveSkip,
     loadFixture,
     runEndpoint,
     testSealedUnit,
 } from "@shared/testing";
+import { CONTACTOUT_KEYS } from "../../schema/auth.ts";
 
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
 const ID = "contactout#v1/email/enrich/work-email";
@@ -63,11 +65,25 @@ Deno.test(`${ID} schema gate: a malformed address and the personal include value
             JSON.stringify(bad),
         );
     }
+    // the near-twin: this key's own include value passes
+    for (
+        const ok of [
+            { email: "person@example.com", include: "work_email" },
+            { email: "person@example.com" },
+        ] as Record<string, Json>[]
+    ) {
+        await assertInputAccepted({
+            unit,
+            input: { queryParams: ok },
+            mode: "replay",
+            fixture,
+        });
+    }
 });
 
 Deno.test({
-    name: `${ID} live (gated on CONTACTOUT_CREDENTIALS)`,
-    ignore: liveSkip("contactout"),
+    name: `${ID} live (gated on the contactout credentials)`,
+    ignore: liveSkip("contactout", CONTACTOUT_KEYS),
     fn: async () => {
         const unit = await testSealedUnit(ID);
         const result = await runEndpoint({

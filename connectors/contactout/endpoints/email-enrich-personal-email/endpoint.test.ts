@@ -1,6 +1,13 @@
 import { assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
-import { loadFixture, runEndpoint, testSealedUnit } from "@shared/testing";
+import {
+    assertInputAccepted,
+    liveSkip,
+    loadFixture,
+    runEndpoint,
+    testSealedUnit,
+} from "@shared/testing";
+import { CONTACTOUT_KEYS } from "../../schema/auth.ts";
 
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
 const ID = "contactout#v1/email/enrich/personal-email";
@@ -52,4 +59,26 @@ Deno.test(`${ID} schema gate: the work-only include switch does not exist on the
         Error,
         "INVALID_INPUT",
     );
+    // the near-twin: the bare address — this key's whole vocabulary — passes
+    await assertInputAccepted({
+        unit,
+        input: { queryParams: { email: "person@example.com" } },
+        mode: "replay",
+        fixture,
+    });
+});
+
+Deno.test({
+    name: `${ID} live (gated on the contactout credentials)`,
+    ignore: liveSkip("contactout", CONTACTOUT_KEYS),
+    fn: async () => {
+        const unit = await testSealedUnit(ID);
+        const result = await runEndpoint({
+            unit,
+            input: { queryParams: { email: "billg@microsoft.com" } },
+            mode: "live",
+        });
+        // shape only: a hit is the vendor's call, a 404 miss is legal data
+        assertEquals(typeof result.httpStatus, "number");
+    },
 });

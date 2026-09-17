@@ -32,8 +32,6 @@ export default defineEndpoint({
     },
     endpoint: "/v1/email/enrich/personal-email",
     request: { method: "GET", path: "/v1/email/enrich" },
-    /** Sends the PERSONAL key (design D1): the provider holds both keys,
-     *  the endpoint says which one rides the `token` header. */
     auth: {
         inject: ({ data }) => ({
             ...data.request,

@@ -1,11 +1,14 @@
-import { assertEquals } from "@std/assert";
+import { assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
+import type { Json } from "@shared/core";
 import {
+    assertInputAccepted,
     liveSkip,
     loadFixture,
     runEndpoint,
     testSealedUnit,
 } from "@shared/testing";
+import { CONTACTOUT_KEYS } from "../../schema/auth.ts";
 
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
 const ID = "contactout#v1/linkedin/enrich/personal-email";
@@ -46,8 +49,8 @@ Deno.test(`${ID} provider error (synthetic 401): data, zero usage`, async () => 
 });
 
 Deno.test({
-    name: `${ID} live (gated on CONTACTOUT_CREDENTIALS)`,
-    ignore: liveSkip("contactout"),
+    name: `${ID} live (gated on the contactout credentials)`,
+    ignore: liveSkip("contactout", CONTACTOUT_KEYS),
     fn: async () => {
         const unit = await testSealedUnit(ID);
         const result = await runEndpoint({
@@ -66,4 +69,46 @@ Deno.test({
             JSON.stringify(result.output),
         );
     },
+});
+
+Deno.test(`${ID} schema gate: company URLs and hidden hosts are rejected before the metered call; real profile URLs pass`, async () => {
+    const unit = await testSealedUnit(ID);
+    const fixture = await loadFixture(`${fixturesDir}synthetic-happy.json`);
+    for (
+        const bad of [
+            "https://www.linkedin.com/company/contactout",
+            // linkedin.com must be the HOSTNAME, not a substring
+            "https://evil.example/?u=linkedin.com/in/example-person",
+            "https://notlinkedin.com/in/example-person",
+        ]
+    ) {
+        await assertRejects(
+            () =>
+                runEndpoint({
+                    unit,
+                    input: { queryParams: { profile: bad } },
+                    mode: "replay",
+                    fixture,
+                }),
+            Error,
+            "INVALID_INPUT",
+            bad,
+        );
+    }
+    // the near-twin: regional subdomains and /pub/ profiles are legal, and
+    // so is the optional profile_only knob
+    for (
+        const ok of [
+            { profile: "https://uk.linkedin.com/in/example-person" },
+            { profile: "https://www.linkedin.com/pub/example-person" },
+            { profile: PROFILE, profile_only: true },
+        ] as Record<string, Json>[]
+    ) {
+        await assertInputAccepted({
+            unit,
+            input: { queryParams: ok },
+            mode: "replay",
+            fixture,
+        });
+    }
 });

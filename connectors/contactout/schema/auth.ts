@@ -19,3 +19,13 @@ export const zContactoutCredentials = z.object({
         "The ContactOut API key of the PERSONAL-email account.",
     ),
 });
+
+/**
+ * The credential field names, derived from the shape above so the live-test
+ * gate can never drift from it: `liveSkip("contactout", CONTACTOUT_KEYS)`
+ * opens only when BOTH `CONTACTOUT_CREDENTIALS_WORK_API_KEY` and
+ * `CONTACTOUT_CREDENTIALS_PERSONAL_API_KEY` are set.
+ */
+export const CONTACTOUT_KEYS: readonly string[] = Object.keys(
+    zContactoutCredentials.shape,
+);

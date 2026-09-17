@@ -2,11 +2,13 @@ import { assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import type { Json } from "@shared/core";
 import {
+    assertInputAccepted,
     liveSkip,
     loadFixture,
     runEndpoint,
     testSealedUnit,
 } from "@shared/testing";
+import { CONTACTOUT_KEYS } from "../../schema/auth.ts";
 
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
 const ID = "contactout#v1/people/search/work-email";
@@ -95,11 +97,30 @@ Deno.test(`${ID} schema gate: page_size is REQUIRED at the binding and capped at
     };
     assertEquals(schema.required, ["page_size"]);
     assertEquals(schema.additionalProperties, false);
+    // the near-twin: this key's own vocabulary and the boundary page size
+    for (
+        const ok of [
+            {
+                job_title: ["CTO"],
+                page_size: 25,
+                data_types: ["work_email", "phone"],
+                reveal_info: true,
+            },
+            { job_title: ["CTO"], page_size: 1 },
+        ] as Record<string, Json>[]
+    ) {
+        await assertInputAccepted({
+            unit,
+            input: { body: ok },
+            mode: "replay",
+            fixture,
+        });
+    }
 });
 
 Deno.test({
-    name: `${ID} live (gated on CONTACTOUT_CREDENTIALS)`,
-    ignore: liveSkip("contactout"),
+    name: `${ID} live (gated on the contactout credentials)`,
+    ignore: liveSkip("contactout", CONTACTOUT_KEYS),
     fn: async () => {
         const unit = await testSealedUnit(ID);
         const result = await runEndpoint({

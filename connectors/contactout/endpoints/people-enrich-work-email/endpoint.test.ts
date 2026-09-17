@@ -2,11 +2,13 @@ import { assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import type { Json } from "@shared/core";
 import {
+    assertInputAccepted,
     liveSkip,
     loadFixture,
     runEndpoint,
     testSealedUnit,
 } from "@shared/testing";
+import { CONTACTOUT_KEYS } from "../../schema/auth.ts";
 
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
 const ID = "contactout#v1/people/enrich/work-email";
@@ -70,11 +72,27 @@ Deno.test(`${ID} schema gate: the other key's include value and unknown keys are
             JSON.stringify(bad),
         );
     }
+    // the near-twin: this key's own include vocabulary and the other
+    // identifier forms
+    for (
+        const ok of [
+            { linkedin_url: PROFILE, include: ["work_email", "phone"] },
+            { email: "person@example.com" },
+            { full_name: "A Person", company: ["ContactOut"] },
+        ] as Record<string, Json>[]
+    ) {
+        await assertInputAccepted({
+            unit,
+            input: { body: ok },
+            mode: "replay",
+            fixture,
+        });
+    }
 });
 
 Deno.test({
-    name: `${ID} live (gated on CONTACTOUT_CREDENTIALS)`,
-    ignore: liveSkip("contactout"),
+    name: `${ID} live (gated on the contactout credentials)`,
+    ignore: liveSkip("contactout", CONTACTOUT_KEYS),
     fn: async () => {
         const unit = await testSealedUnit(ID);
         const result = await runEndpoint({

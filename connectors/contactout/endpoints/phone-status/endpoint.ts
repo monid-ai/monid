@@ -19,8 +19,6 @@ export default defineEndpoint({
         categories: ["people-enrichment"],
     },
     request: { method: "GET", path: "/v1/people/linkedin/phone_status" },
-    /** Sends the WORK key (design D1): the provider holds both keys, the
-     *  endpoint says which one rides the `token` header. */
     auth: {
         inject: ({ data }) => ({
             ...data.request,

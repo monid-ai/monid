@@ -1,11 +1,13 @@
 import { assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import {
+    assertInputAccepted,
     liveSkip,
     loadFixture,
     runEndpoint,
     testSealedUnit,
 } from "@shared/testing";
+import { CONTACTOUT_KEYS } from "../../schema/auth.ts";
 
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
 const ID = "contactout#v1/people/linkedin/work_email_status";
@@ -45,11 +47,25 @@ Deno.test(`${ID} schema gate: only a LinkedIn profile URL`, async () => {
         Error,
         "INVALID_INPUT",
     );
+    // the near-twin: regional subdomains and /pub/ profiles are legal
+    for (
+        const ok of [
+            "https://uk.linkedin.com/in/example-person",
+            "https://www.linkedin.com/pub/example-person",
+        ]
+    ) {
+        await assertInputAccepted({
+            unit,
+            input: { queryParams: { profile: ok } },
+            mode: "replay",
+            fixture,
+        });
+    }
 });
 
 Deno.test({
-    name: `${ID} live (gated on CONTACTOUT_CREDENTIALS)`,
-    ignore: liveSkip("contactout"),
+    name: `${ID} live (gated on the contactout credentials)`,
+    ignore: liveSkip("contactout", CONTACTOUT_KEYS),
     fn: async () => {
         const unit = await testSealedUnit(ID);
         const result = await runEndpoint({
@@ -68,4 +84,20 @@ Deno.test({
         );
         assertEquals(result.usage, { credits: {}, evidence: {} });
     },
+});
+
+Deno.test(`${ID} provider error (synthetic 401): data, zero usage`, async () => {
+    const unit = await testSealedUnit(ID);
+    const fixture = await loadFixture(
+        `${fixturesDir}synthetic-provider-error.json`,
+    );
+    const result = await runEndpoint({
+        unit,
+        input: { queryParams: { profile: PROFILE } },
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(result.isProviderError, true);
+    assertEquals(result.httpStatus, 401);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
 });

@@ -37,18 +37,6 @@ const zYearsRange = (values: string, description: string) =>
             `${values}.`,
     );
 
-/** Free-text-ish filter values where the vendor's published sheet and its
- *  own docs examples disagree on casing — deliberately NOT enum-locked. */
-const zSeniorityList = z.array(z.string().min(1)).max(50).describe(
-    "Seniority levels: Owner / Founder, CXO, Partner, VP, Head, Director, " +
-        "Manager, Senior, Entry, Intern.",
-);
-
-const zJobFunctionList = z.array(z.string().min(1)).max(50).describe(
-    "Functional areas, e.g. Engineering, Sales, Finance, Marketing, " +
-        "Human Resources, Product Management, Operations.",
-);
-
 /** The filter fields, as a shape so each consumer spells its own object. */
 export const peopleSearchFilterShape = {
     name: z.string().min(1).describe("Name of the person.").optional(),
@@ -67,8 +55,17 @@ export const peopleSearchFilterShape = {
         50,
         "Job titles to exclude from results.",
     ).optional(),
-    job_function: zJobFunctionList.optional(),
-    seniority: zSeniorityList.optional(),
+    // seniority and job_function are free-text-ish: the vendor's published
+    // sheet and its own docs examples disagree on casing, so neither is
+    // enum-locked
+    job_function: z.array(z.string().min(1)).max(50).describe(
+        "Functional areas, e.g. Engineering, Sales, Finance, Marketing, " +
+            "Human Resources, Product Management, Operations.",
+    ).optional(),
+    seniority: z.array(z.string().min(1)).max(50).describe(
+        "Seniority levels: Owner / Founder, CXO, Partner, VP, Head, " +
+            "Director, Manager, Senior, Entry, Intern.",
+    ).optional(),
     current_titles_only: z.boolean().describe(
         "Default true — match current job titles only; false also " +
             "matches past titles.",

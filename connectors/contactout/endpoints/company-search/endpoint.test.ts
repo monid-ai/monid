@@ -2,11 +2,13 @@ import { assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import type { Json } from "@shared/core";
 import {
+    assertInputAccepted,
     liveSkip,
     loadFixture,
     runEndpoint,
     testSealedUnit,
 } from "@shared/testing";
+import { CONTACTOUT_KEYS } from "../../schema/auth.ts";
 
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
 const ID = "contactout#v1/company/search";
@@ -62,11 +64,26 @@ Deno.test(`${ID} schema gate: unknown keys and out-of-vocabulary sizes are rejec
             JSON.stringify(bad),
         );
     }
+    // the near-twin: the documented vocabularies and bounds pass
+    for (
+        const ok of [
+            { name: ["ContactOut"] },
+            { size: ["1_10", "10001"], year_founded_from: 1985 },
+            { domain: ["contactout.com"], min_revenue: 1000000 },
+        ] as Record<string, Json>[]
+    ) {
+        await assertInputAccepted({
+            unit,
+            input: { body: ok },
+            mode: "replay",
+            fixture,
+        });
+    }
 });
 
 Deno.test({
-    name: `${ID} live (gated on CONTACTOUT_CREDENTIALS)`,
-    ignore: liveSkip("contactout"),
+    name: `${ID} live (gated on the contactout credentials)`,
+    ignore: liveSkip("contactout", CONTACTOUT_KEYS),
     fn: async () => {
         const unit = await testSealedUnit(ID);
         const result = await runEndpoint({
@@ -80,4 +97,20 @@ Deno.test({
             JSON.stringify(result.output),
         );
     },
+});
+
+Deno.test(`${ID} provider error (synthetic 401): data, zero usage`, async () => {
+    const unit = await testSealedUnit(ID);
+    const fixture = await loadFixture(
+        `${fixturesDir}synthetic-provider-error.json`,
+    );
+    const result = await runEndpoint({
+        unit,
+        input: { body: { name: ["ContactOut"] } },
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(result.isProviderError, true);
+    assertEquals(result.httpStatus, 401);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
 });

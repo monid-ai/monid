@@ -42,8 +42,6 @@ export default defineEndpoint({
     },
     endpoint: "/v1/people/decision-makers/work-email",
     request: { method: "GET", path: "/v1/people/decision-makers" },
-    /** Sends the WORK key (design D1): the provider holds both keys, the
-     *  endpoint says which one rides the `token` header. */
     auth: {
         inject: ({ data }) => ({
             ...data.request,

@@ -2,12 +2,14 @@ import { assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import type { Json } from "@shared/core";
 import {
+    assertInputAccepted,
     liveSkip,
     loadFixture,
     runEndpoint,
     testBundle,
     testSealedUnit,
 } from "@shared/testing";
+import { CONTACTOUT_KEYS } from "../../schema/auth.ts";
 
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
 const ID = "contactout#v1/linkedin/enrich/work-email";
@@ -175,6 +177,31 @@ Deno.test(`${ID} profile_only (synthetic): no contacts back ⇒ exactly one sear
     });
 });
 
+Deno.test(`${ID} nothing on file for this key (synthetic): a MATCHED profile with no contacts draws exactly one search credit`, async () => {
+    const unit = await testSealedUnit(ID);
+    const fixture = await loadFixture(
+        `${fixturesDir}synthetic-nothing-on-file.json`,
+    );
+    const result = await runEndpoint({
+        unit,
+        // no profile_only: the caller DID ask for contacts, the vendor has
+        // none to give under this key
+        input: { queryParams: { profile: PROFILE } },
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(result.isProviderError, false);
+    // the either/or (design D3): one search credit, nothing on email/phone.
+    // This is also the OTHER-KIND-ONLY case — live-verified 2026-09-16 that
+    // a key answers the other kind's arrays present-but-EMPTY, so a profile
+    // whose only address is the other kind is indistinguishable here and
+    // bills the same one search credit.
+    assertEquals(result.usage, {
+        credits: { search_work: 1 },
+        evidence: { email_found: 0, phone_found: 0, profile_only: 1 },
+    });
+});
+
 Deno.test(`${ID} miss (synthetic): 200 with profile [] is free`, async () => {
     const unit = await testSealedUnit(ID);
     const fixture = await loadFixture(`${fixturesDir}synthetic-miss.json`);
@@ -236,11 +263,27 @@ Deno.test(`${ID} schema gate: company URLs and unknown keys are rejected before 
             JSON.stringify(bad),
         );
     }
+    // the near-twin: the gate is not too wide — regional subdomains, /pub/
+    // profiles and the optional boolean knob all reach the wire
+    for (
+        const ok of [
+            { profile: "https://uk.linkedin.com/in/example-person" },
+            { profile: "https://www.linkedin.com/pub/example-person" },
+            { profile: PROFILE, profile_only: false },
+        ] as Record<string, Json>[]
+    ) {
+        await assertInputAccepted({
+            unit,
+            input: { queryParams: ok },
+            mode: "replay",
+            fixture,
+        });
+    }
 });
 
 Deno.test({
-    name: `${ID} live (gated on CONTACTOUT_CREDENTIALS)`,
-    ignore: liveSkip("contactout"),
+    name: `${ID} live (gated on the contactout credentials)`,
+    ignore: liveSkip("contactout", CONTACTOUT_KEYS),
     fn: async () => {
         const unit = await testSealedUnit(ID);
         const result = await runEndpoint({

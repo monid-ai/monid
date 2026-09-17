@@ -39,17 +39,15 @@ export default defineEndpoint({
     },
     endpoint: "/v1/people/linkedin/work-email",
     request: { method: "GET", path: "/v1/people/linkedin" },
-    // Both knobs stay honestly optional (design D7): absent means the
-    // vendor's own default (this key's emails, no phones), and nothing the
-    // caller did not send reaches the wire.
-    /** Sends the WORK key (design D1): the provider holds both keys, the
-     *  endpoint says which one rides the `token` header. */
     auth: {
         inject: ({ data }) => ({
             ...data.request,
             headers: { ...data.request.headers, token: data.params.workApiKey },
         }),
     },
+    // the bare mirror: neither knob takes a binding default (design D7), so
+    // absent stays absent on the wire and the estimate reads `=== "none"` /
+    // `=== true`
     input: { schema: { queryParams: zContactInfoQueryParams } },
     usage: {
         model: {

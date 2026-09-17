@@ -47,19 +47,15 @@ export default defineEndpoint({
      *  personal-email twin, so the id carries the v1 key suffix. */
     endpoint: "/v1/linkedin/enrich/work-email",
     request: { method: "GET", path: "/v1/linkedin/enrich" },
-    // `profile_only` stays honestly optional (design D7): absent means the
-    // vendor's own default (contacts included), and nothing the caller did
-    // not send reaches the wire.
-    /** Sends the WORK key (design D1): the provider holds both keys, the
-     *  endpoint says which one rides the `token` header. */
     auth: {
         inject: ({ data }) => ({
             ...data.request,
             headers: { ...data.request.headers, token: data.params.workApiKey },
         }),
     },
+    // the bare mirror: `profile_only` takes no binding default (design D7),
+    // so absent stays absent on the wire and the estimate reads `=== true`
     input: { schema: { queryParams: zLinkedinEnrichQueryParams } },
-    // auth (work key), timeouts, fromError inherit from the provider
     usage: {
         /** Three vendor credits, one line each, all `amount: 1` — the
          *  pools ARE the vendor's units (design D2); the $/credit is the

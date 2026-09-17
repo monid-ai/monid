@@ -1,11 +1,13 @@
 import { assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import {
+    assertInputAccepted,
     liveSkip,
     loadFixture,
     runEndpoint,
     testSealedUnit,
 } from "@shared/testing";
+import { CONTACTOUT_KEYS } from "../../schema/auth.ts";
 
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
 const ID = "contactout#v1/email/verify";
@@ -68,11 +70,18 @@ Deno.test(`${ID} schema gate: a malformed address is rejected before the wire`, 
         Error,
         "INVALID_INPUT",
     );
+    // the near-twin: a well-formed address passes
+    await assertInputAccepted({
+        unit,
+        input: { queryParams: { email: "person@example.com" } },
+        mode: "replay",
+        fixture,
+    });
 });
 
 Deno.test({
-    name: `${ID} live (gated on CONTACTOUT_CREDENTIALS)`,
-    ignore: liveSkip("contactout"),
+    name: `${ID} live (gated on the contactout credentials)`,
+    ignore: liveSkip("contactout", CONTACTOUT_KEYS),
     fn: async () => {
         const unit = await testSealedUnit(ID);
         const result = await runEndpoint({

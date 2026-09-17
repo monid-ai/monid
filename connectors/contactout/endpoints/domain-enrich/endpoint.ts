@@ -34,8 +34,6 @@ export default defineEndpoint({
         ],
     },
     request: { method: "POST", path: "/v1/domain/enrich" },
-    /** Sends the WORK key (design D1): the provider holds both keys, the
-     *  endpoint says which one rides the `token` header. */
     auth: {
         inject: ({ data }) => ({
             ...data.request,
