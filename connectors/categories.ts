@@ -329,4 +329,11 @@ export const LEAF_CATEGORIES = defineLeafCategories([
         description:
             "Tools to measure visibility in AI answers, including brand mentions, cited pages, prompts, and more.",
     },
+    {
+        id: "legal-research",
+        displayName: "Legal Research",
+        description:
+            "Primary law: statutes, regulations, court rules, constitutions, " +
+            "and the citations between them.",
+    },
 ]);
