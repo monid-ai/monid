@@ -147,13 +147,16 @@ export default defineProvider({
          * hook IS the account stream). Verification is the declarative
          * descriptor (HOST-executed over the EXACT raw bytes):
          * HMAC-SHA256 of `${timestamp}.${rawBody}`, signature in
-         * x-saperly-signature, unix-seconds timestamp in
-         * x-saperly-timestamp, ±300 s replay window.
+         * x-saperly-signature as `v1=<hex>`
+         * (https://saperly.com/docs/guides/webhooks, read 2026-09-17),
+         * unix-seconds timestamp in x-saperly-timestamp, ±300 s replay
+         * window.
          */
         "number-events": {
             verify: {
                 scheme: "hmac-sha256",
                 signatureHeader: "x-saperly-signature",
+                signaturePrefix: "v1=",
                 timestampHeader: "x-saperly-timestamp",
                 payload: "${timestamp}.${rawBody}",
                 toleranceMs: 300_000,
