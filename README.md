@@ -128,7 +128,7 @@ deno task check && deno task test    # types + 188 replay tests, zero network
 Run a real endpoint with your own vendor key:
 
 ```bash
-export TINYFISH_API_KEY=...
+export TINYFISH_CREDENTIALS_API_KEY=...
 deno task engine:run 'tinyfish#search' \
   --query-params '{"query":"solid-state battery suppliers","domain_type":"news"}'
 ```
@@ -141,8 +141,6 @@ deno task catalog endpoints --provider exa   # under one provider
 deno task catalog endpoints --category web-search
 deno task catalog inspect 'exa#search'       # one endpoint's full contract
 ```
-
-
 
 ```
 connectors/<name>/
@@ -163,8 +161,11 @@ connectors/<name>/
 5. Open a pull request.
 
 Tests replay from fixtures, so CI needs no vendor keys. Live tests run only when
-the matching `<PROVIDER>_API_KEY` (or `<PROVIDER>_CREDENTIALS`, for a provider
-with several keys) is present, and skip otherwise.
+the provider's credentials are in the environment, and skip otherwise. Each
+credential field has its own variable, `<PROVIDER>_CREDENTIALS_<FIELD>` — so a
+one-key provider reads `EXA_CREDENTIALS_API_KEY` (the bare `EXA_API_KEY` still
+works) and a two-key provider reads `CONTACTOUT_CREDENTIALS_WORK_API_KEY` and
+`CONTACTOUT_CREDENTIALS_PERSONAL_API_KEY`.
 
 ### Let an agent write it
 
@@ -179,7 +180,7 @@ connector describes your API correctly rather than about whether it runs.
 Apify actors have a head start: `deno task apify:scaffold <actorId>` reads the
 actor's published input schema from the Apify API and generates the endpoint's
 `schema/inputs.ts` as static zod for you to review and commit. It needs
-`APIFY_API_KEY`.
+`APIFY_CREDENTIALS_API_KEY`.
 
 # How it runs
 

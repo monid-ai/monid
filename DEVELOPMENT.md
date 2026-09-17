@@ -124,11 +124,12 @@ validate input (JSON Schema)           → INVALID_INPUT
 
 Load gates fail closed in order: `BAD_DOC` → `UNSUPPORTED_DOC` → `UNKNOWN_FN` →
 `LINK_INTEGRITY` → `UNSUPPORTED_FN_ABI`; run-time contract violations are
-`FN_CONTRACT`. Transports: `directTransport` (local; env `<NAME>_API_KEY`, or
-`<NAME>_CREDENTIALS` as a JSON object for a non-`{apiKey}` credential shape;
-injectable fetch) and the `relayTransport` interface (hosted injection — secrets
-never enter the engine process). `start/poll/stop` are Temporal-activity-shaped;
-`run()` is the only sleeper.
+`FN_CONTRACT`. Transports: `directTransport` (local; env
+`<NAME>_CREDENTIALS_<FIELD>` per declared credential field, with the bare
+`<NAME>_API_KEY` alias for an `apiKey` field; injectable fetch) and the
+`relayTransport` interface (hosted injection — secrets never enter the engine
+process). `start/poll/stop` are Temporal-activity-shaped; `run()` is the only
+sleeper.
 
 ## Usage & billing
 
@@ -229,7 +230,7 @@ Why tag-triggered, why a GitHub Release:
 | `deno task catalog providers \| endpoints \| categories \| inspect <id>`     | browse compiled bundles (`--provider`/`--category` filters)                                          |
 | `deno task engine:run <id> [--body] [--query-params] [--path-params]`        | JIT compile + execute with env credentials (flags = `RunInput` fields, kebab-case)                   |
 | `deno task record <id> <scenario> [--body] [--query-params] [--path-params]` | fixture recorder: live call, {req,res} captured (headers dropped), written to fixtures/              |
-| `deno task test` / `test:live`                                               | replay tests (zero network) / live tests, auto-skipped without `<NAME>_API_KEY`                      |
+| `deno task test` / `test:live`                                               | replay tests (zero network) / live tests, auto-skipped without `<NAME>_CREDENTIALS_<FIELD>`          |
 | `deno task check` / `lint` / `version:check`                                 | hygiene + contract guard                                                                             |
 
 ## Authoring guide
@@ -238,23 +239,34 @@ Why tag-triggered, why a GitHub Release:
   (exa does) — declare it only for non-standard shapes. No secret VALUE ever
   appears in a def, doc, bundle, or fixture. A vendor that issues SEVERAL keys
   (contactout: a work-email and a personal-email account) declares ONE
-  credential shape holding every key on the provider, and no provider
-  `inject`; each endpoint declares its own inline `inject` naming the key it
-  sends. Which key an endpoint uses is always visible in that endpoint's file. Locally the engine reads `<NAME>_CREDENTIALS` (a JSON object in
-  the doc's own credential shape) ahead of `<NAME>_API_KEY`.
+  credential shape holding every key on the provider, and no provider `inject`;
+  each endpoint declares its own inline `inject` naming the key it sends. Which
+  key an endpoint uses is always visible in that endpoint's file. Locally, every
+  credential FIELD reads from its own variable — `<NAME>_CREDENTIALS_<FIELD>`,
+  dashes and camelCase humps underscored:
+
+  ```bash
+  export EXA_CREDENTIALS_API_KEY=...                  # or the EXA_API_KEY alias
+  export CONTACTOUT_CREDENTIALS_WORK_API_KEY=...
+  export CONTACTOUT_CREDENTIALS_PERSONAL_API_KEY=...
+  ```
+
+  One variable per field, so the environment and `auth.credentials` correspond
+  1:1. The only alias is the bare `<NAME>_API_KEY` for a field named `apiKey`;
+  the canonical name wins when both are set, and a variable set but empty fails
+  as `MISSING_CREDENTIAL` naming it rather than falling back.
 - **Meta roles**: `summary` = one line (list views); `description` = full
   capability text (inspect/agents); `notes` = operational CAVEATS, one
   standalone fact per entry (latency, result expiry, input shapes the vendor
   rejects, parameter combinations that are silently wrong rather than errors).
-  `notes` is the ONE additive leaf: the compiled doc concatenates the
-  provider's then the endpoint's, so a provider states what is true of all its
-  endpoints and each endpoint states only what diverges. It is also where a
-  cross-field rule goes, since `.refine`/`.superRefine` cannot survive
-  compilation. A constraint about ONE field stays on that field's
-  `.describe()`. Categories: add the leaf to `connectors/categories.ts` in the
-  same PR.
-- **Schemas**: endpoint-local zod at `endpoints/<name>/schema/inputs.ts` —
-  only what that endpoint uses; a fragment two endpoints share goes in
+  `notes` is the ONE additive leaf: the compiled doc concatenates the provider's
+  then the endpoint's, so a provider states what is true of all its endpoints
+  and each endpoint states only what diverges. It is also where a cross-field
+  rule goes, since `.refine`/`.superRefine` cannot survive compilation. A
+  constraint about ONE field stays on that field's `.describe()`. Categories:
+  add the leaf to `connectors/categories.ts` in the same PR.
+- **Schemas**: endpoint-local zod at `endpoints/<name>/schema/inputs.ts` — only
+  what that endpoint uses; a fragment two endpoints share goes in
   `connectors/<name>/schema/`, never imported or re-exported across endpoint
   directories, and never across providers. What the engine enforces is the
   COMPILED JSON Schema, so the test is whether `z.toJSONSchema` can express the
@@ -265,10 +277,9 @@ Why tag-triggered, why a GitHub Release:
   CROSS-field rule has to be documented in `notes` instead. Do not read that as
   "validation does not survive": a single-field constraint belongs in the
   schema, where it is enforced before the wire. Write `.describe()` BEFORE
-  `.optional()`:
-  a binding that derives a field with `.unwrap()` keeps only the inner schema,
-  so a describe hung on the optional wrapper is silently dropped from the
-  compiled doc (the compiler does not check for it).
+  `.optional()`: a binding that derives a field with `.unwrap()` keeps only the
+  inner schema, so a describe hung on the optional wrapper is silently dropped
+  from the compiled doc (the compiler does not check for it).
 - **Fixtures**: recorded via `deno task record` (headers never captured);
   synthetic fixtures carry a `synthetic-` prefix until real keys exist.
 

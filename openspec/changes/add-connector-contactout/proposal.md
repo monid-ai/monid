@@ -9,7 +9,8 @@ company search, decision makers, email-to-LinkedIn, three free availability
 checkers, and email verification. It is the first connector whose vendor
 issues TWO API keys — a work-email account and a personal-email account,
 each with its own credit pools and its own email rate — so it is also the
-first to declare `auth.credentials` at the endpoint. Everything else it
+first to declare a non-default `auth.credentials` on the PROVIDER while
+each endpoint declares only its own `auth.inject`. Everything else it
 needs already exists: key-wise credit pools (pdl), counting rules for
 either/or billing (D19), literal-rate tests where the vendor reports no
 meter (clay D7a).
@@ -40,14 +41,20 @@ meter (clay D7a).
     (`include`, `data_types`, `email_type`). Cross-field v1 refinements ride
     `meta.notes`; decision-makers' "at least one identifier" binds as a
     compiled `anyOf` (D6).
-- **Engine 0.2.0 → 0.2.1 (D9):** the local credential resolver learns a
-  second env convention, `<NAME>_CREDENTIALS` — a JSON object in the doc's
-  own credential shape — ahead of `<NAME>_API_KEY`. No hook ABI, doc
-  format or lifecycle change; `fn_abi_since` / `doc_format_since` /
-  `async_since` untouched.
+- **Engine 0.2.0 → 0.3.0 (D9):** ONE credential env convention, mirroring
+  `auth.credentials` 1:1 — each declared field reads
+  `<NAME>_CREDENTIALS_<FIELD>` (`CONTACTOUT_CREDENTIALS_WORK_API_KEY`), with
+  the bare `<NAME>_API_KEY` kept as the single alias for an `apiKey` field.
+  `ParamsResolver` widens to `(provider, fields?)` so the resolver reads the
+  fields the DOC declares. No hook ABI, doc format or lifecycle change;
+  `fn_abi_since` / `doc_format_since` / `async_since` untouched.
 - **shared/testing:** replay mode fakes whichever credential fields the
-  doc declares (it hard-coded `{apiKey}`); `liveSkip` opens on either env
-  convention.
+  doc declares (it hard-coded `{apiKey}`); `liveSkip` takes the field list
+  and delegates the env read to the engine, so `shared/testing` no longer
+  touches `Deno.env`.
+- **scripts + CI:** the apify drift suite and `apify:scaffold` resolve their
+  token through the same convention; the `drift.yml` secret becomes
+  `APIFY_CREDENTIALS_API_KEY`.
 - **Fixtures are SYNTHETIC** — no ContactOut key is held in this repo. Every
   body is taken from the v1 adaptor tests or the public API reference and
   every file says so in its `description`.
@@ -78,7 +85,10 @@ meter (clay D7a).
 ## Impact
 
 New connector tree + `openspec/changes/add-connector-contactout`. Engine
-patch bump 0.2.1 for the resolver change (`engine/transport.ts`,
-`engine/auth.ts`, `engine/mod.ts` are version-check contract paths); no
-compiled doc other than contactout's changes. `DEVELOPMENT.md` Authoring
-guide gains the multi-key credentials rule.
+MINOR bump 0.3.0 for the credential convention (`engine/transport.ts`,
+`engine/auth.ts`, `engine/interfaces/mod.ts`, `engine/mod.ts` are
+version-check contract paths) — a minor because the change REMOVES a
+convention, not just adds one. No compiled doc other than contactout's
+changes. `AGENT.md` / `README.md` / `DEVELOPMENT.md` state the one
+credential rule; `AGENT.md`'s stale "endpoint ids are inferred from folder
+names" line is corrected to the D22 rule it contradicted.

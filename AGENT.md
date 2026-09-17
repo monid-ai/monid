@@ -37,7 +37,7 @@ config.yml                    # schema.*/compiler.* = CONTRACT (no env overrides
 
 ```bash
 deno task check && deno task test    # types + replay tests (zero network)
-deno task test:live                  # live tests; auto-skip without <PROVIDER>_API_KEY (or _CREDENTIALS)
+deno task test:live                  # live tests; auto-skip without <PROVIDER>_CREDENTIALS_<FIELD>
 deno task engine:run 'exa#search' --body '{...}'   # JIT-compile + execute one endpoint
 deno task catalog providers|endpoints|inspect <id>
 deno task record <id> ...            # record real fixtures (headers dropped)
@@ -164,19 +164,19 @@ deno task apify:scaffold <actorId>   # authoring-time actor input-schema scaffol
 - **Billing before presentation**: `usage.consolidate` is OPTIONAL (D27 — not
   every vendor reports a meter; clay, pdl and tinyfish ship without one) and,
   when present, runs on the RAW response envelope BEFORE `fromResponse` —
-  presentation changes can never change a bill. Vendor non-2xx is DATA (zero usage), not an exception;
-  lifecycle fns synthesize error statuses for in-body failures and the engine
-  zero-bills every non-2xx envelope (a fn cannot bill an error).
+  presentation changes can never change a bill. Vendor non-2xx is DATA (zero
+  usage), not an exception; lifecycle fns synthesize error statuses for in-body
+  failures and the engine zero-bills every non-2xx envelope (a fn cannot bill an
+  error).
 - **Versioning**: every doc carries compiler-derived `minEngineVersion`.
   Connector-only changes never bump the engine. Any hook-ABI or doc-format
   change requires an `ENGINE_VERSION` minor bump + `doc_format_since`/
   `fn_abi_since` facts in `config.yml`, guarded by `deno task version:check`.
 - **Tests run the artifact**: `testSealedUnit(id)` compiles the whole repo and
   tests the sealed unit (doc + its fn entries), replaying `fixtures/*.json`.
-  Live tests gate on `<PROVIDER>_API_KEY` (or `<PROVIDER>_CREDENTIALS`, a
-  JSON object for a multi-key provider); synthetic fixtures carry a
-  `synthetic-` filename prefix until real recordings exist. Fixtures are MINIMAL
-  SHARED CHAINS (fixture strategy v2): provider-level
+  Live tests gate on the credential env convention (below); synthetic fixtures
+  carry a `synthetic-` filename prefix until real recordings exist. Fixtures are
+  MINIMAL SHARED CHAINS (fixture strategy v2): provider-level
   `connectors/<provider>/fixtures/<shape>.json` with a required `description`
   and `{{request.url}}`/`{{request.origin}}` bindings — one chain serves every
   endpoint. `record` trims (arrays/strings capped) and ALWAYS scrubs PII; the
@@ -199,8 +199,21 @@ The async run protocol (D10/D29's reserved surface) is IMPLEMENTED — see
 ## Conventions
 
 - Deno 2 workspace; fmt `indentWidth: 4`; import aliases `@shared/<name>`.
-- Endpoint ids are `<provider>#<endpoint>`, inferred from folder names — never
-  authored.
+- Endpoint ids are `<provider>#<path minus its leading slash>`, where the path
+  is the def's `endpoint` ?? `request.path` (design D22). Folder names are
+  ORGANIZATIONAL only — they must be unique per provider, but they are never
+  identity. Declare `endpoint` when the native path is transport plumbing
+  (apify's actor slug), empty (tinyfish), or SHARED by two defs (contactout's
+  work/personal twins, where omitting it collides).
+- **Credentials, one convention**: each field of a doc's `auth.credentials`
+  reads from `<PROVIDER>_CREDENTIALS_<FIELD>` — dashes and camelCase humps
+  become underscores (`contactout` + `workApiKey` ⇒
+  `CONTACTOUT_CREDENTIALS_WORK_API_KEY`). One alias, for the near-universal
+  `apiKey` field alone: the bare `<PROVIDER>_API_KEY` still answers, and the
+  canonical name wins when both are set. A variable set but EMPTY is a config
+  error surfaced as `MISSING_CREDENTIAL` naming it, never a silent fallback.
+  Same spelling as monid-services' `AppConfig` path→env derivation, so local env
+  and hosted config agree.
 - New hook = contract file in `shared/core/schema/hooks/` + section carrier +
   doc `zFnRef` slot + `fnKeysOf` entry + `linkFns` branch + engine phase +
   version bump. Follow the existing pattern end-to-end.

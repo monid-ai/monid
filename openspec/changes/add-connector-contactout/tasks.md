@@ -48,21 +48,25 @@
       description) from v1 test bodies and the public API reference
 - [x] 4.2 20 endpoint.test.ts: happy deep-equal usage, miss/empty where the
       vendor has one, 401/404 error-as-data, schema gates, live gated on
-      CONTACTOUT_CREDENTIALS; provider-wide tests (two keys, rate literals,
-      fn provenance) in linkedin-enrich-work-email
-- [ ] 4.3 Obtain a work key + a personal key, set `CONTACTOUT_CREDENTIALS`,
-      run `deno task test:live`, then `deno task record` every scenario and
-      replace the synthetic fixtures (watch: the `profiles` object-vs-array
-      shape, the camelCase `/v1/email/enrich` dialect, whether
-      `profile_only=true` as a query string is honoured)
+      the two credential variables; provider-wide tests (two keys, rate
+      literals, fn provenance) in linkedin-enrich-work-email
+- [ ] 4.3 Obtain a work key + a personal key, set
+      `CONTACTOUT_CREDENTIALS_WORK_API_KEY` /
+      `CONTACTOUT_CREDENTIALS_PERSONAL_API_KEY`, run `deno task test:live`,
+      then `deno task record` every scenario and replace the synthetic
+      fixtures (watch: the `profiles` object-vs-array shape, the camelCase
+      `/v1/email/enrich` dialect, whether `profile_only=true` as a query
+      string is honoured)
 - [ ] 4.4 Confirm with a real personal-key run that the personal pools are
       what `/v1/stats` under that key decrements
 
 ## 5. Docs + wiring
 
 - [x] 5.1 openspec: proposal, design D1–D13, spec, tasks
-- [x] 5.2 DEVELOPMENT.md Authoring guide: multi-key credentials rule +
-      the `<NAME>_CREDENTIALS` convention
+- [x] 5.2 AGENT.md / README.md / DEVELOPMENT.md: the multi-key credentials
+      rule + the ONE `<NAME>_CREDENTIALS_<FIELD>` convention (owner call,
+      PR #19), and AGENT.md's stale folder-name endpoint-id line corrected
+      to D22
 - [ ] 5.3 monid-services: Broker provisions `{workApiKey, personalApiKey}`
       for `contactout` (v1 holds `CONTACTOUT_API_KEY_WORK` / `_PERSONAL`)
 - [x] 5.4 Verify: fmt · lint · check · test · double-compile ·

@@ -147,28 +147,72 @@ and `/v1/company/search` has no knob (`metadata.page_size` is always 25):
 both promise 25, a quantity DEDUCED from the vendor, not a fallback.
 `/v1/domain/enrich` promises `domains.length` (1–30).
 
-## D9 — Engine: `<NAME>_CREDENTIALS` for non-`{apiKey}` shapes (0.2.1)
+## D9 — Engine: one variable per credential FIELD (0.3.0)
 
 The local resolver read one variable and produced one key
 (`CONTACTOUT_API_KEY → {apiKey}`), keyed by PROVIDER — it cannot know the
-endpoint, so a personal-key doc could never be run locally. Options:
-a per-field convention (`CONTACTOUT_WORK_API_KEY`) needs either the doc's
-schema in the resolver (a public-interface change) or an env scan by
-prefix; a JSON object in one variable mirrors the credentials object
-one-to-one and changes no signature. Chosen: `<NAME>_CREDENTIALS` (a JSON
-object of string values) wins when set, else `<NAME>_API_KEY → {apiKey}`;
-a malformed object is MISSING_CREDENTIAL, never a silent `{}`. The hint in
-the injector's error names both variables.
+endpoint, so a personal-key doc could never be run locally.
 
-`engine/transport.ts`, `engine/auth.ts` and `engine/mod.ts` are
-version-check contract paths, so the engine moves 0.2.0 → 0.2.1. No hook
-ABI, doc format or lifecycle surface changed: the three `since` fields in
-`config.yml` stay.
+The first attempt put the WHOLE params object in one variable as JSON
+(`CONTACTOUT_CREDENTIALS='{"workApiKey":…}'`). Withdrawn on review (owner
+call 2026-09-16, PR #19): it changed no signature, but it made the
+environment a parser — a second encoding with its own malformed-input
+failure mode, unquotable in a shell without care, and impossible to set
+one field of from a secret manager that hands out one value per variable.
+
+Chosen: **the environment mirrors `auth.credentials` 1:1.** Every declared
+field reads `<PROVIDER>_CREDENTIALS_<FIELD>`, the provider's dashes and the
+field's camelCase humps both underscored:
+
+```
+exa        + apiKey         → EXA_CREDENTIALS_API_KEY
+contactout + workApiKey     → CONTACTOUT_CREDENTIALS_WORK_API_KEY
+contactout + personalApiKey → CONTACTOUT_CREDENTIALS_PERSONAL_API_KEY
+```
+
+It is the name monid-services' `AppConfig.envVarFor` already derives from
+the config path `contactout.credentials.work_api_key`
+(`shared/app-config/README.md`: `database.credentials.username =>
+DATABASE_CREDENTIALS_USERNAME`), so local env and hosted config spell a
+credential identically — and it matches the CDK posture of one secret
+field per variable that v1 already uses.
+
+**One alias, deliberately.** `apiKey` is the near-universal shape and
+`<PROVIDER>_API_KEY` is in every developer's shell and every README, so
+that one field keeps its bare variable. The canonical name wins when both
+are set. No other field has an alias — a two-key provider cannot be
+configured by accident.
+
+**Set-but-empty is an error, not a fallback.** A blank
+`EXA_CREDENTIALS_API_KEY` is reported as the empty string and rejected by
+the credential schema's own `.min(1)` → `MISSING_CREDENTIAL` naming the
+variable. Silently preferring the alias would hide a broken deployment.
+
+**The resolver learns the fields from the doc**, not from the environment.
+`ParamsResolver` widens to `(provider, fields?) => …` and the injector
+passes `credentialFieldsOf(req.auth.credentials)`; an env scan by prefix
+was the alternative and was rejected because it requires enumerating the
+whole environment and a reverse name transform that is convention rather
+than derivation. A resolver written `(provider) => …` stays assignable, so
+the hosted Relay resolver and every test double keep compiling.
+
+`engine/transport.ts`, `engine/auth.ts`, `engine/interfaces/mod.ts` and
+`engine/mod.ts` are version-check contract paths. The engine moves 0.2.0 →
+**0.3.0** — a minor, not a patch: this REMOVES a credential convention, and
+the version is the only place that can say so. No hook ABI, doc format or
+lifecycle surface changed, so the three `since` fields in `config.yml` stay.
 
 Replay mode in `shared/testing/runner.ts` hard-coded `{apiKey: "test-key"}`
 and would fail every contactout doc with MISSING_CREDENTIAL; it now fakes
-whichever fields the doc's compiled credentials schema requires.
-`liveSkip` opens on either variable.
+whichever fields the doc's compiled credentials schema declares. `liveSkip`
+takes the field list (`liveSkip("contactout", ["workApiKey",
+"personalApiKey"])`) and delegates the env read to the engine's
+`envCredentialsPresent`, so `shared/testing` no longer touches `Deno.env`
+at all — the repo's own boundary rule.
+
+The apify drift suite and `apify:scaffold` read their token through the
+same convention (`APIFY_CREDENTIALS_API_KEY`, alias `APIFY_API_KEY`); the
+`drift.yml` secret is renamed to match.
 
 Hosted: the Relay hands the engine a `Record<string, string>` from the
 Broker; two fields fit. Provisioning both secrets for `contactout` is a
@@ -182,8 +226,9 @@ No ContactOut key is held in this repo, so every fixture is
 the v1 adaptor tests (the profile dialects, the object-vs-array `profiles`
 and `companies` shapes that were real under-billing bugs in v1) and the
 public API reference (checkers, count, person, verify, error envelope).
-Live tests are written and gated on `CONTACTOUT_CREDENTIALS`. Re-recording
-is the first open task.
+Live tests are written and gated on `CONTACTOUT_CREDENTIALS_WORK_API_KEY` +
+`CONTACTOUT_CREDENTIALS_PERSONAL_API_KEY`. Re-recording is the first open
+task.
 
 ## D11 — Contacts-only `email_type=none` draws no email credit
 
