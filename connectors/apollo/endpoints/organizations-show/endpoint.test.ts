@@ -85,8 +85,10 @@ Deno.test({
             JSON.stringify(result.output),
         );
         assertEquals(
-            typeof (result.output as Record<string, unknown>).organization,
-            "object",
+            Object.prototype.toString.call(
+                (result.output as Record<string, unknown>).organization,
+            ),
+            "[object Object]",
             JSON.stringify(result.output),
         );
         assertEquals(Object.keys(result.usage.evidence), ["RESULT"]);
