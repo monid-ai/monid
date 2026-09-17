@@ -49,6 +49,9 @@ Deno.test(`${ID} schema gate: unknown keys and out-of-vocabulary sizes are rejec
             { name: ["ContactOut"], page_size: 10 },
             { size: ["huge"] },
             { year_founded_from: 1900 },
+            // revenue is a CLOSED band list the vendor publishes
+            { min_revenue: 2 },
+            { max_revenue: 7_500_000 },
         ] as Record<string, Json>[]
     ) {
         await assertRejects(
@@ -69,7 +72,8 @@ Deno.test(`${ID} schema gate: unknown keys and out-of-vocabulary sizes are rejec
         const ok of [
             { name: ["ContactOut"] },
             { size: ["1_10", "10001"], year_founded_from: 1985 },
-            { domain: ["contactout.com"], min_revenue: 1000000 },
+            { domain: ["contactout.com"], min_revenue: 1_000_000 },
+            { name: ["ContactOut"], max_revenue: 1_000_000_000 },
         ] as Record<string, Json>[]
     ) {
         await assertInputAccepted({

@@ -31,11 +31,33 @@ export const zLanguageFilter = z.object({
     ])).describe("Accepted proficiency levels; omit for any.").optional(),
 }).strict();
 
-const zYearsRange = (values: string, description: string) =>
-    z.string().min(1).describe(
-        `${description} Format X_Y (min_max years); accepted values: ` +
-            `${values}.`,
+/**
+ * A years range in the vendor's documented format: `X_Y` (min_max), or a
+ * bare `X` for the open-ended top bucket. NOT an enum — the vendor states a
+ * FORMAT and accepts arbitrary integers, so the listed ranges are examples,
+ * not a closed vocabulary (live-verified 2026-09-17 on the free
+ * `/v1/people/count`: `6_10` → 200, `10` → 200, `3_5`+`10` → 200, while
+ * `invalid` → 400 "must be in the format x_y where x and y are numbers").
+ * A single-field pattern, so it compiles to `pattern` and stops a typo
+ * before a metered `/v1/people/search`.
+ */
+const zYearsRange = (examples: string, description: string) =>
+    z.string().regex(
+        /^\d+(_\d+)?$/,
+        "Must be a years range in the format X_Y (min_max years), or a " +
+            "bare number for the open-ended top bucket.",
+    ).describe(
+        `${description} Format X_Y (min_max years), or a bare number for ` +
+            `the open-ended top bucket; e.g. ${examples}.`,
     );
+
+/** The three structured education fields; every arm of the union below
+ *  derives from this one object, so the shape is stated once. */
+const zEducationFilter = z.object({
+    school_name: z.string().min(1).optional(),
+    field_of_study: z.string().min(1).optional(),
+    location: z.string().min(1).optional(),
+}).strict();
 
 /** The filter fields, as a shape so each consumer spells its own object. */
 export const peopleSearchFilterShape = {
@@ -89,12 +111,15 @@ export const peopleSearchFilterShape = {
         50,
         "Schools or degrees. Supports boolean equations.",
     ).optional(),
+    // "at least one of" is a z.union of .required() arms — the form that
+    // SURVIVES compilation as `anyOf` (a .refine would be silently dropped
+    // and an empty `{}` would reach the metered call)
     educations: z.array(
-        z.object({
-            school_name: z.string().min(1).optional(),
-            field_of_study: z.string().min(1).optional(),
-            location: z.string().min(1).optional(),
-        }).strict().describe("Provide at least one education field."),
+        z.union([
+            zEducationFilter.required({ school_name: true }),
+            zEducationFilter.required({ field_of_study: true }),
+            zEducationFilter.required({ location: true }),
+        ]).describe("Provide at least one education field."),
     ).max(50).describe("Structured education filters.").optional(),
     location: zStringList(50, "Locations of the person.").optional(),
     location_radius: z.number().int().min(1).max(500).describe(

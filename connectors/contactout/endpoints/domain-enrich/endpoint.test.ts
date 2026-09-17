@@ -31,6 +31,11 @@ Deno.test(`${ID} happy (synthetic, companies as an OBJECT keyed by domain): 3 as
         credits: { search_work: 2 },
         evidence: { RESULT: 2 },
     });
+    // The provider has no `output.fromResponse`, so the vendor body must
+    // ride out WHOLE — deep-equalling the fixture's own recorded response
+    // proves nothing was stripped and no billing field was stamped on (v1
+    // stamped unit counters onto the output; v2 publishes usage.evidence).
+    assertEquals(result.output, fixture.calls[0].res.body);
 });
 
 Deno.test(`${ID} provider error (synthetic 401): data, zero usage`, async () => {
@@ -103,6 +108,8 @@ Deno.test({
             false,
             JSON.stringify(result.output),
         );
-        assertEquals(result.usage.evidence.RESULT, 1);
+        // shape, not amount: whether a live domain still matches is the
+        // vendor's data, so the COUNT can legitimately change
+        assertEquals(typeof result.usage.evidence.RESULT, "number");
     },
 });

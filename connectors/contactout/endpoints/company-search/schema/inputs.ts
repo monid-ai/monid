@@ -1,6 +1,20 @@
 import { z } from "zod";
 import { zCompanySize } from "../../../schema/common.ts";
 
+/** The revenue bands the vendor accepts — a CLOSED list it publishes, so it
+ *  compiles to an `enum` and an off-band value fails before the request.
+ *  Both bounds take the same list. */
+const zRevenueBand = z.literal([
+    1_000_000,
+    5_000_000,
+    10_000_000,
+    50_000_000,
+    100_000_000,
+    250_000_000,
+    500_000_000,
+    1_000_000_000,
+]);
+
 /** POST /v1/company/search body (ported from v1). v1's two `.refine`s
  *  ("at least one filter"; `year_founded_to` requires `year_founded_from`)
  *  are cross-field rules that do not survive compilation — they ride
@@ -28,12 +42,12 @@ export const zCompanySearchBody = z.object({
         "Technologies in use. Supports boolean equations with " +
             "capitalized AND/OR/NOT, e.g. 'HubSpot AND AWS'.",
     ).optional(),
-    min_revenue: z.number().int().nonnegative().describe(
+    min_revenue: zRevenueBand.describe(
         "Minimum annual revenue in USD. Accepted values: 1000000, " +
             "5000000, 10000000, 50000000, 100000000, 250000000, " +
             "500000000, 1000000000.",
     ).optional(),
-    max_revenue: z.number().int().nonnegative().describe(
+    max_revenue: zRevenueBand.describe(
         "Maximum annual revenue in USD (same accepted values as " +
             "min_revenue).",
     ).optional(),

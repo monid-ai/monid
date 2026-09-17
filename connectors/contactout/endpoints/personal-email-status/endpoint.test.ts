@@ -11,11 +11,11 @@ import { CONTACTOUT_KEYS } from "../../schema/auth.ts";
 
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
 const ID = "contactout#v1/people/linkedin/personal_email_status";
-const PROFILE = "https://www.linkedin.com/in/example-person";
+const PROFILE = "https://www.linkedin.com/in/williamhgates";
 
-Deno.test(`${ID} happy (synthetic): FREE flag under the personal key`, async () => {
+Deno.test(`${ID} happy (recorded live): FREE flag under the personal key`, async () => {
     const unit = await testSealedUnit(ID);
-    const fixture = await loadFixture(`${fixturesDir}synthetic-happy.json`);
+    const fixture = await loadFixture(`${fixturesDir}happy.json`);
     const result = await runEndpoint({
         unit,
         input: { queryParams: { profile: PROFILE } },
@@ -24,12 +24,9 @@ Deno.test(`${ID} happy (synthetic): FREE flag under the personal key`, async () 
     });
     assertEquals(result.httpStatus, 200);
     assertEquals(result.usage, { credits: {}, evidence: {} });
-    // the personal checker answers the flag under a bare `email` key (the
-    // key kind is the ACCOUNT's, not the field's — design D3)
-    assertEquals(
-        (result.output as { profile: { email: boolean } }).profile.email,
-        true,
-    );
+    // the checker answers the flag under a bare `email` key — the key kind
+    // is the ACCOUNT's, not the field's (design D3, recorded live)
+    assertEquals(result.output, fixture.calls[0].res.body);
 });
 
 Deno.test(`${ID} provider error (synthetic 401): data, zero usage`, async () => {
@@ -50,7 +47,7 @@ Deno.test(`${ID} provider error (synthetic 401): data, zero usage`, async () => 
 
 Deno.test(`${ID} schema gate: only a LinkedIn profile URL, and the valid forms pass`, async () => {
     const unit = await testSealedUnit(ID);
-    const fixture = await loadFixture(`${fixturesDir}synthetic-happy.json`);
+    const fixture = await loadFixture(`${fixturesDir}happy.json`);
     for (
         const bad of [
             "https://github.com/example",

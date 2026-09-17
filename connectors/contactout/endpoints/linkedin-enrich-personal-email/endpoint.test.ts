@@ -31,6 +31,11 @@ Deno.test(`${ID} happy (synthetic): a personal email, no phone ⇒ one personal 
         credits: { email_personal: 1 },
         evidence: { email_found: 1, phone_found: 0, profile_only: 0 },
     });
+    // The provider has no `output.fromResponse`, so the vendor body must
+    // ride out WHOLE — deep-equalling the fixture's own recorded response
+    // proves nothing was stripped and no billing field was stamped on (v1
+    // stamped unit counters onto the output; v2 publishes usage.evidence).
+    assertEquals(result.output, fixture.calls[0].res.body);
 });
 
 Deno.test(`${ID} provider error (synthetic 401): data, zero usage`, async () => {

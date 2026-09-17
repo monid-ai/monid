@@ -26,6 +26,11 @@ Deno.test(`${ID} happy (synthetic): a definitive verdict draws one verifier cred
         credits: { verifier: 1 },
         evidence: { RESULT: 1 },
     });
+    // The provider has no `output.fromResponse`, so the vendor body must
+    // ride out WHOLE — deep-equalling the fixture's own recorded response
+    // proves nothing was stripped and no billing field was stamped on (v1
+    // stamped unit counters onto the output; v2 publishes usage.evidence).
+    assertEquals(result.output, fixture.calls[0].res.body);
 });
 
 Deno.test(`${ID} unknown (synthetic): a non-definitive verdict is free`, async () => {

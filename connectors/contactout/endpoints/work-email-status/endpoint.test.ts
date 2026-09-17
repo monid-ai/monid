@@ -11,11 +11,11 @@ import { CONTACTOUT_KEYS } from "../../schema/auth.ts";
 
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
 const ID = "contactout#v1/people/linkedin/work_email_status";
-const PROFILE = "https://www.linkedin.com/in/example-person";
+const PROFILE = "https://www.linkedin.com/in/williamhgates";
 
-Deno.test(`${ID} happy (synthetic): FREE flag`, async () => {
+Deno.test(`${ID} happy (recorded live): FREE flag`, async () => {
     const unit = await testSealedUnit(ID);
-    const fixture = await loadFixture(`${fixturesDir}synthetic-happy.json`);
+    const fixture = await loadFixture(`${fixturesDir}happy.json`);
     const result = await runEndpoint({
         unit,
         input: { queryParams: { profile: PROFILE } },
@@ -24,16 +24,16 @@ Deno.test(`${ID} happy (synthetic): FREE flag`, async () => {
     });
     assertEquals(result.httpStatus, 200);
     assertEquals(result.usage, { credits: {}, evidence: {} });
-    assertEquals(
-        (result.output as { profile: { work_email: boolean } }).profile
-            .work_email,
-        true,
-    );
+    // the checker answers the flag under a bare `email` key with an
+    // `email_status` verdict — the key kind is the ACCOUNT's, not the
+    // field's (recorded live 2026-09-17; the synthetic fixture this replaced
+    // invented a `work_email` field the vendor does not send)
+    assertEquals(result.output, fixture.calls[0].res.body);
 });
 
 Deno.test(`${ID} schema gate: only a LinkedIn profile URL`, async () => {
     const unit = await testSealedUnit(ID);
-    const fixture = await loadFixture(`${fixturesDir}synthetic-happy.json`);
+    const fixture = await loadFixture(`${fixturesDir}happy.json`);
     await assertRejects(
         () =>
             runEndpoint({
@@ -83,6 +83,10 @@ Deno.test({
             JSON.stringify(result.output),
         );
         assertEquals(result.usage, { credits: {}, evidence: {} });
+        // shape: the checker answers a boolean flag, whichever way it falls
+        const profile = (result.output as { profile: Record<string, unknown> })
+            .profile;
+        assertEquals(typeof profile.email, "boolean");
     },
 });
 

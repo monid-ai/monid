@@ -107,6 +107,11 @@ Deno.test({
             JSON.stringify(result.output),
         );
         assertEquals(typeof result.usage.evidence.profiles, "number");
+        // These zeros are NOT vendor amounts: no `reveal_info` was sent, so
+        // the vendor does not populate contact_info at all and the reveal
+        // lines are structurally unreachable. They cannot drift with vendor
+        // data, and they are exactly the regression worth catching — a
+        // reveal we never asked for is a reveal we would be billed for.
         assertEquals(result.usage.evidence.email_reveals, 0);
         assertEquals(result.usage.evidence.phone_reveals, 0);
     },
