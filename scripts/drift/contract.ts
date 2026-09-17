@@ -1,5 +1,8 @@
 import type { EndpointDoc } from "@shared/core";
-import { credentialEnvVarsFor } from "@monid/connector-engine";
+import {
+    credentialEnvVarsFor,
+    resolveCredentialEnv,
+} from "@monid/connector-engine";
 
 /**
  * The drift-suite contract (design D28). DRIFT answers "has the WORLD
@@ -41,10 +44,6 @@ export interface DriftCtx {
 
 export interface DriftSuite {
     provider: string;
-    /** The provider slug whose API key the suite polls with. The variable
-     *  names follow the repo's ONE credential convention, so a suite never
-     *  spells an env var itself (exit 2 when unset). */
-    credentialProvider: string;
     run(ctx: DriftCtx): Promise<DriftFinding[]>;
 }
 
@@ -55,12 +54,11 @@ export function suiteEnvVars(provider: string): string[] {
     return credentialEnvVarsFor(provider, "apiKey");
 }
 
-/** Read a suite's key through that convention; undefined when unset or
- *  blank. `scripts/` is an allowed `Deno.env` boundary. */
+/** Read a suite's key through the engine's OWN precedence rule, so drift and
+ *  the engine can never disagree about which variable supplies a key: the
+ *  first DEFINED variable wins, and a blank one is a configuration error, not
+ *  a fall-through to the alias. Undefined when unset or blank. */
 export function suiteToken(provider: string): string | undefined {
-    for (const name of suiteEnvVars(provider)) {
-        const value = Deno.env.get(name);
-        if (value !== undefined && value !== "") return value;
-    }
-    return undefined;
+    const value = resolveCredentialEnv(provider, "apiKey");
+    return value === undefined || value === "" ? undefined : value;
 }

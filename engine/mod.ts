@@ -32,6 +32,7 @@ export {
     envCredentialsPresent,
     envParamsResolver,
     relayTransport,
+    resolveCredentialEnv,
     sniffDecode,
 } from "./transport.ts";
 export { type LinkedFns, linkFns } from "./link.ts";

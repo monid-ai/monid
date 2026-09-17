@@ -21,6 +21,7 @@ import {
     EngineErrorCode,
     envCredentialsPresent,
     envParamsResolver,
+    resolveCredentialEnv,
     type Transport,
 } from "@monid/connector-engine";
 
@@ -2391,16 +2392,32 @@ Deno.test("FREE discipline: FN_CONTRACT on counts or junk usage keys from a FREE
 // The env credential convention: <PROVIDER>_CREDENTIALS_<FIELD>, 1:1
 // ---------------------------------------------------------------------------
 
-/** Run `fn` with `vars` set, restoring the environment afterwards. */
+/**
+ * Run `fn` with `vars` set, RESTORING each variable's exact prior state
+ * afterwards — a previously-set value is put back, a previously-unset one is
+ * deleted. Deleting unconditionally (the first cut) destroyed a developer's
+ * real credentials for the rest of the process, so a later live test in the
+ * same run silently skipped.
+ *
+ * The fixtures below use a provider slug no connector owns, so these tests
+ * cannot collide with a real `<PROVIDER>_CREDENTIALS_*` variable in the first
+ * place; the restore is the second line of defence.
+ */
 async function withEnv(
     vars: Record<string, string>,
     fn: () => Promise<void>,
 ): Promise<void> {
+    const prior = Object.keys(vars).map(
+        (name) => [name, Deno.env.get(name)] as const,
+    );
     for (const [name, value] of Object.entries(vars)) Deno.env.set(name, value);
     try {
         await fn();
     } finally {
-        for (const name of Object.keys(vars)) Deno.env.delete(name);
+        for (const [name, value] of prior) {
+            if (value === undefined) Deno.env.delete(name);
+            else Deno.env.set(name, value);
+        }
     }
 }
 
@@ -2447,13 +2464,13 @@ Deno.test("credentialFieldsOf: the doc's declared properties ARE the field list;
 
 Deno.test("envParamsResolver: reads one variable per declared field — a multi-key provider resolves every key", async () => {
     await withEnv({
-        CONTACTOUT_CREDENTIALS_WORK_API_KEY: "w",
-        CONTACTOUT_CREDENTIALS_PERSONAL_API_KEY: "p",
+        DEMO_TWOKEY_CREDENTIALS_WORK_API_KEY: "w",
+        DEMO_TWOKEY_CREDENTIALS_PERSONAL_API_KEY: "p",
         // a variable the doc does NOT declare is never picked up
-        CONTACTOUT_CREDENTIALS_UNUSED_KEY: "junk",
+        DEMO_TWOKEY_CREDENTIALS_UNUSED_KEY: "junk",
     }, async () => {
         assertEquals(
-            await envParamsResolver("contactout", [
+            await envParamsResolver("demo-twokey", [
                 "workApiKey",
                 "personalApiKey",
             ]),
@@ -2462,7 +2479,7 @@ Deno.test("envParamsResolver: reads one variable per declared field — a multi-
         // a field with no variable is simply absent — the injector's
         // schema check is what turns that into MISSING_CREDENTIAL
         assertEquals(
-            await envParamsResolver("contactout", ["workApiKey", "otherKey"]),
+            await envParamsResolver("demo-twokey", ["workApiKey", "otherKey"]),
             { workApiKey: "w" },
         );
     });
@@ -2504,20 +2521,20 @@ Deno.test("envParamsResolver: a SET BUT EMPTY canonical variable is reported as 
 });
 
 Deno.test("envCredentialsPresent: the live gate opens only when EVERY declared field is set and non-empty", async () => {
-    await withEnv({ CONTACTOUT_CREDENTIALS_WORK_API_KEY: "w" }, async () => {
+    await withEnv({ DEMO_TWOKEY_CREDENTIALS_WORK_API_KEY: "w" }, async () => {
         const fields = ["workApiKey", "personalApiKey"];
-        assertEquals(envCredentialsPresent("contactout", fields), false);
+        assertEquals(envCredentialsPresent("demo-twokey", fields), false);
         await withEnv({
-            CONTACTOUT_CREDENTIALS_PERSONAL_API_KEY: "p",
+            DEMO_TWOKEY_CREDENTIALS_PERSONAL_API_KEY: "p",
         }, () => {
-            assertEquals(envCredentialsPresent("contactout", fields), true);
+            assertEquals(envCredentialsPresent("demo-twokey", fields), true);
             return Promise.resolve();
         });
         // present but EMPTY does not open the gate
         await withEnv({
-            CONTACTOUT_CREDENTIALS_PERSONAL_API_KEY: "",
+            DEMO_TWOKEY_CREDENTIALS_PERSONAL_API_KEY: "",
         }, () => {
-            assertEquals(envCredentialsPresent("contactout", fields), false);
+            assertEquals(envCredentialsPresent("demo-twokey", fields), false);
             return Promise.resolve();
         });
     });
@@ -2527,6 +2544,30 @@ Deno.test("envCredentialsPresent: the live gate opens only when EVERY declared f
         return Promise.resolve();
     });
     assertEquals(envCredentialsPresent("demo-resolver"), false);
+});
+
+Deno.test("the gate and the resolver share ONE precedence rule: a blank canonical shadows the alias in BOTH", async () => {
+    await withEnv({
+        DEMO_RESOLVER_CREDENTIALS_API_KEY: "",
+        DEMO_RESOLVER_API_KEY: "aliased",
+    }, async () => {
+        // the resolver hands the EMPTY canonical to the injector, which
+        // rejects it by name...
+        assertEquals(await envParamsResolver("demo-resolver"), { apiKey: "" });
+        // ...so the gate must stay SHUT. It used to fall through to the
+        // alias and report true, opening a live test onto a run guaranteed
+        // to fail MISSING_CREDENTIAL.
+        assertEquals(envCredentialsPresent("demo-resolver"), false);
+    });
+    // and the same rule one level down: resolveCredentialEnv returns the
+    // first DEFINED variable, blank or not
+    await withEnv({
+        DEMO_RESOLVER_CREDENTIALS_API_KEY: "",
+        DEMO_RESOLVER_API_KEY: "aliased",
+    }, () => {
+        assertEquals(resolveCredentialEnv("demo-resolver", "apiKey"), "");
+        return Promise.resolve();
+    });
 });
 
 Deno.test("MISSING_CREDENTIAL names the variables THIS doc's shape asks for, not a one-key convention", async () => {

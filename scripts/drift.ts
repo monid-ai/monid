@@ -60,11 +60,11 @@ for (const provider of wanted) {
         );
         continue;
     }
-    const token = suiteToken(suite.credentialProvider);
+    const token = suiteToken(suite.provider);
     if (token === undefined) {
         console.error(
             `${provider}: ${
-                suiteEnvVars(suite.credentialProvider).join(" or ")
+                suiteEnvVars(suite.provider).join(" or ")
             } is required (live checks)`,
         );
         Deno.exit(2);

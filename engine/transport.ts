@@ -41,32 +41,50 @@ export function sniffDecode(response: TransportResponse): Json {
 export const envParamsResolver: ParamsResolver = (provider, fields) => {
     const params: Record<string, string> = {};
     for (const field of fields ?? ["apiKey"]) {
-        for (const name of credentialEnvVarsFor(provider, field)) {
-            const value = Deno.env.get(name);
-            if (value !== undefined) {
-                params[field] = value;
-                break;
-            }
-        }
+        const value = resolveCredentialEnv(provider, field);
+        if (value !== undefined) params[field] = value;
     }
     return Promise.resolve(params);
 };
 
-/** Live-test gate: is every declared credential field present AND non-empty
- *  in the environment? `fields` defaults to the `{apiKey}` shape. Lives here
- *  because `Deno.env` belongs to the transport boundary, not to callers. */
+/**
+ * THE precedence rule, in ONE place: the first variable that is DEFINED wins,
+ * whatever its value. A set-but-EMPTY canonical name therefore SHADOWS the
+ * alias and is returned as `""` rather than skipped — blanking it is a
+ * configuration error, and the credential schema's own `.min(1)` rejects it
+ * by name. Falling through to the alias would hide a broken deployment.
+ *
+ * Every reader of the convention resolves through here — the params resolver,
+ * the live-test gate, and the drift suites — so the three can never disagree
+ * about which variable supplies a field. They did once: the gate treated an
+ * empty canonical as absent and opened onto a run that was then guaranteed to
+ * fail MISSING_CREDENTIAL, so a live test ran and failed instead of skipping.
+ */
+export function resolveCredentialEnv(
+    provider: string,
+    field: string,
+): string | undefined {
+    for (const name of credentialEnvVarsFor(provider, field)) {
+        const value = Deno.env.get(name);
+        if (value !== undefined) return value;
+    }
+    return undefined;
+}
+
+/** Live-test gate: does every declared credential field resolve to a
+ *  NON-EMPTY value? Same precedence as the resolver (above), so the gate
+ *  never opens onto a run the resolver would reject. `fields` defaults to
+ *  the `{apiKey}` shape. */
 export function envCredentialsPresent(
     provider: string,
     fields?: readonly string[],
 ): boolean {
     const wanted = fields ?? ["apiKey"];
     return wanted.length > 0 &&
-        wanted.every((field) =>
-            credentialEnvVarsFor(provider, field).some((name) => {
-                const value = Deno.env.get(name);
-                return value !== undefined && value !== "";
-            })
-        );
+        wanted.every((field) => {
+            const value = resolveCredentialEnv(provider, field);
+            return value !== undefined && value !== "";
+        });
 }
 
 /**

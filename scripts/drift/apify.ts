@@ -483,7 +483,6 @@ async function rescaffold(
 
 export const apifySuite: DriftSuite = {
     provider: "apify",
-    credentialProvider: "apify",
     async run(ctx: DriftCtx): Promise<DriftFinding[]> {
         const token = ctx.token;
         const now = new Date().toISOString();
