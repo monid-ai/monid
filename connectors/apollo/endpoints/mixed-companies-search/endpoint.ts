@@ -1,7 +1,6 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zOrganizationSearchQueryParams } from "./schema/inputs.ts";
 
-/** POST /mixed_companies/search — find companies by firmographic filters. */
 export default defineEndpoint({
     meta: {
         displayName: "Apollo Organization Search",

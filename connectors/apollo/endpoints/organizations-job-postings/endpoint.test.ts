@@ -120,6 +120,14 @@ Deno.test({
             false,
             JSON.stringify(result.output),
         );
+        assertEquals(
+            Array.isArray(
+                (result.output as Record<string, unknown>)
+                    .organization_job_postings,
+            ),
+            true,
+            JSON.stringify(result.output),
+        );
         assertEquals(Object.keys(result.usage.evidence), ["PAGE"]);
     },
 });

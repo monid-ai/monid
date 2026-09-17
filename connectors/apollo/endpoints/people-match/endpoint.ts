@@ -2,8 +2,6 @@ import { z } from "zod";
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zPeopleMatchQueryParams } from "./schema/inputs.ts";
 
-/** POST /people/match — enrich one person from identifiers. */
-
 // The asynchronous channels are NOT carried (design D2): a phone or
 // waterfall reveal answers with a signed 64-bit `request_id` that the
 // engine's JSON decode rounds, so the readback could never find it. Omitted

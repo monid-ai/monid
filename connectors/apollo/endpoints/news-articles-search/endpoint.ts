@@ -1,7 +1,6 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zNewsArticlesSearchQueryParams } from "./schema/inputs.ts";
 
-/** POST /news_articles/search — news articles tied to companies. */
 export default defineEndpoint({
     meta: {
         displayName: "Apollo News Articles Search",
@@ -15,6 +14,7 @@ export default defineEndpoint({
             "prospecting, and market intelligence.",
         docsUrl: "https://docs.apollo.io/reference/news-articles-search",
         categories: ["company-news", "company-enrichment"],
+        notes: ["published_at[min] must not fall after published_at[max]."],
     },
     request: { method: "POST", path: "/news_articles/search" },
     input: { schema: { queryParams: zNewsArticlesSearchQueryParams } },

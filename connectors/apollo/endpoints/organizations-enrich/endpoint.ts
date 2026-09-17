@@ -2,8 +2,6 @@ import { z } from "zod";
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zOrganizationEnrichQueryParams } from "./schema/inputs.ts";
 
-/** GET /organizations/enrich — enrich one company by domain, LinkedIn URL,
- *  or website. */
 export default defineEndpoint({
     meta: {
         displayName: "Apollo Organization Enrichment",

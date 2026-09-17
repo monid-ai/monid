@@ -1,7 +1,6 @@
 import { defineEndpoint, UsageModelKind } from "@shared/core";
 import { zPeopleSearchQueryParams } from "./schema/inputs.ts";
 
-/** POST /mixed_people/api_search — find net-new people by filters; free. */
 export default defineEndpoint({
     meta: {
         displayName: "Apollo People Search",

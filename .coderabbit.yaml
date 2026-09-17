@@ -124,6 +124,10 @@ reviews:
         single-field bounds (.regex/.min/.max/.enum, z.iso.date) STAY in the
         mirror and compile to pattern/minimum/enum; only our own tightening
         (.required, .default, our floors) lives at the binding in endpoint.ts.
+        A .min(1) on a string filter or a .min(0) on a money/count bound is
+        not tightening: an empty string or a negative amount is not a value
+        of the vendor's string/integer, so those floors stay in the mirror
+        (PR #31 apollo).
         Cross-field rules (A requires B, at most one of) go in meta.notes and
         are enforced by the vendor's 4xx, which is error-as-data with zero
         usage — never ask for .refine()/.superRefine() (they do not survive

@@ -1,7 +1,6 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zOrganizationShowPathParams } from "./schema/inputs.ts";
 
-/** GET /organizations/{id} — the complete record for a known company. */
 export default defineEndpoint({
     meta: {
         displayName: "Apollo Get Complete Organization Info",

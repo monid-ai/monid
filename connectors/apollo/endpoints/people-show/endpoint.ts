@@ -1,7 +1,6 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zPersonShowPathParams } from "./schema/inputs.ts";
 
-/** GET /people/{id} — the complete record for a known person. */
 export default defineEndpoint({
     meta: {
         displayName: "Apollo Get Complete Person Info",

@@ -58,9 +58,6 @@ Deno.test(`${ID}: the compiled schema gates the filters`, async () => {
             mode: "replay",
             fixture,
         });
-    // an unknown filter, a seniority outside Apollo's list, a page past
-    // the 500-page display limit, an impossible calendar date — all
-    // rejected before the wire (.strict() / enum / maximum / z.iso.date)
     for (
         const bad of [
             { ...INPUT.queryParams, not_an_apollo_filter: "x" },
@@ -101,6 +98,11 @@ Deno.test({
         assertEquals(
             result.isProviderError,
             false,
+            JSON.stringify(result.output),
+        );
+        assertEquals(
+            Array.isArray((result.output as Record<string, unknown>).people),
+            true,
             JSON.stringify(result.output),
         );
         assertEquals(result.usage, { credits: {}, evidence: {} });

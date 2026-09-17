@@ -76,15 +76,6 @@ const RATE: Record<
     },
 };
 
-/** Fixture dir: `endpoints/<wire path, slashes and underscores as
- *  dashes>/fixtures/` — the folder rule (design D1). */
-const happyFixture = (id: string) =>
-    loadFixture(
-        `${HERE}endpoints/${
-            id.split("#")[1].replaceAll(/[/_]/g, "-")
-        }/fixtures/synthetic-happy.json`,
-    );
-
 const apolloIds = async (): Promise<string[]> => {
     const bundle = await testBundle();
     return Object.keys(bundle.endpoints)
@@ -101,7 +92,13 @@ Deno.test("apollo: the literal rate table covers exactly the compiled endpoints"
 Deno.test("apollo: every endpoint's happy run folds to its published draw", async () => {
     for (const [id, { input, usage }] of Object.entries(RATE)) {
         const unit = await testSealedUnit(id);
-        const fixture = await happyFixture(id);
+        // fixture dir: endpoints/<wire path, slashes and underscores as
+        // dashes>/fixtures/ — the folder rule (design D1)
+        const fixture = await loadFixture(
+            `${HERE}endpoints/${
+                id.split("#")[1].replaceAll(/[/_]/g, "-")
+            }/fixtures/synthetic-happy.json`,
+        );
         const result = await runEndpoint({
             unit,
             input,

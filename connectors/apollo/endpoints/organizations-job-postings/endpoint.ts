@@ -4,8 +4,6 @@ import {
     zJobPostingsQueryParams,
 } from "./schema/inputs.ts";
 
-/** GET /organizations/{organization_id}/job_postings — a company's active
- *  job postings. */
 export default defineEndpoint({
     meta: {
         displayName: "Apollo Organization Job Postings",

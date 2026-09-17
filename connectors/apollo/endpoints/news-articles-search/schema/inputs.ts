@@ -14,11 +14,10 @@ export const zNewsArticlesSearchQueryParams = z.object({
             "'investment', 'contract'.",
     ).optional(),
     "published_at[min]": zDate.describe(
-        "Earliest publish date (YYYY-MM-DD); must fall before " +
-            "published_at[max].",
+        "Earliest publish date (YYYY-MM-DD).",
     ).optional(),
     "published_at[max]": zDate.describe(
-        "Latest publish date (YYYY-MM-DD); must fall after published_at[min].",
+        "Latest publish date (YYYY-MM-DD).",
     ).optional(),
     page: z.number().int().min(1).describe(
         "Page of articles to retrieve (1-based).",

@@ -119,6 +119,13 @@ Deno.test({
             false,
             JSON.stringify(result.output),
         );
+        assertEquals(
+            Array.isArray(
+                (result.output as Record<string, unknown>).news_articles,
+            ),
+            true,
+            JSON.stringify(result.output),
+        );
         assertEquals(Object.keys(result.usage.evidence), ["PAGE"]);
     },
 });
