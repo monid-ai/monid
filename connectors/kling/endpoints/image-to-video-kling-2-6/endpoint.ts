@@ -51,7 +51,8 @@ export default defineEndpoint({
     },
     usage: {
         /** The VENDOR's rate card (design D5) — identical to 2.6
-         *  text-to-video. The "voice control" 1080p row (1.2 units/s) needs
+         *  text-to-video (pricing/base/video, 2026-09-16). The "voice
+         *  control" 1080p row (1.2 units/s) needs
          *  a `voice` content item this connector does not expose, so it has
          *  no line here. */
         model: {

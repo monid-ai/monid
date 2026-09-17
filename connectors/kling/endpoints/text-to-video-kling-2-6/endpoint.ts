@@ -46,7 +46,8 @@ export default defineEndpoint({
     },
     usage: {
         /** The VENDOR's rate card (design D5): per second by resolution,
-         *  plus the one native-audio line Kling publishes (1080p only).
+         *  plus the one native-audio line Kling publishes (1080p only;
+         *  pricing/base/video, 2026-09-16).
          *  Kling also lists a "native audio with voice control" 1080p row
          *  at 1.2 units/s; it needs a `voice` content item (an account-level
          *  asset this connector does not expose), so it has no line here. */
