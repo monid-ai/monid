@@ -100,8 +100,10 @@ Deno.test({
         );
         assertEquals(Object.keys(result.usage.evidence), ["CALL"]);
         assertEquals(
-            typeof (result.output as Record<string, unknown>).data,
-            "object",
+            Object.prototype.toString.call(
+                (result.output as Record<string, unknown>).data,
+            ),
+            "[object Object]",
             JSON.stringify(result.output),
         );
     },

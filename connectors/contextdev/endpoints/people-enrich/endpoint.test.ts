@@ -127,8 +127,10 @@ Deno.test({
         );
         assertEquals(Object.keys(result.usage.evidence), ["RESULT"]);
         assertEquals(
-            typeof (result.output as Record<string, unknown>).match,
-            "object",
+            Object.prototype.toString.call(
+                (result.output as Record<string, unknown>).match,
+            ),
+            "[object Object]",
             JSON.stringify(result.output),
         );
     },
