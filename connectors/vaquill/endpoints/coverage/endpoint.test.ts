@@ -28,7 +28,11 @@ Deno.test(`${ID} happy: free, and the one response with no meter to read`, async
     // and the FREE model settles the run
     const body = result.output as Record<string, Json>;
     assertEquals("creditsConsumed" in body, false);
-    assert(body.data !== undefined && body.meta !== undefined);
+    assert(body.data !== undefined);
+    // `pluck` is EXACT, so the receipt this endpoint reports under `meta` is
+    // untouched. That is deliberate: it is documented response data saying
+    // the call was free, not the root receipt the provider settles on.
+    assertEquals((body.meta as Record<string, Json>).creditsConsumed, 0);
 });
 
 Deno.test(`${ID} provider error: a 401 is data, and bills nothing`, async () => {

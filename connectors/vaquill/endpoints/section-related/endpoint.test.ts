@@ -37,7 +37,8 @@ Deno.test(`${ID} happy: flat 2 credits whatever the window`, async () => {
         false,
     );
     const output = result.output as Record<string, Json>;
-    assert(Array.isArray(output.previous) && Array.isArray(output.next));
+    assertEquals((output.previous as unknown[]).length, 1);
+    assertEquals((output.next as unknown[]).length, 1);
 });
 
 Deno.test(`${ID} provider error: a 401 is data, and bills nothing`, async () => {

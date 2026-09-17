@@ -246,7 +246,9 @@ const zField = z.enum([
     "year",
 ]);
 
-const zDateString = z.string().regex(/^\d{4}-\d{2}-\d{2}$/);
+/** A real calendar date, so `2026-02-30` fails here rather than at the
+ *  vendor. Compiles to a `date` format the engine enforces. */
+const zDateString = z.iso.date();
 
 export const zStatuteSearchBody = z.object({
     query: z.string().min(2).max(500).describe(

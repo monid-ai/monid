@@ -13,7 +13,7 @@ export const zSectionBodyQueryParams = z.object({
             "text, so a pincite like (b)(2) can be addressed directly. " +
             "Same price.",
     ).optional(),
-    asOf: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).describe(
+    asOf: z.iso.date().describe(
         "Return the section's text as it stood on this date " +
             "(`YYYY-MM-DD`) instead of today. The response's `asOf` block " +
             "reports what was reconstructed, and its `isBounded` flag says " +

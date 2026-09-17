@@ -71,6 +71,13 @@ SHALL declare `input.toRequest`.
   `CASE_LAW` is not one of the 21 corpora Vaquill publishes
 - **AND** `corpusType: "CFR"` is accepted
 
+#### Scenario: Date filters are real calendar dates
+
+- **WHEN** `changedSince`, `publishedFrom`, `publishedTo` or `asOf` is given
+  `2026-02-30`
+- **THEN** the run fails INVALID_INPUT before any wire call, because those
+  fields are `z.iso.date()` rather than a four-two-two digit pattern
+
 #### Scenario: A list filter accepts one value or many
 
 - **WHEN** `state`, `corpusType`, `actStatus`, `source`, `code`, `chapter`,
@@ -144,6 +151,15 @@ is a COUNTING rule owned by the fns, never a model shape (design D19).
 - **WHEN** `#sections` runs with `actIds: []` or `#resolve` with
   `citations: []`
 - **THEN** the run fails INVALID_INPUT
+
+#### Scenario: The resolve cap is the RAW list, not the unique count
+
+- **WHEN** `#resolve` runs with 60 copies of one citation
+- **THEN** it is accepted, because the vendor collapses duplicates BEFORE
+  applying its 50-unique cap, and that request bills 2 rather than being
+  refused
+- **AND** the mirror bounds the array at 500, the vendor's raw ceiling, so a
+  client-side cap of 50 would refuse a request the vendor accepts
 
 ### Requirement: Search prices the ranked page and its inline bodies apart
 

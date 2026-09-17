@@ -34,6 +34,10 @@ export default defineEndpoint({
             "A citation that resolves to nothing is still billed: the " +
             "lookup ran. `resolved: false` on a result row reports the " +
             "miss.",
+            "The cap is 50 UNIQUE citations, applied AFTER duplicates are " +
+            "collapsed, so sixty repeats of one citation is one citation " +
+            "and is accepted. The schema bounds the raw list at 500; the " +
+            "post-collapse cap is the vendor's own 422.",
         ],
     },
     request: { method: "POST", path: "/us/statutes/resolve" },

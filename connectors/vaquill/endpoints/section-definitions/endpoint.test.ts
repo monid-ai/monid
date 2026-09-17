@@ -34,7 +34,9 @@ Deno.test(`${ID} happy: one answered lookup, whatever the term count`, async () 
         false,
     );
     const output = result.output as Record<string, Json>;
-    assert((output.terms as unknown[]).length > 0);
+    assertEquals((output.terms as unknown[]).length, 2);
+    // the fixture is trimmed to 2 rows; `total` is the untrimmed truth
+    assertEquals(output.total, 4);
 });
 
 Deno.test(`${ID} provider error: a 401 is data, and bills nothing`, async () => {
@@ -91,9 +93,19 @@ Deno.test({
             false,
             JSON.stringify(result.output),
         );
-        // shape, not amounts: the corpus moves, so pin the pool settled
-        // rather than a figure
-        assertEquals(typeof result.usage.credits.default, "number");
+        // shape, not amounts. A live lookup that finds nothing is
+        // REFUNDED, so there may be no pool entry at all: assert the
+        // answered-lookup quantity, and let each branch say what settles.
+        const answered = result.usage.evidence.RESULT;
+        assert(
+            answered === 0 || answered === 1,
+            `answered lookups must be 0 or 1, got ${answered}`,
+        );
+        if (answered === 1) {
+            assertEquals(typeof result.usage.credits.default, "number");
+        } else {
+            assertEquals(result.usage.credits, {});
+        }
         assert(
             (result.output as Record<string, Json>).terms !== undefined,
         );

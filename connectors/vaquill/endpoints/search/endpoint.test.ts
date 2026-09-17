@@ -161,22 +161,39 @@ Deno.test(`${ID} includeBody: the flat search plus one body line per row that re
 
 Deno.test(`${ID} a thin page estimates high and settles low`, async () => {
     const unit = await testSealedUnit(ID);
-    // asking for 10 bodies promises 10, but the recorded page returned 2
-    // rows and no text, so the settle counts no body line at all
-    assertEquals(
-        await estimateEndpoint(unit, {
-            body: { query: "insider trading", limit: 10, includeBody: true },
-        }),
-        { credits: { default: 64 }, evidence: { body: 10, call: 1 } },
-    );
+    // ONE input for both halves: the estimate and the settle must be
+    // compared on the same request or neither number means anything.
+    const input = {
+        body: {
+            query: "trade secret misappropriation remedies",
+            corpusType: "USC",
+            titleNumber: 18,
+            chapter: "90",
+            limit: 10,
+            includeBody: true,
+            fields: ["actId", "citation", "title", "body"],
+        },
+    };
+    // the promise: `limit` is the only body count a pre-run hook can read
+    assertEquals(await estimateEndpoint(unit, input), {
+        credits: { default: 64 },
+        evidence: { body: 10, call: 1 },
+    });
+    // the bill: this scope holds 9 sections, not 10, so the settle counts 9
+    // bodies and comes in under the promise. 4 + 9 x 6 = 58, which is what
+    // the vendor claimed, so no `mismatch` rides out.
     const result = await runEndpoint({
         unit,
-        input: INPUT,
+        input,
         mode: "replay",
-        fixture: await loadFixture(`${FIXTURES}search-ok.json`),
+        fixture: await loadFixture(`${FIXTURES}search-thin-bodies-ok.json`),
     });
     assertEquals(result.usage, {
-        credits: { default: 4 },
-        evidence: { call: 1 },
+        credits: { default: 58 },
+        evidence: { body: 9, call: 1 },
     });
+    assertEquals(
+        ((result.output as Record<string, Json>).results as unknown[]).length,
+        9,
+    );
 });
