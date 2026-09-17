@@ -11,11 +11,15 @@ import {
 } from "@shared/core";
 import { compileBundle } from "@shared/compiler";
 import {
+    credentialEnvVarFor,
+    credentialEnvVarsFor,
+    credentialFieldsOf,
     directTransport,
     Engine,
     ENGINE_VERSION,
     EngineError,
     EngineErrorCode,
+    envCredentialsPresent,
     envParamsResolver,
     type Transport,
 } from "@monid/connector-engine";
@@ -2384,44 +2388,189 @@ Deno.test("FREE discipline: FN_CONTRACT on counts or junk usage keys from a FREE
 });
 
 // ---------------------------------------------------------------------------
-// envParamsResolver: the two env conventions
+// The env credential convention: <PROVIDER>_CREDENTIALS_<FIELD>, 1:1
 // ---------------------------------------------------------------------------
 
-Deno.test("envParamsResolver: <NAME>_CREDENTIALS (JSON object) wins over <NAME>_API_KEY; the v1 convention still maps to {apiKey}", async () => {
-    Deno.env.set("DEMO_RESOLVER_API_KEY", "single");
-    Deno.env.set(
-        "DEMO_RESOLVER_CREDENTIALS",
-        JSON.stringify({ workApiKey: "w", personalApiKey: "p" }),
-    );
+/** Run `fn` with `vars` set, restoring the environment afterwards. */
+async function withEnv(
+    vars: Record<string, string>,
+    fn: () => Promise<void>,
+): Promise<void> {
+    for (const [name, value] of Object.entries(vars)) Deno.env.set(name, value);
     try {
-        // the JSON object is handed over AS the params — the doc's own
-        // credentials schema decides which keys a run needs
-        assertEquals(await envParamsResolver("demo-resolver"), {
-            workApiKey: "w",
-            personalApiKey: "p",
-        });
-        Deno.env.delete("DEMO_RESOLVER_CREDENTIALS");
-        assertEquals(await envParamsResolver("demo-resolver"), {
-            apiKey: "single",
-        });
-        Deno.env.delete("DEMO_RESOLVER_API_KEY");
-        assertEquals(await envParamsResolver("demo-resolver"), {});
+        await fn();
     } finally {
-        Deno.env.delete("DEMO_RESOLVER_API_KEY");
-        Deno.env.delete("DEMO_RESOLVER_CREDENTIALS");
+        for (const name of Object.keys(vars)) Deno.env.delete(name);
     }
+}
+
+Deno.test("credentialEnvVarFor: a credential field maps 1:1 onto <PROVIDER>_CREDENTIALS_<FIELD>", () => {
+    assertEquals(
+        credentialEnvVarFor("exa", "apiKey"),
+        "EXA_CREDENTIALS_API_KEY",
+    );
+    assertEquals(
+        credentialEnvVarFor("contactout", "workApiKey"),
+        "CONTACTOUT_CREDENTIALS_WORK_API_KEY",
+    );
+    assertEquals(
+        credentialEnvVarFor("contactout", "personalApiKey"),
+        "CONTACTOUT_CREDENTIALS_PERSONAL_API_KEY",
+    );
+    // a dashed provider slug underscores too
+    assertEquals(
+        credentialEnvVarFor("my-vendor", "accountId"),
+        "MY_VENDOR_CREDENTIALS_ACCOUNT_ID",
+    );
+    // the alias exists for `apiKey` ALONE — no other field gets a bare name
+    assertEquals(credentialEnvVarsFor("exa", "apiKey"), [
+        "EXA_CREDENTIALS_API_KEY",
+        "EXA_API_KEY",
+    ]);
+    assertEquals(credentialEnvVarsFor("contactout", "workApiKey"), [
+        "CONTACTOUT_CREDENTIALS_WORK_API_KEY",
+    ]);
 });
 
-Deno.test("envParamsResolver: a malformed <NAME>_CREDENTIALS is MISSING_CREDENTIAL, not a silent {}", async () => {
-    for (const bad of ["not json", '["a"]', '{"k": 1}', '"str"']) {
-        Deno.env.set("DEMO_RESOLVER_CREDENTIALS", bad);
-        try {
-            await expectCode(
-                envParamsResolver("demo-resolver"),
-                EngineErrorCode.MISSING_CREDENTIAL,
-            );
-        } finally {
-            Deno.env.delete("DEMO_RESOLVER_CREDENTIALS");
-        }
-    }
+Deno.test("credentialFieldsOf: the doc's declared properties ARE the field list; a shapeless doc floors at {apiKey}", () => {
+    assertEquals(
+        credentialFieldsOf({
+            type: "object",
+            properties: { workApiKey: {}, personalApiKey: {} },
+            required: ["workApiKey", "personalApiKey"],
+        }),
+        ["workApiKey", "personalApiKey"],
+    );
+    assertEquals(credentialFieldsOf({ type: "object" }), ["apiKey"]);
+    assertEquals(credentialFieldsOf({ properties: {} }), ["apiKey"]);
+});
+
+Deno.test("envParamsResolver: reads one variable per declared field — a multi-key provider resolves every key", async () => {
+    await withEnv({
+        CONTACTOUT_CREDENTIALS_WORK_API_KEY: "w",
+        CONTACTOUT_CREDENTIALS_PERSONAL_API_KEY: "p",
+        // a variable the doc does NOT declare is never picked up
+        CONTACTOUT_CREDENTIALS_UNUSED_KEY: "junk",
+    }, async () => {
+        assertEquals(
+            await envParamsResolver("contactout", [
+                "workApiKey",
+                "personalApiKey",
+            ]),
+            { workApiKey: "w", personalApiKey: "p" },
+        );
+        // a field with no variable is simply absent — the injector's
+        // schema check is what turns that into MISSING_CREDENTIAL
+        assertEquals(
+            await envParamsResolver("contactout", ["workApiKey", "otherKey"]),
+            { workApiKey: "w" },
+        );
+    });
+});
+
+Deno.test("envParamsResolver: <PROVIDER>_API_KEY is the ONE alias, and only for a field named apiKey", async () => {
+    await withEnv({ DEMO_RESOLVER_API_KEY: "aliased" }, async () => {
+        // omitted fields mean the default {apiKey} shape
+        assertEquals(await envParamsResolver("demo-resolver"), {
+            apiKey: "aliased",
+        });
+        // the alias does NOT answer for any other field name
+        assertEquals(
+            await envParamsResolver("demo-resolver", ["workApiKey"]),
+            {},
+        );
+    });
+    // canonical wins when both are set
+    await withEnv({
+        DEMO_RESOLVER_API_KEY: "aliased",
+        DEMO_RESOLVER_CREDENTIALS_API_KEY: "canonical",
+    }, async () => {
+        assertEquals(await envParamsResolver("demo-resolver"), {
+            apiKey: "canonical",
+        });
+    });
+    assertEquals(await envParamsResolver("demo-resolver"), {});
+});
+
+Deno.test("envParamsResolver: a SET BUT EMPTY canonical variable is reported as empty — never a silent fall-through to the alias", async () => {
+    await withEnv({
+        DEMO_RESOLVER_CREDENTIALS_API_KEY: "",
+        DEMO_RESOLVER_API_KEY: "aliased",
+    }, async () => {
+        // the empty string travels to the injector, whose `.min(1)` rejects
+        // it by name — blanking the canonical variable is a config error
+        assertEquals(await envParamsResolver("demo-resolver"), { apiKey: "" });
+    });
+});
+
+Deno.test("envCredentialsPresent: the live gate opens only when EVERY declared field is set and non-empty", async () => {
+    await withEnv({ CONTACTOUT_CREDENTIALS_WORK_API_KEY: "w" }, async () => {
+        const fields = ["workApiKey", "personalApiKey"];
+        assertEquals(envCredentialsPresent("contactout", fields), false);
+        await withEnv({
+            CONTACTOUT_CREDENTIALS_PERSONAL_API_KEY: "p",
+        }, () => {
+            assertEquals(envCredentialsPresent("contactout", fields), true);
+            return Promise.resolve();
+        });
+        // present but EMPTY does not open the gate
+        await withEnv({
+            CONTACTOUT_CREDENTIALS_PERSONAL_API_KEY: "",
+        }, () => {
+            assertEquals(envCredentialsPresent("contactout", fields), false);
+            return Promise.resolve();
+        });
+    });
+    await withEnv({ DEMO_RESOLVER_API_KEY: "aliased" }, () => {
+        // the alias opens the default {apiKey} gate
+        assertEquals(envCredentialsPresent("demo-resolver"), true);
+        return Promise.resolve();
+    });
+    assertEquals(envCredentialsPresent("demo-resolver"), false);
+});
+
+Deno.test("MISSING_CREDENTIAL names the variables THIS doc's shape asks for, not a one-key convention", async () => {
+    const connectors = demoConnector();
+    // a two-key provider: the personal key is declared but never supplied
+    connectors[0].provider = defineProvider({
+        name: "demo",
+        meta: { displayName: "Demo", summary: "Demo provider." },
+        auth: {
+            credentials: z.object({
+                workApiKey: z.string().min(1),
+                personalApiKey: z.string().min(1),
+            }),
+            inject: ({ data }) => ({
+                ...data.request,
+                headers: {
+                    ...data.request.headers,
+                    token: data.params.workApiKey,
+                },
+            }),
+        },
+        request: { baseUrl: "https://api.demo.test" },
+        usage: { credits: { default: { label: "Demo credits" } } },
+    });
+    const bundle = await compileBundle(connectors, COMPILE_OPTS);
+    const engine = new Engine({
+        transport: directTransport({
+            params: () => Promise.resolve({ workApiKey: "w" }),
+            fetch: () => Promise.reject(new Error("must not reach the wire")),
+        }),
+    });
+    const loaded = await engine.load(sealUnit(bundle, "demo#search"));
+    const error = await assertRejects(
+        () => loaded.run({ body: { q: "x" } }),
+        EngineError,
+    );
+    assertEquals(error.code, EngineErrorCode.MISSING_CREDENTIAL);
+    assert(
+        error.message.includes("DEMO_CREDENTIALS_PERSONAL_API_KEY"),
+        `hint must name the missing variable, got: ${error.message}`,
+    );
+    // and it must NOT suggest the bare alias for a non-apiKey field
+    assert(
+        !error.message.includes("DEMO_API_KEY"),
+        `no bare alias for a named field, got: ${error.message}`,
+    );
 });

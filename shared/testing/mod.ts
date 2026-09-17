@@ -17,6 +17,7 @@ export {
     zFixture,
 } from "./fixtures.ts";
 export {
+    assertInputAccepted,
     liveSkip,
     runEndpoint,
     type RunEndpointOptions,

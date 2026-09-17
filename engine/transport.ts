@@ -1,5 +1,5 @@
 import type { Json } from "@shared/core";
-import { applyAuth, credentialsEnvVarFor, envVarFor } from "./auth.ts";
+import { applyAuth, credentialEnvVarsFor, credentialFieldsOf } from "./auth.ts";
 import { EngineError, EngineErrorCode } from "./errors.ts";
 import type {
     ParamsResolver,
@@ -25,57 +25,48 @@ export function sniffDecode(response: TransportResponse): Json {
 }
 
 /**
- * Default resolver, two conventions:
- *   - `<NAME>_CREDENTIALS` — a JSON object holding the doc's WHOLE
- *     credential params (providers whose `auth.credentials` is not the
- *     default `{apiKey}`: contactout's two keys). Wins when set.
- *   - `<NAME>_API_KEY` → `{ apiKey }` (the v1 convention).
+ * The default resolver, ONE convention: read `<NAME>_CREDENTIALS_<FIELD>`
+ * for every field the doc's credential shape declares (plus the single
+ * `<NAME>_API_KEY` alias for a field named `apiKey`). `fields` comes from
+ * the doc — a caller that omits it gets the `{apiKey}` default shape.
+ *
+ * A variable that is SET BUT EMPTY is reported as the empty string, not
+ * skipped: the credential schema's own `.min(1)` then rejects it as
+ * MISSING_CREDENTIAL naming the variable. Blanking the canonical name is a
+ * configuration error, never a silent fall-through to the alias.
+ *
  * The resolver only READS; the injector validates the result against the
- * doc's credentials schema (MISSING_CREDENTIAL on a mismatch).
+ * doc's credentials schema.
  */
-export const envParamsResolver: ParamsResolver = (provider) => {
-    const json = Deno.env.get(credentialsEnvVarFor(provider));
-    if (json !== undefined && json.trim() !== "") {
-        // a rejected promise, never a synchronous throw — callers await
-        return Promise.resolve().then(() =>
-            parseCredentialsJson(provider, json)
-        );
-    }
-    const value = Deno.env.get(envVarFor(provider));
+export const envParamsResolver: ParamsResolver = (provider, fields) => {
     const params: Record<string, string> = {};
-    if (value) params.apiKey = value;
+    for (const field of fields ?? ["apiKey"]) {
+        for (const name of credentialEnvVarsFor(provider, field)) {
+            const value = Deno.env.get(name);
+            if (value !== undefined) {
+                params[field] = value;
+                break;
+            }
+        }
+    }
     return Promise.resolve(params);
 };
 
-/** `<NAME>_CREDENTIALS` must be a JSON object of string values — anything
- *  else is a configuration error, reported as MISSING_CREDENTIAL so it
- *  lands in the same bucket as an absent key. */
-function parseCredentialsJson(
+/** Live-test gate: is every declared credential field present AND non-empty
+ *  in the environment? `fields` defaults to the `{apiKey}` shape. Lives here
+ *  because `Deno.env` belongs to the transport boundary, not to callers. */
+export function envCredentialsPresent(
     provider: string,
-    json: string,
-): Record<string, string> {
-    let parsed: unknown;
-    try {
-        parsed = JSON.parse(json);
-    } catch {
-        throw new EngineError(
-            EngineErrorCode.MISSING_CREDENTIAL,
-            `${credentialsEnvVarFor(provider)} is not valid JSON`,
+    fields?: readonly string[],
+): boolean {
+    const wanted = fields ?? ["apiKey"];
+    return wanted.length > 0 &&
+        wanted.every((field) =>
+            credentialEnvVarsFor(provider, field).some((name) => {
+                const value = Deno.env.get(name);
+                return value !== undefined && value !== "";
+            })
         );
-    }
-    if (
-        parsed === null || typeof parsed !== "object" ||
-        Array.isArray(parsed) ||
-        Object.values(parsed).some((value) => typeof value !== "string")
-    ) {
-        throw new EngineError(
-            EngineErrorCode.MISSING_CREDENTIAL,
-            `${
-                credentialsEnvVarFor(provider)
-            } must be a JSON object of string values`,
-        );
-    }
-    return parsed as Record<string, string>;
 }
 
 /**
@@ -96,7 +87,12 @@ export function directTransport(opts: {
             const authed = req.auth
                 ? await applyAuth(
                     { ...req, auth: req.auth },
-                    await resolveParams(req.provider),
+                    // the DOC states which credential fields exist; the
+                    // resolver reads exactly those variables and no others
+                    await resolveParams(
+                        req.provider,
+                        credentialFieldsOf(req.auth.credentials),
+                    ),
                 )
                 : {
                     url: req.url,
