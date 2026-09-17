@@ -22,10 +22,9 @@ export default defineEndpoint({
         docsUrl: "https://apify.com/damilo/google-maps-scraper",
         categories: ["maps"],
         notes: [
-            "The actor treats max_results as ADVISORY - live runs have " +
-            "returned and billed several times the requested cap (3 " +
-            "requested, 20 billed on 2026-09-16). Treat the estimate as " +
-            "a floor.",
+            "The actor treats max_results as advisory and can return " +
+            "and bill several times the requested cap - treat the " +
+            "estimate as a floor.",
         ],
     },
     /** PUBLIC identity: the actor's own slug path (design D22) —

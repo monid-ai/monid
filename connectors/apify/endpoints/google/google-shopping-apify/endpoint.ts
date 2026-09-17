@@ -23,8 +23,7 @@ export default defineEndpoint({
         docsUrl: "https://apify.com/damilo/google-shopping-apify",
         categories: ["google-shopping"],
         notes: [
-            "The actor has overshot num x max_pages in live runs (10 x " +
-            "1 requested, 40 billed on 2026-09-16) - treat the " +
+            "The actor can overshoot num x max_pages - treat the " +
             "requested caps as advisory and the estimate as a floor.",
         ],
     },

@@ -113,11 +113,12 @@ export default defineEndpoint({
             }
             const status = utils.json.optionalGet(res.body, "$.data.status");
             if (exitCode === 0 && status === "SUCCEEDED") {
-                // NO settle-wait (reconcile 2026-09-17, owner decision) —
-                // see the provider poll: the run settles immediately and
-                // this doc's consolidate fold-guards a lagging partial
-                // usageTotalUsd (pages reconstructed from a partial total
-                // fail the fold check and the derived fold settles).
+                // The run settles IMMEDIATELY (no settle-wait — see the
+                // provider poll): billing is the derived fold over this
+                // doc's own evidence counts. `usageTotalUsd` is read below
+                // ONLY to reconstruct the page count; when it lags the
+                // reconstruction floors to ≥1 page with profiles present
+                // (money follows evidence).
                 const datasetId = utils.json.optionalGet(
                     res.body,
                     "$.data.defaultDatasetId",
@@ -184,49 +185,21 @@ export default defineEndpoint({
                         floor,
                     )
                     : floor;
-                const model = utils.json.optionalGet(
-                    res.body,
-                    "$.data.pricingInfo.pricingModel",
-                );
                 // merge widens the literal to Json (fn bodies are executable
                 // JS — no TS annotations allowed in closed terms)
                 const output = utils.json.merge(
                     { searchPages, profileCount: profiles.length },
                     { profiles },
                 );
+                // const-inferred literal discriminant (closed term)
+                const phase = "settled";
                 return {
                     kind: "COMPLETED",
                     httpStatus: 200,
                     output,
                     state: {
                         externalRunId: runId,
-                        data: {
-                            datasetId,
-                            searchPages,
-                            profileCount: profiles.length,
-                            ...(typeof model === "string"
-                                ? { pricingModel: model }
-                                : {}),
-                            ...(totalUsd !== undefined
-                                ? { usageTotalUsd: totalUsd }
-                                : {}),
-                            // the LIVE rates the reconstruction used —
-                            // stashed so the consolidate's fold-guard
-                            // floors against the SAME truth, not the
-                            // pinned card (reconcile 2026-09-17)
-                            pricingPerEvent: {
-                                "search-page": { eventPriceUsd: pageRate },
-                                ...(perProfile > 0
-                                    ? {
-                                        [mode === "Full"
-                                            ? "full-profile"
-                                            : "full-profile-with-email"]: {
-                                            eventPriceUsd: perProfile,
-                                        },
-                                    }
-                                    : {}),
-                            },
-                        },
+                        data: { phase, datasetId },
                     },
                 };
             }
@@ -305,79 +278,6 @@ export default defineEndpoint({
                 },
             };
         },
-        /** OVERRIDES the provider consolidate (reconcile 2026-09-17): the
-         *  provider fold-guard keys its items count on ARRAY outputs, but
-         *  this doc outputs an object — and its `searchPages` are
-         *  RECONSTRUCTED from the very `usageTotalUsd` being guarded, so
-         *  they cannot anchor the floor. The independent floor is what the
-         *  DELIVERED profiles alone must have cost at the pinned rates
-         *  (profiles × mode line + one charged page when any profile came
-         *  back): a lagging partial total below that floor claims nothing
-         *  and the derived fold settles (v1's "money follows evidence"
-         *  degradation — pages floor to ≥1 with profiles present). */
-        consolidate: ({ data, utils }) => {
-            const total = utils.json.optionalNum(
-                data.lifecycle?.state ?? null,
-                "$.data.usageTotalUsd",
-            );
-            if (total === undefined) return { credits: {} };
-            const profiles = utils.json.optionalNum(
-                data.output,
-                "$.profileCount",
-            ) ?? 0;
-            const mode = utils.json.optionalGet(
-                data.input.body ?? null,
-                "$.profileScraperMode",
-            );
-            // LIVE rates first (the poll stashes actorChargeEvents —
-            // finding 5: baked constants drift; the run record is truth),
-            // pinned model amounts as fallback.
-            const livePage = utils.json.optionalNum(
-                data.lifecycle?.state ?? null,
-                "$.data.pricingPerEvent.search-page.eventPriceUsd",
-            );
-            const liveProfile = mode === "Full"
-                ? utils.json.optionalNum(
-                    data.lifecycle?.state ?? null,
-                    "$.data.pricingPerEvent.full-profile.eventPriceUsd",
-                )
-                : mode === "Full + email search"
-                ? utils.json.optionalNum(
-                    data.lifecycle?.state ?? null,
-                    "$.data.pricingPerEvent.full-profile-with-email" +
-                        ".eventPriceUsd",
-                )
-                : undefined;
-            const model = data.usage.model;
-            let pageRate = 0;
-            let profileRate = 0;
-            if (model.kind === "COMPOSITE") {
-                for (
-                    const [id, component] of Object.entries(model.components)
-                ) {
-                    if (component.kind !== "PER_UNIT") continue;
-                    if (id === "search_page") {
-                        pageRate = livePage ?? component.consumes.amount;
-                    } else if (id === "full_profile" && mode === "Full") {
-                        profileRate = liveProfile ??
-                            component.consumes.amount;
-                    } else if (
-                        id === "full_profile_with_email" &&
-                        mode === "Full + email search"
-                    ) {
-                        profileRate = liveProfile ??
-                            component.consumes.amount;
-                    }
-                }
-            }
-            const floor = profiles * profileRate +
-                (profiles > 0 ? pageRate : 0);
-            return {
-                credits: {
-                    ...(total >= floor - 1e-9 ? { default: total } : {}),
-                },
-            };
-        },
         // OVERRIDES the provider evidence (design D27): billing basis =
         // SEARCH PAGES (v1: a zero-profile run still bills its ≥1 charged
         // pages); profiles land under the MODE-selected line, priced at
@@ -400,8 +300,8 @@ export default defineEndpoint({
                 : mode === "Full + email search"
                 ? "full_profile_with_email"
                 : undefined;
-            // quantities only (D27) — the vendor's usageTotalUsd claim is
-            // the provider consolidate's job
+            // quantities only (D27) — the engine folds them through the
+            // pinned card; there is no vendor claim (no consolidate)
             return {
                 counts: {
                     "search_page": pages,
