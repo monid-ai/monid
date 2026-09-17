@@ -6,7 +6,9 @@ import { zSearchCountry } from "../../../schema/common.ts";
  *  the vendor's own rule, bound as a union in endpoint.ts. */
 
 const zIataCode = z.string().regex(/^[A-Za-z]{3}$/);
-const zIsoDate = z.string().regex(/^\d{4}-\d{2}-\d{2}$/);
+// z.iso.date() compiles to a calendar-aware pattern (month/day bounds, leap
+// years) — real validation survives into the compiled doc, unlike a .refine.
+const zIsoDate = z.iso.date();
 
 export const zGoogleFlightsSearchBody = z.object({
     origin: zIataCode.describe("Origin airport IATA code, e.g. 'JFK'."),

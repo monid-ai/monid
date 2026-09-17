@@ -71,6 +71,7 @@ Deno.test(`${ID}: a round trip needs a return date; codes and dates are gated`, 
             { ...INPUT.body, type: "RT" },
             { ...INPUT.body, origin: "NYC1" },
             { ...INPUT.body, date: "20/11/2026" },
+            { ...INPUT.body, date: "2026-99-99" },
             { ...INPUT.body, type: "MC" },
         ]
     ) {

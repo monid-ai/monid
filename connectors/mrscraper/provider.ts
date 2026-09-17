@@ -26,7 +26,8 @@ import { defineProvider, presets } from "@shared/core";
  * `tokenUsage`), the playground draws runtime + bandwidth (+ AI) per run
  * (echoed as `token_usage`). The pool is that token; every marketplace
  * line pins v1's per-scraper count (the vendor's marketplace catalog,
- * 2026-09-07, corrected by v1's drills). The echo is the vendor's CLAIM —
+ * https://app.mrscraper.com/marketplace, behind login, 2026-09-07,
+ * corrected by v1's drills). The echo is the vendor's CLAIM —
  * but only on a run that returned usable data: an empty result or a "soft
  * failure" (2xx with `success: false`, no `data`, an empty `data`, or
  * `data.status: "FAIL"`) records ZERO (owner decision 2026-09-17, v1's

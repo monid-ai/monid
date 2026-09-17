@@ -27,7 +27,8 @@ export function siteUrl(i: {
     /** Example URL shown in the description. */
     example: string;
     /** Optional path gate: a regex source matched against the URL from
-     *  the first `/` after the host (no anchors — write them yourself). */
+     *  the first `/` after the host, as a prefix — whatever follows it must
+     *  be whitespace-free to the end. */
     pathPattern?: string;
     /** Human name of the path shape, e.g. "product (/dp/)". */
     pathNote?: string;
@@ -41,7 +42,8 @@ export function siteUrl(i: {
         "(?:[A-Za-z]{2,}|(?:ac|co|com|edu|gov|net|org)\\.[A-Za-z]{2,})";
     const host = `(?:[A-Za-z0-9-]+\\.)*(?:${brands})\\.${suffix}(?::\\d+)?`;
     const path = i.pathPattern ?? "(?:[/?#]|$)";
-    return z.string().regex(new RegExp(`^https?://${host}${path}`)).describe(
+    const pattern = new RegExp(`^https?://${host}${path}\\S*$`);
+    return z.string().regex(pattern).describe(
         `Full ${i.site} page URL${
             i.pathNote ? ` — a ${i.pathNote} URL` : ""
         }, e.g. ${i.example}`,

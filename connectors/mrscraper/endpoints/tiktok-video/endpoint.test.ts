@@ -64,6 +64,7 @@ Deno.test(`${ID}: the compiled schema gates the input`, async () => {
         const bad of [
             { url: "https://www.tiktok.com/@mrbeast" },
             { url: "https://www.youtube.com/watch?v=x" },
+            { url: "https://www.tiktok.com/@x/video/1 invalid" },
         ]
     ) {
         await assertRejects(() => run(bad), Error, "INVALID_INPUT");

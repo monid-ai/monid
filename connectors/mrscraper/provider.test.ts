@@ -12,7 +12,8 @@ const HERE = fromFileUrl(new URL("./", import.meta.url));
 
 /**
  * MrScraper's draw per endpoint — the vendor's marketplace catalog
- * (`pricePerRun`, dumped by v1 on 2026-09-07) corrected by v1's 2026-09-08
+ * (`pricePerRun` per card at https://app.mrscraper.com/marketplace, behind
+ * login, dumped by v1 on 2026-09-07) corrected by v1's 2026-09-08
  * drills for the marketplace scrapers, and the playground's variable meter
  * (`token_usage`) as each happy fixture reports it. The vendor's echo
  * equals the fold on every happy chain, so no `mismatch` key appears

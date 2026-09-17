@@ -33,6 +33,8 @@ Deno.test(`${ID} happy (synthetic): the base64 image stays inline, the meter set
     );
     assertEquals("token_usage" in output, false);
     assertEquals("html_path" in output, false);
+    assertEquals("data_path" in output, false);
+    assertEquals("residential_proxy_usage" in output, false);
 });
 
 Deno.test(`${ID} top viewport (synthetic): the caller's area overrides the preset's full`, async () => {
