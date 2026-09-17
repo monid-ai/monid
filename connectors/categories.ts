@@ -106,6 +106,93 @@ export const LEAF_CATEGORIES = defineLeafCategories([
         description: "Google Shopping data: products, prices, and sellers.",
     },
     {
+        id: "tiktok-shop",
+        displayName: "TikTok Shop",
+        description: "TikTok Shop data: products, reviews, and sellers.",
+    },
+    {
+        id: "1688",
+        displayName: "1688",
+        description: "1688 data: wholesale listings, offers, and prices.",
+    },
+    {
+        id: "autozone",
+        displayName: "AutoZone",
+        description:
+            "AutoZone data: products, category listings, and vehicle fitment.",
+    },
+    {
+        id: "cvs",
+        displayName: "CVS",
+        description: "CVS data: products, prices, and availability.",
+    },
+    {
+        id: "homedepot",
+        displayName: "Home Depot",
+        description: "Home Depot data: products, prices, and specifications.",
+    },
+    {
+        id: "kroger",
+        displayName: "Kroger",
+        description: "Kroger data: products, prices, and availability.",
+    },
+    {
+        id: "lazada",
+        displayName: "Lazada",
+        description: "Lazada data: products, category listings, and prices.",
+    },
+    {
+        id: "meijer",
+        displayName: "Meijer",
+        description: "Meijer data: products, prices, and availability.",
+    },
+    {
+        id: "nordstrom",
+        displayName: "Nordstrom",
+        description: "Nordstrom data: products, category listings, and prices.",
+    },
+    {
+        id: "segari",
+        displayName: "Segari",
+        description: "Segari data: products, prices, and availability.",
+    },
+    {
+        id: "shein",
+        displayName: "Shein",
+        description: "Shein data: products, prices, and variants.",
+    },
+    {
+        id: "walmart",
+        displayName: "Walmart",
+        description: "Walmart data: products, reviews, and prices.",
+    },
+    {
+        id: "watsons",
+        displayName: "Watsons",
+        description: "Watsons data: products, category listings, and prices.",
+    },
+    {
+        id: "zepto",
+        displayName: "Zepto",
+        description: "Zepto data: products, prices, and availability.",
+    },
+    {
+        id: "ai-search",
+        displayName: "AI Search",
+        description:
+            "AI search engines: Gemini, ChatGPT web search, Google AI Mode.",
+    },
+    {
+        id: "flights",
+        displayName: "Flights",
+        description: "Flight data: fares, schedules, and routes.",
+    },
+    {
+        id: "hotels",
+        displayName: "Hotels",
+        description: "Hotel data: room rates, availability, and guest reviews.",
+    },
+    {
         id: "jobs",
         displayName: "Jobs",
         description: "Job listings and hiring data.",
