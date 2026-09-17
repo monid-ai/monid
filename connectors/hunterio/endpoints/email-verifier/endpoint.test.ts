@@ -130,7 +130,7 @@ Deno.test(`${ID}: the schema gate — the vendor's rules and strictness`, async 
         // the near twin passes the gate and fails later, at replay URL
         // matching — proving validation let it through
         const err = await assertRejects(
-            () => run({ email: "jane@stripe.com" }),
+            () => run({ email: "jane@example.com" }),
             Error,
         );
         assertEquals(err.message.includes("INVALID_INPUT"), false, err.message);

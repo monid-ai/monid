@@ -24,7 +24,7 @@
                         "linked_domains": [],
                         "emails": [
                             {
-                                "value": "zoe@intercom.com",
+                                "value": "zoe@example.com",
                                 "type": "personal",
                                 "confidence": 90,
                                 "sources": [
@@ -52,7 +52,7 @@
                                 }
                             },
                             {
-                                "value": "alice@intercom.com",
+                                "value": "alice@example.com",
                                 "type": "personal",
                                 "confidence": 89,
                                 "sources": [
@@ -80,7 +80,7 @@
                                 }
                             },
                             {
-                                "value": "bob@intercom.com",
+                                "value": "bob@example.com",
                                 "type": "personal",
                                 "confidence": 88,
                                 "sources": [
@@ -108,7 +108,7 @@
                                 }
                             },
                             {
-                                "value": "carol@intercom.com",
+                                "value": "carol@example.com",
                                 "type": "personal",
                                 "confidence": 87,
                                 "sources": [
@@ -136,7 +136,7 @@
                                 }
                             },
                             {
-                                "value": "dave@intercom.com",
+                                "value": "dave@example.com",
                                 "type": "personal",
                                 "confidence": 86,
                                 "sources": [
@@ -164,7 +164,7 @@
                                 }
                             },
                             {
-                                "value": "erin@intercom.com",
+                                "value": "erin@example.com",
                                 "type": "personal",
                                 "confidence": 85,
                                 "sources": [
@@ -192,7 +192,7 @@
                                 }
                             },
                             {
-                                "value": "frank@intercom.com",
+                                "value": "frank@example.com",
                                 "type": "personal",
                                 "confidence": 84,
                                 "sources": [
@@ -220,7 +220,7 @@
                                 }
                             },
                             {
-                                "value": "grace@intercom.com",
+                                "value": "grace@example.com",
                                 "type": "personal",
                                 "confidence": 83,
                                 "sources": [
@@ -248,7 +248,7 @@
                                 }
                             },
                             {
-                                "value": "heidi@intercom.com",
+                                "value": "heidi@example.com",
                                 "type": "personal",
                                 "confidence": 82,
                                 "sources": [
@@ -276,7 +276,7 @@
                                 }
                             },
                             {
-                                "value": "ivan@intercom.com",
+                                "value": "ivan@example.com",
                                 "type": "personal",
                                 "confidence": 81,
                                 "sources": [
@@ -304,7 +304,7 @@
                                 }
                             },
                             {
-                                "value": "judy@intercom.com",
+                                "value": "judy@example.com",
                                 "type": "personal",
                                 "confidence": 80,
                                 "sources": [
@@ -332,7 +332,7 @@
                                 }
                             },
                             {
-                                "value": "mallory@intercom.com",
+                                "value": "mallory@example.com",
                                 "type": "personal",
                                 "confidence": 79,
                                 "sources": [
