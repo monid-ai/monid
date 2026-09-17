@@ -1,8 +1,9 @@
 import { assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
-import type { Json } from "@shared/core";
+import type { Json, RunInput } from "@shared/core";
 import {
     assertInputAccepted,
+    estimateEndpoint,
     liveSkip,
     loadFixture,
     runEndpoint,
@@ -136,6 +137,49 @@ Deno.test("contactout: fn provenance — the twins intern to one estimate and on
             .key,
         synthesized,
     );
+});
+
+Deno.test("contactout: the either/or endpoints HOLD every line their model can settle", async () => {
+    // The vendor decides the branch, not the caller: a profile with contacts
+    // draws email/phone, one with nothing on file draws the search credit
+    // instead. Nothing in the input says which, so the estimate must be the
+    // per-pool upper bound over both — a hold of email+phone alone leaves the
+    // settled search credit UNRESERVED, and the engine has no
+    // settle-within-estimate check to catch it.
+    const cases: [string, Record<string, Json>, string[]][] = [
+        ["contactout#v1/linkedin/enrich/work-email", {
+            queryParams: { profile: PROFILE },
+        }, ["email_work", "phone_work", "search_work"]],
+        ["contactout#v1/linkedin/enrich/personal-email", {
+            queryParams: { profile: PROFILE },
+        }, ["email_personal", "phone_personal", "search_personal"]],
+        ["contactout#v1/email/enrich/work-email", {
+            queryParams: { email: "person@example.com" },
+        }, ["email_work", "phone_work", "search_work"]],
+        ["contactout#v1/email/enrich/personal-email", {
+            queryParams: { email: "person@example.com" },
+        }, ["email_personal", "phone_personal", "search_personal"]],
+    ];
+    for (const [id, input, pools] of cases) {
+        const usage = await estimateEndpoint(
+            await testSealedUnit(id),
+            input as RunInput,
+        );
+        assertEquals(Object.keys(usage.credits).sort(), [...pools].sort(), id);
+        assertEquals(
+            Object.keys(usage.evidence).sort(),
+            ["email_found", "phone_found", "profile_only"],
+            id,
+        );
+    }
+    // profile_only is the ONE branch the caller does state: no contacts were
+    // asked for, so only the search credit is reachable
+    const only = await estimateEndpoint(
+        await testSealedUnit("contactout#v1/linkedin/enrich/work-email"),
+        { queryParams: { profile: PROFILE, profile_only: true } },
+    );
+    assertEquals(only.credits, { search_work: 1 });
+    assertEquals(only.evidence, { profile_only: 1 });
 });
 
 Deno.test(`${ID} happy (synthetic): a hit with email + phone draws one of each, no search credit`, async () => {

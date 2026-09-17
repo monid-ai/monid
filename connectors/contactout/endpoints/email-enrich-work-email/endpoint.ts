@@ -78,7 +78,12 @@ export default defineEndpoint({
             },
         },
         /** Worst case: a hit with both contacts (v1 held email + phone). */
-        estimate: () => ({ counts: { email_found: 1, phone_found: 1 } }),
+        /** The vendor's either/or, with no input knob to branch on: a hit
+         *  with contacts draws email/phone, a hit with none draws the search
+         *  credit. The hold is the per-pool upper bound over both. */
+        estimate: () => ({
+            counts: { email_found: 1, phone_found: 1, profile_only: 1 },
+        }),
         // source-identical to linkedin-enrich's evidence ⇒ one fnTable entry
         evidence: ({ data, utils }) => {
             const profile = utils.json.optionalGet(data.output, "$.profile");

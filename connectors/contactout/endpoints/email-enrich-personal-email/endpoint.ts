@@ -71,7 +71,12 @@ export default defineEndpoint({
                 },
             },
         },
-        estimate: () => ({ counts: { email_found: 1, phone_found: 1 } }),
+        /** The vendor's either/or, with no input knob to branch on: a hit
+         *  with contacts draws email/phone, a hit with none draws the search
+         *  credit. The hold is the per-pool upper bound over both. */
+        estimate: () => ({
+            counts: { email_found: 1, phone_found: 1, profile_only: 1 },
+        }),
         evidence: ({ data, utils }) => {
             const profile = utils.json.optionalGet(data.output, "$.profile");
             if (

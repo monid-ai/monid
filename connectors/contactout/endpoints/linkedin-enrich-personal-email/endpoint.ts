@@ -82,10 +82,20 @@ export default defineEndpoint({
         },
         // source-identical to the work twin ⇒ one interned fnTable entry
         estimate: ({ data }) => {
+            // profile_only asks for NO contacts, so the either/or search
+            // credit is the only draw possible
             if (data.input.queryParams.profile_only === true) {
                 return { counts: { profile_only: 1 } };
             }
-            return { counts: { email_found: 1, phone_found: 1 } };
+            // Otherwise the branch is the VENDOR'S, not the caller's: a
+            // profile with contacts draws email/phone, one with none on file
+            // draws the search credit instead. Nothing in the INPUT says
+            // which, so the hold is the per-pool upper bound over both —
+            // holding only email+phone leaves a settled search credit
+            // unreserved.
+            return {
+                counts: { email_found: 1, phone_found: 1, profile_only: 1 },
+            };
         },
         evidence: ({ data, utils }) => {
             const profile = utils.json.optionalGet(data.output, "$.profile");

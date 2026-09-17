@@ -74,6 +74,19 @@ never a model shape). `/v1/email/enrich` mirrors the same counter (v1
 `enrichUnits`); `/v1/people/enrich` bills the search credit on EVERY match
 (v1 `peopleEnrichUnits`) and so has no either/or.
 
+The HOLD is the per-pool upper bound over the either/or, not one arm of it
+(review round 2, PR #19). Which arm fires is the VENDOR'S branch — it
+depends on what is on file, which no input states — so the four either/or
+estimates (`linkedin-enrich` ×2, `email-enrich` ×2) reserve all three lines
+whenever the caller has not ruled contacts out. Reserving only email+phone
+let a settled search credit go unheld: the engine has no
+settle-within-estimate check, so nothing caught it. The one branch the
+CALLER does state is still exact — `profile_only=true` asks for no
+contacts, so it holds the search credit alone. Cost of the wider hold: one
+search credit (≈$0.018) over-reserved when contacts are found; it never
+under-reserves. `linkedin-enrich-work-email/endpoint.test.ts` pins all four
+with `estimateEndpoint`.
+
 Both profile dialects are read in one counter: snake_case arrays (`email`,
 `work_email`, `personal_email`, `phone`) and camelCase scalars (`workEmail`,
 a string `email` / `phone` — `/v1/email/enrich`, drill 2026-09-01). Which
