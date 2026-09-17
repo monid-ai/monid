@@ -160,7 +160,8 @@ provider's rule.
 `tripadvisor/reviews` posts to the vendor-designated
 `https://tvlk.mrscraper.com` (v1 `MRSCRAPER_TVLK_BASE_URL`): an
 endpoint-level `request.baseUrl`, the tinyfish posture, with the
-provider's Bearer inject, consolidate, and unwrap unchanged.
+provider's Bearer inject and unwrap unchanged; its evidence and
+consolidate are the review trio's (above), not the provider's.
 
 ## D7 — Screenshots and oversized bodies stay inline (owner, 2026-09-17)
 
