@@ -10,6 +10,12 @@ envelope hooks; every playground endpoint SHALL override the host
 request shaping, the usage model, and the response hooks. Every endpoint
 SHALL be a single synchronous POST and SHALL carry v1's published id.
 
+#### Scenario: TripAdvisor rides its own host
+- **WHEN** the bundle compiles
+- **THEN** `mrscraper#tripadvisor/reviews` posts to
+  `https://tvlk.mrscraper.com/api/hotels/tripadv/review/sync` with the
+  provider's Bearer inject
+
 #### Scenario: Seven presets on one wire path
 - **WHEN** the bundle compiles
 - **THEN** `mrscraper#scrape/html` … `mrscraper#scrape/map` all post to
@@ -55,6 +61,11 @@ null, or empty `data`, or `data.status: "FAIL"` SHALL record zero.
 #### Scenario: A soft failure is free
 - **WHEN** `google/hotel` answers 200 with `data: {status: "FAIL"}` and
   `tokenUsage: 10`
+- **THEN** `usage` is `{credits: {}, evidence: {RESULT: 0}}`
+
+#### Scenario: A page with no reviews is free
+- **WHEN** `agoda/reviews` answers 200 with `data: {url, total_reviews: 0,
+  reviews: []}` and `tokenUsage: 41`
 - **THEN** `usage` is `{credits: {}, evidence: {RESULT: 0}}`
 
 #### Scenario: A usable run settles the vendor's count

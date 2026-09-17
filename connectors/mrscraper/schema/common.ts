@@ -62,6 +62,56 @@ export const zLazadaUrl = siteUrl({
     example: "https://www.lazada.sg/products/pdp-i3158507329-s22328619522.html",
 });
 
+/** A Booking.com hotel page (the rates and the reviews scrapers). */
+export const zBookingUrl = siteUrl({
+    site: "Booking.com",
+    brands: ["booking"],
+    example: "https://www.booking.com/hotel/th/admiral.html",
+});
+
+/** An Expedia page (the hotel rates and the hotel search scrapers). */
+export const zExpediaUrl = siteUrl({
+    site: "Expedia",
+    brands: ["expedia"],
+    example: "https://www.expedia.com/Hotel-Search?destination=Bangkok",
+});
+
+/** A Trip.com hotel page (the rates and the reviews scrapers). */
+export const zTripUrl = siteUrl({
+    site: "Trip.com",
+    brands: ["trip"],
+    example: "https://us.trip.com/hotels/shanghai-hotel-detail-992573/",
+});
+
+/** A calendar date as the travel scrapers take it (Google Flights, the
+ *  hotel-ID scrapers, the airline fare search). */
+export const zIsoDate = z.iso.date();
+
+/** A three-letter IATA airport code (Google Flights, the airline fare
+ *  search). */
+export const zIataCode = z.string().regex(/^[A-Za-z]{3}$/);
+
+/** The stay fields the hotel-ID scrapers share (Agoda, Tiket, Trip.com). */
+export const zGuestCounts = {
+    rooms: z.number().int().min(1).describe("Number of rooms."),
+    adults: z.number().int().min(1).describe("Number of adult guests."),
+    children: z.number().int().min(0).describe("Number of child guests."),
+};
+
+export const zCurrency = z.string().length(3).describe(
+    "Three-letter currency code for returned prices, e.g. 'USD'.",
+);
+
+export const zLocale = z.string().min(2).describe(
+    "Locale for returned content, e.g. 'en-US'.",
+);
+
+/** The vendor's documented pass-through flag (its examples use 1). */
+export const zLoginFlag = z.number().int().describe(
+    "Upstream login-state flag passed to the scraper verbatim (the " +
+        "vendor's examples use 1).",
+);
+
 /** US ZIP or postal code the vendor applies before loading a store page so
  *  price and availability reflect that location (the CVS, Home Depot,
  *  Kroger, and Meijer scrapers). */

@@ -52,12 +52,25 @@
       Shein's binding default pinned; fmt · lint · check · test ·
       double-compile · version:check; red once
 
-## 5. Endpoints, part 3 (14 travel) — next PR
+## 5. Endpoints, part 3 (14 travel)
 
-- [ ] 5.1 The 14 live travel scrapers (TripAdvisor on the `tvlk` host), the
-      review scrapers' empty-`reviews[]` override of evidence and
-      consolidate, the slow-scraper overrides (hotels-com/reviews,
-      trip/reviews)
+- [x] 5.1 `agoda-hotel` 10, `agoda-rates` 46, `agoda-reviews` 41,
+      `booking-rates` 41, `booking-reviews` 36, `china-southern-flights` 2,
+      `expedia-rates` 31, `expedia-search` 26, `hotels-com-reviews` 24,
+      `tiket-hotel` 10, `trip-hotel` 20, `trip-rates` 30, `trip-reviews`
+      31, `tripadvisor-reviews` 20 — pinned v1 ids; TripAdvisor on the
+      `tvlk` host (D12); the three review scrapers' empty-`reviews[]`
+      basis in their own evidence + consolidate (D12); the 330 s
+      overrides on hotels-com/reviews and trip/reviews (D8)
+- [x] 5.2 `schema/common.ts`: `zBookingUrl`, `zExpediaUrl`, `zTripUrl`,
+      `zIsoDate`, `zIataCode`, `zGuestCounts`, `zCurrency`, `zLocale`,
+      `zLoginFlag` (two or more users each); `google-flights` now reads
+      `zIsoDate` / `zIataCode` from there (compiled doc byte-identical)
+- [x] 5.3 Verify: the rate table grows to 50 rows; the provenance test
+      pins the review trio's own interned fns and the TVLK URL; fourteen
+      `endpoint.test.ts` (happy, provider error, gate + twin, live; the
+      trio also no-reviews = 0); fmt · lint · check · test ·
+      double-compile · version:check; red once
 
 ## 6. Verify (part 1)
 

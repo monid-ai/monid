@@ -250,6 +250,156 @@ const RATE: Record<
         },
         usage: { credits: { default: 21 }, evidence: { RESULT: 1 } },
     },
+    "mrscraper#agoda/hotel": {
+        input: {
+            body: {
+                "hotelId": 3126,
+                "checkIn": "2026-10-14",
+                "checkOut": "2026-10-16",
+                "rooms": 1,
+                "adults": 2,
+                "children": 0,
+                "currency": "USD",
+                "locale": "en-US",
+                "login": 1,
+            },
+        },
+        usage: { credits: { default: 10 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#agoda/rates": {
+        input: {
+            body: {
+                "url":
+                    "https://www.agoda.com/ad-lib-bangkok/hotel/bangkok-th.html?checkIn=2026-10-14&los=1&adults=2",
+            },
+        },
+        usage: { credits: { default: 46 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#agoda/reviews": {
+        input: {
+            body: {
+                "url":
+                    "https://www.agoda.com/admiral-suites/hotel/bangkok-th.html",
+            },
+        },
+        usage: { credits: { default: 41 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#booking/rates": {
+        input: {
+            body: {
+                "url":
+                    "https://www.booking.com/hotel/th/admiral.html?checkin=2026-10-14&checkout=2026-10-16",
+            },
+        },
+        usage: { credits: { default: 41 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#booking/reviews": {
+        input: {
+            body: { "url": "https://www.booking.com/hotel/th/admiral.html" },
+        },
+        usage: { credits: { default: 36 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#china-southern/flights": {
+        input: {
+            body: {
+                "origin": "BKK",
+                "dest": "CGK",
+                "adult": 1,
+                "child": 0,
+                "infant": 0,
+                "dptDate": "2026-11-05",
+                "fareClass": "economy",
+                "locale": "en-US",
+                "currency": "USD",
+            },
+        },
+        usage: { credits: { default: 2 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#expedia/rates": {
+        input: {
+            body: {
+                "url":
+                    "https://www.expedia.com/Bangkok-Hotels-Admiral-Suites.h1234567.Hotel-Information?chkin=2026-10-14&chkout=2026-10-16",
+            },
+        },
+        usage: { credits: { default: 31 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#expedia/search": {
+        input: {
+            body: {
+                "url":
+                    "https://www.expedia.com/Hotel-Search?destination=Bangkok&startDate=2026-10-14&endDate=2026-10-16",
+            },
+        },
+        usage: { credits: { default: 26 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#hotels-com/reviews": {
+        input: {
+            body: {
+                "url": "https://th.hotels.com/en/ho338863/mitsui-garden-hotel/",
+            },
+        },
+        usage: { credits: { default: 24 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#tiket/hotel": {
+        input: {
+            body: {
+                "hotelId": "the-example-jakarta",
+                "checkIn": "2026-10-14",
+                "checkOut": "2026-10-16",
+                "rooms": 1,
+                "adults": 2,
+                "children": 0,
+                "currency": "IDR",
+                "locale": "id-ID",
+                "login": 1,
+            },
+        },
+        usage: { credits: { default: 10 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#trip/hotel": {
+        input: {
+            body: {
+                "hotelId": "992573",
+                "checkIn": "2026-10-14",
+                "checkOut": "2026-10-16",
+                "rooms": 1,
+                "adults": 2,
+                "children": 0,
+                "currency": "USD",
+                "locale": "en-US",
+                "login": 1,
+            },
+        },
+        usage: { credits: { default: 20 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#trip/rates": {
+        input: {
+            body: {
+                "url":
+                    "https://us.trip.com/hotels/shanghai-hotel-detail-992573/?checkin=2026-10-14&checkout=2026-10-16",
+            },
+        },
+        usage: { credits: { default: 30 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#trip/reviews": {
+        input: {
+            body: {
+                "url":
+                    "https://us.trip.com/hotels/shanghai-hotel-detail-992573/",
+            },
+        },
+        usage: { credits: { default: 31 }, evidence: { RESULT: 1 } },
+    },
+    "mrscraper#tripadvisor/reviews": {
+        input: {
+            body: {
+                "url":
+                    "https://www.tripadvisor.com/Hotel_Review-g293916-d308699",
+            },
+        },
+        usage: { credits: { default: 20 }, evidence: { RESULT: 1 } },
+    },
     "mrscraper#zepto/product": {
         input: {
             body: {
@@ -279,7 +429,7 @@ const mrscraperIds = async (): Promise<string[]> => {
 
 Deno.test("mrscraper: the literal rate table covers exactly the compiled endpoints", async () => {
     const ids = await mrscraperIds();
-    assertEquals(ids.length, 36);
+    assertEquals(ids.length, 50);
     assertEquals(ids, Object.keys(RATE).sort());
 });
 
@@ -377,19 +527,27 @@ Deno.test("mrscraper: usage fn provenance — the marketplace majority inherits,
     const marketplace = ids.filter((id) => !id.startsWith("mrscraper#scrape/"));
     assertEquals(playground.length, 7);
     const serp = bundle.endpoints["mrscraper#serp/google"];
+    // the three review scrapers override evidence + consolidate with the
+    // empty-`reviews[]` basis (design D12) — one interned text each
+    const reviews = [
+        "mrscraper#agoda/reviews",
+        "mrscraper#trip/reviews",
+        "mrscraper#tripadvisor/reviews",
+    ];
     for (const id of marketplace) {
         const doc = bundle.endpoints[id];
         // one Bearer inject, one envelope consolidate, one generic
         // evidence, one unwrap — all the provider's
         assertEquals(doc.auth.inject.$fn.key, serp.auth.inject.$fn.key, id);
+        const own = reviews.includes(id);
         assertEquals(
-            doc.usage.consolidate?.$fn.key,
-            serp.usage.consolidate?.$fn.key,
+            doc.usage.consolidate?.$fn.key === serp.usage.consolidate?.$fn.key,
+            !own,
             id,
         );
         assertEquals(
-            doc.usage.evidence.$fn.key,
-            serp.usage.evidence.$fn.key,
+            doc.usage.evidence.$fn.key === serp.usage.evidence.$fn.key,
+            !own,
             id,
         );
         assertEquals(
@@ -397,9 +555,28 @@ Deno.test("mrscraper: usage fn provenance — the marketplace majority inherits,
             serp.output.fromResponse?.$fn.key,
             id,
         );
+        // TripAdvisor rides the vendor-designated TVLK host (design D12)
         assertEquals(
-            doc.request.url.startsWith("https://sync.scraper.mrscraper.com/"),
+            doc.request.url.startsWith(
+                id === "mrscraper#tripadvisor/reviews"
+                    ? "https://tvlk.mrscraper.com/"
+                    : "https://sync.scraper.mrscraper.com/",
+            ),
             true,
+            id,
+        );
+    }
+    const agoda = bundle.endpoints["mrscraper#agoda/reviews"];
+    for (const id of reviews) {
+        const doc = bundle.endpoints[id];
+        assertEquals(
+            doc.usage.evidence.$fn.key,
+            agoda.usage.evidence.$fn.key,
+            id,
+        );
+        assertEquals(
+            doc.usage.consolidate?.$fn.key,
+            agoda.usage.consolidate?.$fn.key,
             id,
         );
     }

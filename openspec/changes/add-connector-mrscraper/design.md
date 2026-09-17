@@ -122,7 +122,8 @@ shape is unambiguous. v1 tested its path regex against the whole
 pathname, so a marker may sit after other segments (`amazon.com/Some-
 Slug/dp/B0…`, `watsons.com.my/health-care/vitamins-minerals/c/110100`):
 the e-commerce gates prefix the marker with `(?:/[^?#]*)?` (part 2); the
-part-1 gates that anchor at the host stay as they are.
+part-1 gates that anchor at the host stay as they are. The travel gates
+(part 3) are host-only, as v1's were.
 
 ## D11 — Shein's `render` is a binding default (part 2)
 
@@ -140,6 +141,26 @@ The four ZIP-code scrapers (cvs, homedepot, kroger, meijer) share
 `zZipCode` and the two Lazada scrapers share `zLazadaUrl` in
 `schema/common.ts` (two or more users); Walmart's `zipCode` keeps its
 own describe (v1's wording differs) in its own inputs.
+
+## D12 — The review scrapers count zero on `reviews: []`; TripAdvisor's host (part 3)
+
+v1 gave `agoda/reviews`, `trip/reviews`, and `tripadvisor/reviews` a
+second emptiness predicate (`hasNoReviews`): a page with no reviews
+answers `{url, total_reviews: 0, reviews: []}` — a non-empty object the
+provider rule counts as usable — and the vendor bills its full card for
+it (41 tokens, Agoda, 2026-09-08 drill). Those three endpoints override
+`usage.evidence` and `usage.consolidate` with the provider's rule PLUS
+that check, stated verbatim (closed terms cannot import the provider's
+predicate); the identical texts intern to one fnTable entry each, and
+the provenance test pins that the trio share them and nobody else does.
+`booking/reviews` and `hotels-com/reviews` had no such predicate in v1
+(their bodies are not documented in that shape) and inherit the
+provider's rule.
+
+`tripadvisor/reviews` posts to the vendor-designated
+`https://tvlk.mrscraper.com` (v1 `MRSCRAPER_TVLK_BASE_URL`): an
+endpoint-level `request.baseUrl`, the tinyfish posture, with the
+provider's Bearer inject, consolidate, and unwrap unchanged.
 
 ## D7 — Screenshots and oversized bodies stay inline (owner, 2026-09-17)
 
@@ -159,7 +180,7 @@ budget alone is 300 s); v1's `SLOW_SCRAPER_TIMEOUTS` (330 s) on the
 scrapers the vendor lists at 60 s+ — in part 1: `tiktok/video`,
 `youtube/comments`, `youtube/video`; in part 2: `cvs/product`,
 `homedepot/product`, `kroger/product`, `lazada/category`,
-`meijer/product`.
+`meijer/product`; in part 3: `hotels-com/reviews`, `trip/reviews`.
 
 ## D9 — What v1 enforced with refines
 
