@@ -1,0 +1,381 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC — not recorded (no Hunter key held, 2026-09-17): the shape follows the live reference's own example (hunter.io/api-documentation/v2) and v1's 2026-08-20 ledger drill; values are placeholders. A 25-address page that found 12 addresses: ceil(12/10) = 2 credits.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.hunter.io/v2/domain-search",
+                "body": {
+                    "domain": "intercom.com",
+                    "limit": 25
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "domain": "intercom.com",
+                        "disposable": false,
+                        "webmail": false,
+                        "accept_all": true,
+                        "pattern": "{first}",
+                        "organization": "Intercom",
+                        "linked_domains": [],
+                        "emails": [
+                            {
+                                "value": "ciaran@intercom.com",
+                                "type": "personal",
+                                "confidence": 90,
+                                "sources": [
+                                    {
+                                        "domain": "github.com",
+                                        "uri": "http://github.com/ciaran",
+                                        "extracted_on": "2015-07-29",
+                                        "last_seen_on": "2017-07-01",
+                                        "still_on_page": true
+                                    }
+                                ],
+                                "first_name": "Ciaran",
+                                "last_name": "Example",
+                                "position": "Support Engineer",
+                                "position_raw": "Support Engineer",
+                                "seniority": "senior",
+                                "department": "it",
+                                "decision_maker": false,
+                                "linkedin": null,
+                                "twitter": null,
+                                "phone_number": null,
+                                "verification": {
+                                    "date": "2019-12-06",
+                                    "status": "valid"
+                                }
+                            },
+                            {
+                                "value": "alice@intercom.com",
+                                "type": "personal",
+                                "confidence": 89,
+                                "sources": [
+                                    {
+                                        "domain": "github.com",
+                                        "uri": "http://github.com/alice",
+                                        "extracted_on": "2015-07-29",
+                                        "last_seen_on": "2017-07-01",
+                                        "still_on_page": true
+                                    }
+                                ],
+                                "first_name": "Alice",
+                                "last_name": "Example",
+                                "position": "Support Engineer",
+                                "position_raw": "Support Engineer",
+                                "seniority": "senior",
+                                "department": "it",
+                                "decision_maker": false,
+                                "linkedin": null,
+                                "twitter": null,
+                                "phone_number": null,
+                                "verification": {
+                                    "date": "2019-12-06",
+                                    "status": "valid"
+                                }
+                            },
+                            {
+                                "value": "bob@intercom.com",
+                                "type": "personal",
+                                "confidence": 88,
+                                "sources": [
+                                    {
+                                        "domain": "github.com",
+                                        "uri": "http://github.com/bob",
+                                        "extracted_on": "2015-07-29",
+                                        "last_seen_on": "2017-07-01",
+                                        "still_on_page": true
+                                    }
+                                ],
+                                "first_name": "Bob",
+                                "last_name": "Example",
+                                "position": "Support Engineer",
+                                "position_raw": "Support Engineer",
+                                "seniority": "senior",
+                                "department": "it",
+                                "decision_maker": false,
+                                "linkedin": null,
+                                "twitter": null,
+                                "phone_number": null,
+                                "verification": {
+                                    "date": "2019-12-06",
+                                    "status": "valid"
+                                }
+                            },
+                            {
+                                "value": "carol@intercom.com",
+                                "type": "personal",
+                                "confidence": 87,
+                                "sources": [
+                                    {
+                                        "domain": "github.com",
+                                        "uri": "http://github.com/carol",
+                                        "extracted_on": "2015-07-29",
+                                        "last_seen_on": "2017-07-01",
+                                        "still_on_page": true
+                                    }
+                                ],
+                                "first_name": "Carol",
+                                "last_name": "Example",
+                                "position": "Support Engineer",
+                                "position_raw": "Support Engineer",
+                                "seniority": "senior",
+                                "department": "it",
+                                "decision_maker": false,
+                                "linkedin": null,
+                                "twitter": null,
+                                "phone_number": null,
+                                "verification": {
+                                    "date": "2019-12-06",
+                                    "status": "valid"
+                                }
+                            },
+                            {
+                                "value": "dave@intercom.com",
+                                "type": "personal",
+                                "confidence": 86,
+                                "sources": [
+                                    {
+                                        "domain": "github.com",
+                                        "uri": "http://github.com/dave",
+                                        "extracted_on": "2015-07-29",
+                                        "last_seen_on": "2017-07-01",
+                                        "still_on_page": true
+                                    }
+                                ],
+                                "first_name": "Dave",
+                                "last_name": "Example",
+                                "position": "Support Engineer",
+                                "position_raw": "Support Engineer",
+                                "seniority": "senior",
+                                "department": "it",
+                                "decision_maker": false,
+                                "linkedin": null,
+                                "twitter": null,
+                                "phone_number": null,
+                                "verification": {
+                                    "date": "2019-12-06",
+                                    "status": "valid"
+                                }
+                            },
+                            {
+                                "value": "erin@intercom.com",
+                                "type": "personal",
+                                "confidence": 85,
+                                "sources": [
+                                    {
+                                        "domain": "github.com",
+                                        "uri": "http://github.com/erin",
+                                        "extracted_on": "2015-07-29",
+                                        "last_seen_on": "2017-07-01",
+                                        "still_on_page": true
+                                    }
+                                ],
+                                "first_name": "Erin",
+                                "last_name": "Example",
+                                "position": "Support Engineer",
+                                "position_raw": "Support Engineer",
+                                "seniority": "senior",
+                                "department": "it",
+                                "decision_maker": false,
+                                "linkedin": null,
+                                "twitter": null,
+                                "phone_number": null,
+                                "verification": {
+                                    "date": "2019-12-06",
+                                    "status": "valid"
+                                }
+                            },
+                            {
+                                "value": "frank@intercom.com",
+                                "type": "personal",
+                                "confidence": 84,
+                                "sources": [
+                                    {
+                                        "domain": "github.com",
+                                        "uri": "http://github.com/frank",
+                                        "extracted_on": "2015-07-29",
+                                        "last_seen_on": "2017-07-01",
+                                        "still_on_page": true
+                                    }
+                                ],
+                                "first_name": "Frank",
+                                "last_name": "Example",
+                                "position": "Support Engineer",
+                                "position_raw": "Support Engineer",
+                                "seniority": "senior",
+                                "department": "it",
+                                "decision_maker": false,
+                                "linkedin": null,
+                                "twitter": null,
+                                "phone_number": null,
+                                "verification": {
+                                    "date": "2019-12-06",
+                                    "status": "valid"
+                                }
+                            },
+                            {
+                                "value": "grace@intercom.com",
+                                "type": "personal",
+                                "confidence": 83,
+                                "sources": [
+                                    {
+                                        "domain": "github.com",
+                                        "uri": "http://github.com/grace",
+                                        "extracted_on": "2015-07-29",
+                                        "last_seen_on": "2017-07-01",
+                                        "still_on_page": true
+                                    }
+                                ],
+                                "first_name": "Grace",
+                                "last_name": "Example",
+                                "position": "Support Engineer",
+                                "position_raw": "Support Engineer",
+                                "seniority": "senior",
+                                "department": "it",
+                                "decision_maker": false,
+                                "linkedin": null,
+                                "twitter": null,
+                                "phone_number": null,
+                                "verification": {
+                                    "date": "2019-12-06",
+                                    "status": "valid"
+                                }
+                            },
+                            {
+                                "value": "heidi@intercom.com",
+                                "type": "personal",
+                                "confidence": 82,
+                                "sources": [
+                                    {
+                                        "domain": "github.com",
+                                        "uri": "http://github.com/heidi",
+                                        "extracted_on": "2015-07-29",
+                                        "last_seen_on": "2017-07-01",
+                                        "still_on_page": true
+                                    }
+                                ],
+                                "first_name": "Heidi",
+                                "last_name": "Example",
+                                "position": "Support Engineer",
+                                "position_raw": "Support Engineer",
+                                "seniority": "senior",
+                                "department": "it",
+                                "decision_maker": false,
+                                "linkedin": null,
+                                "twitter": null,
+                                "phone_number": null,
+                                "verification": {
+                                    "date": "2019-12-06",
+                                    "status": "valid"
+                                }
+                            },
+                            {
+                                "value": "ivan@intercom.com",
+                                "type": "personal",
+                                "confidence": 81,
+                                "sources": [
+                                    {
+                                        "domain": "github.com",
+                                        "uri": "http://github.com/ivan",
+                                        "extracted_on": "2015-07-29",
+                                        "last_seen_on": "2017-07-01",
+                                        "still_on_page": true
+                                    }
+                                ],
+                                "first_name": "Ivan",
+                                "last_name": "Example",
+                                "position": "Support Engineer",
+                                "position_raw": "Support Engineer",
+                                "seniority": "senior",
+                                "department": "it",
+                                "decision_maker": false,
+                                "linkedin": null,
+                                "twitter": null,
+                                "phone_number": null,
+                                "verification": {
+                                    "date": "2019-12-06",
+                                    "status": "valid"
+                                }
+                            },
+                            {
+                                "value": "judy@intercom.com",
+                                "type": "personal",
+                                "confidence": 80,
+                                "sources": [
+                                    {
+                                        "domain": "github.com",
+                                        "uri": "http://github.com/judy",
+                                        "extracted_on": "2015-07-29",
+                                        "last_seen_on": "2017-07-01",
+                                        "still_on_page": true
+                                    }
+                                ],
+                                "first_name": "Judy",
+                                "last_name": "Example",
+                                "position": "Support Engineer",
+                                "position_raw": "Support Engineer",
+                                "seniority": "senior",
+                                "department": "it",
+                                "decision_maker": false,
+                                "linkedin": null,
+                                "twitter": null,
+                                "phone_number": null,
+                                "verification": {
+                                    "date": "2019-12-06",
+                                    "status": "valid"
+                                }
+                            },
+                            {
+                                "value": "mallory@intercom.com",
+                                "type": "personal",
+                                "confidence": 79,
+                                "sources": [
+                                    {
+                                        "domain": "github.com",
+                                        "uri": "http://github.com/mallory",
+                                        "extracted_on": "2015-07-29",
+                                        "last_seen_on": "2017-07-01",
+                                        "still_on_page": true
+                                    }
+                                ],
+                                "first_name": "Mallory",
+                                "last_name": "Example",
+                                "position": "Support Engineer",
+                                "position_raw": "Support Engineer",
+                                "seniority": "senior",
+                                "department": "it",
+                                "decision_maker": false,
+                                "linkedin": null,
+                                "twitter": null,
+                                "phone_number": null,
+                                "verification": {
+                                    "date": "2019-12-06",
+                                    "status": "valid"
+                                }
+                            }
+                        ]
+                    },
+                    "meta": {
+                        "results": 12,
+                        "results_approximate": false,
+                        "limit": 25,
+                        "offset": 0,
+                        "params": {
+                            "domain": "intercom.com",
+                            "company": null,
+                            "type": null,
+                            "seniority": null,
+                            "department": null
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,45 @@
+{
+    "name": "synthetic-miss",
+    "description": "SYNTHETIC — not recorded (no Hunter key held, 2026-09-17): the shape follows the live reference's own example (hunter.io/api-documentation/v2) and v1's 2026-08-20 ledger drill; values are placeholders. A miss: 200 with data.email null (never a 404) — free (v1 drill).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.hunter.io/v2/email-finder?domain=reddit.com&first_name=Alexis&last_name=Ohanian"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "first_name": "Alexis",
+                        "last_name": "Ohanian",
+                        "email": null,
+                        "score": null,
+                        "domain": "reddit.com",
+                        "accept_all": false,
+                        "position": "Cofounder",
+                        "twitter": null,
+                        "linkedin_url": null,
+                        "phone_number": null,
+                        "company": "Reddit",
+                        "sources": [],
+                        "verification": {
+                            "date": null,
+                            "status": null
+                        }
+                    },
+                    "meta": {
+                        "params": {
+                            "first_name": "Alexis",
+                            "last_name": "Ohanian",
+                            "full_name": null,
+                            "domain": "reddit.com",
+                            "company": null,
+                            "max_duration": null
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}
