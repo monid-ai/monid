@@ -8,7 +8,6 @@ import {
     zTarget,
 } from "../../../../schema/common.ts";
 
-/** GET /site-explorer/refdomains-history query (ported from v1). */
 export const zRefdomainsHistoryQueryParams = z.object({
     target: zTarget,
     date_from: zDateFrom,

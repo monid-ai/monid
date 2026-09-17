@@ -57,6 +57,10 @@ completion below describe the combined authored connector.
 - [ ] 4.2 Broker: decide whether the 50-unit request minimum passes to the
       caller (the doc now reports it; v1 absorbed it — D1)
 
+- [ ] 4.3 With the key: does a vendor 400 (e.g. a malformed `where`) draw the
+      50-unit base? The settle reads the meter header, so an answer of "yes"
+      changes nothing in code — it only decides whether `where`'s regex
+      guard is enough (PR #21 review, 2026-09-16).
 - [ ] 4.3 Consider additional vendor report controls beyond the v1 input
       surface: broken-backlinks aggregation; top-pages date_compared,
       volume_mode, traffic_mode; pages-by-traffic volume_mode/traffic_mode;

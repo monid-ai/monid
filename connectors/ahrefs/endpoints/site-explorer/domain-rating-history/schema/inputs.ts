@@ -6,7 +6,6 @@ import {
     zTarget,
 } from "../../../../schema/common.ts";
 
-/** GET /site-explorer/domain-rating-history query (ported from v1). */
 export const zDomainRatingHistoryQueryParams = z.object({
     target: zTarget,
     date_from: zDateFrom,

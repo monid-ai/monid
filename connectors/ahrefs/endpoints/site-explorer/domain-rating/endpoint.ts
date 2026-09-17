@@ -1,9 +1,6 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zDomainRatingQueryParams } from "./schema/inputs.ts";
 
-/**
- * GET /site-explorer/domain-rating — Domain Rating: 2 API units per row (all returned fields, one row).
- */
 export default defineEndpoint({
     meta: {
         displayName: "Domain Rating",

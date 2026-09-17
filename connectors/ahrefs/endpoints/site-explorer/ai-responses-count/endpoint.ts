@@ -1,9 +1,6 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zAiResponsesCountQueryParams } from "./schema/inputs.ts";
 
-/**
- * GET /site-explorer/ai-responses-count — AI Answer Citations: 120 API units per row (the fixed field set below; design D4).
- */
 export default defineEndpoint({
     meta: {
         displayName: "AI Answer Citations",

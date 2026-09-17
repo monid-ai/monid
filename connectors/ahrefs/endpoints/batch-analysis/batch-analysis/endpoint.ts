@@ -2,9 +2,6 @@ import { z } from "zod";
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zBatchAnalysisBody, zBatchTarget } from "./schema/inputs.ts";
 
-/**
- * POST /batch-analysis/batch-analysis — Batch Target Analysis: 21 API units per row (the fixed field set below; design D4).
- */
 export default defineEndpoint({
     meta: {
         displayName: "Batch Target Analysis",

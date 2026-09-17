@@ -1,9 +1,6 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zMetricsQueryParams } from "./schema/inputs.ts";
 
-/**
- * GET /site-explorer/metrics — SEO Metrics: 44 API units per row (all returned fields, one row).
- */
 export default defineEndpoint({
     meta: {
         displayName: "SEO Metrics",

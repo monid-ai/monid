@@ -1,9 +1,6 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zKeywordsHistoryQueryParams } from "./schema/inputs.ts";
 
-/**
- * GET /site-explorer/keywords-history — Keyword Positions History: 6 API units per row (the fixed field set below; design D4).
- */
 export default defineEndpoint({
     meta: {
         displayName: "Keyword Positions History",

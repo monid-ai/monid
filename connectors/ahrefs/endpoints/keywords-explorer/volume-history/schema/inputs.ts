@@ -6,7 +6,6 @@ import {
     zKeyword,
 } from "../../../../schema/common.ts";
 
-/** GET /keywords-explorer/volume-history query (ported from v1). */
 export const zVolumeHistoryQueryParams = z.object({
     keyword: zKeyword,
     country: zCountry,

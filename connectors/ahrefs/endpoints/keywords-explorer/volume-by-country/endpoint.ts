@@ -1,9 +1,7 @@
+import { z } from "zod";
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zVolumeByCountryQueryParams } from "./schema/inputs.ts";
 
-/**
- * GET /keywords-explorer/volume-by-country — Volume by Country: 11 API units per row (all returned fields, one row).
- */
 export default defineEndpoint({
     meta: {
         displayName: "Volume by Country",
@@ -23,8 +21,13 @@ export default defineEndpoint({
     request: { method: "GET", path: "/keywords-explorer/volume-by-country" },
     input: {
         schema: {
-            // vendor defaults at the binding (D25); the row budget is REQUIRED — the estimate's whole basis
-            queryParams: zVolumeByCountryQueryParams.required({ limit: true }),
+            // vendor defaults at the binding (D25); the row budget is REQUIRED and plan-capped here, the mirror keeps the vendor's unbounded integer — the estimate's whole basis
+            queryParams: zVolumeByCountryQueryParams.extend({
+                limit: z.number().int().min(1).max(250).describe(
+                    "Maximum number of countries to return (1-250; one billed row per " +
+                        "country).",
+                ),
+            }),
         },
     },
     usage: {

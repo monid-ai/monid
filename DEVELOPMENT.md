@@ -277,9 +277,16 @@ Why tag-triggered, why a GitHub Release:
   CROSS-field rule has to be documented in `notes` instead. Do not read that as
   "validation does not survive": a single-field constraint belongs in the
   schema, where it is enforced before the wire. Write `.describe()` BEFORE
-  `.optional()`: a binding that derives a field with `.unwrap()` keeps only the
-  inner schema, so a describe hung on the optional wrapper is silently dropped
-  from the compiled doc (the compiler does not check for it).
+  `.optional()`:
+  a binding that derives a field with `.unwrap()` keeps only the inner schema,
+  so a describe hung on the optional wrapper is silently dropped from the
+  compiled doc (the compiler does not check for it). A price selector nested
+  inside an optional object (kling's `settings.resolution`) is defaulted the
+  same way one level down and the container is `.prefault({})` at the
+  binding — `.default({})` takes the OUTPUT type and rejects `{}` — which
+  compiles to `"default": {}` so the engine's `useDefaults` fills the nested
+  defaults; a `.describe()` on the container does not survive `.extend()`,
+  so describe the fields, not the object.
 - **Fixtures**: recorded via `deno task record` (headers never captured);
   synthetic fixtures carry a `synthetic-` prefix until real keys exist.
 

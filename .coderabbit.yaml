@@ -73,7 +73,9 @@ reviews:
         callers that do not exist in this repository;
         (4) try/catch, null checks, or fallbacks guarding states the zod schema or
         the caller already rule out;
-        (5) comments or JSDoc that restate the signature or narrate the next line;
+        (5) comments or JSDoc that restate the signature or narrate the next line
+        — a comment that states a reason (why a caller omits a field, why a
+        knob is required) is not narration; leave it;
         (6) edits unrelated to the stated purpose of the PR — reformatting,
         renaming, or "improving" untouched neighbouring code.
         Say which lines to delete. Prefer "drop this" over "consider refactoring".
@@ -93,10 +95,12 @@ reviews:
         multi-key provider passes its field list: liveSkip(slug, FIELDS).
         A sync-provider endpoint.test.ts has fixed parts; flag a missing one:
         happy (result.usage deep-equalled as a WHOLE {credits, evidence} object,
-        billing fields gone from output, result count = the fixture's), provider
+        billing fields gone from output, result count = the fixture's — a deep-equal
+        of the whole output against the fixture body satisfies this), provider
         error (isProviderError true, empty usage), schema gate (assertRejects
         INVALID_INPUT on a near-valid bad input PLUS a passing near-twin proving
-        the gate is not too wide), live (ignore: liveSkip(slug), asserts shape not
+        the gate is not too wide — the twin may be proven through the engine's
+        pure estimate, no fixture needed), live (ignore: liveSkip(slug), asserts shape not
         amounts). Provenance (testBundle, which docs share the provider's fn keys)
         is one per provider, not per endpoint.
 
@@ -109,16 +113,31 @@ reviews:
         changed pinned amount must state its source (vendor pricing page, date);
         apify amounts are Business-tier event prices and the drift suite pins
         them — a PR that "fixes" one by hand needs to say why drift did not.
-        schema/inputs.ts is the faithful vendor mirror: no .default(), no
-        .refine()/.superRefine() (they do not survive compilation), unquoted
-        keys; OUR tightening (.required, .default, floors) lives at the binding
-        in endpoint.ts — a bound the VENDOR documents for a single field
-        (.min/.max/.regex/.enum) belongs in the mirror, where it compiles to
-        minimum/maximum/pattern/enum and stops invalid input before spend.
-        Never invent structure the vendor does not have.
-        Endpoint ids derive from the def's `endpoint` ?? request.path (design
-        D22); folder names are organizational only. An authored `endpoint` is
-        correct and REQUIRED when two defs share one wire path — do not flag it.
+        consumes.amount is a unit COUNT; the price per unit lives on the broker
+        card, so never ask for a $ citation on it. When the vendor publishes one
+        tier table for a family, its URL + date is cited once in provider.ts's
+        header comment and once in the test rate table; do not ask each
+        endpoint to repeat a citation already accepted at provider level.
+        provider.ts and openspec describe the WHOLE connector; a stacked PR
+        delivers a subset, so an endpoint count above this diff is not a
+        mismatch when the PR body says it is a stack.
+        schema/inputs.ts is the faithful vendor mirror: no .default(), unquoted
+        keys, never structure the vendor does not have. Vendor-stated
+        single-field bounds (.regex/.min/.max/.enum, z.iso.date) STAY in the
+        mirror and compile to pattern/minimum/enum; only our own tightening
+        (.required, .default, our floors) lives at the binding in endpoint.ts.
+        Cross-field rules (A requires B, at most one of) go in meta.notes and
+        are enforced by the vendor's 4xx, which is error-as-data with zero
+        usage — never ask for .refine()/.superRefine() (they do not survive
+        compilation) and never ask a schema to be stricter than the vendor's
+        contract. "At least one of" is a z.union of .required arms; "exactly
+        one" is the same union with each arm .omit()-ing the other field.
+        A field the vendor documents in its response is customer data, not an
+        internal leak; do not ask to strip it unless you cite vendor docs
+        showing it is undocumented.
+        Endpoint id = provider# + (authored `endpoint` path ?? request.path);
+        folder names are organisational only (D22). An authored endpoint: is
+        normal — never flag it.
         Schemas are never imported across providers.
         Fixtures: no secret VALUE and no request/response headers ever; PII
         scrubbed; synthetic fixtures carry the synthetic- filename prefix; the

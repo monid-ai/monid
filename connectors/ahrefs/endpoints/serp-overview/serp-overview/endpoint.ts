@@ -1,9 +1,7 @@
+import { z } from "zod";
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zSerpOverviewQueryParams } from "./schema/inputs.ts";
 
-/**
- * GET /serp-overview/serp-overview — SERP Overview: 20 API units per row (the fixed field set below; design D4).
- */
 export default defineEndpoint({
     meta: {
         displayName: "SERP Overview",
@@ -26,9 +24,12 @@ export default defineEndpoint({
     request: { method: "GET", path: "/serp-overview/serp-overview" },
     input: {
         schema: {
-            // vendor defaults at the binding (D25); the row budget is REQUIRED — the estimate's whole basis
-            queryParams: zSerpOverviewQueryParams.required({
-                top_positions: true,
+            // vendor defaults at the binding (D25); the row budget is REQUIRED and plan-capped here, the mirror keeps the vendor's unbounded integer — the estimate's whole basis
+            queryParams: zSerpOverviewQueryParams.extend({
+                top_positions: z.number().int().min(1).max(100).describe(
+                    "How many top positions to return (1-100; one billed row per " +
+                        "position).",
+                ),
             }),
         },
         /** The fixed `select` (design D4) — callers never supply it. */

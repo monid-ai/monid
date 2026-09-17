@@ -147,7 +147,7 @@ and `/v1/company/search` has no knob (`metadata.page_size` is always 25):
 both promise 25, a quantity DEDUCED from the vendor, not a fallback.
 `/v1/domain/enrich` promises `domains.length` (1–30).
 
-## D9 — Engine: one variable per credential FIELD (0.3.0)
+## D9 — Engine: one variable per credential FIELD (0.4.0)
 
 The local resolver read one variable and produced one key
 (`CONTACTOUT_API_KEY → {apiKey}`), keyed by PROVIDER — it cannot know the
@@ -197,9 +197,11 @@ than derivation. A resolver written `(provider) => …` stays assignable, so
 the hosted Relay resolver and every test double keep compiling.
 
 `engine/transport.ts`, `engine/auth.ts`, `engine/interfaces/mod.ts` and
-`engine/mod.ts` are version-check contract paths. The engine moves 0.2.0 →
-**0.3.0** — a minor, not a patch: this REMOVES a credential convention, and
-the version is the only place that can say so. No hook ABI, doc format or
+`engine/mod.ts` are version-check contract paths. The engine moves to
+**0.4.0** — a minor, not a patch: this REMOVES a credential convention, and
+the version is the only place that can say so. (0.3.0 was taken by the
+endpoint-identity format change on main while this branch was open, so the
+bump lands one minor higher than the branch first claimed.) No hook ABI, doc format or
 lifecycle surface changed, so the three `since` fields in `config.yml` stay.
 
 Replay mode in `shared/testing/runner.ts` hard-coded `{apiKey: "test-key"}`

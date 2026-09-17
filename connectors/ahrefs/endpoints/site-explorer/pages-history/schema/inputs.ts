@@ -9,7 +9,6 @@ import {
     zTarget,
 } from "../../../../schema/common.ts";
 
-/** GET /site-explorer/pages-history query (ported from v1). */
 export const zPagesHistoryQueryParams = z.object({
     target: zTarget,
     date_from: zDateFrom,

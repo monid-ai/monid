@@ -42,9 +42,18 @@ export const zProtocol = z.enum(["both", "http", "https"]).describe(
 export const AHREFS_MAX_ROWS = 100;
 
 /**
- * Row budget — the cost basis of every rowed report (each returned row is
- * billed at the endpoint's units-per-row rate). Optional in the mirror,
- * REQUIRED at every binding that uses it.
+ * Row budget as the vendor states it (an integer; upstream default 1,000).
+ * This is what the mirror carries; the plan cap is a tightening and lives
+ * at the binding (`zLimit`), never here (D25).
+ */
+export const zRowBudget = z.number().int().describe(
+    "Maximum number of rows to return (one billed row each).",
+);
+
+/**
+ * Row budget at the BINDING — the cost basis of every rowed report (each
+ * returned row is billed at the endpoint's units-per-row rate): REQUIRED
+ * and capped at the plan's `AHREFS_MAX_ROWS`.
  */
 export const zLimit = z.number().int().min(1).max(AHREFS_MAX_ROWS).describe(
     "Maximum number of rows to return (1-100). This is the cost budget — " +

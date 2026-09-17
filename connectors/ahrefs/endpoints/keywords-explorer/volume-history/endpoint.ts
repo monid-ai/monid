@@ -1,9 +1,6 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zVolumeHistoryQueryParams } from "./schema/inputs.ts";
 
-/**
- * GET /keywords-explorer/volume-history — Keyword Volume History: 2 API units per row (all returned fields, one row).
- */
 export default defineEndpoint({
     meta: {
         displayName: "Keyword Volume History",

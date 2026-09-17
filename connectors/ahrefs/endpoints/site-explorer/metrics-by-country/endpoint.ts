@@ -1,9 +1,6 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zMetricsByCountryQueryParams } from "./schema/inputs.ts";
 
-/**
- * GET /site-explorer/metrics-by-country — Metrics by Country: 23 API units per row (the fixed field set below; design D4).
- */
 export default defineEndpoint({
     meta: {
         displayName: "Metrics by Country",

@@ -1,9 +1,6 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zOutlinksStatsQueryParams } from "./schema/inputs.ts";
 
-/**
- * GET /site-explorer/outlinks-stats — Outbound Link Totals: 4 API units per row (all returned fields, one row).
- */
 export default defineEndpoint({
     meta: {
         displayName: "Outbound Link Totals",

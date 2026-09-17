@@ -41,7 +41,7 @@ meter (clay D7a).
     (`include`, `data_types`, `email_type`). Cross-field v1 refinements ride
     `meta.notes`; decision-makers' "at least one identifier" binds as a
     compiled `anyOf` (D6).
-- **Engine 0.2.0 → 0.3.0 (D9):** ONE credential env convention, mirroring
+- **Engine → 0.4.0 (D9):** ONE credential env convention, mirroring
   `auth.credentials` 1:1 — each declared field reads
   `<NAME>_CREDENTIALS_<FIELD>` (`CONTACTOUT_CREDENTIALS_WORK_API_KEY`), with
   the bare `<NAME>_API_KEY` kept as the single alias for an `apiKey` field.
@@ -85,7 +85,7 @@ meter (clay D7a).
 ## Impact
 
 New connector tree + `openspec/changes/add-connector-contactout`. Engine
-MINOR bump 0.3.0 for the credential convention (`engine/transport.ts`,
+MINOR bump 0.4.0 for the credential convention (`engine/transport.ts`,
 `engine/auth.ts`, `engine/interfaces/mod.ts`, `engine/mod.ts` are
 version-check contract paths) — a minor because the change REMOVES a
 convention, not just adds one. No compiled doc other than contactout's
