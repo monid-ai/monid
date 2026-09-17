@@ -22,8 +22,10 @@ export default defineEndpoint({
     request: { method: "GET", path: "/deals/{id}/investors" },
     input: { schema: { pathParams: zDealPathParams } },
     usage: {
-        /** 1 credit per call — v1 drill (2026-09-01): "1 credit for a
-         *  5-investor deal and for an empty array". */
+        /** 1 credit per call — the pricing page labels this "1
+         *  credit/row" but the live stamp bills per CALL: 1 credit for a
+         *  5-investor deal and for an empty array (v1 drill 2026-09-01),
+         *  re-verified 2026-09-17 (10-investor lineup, credits_used=1). */
         model: {
             kind: UsageModelKind.PER_CALL,
             label: "lookup",

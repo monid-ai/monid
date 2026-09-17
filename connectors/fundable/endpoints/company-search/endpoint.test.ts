@@ -15,12 +15,12 @@ Deno.test("fundable#company/search empty (synthetic): zero candidates still bill
     });
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
-    // one SEARCH-pool call settles from the derived fold (reconcile
-    // 2026-09-16): searches are invoiced at a flat $0.01/call contract
-    // line the vendor's 0.1-credit stamp cannot express, so the doc's
-    // consolidate strips the stamp without claiming it
+    // the ONE credit system (rate card: searches 0.1 credit/call,
+    // charged on zero results): the provider consolidate claims the
+    // response's own 0.1 stamp, which matches the doc's 0.1 fold — no
+    // mismatch
     assertEquals(result.usage, {
-        credits: { search: 1 },
+        credits: { default: 0.1 },
         evidence: { CALL: 1 },
     });
     const output = result.output as Record<string, Record<string, unknown>>;
