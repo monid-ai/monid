@@ -75,7 +75,9 @@ reviews:
               the caller already rule out;
               (5) comments or JSDoc that restate the signature or narrate the next line
               — a comment that states a reason (why a caller omits a field, why a
-              knob is required) is not narration; leave it;
+              knob is required) is not narration; leave it. The one-line
+              `/** METHOD path — name */` header above `defineEndpoint` is the
+              endpoint-file convention (akta, mrscraper); never ask to delete it;
               (6) edits unrelated to the stated purpose of the PR — reformatting,
               renaming, or "improving" untouched neighbouring code.
               Say which lines to delete. Prefer "drop this" over "consider refactoring".
