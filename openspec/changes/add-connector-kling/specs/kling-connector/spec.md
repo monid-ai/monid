@@ -130,12 +130,13 @@ zero usage with a warning.
 - **THEN** evidence carries 5
 
 ### Requirement: Media URLs are enforced, not merely described
-Every `contents[].url` SHALL be constrained to a public `https://` URL by a
-compiled JSON Schema `pattern`.
+Every `contents[].url` SHALL be constrained to an `https://` URL without
+whitespace by a compiled JSON Schema `pattern`; reachability is Kling's own
+free 400.
 
 #### Scenario: Unsupported URL forms are rejected locally
 - **WHEN** a caller passes an inline `data:` URL, a plain `http://` URL, or a
-  malformed string
+  string without the `https://` scheme
 - **THEN** the run is rejected INVALID_INPUT before any upstream call
 
 ### Requirement: Caveats are declared, not buried

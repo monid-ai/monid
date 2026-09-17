@@ -2,8 +2,9 @@ import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zTextToVideoKling26Body } from "./schema/inputs.ts";
 
 /**
- * Kling 2.6 text-to-video — the cheapest tier with native audio (1080p,
- * 1 unit/s) and half the 3.0 rate for silent clips. 5 or 10 s only.
+ * Kling 2.6 text-to-video — silent clips at 0.3/0.5 units/s (720p/1080p,
+ * versus 0.6/0.8 on 3.0), native audio at 1080p for 1 unit/s. 5 or 10 s
+ * only.
  */
 const zSettings = zTextToVideoKling26Body.shape.settings.unwrap();
 
@@ -11,11 +12,11 @@ export default defineEndpoint({
     meta: {
         displayName: "Kling 2.6 Text to Video",
         summary:
-            "Generate 5s or 10s video from text at half the 3.0 rate; native audio only at 1080p, no 4K.",
+            "Generate 5s or 10s video from text at 0.3/0.5 units/s silent (720p/1080p); native audio only at 1080p, no 4K.",
         description: "Turn a text prompt into a 5- or 10-second video at " +
-            "720p/1080p with Kling 2.6. Strengths: the cheapest tier with " +
-            "native audio (1080p, 1 unit/s) and half the 3.0 rate for " +
-            "silent clips. Limits: 5 or 10 s only, 720p is silent only " +
+            "720p/1080p with Kling 2.6. Strengths: silent clips at 0.3/0.5 " +
+            "units/s (720p/1080p, versus 0.6/0.8 on 3.0) and native audio " +
+            "at 1080p for 1 unit/s. Limits: 5 or 10 s only, 720p is silent only " +
             "(native audio requires 1080p), no 4K, no multi-shot. Returns " +
             "outputs[].url (MP4, 30-day link) with the generated duration. " +
             "Supports aspect ratios 16:9, 9:16, 1:1, optional native " +

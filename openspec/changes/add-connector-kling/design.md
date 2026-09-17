@@ -180,7 +180,9 @@ unique ids, O1's 5|10 with a lone first frame, exactly-one-image-and-video).
 None compile (bytedance D6); each is now a note on the endpoint it binds, and
 Kling rejects the combination itself with a free 400. Single-field rules stay
 enforced: `.strict()`, enums, `min`/`max`, and the media-URL `pattern`
-(`^https:\/\/\S+$` — inline base64, `http://` and junk fail locally).
+(`^https:\/\/\S+$` — inline base64, `http://` and strings without an
+`https://` prefix fail locally; anything else that is not a usable URL is
+Kling's own free 400).
 
 The mirrors were diffed against the live `.md` docs
 (`https://kling.ai/document-api/api/video/<model>/<endpoint>.md`, 2026-09-16)

@@ -2,8 +2,9 @@ import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zImageToVideoKling26Body } from "./schema/inputs.ts";
 
 /**
- * Kling 2.6 image-to-video — animate a first (and last) frame at half the
- * 3.0 rate; native audio only at 1080p. 5 or 10 s only.
+ * Kling 2.6 image-to-video — animate a first (and last) frame at 0.3/0.5
+ * units/s silent (720p/1080p, versus 0.6/0.8 on 3.0); native audio at 1080p
+ * for 1 unit/s. 5 or 10 s only.
  */
 const zSettings = zImageToVideoKling26Body.shape.settings.unwrap();
 
@@ -11,12 +12,12 @@ export default defineEndpoint({
     meta: {
         displayName: "Kling 2.6 Image to Video",
         summary:
-            "Animate a first (and last) frame into 5s or 10s video at half the 3.0 rate; audio only at 1080p.",
+            "Animate a first (and last) frame into 5s or 10s video at 0.3/0.5 units/s silent (720p/1080p); audio only at 1080p.",
         description: "Animate a still image (first or first+last frame) " +
             "into a 5- or 10-second video at 720p/1080p with Kling 2.6, " +
-            "guided by a text prompt. Strengths: the cheapest tier with " +
-            "native audio (1080p, 1 unit/s) and half the 3.0 rate for " +
-            "silent clips. Limits: 5 or 10 s only, 720p is silent only " +
+            "guided by a text prompt. Strengths: silent clips at 0.3/0.5 " +
+            "units/s (720p/1080p, versus 0.6/0.8 on 3.0) and native audio " +
+            "at 1080p for 1 unit/s. Limits: 5 or 10 s only, 720p is silent only " +
             "(native audio requires 1080p), first+last frame requires " +
             "1080p, no 4K, no multi-shot. Returns outputs[].url (MP4, " +
             "30-day link) with the generated duration; the output keeps " +
