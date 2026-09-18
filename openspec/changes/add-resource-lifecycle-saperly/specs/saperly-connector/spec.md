@@ -14,17 +14,19 @@ shared nested-strip projection for success AND error bodies
 - **THEN** `output.fromError` removes it before the caller sees the error
 
 ### Requirement: The phone-number resource
-`saperly/phone-number` SHALL declare: `data`
+`saperly/phone-number` SHALL declare: `slug` "phone-number"; `data`
 {phoneNumber?, country, numberType, externalRefs.connection?}; `inputs`
-for create/update/release; billing rent $2/MONTH (CREATION anchor,
-chargeLeadMs 3 d, releaseLeadMs 6 h, no variable); ops `check` (404 or
-`releasedAt` ⇒ inactive; observed monthly cents as `observed.consumes`;
-`nextChargeAt` as `periodEndIso`), `release` (stable per-resource
-idempotency key; 404/410 tolerated; embedded-connection delete converges by
-retry), `refresh` (full override; the connection pointer is AUTHORITATIVE —
-absence clears it; number fields carry forward on degraded reads); external
-`connection` (display) = the live sanitized persona
-(name/instructions/voice/model only).
+for create/update/release; `usage` = one fixed line `rent` $2/MONTH
+(CREATION_TIME anchor — flat, no estimated lines, so no
+`reconcileUsage`); lifecycle `verify` (404 or `releasedAt` ⇒ inactive;
+observed monthly cents as `observedUsage.rent`; `nextChargeAt` as
+`periodEndIso`), `release` (stable per-resource idempotency key; 404/410
+tolerated; embedded-connection delete converges by retry), `refresh`
+(full patch; the connection pointer is AUTHORITATIVE — absence clears
+it; number fields carry forward on degraded reads); view `connection`
+(labeled) = the live sanitized persona (name/instructions/voice/model
+only). Host policy (charge/release leads) lives host-side, not on the
+def.
 
 #### Scenario: Never charge a dead number
 - **WHEN** check finds 404 or `releasedAt`

@@ -1,5 +1,5 @@
 {
-    "name": "call-stop-settled",
+    "name": "synthetic-call-stop-settled",
     "description": "STOP settles the metered work (design D34): start parks RUNNING; the hangup's own response is unsettled; one 3 s sleep + re-read finds the settled record -> the stop returns a FULL COMPLETED envelope and the run bills at stop.",
     "calls": [
         {

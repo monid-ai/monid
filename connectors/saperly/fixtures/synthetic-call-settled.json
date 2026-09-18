@@ -1,5 +1,5 @@
 {
-    "name": "call-settled",
+    "name": "synthetic-call-settled",
     "description": "The RUN is the call, END TO END IN ONE CHAIN (merged call-happy + call-settle-grace): POST /calls parks RUNNING (externalRunId = callId); one mid-flight poll; then the SETTLE RACE (the 53s->'0 minutes' bug) - two reads with a terminal STATUS but costCents still null park on the deterministic graceLeft countdown; the final read settles (53 s, 25 cents). Evidence bills 53 SECONDs (fold ceil(53/60)x$0.28); the consolidate claim is the carrier-settled charge ($0.25) and WINS with the derived fold riding as usage.mismatch.derived - said, never hidden. The USES settle mark reconciles num-1.",
     "calls": [
         {

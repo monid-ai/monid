@@ -1,5 +1,5 @@
 {
-    "name": "resource-ops",
+    "name": "synthetic-resource-ops",
     "description": "The happy op sequence on one loaded resource (merged resource-check-active + resource-release): check before a rent charge - alive, with the vendor's observed price + its own period end - then the idempotent release with the embedded connection delete (the persona dies with the number).",
     "calls": [
         {

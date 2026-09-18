@@ -67,7 +67,7 @@ into a separate `accrue` fn was ours, and it was needless. Restored:
   `max(ceil((elapsedMs ?? 0)/1000), 60)` = 60 s. The AUTHOR picks the
   admission floor; it is the def's promise.
 - Engine: `accrued(input, elapsedMs)` is now sugar for
-  `estimate(input, {elapsedMs})`; `usage.accrue` (fn, intervalMs, buffer)
+  `estimate(input, elapsedMs)`; `usage.accrue` (fn, intervalMs, buffer)
   is deleted everywhere.
 
 ## D41 — `ops` → `lifecycle`; `check` → `verify`; the instance is `resource`

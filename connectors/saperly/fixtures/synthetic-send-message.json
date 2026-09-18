@@ -1,5 +1,5 @@
 {
-    "name": "send-message",
+    "name": "synthetic-send-message",
     "description": "The declarative relay: the engine executes POST /messages itself after the USES ownership gate; flat $0.025 PER_CALL (segments ride as data only).",
     "calls": [
         {

@@ -1,5 +1,5 @@
 {
-    "name": "connection-read",
+    "name": "synthetic-connection-read",
     "description": "ONE live persona read serving BOTH surfaces (merged get-number-happy + resource-external-connection - by design the same reader): /get-numbers composes it onto the owned row, and the resource's 'connection' external serves it as the live detail. The raw response carries the internal id + manualSecret; every consumer projects it through the public allowlist.",
     "calls": [
         {

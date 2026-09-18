@@ -1,5 +1,5 @@
 {
-    "name": "update-repair-ambiguous",
+    "name": "synthetic-update-repair-ambiguous",
     "description": "The repair path's paid-number containment: the stored connection is gone (PATCH 404), a fresh connection is created and its bind 500s (AMBIGUOUS) - the reconcile read shows the number attached to the FRESH connection, so it is treated as bound and NOT deleted.",
     "calls": [
         {

@@ -15,13 +15,16 @@ bundle's `resources` map with both-direction closure enforced.
 - **THEN** the bundles are byte-identical, resources included
 
 ### Requirement: Binding derivation and coherence
-The compiler SHALL resolve every endpoint `resource` binding against the
-bundle's resources (unknown id → CompileError), verify interaction/key
-coherence (UPDATES/RELEASES require `key`; CREATES requires `seed`; `seed`
-outside CREATES and `ensure` on CREATES are rejected), verify
-input-superset contracts against the resource's `inputs` schemas, and
-reject dead bindings (a binding granting nothing any fn or derivation
-uses).
+The compiler SHALL resolve every entry of the endpoint's purpose-keyed
+`resources:` arrays (provisions / uses / updates / releases / reads)
+against the bundle's resources (unknown id → CompileError), verify
+per-purpose coherence (updates/releases entries require `key`; provisions
+carry `seed` and at most ONE entry; `ensure` rides uses/reads only;
+aliases unique across purposes), verify input-superset contracts against
+the resource's `inputs` slot per purpose — required NAMES present AND
+shape-compatible (declared scalar `type` match; one-level nested
+`required`) — and reject dead keys (a JSONPath no declared input can
+carry).
 
 #### Scenario: Missing release input contract
 - **WHEN** an endpoint binds RELEASES but its input cannot accept the
@@ -38,10 +41,11 @@ resolves; accrue counts keys ⊆ the model's metered keys.
 - **THEN** compilation fails (host workflow-history floor)
 
 ### Requirement: Versioning facts
-Docs using any new family/field SHALL floor at the new
-`doc_format_since`; lifecycle-ABI additions (run identity, sleep, headers,
-stop outcome) stamp via `fn_abi_since`; resource-op fns stamp
-`schema.resources_since`. `deno task version:check` SHALL gate the
+`doc_format_since` and `fn_abi_since` SHALL stay put (nothing
+pre-existing changed shape; pure-hook docs gain no capability). EVERY
+resource-family surface — resource docs, binding-carrying endpoint docs,
+resource/webhook fn entries' `api`, and the estimate cadence — SHALL
+stamp `schema.resources_since`. `deno task version:check` SHALL gate the
 ENGINE_VERSION minor bump.
 
 #### Scenario: Old connectors keep their floor

@@ -1,5 +1,5 @@
 {
-    "name": "list-messages",
+    "name": "synthetic-list-messages",
     "description": "The declarative filtered relay: GET /messages?numberId= after the ownership gate.",
     "calls": [
         {

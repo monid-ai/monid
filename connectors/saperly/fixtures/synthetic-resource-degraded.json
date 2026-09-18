@@ -1,5 +1,5 @@
 {
-    "name": "resource-degraded",
+    "name": "synthetic-resource-degraded",
     "description": "The degraded reads on one loaded resource (merged resource-check-released + resource-refresh-clears-pointer): check on a vendor-released number - inactive with the attributable reason - then refresh against a body with NO connectionId: the AUTHORITATIVE pointer policy CLEARS the stored ref (a stale internal id must never survive) while scalar fields carry forward.",
     "calls": [
         {

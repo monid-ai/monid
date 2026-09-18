@@ -15,13 +15,14 @@ instant in replay.
   run replays as the uniform 404
 
 ### Requirement: Resource ops are testable as sealed units
-The harness SHALL provide `testResource(id)` returning the loaded resource,
-and fixture-driven runners for `check` / `release` / `refresh` /
-`external(kind)` / `actualCost(window)` — the latter replayed for the three
-window shapes (cadence tick, boundary, post-mortem tail).
+The harness SHALL provide `loadResource({unit, mode, fixture?})` returning
+the loaded resource, and fixture-driven runs of `verify` / `release` /
+`refresh` / `view(kind)` / `reconcileUsage(line, window)` — the latter
+replayed for the three window shapes (cadence tick, boundary, post-mortem
+tail).
 
 #### Scenario: Cumulative meter replay
-- **WHEN** an actualCost fixture provides a canned vendor series and a
+- **WHEN** a reconcileUsage fixture provides a canned vendor series and a
   boundary window
 - **THEN** the runner asserts the returned `{consumes}` for that window
 

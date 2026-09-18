@@ -1,5 +1,5 @@
 {
-    "name": "update-patch",
+    "name": "synthetic-update-patch",
     "description": "The normal persona edit: the stored pointer resolves and PATCHes in place; a lean ack replaces the body (the internal connection id never reaches users).",
     "calls": [
         {

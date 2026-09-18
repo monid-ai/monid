@@ -1,5 +1,5 @@
 {
-    "name": "provision-bind-reconciled",
+    "name": "synthetic-provision-bind-reconciled",
     "description": "The bind 500s but COMMITTED upstream: the reconcile read shows the number attached to OUR connection - the run treats it as bound (seed carries the pointer) and the connection is NOT deleted.",
     "calls": [
         {

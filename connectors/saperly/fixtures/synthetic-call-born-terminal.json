@@ -1,5 +1,5 @@
 {
-    "name": "call-born-terminal",
+    "name": "synthetic-call-born-terminal",
     "description": "Rare: the create response already carries a settled record (busy, costCents 0) - the run completes at once; zero seconds bill zero.",
     "calls": [
         {

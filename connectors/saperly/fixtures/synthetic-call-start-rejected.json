@@ -1,5 +1,5 @@
 {
-    "name": "call-start-rejected",
+    "name": "synthetic-call-start-rejected",
     "description": "Upstream refuses the call (RecipientOptedOut 403) - error-as-data, zero usage, no charge.",
     "calls": [
         {

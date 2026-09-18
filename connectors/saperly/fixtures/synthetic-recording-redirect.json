@@ -1,5 +1,5 @@
 {
-    "name": "recording-redirect",
+    "name": "synthetic-recording-redirect",
     "description": "The 302 redirect artifact: the anchor pair-verifies, the recording read answers 302 with the location HEADER (HttpResult.headers - hand-authored per the fixture headers rule) and the fn projects it into a 200 with the short-lived URL.",
     "calls": [
         {

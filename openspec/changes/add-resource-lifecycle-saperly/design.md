@@ -1,5 +1,16 @@
 # Design: add-resource-lifecycle-saperly
 
+> AMENDED by `refine-resource-model` (D38–D47), which reshaped several of
+> the surfaces decided here AFTER review: `billing` → the `usage` rate
+> card + `reconcileUsage`; `ops.check/release/refresh` →
+> `lifecycle.verify/release/refresh`; `externals` → `views`;
+> `ResourceRow` → `OwnedResource`; the singular `resource:` binding →
+> purpose-keyed `resources:` arrays; `usage.accrue` → the estimate
+> re-run (`updateEstimateEveryMs` + `elapsedMs`); folder-inferred ids →
+> the authored `slug`. The D-numbered prose BELOW is the original
+> decision record — read it with that mapping; the FINAL contracts live
+> in the refine change's design and in both changes' spec deltas.
+
 Decision numbering continues the repo record (founding change D1–D29,
 add-async-run-protocol D1–D29 in its own file). Provenance: monid-services
 main (incl. MON-298 `resource-billing-lifecycle`), the saperly adaptor

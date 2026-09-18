@@ -31,7 +31,7 @@ Deno.test("saperly resource: the happy op sequence — verify (alive, observed u
     const resource = await loadResource({
         unit: await testResourceUnit("saperly/phone-number"),
         mode: "replay",
-        fixture: await fixture("resource-ops"),
+        fixture: await fixture("synthetic-resource-ops"),
     });
     assertEquals(await resource.verify(ROW), {
         active: true,
@@ -45,7 +45,7 @@ Deno.test("saperly resource: the degraded sequence — released verify, then ref
     const resource = await loadResource({
         unit: await testResourceUnit("saperly/phone-number"),
         mode: "replay",
-        fixture: await fixture("resource-degraded"),
+        fixture: await fixture("synthetic-resource-degraded"),
     });
     const checked = await resource.verify(ROW);
     assertEquals(checked.active, false);
@@ -64,7 +64,7 @@ Deno.test("saperly resource: the connection view is live and sanitized", async (
         unit: await testResourceUnit("saperly/phone-number"),
         mode: "replay",
         // the SAME chain /get-numbers replays — one reader, by design
-        fixture: await fixture("connection-read"),
+        fixture: await fixture("synthetic-connection-read"),
     });
     const detail = await resource.view("connection", ROW) as Record<
         string,

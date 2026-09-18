@@ -1,5 +1,5 @@
 {
-    "name": "provision-conn-failed",
+    "name": "synthetic-provision-conn-failed",
     "description": "Connection-FIRST ordering pays off: the persona create 422s BEFORE any money moves - error-as-data, no purchase call, no resource, zero usage.",
     "calls": [
         {

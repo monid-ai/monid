@@ -14,17 +14,14 @@ export const zCountry = z.literal("US").describe(
     "ISO 3166-1 alpha-2 country code. Phase 1 supports 'US' only.",
 );
 
-/** The Saperly number id returned by /provision-numbers. */
 export const zNumberId = z.string().min(1).describe(
     "The Saperly number id (the `id` returned by /provision-numbers).",
 );
 
-/** The Saperly call id (the `id` in a /place-calls run's output). */
 export const zCallId = z.string().min(1).describe(
     "The Saperly call id (the `id` in a /place-calls run's output).",
 );
 
-/** E.164 destination (e.g. "+14155550123"). */
 export const zE164 = z.string().regex(/^\+[1-9]\d{6,14}$/).describe(
     'Phone number in E.164 format, e.g. "+14155550123".',
 );

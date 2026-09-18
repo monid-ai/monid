@@ -1,5 +1,5 @@
 {
-    "name": "provision-degraded-bind",
+    "name": "synthetic-provision-degraded-bind",
     "description": "The paid-number containment: purchase succeeds, the bind 500s (AMBIGUOUS), the reconcile read shows the number definitively unbound - the resource persists CONNECTION-LESS (repair via /update-numbers), the orphan connection is best-effort deleted, and the run still completes as a success with the provision seed.",
     "calls": [
         {

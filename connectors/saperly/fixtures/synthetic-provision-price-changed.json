@@ -1,5 +1,5 @@
 {
-    "name": "provision-price-changed",
+    "name": "synthetic-provision-price-changed",
     "description": "The consent-to-price guard: the first purchase 409s with PriceChanged carrying the ALLOCATED number's real prices (250/250); ONE retry under a DISTINCT idempotency key succeeds. The seed's rentConsumes and the consolidate claim reflect the retried consent ($2.50).",
     "calls": [
         {

@@ -61,7 +61,7 @@ Deno.test("saperly provision: happy saga — seed, quote claim, stripped output"
         unit: await testSealedUnit("saperly#provision-numbers"),
         input: PROVISION_INPUT,
         mode: "replay",
-        fixture: await fixture("provision-happy"),
+        fixture: await fixture("synthetic-provision-happy"),
     });
     assertEquals(result.httpStatus, 201);
     assertEquals(result.isProviderError, false);
@@ -99,7 +99,7 @@ Deno.test("saperly provision: ONE PriceChanged retry re-consents at the actual p
         unit: await testSealedUnit("saperly#provision-numbers"),
         input: PROVISION_INPUT,
         mode: "replay",
-        fixture: await fixture("provision-price-changed"),
+        fixture: await fixture("synthetic-provision-price-changed"),
     });
     assertEquals(result.httpStatus, 201);
     // the retried consent ($2.50) is the claim; the $2 card rides as the
@@ -117,7 +117,7 @@ Deno.test("saperly provision: a bind failure degrades — connection-less seed, 
         unit: await testSealedUnit("saperly#provision-numbers"),
         input: PROVISION_INPUT,
         mode: "replay",
-        fixture: await fixture("provision-degraded-bind"),
+        fixture: await fixture("synthetic-provision-degraded-bind"),
     });
     assertEquals(result.httpStatus, 201);
     const seed = result.resources?.provisions?.[0];
@@ -135,7 +135,7 @@ Deno.test("saperly provision: an ambiguous bind that COMMITTED reconciles as bou
         mode: "replay",
         // bind 500s, but the reconcile read shows OUR connection attached
         // — the fixture ends WITHOUT a DELETE (a delete would fail replay)
-        fixture: await fixture("provision-bind-reconciled"),
+        fixture: await fixture("synthetic-provision-bind-reconciled"),
     });
     assertEquals(result.httpStatus, 201);
     const seed = result.resources?.provisions?.[0];
@@ -151,7 +151,7 @@ Deno.test("saperly provision: a malformed quote fails closed as OUR 502, zero us
         unit: await testSealedUnit("saperly#provision-numbers"),
         input: PROVISION_INPUT,
         mode: "replay",
-        fixture: await fixture("provision-malformed-quote"),
+        fixture: await fixture("synthetic-provision-malformed-quote"),
     });
     assertEquals(result.httpStatus, 502);
     assertEquals(result.providerHttpStatus, 200);
@@ -165,7 +165,7 @@ Deno.test("saperly provision: connection-first fails fast — no purchase, no se
         unit: await testSealedUnit("saperly#provision-numbers"),
         input: PROVISION_INPUT,
         mode: "replay",
-        fixture: await fixture("provision-conn-failed"),
+        fixture: await fixture("synthetic-provision-conn-failed"),
     });
     assertEquals(result.httpStatus, 422);
     assertEquals(result.isProviderError, true);
@@ -185,7 +185,7 @@ Deno.test("saperly place-calls: the run IS the call — grace parks the settle r
         // ONE chain (merged happy + settle-grace): mid-flight RUNNING,
         // two terminal-but-unsettled reads on the graceLeft countdown,
         // then the settled record
-        fixture: await fixture("call-settled"),
+        fixture: await fixture("synthetic-call-settled"),
         resources: OWNED,
     });
     assertEquals(result.httpStatus, 200);
@@ -226,7 +226,7 @@ Deno.test("saperly place-calls: born-terminal zero-second call bills zero", asyn
         unit: await testSealedUnit("saperly#place-calls"),
         input: CALL_INPUT,
         mode: "replay",
-        fixture: await fixture("call-born-terminal"),
+        fixture: await fixture("synthetic-call-born-terminal"),
         resources: OWNED,
     });
     assertEquals(result.httpStatus, 200);
@@ -239,7 +239,7 @@ Deno.test("saperly place-calls: an upstream refusal is data — zero usage", asy
         unit: await testSealedUnit("saperly#place-calls"),
         input: CALL_INPUT,
         mode: "replay",
-        fixture: await fixture("call-start-rejected"),
+        fixture: await fixture("synthetic-call-start-rejected"),
         resources: OWNED,
     });
     assertEquals(result.httpStatus, 403);
@@ -252,7 +252,7 @@ Deno.test("saperly place-calls: STOP settles the metered work (design D34)", asy
         unit: await testSealedUnit("saperly#place-calls"),
         input: CALL_INPUT,
         mode: "replay",
-        fixture: await fixture("call-stop-settled"),
+        fixture: await fixture("synthetic-call-stop-settled"),
         resources: OWNED,
     });
     const run = { runId: "test-run-1" };
@@ -270,7 +270,7 @@ Deno.test("saperly place-calls: STOP that cannot observe settlement is UNRESOLVE
         unit: await testSealedUnit("saperly#place-calls"),
         input: CALL_INPUT,
         mode: "replay",
-        fixture: await fixture("call-stop-unresolved"),
+        fixture: await fixture("synthetic-call-stop-unresolved"),
         resources: OWNED,
     });
     const run = { runId: "test-run-2" };
@@ -336,7 +336,7 @@ Deno.test("saperly get-numbers: row + LIVE persona in one call, projected", asyn
         unit: await testSealedUnit("saperly#get-numbers"),
         input: { body: { numberId: "num-1" } },
         mode: "replay",
-        fixture: await fixture("connection-read"),
+        fixture: await fixture("synthetic-connection-read"),
         resources: OWNED,
     });
     assertEquals(result.httpStatus, 200);
@@ -370,7 +370,7 @@ Deno.test("saperly update-numbers: PATCH in place; a success marks the refresh",
             },
         },
         mode: "replay",
-        fixture: await fixture("update-patch"),
+        fixture: await fixture("synthetic-update-patch"),
         resources: OWNED,
     });
     assertEquals(result.httpStatus, 200);
@@ -391,7 +391,7 @@ Deno.test("saperly update-numbers: a STALE pointer repairs (create + bind)", asy
             },
         },
         mode: "replay",
-        fixture: await fixture("update-repair"),
+        fixture: await fixture("synthetic-update-repair"),
         resources: OWNED,
     });
     assertEquals(result.httpStatus, 200);
@@ -413,7 +413,7 @@ Deno.test("saperly update-numbers: an ambiguous repair bind reconciles as bound 
         mode: "replay",
         // repair-bind 500s; the reconcile read shows the number attached
         // to the fresh connection — the fixture ends WITHOUT a DELETE
-        fixture: await fixture("update-repair-ambiguous"),
+        fixture: await fixture("synthetic-update-repair-ambiguous"),
         resources: OWNED,
     });
     assertEquals(result.httpStatus, 200);
@@ -448,7 +448,7 @@ Deno.test("saperly list-calls: the pooled list never leaves unfiltered", async (
         unit: await testSealedUnit("saperly#list-calls"),
         input: { queryParams: { numberId: "num-1" } },
         mode: "replay",
-        fixture: await fixture("list-calls"),
+        fixture: await fixture("synthetic-list-calls"),
         resources: OWNED,
     });
     assertEquals(result.httpStatus, 200);
@@ -462,7 +462,7 @@ Deno.test("saperly call-transcripts: anchor pair check, then the artifact", asyn
         unit: await testSealedUnit("saperly#call-transcripts"),
         input: { body: { numberId: "num-1", callId: "call-1" } },
         mode: "replay",
-        fixture: await fixture("call-anchor-transcript"),
+        fixture: await fixture("synthetic-call-anchor-transcript"),
         resources: OWNED,
     });
     assertEquals(result.httpStatus, 200);
@@ -477,7 +477,7 @@ Deno.test("saperly call-transcripts: a mismatched pair is the uniform 404", asyn
         unit: await testSealedUnit("saperly#call-transcripts"),
         input: { body: { numberId: "num-1", callId: "call-9" } },
         mode: "replay",
-        fixture: await fixture("call-anchor-mismatch"),
+        fixture: await fixture("synthetic-call-anchor-mismatch"),
         resources: OWNED,
     });
     assertEquals(result.httpStatus, 404);
@@ -489,7 +489,7 @@ Deno.test("saperly call-recordings: the 302 location header becomes the artifact
         unit: await testSealedUnit("saperly#call-recordings"),
         input: { body: { numberId: "num-1", callId: "call-1" } },
         mode: "replay",
-        fixture: await fixture("recording-redirect"),
+        fixture: await fixture("synthetic-recording-redirect"),
         resources: OWNED,
     });
     assertEquals(result.httpStatus, 200);
@@ -511,7 +511,7 @@ Deno.test("saperly send-messages: declarative relay behind the ownership gate", 
             body: { fromNumberId: "num-1", to: "+14155550123", body: "hello" },
         },
         mode: "replay",
-        fixture: await fixture("send-message"),
+        fixture: await fixture("synthetic-send-message"),
         resources: OWNED,
     });
     assertEquals(result.httpStatus, 201);
@@ -527,7 +527,7 @@ Deno.test("saperly list-messages: gated declarative filter relay", async () => {
         unit: await testSealedUnit("saperly#list-messages"),
         input: { queryParams: { numberId: "num-1" } },
         mode: "replay",
-        fixture: await fixture("list-messages"),
+        fixture: await fixture("synthetic-list-messages"),
         resources: OWNED,
     });
     assertEquals(result.httpStatus, 200);
@@ -694,7 +694,7 @@ Deno.test("saperly inbound-calls: adopts the event callId and shares the call li
         unit: await testSealedUnit("saperly#inbound-calls"),
         input: { body: { callId: "call-1" } },
         mode: "replay",
-        fixture: await fixture("call-stop-settled"),
+        fixture: await fixture("synthetic-call-stop-settled"),
     });
     const input = { body: { callId: "call-1" } };
     const run = { runId: "test-run-3" };
@@ -703,7 +703,7 @@ Deno.test("saperly inbound-calls: adopts the event callId and shares the call li
     assertEquals(started.state.externalRunId, "call-1");
     // the fixture's start POST is unconsumed (LOCAL adopt); the shared
     // stop drains against the same chain shape
-    const chain = await fixture("call-stop-settled");
+    const chain = await fixture("synthetic-call-stop-settled");
     const reloaded = await loadEndpoint({
         unit: await testSealedUnit("saperly#inbound-calls"),
         input,

@@ -1,5 +1,9 @@
 # Proposal: add-resource-lifecycle-saperly
 
+> AMENDED by `refine-resource-model` (D38–D47) — see the banner in
+> design.md for the vocabulary mapping (billing→usage, ops→lifecycle,
+> externals→views, singular binding→purpose-keyed arrays).
+
 ## Why
 
 Resources were removed from the standard in the founding change (D19: "they
@@ -65,5 +69,8 @@ against a mechanism that already runs in production.
   `scripts` (run/catalog), `connectors/saperly/**`, `config.yml`,
   `DEVELOPMENT.md`, `README.md`.
 - All additive: existing docs recompile byte-identical (acceptance-checked).
-  ENGINE_VERSION minor bump; `doc_format_since`/`fn_abi_since` move; new
-  `schema.resources_since` fact — guarded by `deno task version:check`.
+  ENGINE_VERSION minor bump; `doc_format_since` and `fn_abi_since` stay
+  put (pure-hook docs gain no capability and must not floor at a newer
+  engine); the new `schema.resources_since` fact alone carries the
+  resource family (docs' floor + resource fn entries' `api`) — guarded
+  by `deno task version:check`.

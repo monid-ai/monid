@@ -1,5 +1,5 @@
 {
-    "name": "provision-happy",
+    "name": "synthetic-provision-happy",
     "description": "The 4-call saga end to end: quote -> connection-first -> consent purchase -> bind. The seed persists num-1 with its connection pointer and the quoted $2 rent; the consolidate claim is the consented $2 quote (equal to the derived PER_CALL fold - no mismatch); the user output is stripped (no monthlyPriceCents/connectionId; the connection is the sanitized projection).",
     "calls": [
         {

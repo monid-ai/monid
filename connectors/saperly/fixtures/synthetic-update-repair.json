@@ -1,5 +1,5 @@
 {
-    "name": "update-repair",
+    "name": "synthetic-update-repair",
     "description": "The STALE-pointer repair: PATCH 404s (upstream lost the connection) -> create + bind restore the one-connection invariant under deterministic keys.",
     "calls": [
         {

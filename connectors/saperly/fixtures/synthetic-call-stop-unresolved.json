@@ -1,5 +1,5 @@
 {
-    "name": "call-stop-unresolved",
+    "name": "synthetic-call-stop-unresolved",
     "description": "STOP that cannot observe settlement: the hangup lands but every bounded re-read stays unsettled -> UNRESOLVED (the host reconciles out-of-band before money settles). 10 re-reads.",
     "calls": [
         {

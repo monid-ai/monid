@@ -1,5 +1,5 @@
 {
-    "name": "list-calls",
+    "name": "synthetic-list-calls",
     "description": "The pooled-tenancy boundary: upstream GET /calls returns EVERY tenant's calls; only the ownership-gated number's items may leave the fn.",
     "calls": [
         {

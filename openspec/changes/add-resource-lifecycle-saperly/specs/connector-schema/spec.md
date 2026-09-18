@@ -4,10 +4,11 @@
 
 ### Requirement: Resource definitions are first-class
 The schema SHALL provide `defineResource` → `zResourceDef`, authored at
-`connectors/<provider>/resources/<name>/resource.ts` with the id
-`<provider>/<name>` inferred from the folder and never authored. The def
-SHALL declare `meta` (zBaseMeta), a `data` row schema (live zod, compiled to
-JSON Schema), optional `inputs` schemas for create/update/release, the
+`connectors/<provider>/resources/<slug>/resource.ts` with a REQUIRED
+authored `slug` the loader asserts equals the folder name; the id is
+`<provider>/<slug>`. The def SHALL declare `meta` (zBaseMeta), a `data`
+snapshot schema (live zod, compiled to JSON Schema), optional `inputs`
+schemas for create/update/release, the
 REQUIRED `usage` rate card (+ `reconcileUsage`), `lifecycle` (`verify`
 required, `release` required, `refresh` optional), optional `views`, and
 optional `webhooks`.
@@ -20,10 +21,13 @@ optional `webhooks`.
 
 ### Requirement: Compiled resource docs are sealed units
 The compiler SHALL emit `zResourceDoc` mirroring `zEndpointDoc`:
-`{specVersion, id, provider, minEngineVersion, meta, dataSchema, inputs?,
-billing?, ops, externals?, webhooks?, auth, request: {url}, hash}` with every
-fn as a `$fn` ref in the shared fnTable. The bundle SHALL gain a `resources`
-map with both-direction fn closure.
+`{specVersion, id, provider, minEngineVersion, meta, data: {schema},
+inputs?, usage, reconcileUsage?, lifecycle {verify, release, refresh?},
+views?, webhooks?, auth, request: {url}, timeouts, hash}` with every fn as
+a `$fn` ref in the shared fnTable. The doc schema SHALL re-enforce
+reconcile coherence (reconciler keys === estimated-line keys) and the
+id's `<provider>/` prefix SHALL equal `doc.provider` at the bundle. The
+bundle SHALL gain a `resources` map with both-direction fn closure.
 
 #### Scenario: A resource runs as a sealed unit
 - **WHEN** a host seals `saperly/phone-number` with its fn entries
@@ -31,29 +35,28 @@ map with both-direction fn closure.
   endpoint sealed unit (BAD_DOC → UNSUPPORTED_DOC → UNKNOWN_FN →
   LINK_INTEGRITY → UNSUPPORTED_FN_ABI)
 
-### Requirement: Resource billing declares rent and variable streams
-`zResourceBilling` SHALL declare `period {unit, count, anchor:
-CREATION|CALENDAR (default CREATION)}`, optional prepaid `rent {consumes
-(amount ≥ 0), chargeLeadMs, releaseLeadMs}`, and optional `variable {price
-(display card), holdCadenceMs ≥ 3_600_000, buffer: zConsumes,
-getActualCost}`. `getActualCost` SHALL be cumulative from the usage-period
-start and return `{consumes, vendorConsumes?}`.
+### Requirement: The resource usage rate card
+`zResourceUsage` (REQUIRED on every def) SHALL declare ONE `period {unit,
+count, anchor: CREATION_TIME|CALENDAR}` clock and named `lines`, each
+FIXED (`{consumes}`, amount ≥ 0 — a $0 line is a lawful clock-keeper via
+`resourceUsage.free()`) or ESTIMATED (`{price: {unit, every, consumes}}`).
+A sibling `reconcileUsage {<line>: {everyMs ≥ 3_600_000, get}}` SHALL
+cover EXACTLY the estimated lines; `get` is cumulative from the
+usage-period start and returns `{consumes, vendorConsumes?}`. Host policy
+(charge/release leads, buffers, hold cadence) SHALL NOT appear on defs.
 
-#### Scenario: Variable without a clock or a teardown is rejected
-- **WHEN** a def declares `variable` without `rent` or without `ops.release`
-- **THEN** compilation fails (the rent schedule is the settlement clock and
-  the unpaid-release policy depends on the release op)
-
-#### Scenario: A $0 rent is a lawful schedule
-- **WHEN** a def declares rent with `amount: 0`
+#### Scenario: A $0 fixed line is a lawful schedule
+- **WHEN** a def declares a fixed line with `amount: 0`
 - **THEN** it compiles — the host silent-advances the period (sfs-class)
 
-### Requirement: Endpoint↔resource interaction is one derived binding
-The endpoint def SHALL gain `resource?: {id, interaction:
-CREATES|USES|UPDATES|RELEASES|READS, key?, seed?, ensure?}`. `key` is a
-JSONPath into the validated input, required for UPDATES/RELEASES. `seed` is
-CREATES-only and pure; `ensure` is effectful with `data.scope.key` (an
-opaque host namespace token) and `utils.{http, request, resources}`.
+### Requirement: Endpoint↔resource purpose-keyed bindings
+The endpoint def SHALL gain `resources?: {provisions? [{id, seed}] (≤1),
+uses?/reads? [{id, key?, as?, ensure?}], updates?/releases? [{id, key,
+as?}]}`. `key` is a JSONPath into the validated input; aliases (`as` ??
+the key's last segment) are unique across purposes. `seed` is
+provisions-only and pure; `ensure` (uses/reads) is effectful with
+`data.scope.key` (an opaque host namespace token) and `utils.{http,
+request, resources}`.
 
 #### Scenario: Ownership is derived, not authored
 - **WHEN** an endpoint declares `interaction: "USES", key:

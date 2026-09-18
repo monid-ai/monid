@@ -1,5 +1,5 @@
 {
-    "name": "call-anchor-mismatch",
+    "name": "synthetic-call-anchor-mismatch",
     "description": "A foreign/guessed callId under your own numberId: the anchor fetch answers 200 but the pair check fails -> uniform 404 as data (indistinguishable from missing); the artifact is never fetched.",
     "calls": [
         {
