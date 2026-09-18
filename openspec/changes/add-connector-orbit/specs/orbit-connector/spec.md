@@ -171,6 +171,17 @@ and one operation applies to a whole batch. The terminal response's
   `generation_level` 3 and its snapshot omits `operation`
 - **THEN** usage is `{credits: {default: 5}, evidence: {partial_profile: 1}}`
 
+### Requirement: Submits carry a run-stable idempotency key
+Every lifecycle `start` SHALL send `Idempotency-Key: {runId}:submit` on its
+submit, with `runId` the host-stable run id, so a retried or replayed start
+converges on the search or enrichment the first attempt created rather than
+creating and paying for a second one.
+
+#### Scenario: A replayed submit is the same submit
+- **WHEN** a run's `start` executes twice with the same `runId`
+- **THEN** both submits carry the same `Idempotency-Key`, and Orbit answers
+  the second with the resource the first created
+
 ### Requirement: A profile read is one flat credit under a declared identity
 `orbit#v3/profile/{profile_id}` SHALL declare the public identity
 `/v3/profile/{profile_id}` while calling the vendor's own

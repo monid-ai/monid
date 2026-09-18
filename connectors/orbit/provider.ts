@@ -14,6 +14,12 @@ import { defineProvider, presets } from "@shared/core";
  *     run returns finished work. Orbit's status routes are not catalog
  *     endpoints: the engine drives every poll inside the run.
  *
+ * EVERY SUBMIT CARRIES `Idempotency-Key: {runId}:submit` — the host-stable
+ * run id (design D34), so a retried or replayed start converges on the
+ * search or enrichment the first attempt created instead of paying for a
+ * second one. Orbit documents the header and answers `409` when a key is
+ * reused with a different body; the run id changes only when the run does.
+ *
  * THE LIFECYCLE IS NOT ON THE PROVIDER. A provider-level `start` replaces
  * declarative execution on the SYNC endpoint too. Each async endpoint
  * authors its own phases.

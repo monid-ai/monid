@@ -86,7 +86,17 @@
       schema-gate and `liveSkip("orbit")` live cases; the rate card and its
       version are cited at the estimate assertions
 
-## 7. Catalog positioning
+## 7. Platform alignment (monid-services parity)
+
+- [x] 7.1 The two free status reads are not catalog endpoints — the engine
+      drives every poll inside the run; the lifecycles still poll both
+      vendor routes
+- [x] 7.2 A batch tick reads its children concurrently (status bucket 25/s,
+      burst 150) so a tick takes the slowest child, not the sum
+- [x] 7.3 Every submit carries `Idempotency-Key: {runId}:submit` off the
+      host-stable run id, so a replayed start does not pay twice
+
+## 8. Catalog positioning
 
 - [x] 7.1 Provider and endpoint copy name the jobs an agent arrives with —
       a person the user just mentioned, a prospect before outreach, a

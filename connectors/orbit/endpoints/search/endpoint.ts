@@ -106,8 +106,13 @@ export default defineEndpoint({
                 "The status route Orbit named in `links.status`.",
             ),
         }),
-        start: async ({ utils, logger }) => {
-            const res = await utils.request();
+        start: async ({ data, utils, logger }) => {
+            const res = await utils.request({
+                headers: {
+                    ...data.request.headers,
+                    "Idempotency-Key": data.run.runId + ":submit",
+                },
+            });
             if (res.status < 200 || res.status >= 300) {
                 // Orbit refused the request (400 bad input, 402 out of
                 // credits, 403 scope, 429 rate limit) — DATA, zero-billed.
