@@ -121,17 +121,48 @@ is a COUNTING rule owned by the fns, never a model shape (design D19).
   know whether the corpus holds an answer; a miss settles below it, never
   above
 
-#### Scenario: A poll that finds nothing is still the answer it asked for
+### Requirement: An empty answer the vendor charges for is absorbed
 
-- **WHEN** `#changes` returns an empty `changes` page
-- **THEN** it bills its flat 1 credit, because an empty change page is a
-  complete answer rather than a miss, and `#related` bills flat on the same
-  footing
+Vaquill charges four answers that the caller SHALL NOT pay for: a
+`#search` page that matches nothing (4 credits), a `#section/{act_id}/body`
+outside the held editions, answered `available: false` (6 credits), an
+empty `#section/{act_id}/changes` page (1 credit), and a `#resolve`
+citation that does not resolve (2 credits each). Each of those endpoints
+SHALL declare a metered model whose quantity is the answer delivered, and
+SHALL override `usage.consolidate` to decline the vendor's claim in that
+case, so the derived fold settles at what the caller owes. The difference
+is the broker's cost.
+
+#### Scenario: An empty search page bills nothing
+
+- **WHEN** `#search` returns `results: []` with `creditsConsumed: 4`
+- **THEN** usage is `{credits: {}, evidence: {call: 0}}`, with no
+  `mismatch`, because the claim was declined rather than disputed
+
+#### Scenario: A text outside the held editions bills nothing
+
+- **WHEN** `#section/{act_id}/body` answers `available: false` with
+  `creditsConsumed: 6`
+- **THEN** usage is `{credits: {}, evidence: {RESULT: 0}}`
+
+#### Scenario: A poll that finds nothing bills nothing
+
+- **WHEN** `#changes` returns an empty `changes` page with
+  `creditsConsumed: 1`
+- **THEN** usage is `{credits: {}, evidence: {RESULT: 0}}`; `#related`
+  stays flat, because its page is never empty for a known section
+
+#### Scenario: The estimate quotes the list price
+
+- **WHEN** `#search`, `#section/{act_id}/body` or `#changes` is estimated
+- **THEN** the promise counts one answered page or text, because a pre-run
+  hook cannot know whether the answer will be empty; an empty answer
+  settles below it, never above
 
 ### Requirement: The batch endpoints bill on their own measured bases
 
 `vaquill#us/statutes/sections` SHALL count sections RETURNED, and
-`vaquill#us/statutes/resolve` SHALL count citations SUBMITTED.
+`vaquill#us/statutes/resolve` SHALL count citations RESOLVED.
 
 #### Scenario: A batch lookup refunds the ids it could not resolve
 
@@ -139,12 +170,18 @@ is a COUNTING rule owned by the fns, never a model shape (design D19).
 - **THEN** evidence is `{section: 1}` and the bill is 2, matching the
   vendor, and the unresolved id is reported in `notFound`
 
-#### Scenario: A batch resolve bills the miss
+#### Scenario: A batch resolve does not bill the miss
 
-- **WHEN** `#resolve` is given one resolvable and one nonsense citation
-- **THEN** evidence is `{RESULT: 2}` and the bill is 4, because the lookup
-  ran on both; `resolvedCount` is the hit rate and SHALL NOT be the
-  billable count
+- **WHEN** `#resolve` is given one resolvable and one nonsense citation,
+  which the vendor bills 4 with `resolvedCount: 1`
+- **THEN** evidence is `{RESULT: 1}` and the bill is 2: the vendor's claim
+  is declined because it covers the miss, and the fold bills the hit
+
+#### Scenario: A batch resolve with no miss adopts the vendor's claim
+
+- **WHEN** every citation in a `#resolve` batch resolves
+- **THEN** the vendor's `creditsConsumed` is the bill, 2 per citation, and
+  agrees with the fold
 
 #### Scenario: An empty batch is refused before the wire
 
@@ -163,9 +200,10 @@ is a COUNTING rule owned by the fns, never a model shape (design D19).
 
 ### Requirement: Search prices the ranked page and its inline bodies apart
 
-`vaquill#us/statutes/search` SHALL declare a COMPOSITE of a flat `call`
-component at 4 credits and a metered `body` component at 6 credits per hit
-that returns full text under `includeBody`.
+`vaquill#us/statutes/search` SHALL declare a COMPOSITE of a metered `call`
+component at 4 credits per page that holds at least one hit and a metered
+`body` component at 6 credits per hit that returns full text under
+`includeBody`.
 
 #### Scenario: A plain page bills the search line only
 

@@ -4,11 +4,15 @@ import { zStatuteResolveBody } from "./schema/inputs.ts";
 /**
  * `POST /us/statutes/resolve`: turn Bluebook citations into sections.
  *
- * Billed PER CITATION SUBMITTED, and note that this is the one endpoint
- * here where a miss still bills: verified live 2026-09-17, one resolvable
- * and one nonsense citation billed 4, with `resolvedCount: 1`. The work is
- * the lookup, not the hit, so the count that settles is the de-duplicated
- * INPUT length, `$.results`, and never `resolvedCount`.
+ * The vendor bills PER CITATION SUBMITTED, miss included: verified live
+ * 2026-09-17, one resolvable and one nonsense citation billed 4, with
+ * `resolvedCount: 1`. THE CALLER PAYS PER CITATION RESOLVED. A miss is free
+ * to the caller and the broker absorbs the vendor's 2 credits for it, so
+ * the count that settles is `resolvedCount`, and the endpoint's own
+ * `consolidate` adopts the vendor's claim only when every citation resolved
+ * (the one case where the two figures agree). The ESTIMATE still promises
+ * every distinct citation, because a pre-run hook cannot know which will
+ * resolve; a batch with misses settles below it, never above.
  *
  * Vaquill also publishes a single-citation `GET` at this same path. It is
  * not ported: the batch form takes one citation just as happily, at the
@@ -31,9 +35,9 @@ export default defineEndpoint({
             "https://www.vaquill.ai/docs/api-reference/us-statutes/resolve-many-citations-at-once",
         categories: ["legal-research"],
         notes: [
-            "A citation that resolves to nothing is still billed: the " +
-            "lookup ran. `resolved: false` on a result row reports the " +
-            "miss.",
+            "A citation that resolves to nothing is free: only resolved " +
+            "citations bill. `resolved: false` on a result row reports " +
+            "the miss.",
             "The cap is 50 UNIQUE citations, applied AFTER duplicates are " +
             "collapsed, so sixty repeats of one citation is one citation " +
             "and is accepted. The schema bounds the raw list at 500; the " +
@@ -64,13 +68,35 @@ export default defineEndpoint({
                 },
             };
         },
-        /** `results` IS the de-duplicated input, one row per citation
-         *  whether or not it resolved, which is the billable count. `resolvedCount`
-         *  is the hit rate and would under-bill. */
-        evidence: ({ data, utils }) => ({
-            counts: {
-                RESULT: utils.json.optionalLen(data.output, "$.results") ?? 0,
-            },
-        }),
+        /** Citations that RESOLVED. `results` is one row per distinct
+         *  citation whether or not it resolved; `resolvedCount` is the
+         *  vendor's own count of the hits, and hits are what bill. */
+        evidence: ({ data, utils }) => {
+            const hits = utils.json.optionalGet(data.output, "$.resolvedCount");
+            return {
+                counts: { RESULT: typeof hits === "number" ? hits : 0 },
+            };
+        },
+        /** The provider-wide receipt strip, with one difference: the
+         *  vendor's claim covers every citation submitted, so it is adopted
+         *  only when every citation resolved. With a miss in the batch the
+         *  claim is declined and the derived fold, 2 per resolved citation,
+         *  settles; the difference is the broker's cost. */
+        consolidate: ({ data, utils }) => {
+            const { value, rest } = utils.json.pluck(
+                data.output,
+                "$.creditsConsumed",
+            );
+            const hits = utils.json.optionalGet(data.output, "$.resolvedCount");
+            const rows = utils.json.optionalLen(data.output, "$.results") ?? 0;
+            return {
+                credits: {
+                    ...(typeof value === "number" && hits === rows
+                        ? { default: value }
+                        : {}),
+                },
+                output: rest,
+            };
+        },
     },
 });

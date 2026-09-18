@@ -197,3 +197,35 @@ Deno.test(`${ID} a thin page estimates high and settles low`, async () => {
         9,
     );
 });
+
+Deno.test(`${ID} empty page: the vendor charges the search, the caller pays nothing`, async () => {
+    const unit = await testSealedUnit(ID);
+    const input = {
+        body: {
+            query: "zzqxv plorfgh wuxtrel",
+            matchType: "phrase",
+            corpusType: "CONSTITUTION",
+            limit: 1,
+        },
+    };
+    // the promise is the list price: a pre-run hook cannot know the page
+    // will be empty
+    assertEquals(await estimateEndpoint(unit, input), {
+        credits: { default: 4 },
+        evidence: { call: 1 },
+    });
+    const result = await runEndpoint({
+        unit,
+        input,
+        mode: "replay",
+        fixture: await loadFixture(`${FIXTURES}search-empty-ok.json`),
+    });
+    assertEquals(result.httpStatus, 200);
+    assertEquals(result.isProviderError, false);
+    // `creditsConsumed: 4` in the fixture is declined; the fold counts 0
+    // answered pages and no body rows
+    assertEquals(result.usage, { credits: {}, evidence: { call: 0 } });
+    const output = result.output as Record<string, Json>;
+    assertEquals((output.results as unknown[]).length, 0);
+    assertEquals("creditsConsumed" in output, false);
+});

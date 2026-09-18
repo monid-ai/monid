@@ -16,7 +16,7 @@ const INPUT = {
     queryParams: { format: "plain" },
 };
 
-Deno.test(`${ID} happy: flat 6 credits whatever the length`, async () => {
+Deno.test(`${ID} happy: 6 credits whatever the length`, async () => {
     const unit = await testSealedUnit(ID);
     const result = await runEndpoint({
         unit,
@@ -29,7 +29,7 @@ Deno.test(`${ID} happy: flat 6 credits whatever the length`, async () => {
     assertEquals(result.isProviderError, false);
     assertEquals(result.usage, {
         credits: { default: 6 },
-        evidence: { CALL: 1 },
+        evidence: { RESULT: 1 },
     });
     // the vendor's receipt is consolidated away, never handed on
     assertEquals(
@@ -82,8 +82,30 @@ Deno.test(`${ID} schema gate: a format the vendor does not publish is refused`, 
             pathParams: { act_id: "USC_T42_C21_S1983" },
             queryParams: { format: "operative" },
         }),
-        { credits: { default: 6 }, evidence: { CALL: 1 } },
+        { credits: { default: 6 }, evidence: { RESULT: 1 } },
     );
+});
+
+Deno.test(`${ID} out of coverage: no text served, so the caller pays nothing`, async () => {
+    const unit = await testSealedUnit(ID);
+    const result = await runEndpoint({
+        unit,
+        input: {
+            pathParams: { act_id: "USC_T28_C85_S1343" },
+            queryParams: { asOf: "1901-01-01" },
+        },
+        mode: "replay",
+        fixture: await loadFixture(`${FIXTURES}body-unavailable-ok.json`),
+    });
+    assertEquals(result.httpStatus, 200);
+    assertEquals(result.isProviderError, false);
+    // the vendor charged 6 for the attempt (`creditsConsumed: 6` in the
+    // fixture); that claim is declined, and the fold counts 0 texts served
+    assertEquals(result.usage, { credits: {}, evidence: { RESULT: 0 } });
+    const output = result.output as Record<string, Json>;
+    assertEquals(output.available, false);
+    assertEquals(output.plain, null);
+    assertEquals("creditsConsumed" in output, false);
 });
 
 Deno.test({

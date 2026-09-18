@@ -8,6 +8,16 @@ import { defineProvider, presets } from "@shared/core";
  * whole connector is the exa shape (sync POST + body) with the akta shape
  * (sync GET + queryParams) alongside it. Nothing here needs a lifecycle.
  *
+ * EMPTY ANSWERS ARE FREE TO THE CALLER, whether or not the vendor refunds
+ * them. Nine endpoints take the provider-level `consolidate` below (the
+ * vendor's claim IS the bill, and a refunded miss claims 0). Four override
+ * it because the vendor charges an answer the caller does not pay for:
+ * `#search` (an empty page), `#section/{act_id}/body` (`available: false`),
+ * `#section/{act_id}/changes` (an empty page) and `#resolve` (a citation
+ * that does not resolve). Each declines the vendor's claim in that case so
+ * the derived fold settles at what the caller owes; the difference is the
+ * broker's cost.
+ *
  * RATE CARD: the pinned `consumes.amount`s across this connector are the
  * published per-endpoint credit prices from
  * https://api.vaquill.ai/api/v1/api-credits/pricing, read 2026-09-17. That
@@ -42,12 +52,14 @@ export default defineProvider({
             "Every response reports its own charge on `creditsConsumed`, " +
             "and that figure settles the bill. Read it rather than " +
             "multiplying a list price.",
-            "Most lookups refund an empty answer: an unmatched cross-state " +
-            "comparison, an empty count or browse level, a section nothing " +
-            "cites, a chapter that defines nothing, and a batch row whose " +
-            "text cannot be resolved all bill 0. `#resolve` is the " +
-            "exception and bills every citation submitted, because there " +
-            "the lookup IS the work.",
+            "An empty answer bills 0. The vendor refunds most of them (an " +
+            "unmatched cross-state comparison, an empty count or browse " +
+            "level, a section nothing cites, a chapter that defines " +
+            "nothing, a batch row whose text cannot be resolved); the " +
+            "four it still charges (a search that matches nothing, a " +
+            "section text outside the held editions, an empty change " +
+            "page, a citation that does not resolve) are free to the " +
+            "caller all the same.",
             "Section identifiers (`actId`) are stable and hierarchical, so " +
             "a hit from search feeds straight into every section endpoint " +
             "with no second lookup.",

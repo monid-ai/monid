@@ -13,7 +13,7 @@ const ID = "vaquill#us/statutes/resolve";
 const FIXTURES = fromFileUrl(new URL("../../fixtures/", import.meta.url));
 const INPUT = { body: { citations: ["42 U.S.C. 1983", "99 Z.Z.C. 12345"] } };
 
-Deno.test(`${ID} happy: both citations bill, because the lookup ran on both`, async () => {
+Deno.test(`${ID} happy: only the resolved citation bills, and the miss is free`, async () => {
     const unit = await testSealedUnit(ID);
     const result = await runEndpoint({
         unit,
@@ -24,9 +24,12 @@ Deno.test(`${ID} happy: both citations bill, because the lookup ran on both`, as
 
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
+    // the vendor billed 4 (both lookups ran); the caller owes 2 (one hit).
+    // The claim is declined, the derived fold settles, and no `mismatch`
+    // rides out because there is no claim to disagree with.
     assertEquals(result.usage, {
-        credits: { default: 4 },
-        evidence: { RESULT: 2 },
+        credits: { default: 2 },
+        evidence: { RESULT: 1 },
     });
     // the vendor's receipt is consolidated away, never handed on
     assertEquals(
@@ -35,8 +38,24 @@ Deno.test(`${ID} happy: both citations bill, because the lookup ran on both`, as
     );
     const output = result.output as Record<string, Json>;
     assertEquals((output.results as unknown[]).length, 2);
-    // one of the two did not resolve, and was still billed
+    // one of the two did not resolve, and was not billed
     assertEquals(output.resolvedCount, 1);
+});
+
+Deno.test(`${ID} every citation resolves: the vendor's claim is adopted as the bill`, async () => {
+    const unit = await testSealedUnit(ID);
+    const result = await runEndpoint({
+        unit,
+        input: { body: { citations: ["42 U.S.C. 1983"] } },
+        mode: "replay",
+        fixture: await loadFixture(`${FIXTURES}resolve-ok.json`),
+    });
+    assertEquals(result.httpStatus, 200);
+    assertEquals(result.usage, {
+        credits: { default: 2 },
+        evidence: { RESULT: 1 },
+    });
+    assertEquals((result.output as Record<string, Json>).resolvedCount, 1);
 });
 
 Deno.test(`${ID} provider error: a 401 is data, and bills nothing`, async () => {

@@ -55,9 +55,22 @@ response. Nothing here needs a new engine capability.
   would bill the list price for a call the vendor did not charge for. So
   those five count an "answered lookup", 1 or 0, which is a COUNTING rule
   owned by the fns (design D19).
+- **Four answers the vendor charges for are free to the caller, and the
+  broker absorbs them.** Measured live 2026-09-18: a search that matches
+  nothing bills 4, a section text `asOf` a date outside the held editions
+  answers `available: false` and bills 6, an empty change page bills 1, and
+  a citation that does not resolve bills 2. The caller pays nothing for any
+  of them. `#search`'s `call` line, `#section/{act_id}/body` and
+  `#section/{act_id}/changes` are therefore metered like the refunded five
+  (an answer delivered, 1 or 0), and each of the four endpoints overrides
+  `usage.consolidate` to DECLINE the vendor's claim in that case: the claim
+  would win at settle, so declining it is the only way the derived fold
+  (which counts 0) can be the bill. No `mismatch` rides out, because a
+  declined claim is not a disputed one. The vendor's charge is not
+  recorded anywhere in the run; it is the broker's cost.
 - **The two batch endpoints bill on different bases, and both were measured
   rather than assumed.** `#sections` bills per section RETURNED (one good id
-  and one junk id billed 2, not 4). `#resolve` bills per citation
+  and one junk id billed 2, not 4). The vendor bills `#resolve` per citation
   SUBMITTED, miss included (one resolvable and one nonsense citation billed
   4 with `resolvedCount: 1`), because the work is the lookup and not the
   hit.

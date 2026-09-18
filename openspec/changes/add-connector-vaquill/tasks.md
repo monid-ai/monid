@@ -15,12 +15,19 @@
       every billable response, absent entirely on `/coverage`
 - [x] 1.4 Settle the counting bases by measurement, not by reading the
       price list: `#sections` bills per section RETURNED (1 good + 1 junk id
-      = 2), `#resolve` per citation SUBMITTED including misses (2 citations,
-      1 resolved = 4), `#search` + `includeBody` = 4 + 6 per row with text
-      (2 rows = 16)
+      = 2), the vendor bills `#resolve` per citation SUBMITTED including
+      misses (2 citations, 1 resolved = 4), `#search` + `includeBody` = 4 +
+      6 per row with text (2 rows = 16)
 - [x] 1.5 Find the refund rule: `cross-state`, `definitions`, `cited-by`,
       `count` and `divisions` each return 200 with `creditsConsumed: 0` when
       the answer is empty. `related` and `changes` bill regardless
+- [x] 1.6 Find the answers the vendor charges for that the caller does not
+      pay for (2026-09-18): an empty `search` page (4), a `body` outside the
+      held editions (`available: false`, 6), an empty `changes` page (1), a
+      `resolve` citation that does not resolve (2). Recorded as
+      `search-empty-ok`, `body-unavailable-ok`, `changes-empty-ok` and
+      `resolve-partial-ok`; `resolve-ok` and a non-empty `changes-ok`
+      (26 U.S.C. 1) carry the rate-table rows
 
 ## 2. Provider
 
@@ -33,15 +40,17 @@
 
 ## 3. Endpoints (13)
 
-- [x] 3.1 `search`: mirror + composite (flat search + per-body line) +
+- [x] 3.1 `search`: mirror + composite (answered-page search line + per-body line) + own consolidate +
       estimate/evidence
 - [x] 3.2 `sections`: mirror + composite (per section returned + per body)
-- [x] 3.3 `resolve`: mirror + PER_UNIT per citation submitted
+- [x] 3.3 `resolve`: mirror + PER_UNIT per citation RESOLVED + own
+      consolidate (the vendor's claim adopted only when nothing missed)
 - [x] 3.4 `count`: mirror + answered-or-refunded
 - [x] 3.5 `divisions`: mirror + answered-or-refunded
 - [x] 3.6 `coverage`: no input schema, FREE
-- [x] 3.7 `section`, `section-body`, `section-related`, `section-changes`:
-      flat PER_CALL (quantities fns synthesized)
+- [x] 3.7 `section`, `section-related`: flat PER_CALL (quantities fns
+      synthesized); `section-body`, `section-changes`: answered-or-free
+      (text served / change observed, 1 or 0) + own consolidate
 - [x] 3.8 `section-cited-by`, `section-definitions`, `section-cross-state`:
       answered-or-refunded
 
@@ -68,10 +77,13 @@
 
 ## 6. Notes for review
 
-- [x] 6.1 The five answered-or-refunded endpoints are the one place this
+- [x] 6.1 The five answered-or-refunded endpoints, plus the four absorbed
+      ones (`search`, `body`, `changes`, `resolve`), are where this
       connector deviates from "flat price means PER_CALL". The reason is in
-      `proposal.md` and at each call site, and `provider.test.ts` pins both
-      halves with the recorded refunds
+      `proposal.md` and at each call site; `provider.test.ts` pins the
+      refunds (REFUNDED) and the absorbed charges (ABSORBED), and the
+      provenance test names the four endpoints that carry their own
+      `consolidate`
 - [x] 6.2 Seven pre-existing files in the repo fail `deno fmt --check` on
       deno 2.7.14 (minimax, opoint, surf, a workflow). None are touched by
       this change and none were reformatted
