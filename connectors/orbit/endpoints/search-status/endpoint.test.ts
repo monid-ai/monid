@@ -25,9 +25,19 @@ Deno.test("orbit#v3/search/{search_id}: reading a search bills NOTHING", async (
     // snapshot — which a caller following a long search does repeatedly —
     // must never re-bill it.
     assertEquals(result.httpStatus, 200);
+    assertEquals(result.isProviderError, false);
     assertEquals(result.usage, { credits: {}, evidence: {} });
+
     const output = result.output as Record<string, unknown>;
     assertEquals(output.status, "completed");
+    // The vendor's envelope rides through whole — the result count is the
+    // fixture's, and no billing field is invented or stripped on the way.
+    const rows = output.results as Record<string, unknown>[];
+    assertEquals(rows.length, 1);
+    assertEquals(rows[0].profile_id, "PROF_INDEXED_1");
+    for (const field of ["billing", "credits", "usage", "consumed_credits"]) {
+        assertEquals(field in output, false, `${field} must not appear`);
+    }
 });
 
 Deno.test("orbit#v3/search/{search_id}: a vendor refusal is zero-billed data", async () => {

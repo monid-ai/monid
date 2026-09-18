@@ -8,8 +8,8 @@ The orbit provider SHALL declare name `orbit`, `request.baseUrl`
 request / 900 s run / 5 s poll, and the single credit pool `default`
 ("Orbit credits"). It SHALL declare a provider-level `output.fromError` that
 normalizes `{status: "failed", error: {code, message}}` into
-`{message, code?, raw}`. It SHALL NOT declare a lifecycle, because four of the
-eight endpoints are plain synchronous requests and a provider-level `start`
+`{message, code?, raw}`. It SHALL NOT declare a lifecycle, because three of the
+six endpoints are plain synchronous requests and a provider-level `start`
 would replace their declarative execution. It SHALL NOT declare a
 `usage.consolidate`, because Orbit's search and enrichment responses carry no
 meter.

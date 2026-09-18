@@ -123,9 +123,17 @@ export default defineEndpoint({
             if (typeof searchId !== "string" || searchId === "") {
                 throw new Error("Orbit did not return a search_id");
             }
+            // `results` is REQUIRED on a v3 snapshot. A 2xx without it is
+            // exactly as broken as a 2xx without `search_id` — and silently
+            // tolerating it would settle a real search at zero, because
+            // every count this endpoint bills is derived from these rows.
+            // Infrastructure failure, not data.
             const results = utils.json.optionalGet(res.body, "$.results");
+            if (!Array.isArray(results)) {
+                throw new Error("Orbit search snapshot carried no results");
+            }
             const built = [];
-            if (Array.isArray(results)) {
+            {
                 for (const row of results) {
                     const id = utils.json.optionalGet(row, "$.profile_id");
                     const state = utils.json.optionalGet(row, "$.status");
@@ -251,7 +259,10 @@ export default defineEndpoint({
             // previous ids are carried forward by hand.
             const built = (previous?.built ?? []).slice();
             const results = utils.json.optionalGet(res.body, "$.results");
-            if (Array.isArray(results)) {
+            if (!Array.isArray(results)) {
+                throw new Error("Orbit search snapshot carried no results");
+            }
+            {
                 for (const row of results) {
                     const id = utils.json.optionalGet(row, "$.profile_id");
                     const state = utils.json.optionalGet(row, "$.status");
