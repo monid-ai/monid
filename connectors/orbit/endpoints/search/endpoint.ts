@@ -68,7 +68,7 @@ export default defineEndpoint({
             "1 per person candidate discovery resolves, and 5 (partial) or " +
             "10 (full) for each profile Orbit builds for you. Read " +
             "`estimate` before a large or full-depth run.",
-        docsUrl: "https://docs.orbitsearch.com/api/search",
+        docsUrl: "https://docs.orbitsearch.com/api/search/search",
         categories: ["people-enrichment"],
     },
     request: { method: "POST", path: "/v3/search" },
@@ -321,7 +321,7 @@ export default defineEndpoint({
     },
     usage: {
         /** Orbit's published rate card (`GET /v2/developer/pricing`, version
-         *  2026-09-10) as the billing algebra: a search settles the sum of
+         *  2026-09-17) as the billing algebra: a search settles the sum of
          *  the work it actually did. */
         model: {
             kind: UsageModelKind.COMPOSITE,

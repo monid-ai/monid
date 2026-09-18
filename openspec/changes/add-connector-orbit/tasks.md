@@ -7,9 +7,10 @@
       `IdentitySignals`, `EnrichRequest`, `BatchEnrichRequest`,
       `PopulationRequest`, and the `{status, error: {code, message}}` envelope
 - [x] 1.2 Pin the rate card from `GET /v2/developer/pricing` (unauthenticated,
-      version `2026-09-10`): `profile_read` 1, `index_search` 1 per 10
+      version `2026-09-17`): `profile_read` 1, `index_search` 1 per 10
       results, `candidate_discovery` 1 per profile, `partial_profile` 5,
-      `full_profile` 10; packages flat at $0.01/credit
+      `full_profile` 10; no $/credit pinned (the published
+      package tiers are not uniform)
 - [x] 1.3 Establish that NO search or enrich response carries a meter — only
       `population.credits_quoted` and a watcher run's `charge_amount` do
 - [x] 1.4 Settle the billing algebra against Orbit's own settle: an index hit

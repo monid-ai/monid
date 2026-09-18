@@ -26,7 +26,7 @@ export default defineEndpoint({
             "result list final, and `profile_upgrades_completed` marks " +
             "every result as having reached the depth the search asked for. " +
             "Free — the search itself was already billed.",
-        docsUrl: "https://docs.orbitsearch.com/api/search-status",
+        docsUrl: "https://docs.orbitsearch.com/api/search/search-status",
         categories: ["people-enrichment"],
     },
     request: { method: "GET", path: "/v3/search/{search_id}" },

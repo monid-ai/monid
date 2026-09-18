@@ -114,8 +114,9 @@ exists only while a run is in flight.
 - The company lines on the rate card price routes the public v3 document does
   not carry yet.
 - No new category leaf: `people-enrichment` already exists.
-- No dollar conversion in the doc. Orbit's packages are a flat $0.01/credit at
-  every tier, and the conversion stays the broker card's job.
+- No dollar conversion in the doc. The published package tiers are not
+  uniform, so a single $/credit constant would be fiction; the pool is
+  Orbit's own credits and the conversion stays the broker card's job.
 
 The six that remain are exactly the endpoints that settle inside their own
 run — and, separately, the core of the request/response surface Orbit's own

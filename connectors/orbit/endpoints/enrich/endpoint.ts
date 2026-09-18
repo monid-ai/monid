@@ -47,7 +47,7 @@ export default defineEndpoint({
             "for 1 credit. A profile already at the depth you asked for " +
             "returns as it stands and costs nothing. Otherwise 5 credits " +
             "for `partial`, 10 for `full` and `regenerate`.",
-        docsUrl: "https://docs.orbitsearch.com/api/enrich",
+        docsUrl: "https://docs.orbitsearch.com/api/enrich/enrich-profile",
         categories: ["people-enrichment"],
     },
     request: { method: "POST", path: "/v3/enrich/{profile_id}" },

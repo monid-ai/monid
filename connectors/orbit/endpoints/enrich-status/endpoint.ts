@@ -23,7 +23,7 @@ export default defineEndpoint({
             "`orbit#v3/enrich` returns one `request_id` per profile, and " +
             "each reads back through this route. Free — the build was " +
             "already billed.",
-        docsUrl: "https://docs.orbitsearch.com/api/enrich-status",
+        docsUrl: "https://docs.orbitsearch.com/api/enrich/enrich-status",
         categories: ["people-enrichment"],
     },
     request: { method: "GET", path: "/v3/enrich/requests/{request_id}" },

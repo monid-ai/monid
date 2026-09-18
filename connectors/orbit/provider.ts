@@ -41,7 +41,7 @@ import { defineProvider, presets } from "@shared/core";
  * the documented path shape.
  *
  * BILLING — Orbit publishes its rate card at `GET /v2/developer/pricing`,
- * unauthenticated, and the lines below are pinned from version `2026-09-10`:
+ * unauthenticated, and the lines below are pinned from version `2026-09-17`:
  *
  *   profile_read         1  per profile read
  *   index_search         1  per 10 results returned from the Orbit index
@@ -76,7 +76,8 @@ import { defineProvider, presets } from "@shared/core";
  *     observation. The bulk routes are held for an internal review on the
  *     vendor's side, not for want of a settle; see the proposal.
  *   - `face_search` (100) rides an identity signal that is absent from the
- *     published request schema.
+ *     published request schema, and `profile_query` (1) prices a route the
+ *     public v3 document does not carry.
  *   - The company lines (`company_search`, `company_profile`,
  *     `company_enrichment`, `company_discovery`, `company_briefing`,
  *     `person_company_graph`) price routes that the public v3 document does
@@ -120,11 +121,11 @@ export default defineProvider({
      *  the cadence Orbit's own status routes are written for. */
     timeouts: { requestMs: 60_000, runMs: 900_000, pollMs: 5_000 },
     usage: {
-        /** THE credit system (design D26): Orbit meters in its OWN credits.
-         *  The published packages price every tier at $0.01/credit flat
-         *  ($10/1,000 through $200/20,000), so the conversion is a constant —
-         *  and it stays the broker card's job rather than a number pinned
-         *  into the doc. */
+        /** THE credit system (design D26): Orbit meters in its OWN credits,
+         *  and that is the unit this doc bills in. No dollar rate is pinned
+         *  here: the published packages do not price every tier alike, so a
+         *  single $/credit constant would be fiction — the conversion stays
+         *  the broker card's job, read from the live rate card. */
         credits: {
             default: {
                 label: "Orbit credits",

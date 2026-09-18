@@ -196,7 +196,7 @@ Deno.test("orbit#v3/search: a vendor refusal is zero-billed data", async () => {
 Deno.test("orbit#v3/search estimate: the ceiling the caller authorized", async () => {
     // Rates pinned from Orbit's own rate card —
     // GET https://api.orbitsearch.com/v2/developer/pricing, version
-    // 2026-09-10 (unauthenticated): index_search 1 per 10 results,
+    // 2026-09-17 (unauthenticated): index_search 1 per 10 results,
     // candidate_discovery 1, partial_profile 5, full_profile 10.
     const unit = await testSealedUnit("orbit#v3/search");
 

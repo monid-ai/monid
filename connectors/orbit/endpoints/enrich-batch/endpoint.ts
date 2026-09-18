@@ -44,7 +44,7 @@ export default defineEndpoint({
             "for `partial` and 10 each for `full` and `regenerate`. Use " +
             "`orbit#v3/search` first for anyone Orbit has yet to identify — " +
             "it returns the profile ids this endpoint takes.",
-        docsUrl: "https://docs.orbitsearch.com/api/enrich-batch",
+        docsUrl: "https://docs.orbitsearch.com/api/enrich/batch-enrich",
         categories: ["people-enrichment"],
     },
     request: { method: "POST", path: "/v3/enrich" },

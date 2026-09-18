@@ -29,7 +29,7 @@ export default defineEndpoint({
             "refresh behind it when that data is stale. This is " +
             "the endpoint to reach for when an agent already knows WHO the " +
             "person is and wants everything about them. 1 credit.",
-        docsUrl: "https://docs.orbitsearch.com/api/profile-read",
+        docsUrl: "https://docs.orbitsearch.com/api/enrich/read-profile",
         categories: ["people-enrichment"],
     },
     endpoint: "/v3/profile/{profile_id}",
@@ -37,7 +37,7 @@ export default defineEndpoint({
     input: { schema: { pathParams: zProfileReadPathParams } },
     timeouts: { requestMs: 60_000, runMs: 90_000 },
     usage: {
-        /** `profile_read`: 1 credit, flat (rate card 2026-09-10). The
+        /** `profile_read`: 1 credit, flat (rate card 2026-09-17). The
          *  quantities fns are synthesized for a meterless flat model. */
         model: {
             kind: UsageModelKind.PER_CALL,
