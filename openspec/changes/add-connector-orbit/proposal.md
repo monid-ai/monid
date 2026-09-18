@@ -25,12 +25,15 @@ exists only while a run is in flight.
 
 ## What Changes
 
-- **connectors/orbit** — 6 endpoints against `https://api.orbitsearch.com`,
+- **connectors/orbit** — 4 endpoints against `https://api.orbitsearch.com`,
   bearer auth (`sk_orb_` keys) needing only the `search:read` and
   `profile:read` scopes, one credit pool, a provider-level
   `output.fromError`, and no provider lifecycle.
-  - 3 sync: profile read, search status, enrichment status.
+  - 1 sync: profile read.
   - 3 async: search, enrich, batch enrich — each carrying its own lifecycle.
+    Orbit's two status routes are the routes those lifecycles poll, not
+    catalog endpoints: the engine drives every poll inside the run, so a
+    caller never needs to read a search or an enrichment by id.
 - **The poll is the meter (search).** Orbit charges 5 or 10 credits for a
   profile it BUILT and nothing for one it already held, and the two are
   indistinguishable in the terminal snapshot — both read `ready` at the depth
@@ -58,7 +61,7 @@ exists only while a run is in flight.
   depth authorizes up to 1,010 credits while a typical cached search settles
   at 1. An agent that reads `estimate` before committing sees the difference;
   one that does not, finds out afterwards.
-- 17 synthetic fixture chains and 26 replay tests, covering both zero-settle
+- 15 synthetic fixture chains and 23 replay tests, covering both zero-settle
   regressions (the cached search, the no-op enrich) explicitly, plus a
   runtime schema gate on every endpoint that takes an input.
 - **Catalog positioning.** `discover` ranks on `meta.description`, so the
@@ -117,7 +120,7 @@ exists only while a run is in flight.
 - No dollar conversion in the doc. Orbit's packages are a flat $0.01/credit at
   every tier, and the conversion stays the broker card's job.
 
-The six that remain are exactly the endpoints that settle inside their own
+The four that remain are exactly the endpoints that settle inside their own
 run — and, separately, the core of the request/response surface Orbit's own
 agent skill (`docs.orbitsearch.com/skill.md`) and hosted MCP server publish
 for this job.

@@ -25,24 +25,22 @@
 - [x] 2.2 `schema/person-query.ts`: the `StructuredIntent` / `IdentitySignals`
       mirrors plus the shape shared by search and any future bulk item
 
-## 3. Endpoints (6)
+## 3. Endpoints (4)
 
 - [x] 3.1 `search` — mirror + vendor defaults at the binding + lifecycle whose
       poll accumulates the build signal + 4-line composite
-- [x] 3.2 `search-status` — path mirror, FREE
-- [x] 3.3 `profile-read` — declared identity `/v3/profile/{profile_id}`
+- [x] 3.2 `profile-read` — declared identity `/v3/profile/{profile_id}`
       (the vendor path is shared with the build), flat 1 credit
-- [x] 3.4 `enrich` — mirror + lifecycle following `links.status` + dispatch
+- [x] 3.3 `enrich` — mirror + lifecycle following `links.status` + dispatch
       signal + 2-line composite
-- [x] 3.5 `enrich-status` — path mirror, FREE
-- [x] 3.6 `enrich-batch` — mirror + fan-out lifecycle over child request ids
+- [x] 3.4 `enrich-batch` — mirror + fan-out lifecycle over child request ids
 
 ## 4. Fixtures + tests
 
 - [x] 4.1 12 provider-level chains (strategy v2), `synthetic-` prefixed until
       recorded: search async / indexed / discovery / failed / transient,
-      enrich built / no-op / provider-error, batch, profile read, search
-      status read, shared provider error
+      enrich built / no-op / provider-error, batch, profile read, shared
+      provider error
 - [x] 4.2 18 replay tests, including the two zero-settle regressions the
       connector exists to get right — a cached search and a no-op enrich
 - [x] 4.3 Estimate spot-checks against the published rate card
@@ -84,7 +82,7 @@
       callers to poll, with the documented path as fallback
 - [x] 6.7 The single-use `personSearchShape` is inlined into the search body
       and `connectors/orbit/schema/` is gone — one call site, no abstraction
-- [x] 6.8 Test matrix completed on the sync endpoints: provider-error,
+- [x] 6.8 Test matrix completed on the sync endpoint: provider-error,
       schema-gate and `liveSkip("orbit")` live cases; the rate card and its
       version are cited at the estimate assertions
 
