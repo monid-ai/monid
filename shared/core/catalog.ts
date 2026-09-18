@@ -103,7 +103,6 @@ export function listResources(
         }));
 }
 
-/** The doc IS the resource's contract — return it as-is. */
 export function inspectResource(
     bundle: Bundle,
     resourceId: string,

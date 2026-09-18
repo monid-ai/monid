@@ -13,6 +13,7 @@ import { zJsonSchemaDoc } from "./json-schema-doc.ts";
 import { zFnRef } from "../fn-table/ref.ts";
 import { zTimeouts } from "../sections/timeouts.ts";
 import { zResourceId } from "../resource/ids.ts";
+import { resourcesSectionIssues } from "../sections/resource-binding.ts";
 import { zCredits, zUsageModel } from "../usage/model/mod.ts";
 
 /**
@@ -141,6 +142,13 @@ export const zEndpointDoc = z.strictObject({
             as: z.string().min(1).optional(),
             ensure: zFnRef.optional(),
         })).optional(),
+    }).superRefine((section, ctx) => {
+        // the SAME invariants the def schema enforces — docs cross a
+        // trust boundary, so the engine-side shape re-enforces them
+        // (provisions ≤1, `as` requires `key`, aliases unique)
+        for (const issue of resourcesSectionIssues(section)) {
+            ctx.addIssue({ code: "custom", ...issue });
+        }
     }).optional(),
     timeouts: zTimeouts,
     /** Hash of the stable serialization (minus this field) — covers $fn ids. */

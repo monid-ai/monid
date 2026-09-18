@@ -31,7 +31,6 @@ const RAW = JSON.stringify({ eventType: "demo.event", payload: { id: "1" } });
 Deno.test("webhook verify: round-trip WITH a declared prefix verifies", async () => {
     const at = new Date("2026-09-17T12:00:00Z");
     const headers = await sign(PREFIXED, SECRET, RAW, at);
-    // the synthetic delivery wears the vendor's envelope
     assert(headers["x-demo-signature"].startsWith("v1="));
     const check = await checkDelivery(PREFIXED, SECRET, headers, RAW, at);
     assertEquals(check, { ok: true });
@@ -39,14 +38,14 @@ Deno.test("webhook verify: round-trip WITH a declared prefix verifies", async ()
 
 Deno.test("webhook verify: a bare-hex header against a declared prefix is a mismatch", async () => {
     const at = new Date("2026-09-17T12:00:00Z");
-    const headers = await sign(BASE, SECRET, RAW, at); // bare hex
+    const headers = await sign(BASE, SECRET, RAW, at);
     const check = await checkDelivery(PREFIXED, SECRET, headers, RAW, at);
     assertEquals(check, { ok: false, reason: "signature mismatch" });
 });
 
 Deno.test("webhook verify: a prefixed header against an undeclared prefix is a mismatch", async () => {
     const at = new Date("2026-09-17T12:00:00Z");
-    const headers = await sign(PREFIXED, SECRET, RAW, at); // v1=<hex>
+    const headers = await sign(PREFIXED, SECRET, RAW, at);
     const check = await checkDelivery(BASE, SECRET, headers, RAW, at);
     assertEquals(check, { ok: false, reason: "signature mismatch" });
 });

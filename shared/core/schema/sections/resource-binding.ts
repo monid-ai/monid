@@ -108,6 +108,66 @@ export function bindingAlias(
     return segments[segments.length - 1];
 }
 
+/** The binding invariants over the STRUCTURAL subset def and doc
+ *  sections share ({id, key?, as?} arrays by purpose — fn slots differ,
+ *  the invariants don't). ONE checker, applied by BOTH schemas'
+ *  superRefines: a compiled doc crosses a trust boundary (disk, hosts),
+ *  so the engine-side shape must re-enforce what the authoring schema
+ *  enforced — a doctored two-provisions doc must fail LOAD, not
+ *  silently run provisions[0]; duplicate aliases must fail load, not
+ *  make `data.resources` last-write-wins. */
+export interface ResourcesSectionShape {
+    provisions?: ReadonlyArray<unknown>;
+    uses?: ReadonlyArray<{ key?: string; as?: string }>;
+    updates?: ReadonlyArray<{ key?: string; as?: string }>;
+    releases?: ReadonlyArray<{ key?: string; as?: string }>;
+    reads?: ReadonlyArray<{ key?: string; as?: string }>;
+}
+
+export function resourcesSectionIssues(
+    section: ResourcesSectionShape,
+): Array<{ path: (string | number)[]; message: string }> {
+    const issues: Array<{ path: (string | number)[]; message: string }> = [];
+    if ((section.provisions?.length ?? 0) > 1) {
+        issues.push({
+            path: ["provisions"],
+            message: "an endpoint provisions at most ONE resource — a run " +
+                "that could provision two things is two endpoints",
+        });
+    }
+    // `as` without `key` is unanchored — there is no instance to alias
+    for (const purpose of ["uses", "reads"] as const) {
+        (section[purpose] ?? []).forEach((binding, index) => {
+            if (binding.as !== undefined && binding.key === undefined) {
+                issues.push({
+                    path: [purpose, index, "as"],
+                    message: "`as` without `key` aliases nothing — a " +
+                        "keyless binding gates no instance",
+                });
+            }
+        });
+    }
+    // alias uniqueness ACROSS purposes — data.resources is one flat map
+    const seen = new Map<string, string>();
+    for (const purpose of RESOURCE_GATE_ORDER) {
+        (section[purpose] ?? []).forEach((binding, index) => {
+            const alias = bindingAlias(binding);
+            if (alias === undefined) return;
+            const prior = seen.get(alias);
+            if (prior !== undefined) {
+                issues.push({
+                    path: [purpose, index],
+                    message: `alias "${alias}" collides with ${prior} — ` +
+                        `disambiguate with \`as\``,
+                });
+                return;
+            }
+            seen.set(alias, `${purpose}[${index}]`);
+        });
+    }
+    return issues;
+}
+
 export const zResourcesSection = z.strictObject({
     provisions: z.array(zProvisionBinding).max(
         1,
@@ -132,37 +192,8 @@ export const zResourcesSection = z.strictObject({
             message: "resources: block declares no bindings — drop it",
         });
     }
-    // `as` without `key` is unanchored — there is no instance to alias
-    for (const purpose of ["uses", "reads"] as const) {
-        (section[purpose] ?? []).forEach((binding, index) => {
-            if (binding.as !== undefined && binding.key === undefined) {
-                ctx.addIssue({
-                    code: "custom",
-                    path: [purpose, index, "as"],
-                    message: "`as` without `key` aliases nothing — a " +
-                        "keyless binding gates no instance",
-                });
-            }
-        });
-    }
-    // alias uniqueness ACROSS purposes — data.resources is one flat map
-    const seen = new Map<string, string>();
-    for (const purpose of RESOURCE_GATE_ORDER) {
-        (section[purpose] ?? []).forEach((binding, index) => {
-            const alias = bindingAlias(binding);
-            if (alias === undefined) return;
-            const prior = seen.get(alias);
-            if (prior !== undefined) {
-                ctx.addIssue({
-                    code: "custom",
-                    path: [purpose, index],
-                    message: `alias "${alias}" collides with ${prior} — ` +
-                        `disambiguate with \`as\``,
-                });
-                return;
-            }
-            seen.set(alias, `${purpose}[${index}]`);
-        });
+    for (const issue of resourcesSectionIssues(section)) {
+        ctx.addIssue({ code: "custom", ...issue });
     }
 });
 export type ResourcesSection = z.infer<typeof zResourcesSection>;

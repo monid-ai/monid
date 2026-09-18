@@ -83,6 +83,18 @@ export const zBundle = z.strictObject({
                     `resources["${id}"] references unknown provider: ${doc.provider}`,
             });
         }
+        // the id's <provider>/ prefix and the doc's own provider field
+        // must AGREE: execution fuses doc.provider's auth + origin while
+        // hosts select by id — a mismatch runs one vendor's resource
+        // under another vendor's identity
+        if (!doc.id.startsWith(`${doc.provider}/`)) {
+            ctx.addIssue({
+                code: "custom",
+                message: `resources["${id}"] id names provider "${
+                    doc.id.split("/")[0]
+                }" but the doc carries provider "${doc.provider}"`,
+            });
+        }
     }
     // every endpoint binding resolves to a bundled resource doc
     for (const [id, doc] of Object.entries(bundle.endpoints)) {

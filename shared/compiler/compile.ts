@@ -725,9 +725,14 @@ export async function compileBundle(
             };
 
             // ---- usage.updateEstimateEveryMs (design D40) -----------------
-            // Coherence: only a POLLABLE run has a mid-flight to re-price,
-            // and only METERED lines give the estimate anything to vary.
-            if (def.usage?.updateEstimateEveryMs !== undefined) {
+            // Resolved endpoint ?? provider like every other usage leaf
+            // (a provider whose every endpoint is a metered live stream
+            // declares the cadence ONCE). Coherence: only a POLLABLE run
+            // has a mid-flight to re-price, and only METERED lines give
+            // the estimate anything to vary.
+            const updateEstimateEveryMs = def.usage?.updateEstimateEveryMs ??
+                provider.usage?.updateEstimateEveryMs;
+            if (updateEstimateEveryMs !== undefined) {
                 if (!lifecyclePoll) {
                     throw new CompileError(
                         CompileErrorCode.DOC_MALFORMED,
@@ -850,6 +855,14 @@ export async function compileBundle(
                                 `missing required: ${missing.join(", ")}`,
                         );
                     }
+                    // names alone are not a contract — required
+                    // properties must also be SHAPE-compatible
+                    lintSlotShapes(
+                        slot as Record<string, Json>,
+                        (inputSchemas.body ?? {}) as Record<string, Json>,
+                        `${binding.id} inputs.${slotName}`,
+                        where,
+                    );
                 }
                 const seed = binding.seed
                     ? await interner.intern(
@@ -945,8 +958,7 @@ export async function compileBundle(
                 // a binding/cadence with no NEW fn (e.g. uses with neither
                 // key nor ensure) still floors the doc: an older engine's
                 // strictObject rejects the new keys outright.
-                ...(bindingsSection ||
-                        def.usage?.updateEstimateEveryMs !== undefined
+                ...(bindingsSection || updateEstimateEveryMs !== undefined
                     ? [SC.resourcesSince]
                     : []),
             ]);
@@ -993,7 +1005,7 @@ export async function compileBundle(
                     estimate: estimateRef as unknown as Json,
                     evidence: evidenceRef as unknown as Json,
                     consolidate: consolidateRef as unknown as Json,
-                    updateEstimateEveryMs: def.usage?.updateEstimateEveryMs,
+                    updateEstimateEveryMs,
                 },
                 lifecycle: lifecycleStartRef
                     ? {
@@ -1156,6 +1168,60 @@ export async function compileBundle(
  * request.baseUrl at the provider level. Every fn stamps
  * `schema.resources_since` (the resource family IS the surface).
  */
+/**
+ * SHAPE lint for the inputs ⊇ slot contract (round-2): the name-only
+ * check let `id: number` satisfy a slot requiring `id: string` — callers
+ * following the CATALOG contract then get rejected by the endpoint's own
+ * gate at run time. This is a bounded LINT, not JSON-Schema subsumption:
+ * (a) when BOTH sides declare a scalar `type` for a slot-required
+ * property, a mismatch fails compilation; (b) object-typed properties
+ * recurse ONE level into their own `required` lists. Anything either
+ * side leaves untyped passes (author freedom beats false positives).
+ */
+function lintSlotShapes(
+    slot: Record<string, Json>,
+    body: Record<string, Json>,
+    label: string,
+    where: string,
+    depth = 0,
+): void {
+    const slotRequired = Array.isArray(slot.required)
+        ? slot.required.filter((key): key is string => typeof key === "string")
+        : [];
+    const slotProps = (slot.properties ?? {}) as Record<string, Json>;
+    const bodyProps = (body.properties ?? {}) as Record<string, Json>;
+    for (const key of slotRequired) {
+        const slotProp = slotProps[key];
+        const bodyProp = bodyProps[key];
+        if (
+            typeof slotProp !== "object" || slotProp === null ||
+            typeof bodyProp !== "object" || bodyProp === null
+        ) continue;
+        const slotType = (slotProp as Record<string, Json>).type;
+        const bodyType = (bodyProp as Record<string, Json>).type;
+        if (
+            typeof slotType === "string" && typeof bodyType === "string" &&
+            slotType !== bodyType
+        ) {
+            throw new CompileError(
+                CompileErrorCode.DOC_MALFORMED,
+                `${where}: input.schema.body.${key} is "${bodyType}" but ` +
+                    `${label} requires "${slotType}" — the endpoint would ` +
+                    `reject values the catalog contract accepts`,
+            );
+        }
+        if (slotType === "object" && bodyType === "object" && depth < 1) {
+            lintSlotShapes(
+                slotProp as Record<string, Json>,
+                bodyProp as Record<string, Json>,
+                `${label}.${key}`,
+                where,
+                depth + 1,
+            );
+        }
+    }
+}
+
 async function compileResource(args: {
     providerName: string;
     providerFile: string;

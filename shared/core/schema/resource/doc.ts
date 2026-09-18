@@ -8,6 +8,7 @@ import { zWebhookSlug } from "../sections/webhooks.ts";
 import { zWebhookVerify } from "../hooks/webhooks.ts";
 import { zResourceId } from "./ids.ts";
 import {
+    isEstimatedLine,
     RECONCILE_EVERY_FLOOR_MS,
     zLineName,
     zResourceUsage,
@@ -83,6 +84,37 @@ export const zResourceDoc = z.strictObject({
         requestMs: z.number().int().positive(),
     }),
     hash: zDocHash,
+}).superRefine((doc, ctx) => {
+    // RECONCILE COHERENCE, re-enforced at the trust boundary (the
+    // compiler checks the DEF; a doctored doc must fail LOAD, not
+    // surface later as a confusing NOT_ASYNC): the reconcilers cover
+    // EXACTLY the estimated lines — a fixed line has no meter to sync,
+    // an estimation without a sync drifts forever.
+    const estimated = new Set(
+        Object.entries(doc.usage.lines)
+            .filter(([, line]) => isEstimatedLine(line))
+            .map(([name]) => name),
+    );
+    for (const line of Object.keys(doc.reconcileUsage ?? {})) {
+        if (!estimated.has(line)) {
+            ctx.addIssue({
+                code: "custom",
+                path: ["reconcileUsage", line],
+                message: `reconcileUsage.${line} names a line that is ` +
+                    `not ESTIMATED (only estimated lines reconcile)`,
+            });
+        }
+    }
+    for (const line of estimated) {
+        if (doc.reconcileUsage?.[line] === undefined) {
+            ctx.addIssue({
+                code: "custom",
+                path: ["reconcileUsage"],
+                message: `estimated line "${line}" has no reconcileUsage ` +
+                    `entry — an estimation must sync`,
+            });
+        }
+    }
 });
 export type ResourceDoc = z.infer<typeof zResourceDoc>;
 

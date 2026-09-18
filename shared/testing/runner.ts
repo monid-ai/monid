@@ -206,7 +206,7 @@ export interface LoadResourceOptions {
 }
 
 /** Engine.loadResource with the test wiring — resource-op tests drive
- *  check/release/refresh/actualCost/external against replay chains. */
+ *  verify/release/refresh/reconcileUsage/view against replay chains. */
 export async function loadResource(
     opts: LoadResourceOptions,
 ): Promise<RunnableResource> {

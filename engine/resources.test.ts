@@ -8,6 +8,7 @@ import {
     presets,
     sealResourceUnit,
     sealUnit,
+    zBundle,
 } from "@shared/core";
 import { compileBundle, CompileError } from "@shared/compiler";
 import {
@@ -508,5 +509,168 @@ Deno.test("resources compiler: updateEstimateEveryMs demands a pollable metered 
             }),
         CompileError,
         "usage.updateEstimateEveryMs is dead config",
+    );
+});
+
+Deno.test("resources compiler: updateEstimateEveryMs resolves endpoint ?? provider", async () => {
+    // a provider whose every endpoint is a metered live stream declares
+    // the cadence ONCE — the compiled docs must carry it (an absent
+    // field means STATIC estimate to the engine: holds never re-price)
+    const meteredPollable = (
+        connectors: ConnectorSource[],
+        endpointCadence?: number,
+    ) => {
+        const use = connectors[0].endpoints[1];
+        use.def.usage = {
+            model: {
+                kind: "PER_UNIT",
+                unit: "SECOND",
+                every: 1,
+                consumes: { credit: "default", amount: 0.1 },
+            },
+            credits: { default: { label: "demo credits" } },
+            estimate: () => ({ counts: { SECOND: 1 } }),
+            evidence: () => ({ counts: { SECOND: 1 } }),
+            ...(endpointCadence !== undefined
+                ? { updateEstimateEveryMs: endpointCadence }
+                : {}),
+        };
+        use.def.lifecycle = {
+            // deno-lint-ignore require-await
+            start: async () => ({ kind: "RUNNING" }),
+            // deno-lint-ignore require-await
+            poll: async () => ({
+                kind: "COMPLETED",
+                httpStatus: 200,
+                output: null,
+            }),
+        };
+        // provider cadence must be coherent for EVERY endpoint — keep
+        // only the pollable metered one
+        connectors[0].endpoints = [use];
+        connectors[0].provider.usage = {
+            ...connectors[0].provider.usage,
+            updateEstimateEveryMs: 60_000,
+        };
+    };
+    const inherited = await bundleOf((connectors) =>
+        meteredPollable(connectors)
+    );
+    assertEquals(
+        inherited.endpoints["resdemo#widgets/use"].usage
+            .updateEstimateEveryMs,
+        60_000,
+    );
+    const overridden = await bundleOf((connectors) =>
+        meteredPollable(connectors, 30_000)
+    );
+    assertEquals(
+        overridden.endpoints["resdemo#widgets/use"].usage
+            .updateEstimateEveryMs,
+        30_000,
+    );
+    // and the coherence lint fires for a PROVIDER cadence too: the
+    // remaining free declarative endpoints have no mid-flight
+    await assertRejects(
+        () =>
+            bundleOf((connectors) => {
+                connectors[0].provider.usage = {
+                    ...connectors[0].provider.usage,
+                    updateEstimateEveryMs: 60_000,
+                };
+            }),
+        CompileError,
+        "usage.updateEstimateEveryMs is dead config",
+    );
+});
+
+Deno.test("resources compiler: a slot-required property with a MISMATCHED type fails", async () => {
+    await assertRejects(
+        () =>
+            bundleOf((connectors) => {
+                // the resource's create slot requires color: string; an
+                // endpoint declaring color: number passes a NAME-only
+                // check but rejects every catalog-contract value
+                connectors[0].resources![0].def.inputs = {
+                    create: z.object({ color: z.string() }),
+                };
+                connectors[0].endpoints[0].def.input = {
+                    schema: { body: z.object({ color: z.number() }) },
+                };
+            }),
+        CompileError,
+        'is "number" but',
+    );
+});
+
+// ---------------------------------------------------------------------------
+// trust boundary (round-2): a doctored artifact fails LOAD/parse, never
+// silently degrades mid-run — the doc schemas re-enforce what the
+// authoring schemas enforced
+// ---------------------------------------------------------------------------
+
+Deno.test("trust boundary: a doctored TWO-provisions endpoint doc fails load (BAD_DOC)", async () => {
+    const bundle = await bundleOf();
+    const unit = structuredClone(
+        sealUnit(bundle, "resdemo#widgets"),
+    ) as unknown as {
+        doc: { resources: { provisions: unknown[] } };
+    };
+    // duplicate the provision entry — link.ts would otherwise silently
+    // run provisions[0] and drop the second seed
+    unit.doc.resources.provisions.push(unit.doc.resources.provisions[0]);
+    const engine = new Engine({
+        transport: scripted([]),
+        resources: reader([]),
+    });
+    const error = await assertRejects(() => engine.load(unit), EngineError);
+    assertEquals(error.code, EngineErrorCode.BAD_DOC);
+    assert(String(error).includes("at most ONE resource"));
+});
+
+Deno.test("trust boundary: a doctored FIXED-line reconciler on a resource doc fails load (BAD_DOC)", async () => {
+    const bundle = await bundleOf();
+    const unit = structuredClone(
+        sealResourceUnit(bundle, "resdemo/widget"),
+    ) as unknown as {
+        doc: {
+            lifecycle: { verify: Json };
+            reconcileUsage?: Record<string, Json>;
+        };
+    };
+    // "rent" is FIXED — a reconciler for it is incoherent (no meter to
+    // sync); reuse the verify fn ref so only the COHERENCE breaks
+    unit.doc.reconcileUsage = {
+        rent: {
+            everyMs: 3_600_000,
+            get: unit.doc.lifecycle.verify,
+        } as unknown as Json,
+    };
+    const engine = new Engine({ transport: scripted([]) });
+    const error = await assertRejects(
+        () => engine.loadResource(unit),
+        EngineError,
+    );
+    assertEquals(error.code, EngineErrorCode.BAD_DOC);
+    assert(String(error).includes("not ESTIMATED"));
+});
+
+Deno.test("trust boundary: a resource doc whose id names a FOREIGN provider fails the bundle", async () => {
+    const bundle = await bundleOf();
+    const doctored = structuredClone(bundle) as unknown as {
+        resources: Record<string, { id: string; provider: string }>;
+    };
+    // identity says "othr/widget", execution identity stays "resdemo" —
+    // the id prefix and doc.provider must AGREE
+    const doc = doctored.resources["resdemo/widget"];
+    doc.id = "othr/widget";
+    delete doctored.resources["resdemo/widget"];
+    doctored.resources["othr/widget"] = doc;
+    const parsed = zBundle.safeParse(doctored);
+    assert(!parsed.success);
+    assert(
+        parsed.error.issues.some((issue) =>
+            issue.message.includes('id names provider "othr"')
+        ),
     );
 });
