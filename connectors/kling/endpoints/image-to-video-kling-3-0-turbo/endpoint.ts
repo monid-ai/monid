@@ -22,6 +22,8 @@ export default defineEndpoint({
             "image's aspect ratio. Suited for: product shots to motion, " +
             "character animation, photo-to-clip social content.",
         categories: ["video-generation"],
+        docsUrl:
+            "https://kling.ai/document-api/api/video/3-0-turbo/image-to-video",
         notes: [
             "Turbo always generates native audio and is priced as such — " +
             "there is no audio switch.",

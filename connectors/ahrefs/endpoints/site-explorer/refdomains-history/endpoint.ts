@@ -11,7 +11,8 @@ export default defineEndpoint({
             "per bucket. Supports target scope. Suited for link-velocity " +
             "monitoring and penalty forensics. One billed row per " +
             "history_grouping bucket (daily, weekly, or monthly).",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/site-explorer/get-refdomains-history",
         categories: ["seo"],
         notes: [
             "Billing: 6 API units per returned row, minimum 50 units per " +

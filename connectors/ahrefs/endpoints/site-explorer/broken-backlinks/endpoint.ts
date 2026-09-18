@@ -15,7 +15,8 @@ export default defineEndpoint({
             "code, and dofollow flag. Supports target scope, filtering, " +
             "sorting, and a row budget via limit. Suited for broken-link " +
             "reclamation and link-equity recovery.",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/site-explorer/get-broken-backlinks",
         categories: ["seo"],
         notes: [
             "Billing: 9 API units per returned row, minimum 50 units per " +

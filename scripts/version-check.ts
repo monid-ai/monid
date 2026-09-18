@@ -44,6 +44,15 @@ const CONTRACT_PATHS = [
     "shared/core/schema/usage/model/mod.ts",
     "shared/core/schema/sections/usage.ts", // usage def section (model/estimate)
     "shared/core/schema/json/util.ts", // JsonUtil interface (the ABI) + JsonPathError
+    "shared/core/schema/resource/usage.ts", // the resource family (0.4.0):
+    "shared/core/schema/resource/def.ts", //   the rate card + def shape
+    "shared/core/schema/resource/ops.ts", //   op ctx/outcomes + ResourceOpUtils
+    "shared/core/schema/resource/row.ts", //   target/instance/query (reader port)
+    "shared/core/schema/resource/doc.ts", //   resource doc format
+    "shared/core/schema/sections/resource-binding.ts", // endpoint binding shape
+    "shared/core/schema/sections/webhooks.ts", // webhook section shapes
+    "shared/core/schema/hooks/resource-binding.ts", // seed/ensure contracts
+    "shared/core/schema/hooks/webhooks.ts", // webhook fn contracts
     "config.yml", // contract constants
 ];
 

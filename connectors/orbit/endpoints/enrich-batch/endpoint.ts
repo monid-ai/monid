@@ -15,6 +15,9 @@ import { zBatchEnrichBody } from "./schema/inputs.ts";
  *
  * Bounded by construction: 20 profiles is the vendor's own cap, child reads
  * are free, and only the still-running children are polled on each tick.
+ * The reads of one tick go out TOGETHER: Orbit's status bucket refills at
+ * 25/s with a burst of 150, so twenty concurrent reads sit inside it, and a
+ * tick then takes as long as its slowest child rather than the sum.
  *
  * BILLING is the single-enrich rule, 20 times over: a child Orbit answered
  * `running` for is one it started building, and it draws its depth line when
@@ -73,7 +76,12 @@ export default defineEndpoint({
             parentRequestId: z.string().describe("The batch's own id."),
         }),
         start: async ({ data, utils, logger }) => {
-            const res = await utils.request();
+            const res = await utils.request({
+                headers: {
+                    ...data.request.headers,
+                    "Idempotency-Key": data.run.runId + ":submit",
+                },
+            });
             if (res.status < 200 || res.status >= 300) {
                 return {
                     kind: "COMPLETED",
@@ -131,13 +139,15 @@ export default defineEndpoint({
                     { retriable: false },
                 );
             }
-            const pending = [];
-            let backoffMs = 0;
-            for (const id of previous.pending) {
-                const res = await utils.http({
+            const read = (id: string) =>
+                utils.http({
                     method: "GET",
                     path: "/v3/enrich/requests/" + encodeURIComponent(id),
-                });
+                }).then((res) => ({ id, res }));
+            const pending = [];
+            let backoffMs = 0;
+            const reads = await Promise.all(previous.pending.map(read));
+            for (const { id, res } of reads) {
                 if (
                     res.status === 408 || res.status === 429 ||
                     res.status >= 500
@@ -182,11 +192,8 @@ export default defineEndpoint({
             const reopened = [];
             let errored = false;
             let finalBackoffMs = 0;
-            for (const id of previous.children) {
-                const res = await utils.http({
-                    method: "GET",
-                    path: "/v3/enrich/requests/" + encodeURIComponent(id),
-                });
+            const finalReads = await Promise.all(previous.children.map(read));
+            for (const { id, res } of finalReads) {
                 if (
                     res.status === 408 || res.status === 429 ||
                     res.status >= 500

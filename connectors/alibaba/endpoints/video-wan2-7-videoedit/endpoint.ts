@@ -25,15 +25,18 @@ export default defineEndpoint({
             "cinematic looks), wardrobe and product swaps, localized " +
             "content variants.",
         categories: ["video-generation"],
+        docsUrl:
+            "https://www.alibabacloud.com/help/en/model-studio/wan-video-editing-api-reference",
         /** CROSS-field rules the compiled JSON Schema cannot express (design
          *  D9); DashScope enforces each with a free rejection. */
         notes: [
             "Exactly one video item and up to four reference_image items.",
-            "Billed seconds = input seconds + output seconds — editing a 5 " +
-            "s clip into a 5 s output bills about 10 seconds; fractional " +
-            "seconds are reported by DashScope and rounded UP to the next " +
-            "whole second here. Without a duration the estimate holds a " +
-            "10-second output and settles on actual seconds.",
+            "Billed seconds = input + output seconds, rounded up (a 5 s " +
+            "clip edited into a 5 s output bills ~10 s). Without a " +
+            "duration the estimate assumes a 10 s output and settles on " +
+            "actual seconds.",
+            "Generation typically takes 1-5 minutes; long or complex " +
+            "requests can take 15+ minutes.",
         ],
     },
     /** PUBLIC identity: v1's published id (design D1). */

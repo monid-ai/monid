@@ -25,9 +25,13 @@ export default defineEndpoint({
             "Shorts clips, ads and marketing b-roll, storyboarding, music " +
             "videos.",
         categories: ["video-generation"],
+        docsUrl:
+            "https://www.alibabacloud.com/help/en/model-studio/text-to-video-api-reference",
         notes: [
             "Billed per second of OUTPUT video at the selected resolution; " +
             "a driving audio input is free.",
+            "Generation typically takes 1-5 minutes; long or complex " +
+            "requests can take 15+ minutes.",
         ],
     },
     /** PUBLIC identity: v1's published id (design D1). */

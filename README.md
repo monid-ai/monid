@@ -107,6 +107,15 @@ export default defineEndpoint({
 That is the whole contract. No client, no adaptor, no per-provider execution
 path.
 
+Providers whose product is a durable OWNED thing (saperly's phone numbers)
+additionally declare a **resource** (`resources/<slug>/resource.ts`): its
+stored-snapshot shape, platform lifecycle (verify/release/refresh), live views,
+and its usage rate card (fixed and/or estimated lines over one period clock).
+Endpoints then BIND to it (`resources: { uses: [{ id, key }] }` et al.,
+purpose-keyed) and the engine derives the rest — ownership gating, gated
+instances into fns, provision seeds, release/refresh/reconcile marks (see
+DEVELOPMENT.md "Resources").
+
 **Write `meta.description` like it is the product, because to an agent it is.**
 It is the text `discover` ranks and `inspect` returns. Say what the endpoint
 really does, what it will not do, and which endpoint to reach for instead. The
@@ -239,6 +248,18 @@ config.yml         schema.* and compiler.* are contract; engine and scripts are 
   behind every choice above.
 - [AGENT.md](./AGENT.md) is the brief to hand a coding agent you point at this
   repo.
+
+## Citation
+
+```bibtex
+@misc{monid2026,
+  author = {{Monid}},
+  title  = {Monid {API}},
+  url    = {https://monid.ai/},
+  year   = {2026},
+  note   = {Aggregation layer of API tools for AI agents with per-call pricing}
+}
+```
 
 ## License
 

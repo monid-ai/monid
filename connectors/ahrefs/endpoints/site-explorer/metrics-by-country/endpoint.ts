@@ -14,7 +14,8 @@ export default defineEndpoint({
             "international SEO prioritization. Returns every country with " +
             "data (no row budget), so the hold assumes the full country " +
             "list.",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/site-explorer/get-metrics-by-country",
         categories: ["seo"],
         notes: [
             "Billing: 23 API units per returned row, minimum 50 units per " +

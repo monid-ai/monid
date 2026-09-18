@@ -12,7 +12,8 @@ export default defineEndpoint({
             "Suited for measuring the impact of link building on a specific " +
             "page. One billed row per history_grouping bucket (daily, " +
             "weekly, or monthly).",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/site-explorer/get-url-rating-history",
         categories: ["seo"],
         notes: [
             "Billing: 2 API units per returned row, minimum 50 units per " +

@@ -14,7 +14,8 @@ export default defineEndpoint({
             "position. Supports a report date, country filter, target " +
             "scope, filtering, sorting, and a row budget via limit. Suited " +
             "for content-gap analysis and traffic-driver discovery.",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/site-explorer/get-top-pages",
         categories: ["seo"],
         notes: [
             "Billing: 23 API units per returned row, minimum 50 units per " +

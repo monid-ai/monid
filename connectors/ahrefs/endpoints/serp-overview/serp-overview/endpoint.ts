@@ -14,7 +14,8 @@ export default defineEndpoint({
             "estimated traffic of each result. Supports an optional " +
             "historical date and a top_positions budget. Suited for SERP " +
             "difficulty analysis and ranking-feasibility checks.",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/serp-overview/get-serp-overview",
         categories: ["seo"],
         notes: [
             "Billing: 20 API units per returned row, minimum 50 units per " +

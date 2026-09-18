@@ -13,7 +13,8 @@ export default defineEndpoint({
             "target scope and an optional country filter. Suited for " +
             "ranking-distribution trend analysis. One billed row per " +
             "history_grouping bucket (daily, weekly, or monthly).",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/site-explorer/get-keywords-history",
         categories: ["seo"],
         notes: [
             "Billing: 6 API units per returned row, minimum 50 units per " +

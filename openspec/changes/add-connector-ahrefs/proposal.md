@@ -59,8 +59,11 @@ line whose count is a rule (D19), and the field-set guard is a JSON Schema
   pricing never drill-measured, no v1 def exists); the 92 workspace-bound or
   free operations (Management, Rank Tracker, Site Audit, GSC Insights, Web
   Analytics, Social Media, Public, Subscription Info).
-- No dollar conversion in the doc: v1's `$0.00129`/unit cost (Lite plan) and
-  `$0.003`/unit list rate are the broker card's job (owner rule 2026-09-15).
+- No dollar conversion in the doc: v1's `$0.0006225`/unit cost ($249 /
+  400,000 units — corrected 2026-09-16; this line previously misquoted v1 as
+  "$0.00129 (Lite plan)") and `$0.003`/unit list rate are the broker card's
+  job (owner rule 2026-09-15). Seed the card from v1 `units.ts`, not from
+  earlier copies of this document.
 - **The 50-unit minimum is NOT absorbed here (D1).** v1 absorbed it on the
   platform side (`billAtPublishedRate`); the doc states the vendor's card
   and the broker decides pass-through — the clay D3 posture.

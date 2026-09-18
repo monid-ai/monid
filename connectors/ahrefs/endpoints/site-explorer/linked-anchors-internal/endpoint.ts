@@ -13,7 +13,8 @@ export default defineEndpoint({
             "first seen date. Supports target scope, filtering, sorting, " +
             "and a row budget via limit. Suited for internal anchor-text " +
             "optimization.",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/site-explorer/get-linked-anchors-internal",
         categories: ["seo"],
         notes: [
             "Billing: 4 API units per returned row, minimum 50 units per " +

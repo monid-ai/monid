@@ -12,6 +12,11 @@ export default defineEndpoint({
             "name, description, chains, logo.",
         docsUrl: "https://docs.asksurf.ai/data-api/search/project",
         categories: ["company-enrichment"],
+        notes: [
+            "The exact credit tier for this endpoint is not individually " +
+            "verified - confirm against your billing before relying on " +
+            "the rate.",
+        ],
     },
     request: { method: "GET", path: "/search/project" },
     input: {

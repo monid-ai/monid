@@ -74,7 +74,12 @@ export default defineEndpoint({
             ),
         }),
         start: async ({ data, utils, logger }) => {
-            const res = await utils.request();
+            const res = await utils.request({
+                headers: {
+                    ...data.request.headers,
+                    "Idempotency-Key": data.run.runId + ":submit",
+                },
+            });
             if (res.status < 200 || res.status >= 300) {
                 return {
                     kind: "COMPLETED",

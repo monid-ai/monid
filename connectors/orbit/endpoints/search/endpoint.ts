@@ -61,9 +61,7 @@ export default defineEndpoint({
             "or the people behind a company you are researching (name the " +
             "employer in `intent` and Orbit returns its people). This " +
             "endpoint runs the whole search and returns the finished " +
-            "snapshot; read " +
-            "`orbit#v3/search/{search_id}` " +
-            "instead to follow a search yourself. Pricing follows the " +
+            "snapshot. Pricing follows the " +
             "results: 1 credit per 10 people returned from the Orbit index, " +
             "1 per person candidate discovery resolves, and 5 (partial) or " +
             "10 (full) for each profile Orbit builds for you. Read " +
@@ -108,8 +106,13 @@ export default defineEndpoint({
                 "The status route Orbit named in `links.status`.",
             ),
         }),
-        start: async ({ utils, logger }) => {
-            const res = await utils.request();
+        start: async ({ data, utils, logger }) => {
+            const res = await utils.request({
+                headers: {
+                    ...data.request.headers,
+                    "Idempotency-Key": data.run.runId + ":submit",
+                },
+            });
             if (res.status < 200 || res.status >= 300) {
                 // Orbit refused the request (400 bad input, 402 out of
                 // credits, 403 scope, 429 rate limit) — DATA, zero-billed.

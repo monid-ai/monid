@@ -53,7 +53,7 @@ const UNITS_PER_ROW: Record<string, number> = {
     "ahrefs#batch-analysis/batch-analysis": 21,
 };
 
-Deno.test("ahrefs: the units-per-row literals — one line per doc, the vendor OpenAPI field costs (v1 UNITS_PER_ROW, drill-verified 2026-08)", async () => {
+Deno.test("ahrefs: the units-per-row literals — one line per doc, the vendor OpenAPI field costs (v1 UNITS_PER_ROW, re-derived 2026-09-16)", async () => {
     const bundle = await testBundle();
     const ids = Object.keys(bundle.endpoints).filter((id) =>
         id.startsWith("ahrefs#")

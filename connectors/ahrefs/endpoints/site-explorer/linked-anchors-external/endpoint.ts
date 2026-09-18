@@ -14,7 +14,8 @@ export default defineEndpoint({
             "counts with first seen date. Supports target scope, filtering, " +
             "sorting, and a row budget via limit. Suited for outbound " +
             "anchor audits.",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/site-explorer/get-linked-anchors-external",
         categories: ["seo"],
         notes: [
             "Billing: 5 API units per returned row, minimum 50 units per " +

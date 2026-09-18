@@ -15,7 +15,8 @@ export default defineEndpoint({
             "Supports a report date, country, target scope, filtering, " +
             "sorting, and a row budget via limit. Suited for competitive " +
             "landscape mapping.",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/site-explorer/get-organic-competitors",
         categories: ["seo"],
         notes: [
             "Billing: 14 API units per returned row, minimum 50 units per " +

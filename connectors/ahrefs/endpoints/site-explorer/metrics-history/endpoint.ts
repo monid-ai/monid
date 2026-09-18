@@ -13,7 +13,8 @@ export default defineEndpoint({
             "country filter. Suited for traffic-trend charts and " +
             "before/after comparisons. One billed row per history_grouping " +
             "bucket (daily, weekly, or monthly).",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/site-explorer/get-metrics-history",
         categories: ["seo"],
         notes: [
             "Billing: 21 API units per returned row, minimum 50 units per " +

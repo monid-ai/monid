@@ -13,7 +13,8 @@ export default defineEndpoint({
             "number of internal links pointing at it. Supports target " +
             "scope, filtering, sorting, and a row budget via limit. Suited " +
             "for internal-linking audits and PageRank-flow analysis.",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/site-explorer/get-pages-by-internal-links",
         categories: ["seo"],
         notes: [
             "Billing: 3 API units per returned row, minimum 50 units per " +

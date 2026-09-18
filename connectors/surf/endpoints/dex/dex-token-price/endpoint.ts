@@ -31,6 +31,9 @@ export default defineEndpoint({
         notes: [
             "Set `from` and `to` together or not at all (vendor rule); " +
             "one without the other is passed through, not rejected here.",
+            "The exact credit tier for this endpoint is not individually " +
+            "verified - confirm against your billing before relying on " +
+            "the rate.",
         ],
     },
     request: { method: "GET", path: "/dex/token/price" },

@@ -12,7 +12,8 @@ export default defineEndpoint({
             "difficulty, traffic potential of the top-ranking page, search " +
             "intents, and CPC. Suited for keyword shortlisting, difficulty " +
             "triage, and content prioritization.",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/keywords-explorer/get-overview",
         categories: ["seo"],
         notes: [
             "Billing: 42 API units per returned row, minimum 50 units per " +

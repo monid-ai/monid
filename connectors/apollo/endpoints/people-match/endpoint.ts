@@ -39,6 +39,8 @@ export default defineEndpoint({
             "match_confidence of none with no email draws nothing.",
             "Personal emails are not revealed for people in GDPR-compliant " +
             "regions.",
+            "A successful match costs 1 credit; reveal_personal_emails " +
+            "adds no surcharge when no personal email is on file.",
         ],
     },
     request: { method: "POST", path: "/people/match" },

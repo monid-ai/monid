@@ -11,7 +11,8 @@ export default defineEndpoint({
             "dates in one country. Returns the date and volume per month, " +
             "one billed row each. Suited for seasonality and demand-trend " +
             "analysis.",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/keywords-explorer/get-volume-history",
         categories: ["seo"],
         notes: [
             "Billing: 2 API units per returned row, minimum 50 units per " +

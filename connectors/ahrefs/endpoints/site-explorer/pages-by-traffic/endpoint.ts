@@ -12,7 +12,8 @@ export default defineEndpoint({
             "object: page counts and total traffic per range. Supports " +
             "target scope and an optional country filter. Suited for sizing " +
             "where a site's traffic concentrates.",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/site-explorer/get-pages-by-traffic",
         categories: ["seo"],
         notes: [
             "Billing: 56 API units per returned row, minimum 50 units per " +

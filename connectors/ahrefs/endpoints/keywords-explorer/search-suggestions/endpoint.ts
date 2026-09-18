@@ -13,7 +13,8 @@ export default defineEndpoint({
             "volume, and CPC. Supports filtering and sorting on the " +
             "returned fields and a row budget via limit. Suited for " +
             "capturing long-tail question and modifier queries.",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/keywords-explorer/get-search-suggestions",
         categories: ["seo"],
         notes: [
             "Billing: 12 API units per returned row, minimum 50 units per " +

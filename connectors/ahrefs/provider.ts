@@ -67,6 +67,7 @@ export default defineProvider({
             "Rowed reports return at most 100 rows per request (plan cap); " +
             "state the row budget with limit — it is what the hold is priced " +
             "from.",
+            "Ahrefs API keys expire after one year and must be rotated.",
         ],
     },
     auth: { inject: presets.auth.bearer() },
@@ -110,8 +111,10 @@ export default defineProvider({
         /** THE credit system (design D1): Ahrefs meters ONE pool of API
          *  units per workspace (a monthly allowance, `/subscription-info/
          *  limits-and-usage`), so the pool is that unit and the id is
-         *  `default`. The $/unit of the plan (v1: $129 / 100k units on
-         *  Lite) is the broker card's job, not the doc's. */
+         *  `default`. The $/unit of the plan (v1 units.ts: $249 / 400k
+         *  units = $0.0006225 cost, $0.003 list — the reconcile corrected
+         *  an earlier "$129 / 100k Lite" misquote) is the broker card's
+         *  job, not the doc's. */
         credits: {
             default: {
                 label: "Ahrefs API units",

@@ -232,3 +232,30 @@ The claim path has its own chains: `synthetic-task-succeeded-billed` (unit
 row `"3"` — equals the 3.0 fold, disagrees with Turbo's 4 and surfaces the
 mismatch signal) and `synthetic-task-succeeded-cash` (the cash row forfeits
 the claim).
+
+## D13 — displayName convention (reconcile addendum, 2026-09-16)
+
+v1 deliberately kept provider/model names OUT of displayNames ("Text to
+Video", "Transfer Motion to Character" — pinned by a v1 test). v2 names them
+"Kling 3.0 Text to Video" etc. Decision: KEEP the v2 branded names — every
+other v2 connector brands its displayNames (Seedance/MiniMax/Suzanne), the
+catalog lists all providers side by side where neutral names collide, and
+v1's neutrality rule served a storefront this repo does not render. Recorded
+here because the flip was previously undocumented.
+
+## D14 — per-endpoint docsUrl (reconcile addendum, 2026-09-16)
+
+v1 carried a per-model documentation page on every def; the port kept only
+the provider-level root. Restored: each endpoint's meta.docsUrl is v1's
+model-specific kling.ai/document-api page (t2v and i2v share their model's
+page, as v1 did).
+
+## D15 — endpoint identities stay wire-faithful (reconcile addendum, 2026-09-16)
+
+The reconcile's faithful-naming rule restored v1 catalog ids elsewhere
+(fundable `deals/{id}`, suzanne `v1/models/{job_id}/download`, bytedance
+`/v1/video/seedance-*`). Kling is the inverse case and KEEPS its v2 ids:
+v1's `/v1/video/kling-*-t2v` names were INVENTED over a shared `/tasks`
+wire, while v2's ids ARE the vendor's own create-task paths
+(`/text-to-video/kling-3.0`, …). Faithful means the vendor's path — v2
+already is.

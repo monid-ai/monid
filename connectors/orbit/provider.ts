@@ -7,19 +7,22 @@ import { defineProvider, presets } from "@shared/core";
  *
  * Two shapes live behind that one host:
  *
- *   - SYNC reads — a profile read and two status polls. One request, one
- *     answer.
+ *   - A SYNC read — the profile read. One request, one answer.
  *   - ASYNC WORK — search and enrich. The submit answers `202` with a
- *     snapshot carrying the id and `status: "running"`; the caller polls the
- *     matching status route until the status is terminal. Three endpoints
- *     carry a lifecycle so ONE monid run returns finished work; the status
- *     routes stay exposed for callers who would rather drive the poll
- *     themselves or resume a run started elsewhere.
+ *     snapshot carrying the id and `status: "running"`; the lifecycle polls
+ *     the matching status route until the status is terminal, so ONE monid
+ *     run returns finished work. Orbit's status routes are not catalog
+ *     endpoints: the engine drives every poll inside the run.
+ *
+ * EVERY SUBMIT CARRIES `Idempotency-Key: {runId}:submit` — the host-stable
+ * run id (design D34), so a retried or replayed start converges on the
+ * search or enrichment the first attempt created instead of paying for a
+ * second one. Orbit documents the header and answers `409` when a key is
+ * reused with a different body; the run id changes only when the run does.
  *
  * THE LIFECYCLE IS NOT ON THE PROVIDER. A provider-level `start` replaces
- * declarative execution on the SYNC endpoints too, and half of this
- * connector's endpoints are plain requests. Each async endpoint authors its
- * own phases.
+ * declarative execution on the SYNC endpoint too. Each async endpoint
+ * authors its own phases.
  *
  * SCOPES: `search:read` and `profile:read`, the same pair Orbit's own hosted
  * MCP server publishes. The connector reaches no surface that needs
