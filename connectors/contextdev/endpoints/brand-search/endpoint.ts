@@ -18,6 +18,10 @@ export default defineEndpoint({
         docsUrl:
             "https://docs.context.dev/api-reference/brand-intelligence/search",
         categories: ["company-enrichment"],
+        notes: [
+            "Free on this integration's plan tier. Rate-limited like " +
+            "every other endpoint.",
+        ],
     },
     request: { method: "GET", path: "/brand/search" },
     input: { schema: { queryParams: zBrandSearchQueryParams } },
@@ -32,6 +36,10 @@ export default defineEndpoint({
          *  and draws on Monid's separate Logo Link quota — so it never
          *  reaches a caller (v1 brandSearchFormatOutput; design D4). Runs
          *  after evidence, on the consolidated body. */
+        // deep key-walk is SAFE here today: the response is
+        // {results: [{domain, name, logo}]} and no other level can carry a
+        // `logo` key — revisit if the vendor ever nests one elsewhere
+        // (reconcile 2026-09-16; the octen deep-omit lesson).
         fromResponse: ({ data, utils }) =>
             utils.json.omit(data.output, ["logo"]),
     },

@@ -13,7 +13,8 @@ export default defineEndpoint({
             "first seen date, and last crawl date. Supports target scope, " +
             "filtering, sorting, and a row budget via limit. Suited for " +
             "indexation checks and site-structure inventories.",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/site-explorer/get-crawled-pages",
         categories: ["seo"],
         notes: [
             "Billing: 6 API units per returned row, minimum 50 units per " +

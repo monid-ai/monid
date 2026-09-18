@@ -12,7 +12,8 @@ export default defineEndpoint({
             "domains, and all-time referring domains as of the given date. " +
             "Supports target scope and protocol. Suited for a quick link- " +
             "profile size check before pulling row-level reports.",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/site-explorer/get-backlinks-stats",
         categories: ["seo"],
         notes: [
             "Billing: 12 API units per returned row, minimum 50 units per " +

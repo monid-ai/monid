@@ -32,6 +32,7 @@ export default defineEndpoint({
             "editing and restyling, character-consistent scenes, " +
             "reference-driven ads, storyboard-to-video.",
         categories: ["video-generation"],
+        docsUrl: "https://kling.ai/document-api/api/video/3-0-omni/video-omni",
         /** CROSS-field rules the compiled JSON Schema cannot express (design
          *  D9). Kling enforces each with a free rejection; the one that is
          *  silently wrong rather than an error — multi_shot with a base

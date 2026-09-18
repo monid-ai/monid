@@ -13,7 +13,9 @@ sync POST → exa).
 Ahrefs bills uncached, non-free requests in API units: `units_per_row × rows`, floored at
 50 per request (empty results included). v1 billed the caller per ROW and
 absorbed the 50-unit floor on the platform side (`billAtPublishedRate`,
-"requests under ceil(21.5 / U) rows run at a loss by design").
+"requests under ceil(10.375 / U) rows run at a loss by design" — the
+break-even is 50 × $0.0006225 ÷ $0.003 = 10.375 units; an earlier revision
+of this line misquoted it as 21.5, derived from a wrong $0.00129/unit cost).
 
 A `max()` is not a model shape. Two options were live:
 

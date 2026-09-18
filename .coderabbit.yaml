@@ -145,7 +145,10 @@ reviews:
               folder names are organisational only (D22). An authored endpoint: is
               normal — never flag it.
               Schemas are never imported across providers.
-              Fixtures: no secret VALUE and no request/response headers ever; PII
+              Fixtures: no secret VALUE and no request headers ever; response
+              headers only from the recorded-response allowlist
+              (RECORDED_RES_HEADERS — today just `location`, a 302 whose
+              redirect target IS the payload; zRecordedCall rejects the rest); PII
               scrubbed; synthetic fixtures carry the synthetic- filename prefix; the
               provider-level chain fixtures carry a description. Flag a fixture that
               contradicts the vendor shape the endpoint's fromResponse/consolidate

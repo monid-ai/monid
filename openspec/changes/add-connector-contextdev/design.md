@@ -48,8 +48,10 @@ overage rate) is the broker's. Where the card moved since v1:
 Every response — success or error — carries `key_metadata: {
 credits_consumed, credits_remaining }`. The provider `consolidate` plucks
 the envelope, claims `credits_consumed` when it is a number (a present 0 —
-a cached brand lookup, a free search — prunes to an empty claim and the
-fold settles the list rate, v1's `max(calculated, actual)`), and returns
+a cached brand lookup, a free search — prunes to an empty claim per D27
+zero-pruning, so the doc's own derived fold settles instead: the list
+rate on a metered doc, 0 on a free one — the engine-level shape of v1's
+`max(calculated, actual)`), and returns
 the body without the envelope: `credits_remaining` is OUR balance. The
 fold is the cross-check, which is how a call billed above list (OCR'd PDF
 pages in a crawl, search with inline Markdown, a paid-plan action) settles
@@ -109,7 +111,7 @@ collections are named differently (`results`, `data`, `match`,
 ## D7 — Vendor one-of rules bind as unions
 
 v1 enforced seven cross-field rules with `.refine`, which compiles to
-nothing here. Each is the vendor's own one-of, so it lives in the mirror
+nothing here (until the `add-schema-refinement-hooks` proposal lands). Each is the vendor's own one-of, so it lives in the mirror
 (`brand/retrieve` six arms, `news/search` entity four arms,
 `utility/prefetch` identifier two arms, `brand/ai/products` two arms) or,
 where the vendor declares every field optional, binds at the endpoint as
@@ -162,3 +164,13 @@ the fold agree; the cached (0), above-list (2), not-found and searched cases
 are their own chains or in-test edits. Replay matched the engine's URLs on
 the first run for all nineteen endpoints; the wire form is self-consistent,
 not live-verified (tasks 7.1).
+
+## D11 — reconcile live verification (addendum, 2026-09-16)
+
+All 19 endpoints ran live (tasks 7.1 partially discharged): every vendor
+`credits_consumed` claim matched the derived fold with zero mismatch
+signals. The two card divergences this change introduced are CONFIRMED:
+`web/screenshot` bills 1 credit (v1's 5 was an older card — D3), and the
+`web/scrape/sitemap` search surcharge is real (plain crawl claimed 1,
+searched crawl claimed 2). people/enrich claimed 20 on a found person.
+Synthetic fixtures remain to be replaced with recordings.

@@ -14,7 +14,8 @@ export default defineEndpoint({
             "estimated organic traffic. Supports per-target scope and an " +
             "optional country filter. Suited for bulk domain vetting and " +
             "prospect-list scoring.",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/batch-analysis/post-batch-analysis",
         categories: ["seo"],
         notes: [
             "Billing: 21 API units per returned row, minimum 50 units per " +

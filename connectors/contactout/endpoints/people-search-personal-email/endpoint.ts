@@ -31,11 +31,9 @@ export default defineEndpoint({
         docsUrl: "https://api.contactout.com/#people-search-api",
         categories: ["people-enrichment"],
         notes: [
-            "Billed per profile RETURNED — one search credit each, so a " +
-            "short last page costs less than page_size; zero results cost " +
-            "nothing. With reveal_info, each profile that carries a " +
-            "personal email adds one email credit and each that carries a " +
-            "phone number one phone credit.",
+            "Billed per profile returned (zero results free). With " +
+            "reveal_info, each profile with a personal email adds one " +
+            "email credit and each with a phone number one phone credit.",
             ...SEARCH_EXCLUSION_NOTES,
         ],
     },

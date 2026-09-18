@@ -1,11 +1,20 @@
-export { Engine, ENGINE_VERSION, LoadedEndpoint } from "./engine.ts";
+export {
+    Engine,
+    ENGINE_VERSION,
+    LoadedEndpoint,
+    LoadedResource,
+} from "./engine.ts";
 export type {
     ConnectorEngine,
     EngineCtx,
+    IResourceStore,
     ParamsResolver,
     PreparedRequest,
+    ResourceReader,
     RunCompleted,
+    RunHandle,
     RunnableEndpoint,
+    RunnableResource,
     RunPollResult,
     RunResult,
     RunStartResult,
@@ -35,4 +44,10 @@ export {
     resolveCredentialEnv,
     sniffDecode,
 } from "./transport.ts";
-export { type LinkedFns, linkFns } from "./link.ts";
+export {
+    instantiate,
+    type LinkedFns,
+    type LinkedResourceFns,
+    linkFns,
+    linkResourceFns,
+} from "./link.ts";

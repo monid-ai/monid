@@ -25,6 +25,8 @@ export default defineEndpoint({
             "for: marketing posters and banners, UI/slide mockups, " +
             "storyboards, product shots, style transfer and subject edits.",
         categories: ["image-generation"],
+        docsUrl:
+            "https://www.alibabacloud.com/help/en/model-studio/qwen-image-generation-and-editing-api-reference",
         notes: [
             "Generation typically takes 20-60 seconds per run; the call " +
             "blocks until the images are ready.",

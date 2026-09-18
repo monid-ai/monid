@@ -15,7 +15,8 @@ export default defineEndpoint({
             "sorting on the returned fields, and a row budget via limit. " +
             "Suited for competitor keyword research and rank tracking " +
             "snapshots.",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/site-explorer/get-organic-keywords",
         categories: ["seo"],
         notes: [
             "Billing: 24 API units per returned row, minimum 50 units per " +

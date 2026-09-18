@@ -24,6 +24,8 @@ export default defineEndpoint({
             "animating photos and artwork, cinematic shots from a single " +
             "still, extending existing footage, talking-head clips.",
         categories: ["video-generation"],
+        docsUrl:
+            "https://www.alibabacloud.com/help/en/model-studio/image-to-video-general-api-reference",
         /** CROSS-field rules the compiled JSON Schema cannot express (design
          *  D9); DashScope enforces each with a free rejection. */
         notes: [
@@ -33,6 +35,8 @@ export default defineEndpoint({
             "Continuation outputs INCLUDE the source clip (duration bounds " +
             "the total), so a 15 s continuation of a 3 s clip bills 15 " +
             "seconds.",
+            "Generation typically takes 1-5 minutes; long or complex " +
+            "requests can take 15+ minutes.",
         ],
     },
     /** PUBLIC identity: v1's published id (design D1). */

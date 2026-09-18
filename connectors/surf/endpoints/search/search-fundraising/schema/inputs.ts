@@ -3,10 +3,14 @@ import { z } from "zod";
 /** GET /search/fundraising query params (ported from v1; faithful vendor mirror,
  *  optionality only — vendor defaults are applied at the binding). */
 export const zSearchFundraisingQueryParams = z.object({
+    // v1 `.trim()`ed the query before length checks; a zod transform does
+    // not survive z.toJSONSchema, so v2 validates the RAW string
+    // (documented drop, reconcile 2026-09-16) — the describe no longer
+    // promises trimmed semantics.
     q: z.string().min(2).max(100).describe(
         "Optional project name, alias, symbol, title, or summary " +
-            "search query. When provided, the trimmed query must contain " +
-            "2-100 Unicode characters. Example: elliptic.",
+            "search query, 2-100 characters (validated untrimmed). " +
+            "Example: elliptic.",
     ).optional(),
     from: z.string().min(1).describe(
         "Inclusive event-time lower bound. Accepts Unix seconds, " +

@@ -13,7 +13,8 @@ export default defineEndpoint({
             "one object. Supports an optional date and country filter and " +
             "target scope. Suited for AI-visibility (GEO) audits and share- " +
             "of-answer tracking.",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/site-explorer/get-ai-responses-count",
         categories: ["geo"],
         notes: [
             "Billing: 120 API units per returned row, minimum 50 units per " +

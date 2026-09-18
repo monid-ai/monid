@@ -1,10 +1,14 @@
 import { fromFileUrl, join } from "@std/path";
 import {
     type Bundle,
+    type Json,
     loadCategoryRegistry,
     loadConnectorDefs,
+    type OwnedResource,
+    type ResourceSealedUnit,
     type RunInput,
     type SealedUnit,
+    sealResourceUnit,
     sealUnit,
     type Usage,
 } from "@shared/core";
@@ -15,7 +19,10 @@ import {
     ENGINE_VERSION,
     envCredentialsPresent,
     envParamsResolver,
+    type ResourceReader,
     type RunCompleted,
+    type RunnableEndpoint,
+    type RunnableResource,
 } from "@monid/connector-engine";
 import { compileBundle } from "@shared/compiler";
 import {
@@ -58,14 +65,126 @@ export async function testSealedUnit(endpointId: string): Promise<SealedUnit> {
     return sealUnit(await testBundle(), endpointId);
 }
 
+export async function testResourceUnit(
+    resourceId: string,
+): Promise<ResourceSealedUnit> {
+    return sealResourceUnit(await testBundle(), resourceId);
+}
+
+/** An in-memory ResourceReader over fixture rows — the test stand-in for
+ *  the host's ownership window (empty seed = owns nothing). */
+export function fixtureReader(rows: OwnedResource[] = []): ResourceReader {
+    return {
+        owned: (query) =>
+            Promise.resolve(
+                rows.filter((row) =>
+                    row.resource === query.resource &&
+                    (query.externalId === undefined ||
+                        row.externalId === query.externalId)
+                ),
+            ),
+    };
+}
+
 export interface RunEndpointOptions {
     unit: SealedUnit;
     input: RunInput;
     mode: RunMode;
-    /** replay mode: the fixture to serve. */
+    /** replay mode: the fixture to serve. OMIT it to assert the test
+     *  makes ZERO upstream calls (gate misses, reader-only endpoints,
+     *  local completions) — any fetch then fails loudly instead of
+     *  silently consuming a placeholder chain. */
     fixture?: Fixture;
     /** record mode: captured calls are pushed here. */
     sink?: RecordedCall[];
+    /** Owned-resource rows served to `utils.resources` and the ownership
+     *  gate. A reader is ALWAYS wired (possibly empty) — bound docs load
+     *  regardless; ownership is the fixture's story. */
+    resources?: OwnedResource[];
+    /** The opaque scope token `ensure` fns see (default "test-scope"). */
+    scopeKey?: string;
+}
+
+function testTransport(opts: {
+    mode: RunMode;
+    fixture?: Fixture;
+    sink?: RecordedCall[];
+    bindings?: Record<string, string>;
+    /** The doc's compiled auth.credentials schema. */
+    credentials: Record<string, Json>;
+}) {
+    // the test key satisfies whatever credential SHAPE the doc declares
+    // (default `{apiKey}`, or a provider's own — contactout names its two
+    // keys), so replay never depends on env
+    const testParams = Object.fromEntries(
+        credentialFieldsOf(opts.credentials)
+            .map((field) => [field, "test-key"]),
+    );
+    switch (opts.mode) {
+        case "replay": {
+            if (!opts.fixture) {
+                // NO fixture = the test's assertion that ZERO upstream
+                // calls happen — strictly stronger than a placeholder
+                // chain (which an accidental call could silently consume)
+                return directTransport({
+                    params: () => Promise.resolve(testParams),
+                    fetch: (input, init) =>
+                        Promise.reject(
+                            new Error(
+                                "replay: no fixture — this test expects " +
+                                    "zero upstream calls, got " +
+                                    `${
+                                        (init as { method?: string })
+                                            ?.method ?? "GET"
+                                    } ${String(input)}`,
+                            ),
+                        ),
+                });
+            }
+            return directTransport({
+                params: () => Promise.resolve(testParams),
+                fetch: replayFetch(opts.fixture, opts.bindings ?? {}),
+            });
+        }
+        case "record": {
+            if (!opts.sink) throw new Error("record mode requires a sink");
+            return directTransport({
+                params: envParamsResolver,
+                fetch: recordingFetch(fetch, opts.sink),
+            });
+        }
+        case "live":
+            return directTransport({ params: envParamsResolver });
+    }
+}
+
+/** Engine.load with the test wiring — for tests that drive phases
+ *  (ensure/start/poll/stop/accrued) themselves. */
+export async function loadEndpoint(
+    opts: RunEndpointOptions,
+): Promise<RunnableEndpoint> {
+    // shared-chain bindings (fixture strategy v2): fixture urls may
+    // carry {{request.url}}/{{request.origin}} placeholders, bound
+    // from THIS endpoint's compiled request
+    const requestUrl = opts.unit.doc.request.url;
+    const engine = new Engine({
+        transport: testTransport({
+            mode: opts.mode,
+            fixture: opts.fixture,
+            sink: opts.sink,
+            bindings: {
+                "request.url": requestUrl,
+                "request.origin": new URL(requestUrl).origin,
+            },
+            credentials: opts.unit.doc.auth.credentials,
+        }),
+        // replay: skip real pollAfterMs sleeps — async fixtures replay
+        // instantly (also neuters lifecycle utils.sleep waits).
+        ...(opts.mode === "replay" ? { sleep: () => Promise.resolve() } : {}),
+        resources: fixtureReader(opts.resources ?? []),
+        scopeKey: opts.scopeKey ?? "test-scope",
+    });
+    return await engine.load(opts.unit);
 }
 
 /**
@@ -75,51 +194,37 @@ export interface RunEndpointOptions {
 export async function runEndpoint(
     opts: RunEndpointOptions,
 ): Promise<RunCompleted> {
-    let transport;
-    switch (opts.mode) {
-        case "replay": {
-            if (!opts.fixture) {
-                throw new Error("replay mode requires a fixture");
-            }
-            // shared-chain bindings (fixture strategy v2): fixture urls may
-            // carry {{request.url}}/{{request.origin}} placeholders, bound
-            // from THIS endpoint's compiled request
-            const requestUrl = opts.unit.doc.request.url;
-            // the test key satisfies whatever credential SHAPE the doc
-            // declares (default `{apiKey}`, or a provider's own — contactout
-            // names its two keys), so replay never depends on env
-            const testParams = Object.fromEntries(
-                credentialFieldsOf(opts.unit.doc.auth.credentials)
-                    .map((field) => [field, "test-key"]),
-            );
-            transport = directTransport({
-                params: () => Promise.resolve(testParams),
-                fetch: replayFetch(opts.fixture, {
-                    "request.url": requestUrl,
-                    "request.origin": new URL(requestUrl).origin,
-                }),
-            });
-            break;
-        }
-        case "record": {
-            if (!opts.sink) throw new Error("record mode requires a sink");
-            transport = directTransport({
-                params: envParamsResolver,
-                fetch: recordingFetch(fetch, opts.sink),
-            });
-            break;
-        }
-        case "live":
-            transport = directTransport({ params: envParamsResolver });
-            break;
-    }
-    // replay: skip real pollAfterMs sleeps — async fixtures replay instantly.
+    const loaded = await loadEndpoint(opts);
+    return await loaded.run(opts.input);
+}
+
+export interface LoadResourceOptions {
+    unit: ResourceSealedUnit;
+    mode: RunMode;
+    fixture?: Fixture;
+    sink?: RecordedCall[];
+}
+
+/** Engine.loadResource with the test wiring — resource-op tests drive
+ *  verify/release/refresh/reconcileUsage/view against replay chains. */
+export async function loadResource(
+    opts: LoadResourceOptions,
+): Promise<RunnableResource> {
+    const requestUrl = opts.unit.doc.request.url;
     const engine = new Engine({
-        transport,
+        transport: testTransport({
+            mode: opts.mode,
+            fixture: opts.fixture,
+            sink: opts.sink,
+            bindings: {
+                "request.url": requestUrl,
+                "request.origin": new URL(requestUrl).origin,
+            },
+            credentials: opts.unit.doc.auth.credentials,
+        }),
         ...(opts.mode === "replay" ? { sleep: () => Promise.resolve() } : {}),
     });
-    const loaded = await engine.load(opts.unit);
-    return await loaded.run(opts.input);
+    return await engine.loadResource(opts.unit);
 }
 
 /**

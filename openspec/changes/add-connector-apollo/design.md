@@ -182,3 +182,21 @@ drills (each description says so). Replay matched the engine's URLs on
 the first run for all eight endpoints (bracket encoding, `@` → `%40`,
 path substitution), so the wire form is at least self-consistent; it is
 not live-verified (tasks 7.1).
+
+## D12 — reconcile ledger drills (addendum, 2026-09-16)
+
+Three of this change's open questions were settled against the live credit
+ledger (`num_credits_remaining` deltas, tasks 7.1):
+
+1. **Every card row is exact**: companies-search, organizations-enrich,
+   organizations-show, job-postings, news-search, people-show each moved the
+   ledger exactly 1 credit; people-search moved it 0 (FREE confirmed).
+2. **Empty pages do NOT bill** (D4's open question): an empty
+   companies-search page moved the ledger 0 — v1's "when results are
+   returned" reading and this change's evidence rule are both correct.
+3. **`reveal_personal_emails` alone does NOT surcharge** (D3 confirmed
+   against v1's +1-on-flag card): a matched person with the flag set and
+   `personal_emails: []` delivered moved the ledger exactly 1. The cost of a
+   DELIVERED personal email remains unmeasured (no test subject with one on
+   file); the flag stays sendable and the card stays surcharge-free per the
+   published table.

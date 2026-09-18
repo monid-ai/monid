@@ -10,8 +10,11 @@ import { defineProvider, presets } from "@shared/core";
  * BILLING IS THE PUBLISHED TIER, NOT THE RESPONSE FIELD (design D1). Surf
  * prices every call at Light 1 / Standard 2 / Heavy 4 credits (the tier
  * table by family: https://docs.asksurf.ai/pricing, checked 2026-09-16;
- * the per-endpoint tier is v1's, confirmed by the 2026-08-03/04 balance
- * drills), and each endpoint's flat PER_CALL line pins its tier. Every 2xx
+ * the per-endpoint tier is v1's — the 2026-08-03/04 balance drills
+ * confirmed the 13 endpoints they measured, and the nine docs carrying a
+ * "(partial)" note keep v1's undrilled BEST READING of the vendor's
+ * unnamed tier entry), and each endpoint's flat PER_CALL line pins its
+ * tier. Every 2xx
  * body also carries `meta.credits_used` — v1 measured it against the
  * account balance in 2026-08 (13 endpoints, both directions wrong:
  * `web/fetch` reports 2 and is charged 1, `heatscore/projects` reports 1

@@ -21,6 +21,8 @@ export default defineEndpoint({
             "16:9, 9:16, 1:1. Suited for: short-form social clips, ads and " +
             "product b-roll, storyboards, concept previews.",
         categories: ["video-generation"],
+        docsUrl:
+            "https://kling.ai/document-api/api/video/3-0-turbo/text-to-video",
         notes: [
             "Turbo always generates native audio and is priced as such — " +
             "there is no audio switch.",

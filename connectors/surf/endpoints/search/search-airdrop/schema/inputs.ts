@@ -6,7 +6,14 @@ export const zSearchAirdropQueryParams = z.object({
     q: z.string().min(2).max(100).describe(
         "Search keyword for coin name. Example: airdrop.",
     ).optional(),
-    phase: z.string().min(1).describe(
+    // The value-set gate v1 enforced with `.refine` — as a PATTERN, since
+    // a refinement is silently dropped by z.toJSONSchema but a regex
+    // compiles and the engine validates it pre-flight (reconcile
+    // 2026-09-16: an invalid phase no longer travels to the vendor).
+    phase: z.string().min(1).regex(
+        /^\s*(?:active|claimable|completed)\s*(?:,\s*(?:active|claimable|completed)\s*)*$/,
+        "phase accepts active, claimable and completed",
+    ).describe(
         "Comma-separated lifecycle phases. active = tasks open, can " +
             "participate (POTENTIAL + CONFIRMED). claimable = eligible, " +
             "can claim (SNAPSHOT + VERIFICATION + REWARD_AVAILABLE). " +

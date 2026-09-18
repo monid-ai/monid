@@ -12,7 +12,8 @@ export default defineEndpoint({
             "paid keywords, paid traffic, and paid cost, as of the given " +
             "date. Supports country filter and target scope. Suited for " +
             "one-call domain snapshots in competitive research.",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/site-explorer/get-metrics",
         categories: ["seo"],
         notes: [
             "Billing: 44 API units per returned row, minimum 50 units per " +

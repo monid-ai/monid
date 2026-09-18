@@ -62,12 +62,9 @@ export default defineProvider({
             "EXPIRES after 30 days, download promptly.",
             "Media URLs must be public https:// URLs that Kling can fetch " +
             "server-side; inline base64 is not accepted.",
-            "Billing is per WHOLE second of video at the rate the request " +
-            "selects (resolution, and where the model prices them, native " +
-            "audio or a video input) — a 3.041 s output bills 3 s. A " +
-            "rejected request (unsupported combination, content policy) " +
-            "returns Kling's rule text and costs nothing; a failed task " +
-            "bills nothing.",
+            "Billing is per whole second at the rate the request selects " +
+            "(resolution, native audio, video input) — a 3.041 s output " +
+            "bills 3 s. Rejected requests and failed tasks cost nothing.",
             "There is no cancel: a submitted task runs to completion and " +
             "is billed even if the run is abandoned.",
         ],

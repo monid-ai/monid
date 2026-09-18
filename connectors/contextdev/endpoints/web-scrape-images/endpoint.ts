@@ -14,6 +14,13 @@ export default defineEndpoint({
             "content pipelines.",
         docsUrl: "https://docs.context.dev/api-reference/web-scraping/images",
         categories: ["web-extraction"],
+        notes: [
+            "Per-image enrichment (resolution, CDN hosting, " +
+            "classification) is a 5-credit call upstream and is not " +
+            "surfaced by this integration; if Context.dev ever bills " +
+            "more than the list rate, the vendor's credits_consumed " +
+            "claim settles the run.",
+        ],
     },
     request: { method: "GET", path: "/web/scrape/images" },
     input: { schema: { queryParams: zScrapeImagesQueryParams } },

@@ -12,7 +12,8 @@ export default defineEndpoint({
             "score, as of the given date. Suited for authority checks in " +
             "outreach vetting, domain valuation, and competitor " +
             "comparisons.",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/site-explorer/get-domain-rating",
         categories: ["seo"],
         notes: [
             "Billing: 2 API units per returned row, minimum 50 units per " +

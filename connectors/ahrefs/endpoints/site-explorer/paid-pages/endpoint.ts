@@ -14,7 +14,8 @@ export default defineEndpoint({
             "at the page. Supports a report date, country filter, target " +
             "scope, filtering, sorting, and a row budget via limit. Suited " +
             "for competitor PPC landing-page research.",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/site-explorer/get-paid-pages",
         categories: ["seo"],
         notes: [
             "Billing: 13 API units per returned row, minimum 50 units per " +

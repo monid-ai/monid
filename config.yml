@@ -53,7 +53,18 @@ schema:
     # utils.request, which only the LIFECYCLE family holds. So this bump is
     # alone here, NOT on fn_abi_since: a pure-hook doc gained no capability
     # and must not be floored at a newer engine.
+    # (0.2.0 ALSO grew the lifecycle ctx additively in the same release:
+    # `data.run.runId`, `utils.sleep`, `utils.resources`, and the stop
+    # outcome voice — add-resource-lifecycle-saperly.)
     async_since: "0.2.0" # engine release of the lifecycle (async) hook family; stamped as lifecycle fn entries' `api`
+    # 0.5.0: the RESOURCE family ships (add-resource-lifecycle-saperly,
+    # refined by refine-resource-model) — resource docs (usage rate card,
+    # lifecycle verify/release/refresh, views), purpose-keyed endpoint
+    # bindings with gated-instance injection, route webhooks. A new fact
+    # rather than riding async_since: resource fns are their own hook
+    # family with their own ctx (no request, ResourceOpUtils), and endpoint
+    # docs WITHOUT bindings must not inherit the resource floor.
+    resources_since: "0.5.0" # engine release of the resource family; resource docs' floor + resource fn entries' `api`
     state_max_bytes: 65536 # hard engine cap on serialized lifecycle state (ids + billing signals, never payloads)
 
 compiler:

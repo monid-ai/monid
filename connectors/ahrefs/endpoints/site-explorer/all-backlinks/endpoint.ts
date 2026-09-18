@@ -15,11 +15,14 @@ export default defineEndpoint({
             "filtering and sorting on the returned fields, and a row budget " +
             "via limit. Suited for link audits, outreach prospecting, and " +
             "competitor link-profile analysis.",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/site-explorer/get-all-backlinks",
         categories: ["seo"],
         notes: [
             "Billing: 10 API units per returned row, minimum 50 units per " +
-            "request — an empty result still draws 50.",
+            "billable request; cache hits and explicit zero consumption are free.",
+            "where and order_by accept only this endpoint's returned " +
+            "fields; anything else is rejected before the request.",
         ],
     },
     request: { method: "GET", path: "/site-explorer/all-backlinks" },

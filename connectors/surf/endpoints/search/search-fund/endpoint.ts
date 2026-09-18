@@ -13,6 +13,11 @@ export default defineEndpoint({
             "type, logo, top invested projects.",
         docsUrl: "https://docs.asksurf.ai/data-api/search/fund",
         categories: ["company-enrichment", "funding-data"],
+        notes: [
+            "The exact credit tier for this endpoint is not individually " +
+            "verified - confirm against your billing before relying on " +
+            "the rate.",
+        ],
     },
     request: { method: "GET", path: "/search/fund" },
     input: {

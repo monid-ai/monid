@@ -34,6 +34,10 @@ export default defineEndpoint({
             "seconds. Estimate cost/validity first with " +
             "/onchain/sql/preflight. Refresh: ~24h.",
         categories: ["onchain-data"],
+        notes: [
+            "Billed once at submit (4 credits) - status polls and the " +
+            "result download are free.",
+        ],
     },
     request: { method: "POST", path: "/onchain/sql/jobs" },
     input: {

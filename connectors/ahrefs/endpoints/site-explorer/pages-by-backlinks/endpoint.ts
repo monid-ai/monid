@@ -13,7 +13,8 @@ export default defineEndpoint({
             "to the page, and unique referring domains. Supports target " +
             "scope, filtering, sorting, and a row budget via limit. Suited " +
             "for finding a site's most linkable assets.",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/site-explorer/get-pages-by-backlinks",
         categories: ["seo"],
         notes: [
             "Billing: 8 API units per returned row, minimum 50 units per " +

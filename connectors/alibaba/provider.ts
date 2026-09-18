@@ -243,6 +243,7 @@ export default defineProvider({
                 "input_tokens",
                 "output_tokens",
                 "total_tokens",
+                "characters",
             ]),
     },
     usage: {

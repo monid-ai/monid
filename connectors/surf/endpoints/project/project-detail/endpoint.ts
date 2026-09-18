@@ -37,6 +37,9 @@ export default defineEndpoint({
             "Pass at least one of `id`, `x_id`, `handle` or `q`; " +
             "`id` takes priority when several are given. A request " +
             "with none is rejected before the wire.",
+            "The exact credit tier for this endpoint is not individually " +
+            "verified - confirm against your billing before relying on " +
+            "the rate.",
         ],
     },
     request: { method: "GET", path: "/project/detail" },

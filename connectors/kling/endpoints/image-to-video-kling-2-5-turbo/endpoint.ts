@@ -23,6 +23,11 @@ export default defineEndpoint({
             "animation, photo-to-clip social content, keyframe-driven " +
             "transitions.",
         categories: ["video-generation"],
+        docsUrl:
+            // the only i2v page Kling publishes for 2.5 Turbo is the legacy
+            // reference (Google-index verified, PR review 2026-09-17)
+            "https://kling.ai/document-api/api/video/2-5-turbo" +
+            "/image-to-video/legacy",
         /** CROSS-field rules the compiled JSON Schema cannot express, which
          *  Kling enforces itself with a free rejection (design D9). */
         notes: [

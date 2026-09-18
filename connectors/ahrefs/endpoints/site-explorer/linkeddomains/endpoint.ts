@@ -14,7 +14,8 @@ export default defineEndpoint({
             "target's pages linking out. Supports target scope, filtering, " +
             "sorting, and a row budget via limit. Suited for outbound-link " +
             "audits and partnership discovery.",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/site-explorer/get-linkeddomains",
         categories: ["seo"],
         notes: [
             "Billing: 4 API units per returned row, minimum 50 units per " +

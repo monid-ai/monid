@@ -254,6 +254,22 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "Work with voice, including text-to-speech, transcription, dialogue, and more.",
     },
     {
+        // The first RESOURCE-backed leaves (add-resource-lifecycle-saperly):
+        // real phone numbers owned by the workspace, with AI personas
+        // answering and placing calls.
+        id: "agentic-phone",
+        displayName: "Agentic Phone",
+        description:
+            "Real phone numbers for AI agents — provision numbers, place " +
+            "and answer calls with an AI persona, transcripts and " +
+            "recordings.",
+    },
+    {
+        id: "sms",
+        displayName: "SMS",
+        description: "Send and receive SMS from owned phone numbers.",
+    },
+    {
         id: "token-prices",
         displayName: "Token Prices",
         description:

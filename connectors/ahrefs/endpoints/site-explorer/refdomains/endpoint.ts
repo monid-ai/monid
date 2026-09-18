@@ -14,7 +14,8 @@ export default defineEndpoint({
             "dates. Supports target scope, filtering, sorting, and a row " +
             "budget via limit. Suited for link-profile audits and domain- " +
             "level outreach lists.",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/site-explorer/get-refdomains",
         categories: ["seo"],
         notes: [
             "Billing: 6 API units per returned row, minimum 50 units per " +

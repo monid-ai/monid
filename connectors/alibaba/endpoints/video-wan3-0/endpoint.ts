@@ -18,6 +18,8 @@ export default defineEndpoint({
         description:
             'Generate video from any mix of inputs with one request: a text prompt (up to 20,000 characters), pinned first/last frames, reference images (up to 10), reference video and audio clips, an office document or PDF, or a web link, with Wan 3.0. Supports smart duration ("auto"), adaptive aspect ratio, and prompt rewriting. Returns a downloadable MP4 video_url (24h expiry) with synchronized audio, 2-30 seconds, 480P/720P/1080P. Suited for: short-form social clips, ads and product demos, storyboard-to-video, document and article explainers, character-consistent scenes.',
         categories: ["video-generation"],
+        docsUrl:
+            "https://www.alibabacloud.com/help/en/model-studio/wan3-video-generation-api-reference",
         /** CROSS-field rules the compiled JSON Schema cannot express (design
          *  D9); DashScope enforces each with a free rejection. */
         notes: [
@@ -38,6 +40,8 @@ export default defineEndpoint({
             "unused portion at settle. Pass an explicit duration for a " +
             "tight hold.",
             "DashScope currently discounts wan3.0-video by 30% for a limited time; the rates here are the published list price.",
+            "Generation typically takes 1-5 minutes; long or complex " +
+            "requests can take 15+ minutes.",
         ],
     },
     /** PUBLIC identity: v1's published id. Pinned because all six Wan video

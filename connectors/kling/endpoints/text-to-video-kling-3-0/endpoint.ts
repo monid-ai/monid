@@ -27,6 +27,8 @@ export default defineEndpoint({
             "short-form social clips, ads and product b-roll, storyboards, " +
             "concept previews.",
         categories: ["video-generation"],
+        docsUrl:
+            "https://kling.ai/document-api/api/video/3-0-omni/text-to-video",
         notes: [
             "4K bills 3 units per second with or without native audio — " +
             "five times the silent 720p rate.",

@@ -11,7 +11,8 @@ export default defineEndpoint({
             "country. Returns the country code and its search volume. " +
             "Supports a row budget via limit. Suited for choosing target " +
             "markets for a keyword.",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/keywords-explorer/get-volume-by-country",
         categories: ["seo"],
         notes: [
             "Billing: 11 API units per returned row, minimum 50 units per " +

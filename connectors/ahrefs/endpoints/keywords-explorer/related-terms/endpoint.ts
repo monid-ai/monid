@@ -14,7 +14,8 @@ export default defineEndpoint({
             "filtering and sorting on the returned fields and a row budget " +
             "via limit. Suited for widening topical coverage beyond " +
             "contains-the-seed matches.",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/keywords-explorer/get-related-terms",
         categories: ["seo"],
         notes: [
             "Billing: 22 API units per returned row, minimum 50 units per " +

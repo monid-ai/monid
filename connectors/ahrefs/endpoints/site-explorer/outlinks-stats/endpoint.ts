@@ -12,7 +12,8 @@ export default defineEndpoint({
             "Supports target scope and protocol. Suited for a quick " +
             "outbound-profile check before pulling row-level outgoing " +
             "reports.",
-        docsUrl: "https://docs.ahrefs.com/",
+        docsUrl:
+            "https://docs.ahrefs.com/en/api/reference/site-explorer/get-outlinks-stats",
         categories: ["seo"],
         notes: [
             "Billing: 4 API units per returned row, minimum 50 units per " +
