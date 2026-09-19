@@ -1,9 +1,6 @@
 import { defineEndpoint } from "@shared/core";
 import { zZenschedGuideBody } from "./schema/inputs.ts";
 
-/**
- * ZenSched onboarding guide — free, unauthenticated MCP tools/call.
- */
 export default defineEndpoint({
     meta: {
         displayName: "ZenSched Guide",

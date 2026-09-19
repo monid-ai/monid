@@ -1,6 +1,6 @@
 {
-    "name": "happy",
-    "description": "synthetic zensched#feedback-submit",
+    "name": "provider-error",
+    "description": "synthetic zensched#feedback-submit — MCP host returns 503",
     "calls": [
         {
             "req": {
@@ -21,19 +21,10 @@
                 }
             },
             "res": {
-                "status": 200,
+                "status": 503,
                 "body": {
-                    "jsonrpc": "2.0",
-                    "id": 1,
-                    "result": {
-                        "content": [
-                            {
-                                "type": "text",
-                                "text": "{\"feedback_id\":9001,\"status\":\"open\",\"category\":\"feature\",\"severity\":\"medium\",\"message\":\"Got it — a human will read this. Sign in later and call feedback_list if you want a status update.\"}"
-                            }
-                        ],
-                        "isError": false
-                    }
+                    "error": "service_unavailable",
+                    "message": "ZenSched MCP temporarily unavailable"
                 }
             }
         }

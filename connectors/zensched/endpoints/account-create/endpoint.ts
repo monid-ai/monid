@@ -1,9 +1,6 @@
 import { defineEndpoint } from "@shared/core";
 import { zZenschedAccountCreateBody } from "./schema/inputs.ts";
 
-/**
- * Cold-start org creation — email-less, returns zsc_ key immediately.
- */
 export default defineEndpoint({
     meta: {
         displayName: "Create ZenSched Organization",
