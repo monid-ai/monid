@@ -30,8 +30,6 @@ Deno.test("orbit#v3/enrich: the fan-out polls only what is running, then reads e
         credits: { default: 5 },
         evidence: { partial_profile: 1 },
     });
-    // The envelope carries one CURRENT snapshot per profile, assembled from
-    // the final read of every child, under the batch's own request_id.
     const output = result.output as Record<string, unknown>;
     assertEquals(output.request_id, "BATCH1");
     assertEquals(output.status, "completed");

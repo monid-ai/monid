@@ -27,8 +27,6 @@ Deno.test("orbit#v3/profile/{profile_id}: one flat credit, and the profile rides
     });
     const output = result.output as Record<string, unknown>;
     assertEquals(output.generation_level, 3);
-    // The stored profile rides through whole, with no billing field
-    // invented or stripped on the way.
     const profile = output.profile as Record<string, unknown>;
     assertEquals((profile.sections as unknown[]).length, 1);
     for (const field of ["billing", "credits", "usage", "consumed_credits"]) {
