@@ -336,4 +336,11 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "Primary law: statutes, regulations, court rules, constitutions, " +
             "and the citations between them.",
     },
+    {
+        id: "field-workforce",
+        displayName: "Field Workforce",
+        description:
+            "Schedule field workers, verify GPS check-ins, collect forms, " +
+            "and export timesheets.",
+    },
 ]);

@@ -1,0 +1,28 @@
+{
+    "name": "synthetic-envelope-error",
+    "description": "HTTP 200 with MCP result.isError — lifecycle.start must synthesize 502 so FREE endpoints zero-bill.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Error executing tool account_create: org_name is required"
+                            }
+                        ],
+                        "isError": true
+                    }
+                }
+            }
+        }
+    ]
+}
