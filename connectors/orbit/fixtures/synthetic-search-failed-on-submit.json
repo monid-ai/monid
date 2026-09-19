@@ -1,0 +1,36 @@
+{
+    "name": "synthetic-search-failed-on-submit",
+    "description": "A search that fails inside the submit window: 200 with a terminal `failed` status and the reason at candidate_discovery_failure, where the provider's fromError does not look. The start phase lifts it into Orbit's own error envelope, exactly as the poll does, so the caller reads the real reason rather than the generic fallback. Zero-billed. Synthetic.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "search_id": "SEARCH7",
+                    "request_id": "req-search7",
+                    "status": "failed",
+                    "candidate_discovery": true,
+                    "profile_depth": "partial",
+                    "include_profile": true,
+                    "profile_upgrades_completed": true,
+                    "results": [],
+                    "candidate_discovery_failure": {
+                        "code": "signals_unresolvable",
+                        "message": "The address could not be resolved to a person",
+                        "retryable": false,
+                        "reason": "no_provider_match"
+                    },
+                    "created_at": "2026-09-18T12:00:00.000Z",
+                    "updated_at": "2026-09-18T12:00:02.000Z",
+                    "links": {
+                        "status": "/v3/search/SEARCH7"
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "name": "synthetic-enrich-provider-error",
+    "description": "Orbit refuses an enrichment: 402 with the credits envelope. Vendor non-2xx is DATA — zero usage, forced by the engine. Its own chain rather than the shared one because {profile_id} is substituted before the call, so the url cannot be a {{request.url}} binding. Synthetic.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.orbitsearch.com/v3/enrich/a23ff3b7-b6cc-4ac6-8d4f-0c909cd956f5"
+            },
+            "res": {
+                "status": 402,
+                "body": {
+                    "status": "failed",
+                    "error": {
+                        "code": "developer_api_credits_insufficient",
+                        "message": "Not enough credits to start this request",
+                        "requiredCredits": 5,
+                        "remainingCredits": 1
+                    }
+                }
+            }
+        }
+    ]
+}

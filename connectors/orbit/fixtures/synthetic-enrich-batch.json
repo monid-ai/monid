@@ -1,0 +1,153 @@
+{
+    "name": "synthetic-enrich-batch",
+    "description": "The batch fan-out: the submit returns two children, one running and one already complete; the poll reads only the running child, and once none are running reads BOTH children once more so the envelope carries a current snapshot per profile. Only the dispatched child draws — settles one partial_profile = 5 credits. Synthetic.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "request_id": "BATCH1",
+                    "status": "running",
+                    "results": [
+                        {
+                            "request_id": "CHILD_BUILT",
+                            "profile_id": "PROF_A",
+                            "status": "running",
+                            "operation": "partial",
+                            "include_profile": true,
+                            "generation_level": 1,
+                            "links": {
+                                "status": "/v3/enrich/requests/CHILD_BUILT",
+                                "profile": "/v3/enrich/PROF_A"
+                            }
+                        },
+                        {
+                            "request_id": "CHILD_HELD",
+                            "profile_id": "PROF_B",
+                            "status": "completed",
+                            "operation": "partial",
+                            "include_profile": true,
+                            "generation_level": 2,
+                            "links": {
+                                "status": "/v3/enrich/requests/CHILD_HELD",
+                                "profile": "/v3/enrich/PROF_B"
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.orbitsearch.com/v3/enrich/requests/CHILD_BUILT"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "request_id": "CHILD_BUILT",
+                    "profile_id": "PROF_A",
+                    "status": "completed",
+                    "operation": "partial",
+                    "include_profile": true,
+                    "generation_level": 2,
+                    "profile": {
+                        "id": "a23ff3b7-b6cc-4ac6-8d4f-0c909cd956f5",
+                        "name": "Ada Fielding",
+                        "headline": "Founder at Northwind Instruments",
+                        "location": "Brooklyn, New York",
+                        "sections": [
+                            {
+                                "kind": "background",
+                                "text": "Ada builds measurement hardware for field ecologists.",
+                                "sources": [
+                                    "https://northwind-instruments.example/about"
+                                ]
+                            }
+                        ]
+                    },
+                    "links": {
+                        "status": "/v3/enrich/requests/CHILD_BUILT",
+                        "profile": "/v3/enrich/PROF_A"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.orbitsearch.com/v3/enrich/requests/CHILD_BUILT"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "request_id": "CHILD_BUILT",
+                    "profile_id": "PROF_A",
+                    "status": "completed",
+                    "operation": "partial",
+                    "include_profile": true,
+                    "generation_level": 2,
+                    "profile": {
+                        "id": "a23ff3b7-b6cc-4ac6-8d4f-0c909cd956f5",
+                        "name": "Ada Fielding",
+                        "headline": "Founder at Northwind Instruments",
+                        "location": "Brooklyn, New York",
+                        "sections": [
+                            {
+                                "kind": "background",
+                                "text": "Ada builds measurement hardware for field ecologists.",
+                                "sources": [
+                                    "https://northwind-instruments.example/about"
+                                ]
+                            }
+                        ]
+                    },
+                    "links": {
+                        "status": "/v3/enrich/requests/CHILD_BUILT",
+                        "profile": "/v3/enrich/PROF_A"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.orbitsearch.com/v3/enrich/requests/CHILD_HELD"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "request_id": "CHILD_HELD",
+                    "profile_id": "PROF_B",
+                    "status": "completed",
+                    "operation": "partial",
+                    "include_profile": true,
+                    "generation_level": 2,
+                    "profile": {
+                        "id": "a23ff3b7-b6cc-4ac6-8d4f-0c909cd956f5",
+                        "name": "Ada Fielding",
+                        "headline": "Founder at Northwind Instruments",
+                        "location": "Brooklyn, New York",
+                        "sections": [
+                            {
+                                "kind": "background",
+                                "text": "Ada builds measurement hardware for field ecologists.",
+                                "sources": [
+                                    "https://northwind-instruments.example/about"
+                                ]
+                            }
+                        ]
+                    },
+                    "links": {
+                        "status": "/v3/enrich/requests/CHILD_HELD",
+                        "profile": "/v3/enrich/PROF_B"
+                    }
+                }
+            }
+        }
+    ]
+}

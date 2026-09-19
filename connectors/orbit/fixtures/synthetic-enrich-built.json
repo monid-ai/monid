@@ -1,0 +1,84 @@
+{
+    "name": "synthetic-enrich-built",
+    "description": "A full build Orbit had to do: the submit answers 202 running (the DISPATCH signal), one tick is still running, and the terminal snapshot reports generation_level 3. Settles one full_profile = 10 credits. Urls are literal because {profile_id} is substituted before the call, and the poll follows links.status. Synthetic.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.orbitsearch.com/v3/enrich/a23ff3b7-b6cc-4ac6-8d4f-0c909cd956f5"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "request_id": "ENRICH1",
+                    "profile_id": "a23ff3b7-b6cc-4ac6-8d4f-0c909cd956f5",
+                    "status": "running",
+                    "operation": "full",
+                    "include_profile": true,
+                    "generation_level": 2,
+                    "links": {
+                        "status": "/v3/enrich/requests/ENRICH1",
+                        "profile": "/v3/enrich/a23ff3b7-b6cc-4ac6-8d4f-0c909cd956f5"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.orbitsearch.com/v3/enrich/requests/ENRICH1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "request_id": "ENRICH1",
+                    "profile_id": "a23ff3b7-b6cc-4ac6-8d4f-0c909cd956f5",
+                    "status": "running",
+                    "operation": "full",
+                    "include_profile": true,
+                    "generation_level": 2,
+                    "links": {
+                        "status": "/v3/enrich/requests/ENRICH1",
+                        "profile": "/v3/enrich/a23ff3b7-b6cc-4ac6-8d4f-0c909cd956f5"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.orbitsearch.com/v3/enrich/requests/ENRICH1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "request_id": "ENRICH1",
+                    "profile_id": "a23ff3b7-b6cc-4ac6-8d4f-0c909cd956f5",
+                    "status": "completed",
+                    "operation": "full",
+                    "include_profile": true,
+                    "generation_level": 3,
+                    "profile": {
+                        "id": "a23ff3b7-b6cc-4ac6-8d4f-0c909cd956f5",
+                        "name": "Ada Fielding",
+                        "headline": "Founder at Northwind Instruments",
+                        "location": "Brooklyn, New York",
+                        "sections": [
+                            {
+                                "kind": "background",
+                                "text": "Ada builds measurement hardware for field ecologists.",
+                                "sources": [
+                                    "https://northwind-instruments.example/about"
+                                ]
+                            }
+                        ]
+                    },
+                    "links": {
+                        "status": "/v3/enrich/requests/ENRICH1",
+                        "profile": "/v3/enrich/a23ff3b7-b6cc-4ac6-8d4f-0c909cd956f5"
+                    }
+                }
+            }
+        }
+    ]
+}

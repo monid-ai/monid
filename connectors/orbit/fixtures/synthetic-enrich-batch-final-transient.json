@@ -1,0 +1,169 @@
+{
+    "name": "synthetic-enrich-batch-final-transient",
+    "description": "The batch's FINAL read hits a transient failure on a child that has already completed. That read is the same lookup the poll makes, so it gets the same answer: the sweep finishes, the child is re-opened rather than published as `failed`, and the next tick settles. Publishing a failed row would settle a build Orbit charged for at zero. One partial_profile = 5 credits. Synthetic.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "request_id": "BATCH2",
+                    "status": "running",
+                    "results": [
+                        {
+                            "request_id": "CHILD_BUILT",
+                            "profile_id": "PROF_A",
+                            "status": "running",
+                            "operation": "partial",
+                            "include_profile": true,
+                            "generation_level": 1,
+                            "links": {
+                                "status": "/v3/enrich/requests/CHILD_BUILT",
+                                "profile": "/v3/enrich/PROF_A"
+                            }
+                        },
+                        {
+                            "request_id": "CHILD_HELD",
+                            "profile_id": "PROF_B",
+                            "status": "completed",
+                            "operation": "partial",
+                            "include_profile": true,
+                            "generation_level": 2,
+                            "links": {
+                                "status": "/v3/enrich/requests/CHILD_HELD",
+                                "profile": "/v3/enrich/PROF_B"
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.orbitsearch.com/v3/enrich/requests/CHILD_BUILT"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "request_id": "CHILD_BUILT",
+                    "profile_id": "PROF_A",
+                    "status": "completed",
+                    "operation": "partial",
+                    "include_profile": true,
+                    "generation_level": 2,
+                    "links": {
+                        "status": "/v3/enrich/requests/CHILD_BUILT",
+                        "profile": "/v3/enrich/PROF_A"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.orbitsearch.com/v3/enrich/requests/CHILD_BUILT"
+            },
+            "res": {
+                "status": 503,
+                "body": {
+                    "status": "failed",
+                    "error": {
+                        "code": "upstream_unavailable",
+                        "message": "Service unavailable"
+                    }
+                },
+                "headers": {
+                    "retry-after": "3"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.orbitsearch.com/v3/enrich/requests/CHILD_HELD"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "request_id": "CHILD_HELD",
+                    "profile_id": "PROF_B",
+                    "status": "completed",
+                    "operation": "partial",
+                    "include_profile": true,
+                    "generation_level": 2,
+                    "links": {
+                        "status": "/v3/enrich/requests/CHILD_HELD",
+                        "profile": "/v3/enrich/PROF_B"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.orbitsearch.com/v3/enrich/requests/CHILD_BUILT"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "request_id": "CHILD_BUILT",
+                    "profile_id": "PROF_A",
+                    "status": "completed",
+                    "operation": "partial",
+                    "include_profile": true,
+                    "generation_level": 2,
+                    "links": {
+                        "status": "/v3/enrich/requests/CHILD_BUILT",
+                        "profile": "/v3/enrich/PROF_A"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.orbitsearch.com/v3/enrich/requests/CHILD_BUILT"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "request_id": "CHILD_BUILT",
+                    "profile_id": "PROF_A",
+                    "status": "completed",
+                    "operation": "partial",
+                    "include_profile": true,
+                    "generation_level": 2,
+                    "links": {
+                        "status": "/v3/enrich/requests/CHILD_BUILT",
+                        "profile": "/v3/enrich/PROF_A"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.orbitsearch.com/v3/enrich/requests/CHILD_HELD"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "request_id": "CHILD_HELD",
+                    "profile_id": "PROF_B",
+                    "status": "completed",
+                    "operation": "partial",
+                    "include_profile": true,
+                    "generation_level": 2,
+                    "links": {
+                        "status": "/v3/enrich/requests/CHILD_HELD",
+                        "profile": "/v3/enrich/PROF_B"
+                    }
+                }
+            }
+        }
+    ]
+}

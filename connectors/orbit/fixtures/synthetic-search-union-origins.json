@@ -1,0 +1,121 @@
+{
+    "name": "synthetic-search-union-origins",
+    "description": "Ten people from the index plus one the search found BOTH ways, whose `sources` therefore carries `candidate_discovery` and `search` together. Orbit bills that row against the single origin that created it and excludes discovery rows from the cached-result count, so the union row belongs on the discovery line only: 10 cached results = 1 block, plus 1 discovery = 2 credits. Counting it on both lines would round the cached count up to a second block and charge 3. Synthetic.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "search_id": "SEARCH6",
+                    "request_id": "req-search6",
+                    "status": "completed",
+                    "candidate_discovery": true,
+                    "profile_depth": "partial",
+                    "include_profile": false,
+                    "profile_upgrades_completed": true,
+                    "results": [
+                        {
+                            "profile_id": "PROF_1",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_2",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_3",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_4",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_5",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_6",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_7",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_8",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_9",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_10",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_BOTH",
+                            "status": "ready",
+                            "generation_level": 1,
+                            "sources": [
+                                "candidate_discovery",
+                                "search"
+                            ]
+                        }
+                    ],
+                    "created_at": "2026-09-17T12:00:00.000Z",
+                    "updated_at": "2026-09-17T12:01:00.000Z",
+                    "links": {
+                        "status": "/v3/search/SEARCH6"
+                    },
+                    "candidate_discovery_completed": true
+                }
+            }
+        }
+    ]
+}

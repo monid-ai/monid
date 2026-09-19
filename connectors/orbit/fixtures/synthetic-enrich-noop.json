@@ -1,0 +1,42 @@
+{
+    "name": "synthetic-enrich-noop",
+    "description": "THE no-op: the profile already sits at the depth asked for, so Orbit answers 200 terminally on the submit without dispatching anything, and the run settles at ZERO. This is the case the dispatch signal exists for — a settle keyed on the depth reached would bill 10 credits for work nobody did. Synthetic.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.orbitsearch.com/v3/enrich/a23ff3b7-b6cc-4ac6-8d4f-0c909cd956f5"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "request_id": "ENRICH2",
+                    "profile_id": "a23ff3b7-b6cc-4ac6-8d4f-0c909cd956f5",
+                    "status": "completed",
+                    "operation": "full",
+                    "include_profile": true,
+                    "generation_level": 3,
+                    "profile": {
+                        "id": "a23ff3b7-b6cc-4ac6-8d4f-0c909cd956f5",
+                        "name": "Ada Fielding",
+                        "headline": "Founder at Northwind Instruments",
+                        "location": "Brooklyn, New York",
+                        "sections": [
+                            {
+                                "kind": "background",
+                                "text": "Ada builds measurement hardware for field ecologists.",
+                                "sources": [
+                                    "https://northwind-instruments.example/about"
+                                ]
+                            }
+                        ]
+                    },
+                    "links": {
+                        "status": "/v3/enrich/requests/ENRICH2",
+                        "profile": "/v3/enrich/a23ff3b7-b6cc-4ac6-8d4f-0c909cd956f5"
+                    }
+                }
+            }
+        }
+    ]
+}
