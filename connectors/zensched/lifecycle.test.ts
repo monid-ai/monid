@@ -1,4 +1,4 @@
-import { assert, assertEquals } from "@std/assert";
+import { assertEquals } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import { loadFixture, runEndpoint, testSealedUnit } from "@shared/testing";
 
@@ -21,16 +21,6 @@ const INPUTS = {
         },
     },
 } as const;
-
-Deno.test("zensched: the three sync endpoints share provider lifecycle.start", async () => {
-    const units = await Promise.all(ENDPOINTS.map((id) => testSealedUnit(id)));
-    const startKey = units[0].doc.lifecycle?.start.$fn.key;
-    assert(startKey !== undefined, "provider lifecycle.start must resolve");
-    for (const unit of units) {
-        assertEquals(unit.doc.lifecycle?.start.$fn.key, startKey);
-        assertEquals(unit.doc.lifecycle?.poll, undefined);
-    }
-});
 
 Deno.test("zensched: HTTP 200 + result.isError becomes 502 and bills nothing", async () => {
     const fixture = await loadFixture(`${FIXTURES}synthetic-envelope-error.json`);

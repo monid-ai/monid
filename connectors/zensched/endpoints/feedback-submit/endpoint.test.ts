@@ -20,7 +20,7 @@ const INPUT = {
 
 Deno.test(`${ID} happy (synthetic): free`, async () => {
     const unit = await testSealedUnit(ID);
-    const fixture = await loadFixture(`${fixturesDir}happy.json`);
+    const fixture = await loadFixture(`${fixturesDir}synthetic-happy.json`);
     assertEquals(fixture.calls.length, 1);
     const result = await runEndpoint({
         unit,
@@ -53,7 +53,7 @@ Deno.test(`${ID} provider error (synthetic 503): zero usage`, async () => {
 
 Deno.test(`${ID}: title and body required, category enum, strict body`, async () => {
     const unit = await testSealedUnit(ID);
-    const fixture = await loadFixture(`${fixturesDir}happy.json`);
+    const fixture = await loadFixture(`${fixturesDir}synthetic-happy.json`);
     const run = (body: Record<string, unknown>) =>
         runEndpoint({
             unit,
@@ -75,8 +75,9 @@ Deno.test(`${ID}: title and body required, category enum, strict body`, async ()
         await assertRejects(() => run(bad), Error, "INVALID_INPUT");
     }
     const result = await run({
-        title: "Monid schema gate valid optional context",
-        body: "Optional context is allowed on feedback_submit.",
+        title: "Surface pet-care kits in Monid discover",
+        body: "Would love Monid discover to surface pet-care reference-design kits.",
+        category: "feature",
         context: "optional context is allowed",
     });
     assertEquals(result.isProviderError, false);
@@ -85,7 +86,7 @@ Deno.test(`${ID}: title and body required, category enum, strict body`, async ()
 Deno.test({
     name:
         `${ID} live (gated on ZENSCHED_API_KEY — public funnel, key unused on wire)`,
-    ignore: liveSkip("zensched"),
+    ignore: liveSkip("zensched", ["apiKey"]),
     fn: async () => {
         const unit = await testSealedUnit(ID);
         const result = await runEndpoint({

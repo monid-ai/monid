@@ -14,7 +14,7 @@ const INPUT = { body: { org_name: "Demo Field Crew" } };
 
 Deno.test(`${ID} happy (synthetic): free, org + key`, async () => {
     const unit = await testSealedUnit(ID);
-    const fixture = await loadFixture(`${fixturesDir}happy.json`);
+    const fixture = await loadFixture(`${fixturesDir}synthetic-happy.json`);
     assertEquals(fixture.calls.length, 1);
     const result = await runEndpoint({
         unit,
@@ -47,7 +47,7 @@ Deno.test(`${ID} provider error (synthetic 503): zero usage`, async () => {
 
 Deno.test(`${ID}: org_name required, bounded 1-200, strict body`, async () => {
     const unit = await testSealedUnit(ID);
-    const fixture = await loadFixture(`${fixturesDir}happy.json`);
+    const fixture = await loadFixture(`${fixturesDir}synthetic-happy.json`);
     const run = (body: Record<string, unknown>) =>
         runEndpoint({
             unit,
@@ -65,14 +65,14 @@ Deno.test(`${ID}: org_name required, bounded 1-200, strict body`, async () => {
     ) {
         await assertRejects(() => run(bad), Error, "INVALID_INPUT");
     }
-    const result = await run({ org_name: "Another Valid Org" });
+    const result = await run({ org_name: "Demo Field Crew" });
     assertEquals(result.isProviderError, false);
 });
 
 Deno.test({
     name:
         `${ID} live (gated on ZENSCHED_API_KEY — creates a real org; key unused on wire)`,
-    ignore: liveSkip("zensched"),
+    ignore: liveSkip("zensched", ["apiKey"]),
     fn: async () => {
         const unit = await testSealedUnit(ID);
         const orgName = `Monid live ${Date.now()}`;

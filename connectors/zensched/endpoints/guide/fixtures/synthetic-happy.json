@@ -1,6 +1,6 @@
 {
-    "name": "happy",
-    "description": "synthetic zensched#account-create — MCP account_create",
+    "name": "synthetic-happy",
+    "description": "synthetic zensched#guide — MCP tools/call zensched_guide",
     "calls": [
         {
             "req": {
@@ -10,10 +10,7 @@
                     "jsonrpc": "2.0",
                     "id": 1,
                     "method": "tools/call",
-                    "params": {
-                        "name": "account_create",
-                        "arguments": { "org_name": "Demo Field Crew" }
-                    }
+                    "params": { "name": "zensched_guide", "arguments": {} }
                 }
             },
             "res": {
@@ -25,7 +22,7 @@
                         "content": [
                             {
                                 "type": "text",
-                                "text": "{\"org_id\":42,\"org_name\":\"Demo Field Crew\",\"api_key\":\"zsc_demo_key_redacted\",\"message\":\"Store this key immediately.\"}"
+                                "text": "{\"guide\":\"# ZenSched — agent guide\\n\\nZenSched schedules field workers...\"}"
                             }
                         ],
                         "isError": false

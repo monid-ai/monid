@@ -14,7 +14,7 @@ const INPUT = { body: {} };
 
 Deno.test(`${ID} happy (synthetic): free, guide payload`, async () => {
     const unit = await testSealedUnit(ID);
-    const fixture = await loadFixture(`${fixturesDir}happy.json`);
+    const fixture = await loadFixture(`${fixturesDir}synthetic-happy.json`);
     assertEquals(fixture.calls.length, 1);
     const result = await runEndpoint({
         unit,
@@ -46,7 +46,7 @@ Deno.test(`${ID} provider error (synthetic 503): zero usage`, async () => {
 
 Deno.test(`${ID}: the compiled schema rejects unknown body fields`, async () => {
     const unit = await testSealedUnit(ID);
-    const fixture = await loadFixture(`${fixturesDir}happy.json`);
+    const fixture = await loadFixture(`${fixturesDir}synthetic-happy.json`);
     await assertRejects(
         () =>
             runEndpoint({
@@ -70,7 +70,7 @@ Deno.test(`${ID}: the compiled schema rejects unknown body fields`, async () => 
 Deno.test({
     name:
         `${ID} live (gated on ZENSCHED_API_KEY — public funnel, key unused on wire)`,
-    ignore: liveSkip("zensched"),
+    ignore: liveSkip("zensched", ["apiKey"]),
     fn: async () => {
         const unit = await testSealedUnit(ID);
         const result = await runEndpoint({
