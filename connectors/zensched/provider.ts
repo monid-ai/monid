@@ -40,6 +40,44 @@ export default defineProvider({
     usage: {
         model: { kind: UsageModelKind.FREE },
     },
+    lifecycle: {
+        /** MCP Streamable HTTP often answers HTTP 200 with `result.isError`
+         *  or a top-level JSON-RPC `error`. Without this relay, sync endpoints
+         *  would settle as success and unwrap garbage as output. */
+        start: async ({ utils, logger }) => {
+            const res = await utils.request();
+            if (res.status < 200 || res.status >= 300) {
+                return {
+                    kind: "COMPLETED",
+                    httpStatus: res.status,
+                    output: res.body,
+                };
+            }
+            if (utils.json.optionalGet(res.body, "$.error") !== undefined) {
+                logger.warn("zensched json-rpc error — synthesizing 502");
+                return {
+                    kind: "COMPLETED",
+                    httpStatus: 502,
+                    providerHttpStatus: res.status,
+                    output: res.body,
+                };
+            }
+            if (utils.json.optionalGet(res.body, "$.result.isError") === true) {
+                logger.warn("zensched mcp tool error — synthesizing 502");
+                return {
+                    kind: "COMPLETED",
+                    httpStatus: 502,
+                    providerHttpStatus: res.status,
+                    output: res.body,
+                };
+            }
+            return {
+                kind: "COMPLETED",
+                httpStatus: res.status,
+                output: res.body,
+            };
+        },
+    },
     output: {
         /** MCP Streamable HTTP: unwrap tools/call text JSON from the envelope. */
         fromResponse: ({ data, utils }) => {

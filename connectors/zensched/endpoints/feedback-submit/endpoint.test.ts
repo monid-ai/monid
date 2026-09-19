@@ -39,7 +39,7 @@ Deno.test(`${ID} happy (synthetic): free`, async () => {
 
 Deno.test(`${ID} provider error (synthetic 503): zero usage`, async () => {
     const unit = await testSealedUnit(ID);
-    const fixture = await loadFixture(`${fixturesDir}provider-error.json`);
+    const fixture = await loadFixture(`${fixturesDir}synthetic-provider-error.json`);
     const result = await runEndpoint({
         unit,
         input: INPUT,
