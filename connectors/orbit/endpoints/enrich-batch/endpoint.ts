@@ -185,9 +185,9 @@ export default defineEndpoint({
                     ...(backoffMs > 0 ? { pollAfterMs: backoffMs } : {}),
                 };
             }
-            // Every child is terminal. Read them ALL once — including the
-            // ones that finished on the submit — so the batch envelope
-            // carries one current snapshot per profile. Child reads are free.
+            // The children that finished on the submit are re-read too, so
+            // the envelope carries one CURRENT snapshot per profile. Child
+            // reads are free.
             const results = [];
             const reopened = [];
             let errored = false;

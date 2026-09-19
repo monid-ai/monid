@@ -114,8 +114,8 @@ export default defineEndpoint({
                 },
             });
             if (res.status < 200 || res.status >= 300) {
-                // Orbit refused the request (400 bad input, 402 out of
-                // credits, 403 scope, 429 rate limit) — DATA, zero-billed.
+                // Vendor non-2xx is DATA, zero-billed by the engine:
+                // 400 bad input, 402 out of credits, 403 scope, 429 limit.
                 return {
                     kind: "COMPLETED",
                     httpStatus: res.status,
@@ -146,8 +146,7 @@ export default defineEndpoint({
                     ) built.push(id);
                 }
             }
-            // Follow the link Orbit gave us — the v3 contract tells callers
-            // to poll `links.status` — and fall back to the documented shape.
+            // The v3 contract tells callers to poll `links.status`.
             const link = utils.json.optionalGet(res.body, "$.links.status");
             const statusPath =
                 typeof link === "string" && link.charAt(0) === "/"
@@ -196,9 +195,8 @@ export default defineEndpoint({
                 };
             }
             if (status !== "running") {
-                // Orbit answered the whole search on the submit — a 200 with
-                // a terminal status, which is what a search over people it
-                // can already answer for looks like.
+                // A search over people Orbit can already answer for never
+                // goes RUNNING at all.
                 logger.info("orbit search settled on submit", {
                     searchId,
                     status: String(status),
@@ -257,9 +255,8 @@ export default defineEndpoint({
                     output: res.body,
                 };
             }
-            // Accumulate the build signal: WHOLE-STATE semantics (D21) mean
-            // the returned state replaces the previous one wholesale, so the
-            // previous ids are carried forward by hand.
+            // WHOLE-STATE semantics (D21): the returned state replaces the
+            // previous one wholesale, so earlier ids are carried by hand.
             const built = (previous?.built ?? []).slice();
             const results = utils.json.optionalGet(res.body, "$.results");
             if (!Array.isArray(results)) {
