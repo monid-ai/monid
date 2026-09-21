@@ -10,14 +10,29 @@ import { z } from "zod";
  * cross-field rule, and cross-field rules do not survive JSON Schema
  * compilation — it is stated in the descriptions below, and Orbit answers a
  * request that satisfies none of them with a `400`, which arrives as data.
+ *
+ * STRICT, because Orbit's published schemas are (`additionalProperties:
+ * false` on the request, the intent and the signals). The live API also
+ * accepts fields the published contract does not carry — `signals.face_source`
+ * (a 100-credit face search), `webhooks`, `force_tier`, `directory_ids`,
+ * `input_entities` — and an open mirror would pass them straight through.
+ * A face search alone would break the estimate's promise to be a ceiling, so
+ * the gate rejects anything outside the published contract.
+ *
+ * `request_id` is intentionally NOT EXPOSED. Orbit lets a body `request_id`
+ * override the `Idempotency-Key` header, and it scopes request ids per API
+ * key — which on a broker is ONE namespace shared by every caller. Two
+ * callers reusing an id from Orbit's own docs would collide: the same body
+ * returns the first caller's search, a different body answers `409`. The
+ * engine's run-stable `Idempotency-Key` is the only idempotency identity.
  */
 
-export const zIntegerRange = z.object({
+export const zIntegerRange = z.strictObject({
     min: z.number().int(),
     max: z.number().int(),
 });
 
-export const zExperienceIntent = z.object({
+export const zExperienceIntent = z.strictObject({
     title: z.string().optional(),
     titleAnyOf: z.array(z.string()).optional().describe(
         "Match any one of these titles.",
@@ -34,7 +49,7 @@ export const zExperienceIntent = z.object({
         ),
 });
 
-export const zSchoolIntent = z.object({
+export const zSchoolIntent = z.strictObject({
     school: z.string().optional(),
     schoolAnyOf: z.array(z.string()).optional(),
     graduationYear: z.number().int().optional(),
@@ -47,7 +62,7 @@ export const zSchoolIntent = z.object({
     ),
 });
 
-export const zGeoIntent = z.object({
+export const zGeoIntent = z.strictObject({
     place: z.string().optional().describe(
         "A place name: a city, a region, or a country.",
     ),
@@ -60,18 +75,18 @@ export const zGeoIntent = z.object({
     ),
 });
 
-export const zDemographicsIntent = z.object({
+export const zDemographicsIntent = z.strictObject({
     ageRange: zIntegerRange.optional(),
     birthYearRange: zIntegerRange.optional(),
     gender: z.string().optional(),
 });
 
-export const zPersonalizationIntent = z.object({
-    network: z.object({ scope: z.literal("first_degree") }).optional(),
-    nearMe: z.object({ distance: z.string() }).optional(),
+export const zPersonalizationIntent = z.strictObject({
+    network: z.strictObject({ scope: z.literal("first_degree") }).optional(),
+    nearMe: z.strictObject({ distance: z.string() }).optional(),
 });
 
-export const zSemanticClause = z.object({
+export const zSemanticClause = z.strictObject({
     text: z.string().min(1).optional().describe(
         "A trait in plain English — `writes about climate policy`.",
     ),
@@ -80,7 +95,7 @@ export const zSemanticClause = z.object({
     ),
 }).describe("Carries `text`, `anyOf`, or both.");
 
-export const zStructuredIntent = z.object({
+export const zStructuredIntent = z.strictObject({
     names: z.array(z.string().min(1)).optional(),
     experiences: z.array(zExperienceIntent).optional().describe(
         "Roles and employers.",
@@ -98,7 +113,7 @@ export const zStructuredIntent = z.object({
         "arrays and scalars replace, nested objects merge field by field.",
 );
 
-export const zIdentitySignals = z.object({
+export const zIdentitySignals = z.strictObject({
     address: z.string().min(1).optional(),
     email: z.email().optional(),
     phone: z.string().min(1).optional(),
@@ -118,10 +133,7 @@ export const zIdentitySignals = z.object({
         "people, which is what `candidate_discovery` resolves.",
 );
 
-export const zOrbitSearchBody = z.object({
-    request_id: z.string().min(1).optional().describe(
-        "Your idempotency key. Reuse it to retry the same logical search.",
-    ),
+export const zOrbitSearchBody = z.strictObject({
     query: z.string().min(1).optional().describe(
         "A plain-English description of the people you want — `machine " +
             "learning engineers at Anthropic near San Francisco`, or simply " +

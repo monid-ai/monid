@@ -188,7 +188,7 @@ Deno.test("orbit#v3/search: the mirror binds Orbit's defaults, and the budget co
         required?: string[];
     };
     assert(body.properties);
-    for (const field of ["query", "intent", "signals", "request_id"]) {
+    for (const field of ["query", "intent", "signals"]) {
         assert(field in body.properties, `${field} is part of the mirror`);
     }
     assertEquals(body.properties.limit.default, 20);
@@ -218,6 +218,37 @@ Deno.test("orbit#v3/search: the gate rejects limit 101, and passes 100", async (
     await assertInputAccepted({
         unit,
         input: { body: { query: "Ada", limit: 100 } },
+        mode: "replay",
+        fixture,
+    });
+});
+
+Deno.test("orbit#v3/search: the gate rejects what the published contract does not carry", async () => {
+    const unit = await testSealedUnit(ID);
+    const fixture = await loadFixture(`${chains}synthetic-search-indexed.json`);
+    const rejected = (body: Json) =>
+        assertRejects(
+            () =>
+                runEndpoint({ unit, input: { body }, mode: "replay", fixture }),
+            Error,
+            "INVALID_INPUT",
+        );
+
+    // The live API accepts all three; the published contract carries none.
+    // A face search draws 100 credits the estimate never promised.
+    await rejected({
+        query: "Ada",
+        signals: { face_source: { image_url: "https://x.example/a.jpg" } },
+    });
+    // Pushes whole profiles to the KEY HOLDER's webhook endpoints.
+    await rejected({ query: "Ada", webhooks: true });
+    // Overrides the engine's Idempotency-Key, in a namespace every caller
+    // on the broker's one API key shares.
+    await rejected({ query: "Ada", request_id: "search-ml-sf-001" });
+
+    await assertInputAccepted({
+        unit,
+        input: { body: { query: "Ada", signals: { usernames: ["ada"] } } },
         mode: "replay",
         fixture,
     });

@@ -95,6 +95,21 @@ them with a `400`, which arrives as data.
 - **THEN** `profile_ids` carries `minItems` 1 and `maxItems` 20, and the
   required set is `["profile_ids", "operation"]`
 
+### Requirement: The gate is the published contract, and idempotency is the engine's
+Every input mirror SHALL be strict, as Orbit's published schemas are
+(`additionalProperties: false`), so the engine rejects a field the published
+contract does not carry before it reaches the vendor. The live API accepts
+several such fields — `signals.face_source` (a face search priced at 100),
+`webhooks`, `force_tier`, `directory_ids`, `input_entities` — and a face
+search alone would break the estimate's promise to be a ceiling. No mirror
+SHALL expose `request_id`: Orbit lets a body `request_id` override the
+`Idempotency-Key` header and scopes it per API key, which on a broker is one
+namespace shared by every caller.
+
+#### Scenario: An unpublished field is rejected at the gate
+- **WHEN** a search carries `signals.face_source`, `webhooks`, or `request_id`
+- **THEN** the run fails `INVALID_INPUT` and no request reaches Orbit
+
 ### Requirement: A search runs to a terminal snapshot
 `orbit#v3/search` SHALL carry a lifecycle whose `start` executes the submit
 and whose `poll` reads the route Orbit names in `links.status` until the run

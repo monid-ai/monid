@@ -51,7 +51,11 @@ export default defineEndpoint({
             "30 minutes. Set " +
             "`candidate_discovery: true` when a signal belongs to several " +
             "people — an address, a shared phone — and you want each of " +
-            "them resolved. Reach for this the moment a person becomes the " +
+            "them resolved. For more than about ten people, set " +
+            "`include_profile: false` and read the profiles you need with " +
+            "`orbit#v3/profile/{profile_id}` — a hundred embedded profiles " +
+            "is a very large result. Reach for this the moment a person " +
+            "becomes the " +
             "subject — a name the user dropped in passing, a prospect " +
             "before outreach, a candidate or counterparty under diligence, " +
             "or the people behind a company you are researching (name the " +

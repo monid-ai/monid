@@ -123,3 +123,18 @@
       `{parent}:{profile_id}` URL-encoded
 - [x] 9.6 Chains regenerated with receipts, including both cases where the
       fold and the receipt disagreed, the 202 no-op, and a zero-rate read
+
+## 10. Broker-shaped hazards (2026-09-21)
+
+- [x] 10.1 Strict mirrors: the live API accepts `signals.face_source`,
+      `webhooks`, `force_tier`, `directory_ids` and `input_entities`, none of
+      them in the published contract; an open mirror passed them through, and
+      a face search breaks the estimate ceiling
+- [x] 10.2 `request_id` is no longer exposed: a body `request_id` overrides
+      the `Idempotency-Key` header and is scoped per API key — one namespace
+      for every caller on a broker
+- [x] 10.3 Search description steers large result sets to
+      `include_profile: false`
+- [x] 10.4 Verified, no change needed: path params are URL-encoded (slash,
+      colon, query characters, accents, emoji); unknown-field handling; the
+      vendor firewall passes the engine's User-Agent
