@@ -8,22 +8,25 @@ import { zBatchEnrichBody } from "./schema/inputs.ts";
  * ASYNC, AND THE ONE ENDPOINT THAT FANS OUT. Orbit's batch has no parent
  * status route: the submit hands back one child `request_id` per normalized
  * profile, and each child reads back through
- * `GET /v3/enrich/requests/{request_id}`. The lifecycle does exactly what
- * Orbit asks a caller to do — polls the children that are still running,
- * then, once none are, reads every child once more so the output carries a
+ * `GET /v3/enrich/requests/{request_id}`. The lifecycle does what Orbit asks
+ * a caller to do — reads the children that are still open, concurrently, and
+ * once none are, reads every child once more so the output carries a
  * complete, current set of child snapshots under the parent envelope.
  *
- * Bounded by construction: 20 profiles is the vendor's own cap, child reads
- * are free, and only the still-running children are polled on each tick.
- * The reads of one tick go out TOGETHER: Orbit's status bucket refills at
- * 25/s with a burst of 150, so twenty concurrent reads sit inside it, and a
- * tick then takes as long as its slowest child rather than the sum.
+ * Child ids have the shape `{parent}:{profile_id}`, so every path built from
+ * one is URL-encoded. A child that completes on the submit carries no
+ * `links.status` and a null receipt; its request route still answers.
  *
- * BILLING is the single-enrich rule, 20 times over: a child Orbit answered
- * `running` for is one it started building, and it draws its depth line when
- * it reaches that depth. Children already at the requested depth answer
- * terminally on the submit and settle at zero. `regenerate` rebuilds every
- * child, so every child draws.
+ * THE RECEIPTS SETTLE IT. Each child carries its own `billing` receipt, and
+ * the batch settles their SUM — this endpoint overrides the provider's
+ * evidence and consolidate only to add them up. A child already at depth
+ * settles the zero Orbit charged for it, whichever status code its submit
+ * answered with. A child is open until its status is terminal AND its
+ * receipt is settled.
+ *
+ * Bounded by construction: 20 profiles is the vendor's own cap, child reads
+ * are free, and Orbit's status bucket (25/s, burst 150) covers twenty
+ * concurrent reads.
  */
 export default defineEndpoint({
     meta: {
@@ -59,9 +62,10 @@ export default defineEndpoint({
             }),
         },
     },
-    /** Twenty full builds run in parallel on Orbit's side; 20 minutes is the
-     *  whole-run budget they live inside. */
-    timeouts: { requestMs: 60_000, runMs: 1_200_000, pollMs: 10_000 },
+    /** Measured live: a batch child at full depth took 27 minutes. 45
+     *  minutes is the whole-run budget; a run that times out is still
+     *  charged by Orbit. */
+    timeouts: { requestMs: 60_000, runMs: 2_700_000, pollMs: 10_000 },
     lifecycle: {
         state: z.strictObject({
             children: z.array(z.string()).describe(
@@ -69,9 +73,6 @@ export default defineEndpoint({
             ),
             pending: z.array(z.string()).describe(
                 "The children still running.",
-            ),
-            dispatched: z.array(z.string()).describe(
-                "The children Orbit started building — the billing signal.",
             ),
             parentRequestId: z.string().describe("The batch's own id."),
         }),
@@ -94,27 +95,21 @@ export default defineEndpoint({
             if (!Array.isArray(rows)) {
                 throw new Error("Orbit batch enrich returned no results list");
             }
-            // `regenerate` rebuilds every child, so every child draws however
-            // its submit answered.
-            const rebuilding = data.input.body.operation === "regenerate";
             const children = [];
             const pending = [];
-            const dispatched = [];
             for (const row of rows) {
                 const id = utils.json.optionalGet(row, "$.request_id");
                 if (typeof id !== "string" || id === "") continue;
                 children.push(id);
-                const status = utils.json.optionalGet(row, "$.status");
-                if (status === "running") {
-                    pending.push(id);
-                    dispatched.push(id);
-                } else if (rebuilding) dispatched.push(id);
+                if (
+                    utils.json.optionalGet(row, "$.status") === "running" ||
+                    utils.json.optionalGet(row, "$.billing.status") === "open"
+                ) pending.push(id);
             }
             const state = {
                 data: {
                     children,
                     pending,
-                    dispatched,
                     parentRequestId: typeof parent === "string" ? parent : "",
                 },
             };
@@ -165,10 +160,16 @@ export default defineEndpoint({
                     pending.push(id);
                     continue;
                 }
-                const status = res.status >= 200 && res.status < 300
+                const ok = res.status >= 200 && res.status < 300;
+                const status = ok
                     ? utils.json.optionalGet(res.body, "$.status")
                     : "failed";
-                if (status === "running" || status === undefined) {
+                if (
+                    status === "running" || status === undefined ||
+                    (ok &&
+                        utils.json.optionalGet(res.body, "$.billing.status") ===
+                            "open")
+                ) {
                     pending.push(id);
                 }
             }
@@ -179,10 +180,16 @@ export default defineEndpoint({
                         pollAfterMs: backoffMs,
                     });
                 }
+                // Four minutes in, these are full builds, and those run for
+                // tens of minutes: thirty seconds a tick.
+                const slowMs = data.lifecycle.state.timing.attempts > 24
+                    ? 30_000
+                    : 0;
+                const waitMs = backoffMs > slowMs ? backoffMs : slowMs;
                 return {
                     kind: "RUNNING",
                     state: { data: { ...previous, pending } },
-                    ...(backoffMs > 0 ? { pollAfterMs: backoffMs } : {}),
+                    ...(waitMs > 0 ? { pollAfterMs: waitMs } : {}),
                 };
             }
             // The children that finished on the submit are re-read too, so
@@ -201,9 +208,8 @@ export default defineEndpoint({
                     // The FINAL read is the same lookup the poll above makes,
                     // so it gets the same answer: a transient failure says
                     // nothing about the child. Re-open it rather than
-                    // publishing a `failed` row — that row would also drop
-                    // the child's depth line from evidence, settling a build
-                    // Orbit charged for at zero.
+                    // publishing a `failed` row — that row would carry no
+                    // receipt, settling a build Orbit charged for at zero.
                     const after = Number(res.headers["retry-after"]);
                     const wait = Number.isFinite(after) && after > 0
                         ? Math.min(Math.max(after * 1000, 1_000), 120_000)
@@ -255,82 +261,67 @@ export default defineEndpoint({
         },
     },
     usage: {
+        /** Metered in Orbit's own credits: each child carries its receipt
+         *  and the batch settles their sum. */
         model: {
-            kind: UsageModelKind.COMPOSITE,
-            components: {
-                partial_profile: {
-                    kind: UsageModelKind.PER_UNIT,
-                    unit: Unit.RESULT,
-                    consumes: { credit: "default", amount: 5 },
-                    label: "partial profiles built",
-                    description: "profiles built to partial depth",
-                },
-                full_profile: {
-                    kind: UsageModelKind.PER_UNIT,
-                    unit: Unit.RESULT,
-                    consumes: { credit: "default", amount: 10 },
-                    label: "full profiles built",
-                    description:
-                        "profiles built to full depth, or rebuilt by " +
-                        "`regenerate`",
-                },
-            },
+            kind: UsageModelKind.PER_UNIT,
+            unit: Unit.CREDIT,
+            consumes: { credit: "default", amount: 1 },
+            label: "profile builds",
+            description:
+                "what the children drew, summed from Orbit's own receipts",
         },
-        /** The ceiling: every profile in the list needs its build. Duplicate
-         *  ids normalize away on Orbit's side, which only ever lowers the
-         *  settle. */
+        /** The ceiling: every profile in the list at the depth asked for,
+         *  from the published card. Duplicate ids normalize away on Orbit's
+         *  side, which only ever lowers the settle. */
         estimate: ({ data }) => {
             const body = data.input.body;
-            const people = body.profile_ids.length;
             return {
-                counts: body.operation === "partial"
-                    ? { partial_profile: people }
-                    : { full_profile: people },
+                counts: {
+                    CREDIT: body.profile_ids.length *
+                        (body.operation === "partial" ? 5 : 10),
+                },
             };
         },
-        /** One depth line per child Orbit both STARTED building and finished
-         *  at the depth asked for. */
+        /** The SUM of the children's receipts. A child that completed on
+         *  the submit carries a null receipt and adds nothing. */
         evidence: ({ data, utils }) => {
-            const started = utils.json.optionalGet(
-                data.lifecycle?.state ?? null,
-                "$.data.dispatched",
-            );
-            const dispatched = Array.isArray(started)
-                ? started.map((id) => String(id))
-                : [];
             const rows = utils.json.optionalGet(data.output, "$.results");
-            // ONE operation applies to every profile in the batch, and the
-            // request is where it is stated — required input, and what Orbit
-            // priced. Each row's `generation_level` still says how deep that
-            // child actually reached.
-            const operation = data.input.body.operation;
-            let partial = 0;
-            let full = 0;
+            let consumed = 0;
+            let seen = false;
             if (Array.isArray(rows)) {
                 for (const row of rows) {
-                    const id = utils.json.optionalGet(row, "$.request_id");
-                    if (typeof id !== "string" || !dispatched.includes(id)) {
-                        continue;
-                    }
-                    if (
-                        utils.json.optionalGet(row, "$.status") !== "completed"
-                    ) {
-                        continue;
-                    }
-                    const level = utils.json.optionalNum(
+                    const credits = utils.json.optionalNum(
                         row,
-                        "$.generation_level",
-                    ) ?? 0;
-                    if (operation === "partial") {
-                        if (level >= 2) partial += 1;
-                    } else if (level >= 3) full += 1;
+                        "$.billing.consumedCredits",
+                    );
+                    if (credits === undefined) continue;
+                    consumed += credits;
+                    seen = true;
+                }
+            }
+            return { counts: seen ? { CREDIT: consumed } : {} };
+        },
+        /** The same sum as the claim. The per-child receipts stay in the
+         *  output as each child's own provenance. */
+        consolidate: ({ data, utils }) => {
+            const rows = utils.json.optionalGet(data.output, "$.results");
+            let consumed = 0;
+            let seen = false;
+            if (Array.isArray(rows)) {
+                for (const row of rows) {
+                    const credits = utils.json.optionalNum(
+                        row,
+                        "$.billing.consumedCredits",
+                    );
+                    if (credits === undefined) continue;
+                    consumed += credits;
+                    seen = true;
                 }
             }
             return {
-                counts: {
-                    ...(partial > 0 ? { partial_profile: partial } : {}),
-                    ...(full > 0 ? { full_profile: full } : {}),
-                },
+                credits: { ...(seen ? { default: consumed } : {}) },
+                output: data.output,
             };
         },
     },

@@ -1,6 +1,6 @@
 {
     "name": "synthetic-profile-read-error",
-    "description": "A profile read refused for want of credits: 402 with the credits envelope. A flat PER_CALL endpoint bills nothing on a provider error — the engine forces zero usage on every non-2xx. Synthetic.",
+    "description": "A profile read refused for want of credits: 402 with the credits envelope. Non-2xx is DATA — the engine forces zero usage. Synthetic, shaped on a live drill of v3 (2026-09-20).",
     "calls": [
         {
             "req": {

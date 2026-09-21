@@ -43,50 +43,49 @@ import { defineProvider, presets } from "@shared/core";
  * which is what the v3 guide tells every caller to poll, and fall back to
  * the documented path shape.
  *
- * BILLING — Orbit publishes its rate card at `GET /v2/developer/pricing`,
- * unauthenticated, and the lines below are pinned from version `2026-09-17`:
+ * BILLING — THE RECEIPT SETTLES EVERY RUN. Every v3 response carries Orbit's
+ * own receipt for the operation:
  *
- *   profile_read         1  per profile read
- *   index_search         1  per 10 results returned from the Orbit index
- *   candidate_discovery  1  per profile that discovery returns
- *   partial_profile      5  per profile built to partial depth
- *   full_profile        10  per profile built to full depth
+ *   "billing": { "id", "pricingVersion", "reservedCredits",
+ *                "consumedCredits", "releasedCredits", "heldCredits",
+ *                "status": "open" | "settled" }
  *
- * A search settles as a COMPOSITE of those lines rather than a flat fee,
- * because that is the algebra Orbit itself settles on: results already at the
- * requested depth draw only their share of an `index_search` block, and a
- * profile Orbit had to BUILD draws 5 or 10 on top. An enrich that finds the
- * profile already at the requested depth is a no-op and settles at zero.
+ * `status` goes `open` -> `settled`, and `consumedCredits` on the terminal
+ * snapshot is what Orbit charged (verified live 2026-09-20, 46 credits of
+ * receipts). So every billed endpoint here is metered in Orbit's OWN credits
+ * and the receipt is the evidence — provider-level `usage.evidence` reads it,
+ * provider-level `usage.consolidate` claims it and plucks it out of the
+ * payload (a receipt, not data).
  *
- * NO endpoint in this connector reports a vendor meter, so none declares a
- * `usage.consolidate` (design D27 — the hook is optional) and the derived
- * fold settles every run.
+ * The receipt is the EVIDENCE, not only the claim, for a reason the engine
+ * makes binding: a zero claim is pruned and falls back to the derived fold.
+ * Orbit's zero receipts are real answers — an enrich of a profile already at
+ * depth settles 0 — so a fold derived from anything else would overrule them.
  *
- * LINES NOT MODELED, and why (the D29 completeness rule):
- *   - `watcher_run` (1) and `watcher_update` (5) accrue on Orbit's own
- *     schedule AFTER the call that created the watcher returns, so a monid
- *     run can never settle them. The watcher surface is held back until the
- *     two platforms agree how a recurring charge settles; see the proposal.
- *   - A POPULATION search is priced as one number and reserved when it
- *     starts — and Orbit then "settles them as the work completes, and
- *     releases what it did not use" (docs.orbitsearch.com/concepts/credits).
- *     The reserve is a CEILING, the public contract carries no settled
- *     figure, and billing a ceiling would overcharge every population that
- *     under-runs. Both population routes are held back with the watchers.
- *   - A BULK job's rows are priced by the same lines, and a job DOES report
- *     its own settled total on `billing.consumed_credits` — the one Orbit
- *     surface a connector could bill exactly rather than bound from
- *     observation. The bulk routes are held for an internal review on the
- *     vendor's side, not for want of a settle; see the proposal.
- *   - `face_search` (100) rides an identity signal that is absent from the
- *     published request schema, and `profile_query` (1) prices a route the
+ * Nothing about the charge is inferable from the snapshot's visible state,
+ * which is why nothing here tries:
+ *   - a row seen `enriching` is not always a charged build (12 index hits
+ *     with one row enriching settled 2, not 2 + 5);
+ *   - a build can finish between two ticks and never be seen mid-build;
+ *   - an enrich of a profile already at depth can answer `202 running` with
+ *     `reservedCredits: 0` and settle 0 a few seconds later, so a 202 says
+ *     nothing about whether work was charged.
+ *
+ * RATES appear in one place only: `usage.estimate`, the pre-run ceiling, read
+ * from the published card (`GET /v2/developer/pricing`, unauthenticated,
+ * version `2026-09-17`): index_search 1 per 10 results, candidate_discovery 1
+ * per profile, partial_profile 5, full_profile 10, profile_read 1. A rate
+ * change on Orbit's side moves the settle with it; only the ceiling is pinned.
+ *
+ * SURFACES NOT IN THIS CONNECTOR, and why:
+ *   - Watchers: `watcher_run` and `watcher_update` accrue on Orbit's schedule
+ *     AFTER the create call returns, so no run can settle them.
+ *   - Population search: the receipt it reserves is settled "as the work
+ *     completes", long after a pass-through submit returns.
+ *   - Bulk search: held for an internal review on the vendor's side.
+ *   - Webhooks: the create response carries a plaintext signing secret.
+ *   - `face_search`, `profile_query` and the company lines price routes the
  *     public v3 document does not carry.
- *   - The company lines (`company_search`, `company_profile`,
- *     `company_enrichment`, `company_discovery`, `company_briefing`,
- *     `person_company_graph`) price routes that the public v3 document does
- *     not carry yet.
- * Orbit publishes the rate card as JSON at a stable URL, so these pins are
- * checkable against the vendor's own surface on demand.
  */
 export default defineProvider({
     name: "orbit",
@@ -110,19 +109,19 @@ export default defineProvider({
             "the user is about to meet. One person, or a list of them — up " +
             "to 20 known profiles build together in a single call. " +
             "Depth is the caller's choice: `partial` is a useful profile in " +
-            "seconds, `full` is the deepest profile Orbit can build.",
+            "seconds, `full` is the deepest profile Orbit can build and " +
+            "takes 25 to 30 minutes.",
         homepageUrl: "https://orbitsearch.com",
         docsUrl: "https://docs.orbitsearch.com",
         categories: ["people-enrichment"],
     },
     auth: { inject: presets.auth.bearer() },
     request: { baseUrl: "https://api.orbitsearch.com" },
-    /** Reads answer in well under a second; the async submits answer 202 fast
-     *  and the WORK is what takes time. `runMs` is the whole-run budget a
-     *  polled search or enrich lives inside — a full-depth profile is built
-     *  from live sources and minutes is the honest figure. `pollMs` matches
-     *  the cadence Orbit's own status routes are written for. */
-    timeouts: { requestMs: 60_000, runMs: 900_000, pollMs: 5_000 },
+    /** Reads answer in well under a second and the async submits answer fast;
+     *  the WORK is what takes time, and the endpoints that carry a lifecycle
+     *  set their own whole-run budget. `pollMs` is the cadence Orbit's
+     *  status routes are written for. */
+    timeouts: { requestMs: 60_000, runMs: 120_000, pollMs: 5_000 },
     usage: {
         /** THE credit system (design D26): Orbit meters in its OWN credits,
          *  and that is the unit this doc bills in. No dollar rate is pinned
@@ -136,6 +135,39 @@ export default defineProvider({
                     "Orbit credits, bought in packages from $10 for 1,000; " +
                     "`GET /v2/developer/pricing` serves the live rate card",
             },
+        },
+        /** THE RECEIPT IS THE EVIDENCE. Every billed doc here is a leaf
+         *  `PER_UNIT` in `CREDIT` units, so the count is the receipt's
+         *  `consumedCredits` and the fold is the vendor's own number — which
+         *  is what lets a ZERO receipt settle zero (a pruned zero claim
+         *  would otherwise fall back to whatever else the fold derived). An
+         *  absent receipt counts nothing. The batch overrides this to sum
+         *  its children. */
+        evidence: ({ data, utils }) => {
+            if (data.usage.model.kind !== "PER_UNIT") return { counts: {} };
+            const consumed = utils.json.optionalNum(
+                data.output,
+                "$.billing.consumedCredits",
+            );
+            return {
+                counts: consumed === undefined
+                    ? {}
+                    : { [data.usage.model.unit]: consumed },
+            };
+        },
+        /** THE VENDOR'S OWN CLAIM (design D27): the same receipt, lifted out
+         *  of the payload in one motion. Omitted when absent. */
+        consolidate: ({ data, utils }) => {
+            const { value, rest } = utils.json.pluck(data.output, "$.billing");
+            const consumed = value === undefined
+                ? undefined
+                : utils.json.optionalNum(value, "$.consumedCredits");
+            return {
+                credits: {
+                    ...(consumed !== undefined ? { default: consumed } : {}),
+                },
+                output: rest,
+            };
         },
     },
     output: {

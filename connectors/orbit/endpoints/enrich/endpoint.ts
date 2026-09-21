@@ -5,26 +5,21 @@ import { zEnrichBody, zEnrichPathParams } from "./schema/inputs.ts";
 /**
  * `POST /v3/enrich/{profile_id}` — build one person's profile deeper.
  *
- * ASYNC. The submit answers `202` with `request_id` and `status: "running"`
- * when Orbit dispatched work; the lifecycle polls the status route named in
- * `links.status` until the status is terminal, so one monid run returns the
- * finished profile.
+ * ASYNC. The submit answers with `request_id` and a status; the lifecycle
+ * polls the route Orbit names in `links.status` until the status is terminal,
+ * so one monid run returns the finished profile.
  *
- * DISPATCH IS THE BILLING SIGNAL. Orbit charges for a profile it BUILT, and
- * an enrich whose target already sits at the requested depth is a no-op that
- * settles at zero. The public snapshot reports the depth reached, never
- * whether work was needed to reach it — but the dispatch does: Orbit answers
- * `running` exactly when it started building, and answers terminally on the
- * submit when there was nothing to do. `start` records which of the two
- * happened in `state.data.dispatched`, and `evidence` settles the depth line
- * from it.
+ * THE RECEIPT SETTLES IT, and nothing else can. A `202 running` says nothing
+ * about whether work will be charged: an enrich of a profile already at the
+ * requested depth can answer `202` with `reservedCredits: 0`, run a free
+ * reconciliation for a few seconds, and settle `consumedCredits: 0`
+ * (verified live). The provider's evidence reads the receipt, so that run
+ * settles at zero and a real build settles at what Orbit charged for it.
  *
- * `regenerate` always rebuilds, so it always draws — recorded as dispatched
- * whichever way the submit answers.
- *
- * The bound runs in the caller's favour: work Orbit both starts and finishes
- * inside the submit window settles here as a no-op. A vendor claim on the
- * snapshot closes it exactly.
+ * THE BUDGET IS MEASURED. A partial build settles in seconds; a full build
+ * and a `regenerate` were measured at 24 to 27 minutes. A run that times out
+ * is still charged on Orbit's side, so the whole-run budget covers the slow
+ * case and the cadence backs off once the run is clearly a long build.
  */
 export default defineEndpoint({
     meta: {
@@ -35,7 +30,7 @@ export default defineEndpoint({
             "seconds. `full` produces the deepest profile Orbit can build — " +
             "web, social and public-record research pulled together into " +
             "attributed sections on the person's background, interests and " +
-            "recent activity — and takes minutes. `regenerate` forces " +
+            "recent activity. `regenerate` forces " +
             "fresh work that CAN REPLACE facts already on the profile, so " +
             "reach for it only when a refresh is what was asked for. Takes " +
             "an Orbit " +
@@ -43,10 +38,12 @@ export default defineEndpoint({
             "one from a name, an email, a phone number or a description. " +
             "Reach for this when an agent already knows who the person is " +
             "and wants more depth than the stored profile carries; " +
-            "`orbit#v3/profile/{profile_id}` reads what is already there " +
-            "for 1 credit. A profile already at the depth you asked for " +
-            "returns as it stands and costs nothing. Otherwise 5 credits " +
-            "for `partial`, 10 for `full` and `regenerate`.",
+            "`orbit#v3/profile/{profile_id}` reads what is already there. " +
+            "A profile already at the depth you asked for returns as it " +
+            "stands and costs nothing. Otherwise 5 credits for `partial`, " +
+            "10 for `full` and `regenerate` — a full build includes its " +
+            "partial. `partial` settles in seconds; `full` and " +
+            "`regenerate` research live sources and take 25 to 30 minutes.",
         docsUrl: "https://docs.orbitsearch.com/api/enrich/enrich-profile",
         categories: ["people-enrichment"],
     },
@@ -60,15 +57,12 @@ export default defineEndpoint({
             }),
         },
     },
-    /** A full build researches live sources; 15 minutes is the whole-run
-     *  budget that work lives inside. */
-    timeouts: { requestMs: 60_000, runMs: 900_000, pollMs: 5_000 },
+    /** Measured live: partial builds settle in seconds, `full` and
+     *  `regenerate` take 24 to 27 minutes. 45 minutes is the whole-run
+     *  budget; a run that times out is still charged by Orbit. */
+    timeouts: { requestMs: 60_000, runMs: 2_700_000, pollMs: 5_000 },
     lifecycle: {
         state: z.strictObject({
-            dispatched: z.boolean().describe(
-                "Whether Orbit started building — the signal that separates " +
-                    "a billed build from a no-op read.",
-            ),
             statusPath: z.string().optional().describe(
                 "The status route Orbit named in `links.status`.",
             ),
@@ -91,21 +85,20 @@ export default defineEndpoint({
             if (typeof requestId !== "string" || requestId === "") {
                 throw new Error("Orbit did not return a request_id");
             }
-            const status = utils.json.optionalGet(res.body, "$.status");
-            // `regenerate` rebuilds unconditionally, so it draws however the
-            // submit answers.
-            const rebuilding = data.input.body.operation === "regenerate";
+            // The v3 contract tells callers to poll `links.status`; a request
+            // that completes on the submit carries no such link, and its id
+            // can hold a colon, so the fallback path is encoded.
             const link = utils.json.optionalGet(res.body, "$.links.status");
             const statusPath =
                 typeof link === "string" && link.charAt(0) === "/"
                     ? link
                     : "/v3/enrich/requests/" + encodeURIComponent(requestId);
+            const state = { externalRunId: requestId, data: { statusPath } };
+            const status = utils.json.optionalGet(res.body, "$.status");
             if (status === "failed") {
-                // A build that fails on the submit reports its reason at
-                // `failure`, where the provider's fromError does not look —
-                // lifted into Orbit's own error envelope here, exactly as
-                // the poll does it, so the caller reads the reason rather
-                // than the generic fallback.
+                // The reason sits at `failure`, where the provider's
+                // fromError does not look — lifted into Orbit's own error
+                // envelope, exactly as the poll does it.
                 const failure = utils.json.optionalGet(res.body, "$.failure");
                 const message = utils.json.optionalGet(
                     failure ?? null,
@@ -130,13 +123,14 @@ export default defineEndpoint({
                         },
                         request_id: requestId,
                     },
-                    state: {
-                        externalRunId: requestId,
-                        data: { dispatched: rebuilding, statusPath },
-                    },
+                    state,
                 };
             }
-            if (status !== "running") {
+            const receipt = utils.json.optionalGet(
+                res.body,
+                "$.billing.status",
+            );
+            if (status !== "running" && receipt !== "open") {
                 logger.info("orbit enrich settled on submit", {
                     requestId,
                     status: String(status),
@@ -145,19 +139,10 @@ export default defineEndpoint({
                     kind: "COMPLETED",
                     httpStatus: res.status,
                     output: res.body,
-                    state: {
-                        externalRunId: requestId,
-                        data: { dispatched: rebuilding, statusPath },
-                    },
+                    state,
                 };
             }
-            return {
-                kind: "RUNNING",
-                state: {
-                    externalRunId: requestId,
-                    data: { dispatched: true, statusPath },
-                },
-            };
+            return { kind: "RUNNING", state };
         },
         poll: async ({ data, utils, logger }) => {
             const requestId = data.lifecycle.state.externalRunId;
@@ -167,21 +152,17 @@ export default defineEndpoint({
                     { retriable: false },
                 );
             }
-            const previous = data.lifecycle.state.data;
             const res = await utils.http({
                 method: "GET",
-                path: previous?.statusPath ??
+                path: data.lifecycle.state.data?.statusPath ??
                     "/v3/enrich/requests/" + encodeURIComponent(requestId),
             });
             if (res.status === 408 || res.status === 429 || res.status >= 500) {
                 // The status LOOKUP failed while the build keeps running and
-                // keeps drawing credits. Orbit's error guide puts 429 and
-                // every temporary server failure in one retry class, so the
-                // whole 5xx range is held rather than a hand-picked four.
-                // `Retry-After` is in SECONDS and the v3 contract asks
-                // callers to honor it; an absent or malformed header falls
-                // back to a fixed backoff, clamped so a bad value cannot
-                // stall the run. Bounded by runMs.
+                // keeps drawing credits — the provider's one retry class.
+                // `Retry-After` is in SECONDS; an absent or malformed header
+                // falls back to a fixed backoff, clamped so a bad value
+                // cannot stall the run. Bounded by runMs.
                 const after = Number(res.headers["retry-after"]);
                 const pollAfterMs = Number.isFinite(after) && after > 0
                     ? Math.min(Math.max(after * 1000, 1_000), 120_000)
@@ -201,8 +182,19 @@ export default defineEndpoint({
                 };
             }
             const status = utils.json.optionalGet(res.body, "$.status");
-            if (status === "running" || status === undefined) {
-                return { kind: "RUNNING" };
+            const receipt = utils.json.optionalGet(
+                res.body,
+                "$.billing.status",
+            );
+            if (
+                status === "running" || status === undefined ||
+                receipt === "open"
+            ) {
+                // Two minutes in, this is a full build, and those run for
+                // tens of minutes: fifteen seconds a tick.
+                return data.lifecycle.state.timing.attempts > 24
+                    ? { kind: "RUNNING", pollAfterMs: 15_000 }
+                    : { kind: "RUNNING" };
             }
             if (status === "failed") {
                 // The BUILD failed while the status route answered 200 —
@@ -239,62 +231,23 @@ export default defineEndpoint({
         },
     },
     usage: {
+        /** Metered in Orbit's own credits; the provider's evidence reads the
+         *  receipt, so a profile already at depth settles the zero Orbit
+         *  charged for it. */
         model: {
-            kind: UsageModelKind.COMPOSITE,
-            components: {
-                partial_profile: {
-                    kind: UsageModelKind.PER_UNIT,
-                    unit: Unit.RESULT,
-                    consumes: { credit: "default", amount: 5 },
-                    label: "partial profile built",
-                    description: "a profile built to partial depth",
-                },
-                full_profile: {
-                    kind: UsageModelKind.PER_UNIT,
-                    unit: Unit.RESULT,
-                    consumes: { credit: "default", amount: 10 },
-                    label: "full profile built",
-                    description:
-                        "a profile built to full depth, or rebuilt by " +
-                        "`regenerate`",
-                },
-            },
+            kind: UsageModelKind.PER_UNIT,
+            unit: Unit.CREDIT,
+            consumes: { credit: "default", amount: 1 },
+            label: "profile build",
+            description:
+                "what the build drew, as Orbit's own receipt totals it",
         },
-        /** One profile, priced at the depth asked for. The ceiling assumes
-         *  the build is needed; a target already at that depth settles at
-         *  zero. */
+        /** One profile at the depth asked for, from the published card. A
+         *  full build includes its partial, so it is 10 and never 5 + 10. */
         estimate: ({ data }) => ({
-            counts: data.input.body.operation === "partial"
-                ? { partial_profile: 1 }
-                : { full_profile: 1 },
+            counts: {
+                CREDIT: data.input.body.operation === "partial" ? 5 : 10,
+            },
         }),
-        /** Settles on the dispatch signal: the depth line is drawn only when
-         *  `start` saw Orbit begin building, and only when the run reached
-         *  the depth it asked for. */
-        evidence: ({ data, utils }) => {
-            const dispatched = utils.json.optionalGet(
-                data.lifecycle?.state ?? null,
-                "$.data.dispatched",
-            );
-            const status = utils.json.optionalGet(data.output, "$.status");
-            if (dispatched !== true || status !== "completed") {
-                return { counts: {} };
-            }
-            // The REQUEST states the operation — it is required input, one
-            // operation per request, and it is what Orbit priced. The
-            // response echoes it, but the contract does not require that
-            // echo, and a missing one would drop a 5-credit partial into the
-            // 10-credit branch. `generation_level` stays the response's job:
-            // it is the depth actually reached.
-            const operation = data.input.body.operation;
-            const level = utils.json.optionalNum(
-                data.output,
-                "$.generation_level",
-            ) ?? 0;
-            if (operation === "partial") {
-                return { counts: level >= 2 ? { partial_profile: 1 } : {} };
-            }
-            return { counts: level >= 3 ? { full_profile: 1 } : {} };
-        },
     },
 });

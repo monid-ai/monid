@@ -1,4 +1,4 @@
-import { defineEndpoint, UsageModelKind } from "@shared/core";
+import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zProfileReadPathParams } from "./schema/inputs.ts";
 
 /**
@@ -9,8 +9,10 @@ import { zProfileReadPathParams } from "./schema/inputs.ts";
  * collide, so the read takes the name Orbit's own response links give it
  * (`links.profile`) and the write keeps the native path.
  *
- * 1 credit per read, flat — a `profile_read` on Orbit's card. Reading does no
- * work: it returns what is stored, at whatever depth it was last built to.
+ * Priced at Orbit's profile-read rate, and settled on the receipt the
+ * response carries — so a change to that rate on Orbit's side moves the
+ * settle with it. Reading does no work: it returns what is stored, at
+ * whatever depth it was last built to.
  */
 export default defineEndpoint({
     meta: {
@@ -28,7 +30,9 @@ export default defineEndpoint({
             "read returns the profile as stored, and can schedule a " +
             "refresh behind it when that data is stale. This is " +
             "the endpoint to reach for when an agent already knows WHO the " +
-            "person is and wants everything about them. 1 credit.",
+            "person is and wants everything about them — briefing before a " +
+            "call, personalizing outreach, or answering the user about " +
+            "someone they just named. Priced at Orbit's profile-read rate.",
         docsUrl: "https://docs.orbitsearch.com/api/enrich/read-profile",
         categories: ["people-enrichment"],
     },
@@ -37,12 +41,16 @@ export default defineEndpoint({
     input: { schema: { pathParams: zProfileReadPathParams } },
     timeouts: { requestMs: 60_000, runMs: 90_000 },
     usage: {
-        /** `profile_read`: 1 credit, flat (rate card 2026-09-17). The
-         *  quantities fns are synthesized for a meterless flat model. */
+        /** Metered in Orbit's own credits; the provider's evidence reads the
+         *  receipt. */
         model: {
-            kind: UsageModelKind.PER_CALL,
-            label: "profile read",
+            kind: UsageModelKind.PER_UNIT,
+            unit: Unit.CREDIT,
             consumes: { credit: "default", amount: 1 },
+            label: "profile read",
+            description: "Orbit's profile-read rate, as its receipt reports it",
         },
+        /** One read at the published profile-read rate (card 2026-09-17). */
+        estimate: () => ({ counts: { CREDIT: 1 } }),
     },
 });

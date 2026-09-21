@@ -1,6 +1,6 @@
 {
     "name": "synthetic-provider-error",
-    "description": "Orbit refuses the request outright: 402 with the credits envelope every endpoint can answer with. Vendor non-2xx is DATA — the engine classifies it as a provider error and forces zero usage, so no fn can bill it. Serves the sync and async endpoints alike. Synthetic.",
+    "description": "Orbit refuses the request outright: 402 with the credits envelope every endpoint can answer with. Vendor non-2xx is DATA — the engine classifies it as a provider error and forces zero usage. Synthetic, shaped on a live drill of v3 (2026-09-20).",
     "calls": [
         {
             "req": {

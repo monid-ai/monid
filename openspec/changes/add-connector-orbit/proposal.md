@@ -14,14 +14,14 @@ It fits the connector standard without stretching it: one base URL, bearer
 auth, a published OpenAPI document, and an **unauthenticated JSON rate card**
 at `GET /v2/developer/pricing` that pins every credit line in this change.
 
-It is also the first connector whose vendor **reports no meter on the work it
-bills**. Orbit's own settle turns on whether it BUILT a profile or merely read
-one, and its public snapshot reports the depth reached without ever saying
-which of the two happened. Firecrawl could lean on `creditsUsed`; exa on
-`costDollars`; here there is nothing to lean on — so this change is the test
-of whether a connector can derive an honest bill from OBSERVATION instead, and
-of how the async lifecycle's fn-owned state carries a billing signal that
-exists only while a run is in flight.
+Its billing turned on a fact the published contract does not carry yet: every
+v3 response includes Orbit's own `billing` receipt, and `consumedCredits` on
+the terminal snapshot is the charge. The first cut of this connector did not
+know that and derived its bill from observed result states. A live drill
+retired that approach — it overbilled a row seen `enriching` that Orbit never
+charged as a build, underbilled a build that finished between two ticks, and
+would have billed a no-op enrich that answers `202`. The receipt settles every
+run now, and nothing is inferred.
 
 ## What Changes
 
@@ -34,24 +34,16 @@ exists only while a run is in flight.
     Orbit's two status routes are the routes those lifecycles poll, not
     catalog endpoints: the engine drives every poll inside the run, so a
     caller never needs to read a search or an enrichment by id.
-- **The poll is the meter (search).** Orbit charges 5 or 10 credits for a
-  profile it BUILT and nothing for one it already held, and the two are
-  indistinguishable in the terminal snapshot — both read `ready` at the depth
-  asked for. The lifecycle records every id it observed `generating` or
-  `enriching` into the fn-owned `state.data.built` bag, and `evidence` settles
-  the depth line from those observations. A search answered entirely from the
-  index settles its `index_search` blocks and nothing else.
-- **Dispatch is the meter (enrich).** Orbit answers `202 running` exactly when
-  it starts building and answers terminally on the submit when the profile is
-  already at the requested depth. `start` records which happened;
-  a no-op enrich settles at **zero**. `regenerate` rebuilds unconditionally
-  and is recorded as dispatched however the submit answers.
-- **Both derivations are TRUE LOWER BOUNDS, stated as such.** Work that Orbit
-  both starts and finishes between two ticks is never observed and settles as
-  a read. Scaling the count up to cover it would invent work we did not see,
-  and D27 is explicit that unobserved entries are omitted rather than guessed.
-  The bound errs toward the caller, and a vendor claim closes it exactly the
-  day an Orbit snapshot carries its own settled charge.
+- **The receipt is the evidence.** Every billed endpoint is a leaf `PER_UNIT`
+  in `CREDIT` units; provider-level `usage.evidence` reads
+  `billing.consumedCredits` and provider-level `usage.consolidate` claims it
+  and plucks the receipt out of the payload. It has to be the evidence and
+  not only the claim: the engine prunes a zero claim and falls back to the
+  derived fold, and Orbit's zero receipts — a no-op enrich, an empty search —
+  are real answers. A run stays open while its receipt reads `open`.
+- **Budgets are measured.** Full-depth builds took 24 to 27 minutes on the
+  live drill, so the three lifecycles carry a 45-minute run budget and back
+  their cadence off once a run is clearly a long build.
 - **The batch fans out.** Orbit's batch has no parent status route: the submit
   returns one child `request_id` per profile and each reads back on its own.
   The lifecycle polls only the children still running, then reads every child

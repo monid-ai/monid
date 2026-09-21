@@ -1,6 +1,6 @@
 {
     "name": "synthetic-enrich-built",
-    "description": "A full build Orbit had to do: the submit answers 202 running (the DISPATCH signal), one tick is still running, and the terminal snapshot reports generation_level 3. Settles one full_profile = 10 credits. Urls are literal because {profile_id} is substituted before the call, and the poll follows links.status. Synthetic.",
+    "description": "A full build Orbit had to do: 202 running with 10 reserved, one tick still running, then completed at level 3 with the receipt settled at 10 — a full build includes its partial, so it is 10 and never 5 + 10. The poll follows links.status. Synthetic, shaped on a live drill of v3 (2026-09-20).",
     "calls": [
         {
             "req": {
@@ -17,8 +17,17 @@
                     "include_profile": true,
                     "generation_level": 2,
                     "links": {
-                        "status": "/v3/enrich/requests/ENRICH1",
-                        "profile": "/v3/enrich/a23ff3b7-b6cc-4ac6-8d4f-0c909cd956f5"
+                        "profile": "/v3/enrich/a23ff3b7-b6cc-4ac6-8d4f-0c909cd956f5",
+                        "status": "/v3/enrich/requests/ENRICH1"
+                    },
+                    "billing": {
+                        "id": "op-enrich-1",
+                        "pricingVersion": "2026-09-17",
+                        "reservedCredits": 10,
+                        "consumedCredits": 0,
+                        "releasedCredits": 0,
+                        "heldCredits": 10,
+                        "status": "open"
                     }
                 }
             }
@@ -38,8 +47,17 @@
                     "include_profile": true,
                     "generation_level": 2,
                     "links": {
-                        "status": "/v3/enrich/requests/ENRICH1",
-                        "profile": "/v3/enrich/a23ff3b7-b6cc-4ac6-8d4f-0c909cd956f5"
+                        "profile": "/v3/enrich/a23ff3b7-b6cc-4ac6-8d4f-0c909cd956f5",
+                        "status": "/v3/enrich/requests/ENRICH1"
+                    },
+                    "billing": {
+                        "id": "op-enrich-1",
+                        "pricingVersion": "2026-09-17",
+                        "reservedCredits": 10,
+                        "consumedCredits": 0,
+                        "releasedCredits": 0,
+                        "heldCredits": 10,
+                        "status": "open"
                     }
                 }
             }
@@ -74,8 +92,17 @@
                         ]
                     },
                     "links": {
-                        "status": "/v3/enrich/requests/ENRICH1",
-                        "profile": "/v3/enrich/a23ff3b7-b6cc-4ac6-8d4f-0c909cd956f5"
+                        "profile": "/v3/enrich/a23ff3b7-b6cc-4ac6-8d4f-0c909cd956f5",
+                        "status": "/v3/enrich/requests/ENRICH1"
+                    },
+                    "billing": {
+                        "id": "op-enrich-1",
+                        "pricingVersion": "2026-09-17",
+                        "reservedCredits": 10,
+                        "consumedCredits": 10,
+                        "releasedCredits": 0,
+                        "heldCredits": 0,
+                        "status": "settled"
                     }
                 }
             }

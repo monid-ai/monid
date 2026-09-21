@@ -106,3 +106,20 @@
 - [x] 7.2 No platform names and nothing about what Orbit already holds
 - [x] 7.3 Runtime schema gates on every endpoint taking an input, and
       live tests asserting shape rather than amounts
+
+## 9. Live-drill corrections (2026-09-20)
+
+- [x] 9.1 Settle on Orbit's `billing` receipt: provider-level `usage.evidence`
+      and `usage.consolidate` on `billing.consumedCredits`, every billed doc a
+      leaf `PER_UNIT` in `CREDIT` units — the receipt must be the evidence
+      because a pruned zero claim falls back to the fold
+- [x] 9.2 Retire the observation fold: no `built` ids, no dispatch signal, no
+      per-line derivation from result states or from the submit's status code
+- [x] 9.3 A run stays open while its receipt reads `open`
+- [x] 9.4 `runMs` 45 minutes on the three lifecycles (full builds measured at
+      24 to 27 minutes) with a cadence that backs off on long builds
+- [x] 9.5 Batch: sum of the children's receipts; null receipt and missing
+      `links.status` on a child that completed on the submit; child ids
+      `{parent}:{profile_id}` URL-encoded
+- [x] 9.6 Chains regenerated with receipts, including both cases where the
+      fold and the receipt disagreed, the 202 no-op, and a zero-rate read

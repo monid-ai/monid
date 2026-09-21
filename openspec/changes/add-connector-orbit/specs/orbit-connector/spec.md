@@ -4,21 +4,76 @@
 
 ### Requirement: Orbit provider definition
 The orbit provider SHALL declare name `orbit`, `request.baseUrl`
-`https://api.orbitsearch.com`, auth `presets.auth.bearer()`, timeouts 60 s
-request / 900 s run / 5 s poll, and the single credit pool `default`
-("Orbit credits"). It SHALL declare a provider-level `output.fromError` that
-normalizes `{status: "failed", error: {code, message}}` into
-`{message, code?, raw}`. It SHALL NOT declare a lifecycle, because the
+`https://api.orbitsearch.com`, auth `presets.auth.bearer()`, and the single
+credit pool `default` ("Orbit credits"). It SHALL declare a provider-level
+`output.fromError` that normalizes `{status: "failed", error: {code, message}}`
+into `{message, code?, raw}`. It SHALL NOT declare a lifecycle, because the
 profile read is a plain synchronous request and a provider-level `start`
-would replace its declarative execution. It SHALL NOT declare a
-`usage.consolidate`, because Orbit's search and enrichment responses carry no
-meter.
+would replace its declarative execution.
 
 #### Scenario: Vendor non-2xx is zero-billed data
 - **WHEN** any endpoint receives a 402
   `{status: "failed", error: {code: "developer_api_credits_insufficient", ...}}`
 - **THEN** `isProviderError` is true, usage is `{credits: {}, evidence: {}}`,
   and the output carries `code` and `message` beside the raw envelope
+
+### Requirement: Orbit's receipt settles every run
+Every v3 response carries Orbit's own receipt, `billing: {id, pricingVersion,
+reservedCredits, consumedCredits, releasedCredits, heldCredits, status}`, whose
+`status` goes `open` to `settled` and whose `consumedCredits` on the terminal
+snapshot is the charge. Every billed endpoint SHALL price a leaf `PER_UNIT` in
+`CREDIT` units at amount 1, and the provider SHALL declare `usage.evidence`
+reading `billing.consumedCredits` as that count and `usage.consolidate`
+claiming the same figure while plucking `billing` out of the output. The
+receipt SHALL be the EVIDENCE and not only the claim, because the engine
+prunes a zero claim and falls back to the derived fold, and Orbit's zero
+receipts are real answers. No endpoint SHALL infer a charge from result
+states or from the submit's status code. Rates SHALL appear only in
+`usage.estimate`, the pre-run ceiling, read from the published card.
+
+#### Scenario: A row seen mid-build is not a charged build
+- **WHEN** a search returns twelve index hits, one of them `enriching` on the
+  submit and `ready` on the terminal snapshot, with a receipt of 2
+- **THEN** usage is `{credits: {default: 2}, evidence: {CREDIT: 2}}`
+
+#### Scenario: A build never seen mid-build is still charged
+- **WHEN** a discovery search returns one index hit and two discovered
+  people, only one of whom was ever seen `generating`, with a receipt of 11
+- **THEN** usage is `{credits: {default: 11}, evidence: {CREDIT: 11}}`
+
+#### Scenario: A zero receipt settles zero
+- **WHEN** an enrichment of a profile already at depth answers `202 running`
+  with `reservedCredits` 0 and completes with `consumedCredits` 0
+- **THEN** the run settles with no credits, whatever the submit's status code
+
+#### Scenario: A rate change moves the settle
+- **WHEN** a profile read's receipt reports `consumedCredits` 0 under a newer
+  `pricingVersion`
+- **THEN** the run settles with no credits and no connector change
+
+#### Scenario: The receipt leaves the payload
+- **WHEN** any single-receipt endpoint settles
+- **THEN** `billing` is absent from the output
+
+### Requirement: A run is terminal when its receipt is
+Each lifecycle SHALL keep a run open while its status is `running` OR its
+receipt's `status` is `open`, so a settle that lands after the status never
+bills a partial figure.
+
+#### Scenario: A terminal status with an open receipt is read again
+- **WHEN** a status read answers `completed` with a receipt still `open`
+- **THEN** the poll returns RUNNING and the next read's settled receipt bills
+
+### Requirement: Run budgets cover measured build times
+Partial-depth and index-only work settles inside 90 seconds; full-depth
+builds were measured at 24 to 27 minutes. `orbit#v3/search`,
+`orbit#v3/enrich/{profile_id}` and `orbit#v3/enrich` SHALL declare `runMs` of
+45 minutes, and each poll SHALL back its cadence off once a run is clearly a
+long build.
+
+#### Scenario: The budget exceeds the slowest measured build
+- **WHEN** any of the three compiled docs is inspected
+- **THEN** `timeouts.runMs` is at least 27 minutes
 
 ### Requirement: Inputs mirror the published v3 OpenAPI
 Every `schema/inputs.ts` SHALL mirror its v3 component with optionality only —
@@ -40,42 +95,11 @@ them with a `400`, which arrives as data.
 - **THEN** `profile_ids` carries `minItems` 1 and `maxItems` 20, and the
   required set is `["profile_ids", "operation"]`
 
-### Requirement: A search settles the work it did, derived from observation
-`orbit#v3/search` SHALL carry a lifecycle whose `start` executes the submit and
-whose `poll` reads `GET /v3/search/{search_id}` until the status is terminal.
-The poll SHALL accumulate every `profile_id` it observes with status
-`generating` or `enriching` into the fn-owned `state.data.built` bag, carrying
-the previous tick's ids forward by hand (whole-state semantics, D21). The
-endpoint SHALL price a COMPOSITE of `index_search` (1 credit per 10 RESULTs),
-`candidate_discovery` (1), `partial_profile` (5) and `full_profile` (10), and
-`evidence` SHALL settle: one `index_search` count per non-failed result whose
-`sources` carries `search`; the requested depth line for each result observed
-mid-build; and `candidate_discovery` for each remaining non-failed result whose
-`sources` carries `candidate_discovery`.
-
-#### Scenario: A built profile settles at its depth
-- **WHEN** a partial-depth search reports two index results, one of which was
-  seen `generating` and then `enriching` before ending `ready`
-- **THEN** usage is `{credits: {default: 6}, evidence: {index_search: 2,
-  partial_profile: 1}}`
-
-#### Scenario: A search answered from the index bills no build
-- **WHEN** a search returns twelve `ready` results that were never observed
-  mid-build
-- **THEN** usage is `{credits: {default: 2}, evidence: {index_search: 12}}`
-
-#### Scenario: A union of origins stays off the cached line
-- **WHEN** a result's `sources` carries both `search` and
-  `candidate_discovery`
-- **THEN** it is counted on the discovery line alone, because Orbit excludes
-  discovery rows from the cached-result count and bills the row against the
-  single origin that created it
-
-#### Scenario: A candidate merely resolved bills 1
-- **WHEN** a discovery search returns one index result and two
-  `candidate_discovery` results that were never observed mid-build
-- **THEN** usage is `{credits: {default: 3}, evidence: {index_search: 1,
-  candidate_discovery: 2}}`
+### Requirement: A search runs to a terminal snapshot
+`orbit#v3/search` SHALL carry a lifecycle whose `start` executes the submit
+and whose `poll` reads the route Orbit names in `links.status` until the run
+is terminal. A 2xx snapshot without a `results` array SHALL be an
+infrastructure failure, exactly as a 2xx without `search_id` is.
 
 #### Scenario: A submit-time failure reads like a poll-time one
 - **WHEN** the submit answers 200 with `status: "failed"` and its reason at
@@ -86,56 +110,39 @@ mid-build; and `candidate_discovery` for each remaining non-failed result whose
 
 #### Scenario: A failed search is ours/theirs and bills nothing
 - **WHEN** the status route answers 200 with `status: "failed"`
-- **THEN** the run reports `httpStatus` 500 with `providerHttpStatus` 200,
-  usage `{credits: {}, evidence: {}}`, and an output shaped like Orbit's own
-  error envelope so one mapper reads it
-
-#### Scenario: A failed status lookup keeps the run alive
-- **WHEN** a status read answers 408, 429 or ANY 5xx while the search is
-  running
-- **THEN** the poll returns RUNNING with a backed-off cadence rather than
-  settling, because the search keeps running and keeps drawing credits
+- **THEN** the run reports `httpStatus` 500 with `providerHttpStatus` 200 and
+  usage `{credits: {}, evidence: {}}`
 
 #### Scenario: The estimate is the ceiling the caller authorized
 - **WHEN** `orbit#v3/search` is estimated with `limit` 100 and
   `profile_depth: "full"`
-- **THEN** the estimate is 1,010 credits — ten index blocks plus a full build
-  for every person the search may return
+- **THEN** the estimate is 1,010 credits — ten cached blocks plus a full
+  build for every person the search may return
 
-### Requirement: An enrichment settles on dispatch, and a no-op settles at zero
-`orbit#v3/enrich/{profile_id}` SHALL carry a lifecycle whose `start` records
-whether Orbit dispatched work — `status: "running"` on the submit, or the
-`regenerate` operation, which always rebuilds — into `state.data.dispatched`,
-and whose `poll` follows the status route Orbit names in `links.status`. The
-endpoint SHALL price a COMPOSITE of `partial_profile` (5) and `full_profile`
-(10), and `evidence` SHALL draw a depth line only when work was dispatched AND
-the terminal status is `completed` AND `generation_level` reached the depth
-asked for (2 for `partial`, 3 for `full` and `regenerate`).
+### Requirement: An enrichment runs to a terminal snapshot
+`orbit#v3/enrich/{profile_id}` SHALL carry a lifecycle whose `poll` follows
+`links.status`, falling back to the URL-encoded request route when the
+response carries no link. A `202` SHALL carry no billing meaning.
 
-#### Scenario: A dispatched build settles at its depth
-- **WHEN** a `full` enrichment answers 202 `running` and completes at
-  `generation_level` 3
-- **THEN** usage is `{credits: {default: 10}, evidence: {full_profile: 1}}`
-
-#### Scenario: A profile already at depth settles at zero
-- **WHEN** a `full` enrichment answers 200 `completed` on the submit at
-  `generation_level` 3
-- **THEN** usage is `{credits: {}, evidence: {}}`, although the snapshot is
-  otherwise identical to the dispatched case
+#### Scenario: A full build settles its receipt
+- **WHEN** a `full` enrichment completes at `generation_level` 3 with a
+  receipt of 10
+- **THEN** usage is `{credits: {default: 10}, evidence: {CREDIT: 10}}`
 
 ### Requirement: The batch fans out over its children
-`orbit#v3/enrich` SHALL carry a lifecycle that reads the child `request_id`s
-from the submit, polls only the children still running on each tick, and, once
-none are running, reads EVERY child once more to assemble
-`{request_id, status, results}` with one current snapshot per profile. The
-parent status SHALL be `completed_with_errors` when any child ended other than
-`completed`. Only children Orbit dispatched SHALL draw a depth line.
+`orbit#v3/enrich` SHALL read its still-open children concurrently, and once
+none are open SHALL read EVERY child once more to assemble
+`{request_id, status, results}`. Child ids have the shape
+`{parent}:{profile_id}` and SHALL be URL-encoded in every path. The batch
+SHALL override the provider's evidence and consolidate to settle the SUM of
+its children's receipts; a child that completed on the submit carries a null
+receipt and adds nothing. The per-child receipts SHALL stay in the output.
 
-#### Scenario: Only the dispatched child draws
-- **WHEN** a `partial` batch of two returns one child `running` and one child
-  already `completed`, and the running child completes at level 2
-- **THEN** usage is `{credits: {default: 5}, evidence: {partial_profile: 1}}`
-  and the output carries both children under `request_id` `BATCH1`
+#### Scenario: The batch settles the sum of its children
+- **WHEN** a `partial` batch of two returns one child that builds (receipt 5)
+  and one that completed on the submit with a null receipt
+- **THEN** usage is `{credits: {default: 5}, evidence: {CREDIT: 5}}` and the
+  output carries both children under the parent's `request_id`
 
 ### Requirement: One status-read retry rule across every lifecycle
 Every lifecycle SHALL treat a status read answering `408`, `429` or any `5xx`
@@ -158,18 +165,7 @@ falling back to the documented path shape.
 #### Scenario: A transient final read re-opens a batch child
 - **WHEN** the batch's final sweep reads a completed child and gets a `503`
 - **THEN** that child is re-opened for a later tick instead of being
-  published as `failed`, so its depth line survives into evidence
-
-### Requirement: The request states what was priced
-Usage fns SHALL read `operation` and `profile_depth` from
-`data.input.body` — both are request fields Orbit priced the work against,
-and one operation applies to a whole batch. The terminal response's
-`generation_level` SHALL remain the source for the depth actually reached.
-
-#### Scenario: A missing echo does not change the price
-- **WHEN** a dispatched `partial` enrichment completes at
-  `generation_level` 3 and its snapshot omits `operation`
-- **THEN** usage is `{credits: {default: 5}, evidence: {partial_profile: 1}}`
+  published as `failed`, so its receipt survives into the sum
 
 ### Requirement: Submits carry a run-stable idempotency key
 Every lifecycle `start` SHALL send `Idempotency-Key: {runId}:submit` on its
@@ -182,11 +178,12 @@ creating and paying for a second one.
 - **THEN** both submits carry the same `Idempotency-Key`, and Orbit answers
   the second with the resource the first created
 
-### Requirement: A profile read is one flat credit under a declared identity
+### Requirement: A profile read under a declared identity
 `orbit#v3/profile/{profile_id}` SHALL declare the public identity
 `/v3/profile/{profile_id}` while calling the vendor's own
 `GET /v3/enrich/{profile_id}`, because that path is shared with the build and
-two defs on one path collide. It SHALL price `PER_CALL` 1 credit.
+two defs on one path collide. It SHALL settle on its receipt like every other
+billed endpoint, with an estimate of the published profile-read rate.
 
 #### Scenario: The identity is declared and the call is the vendor's
 - **WHEN** the compiled doc is inspected

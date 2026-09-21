@@ -1,6 +1,6 @@
 {
     "name": "synthetic-search-async",
-    "description": "The canonical async search chain: the submit answers 202 with status running and one result already generating, one poll tick still running, then a terminal completed snapshot. The generating id is the BILLING SIGNAL — the poll records it in state.data.built, so the profile settles on the partial_profile line while the two index hits settle one index_search block. Settles 1 + 5 = 6 credits. Synthetic: written against the published v3 OpenAPI, pending a recording with the dedicated Monid provider key.",
+    "description": "THE case that retired the observation fold. Twelve index hits, one of them `enriching` on the submit and `ready` at level 2 on the terminal snapshot — and Orbit's receipt settles 2: two cached blocks, no build charged. A fold that read `enriching` as a billed build settled 2 + 5. The receipt goes open (reserved 12) to settled (consumed 2). Synthetic, shaped on a live drill of v3 (2026-09-20).",
     "calls": [
         {
             "req": {
@@ -11,15 +11,15 @@
                 "status": 202,
                 "body": {
                     "search_id": "SEARCH1",
-                    "request_id": "req-synthetic-1",
+                    "request_id": "req-search1",
                     "status": "running",
                     "candidate_discovery": false,
                     "profile_depth": "partial",
-                    "include_profile": true,
+                    "include_profile": false,
                     "profile_upgrades_completed": false,
                     "results": [
                         {
-                            "profile_id": "PROF_INDEXED_1",
+                            "profile_id": "PROF_1",
                             "status": "ready",
                             "generation_level": 2,
                             "sources": [
@@ -27,40 +27,7 @@
                             ]
                         },
                         {
-                            "profile_id": "PROF_BUILT_1",
-                            "status": "generating",
-                            "generation_level": null,
-                            "sources": [
-                                "search"
-                            ]
-                        }
-                    ],
-                    "created_at": "2026-09-17T12:00:00.000Z",
-                    "updated_at": "2026-09-17T12:00:00.000Z",
-                    "links": {
-                        "status": "/v3/search/SEARCH1"
-                    }
-                }
-            }
-        },
-        {
-            "req": {
-                "method": "GET",
-                "url": "{{request.url}}/SEARCH1"
-            },
-            "res": {
-                "status": 200,
-                "body": {
-                    "search_id": "SEARCH1",
-                    "request_id": "req-synthetic-1",
-                    "status": "running",
-                    "candidate_discovery": false,
-                    "profile_depth": "partial",
-                    "include_profile": true,
-                    "profile_upgrades_completed": false,
-                    "results": [
-                        {
-                            "profile_id": "PROF_INDEXED_1",
+                            "profile_id": "PROF_2",
                             "status": "ready",
                             "generation_level": 2,
                             "sources": [
@@ -68,7 +35,79 @@
                             ]
                         },
                         {
-                            "profile_id": "PROF_BUILT_1",
+                            "profile_id": "PROF_3",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_4",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_5",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_6",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_7",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_8",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_9",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_10",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_11",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_12",
                             "status": "enriching",
                             "generation_level": 1,
                             "sources": [
@@ -76,10 +115,19 @@
                             ]
                         }
                     ],
-                    "created_at": "2026-09-17T12:00:00.000Z",
-                    "updated_at": "2026-09-17T12:00:20.000Z",
+                    "created_at": "2026-09-20T12:00:00.000Z",
+                    "updated_at": "2026-09-20T12:01:00.000Z",
                     "links": {
                         "status": "/v3/search/SEARCH1"
+                    },
+                    "billing": {
+                        "id": "op-search-1",
+                        "pricingVersion": "2026-09-17",
+                        "reservedCredits": 12,
+                        "consumedCredits": 0,
+                        "releasedCredits": 0,
+                        "heldCredits": 12,
+                        "status": "open"
                     }
                 }
             }
@@ -87,70 +135,259 @@
         {
             "req": {
                 "method": "GET",
-                "url": "{{request.url}}/SEARCH1"
+                "url": "https://api.orbitsearch.com/v3/search/SEARCH1"
             },
             "res": {
                 "status": 200,
                 "body": {
                     "search_id": "SEARCH1",
-                    "request_id": "req-synthetic-1",
+                    "request_id": "req-search1",
+                    "status": "running",
+                    "candidate_discovery": false,
+                    "profile_depth": "partial",
+                    "include_profile": false,
+                    "profile_upgrades_completed": false,
+                    "results": [
+                        {
+                            "profile_id": "PROF_1",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_2",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_3",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_4",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_5",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_6",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_7",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_8",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_9",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_10",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_11",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_12",
+                            "status": "enriching",
+                            "generation_level": 1,
+                            "sources": [
+                                "search"
+                            ]
+                        }
+                    ],
+                    "created_at": "2026-09-20T12:00:00.000Z",
+                    "updated_at": "2026-09-20T12:01:00.000Z",
+                    "links": {
+                        "status": "/v3/search/SEARCH1"
+                    },
+                    "billing": {
+                        "id": "op-search-1",
+                        "pricingVersion": "2026-09-17",
+                        "reservedCredits": 12,
+                        "consumedCredits": 0,
+                        "releasedCredits": 0,
+                        "heldCredits": 12,
+                        "status": "open"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.orbitsearch.com/v3/search/SEARCH1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "search_id": "SEARCH1",
+                    "request_id": "req-search1",
                     "status": "completed",
                     "candidate_discovery": false,
                     "profile_depth": "partial",
-                    "include_profile": true,
+                    "include_profile": false,
                     "profile_upgrades_completed": true,
                     "results": [
                         {
-                            "profile_id": "PROF_INDEXED_1",
+                            "profile_id": "PROF_1",
                             "status": "ready",
                             "generation_level": 2,
                             "sources": [
                                 "search"
-                            ],
-                            "profile": {
-                                "id": "a23ff3b7-b6cc-4ac6-8d4f-0c909cd956f5",
-                                "name": "Ada Fielding",
-                                "headline": "Founder at Northwind Instruments",
-                                "location": "Brooklyn, New York",
-                                "sections": [
-                                    {
-                                        "kind": "background",
-                                        "text": "Ada builds measurement hardware for field ecologists.",
-                                        "sources": [
-                                            "https://northwind-instruments.example/about"
-                                        ]
-                                    }
-                                ]
-                            }
+                            ]
                         },
                         {
-                            "profile_id": "PROF_BUILT_1",
+                            "profile_id": "PROF_2",
                             "status": "ready",
                             "generation_level": 2,
                             "sources": [
                                 "search"
-                            ],
-                            "profile": {
-                                "id": "a23ff3b7-b6cc-4ac6-8d4f-0c909cd956f5",
-                                "name": "Ada Fielding",
-                                "headline": "Founder at Northwind Instruments",
-                                "location": "Brooklyn, New York",
-                                "sections": [
-                                    {
-                                        "kind": "background",
-                                        "text": "Ada builds measurement hardware for field ecologists.",
-                                        "sources": [
-                                            "https://northwind-instruments.example/about"
-                                        ]
-                                    }
-                                ]
-                            }
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_3",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_4",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_5",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_6",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_7",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_8",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_9",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_10",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_11",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
+                        },
+                        {
+                            "profile_id": "PROF_12",
+                            "status": "ready",
+                            "generation_level": 2,
+                            "sources": [
+                                "search"
+                            ]
                         }
                     ],
-                    "created_at": "2026-09-17T12:00:00.000Z",
-                    "updated_at": "2026-09-17T12:01:40.000Z",
+                    "created_at": "2026-09-20T12:00:00.000Z",
+                    "updated_at": "2026-09-20T12:01:00.000Z",
                     "links": {
                         "status": "/v3/search/SEARCH1"
+                    },
+                    "billing": {
+                        "id": "op-search-1",
+                        "pricingVersion": "2026-09-17",
+                        "reservedCredits": 12,
+                        "consumedCredits": 2,
+                        "releasedCredits": 10,
+                        "heldCredits": 0,
+                        "status": "settled"
                     }
                 }
             }

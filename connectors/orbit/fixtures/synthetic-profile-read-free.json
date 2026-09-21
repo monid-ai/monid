@@ -1,6 +1,6 @@
 {
-    "name": "synthetic-profile-read",
-    "description": "A straight profile read with its receipt: consumed 1 at the profile-read rate of card 2026-09-17. The url is literal because the engine substitutes {profile_id} before the call. Synthetic, shaped on a live drill of v3 (2026-09-20).",
+    "name": "synthetic-profile-read-free",
+    "description": "The same read after Orbit moves its profile-read rate to zero: the receipt reports consumed 0 and the run settles zero with no connector change. This is what settling on the receipt buys — the settle follows Orbit's card, and only the estimate ceiling is pinned. Synthetic, shaped on a live drill of v3 (2026-09-20).",
     "calls": [
         {
             "req": {
@@ -28,10 +28,10 @@
                         ]
                     },
                     "billing": {
-                        "id": "op-read-1",
-                        "pricingVersion": "2026-09-17",
-                        "reservedCredits": 1,
-                        "consumedCredits": 1,
+                        "id": "op-read-2",
+                        "pricingVersion": "2026-09-19",
+                        "reservedCredits": 0,
+                        "consumedCredits": 0,
                         "releasedCredits": 0,
                         "heldCredits": 0,
                         "status": "settled"

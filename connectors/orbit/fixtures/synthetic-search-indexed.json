@@ -1,6 +1,6 @@
 {
     "name": "synthetic-search-indexed",
-    "description": "A search Orbit answers whole on the submit: 200, status completed, twelve people read straight from the index and nothing built. Settles two index_search blocks (ceil(12/10)) and no depth line, which is the case the derived fold has to get right or every cached search overcharges. Synthetic.",
+    "description": "A search Orbit answers whole on the submit: 200, status completed, twelve cached people, receipt already settled at 2 (two blocks of ten). No poll happens. Synthetic, shaped on a live drill of v3 (2026-09-20).",
     "calls": [
         {
             "req": {
@@ -11,7 +11,7 @@
                 "status": 200,
                 "body": {
                     "search_id": "SEARCH2",
-                    "request_id": "req-synthetic-2",
+                    "request_id": "req-search2",
                     "status": "completed",
                     "candidate_discovery": false,
                     "profile_depth": "partial",
@@ -115,10 +115,19 @@
                             ]
                         }
                     ],
-                    "created_at": "2026-09-17T12:00:00.000Z",
-                    "updated_at": "2026-09-17T12:00:00.000Z",
+                    "created_at": "2026-09-20T12:00:00.000Z",
+                    "updated_at": "2026-09-20T12:01:00.000Z",
                     "links": {
                         "status": "/v3/search/SEARCH2"
+                    },
+                    "billing": {
+                        "id": "op-search-2",
+                        "pricingVersion": "2026-09-17",
+                        "reservedCredits": 12,
+                        "consumedCredits": 2,
+                        "releasedCredits": 10,
+                        "heldCredits": 0,
+                        "status": "settled"
                     }
                 }
             }

@@ -1,6 +1,6 @@
 {
     "name": "synthetic-enrich-provider-error",
-    "description": "Orbit refuses an enrichment: 402 with the credits envelope. Vendor non-2xx is DATA — zero usage, forced by the engine. Its own chain rather than the shared one because {profile_id} is substituted before the call, so the url cannot be a {{request.url}} binding. Synthetic.",
+    "description": "Orbit refuses an enrichment: 402 with the credits envelope. Vendor non-2xx is DATA — zero usage, forced by the engine. Its own chain because {profile_id} is substituted before the call. Synthetic, shaped on a live drill of v3 (2026-09-20).",
     "calls": [
         {
             "req": {
