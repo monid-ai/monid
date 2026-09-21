@@ -78,15 +78,10 @@ run now, and nothing is inferred.
   call is free while it commits an open-ended draw is the one thing a billing
   model must not do. It arrives when the two platforms have agreed how a
   recurring charge settles.
-- **Bulk search is held back** (`/v3/search/bulk` and its three reads) —
-  pending an internal review on the vendor side rather than on any doubt
-  about the shape. It is worth recording what that review starts from,
-  because it is the opposite of the population case below: a bulk job
-  reports `billing.consumed_credits`, its own cumulative charge after Orbit
-  "releases unused credits", so it is the one Orbit surface a connector can
-  settle EXACTLY rather than bounding from observation. It also exposes a
-  cancel route, so a run that hits its budget can stop the undispatched
-  remainder instead of leaving it to charge on.
+- **Bulk search is held back** (`/v3/search/bulk` and its three reads),
+  pending an internal review on the vendor side. It reports
+  `billing.consumed_credits` on the job and exposes a cancel route, so it
+  fits the same receipt-settled shape when it comes.
 - **Population search is held back** (`/v3/search/populations` and its
   quote), and this one is worth stating precisely because the endpoint LOOKS
   settleable. A population is priced as one number and reserved when the
