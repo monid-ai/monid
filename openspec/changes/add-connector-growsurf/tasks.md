@@ -45,7 +45,7 @@
 ## 3. Endpoints (9)
 
 - [x] 3.1 `campaigns`: no input schema at all — the entry point that needs
-      no id, and the only endpoint a live test can exercise
+      no id, and the only endpoint a live test can reach without one
 - [x] 3.2 `campaign`: `{id}` mirror
 - [x] 3.3 `participants`: `{id}` + cursor paging; the deepObject metadata
       filter deliberately not mirrored
@@ -65,21 +65,31 @@
 
 ## 4. Fixtures + tests
 
-- [x] 4.1 12 shared provider-level chains (strategy v2), each with a
+- [x] 4.1 20 shared provider-level chains (strategy v2), each with a
       `description` naming its provenance; `{{request.url}}` where the
       compiled url is the issued one, literal urls where a path parameter
       is substituted
 - [x] 4.2 The two 200-but-not-done chains get their own recordings:
       `synthetic-trigger-referral-repeat` and
       `synthetic-record-transaction-duplicate`
-- [x] 4.3 Per-endpoint replay tests, 9 of 9: happy, a schema gate with an
+- [x] 4.3 Per-endpoint replay tests, 9 of 9: happy (the WHOLE output
+      compared against the fixture body, so an injected billing field or a
+      stripped record fails), a provider error, a schema gate with an
       accepted boundary twin, and the doc-shape claim each endpoint makes
 - [x] 4.4 Provider-level `provider.test.ts`: the nine compiled urls, FREE
       on every doc with the synthesized quantities entry shared, one
       interned bearer inject with no wire layer anywhere, and the sale
       endpoint pinned FREE on its own
-- [x] 4.5 One credential-gated live test, `#campaigns` — the only call
-      that needs no program id, so it works for any key
+- [x] 4.5 Six credential-gated live tests. `#campaigns` needs only a key;
+      the five program-scoped READS discover an id through it at run time
+      (`connectors/growsurf/testing.ts`), because a GrowSurf program id
+      belongs to one team and cannot be pinned the way vaquill pins a
+      public statute id. Plan and verification gates count as ACCOUNT
+      states there, since a live key may sit on either side of them
+- [x] 4.6 NO live test on the three writes, deliberately: a live run would
+      enroll a real person, credit a real referral, or record a real sale
+      and generate a commission a real customer then owes. There is no
+      read-only form and no vendor sandbox. Stated at each call site
 
 ## 5. Wiring + verification
 
@@ -92,11 +102,11 @@
       30-odd unrelated ids into this change, so the edit is exactly the
       nine. `ids:check` still reports the pre-existing drift; it reports
       none for `growsurf#`, in either direction
-- [x] 5.3 Verify: `deno fmt` clean · `deno lint` clean (27 files) ·
-      `deno task check` clean · `deno task test` 1174 passed, 0 failed,
-      201 ignored · double-compile `--force --frozen-meta` byte-identical
-      · `version:check` reports no contract-surface change · catalog
-      smoke lists all nine under `referrals`
+- [x] 5.3 Verify: `deno fmt` clean · `deno lint` clean · `deno task check`
+      clean · `deno task test` 1182 passed, 0 failed, 206 ignored ·
+      double-compile `--force --frozen-meta` byte-identical ·
+      `version:check` reports no contract-surface change · catalog smoke
+      lists all nine under `referrals`
 
 ## 6. Notes for review
 
@@ -112,3 +122,31 @@
       2026-09-22 and uses GrowSurf's own published example identities.
       Real recordings can replace them once a throwaway program exists
       for the purpose
+
+## 7. Review round 1 (CodeRabbit, 2026-09-22)
+
+- [x] 7.1 Completed the synchronous test matrix. Every suite now carries a
+      provider-error case, and the eight that lacked one gained it. Eight
+      new per-endpoint error chains, one per endpoint and method-correct —
+      replay matches METHOD as well as url, so the shared GET chain could
+      never have served the three POSTs. Each chain carries a DIFFERENT
+      error GrowSurf really returns (404 unknown program, 429 rate limit,
+      402 affiliate payment-method gate, 403 referral plan gate, 400
+      unknown participant, 422 blocked participant, 422 wrong program
+      type) rather than nine copies of one 403
+- [x] 7.2 Happy paths now compare the WHOLE output against the fixture
+      body instead of picked fields, so an injected billing field fails.
+      The usage assertions are unchanged
+- [x] 7.3 Live coverage added where it can exist — see 4.5 and 4.6. The
+      three writes stay live-test-free on purpose
+- [x] 7.4 NOT FIXED, and deliberately: an omitted body on
+      `…/{participantIdOrEmail}/ref` is refused although GrowSurf accepts
+      a bodyless POST. `engine/request.ts` coerces an absent body to
+      `null` before validating it against any declared body schema, so
+      this is engine-wide — 23 endpoints across the repo declare an
+      all-optional body and every one behaves the same way. A connector
+      cannot fix it: `.nullable()` would pass validation and then put a
+      literal `null` on the wire, which is worse. The behaviour is now
+      pinned by a test and called out in `meta.notes` so a caller is told
+      to send `{}`. The real fix belongs in the engine and should be its
+      own change

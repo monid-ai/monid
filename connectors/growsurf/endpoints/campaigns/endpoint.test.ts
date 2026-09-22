@@ -12,26 +12,26 @@ const chains = fromFileUrl(new URL("../../fixtures/", import.meta.url));
 
 Deno.test(`${ID} happy: the list is the entry point, and it is free`, async () => {
     const unit = await testSealedUnit(ID);
+    const fixture = await loadFixture(`${chains}synthetic-campaigns-ok.json`);
     const result = await runEndpoint({
         unit,
         input: {},
         mode: "replay",
-        fixture: await loadFixture(`${chains}synthetic-campaigns-ok.json`),
+        fixture,
     });
 
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
     // FREE model: nothing folds, nothing is evidenced
     assertEquals(result.usage, { credits: {}, evidence: {} });
+    // no output projection on this doc: the vendor's body IS the contract.
+    // Comparing the WHOLE body (not picked fields) is what catches a
+    // stripped program or an injected billing field.
+    assertEquals(result.output, fixture.calls[0].res.body);
 
+    // the two program TYPES decide which of the other endpoints apply
     const campaigns = (result.output as Record<string, unknown>)
-        .campaigns as Record<
-            string,
-            unknown
-        >[];
-    assertEquals(campaigns.length, 2);
-    // the two program TYPES decide which of the other endpoints apply, so
-    // both must survive to the caller untouched
+        .campaigns as Record<string, unknown>[];
     assertEquals(campaigns.map((c) => c.type), ["REFERRAL", "AFFILIATE"]);
 });
 
@@ -44,27 +44,26 @@ Deno.test(`${ID}: no input schema at all — the one endpoint needing no id`, as
 
 Deno.test(`${ID} provider error: a 403 is data, and still zero usage`, async () => {
     const unit = await testSealedUnit(ID);
+    const fixture = await loadFixture(`${chains}synthetic-provider-error.json`);
     const result = await runEndpoint({
         unit,
         input: {},
         mode: "replay",
-        fixture: await loadFixture(`${chains}synthetic-provider-error.json`),
+        fixture,
     });
 
+    assertEquals(result.httpStatus, 403);
     assertEquals(result.isProviderError, true);
     assertEquals(result.usage, { credits: {}, evidence: {} });
-    // `code` is the stable half of GrowSurf's error envelope — it must
-    // reach the caller intact
-    assertEquals(
-        (result.output as Record<string, unknown>).code,
-        "NOT_AUTHORIZED_ERROR",
-    );
+    // the envelope reaches the caller intact — `code` is the stable half
+    assertEquals(result.output, fixture.calls[0].res.body);
 });
 
 Deno.test({
-    // The ONLY live test in this connector, because it is the only call
-    // that needs no program id: every other endpoint would have to
-    // hardcode an id that exists in one particular GrowSurf team.
+    // The one live test that needs NOTHING but a key. Every other endpoint
+    // needs a program id, which belongs to one GrowSurf team — see those
+    // suites, which discover an id through this endpoint rather than
+    // pinning one that exists only in our own account.
     name: `${ID} live (gated on GROWSURF_API_KEY)`,
     ignore: liveSkip("growsurf"),
     fn: async () => {

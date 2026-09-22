@@ -2,10 +2,12 @@ import { assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import {
     assertInputAccepted,
+    liveSkip,
     loadFixture,
     runEndpoint,
     testSealedUnit,
 } from "@shared/testing";
+import { assertLiveOk, liveProgramId } from "../../testing.ts";
 
 const ID = "growsurf#campaign/{id}";
 const chains = fromFileUrl(new URL("../../fixtures/", import.meta.url));
@@ -21,9 +23,26 @@ Deno.test(`${ID} happy: the commissionStructure is what prices a recorded sale`,
     });
 
     assertEquals(result.httpStatus, 200);
+    assertEquals(result.isProviderError, false);
     assertEquals(result.usage, { credits: {}, evidence: {} });
     // no output projection on this doc: the vendor's body IS the contract,
     // so a dropped reward or an injected field must fail here
+    assertEquals(result.output, fixture.calls[0].res.body);
+});
+
+Deno.test(`${ID} provider error: an unknown program id is data, not an exception`, async () => {
+    const unit = await testSealedUnit(ID);
+    const fixture = await loadFixture(`${chains}synthetic-error-campaign.json`);
+    const result = await runEndpoint({
+        unit,
+        input: { pathParams: { id: "x4t7bd" } },
+        mode: "replay",
+        fixture,
+    });
+
+    assertEquals(result.httpStatus, 404);
+    assertEquals(result.isProviderError, true);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
     assertEquals(result.output, fixture.calls[0].res.body);
 });
 
@@ -58,4 +77,19 @@ Deno.test(`${ID}: the program id is REQUIRED in the compiled doc`, async () => {
         unit.doc.request.url,
         "https://api.growsurf.com/v2/campaign/{id}",
     );
+});
+
+Deno.test({
+    name: `${ID} live (gated on GROWSURF_API_KEY)`,
+    ignore: liveSkip("growsurf"),
+    fn: async () => {
+        const id = await liveProgramId();
+        if (id === undefined) return; // the key's team has no programs
+        const result = await runEndpoint({
+            unit: await testSealedUnit(ID),
+            input: { pathParams: { id } },
+            mode: "live",
+        });
+        assertLiveOk(result);
+    },
 });

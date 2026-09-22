@@ -37,6 +37,9 @@ export default defineEndpoint({
             "Naming the referrer credits nothing.",
             "A repeat answers 200 with `success: false`, not an error. " +
             "Branch on `success`.",
+            "Send `{}` as the body to credit immediately — an ABSENT body " +
+            "is refused before the request is sent, even though GrowSurf " +
+            "itself would accept one.",
         ],
     },
     request: {

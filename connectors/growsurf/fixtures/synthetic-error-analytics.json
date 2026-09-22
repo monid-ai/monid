@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-error-analytics",
+    "description": "A referral program on an unpaid team. The other half of the plan gate, and also an account state. Vendor non-2xx is DATA: the engine classifies it as a provider error, forces zero usage, and passes the envelope through — `code` is the stable half a caller branches on. Authored from the GrowSurf REST v2 (2.0.0) response shape, verified field for field against a live deployment on 2026-09-22; the identities are GrowSurf's own published example values.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.growsurf.com/v2/campaign/k9j2mq/analytics?days=30&include=rates"
+            },
+            "res": {
+                "status": 403,
+                "body": {
+                    "name": "PaidPlanRequiredError",
+                    "code": "PAID_PLAN_REQUIRED_ERROR",
+                    "message": "A paid plan is required to use the GrowSurf REST API for referral programs.",
+                    "status": 403,
+                    "supportUrl": "https://growsurf.com/settings#contact_support"
+                }
+            }
+        }
+    ]
+}

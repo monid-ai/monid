@@ -18,21 +18,29 @@ const SALE = {
     description: "Renewal for Pro subscription",
 };
 
+/** NO LIVE TEST: a live run records a real sale against a real customer's
+ *  affiliate program and generates a real commission they then owe. This
+ *  is the one endpoint in the connector where a stray test run costs
+ *  somebody money. See add-participant's note. */
+
 Deno.test(`${ID} happy: a $99.00 sale, first one, not a duplicate`, async () => {
     const unit = await testSealedUnit(ID);
+    const fixture = await loadFixture(
+        `${chains}synthetic-record-transaction-ok.json`,
+    );
     const result = await runEndpoint({
         unit,
         input: { pathParams: PATH, body: SALE },
         mode: "replay",
-        fixture: await loadFixture(
-            `${chains}synthetic-record-transaction-ok.json`,
-        ),
+        fixture,
     });
 
     assertEquals(result.httpStatus, 200);
+    assertEquals(result.isProviderError, false);
     // the money in this payload is the CUSTOMER'S sale, never a charge for
     // the call — the connector bills nothing either way
     assertEquals(result.usage, { credits: {}, evidence: {} });
+    assertEquals(result.output, fixture.calls[0].res.body);
 
     const body = result.output as Record<string, unknown>;
     assertEquals(body.success, true);
@@ -41,13 +49,14 @@ Deno.test(`${ID} happy: a $99.00 sale, first one, not a duplicate`, async () => 
 
 Deno.test(`${ID} duplicate: the same invoiceId twice pays no one twice`, async () => {
     const unit = await testSealedUnit(ID);
+    const fixture = await loadFixture(
+        `${chains}synthetic-record-transaction-duplicate.json`,
+    );
     const result = await runEndpoint({
         unit,
         input: { pathParams: PATH, body: SALE },
         mode: "replay",
-        fixture: await loadFixture(
-            `${chains}synthetic-record-transaction-duplicate.json`,
-        ),
+        fixture,
     });
 
     // this is the whole reason an identifier is required: a retried sale
@@ -55,12 +64,34 @@ Deno.test(`${ID} duplicate: the same invoiceId twice pays no one twice`, async (
     // A caller reading the status alone would believe it had recorded two.
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
+    assertEquals(result.output, fixture.calls[0].res.body);
     const body = result.output as Record<string, unknown>;
     assertEquals(body.success, false);
     assertEquals(body.duplicate, true);
     assertEquals(body.commissionsCreated, 0);
     assertEquals(body.duplicateFields, ["invoiceId"]);
     assertEquals(body.matchingCommissionIds, ["comm_jy6kl1"]);
+});
+
+Deno.test(`${ID} provider error: a REFERRAL program refuses the call outright`, async () => {
+    const unit = await testSealedUnit(ID);
+    const fixture = await loadFixture(
+        `${chains}synthetic-error-record-transaction.json`,
+    );
+    const result = await runEndpoint({
+        unit,
+        input: { pathParams: PATH, body: SALE },
+        mode: "replay",
+        fixture,
+    });
+
+    // "affiliate programs only" is enforced by the VENDOR, not by the
+    // schema — nothing in the input distinguishes the two program types,
+    // so this 422 is the only place a caller learns it
+    assertEquals(result.httpStatus, 422);
+    assertEquals(result.isProviderError, true);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
+    assertEquals(result.output, fixture.calls[0].res.body);
 });
 
 Deno.test(`${ID} schema gate: a non-integer or zero amount never reaches the wire`, async () => {

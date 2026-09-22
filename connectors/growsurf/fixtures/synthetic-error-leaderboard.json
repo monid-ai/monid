@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-error-leaderboard",
+    "description": "An affiliate program on a team with no payment method on file. An ACCOUNT STATE, not a bad request. Vendor non-2xx is DATA: the engine classifies it as a provider error, forces zero usage, and passes the envelope through — `code` is the stable half a caller branches on. Authored from the GrowSurf REST v2 (2.0.0) response shape, verified field for field against a live deployment on 2026-09-22; the identities are GrowSurf's own published example values.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.growsurf.com/v2/campaign/x4t7bd/leaderboard?leaderboardType=BY_COMMISSIONS"
+            },
+            "res": {
+                "status": 402,
+                "body": {
+                    "name": "PaymentMethodRequiredError",
+                    "code": "PAYMENT_METHOD_REQUIRED_ERROR",
+                    "message": "You must add a payment method to your account to use the REST API for affiliate programs.",
+                    "status": 402,
+                    "supportUrl": "https://growsurf.com/settings#contact_support"
+                }
+            }
+        }
+    ]
+}

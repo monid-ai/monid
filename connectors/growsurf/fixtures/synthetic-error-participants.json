@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-error-participants",
+    "description": "The paging endpoint under a rate limit — a 429 that a caller should retry against `Retry-After`, not treat as a failed page. Vendor non-2xx is DATA: the engine classifies it as a provider error, forces zero usage, and passes the envelope through — `code` is the stable half a caller branches on. Authored from the GrowSurf REST v2 (2.0.0) response shape, verified field for field against a live deployment on 2026-09-22; the identities are GrowSurf's own published example values.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.growsurf.com/v2/campaign/k9j2mq/participants?limit=2"
+            },
+            "res": {
+                "status": 429,
+                "body": {
+                    "name": "RateLimitError",
+                    "code": "RATE_LIMIT_ERROR",
+                    "message": "Too many requests. Retry after the period given by Retry-After.",
+                    "status": 429,
+                    "supportUrl": "https://growsurf.com/settings#contact_support"
+                }
+            }
+        }
+    ]
+}
