@@ -3,6 +3,7 @@ import { fromFileUrl } from "@std/path";
 import {
     assertInputAccepted,
     estimateEndpoint,
+    liveSkip,
     loadFixture,
     runEndpoint,
     testSealedUnit,
@@ -22,10 +23,10 @@ Deno.test("orbit#v3/enrich: the batch settles the SUM of its children's receipts
         fixture: await loadFixture(`${chains}synthetic-enrich-batch.json`),
     });
 
-    // One child built (receipt 5); the other completed on the submit with a
-    // NULL receipt and no `links.status`. Child ids are
-    // `{parent}:{profile_id}` — the chain's urls carry them URL-encoded, so
-    // an unencoded path fails the replay.
+    // One child built (receipt 5); the other completed on the submit with
+    // no receipt and no `links.status`. Child ids are `{parent}:{profile_id}`
+    // — the chain's urls carry them URL-encoded, so an unencoded path fails
+    // the replay.
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
     assertEquals(result.usage, {
@@ -44,7 +45,19 @@ Deno.test("orbit#v3/enrich: the batch settles the SUM of its children's receipts
         (rows[0].billing as Record<string, unknown>).consumedCredits,
         5,
     );
-    assertEquals(rows[1].billing, null);
+    assertEquals("billing" in rows[1], false);
+});
+
+Deno.test("orbit#v3/enrich: a vendor refusal of the batch is zero-billed data", async () => {
+    const result = await runEndpoint({
+        unit: await testSealedUnit(ID),
+        input: { body: { profile_ids: ["PROF_A"], operation: "full" } },
+        mode: "replay",
+        fixture: await loadFixture(`${chains}synthetic-provider-error.json`),
+    });
+    assertEquals(result.httpStatus, 402);
+    assertEquals(result.isProviderError, true);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
 });
 
 Deno.test("orbit#v3/enrich: a transient FINAL read re-opens the child instead of failing it", async () => {
@@ -107,4 +120,33 @@ Deno.test("orbit#v3/enrich: the gate rejects a 21st profile, and passes 20", asy
         mode: "replay",
         fixture,
     });
+});
+
+Deno.test({
+    name:
+        "orbit#v3/enrich live: a one-profile batch settles on Orbit's receipts",
+    ignore: liveSkip("orbit"),
+    fn: async () => {
+        const unit = await testSealedUnit(ID);
+        const result = await runEndpoint({
+            unit,
+            input: {
+                body: {
+                    profile_ids: ["a23ff3b7-b6cc-4ac6-8d4f-0c909cd956f5"],
+                    operation: "partial",
+                },
+            },
+            mode: "live",
+        });
+        assertEquals(
+            result.isProviderError,
+            false,
+            JSON.stringify(result.output),
+        );
+        const pools = Object.keys(result.usage.credits);
+        assert(pools.length === 0 || pools.join() === "default", pools.join());
+        const output = result.output as Record<string, unknown>;
+        assert("status" in output);
+        assertEquals((output.results as unknown[]).length, 1);
+    },
 });

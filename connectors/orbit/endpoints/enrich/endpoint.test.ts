@@ -49,7 +49,7 @@ Deno.test("orbit#v3/enrich/{profile_id}: a no-op answers 202 and still settles Z
     // consumedCredits 0. A settle keyed on "202 means dispatched means
     // billed" charged 10 for it.
     assertEquals(result.httpStatus, 200);
-    assertEquals(result.usage.credits, {});
+    assertEquals(result.usage, { credits: {}, evidence: { CREDIT: 0 } });
     assertEquals(
         (result.output as Record<string, unknown>).generation_level,
         3,

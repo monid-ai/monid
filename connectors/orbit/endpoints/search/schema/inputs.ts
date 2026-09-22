@@ -6,18 +6,16 @@ import { z } from "zod";
  * only, no `.default()`. Orbit's own documented defaults are applied at the
  * BINDING in endpoint.ts, so the estimate reads concrete numbers.
  *
- * Orbit requires at least one of `query`, `intent` or `signals`. That is a
- * cross-field rule, and cross-field rules do not survive JSON Schema
- * compilation — it is stated in the descriptions below, and Orbit answers a
- * request that satisfies none of them with a `400`, which arrives as data.
+ * Orbit requires at least one of `query`, `intent` or `signals`. That is
+ * the one cross-field rule that survives compilation: a union of three
+ * arms, each with one of them required.
  *
  * STRICT, because Orbit's published schemas are (`additionalProperties:
- * false` on the request, the intent and the signals). The live API also
- * accepts fields the published contract does not carry — `signals.face_source`
- * (a 100-credit face search), `webhooks`, `force_tier`, `directory_ids`,
- * `input_entities` — and an open mirror would pass them straight through.
- * A face search alone would break the estimate's promise to be a ceiling, so
- * the gate rejects anything outside the published contract.
+ * false` on the request, the intent and the signals). The live API accepts
+ * fields the published contract does not carry, some of them priced, and an
+ * open mirror would pass them straight through and break the estimate's
+ * promise to be a ceiling. The gate rejects anything outside the published
+ * contract.
  *
  * `request_id` is intentionally NOT EXPOSED. Orbit lets a body `request_id`
  * override the `Idempotency-Key` header, and it scopes request ids per API
@@ -27,12 +25,12 @@ import { z } from "zod";
  * engine's run-stable `Idempotency-Key` is the only idempotency identity.
  */
 
-export const zIntegerRange = z.strictObject({
+const zIntegerRange = z.strictObject({
     min: z.number().int(),
     max: z.number().int(),
 });
 
-export const zExperienceIntent = z.strictObject({
+const zExperienceIntent = z.strictObject({
     title: z.string().optional(),
     titleAnyOf: z.array(z.string()).optional().describe(
         "Match any one of these titles.",
@@ -49,7 +47,7 @@ export const zExperienceIntent = z.strictObject({
         ),
 });
 
-export const zSchoolIntent = z.strictObject({
+const zSchoolIntent = z.strictObject({
     school: z.string().optional(),
     schoolAnyOf: z.array(z.string()).optional(),
     graduationYear: z.number().int().optional(),
@@ -62,7 +60,7 @@ export const zSchoolIntent = z.strictObject({
     ),
 });
 
-export const zGeoIntent = z.strictObject({
+const zGeoIntent = z.strictObject({
     place: z.string().optional().describe(
         "A place name: a city, a region, or a country.",
     ),
@@ -75,18 +73,18 @@ export const zGeoIntent = z.strictObject({
     ),
 });
 
-export const zDemographicsIntent = z.strictObject({
+const zDemographicsIntent = z.strictObject({
     ageRange: zIntegerRange.optional(),
     birthYearRange: zIntegerRange.optional(),
     gender: z.string().optional(),
 });
 
-export const zPersonalizationIntent = z.strictObject({
+const zPersonalizationIntent = z.strictObject({
     network: z.strictObject({ scope: z.literal("first_degree") }).optional(),
     nearMe: z.strictObject({ distance: z.string() }).optional(),
 });
 
-export const zSemanticClause = z.strictObject({
+const zSemanticClause = z.strictObject({
     text: z.string().min(1).optional().describe(
         "A trait in plain English — `writes about climate policy`.",
     ),
@@ -95,7 +93,7 @@ export const zSemanticClause = z.strictObject({
     ),
 }).describe("Carries `text`, `anyOf`, or both.");
 
-export const zStructuredIntent = z.strictObject({
+const zStructuredIntent = z.strictObject({
     names: z.array(z.string().min(1)).optional(),
     experiences: z.array(zExperienceIntent).optional().describe(
         "Roles and employers.",
@@ -113,7 +111,7 @@ export const zStructuredIntent = z.strictObject({
         "arrays and scalars replace, nested objects merge field by field.",
 );
 
-export const zIdentitySignals = z.strictObject({
+const zIdentitySignals = z.strictObject({
     address: z.string().min(1).optional(),
     email: z.email().optional(),
     phone: z.string().min(1).optional(),
@@ -133,7 +131,7 @@ export const zIdentitySignals = z.strictObject({
         "people, which is what `candidate_discovery` resolves.",
 );
 
-export const zOrbitSearchBody = z.strictObject({
+const zOrbitSearchFields = z.strictObject({
     query: z.string().min(1).optional().describe(
         "A plain-English description of the people you want — `machine " +
             "learning engineers at Anthropic near San Francisco`, or simply " +
@@ -141,26 +139,35 @@ export const zOrbitSearchBody = z.strictObject({
     ),
     intent: zStructuredIntent.optional(),
     signals: zIdentitySignals.optional(),
-    candidate_discovery: z.boolean().optional().describe(
+    // `.describe()` sits inside `.optional()` on every field the binding
+    // unwraps, so the description survives into the compiled doc.
+    candidate_discovery: z.boolean().describe(
         "Continue past the people Orbit can name immediately and resolve " +
             "further candidates from the signals you sent. Each returned " +
             "profile draws 1 credit.",
-    ),
-    candidate_discovery_limit: z.number().int().min(1).max(50).optional()
-        .describe(
-            "The most candidates discovery returns. Read with " +
-                "`candidate_discovery: true`.",
-        ),
-    profile_depth: z.enum(["partial", "full"]).optional().describe(
+    ).optional(),
+    candidate_discovery_limit: z.number().int().min(1).max(50).describe(
+        "The most candidates discovery returns. Read with " +
+            "`candidate_discovery: true`.",
+    ).optional(),
+    profile_depth: z.enum(["partial", "full"]).describe(
         "The depth every ready result reaches. `partial` is a useful " +
             "profile; `full` is the deepest profile Orbit builds, and takes " +
             "longer.",
-    ),
-    include_profile: z.boolean().optional().describe(
+    ).optional(),
+    include_profile: z.boolean().describe(
         "Embed each readable result's profile in the snapshot.",
-    ),
-    limit: z.number().int().min(1).max(100).optional().describe(
+    ).optional(),
+    limit: z.number().int().min(1).max(100).describe(
         "The most matches returned from the Orbit index. Candidate " +
             "Discovery results append beyond it.",
-    ),
+    ).optional(),
 });
+
+/** At least one of `query`, `intent` or `signals`: one arm per field, each
+ *  requiring its own and leaving the other two optional. */
+export const zOrbitSearchBody = z.union([
+    zOrbitSearchFields.required({ query: true }),
+    zOrbitSearchFields.required({ intent: true }),
+    zOrbitSearchFields.required({ signals: true }),
+]);

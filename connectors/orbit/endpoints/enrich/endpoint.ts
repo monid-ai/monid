@@ -16,7 +16,7 @@ import { zEnrichBody, zEnrichPathParams } from "./schema/inputs.ts";
  * (verified live). The provider's evidence reads the receipt, so that run
  * settles at zero and a real build settles at what Orbit charged for it.
  *
- * THE BUDGET IS MEASURED. A partial build settles in seconds; a full build
+ * THE BUDGET IS MEASURED. A partial build settles in under two minutes; a full build
  * and a `regenerate` were measured at 24 to 27 minutes. A run that times out
  * is still charged on Orbit's side, so the whole-run budget covers the slow
  * case and the cadence backs off once the run is clearly a long build.
@@ -42,7 +42,7 @@ export default defineEndpoint({
             "A profile already at the depth you asked for returns as it " +
             "stands and costs nothing. Otherwise 5 credits for `partial`, " +
             "10 for `full` and `regenerate` — a full build includes its " +
-            "partial. `partial` settles in seconds; `full` and " +
+            "partial. `partial` settles in under two minutes; `full` and " +
             "`regenerate` research live sources and take 25 to 30 minutes.",
         docsUrl: "https://docs.orbitsearch.com/api/enrich/enrich-profile",
         categories: ["people-enrichment"],
@@ -57,13 +57,13 @@ export default defineEndpoint({
             }),
         },
     },
-    /** Measured live: partial builds settle in seconds, `full` and
+    /** Measured live: partial builds settle in under two minutes, `full` and
      *  `regenerate` take 24 to 27 minutes. 45 minutes is the whole-run
      *  budget; a run that times out is still charged by Orbit. */
     timeouts: { requestMs: 60_000, runMs: 2_700_000, pollMs: 5_000 },
     lifecycle: {
         state: z.strictObject({
-            statusPath: z.string().optional().describe(
+            statusPath: z.string().describe(
                 "The status route Orbit named in `links.status`.",
             ),
         }),
@@ -186,10 +186,7 @@ export default defineEndpoint({
                 res.body,
                 "$.billing.status",
             );
-            if (
-                status === "running" || status === undefined ||
-                receipt === "open"
-            ) {
+            if (status === "running" || receipt === "open") {
                 // Two minutes in, this is a full build, and those run for
                 // tens of minutes: fifteen seconds a tick.
                 return data.lifecycle.state.timing.attempts > 24

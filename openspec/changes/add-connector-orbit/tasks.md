@@ -22,27 +22,32 @@
 
 - [x] 2.1 `provider.ts`: bearer auth, `https://api.orbitsearch.com` baseUrl,
       timeouts, the `default` credit pool, `output.fromError` over
-      `{status, error: {code, message}}`; no lifecycle, no consolidate
-- [x] 2.2 `schema/person-query.ts`: the `StructuredIntent` / `IdentitySignals`
-      mirrors plus the shape shared by search and any future bulk item
+      `{status, error: {code, message}}`, and the receipt-reading evidence
+      and consolidate every billed endpoint shares; no lifecycle
+- [x] 2.2 The `StructuredIntent` / `IdentitySignals` mirrors live inside
+      `search/schema/inputs.ts`; the search body is their only user
 
 ## 3. Endpoints (4)
 
-- [x] 3.1 `search` — mirror + vendor defaults at the binding + lifecycle whose
-      poll accumulates the build signal + 4-line composite
+- [x] 3.1 `search` — union mirror (one arm per way in) + vendor defaults
+      stated at the binding + lifecycle that follows `links.status` and
+      holds the run while the receipt is open; a leaf `PER_UNIT` in credits,
+      settled on the receipt
 - [x] 3.2 `profile-read` — declared identity `/v3/profile/{profile_id}`
-      (the vendor path is shared with the build), flat 1 credit
-- [x] 3.3 `enrich` — mirror + lifecycle following `links.status` + dispatch
-      signal + 2-line composite
+      (the vendor path is shared with the build); a leaf `PER_UNIT` settled
+      on the receipt, estimated at the profile-read rate
+- [x] 3.3 `enrich` — mirror + lifecycle following `links.status`; a leaf
+      `PER_UNIT` settled on the receipt
 - [x] 3.4 `enrich-batch` — mirror + fan-out lifecycle over child request ids
 
 ## 4. Fixtures + tests
 
-- [x] 4.1 12 provider-level chains (strategy v2), `synthetic-` prefixed until
-      recorded: search async / indexed / discovery / failed / transient,
-      enrich built / no-op / provider-error, batch, profile read, shared
-      provider error
-- [x] 4.2 18 replay tests, including the two zero-settle regressions the
+- [x] 4.1 17 provider-level chains (strategy v2), `synthetic-` prefixed until
+      recorded: search async / indexed / discovery / empty / failed /
+      failed-on-submit / receipt-open / transient, enrich built / no-op /
+      failed-on-submit / provider-error, batch / batch-final-transient,
+      profile read / read-error, shared provider error
+- [x] 4.2 29 replay tests, including the two zero-settle regressions the
       connector exists to get right — a cached search and a no-op enrich
 - [x] 4.3 Estimate spot-checks against the published rate card
 - [ ] 4.4 Record real chains and run `deno task test:live` once the dedicated
@@ -54,7 +59,7 @@
 - [x] 5.2 `deno task test` — full suite green
 - [x] 5.3 `deno task version:check` — no contract-surface change
 - [x] 5.4 Double-compile byte-identical
-- [x] 5.5 `deno task catalog endpoints --provider orbit` lists all 6, and
+- [x] 5.5 `deno task catalog endpoints --provider orbit` lists all 4, and
       `catalog inspect` returns the approved copy and schemas
 - [x] 5.6 Reconcile against Orbit's own published surfaces: `concepts/credits`
       (the settle rules), `skill.md` + `llms.txt` (the agent endpoint set),
@@ -76,9 +81,8 @@
 - [x] 6.4 Usage fns read `operation` / `profile_depth` from the REQUEST; the
       response echo is not contractual and a missing one moved a 5-credit
       partial into the 10-credit branch
-- [x] 6.5 `sources` is a UNION — a row carrying `candidate_discovery` stays
-      off the cached-result line, matching Orbit's exclusion rule and its
-      single-origin settle
+- [x] 6.5 Retired with the observation fold (9.2): the receipt carries
+      Orbit's own exclusion of discovered rows from the cached-result line
 - [x] 6.6 Every lifecycle follows `links.status`, the route the v3 guide tells
       callers to poll, with the documented path as fallback
 - [x] 6.7 The single-use `personSearchShape` is inlined into the search body
@@ -99,12 +103,12 @@
 
 ## 8. Catalog positioning
 
-- [x] 7.1 Provider and endpoint copy name the jobs an agent arrives with —
+- [x] 8.1 Provider and endpoint copy name the jobs an agent arrives with —
       a person the user just mentioned, a prospect before outreach, a
       candidate or counterparty under diligence, the people behind a company
       — with "maximum person context" kept as the spine
-- [x] 7.2 No platform names and nothing about what Orbit already holds
-- [x] 7.3 Runtime schema gates on every endpoint taking an input, and
+- [x] 8.2 No platform names and nothing about what Orbit already holds
+- [x] 8.3 Runtime schema gates on every endpoint taking an input, and
       live tests asserting shape rather than amounts
 
 ## 9. Live-drill corrections (2026-09-20)
@@ -122,14 +126,13 @@
       `links.status` on a child that completed on the submit; child ids
       `{parent}:{profile_id}` URL-encoded
 - [x] 9.6 Chains regenerated with receipts, including both cases where the
-      fold and the receipt disagreed, the 202 no-op, and a zero-rate read
+      fold and the receipt disagreed, and the 202 no-op
 
 ## 10. Broker-shaped hazards (2026-09-21)
 
-- [x] 10.1 Strict mirrors: the live API accepts `signals.face_source`,
-      `webhooks`, `force_tier`, `directory_ids` and `input_entities`, none of
-      them in the published contract; an open mirror passed them through, and
-      a face search breaks the estimate ceiling
+- [x] 10.1 Strict mirrors: the live API accepts fields the published
+      contract does not carry, some of them priced; an open mirror passed
+      them through, and one of them alone breaks the estimate ceiling
 - [x] 10.2 `request_id` is no longer exposed: a body `request_id` overrides
       the `Idempotency-Key` header and is scoped per API key — one namespace
       for every caller on a broker

@@ -35,21 +35,11 @@ Deno.test("orbit#v3/profile/{profile_id}: the read settles on its receipt, and t
     assertEquals("billing" in output, false);
 });
 
-Deno.test("orbit#v3/profile/{profile_id}: when Orbit's read rate moves to zero, the settle moves with it", async () => {
-    const result = await read("synthetic-profile-read-free.json");
-
-    // No connector change: the receipt says 0, the run settles 0. Only the
-    // estimate ceiling is pinned to a card version.
-    assertEquals(result.httpStatus, 200);
-    assertEquals(result.usage.credits, {});
-});
-
 Deno.test("orbit#v3/profile/{profile_id}: the identity is DECLARED, the call is the vendor's", async () => {
     const unit = await testSealedUnit(ID);
     // The read and the build share `/v3/enrich/{profile_id}` on Orbit's
-    // side, and two defs on one path collide — so the read takes the name
-    // Orbit's own `links.profile` gives it while still calling the vendor
-    // path unchanged.
+    // side, and two defs on one path collide — so the read takes its own
+    // name while still calling the vendor path unchanged.
     assertEquals(unit.doc.id, ID);
     assertEquals(unit.doc.request.method, "GET");
     assertEquals(

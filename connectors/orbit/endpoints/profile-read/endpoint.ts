@@ -6,12 +6,11 @@ import { zProfileReadPathParams } from "./schema/inputs.ts";
  *
  * PUBLIC IDENTITY IS DECLARED (design D22). The vendor path is shared with
  * `POST /v3/enrich/{profile_id}`, which starts work; two defs on one path
- * collide, so the read takes the name Orbit's own response links give it
- * (`links.profile`) and the write keeps the native path.
+ * collide, so the read takes its own name and the write keeps the native
+ * path.
  *
  * Priced at Orbit's profile-read rate, and settled on the receipt the
- * response carries — so a change to that rate on Orbit's side moves the
- * settle with it. Reading does no work: it returns what is stored, at
+ * response carries. Reading does no work: it returns what is stored, at
  * whatever depth it was last built to.
  */
 export default defineEndpoint({

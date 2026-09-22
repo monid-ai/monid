@@ -22,7 +22,7 @@ export const zEnrichBody = z.strictObject({
             "profile Orbit can, and `regenerate` rebuilds a fresh full " +
             "profile from current sources.",
     ),
-    include_profile: z.boolean().optional().describe(
+    include_profile: z.boolean().describe(
         "Embed the profile in the response once it is available.",
-    ),
+    ).optional(),
 });

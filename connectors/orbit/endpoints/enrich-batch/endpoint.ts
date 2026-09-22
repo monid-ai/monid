@@ -91,6 +91,9 @@ export default defineEndpoint({
                 };
             }
             const parent = utils.json.optionalGet(res.body, "$.request_id");
+            if (typeof parent !== "string" || parent === "") {
+                throw new Error("Orbit did not return a batch request_id");
+            }
             const rows = utils.json.optionalGet(res.body, "$.results");
             if (!Array.isArray(rows)) {
                 throw new Error("Orbit batch enrich returned no results list");
@@ -107,11 +110,8 @@ export default defineEndpoint({
                 ) pending.push(id);
             }
             const state = {
-                data: {
-                    children,
-                    pending,
-                    parentRequestId: typeof parent === "string" ? parent : "",
-                },
+                externalRunId: parent,
+                data: { children, pending, parentRequestId: parent },
             };
             if (pending.length === 0) {
                 logger.info("orbit batch enrich settled on submit", {

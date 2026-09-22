@@ -5,6 +5,7 @@ import {
     assertInputAccepted,
     estimateEndpoint,
     liveSkip,
+    loadEndpoint,
     loadFixture,
     runEndpoint,
     testSealedUnit,
@@ -75,7 +76,7 @@ Deno.test("orbit#v3/search: a ZERO receipt settles zero", async () => {
         query: "nobody at all",
     });
     assertEquals(result.httpStatus, 200);
-    assertEquals(result.usage.credits, {});
+    assertEquals(result.usage, { credits: {}, evidence: { CREDIT: 0 } });
 });
 
 Deno.test("orbit#v3/search: a terminal status with an OPEN receipt is read again", async () => {
@@ -124,15 +125,27 @@ Deno.test("orbit#v3/search: a submit-time failure reads like a poll-time one", a
     );
 });
 
-Deno.test("orbit#v3/search: a failed status LOOKUP keeps the run alive", async () => {
-    const result = await run("synthetic-search-transient.json", {
-        query: "Ada Fielding",
+Deno.test("orbit#v3/search: a failed status LOOKUP keeps the run alive, and Retry-After sets the next tick", async () => {
+    const input = { body: { query: "Ada Fielding" } };
+    const loaded = await loadEndpoint({
+        unit: await testSealedUnit(ID),
+        input,
+        mode: "replay",
+        fixture: await loadFixture(`${chains}synthetic-search-transient.json`),
     });
 
     // The 599 is the STATUS ROUTE failing, not the search, and it is a 599
-    // on purpose: every temporary server failure is one retry class.
-    assertEquals(result.httpStatus, 200);
-    assertEquals(result.usage, {
+    // on purpose: every temporary server failure is one retry class. Its
+    // `Retry-After: 7` is seconds.
+    const started = await loaded.start(input);
+    assert(started.kind === "RUNNING");
+    const held = await loaded.poll(input, started.state);
+    assert(held.kind === "RUNNING");
+    assertEquals(held.pollAfterMs, 7_000);
+    const settled = await loaded.poll(input, held.state);
+    assert(settled.kind === "COMPLETED");
+    assertEquals(settled.httpStatus, 200);
+    assertEquals(settled.usage, {
         credits: { default: 1 },
         evidence: { CREDIT: 1 },
     });
@@ -181,24 +194,66 @@ Deno.test("orbit#v3/search estimate: the ceiling the caller authorized", async (
     assertEquals(discovering.credits, { default: 71 });
 });
 
-Deno.test("orbit#v3/search: the mirror binds Orbit's defaults, and the budget covers a measured full build", async () => {
+Deno.test("orbit#v3/search: one arm per way in, each binding Orbit's defaults with their descriptions", async () => {
     const unit = await testSealedUnit(ID);
     const body = unit.doc.input.schema.body as {
-        properties?: Record<string, { default?: unknown }>;
-        required?: string[];
+        anyOf?: {
+            properties?: Record<
+                string,
+                { default?: unknown; description?: string }
+            >;
+            required?: string[];
+            additionalProperties?: boolean;
+        }[];
     };
-    assert(body.properties);
-    for (const field of ["query", "intent", "signals"]) {
-        assert(field in body.properties, `${field} is part of the mirror`);
+    assert(body.anyOf);
+    // At least one of `query`, `intent`, `signals`: three strict arms.
+    assertEquals(body.anyOf.map((arm) => arm.required), [["query"], [
+        "intent",
+    ], ["signals"]]);
+    for (const arm of body.anyOf) {
+        assert(arm.properties);
+        assertEquals(arm.additionalProperties, false);
+        assertEquals(arm.properties.limit.default, 20);
+        assertEquals(arm.properties.profile_depth.default, "partial");
+        assertEquals(arm.properties.candidate_discovery.default, false);
+        assertEquals(arm.properties.candidate_discovery_limit.default, 10);
+        assertEquals(arm.properties.include_profile.default, true);
+        // `.unwrap()` keeps a description that sits inside `.optional()`.
+        for (
+            const field of [
+                "limit",
+                "profile_depth",
+                "candidate_discovery",
+                "candidate_discovery_limit",
+                "include_profile",
+            ]
+        ) assert(arm.properties[field].description, `${field} is described`);
     }
-    assertEquals(body.properties.limit.default, 20);
-    assertEquals(body.properties.profile_depth.default, "partial");
-    assertEquals(body.properties.candidate_discovery.default, false);
-    assertEquals(body.properties.candidate_discovery_limit.default, 10);
-    assertEquals(body.properties.include_profile.default, true);
-    assertEquals(body.required, undefined);
     // Full-depth builds were measured at 24 to 27 minutes.
     assert(unit.doc.timeouts.runMs >= 27 * 60_000);
+});
+
+Deno.test("orbit#v3/search: the gate rejects a body with none of query, intent or signals", async () => {
+    const unit = await testSealedUnit(ID);
+    const fixture = await loadFixture(`${chains}synthetic-search-indexed.json`);
+    await assertRejects(
+        () =>
+            runEndpoint({
+                unit,
+                input: { body: { limit: 5 } },
+                mode: "replay",
+                fixture,
+            }),
+        Error,
+        "INVALID_INPUT",
+    );
+    await assertInputAccepted({
+        unit,
+        input: { body: { intent: { names: ["Ada Fielding"] }, limit: 5 } },
+        mode: "replay",
+        fixture,
+    });
 });
 
 Deno.test("orbit#v3/search: the gate rejects limit 101, and passes 100", async () => {
@@ -234,16 +289,14 @@ Deno.test("orbit#v3/search: the gate rejects what the published contract does no
             "INVALID_INPUT",
         );
 
-    // The live API accepts all three; the published contract carries none.
-    // A face search draws 100 credits the estimate never promised.
+    // The published contract carries none of these.
     await rejected({
         query: "Ada",
         signals: { face_source: { image_url: "https://x.example/a.jpg" } },
     });
-    // Pushes whole profiles to the KEY HOLDER's webhook endpoints.
     await rejected({ query: "Ada", webhooks: true });
-    // Overrides the engine's Idempotency-Key, in a namespace every caller
-    // on the broker's one API key shares.
+    // Would override the engine's Idempotency-Key, in a namespace every
+    // caller on the broker's one API key shares.
     await rejected({ query: "Ada", request_id: "search-ml-sf-001" });
 
     await assertInputAccepted({

@@ -1,6 +1,6 @@
 {
     "name": "synthetic-search-async",
-    "description": "THE case that retired the observation fold. Twelve index hits, one of them `enriching` on the submit and `ready` at level 2 on the terminal snapshot — and Orbit's receipt settles 2: two cached blocks, no build charged. A fold that read `enriching` as a billed build settled 2 + 5. The receipt goes open (reserved 12) to settled (consumed 2). Synthetic, shaped on a live drill of v3 (2026-09-20).",
+    "description": "Twelve index hits, one of them `enriching` on the submit and `ready` at level 2 on the terminal snapshot. The receipt goes open (reserved 12) to settled (consumed 2): two cached blocks, no build charged. Synthetic, shaped on a live drill of v3 (2026-09-20).",
     "calls": [
         {
             "req": {

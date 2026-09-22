@@ -1,6 +1,6 @@
 {
     "name": "synthetic-search-discovery",
-    "description": "The OTHER case that retired the fold. A name query with candidate_discovery and limit 2: one index hit plus two discovered people, receipt 11 = 1 + 5 + 5 — both discovered people were built and charged as partial builds. Only ONE of them is ever seen `generating`; the other goes straight to `ready` between two ticks, so a fold keyed on observed builds settled 7. Synthetic, shaped on a live drill of v3 (2026-09-20).",
+    "description": "A name query with candidate_discovery and limit 2: one index hit plus two discovered people, both built and charged as partial builds. Only one of them is ever seen `generating`; the other goes straight to `ready` between two ticks. The receipt settles 11 = 1 + 5 + 5. Synthetic, shaped on a live drill of v3 (2026-09-20).",
     "calls": [
         {
             "req": {

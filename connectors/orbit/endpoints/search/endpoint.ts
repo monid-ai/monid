@@ -2,6 +2,25 @@ import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { z } from "zod";
 import { zOrbitSearchBody } from "./schema/inputs.ts";
 
+const [zQueryArm, zIntentArm, zSignalsArm] = zOrbitSearchBody.options;
+
+/** Orbit's own documented defaults, stated at the binding on each arm of
+ *  the union (D25 — the mirror carries optionality only) so the compiled
+ *  doc shows them. JSON-Schema defaults never materialize inside `anyOf`,
+ *  so the estimate reads the same numbers as fallbacks, and Orbit applies
+ *  them on the wire. The fields are the same on every arm, so one arm's
+ *  shape names them. */
+const orbitDefaults = {
+    candidate_discovery: zQueryArm.shape.candidate_discovery.unwrap().default(
+        false,
+    ),
+    candidate_discovery_limit: zQueryArm.shape.candidate_discovery_limit
+        .unwrap().default(10),
+    profile_depth: zQueryArm.shape.profile_depth.unwrap().default("partial"),
+    include_profile: zQueryArm.shape.include_profile.unwrap().default(true),
+    limit: zQueryArm.shape.limit.unwrap().default(20),
+};
+
 /**
  * `POST /v3/search` — find people, and come back with their context.
  *
@@ -46,7 +65,7 @@ export default defineEndpoint({
             "carries identity and contact fields plus generated sections on " +
             "the person's background, interests and recent activity, every " +
             "claim attributed to the source it came from. `profile_depth` " +
-            "picks how deep to go: `partial` answers inside two minutes, " +
+            "picks how deep to go: `partial` answers in under two minutes, " +
             "`full` builds the deepest profile Orbit can and takes 25 to " +
             "30 minutes. Set " +
             "`candidate_discovery: true` when a signal belongs to several " +
@@ -68,26 +87,22 @@ export default defineEndpoint({
             "`estimate` before a large or full-depth run.",
         docsUrl: "https://docs.orbitsearch.com/api/search/search",
         categories: ["people-enrichment"],
+        notes: [
+            "`candidate_discovery_limit` is read with `candidate_discovery: " +
+            "true`; on its own it changes nothing.",
+        ],
     },
     request: { method: "POST", path: "/v3/search" },
     input: {
         schema: {
-            // Orbit's own documented defaults, applied at the binding (D25 —
-            // the mirror carries optionality only). `limit` and
-            // `candidate_discovery_limit` are the limiting knobs, and both
-            // are vendor-published, so the estimate reads a concrete cap
-            // without a house constant.
-            body: zOrbitSearchBody.extend({
-                candidate_discovery: zOrbitSearchBody.shape.candidate_discovery
-                    .unwrap().default(false),
-                candidate_discovery_limit: zOrbitSearchBody.shape
-                    .candidate_discovery_limit.unwrap().default(10),
-                profile_depth: zOrbitSearchBody.shape.profile_depth.unwrap()
-                    .default("partial"),
-                include_profile: zOrbitSearchBody.shape.include_profile.unwrap()
-                    .default(true),
-                limit: zOrbitSearchBody.shape.limit.unwrap().default(20),
-            }),
+            // `limit` and `candidate_discovery_limit` are the limiting
+            // knobs, and both are vendor-published, so the estimate reads a
+            // concrete cap without a house constant.
+            body: z.union([
+                zQueryArm.extend(orbitDefaults),
+                zIntentArm.extend(orbitDefaults),
+                zSignalsArm.extend(orbitDefaults),
+            ]),
         },
     },
     /** Measured live: index-only and partial-depth searches settle inside
@@ -96,7 +111,7 @@ export default defineEndpoint({
     timeouts: { requestMs: 60_000, runMs: 2_700_000, pollMs: 5_000 },
     lifecycle: {
         state: z.strictObject({
-            statusPath: z.string().optional().describe(
+            statusPath: z.string().describe(
                 "The status route Orbit named in `links.status`.",
             ),
         }),
@@ -239,10 +254,7 @@ export default defineEndpoint({
                 res.body,
                 "$.billing.status",
             );
-            if (
-                status === "running" || status === undefined ||
-                receipt === "open"
-            ) {
+            if (status === "running" || receipt === "open") {
                 // Two minutes in, this is a build rather than a lookup, and
                 // builds run for tens of minutes: fifteen seconds a tick.
                 return data.lifecycle.state.timing.attempts > 24
@@ -310,15 +322,17 @@ export default defineEndpoint({
          *  person the search may return — a discovered person Orbit builds
          *  is charged as the build, so discovery is not counted on top. */
         estimate: ({ data }) => {
+            // Orbit's documented defaults, again: a union arm's `default`
+            // is shown, never filled.
             const body = data.input.body;
-            const discovered = body.candidate_discovery
-                ? body.candidate_discovery_limit
+            const limit = body.limit ?? 20;
+            const discovered = (body.candidate_discovery ?? false)
+                ? body.candidate_discovery_limit ?? 10
                 : 0;
-            const rate = body.profile_depth === "full" ? 10 : 5;
+            const rate = (body.profile_depth ?? "partial") === "full" ? 10 : 5;
             return {
                 counts: {
-                    CREDIT: Math.ceil(body.limit / 10) +
-                        (body.limit + discovered) * rate,
+                    CREDIT: Math.ceil(limit / 10) + (limit + discovered) * rate,
                 },
             };
         },

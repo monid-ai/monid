@@ -18,7 +18,7 @@ export const zBatchEnrichBody = z.strictObject({
     operation: z.enum(["partial", "full", "regenerate"]).describe(
         "One operation, applied to every profile in the list.",
     ),
-    include_profile: z.boolean().optional().describe(
+    include_profile: z.boolean().describe(
         "Embed each child's profile once it is available.",
-    ),
+    ).optional(),
 });

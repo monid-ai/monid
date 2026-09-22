@@ -46,11 +46,6 @@ states or from the submit's status code. Rates SHALL appear only in
   with `reservedCredits` 0 and completes with `consumedCredits` 0
 - **THEN** the run settles with no credits, whatever the submit's status code
 
-#### Scenario: A rate change moves the settle
-- **WHEN** a profile read's receipt reports `consumedCredits` 0 under a newer
-  `pricingVersion`
-- **THEN** the run settles with no credits and no connector change
-
 #### Scenario: The receipt leaves the payload
 - **WHEN** any single-receipt endpoint settles
 - **THEN** `billing` is absent from the output
@@ -78,17 +73,24 @@ long build.
 ### Requirement: Inputs mirror the published v3 OpenAPI
 Every `schema/inputs.ts` SHALL mirror its v3 component with optionality only —
 no `.default()`, no invented fields. Orbit's own documented defaults SHALL be
-applied at the binding in `endpoint.ts`, so estimates read concrete numbers.
-Orbit's cross-field rules (a search carries one of `query`, `intent` or
-`signals`) SHALL live in the descriptions, since refinements do not survive
-JSON Schema compilation and Orbit answers a request that satisfies none of
-them with a `400`, which arrives as data.
+stated at the binding in `endpoint.ts`, so the compiled doc shows them, and
+the search estimate SHALL read the same numbers as fallbacks, because a
+default inside a union arm is shown and never filled. "At least one of
+`query`, `intent` or `signals`" SHALL be a union of three arms, each
+requiring one of them. "`candidate_discovery_limit` is read with
+`candidate_discovery: true`" SHALL live in `meta.notes`.
 
-#### Scenario: Vendor defaults are materialized
+#### Scenario: One arm per way in
 - **WHEN** the compiled `orbit#v3/search` body schema is inspected
-- **THEN** `limit` defaults to 20, `profile_depth` to `partial`,
-  `candidate_discovery` to false, `candidate_discovery_limit` to 10, and
-  `include_profile` to true
+- **THEN** it is an `anyOf` of three strict arms requiring `query`, `intent`
+  and `signals` in turn, and on every arm `limit` defaults to 20,
+  `profile_depth` to `partial`, `candidate_discovery` to false,
+  `candidate_discovery_limit` to 10, and `include_profile` to true, each with
+  its description
+
+#### Scenario: A body with none of the three is rejected
+- **WHEN** a search body carries only `limit`
+- **THEN** the run fails `INVALID_INPUT` and no request reaches Orbit
 
 #### Scenario: The vendor's own caps are the mirror's caps
 - **WHEN** the compiled `orbit#v3/enrich` body schema is inspected
@@ -99,9 +101,8 @@ them with a `400`, which arrives as data.
 Every input mirror SHALL be strict, as Orbit's published schemas are
 (`additionalProperties: false`), so the engine rejects a field the published
 contract does not carry before it reaches the vendor. The live API accepts
-several such fields — `signals.face_source` (a face search priced at 100),
-`webhooks`, `force_tier`, `directory_ids`, `input_entities` — and a face
-search alone would break the estimate's promise to be a ceiling. No mirror
+fields the published contract does not carry, some of them priced, and one of
+those alone would break the estimate's promise to be a ceiling. No mirror
 SHALL expose `request_id`: Orbit lets a body `request_id` override the
 `Idempotency-Key` header and scopes it per API key, which on a broker is one
 namespace shared by every caller.

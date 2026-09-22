@@ -53,7 +53,7 @@ run now, and nothing is inferred.
   depth authorizes up to 1,010 credits while a typical cached search settles
   at 1. An agent that reads `estimate` before committing sees the difference;
   one that does not, finds out afterwards.
-- 15 synthetic fixture chains and 23 replay tests, covering both zero-settle
+- 17 synthetic fixture chains and 29 replay tests, covering both zero-settle
   regressions (the cached search, the no-op enrich) explicitly, plus a
   runtime schema gate on every endpoint that takes an input.
 - **Catalog positioning.** `discover` ranks on `meta.description`, so the
@@ -117,5 +117,6 @@ for this job.
 
 New connector tree. No new `Unit`, preset, hook, category or compiler change,
 and no engine bump — `deno task version:check` reports no contract-surface
-change. Fixtures carry the `synthetic-` prefix until they are recorded against
+change. One line in `shared/testing/fixtures.ts` adds `retry-after` to the
+recorded-response header allowlist, as that file's header provides for. Fixtures carry the `synthetic-` prefix until they are recorded against
 the dedicated provider key.
