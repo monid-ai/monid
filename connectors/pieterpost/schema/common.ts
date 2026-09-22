@@ -17,10 +17,14 @@ export const zPieterPostLocale = z.enum([
 ]);
 
 export const zPieterPostMetadata = z.record(
-    z.string(),
-    z.union([z.string(), z.number(), z.boolean()]),
+    z.string().min(1).max(40),
+    z.union([z.string().max(200), z.number(), z.boolean()]),
 ).describe(
     "Optional correlation metadata. PieterPost keeps at most 20 primitive entries.",
+);
+
+export const zPieterPostAssetId = z.string().min(1).max(140).describe(
+    "Asset id returned by POST /v1/uploads.",
 );
 
 export const zPieterPostRecipient = z.object({
@@ -55,22 +59,35 @@ export const zPieterPostRecipient = z.object({
 }).strict();
 
 export const zPieterPostLetter = z.object({
-    message: z.string().min(1).max(6_000).describe(
-        "Letter text. Newlines are preserved.",
+    attachments: z.array(zPieterPostAssetId).min(1).optional().describe(
+        "Uploaded letter-attachment asset ids. A letter requires text, attachments, or both.",
+    ),
+    message: z.string().max(6_000).optional().describe(
+        "Optional letter text. Newlines are preserved.",
     ),
     recipient: zPieterPostRecipient,
 }).strict();
 
 const zPieterPostSinglePostcard = z.object({
+    composeMode: z.enum(["personal", "template"]).optional(),
+    frontImageAssetId: zPieterPostAssetId.optional().describe(
+        "Optional square postcard-image upload; PieterPost uses its default front when omitted.",
+    ),
     message: z.string().min(1).max(1_200).describe("Postcard message."),
     recipient: zPieterPostRecipient,
+    variableKeys: z.array(z.string().min(1).max(40)).max(25).optional(),
 }).strict();
 
 const zPieterPostBulkPostcard = z.object({
+    composeMode: z.enum(["personal", "template"]).optional(),
+    frontImageAssetId: zPieterPostAssetId.optional().describe(
+        "Optional square postcard-image upload; PieterPost uses its default front when omitted.",
+    ),
     message: z.string().min(1).max(1_200).describe(
         "Shared postcard message for every recipient.",
     ),
     recipients: z.array(zPieterPostRecipient).min(1).max(25),
+    variableKeys: z.array(z.string().min(1).max(40)).max(25).optional(),
 }).strict();
 
 export const zPieterPostPostcard = z.union([
@@ -99,4 +116,39 @@ export const zPieterPostCheckoutCommon = {
     senderEmail: z.string().email().describe(
         "Email address used for the hosted checkout and order contact.",
     ),
+};
+
+export const zPieterPostDirectOrderCommon = {
+    acceptUsAddressWarnings: z.boolean().optional().describe(
+        "Set true only after reviewing and accepting US unit/address warnings " +
+            "returned by a previous request.",
+    ),
+    externalId: z.string().min(1).max(140).optional().describe(
+        "Optional caller-side order identifier.",
+    ),
+    idempotencyKey: zPieterPostIdempotencyKey,
+    locale: zPieterPostLocale.optional(),
+    metadata: zPieterPostMetadata.optional(),
+    senderEmail: z.string().email().optional().describe(
+        "Optional email address used as the order contact.",
+    ),
+};
+
+export const zPieterPostLetterRequestFields = {
+    composeMode: z.enum(["personal", "template"]).optional().describe(
+        "Use template with templateMessage and recipient customFields for bulk personalization.",
+    ),
+    letters: z.array(zPieterPostLetter).min(1).max(25).describe(
+        "Letters for 1-25 recipients. Each letter requires text, attachments, or a template message.",
+    ),
+    stampImageAssetId: zPieterPostAssetId.optional().describe(
+        "Optional uploaded letter-stamp-image; overrides the saved Business logo.",
+    ),
+    templateMessage: z.string().min(1).max(6_000).optional().describe(
+        "Shared message with template variables for template compose mode.",
+    ),
+    useBusinessLogo: z.boolean().optional().describe(
+        "Use the account's saved Business logo when no stampImageAssetId is supplied.",
+    ),
+    variableKeys: z.array(z.string().min(1).max(40)).max(25).optional(),
 };

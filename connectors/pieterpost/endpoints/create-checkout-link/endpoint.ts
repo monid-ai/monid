@@ -7,7 +7,7 @@ export default defineEndpoint({
         summary:
             "Validate and price physical mail, then return a hosted payment link.",
         description: "Create a PieterPost-hosted checkout for one or more " +
-            "text letters, or for one or more postcards. PieterPost validates " +
+            "letters or postcards. PieterPost validates " +
             "the address, calculates the exact price, and returns a checkout " +
             "URL. Give that URL to the payer. The API call itself does not " +
             "send mail; fulfillment starts only after checkout payment succeeds.",
@@ -16,9 +16,8 @@ export default defineEndpoint({
         notes: [
             "Running this tool is free, but the returned checkout charges the " +
             "payer the displayed postage and fulfillment price if they complete it.",
-            "This first connector version supports text-only letters and " +
-            "postcards. Use PieterPost's full API or MCP server for attachments, " +
-            "custom stamp images, and custom postcard fronts.",
+            "Letters support templates, uploaded attachments, saved Business " +
+            "logos, and uploaded stamp images. Postcards support uploaded fronts.",
             "Always reuse idempotencyKey when retrying the same operation.",
         ],
     },

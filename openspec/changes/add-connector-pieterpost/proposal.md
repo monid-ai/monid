@@ -7,10 +7,11 @@ postcards. Its public API is a safer fit for Monid than proxying the full remote
 MCP server: the API uses a stable server-side bearer key, while the MCP server
 uses user-approved OAuth connections with short-lived access tokens.
 
-The first connector should make the useful pre-send workflows discoverable
-without exposing wallet-funded direct send or pooled account data. A review link
-requires the user to continue in PieterPost. A hosted checkout link requires the
-payer to complete checkout before fulfillment starts.
+The connector should expose PieterPost's complete JSON API surface: review
+links, hosted checkout, wallet-funded direct send, order tracking, wallet
+capabilities and balances, and credit top-ups. The connector metadata must make
+the difference between review, payment-link, test-wallet, and immediate live
+side effects explicit.
 
 ## What Changes
 
@@ -19,8 +20,14 @@ payer to complete checkout before fulfillment starts.
 - Add `pieterpost#create-compose-link`, which maps a required connector
   `idempotencyKey` to PieterPost's `Idempotency-Key` header and creates a
   short-lived review URL.
-- Add `pieterpost#create-checkout-link`, which supports text-only letter and
-  postcard checkout payloads and returns an unpaid hosted checkout URL.
+- Add `pieterpost#create-checkout-link`, which supports letter templates,
+  attachments, stamp assets, postcard front assets, and hosted payment.
+- Add `pieterpost#create-direct-order`, which submits a wallet-funded letter or
+  postcard and starts live fulfillment when used with a live key.
+- Add `pieterpost#get-order` and `pieterpost#get-wallet` for order status,
+  account capabilities, and EUR/USD wallet balances.
+- Add `pieterpost#create-credit-topup`, which applies test credits immediately
+  or returns a live Stripe Checkout URL.
 - Add the `postal-mail` category leaf.
 - Add synthetic replay fixtures shaped from the live public API documentation
   and focused schema, request-mapping, success, and provider-error tests.
@@ -31,17 +38,16 @@ payer to complete checkout before fulfillment starts.
 
 ## Non-goals
 
-- Wallet-funded `POST /v1/orders` direct send. It spends PieterPost credits and
-  needs an explicit Monid tariff and shared-account policy before catalog use.
-- Wallet, order lookup, top-up, API-key management, or Address Book endpoints.
-  A shared provider credential would expose pooled account state without a
-  resource/ownership design.
-- Attachments, uploads, custom letter stamps, and custom postcard fronts in the
-  first connector release.
+- `POST /v1/uploads`. PieterPost requires multipart form-data, while Monid's
+  connector input and request transports currently accept JSON only. Adding a
+  non-working JSON declaration would misrepresent the wire contract. Existing
+  uploaded asset ids are accepted by letter and postcard order fields.
+- API-key management and Address Book tools. They are MCP/account surfaces, not
+  endpoints in PieterPost's public v1 REST API.
 - Proxying PieterPost's OAuth MCP server or exposing OAuth tokens as connector
   input.
 
 ## Impact
 
-One provider, two endpoints, one taxonomy leaf, and the identity lock update.
+One provider, six endpoints, one taxonomy leaf, and the identity lock update.
 No engine, compiler, ABI, or document-format change.
