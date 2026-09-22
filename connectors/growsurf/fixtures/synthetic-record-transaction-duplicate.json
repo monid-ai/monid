@@ -1,0 +1,27 @@
+{
+    "name": "synthetic-record-transaction-duplicate",
+    "description": "The same sale sent twice under one invoiceId. HTTP 200, success:false, duplicate:true, and the commission ids it matched — the de-duplication that stops a retry from paying an affiliate a second time. Authored from the GrowSurf REST v2 (2.0.0) response shape, verified field for field against a live deployment on 2026-09-22; the identities are GrowSurf's own published example values.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.growsurf.com/v2/campaign/x4t7bd/participant/i9g2bh/transaction"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": false,
+                    "duplicate": true,
+                    "commissionsCreated": 0,
+                    "duplicateFields": [
+                        "invoiceId"
+                    ],
+                    "matchingCommissionIds": [
+                        "comm_jy6kl1"
+                    ],
+                    "message": "Sale already recorded for identifiers: invoiceId. Matching commission IDs: jy6kl1"
+                }
+            }
+        }
+    ]
+}

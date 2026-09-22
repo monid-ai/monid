@@ -1,0 +1,51 @@
+{
+    "name": "synthetic-analytics-ok",
+    "description": "GET /campaign/{id}/analytics?days=30&include=rates: a referral program's 30-day totals plus the derived rates. Ratios run 0 to 1 and the window is echoed back as startDate/endDate. Authored from the GrowSurf REST v2 (2.0.0) response shape, verified field for field against a live deployment on 2026-09-22; the identities are GrowSurf's own published example values.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.growsurf.com/v2/campaign/k9j2mq/analytics?days=30&include=rates"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "analytics": {
+                        "invites": 3,
+                        "impressions": 12,
+                        "uniqueImpressions": 9,
+                        "participants": 7,
+                        "referrals": 2,
+                        "referralCreditPendings": 1,
+                        "referralCreditExpireds": 0,
+                        "emailShares": 3,
+                        "facebookShares": 1,
+                        "twitterShares": 0,
+                        "threadsShares": 0,
+                        "blueskyShares": 0,
+                        "pinterestShares": 0,
+                        "linkedInShares": 0,
+                        "smsShares": 2,
+                        "messengerShares": 0,
+                        "whatsAppShares": 0,
+                        "wechatShares": 0,
+                        "telegramShares": 0,
+                        "qrcodeShares": 0,
+                        "redditShares": 0,
+                        "tumblrShares": 0,
+                        "copyRefLinkShares": 4,
+                        "iosNativeShares": 0,
+                        "androidNativeShares": 0
+                    },
+                    "startDate": 1787457003800,
+                    "endDate": 1790049003800,
+                    "rates": {
+                        "referralConversionRate": 0.2857,
+                        "participationRate": 0.4285,
+                        "sharesPerParticipant": 1.4285
+                    }
+                }
+            }
+        }
+    ]
+}
