@@ -60,14 +60,14 @@ argument schema with optionality only — no `.default()`, no invented
 fields. `create_ads` SHALL require `brandId`, `targetAudience`,
 `keyMessage`, and `tone`. `create_brand_from_url` SHALL require `url`.
 `create_manual_brand` SHALL require `name` and `requestId`. Empty-arg
-tools (`whoami`, `list_brands`) SHALL accept an omitted body.
+tools (`whoami`, `list_brands`) SHALL accept an empty object body.
 
 #### Scenario: Unbounded create_ads is refused before the wire
 - **WHEN** `adlegends#create_ads` runs without `tone`
 - **THEN** the run fails INVALID_INPUT before any wire call
 
-#### Scenario: whoami with no body
-- **WHEN** `adlegends#whoami` runs with `{}`
+#### Scenario: whoami with an empty body
+- **WHEN** `adlegends#whoami` runs with `{body: {}}`
 - **THEN** the run is accepted and `toRequest` sends
   `arguments: {}`
 

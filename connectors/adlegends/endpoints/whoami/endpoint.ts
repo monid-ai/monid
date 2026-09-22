@@ -17,7 +17,7 @@ export default defineEndpoint({
     endpoint: "/whoami",
     request: { method: "POST", path: "/api/mcp/brands" },
     input: {
-        schema: { body: zWhoamiBody.optional() },
+        schema: { body: zWhoamiBody },
         toRequest: ({ data }) => ({
             ...data.input,
             body: {

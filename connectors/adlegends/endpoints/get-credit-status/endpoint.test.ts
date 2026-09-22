@@ -24,13 +24,14 @@ Deno.test(`${ID} happy (synthetic): requiredCredits preflight`, async () => {
 
 Deno.test(`${ID}: negative requiredCredits is INVALID_INPUT`, async () => {
     const unit = await testSealedUnit(ID);
+    const fixture = await loadFixture(`${chains}synthetic-tool-ok.json`);
     await assertRejects(
         () =>
             runEndpoint({
                 unit,
                 input: { body: { requiredCredits: -1 } },
                 mode: "replay",
-                fixture: await loadFixture(`${chains}synthetic-tool-ok.json`),
+                fixture,
             }),
         Error,
         "INVALID_INPUT",

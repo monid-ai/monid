@@ -18,7 +18,7 @@ export default defineEndpoint({
     endpoint: "/list_brands",
     request: { method: "POST", path: "/api/mcp/brands" },
     input: {
-        schema: { body: zListBrandsBody.optional() },
+        schema: { body: zListBrandsBody },
         toRequest: ({ data }) => ({
             ...data.input,
             body: {

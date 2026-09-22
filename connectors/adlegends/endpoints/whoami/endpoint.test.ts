@@ -10,11 +10,11 @@ import {
 const ID = "adlegends#whoami";
 const chains = fromFileUrl(new URL("../../fixtures/", import.meta.url));
 
-Deno.test(`${ID} happy (synthetic): omitted body is valid`, async () => {
+Deno.test(`${ID} happy (synthetic): empty body is valid`, async () => {
     const unit = await testSealedUnit(ID);
     const result = await runEndpoint({
         unit,
-        input: {},
+        input: { body: {} },
         mode: "replay",
         fixture: await loadFixture(`${chains}synthetic-tool-ok.json`),
     });

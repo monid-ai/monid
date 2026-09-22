@@ -19,13 +19,14 @@ Deno.test(`${ID} happy (synthetic)`, async () => {
 
 Deno.test(`${ID}: sessionId required`, async () => {
     const unit = await testSealedUnit(ID);
+    const fixture = await loadFixture(`${chains}synthetic-tool-ok.json`);
     await assertRejects(
         () =>
             runEndpoint({
                 unit,
                 input: { body: {} },
                 mode: "replay",
-                fixture: await loadFixture(`${chains}synthetic-tool-ok.json`),
+                fixture,
             }),
         Error,
         "INVALID_INPUT",
