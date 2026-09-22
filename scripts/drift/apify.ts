@@ -38,7 +38,11 @@ import type { DriftCtx, DriftFinding, DriftSuite } from "./contract.ts";
  * vs live, with effectiveAt for scheduled ones), never auto-applied.
  */
 
-const FLAT_EVENT = /(^|[-_])start($|[-_])|^request$/;
+/** Flat (once-per-run) events: the `start` family, bare `request`, and
+ *  the `setup` / `startup` names the johnvc fleet publishes for its
+ *  "one-time fee per Actor run" (each such actor's own event text,
+ *  2026-09-22; no other fleet actor publishes either name). */
+const FLAT_EVENT = /(^|[-_])start($|[-_])|^request$|^setup$|^startup$/;
 
 /** Events billed PER GIGABYTE of actor run memory (`actor-start-gb`):
  *  the published eventPriceUsd is a $/GB rate, and the actor bills it
@@ -299,9 +303,9 @@ export function checkPricing(
             });
             continue;
         }
-        const eventName = eventNames
-            .find((name) => normalizeEventName(name) === line.id);
-        if (eventName === undefined) {
+        const joined = eventNames
+            .filter((name) => normalizeEventName(name) === line.id);
+        if (joined.length === 0) {
             findings.push({
                 docId: doc.id,
                 check: "join",
@@ -311,41 +315,66 @@ export function checkPricing(
             });
             continue;
         }
+        // Several published events can normalize onto ONE id
+        // (`apify-actor-start` + a custom `actor_start`, naver-search-api);
+        // each fires once per run, so the line's live price is their SUM.
         // per-GB start events: the published price is $/GB — the expected
         // pinned CHARGE is rate × the actor's default run memory
-        const scale = GB_EVENT.test(eventName) ? memoryGb : 1;
-        const rawLive = livePrice(events[eventName]);
-        const live = rawLive === undefined ? undefined : rawLive * scale;
+        const scaleOf = (name: string) => GB_EVENT.test(name) ? memoryGb : 1;
+        const liveByName = new Map<string, number>();
+        for (const name of joined) {
+            const rawLive = livePrice(events[name]);
+            if (rawLive === undefined) continue;
+            liveByName.set(name, rawLive * scaleOf(name));
+        }
+        const eventName = joined.join(" + ");
+        const live = liveByName.size === 0
+            ? undefined
+            : [...liveByName.values()].reduce((sum, price) => sum + price, 0);
         if (live !== undefined && Math.abs(live - line.amount) < 1e-12) {
             continue;
         }
-        const ahead = (scheduled.get(eventName) ?? [])
-            .find((entry) =>
-                Math.abs(entry.price * scale - line.amount) < 1e-12
-            );
+        // a scheduled change on ANY joined event that lands the sum on
+        // the pin is ahead of schedule, not drifted
+        const ahead = joined
+            .flatMap((name) =>
+                (scheduled.get(name) ?? []).map((entry) => ({ name, entry }))
+            )
+            .find(({ name, entry }) => {
+                const others = [...liveByName.entries()]
+                    .filter(([other]) => other !== name)
+                    .reduce((sum, [, price]) => sum + price, 0);
+                return Math.abs(
+                    others + entry.price * scaleOf(name) - line.amount,
+                ) < 1e-12;
+            });
         if (ahead !== undefined) {
             log(
                 `  UPCOMING ${doc.id}: ${line.id} ("${eventName}") pinned ` +
                     `ahead of schedule (${line.amount} effective ` +
-                    `${ahead.at}; billing ${live} until then)`,
+                    `${ahead.entry.at}; billing ${live} until then)`,
             );
             repins.push({
                 docId: doc.id,
                 line: line.id,
                 pinned: line.amount,
                 live: line.amount,
-                effectiveAt: ahead.at,
+                effectiveAt: ahead.entry.at,
             });
             continue;
         }
+        const gbNote = joined.length === 1 && scaleOf(joined[0]) !== 1
+            ? ` (= ${livePrice(events[joined[0]])}/GB × ${memoryGb} GB ` +
+                `default memory)`
+            : joined.length > 1
+            ? ` (= ${[...liveByName.values()].join(" + ")})`
+            : "";
         findings.push({
             docId: doc.id,
             check: "rate",
             message: `line ${line.id} ("${eventName}"): pinned ` +
                 `${line.amount}, live Business ${live ?? "(none)"}` +
-                (scale !== 1
-                    ? ` (= ${rawLive}/GB × ${memoryGb} GB default memory)`
-                    : "") +
+                gbNote +
                 ` — re-pin consumes.amount`,
         });
         repins.push({

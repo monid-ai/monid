@@ -87,6 +87,82 @@ const CHAIN_COUNTS: Record<string, Record<string, number>> = {
     // no oldestPostDate, no AI toggles, no transcription mode; chain
     // items carry no duration → base videos only
     "streamers/youtube-scraper": { result: 2 },
+    // ---- johnvc actors (add-apify-johnvc-actors): every card also
+    // carries the platform's per-row default_dataset_item line (D5), so
+    // the 2 chain rows settle it alongside the actor's own metered line
+    // product_ids → 2 reviews
+    "johnvc/apple-app-store-reviews-api": {
+        review: 2,
+        default_dataset_item: 2,
+    },
+    // pre-charged from the input cap: max_pagination 1 → 1 page (D3)
+    "johnvc/baidu-search-scraper": {
+        page_processed: 1,
+        default_dataset_item: 2,
+    },
+    // the actor fetches one page; chain items carry no events[] → 0 events
+    "johnvc/google-events-api---access-google-events-data": {
+        page_processed: 2,
+        event_returned: 0,
+        default_dataset_item: 2,
+    },
+    // fetch_booking_options off (binding default) → no booking line
+    "johnvc/google-flights-data-scraper-flight-and-price-search": {
+        page_processed: 2,
+        default_dataset_item: 2,
+    },
+    // search mode (binding default); chain items carry no properties →
+    // they are not the empty-page marker, so both bill as pages
+    "johnvc/google-hotels-search-scraper": {
+        page_processed: 2,
+        default_dataset_item: 2,
+    },
+    "johnvc/google-images-api": { image_scraped: 2, default_dataset_item: 2 },
+    // rows are jobs (~10 per page): 2 jobs under num_results 10 → 1 page
+    "johnvc/google-jobs-scraper": {
+        page_processed: 1,
+        default_dataset_item: 2,
+    },
+    // search_type visual_matches (binding default) selects the line
+    "johnvc/google-lens-api": {
+        visual_match_returned: 2,
+        default_dataset_item: 2,
+    },
+    // no dataCid in the input → the location lookup billed once
+    "johnvc/google-local-services-api": {
+        business_returned: 2,
+        location_resolved: 1,
+    },
+    "johnvc/google-maps-directions-api": {
+        directions_processed: 2,
+        default_dataset_item: 2,
+    },
+    // mode search, max_pages 1: 2 rows under a 10-per-page size → 1 page
+    "johnvc/google-scholar-api": { query_executed: 1, default_dataset_item: 2 },
+    // chain rows carry no query echo → the input's one query
+    "johnvc/naver-search-api": {
+        query_searched: 1,
+        result_scraped: 2,
+        default_dataset_item: 2,
+    },
+    // rows carry page_number; chain rows do not → one page when anything
+    // was delivered
+    "johnvc/scrape-yandex": { page_processed: 1, default_dataset_item: 2 },
+    // pre-charged from the input cap: Max_Results 2 (D3)
+    "johnvc/us-congress-financial-disclosures-and-stock-trading-data": {
+        transaction_processed: 2,
+        default_dataset_item: 2,
+    },
+    // blocks of 10: 2 rows → one started block (D4)
+    "johnvc/yandex-reverse-image-search": {
+        result_returned: 10,
+        default_dataset_item: 2,
+    },
+    // include_metadata false in the input → one videoprocessed per row
+    "johnvc/youtubetranscripts": {
+        videoprocessed: 2,
+        default_dataset_item: 2,
+    },
 };
 
 const inputFor = (id: string): RunInput => {
@@ -685,6 +761,170 @@ Deno.test("apify estimates: D29 gating spot checks (input-switched add-on lines)
             credits: { default: 0.015 + 2 * 0.008 },
             evidence: { full_profile_with_email: 2, actor_start: 1 },
         },
+    );
+});
+
+// ---------------------------------------------------------------------------
+// johnvc actors (add-apify-johnvc-actors): one estimate spot check per
+// archetype, plus the input-gated lines
+// ---------------------------------------------------------------------------
+
+Deno.test("apify estimates: johnvc archetype spot checks", async () => {
+    // A3 (Google Jobs): rows are jobs, ~10 per page — num_results 25 with
+    // no page cap → 3 pages × $0.035 + 25 rows × $0.00001 + the start flat
+    assertEquals(
+        await estimateFor("apify#johnvc/google-jobs-scraper", {
+            query: "software engineer",
+            num_results: 25,
+        }),
+        {
+            credits: { default: 3 * 0.035 + 25 * 0.00001 + 0.00001 },
+            evidence: {
+                page_processed: 3,
+                default_dataset_item: 25,
+                actor_start: 1,
+            },
+        },
+    );
+    // …and max_pagination caps the pages (2 of the 3)
+    assertEquals(
+        (await estimateFor("apify#johnvc/google-jobs-scraper", {
+            query: "software engineer",
+            num_results: 25,
+            max_pagination: 2,
+        })).evidence,
+        { page_processed: 2, default_dataset_item: 20, actor_start: 1 },
+    );
+    // B (Google Images): cap × queries, the actor's own floor of 50 per
+    // query applied — 2 queries at a requested 10 → 100 images
+    assertEquals(
+        (await estimateFor("apify#johnvc/google-images-api", {
+            queries: ["a", "b"],
+            maxResultsPerQuery: 10,
+        })).evidence,
+        { image_scraped: 100, default_dataset_item: 100, actor_start: 1 },
+    );
+    // C leaf (fuelprices): no cap knob → the D24 floor 0 on the one key
+    // (a zero draw prunes out of the credits fold)
+    assertEquals(
+        await estimateFor("apify#johnvc/fuelprices", { search: "11507" }),
+        { credits: {}, evidence: { RESULT: 0 } },
+    );
+    // E (Scholar): a non-paginated mode is ONE query regardless of max_pages
+    assertEquals(
+        (await estimateFor("apify#johnvc/google-scholar-api", {
+            mode: "author_profile",
+            author_id: "x",
+            max_pages: 5,
+        })).evidence,
+        {
+            query_executed: 1,
+            default_dataset_item: 1,
+            actor_start: 1,
+            setup: 1,
+        },
+    );
+    // D4 (Yandex reverse image): blocks of 10 — 23 requested → 30 billed
+    assertEquals(
+        (await estimateFor("apify#johnvc/yandex-reverse-image-search", {
+            image_url: "https://example.com/a.jpg",
+            max_results: 23,
+        })).evidence,
+        { result_returned: 30, default_dataset_item: 23, actor_start: 1 },
+    );
+    // A2 (Scrape-Yandex): pages × (1 + each vertical switched on) — 2 pages
+    // with image search on → 4 pages
+    assertEquals(
+        (await estimateFor("apify#johnvc/scrape-yandex", {
+            text: "python",
+            max_pages: 2,
+            include_image_search: true,
+        })).evidence,
+        { page_processed: 4, default_dataset_item: 4, setup: 1 },
+    );
+    // D3 (us-congress): pre-charged from the cap — the estimate IS the cap
+    assertEquals(
+        (await estimateFor(
+            "apify#johnvc/us-congress-financial-disclosures-and-stock-trading-data",
+            {
+                Max_Results: 7,
+            },
+        )).evidence,
+        { transaction_processed: 7, default_dataset_item: 7, setup: 1 },
+    );
+});
+
+Deno.test("apify estimates: johnvc D29 gating spot checks (input-switched lines)", async () => {
+    // Google Lens: search_type SELECTS the billed line; images come through
+    // one door (uploads win over base64 over the URL) — 2 uploads × 5
+    assertEquals(
+        (await estimateFor("apify#johnvc/google-lens-api", {
+            image_upload: ["f1", "f2"],
+            image_url: "https://example.com/ignored.jpg",
+            search_type: "products",
+            max_results: 5,
+        })).evidence,
+        { product_match_returned: 10, default_dataset_item: 10 },
+    );
+    // Google Flights: fetch_booking_options promises the option line at the
+    // D24 floor 0 (unknowable pre-run); off (the default) → no line
+    assertEquals(
+        (await estimateFor(
+            "apify#johnvc/google-flights-data-scraper-flight-and-price-search",
+            {
+                departure_id: "LAX",
+                arrival_id: "JFK",
+                outbound_date: "2026-12-01",
+                max_pages: 2,
+                fetch_booking_options: true,
+            },
+        )).evidence,
+        {
+            page_processed: 2,
+            default_dataset_item: 2,
+            booking_option_processed: 0,
+            actor_start: 1,
+            setup: 1,
+        },
+    );
+    // Google Local Services: a dataCid skips the location lookup
+    assertEquals(
+        (await estimateFor("apify#johnvc/google-local-services-api", {
+            queries: ["plumber", "electrician"],
+            dataCid: "123",
+            maxResultsPerQuery: 4,
+        })).evidence,
+        { business_returned: 8, location_resolved: 0 },
+    );
+    // Google Hotels: the reviews mode switches to its per-item line
+    // (promised at the floor 0 — the count is unknowable pre-run)
+    assertEquals(
+        (await estimateFor("apify#johnvc/google-hotels-search-scraper", {
+            search_type: "reviews",
+            property_token: "tok",
+        })).evidence,
+        {
+            review_returned: 0,
+            default_dataset_item: 0,
+            actor_start: 1,
+            setup: 1,
+        },
+    );
+    // YouTube transcripts: include_metadata (the actor's default) bills a
+    // second videoprocessed per video; list_only bills none
+    assertEquals(
+        (await estimateFor("apify#johnvc/youtubetranscripts", {
+            youtube_url: ["https://youtu.be/a", "https://youtu.be/b"],
+        })).evidence,
+        { videoprocessed: 4, default_dataset_item: 2, actor_start: 1 },
+    );
+    assertEquals(
+        (await estimateFor("apify#johnvc/youtubetranscripts", {
+            channel: "@somechannel",
+            list_only: true,
+            max_videos: 5,
+        })).evidence,
+        { videoprocessed: 0, default_dataset_item: 5, actor_start: 1 },
     );
 });
 
