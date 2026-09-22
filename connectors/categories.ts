@@ -56,6 +56,11 @@ export const LEAF_CATEGORIES = defineLeafCategories([
         description: "Convert text and media into vector representations.",
     },
     {
+        id: "face-verification",
+        displayName: "Face Verification",
+        description: "Compare consented face images and facial embeddings.",
+    },
+    {
         id: "people-enrichment",
         displayName: "People Enrichment",
         description:

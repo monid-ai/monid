@@ -1,0 +1,13 @@
+{
+    "name": "synthetic-profile-mismatch",
+    "description": "Synthetic fail-closed gateway response for a prepaid, differently contracted, or inactive account; used as shared error-chain shape.",
+    "calls": [
+        {
+            "req": { "method": "POST", "url": "{{request.url}}" },
+            "res": {
+                "status": 409,
+                "body": { "error": "billing_profile_mismatch" }
+            }
+        }
+    ]
+}

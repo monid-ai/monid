@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-compare-ok",
+    "description": "Synthetic synchronous single-pair comparison using invented numeric vectors, not recorded facial embeddings.",
+    "calls": [
+        {
+            "req": { "method": "POST", "url": "{{request.url}}" },
+            "res": {
+                "status": 200,
+                "body": {
+                    "model_name": "Facenet",
+                    "metric": "cosine",
+                    "source": { "type": "vector", "vector_length": 128 },
+                    "results": [{ "index": 0, "distance": 0, "match": true }],
+                    "best_match": { "index": 0, "distance": 0, "match": true }
+                }
+            }
+        }
+    ]
+}

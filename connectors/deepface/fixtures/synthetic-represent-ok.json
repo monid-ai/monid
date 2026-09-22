@@ -1,0 +1,20 @@
+{
+    "name": "synthetic-represent-ok",
+    "description": "Synthetic embedding response; invented short vector, no photograph, person, or recorded biometric data.",
+    "calls": [
+        {
+            "req": { "method": "POST", "url": "{{request.url}}" },
+            "res": {
+                "status": 200,
+                "body": [
+                    {
+                        "embedding": [0.25, 0.75],
+                        "model_name": "Facenet",
+                        "facial_area": { "x": 0, "y": 0, "w": 1, "h": 1 },
+                        "face_confidence": 0.99
+                    }
+                ]
+            }
+        }
+    ]
+}

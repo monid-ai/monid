@@ -175,6 +175,11 @@ one-key provider reads `EXA_CREDENTIALS_API_KEY` (the bare `EXA_API_KEY` still
 works) and a two-key provider reads `CONTACTOUT_CREDENTIALS_WORK_API_KEY` and
 `CONTACTOUT_CREDENTIALS_PERSONAL_API_KEY`.
 
+The proposed [deepface.dev connector](connectors/deepface/README.md) adds facial
+embeddings, two-image verification, and single-pair vector comparison under a
+dedicated `monid_v1` billing contract. Its README records the backend, account,
+and broker activation prerequisites; it is not a general prepaid-key adapter.
+
 ### Let an agent write it
 
 The format above is declarative and the contract is written down, so step 2 is
