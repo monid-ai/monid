@@ -127,10 +127,10 @@ export default defineProvider({
             },
         },
         consolidate: ({ data, utils }) => {
-            const credits = utils.json.optionalNum(
-                data.output,
-                "$.credits_charged",
-            );
+            const status = utils.json.optionalGet(data.output, "$.status");
+            const credits = status === "complete"
+                ? utils.json.optionalNum(data.output, "$.credits_charged")
+                : undefined;
             return {
                 credits: {
                     ...(credits !== undefined ? { default: credits } : {}),
