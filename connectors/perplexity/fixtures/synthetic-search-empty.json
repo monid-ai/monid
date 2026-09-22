@@ -1,0 +1,17 @@
+{
+    "name": "synthetic-search-empty",
+    "description": "Synthetic successful empty result; the successful request still incurs one flat call charge. Not a live recording.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": { "query": "synthetic no-result query" }
+            },
+            "res": {
+                "status": 200,
+                "body": { "id": "synthetic-empty-request", "results": [] }
+            }
+        }
+    ]
+}

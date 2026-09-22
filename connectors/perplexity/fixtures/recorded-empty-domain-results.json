@@ -1,0 +1,27 @@
+{
+    "name": "recorded-empty-domain-results",
+    "description": "Live empty-domain-results, 2026-09-22T21:05:36.208Z. Public validation query; request headers are not recorded. Trimmed response arrays to 2 items and strings to 500 characters; email/phone scrub applied. Live result count before trimming: 0.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "query": "Deno documentation",
+                    "max_results": 2,
+                    "search_context_size": "low",
+                    "search_domain_filter": [
+                        "monid-validation-nonexistent.invalid"
+                    ]
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "b5d2e0aa-b4ec-4a59-b002-480bacb241eb",
+                    "results": []
+                }
+            }
+        }
+    ]
+}

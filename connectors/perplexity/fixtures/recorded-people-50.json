@@ -1,0 +1,28 @@
+{
+    "name": "recorded-people-50",
+    "description": "Live people-50, 2026-09-22T21:05:31.285Z. Public validation query; request headers are not recorded. Trimmed response arrays to 2 items and strings to 500 characters; email/phone scrub applied. Live result count before trimming: not applicable.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "query": "computer science researchers",
+                    "search_type": "people",
+                    "max_results": 50,
+                    "search_context_size": "low"
+                }
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "error": {
+                        "message": "Invalid request (request id: 5839435b-e9be-4fcd-9a36-ce103d782801)",
+                        "type": "invalid_request",
+                        "code": 400
+                    }
+                }
+            }
+        }
+    ]
+}

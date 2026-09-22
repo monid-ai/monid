@@ -1,0 +1,17 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "Synthetic 401 error envelope for engine passthrough and zero-usage testing. Error text is illustrative, not a verified vendor response.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": { "query": "public documentation" }
+            },
+            "res": {
+                "status": 401,
+                "body": { "error": "Synthetic invalid credentials" }
+            }
+        }
+    ]
+}

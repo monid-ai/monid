@@ -1,0 +1,37 @@
+{
+    "name": "recorded-people-fifty-no-context",
+    "description": "Live people-search isolation: people-fifty-no-context, 2026-09-22T21:06:19.971Z. Headers omitted. Trimmed response arrays to 2 items and strings to 500 characters; email/phone scrub applied. Live result count before trimming: 50.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "query": "computer science researchers",
+                    "search_type": "people",
+                    "max_results": 50
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "e4a6c415-2468-466e-b3ad-faad20a4d9c8",
+                    "results": [
+                        {
+                            "last_updated": "2026-08-13",
+                            "snippet": "**Mir Ahsan Talpur**\n**Comeputer**\n**comeputer at Computer Science Research Institue**\nPakistan\n### Experience\n- **comeputer**\n**Computer Science Research Institue**\nMarch 1999 - Present\n- **comeputer sicence**\n**Computer Science Research Institue**\nMarch 1999 - March 2002 · 3 years 1 month\n- **in 9th class**",
+                            "title": "Mir Ahsan Talpur | comeputer at Computer Science Research Institue | Pakistan",
+                            "url": "https://www.linkedin.com/in/mir-ahsan-talpur-53645294"
+                        },
+                        {
+                            "last_updated": "2026-07-20",
+                            "snippet": "**Baba Kale**\n**Lecturer**\n**lecturer at Computer Science Research Institue**\nChhatrapati Sambhajinagar, Maharashtra, India\n### Experience",
+                            "title": "Baba Kale | lecturer at Computer Science Research Institue | Chhatrapati Sambhajinagar, Maharashtra, India",
+                            "url": "https://www.linkedin.com/in/baba-kale-1bb72717"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

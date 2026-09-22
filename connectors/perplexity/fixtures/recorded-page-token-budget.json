@@ -1,0 +1,38 @@
+{
+    "name": "recorded-page-token-budget",
+    "description": "Live page-token-budget, 2026-09-22T21:05:29.351Z. Public validation query; request headers are not recorded. Trimmed response arrays to 2 items and strings to 500 characters; email/phone scrub applied. Live result count before trimming: 2.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "query": "Deno documentation",
+                    "max_results": 2,
+                    "max_tokens_per_page": 1000
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "f817aa02-77c5-42d4-82e8-8a97ef5f446c",
+                    "results": [
+                        {
+                            "date": "2026-07-29",
+                            "last_updated": "2026-09-21",
+                            "snippet": "Get started with Deno | Deno Docs\n...\nDeno (/ˈdiːnoʊ/, pronounced `dee-no`) is an\nopen source JavaScript, TypeScript, and WebAssembly runtime with secure defaults and a great developer experience.\nThis page takes you from nothing to a running, tested project in a few minutes.\n...\ndeno.com/agents.md is a single page written for coding agents: what Deno is, the assumptions to unlearn if it already knows Node, and how to install Deno's agent skills so it keeps that context in every session.\n...\nIns",
+                            "title": "Deno Docs: Get started with Deno",
+                            "url": "https://docs.deno.com/runtime/"
+                        },
+                        {
+                            "last_updated": "2026-08-18",
+                            "snippet": "A collection of walkthrough tutorials, examples, videos and guides to teach you about the Deno runtime and how to use it with your favorite tools.\n...\n- Generating documentation with deno docLearn how to generate professional documentation for your Deno projects using the built-in deno doc command.",
+                            "title": "Deno examples and tutorials",
+                            "url": "https://docs.deno.com/examples/"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "synthetic-search-ok",
+    "description": "Synthetic Search API envelope based on the public response schema; not a live recording. Includes null, absent dates, and an empty snippet.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": { "query": "public documentation" }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "synthetic-search-request",
+                    "server_time": null,
+                    "results": [
+                        {
+                            "title": "Example documentation",
+                            "url": "https://example.com/docs",
+                            "snippet": "A query-relevant passage.",
+                            "date": null,
+                            "last_updated": "2026-09-01"
+                        },
+                        {
+                            "title": "Another source",
+                            "url": "https://example.org/",
+                            "snippet": "",
+                            "last_updated": null
+                        },
+                        {
+                            "title": "Source without dates",
+                            "url": "https://example.net/",
+                            "snippet": "No date metadata is available."
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

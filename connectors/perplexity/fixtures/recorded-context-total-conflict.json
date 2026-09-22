@@ -1,0 +1,27 @@
+{
+    "name": "recorded-context-total-conflict",
+    "description": "Live context-total-conflict, 2026-09-22T21:05:32.112Z. Public validation query; request headers are not recorded. Trimmed response arrays to 2 items and strings to 500 characters; email/phone scrub applied. Live result count before trimming: not applicable.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "query": "Deno documentation",
+                    "search_context_size": "high",
+                    "max_tokens": 5000
+                }
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "error": {
+                        "message": "search_context_size cannot be combined with explicit max_tokens or max_tokens_per_page",
+                        "type": "invalid_request",
+                        "code": 400
+                    }
+                }
+            }
+        }
+    ]
+}

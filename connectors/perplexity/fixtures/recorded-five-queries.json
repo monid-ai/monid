@@ -1,0 +1,43 @@
+{
+    "name": "recorded-five-queries",
+    "description": "Live five-queries, 2026-09-22T21:05:29.786Z. Public validation query; request headers are not recorded. Trimmed response arrays to 2 items and strings to 500 characters; email/phone scrub applied. Live result count before trimming: 2.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "query": [
+                        "Deno documentation",
+                        "TypeScript handbook",
+                        "Rust book",
+                        "Python documentation",
+                        "Go documentation"
+                    ],
+                    "max_results": 2,
+                    "search_context_size": "low"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "35318074-430e-4f1b-b07c-f714e5bd7df3",
+                    "results": [
+                        {
+                            "last_updated": "2026-09-22",
+                            "snippet": "TypeScript: Handbook - The TypeScript Handbook\n...\nThe handbook is split into two sections:\n- **The Handbook**\nThe TypeScript Handbook is intended to be a comprehensive document that explains TypeScript to everyday programmers.\nYou can read the handbook by going from top to bottom in the left-hand navigation.\nYou should expect each chapter or page to provide you with a strong understanding of the given concepts.\nThe TypeScript Handbook is not a complete language specification, but it is intended",
+                            "title": "The TypeScript Handbook",
+                            "url": "https://www.typescriptlang.org/docs/handbook/intro.html"
+                        },
+                        {
+                            "last_updated": "2026-09-16",
+                            "snippet": "#### Handbook\nA great first read for your daily TS work.\n- The TypeScript Handbook\n- The Basics\n- Everyday Types\n- Narrowing\n- More on Functions\n- Object Types\n- Type Manipulation\n- Creating Types from Types\n- Generics\n- Keyof Type Operator\n- Typeof Type Operator\n- Indexed Access Types\n- Conditional Types\n- Mapped Types\n- Template Literal Types\n- Classes\n- Modules\n...\n#### Handbook\n- Everyday Types\n- Creating Types from Types\n- Object Types\n- Variable Declarations\n- More on Functions\n#### Tools",
+                            "title": "TypeScript Documentation",
+                            "url": "https://www.typescriptlang.org/docs/"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
