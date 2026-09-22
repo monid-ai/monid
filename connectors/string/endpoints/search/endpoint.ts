@@ -31,8 +31,8 @@ import { zSearchBody } from "./schema/inputs.ts";
  * PRICING: String's rate is plan-tier USD ($1.50/1,000 on Starter, $1.00/
  * 1,000 on Growth — pricing.mdx "Search"), not a vendor "credits"
  * abstraction, and the response carries no billing receipt to read at
- * settle time the way Firecrawl's or Exa's does. Quoted here at the
- * Growth-tier rate ($0.001/page) — a deliberate choice, not a guess.
+ * settle time. Quoted here at the Growth-tier rate ($0.001/page) — a
+ * deliberate choice, not a guess.
  */
 export default defineEndpoint({
     meta: {

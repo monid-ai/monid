@@ -26,18 +26,16 @@ import { zFetchBody } from "./schema/inputs.ts";
  * field; confirmed by reading both, not assumed. `lifecycle.start` DOES
  * see response headers (`utils.request()` returns `{status, headers,
  * body}`), so this endpoint uses a single-tick lifecycle (no `poll` —
- * `/fetch` is a synchronous vendor call, no job id, mirroring
- * `hunterio#email-verifier`'s non-polling COMPLETED branch) and stashes
- * the header on `state.data`, the documented billing-signal channel
- * (`data.lifecycle.state.data` — the same path Apify's poll response
- * uses to carry pricing fields forward) for `usage.evidence` to read.
+ * `/fetch` is a synchronous vendor call, no job id — the non-polling
+ * COMPLETED branch) and stashes the header on `state.data`, the
+ * documented billing-signal channel (`data.lifecycle.state.data`) for
+ * `usage.evidence` to read.
  *
  * ESTIMATE: the browser-vs-request axis is knowable from the request
  * (`executeJS`/`requireWSS`/`screenshot`/`actions` force browser); the
  * proxy-class axis is not, so this promises the cheaper (standard) proxy
  * on whichever strategy the request implies — an honest floor, not a
- * worst case, the same kind of gap Firecrawl's own PDF-page line leaves
- * open for an output-determined quantity.
+ * worst case, for an output-determined quantity.
  *
  * SETTLE: reads `x-billed-request-type` off `state.data` (stashed by
  * `lifecycle.start`). A transport that does not surface response headers
