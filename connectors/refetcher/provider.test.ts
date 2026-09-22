@@ -357,6 +357,36 @@ Deno.test("refetcher input: post tools reject profiles, foreign hosts, and unsup
     }
 });
 
+Deno.test("refetcher input: enforce native Facebook cursor and X status ID bounds before IO", async () => {
+    await rejects("facebook/profile", {
+        body: { username: "nasa", after: "a".repeat(12001) },
+    });
+    for (const length of [7, 26]) {
+        await rejects("x/post", {
+            body: { url: `https://x.com/creator/status/${"1".repeat(length)}` },
+        });
+    }
+    assertEquals(
+        await estimateEndpoint(
+            await testSealedUnit(idFor("facebook/profile")),
+            {
+                body: { username: "nasa", after: "a".repeat(12000) },
+            },
+        ),
+        successUsage,
+    );
+    for (const length of [8, 25]) {
+        assertEquals(
+            await estimateEndpoint(await testSealedUnit(idFor("x/post")), {
+                body: {
+                    url: `https://x.com/creator/status/${"1".repeat(length)}`,
+                },
+            }),
+            successUsage,
+        );
+    }
+});
+
 Deno.test("refetcher input: comments, Facebook cursors, X ordering, and nullable metrics remain supported", async () => {
     const accepted: { id: string; body: Record<string, Json> }[] = [
         {

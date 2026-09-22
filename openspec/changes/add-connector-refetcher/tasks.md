@@ -14,14 +14,16 @@
 ## 2. Offline verification
 
 - [x] 2.1 Add minimal shared `synthetic-*` fixtures whose descriptions state
-      their synthetic provenance, plus a real unauthenticated HTTP 401 fixture
-      recorded without a key or paid scrape.
+      their synthetic provenance, four scrubbed recorded success fixtures and
+      a real unauthenticated HTTP 401 fixture recorded without a key or paid
+      scrape.
 - [x] 2.2 Exercise each sealed endpoint's request shaping, response and rate.
 - [x] 2.3 Cover HTTP errors, failed results in HTTP 200 bodies, empty/malformed
       success envelopes, input bounds and no-charge outcomes.
 - [x] 2.4 Verify that balance, provisioning and people-search tools are absent.
-- [x] 2.5 Run formatting, lint, type checks, replay tests, deterministic
-      double-compilation, version checks and catalog inspection.
+- [x] 2.5 Repeat final formatting, lint, type checks, replay tests,
+      deterministic double-compilation, version checks and catalog inspection
+      after adding the authenticated recordings. All passed.
 
 ## 3. Documentation and review
 
@@ -31,18 +33,22 @@
 - [x] 3.3 Review the diff for secrets and implementation details outside the
       public API contract.
 
-## 4. Live follow-up
+## 4. Live qualification and activation
 
-- [ ] 4.1 Supply a dedicated API key and an explicit `REFETCHER_LIVE_INPUTS`
-      target map through the environment and run the gated live tests; never
-      commit the key or print it in test output.
-- [ ] 4.2 Record and scrub representative authenticated success/error responses,
-      replacing synthetic fixtures only after preserving their test coverage.
+- [x] 4.1 Qualify all eleven tools through the compiled engine with explicit
+      public target inputs and an environment-supplied API key; keep the key
+      out of files and test output. All eleven passed on 2026-09-22.
+- [x] 4.2 Record and scrub four representative authenticated success responses,
+      retaining synthetic boundary/error cases and the recorded HTTP 401.
 - [ ] 4.3 Have maintainers confirm hosted credentials, activation and the
       commercial arrangement separately from connector correctness.
 
-The focused connector suite passed eleven tests with one live test skipped.
-Full-repository verification passed: 1,152 tests passed, zero failed and 201
-credential-gated live tests were skipped. Type checks, connector formatting/lint,
-byte-identical double-compilation, version checks and catalog inspection passed. Synthetic replay success
-and an unauthenticated 401 do not establish successful live scraping.
+The 2026-09-22 live smoke run used `runEndpoint` in recording mode: eleven
+passes, zero failures, one upstream request per tool, HTTP 200 and one
+successful result each, with usage of $0.0009 USD per run. Total elapsed time
+was approximately 47 seconds. Social profiles included recent posts; the
+YouTube channel included recent uploads, within the default bounds of one page
+and twelve uploads. This is a point-in-time check of those targets, not an SLA or
+an assertion that all targets work. Final offline verification passed: 1,157
+tests passed, zero failed and 201 credential-gated live tests were skipped.
+The focused connector suite passed sixteen tests with one live test skipped.

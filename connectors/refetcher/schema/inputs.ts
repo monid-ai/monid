@@ -40,7 +40,7 @@ export const zProfileBody = z.strictObject({
     pages: z.number().int().min(1).max(25).optional().describe(
         "Requested recent-post pages; vendor default 1. This connector binds this to one page.",
     ),
-    after: z.string().min(1).optional().describe(
+    after: z.string().min(1).max(12000).optional().describe(
         "Facebook continuation cursor from pageInfo.recentPosts.endCursor.",
     ),
     sort: z.enum(["latest", "popular"]).optional().describe(

@@ -62,14 +62,23 @@ Public sources: [API documentation](https://www.refetcher.com/docs) and
 
 ## Validation status
 
-The `synthetic-*` fixtures are constructed examples based on the public API
-contract. `fixtures/unauthorized.json` is a real HTTP 401 response recorded from
-an unauthenticated request on 2026-09-22; no API key was sent and no paid scrape
-ran. The focused connector suite passed eleven tests with one live test skipped.
-The full repository suite passed 1,152 tests with zero failures and 201 skipped
-live tests. Type checks, connector formatting/lint, deterministic compilation
-and catalog checks passed. These checks do not establish successful live
-scraping.
+All eleven tools passed a live smoke test on 2026-09-22 through the compiled
+engine in recording mode. Each made one request, returned HTTP 200 with a
+successful target result, and settled $0.0009 USD. The complete run took
+approximately 47 seconds. Profile cases requested recent posts, and the YouTube
+channel case requested recent uploads, within the one-page/twelve-upload bounds.
+This verifies those targets at that time; it does not establish an SLA or
+availability for every target.
+
+Four scrubbed `recorded-*-success.json` fixtures cover a YouTube video, an
+Instagram profile, a YouTube channel and its uploads. The `synthetic-*` fixtures
+retain constructed boundary and error cases. `fixtures/unauthorized.json` is a
+real HTTP 401 response from an unauthenticated request; no key was sent and no
+paid scrape ran for that fixture. Final offline verification passed: 1,157
+repository tests passed, zero failed and 201 credential-gated live tests were
+skipped. The focused connector suite passed sixteen tests with one live test
+skipped. Type checks, connector formatting/lint, deterministic
+double-compilation, version checks and catalog inspection also passed.
 
 Live tests require both the credential environment variable and
 `REFETCHER_LIVE_INPUTS`, a JSON object mapping logical endpoint paths to native
@@ -82,5 +91,5 @@ deno task test:live --filter 'refetcher live'
 ```
 
 Replace `VALID_ID` with a real current video id before running. Successful live
-tests incur the published API charge. Maintainers should record scrubbed
-authenticated success/error fixtures and confirm hosted activation separately.
+tests incur the published API charge. Hosted activation and the commercial
+arrangement still require maintainer confirmation.

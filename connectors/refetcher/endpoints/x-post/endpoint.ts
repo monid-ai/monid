@@ -20,7 +20,7 @@ export default defineEndpoint({
             }).extend({
                 // A single post URL keeps the operation within one billable unit.
                 url: zPostBody.shape.url.unwrap().regex(
-                    /^https?:\/\/(?:(?:www|mobile)\.)?(?:x|twitter)\.com\/(?:[A-Za-z0-9_]+\/status|i\/web\/status)\/[0-9]+(?:\/(?:photo|video)\/[0-9]+)?\/?(?:[?#][^\s]*)?$/,
+                    /^https?:\/\/(?:(?:www|mobile)\.)?(?:x|twitter)\.com\/(?:[A-Za-z0-9_]+\/status|i\/web\/status)\/[0-9]{8,25}(?:\/(?:photo|video)\/[0-9]+)?\/?(?:[?#][^\s]*)?$/,
                     "Use a supported X Post URL for one public target.",
                 ),
             }),

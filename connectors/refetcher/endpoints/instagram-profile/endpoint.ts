@@ -9,7 +9,7 @@ export default defineEndpoint({
         summary:
             "Read public Instagram profile metadata and optional recent media links.",
         description:
-            "Fetch one Instagram profile by username. Optionally include the first page of up to 12 recent public media references. References do not include per-post engagement; use Instagram Post for those metrics. This connector allows one page per call. Failed scrapes are not charged.",
+            "Fetch one Instagram profile by username. Optionally include the first page of up to 12 recent public media references. References may include publicly exposed counts; use Instagram Post for full per-post metrics. This connector allows one page per call. Failed scrapes are not charged.",
         docsUrl: "https://www.refetcher.com/docs#req-instagram-profile",
         categories: ["instagram"],
     },

@@ -105,8 +105,12 @@ promise a complete profile history.
 ### Requirement: Test provenance and credential gating are explicit
 
 Constructed fixtures SHALL have `synthetic-` names and descriptions disclosing
-their provenance. The separately recorded `unauthorized.json` fixture SHALL
-identify the real unauthenticated HTTP 401 request and SHALL contain no API key.
+their provenance. Authenticated recordings SHALL be scrubbed before inclusion
+and identified as recorded responses; four representative
+`recorded-*-success.json` fixtures cover post, profile, channel and channel-video
+response shapes. The separately recorded `unauthorized.json` fixture SHALL
+identify the real unauthenticated HTTP 401 request. Fixtures SHALL contain no
+API keys or private provider-account information.
 Offline tests SHALL execute sealed compiled endpoints without network access.
 Live tests SHALL require both a credential through the standard environment
 convention and `REFETCHER_LIVE_INPUTS`, a JSON map of logical endpoint paths to
@@ -118,6 +122,15 @@ of successful live scraping.
 
 - **WHEN** the suite runs without a Refetcher API key or `REFETCHER_LIVE_INPUTS`
 - **THEN** fixture-replay tests can run and live tests are skipped
+
+#### Scenario: Recorded success coverage has a bounded validation claim
+
+- **WHEN** the eleven tools are qualified through the compiled engine with
+  one explicit public target per tool
+- **THEN** validation reports each response status, result success and settled
+  usage without retaining credentials
+- **AND** the successful 2026-09-22 smoke run establishes those eleven cases
+  at that time, not an SLA or universal target availability
 
 ### Requirement: Supplier operations remain outside the public tool catalog
 

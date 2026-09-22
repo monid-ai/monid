@@ -24,9 +24,14 @@ requiring callers to learn the unified request router.
   markers, pagination details and media links. No output transformation
   substitutes guessed values for unavailable data.
 - Add fixture-replay coverage and opt-in live tests gated on credentials and
-  explicit target inputs. Success and other constructed fixtures are labelled
+  explicit target inputs. Four scrubbed recordings cover representative
+  authenticated successes; constructed boundary/error fixtures remain labelled
   synthetic. A separate HTTP 401 fixture records an unauthenticated request;
-  no key was sent and no paid scrape ran.
+  no key was sent and no paid scrape ran for that fixture.
+- Qualify all eleven tools through the compiled engine on 2026-09-22: every
+  tool completed one HTTP 200 request with a successful target result and
+  $0.0009 USD usage. This smoke test covers the selected targets at that time,
+  not an SLA or every possible target.
 
 ## Capabilities
 
