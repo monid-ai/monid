@@ -6,15 +6,17 @@ import { defineProvider, presets } from "@shared/core";
  * `https://request.usestring.ai/v1` with `Authorization: Bearer <key>`
  * (portal.usestring.ai/docs/get-started/authentication).
  *
- * This first cut ports only `/search` (see the PR description for why
- * `/fetch`, `/sitemap`, and the rest of the surface are left for a later
- * PR). Sourced entirely from String's own public docs, not third-party
+ * This cut ports `/search` and `/fetch` (see the PR description for why
+ * `/sitemap` and the rest of the surface are left for a later PR).
+ * Sourced entirely from String's own public docs, not third-party
  * reverse engineering — String is durable-alpha's own product, so the docs
  * are authoritative here rather than something to verify live against a
  * key the repo's author didn't have in hand while drafting this.
  *
- * Priced at the Growth-tier rate ($1.00/1,000 searches) — see
- * endpoints/search/endpoint.ts.
+ * Priced at the Growth-tier rate — $1.00/1,000 searches, $0.20-$4.00/1,000
+ * fetches by billed class — per portal.usestring.ai/docs/get-started/
+ * pricing (retrieved 2026-09-22); see each endpoint file for the per-unit
+ * breakdown.
  */
 export default defineProvider({
     name: "string",

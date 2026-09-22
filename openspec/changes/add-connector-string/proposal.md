@@ -60,7 +60,8 @@ Monid-integrated agent.
 
 ## Impact
 
-New connector tree; no new `Unit`, preset, or hook, and no compiler or
-schema change — `ENGINE_VERSION` and `config.yml`'s `doc_format_since` are
-untouched. One test-infra change: `RECORDED_RES_HEADERS` widens by one
-entry.
+New connector tree, including its own connector-local `search`/`fetch`
+input schemas; no new `Unit`, preset, or hook, and no shared schema
+contract change — `ENGINE_VERSION` and `config.yml`'s `doc_format_since`
+are untouched. One test-infra change: `RECORDED_RES_HEADERS` widens by
+one entry.

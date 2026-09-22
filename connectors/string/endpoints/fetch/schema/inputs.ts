@@ -18,10 +18,20 @@ import { z } from "zod";
  * than re-encoded here, matching the sibling search mirror's minimalism.
  */
 export const zFetchBody = z.object({
-    url: z.url({ protocol: /^https?$/ }).describe(
-        "The http/https URL to fetch.",
-    ),
-    method: z.enum(["GET", "POST", "PUT", "PATCH"]).optional().describe(
+    // `z.url({protocol})` doesn't carry its protocol constraint through
+    // to the compiled runtime validator (confirmed empirically: a
+    // ftp:// URL passed it), so this mirrors the plain-regex convention
+    // the rest of the repo already uses for URL fields (e.g.
+    // connectors/minimax/schema/h3-video.ts).
+    url: z.string().regex(/^https?:\/\//, "must be a public http(s) URL")
+        .describe("The http/https URL to fetch."),
+    // The `i` regex flag doesn't survive compilation to the runtime JSON
+    // Schema `pattern` (confirmed empirically, same as the url protocol
+    // constraint below), so case-insensitivity is spelled out with
+    // per-letter character classes instead of a flag.
+    method: z.string().regex(
+        /^([gG][eE][tT]|[pP][oO][sS][tT]|[pP][uU][tT]|[pP][aA][tT][cC][hH])$/,
+    ).optional().describe(
         "HTTP method, case-insensitive (vendor default 'GET'). `body` is " +
             "only valid for non-GET.",
     ),

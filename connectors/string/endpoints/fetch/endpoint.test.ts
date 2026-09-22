@@ -1,5 +1,6 @@
-import { assertEquals } from "@std/assert";
+import { assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
+import type { Json } from "@shared/core";
 import {
     liveSkip,
     loadFixture,
@@ -51,6 +52,78 @@ Deno.test("string#fetch happy: browser_premium settles at the browser-premium li
         credits: { default: 0.004 },
         evidence: { browser_premium: 1 },
     });
+});
+
+Deno.test("string#fetch happy: absent billed-type header settles zero usage, not a guess", async () => {
+    const unit = await testSealedUnit("string#fetch");
+    const fixture = await loadFixture(
+        `${fixturesDir}synthetic-fetch-header-absent.json`,
+    );
+    const result = await runEndpoint({
+        unit,
+        input: { body: { url: "https://httpbin.org/json" } },
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(result.isProviderError, false);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
+});
+
+Deno.test("string#fetch happy: unrecognized billed-type header settles zero usage, not a guess", async () => {
+    const unit = await testSealedUnit("string#fetch");
+    const fixture = await loadFixture(
+        `${fixturesDir}synthetic-fetch-header-unrecognized.json`,
+    );
+    const result = await runEndpoint({
+        unit,
+        input: { body: { url: "https://httpbin.org/json" } },
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(result.isProviderError, false);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
+});
+
+Deno.test("string#fetch provider error (synthetic 502): zero usage", async () => {
+    const unit = await testSealedUnit("string#fetch");
+    const fixture = await loadFixture(`${fixturesDir}provider-error.json`);
+    const result = await runEndpoint({
+        unit,
+        input: { body: { url: "https://httpbin.org/json" } },
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(result.httpStatus, 502);
+    assertEquals(result.isProviderError, true);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
+});
+
+Deno.test("string#fetch: url must be http(s); method accepts any case", async () => {
+    const unit = await testSealedUnit("string#fetch");
+    const fixture = await loadFixture(`${fixturesDir}synthetic-fetch-ok.json`);
+    const rejected: Json[] = [
+        {},
+        { url: "ftp://example.test/file" },
+        { url: "https://example.test", method: "DELETE" },
+        { url: "https://example.test", notAField: true },
+    ];
+    for (const body of rejected) {
+        await assertRejects(
+            () =>
+                runEndpoint({ unit, input: { body }, mode: "replay", fixture }),
+            Error,
+            "INVALID_INPUT",
+            JSON.stringify(body),
+        );
+    }
+    // near-valid twin, lowercase method — proves the case-insensitive fix
+    const result = await runEndpoint({
+        unit,
+        input: { body: { url: "https://example.test", method: "get" } },
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(result.isProviderError, false);
 });
 
 Deno.test("string#fetch: jsonSchema is not exposed on the input schema", async () => {

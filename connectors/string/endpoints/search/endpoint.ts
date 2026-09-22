@@ -16,23 +16,24 @@ import { zSearchBody } from "./schema/inputs.ts";
  * search." `duckduckgo`, `brave`, and `mojeek` accept `searchCount` but
  * ignore it — always exactly one billed page.
  *
- * ESTIMATE: without `searchCount`, always 1 page. With it, on `google`
- * (the default when `engine` is omitted): String's docs describe "about
- * eight to ten organic results" per page with a hard 10-page cap, so the
- * estimate ceilings on the conservative low end —
- * `min(10, ceil(searchCount / 8))`. A page that returns fewer than 8
- * results in practice would need more pages than this promises; there is
- * no published per-page floor to promise against exactly. Any non-google
+ * ESTIMATE is an admission hold, not a best guess: it must not undershoot
+ * what settlement can actually charge. Without `searchCount`, always 1
+ * page. With it, on `google` (the default when `engine` is omitted):
+ * String's docs describe a hard 10-page cap and settlement reads whatever
+ * `paging.pages` the response reports, which can land anywhere up to that
+ * cap — so the hold reserves the full 10 rather than a per-page-count
+ * heuristic that could settle under what it promised. Any non-google
  * engine always estimates 1, since searchCount is a no-op there.
  *
  * SETTLE: reads `paging.pages` from the response when present (String
  * only sends it when `searchCount` was in the request); otherwise 1.
  *
  * PRICING: String's rate is plan-tier USD ($1.50/1,000 on Starter, $1.00/
- * 1,000 on Growth — pricing.mdx "Search"), not a vendor "credits"
- * abstraction, and the response carries no billing receipt to read at
- * settle time. Quoted here at the Growth-tier rate ($0.001/page) — a
- * deliberate choice, not a guess.
+ * 1,000 on Growth — portal.usestring.ai/docs/get-started/pricing
+ * "Search", retrieved 2026-09-22), not a vendor "credits" abstraction, and
+ * the response carries no billing receipt to read at settle time. Quoted
+ * here at the Growth-tier rate ($0.001/page) — a deliberate choice, not a
+ * guess.
  */
 export default defineEndpoint({
     meta: {
@@ -75,8 +76,10 @@ export default defineEndpoint({
             if (body.engine !== "google" || body.searchCount === undefined) {
                 return { counts: { PAGE: 1 } };
             }
-            const pages = Math.min(10, Math.ceil(body.searchCount / 8));
-            return { counts: { PAGE: pages } };
+            // Hold the documented 10-page cap, not a per-page-count
+            // guess: settlement reads the real `paging.pages` and must
+            // never be able to charge more than this hold reserved.
+            return { counts: { PAGE: 10 } };
         },
         evidence: ({ data, utils }) => {
             const pages = utils.json.optionalNum(
