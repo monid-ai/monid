@@ -8,6 +8,7 @@ import {
     testBundle,
     testSealedUnit,
 } from "@shared/testing";
+import { directTransport, Engine } from "@monid/connector-engine";
 
 const HERE = fromFileUrl(new URL("./", import.meta.url));
 
@@ -81,6 +82,18 @@ const CASES: ReadonlyArray<{
     },
 ];
 
+/** Validate through the estimate path, which compiles and checks input without IO. */
+const estimate = async (id: string, input: RunInput) => {
+    const engine = new Engine({
+        transport: directTransport({
+            params: () => Promise.resolve({ apiKey: "test-key" }),
+            fetch: () => Promise.reject(new Error("estimate must not IO")),
+        }),
+    });
+    const loaded = await engine.load(await testSealedUnit(id));
+    return await loaded.estimate(input);
+};
+
 Deno.test("philidor docs: nine free read tools share auth and error handling", async () => {
     const bundle = await testBundle();
     const ids = Object.keys(bundle.endpoints).filter((id) =>
@@ -148,7 +161,7 @@ Deno.test("philidor provider error: normalized envelope and zero usage", async (
     );
 });
 
-Deno.test("philidor input gates reject invalid filters before the wire", async () => {
+Deno.test("philidor input gates reject invalid and accept boundary filters", async () => {
     const invalid: ReadonlyArray<{ id: string; input: RunInput }> = [
         {
             id: "philidor#vaults",
@@ -184,6 +197,33 @@ Deno.test("philidor input gates reject invalid filters before the wire", async (
                 }),
             Error,
             "INVALID_INPUT",
+        );
+    }
+
+    const valid: ReadonlyArray<{ id: string; input: RunInput }> = [
+        {
+            id: "philidor#vaults",
+            input: { queryParams: { limit: 100 } },
+        },
+        {
+            id: "philidor#events",
+            input: { queryParams: { daysBack: 730 } },
+        },
+        {
+            id: "philidor#rwa",
+            input: { queryParams: { category: "tokenized_treasury" } },
+        },
+        {
+            id: "philidor#rwa/{asset_id}",
+            input: { pathParams: { asset_id: "3881" } },
+        },
+    ];
+
+    for (const testCase of valid) {
+        assertEquals(
+            await estimate(testCase.id, testCase.input),
+            { credits: {}, evidence: {} },
+            testCase.id,
         );
     }
 });
