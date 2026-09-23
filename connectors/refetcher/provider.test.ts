@@ -469,7 +469,15 @@ Deno.test({
                 mode: "live",
             });
             assertEquals(result.isProviderError, false);
-            assertEquals(result.usage, successUsage);
+            const output = result.output as Record<string, Json>;
+            assert(output !== null && typeof output === "object");
+            assert(Array.isArray(output.results));
+            assertEquals(output.results.length, 1);
+            const target = output.results[0] as Record<string, Json>;
+            assert(target !== null && typeof target === "object");
+            assertEquals(target.success, true);
+            assert(typeof result.usage.credits.default === "number");
+            assert(typeof result.usage.evidence.RESULT === "number");
         }
     },
 });
