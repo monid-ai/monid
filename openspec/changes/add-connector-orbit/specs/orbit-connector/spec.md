@@ -146,7 +146,7 @@ response carries no link. A `202` SHALL carry no billing meaning.
 - **THEN** usage is `{credits: {default: 10}, evidence: {CREDIT: 10}}`
 
 ### Requirement: The batch fans out over its children
-`orbit#v3/enrich` SHALL read its still-open children concurrently, and once
+`orbit#v3/enrich` SHALL read its still-open children one at a time, and once
 none are open SHALL read EVERY child once more to assemble
 `{request_id, status, results}`. Child ids have the shape
 `{parent}:{profile_id}` and SHALL be URL-encoded in every path. The batch

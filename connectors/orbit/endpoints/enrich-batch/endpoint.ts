@@ -9,7 +9,7 @@ import { zBatchEnrichBody } from "./schema/inputs.ts";
  * status route: the submit hands back one child `request_id` per normalized
  * profile, and each child reads back through
  * `GET /v3/enrich/requests/{request_id}`. The lifecycle does what Orbit asks
- * a caller to do — reads the children that are still open, concurrently, and
+ * a caller to do — reads the children that are still open, one at a time, and
  * once none are, reads every child once more so the output carries a
  * complete, current set of child snapshots under the parent envelope.
  *
@@ -25,8 +25,8 @@ import { zBatchEnrichBody } from "./schema/inputs.ts";
  * receipt is settled.
  *
  * Bounded by construction: 20 profiles is the vendor's own cap, child reads
- * are free, and Orbit's status bucket (25/s, burst 150) covers twenty
- * concurrent reads.
+ * are free, and Orbit's status bucket (25/s, burst 150) covers twenty reads
+ * a tick.
  */
 export default defineEndpoint({
     meta: {
@@ -134,14 +134,23 @@ export default defineEndpoint({
                     { retriable: false },
                 );
             }
-            const read = (id: string) =>
-                utils.http({
-                    method: "GET",
-                    path: "/v3/enrich/requests/" + encodeURIComponent(id),
-                }).then((res) => ({ id, res }));
+            // One child at a time, in state order: concurrent reads egress in
+            // whatever order their auth step finishes, and a recorded fixture
+            // replays in ONE order. At most 20 children, and the reads are free.
+            const readAll = async (ids: string[]) => {
+                const reads = [];
+                for (const id of ids) {
+                    const res = await utils.http({
+                        method: "GET",
+                        path: "/v3/enrich/requests/" + encodeURIComponent(id),
+                    });
+                    reads.push({ id, res });
+                }
+                return reads;
+            };
             const pending = [];
             let backoffMs = 0;
-            const reads = await Promise.all(previous.pending.map(read));
+            const reads = await readAll(previous.pending);
             for (const { id, res } of reads) {
                 if (
                     res.status === 408 || res.status === 429 ||
@@ -199,7 +208,7 @@ export default defineEndpoint({
             const reopened = [];
             let errored = false;
             let finalBackoffMs = 0;
-            const finalReads = await Promise.all(previous.children.map(read));
+            const finalReads = await readAll(previous.children);
             for (const { id, res } of finalReads) {
                 if (
                     res.status === 408 || res.status === 429 ||

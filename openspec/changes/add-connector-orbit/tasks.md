@@ -96,8 +96,8 @@
 - [x] 7.1 The two free status reads are not catalog endpoints — the engine
       drives every poll inside the run; the lifecycles still poll both
       vendor routes
-- [x] 7.2 A batch tick reads its children concurrently (status bucket 25/s,
-      burst 150) so a tick takes the slowest child, not the sum
+- [x] 7.2 A batch tick reads its children one at a time, in state order —
+      concurrent reads raced the ordered fixture replay (CI flaked 50/50)
 - [x] 7.3 Every submit carries `Idempotency-Key: {runId}:submit` off the
       host-stable run id, so a replayed start does not pay twice
 
