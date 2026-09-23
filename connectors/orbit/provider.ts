@@ -94,25 +94,19 @@ export default defineProvider({
     meta: {
         displayName: "Orbit",
         summary:
-            "The most in-depth, source-backed context about a person — for personalization, sales, research and diligence.",
-        description: "Orbit gives an agent the deepest available context " +
-            "about a PERSON — who they are, what they have done, what they " +
-            "care about, and the sources behind every claim. Find someone " +
-            "from a plain-English description, a name, an email, a phone " +
-            "number, an address, a handle, or a profile URL; then read a " +
-            "profile carrying identity, contact and work facts plus " +
-            "generated sections on their background, interests and recent " +
-            "activity, each attributed to the source it came from. Reach " +
-            "for Orbit whenever a PERSON is the subject: someone the user " +
-            "just mentioned and you know nothing about, a prospect or " +
-            "account contact before outreach, a candidate or counterparty " +
-            "under diligence, the people behind a company you are " +
-            "researching, a friend you are choosing a gift for, or anyone " +
-            "the user is about to meet. One person, or a list of them — up " +
-            "to 20 known profiles build together in a single call. " +
-            "Depth is the caller's choice: `partial` is a useful profile " +
-            "in under two minutes, `full` is the deepest profile Orbit can " +
-            "build and takes 25 to 30 minutes.",
+            "The deepest source-backed context about a person, for one-shot agent personalization and person enrichment.",
+        description: "Orbit gives an agent a complete starting point on " +
+            "anyone it needs to understand. From a name, an email, a phone " +
+            "number, an address, a social handle or a plain-English " +
+            "description, Orbit maps the person's public internet presence " +
+            "into one source-backed profile: identity and contact details, " +
+            "work history, and sections on their background, interests and " +
+            "recent activity, with every claim linked to its source. The " +
+            "agent can personalize from its first message, and refresh the " +
+            "profile whenever it needs the latest. Reach for Orbit whenever " +
+            "a person comes up: a friend you are choosing a birthday gift " +
+            "for, a lead to enrich before your next sale, a candidate or " +
+            "counterparty to vet, or someone you are about to meet.",
         homepageUrl: "https://orbitsearch.com",
         docsUrl: "https://docs.orbitsearch.com",
         categories: ["people-enrichment"],
