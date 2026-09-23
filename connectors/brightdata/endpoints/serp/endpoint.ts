@@ -1,4 +1,4 @@
-import { defineEndpoint, UsageModelKind } from "@shared/core";
+import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zBrightdataSerpBody } from "./schema/inputs.ts";
 
 /**
@@ -68,11 +68,33 @@ export default defineEndpoint({
     input: { schema: { body: zBrightdataSerpBody } },
     usage: {
         // $1.50 / 1,000 requests, Bright Data's published pay-as-you-go
-        // rate for SERP API (brightdata.com/pricing/serp, read 2026-09-23).
+        // rate for SERP API (brightdata.com/pricing/serp,
+        // read 2026-09-23), counted 0|1 by the evidence below: a 200 that
+        // delivered no payload is an upstream failure, not a billable
+        // request (design D4).
         model: {
-            kind: UsageModelKind.PER_CALL,
-            label: "request",
+            kind: UsageModelKind.PER_UNIT,
+            unit: Unit.RESULT,
+            label: "delivered requests",
+            description: "requests that came back carrying a payload",
             consumes: { credit: "default", amount: 0.0015 },
+        },
+        /** One request is promised; whether it DELIVERS is the settle's
+         *  question, never the estimate's. */
+        estimate: () => ({ counts: { RESULT: 1 } }),
+        /** Design D4. Bright Data can accept a request, fail the unlock
+         *  upstream, and still answer 200 — with an EMPTY body and the
+         *  real status in `x-brd-status-code` (a 502 was drilled live
+         *  2026-09-23). Headers do not reach a fn, but the empty payload
+         *  does: the sniffing decode renders it as `null`. So delivery is
+         *  read off the payload itself — a null, or a blank string, is
+         *  nothing delivered and draws nothing. This source is identical
+         *  on both endpoints and interns to one fnTable entry. */
+        evidence: ({ data }) => {
+            const body = data.output;
+            const blank = body === null ||
+                (typeof body === "string" && body.trim() === "");
+            return { counts: { RESULT: blank ? 0 : 1 } };
         },
     },
 });

@@ -15,6 +15,9 @@
 - [x] 1.4 Drill the billing partition (D4): target 404 answers a 200
       envelope in BOTH `raw` and `json` formats; zone-not-found is 400 and
       a rejected key is 401, both plain text
+- [x] 1.6 Second pass on D4 after a live re-run: an unlock that fails
+      UPSTREAM also answers 200, with an empty body and `x-brd-status-code:
+      502`. Delivery, not the envelope, is the billing signal
 - [x] 1.5 Read the published rate off the pricing pages: $1.50 / 1,000
       requests pay-as-you-go for both, $1.30 above the $499 Scale
       allowance, 5,000/month free tier shared across products
@@ -31,9 +34,9 @@
 ## 3. Endpoints (2)
 
 - [x] 3.1 `serp` — declared id `/serp`, inline inject over `serpZone`,
-      SERP-specific `url` description, flat `PER_CALL` 0.0015
+      SERP-specific `url` description, `PER_UNIT`·`RESULT` 0.0015
 - [x] 3.2 `unlocker` — declared id `/unlocker`, inline inject over
-      `unlockerZone`, mirror + `render` + `debug`, flat `PER_CALL` 0.0015
+      `unlockerZone`, mirror + `render` + `debug`, `PER_UNIT`·`RESULT` 0.0015
 
 ## 4. Fixtures (5, real recordings, hand-minimized)
 
@@ -43,13 +46,17 @@
 - [x] 4.3 `unlocker-target-404` — the 200 envelope carrying `status_code: 404`
 - [x] 4.4 `invalid-token` — plain-text 401
 - [x] 4.5 `zone-not-found` — plain-text 400
+- [x] 4.6 `upstream-failure-empty` — the 200 with an empty payload
 
 ## 5. Tests
 
-- [x] 5.1 serp: happy fold, zone absent from the schema, flat-rate pin,
+- [x] 5.1 serp: happy fold, zone absent from the schema, rate pin,
       plain-text 401, live
 - [x] 5.2 unlocker: markdown-as-string, target-404 billable, wrong zone,
-      twin-id assertion, live
+      twin-id assertion, schema gate, live
+- [x] 5.4 `provider.test.ts` provenance: the rate table, an own inject per
+      endpoint, one interned estimate and evidence, no consolidate /
+      fromError / fromResponse / lifecycle
 - [x] 5.3 `deno task check`, `deno task lint`, `deno fmt --check`,
       `deno task test`, live suite against a real key
 

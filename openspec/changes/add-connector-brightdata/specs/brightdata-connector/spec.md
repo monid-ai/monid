@@ -45,30 +45,41 @@ via `utils.json.merge`.
 - **THEN** `render` and `debug` are present on `brightdata#unlocker` and
   absent from `brightdata#serp`
 
-### Requirement: Flat per-request billing at the published pay-as-you-go rate
-Each endpoint SHALL declare a LEAF `PER_CALL` model consuming 0.0015 of the
-`default` pool, with no metered line, no `usage.estimate` and no
-`usage.evidence` — the compiler synthesizing the empty counts fn.
+### Requirement: Per-DELIVERED-request billing at the published pay-as-you-go rate
+Each endpoint SHALL declare a LEAF `PER_UNIT` model on `Unit.RESULT` at
+`every: 1`, consuming 0.0015 of the `default` pool, with a `usage.estimate`
+promising the one request and a `usage.evidence` settling it 0|1 on whether
+a payload was delivered. Both fns SHALL be identical across the two
+endpoints and intern to one fnTable entry each.
 
 #### Scenario: Result count does not enter the bill
 - **WHEN** `brightdata#serp` returns a page of organic results
-- **THEN** usage is `{credits: {default: 0.0015}, evidence: {CALL: 1}}`
+- **THEN** usage is `{credits: {default: 0.0015}, evidence: {RESULT: 1}}`
 
 #### Scenario: Page weight does not enter the bill
 - **WHEN** `brightdata#unlocker` returns a markdown payload
-- **THEN** usage is `{credits: {default: 0.0015}, evidence: {CALL: 1}}`
+- **THEN** usage is `{credits: {default: 0.0015}, evidence: {RESULT: 1}}`
 
-### Requirement: The envelope decides what is billed
-A 2xx envelope SHALL settle as billable success regardless of the TARGET's
-own status code, which Bright Data reports in the `x-brd-status-code`
-response header and, under `format: "json"`, as a `status_code` field in the
-body. A non-2xx envelope SHALL settle as zero-usage provider error.
+### Requirement: Delivery decides what is billed
+A 2xx envelope that CARRIES A PAYLOAD SHALL settle as billable, regardless
+of the TARGET's own status code, which Bright Data reports in the
+`x-brd-status-code` response header and, under `format: "json"`, as a
+`status_code` field in the body. A 2xx envelope with an empty payload — an
+unlock Bright Data accepted and failed upstream — SHALL settle at zero
+without being a provider error. A non-2xx envelope SHALL settle as
+zero-usage provider error.
+
+#### Scenario: A 200 that delivered nothing draws nothing
+- **WHEN** Bright Data answers 200 with an empty body (the real status only
+  in `x-brd-status-code`, a 502 drilled live)
+- **THEN** `isProviderError` is false and usage is
+  `{credits: {}, evidence: {RESULT: 0}}`
 
 #### Scenario: A target 404 is a billable unlock
 - **WHEN** `brightdata#unlocker` fetches a url whose target answers 404 and
   Bright Data answers 200 with `status_code: 404` in the body
 - **THEN** `isProviderError` is false and usage is
-  `{credits: {default: 0.0015}, evidence: {CALL: 1}}`
+  `{credits: {default: 0.0015}, evidence: {RESULT: 1}}`
 
 #### Scenario: A rejected key is zero-billed data
 - **WHEN** Bright Data answers 401 with the bare string `Invalid token`

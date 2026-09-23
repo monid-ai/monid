@@ -5,7 +5,7 @@
 Bright Data is the web-access layer a large share of the agent ecosystem
 already runs on, and the catalog has no entry for it. The two endpoints that
 matter to an agent are a clean fit for the connector standard as it stands:
-one host, one bearer token, two synchronous POSTs, flat per-request pricing
+one host, one bearer token, two synchronous POSTs, per-request pricing
 published in dollars, and no new engine capability of any kind.
 
 It is also the first connector whose vendor requires a field the CALLER
@@ -36,23 +36,28 @@ not itself a secret. Getting that seam right is most of this change.
   contactout twin posture. The shared body mirror lives at provider level and
   each endpoint adds what its own product documents (`render`, `debug` are
   Web Unlocker's alone).
-- **No vendor meter, and the envelope is the billing signal** (D3, D4).
-  Verified live: a successful response carries no credits field, no cost
-  field and no usage header, so there is no `usage.consolidate` and the
-  derived fold IS the bill. What Bright Data *does* give is a clean success
-  signal — it bills per successful request, answers non-2xx when it could not
-  complete one, and answers 200 when it could, whatever the target then said.
-  The engine's "vendor non-2xx is data, zero usage" rule and the vendor's own
-  "pay only for success" are the same rule, so no line has to reconcile them.
-- **Flat per-request billing** (D6). $1.50 per 1,000 requests pay-as-you-go
-  for both products — $0.0015 a call, pinned from the published card and
-  re-audited on repricing (the exa / apify posture). No metered line: neither
-  result count nor page weight enters the bill.
+- **No vendor meter** (D3). Verified live: a successful response carries no
+  credits field, no cost field and no usage header, so there is no
+  `usage.consolidate` and the derived fold IS the bill.
+- **Delivery is the billing signal, not the envelope** (D4). Bright Data can
+  accept a request, fail the unlock upstream, and still answer HTTP 200 —
+  with an empty body and the real status only in `x-brd-status-code` (a 502,
+  drilled live). `isProviderError` is false there, so the engine's zero-bill
+  rule never fires and a flat model would charge for a request that delivered
+  nothing. Headers do not reach a fn, but the empty payload does, so the
+  model meters DELIVERY: `PER_UNIT`·`RESULT` settled 0|1 by `usage.evidence`
+  — litescrape's shape, for the same reason. A target 404 still counts 1: the
+  unlock happened and its payload is the 404 page.
+- **$1.50 per 1,000 requests** pay-as-you-go for both products — $0.0015 per
+  delivered request, pinned from the published card and re-audited on
+  repricing (the exa / apify posture). Neither result count nor page weight
+  enters the bill.
 - **Errors are bare strings and stay that way** (D5). Bright Data answers a
   rejected request with `Invalid token`, not a JSON envelope. The engine's
   sniffing decode already renders that faithfully, so no `output.fromError`.
-- Five real recorded fixtures, hand-minimized, covering both happy paths,
-  a target 404, a rejected key and a wrong zone.
+- Six real recorded fixtures, hand-minimized, covering both happy paths, a
+  target 404, an upstream failure behind a 200, a rejected key and a wrong
+  zone.
 
 ## Capabilities
 

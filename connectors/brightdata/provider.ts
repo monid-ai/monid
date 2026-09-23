@@ -26,16 +26,20 @@ import { zBrightdataCredentials } from "./schema/auth.ts";
  * `usage.mismatch.derived` cross-check exists for Bright Data. The tests
  * pin the rates as literals (the contactout / clay D7a posture).
  *
- * BILLING LINES UP WITH THE ENGINE'S ZERO-BILL RULE, exactly (design D4).
- * Bright Data bills per SUCCESSFUL request and the envelope says which is
- * which: an unlock it could not perform answers non-2xx (400 `zone "x" not
- * found`, 401 `Invalid token`) and is not charged, while an unlock it DID
- * perform answers 200 whatever the target said — a target 404 arrives as a
+ * DELIVERY IS THE BILLING SIGNAL, NOT THE ENVELOPE (design D4). Bright Data
+ * bills per successful request, and most of the wire says which is which: a
+ * request it could not accept answers non-2xx (400 `zone "x" not found`, 401
+ * `Invalid token`) and the engine zero-bills it, while an unlock it
+ * performed answers 200 whatever the target said — a target 404 arrives as a
  * 200 envelope carrying the target's status in `x-brd-status-code`, and it
- * is a billable unlock. Verified live in BOTH formats 2026-09-23. So the
- * engine's "vendor non-2xx is data, zero usage" rule and the vendor's own
- * "pay only for success" are the same rule, and no line needs to reconcile
- * them.
+ * is a billable unlock. But there is a third case, drilled live 2026-09-23:
+ * Bright Data can ACCEPT a request, fail the unlock upstream, and still
+ * answer 200 — with an EMPTY body and `x-brd-status-code: 502`. There
+ * `isProviderError` is false, so the engine's zero-bill rule never fires,
+ * and a flat per-call model would charge for a request that delivered
+ * nothing. Headers do not reach a fn, but the empty payload does, so both
+ * endpoints meter DELIVERY: a `PER_UNIT`/`RESULT` line settled 0|1 by
+ * `usage.evidence` on whether a payload came back (litescrape's shape).
  *
  * ERRORS ARE PLAIN TEXT, and pass through untouched (design D5). Bright
  * Data answers a rejected request with a bare string body

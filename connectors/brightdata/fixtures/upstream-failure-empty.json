@@ -1,0 +1,10 @@
+{
+    "name": "upstream-failure-empty",
+    "description": "The shape that makes the envelope alone an unsafe billing signal, recorded live 2026-09-23: Bright Data answers HTTP 200 with an EMPTY body and `x-brd-status-code: 502` — it accepted the request, could not complete the unlock, and delivered nothing. The engine's sniffing decode renders the empty body as `null` (recorded here as a literal null, which replays identically). Nothing was delivered, so the RESULT line counts 0 and the run settles at zero credits (design D4).",
+    "calls": [
+        {
+            "req": { "method": "POST", "url": "{{request.url}}" },
+            "res": { "status": 200, "body": null }
+        }
+    ]
+}

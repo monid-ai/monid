@@ -86,31 +86,47 @@ Bright Data. The derived fold IS the bill, and the pinned rate is guarded by
 D2 / clay D7a posture. Bright Data publishes no machine-readable pricing
 surface either, so no `scripts/drift/` suite is added.
 
-## D4 — The envelope is the billing signal, and it already agrees with the engine
+## D4 — The envelope is necessary but NOT sufficient; delivery is the billing signal
 
-Bright Data bills per SUCCESSFUL request. The question a connector has to
-answer is which responses those are, and here the envelope says it exactly:
+Bright Data bills per SUCCESSFUL request. The first reading of the wire said
+the envelope answers which those are, and most of it holds:
 
-| case | envelope | billed | drilled |
-| --- | --- | --- | --- |
-| unlock performed, target 200 | 200 | yes | `format` raw and json |
-| unlock performed, target 404 | **200**, target status in `x-brd-status-code` | yes | both formats |
-| zone not found | 400, body `zone "x" not found` | no | live |
-| rejected key | 401, body `Invalid token` | no | live |
+| case | envelope | payload | billed | drilled |
+| --- | --- | --- | --- | --- |
+| unlock performed, target 200 | 200 | the page | yes | `raw` and `json` |
+| unlock performed, target 404 | **200**, target status in `x-brd-status-code` | the 404 page | yes | both formats |
+| **unlock FAILED upstream** | **200**, `x-brd-status-code: 502` | **empty** | **no** | live, 2026-09-23 |
+| zone not found | 400, body `zone "x" not found` | — | no | live |
+| rejected key | 401, body `Invalid token` | — | no | live |
 
-The target's status is never the envelope's. A page that 404s is an unlock
-Bright Data performed and charges for, and it answers 200 — verified in BOTH
-formats, which matters because it would have been reasonable to expect `raw`
-to pass the target's status through and it does not.
+The third row is the one that matters, and it was found by re-running the
+live suite rather than by reading the docs: Bright Data can accept a request,
+fail the unlock upstream, and STILL answer HTTP 200 — with an empty body and
+the real status only in `x-brd-status-code`. `isProviderError` is false, so
+the engine's zero-bill rule never fires, and a flat `PER_CALL` model would
+have charged $0.0015 for a request that delivered nothing.
 
-So the engine's rule ("vendor non-2xx is DATA, zero usage") and the vendor's
-rule ("pay only for success") are the same partition, and no usage line has
-to reconcile them. `unlocker-target-404.json` is the fixture that pins it:
-`isProviderError` false, `{CALL: 1}`, billed.
+Headers do not reach a fn (and `record` drops them, so no fixture could pin
+one), but the empty payload does — the sniffing decode renders it as `null`.
+So the model meters DELIVERY: a leaf `PER_UNIT`·`RESULT` line settled 0|1 by
+`usage.evidence`, counting 1 when a payload came back and 0 when it did not.
+That is litescrape's shape (`PER_UNIT`·`RESULT`, 0|1 on a result check), for
+the same reason.
 
-A caller who needs to branch on the target's status sends `format: "json"`,
-which lifts it into the body as `status_code`. Both endpoint descriptions
-say so.
+The target's status is still never the envelope's: a page that 404s is an
+unlock Bright Data performed and charges for, and its payload is the 404
+page — non-empty, so it counts 1. A caller who needs to branch on the
+target's status sends `format: "json"`, which lifts it into the body as
+`status_code`. Both endpoint descriptions say so.
+
+Stated rather than guessed at: Bright Data publishes no meter (D3), so
+whether it ALSO declines to charge for the empty 502 cannot be proven from
+the wire. Its own card says "pay only for success" and nothing was
+delivered, so counting 0 is both the conservative reading and the one that
+matches the vendor's stated posture. If it turns out Bright Data does deduct
+for these, the connector under-bills that case by $0.0015 — the direction a
+rate card should err in, and litescrape absorbs the same trade in the
+opposite direction for its empty successes.
 
 ## D5 — Errors are bare strings, and pass through untouched
 
@@ -129,10 +145,12 @@ Both products are priced per REQUEST, not per result and not per byte:
 $1.50 per 1,000 requests pay-as-you-go (`brightdata.com/pricing/serp` and
 `/pricing/web-unlocker`, read 2026-09-23) — $0.0015 a call.
 
-That makes each endpoint a LEAF `PER_CALL`, and there is nothing to author:
-the compiler synthesizes the one lawful empty counts fn for a flat model and
-the engine appends the flat 1 under `CALL`. No estimate fn, no evidence fn,
-no metered line.
+Per request, not per result — but not per ATTEMPT either (D4), so the line is
+a leaf `PER_UNIT`·`RESULT` at `every: 1`, settled 0|1 on delivery rather than
+a flat `PER_CALL`. The estimate promises the one request; the evidence
+decides whether it delivered. Both sources are identical across the two
+endpoints and intern to one fnTable entry each, which the provider suite
+pins.
 
 The pool is US DOLLARS. Bright Data publishes no credit unit — it prices in
 dollars directly — so unlike Firecrawl there is no vendor-native unit to

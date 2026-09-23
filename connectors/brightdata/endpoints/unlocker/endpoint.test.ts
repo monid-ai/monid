@@ -1,14 +1,40 @@
-import { assert, assertEquals } from "@std/assert";
+import { assert, assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
+import type { Json } from "@shared/core";
 import {
     liveSkip,
     loadFixture,
     runEndpoint,
     testSealedUnit,
 } from "@shared/testing";
+import { directTransport, Engine } from "@monid/connector-engine";
 import { BRIGHTDATA_KEYS } from "../../schema/auth.ts";
 
 const chains = fromFileUrl(new URL("../../fixtures/", import.meta.url));
+
+/** Validate-only run: the estimate derives the input without IO, so a
+ *  rejecting transport proves whether a body passes the compiled gate
+ *  (the litescrape idiom). */
+const validates = async (body: Record<string, Json>) => {
+    const engine = new Engine({
+        transport: directTransport({
+            params: () =>
+                Promise.resolve({
+                    apiKey: "test-key",
+                    serpZone: "test-serp-zone",
+                    unlockerZone: "test-unlocker-zone",
+                }),
+            fetch: () => Promise.reject(new Error("estimate must not IO")),
+        }),
+    });
+    const loaded = await engine.load(
+        await testSealedUnit("brightdata#unlocker"),
+    );
+    return await loaded.estimate({ body });
+};
+
+const rejects = (body: Record<string, Json>) =>
+    assertRejects(() => validates(body), Error, "INVALID_INPUT");
 
 Deno.test("brightdata#unlocker happy: a markdown payload is a STRING, and rides through as one", async () => {
     const unit = await testSealedUnit("brightdata#unlocker");
@@ -29,7 +55,7 @@ Deno.test("brightdata#unlocker happy: a markdown payload is a STRING, and rides 
     assertEquals(result.isProviderError, false);
     assertEquals(result.usage, {
         credits: { default: 0.0015 },
-        evidence: { CALL: 1 },
+        evidence: { RESULT: 1 },
     });
     // the engine's sniffing decode: a body that is not JSON is the complete
     // raw body as a faithful string. No connector-side parsing is authored,
@@ -59,7 +85,7 @@ Deno.test("brightdata#unlocker: a target 404 is billable success, not a provider
     assertEquals(result.isProviderError, false);
     assertEquals(result.usage, {
         credits: { default: 0.0015 },
-        evidence: { CALL: 1 },
+        evidence: { RESULT: 1 },
     });
     assertEquals(
         (result.output as Record<string, unknown>).status_code,
@@ -109,6 +135,26 @@ Deno.test("brightdata: the twins share one wire path and are told apart by decla
     assert(!("render" in serpProps) && !("debug" in serpProps));
 });
 
+Deno.test("brightdata#unlocker schema gate: the vendor's string-typed `render` is enforced, its near twin passes", async () => {
+    const url = "https://example.com";
+    // `render` is a STRING enum on the wire, not a boolean — the mirror
+    // keeps the vendor's own type, so the friendlier spelling must fail
+    await rejects({ url, format: "raw", render: true });
+    await rejects({ url, format: "raw", data_format: "pdf" });
+    await rejects({ url, format: "raw", debug: "true" });
+    // the near twins pass the gate — proving it is not simply too wide
+    assertEquals(
+        await validates({
+            url,
+            format: "raw",
+            render: "true",
+            data_format: "markdown",
+            debug: true,
+        }),
+        { credits: { default: 0.0015 }, evidence: { RESULT: 1 } },
+    );
+});
+
 Deno.test({
     name:
         "brightdata#unlocker live (gated on BRIGHTDATA_CREDENTIALS_{API_KEY,SERP_ZONE,UNLOCKER_ZONE})",
@@ -131,10 +177,16 @@ Deno.test({
             false,
             JSON.stringify(result.output).slice(0, 400),
         );
-        assertEquals(result.usage, {
-            credits: { default: 0.0015 },
-            evidence: { CALL: 1 },
-        });
-        assertEquals(typeof result.output, "string");
+        // shape, not amounts; and delivery is not assumed (design D4).
+        if (result.output === null) {
+            assertEquals(result.usage, {
+                credits: {},
+                evidence: { RESULT: 0 },
+            });
+        } else {
+            assertEquals(result.usage.evidence, { RESULT: 1 });
+            assertEquals(typeof result.usage.credits.default, "number");
+            assertEquals(typeof result.output, "string");
+        }
     },
 });
