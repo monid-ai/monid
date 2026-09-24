@@ -1,7 +1,10 @@
+import { captureCredentials } from "./credential-capture.ts";
+import { decodeBody, encodeBody } from "./http-body.ts";
 import type { Json } from "@shared/core";
 import { applyAuth, credentialEnvVarsFor, credentialFieldsOf } from "./auth.ts";
 import { EngineError, EngineErrorCode } from "./errors.ts";
 import type {
+    CredentialStore,
     ParamsResolver,
     PreparedRequest,
     Transport,
@@ -92,25 +95,52 @@ export function envCredentialsPresent(
  * `fetch` is injectable → fixture replay. Resolved values never logged.
  */
 export function directTransport(opts: {
+    credentials?: CredentialStore;
     params?: ParamsResolver;
     fetch?: typeof fetch;
 } = {}): Transport {
     const resolveParams = opts.params ?? envParamsResolver;
     const doFetch = opts.fetch ?? fetch;
     return {
+        capabilities: {
+            credentials: true,
+            httpBodies: true,
+            headerInputs: true,
+        },
+        forgetCredential: async (provider, origin, reference) => {
+            if (!opts.credentials) {
+                throw new EngineError(
+                    EngineErrorCode.MISSING_CREDENTIAL,
+                    "A scoped credential store is required",
+                );
+            }
+            await opts.credentials.forget(provider, origin, reference);
+        },
         async execute(req: PreparedRequest): Promise<TransportResponse> {
             // No auth block ⇒ the request egresses BARE (same-origin
             // credential rule, design D16) — credentials are never even
             // resolved for it.
+            if ((req.credentialRef || req.auth?.capture) && !opts.credentials) {
+                throw new EngineError(
+                    EngineErrorCode.MISSING_CREDENTIAL,
+                    "A scoped credential store is required before dispatch",
+                );
+            }
             const authed = req.auth
                 ? await applyAuth(
                     { ...req, auth: req.auth },
                     // the DOC states which credential fields exist; the
                     // resolver reads exactly those variables and no others
-                    await resolveParams(
-                        req.provider,
-                        credentialFieldsOf(req.auth.credentials),
-                    ),
+                    req.credentialRef
+                        ? await opts.credentials!.resolve(
+                            req.provider,
+                            new URL(req.url).origin,
+                            req.credentialRef,
+                        )
+                        : await resolveParams(
+                            req.provider,
+                            credentialFieldsOf(req.auth.credentials),
+                        ),
                 )
                 : {
                     url: req.url,
@@ -127,27 +157,44 @@ export function directTransport(opts: {
                 for (const value of values) url.searchParams.append(key, value);
             }
 
+            const encodedBody = encodeBody(req, authed);
             const controller = new AbortController();
             const timer = setTimeout(
                 () => controller.abort(),
                 req.timeouts.requestMs,
             );
             try {
+                const outboundHeaders = { ...authed.headers };
+                if (req.bodyEncoding === "multipart") {
+                    for (const name of Object.keys(outboundHeaders)) {
+                        if (name.toLowerCase() === "content-type") {
+                            delete outboundHeaders[name];
+                        }
+                    }
+                } else if (
+                    authed.body !== undefined &&
+                    !Object.keys(outboundHeaders).some((name) =>
+                        name.toLowerCase() === "content-type"
+                    )
+                ) {
+                    outboundHeaders["content-type"] = "application/json";
+                }
                 const response = await doFetch(url.toString(), {
                     method: req.method,
-                    headers: {
-                        ...(authed.body !== undefined
-                            ? { "content-type": "application/json" }
-                            : {}),
-                        ...authed.headers,
-                    },
-                    body: authed.body !== undefined
-                        ? JSON.stringify(authed.body)
-                        : undefined,
+                    headers: outboundHeaders,
+                    body: encodedBody,
                     signal: controller.signal,
                     redirect: "manual",
                 });
-                const body = await response.text();
+                let body = await decodeBody(response, req);
+                if (req.auth?.capture) {
+                    body = await captureCredentials(
+                        req,
+                        response.status,
+                        body,
+                        opts.credentials!,
+                    );
+                }
                 return {
                     status: response.status,
                     body,
@@ -156,12 +203,26 @@ export function directTransport(opts: {
                     // payload for presigned-URL endpoints. Header keys are
                     // lowercased (multi-values comma-joined) by the Fetch
                     // spec's Headers iterator.
-                    headers: Object.fromEntries(response.headers),
+                    headers: req.auth?.capture
+                        ? {}
+                        : Object.fromEntries(response.headers),
                     contentType: response.headers.get("content-type") ??
                         undefined,
                 };
             } catch (error) {
                 if (error instanceof EngineError) throw error;
+                if (req.auth?.capture) {
+                    throw new EngineError(
+                        EngineErrorCode.CREDENTIAL_CAPTURE_FAILED,
+                        "Credential exchange may have committed; reconcile before retrying",
+                    );
+                }
+                if (req.credentialRef) {
+                    throw new EngineError(
+                        EngineErrorCode.EXECUTION_FAILED,
+                        "Connection transport failed",
+                    );
+                }
                 throw new EngineError(
                     EngineErrorCode.EXECUTION_FAILED,
                     `transport failure calling ${req.provider}: ${error}`,

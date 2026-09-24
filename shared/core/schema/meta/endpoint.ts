@@ -8,6 +8,11 @@ import { zBaseMeta } from "./base.ts";
  */
 export const zEndpointMeta = z.strictObject({
     ...zBaseMeta.shape,
+    annotations: z.object({
+        readOnly: z.boolean().optional(),
+        destructive: z.boolean().optional(),
+        openWorld: z.boolean().optional(),
+    }).strict().optional(),
     categories: z.array(zCategoryId).optional(),
 });
 export type EndpointMeta = z.infer<typeof zEndpointMeta>;

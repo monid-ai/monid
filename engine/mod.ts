@@ -4,8 +4,10 @@ export {
     LoadedEndpoint,
     LoadedResource,
 } from "./engine.ts";
+export { redactRunInput } from "./redact-input.ts";
 export type {
     ConnectorEngine,
+    CredentialStore,
     EngineCtx,
     IResourceStore,
     ParamsResolver,

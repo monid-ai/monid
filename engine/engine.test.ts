@@ -2449,7 +2449,7 @@ Deno.test("credentialEnvVarFor: a credential field maps 1:1 onto <PROVIDER>_CRED
     ]);
 });
 
-Deno.test("credentialFieldsOf: the doc's declared properties ARE the field list; a shapeless doc floors at {apiKey}", () => {
+Deno.test("credentialFieldsOf: declared fields include an explicit empty set; only a shapeless doc defaults to apiKey", () => {
     assertEquals(
         credentialFieldsOf({
             type: "object",
@@ -2459,7 +2459,7 @@ Deno.test("credentialFieldsOf: the doc's declared properties ARE the field list;
         ["workApiKey", "personalApiKey"],
     );
     assertEquals(credentialFieldsOf({ type: "object" }), ["apiKey"]);
-    assertEquals(credentialFieldsOf({ properties: {} }), ["apiKey"]);
+    assertEquals(credentialFieldsOf({ properties: {} }), []);
 });
 
 Deno.test("envParamsResolver: reads one variable per declared field — a multi-key provider resolves every key", async () => {

@@ -241,9 +241,9 @@ config.yml         schema.* and compiler.* are contract; engine and scripts are 
 
 ## Learn more
 
-- [Ambiguous connector](./connectors/ambiguous/README.md): workspace search,
-  documents, tasks, and customer-scoped setup for new or existing workspaces.
-  Hosted enablement requires the connection wiring described in its guide.
+- [Ambiguous connector](./connectors/ambiguous/README.md): the full published
+  agent API, with native connection resources for new and existing workspaces.
+  Requires the resource-credential features in engine 0.6.0.
 - [DEVELOPMENT.md](./DEVELOPMENT.md) covers hooks, the compiler, usage and
   billing, configuration, versioning, catalog publishing, and the full CLI
   reference.

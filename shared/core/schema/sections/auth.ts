@@ -18,7 +18,16 @@ import { zAuthInjectFn, zSchemaCarrier } from "../hooks/mod.ts";
  * No secret VALUE ever appears in a def, doc, bundle, or this repo — only
  * the shape travels; values come from env (local) or Broker/KMS (hosted).
  */
+export const zCredentialCapture = z.strictObject({
+    fields: z.record(
+        z.string().regex(/^[A-Za-z][A-Za-z0-9_]*$/),
+        z.string().regex(/^[A-Za-z][A-Za-z0-9_]*$/),
+    ).refine((fields) => Object.keys(fields).length > 0),
+});
+
 export const zAuthSection = z.strictObject({
+    resource: z.string().min(1).nullable().optional(),
+    capture: zCredentialCapture.optional(),
     inject: zAuthInjectFn.optional(),
     /** `.optional()`, deliberately NOT `.default(zDefaultCredentials)`:
      *  `.default()` fires at def-parse time PER LEVEL, so an endpoint that

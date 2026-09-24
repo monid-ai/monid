@@ -6,25 +6,26 @@ export default defineProvider({
         displayName: "Ambiguous",
         summary: "A collaborative workspace for people and AI agents.",
         description:
-            "Search workspace content and create, read, and update documents " +
-            "and tasks using your connected Ambiguous identity. Create a new " +
-            "workspace or connect an existing one through the host's connection " +
-            "setup. Each connection has its own credential and permissions.",
+            "The complete published agent API for Ambiguous: documents, sheets, " +
+            "slides, mail, chat, calendar, tasks, CRM, wiki, drive, forms, signing, " +
+            "automations and administration. Create a workspace or connect an " +
+            "existing one, then use its owned connection with your existing permissions.",
         homepageUrl: "https://ambiguous.ai",
         docsUrl: "https://app.ambiguous.ai/api/openapi.json",
         categories: ["workspace"],
         notes: [
-            "Requires a customer-scoped connection. The hosted service must " +
-            "bind the credential resolver to its authenticated customer; never " +
-            "configure a shared Ambiguous account for all customers.",
-            "This connector covers routine workspace operations with no " +
-            "vendor cost. Paid AI generation is not exposed.",
+            "Calls require a connection resource owned by your Monid workspace. " +
+            "Create one with connections/create or connect an existing account with connections/connect.",
+            "Monid's connector fee is zero. Ambiguous subscriptions, AI actions, " +
+            "and paid operations are billed to the connected Ambiguous workspace " +
+            "under its existing plan and quota; these are not free AI calls.",
         ],
     },
-    auth: { inject: presets.auth.bearer() },
+    auth: { inject: presets.auth.bearer(), resource: "connection" },
     request: {
         baseUrl: "https://app.ambiguous.ai",
         headers: { "API-Version": "1" },
+        responseEncoding: "auto",
     },
     input: {
         toRequest: ({ data }) => ({

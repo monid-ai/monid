@@ -38,6 +38,7 @@ export const zResourceDef = z.strictObject({
      *  instance and serves back into every op/endpoint read (compiled to
      *  JSON Schema; live truth stays upstream). An owned instance
      *  carries these fields as `.data`. */
+    credential: z.boolean().optional(),
     data: zSchemaCarrier,
     /** DISPLAY/CATALOG-ONLY input shapes of the user actions (create /
      *  update / release) — the acquisition surface a catalog can render

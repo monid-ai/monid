@@ -1,13 +1,12 @@
 # Tasks
 
-- [x] Read the public OpenAPI and mirror the selected request schemas.
-- [x] Add ten connector definitions and the workspace category.
-- [x] Implement new-workspace and existing-workspace connection setup.
-- [x] Add encrypted, customer-scoped credential storage and transport binding.
-- [x] Provide a runnable local host and persistence implementation.
-- [x] Add synthetic request/replay and connection-isolation tests.
-- [x] Run formatting, lint, typecheck, complete tests, and catalog smoke checks.
-- [x] Compare the identity-lock check against unchanged upstream: both report
-      identical pre-existing drift in unrelated providers; add only Ambiguous IDs.
-- [ ] Wire connection setup and credential lookup in hosted monid-services.
-- [ ] Validate both journeys against the staging hosted service before enablement.
+- [x] Replace the hand-selected endpoint set with the complete published agent catalog.
+- [x] Account for every HTTP operation in a reproducible coverage report.
+- [x] Replace standalone onboarding with native resource endpoints.
+- [x] Add transport-side credential capture and resource-bound lookup.
+- [x] Preserve multipart, binary, SSE and declared header behavior.
+- [x] Test setup, isolation, fidelity and coverage through compiled artifacts.
+- [x] Finish full regression, formatting, lint, type and catalog checks.
+- [x] Confirm identity-lock drift matches unchanged upstream; add only Ambiguous identities.
+- [ ] Monid: deploy engine 0.6.0 and implement the generic hosted credential port.
+- [ ] Monid: validate both onboarding flows against real accounts before activation.

@@ -8,6 +8,7 @@ import { zJson } from "../json/type.ts";
  */
 export const zRunInput = z.object({
     body: zJson.optional(),
+    headers: z.record(z.string(), z.string()).optional(),
     queryParams: z.record(z.string(), zJson).optional(),
     pathParams: z.record(z.string(), z.string()).optional(),
 }).strict();

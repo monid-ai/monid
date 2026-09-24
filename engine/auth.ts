@@ -128,5 +128,5 @@ export function credentialFieldsOf(credentials: JsonSchemaDoc): string[] {
         return ["apiKey"];
     }
     const fields = Object.keys(properties);
-    return fields.length > 0 ? fields : ["apiKey"];
+    return fields;
 }

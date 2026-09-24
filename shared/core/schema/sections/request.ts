@@ -13,6 +13,9 @@ import { zHttpMethod } from "../common/http.ts";
  */
 export const zRequestDefaults = z.strictObject({
     baseUrl: z.url().optional(),
+    bodyEncoding: z.enum(["json", "multipart"]).optional(),
+    fileFields: z.array(z.string().min(1)).optional(),
+    responseEncoding: z.enum(["text", "base64", "auto"]).optional(),
     /** Static extra headers. */
     headers: z.record(z.string(), z.string()).optional(),
 });

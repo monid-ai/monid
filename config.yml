@@ -34,7 +34,7 @@ schema:
     # feature can ride the fn-api table (async_since does); an IDENTITY is
     # not a fn, so a per-doc floor for it would need its own compiler branch
     # — not worth it with no consumer yet.
-    doc_format_since: "0.3.0" # oldest engine understanding the doc format (minEngineVersion floor)
+    doc_format_since: "0.6.0" # oldest engine understanding the doc format (minEngineVersion floor)
     # Pre-release: the whole contract (hook ctx {data, utils, logger},
     # structured run state, UPPERCASE run kinds, usage.model + usage.estimate,
     # zero-default utils.http / full-capability utils.request, the

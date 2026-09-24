@@ -1,21 +1,16 @@
-# Add Ambiguous workspace connector
+# Add the complete Ambiguous agent catalog
 
-Agents need to create an Ambiguous workspace or connect an existing one, then
-search their content and work on documents and tasks through Monid.
+Generate one ordinary connector definition for every MCP-exposed operation in a
+pinned public OpenAPI snapshot. Account for every other HTTP operation in the
+coverage report. Native `ambiguous/connection` resources provide new-workspace
+signup, existing-account setup-code exchange, listing and disconnect.
 
-Add ten ordinary REST connector definitions with native request schemas, bearer
-authentication, and a free usage model for the selected routine operations. Add a
-host-side connection manager that handles agent signup, one-time code exchange,
-and accepting an already-issued API/OAuth token. It persists encrypted credentials
-per authenticated customer and connection, then supplies the existing transport's
-credential resolver. No engine, hook, or compiled-format change is needed.
+Credential handling, multipart requests, header inputs and byte-preserving exports
+use the shared framework extension described in
+`../resource-credentials-and-http-bodies/design.md`. There is no separate provider
+CLI or connection manager. Credentials stay at the transport/Relay boundary.
 
-The host helper deliberately keeps credential issuance outside normal run inputs
-and outputs. The hosted Relay implementation is not in this repository; its
-connection setup and credential-store wiring are a deployment prerequisite,
-documented in `connectors/ambiguous/README.md`. A local file-backed host provides
-an executable implementation, not a claim that the hosted service is deployed.
-
-Paid AI generation, destructive operations, full-suite coverage, and an OAuth
-callback server are outside this initial connector. Existing workspaces connect
-through a setup code or an API/OAuth token; both paths verify identity before save.
+The customer owns the upstream identity and its Ambiguous plan/quota. Connector
+calls have no Monid charge; upstream AI consumption is not advertised as free.
+Hosted activation requires the generic secret-store port, effect persistence,
+sensitive-input redaction and an engine 0.6.0 rollout, followed by live validation.

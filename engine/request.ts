@@ -69,6 +69,44 @@ export function validateInput(doc: EndpointDoc, rawInput: unknown): RunInput {
             runInput.pathParams = value as RunInput["pathParams"];
         }
     }
+    if (runInput.headers) {
+        if (!schemas.headers) {
+            throw new EngineError(
+                EngineErrorCode.INVALID_INPUT,
+                "Header inputs are not declared",
+            );
+        }
+        const seen = new Set<string>();
+        for (const name of Object.keys(runInput.headers)) {
+            const normalized = name.toLowerCase();
+            if (
+                seen.has(normalized) ||
+                /^(authorization|proxy-authorization|cookie|host|content-type|content-length|transfer-encoding|connection)$/i
+                    .test(name)
+            ) {
+                throw new EngineError(
+                    EngineErrorCode.INVALID_INPUT,
+                    "Forbidden header input",
+                );
+            }
+            seen.add(normalized);
+        }
+        const check = validateInputAgainst(schemas.headers, runInput.headers);
+        if (!check.ok) {
+            throw new EngineError(
+                EngineErrorCode.INVALID_INPUT,
+                `${doc.id}: headers ${check.message}`,
+            );
+        }
+    } else if (schemas.headers) {
+        const check = validateInputAgainst(schemas.headers, {});
+        if (!check.ok) {
+            throw new EngineError(
+                EngineErrorCode.INVALID_INPUT,
+                `${doc.id}: headers ${check.message}`,
+            );
+        }
+    }
     return runInput;
 }
 
@@ -146,12 +184,16 @@ export function buildRequest(
     return {
         method: doc.request.method,
         url,
-        headers: { ...doc.request.headers },
+        headers: { ...doc.request.headers, ...input.headers },
         query,
         body: input.body,
+        bodyEncoding: doc.request.bodyEncoding,
+        fileFields: doc.request.fileFields,
+        responseEncoding: doc.request.responseEncoding,
         auth: {
             inject: { ref: doc.auth.inject, entry: injectEntry },
             credentials: doc.auth.credentials,
+            ...(doc.auth.capture ? { capture: doc.auth.capture } : {}),
         },
         provider: doc.provider,
         timeouts: { requestMs: doc.timeouts.requestMs },

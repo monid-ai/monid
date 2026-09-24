@@ -1,50 +1,22 @@
-# Ambiguous connector
+# Ambiguous connector requirements
 
-## Requirements
-
-### Customer-scoped authentication
-
-A host-authenticated customer may use only connections saved under that customer.
-Connections contain an encrypted upstream credential and the verified principal
-and workspace metadata. A copied connection ID or ciphertext never grants another
-customer access. Missing connections fail before a network request, without
-falling back to an environment credential.
-
-### New workspace
-
-An explicit create action calls agent signup once with the agent name and
-accountable human email. Its credential is stored and a secret-free connection
-summary is returned, including whether the claim email was sent. The normal
-Ambiguous claim/merge process retains ownership of onboarding policy.
-
-### Existing workspace
-
-An explicit connect action redeems a one-time setup code or accepts an API/OAuth
-token. The credential must resolve to a workspace through `/api/users/me` before
-save. If an expected workspace was selected, a different workspace is rejected.
-A failed connection never creates another workspace. Upstream mutations and
-one-time exchanges are not automatically retried.
-
-### Workspace operations
-
-The connector provides identity, cross-module search, and list/create/get/update
-for documents and tasks. Paths, methods, request fields, pagination cursors, and
-nullable update fields follow the public OpenAPI. Authoring content is passed
-without conversion. All exposed operations have a free vendor usage model;
-upstream errors preserve their HTTP status and settle at zero usage.
-
-### Credential custody and disconnect
-
-Credentials and setup codes stay outside ordinary tool input and output. The host
-persists AES-256-GCM ciphertext with scope-bound authenticated data and keeps its
-encryption key separately. Request authentication occurs at the existing
-transport/Relay boundary and is restricted to the Ambiguous API origin. Disconnect
-removes only the connection. Subsequent calls through existing engine instances
-must fail, while already-dispatched requests may finish. Upstream revocation is
-enforced by Ambiguous on each API call.
-
-### Hosted availability
-
-The hosted provider may be enabled only after its control plane and Relay bind
-connection setup and credential lookup to authenticated customer identity. The
-public catalog change does not itself prove or deploy that hosted binding.
+- Every operation exposed to MCP by the pinned public OpenAPI has exactly one
+  native operationId registration, preserving methods, paths, schemas and action
+  annotations. The coverage report accounts for every non-exposed operation.
+- New-workspace signup and existing-workspace setup-code exchange provision owned
+  connections. The Relay captures returned credentials before engine ingress.
+  A failed existing-account connection never provisions a new workspace.
+- Every ordinary API call requires the connection resource and passes its
+  ownership gate. Credential lookup is scoped independently by the authenticated
+  host principal and never falls back to a shared provider key.
+- Connection listing reveals only the ownership window. Disconnect removes the
+  connection and stored credential, not the upstream workspace or a shared key.
+- The API remains authoritative for identity, scope, permissions, quotas, approval,
+  expiry and revocation. A human claim/merge is reflected by live identity reads.
+- Multipart files and binary exports preserve bytes. JSON, null clearing,
+  pagination, headers, errors and finite SSE response text preserve their native
+  meaning. Long AI calls use the shared async protocol.
+- The gateway fee is zero; upstream customer-plan and AI-action charges remain
+  on Ambiguous. Metadata must distinguish these billing responsibilities.
+- Hosted activation requires the shared engine/Relay features and live validation
+  of both onboarding flows. Synthetic tests prove adapter behavior, not deployment.

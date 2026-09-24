@@ -1,3 +1,4 @@
+import { localCredentialStore } from "./store/credentials.ts";
 /**
  * deno task engine:run <provider>#<endpoint> [--body '<json>']
  *                      [--query-params '<json>'] [--path-params '<json>']
@@ -28,7 +29,7 @@ function parseJson(flag: string, raw: string): Json {
     try {
         return JSON.parse(raw) as Json;
     } catch (error) {
-        throw new Error(`${flag} is not valid JSON: ${error}`);
+        throw new Error(`${flag} is not valid JSON`);
     }
 }
 
@@ -39,6 +40,15 @@ const { options, args } = await new Command()
     )
     .arguments("<endpoint:string>")
     .option("--body <json:string>", "RunInput.body (JSON).")
+    .option(
+        "--body-file <file:string>",
+        "Read RunInput.body from a protected JSON file.",
+        { conflicts: ["body"] },
+    )
+    .option(
+        "--headers <json:string>",
+        "Declared request headers (JSON object).",
+    )
     .option(
         "--query-params <json:string>",
         "RunInput.queryParams (JSON object).",
@@ -60,6 +70,22 @@ const { options, args } = await new Command()
 const endpointId = args[0];
 
 const input: RunInput = {
+    ...(options.bodyFile !== undefined
+        ? {
+            body: parseJson(
+                "--body-file",
+                await Deno.readTextFile(options.bodyFile),
+            ),
+        }
+        : {}),
+    ...(options.headers !== undefined
+        ? {
+            headers: parseJson(
+                "--headers",
+                options.headers,
+            ) as RunInput["headers"],
+        }
+        : {}),
     ...(options.body !== undefined
         ? { body: parseJson("--body", options.body) }
         : {}),
@@ -93,7 +119,7 @@ console.error(
 // provision made by one run is owned in the next. --resources swaps in a
 // fixture window (rows from a file, NOTHING persisted).
 const store = options.resources === undefined
-    ? await KvResourceStore.open()
+    ? await KvResourceStore.open(undefined, options.scopeKey ?? "local")
     : undefined;
 const fixtureRows: OwnedResource[] = options.resources !== undefined
     ? parseSchema(
@@ -105,8 +131,14 @@ const fixtureRows: OwnedResource[] = options.resources !== undefined
 
 const unit = sealUnit(bundle, endpointId);
 const log = (line: string) => console.error(`[engine:run] ${line}`);
+const credentials = await localCredentialStore(options.scopeKey ?? "local");
+if ((unit.doc.auth.capture || unit.doc.auth.resource) && !credentials) {
+    throw new Error(
+        "Set MONID_CREDENTIAL_STORE_KEY before running a credential-backed connector",
+    );
+}
 const engine = new Engine({
-    transport: directTransport(),
+    transport: directTransport({ credentials }),
     resources: store ?? {
         owned: (query) =>
             Promise.resolve(
@@ -126,7 +158,19 @@ const loaded = await engine.load(unit);
 const result = await loaded.run(input);
 
 // settle EFFECTS → the store (the host's persistence work-orders)
-if (store) await persistEffects(store, result.resources, log);
+if (store) {
+    await persistEffects(store, result.resources, log);
+    for (const release of result.resources?.releases ?? []) {
+        const resource = bundle.resources?.[release.resource];
+        if (resource?.credential) {
+            await credentials?.forget(
+                resource.provider,
+                new URL(resource.request.url).origin,
+                release.externalId,
+            );
+        }
+    }
+}
 store?.close();
 
 console.log(JSON.stringify(result, null, 2));
