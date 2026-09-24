@@ -21,9 +21,9 @@
 
 ## 3. Verification
 
-- [ ] 3.1 Run `deno task check` and `deno task test`.
-- [ ] 3.2 Run formatter, linter, compiler, catalog, and version smoke checks.
-- [ ] 3.3 Open the focused upstream pull request after all local gates pass.
+- [x] 3.1 Run `deno task check` and `deno task test`.
+- [x] 3.2 Run formatter, linter, compiler, catalog, and version smoke checks.
+- [x] 3.3 Open the focused upstream pull request after all local gates pass.
 
 ## 4. Follow-ups
 
