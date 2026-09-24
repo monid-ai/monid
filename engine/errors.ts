@@ -19,8 +19,6 @@ export const EngineErrorCode = {
     INVALID_INPUT: "INVALID_INPUT",
     /** Resolved auth params failed the provider's authParams schema. */
     MISSING_CREDENTIAL: "MISSING_CREDENTIAL",
-    UNSUPPORTED_TRANSPORT: "UNSUPPORTED_TRANSPORT",
-    CREDENTIAL_CAPTURE_FAILED: "CREDENTIAL_CAPTURE_FAILED",
     /** Transport-level failure (network, abort). RETRIABLE. */
     EXECUTION_FAILED: "EXECUTION_FAILED",
     /** Response body could not be decoded at all. */

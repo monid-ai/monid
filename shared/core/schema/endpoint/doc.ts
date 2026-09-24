@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { zCredentialCapture } from "../sections/auth.ts";
 import { contractConfig } from "../../config.ts";
 import {
     zDocHash,
@@ -38,8 +37,6 @@ export const zEndpointDoc = z.strictObject({
     /** Post-fallback (docsUrl/categories may come from the provider). */
     meta: zEndpointMeta,
     auth: z.strictObject({
-        resource: z.string().min(1).optional(),
-        capture: zCredentialCapture.optional(),
         /** Executed by the injector (Transport/Relay), never the pipeline. */
         inject: zFnRef,
         /** JSON Schema of the credential SHAPE — validated against RESOLVED
@@ -47,18 +44,13 @@ export const zEndpointDoc = z.strictObject({
         credentials: zJsonSchemaDoc,
     }),
     request: z.strictObject({
-        bodyEncoding: z.enum(["json", "multipart"]).optional(),
-        fileFields: z.array(z.string().min(1)).optional(),
-        responseEncoding: z.enum(["text", "base64", "auto"]).optional(),
         method: zHttpMethod,
         /** Absolute after baseUrl resolution; may contain {pathParam}s. */
         url: z.string().min(1),
         headers: z.record(z.string(), z.string()).optional(),
     }),
     input: z.strictObject({
-        sensitive: z.array(z.string().min(1)).optional(),
         schema: z.strictObject({
-            headers: zJsonSchemaDoc.optional(),
             body: zJsonSchemaDoc.optional(),
             queryParams: zJsonSchemaDoc.optional(),
             pathParams: zJsonSchemaDoc.optional(),
@@ -161,37 +153,6 @@ export const zEndpointDoc = z.strictObject({
     timeouts: zTimeouts,
     /** Hash of the stable serialization (minus this field) — covers $fn ids. */
     hash: zDocHash,
-}).superRefine((doc, ctx) => {
-    if (doc.auth.resource) {
-        const bindings = [
-            ...doc.resources?.uses ?? [],
-            ...doc.resources?.reads ?? [],
-            ...doc.resources?.updates ?? [],
-            ...doc.resources?.releases ?? [],
-        ];
-        if (
-            !bindings.some((binding) =>
-                binding.key &&
-                (binding.as ?? binding.key.split(".").at(-1)) ===
-                    doc.auth.resource
-            )
-        ) {
-            ctx.addIssue({
-                code: "custom",
-                message: "auth.resource must name a keyed ownership binding",
-            });
-        }
-    }
-    if (
-        doc.auth.capture &&
-        (!doc.resources?.provisions?.length || doc.auth.resource)
-    ) {
-        ctx.addIssue({
-            code: "custom",
-            message:
-                "credential capture requires a provision binding and no resource credential",
-        });
-    }
 });
 export type EndpointDoc = z.infer<typeof zEndpointDoc>;
 

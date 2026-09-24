@@ -7,22 +7,15 @@ export default defineEndpoint({
         summary:
             "Redeem a one-time setup code from Ambiguous Settings → Connect your AI.",
         description:
-            "Connects the identity selected in Ambiguous. A consumed or expired code fails without creating another workspace. The Relay captures the returned key privately. Use the returned credentialRef as monid_connection, then call auth_whoami to confirm the current identity and workspace.",
-        annotations: { readOnly: false },
+            "Ambiguous retains the delegated key and returns an owned connection ID. Supply a new request_id UUID for this intent and reuse it on retries. A reused ID with different inputs fails. An expired or consumed code fails without creating a workspace.",
     },
     endpoint: "/connections/connect",
-    request: { method: "POST", path: "/api/auth/key-handoff/exchange" },
-    auth: {
-        resource: null,
-        credentials: z.object({}),
-        inject: ({ data }) => data.request,
-        capture: { fields: { apiKey: "token" } },
-    },
+    request: { method: "POST", path: "/api/provider-connections/connect" },
     input: {
-        sensitive: ["$.body.code"],
         schema: {
             body: z.object({
-                code: z.string().regex(/^ahc_[A-Za-z0-9_-]{43}$/),
+                setup_code: z.string().regex(/^ahc_[A-Za-z0-9_-]{43}$/),
+                request_id: z.string().uuid(),
             }).strict(),
         },
     },
@@ -31,14 +24,11 @@ export default defineEndpoint({
             id: "ambiguous/connection",
             seed: ({ data, utils }) => ({
                 resource: "ambiguous/connection",
-                externalId: utils.json.str(data.output, "$.credentialRef"),
+                externalId: utils.json.str(data.output, "$.id"),
                 data: {
-                    displayName: typeof utils.json.optionalGet(
-                            data.output,
-                            "$.display_name",
-                        ) === "string"
-                        ? utils.json.str(data.output, "$.display_name")
-                        : "Ambiguous connection",
+                    workspaceId: utils.json.str(data.output, "$.workspace_id"),
+                    principalId: utils.json.str(data.output, "$.principal_id"),
+                    displayName: utils.json.str(data.output, "$.display_name"),
                 },
             }),
         }],

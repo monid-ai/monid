@@ -45,10 +45,6 @@ export interface PreparedRequest {
      *  vendor (akta, comma) arrives as the single element `["a,b"]`. */
     query: Record<string, string[]>;
     body?: Json;
-    credentialRef?: string;
-    bodyEncoding?: "json" | "multipart";
-    fileFields?: string[];
-    responseEncoding?: "text" | "base64" | "auto";
     /** ABSENT ⇒ the request egresses BARE (no credential injection) — the
      *  same-origin credential rule (design D16): lifecycle fns targeting a
      *  different origin than the doc's request never carry the provider's
@@ -56,7 +52,6 @@ export interface PreparedRequest {
     auth?: {
         inject: { ref: FnRef; entry: FnEntry };
         credentials: JsonSchemaDoc;
-        capture?: { fields: Record<string, string> };
     };
     /** Credential lookup key (provider name). */
     provider: string;
@@ -76,32 +71,7 @@ export interface TransportResponse {
 
 /** The only IO port of the engine. Owns credential injection + egress. */
 export interface Transport {
-    capabilities?: {
-        credentials?: boolean;
-        httpBodies?: boolean;
-        headerInputs?: boolean;
-    };
     execute(req: PreparedRequest): Promise<TransportResponse>;
-    forgetCredential?(
-        provider: string,
-        origin: string,
-        reference: string,
-    ): Promise<void>;
-}
-
-/** The host binds this vault to the authenticated caller; keys never enter engine hooks. */
-export interface CredentialStore {
-    capture(
-        provider: string,
-        origin: string,
-        params: Record<string, string>,
-    ): Promise<string>;
-    resolve(
-        provider: string,
-        origin: string,
-        reference: string,
-    ): Promise<Record<string, string>>;
-    forget(provider: string, origin: string, reference: string): Promise<void>;
 }
 
 /** Credential lookup. `fields` are the credential field names the doc's

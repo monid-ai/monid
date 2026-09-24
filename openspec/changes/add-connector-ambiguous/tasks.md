@@ -1,12 +1,8 @@
-# Tasks
-
-- [x] Replace the hand-selected endpoint set with the complete published agent catalog.
-- [x] Account for every HTTP operation in a reproducible coverage report.
-- [x] Replace standalone onboarding with native resource endpoints.
-- [x] Add transport-side credential capture and resource-bound lookup.
-- [x] Preserve multipart, binary, SSE and declared header behavior.
-- [x] Test setup, isolation, fidelity and coverage through compiled artifacts.
-- [x] Finish full regression, formatting, lint, type and catalog checks.
-- [x] Confirm identity-lock drift matches unchanged upstream; add only Ambiguous identities.
-- [ ] Monid: deploy engine 0.6.0 and implement the generic hosted credential port.
-- [ ] Monid: validate both onboarding flows against real accounts before activation.
+- [x] Generate and account for the complete MCP-exposed catalog.
+- [x] Bind all operations to owned connection resources.
+- [x] Support create, connect, list and disconnect with existing core contracts.
+- [x] Keep delegated credentials and non-JSON adaptation on Ambiguous.
+- [x] Verify sealed artifacts, isolation, resource lifecycle and wire fidelity.
+- [ ] Deploy the companion Ambiguous provider adapter.
+- [ ] Configure Monid's ordinary Ambiguous provider credential and publish catalog.
+- [ ] Validate new and existing workspace flows on the hosted integration.

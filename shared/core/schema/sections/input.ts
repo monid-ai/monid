@@ -12,9 +12,7 @@ import { zInputToRequestFn, zSchemaCarrier } from "../hooks/mod.ts";
  *     chain).
  */
 export const zInputSection = z.strictObject({
-    sensitive: z.array(z.string().min(1)).optional(),
     schema: z.strictObject({
-        headers: zSchemaCarrier.optional(),
         body: zSchemaCarrier.optional(),
         queryParams: zSchemaCarrier.optional(),
         pathParams: zSchemaCarrier.optional(),

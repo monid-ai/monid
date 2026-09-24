@@ -8,35 +8,27 @@ export default defineEndpoint({
         summary:
             "Create a workspace and agent, and email the accountable human a claim link.",
         description:
-            "Creates a new provisional workspace. Use connections/connect for an existing workspace. The credential is captured privately by the Relay; the returned credentialRef is your owned connection ID. Check human.claim_token_sent for email delivery. Creation is not automatically retried.",
-        annotations: { readOnly: false, openWorld: true },
+            "Ambiguous retains the delegated key and returns an owned connection ID. Supply a new request_id UUID for this intent and reuse it on retries. A reused ID with different inputs fails. Check human.claim_token_sent for claim-email delivery.",
     },
     endpoint: "/connections/create",
-    request: { method: "POST", path: "/api/auth/signup-agent" },
-    auth: {
-        resource: null,
-        credentials: z.object({}),
-        inject: ({ data }) => data.request,
-        capture: { fields: { apiKey: "api_key" } },
+    request: { method: "POST", path: "/api/provider-connections/create" },
+    input: {
+        schema: {
+            body: signupInput.omit({ browser_session: true }).extend({
+                request_id: z.string().uuid(),
+            }),
+        },
     },
-    input: { schema: { body: signupInput } },
     resources: {
         provisions: [{
             id: "ambiguous/connection",
             seed: ({ data, utils }) => ({
                 resource: "ambiguous/connection",
-                externalId: utils.json.str(data.output, "$.credentialRef"),
+                externalId: utils.json.str(data.output, "$.id"),
                 data: {
-                    workspaceId: utils.json.str(data.output, "$.workspace.id"),
-                    workspaceName: utils.json.str(
-                        data.output,
-                        "$.workspace.name",
-                    ),
-                    displayName: utils.json.str(
-                        data.output,
-                        "$.agent.display_name",
-                    ),
-                    principalId: utils.json.str(data.output, "$.agent.id"),
+                    workspaceId: utils.json.str(data.output, "$.workspace_id"),
+                    principalId: utils.json.str(data.output, "$.principal_id"),
+                    displayName: utils.json.str(data.output, "$.display_name"),
                 },
             }),
         }],

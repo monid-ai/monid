@@ -56,7 +56,6 @@ import type {
     RunHandle,
     RunnableEndpoint,
     RunnableResource,
-    Transport,
 } from "./interfaces/mod.ts";
 import { EngineError, EngineErrorCode } from "./errors.ts";
 import {
@@ -133,19 +132,6 @@ export class Engine implements ConnectorEngine {
                     `carries no ResourceReader`,
             );
         }
-        const capabilities = this.ctx.transport.capabilities;
-        if (
-            ((doc.auth.resource || doc.auth.capture) &&
-                !capabilities?.credentials) ||
-            ((doc.request.bodyEncoding === "multipart" ||
-                doc.request.responseEncoding) && !capabilities?.httpBodies) ||
-            (doc.input.schema.headers && !capabilities?.headerInputs)
-        ) {
-            throw new EngineError(
-                EngineErrorCode.UNSUPPORTED_TRANSPORT,
-                `${doc.id} requires transport capabilities not advertised by this host`,
-            );
-        }
         const hookLogger = toHookLogger(this.logger);
         const linked = await linkFns(doc, fns, ENGINE_VERSION, hookLogger);
         this.logger.debug("loaded endpoint", { id: doc.id });
@@ -178,12 +164,6 @@ export class Engine implements ConnectorEngine {
             throw new EngineError(
                 EngineErrorCode.UNSUPPORTED_DOC,
                 `${doc.id} needs engine ${doc.minEngineVersion}, this engine is ${ENGINE_VERSION}`,
-            );
-        }
-        if (doc.credential && !this.ctx.transport.capabilities?.credentials) {
-            throw new EngineError(
-                EngineErrorCode.UNSUPPORTED_TRANSPORT,
-                `${doc.id} requires a credential-capable transport`,
             );
         }
         const hookLogger = toHookLogger(this.logger);
@@ -230,12 +210,11 @@ export class LoadedEndpoint implements RunnableEndpoint {
     private utilsFor(
         input: RunInput,
         requestInfo: LifecycleRequestInfo,
-        instances?: GatedResources,
     ): LifecycleUtils {
         return makeLifecycleUtils({
             doc: this.doc,
             injectEntry: this.injectEntry,
-            transport: this.boundTransport(instances),
+            transport: this.ctx.transport,
             requestInfo,
             input,
             sleep: (ms) => (this.ctx.sleep ?? sleep)(ms),
@@ -243,23 +222,6 @@ export class LoadedEndpoint implements RunnableEndpoint {
                 ? makeResourcesWindow(this.doc.id, this.ctx.resources)
                 : undeclaredResources(this.doc.id),
         });
-    }
-
-    private boundTransport(instances?: GatedResources): Transport {
-        const alias = this.doc.auth.resource;
-        if (!alias) return this.ctx.transport;
-        const resource = instances?.[alias];
-        if (!resource) {
-            throw new EngineError(
-                EngineErrorCode.MISSING_CREDENTIAL,
-                "Owned credential resource was not resolved",
-            );
-        }
-        return bindCredentialTransport(
-            this.ctx.transport,
-            new URL(this.doc.request.url).origin,
-            resource.externalId,
-        );
     }
 
     /** The KEYED bindings' ownership TARGETS for this call — every
@@ -439,7 +401,7 @@ export class LoadedEndpoint implements RunnableEndpoint {
                         ? { resources: gated.instances }
                         : {}),
                 },
-                this.utilsFor(input, request, gated.instances),
+                this.utilsFor(input, request),
             );
             return this.fromOutcome(
                 outcome,
@@ -454,9 +416,7 @@ export class LoadedEndpoint implements RunnableEndpoint {
         // 1. build request — auth travels UNEXECUTED (credentials stay out of the pipeline)
         const request = buildRequest(doc, input, this.injectEntry);
         // 2. transport: injection + egress inside the port  → EXECUTION_FAILED (retriable)
-        const response = await this.boundTransport(gated.instances).execute(
-            request,
-        );
+        const response = await this.ctx.transport.execute(request);
         // 3. sniffing decode: JSON if it parses, else the faithful raw string
         const completedAt = this.now();
         return this.settle(
@@ -522,7 +482,7 @@ export class LoadedEndpoint implements RunnableEndpoint {
                     : {}),
                 lifecycle: { state: prevState },
             },
-            this.utilsFor(input, request, gated.instances),
+            this.utilsFor(input, request),
         );
         return this.fromOutcome(
             outcome,
@@ -573,7 +533,7 @@ export class LoadedEndpoint implements RunnableEndpoint {
                         : {}),
                     lifecycle: { state: prevState },
                 },
-                this.utilsFor(input, request, instances),
+                this.utilsFor(input, request),
             );
             if (outcome === undefined) {
                 return { kind: StopKind.STOPPED_UNSETTLED };
@@ -1126,30 +1086,13 @@ export class LoadedResource implements RunnableResource {
     // deno-lint-ignore require-await
     async verify(resource: OwnedResource): Promise<VerifyOutcome> {
         const valid = this.parseResource(resource);
-        return this.fns.verify({ resource: valid }, this.utils(valid));
+        return this.fns.verify({ resource: valid }, this.utils());
     }
 
     // deno-lint-ignore require-await
     async release(resource: OwnedResource): Promise<ReleaseOutcome> {
         const valid = this.parseResource(resource);
-        if (this.doc.credential && !this.ctx.transport.forgetCredential) {
-            throw new EngineError(
-                EngineErrorCode.MISSING_CREDENTIAL,
-                "Credential resource release requires the host credential store",
-            );
-        }
-        const outcome = await this.fns.release(
-            { resource: valid },
-            this.utils(valid),
-        );
-        if (this.doc.credential && outcome.released) {
-            await this.ctx.transport.forgetCredential!(
-                this.doc.provider,
-                new URL(this.doc.request.url).origin,
-                valid.externalId,
-            );
-        }
-        return outcome;
+        return this.fns.release({ resource: valid }, this.utils());
     }
 
     async refresh(resource: OwnedResource): Promise<RefreshOutcome> {
@@ -1162,7 +1105,7 @@ export class LoadedResource implements RunnableResource {
         const valid = this.parseResource(resource);
         const outcome = await this.fns.refresh(
             { resource: valid },
-            this.utils(valid),
+            this.utils(),
         );
         // the patch is the next stored snapshot — it must satisfy the
         // doc's own data schema (FN_CONTRACT: the fn wrote it)
@@ -1198,7 +1141,7 @@ export class LoadedResource implements RunnableResource {
             );
         }
         const valid = this.parseResource(resource);
-        return get({ resource: valid, window }, this.utils(valid));
+        return get({ resource: valid, window }, this.utils());
     }
 
     // deno-lint-ignore require-await
@@ -1222,7 +1165,7 @@ export class LoadedResource implements RunnableResource {
                 resource: valid,
                 ...(args !== undefined ? { args } : {}),
             },
-            this.utils(valid),
+            this.utils(),
         );
     }
 
@@ -1255,7 +1198,7 @@ export class LoadedResource implements RunnableResource {
         return parsed.data;
     }
 
-    private utils(resource: OwnedResource) {
+    private utils() {
         return makeResourceOpUtils({
             doc: this.doc,
             auth: {
@@ -1265,13 +1208,7 @@ export class LoadedResource implements RunnableResource {
                 },
                 credentials: this.doc.auth.credentials,
             },
-            transport: this.doc.credential
-                ? bindCredentialTransport(
-                    this.ctx.transport,
-                    new URL(this.doc.request.url).origin,
-                    resource.externalId,
-                )
-                : this.ctx.transport,
+            transport: this.ctx.transport,
             sleep: (ms) => (this.ctx.sleep ?? sleep)(ms),
         });
     }
@@ -1290,20 +1227,4 @@ function sleep(ms: number, signal?: AbortSignal): Promise<void> {
         };
         signal?.addEventListener("abort", onAbort, { once: true });
     });
-}
-
-function bindCredentialTransport(
-    transport: Transport,
-    origin: string,
-    reference: string,
-): Transport {
-    return {
-        capabilities: transport.capabilities,
-        execute: (request) =>
-            transport.execute(
-                request.auth && new URL(request.url).origin === origin
-                    ? { ...request, credentialRef: reference }
-                    : request,
-            ),
-    };
 }

@@ -239,32 +239,6 @@ only; the engine never listens).
 
 ## Configuration
 
-### Customer account resources (engine 0.6.0)
-
-An owned resource may declare `credential: true`. Endpoint `auth.resource` names
-the keyed resource-binding alias supplying its credential reference after ownership
-admission. The transport resolves the reference through a caller-bound
-`CredentialStore`, never through provider-wide environment fallback.
-
-Credential-issuing endpoints declare `auth.capture.fields` and an ordinary provision
-seed. The Relay captures the mapped top-level response fields, stores them, and
-returns an opaque `credentialRef` before any engine hook or run history receives the
-response. Such endpoints require the store before dispatch and never automatically
-retry an ambiguous exchange. `input.sensitive` paths feed `redactRunInput` for
-history/telemetry; execution payloads still require host-side secret protection.
-
-The standard local host uses `scripts/store/credentials.ts`, a persistent
-`MONID_CREDENTIAL_STORE_KEY`, and scope-specific KV ownership. Hosted Relay supplies
-the same generic port using its own durable secret infrastructure. Persist ordinary
-resource effects and forget the captured credential when its resource is released.
-The complete contract and migration requirements are in
-`openspec/changes/resource-credentials-and-http-bodies/`.
-
-Header inputs, `request.bodyEncoding: "multipart"` plus `fileFields`, and
-`request.responseEncoding: "auto" | "base64"` are transport capabilities. Existing
-definitions retain their JSON/text behavior. The Ambiguous connector demonstrates
-all of these through compiled artifacts and uses no provider-specific runtime.
-
 Top-level `config.yml`, component-first
 (`schema:`/`compiler:`/`engine:`/`scripts:`), split by DETERMINISM: `schema.*`
 (incl. the declared `doc_format_since`/`fn_abi_since` facts) + `compiler.*` are

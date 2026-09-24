@@ -321,15 +321,6 @@ export function makeLifecycleUtils(opts: {
         // target shares the doc request's origin; else the request is BARE.
         const sameOrigin = new URL(parts.url).origin === origin;
         const prepared: PreparedRequest = {
-            bodyEncoding: parts.url === requestInfo.url
-                ? doc.request.bodyEncoding
-                : undefined,
-            fileFields: parts.url === requestInfo.url
-                ? doc.request.fileFields
-                : undefined,
-            responseEncoding: parts.url === requestInfo.url
-                ? doc.request.responseEncoding
-                : undefined,
             method: parts.method,
             url: parts.url,
             headers: { ...parts.headers },
@@ -340,9 +331,6 @@ export function makeLifecycleUtils(opts: {
                     auth: {
                         inject: { ref: doc.auth.inject, entry: injectEntry },
                         credentials: doc.auth.credentials,
-                        ...(doc.auth.capture && parts.url === requestInfo.url
-                            ? { capture: doc.auth.capture }
-                            : {}),
                     },
                 }
                 : {}),
@@ -405,11 +393,7 @@ export function makeLifecycleUtils(opts: {
                 // compiled request's own url
                 url: o.url ??
                     (o.path !== undefined ? origin + o.path : requestInfo.url),
-                headers: {
-                    ...requestInfo.headers,
-                    ...input.headers,
-                    ...o.headers,
-                },
+                headers: { ...requestInfo.headers, ...o.headers },
                 query: toWireQuery(
                     doc.id,
                     o.queryParams ?? input.queryParams ?? {},

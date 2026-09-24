@@ -243,7 +243,7 @@ config.yml         schema.* and compiler.* are contract; engine and scripts are 
 
 - [Ambiguous connector](./connectors/ambiguous/README.md): the full published
   agent API, with native connection resources for new and existing workspaces.
-  Requires the resource-credential features in engine 0.6.0.
+  Uses engine 0.5.0 unchanged with Ambiguous-hosted credential delegation.
 - [DEVELOPMENT.md](./DEVELOPMENT.md) covers hooks, the compiler, usage and
   billing, configuration, versioning, catalog publishing, and the full CLI
   reference.

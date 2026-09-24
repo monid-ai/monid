@@ -1,19 +1,12 @@
-import { z } from "zod";
 import { defineEndpoint } from "@shared/core";
 
 export default defineEndpoint({
     meta: {
         displayName: "List Ambiguous connections",
         summary: "List connections owned by your Monid workspace.",
-        annotations: { readOnly: true },
     },
     endpoint: "/connections/list",
     request: { method: "GET", path: "/api/users/me" },
-    auth: {
-        resource: null,
-        credentials: z.object({}),
-        inject: ({ data }) => data.request,
-    },
     resources: { reads: [{ id: "ambiguous/connection" }] },
     lifecycle: {
         start: async ({ utils }) => ({

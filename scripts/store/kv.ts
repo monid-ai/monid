@@ -30,23 +30,12 @@ import { OUTPUT_DIR } from "../lib.ts";
  * uniform 404 follows naturally) and leaves a tombstone for audit.
  */
 export class KvResourceStore implements IResourceStore {
-    private constructor(
-        private readonly kv: Deno.Kv,
-        private readonly scope = "local",
-    ) {}
+    private constructor(private readonly kv: Deno.Kv) {}
 
-    private key(...parts: string[]): Deno.KvKey {
-        return this.scope === "local" ? parts : ["scope", this.scope, ...parts];
-    }
-
-    static async open(
-        path?: string,
-        scope = "local",
-    ): Promise<KvResourceStore> {
+    static async open(path?: string): Promise<KvResourceStore> {
         const dbPath = path ?? join(OUTPUT_DIR, "local.db");
         await ensureDir(join(dbPath, ".."));
-        if (!scope.trim()) throw new Error("A host scope is required");
-        return new KvResourceStore(await Deno.openKv(dbPath), scope);
+        return new KvResourceStore(await Deno.openKv(dbPath));
     }
 
     async provision(resource: OwnedResource): Promise<void> {
@@ -55,12 +44,10 @@ export class KvResourceStore implements IResourceStore {
         // can never leave both absent
         const result = await this.kv.atomic()
             .set(
-                this.key("resources", resource.resource, resource.externalId),
+                ["resources", resource.resource, resource.externalId],
                 resource,
             )
-            .delete(
-                this.key("released", resource.resource, resource.externalId),
-            )
+            .delete(["released", resource.resource, resource.externalId])
             .commit();
         if (!result.ok) {
             throw new Error(
@@ -72,7 +59,7 @@ export class KvResourceStore implements IResourceStore {
 
     async refresh(id: string, externalId: string, data: Json): Promise<void> {
         const entry = await this.kv.get<OwnedResource>(
-            this.key("resources", id, externalId),
+            ["resources", id, externalId],
         );
         if (entry.value === null) {
             throw new Error(
@@ -83,7 +70,7 @@ export class KvResourceStore implements IResourceStore {
         // resurrect a released row with a stale patch
         const result = await this.kv.atomic()
             .check(entry)
-            .set(this.key("resources", id, externalId), {
+            .set(["resources", id, externalId], {
                 ...entry.value,
                 data,
                 syncedAt: new Date().toISOString(),
@@ -99,8 +86,8 @@ export class KvResourceStore implements IResourceStore {
 
     async release(id: string, externalId: string): Promise<void> {
         const result = await this.kv.atomic()
-            .delete(this.key("resources", id, externalId))
-            .set(this.key("released", id, externalId), {
+            .delete(["resources", id, externalId])
+            .set(["released", id, externalId], {
                 releasedAt: new Date().toISOString(),
             })
             .commit();
@@ -116,7 +103,7 @@ export class KvResourceStore implements IResourceStore {
         externalId: string,
     ): Promise<OwnedResource | undefined> {
         const entry = await this.kv.get<OwnedResource>(
-            this.key("resources", id, externalId),
+            ["resources", id, externalId],
         );
         return entry.value ?? undefined;
     }
@@ -125,7 +112,7 @@ export class KvResourceStore implements IResourceStore {
         const rows: OwnedResource[] = [];
         for await (
             const entry of this.kv.list<OwnedResource>({
-                prefix: this.key("resources"),
+                prefix: ["resources"],
             })
         ) {
             rows.push(entry.value);
@@ -142,7 +129,7 @@ export class KvResourceStore implements IResourceStore {
         const rows: OwnedResource[] = [];
         for await (
             const entry of this.kv.list<OwnedResource>({
-                prefix: this.key("resources", query.resource),
+                prefix: ["resources", query.resource],
             })
         ) {
             rows.push(entry.value);

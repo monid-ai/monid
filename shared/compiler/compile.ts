@@ -707,11 +707,6 @@ export async function compileBundle(
                 return resolved ? toJsonSchema(resolved, label) : undefined;
             };
             const inputSchemas = {
-                headers: schemaLeaf(
-                    def.input?.schema?.headers,
-                    provider.input?.schema?.headers,
-                    `${where}: input.schema.headers`,
-                ),
                 body: schemaLeaf(
                     def.input?.schema?.body,
                     provider.input?.schema?.body,
@@ -968,37 +963,6 @@ export async function compileBundle(
                     : []),
             ]);
 
-            const credentialAlias = (def.auth?.resource !== undefined
-                ? def.auth.resource
-                : provider.auth?.resource) ?? undefined;
-            if (credentialAlias) {
-                const bindings = [
-                    ...def.resources?.uses ?? [],
-                    ...def.resources?.reads ?? [],
-                    ...def.resources?.updates ?? [],
-                    ...def.resources?.releases ?? [],
-                ];
-                const binding = bindings.find((item) =>
-                    item.key &&
-                    (item.as ?? item.key.split(".").at(-1)) === credentialAlias
-                );
-                if (!binding || !providerResourceDocs[binding.id]?.credential) {
-                    throw new CompileError(
-                        CompileErrorCode.DOC_MALFORMED,
-                        `${where}: auth.resource must bind a credential-backed resource`,
-                    );
-                }
-            }
-            if (def.auth?.capture ?? provider.auth?.capture) {
-                const target = def.resources?.provisions?.[0]?.id;
-                if (!target || !providerResourceDocs[target]?.credential) {
-                    throw new CompileError(
-                        CompileErrorCode.DOC_MALFORMED,
-                        `${where}: capture must provision a credential-backed resource`,
-                    );
-                }
-            }
-
             // ---- assemble + validate --------------------------------------
             const docWithoutHash = pruneUndefined({
                 specVersion: SC.specVersion,
@@ -1010,29 +974,16 @@ export async function compileBundle(
                 auth: {
                     inject: injectRef as unknown as Json,
                     credentials: credentialsSchema,
-                    resource: (def.auth?.resource !== undefined
-                        ? def.auth.resource
-                        : provider.auth?.resource) ?? undefined,
-                    capture: def.auth?.capture ?? provider.auth?.capture,
                 },
                 request: {
                     method: def.request.method,
-                    bodyEncoding: def.request.bodyEncoding ??
-                        provider.request?.bodyEncoding,
-                    fileFields: def.request.fileFields ??
-                        provider.request?.fileFields,
-                    responseEncoding: def.request.responseEncoding ??
-                        provider.request?.responseEncoding,
                     url,
                     headers: Object.keys(headers).length > 0
                         ? headers
                         : undefined,
                 },
                 input: {
-                    sensitive: def.input?.sensitive ??
-                        provider.input?.sensitive,
                     schema: {
-                        headers: inputSchemas.headers,
                         body: inputSchemas.body,
                         queryParams: inputSchemas.queryParams,
                         pathParams: inputSchemas.pathParams,
@@ -1476,7 +1427,6 @@ async function compileResource(args: {
         // fnAbiSince-stamped inject
         minEngineVersion: semverMax([SC.resourcesSince]),
         meta,
-        credential: def.credential,
         data: { schema: dataSchema },
         inputs: inputs && Object.keys(inputs).length > 0 ? inputs : undefined,
         usage: def.usage as unknown as Json,

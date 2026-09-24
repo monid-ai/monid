@@ -1,16 +1,16 @@
 # Add the complete Ambiguous agent catalog
 
-Generate one ordinary connector definition for every MCP-exposed operation in a
-pinned public OpenAPI snapshot. Account for every other HTTP operation in the
-coverage report. Native `ambiguous/connection` resources provide new-workspace
-signup, existing-account setup-code exchange, listing and disconnect.
+Generate one native connector definition for each MCP-exposed operation in the
+pinned public OpenAPI snapshot. Support both new-workspace creation and existing
+workspace connection using ordinary owned resources.
 
-Credential handling, multipart requests, header inputs and byte-preserving exports
-use the shared framework extension described in
-`../resource-credentials-and-http-bodies/design.md`. There is no separate provider
-CLI or connection manager. Credentials stay at the transport/Relay boundary.
+The connector uses engine 0.5.0 unchanged. One normal provider credential calls
+Ambiguous's provider-connection API; Ambiguous retains customer credentials and
+adapts multipart, binary and finite-stream traffic to JSON. Monid's existing
+resource gate supplies customer isolation. No shared schema, compiler, engine or
+Relay extension is required.
 
-The customer owns the upstream identity and its Ambiguous plan/quota. Connector
-calls have no Monid charge; upstream AI consumption is not advertised as free.
-Hosted activation requires the generic secret-store port, effect persistence,
-sensitive-input redaction and an engine 0.6.0 rollout, followed by live validation.
+The customer owns the delegated identity and its Ambiguous subscription/quota.
+The Monid connector fee is zero; upstream AI consumption is not free. Activation
+requires deploying the Ambiguous adapter, configuring the normal provider key,
+merging/publishing the catalog and validating both setup paths live.

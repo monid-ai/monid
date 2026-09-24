@@ -47,7 +47,6 @@ export const zResourceDoc = z.strictObject({
     /** Compiler-derived: semverMax(resources_since, api of every $fn). */
     minEngineVersion: zSemverString,
     meta: zBaseMeta,
-    credential: z.boolean().optional(),
     data: z.strictObject({ schema: zJsonSchemaDoc }),
     inputs: z.strictObject({
         create: zJsonSchemaDoc.optional(),

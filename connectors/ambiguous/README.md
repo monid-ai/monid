@@ -1,129 +1,111 @@
 # Ambiguous
 
-The connector publishes the complete MCP-exposed surface of Ambiguous's pinned
-[public OpenAPI](https://app.ambiguous.ai/api/openapi.json), plus native
-connection create/connect/list/disconnect endpoints. The generated
-[coverage report](./coverage.json) records exact counts and accounts for every
-HTTP operation outside that surface, including credential-bearing, internal and
-client-specific routes. They are not silently counted as implemented. For
-example, image generation is currently assistant-only; audio transcription is
-exposed to MCP and is included.
+Native Monid connector for the complete MCP-exposed Ambiguous API. The pinned
+OpenAPI snapshot supplies 928 operation definitions; four connection tools
+create, connect, list and disconnect workspaces. `coverage.json` accounts for
+all 1,335 published HTTP operations, including 407 that Ambiguous does not
+expose to MCP.
 
-Endpoint IDs retain the API's operationId: `ambiguous#send_email`,
-`ambiguous#list_documents`, `ambiguous#create_event`, and so on. Admin and
-destructive operations remain available subject to the connected identity's
-existing Ambiguous permissions and approval rules. The generator preserves
-action annotations and native schemas instead of maintaining a hand-selected
-allowlist.
+This connector uses the existing engine 0.5.0 provider auth, JSON transport and
+owned resources. Ambiguous stores delegated customer credentials and adapts file
+uploads and exports through its provider-connection API. No engine, compiler,
+shared schema, credential-store port or Relay changes are required.
 
-## Connect through ordinary tools
+## Provider setup
 
-- `ambiguous#connections/create`: send `body.agent_display_name`, `human_email`,
-  and optional workspace name/slug. Ambiguous creates a provisional workspace
-  and sends its human claim email. Check `human.claim_token_sent`; false means
-  delivery failed even though the connection was created. Human claim/merge
-  remains on Ambiguous's normal path.
-- `ambiguous#connections/connect`: send `body.code`, a one-time setup code from
-  Ambiguous Settings → Connect your AI. A stale code fails without creating a
-  new workspace. The code is declared sensitive for host history/telemetry
-  redaction.
-- Both return an opaque `credentialRef` and provision an owned
-  `ambiguous/connection`. The actual key is captured and removed at the
-  transport boundary, before any engine hook or run result sees it.
-- Supply that reference as `pathParams.monid_connection` on API calls. The
-  resource gate checks ownership before dispatch; the Relay resolves the
-  corresponding customer-bound credential. It never falls back to a shared
-  environment key.
-- Call `ambiguous#auth_whoami` after connecting to confirm the current principal
-  and workspace. Connection metadata is a snapshot; a human claim/merge can
-  change the upstream workspace, and the resource's identity view/refresh reads
-  it live.
-- `connections/list` reads the caller's ownership window.
-  `connections/disconnect` releases that connection and forgets its credential;
-  it does not delete the workspace or revoke a key used elsewhere.
+Deploy Ambiguous's provider-connection API before activating the connector.
+Monid configures one ordinary Ambiguous administrator API key as
+`AMBIGUOUS_CREDENTIALS_API_KEY` (the usual `AMBIGUOUS_API_KEY` alias also
+works). Allow `provider_connections.read` and `provider_connections.write`, or
+`*`. Normal provider credential provisioning, catalog publication and
+owned-resource lifecycle support are the same requirements as other
+resource-backed connectors.
 
-No raw API-key import or OAuth callback server is added. The existing-account
-path uses Ambiguous's already-issued, single-use setup code and preserves that
-key's identity, scopes, expiry and revocation.
+The Ambiguous deployment must configure `COWORKER_TOKEN_ENCRYPTION_KEY` and
+apply its provider-connection migrations. This is an Ambiguous-side deployment
+prerequisite, not a Monid core dependency. Synthetic connector tests do not
+prove production activation; validate both setup paths against the deployed
+adapter.
 
-## HTTP and billing behavior
+## Connection lifecycle
 
-JSON bodies, nullable fields, pagination and declared headers pass through.
-Multipart file fields accept `{filename, contentType?, dataBase64}` and are sent
-as real multipart uploads. Binary/non-JSON files return
-`{dataBase64, contentType, contentDisposition}` with all bytes intact. JSON
-responses remain JSON; empty 204/205 responses remain empty. Finite SSE
-responses are returned as the complete event-stream text, preserving the
-upstream frames rather than claiming interactive streaming. The two completion
-streams and audio transcription use Monid's async lifecycle, with execution on
-the first poll.
+- `ambiguous#connections/create`: supply `request_id` (a new UUID),
+  `agent_display_name`, `human_email`, and optional workspace name/slug.
+  Ambiguous creates a provisional workspace and sends the human a claim email.
+  Read `human.claim_token_sent` for delivery status.
+- `ambiguous#connections/connect`: supply a new `request_id` UUID and a one-time
+  `setup_code` from Ambiguous Settings → Connect your AI. An invalid or consumed
+  code fails; this flow never falls back to signup.
+- Reuse the same request UUID and identical input on retries. Ambiguous
+  deduplicates setup and returns the existing connection. Changed inputs fail. A
+  released or revoked connection cannot be recreated by replaying its setup
+  request.
+- Both paths return `id` and identity metadata, and provision an owned
+  `ambiguous/connection` resource with that ID. Customer API keys never leave
+  Ambiguous in these responses. The setup code is a one-time credential input;
+  treat it as sensitive until redemption.
+- `ambiguous#connections/list` reads only the current Monid ownership window.
+- `ambiguous#connections/disconnect` emits the normal resource release intent;
+  the resource lifecycle deletes the delegated credential on Ambiguous. It does
+  not delete the workspace or revoke a customer's key used elsewhere.
 
-The Monid connector fee is zero. **Ambiguous's own subscription and AI-action
-charges still apply to the connected customer's workspace.** This is a
-customer-funded connection, not a pooled reseller account; Monid must not charge
-those same upstream actions a second time. Cost notes are included in provider
-metadata, and upstream 429/quota and permission errors are retained.
+Every ordinary operation requires `pathParams.monid_connection`. Monid's
+existing resource gate checks ownership before egress. Ambiguous independently
+checks that this connection belongs to the configured provider key, then
+re-enters its full API under the delegated customer identity. Permissions,
+scopes, resource access, module availability, approval, quota, expiry and
+revocation remain authoritative. Key rotation requires reconnecting after the
+old key's grace period ends. Live identity refresh follows workspace
+claim/merge.
 
-## Standard local host
+## Operation inputs and outputs
 
-Use `deno task engine:run`; there is no Ambiguous-specific CLI or account
-manager. Set `MONID_CREDENTIAL_STORE_KEY` to a persistent, private 32-byte AES
-key encoded as 64 hex characters. Keep it in your secret configuration, separate
-from saved ciphertext. The standard CLI stores encrypted credentials under
-`.output/credentials` and owned resources in `.output/local.db`, both bound to
-`--scope-key`.
+The endpoint ID is `ambiguous#<operationId>`. Its Monid `body` holds the native
+`body`, `pathParams`, `queryParams` and `headers` groups; the outer path
+selector is reserved for `monid_connection`. For example:
 
-Put a setup command's JSON body in a protected local file (never commit it):
-
-```sh
-deno task engine:run ambiguous#connections/connect \
-  --scope-key my-workspace --body-file /private/path/setup-body.json
+```json
+{
+    "pathParams": {
+        "monid_connection": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa"
+    },
+    "body": {
+        "body": { "title": "Plan", "type": "doc" }
+    }
+}
 ```
 
-The file contains `{"code":"<one-time setup code>"}`. For a new workspace, use
-`ambiguous#connections/create` with the signup body instead. Then use the
-returned reference:
+Declared upstream schemas retain their field types, required fields, nested
+content and explicit nulls. Where the published API omits a mutation body
+schema, there is an optional JSON object input; the destination API validates
+it. This keeps legacy operations callable without inventing undocumented field
+schemas. File fields become `{filename, contentType?, dataBase64}`. The provider
+adapter constructs multipart requests. Declared header inputs, including
+required idempotency keys, are nested under `body.headers`.
+
+Results preserve the adapter envelope `{http_status, output, headers}`; the
+engine outcome also uses `http_status` so destination errors stay errors and
+carry zero Monid usage. Binary output is
+`{encoding:"base64", contentType, dataBase64}`. Finite SSE output is
+`{encoding:"utf8", contentType, text}`. Selected response headers include file
+names, ETags, retry hints and quota headers. JSON envelope size and destination
+upload limits apply. This is the finite agent API, not WebSocket or unbounded
+stream transport. Long AI operations use the existing async run protocol.
+
+Monid's connector fee is zero. Ambiguous subscriptions, AI actions and paid
+operations are billed to the customer's connected workspace under its plan and
+quota. These are not free AI calls.
+
+## Verification and refresh
 
 ```sh
-deno task engine:run ambiguous#auth_whoami \
-  --scope-key my-workspace \
-  --path-params '{"monid_connection":"<returned UUID>"}'
+deno task ambiguous:check
+deno test --allow-read --allow-env --allow-write connectors/ambiguous/connector.test.ts
+deno run --allow-read --allow-write --allow-env --allow-net=app.ambiguous.ai scripts/ambiguous-catalog.ts --refresh
 ```
 
-Network/persistence failure during signup or code exchange is not automatically
-retried: the upstream mutation may already have committed. Recover through the
-normal Ambiguous claim/connection flow instead of silently creating another
-account.
-
-## Generation and verification
-
-```sh
-deno run --allow-read --allow-write --allow-env scripts/ambiguous-catalog.ts
-deno run --allow-read --allow-env scripts/ambiguous-catalog.ts --check
-```
-
-Add `--allow-net=app.ambiguous.ai` and `--refresh` to refresh the pinned
-OpenAPI. Review the snapshot, coverage report and resulting registration diff
-together. Retired operations cause a failure requiring explicit removal review.
-
-Tests exercise compiled artifacts, both setup paths, encrypted persistence,
-ownership denial, revocation/disconnect, multipart bytes, exports, headers and
-catalog completeness. Upstream responses are synthetic. No test sends a real
-claim email or modifies a customer's workspace.
-
-## Hosted handoff
-
-Requires shared engine **0.6.0**. Monid's Relay must supply the generic,
-authenticated-customer-bound `CredentialStore` port and implement the declared
-capture/reference semantics before enabling this catalog. The host persists the
-existing provision/release effects, forgets credentials on credential-resource
-release, and uses `redactRunInput` for history/telemetry. The local
-implementation and conformance tests are included. No provider-specific hosted
-connection manager is needed. Hosted deployment and real-account verification
-are still required.
-
-The transport must advertise its `credentials`, `httpBodies`, and `headerInputs`
-capabilities only after the corresponding Relay implementation is deployed. The
-engine refuses new definitions on an older transport before dispatch, so a
-worker upgrade alone cannot bypass credential capture or send an incorrect body
-format.
+Review source-contract changes, generated registrations and the coverage report
+before committing. The tests execute compiled artifacts on the unchanged engine
+with synthetic external API responses. Ambiguous's companion API tests exercise
+real PostgreSQL, both setup paths, credential lifecycle and dispatch through the
+ordinary API.

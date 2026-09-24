@@ -6,7 +6,6 @@ export default defineEndpoint({
         displayName: "Disconnect Ambiguous workspace",
         summary:
             "Release your owned connection without deleting the Ambiguous workspace.",
-        annotations: { readOnly: false, destructive: true },
     },
     endpoint: "/connections/disconnect",
     request: { method: "GET", path: "/api/users/me" },

@@ -21,25 +21,10 @@ export default defineProvider({
             "under its existing plan and quota; these are not free AI calls.",
         ],
     },
-    auth: { inject: presets.auth.bearer(), resource: "connection" },
+    auth: { inject: presets.auth.bearer() },
     request: {
         baseUrl: "https://app.ambiguous.ai",
         headers: { "API-Version": "1" },
-        responseEncoding: "auto",
-    },
-    input: {
-        toRequest: ({ data }) => ({
-            ...data.input,
-            ...(data.input.queryParams
-                ? {
-                    queryParams: Object.fromEntries(
-                        Object.entries(data.input.queryParams).filter((
-                            [, value],
-                        ) => value !== null),
-                    ),
-                }
-                : {}),
-        }),
     },
     usage: { model: { kind: UsageModelKind.FREE } },
 });

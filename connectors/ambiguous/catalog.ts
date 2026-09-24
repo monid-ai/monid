@@ -17,6 +17,7 @@ export interface ApiOperation {
         Record<"body" | "pathParams" | "queryParams" | "headers", Schema>
     >;
     multipart: boolean;
+    bodyRequired: boolean;
 }
 interface ApiDocument {
     paths: Record<
@@ -36,7 +37,10 @@ interface ApiDocument {
                 required?: boolean;
                 schema: Schema;
             }[];
-            requestBody?: { content?: Record<string, { schema: Schema }> };
+            requestBody?: {
+                required?: boolean;
+                content?: Record<string, { schema: Schema }>;
+            };
         }>
     >;
     components: { schemas: Record<string, Schema> };
@@ -92,32 +96,19 @@ for (const [path, methods] of Object.entries(document.paths)) {
                 };
             }
         }
-        const pathSchema = inputs.pathParams ??
-            {
-                type: "object",
-                properties: {},
-                required: [],
-                additionalProperties: false,
-            };
-        const properties = pathSchema.properties as Record<string, Schema>;
-        if ("monid_connection" in properties) {
-            throw new Error(
-                "Upstream parameter collides with the connection selector",
-            );
-        }
-        properties.monid_connection = {
-            type: "string",
-            format: "uuid",
-            description:
-                "Owned connection ID from connections/create or connections/connect.",
-        };
-        (pathSchema.required as string[]).push("monid_connection");
-        inputs.pathParams = pathSchema;
         const media = operation.requestBody?.content ?? {};
         const multipart = "multipart/form-data" in media;
         const body =
             media[multipart ? "multipart/form-data" : "application/json"];
         if (body) inputs.body = body.schema;
+        else if (method !== "get") {
+            inputs.body = {
+                type: "object",
+                additionalProperties: true,
+                description:
+                    "The public API omits a body schema for this operation. Supply JSON only if the destination operation accepts it; Ambiguous validates it.",
+            };
+        }
         apiOperations.push({
             operationId: operation.operationId,
             method: method.toUpperCase() as ApiOperation["method"],
@@ -128,6 +119,7 @@ for (const [path, methods] of Object.entries(document.paths)) {
             annotations: operation["x-tool"]?.annotations ?? {},
             inputs,
             multipart,
+            bodyRequired: operation.requestBody?.required ?? false,
         });
     }
 }
@@ -194,51 +186,66 @@ export function apiEndpoint(operationId: string) {
     if (!operation) {
         throw new Error(`Unknown Ambiguous operation: ${operationId}`);
     }
-    const schema = Object.fromEntries(
-        Object.entries(operation.inputs).map((
-            [name, value],
-        ) => [name, inputSchema(value)]),
+    const inputs = Object.fromEntries(
+        Object.entries(operation.inputs).map(([name, value]) => [
+            name,
+            (name === "body"
+                    ? !operation.bodyRequired
+                    : !(value.required as string[] | undefined)?.length)
+                ? inputSchema(value).optional()
+                : inputSchema(value),
+        ]),
     );
-    const properties = operation.inputs.body
-        ? resolved(operation.inputs.body).properties as
-            | Record<string, Schema>
-            | undefined
-        : undefined;
-    const fileFields = operation.multipart
-        ? Object.entries(properties ?? {}).filter(([, value]) =>
-            resolved(value).format === "binary"
-        ).map(([name]) => name)
-        : undefined;
-    if (operation.multipart && !fileFields?.length) {
-        throw new Error(
-            `Multipart operation has no declared file: ${operationId}`,
-        );
-    }
     const asynchronous = [
         "documents_completions",
         "mail_smart_compose",
         "audio_transcribe",
     ].includes(operationId);
+    const complete = async (
+        { utils }: { utils: import("@shared/core").LifecycleUtils },
+    ) => {
+        const result = await utils.request();
+        if (result.status !== 200) {
+            return {
+                kind: "COMPLETED" as const,
+                httpStatus: result.status,
+                output: result.body,
+            };
+        }
+        return {
+            kind: "COMPLETED" as const,
+            httpStatus: utils.json.num(result.body, "$.http_status"),
+            output: result.body,
+        };
+    };
     return defineEndpoint({
         meta: {
             displayName: operationId.replaceAll("_", " "),
             summary: operation.description.split("\n")[0],
             description: operation.description,
-            annotations: {
-                readOnly: operation.method === "GET",
-                destructive: operation.method === "DELETE",
-                ...operation.annotations,
-            },
+            notes: [
+                operation.annotations.destructive ||
+                    operation.method === "DELETE"
+                    ? "This operation can delete or overwrite data."
+                    : operation.annotations.readOnly ||
+                            operation.method === "GET"
+                    ? "This operation reads data."
+                    : "This operation can change data or trigger external actions.",
+            ],
         },
         endpoint: `/${operationId}`,
         request: {
-            method: operation.method,
-            path: operation.path,
-            ...(operation.multipart
-                ? { bodyEncoding: "multipart" as const, fileFields }
-                : {}),
+            method: "POST",
+            path:
+                `/api/provider-connections/{monid_connection}/operations/${operationId}`,
         },
-        input: { schema },
+        input: {
+            schema: {
+                body: z.object(inputs).strict(),
+                pathParams: z.object({ monid_connection: z.string().uuid() })
+                    .strict(),
+            },
+        },
         resources: {
             uses: [{
                 id: "ambiguous/connection",
@@ -246,25 +253,12 @@ export function apiEndpoint(operationId: string) {
                 as: "connection",
             }],
         },
-        ...(asynchronous
+        lifecycle: asynchronous
             ? {
-                lifecycle: {
-                    start: async () => ({ kind: "RUNNING" as const }),
-                    poll: async (
-                        { utils }: {
-                            utils: import("@shared/core").LifecycleUtils;
-                        },
-                    ) => {
-                        const result = await utils.request();
-                        return {
-                            kind: "COMPLETED" as const,
-                            httpStatus: result.status,
-                            output: result.body,
-                        };
-                    },
-                },
+                start: async () => ({ kind: "RUNNING" as const }),
+                poll: complete,
             }
-            : {}),
+            : { start: complete },
         timeouts: { requestMs: 300_000, runMs: 310_000 },
     });
 }

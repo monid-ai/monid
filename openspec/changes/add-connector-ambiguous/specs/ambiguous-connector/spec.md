@@ -1,22 +1,23 @@
 # Ambiguous connector requirements
 
-- Every operation exposed to MCP by the pinned public OpenAPI has exactly one
-  native operationId registration, preserving methods, paths, schemas and action
-  annotations. The coverage report accounts for every non-exposed operation.
-- New-workspace signup and existing-workspace setup-code exchange provision owned
-  connections. The Relay captures returned credentials before engine ingress.
-  A failed existing-account connection never provisions a new workspace.
-- Every ordinary API call requires the connection resource and passes its
-  ownership gate. Credential lookup is scoped independently by the authenticated
-  host principal and never falls back to a shared provider key.
-- Connection listing reveals only the ownership window. Disconnect removes the
-  connection and stored credential, not the upstream workspace or a shared key.
-- The API remains authoritative for identity, scope, permissions, quotas, approval,
-  expiry and revocation. A human claim/merge is reflected by live identity reads.
-- Multipart files and binary exports preserve bytes. JSON, null clearing,
-  pagination, headers, errors and finite SSE response text preserve their native
-  meaning. Long AI calls use the shared async protocol.
-- The gateway fee is zero; upstream customer-plan and AI-action charges remain
-  on Ambiguous. Metadata must distinguish these billing responsibilities.
-- Hosted activation requires the shared engine/Relay features and live validation
-  of both onboarding flows. Synthetic tests prove adapter behavior, not deployment.
+- Every MCP-exposed operation in the pinned OpenAPI has one native operationId
+  registration. Coverage accounts for every other published HTTP operation.
+- Use the existing 0.5.0 provider-auth, JSON transport, lifecycle and resource
+  contracts. Make no shared engine/compiler/schema or Relay changes.
+- New-workspace signup and existing-workspace setup-code redemption provision
+  owned connections. Ambiguous retains the customer key; only connection IDs and
+  identity metadata enter Monid resources or setup output.
+- Setup takes a stable request UUID for retry deduplication. Failed connection
+  never creates a workspace. Retries preserve intent and do not duplicate signup.
+- Every ordinary operation passes the Monid ownership gate before egress. The
+  Ambiguous adapter independently binds connections to the configured provider key
+  and dispatches the delegated credential through the ordinary API middleware.
+- List only owned connections. Resource release removes the delegation without
+  deleting the customer workspace or revoking a key used by another client.
+- Preserve published inputs, null clearing, file bytes, response status and useful
+  headers. Where a mutation body schema is absent, accept an optional JSON object
+  and defer validation to the destination instead of inventing a schema.
+- Native permissions, scopes, quota, approval, expiry and revocation apply. Claim
+  and merge changes appear through live resource identity refresh.
+- The Monid fee is zero; Ambiguous customer-plan and paid-action charges remain
+  upstream. Tests must not equate synthetic adapter responses with deployment.

@@ -3,46 +3,53 @@ import { defineResource, resourceUsage } from "@shared/core";
 
 export default defineResource({
     slug: "connection",
-    credential: true,
     meta: {
         displayName: "Ambiguous workspace connection",
         summary: "An owned connection acting as one Ambiguous identity.",
         description:
-            "Created by signup or one-time setup-code exchange. The resource stores identity metadata and an opaque credential reference; only the Relay holds the key. Release disconnects Monid without deleting the upstream workspace.",
+            "Ambiguous retains the delegated credential. This resource contains an opaque connection ID and identity metadata. Release removes the delegation without deleting the workspace or revoking a key used by another client.",
     },
     data: z.object({
-        workspaceId: z.string().optional(),
-        workspaceName: z.string().optional(),
-        displayName: z.string().nullable().optional(),
-        principalId: z.string().optional(),
+        workspaceId: z.string(),
+        principalId: z.string(),
+        displayName: z.string(),
     }).strict(),
     usage: resourceUsage.free(),
     lifecycle: {
-        verify: async ({ utils }) => {
+        verify: async ({ data, utils }) => {
             const response = await utils.http({
                 method: "GET",
-                path: "/api/users/me",
+                path: "/api/provider-connections/" + data.resource.externalId,
             });
-            if (response.status === 401) {
+            if (response.status === 404) {
                 return {
                     active: false,
-                    inactiveReason: "Credential expired or revoked",
+                    inactiveReason: "Connection unavailable",
                 };
             }
             if (response.status !== 200) {
-                throw new Error("Ambiguous identity verification failed");
+                throw new Error("Ambiguous connection verification failed");
             }
             return { active: true };
         },
-        release: async () => ({ released: true }),
-        refresh: async ({ utils }) => {
+        release: async ({ data, utils }) => {
+            const response = await utils.http({
+                method: "DELETE",
+                path: "/api/provider-connections/" + data.resource.externalId,
+            });
+            if (response.status !== 204 && response.status !== 404) {
+                throw new Error("Ambiguous connection release failed");
+            }
+            return { released: true };
+        },
+        refresh: async ({ data, utils }) => {
             const response = await utils.http({
                 method: "GET",
-                path: "/api/users/me",
+                path: "/api/provider-connections/" + data.resource.externalId,
             });
-            if (response.status === 401) return { active: false };
+            if (response.status === 404) return { active: false };
             if (response.status !== 200) {
-                throw new Error("Ambiguous identity refresh failed");
+                throw new Error("Ambiguous connection refresh failed");
             }
             return {
                 active: true,
@@ -51,15 +58,14 @@ export default defineResource({
                         response.body,
                         "$.workspace_id",
                     ),
-                    workspaceName: utils.json.str(
+                    principalId: utils.json.str(
                         response.body,
-                        "$.workspace_name",
+                        "$.principal_id",
                     ),
                     displayName: utils.json.str(
                         response.body,
                         "$.display_name",
                     ),
-                    principalId: utils.json.str(response.body, "$.id"),
                 },
             };
         },
@@ -67,13 +73,14 @@ export default defineResource({
     views: {
         identity: {
             label: "Current identity and workspace",
-            read: async ({ utils }) => {
+            read: async ({ data, utils }) => {
                 const response = await utils.http({
                     method: "GET",
-                    path: "/api/users/me",
+                    path: "/api/provider-connections/" +
+                        data.resource.externalId,
                 });
                 if (response.status !== 200) {
-                    throw new Error("Ambiguous identity read failed");
+                    throw new Error("Ambiguous connection read failed");
                 }
                 return response.body;
             },
