@@ -1,0 +1,18 @@
+{
+    "name": "Ambiguous unauthorized (synthetic)",
+    "description": "Synthetic API 401, without customer data or credentials.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": "Unauthorized"
+                }
+            }
+        }
+    ]
+}
