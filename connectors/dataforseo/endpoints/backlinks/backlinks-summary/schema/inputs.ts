@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { zTarget } from "../../../../schema/common.ts";
+import { zFilters, zTarget } from "../../../../schema/common.ts";
 
 /**
  * Request body of `POST /v3/backlinks/summary/live` — the vendor's fields as
@@ -25,9 +25,7 @@ export const zBacklinksSummaryBody = z.object({
     backlinks_status_type: z.string().min(1).describe(
         "Set what backlinks to return and count (default live; values: all)",
     ).optional(),
-    backlinks_filters: z.array(z.record(z.string(), z.any())).describe(
-        "Filter the backlinks of your target",
-    ).optional(),
+    backlinks_filters: zFilters,
     rank_scale: z.string().min(1).describe(
         "Defines the scale used for calculating and displaying the rank, domain_from_rank, and page_from_rank values (default one_thousand; values: one_hundred)",
     ).optional(),

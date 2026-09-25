@@ -58,18 +58,18 @@
                                     "location_type": "City"
                                 },
                                 {
-                                    "location_code": 2826,
-                                    "location_name": "United Kingdom",
-                                    "location_code_parent": null,
-                                    "country_iso_code": "GB",
-                                    "location_type": "Country"
+                                    "location_code": 21137,
+                                    "location_name": "California,United States",
+                                    "location_code_parent": 2840,
+                                    "country_iso_code": "US",
+                                    "location_type": "State"
                                 },
                                 {
-                                    "location_code": 2276,
-                                    "location_name": "Germany",
-                                    "location_code_parent": null,
-                                    "country_iso_code": "DE",
-                                    "location_type": "Country"
+                                    "location_code": 21176,
+                                    "location_name": "Texas,United States",
+                                    "location_code_parent": 2840,
+                                    "country_iso_code": "US",
+                                    "location_type": "State"
                                 },
                                 {
                                     "location_code": 9061237,

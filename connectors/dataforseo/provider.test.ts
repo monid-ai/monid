@@ -1146,6 +1146,29 @@ Deno.test("dataforseo gates: an 'at least one of' body passes with one identifie
     assertEquals(unions, AT_LEAST_ONE.filter((id) => ids.includes(id)));
 });
 
+Deno.test("dataforseo gates: every filter field takes the vendor's expression array — conditions as arrays joined by and / or", async () => {
+    const bundle = await testBundle();
+    const expression: Json = [["rank", ">", 10], "and", ["type", "=", "x"]];
+    let seen = 0;
+    for (const id of await dataforseoIds()) {
+        const fields = Object.keys(
+            propsOf(bundle.endpoints[id].input.schema.body),
+        ).filter((f) => f.endsWith("filters"));
+        for (const field of fields) {
+            seen++;
+            const input = inputFor(id);
+            await validates(id, {
+                ...input,
+                body: {
+                    ...(input.body as Record<string, Json>),
+                    [field]: expression,
+                },
+            });
+        }
+    }
+    assert(seen > 0);
+});
+
 Deno.test("dataforseo gates: an omitted limit / depth holds the vendor's default page; the estimate holds pages × price or fee + rows × price", async () => {
     const organic = "dataforseo#serp/google-organic";
     const omitted = await validates(organic, { body: { keyword: "seo api" } });
