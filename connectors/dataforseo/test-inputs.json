@@ -19,13 +19,414 @@
             "target": "dataforseo.com"
         }
     },
+    "labs/amazon-bulk-search-volume": {
+        "body": {
+            "keywords": [
+                "seo api",
+                "rank tracker",
+                "keyword research"
+            ],
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/amazon-product-competitors": {
+        "body": {
+            "asin": "B08G4KG9GD",
+            "limit": 3,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/amazon-product-keyword-intersections": {
+        "body": {
+            "asins": {
+                "1": "B08G4KG9GD",
+                "2": "B07FZ8S74Z"
+            },
+            "limit": 3,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/amazon-product-rank-overview": {
+        "body": {
+            "asins": [
+                "B08G4KG9GD",
+                "B07FZ8S74R",
+                "B09B8V1LZ3"
+            ],
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/amazon-ranked-keywords": {
+        "body": {
+            "asin": "B08G4KG9GD",
+            "limit": 3,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/amazon-related-keywords": {
+        "body": {
+            "keyword": "seo api",
+            "limit": 3,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/app-store-app-competitors": {
+        "body": {
+            "app_id": "324684580",
+            "limit": 3,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/app-store-app-intersection": {
+        "body": {
+            "app_ids": {
+                "1": "324684580",
+                "2": "363590051"
+            },
+            "limit": 3,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/app-store-bulk-app-metrics": {
+        "body": {
+            "app_ids": [
+                "324684580",
+                "363590051",
+                "284882215"
+            ],
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/app-store-keywords-for-app": {
+        "body": {
+            "app_id": "324684580",
+            "limit": 3,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/available-history": {
+        "queryParams": {
+            "limit": 3,
+            "search": "2026"
+        }
+    },
+    "labs/bulk-keyword-difficulty": {
+        "body": {
+            "keywords": [
+                "seo api",
+                "rank tracker",
+                "keyword research"
+            ],
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/bulk-traffic-estimation": {
+        "body": {
+            "targets": [
+                "dataforseo.com",
+                "ahrefs.com",
+                "semrush.com"
+            ],
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/categories-for-domain": {
+        "body": {
+            "target": "dataforseo.com",
+            "limit": 3,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/categories-for-keywords": {
+        "body": {
+            "keywords": [
+                "seo api",
+                "rank tracker",
+                "keyword research"
+            ],
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/categories": {
+        "queryParams": {
+            "limit": 3,
+            "search": "apparel"
+        }
+    },
+    "labs/competitors-domain": {
+        "body": {
+            "target": "dataforseo.com",
+            "limit": 3,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/domain-intersection": {
+        "body": {
+            "target1": "dataforseo.com",
+            "target2": "ahrefs.com",
+            "limit": 3,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/domain-metrics-by-categories": {
+        "body": {
+            "category_codes": [
+                10021
+            ],
+            "first_date": "2026-06-01",
+            "second_date": "2026-08-01",
+            "limit": 3,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/domain-rank-overview": {
+        "body": {
+            "target": "dataforseo.com",
+            "limit": 3,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
     "labs/filters": {},
+    "labs/google-play-app-competitors": {
+        "body": {
+            "app_id": "com.spotify.music",
+            "limit": 3,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/google-play-app-intersection": {
+        "body": {
+            "app_ids": {
+                "1": "com.spotify.music",
+                "2": "com.netflix.mediaclient"
+            },
+            "limit": 3,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/google-play-bulk-app-metrics": {
+        "body": {
+            "app_ids": [
+                "com.spotify.music",
+                "com.netflix.mediaclient",
+                "com.facebook.katana"
+            ],
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/google-play-keywords-for-app": {
+        "body": {
+            "app_id": "com.spotify.music",
+            "limit": 3,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/historical-bulk-traffic-estimation": {
+        "body": {
+            "targets": [
+                "dataforseo.com",
+                "ahrefs.com",
+                "semrush.com"
+            ],
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/historical-keyword-data": {
+        "body": {
+            "keywords": [
+                "seo api",
+                "rank tracker",
+                "keyword research"
+            ],
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/historical-rank-overview": {
+        "body": {
+            "target": "dataforseo.com",
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/historical-serps": {
+        "body": {
+            "keyword": "seo api",
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/keyword-ideas": {
+        "body": {
+            "keywords": [
+                "seo api",
+                "rank tracker"
+            ],
+            "limit": 3,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/keyword-overview": {
+        "body": {
+            "keywords": [
+                "seo api",
+                "rank tracker",
+                "keyword research"
+            ],
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/keyword-suggestions": {
+        "body": {
+            "keyword": "seo api",
+            "limit": 3,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/keywords-for-categories": {
+        "body": {
+            "category_codes": [
+                10021
+            ],
+            "limit": 3,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/keywords-for-site": {
+        "body": {
+            "target": "dataforseo.com",
+            "limit": 3,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/locations": {
+        "queryParams": {
+            "limit": 3,
+            "search": "city"
+        }
+    },
+    "labs/page-intersection": {
+        "body": {
+            "pages": {
+                "1": "https://dataforseo.com/*",
+                "2": "https://ahrefs.com/*"
+            },
+            "limit": 3,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
     "labs/ranked-keywords": {
         "body": {
             "target": "dataforseo.com",
             "limit": 3,
             "location_code": 2840,
             "language_code": "en"
+        }
+    },
+    "labs/related-keywords": {
+        "body": {
+            "keyword": "seo api",
+            "limit": 3,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/relevant-pages": {
+        "body": {
+            "target": "dataforseo.com",
+            "limit": 3,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/search-intent": {
+        "body": {
+            "keywords": [
+                "seo api",
+                "rank tracker",
+                "keyword research"
+            ],
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/serp-competitors": {
+        "body": {
+            "keywords": [
+                "seo api",
+                "rank tracker"
+            ],
+            "limit": 3,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/subdomains": {
+        "body": {
+            "target": "dataforseo.com",
+            "limit": 3,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "labs/top-searches": {
+        "body": {
+            "limit": 3,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "onpage/content-parsing": {
+        "body": {
+            "url": "https://dataforseo.com/"
+        }
+    },
+    "onpage/filters": {},
+    "onpage/instant-pages": {
+        "body": {
+            "url": "https://dataforseo.com/"
+        }
+    },
+    "onpage/lighthouse-audits": {},
+    "onpage/lighthouse-versions": {},
+    "onpage/lighthouse": {
+        "body": {
+            "url": "https://dataforseo.com/",
+            "language_code": "en"
+        }
+    },
+    "onpage/page-screenshot": {
+        "body": {
+            "url": "https://dataforseo.com/"
         }
     },
     "serp/baidu-locations": {

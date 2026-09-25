@@ -145,8 +145,58 @@ const RATE: Record<string, string> = {
     "dataforseo#ai/chatgpt-response": "flat 0.0006",
     "dataforseo#backlinks/bulk-ranks": "rows 0.024+0.000036",
     "dataforseo#backlinks/summary": "rows 0.024+0.000036",
+    "dataforseo#labs/amazon-bulk-search-volume": "rows 0.012+0.00012",
+    "dataforseo#labs/amazon-product-competitors": "rows 0.012+0.00012",
+    "dataforseo#labs/amazon-product-keyword-intersections":
+        "rows 0.012+0.00012",
+    "dataforseo#labs/amazon-product-rank-overview": "rows 0.012+0.00012",
+    "dataforseo#labs/amazon-ranked-keywords": "rows 0.012+0.00012",
+    "dataforseo#labs/amazon-related-keywords": "rows 0.012+0.00012",
+    "dataforseo#labs/app-store-app-competitors": "rows 0.012+0.00012",
+    "dataforseo#labs/app-store-app-intersection": "rows 0.012+0.00012",
+    "dataforseo#labs/app-store-bulk-app-metrics": "rows 0.012+0.00012",
+    "dataforseo#labs/app-store-keywords-for-app": "rows 0.012+0.00012",
+    "dataforseo#labs/available-history": "free",
+    "dataforseo#labs/bulk-keyword-difficulty": "rows 0.012+0.00012",
+    "dataforseo#labs/bulk-traffic-estimation": "rows 0.012+0.00012",
+    "dataforseo#labs/categories": "free",
+    "dataforseo#labs/categories-for-domain": "rows 0.012+0.00012",
+    "dataforseo#labs/categories-for-keywords": "rows 0.012+0.00012",
+    "dataforseo#labs/competitors-domain": "rows 0.012+0.00012",
+    "dataforseo#labs/domain-intersection": "rows 0.012+0.00012",
+    "dataforseo#labs/domain-metrics-by-categories": "rows 0.12+0.0012",
+    "dataforseo#labs/domain-rank-overview": "rows 0.012+0.00012",
     "dataforseo#labs/filters": "free",
+    "dataforseo#labs/google-play-app-competitors": "rows 0.012+0.00012",
+    "dataforseo#labs/google-play-app-intersection": "rows 0.012+0.00012",
+    "dataforseo#labs/google-play-bulk-app-metrics": "rows 0.012+0.00012",
+    "dataforseo#labs/google-play-keywords-for-app": "rows 0.012+0.00012",
+    "dataforseo#labs/historical-bulk-traffic-estimation": "rows 0.12+0.0012",
+    "dataforseo#labs/historical-keyword-data": "rows 0.012+0.00012",
+    "dataforseo#labs/historical-rank-overview": "rows 0.12+0.0012",
+    "dataforseo#labs/historical-serps": "row 0.00012",
+    "dataforseo#labs/keyword-ideas": "rows 0.012+0.00012",
+    "dataforseo#labs/keyword-overview": "rows 0.012+0.00012",
+    "dataforseo#labs/keyword-suggestions": "rows 0.012+0.00012",
+    "dataforseo#labs/keywords-for-categories": "rows 0.012+0.00012",
+    "dataforseo#labs/keywords-for-site": "rows 0.012+0.00012",
+    "dataforseo#labs/locations": "free",
+    "dataforseo#labs/page-intersection": "rows 0.012+0.00012",
     "dataforseo#labs/ranked-keywords": "rows 0.012+0.00012",
+    "dataforseo#labs/related-keywords": "rows 0.012+0.00012",
+    "dataforseo#labs/relevant-pages": "rows 0.012+0.00012",
+    "dataforseo#labs/search-intent": "rows 0.012+0.00012",
+    "dataforseo#labs/serp-competitors": "rows 0.012+0.00012",
+    "dataforseo#labs/subdomains": "rows 0.012+0.00012",
+    "dataforseo#labs/top-searches": "rows 0.012+0.00012",
+    "dataforseo#onpage/content-parsing": "flat 0.00015",
+    "dataforseo#onpage/filters": "free",
+    "dataforseo#onpage/instant-pages": "flat 0.00015",
+    "dataforseo#onpage/lighthouse": "flat 0.005",
+    "dataforseo#onpage/lighthouse-audits": "free",
+    "dataforseo#onpage/lighthouse-versions": "free",
+    // vendor pricing page (dataforseo.com/pricing/on-page, 2026-09-25)
+    "dataforseo#onpage/page-screenshot": "flat 0.0048",
     "dataforseo#serp/baidu-locations": "free",
     "dataforseo#serp/baidu-organic": "page 0.0012/10",
     "dataforseo#serp/bing-locations": "free",
@@ -247,7 +297,7 @@ const LLM_RESPONSES = [
 
 Deno.test("dataforseo docs: every endpoint is in the rate table", async () => {
     const ids = await dataforseoIds();
-    assertEquals(ids.length, 37);
+    assertEquals(ids.length, 85);
     assertEquals(Object.keys(RATE).sort(), ids);
 });
 
@@ -445,20 +495,20 @@ Deno.test("dataforseo docs: one Basic inject, one relay, one digest, one meter, 
     );
     assertEquals(
         byProvenance.filter(([mine]) => mine).map(([, n]) => n),
-        [23],
+        [65],
     );
     assertEquals(
         byProvenance.filter(([mine]) => !mine).map(([, n]) => n).sort((a, b) =>
             a - b
         ),
-        [1, 6, 7],
+        [4, 7, 9],
     );
     // two poll texts: task_get/advanced/{id} and task_get/{id}
     assertEquals(polls.size, 1);
     // the estimate texts: depth, YouTube's block_depth, depth × crawl pages
     // (per page size), crawl pages only, limit, one per array field, and the
     // fixed one row
-    assertEquals(estimates.size, 13);
+    assertEquals(estimates.size, 20);
 });
 
 Deno.test("dataforseo meta: the provider's envelope and blocked-field notes reach every doc; v1's pricing notes ride the docs that had them", async () => {
@@ -523,7 +573,7 @@ Deno.test("dataforseo schemas: strict mirrors, the vendor's default on limit / d
             }
         }
     }
-    assertEquals(defaults.filter((n) => n === "limit").length, 1);
+    assertEquals(defaults.filter((n) => n === "limit").length, 26);
     assertEquals(defaults.filter((n) => n === "depth").length, 14);
     assertEquals(defaults.filter((n) => n === "block_depth").length, 1);
     // the dictionary query is ours: search and limit optional, country in
