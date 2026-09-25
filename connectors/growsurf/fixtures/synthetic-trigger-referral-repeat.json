@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-trigger-referral-repeat",
+    "description": "The SAME referral credited twice. HTTP 200 with success:false — not an error status, which is exactly why a caller must branch on `success` and not on the status code. Authored from the GrowSurf REST v2 (2.0.0) response shape, verified field for field against a live deployment on 2026-09-22; the identities are GrowSurf's own published example values.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.growsurf.com/v2/campaign/k9j2mq/participant/i9g2bh/ref"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": false,
+                    "message": "Referral credit has already been awarded"
+                }
+            }
+        }
+    ]
+}

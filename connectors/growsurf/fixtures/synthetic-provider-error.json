@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "GrowSurf refuses the call: 403 with the flat error envelope every non-2xx carries, where `code` is the stable machine-readable half. Vendor non-2xx is DATA — the engine classifies it as a provider error and the run completes at zero usage. Serves every endpoint. Authored from the GrowSurf REST v2 (2.0.0) response shape, verified field for field against a live deployment on 2026-09-22; the identities are GrowSurf's own published example values.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 403,
+                "body": {
+                    "name": "NotAuthorizedError",
+                    "code": "NOT_AUTHORIZED_ERROR",
+                    "message": "No API key provided. Send it as an Authorization: Bearer header.",
+                    "status": 403,
+                    "supportUrl": "https://growsurf.com/settings#contact_support"
+                }
+            }
+        }
+    ]
+}

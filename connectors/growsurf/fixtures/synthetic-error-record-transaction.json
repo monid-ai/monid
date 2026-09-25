@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-error-record-transaction",
+    "description": "Recording a sale against a REFERRAL program. The affiliate-only rule, enforced by the vendor rather than by the schema. Vendor non-2xx is DATA: the engine classifies it as a provider error, forces zero usage, and passes the envelope through — `code` is the stable half a caller branches on. Authored from the GrowSurf REST v2 (2.0.0) response shape, verified field for field against a live deployment on 2026-09-22; the identities are GrowSurf's own published example values.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.growsurf.com/v2/campaign/x4t7bd/participant/i9g2bh/transaction"
+            },
+            "res": {
+                "status": 422,
+                "body": {
+                    "name": "CampaignTypeError",
+                    "code": "CAMPAIGN_TYPE_ERROR",
+                    "message": "This endpoint is only available for affiliate programs.",
+                    "status": 422,
+                    "supportUrl": "https://growsurf.com/settings#contact_support"
+                }
+            }
+        }
+    ]
+}

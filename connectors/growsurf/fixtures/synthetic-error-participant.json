@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-error-participant",
+    "description": "An unknown participant answers 400, NOT 404 — worth pinning, because a caller looking for a 404 would treat it as a malformed request. Vendor non-2xx is DATA: the engine classifies it as a provider error, forces zero usage, and passes the envelope through — `code` is the stable half a caller branches on. Authored from the GrowSurf REST v2 (2.0.0) response shape, verified field for field against a live deployment on 2026-09-22; the identities are GrowSurf's own published example values.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.growsurf.com/v2/campaign/x4t7bd/participant/monica%40raviga.com"
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "name": "ParticipantNotFound",
+                    "code": "PARTICIPANT_NOT_FOUND",
+                    "message": "Participant monica@raviga.com not found",
+                    "status": 400,
+                    "supportUrl": "https://growsurf.com/settings#contact_support"
+                }
+            }
+        }
+    ]
+}

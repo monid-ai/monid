@@ -343,4 +343,16 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "Tools to pull data from app stores, including Apple App Store " +
             "and Google Play listings, rankings, reviews, and more.",
     },
+    {
+        // The first leaf whose endpoints OPERATE the caller's own program
+        // rather than retrieve or generate something: enrolling a
+        // participant and crediting a referral change the caller's live
+        // program, and reading it back is the same surface.
+        id: "referrals",
+        displayName: "Referrals & Affiliates",
+        description:
+            "Tools to run referral and affiliate programs, including " +
+            "participants, referral links, sales attribution, commissions, " +
+            "and more.",
+    },
 ]);

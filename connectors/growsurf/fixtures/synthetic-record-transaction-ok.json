@@ -1,0 +1,21 @@
+{
+    "name": "synthetic-record-transaction-ok",
+    "description": "POST /campaign/{id}/participant/{participantIdOrEmail}/transaction: a $99.00 sale recorded against a referred customer, first sale, not a duplicate. Authored from the GrowSurf REST v2 (2.0.0) response shape, verified field for field against a live deployment on 2026-09-22; the identities are GrowSurf's own published example values.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.growsurf.com/v2/campaign/x4t7bd/participant/i9g2bh/transaction"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "firstSale": true,
+                    "duplicate": false,
+                    "message": "Sale was successfully recorded. Commission(s) for the referrer will be generated, if applicable."
+                }
+            }
+        }
+    ]
+}

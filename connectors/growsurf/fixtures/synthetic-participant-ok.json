@@ -1,0 +1,108 @@
+{
+    "name": "synthetic-participant-ok",
+    "description": "GET /campaign/{id}/participant/{participantIdOrEmail}: one affiliate, looked up by EMAIL ADDRESS rather than id — the path parameter is URL-encoded by the engine. Carries the affiliate-only fields (isAffiliate, affiliateStatus, payoutSettings.requiredActions). Authored from the GrowSurf REST v2 (2.0.0) response shape, verified field for field against a live deployment on 2026-09-22; the identities are GrowSurf's own published example values.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.growsurf.com/v2/campaign/x4t7bd/participant/monica%40raviga.com"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "h8kp6l",
+                    "firstName": "Monica",
+                    "lastName": "Hall",
+                    "referralCount": 2,
+                    "inviteCount": 3,
+                    "monthlyReferralCount": 1,
+                    "prevMonthlyReferralCount": 0,
+                    "leadCount": 1,
+                    "rank": 1,
+                    "monthlyRank": 1,
+                    "shareUrl": "https://piedpiper.com?grsf=h8kp6l",
+                    "rewards": [
+                        {
+                            "id": "prew_8yzmil",
+                            "referredId": "i9g2bh",
+                            "referrerId": "h8kp6l",
+                            "commissionStructure": {
+                                "event": "SALE",
+                                "type": "PERCENT",
+                                "minPaidReferrals": 1,
+                                "holdDuration": 30,
+                                "duration": "FOREVER",
+                                "durationInMonths": null,
+                                "approvalRequired": false,
+                                "percent": 20,
+                                "amount": null,
+                                "amountISO": null,
+                                "hasMaxAmount": false,
+                                "maxAmount": null,
+                                "maxAmountISO": null,
+                                "hasIntro": false,
+                                "introType": null,
+                                "introPercent": null,
+                                "introAmount": null,
+                                "introAmountISO": null,
+                                "introDuration": null,
+                                "introDurationInMonths": null
+                            }
+                        }
+                    ],
+                    "email": "monica@raviga.com",
+                    "vanityKeys": [],
+                    "createdAt": 1752404738928,
+                    "referralSource": "PARTICIPANT",
+                    "isWinner": true,
+                    "fraudRiskLevel": "LOW",
+                    "fraudReasonCode": "UNIQUE_IDENTITY",
+                    "shareCount": {
+                        "email": 3,
+                        "facebook": 1,
+                        "twitter": 0,
+                        "linkedin": 0,
+                        "pinterest": 0,
+                        "sms": 2,
+                        "messenger": 0,
+                        "whatsapp": 0,
+                        "wechat": 0,
+                        "threads": 0,
+                        "bluesky": 0,
+                        "telegram": 0,
+                        "reddit": 0,
+                        "tumblr": 0,
+                        "qrcode": 0
+                    },
+                    "impressionCount": 12,
+                    "uniqueImpressionCount": 9,
+                    "referrals": [
+                        "i9g2bh",
+                        "xua4sq"
+                    ],
+                    "monthlyReferrals": [
+                        "xua4sq"
+                    ],
+                    "ipAddress": "203.0.113.10",
+                    "fingerprint": "cfb163bd47ba666c52cb932c521e47f4",
+                    "mobileInstanceId": null,
+                    "metadata": {
+                        "customerId": "12345"
+                    },
+                    "unsubscribed": false,
+                    "referrer": null,
+                    "affiliateEnrollmentSource": "INVITE",
+                    "isAffiliate": true,
+                    "affiliateStatus": "APPROVED",
+                    "unreadCommissionsCount": 2,
+                    "unreadPayoutsCount": 0,
+                    "payoutSettings": {
+                        "requiredActions": [
+                            "PAYOUT_DESTINATION"
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

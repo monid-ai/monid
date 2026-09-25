@@ -1,0 +1,125 @@
+{
+    "name": "synthetic-campaigns-ok",
+    "description": "GET /campaigns: the team's programs, one REFERRAL and one AFFILIATE. The affiliate row carries the commissionStructure a recorded sale is priced by, which is why the list is worth reading before anything else. Authored from the GrowSurf REST v2 (2.0.0) response shape, verified field for field against a live deployment on 2026-09-22; the identities are GrowSurf's own published example values.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "campaigns": [
+                        {
+                            "id": "k9j2mq",
+                            "name": "Pied Piper Referral Program",
+                            "type": "REFERRAL",
+                            "referralCount": 2,
+                            "participantCount": 7,
+                            "impressionCount": 12,
+                            "inviteCount": 3,
+                            "winnerCount": 1,
+                            "currencyISO": "USD",
+                            "status": "IN_PROGRESS",
+                            "rewards": [
+                                {
+                                    "id": "crew_v180lz",
+                                    "type": "DOUBLE_SIDED",
+                                    "description": "$20 gift card",
+                                    "referralDescription": "$20 off your first month",
+                                    "isUnlimited": false,
+                                    "limit": 5,
+                                    "conversionsRequired": 1,
+                                    "numberOfWinners": null,
+                                    "imageUrl": "",
+                                    "order": 0,
+                                    "limitDuration": "IN_TOTAL",
+                                    "nextMilestonePrefix": null,
+                                    "nextMilestoneSuffix": null,
+                                    "couponCode": null,
+                                    "metadata": {},
+                                    "title": "Refer a friend, get $20",
+                                    "isVisible": true,
+                                    "referralCouponCode": null,
+                                    "value": {
+                                        "fairMarketValueUSD": 2000,
+                                        "taxCharacter": "GIFT_CARD"
+                                    },
+                                    "referredValue": {
+                                        "fairMarketValueUSD": 2000,
+                                        "taxCharacter": "DISCOUNT"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "id": "x4t7bd",
+                            "name": "Pied Piper Affiliate Program",
+                            "type": "AFFILIATE",
+                            "referralCount": 4,
+                            "participantCount": 129,
+                            "impressionCount": 0,
+                            "inviteCount": 0,
+                            "winnerCount": 2,
+                            "currencyISO": "USD",
+                            "status": "IN_PROGRESS",
+                            "rewards": [
+                                {
+                                    "id": "crew_mzf2jc",
+                                    "type": "AFFILIATE",
+                                    "description": null,
+                                    "referralDescription": null,
+                                    "isUnlimited": true,
+                                    "limit": -1,
+                                    "conversionsRequired": null,
+                                    "numberOfWinners": null,
+                                    "imageUrl": "",
+                                    "order": null,
+                                    "limitDuration": null,
+                                    "nextMilestonePrefix": null,
+                                    "nextMilestoneSuffix": null,
+                                    "couponCode": null,
+                                    "metadata": {},
+                                    "commissionStructure": {
+                                        "event": "SALE",
+                                        "type": "PERCENT",
+                                        "minPaidReferrals": 1,
+                                        "holdDuration": 30,
+                                        "duration": "FOREVER",
+                                        "durationInMonths": null,
+                                        "approvalRequired": false,
+                                        "percent": 20,
+                                        "amount": null,
+                                        "amountISO": null,
+                                        "hasMaxAmount": false,
+                                        "maxAmount": null,
+                                        "maxAmountISO": null,
+                                        "hasIntro": false,
+                                        "introType": null,
+                                        "introPercent": null,
+                                        "introAmount": null,
+                                        "introAmountISO": null,
+                                        "introDuration": null,
+                                        "introDurationInMonths": null
+                                    },
+                                    "title": "20% recurring commission",
+                                    "isVisible": true,
+                                    "referralCouponCode": null,
+                                    "value": {
+                                        "fairMarketValueUSD": null,
+                                        "taxCharacter": null
+                                    },
+                                    "referredValue": {
+                                        "fairMarketValueUSD": null,
+                                        "taxCharacter": null
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
