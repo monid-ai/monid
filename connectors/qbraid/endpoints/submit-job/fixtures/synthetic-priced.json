@@ -1,0 +1,35 @@
+{
+    "name": "synthetic-priced",
+    "description": "SYNTHETIC — the recorded 201 re-priced to the recorded QPU estimate (265 credits for 100 shots on aws:aqt:qpu:ibex-q1, cost-estimate 2026-09-22). Pins the billing arithmetic: claim 265 wins, evidence CREDIT 265 000 000 folds to 265.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api-v2.qbraid.com/api/v1/jobs"
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "jobQrn": "aws:aqt:qpu:ibex-q1-32de-qjob-6ab2125ea32f8043c5e8e9d9",
+                        "name": "monid-fixture-bell",
+                        "status": "INITIALIZING",
+                        "shots": 100,
+                        "numCircuits": 1,
+                        "estimatedCost": 265,
+                        "experimentType": "gate_model",
+                        "vendor": "aws",
+                        "deviceQrn": "aws:aqt:qpu:ibex-q1",
+                        "tags": {},
+                        "runtimeOptions": {},
+                        "timeStamps": {
+                            "createdAt": "2026-09-22T05:30:06.351840Z"
+                        },
+                        "provider": "aqt"
+                    }
+                }
+            }
+        }
+    ]
+}

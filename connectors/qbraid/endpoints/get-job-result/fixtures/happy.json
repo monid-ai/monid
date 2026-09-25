@@ -1,0 +1,34 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-09-22: GET /jobs/{qrn}/result on a 10-shot Bell job — resultData.measurementCounts; cost is a decimal STRING (\"0E-33\") on this route.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api-v2.qbraid.com/api/v1/jobs/qbraid%3Aqbraid%3Asim%3Aqir-sv-32de-qjob-6ab2125ea32f8043c5e8e9d9/result"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "status": "COMPLETED",
+                        "cost": "0E-33",
+                        "timeStamps": {
+                            "createdAt": "2026-09-22T05:30:08Z",
+                            "endedAt": "2026-09-22T05:30:08Z",
+                            "executionDuration": 5
+                        },
+                        "resultData": {
+                            "measurementCounts": {
+                                "11": 3,
+                                "00": 7
+                            },
+                            "seed": null
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

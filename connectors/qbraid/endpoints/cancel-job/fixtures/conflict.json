@@ -1,0 +1,23 @@
+{
+    "name": "conflict",
+    "description": "Recorded 2026-09-22: cancelling a job still INITIALIZING — 409 JOB_CANCEL_CONFLICT. Data, zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api-v2.qbraid.com/api/v1/jobs/qbraid%3Aqbraid%3Asim%3Aqir-sv-32de-qjob-6ab2125ea32f8043c5e8e9d9/cancel"
+            },
+            "res": {
+                "status": 409,
+                "body": {
+                    "success": false,
+                    "message": "Job qbraid:qbraid:sim:qir-sv-32de-qjob-6ab21275a32f8043c5e8e9e7 is still initializing and cannot be cancelled yet. Please try again in a few moments.",
+                    "error": {
+                        "message": "Job qbraid:qbraid:sim:qir-sv-32de-qjob-6ab21275a32f8043c5e8e9e7 is still initializing and cannot be cancelled yet. Please try again in a few moments.",
+                        "code": "JOB_CANCEL_CONFLICT"
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,23 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC — the 202 shape from qbraid-api job/core/controller.ts cancelJob ({message, jobQrn, status}). No recording: the free simulator finishes before a cancel can land.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api-v2.qbraid.com/api/v1/jobs/qbraid%3Aqbraid%3Asim%3Aqir-sv-32de-qjob-6ab2125ea32f8043c5e8e9d9/cancel"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "message": "Job cancellation initiated successfully",
+                        "jobQrn": "qbraid:qbraid:sim:qir-sv-32de-qjob-6ab2125ea32f8043c5e8e9d9",
+                        "status": "CANCELLING"
+                    }
+                }
+            }
+        }
+    ]
+}

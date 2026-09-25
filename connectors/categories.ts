@@ -343,4 +343,11 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "Tools to pull data from app stores, including Apple App Store " +
             "and Google Play listings, rankings, reviews, and more.",
     },
+    {
+        id: "quantum-computing",
+        displayName: "Quantum Computing",
+        description:
+            "Quantum hardware and simulators: devices, calibrations, OpenQASM " +
+            "tooling, and job submission.",
+    },
 ]);

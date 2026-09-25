@@ -1,0 +1,35 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-09-22: POST /jobs, 10 shots of a Bell circuit on the free qbraid:qbraid:sim:qir-sv — 201, estimatedCost 0. A zero claim prunes: credits {}.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api-v2.qbraid.com/api/v1/jobs"
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "jobQrn": "qbraid:qbraid:sim:qir-sv-32de-qjob-6ab2125ea32f8043c5e8e9d9",
+                        "name": "monid-fixture-bell",
+                        "status": "INITIALIZING",
+                        "shots": 10,
+                        "numCircuits": 1,
+                        "estimatedCost": 0,
+                        "experimentType": "gate_model",
+                        "vendor": "qbraid",
+                        "deviceQrn": "qbraid:qbraid:sim:qir-sv",
+                        "tags": {},
+                        "runtimeOptions": {},
+                        "timeStamps": {
+                            "createdAt": "2026-09-22T05:30:06.351840Z"
+                        },
+                        "provider": "qbraid"
+                    }
+                }
+            }
+        }
+    ]
+}

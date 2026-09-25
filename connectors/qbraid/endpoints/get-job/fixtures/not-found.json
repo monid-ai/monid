@@ -1,0 +1,23 @@
+{
+    "name": "not-found",
+    "description": "Recorded 2026-09-22: unknown job QRN — 404 NOT_FOUND. Data, zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api-v2.qbraid.com/api/v1/jobs/qbraid%3Aqbraid%3Asim%3Aqir-sv-32de-qjob-6ab2125ea32f8043c5e8e9d9"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "success": false,
+                    "message": "Job not found",
+                    "error": {
+                        "message": "Job not found",
+                        "code": "NOT_FOUND"
+                    }
+                }
+            }
+        }
+    ]
+}

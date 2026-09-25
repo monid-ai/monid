@@ -1,0 +1,47 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-09-22: GET /jobs/{qrn} on a COMPLETED free-simulator job — carries cost AND estimatedCost (0): reading a job must bill nothing. SDK-contract ids and the bucket locator scrubbed.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api-v2.qbraid.com/api/v1/jobs/qbraid%3Aqbraid%3Asim%3Aqir-sv-32de-qjob-6ab2125ea32f8043c5e8e9d9"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "jobQrn": "qbraid:qbraid:sim:qir-sv-32de-qjob-6ab2125ea32f8043c5e8e9d9",
+                        "name": "monid-fixture-bell",
+                        "status": "COMPLETED",
+                        "shots": 10,
+                        "numCircuits": 1,
+                        "cost": 0,
+                        "estimatedCost": 0,
+                        "experimentType": "gate_model",
+                        "vendor": "qbraid",
+                        "deviceQrn": "qbraid:qbraid:sim:qir-sv",
+                        "tags": {},
+                        "runtimeOptions": {},
+                        "createdAt": "2026-09-22T05:30:06.351Z",
+                        "updatedAt": "2026-09-22T05:30:18.088Z",
+                        "timeStamps": {
+                            "createdAt": "2026-09-22T05:30:08.000Z",
+                            "endedAt": "2026-09-22T05:30:08.000Z",
+                            "executionDuration": 5
+                        },
+                        "device": {
+                            "qrn": "qbraid:qbraid:sim:qir-sv",
+                            "name": "QIR Simulator",
+                            "deviceType": "SIMULATOR",
+                            "vendor": "qbraid",
+                            "status": "ONLINE"
+                        },
+                        "provider": "qbraid"
+                    }
+                }
+            }
+        }
+    ]
+}
