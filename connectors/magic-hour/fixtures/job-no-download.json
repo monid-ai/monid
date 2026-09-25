@@ -1,0 +1,25 @@
+{
+    "name": "job-no-download",
+    "description": "A complete image project without a usable download is not a successful output.",
+    "calls": [
+        {
+            "req": { "method": "POST", "url": "{{request.url}}" },
+            "res": { "status": 200, "body": { "id": "project_1" } }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/image-projects/project_1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "project_1",
+                    "status": "complete",
+                    "credits_charged": 50,
+                    "downloads": []
+                }
+            }
+        }
+    ]
+}

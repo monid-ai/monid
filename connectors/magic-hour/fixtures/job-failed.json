@@ -1,0 +1,25 @@
+{
+    "name": "job-failed",
+    "description": "A failed image project returns an error even if its status body carries a credits_charged field.",
+    "calls": [
+        {
+            "req": { "method": "POST", "url": "{{request.url}}" },
+            "res": { "status": 200, "body": { "id": "project_1" } }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/image-projects/project_1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "project_1",
+                    "status": "error",
+                    "credits_charged": 50,
+                    "error": "Generation failed"
+                }
+            }
+        }
+    ]
+}
