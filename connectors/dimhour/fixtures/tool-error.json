@@ -1,0 +1,28 @@
+{
+    "name": "tool-error",
+    "description": "Live, recorded 2026-09-24 (supported-city list trimmed): a tool result with isError: true inside an HTTP 200 (get_venue with an unknown city). Settles as a 502 provider error with zero usage; fromError lifts the tool's own {\"error\"} text into message.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "{\"error\":\"Unknown city \\\"atlantis\\\". Supported cities: New York City (nyc), Dallas (dallas), ...\"}"
+                            }
+                        ],
+                        "isError": true
+                    },
+                    "jsonrpc": "2.0",
+                    "id": 1
+                }
+            }
+        }
+    ]
+}

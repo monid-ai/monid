@@ -1,0 +1,68 @@
+{
+    "name": "happy",
+    "description": "Live Dim Hour MCP answer, recorded 2026-09-24 and trimmed (arrays to 2, strings to 240 chars): find_places city=dallas looking_for=patio limit=2: ranked occasion picks. HTTP 200 carrying result.structuredContent plus the same payload as JSON in content[0].text. The connector returns structuredContent without the MCP envelope.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "{\"city\":\"dallas\",\"total_matches\":291,\"showing\":2,\"venues\":[{\"id\":86,\"name\":\"Georgie\",\"cuisine\":\"American / Southern Fine Dining\",\"neighborhood\":\"Knox-Henderson\",\"score\":95,\"price\":\"$$$\",\"happy_hour\":\"\",\"reservation\":\"OpenTable\",\"awards\":\"Michelin Guide Recommended 2024 & 2025 | Wine Spectator Best of Award of Excellence; James Beard Emerging Chef (RJ Yoakum) 2025 (finalist)\",\"description\":\"Georgie is Travis Street Hospitality's Knox-Henderson fine-dining destination, now led by acclaimed French chef Bruno Davaillon, who introduced a newly developed menu in March 2026 built on refined,\",\"url\":\"https://dimhour.com/dallas/v/georgie/\"},{\"id\":45,\"name\":\"Loro\",\"cuisine\":\"Asian Smokehouse / BBQ\",\"neighborhood\":\"East Dallas / Lakewood\",\"score\":93,\"price\":\"$$$\",\"happy_hour\":\"Mon-Fri 5-6pm\",\"reservation\":\"Toast\",\"awards\":\"Michelin Bib Gourmand 2024 & 2025\",\"description\":\"Loro is the East Dallas Asian smokehouse where the award-winning talents behind Uchi (Tyson Cole, James Beard winner) and Franklin Barbecue (Aaron Franklin, James Beard winner) collide - the second\",\"url\":\"https://dimhour.com/dallas/v/loro/\"}],\"receipt\":{\"as_of\":\"2026-09-24\",\"as_of_scope\":\"city-catalog-file\",\"source\":\"dimhour-catalog\",\"abstained\":false,\"stale\":false,\"reason\":null}}"
+                            }
+                        ],
+                        "structuredContent": {
+                            "city": "dallas",
+                            "total_matches": 291,
+                            "showing": 2,
+                            "venues": [
+                                {
+                                    "id": 86,
+                                    "name": "Georgie",
+                                    "cuisine": "American / Southern Fine Dining",
+                                    "neighborhood": "Knox-Henderson",
+                                    "score": 95,
+                                    "price": "$$$",
+                                    "happy_hour": "",
+                                    "reservation": "OpenTable",
+                                    "awards": "Michelin Guide Recommended 2024 & 2025 | Wine Spectator Best of Award of Excellence; James Beard Emerging Chef (RJ Yoakum) 2025 (finalist)",
+                                    "description": "Georgie is Travis Street Hospitality's Knox-Henderson fine-dining destination, now led by acclaimed French chef Bruno Davaillon, who introduced a newly developed menu in March 2026 built on refined,",
+                                    "url": "https://dimhour.com/dallas/v/georgie/"
+                                },
+                                {
+                                    "id": 45,
+                                    "name": "Loro",
+                                    "cuisine": "Asian Smokehouse / BBQ",
+                                    "neighborhood": "East Dallas / Lakewood",
+                                    "score": 93,
+                                    "price": "$$$",
+                                    "happy_hour": "Mon-Fri 5-6pm",
+                                    "reservation": "Toast",
+                                    "awards": "Michelin Bib Gourmand 2024 & 2025",
+                                    "description": "Loro is the East Dallas Asian smokehouse where the award-winning talents behind Uchi (Tyson Cole, James Beard winner) and Franklin Barbecue (Aaron Franklin, James Beard winner) collide - the second",
+                                    "url": "https://dimhour.com/dallas/v/loro/"
+                                }
+                            ],
+                            "receipt": {
+                                "as_of": "2026-09-24",
+                                "as_of_scope": "city-catalog-file",
+                                "source": "dimhour-catalog",
+                                "abstained": false,
+                                "stale": false,
+                                "reason": null
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

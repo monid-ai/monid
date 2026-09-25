@@ -1,0 +1,23 @@
+{
+    "name": "rpc-error",
+    "description": "Live, recorded 2026-09-24: a JSON-RPC top-level error (-32601 Method not found) inside an HTTP 200. lifecycle.start settles it as a 502 provider error with zero usage; fromError digests it to {message, error_code, raw}.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "error": {
+                        "code": -32601,
+                        "message": "Method not found"
+                    }
+                }
+            }
+        }
+    ]
+}

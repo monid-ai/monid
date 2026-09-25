@@ -1,0 +1,70 @@
+{
+    "name": "happy",
+    "description": "Live Dim Hour MCP answer, recorded 2026-09-24 and trimmed (arrays to 2, strings to 240 chars): search_venues city=dallas query=ramen limit=2: ranked venues. HTTP 200 carrying result.structuredContent plus the same payload as JSON in content[0].text. The connector returns structuredContent without the MCP envelope.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "{\"city\":\"dallas\",\"total_matches\":18,\"total_exact\":true,\"receipt\":{\"as_of\":\"2026-09-24\",\"as_of_scope\":\"city-catalog-file\",\"source\":\"dimhour-catalog\",\"abstained\":false,\"stale\":false,\"reason\":null},\"showing\":2,\"note\":\"Showing top 2 of 18 by score - add filters (cuisine, neighborhood, min_score) to narrow.\",\"venues\":[{\"id\":393,\"name\":\"Ichigoh Ramen\",\"cuisine\":\"Japanese Ramen\",\"neighborhood\":\"Deep Ellum\",\"score\":88,\"price\":\"$$\",\"happy_hour\":\"\",\"reservation\":\"walk-in\",\"awards\":\"D Magazine Best Ramen | Dallas Observer Top Pick\",\"description\":\"Deep Ellum ramen shop opened in November 2018 by NYC transplants George Itoh and Andy Tam.\",\"url\":\"https://dimhour.com/dallas/v/ichigoh-ramen/\"},{\"id\":1095,\"name\":\"Oni Ramen\",\"cuisine\":\"Japanese Ramen\",\"neighborhood\":\"Deep Ellum\",\"score\":86,\"price\":\"$$\",\"happy_hour\":\"\",\"reservation\":\"walk-in\",\"awards\":\"D Magazine Best Ramen; Dallas Observer; PaperCity Best Ramen\",\"description\":\"One of Dallas's most-decorated ramen spots and a Deep Ellum staple since 2016. Chef Jesús García blends Japanese technique with bold flavors — rich broths, a signature Texas Mazemen — and the\",\"url\":\"https://dimhour.com/dallas/v/oni-ramen/\"}]}"
+                            }
+                        ],
+                        "structuredContent": {
+                            "city": "dallas",
+                            "total_matches": 18,
+                            "total_exact": true,
+                            "receipt": {
+                                "as_of": "2026-09-24",
+                                "as_of_scope": "city-catalog-file",
+                                "source": "dimhour-catalog",
+                                "abstained": false,
+                                "stale": false,
+                                "reason": null
+                            },
+                            "showing": 2,
+                            "note": "Showing top 2 of 18 by score - add filters (cuisine, neighborhood, min_score) to narrow.",
+                            "venues": [
+                                {
+                                    "id": 393,
+                                    "name": "Ichigoh Ramen",
+                                    "cuisine": "Japanese Ramen",
+                                    "neighborhood": "Deep Ellum",
+                                    "score": 88,
+                                    "price": "$$",
+                                    "happy_hour": "",
+                                    "reservation": "walk-in",
+                                    "awards": "D Magazine Best Ramen | Dallas Observer Top Pick",
+                                    "description": "Deep Ellum ramen shop opened in November 2018 by NYC transplants George Itoh and Andy Tam.",
+                                    "url": "https://dimhour.com/dallas/v/ichigoh-ramen/"
+                                },
+                                {
+                                    "id": 1095,
+                                    "name": "Oni Ramen",
+                                    "cuisine": "Japanese Ramen",
+                                    "neighborhood": "Deep Ellum",
+                                    "score": 86,
+                                    "price": "$$",
+                                    "happy_hour": "",
+                                    "reservation": "walk-in",
+                                    "awards": "D Magazine Best Ramen; Dallas Observer; PaperCity Best Ramen",
+                                    "description": "One of Dallas's most-decorated ramen spots and a Deep Ellum staple since 2016. Chef Jesús García blends Japanese technique with bold flavors — rich broths, a signature Texas Mazemen — and the",
+                                    "url": "https://dimhour.com/dallas/v/oni-ramen/"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

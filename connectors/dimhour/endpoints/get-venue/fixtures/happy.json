@@ -1,0 +1,66 @@
+{
+    "name": "happy",
+    "description": "Live Dim Hour MCP answer, recorded 2026-09-24 and trimmed (arrays to 2, strings to 240 chars): get_venue city=dallas name=\"Las Palmas\": one full venue record. HTTP 200 carrying result.structuredContent plus the same payload as JSON in content[0].text. The connector returns structuredContent without the MCP envelope.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "{\"id\":28,\"name\":\"Las Palmas\",\"cuisine\":\"Tex-Mex\",\"neighborhood\":\"Uptown\",\"score\":86,\"price\":\"$$\",\"tags\":[\"Happy Hour\",\"Casual\"],\"description\":\"The Heidari brothers' Uptown Tex-Mex - the family behind Old Warsaw and St. Martin's, with Pasha Heidari also behind Bowen House - in a salmon-pink stucco corner building on Routh Street that Dallas veterans remember as Baby Routh, Arcod...\",\"dishes\":[\"Wagyu Fajitas\",\"House Margarita\"],\"happy_hour\":\"Mon-Fri 2-6PM -- $8.50 cocktails\",\"address\":\"2708 Routh St, Dallas TX 75201\",\"hours\":\"Mon-Sun 11am-10pm (Thu-Sat till 11pm)\",\"phone\":\"(214) 922-0200\",\"reservation\":\"Resy\",\"awards\":\"\",\"website\":\"https://laspalmasdallas.com/\",\"instagram\":\"@laspalmastexmex\",\"lat\":32.7975219,\"lng\":-96.8026527,\"url\":\"https://dimhour.com/dallas/v/las-palmas/\",\"city_name\":\"Dallas\",\"price_tier\":2,\"photoUrl\":\"https://nsmwgokjjnpwwvearwxf.supabase.co/storage/v1/object/public/venue-photos/dallas/28.jpg\",\"receipt\":{\"as_of\":\"2026-09-24\",\"as_of_scope\":\"city-catalog-file\",\"source\":\"dimhour-catalog\",\"abstained\":false,\"stale\":false,\"reason\":null}}"
+                            }
+                        ],
+                        "structuredContent": {
+                            "id": 28,
+                            "name": "Las Palmas",
+                            "cuisine": "Tex-Mex",
+                            "neighborhood": "Uptown",
+                            "score": 86,
+                            "price": "$$",
+                            "tags": [
+                                "Happy Hour",
+                                "Casual"
+                            ],
+                            "description": "The Heidari brothers' Uptown Tex-Mex - the family behind Old Warsaw and St. Martin's, with Pasha Heidari also behind Bowen House - in a salmon-pink stucco corner building on Routh Street that Dallas veterans remember as Baby Routh, Arcod...",
+                            "dishes": [
+                                "Wagyu Fajitas",
+                                "House Margarita"
+                            ],
+                            "happy_hour": "Mon-Fri 2-6PM -- $8.50 cocktails",
+                            "address": "2708 Routh St, Dallas TX 75201",
+                            "hours": "Mon-Sun 11am-10pm (Thu-Sat till 11pm)",
+                            "phone": "(214) 922-0200",
+                            "reservation": "Resy",
+                            "awards": "",
+                            "website": "https://laspalmasdallas.com/",
+                            "instagram": "@laspalmastexmex",
+                            "lat": 32.7975219,
+                            "lng": -96.8026527,
+                            "url": "https://dimhour.com/dallas/v/las-palmas/",
+                            "city_name": "Dallas",
+                            "price_tier": 2,
+                            "photoUrl": "https://nsmwgokjjnpwwvearwxf.supabase.co/storage/v1/object/public/venue-photos/dallas/28.jpg",
+                            "receipt": {
+                                "as_of": "2026-09-24",
+                                "as_of_scope": "city-catalog-file",
+                                "source": "dimhour-catalog",
+                                "abstained": false,
+                                "stale": false,
+                                "reason": null
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

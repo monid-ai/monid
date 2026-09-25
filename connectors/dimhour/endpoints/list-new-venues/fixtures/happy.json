@@ -1,0 +1,72 @@
+{
+    "name": "happy",
+    "description": "Live Dim Hour MCP answer, recorded 2026-09-24 and trimmed (arrays to 2, strings to 240 chars): list_new_venues city=dallas days=30 limit=2: recent additions with a receipt. HTTP 200 carrying result.structuredContent plus the same payload as JSON in content[0].text. The connector returns structuredContent without the MCP envelope.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "{\"window_days\":30,\"city\":\"dallas\",\"total_new\":41,\"showing\":2,\"feed_generated\":\"2026-09-24\",\"venues\":[{\"city\":\"dallas\",\"city_name\":\"Dallas\",\"id\":1000030,\"name\":\"Sugar & Sage Bakery\",\"cuisine\":\"Bakery & Cafe\",\"neighborhood\":\"University Park\",\"score\":75,\"price\":\"$$\",\"awards\":\"\",\"happy_hour\":\"\",\"first_seen\":\"2026-09-18\",\"url\":\"https://dimhour.com/detail.html?city=dallas&id=1000030\"},{\"city\":\"dallas\",\"city_name\":\"Dallas\",\"id\":1000031,\"name\":\"Monterrey Mexican Restaurant\",\"cuisine\":\"Mexican\",\"neighborhood\":\"East Dallas / Lakewood\",\"score\":75,\"price\":\"$$\",\"awards\":\"\",\"happy_hour\":\"\",\"first_seen\":\"2026-09-18\",\"url\":\"https://dimhour.com/detail.html?city=dallas&id=1000031\"}],\"receipt\":{\"as_of\":\"2026-09-24\",\"as_of_scope\":\"shared-catalog-file\",\"source\":\"dimhour-catalog:recent-venues.json\",\"abstained\":false,\"stale\":false,\"reason\":null}}"
+                            }
+                        ],
+                        "structuredContent": {
+                            "window_days": 30,
+                            "city": "dallas",
+                            "total_new": 41,
+                            "showing": 2,
+                            "feed_generated": "2026-09-24",
+                            "venues": [
+                                {
+                                    "city": "dallas",
+                                    "city_name": "Dallas",
+                                    "id": 1000030,
+                                    "name": "Sugar & Sage Bakery",
+                                    "cuisine": "Bakery & Cafe",
+                                    "neighborhood": "University Park",
+                                    "score": 75,
+                                    "price": "$$",
+                                    "awards": "",
+                                    "happy_hour": "",
+                                    "first_seen": "2026-09-18",
+                                    "url": "https://dimhour.com/detail.html?city=dallas&id=1000030"
+                                },
+                                {
+                                    "city": "dallas",
+                                    "city_name": "Dallas",
+                                    "id": 1000031,
+                                    "name": "Monterrey Mexican Restaurant",
+                                    "cuisine": "Mexican",
+                                    "neighborhood": "East Dallas / Lakewood",
+                                    "score": 75,
+                                    "price": "$$",
+                                    "awards": "",
+                                    "happy_hour": "",
+                                    "first_seen": "2026-09-18",
+                                    "url": "https://dimhour.com/detail.html?city=dallas&id=1000031"
+                                }
+                            ],
+                            "receipt": {
+                                "as_of": "2026-09-24",
+                                "as_of_scope": "shared-catalog-file",
+                                "source": "dimhour-catalog:recent-venues.json",
+                                "abstained": false,
+                                "stale": false,
+                                "reason": null
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

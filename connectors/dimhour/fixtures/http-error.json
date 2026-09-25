@@ -1,0 +1,23 @@
+{
+    "name": "http-error",
+    "description": "Live, recorded 2026-09-24: the server's HTTP 400 for a body that is not JSON-RPC 2.0. A plain vendor non-2xx: provider error, zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": null,
+                    "error": {
+                        "code": -32700,
+                        "message": "Parse error: body must be JSON-RPC 2.0"
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,49 @@
+{
+    "name": "happy",
+    "description": "Live Dim Hour MCP answer, recorded 2026-09-24 and trimmed (arrays to 2, strings to 240 chars): search query=\"ramen dallas\": city:id results with citable URLs. HTTP 200 carrying result.structuredContent plus the same payload as JSON in content[0].text. The connector returns structuredContent without the MCP envelope.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "{\"results\":[{\"id\":\"dallas:393\",\"title\":\"Ichigoh Ramen — Japanese Ramen, Deep Ellum — Dallas\",\"url\":\"https://dimhour.com/dallas/v/ichigoh-ramen/\"},{\"id\":\"dallas:299\",\"title\":\"Legacy Hall — Food Hall / Live Music, Plano — Dallas\",\"url\":\"https://dimhour.com/dallas/v/legacy-hall/\"}],\"receipt\":{\"as_of\":\"2026-09-24\",\"as_of_scope\":\"catalog-slice-oldest\",\"source\":\"dimhour-catalog-mirror\",\"abstained\":false,\"stale\":false,\"reason\":null}}"
+                            }
+                        ],
+                        "structuredContent": {
+                            "results": [
+                                {
+                                    "id": "dallas:393",
+                                    "title": "Ichigoh Ramen — Japanese Ramen, Deep Ellum — Dallas",
+                                    "url": "https://dimhour.com/dallas/v/ichigoh-ramen/"
+                                },
+                                {
+                                    "id": "dallas:299",
+                                    "title": "Legacy Hall — Food Hall / Live Music, Plano — Dallas",
+                                    "url": "https://dimhour.com/dallas/v/legacy-hall/"
+                                }
+                            ],
+                            "receipt": {
+                                "as_of": "2026-09-24",
+                                "as_of_scope": "catalog-slice-oldest",
+                                "source": "dimhour-catalog-mirror",
+                                "abstained": false,
+                                "stale": false,
+                                "reason": null
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

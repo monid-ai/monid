@@ -1,0 +1,49 @@
+{
+    "name": "happy",
+    "description": "Live Dim Hour MCP answer, recorded 2026-09-24 and trimmed (arrays to 2, strings to 240 chars): fetch id=dallas:393: one venue in the OpenAI connector document shape. HTTP 200 carrying result.structuredContent plus the same payload as JSON in content[0].text. The connector returns structuredContent without the MCP envelope.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "{\"id\":\"dallas:393\",\"title\":\"Ichigoh Ramen — Dallas\",\"text\":\"Ichigoh Ramen — Japanese Ramen, Deep Ellum, Dallas\\n\\nDeep Ellum ramen shop opened in November 2018 by NYC transplants George Itoh and Andy Tam. Noodles are imported from Sapporo and aged 5-7 days in traditional Japanese cedar boxes; broth...\",\"url\":\"https://dimhour.com/dallas/v/ichigoh-ramen/\",\"metadata\":{\"city\":\"Dallas\",\"city_key\":\"dallas\",\"cuisine\":\"Japanese Ramen\",\"neighborhood\":\"Deep Ellum\",\"score\":\"88\",\"price\":\"$$\"},\"receipt\":{\"as_of\":\"2026-09-24\",\"as_of_scope\":\"city-catalog-file\",\"source\":\"dimhour-catalog\",\"abstained\":false,\"stale\":false,\"reason\":null}}"
+                            }
+                        ],
+                        "structuredContent": {
+                            "id": "dallas:393",
+                            "title": "Ichigoh Ramen — Dallas",
+                            "text": "Ichigoh Ramen — Japanese Ramen, Deep Ellum, Dallas\n\nDeep Ellum ramen shop opened in November 2018 by NYC transplants George Itoh and Andy Tam. Noodles are imported from Sapporo and aged 5-7 days in traditional Japanese cedar boxes; broth...",
+                            "url": "https://dimhour.com/dallas/v/ichigoh-ramen/",
+                            "metadata": {
+                                "city": "Dallas",
+                                "city_key": "dallas",
+                                "cuisine": "Japanese Ramen",
+                                "neighborhood": "Deep Ellum",
+                                "score": "88",
+                                "price": "$$"
+                            },
+                            "receipt": {
+                                "as_of": "2026-09-24",
+                                "as_of_scope": "city-catalog-file",
+                                "source": "dimhour-catalog",
+                                "abstained": false,
+                                "stale": false,
+                                "reason": null
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

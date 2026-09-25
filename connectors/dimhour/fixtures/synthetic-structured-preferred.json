@@ -1,0 +1,42 @@
+{
+    "name": "synthetic-structured-preferred",
+    "description": "Synthetic, derived from get-hours-ok: structuredContent is present and content[0].text is a plain-language summary that is NOT JSON (MCP allows the two to differ). The output must be structuredContent: the text block is only a fallback.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Las Palmas (Dallas): Mon-Sun 11am-10pm (Thu-Sat till 11pm)."
+                            }
+                        ],
+                        "structuredContent": {
+                            "city": "dallas",
+                            "id": 28,
+                            "name": "Las Palmas",
+                            "hours": "Mon-Sun 11am-10pm (Thu-Sat till 11pm)",
+                            "url": "https://dimhour.com/dallas/v/las-palmas/",
+                            "receipt": {
+                                "as_of": "2026-09-24",
+                                "as_of_scope": "city-catalog-file",
+                                "source": "dimhour-catalog",
+                                "abstained": false,
+                                "stale": false,
+                                "reason": null
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

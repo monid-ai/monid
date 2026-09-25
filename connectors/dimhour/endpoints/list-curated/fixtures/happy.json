@@ -1,0 +1,52 @@
+{
+    "name": "happy",
+    "description": "Live Dim Hour MCP answer, recorded 2026-09-24 and trimmed (arrays to 2, strings to 240 chars): list_curated city=dallas: the city's editorial list titles. HTTP 200 carrying result.structuredContent plus the same payload as JSON in content[0].text. The connector returns structuredContent without the MCP envelope.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "{\"city\":\"dallas\",\"receipt\":{\"as_of\":\"2026-08-25\",\"as_of_scope\":\"shared-catalog-file\",\"source\":\"dimhour-catalog:city-curated-lists.js\",\"abstained\":false,\"stale\":true,\"reason\":\"the shared-catalog-file was last revised 31 days ago, beyond the 7-day freshness threshold\"},\"lists\":[{\"id\":\"dal-unmarked-doors\",\"title\":\"Unmarked Doors\",\"subtitle\":\"Speakeasies & hidden entrances\",\"venue_count\":6},{\"id\":\"dal-fuel-city-feelings\",\"title\":\"Fuel City Feelings\",\"subtitle\":\"Gas stations, trailers & converted garages\",\"venue_count\":6}]}"
+                            }
+                        ],
+                        "structuredContent": {
+                            "city": "dallas",
+                            "receipt": {
+                                "as_of": "2026-08-25",
+                                "as_of_scope": "shared-catalog-file",
+                                "source": "dimhour-catalog:city-curated-lists.js",
+                                "abstained": false,
+                                "stale": true,
+                                "reason": "the shared-catalog-file was last revised 31 days ago, beyond the 7-day freshness threshold"
+                            },
+                            "lists": [
+                                {
+                                    "id": "dal-unmarked-doors",
+                                    "title": "Unmarked Doors",
+                                    "subtitle": "Speakeasies & hidden entrances",
+                                    "venue_count": 6
+                                },
+                                {
+                                    "id": "dal-fuel-city-feelings",
+                                    "title": "Fuel City Feelings",
+                                    "subtitle": "Gas stations, trailers & converted garages",
+                                    "venue_count": 6
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

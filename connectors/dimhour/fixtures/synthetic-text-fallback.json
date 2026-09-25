@@ -1,0 +1,27 @@
+{
+    "name": "synthetic-text-fallback",
+    "description": "Synthetic, derived from endpoints/get-hours/fixtures/happy.json: the same answer with result.structuredContent REMOVED, so the payload exists only as JSON text in content[0].text. The connector parses the text and returns it as the output.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "{\"city\":\"dallas\",\"id\":28,\"name\":\"Las Palmas\",\"hours\":\"Mon-Sun 11am-10pm (Thu-Sat till 11pm)\",\"url\":\"https://dimhour.com/dallas/v/las-palmas/\",\"receipt\":{\"as_of\":\"2026-09-24\",\"as_of_scope\":\"city-catalog-file\",\"source\":\"dimhour-catalog\",\"abstained\":false,\"stale\":false,\"reason\":null}}"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

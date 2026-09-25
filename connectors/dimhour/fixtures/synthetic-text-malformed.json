@@ -1,0 +1,27 @@
+{
+    "name": "synthetic-text-malformed",
+    "description": "Synthetic: an HTTP 200 whose result has no structuredContent and whose content[0].text is not JSON. It must NOT settle as a successful structured result: lifecycle.start settles it as a 502 provider error with zero usage, and the raw body rides in the error output.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Venue list temporarily unavailable - try again shortly."
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

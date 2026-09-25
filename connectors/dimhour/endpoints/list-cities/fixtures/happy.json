@@ -1,0 +1,43 @@
+{
+    "name": "happy",
+    "description": "Live Dim Hour MCP answer, recorded 2026-09-24 and trimmed (arrays to 2, strings to 240 chars): list_cities: the covered cities and their keys. HTTP 200 carrying result.structuredContent plus the same payload as JSON in content[0].text. The connector returns structuredContent without the MCP envelope.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "{\"cities\":[{\"key\":\"nyc\",\"name\":\"New York City\",\"state\":\"NY\",\"kind\":\"city\"},{\"key\":\"dallas\",\"name\":\"Dallas\",\"state\":\"TX\",\"kind\":\"city\"}]}"
+                            }
+                        ],
+                        "structuredContent": {
+                            "cities": [
+                                {
+                                    "key": "nyc",
+                                    "name": "New York City",
+                                    "state": "NY",
+                                    "kind": "city"
+                                },
+                                {
+                                    "key": "dallas",
+                                    "name": "Dallas",
+                                    "state": "TX",
+                                    "kind": "city"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}
