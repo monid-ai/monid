@@ -1,5 +1,4 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
-import { z } from "zod";
 import { zVeo31TextToVideoBody } from "./schema/inputs.ts";
 
 /** Google Veo 3.1 text-to-video through MuAPI. */
@@ -25,12 +24,13 @@ export default defineEndpoint({
     input: {
         schema: {
             body: zVeo31TextToVideoBody.extend({
-                prompt: zVeo31TextToVideoBody.shape.prompt.unwrap().min(1),
+                prompt: zVeo31TextToVideoBody.shape.prompt.unwrap(),
                 aspect_ratio: zVeo31TextToVideoBody.shape.aspect_ratio.unwrap()
-                    .pipe(z.enum(["16:9", "9:16"])).default("16:9"),
-                duration: z.literal(8).default(8),
+                    .default("16:9"),
+                duration: zVeo31TextToVideoBody.shape.duration.unwrap()
+                    .default(8),
                 resolution: zVeo31TextToVideoBody.shape.resolution.unwrap()
-                    .pipe(z.enum(["720p", "1080p", "4k"])).default("720p"),
+                    .default("720p"),
             }),
         },
     },

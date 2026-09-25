@@ -8,6 +8,10 @@ import { defineProvider, presets } from "@shared/core";
  * Nano Banana 2 image generation, Nano Banana 2 image editing, and Google
  * Veo 3.1 text-to-video. They share MuAPI's prediction lifecycle while
  * keeping their model-specific schemas and billing rules at the endpoint.
+ * Published rate cards were checked 2026-09-24 against the vendor's model
+ * API pages: https://muapi.ai/playground/nano-banana-2/api,
+ * https://muapi.ai/playground/nano-banana-2-edit/api, and
+ * https://muapi.ai/veo-3.1.
  */
 export default defineProvider({
     name: "muapi",
@@ -175,15 +179,18 @@ export default defineProvider({
     usage: {
         credits: { default: { label: "US dollars" } },
         consolidate: ({ data, utils }) => {
-            const { value, rest } = utils.json.pluck(data.output, "$.cost");
-            const amount = value === undefined
-                ? utils.json.optionalNum(data.output, "$.data.cost.amount_usd")
-                : utils.json.optionalNum(value, "$.amount_usd");
+            const top = utils.json.pluck(data.output, "$.cost");
+            const picked = top.value === undefined
+                ? utils.json.pluck(top.rest, "$.data.cost")
+                : top;
+            const amount = picked.value === undefined
+                ? undefined
+                : utils.json.optionalNum(picked.value, "$.amount_usd");
             return {
                 credits: {
                     ...(amount !== undefined ? { default: amount } : {}),
                 },
-                output: rest,
+                output: picked.rest,
             };
         },
     },

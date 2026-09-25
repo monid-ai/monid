@@ -61,6 +61,26 @@ Deno.test("muapi: Nano Banana 2 image generation settles vendor cost", async () 
     assert(!("cost" in output));
 });
 
+Deno.test("muapi: nested vendor cost is settled and removed", async () => {
+    const result = await runEndpoint({
+        unit: await testSealedUnit(IMAGE_ID),
+        input: INPUTS[IMAGE_ID],
+        mode: "replay",
+        fixture: await fixture("synthetic-nested-cost-succeeded"),
+    });
+    assertEquals(result.httpStatus, 200);
+    assertEquals(result.usage, {
+        credits: { default: 0.06 },
+        evidence: { "1k_image": 1 },
+    });
+    const output = result.output as Record<string, Json>;
+    const data = output.data as Record<string, Json>;
+    assertEquals(data.outputs, [
+        "https://cdn.muapi.ai/image/MUAPI_NANO_NESTED_1.jpg",
+    ]);
+    assert(!("cost" in data));
+});
+
 Deno.test("muapi: Nano Banana 2 editing settles per-resolution cost", async () => {
     const result = await runEndpoint({
         unit: await testSealedUnit(EDIT_ID),

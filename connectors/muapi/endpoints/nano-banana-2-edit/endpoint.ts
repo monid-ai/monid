@@ -1,5 +1,4 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
-import { z } from "zod";
 import { zNanoBanana2EditBody } from "./schema/inputs.ts";
 
 /** Google Nano Banana 2 instruction-based image editing through MuAPI. */
@@ -23,33 +22,16 @@ export default defineEndpoint({
     input: {
         schema: {
             body: zNanoBanana2EditBody.extend({
-                prompt: zNanoBanana2EditBody.shape.prompt.unwrap().min(1),
-                images_list: zNanoBanana2EditBody.shape.images_list.unwrap()
-                    .min(1).max(14),
+                prompt: zNanoBanana2EditBody.shape.prompt.unwrap(),
+                images_list: zNanoBanana2EditBody.shape.images_list.unwrap(),
                 aspect_ratio: zNanoBanana2EditBody.shape.aspect_ratio.unwrap()
-                    .pipe(z.enum([
-                        "1:1",
-                        "1:4",
-                        "1:8",
-                        "2:3",
-                        "3:2",
-                        "3:4",
-                        "4:1",
-                        "4:3",
-                        "4:5",
-                        "5:4",
-                        "8:1",
-                        "9:16",
-                        "16:9",
-                        "21:9",
-                        "Auto",
-                    ])).default("Auto"),
+                    .default("Auto"),
                 google_search: zNanoBanana2EditBody.shape.google_search.unwrap()
                     .default(false),
                 resolution: zNanoBanana2EditBody.shape.resolution.unwrap()
-                    .pipe(z.enum(["1k", "2k", "4k"])).default("1k"),
+                    .default("1k"),
                 output_format: zNanoBanana2EditBody.shape.output_format.unwrap()
-                    .pipe(z.enum(["jpg", "png"])).default("jpg"),
+                    .default("jpg"),
             }),
         },
     },

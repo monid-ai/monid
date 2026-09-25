@@ -1,5 +1,4 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
-import { z } from "zod";
 import { zNanoBanana2Body } from "./schema/inputs.ts";
 
 /** Google Nano Banana 2 text-to-image through MuAPI. */
@@ -22,31 +21,15 @@ export default defineEndpoint({
     input: {
         schema: {
             body: zNanoBanana2Body.extend({
-                prompt: zNanoBanana2Body.shape.prompt.unwrap().min(1),
+                prompt: zNanoBanana2Body.shape.prompt.unwrap(),
                 aspect_ratio: zNanoBanana2Body.shape.aspect_ratio.unwrap()
-                    .pipe(z.enum([
-                        "1:1",
-                        "1:4",
-                        "1:8",
-                        "2:3",
-                        "3:2",
-                        "3:4",
-                        "4:1",
-                        "4:3",
-                        "4:5",
-                        "5:4",
-                        "8:1",
-                        "9:16",
-                        "16:9",
-                        "21:9",
-                        "Auto",
-                    ])).default("1:1"),
+                    .default("1:1"),
                 google_search: zNanoBanana2Body.shape.google_search.unwrap()
                     .default(false),
                 resolution: zNanoBanana2Body.shape.resolution.unwrap()
-                    .pipe(z.enum(["1k", "2k", "4k"])).default("1k"),
+                    .default("1k"),
                 output_format: zNanoBanana2Body.shape.output_format.unwrap()
-                    .pipe(z.enum(["jpg", "png"])).default("jpg"),
+                    .default("jpg"),
             }),
         },
     },
