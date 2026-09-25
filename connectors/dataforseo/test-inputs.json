@@ -1,0 +1,281 @@
+{
+    "ai/chatgpt-response": {
+        "body": {
+            "user_prompt": "What is DataForSEO?",
+            "model_name": "gpt-4o-mini"
+        }
+    },
+    "backlinks/bulk-ranks": {
+        "body": {
+            "targets": [
+                "dataforseo.com",
+                "ahrefs.com",
+                "semrush.com"
+            ]
+        }
+    },
+    "backlinks/summary": {
+        "body": {
+            "target": "dataforseo.com"
+        }
+    },
+    "labs/filters": {},
+    "labs/ranked-keywords": {
+        "body": {
+            "target": "dataforseo.com",
+            "limit": 3,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "serp/baidu-locations": {
+        "queryParams": {
+            "limit": 3,
+            "search": "city"
+        },
+        "pathParams": {
+            "country": "us"
+        }
+    },
+    "serp/baidu-organic": {
+        "body": {
+            "keyword": "seo api",
+            "depth": 10,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "serp/bing-locations": {
+        "queryParams": {
+            "limit": 3,
+            "search": "city"
+        },
+        "pathParams": {
+            "country": "us"
+        }
+    },
+    "serp/bing-organic": {
+        "body": {
+            "keyword": "seo api",
+            "depth": 10,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "serp/google-ads-advertisers": {
+        "body": {
+            "keyword": "seo api",
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "serp/google-ads-search": {
+        "body": {
+            "advertiser_ids": [
+                "AR1234567890"
+            ],
+            "depth": 40,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "serp/google-ai-mode": {
+        "body": {
+            "keyword": "seo api",
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "serp/google-autocomplete": {
+        "body": {
+            "keyword": "seo api",
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "serp/google-dataset-info": {
+        "body": {
+            "dataset_id": "example-dataset",
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "serp/google-dataset-search": {
+        "body": {
+            "keyword": "seo api",
+            "depth": 20,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "serp/google-finance-explore": {
+        "body": {
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "serp/google-finance-markets": {
+        "body": {
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "serp/google-finance-quote": {
+        "body": {
+            "keyword": "seo api",
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "serp/google-finance-ticker-search": {
+        "body": {
+            "keyword": "seo api",
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "serp/google-images": {
+        "body": {
+            "keyword": "seo api",
+            "depth": 100,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "serp/google-jobs": {
+        "body": {
+            "keyword": "seo api",
+            "depth": 10,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "serp/google-local-finder": {
+        "body": {
+            "keyword": "seo api",
+            "depth": 20,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "serp/google-locations": {
+        "queryParams": {
+            "limit": 3,
+            "search": "city"
+        },
+        "pathParams": {
+            "country": "us"
+        }
+    },
+    "serp/google-maps": {
+        "body": {
+            "keyword": "seo api",
+            "depth": 100,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "serp/google-news": {
+        "body": {
+            "keyword": "seo api",
+            "depth": 100,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "serp/google-organic": {
+        "body": {
+            "keyword": "seo api",
+            "depth": 10,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "serp/google-search-by-image": {
+        "body": {
+            "image_url": "https://dataforseo.com/logo.png",
+            "max_crawl_pages": 1,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "serp/naver-organic": {
+        "body": {
+            "keyword": "seo api",
+            "depth": 15
+        }
+    },
+    "serp/seznam-locations": {
+        "queryParams": {
+            "limit": 3,
+            "search": "city"
+        },
+        "pathParams": {
+            "country": "us"
+        }
+    },
+    "serp/seznam-organic": {
+        "body": {
+            "keyword": "seo api",
+            "depth": 10,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "serp/yahoo-locations": {
+        "queryParams": {
+            "limit": 3,
+            "search": "city"
+        },
+        "pathParams": {
+            "country": "us"
+        }
+    },
+    "serp/yahoo-organic": {
+        "body": {
+            "keyword": "seo api",
+            "depth": 10,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "serp/youtube-comments": {
+        "body": {
+            "video_id": "dQw4w9WgXcQ",
+            "depth": 20,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "serp/youtube-locations": {
+        "queryParams": {
+            "limit": 3,
+            "search": "city"
+        },
+        "pathParams": {
+            "country": "us"
+        }
+    },
+    "serp/youtube-organic": {
+        "body": {
+            "keyword": "seo api",
+            "block_depth": 20,
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "serp/youtube-subtitles": {
+        "body": {
+            "video_id": "dQw4w9WgXcQ",
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    },
+    "serp/youtube-video-info": {
+        "body": {
+            "video_id": "dQw4w9WgXcQ",
+            "location_code": 2840,
+            "language_code": "en"
+        }
+    }
+}
