@@ -343,4 +343,32 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "Tools to pull data from app stores, including Apple App Store " +
             "and Google Play listings, rankings, reviews, and more.",
     },
+    {
+        id: "image-search",
+        displayName: "Image Search",
+        description:
+            "Tools to search by or for images, including reverse image " +
+            "lookup, visual matches, and image results by keyword.",
+    },
+    {
+        id: "academic-search",
+        displayName: "Academic Search",
+        description:
+            "Tools to search scholarly sources, including papers, authors, " +
+            "citations, and more.",
+    },
+    {
+        id: "events",
+        displayName: "Events",
+        description:
+            "Tools to pull event listings, including concerts, conferences, " +
+            "dates, venues, and more.",
+    },
+    {
+        id: "government-data",
+        displayName: "Government Data",
+        description:
+            "Tools to pull public government records, including financial " +
+            "disclosures, filings, registries, and more.",
+    },
 ]);
