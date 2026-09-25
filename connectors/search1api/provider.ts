@@ -9,8 +9,12 @@ import { defineProvider, presets } from "@shared/core";
  * here costs 1 Search1API credit per call — except `/search` and `/news`
  * with `crawl_results > 0` ("Deep Search"), which add 1 credit per
  * successfully crawled page; the endpoints model that as COMPOSITE.
- * Responses carry no usage meter, so there is no `consolidate` — the
- * derived fold is the bill.
+ * The vendor also charges a completed search that returns nothing
+ * (https://s1.dev/docs/essentials/credits-and-limits); Monid does not
+ * pass that on, so `search`, `news`, `sitemap` and `trending` count the
+ * call off the response and bill it only when the result list is
+ * non-empty — `crawl` stays flat. Responses carry no usage meter, so
+ * there is no `consolidate` — the derived fold is the bill.
  *
  * `/search`, `/news` and `/crawl` also accept a BATCH array body (one
  * credit per item); the connector mirrors the single-object form only —
@@ -25,10 +29,10 @@ export default defineProvider({
     meta: {
         displayName: "Search1API",
         summary: "Live web search, news, page crawling, sitemap, and " +
-            "trending topics — flat 1 credit per call.",
+            "trending topics — 1 credit per call with results.",
         description: "Search1API gives agents live web data through five " +
             "simple endpoints: web search across Google, Bing, Bing CN, " +
-            "DuckDuckGo, Yahoo, YouTube, X, Reddit, GitHub, arXiv, WeChat, " +
+            "DuckDuckGo, Yahoo, Yandex, YouTube, X, Reddit, GitHub, arXiv, WeChat, " +
             "Bilibili, IMDb, Wikipedia and the Chinese engines (Baidu, " +
             "360, Quark); a dedicated news vertical; single-URL page " +
             "crawling to clean Markdown; sitemap link discovery; and " +
@@ -36,12 +40,12 @@ export default defineProvider({
             "flat per-call pricing — the free plan includes 100 credits " +
             "at https://s1.dev.",
         homepageUrl: "https://s1.dev",
-        docsUrl: "https://docs.s1.dev",
+        docsUrl: "https://s1.dev/docs",
         categories: ["web-search"],
     },
     auth: { inject: presets.auth.bearer() },
     request: { baseUrl: "https://api.search1api.com" },
-    timeouts: { requestMs: 30_000, runMs: 30_000 },
+    timeouts: { requestMs: 60_000, runMs: 60_000 },
     usage: {
         /** THE credit system (design D26): Search1API meters in its OWN
          *  credits — 1 credit per call on every endpoint here (the public

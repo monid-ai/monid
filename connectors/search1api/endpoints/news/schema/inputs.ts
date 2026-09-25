@@ -7,4 +7,4 @@ export const zNewsBody = z.object({
     search_service: zNewsService.optional().describe(
         "News backend to use (default: the vendor's pick — Bing).",
     ),
-});
+}).strict();

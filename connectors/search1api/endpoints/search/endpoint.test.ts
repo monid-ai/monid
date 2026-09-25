@@ -61,6 +61,23 @@ Deno.test(`${ID} deep search (recorded): +1 credit per crawled page`, async () =
     });
 });
 
+Deno.test(`${ID} empty results (200): zero usage`, async () => {
+    const unit = await testSealedUnit(ID);
+    const result = await runEndpoint({
+        unit,
+        input: { body: { query: "zxqv no such phrase 7f3k", max_results: 3 } },
+        mode: "replay",
+        fixture: await loadFixture(`${chains}search-empty.json`),
+    });
+    assertEquals(result.httpStatus, 200);
+    assertEquals(result.isProviderError, false);
+    assertEquals(result.usage, {
+        credits: {},
+        evidence: { call: 0 },
+    });
+    assertEquals((result.output as Record<string, unknown>).results, []);
+});
+
 Deno.test(`${ID} provider error (recorded 401): zero usage`, async () => {
     const unit = await testSealedUnit(ID);
     const result = await runEndpoint({
@@ -101,6 +118,18 @@ Deno.test(`${ID} schema gate: rejects unknown engine, passes a documented one`, 
         Error,
         "INVALID_INPUT",
     );
+    // strict body: a misspelled key is rejected, not silently dropped
+    await assertRejects(
+        () =>
+            runEndpoint({
+                unit,
+                input: { body: { query: "q", max_result: 3 } },
+                mode: "replay",
+                fixture,
+            }),
+        Error,
+        "INVALID_INPUT",
+    );
     // near-twin: a documented engine value passes the same gate
     const nearTwin = await runEndpoint({
         unit,
@@ -109,6 +138,13 @@ Deno.test(`${ID} schema gate: rejects unknown engine, passes a documented one`, 
         fixture,
     });
     assertEquals(nearTwin.isProviderError, false);
+    const yandex = await runEndpoint({
+        unit,
+        input: { body: { query: "q", search_service: "yandex" } },
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(yandex.isProviderError, false);
 });
 
 Deno.test({

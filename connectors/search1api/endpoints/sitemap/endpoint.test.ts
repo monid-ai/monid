@@ -22,11 +22,28 @@ Deno.test(`${ID} happy (recorded): whole usage, links array out`, async () => {
     assertEquals(result.isProviderError, false);
     assertEquals(result.usage, {
         credits: { default: 1 },
-        evidence: { CALL: 1 },
+        evidence: { RESULT: 1 },
     });
     const output = result.output as Record<string, unknown>;
     assertEquals(Object.keys(output), ["links"]);
     assertEquals(Array.isArray(output.links), true);
+});
+
+Deno.test(`${ID} empty links (200): zero usage`, async () => {
+    const unit = await testSealedUnit(ID);
+    const result = await runEndpoint({
+        unit,
+        input: { body: { url: "https://example.com", type: "sitemap" } },
+        mode: "replay",
+        fixture: await loadFixture(`${chains}sitemap-empty.json`),
+    });
+    assertEquals(result.httpStatus, 200);
+    assertEquals(result.isProviderError, false);
+    assertEquals(result.usage, {
+        credits: {},
+        evidence: { RESULT: 0 },
+    });
+    assertEquals((result.output as Record<string, unknown>).links, []);
 });
 
 Deno.test(`${ID} provider error (recorded 401): zero usage`, async () => {
@@ -50,6 +67,18 @@ Deno.test(`${ID} schema gate: rejects an unknown type, passes 'all'`, async () =
             runEndpoint({
                 unit,
                 input: { body: { url: "https://s1.dev", type: "deep" } },
+                mode: "replay",
+                fixture,
+            }),
+        Error,
+        "INVALID_INPUT",
+    );
+    // strict body: a misspelled key is rejected, not silently dropped
+    await assertRejects(
+        () =>
+            runEndpoint({
+                unit,
+                input: { body: { url: "https://s1.dev", typ: "all" } },
                 mode: "replay",
                 fixture,
             }),

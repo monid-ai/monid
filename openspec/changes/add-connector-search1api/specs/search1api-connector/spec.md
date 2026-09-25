@@ -16,9 +16,13 @@ The search1api provider SHALL declare name `search1api`,
   exist
 
 ### Requirement: Per-call billing with a deep-search meter
-Every endpoint SHALL consume 1 `default` credit per call. `search` and
-`news` SHALL additionally model "Deep Search" as a COMPOSITE: a flat
-`call` component plus a `crawled_page` PER_UNIT component (1 credit per
+Every endpoint SHALL consume 1 `default` credit per call, except that
+`search`, `news`, `sitemap` and `trending` SHALL bill that credit only
+when the response's result list (`results`, or `links` for `sitemap`) is
+non-empty — an empty answer is free to the buyer. `crawl` SHALL stay a
+flat PER_CALL. `search` and `news` SHALL additionally model "Deep
+Search" as a COMPOSITE: a `call` component counted off the response plus
+a `crawled_page` PER_UNIT component (1 credit per
 successfully crawled page — the vendor rate card,
 https://s1.dev/pricing, verified 2026-09-17) whose estimate is the
 requested `crawl_results` capped by `max_results` and whose evidence
@@ -36,6 +40,10 @@ reports no per-response meter — the derived fold is the bill).
 - **THEN** usage is
   `{credits: {default: 3}, evidence: {call: 1, crawled_page: 2}}`
 
+#### Scenario: Empty results are free
+- **WHEN** a `search1api#search` run returns 200 with `results: []`
+- **THEN** usage is `{credits: {}, evidence: {call: 0}}`
+
 #### Scenario: Errors are free
 - **WHEN** the vendor answers 401
 - **THEN** the run completes as provider-error data with
@@ -49,7 +57,13 @@ and mirror `enableFallback`. `/sitemap` SHALL require `url` and mirror
 `type` (`sitemap`|`all`). `/trending` SHALL require `search_service` —
 enumerated `github`|`hackernews`, the only values the vendor documents —
 and mirror optional `max_results`. Batch-array variants SHALL NOT be
-exposed.
+exposed. Every body SHALL be strict — an unknown key fails INVALID_INPUT
+(the vendor's OpenAPI declares `additionalProperties: false`).
+
+#### Scenario: Unknown key rejected
+- **WHEN** a caller passes a misspelled field (e.g. `max_result`) to
+  `search1api#search`
+- **THEN** the run fails with INVALID_INPUT before any network call
 
 #### Scenario: Unknown engine rejected
 - **WHEN** a caller passes `search_service: "not-an-engine"` to

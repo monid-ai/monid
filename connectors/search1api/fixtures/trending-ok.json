@@ -1,6 +1,6 @@
 {
     "name": "trending-ok",
-    "description": "Search1API /trending happy path: trending GitHub repos. Flat 1 credit.",
+    "description": "Search1API /trending happy path: trending GitHub repos. 1 credit (non-empty results).",
     "calls": [
         {
             "req": {

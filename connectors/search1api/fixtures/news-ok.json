@@ -1,6 +1,6 @@
 {
     "name": "news-ok",
-    "description": "Search1API /news happy path: ranked news results (array trimmed by record). Flat 1 credit per call.",
+    "description": "Search1API /news happy path: ranked news results (array trimmed by record). 1 credit per call with results.",
     "calls": [
         {
             "req": {

@@ -1,9 +1,10 @@
-import { defineEndpoint, UsageModelKind } from "@shared/core";
+import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zSitemapBody } from "./schema/inputs.ts";
 
 /**
  * `POST /sitemap` — one domain or URL in, its link inventory out
- * (`{links: [...]}`). Flat 1 credit per call ⇒ leaf PER_CALL.
+ * (`{links: [...]}`). 1 credit per call, billed only when `links` is
+ * non-empty ⇒ leaf PER_UNIT counted off the response.
  */
 export default defineEndpoint({
     meta: {
@@ -15,17 +16,33 @@ export default defineEndpoint({
             "sitemap; `type: 'all'` enumerates every link the vendor " +
             "can reach. Returns `{links: [...]}` — feed a chosen URL " +
             "to `search1api#crawl` for its content.",
-        docsUrl: "https://docs.s1.dev/api-reference/sitemap",
+        docsUrl: "https://s1.dev/docs/advanced/sitemap",
         categories: ["web-scraping"],
-        notes: ["1 Search1API credit per call."],
+        notes: [
+            "1 Search1API credit per call that returns results (an " +
+            "empty `links` is not billed).",
+        ],
     },
     request: { method: "POST", path: "/sitemap" },
     input: { schema: { body: zSitemapBody } },
     usage: {
         model: {
-            kind: UsageModelKind.PER_CALL,
-            label: "sitemap calls",
+            kind: UsageModelKind.PER_UNIT,
+            unit: Unit.RESULT,
+            label: "sitemap calls with results",
+            description: "one /sitemap call that returned at least one link",
             consumes: { credit: "default", amount: 1 },
+        },
+        estimate: () => ({ counts: { RESULT: 1 } }),
+        /** Bills only when `links` is non-empty — an empty answer is free
+         *  to the buyer (Monid absorbs the vendor's credit). */
+        evidence: ({ data, utils }) => {
+            const links = utils.json.optionalGet(data.output, "$.links");
+            return {
+                counts: {
+                    RESULT: Array.isArray(links) && links.length > 0 ? 1 : 0,
+                },
+            };
         },
     },
 });

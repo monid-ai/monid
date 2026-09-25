@@ -2,7 +2,7 @@
 
 ## Why
 
-[Search1API](https://s1.dev) is a live-web-data API — web search across 17
+[Search1API](https://s1.dev) is a live-web-data API — web search across 18
 backends (incl. the Chinese engines), a dedicated news vertical, single-URL
 page crawling to Markdown, sitemap link discovery, and trending topics —
 priced in its own credits (1 credit per call; +1 per crawled page on
@@ -14,10 +14,15 @@ provider whose entire surface is already five simple synchronous POSTs.
 
 - **connectors/search1api** — provider (`presets.auth.bearer()` on
   `https://api.search1api.com`) + 5 endpoints: `search`, `news`, `crawl`,
-  `sitemap`, `trending`. `crawl`/`sitemap`/`trending` are leaf `PER_CALL`
-  at 1 credit; `search` and `news` are COMPOSITE — 1 credit per call plus
+  `sitemap`, `trending`. `crawl` is leaf `PER_CALL` at 1 credit;
+  `sitemap`/`trending` are leaf `PER_UNIT` at 1 credit, counted 1 only
+  when the response's `links`/`results` is non-empty; `search` and
+  `news` are COMPOSITE — 1 credit for a call that returns results plus
   1 credit per successfully crawled page when `crawl_results > 0`
-  (the vendor's "Deep Search" line on https://s1.dev/pricing). Provider-
+  (the vendor's "Deep Search" line on https://s1.dev/pricing). An empty
+  result list bills the buyer nothing (Monid absorbs the vendor's
+  credit). Request bodies are `.strict()` — unknown keys are rejected,
+  matching the OpenAPI `additionalProperties: false`. Provider-
   level `output.fromError` normalizes the vendor's `{detail}` /
   RFC-9457 problem envelopes.
 - **Shared schema** — `schema/common.ts` mirrors the fields `/search` and

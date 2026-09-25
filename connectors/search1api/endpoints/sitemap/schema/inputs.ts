@@ -8,4 +8,4 @@ export const zSitemapBody = z.object({
             "every reachable link the vendor can find (vendor default " +
             "'sitemap').",
     ),
-});
+}).strict();

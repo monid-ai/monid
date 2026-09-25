@@ -1,6 +1,6 @@
 {
     "name": "search-ok",
-    "description": "Search1API /search happy path: ranked results for 'deno 2 release notes' (array trimmed by record). Flat 1 credit per call \u2014 no vendor meter on the envelope, so the derived fold is the bill.",
+    "description": "Search1API /search happy path: ranked results for 'deno 2 release notes' (array trimmed by record). 1 credit per call with results \u2014 no vendor meter on the envelope, so the derived fold is the bill.",
     "calls": [
         {
             "req": {

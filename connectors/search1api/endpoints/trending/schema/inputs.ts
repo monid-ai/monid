@@ -12,4 +12,4 @@ export const zTrendingBody = z.object({
     max_results: z.number().int().min(1).optional().describe(
         "Maximum trending items to return.",
     ),
-});
+}).strict();

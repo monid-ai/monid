@@ -17,6 +17,7 @@ export const zSearchService = z.enum([
     "bingcn",
     "duckduckgo",
     "yahoo",
+    "yandex",
     "youtube",
     "x",
     "reddit",

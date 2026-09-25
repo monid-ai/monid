@@ -3,8 +3,7 @@ import { zCrawlBody } from "./schema/inputs.ts";
 
 /**
  * `POST /crawl` — one public URL in, clean Markdown out. Flat 1 credit
- * per call ⇒ leaf PER_CALL. A slower read than search — the request
- * budget doubles the provider default.
+ * per call ⇒ leaf PER_CALL.
  */
 export default defineEndpoint({
     meta: {
@@ -18,12 +17,11 @@ export default defineEndpoint({
             "crawler when the primary fetch fails. Markdown only — no " +
             "raw-HTML or rendered-DOM output; for a site's link structure " +
             "use `search1api#sitemap`.",
-        docsUrl: "https://docs.s1.dev/api-reference/crawl",
+        docsUrl: "https://s1.dev/docs/basic/crawl",
         categories: ["web-extraction"],
         notes: ["1 Search1API credit per call."],
     },
     request: { method: "POST", path: "/crawl" },
-    timeouts: { requestMs: 60_000, runMs: 60_000 },
     input: { schema: { body: zCrawlBody } },
     usage: {
         model: {

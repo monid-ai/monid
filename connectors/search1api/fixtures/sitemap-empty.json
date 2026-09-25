@@ -1,23 +1,20 @@
 {
-    "name": "sitemap-ok",
-    "description": "Search1API /sitemap happy path: link inventory for s1.dev. 1 credit (non-empty links).",
+    "name": "sitemap-empty",
+    "description": "Search1API /sitemap with no discoverable links (200 + links: []). Unbilled on the Monid side. Hand-built from the vendor's documented shape.",
     "calls": [
         {
             "req": {
                 "method": "POST",
                 "url": "{{request.url}}",
                 "body": {
-                    "url": "https://s1.dev",
+                    "url": "https://example.com",
                     "type": "sitemap"
                 }
             },
             "res": {
                 "status": 200,
                 "body": {
-                    "links": [
-                        "https://s1.dev/",
-                        "https://s1.dev/about"
-                    ]
+                    "links": []
                 }
             }
         }

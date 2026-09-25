@@ -15,4 +15,4 @@ export const zSearchBody = z.object({
     page: z.number().int().min(1).max(100).optional().describe(
         "Result page to return (vendor default 1, cap 100).",
     ),
-});
+}).strict();

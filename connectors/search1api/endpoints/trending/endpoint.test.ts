@@ -22,7 +22,7 @@ Deno.test(`${ID} happy (recorded): whole usage, trending items out`, async () =>
     assertEquals(result.isProviderError, false);
     assertEquals(result.usage, {
         credits: { default: 1 },
-        evidence: { CALL: 1 },
+        evidence: { RESULT: 1 },
     });
     const output = result.output as Record<string, unknown>;
     assertEquals(Object.keys(output).sort(), [
@@ -30,6 +30,23 @@ Deno.test(`${ID} happy (recorded): whole usage, trending items out`, async () =>
         "trendingParameters",
     ]);
     assertEquals(Array.isArray(output.results), true);
+});
+
+Deno.test(`${ID} empty results (200): zero usage`, async () => {
+    const unit = await testSealedUnit(ID);
+    const result = await runEndpoint({
+        unit,
+        input: { body: { search_service: "hackernews", max_results: 3 } },
+        mode: "replay",
+        fixture: await loadFixture(`${chains}trending-empty.json`),
+    });
+    assertEquals(result.httpStatus, 200);
+    assertEquals(result.isProviderError, false);
+    assertEquals(result.usage, {
+        credits: {},
+        evidence: { RESULT: 0 },
+    });
+    assertEquals((result.output as Record<string, unknown>).results, []);
 });
 
 Deno.test(`${ID} provider error (recorded 401): zero usage`, async () => {
@@ -53,6 +70,18 @@ Deno.test(`${ID} schema gate: rejects an unknown service, passes the other`, asy
             runEndpoint({
                 unit,
                 input: { body: { search_service: "tiktok" } },
+                mode: "replay",
+                fixture,
+            }),
+        Error,
+        "INVALID_INPUT",
+    );
+    // strict body: a misspelled key is rejected, not silently dropped
+    await assertRejects(
+        () =>
+            runEndpoint({
+                unit,
+                input: { body: { search_service: "github", max_result: 3 } },
                 mode: "replay",
                 fixture,
             }),

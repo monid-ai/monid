@@ -55,6 +55,23 @@ Deno.test(`${ID} deep search (recorded): +1 credit per crawled page`, async () =
     });
 });
 
+Deno.test(`${ID} empty results (200): zero usage`, async () => {
+    const unit = await testSealedUnit(ID);
+    const result = await runEndpoint({
+        unit,
+        input: { body: { query: "zxqv no such phrase 7f3k", max_results: 3 } },
+        mode: "replay",
+        fixture: await loadFixture(`${chains}news-empty.json`),
+    });
+    assertEquals(result.httpStatus, 200);
+    assertEquals(result.isProviderError, false);
+    assertEquals(result.usage, {
+        credits: {},
+        evidence: { call: 0 },
+    });
+    assertEquals((result.output as Record<string, unknown>).results, []);
+});
+
 Deno.test(`${ID} provider error (recorded 401): zero usage`, async () => {
     const unit = await testSealedUnit(ID);
     const result = await runEndpoint({
@@ -78,6 +95,18 @@ Deno.test(`${ID} schema gate: rejects a web-only engine, passes a news one`, asy
                 input: {
                     body: { query: "q", search_service: "github" },
                 },
+                mode: "replay",
+                fixture,
+            }),
+        Error,
+        "INVALID_INPUT",
+    );
+    // strict body: a misspelled key is rejected, not silently dropped
+    await assertRejects(
+        () =>
+            runEndpoint({
+                unit,
+                input: { body: { query: "q", time_rang: "day" } },
                 mode: "replay",
                 fixture,
             }),

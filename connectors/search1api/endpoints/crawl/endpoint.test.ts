@@ -61,6 +61,18 @@ Deno.test(`${ID} schema gate: rejects a missing url, passes a valid one`, async 
         Error,
         "INVALID_INPUT",
     );
+    // strict body: a misspelled key is rejected, not silently dropped
+    await assertRejects(
+        () =>
+            runEndpoint({
+                unit,
+                input: { body: { url: "https://s1.dev", enableFalback: true } },
+                mode: "replay",
+                fixture,
+            }),
+        Error,
+        "INVALID_INPUT",
+    );
     // near-twin: the documented flag shape passes the same gate
     const nearTwin = await runEndpoint({
         unit,
