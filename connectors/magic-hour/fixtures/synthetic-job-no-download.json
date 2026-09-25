@@ -1,6 +1,6 @@
 {
-    "name": "job-failed",
-    "description": "A failed image project returns an error even if its status body carries a credits_charged field.",
+    "name": "synthetic-job-no-download",
+    "description": "A complete image project without a usable download is not a successful output.",
     "calls": [
         {
             "req": { "method": "POST", "url": "{{request.url}}" },
@@ -15,9 +15,9 @@
                 "status": 200,
                 "body": {
                     "id": "project_1",
-                    "status": "error",
+                    "status": "complete",
                     "credits_charged": 50,
-                    "error": "Generation failed"
+                    "downloads": []
                 }
             }
         }

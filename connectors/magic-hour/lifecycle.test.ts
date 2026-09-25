@@ -18,7 +18,7 @@ const run = async (name: string) =>
     });
 
 Deno.test("magic-hour: AI GIF completes with a download and settles 50 credits", async () => {
-    const result = await run("job-succeeded");
+    const result = await run("synthetic-job-succeeded");
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
     assertEquals(result.usage, {
@@ -34,7 +34,7 @@ Deno.test("magic-hour: AI GIF completes with a download and settles 50 credits",
 });
 
 Deno.test("magic-hour: failed image project returns an error with zero usage", async () => {
-    const result = await run("job-failed");
+    const result = await run("synthetic-job-failed");
     assertEquals(result.httpStatus, 500);
     assertEquals(result.providerHttpStatus, 200);
     assertEquals(result.isProviderError, true);
@@ -42,14 +42,14 @@ Deno.test("magic-hour: failed image project returns an error with zero usage", a
 });
 
 Deno.test("magic-hour: rejected submission does not poll or bill", async () => {
-    const result = await run("start-rejected");
+    const result = await run("synthetic-start-rejected");
     assertEquals(result.httpStatus, 402);
     assertEquals(result.isProviderError, true);
     assertEquals(result.usage, { credits: {}, evidence: {} });
 });
 
 Deno.test("magic-hour: completed project without download is not successful", async () => {
-    const result = await run("job-no-download");
+    const result = await run("synthetic-job-no-download");
     assertEquals(result.httpStatus, 502);
     assertEquals(result.providerHttpStatus, 200);
     assertEquals(result.isProviderError, true);

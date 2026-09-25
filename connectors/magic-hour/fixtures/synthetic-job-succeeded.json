@@ -1,5 +1,5 @@
 {
-    "name": "job-succeeded",
+    "name": "synthetic-job-succeeded",
     "description": "Submit an AI GIF, poll once while rendering, then return a completed project with a download and 50 credits charged.",
     "calls": [
         {
