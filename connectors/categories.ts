@@ -343,4 +343,11 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "Tools to pull data from app stores, including Apple App Store " +
             "and Google Play listings, rankings, reviews, and more.",
     },
+    {
+        id: "field-workforce",
+        displayName: "Field Workforce",
+        description:
+            "Schedule field workers, verify GPS check-ins, collect forms, " +
+            "and export timesheets.",
+    },
 ]);

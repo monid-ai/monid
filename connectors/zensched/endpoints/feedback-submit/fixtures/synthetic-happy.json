@@ -1,0 +1,41 @@
+{
+    "name": "synthetic-happy",
+    "description": "synthetic zensched#feedback-submit",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://mcp.zensched.com/mcp",
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "method": "tools/call",
+                    "params": {
+                        "name": "feedback_submit",
+                        "arguments": {
+                            "title": "Surface pet-care kits in Monid discover",
+                            "body": "Would love Monid discover to surface pet-care reference-design kits.",
+                            "category": "feature"
+                        }
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "{\"feedback_id\":9001,\"status\":\"open\",\"category\":\"feature\",\"severity\":\"medium\",\"message\":\"Got it — a human will read this. Sign in later and call feedback_list if you want a status update.\"}"
+                            }
+                        ],
+                        "isError": false
+                    }
+                }
+            }
+        }
+    ]
+}

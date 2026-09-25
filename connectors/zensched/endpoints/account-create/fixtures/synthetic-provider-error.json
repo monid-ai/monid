@@ -1,0 +1,28 @@
+{
+    "name": "provider-error",
+    "description": "synthetic zensched#account-create — MCP host returns 503",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://mcp.zensched.com/mcp",
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "method": "tools/call",
+                    "params": {
+                        "name": "account_create",
+                        "arguments": { "org_name": "Demo Field Crew" }
+                    }
+                }
+            },
+            "res": {
+                "status": 503,
+                "body": {
+                    "error": "service_unavailable",
+                    "message": "ZenSched MCP temporarily unavailable"
+                }
+            }
+        }
+    ]
+}
