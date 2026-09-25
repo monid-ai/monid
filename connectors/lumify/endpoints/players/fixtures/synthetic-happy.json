@@ -1,0 +1,26 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC \u2014 not recorded. Shape from GET /players (lumify.ai/docs); the wire is the schema.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://lumify.ai/v1/players?limit=5"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "player_id": 901,
+                            "name": "Novak Djokovic",
+                            "sport": "tennis",
+                            "country": "RS"
+                        }
+                    ],
+                    "next_after_id": 901
+                }
+            }
+        }
+    ]
+}

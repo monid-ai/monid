@@ -1,0 +1,26 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC \u2014 not recorded. Shape from GET /teams (lumify.ai/docs); the wire is the schema.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://lumify.ai/v1/teams?limit=5"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "team_id": 55,
+                            "name": "Boston Celtics",
+                            "sport": "nba",
+                            "conference": "East"
+                        }
+                    ],
+                    "next_after_id": 55
+                }
+            }
+        }
+    ]
+}

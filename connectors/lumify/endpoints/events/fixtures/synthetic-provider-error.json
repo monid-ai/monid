@@ -1,0 +1,24 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "SYNTHETIC \u2014 a 401 from GET /events; the error envelope relays as data at zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://lumify.ai/v1/events?limit=5"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": {
+                        "code": "unauthorized",
+                        "message": "API key required. Pass as: Authorization: Bearer lmfy-...",
+                        "status": 401,
+                        "doc_url": "https://lumify.ai/docs/reference#error-codes"
+                    },
+                    "detail": "API key required. Pass as: Authorization: Bearer lmfy-..."
+                }
+            }
+        }
+    ]
+}

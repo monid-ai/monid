@@ -1,0 +1,33 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC \u2014 not recorded. Shape from GET /events (EventListResponse: events[] of EventSummary, total, next_after_id; lumify.ai/openapi.json).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://lumify.ai/v1/events?limit=5"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "events": [
+                        {
+                            "id": 12345,
+                            "name": "Boston Celtics @ Miami Heat",
+                            "sport": "nba",
+                            "league": "NBA",
+                            "season_id": 2026,
+                            "starts_at": "2026-01-15T00:00:00Z",
+                            "status": "scheduled",
+                            "period": null,
+                            "clock": null,
+                            "venue": null
+                        }
+                    ],
+                    "total": 1,
+                    "next_after_id": 12345
+                }
+            }
+        }
+    ]
+}

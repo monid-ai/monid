@@ -1,0 +1,29 @@
+{
+    "name": "synthetic-unavailable",
+    "description": "SYNTHETIC \u2014 a 200 from GET /events/{event_id}/intelligence with available: false AND forecasts empty; Lumify's billing note is explicit that the request is free only in that combined state (X-Credits-Used: 0). See synthetic-forecasts-only for the billable available:false case.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://lumify.ai/v1/events/12345/intelligence"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "event_id": 12345,
+                    "available": false,
+                    "sport": "soccer",
+                    "league": "mls",
+                    "odds_source": null,
+                    "players": {},
+                    "has_recommend": null,
+                    "match_overview": null,
+                    "rationale": null,
+                    "intelligence_updated_at": null,
+                    "bets": [],
+                    "forecasts": []
+                }
+            }
+        }
+    ]
+}

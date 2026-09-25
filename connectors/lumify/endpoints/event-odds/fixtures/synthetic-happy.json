@@ -1,0 +1,82 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC \u2014 not recorded. Shape from GET /events/{event_id}/odds (OddsResponse: event_id, available, bookmakers[] of {bookmaker, markets[] of {key, label, outcomes[]}, captured_at}, last_updated; lumify.ai/docs/reference#event-odds).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://lumify.ai/v1/events/12345/odds"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "event_id": 12345,
+                    "available": true,
+                    "bookmakers": [
+                        {
+                            "bookmaker": "pinnacle",
+                            "markets": [
+                                {
+                                    "key": "h2h",
+                                    "label": "moneyline",
+                                    "outcomes": [
+                                        {
+                                            "outcome": "Boston Celtics",
+                                            "price": -120,
+                                            "point": null,
+                                            "is_main": true
+                                        },
+                                        {
+                                            "outcome": "Miami Heat",
+                                            "price": 105,
+                                            "point": null,
+                                            "is_main": true
+                                        }
+                                    ]
+                                },
+                                {
+                                    "key": "spreads",
+                                    "label": "spread",
+                                    "outcomes": [
+                                        {
+                                            "outcome": "Boston Celtics",
+                                            "price": -110,
+                                            "point": -2.5,
+                                            "is_main": true
+                                        },
+                                        {
+                                            "outcome": "Miami Heat",
+                                            "price": -110,
+                                            "point": 2.5,
+                                            "is_main": true
+                                        }
+                                    ]
+                                },
+                                {
+                                    "key": "totals",
+                                    "label": "totals",
+                                    "outcomes": [
+                                        {
+                                            "outcome": "Over",
+                                            "price": -110,
+                                            "point": 218.5,
+                                            "is_main": true
+                                        },
+                                        {
+                                            "outcome": "Under",
+                                            "price": -110,
+                                            "point": 218.5,
+                                            "is_main": true
+                                        }
+                                    ]
+                                }
+                            ],
+                            "captured_at": "2026-01-15T00:05:00Z"
+                        }
+                    ],
+                    "last_updated": "2026-01-15T00:05:00Z"
+                }
+            }
+        }
+    ]
+}

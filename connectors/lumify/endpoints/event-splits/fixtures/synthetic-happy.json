@@ -1,0 +1,100 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC \u2014 not recorded. Shape from GET /events/{event_id}/splits (SplitsResponse: event_id, available, captured_at, consensus, bookmakers[]; consensus/bookmakers sides use bets_pct/handle_pct, not tickets_pct/money_pct; lumify.ai/docs/reference#event-splits).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://lumify.ai/v1/events/12345/splits"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "event_id": 12345,
+                    "available": true,
+                    "captured_at": "2026-01-15T00:05:00Z",
+                    "consensus": {
+                        "moneyline": {
+                            "home": {
+                                "bets_pct": 62,
+                                "handle_pct": 48,
+                                "price": -149
+                            },
+                            "away": {
+                                "bets_pct": 38,
+                                "handle_pct": 52,
+                                "price": 123
+                            }
+                        },
+                        "spread": {
+                            "home": {
+                                "bets_pct": 60,
+                                "handle_pct": 55,
+                                "line": -2.5
+                            },
+                            "away": {
+                                "bets_pct": 40,
+                                "handle_pct": 45,
+                                "line": 2.5
+                            }
+                        },
+                        "total": {
+                            "over": {
+                                "bets_pct": 70,
+                                "handle_pct": 65,
+                                "line": 218.5
+                            },
+                            "under": {
+                                "bets_pct": 30,
+                                "handle_pct": 35,
+                                "line": 218.5
+                            }
+                        }
+                    },
+                    "bookmakers": [
+                        {
+                            "bookmaker": "pinnacle",
+                            "name": "Pinnacle",
+                            "moneyline": {
+                                "home": {
+                                    "bets_pct": 60,
+                                    "handle_pct": 45,
+                                    "price": -149
+                                },
+                                "away": {
+                                    "bets_pct": 40,
+                                    "handle_pct": 55,
+                                    "price": 123
+                                }
+                            },
+                            "spread": {
+                                "home": {
+                                    "bets_pct": 58,
+                                    "handle_pct": 52,
+                                    "line": -2.5
+                                },
+                                "away": {
+                                    "bets_pct": 42,
+                                    "handle_pct": 48,
+                                    "line": 2.5
+                                }
+                            },
+                            "total": {
+                                "over": {
+                                    "bets_pct": 68,
+                                    "handle_pct": 61,
+                                    "line": 218.5
+                                },
+                                "under": {
+                                    "bets_pct": 32,
+                                    "handle_pct": 39,
+                                    "line": 218.5
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

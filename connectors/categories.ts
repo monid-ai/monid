@@ -343,4 +343,18 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "Tools to pull data from app stores, including Apple App Store " +
             "and Google Play listings, rankings, reviews, and more.",
     },
+    {
+        id: "sports-data",
+        displayName: "Sports Data",
+        description:
+            "Sports schedules, live scores, results, teams, players, and " +
+            "season structure across leagues.",
+    },
+    {
+        id: "sports-betting",
+        displayName: "Sports Betting",
+        description:
+            "Sportsbook odds, line movement, public betting splits, and " +
+            "bet intelligence across books.",
+    },
 ]);

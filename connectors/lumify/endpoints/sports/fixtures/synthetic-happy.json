@@ -1,0 +1,34 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC \u2014 not recorded. Shape from GET /sports (SportsListResponse: sports[], total; lumify.ai/openapi.json).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://lumify.ai/v1/sports"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "sports": [
+                        {
+                            "id": 1,
+                            "slug": "nba",
+                            "name": "NBA",
+                            "is_team_sport": true,
+                            "leagues": []
+                        },
+                        {
+                            "id": 2,
+                            "slug": "nfl",
+                            "name": "NFL",
+                            "is_team_sport": true,
+                            "leagues": []
+                        }
+                    ],
+                    "total": 2
+                }
+            }
+        }
+    ]
+}

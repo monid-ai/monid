@@ -1,0 +1,24 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "SYNTHETIC \u2014 a 404 from GET /events/{event_id}/splits; the error envelope relays as data at zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://lumify.ai/v1/events/12345/splits"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": {
+                        "code": "not_found",
+                        "message": "Event not found.",
+                        "status": 404,
+                        "doc_url": "https://lumify.ai/docs/reference#error-codes"
+                    },
+                    "detail": "Event not found."
+                }
+            }
+        }
+    ]
+}

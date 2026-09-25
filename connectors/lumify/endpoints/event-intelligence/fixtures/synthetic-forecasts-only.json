@@ -1,0 +1,58 @@
+{
+    "name": "synthetic-forecasts-only",
+    "description": "SYNTHETIC \u2014 available: false with bets[] empty, but forecasts[] nonempty (MLB player-prop wager, no bets[] token published yet). Lumify still charges this response \u2014 free requires available:false AND forecasts empty together.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://lumify.ai/v1/events/12345/intelligence"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "event_id": 12345,
+                    "available": false,
+                    "sport": "mlb",
+                    "league": "mlb",
+                    "odds_source": null,
+                    "players": {},
+                    "has_recommend": null,
+                    "match_overview": null,
+                    "rationale": null,
+                    "intelligence_updated_at": null,
+                    "bets": [],
+                    "forecasts": [
+                        {
+                            "sport": "mlb",
+                            "league": "mlb",
+                            "player": "Ben Rortvedt",
+                            "player_id": 5128,
+                            "bet_type": null,
+                            "player_role": null,
+                            "market": "runs",
+                            "line": 0.5,
+                            "side": "under",
+                            "p_hit": 0.7617,
+                            "interval": [0.6982, 0.8252],
+                            "sufficiency": 0.4545,
+                            "reliability": "emerging",
+                            "conviction": 0.2379,
+                            "model_version": "forecast-v0",
+                            "selected": true,
+                            "books": { "draftkings": -453 },
+                            "drivers": [
+                                {
+                                    "id": "player.l10_rate",
+                                    "input": 0.27,
+                                    "effect": 0.082,
+                                    "direction": "up"
+                                }
+                            ],
+                            "research": null
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
