@@ -1,0 +1,24 @@
+{
+    "name": "search-empty",
+    "description": "A valid search that matches nothing: 200, no results, receipt 0. Serves both searches via {{request.url}}. Recorded live on /search/companies 2026-09-23.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "total": 0,
+                    "offset": 0,
+                    "count": 0,
+                    "has_next_page": false,
+                    "credits_used": 0,
+                    "results": [],
+                    "_debug": null
+                }
+            }
+        }
+    ]
+}

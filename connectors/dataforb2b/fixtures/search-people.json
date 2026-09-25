@@ -1,0 +1,163 @@
+{
+    "name": "search-people",
+    "description": "POST /search/people, live mode, 2 results: receipt credits_used 3 (2 x 1.5). Recorded live 2026-09-23, hand-minimized; person identities replaced, envelope and result shape as recorded.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.dataforb2b.ai/search/people"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "total": 10000,
+                    "total_is_capped": true,
+                    "offset": 0,
+                    "count": 2,
+                    "has_next_page": true,
+                    "credits_used": 3,
+                    "results": [
+                        {
+                            "id": "prof_PVURNGJihYludzaOwFCAwNajijSHFi6H0L9R",
+                            "first_name": "Sarah",
+                            "last_name": "Martinez",
+                            "headline": "Software/Android Engineer at DoorDash",
+                            "location": "San Francisco Bay Area",
+                            "country": "US",
+                            "industry": "Software Development",
+                            "profile_language": "en_US",
+                            "links": {
+                                "linkedin": null,
+                                "twitter": null,
+                                "github": null
+                            },
+                            "experience": [
+                                {
+                                    "company": {
+                                        "id": "org_0lox54iG5IEZSb71mZWLR8z9CVPqRvNMOgyi",
+                                        "name": "DoorDash",
+                                        "url": "https://www.linkedin.com/company/doordash/",
+                                        "logo_url": "https://media.licdn.com/dms/image/v2/D4E0BAQFmucd42O03SQ/company-logo_400_400/B4EaCRrt8LKgAU-/0/1789150552100?e=1792022400&v=beta&t=_H_M6hYBloQ9_gHTMv88CGLbe3d_lpN3jsWN6qe2wIs",
+                                        "size": "10001+",
+                                        "industry": "computer software"
+                                    },
+                                    "title": "Software Engineer",
+                                    "employment_type": "Full-time",
+                                    "location": null,
+                                    "duration_months": null,
+                                    "start_date": "2021-01",
+                                    "end_date": null,
+                                    "is_current": true
+                                },
+                                {
+                                    "company": {
+                                        "id": "org_0lox54iG5IEZSb71mZWLR8z9CVPzUSLUuiaX",
+                                        "name": "Wag! Group Co.",
+                                        "url": "https://www.linkedin.com/company/wag-group-co/",
+                                        "logo_url": "https://media.licdn.com/dms/image/v2/D560BAQGGby2Kl4NYqg/company-logo_400_400/company-logo_400_400/0/1716477807549/wag_group_co_logo?e=1792022400&v=beta&t=N9rDewtbOs-WfvDHMJoFtmGyMzqQJppWhrqIJS2nAs4",
+                                        "size": "51-200",
+                                        "industry": "consumer services"
+                                    },
+                                    "title": "Senior Android Engineer",
+                                    "employment_type": "Full-time",
+                                    "location": "Mountain View California",
+                                    "duration_months": null,
+                                    "start_date": "2019-06",
+                                    "end_date": "2020-12",
+                                    "is_current": false
+                                }
+                            ],
+                            "education": [
+                                {
+                                    "school": {
+                                        "id": "edu_091Fp571NCJ3valLtt0bvMBKnSjHO36Ve4Zz",
+                                        "name": "Maharishi International University",
+                                        "url": "https://www.linkedin.com/school/maharishi-international-university/",
+                                        "logo_url": "https://media.licdn.com/dms/image/v2/C560BAQEIEaCTfzE_0A/company-logo_400_400/company-logo_400_400/0/1630620241451/maharishi_international_university_logo?e=1792022400&v=beta&t=5vAHd9hIPQXb2kl1_16B53OpDYjmOGvcnBxWC2Tj-to"
+                                    },
+                                    "degree": "Master of Science in Computer Science (MSCS) at Iowa, USA",
+                                    "field_of_study": "Computer Science",
+                                    "start_date": "2014",
+                                    "end_date": "2018"
+                                }
+                            ],
+                            "skills": [
+                                "Android",
+                                "Java"
+                            ]
+                        },
+                        {
+                            "id": "prof_QWXj2MZKh65aYLdoLGDvwOckljTIGj7I1M0S",
+                            "first_name": "Michael",
+                            "last_name": "Chen",
+                            "headline": "Principal Engineer | Stripe | Meta | Amazon | Capital Group",
+                            "location": "San Francisco Bay Area",
+                            "country": "US",
+                            "industry": "Software Development",
+                            "profile_language": "en_US",
+                            "links": {
+                                "linkedin": null,
+                                "twitter": null,
+                                "github": null
+                            },
+                            "experience": [
+                                {
+                                    "company": {
+                                        "id": "org_0lox54iG5IEZSb71mZWLR8z9CVPs8v1Lj8oQ",
+                                        "name": "Stripe",
+                                        "url": "https://www.linkedin.com/company/stripe/",
+                                        "logo_url": "https://media.licdn.com/dms/image/v2/D560BAQE2ZfJyfn-VCg/company-logo_400_400/B56ZlyKwpUKIAY-/0/1758557047806/stripe_logo?e=1792022400&v=beta&t=HNOGo6gX8ScNjazz7_Lf36cZQrxlMtaJKjT-jreEt6k",
+                                        "size": "5001-10000",
+                                        "industry": "computer software"
+                                    },
+                                    "title": "Software Engineer",
+                                    "employment_type": "Full-time",
+                                    "location": "San Francisco, CA",
+                                    "duration_months": null,
+                                    "start_date": "2025-11",
+                                    "end_date": null,
+                                    "is_current": true
+                                },
+                                {
+                                    "company": {
+                                        "id": "org_0lox54iG5IEZSb71mZWLR8z9DhOdyxN5PRuK",
+                                        "name": "Rohati Capital",
+                                        "url": "https://www.linkedin.com/company/rohati-capital/",
+                                        "logo_url": "https://media.licdn.com/dms/image/v2/D4E0BAQFAwOtOISKC2g/company-logo_400_400/B4EZWGsSyhHgAY-/0/1741721519201/rohati_capital_logo?e=1792022400&v=beta&t=tav4bmX4CX-TYMPJAwn06_hWG-8c_U3Uq_INlZk7yvk",
+                                        "size": "2-10",
+                                        "industry": "financial services"
+                                    },
+                                    "title": "Technical Advisor and Partner",
+                                    "employment_type": "Part-time",
+                                    "location": "Palo Alto, California, United States",
+                                    "duration_months": null,
+                                    "start_date": "2025-09",
+                                    "end_date": null,
+                                    "is_current": true
+                                }
+                            ],
+                            "education": [
+                                {
+                                    "school": {
+                                        "id": null,
+                                        "name": "University of Zagreb FER",
+                                        "url": null,
+                                        "logo_url": null
+                                    },
+                                    "degree": "Doctor of Philosophy - PhD",
+                                    "field_of_study": "Computer Science",
+                                    "start_date": null,
+                                    "end_date": null
+                                }
+                            ],
+                            "skills": [
+                                "Python",
+                                "Git"
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

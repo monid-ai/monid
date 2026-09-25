@@ -1,0 +1,18 @@
+{
+    "name": "enrich-not-found",
+    "description": "The profile to enrich does not exist: 404 with a string detail. Recorded live 2026-09-23.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.dataforb2b.ai/enrich/profile"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "detail": "Profile not found"
+                }
+            }
+        }
+    ]
+}

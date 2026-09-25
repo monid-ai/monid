@@ -1,0 +1,79 @@
+{
+    "name": "enrich-profile",
+    "description": "POST /enrich/profile with profile + work email + personal email + phone, all four found: receipt credits_used 15.5 (1.5 + 1 + 3 + 10). Recorded live 2026-09-23, hand-minimized; identity replaced and contact values set to placeholders.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.dataforb2b.ai/enrich/profile"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "profile": {
+                        "id": "prof_PVURNGJihYludzaOwFCAwNajijSHFi6H0L9R",
+                        "first_name": "Sarah",
+                        "last_name": "Martinez",
+                        "headline": "Co-chair",
+                        "location": "Seattle, Washington, United States",
+                        "country": "US",
+                        "industry": "Philanthropic Fundraising Services",
+                        "profile_language": "en_US",
+                        "experience": [
+                            {
+                                "company": {
+                                    "id": "org_0lox54iG5IEZSb71mZWLR8z9CVPuIFF7K2AX",
+                                    "name": "Gates Foundation",
+                                    "url": "https://www.linkedin.com/company/gates-foundation/",
+                                    "logo_url": "https://media.licdn.com/dms/image/v2/D560BAQEgMqqFTd40Tg/company-logo_400_400/company-logo_400_400/0/1736784969376/bill__melinda_gates_foundation_logo?e=1792022400&v=beta&t=ZOmZb8U4UmBFK_-FgD4W0QIs7ooPX5-yIbEoGfCWJ2k",
+                                    "industry": "non-profit organization management",
+                                    "size": "1001-5000"
+                                },
+                                "title": "Co-chair",
+                                "start_date": "2000-01",
+                                "end_date": null,
+                                "is_current": true
+                            },
+                            {
+                                "company": {
+                                    "id": "org_0lox54iG5IEZSb71mZWLR8z9CVKjIkVy6PLt",
+                                    "name": "Breakthrough Energy",
+                                    "url": "https://www.linkedin.com/company/breakthrough-energy/",
+                                    "logo_url": "https://media.licdn.com/dms/image/v2/D560BAQFRMYiQN7-2kA/company-logo_400_400/B56ZoI4SGPI0AY-/0/1761085563539/breakthrough_energy_logo?e=1792022400&v=beta&t=jDN0F3I2HjkxgmjsQbZuPozBPuWd9AgSLgfNE79gH9Y",
+                                    "industry": "management consulting",
+                                    "size": "51-200"
+                                },
+                                "title": "Founder",
+                                "start_date": "2015-01",
+                                "end_date": null,
+                                "is_current": true
+                            }
+                        ],
+                        "education": [
+                            {
+                                "school": {
+                                    "id": "edu_0lox54iG5IEZSb71mZWLR8z9CVPuIFEZNxxh",
+                                    "name": "Harvard University",
+                                    "url": "https://www.linkedin.com/school/harvard-university/",
+                                    "logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQF5t62bcL0e9g/company-logo_400_400/company-logo_400_400/0/1631318058235?e=1792022400&v=beta&t=Y7QGnHo-Y5q7Ba1PgB4tSByP0AvT802Q6yMq5QT_zuw"
+                                },
+                                "degree": null,
+                                "field_of_study": null,
+                                "start_date": "1973",
+                                "end_date": "1975"
+                            }
+                        ],
+                        "skills": [],
+                        "languages": []
+                    },
+                    "work_email": "user@example.com",
+                    "personal_email": "user@example.com",
+                    "phone": "+1 000 000 0000",
+                    "git_profile": null,
+                    "results": null,
+                    "credits_used": 15.5
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,115 @@
+{
+    "name": "search-companies",
+    "description": "POST /search/companies, indexed mode (the route default), 2 results: receipt credits_used 1.5 (2 x 0.75). Recorded live 2026-09-23, hand-minimized.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.dataforb2b.ai/search/companies"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "total": 607,
+                    "offset": 0,
+                    "count": 2,
+                    "has_next_page": true,
+                    "credits_used": 1.5,
+                    "_debug": null,
+                    "results": [
+                        {
+                            "id": "org_0lox54iG5IEZSb71mZWLR8z9CVPDIV3twIIi",
+                            "name": "Dawex - Data Exchange Technology",
+                            "tagline": " ",
+                            "industry": "software development",
+                            "headquarters": {
+                                "country": "FR",
+                                "city": "Lyon",
+                                "region": "Auvergne-Rhone-Alpes"
+                            },
+                            "founded_year": 2015,
+                            "company_type": "PRIVATELY_HELD",
+                            "links": {
+                                "website": "https://www.dawex.com",
+                                "linkedin": "https://www.linkedin.com/company/dawex"
+                            },
+                            "size": {
+                                "employees": 54,
+                                "range_min": 51,
+                                "range_max": 200
+                            },
+                            "metrics": {
+                                "followers": 5089
+                            },
+                            "categories": [
+                                "Marketplace",
+                                "Internet"
+                            ],
+                            "funding": {
+                                "stage": "corporate_round",
+                                "total_rounds": 4,
+                                "last_round_amount": 5592497,
+                                "last_round_currency": "USD",
+                                "last_round_date": "2026-06-18",
+                                "rounds": [
+                                    {
+                                        "round": "corporate_round",
+                                        "amount_usd": null,
+                                        "date": "2026-06-18"
+                                    },
+                                    {
+                                        "round": "series_unknown",
+                                        "amount_usd": 5592497,
+                                        "date": "2019-05-23"
+                                    }
+                                ],
+                                "investors": null,
+                                "other_investors_count": null
+                            },
+                            "growth": {
+                                "percent_1m": null,
+                                "percent_6m": null,
+                                "percent_12m": null
+                            }
+                        },
+                        {
+                            "id": "org_0lox54iG5IEZSb71mZWLR8z9CVKaH9C0d75O",
+                            "name": "Wiremind",
+                            "tagline": "AI-powered inventory, distribution & optimization solutions for transportation, air cargo, and entertainment industries.",
+                            "industry": "software development",
+                            "headquarters": {
+                                "country": "FR",
+                                "city": "Paris",
+                                "region": "Île-de-France"
+                            },
+                            "founded_year": 2014,
+                            "company_type": "PRIVATELY_HELD",
+                            "links": {
+                                "website": "https://www.wiremind.io",
+                                "linkedin": "https://www.linkedin.com/company/wiremind"
+                            },
+                            "size": {
+                                "employees": 131,
+                                "range_min": 51,
+                                "range_max": 200
+                            },
+                            "metrics": {
+                                "followers": 5460
+                            },
+                            "categories": [
+                                "Business Intelligence",
+                                "Software"
+                            ],
+                            "funding": null,
+                            "growth": {
+                                "percent_1m": 0.77,
+                                "percent_6m": 3.97,
+                                "percent_12m": 17
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
