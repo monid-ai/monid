@@ -67,7 +67,7 @@ Deno.test(`${ID} empty results (200): zero usage`, async () => {
         unit,
         input: { body: { query: "zxqv no such phrase 7f3k", max_results: 3 } },
         mode: "replay",
-        fixture: await loadFixture(`${chains}search-empty.json`),
+        fixture: await loadFixture(`${chains}synthetic-search-empty.json`),
     });
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);

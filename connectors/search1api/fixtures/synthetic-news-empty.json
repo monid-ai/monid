@@ -1,5 +1,5 @@
 {
-    "name": "news-empty",
+    "name": "synthetic-news-empty",
     "description": "Search1API /news completed with zero results (200 + results: []). Unbilled on the Monid side. Hand-built from the vendor's documented empty-result shape.",
     "calls": [
         {

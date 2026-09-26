@@ -35,7 +35,7 @@ Deno.test(`${ID} empty links (200): zero usage`, async () => {
         unit,
         input: { body: { url: "https://example.com", type: "sitemap" } },
         mode: "replay",
-        fixture: await loadFixture(`${chains}sitemap-empty.json`),
+        fixture: await loadFixture(`${chains}synthetic-sitemap-empty.json`),
     });
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);

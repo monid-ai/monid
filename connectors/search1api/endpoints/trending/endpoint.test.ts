@@ -38,7 +38,7 @@ Deno.test(`${ID} empty results (200): zero usage`, async () => {
         unit,
         input: { body: { search_service: "hackernews", max_results: 3 } },
         mode: "replay",
-        fixture: await loadFixture(`${chains}trending-empty.json`),
+        fixture: await loadFixture(`${chains}synthetic-trending-empty.json`),
     });
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);

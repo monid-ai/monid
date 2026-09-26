@@ -1,5 +1,5 @@
 {
-    "name": "trending-empty",
+    "name": "synthetic-trending-empty",
     "description": "Search1API /trending with an empty list (200 + results: []). Unbilled on the Monid side. Hand-built from the vendor's documented shape.",
     "calls": [
         {

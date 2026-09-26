@@ -1,5 +1,5 @@
 {
-    "name": "sitemap-empty",
+    "name": "synthetic-sitemap-empty",
     "description": "Search1API /sitemap with no discoverable links (200 + links: []). Unbilled on the Monid side. Hand-built from the vendor's documented shape.",
     "calls": [
         {

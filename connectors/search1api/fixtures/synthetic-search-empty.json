@@ -1,5 +1,5 @@
 {
-    "name": "search-empty",
+    "name": "synthetic-search-empty",
     "description": "Search1API /search completed with zero results (200 + results: []). The vendor charges this call; Monid does not pass it on, so usage is empty. Hand-built from the vendor's documented empty-result shape.",
     "calls": [
         {
