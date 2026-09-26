@@ -193,6 +193,8 @@
         "fundable#person",
         "fundable#person/deals",
         "fundable#person/search",
+        "insuron#client/requests/{id}",
+        "insuron#requests",
         "kling#image-to-video/kling-2.5-turbo",
         "kling#image-to-video/kling-2.6",
         "kling#image-to-video/kling-3.0",

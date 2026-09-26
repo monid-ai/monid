@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-insuron-needs-information",
+    "description": "Synthetic Insuron POST /requests response (200); no request was created and no live request or credentials were used.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "needs_information",
+                    "missingFields": ["objective"]
+                }
+            }
+        }
+    ]
+}

@@ -343,4 +343,10 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "Tools to pull data from app stores, including Apple App Store " +
             "and Google Play listings, rankings, reviews, and more.",
     },
+    {
+        id: "insurance-matching",
+        displayName: "Insurance Matching",
+        description:
+            "Match consumers to licensed insurance agents using explicit permission to share a request.",
+    },
 ]);

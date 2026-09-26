@@ -1,0 +1,33 @@
+{
+    "name": "synthetic-insuron-accepted",
+    "description": "Synthetic Insuron POST /requests response (201). No live request or credentials were used.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "id": "89f2833d-6f0d-4ae0-8fb2-33b02ca03eb9",
+                    "objective": "I need help finding auto insurance.",
+                    "product": "auto",
+                    "state": "CA",
+                    "buyerType": "consumer",
+                    "preferredMode": "auto",
+                    "mode": "async_review",
+                    "status": "review_required",
+                    "consent": true,
+                    "externalAgent": "Example approved app",
+                    "consumerName": "Consumer",
+                    "partnerId": null,
+                    "partnerName": null,
+                    "routeReason": "Checking recorded consent and licensed-agent availability.",
+                    "connectionId": null,
+                    "createdAt": "2026-01-01T00:00:00.000Z"
+                }
+            }
+        }
+    ]
+}
