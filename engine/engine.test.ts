@@ -1905,7 +1905,6 @@ Deno.test("lifecycle: run() timeout with unresolved stop preserves the unresolve
                     kind: "UNRESOLVED",
                     reason: "vendor teardown requires manual reconciliation",
                     state: {
-                        externalRunId: "j2",
                         stage: "requires_reconcile",
                     },
                 });

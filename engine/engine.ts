@@ -623,10 +623,15 @@ export class LoadedEndpoint implements RunnableEndpoint {
             if (this.now().getTime() > deadline) {
                 const stopped = await this.stop(runInput, tick.state, run);
                 if (stopped.kind === RunKind.COMPLETED) return stopped;
-                const finalState =
-                    stopped.kind === StopKind.UNRESOLVED && stopped.state
-                        ? stopped.state
-                        : tick.state;
+                let finalState = tick.state;
+                if (stopped.kind === StopKind.UNRESOLVED && stopped.state) {
+                    finalState = {
+                        ...(tick.state.externalRunId !== undefined
+                            ? { externalRunId: tick.state.externalRunId }
+                            : {}),
+                        ...stopped.state,
+                    };
+                }
                 throw new EngineError(
                     EngineErrorCode.TIMEOUT,
                     `${this.doc.id} exceeded runMs ${this.doc.timeouts.runMs}` +
