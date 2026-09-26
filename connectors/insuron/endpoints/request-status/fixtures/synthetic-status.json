@@ -1,0 +1,29 @@
+{
+    "name": "synthetic-insuron-request-status",
+    "description": "Synthetic app-owned client request status projection. No live request or credentials were used.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://insuron.io/api/client/requests/89f2833d-6f0d-4ae0-8fb2-33b02ca03eb9"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "89f2833d-6f0d-4ae0-8fb2-33b02ca03eb9",
+                    "status": "review_required",
+                    "product": "auto",
+                    "state": "CA",
+                    "mode": "async_review",
+                    "context": {
+                        "conversationId": "synthetic-conversation-123",
+                        "sourceAgent": "synthetic-source-agent"
+                    },
+                    "createdAt": "2026-01-01T00:00:00.000Z",
+                    "phone": "+15555550100",
+                    "email": "synthetic@example.test"
+                }
+            }
+        }
+    ]
+}
