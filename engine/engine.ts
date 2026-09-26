@@ -623,10 +623,15 @@ export class LoadedEndpoint implements RunnableEndpoint {
             if (this.now().getTime() > deadline) {
                 const stopped = await this.stop(runInput, tick.state, run);
                 if (stopped.kind === RunKind.COMPLETED) return stopped;
+                const finalState =
+                    stopped.kind === StopKind.UNRESOLVED && stopped.state
+                        ? stopped.state
+                        : tick.state;
                 throw new EngineError(
                     EngineErrorCode.TIMEOUT,
                     `${this.doc.id} exceeded runMs ${this.doc.timeouts.runMs}` +
                         ` (stop: ${stopped.kind})`,
+                    { state: finalState, stopResult: stopped },
                 );
             }
             // cap the nap by the remaining budget: a fn requesting a long

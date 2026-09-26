@@ -1,4 +1,4 @@
-import { join } from "@std/path";
+import { fromFileUrl, join } from "@std/path";
 import { ensureDir, walk } from "@std/fs";
 import {
     type Bundle,
@@ -11,7 +11,7 @@ import {
 import type { Json } from "@shared/core";
 import { compileBundle } from "@shared/compiler";
 
-export const REPO_ROOT = new URL("../", import.meta.url).pathname;
+export const REPO_ROOT = fromFileUrl(new URL("../", import.meta.url));
 export const OUTPUT_DIR = join(REPO_ROOT, ".output");
 
 /** Versions read as DATA (scripts do not need the packages' code). */
