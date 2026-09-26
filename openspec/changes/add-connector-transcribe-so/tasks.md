@@ -35,11 +35,12 @@
       estimate = ceil(max_charge_usd / 0.016667), evidence =
       ceil(duration_seconds / 60)
 
-## 4. Fixtures (synthetic, provider-level shared chains)
+## 4. Fixtures (provider-level shared chains)
 
-- [x] 4.1 `synthetic-happy` (202 → timed-out wait → completed wait with
-      chapters → transcript md in the export's Table-of-Contents layout),
-      `synthetic-happy-all-formats` (+ srt + vtt reads),
+- [x] 4.1 `happy.json` (RECORDED 2026-09-26, all formats: 202 → timed-out
+      wait → completed wait with chapters → transcript md in the export's
+      Table-of-Contents layout → srt → vtt; serves the happy path and the
+      formats-gating slices),
       `synthetic-insufficient-funds` (402), `synthetic-failed` (failed row
       with internal error text), `synthetic-poll-rate-limited` (429 +
       Retry-After 7 on the read), `synthetic-create-conflict` (409 +
@@ -56,7 +57,7 @@
       consolidate, no stop, timeouts, model, category), live test gated on
       `TRANSCRIBE_SO_API_KEY` asserting shapes, not amounts
 - [x] 5.2 `endpoint.test.ts`: estimate purity + values (6 / 60 / exact
-      multiple / duration advisory), 14 INVALID_INPUT gates + 5 accepted
+      multiple / duration advisory), 13 INVALID_INPUT gates + 5 accepted
       shapes, formats gating (all three / srt only / markdown only)
 - [x] 5.3 Verify: fmt · lint · check · test · ids:check
 - [x] 5.4 Record the real happy chain against

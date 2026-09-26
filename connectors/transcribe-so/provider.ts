@@ -38,15 +38,18 @@ import { defineProvider, presets } from "@shared/core";
  *   - no stop: transcribe.so exposes no cancel for a started job.
  *
  * BILLING: the pool is US dollars (pay-as-you-go retail, $1 per audio
- * hour = $0.016667 per billed minute, whole minutes). The endpoint's
- * `estimate` holds the caller's own `max_charge_usd` ceiling expressed
- * in minutes; `evidence` settles `ceil(duration_seconds / 60)` off the
- * completed row, and the engine's fold (minutes × the pinned rate) IS the
- * bill. There is deliberately NO `usage.consolidate`: the completed row
- * does carry `charge_usd`, but it is the same minutes × rate rounded to
- * four decimals (0.0333 for 2 minutes vs the fold's 0.033334), and
- * claiming it would raise `usage.mismatch.derived` — monid's rate-drift
- * alarm — on EVERY run for a rounding hair. `charge_usd` is not returned
+ * hour = $0.016667 per billed minute, whole minutes).
+ * Pricing: https://transcribe.so/pricing (read 2026-09-26): pay as you go,
+ * $1 per audio hour = $0.016667 per billed minute.
+ * The endpoint's `estimate` holds the caller's own `max_charge_usd`
+ * ceiling expressed in minutes; `evidence` settles
+ * `ceil(duration_seconds / 60)` off the completed row, and the engine's
+ * fold (minutes × the pinned rate) IS the bill. There is deliberately NO
+ * `usage.consolidate`: the completed row does carry `charge_usd`, but the
+ * vendor rounds it — the recorded happy fixture shows 0.03 for 2 billed
+ * minutes against the fold's 0.033334 — and claiming it would raise
+ * `usage.mismatch.derived` (monid's rate-drift alarm) for that fixture,
+ * and in general whenever the vendor rounds. `charge_usd` is not returned
  * in the output either; the receipt is the fold.
  */
 export default defineProvider({
@@ -558,8 +561,9 @@ export default defineProvider({
         /** THE credit system (design D26): transcribe.so prices in dollars
          *  (pay-as-you-go retail, $1 per audio hour), so the pool IS
          *  dollars. No `usage.consolidate` (design D6 of this change): the
-         *  vendor's `charge_usd` is minutes × rate rounded to 4 decimals,
-         *  so the derived fold is the bill and no standing mismatch exists.
+         *  vendor rounds `charge_usd` (0.03 recorded for 2 minutes vs the
+         *  fold's 0.033334), so claiming it would raise the mismatch alarm;
+         *  the derived fold is the bill.
          *  model / estimate / evidence live on the endpoint: the rate card
          *  is the endpoint's and the estimate reads its typed body. */
         credits: {

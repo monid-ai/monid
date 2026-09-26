@@ -54,9 +54,11 @@ exercises two things no connector has yet:
   title/summary/start/end (the `url` deep-link carries the id for direct
   media sources), and terminal failures settle with FIXED error strings —
   the vendor's internal `error` text is never copied.
-- **Synthetic fixtures** now (six shared chains); the happy chain is
-  replaced by a real recording against `https://transcribe.so/test-90s.m4a`
-  before the PR opens (tasks 5.2).
+- **Fixtures**: five provider-level shared chains. The happy chain
+  (`happy.json`) IS a real recording against
+  `https://transcribe.so/test-90s.m4a` (2026-09-26, all formats, tasks 5.4 —
+  done); the four `synthetic-*` chains cover the shapes a recording cannot
+  provoke on demand.
 
 ## Capabilities
 

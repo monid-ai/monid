@@ -89,11 +89,13 @@ A failed job RELEASES its hold on the vendor side (the vendor's
 ## D6 — No `usage.consolidate`; the fold is the bill (review, 2026-09-26)
 
 The completed row carries `charge_usd`, and the first draft claimed it (D27:
-the vendor's meter wins). But it is minutes × $0.016667 rounded to FOUR
-decimals (2 minutes → 0.0333) while the doc's fold is 0.033334, so the claim
-would have raised `usage.mismatch.derived` on EVERY run — and that signal is
-monid's rate-drift alarm (alibaba/bytedance tests assert it is absent). A
-permanent false alarm is worse than no claim. So: no consolidate, the
+the vendor's meter wins). But the vendor ROUNDS it: the committed happy
+fixture records `charge_usd: 0.03` for 2 billed minutes while the doc's fold
+is 2 × $0.016667 = 0.033334. Claiming the vendor charge would raise
+`usage.mismatch.derived` for this fixture — and in general whenever the
+vendor rounds — and that signal is monid's rate-drift alarm
+(alibaba/bytedance tests assert it is absent). A false alarm on a rounding
+difference is worse than no claim. So: no consolidate, the
 engine's evidence × rate settles, `charge_usd` is not returned in the
 output, and the happy test deep-equals `usage` as one object to prove no
 `mismatch` key exists. If the vendor ever reports the unrounded amount, a
