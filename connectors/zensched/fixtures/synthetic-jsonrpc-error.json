@@ -1,0 +1,20 @@
+{
+    "name": "synthetic-jsonrpc-error",
+    "description": "HTTP 200 with top-level JSON-RPC error — lifecycle.start must synthesize 502.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "error": { "code": -32602, "message": "Invalid params" }
+                }
+            }
+        }
+    ]
+}

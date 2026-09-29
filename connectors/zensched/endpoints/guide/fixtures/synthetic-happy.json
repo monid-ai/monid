@@ -1,0 +1,34 @@
+{
+    "name": "synthetic-happy",
+    "description": "synthetic zensched#guide — MCP tools/call zensched_guide",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://mcp.zensched.com/mcp",
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "method": "tools/call",
+                    "params": { "name": "zensched_guide", "arguments": {} }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "{\"guide\":\"# ZenSched — agent guide\\n\\nZenSched schedules field workers...\"}"
+                            }
+                        ],
+                        "isError": false
+                    }
+                }
+            }
+        }
+    ]
+}

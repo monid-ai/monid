@@ -364,4 +364,11 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "Tools to pull public market data, including quotes, fundamentals, " +
             "earnings, screeners, and more.",
     },
+    {
+        id: "field-workforce",
+        displayName: "Field Workforce",
+        description:
+            "Schedule field workers, verify GPS check-ins, collect forms, " +
+            "and export timesheets.",
+    },
 ]);
