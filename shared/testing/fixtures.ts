@@ -34,6 +34,9 @@ import { type Json, zJson } from "@shared/core";
  * written.
  */
 export const RECORDED_RES_HEADERS = [
+    // Parallel MCP transport session. Recorded fixtures replace the live ID
+    // with a fixed placeholder; no reusable session identifier is committed.
+    "mcp-session-id",
     "location",
     "retry-after",
     "x-api-units-cost-total-actual",

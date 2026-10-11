@@ -488,6 +488,8 @@
         "opoint#search-by-ids",
         "opoint#search-headlines",
         "opoint#suggest",
+        "parallel#fetch",
+        "parallel#search",
         "pdl#v5/company/enrich",
         "pdl#v5/company/search",
         "pdl#v5/person/enrich",
