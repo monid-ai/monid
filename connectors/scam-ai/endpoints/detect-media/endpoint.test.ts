@@ -2,12 +2,16 @@ import { assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import type { Json } from "@shared/core";
 import {
+    estimateEndpoint,
     liveSkip,
     loadFixture,
     runEndpoint,
     testSealedUnit,
 } from "@shared/testing";
 
+// Native rate table: https://scam.ai/docs/credits-and-limits (checked 2026-10-11).
+// Image: 1; video: 1 per scored frame, max 20; audio: ceil(minutes), minimum 1.
+// The settlement assertions below check the response's credits_used meter.
 const ID = "scam-ai#v1/detections";
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
 const INPUT = { body: { url: "https://example.com/ai-portrait.png" } };
@@ -34,7 +38,7 @@ Deno.test(`${ID} happy (synthetic): an image run settles one credit`, async () =
     assertEquals(result.output, body);
 });
 
-Deno.test(`${ID} happy (synthetic): a video run settles per sampled frame`, async () => {
+Deno.test(`${ID} happy (synthetic): a video run preserves output and settles per scored frame`, async () => {
     const unit = await testSealedUnit(ID);
     const fixture = await loadFixture(
         `${fixturesDir}synthetic-video-happy.json`,
@@ -50,6 +54,9 @@ Deno.test(`${ID} happy (synthetic): a video run settles per sampled frame`, asyn
         credits: { default: 12 },
         evidence: { CREDIT: 12 },
     });
+    const { credits_used: _settled, ...body } = fixture.calls[0].res
+        .body as Record<string, Json>;
+    assertEquals(result.output, body);
 });
 
 Deno.test(`${ID} happy (recorded): an image run preserves the response payload`, async () => {
@@ -138,13 +145,23 @@ Deno.test(`${ID} provider error (synthetic 402): zero usage, digested body`, asy
     assertEquals(typeof output.message, "string");
 });
 
-Deno.test(`${ID} input gate: only a public https URL passes`, async () => {
+Deno.test(`${ID} compiled input gate: HTTPS passes; HTTP and extra fields fail`, async () => {
     const unit = await testSealedUnit(ID);
+    // Change only the rejected HTTP URL's scheme: the pure estimate validates
+    // the compiled input without making any transport calls.
+    assertEquals(
+        await estimateEndpoint(unit, {
+            body: { url: "https://insecure.example.com/frame.png" },
+        }),
+        { credits: { default: 1 }, evidence: { CREDIT: 1 } },
+    );
     const bad: Json[] = [
         {},
         { url: "http://insecure.example.com/frame.png" },
         { url: 42 },
         { url: "https://example.com/a.png", extra: true },
+        { url: "https://example.com/a.png", thumbnails: true },
+        { url: "https://example.com/a.png", thumbnails: false },
     ];
     for (const body of bad) {
         await assertRejects(

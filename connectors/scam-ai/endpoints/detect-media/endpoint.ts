@@ -33,7 +33,21 @@ export default defineEndpoint({
         ],
     },
     request: { method: "POST", path: "/v1/detections" },
-    input: { schema: { body: zDetectBody } },
+    input: {
+        schema: {
+            // Restrict this connector to one HTTPS URL; the schema module
+            // mirrors the vendor's broader JSON body. A regex survives
+            // compilation as a JSON Schema pattern; a refinement would not.
+            body: zDetectBody.pick({ url: true }).extend({
+                url: zDetectBody.shape.url
+                    .regex(/^https:\/\/\S+$/, "must be a public https:// URL")
+                    .describe(
+                        "A public https:// URL of the image, video, or audio " +
+                            "to score (inline base64 is not accepted).",
+                    ),
+            }).strict(),
+        },
+    },
     usage: {
         model: {
             kind: UsageModelKind.PER_UNIT,

@@ -1,6 +1,12 @@
 import { defineProvider, presets } from "@shared/core";
 
-/** Scam AI — AI-content detection for images, video, and audio. */
+/**
+ * Scam AI — AI-content detection for images, video, and audio.
+ * Native credit rates: https://scam.ai/docs/credits-and-limits
+ * (checked 2026-10-11): image 1; video 1 per scored frame, capped at 20;
+ * audio 1 per minute rounded up, minimum 1. The response's credits_used
+ * reports the actual charge, including zero-charge duplicates/sandbox runs.
+ */
 export default defineProvider({
     name: "scam-ai",
     meta: {

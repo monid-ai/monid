@@ -28,15 +28,25 @@ additional fields. The usage model SHALL be PER_UNIT over Scam.ai credits
 1-credit billable-image estimate, and the evidence SHALL read `credits_used` from the
 response, failing the run when a success envelope lacks it.
 
+The vendor input schema SHALL mirror HTTP/HTTPS URLs and optional boolean
+`thumbnails`. The connector's HTTPS-only, URL-only restrictions SHALL be
+derived from that schema at the endpoint binding.
+
 #### Scenario: Score an image URL
 - **WHEN** a caller submits `{url: "https://example.com/ai-portrait.png"}`
 - **THEN** the wire request posts the body to `https://api.scam.ai/v1/detections`
 - **AND** the estimated usage is 1 Scam.ai credit
 
-#### Scenario: Settle a video run per sampled frame
+#### Scenario: Settle a video run per scored frame
 - **WHEN** a video run answers with `credits_used: 12`
 - **THEN** usage settles at 12 Scam.ai credits
 - **AND** evidence reports 12 credits
+- **AND** output preserves the full response except for `credits_used`
+
+#### Scenario: The compiled input gate preserves the connector's URL-only policy
+- **WHEN** a caller submits an HTTP URL, or includes `thumbnails` or an unknown field
+- **THEN** input validation rejects the request before transport
+- **AND** changing only the HTTP URL's scheme to HTTPS passes the pure estimate
 
 #### Scenario: A success envelope without the vendor meter fails
 - **WHEN** a 200 response lacks `credits_used`

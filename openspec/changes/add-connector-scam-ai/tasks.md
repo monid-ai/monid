@@ -15,3 +15,5 @@
 - [x] 2.5 Align the supported-media descriptions and docs link with the current public detection route
 - [x] 2.6 Preserve flat link/scope errors and verify zero-charge success settlement through the compiled connector
 - [x] 2.7 Describe scored-frame billing and billable-image estimates; remove unsupported calibration/compliance claims and document-input wording
+- [x] 2.8 Mirror vendor inputs and derive connector restrictions at the binding; verify the compiled HTTPS near-twin and thumbnail rejection
+- [x] 2.9 Assert the complete synthetic video output and cite the checked credit-rate source beside provider metadata and test assertions
