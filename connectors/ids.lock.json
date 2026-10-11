@@ -422,6 +422,8 @@
         "hunterio#multi-domain-search",
         "hunterio#multi-domain-search/reveal",
         "hunterio#people/find",
+        "keenable#v1/fetch",
+        "keenable#v1/search",
         "kling#image-to-video/kling-2.5-turbo",
         "kling#image-to-video/kling-2.6",
         "kling#image-to-video/kling-3.0",

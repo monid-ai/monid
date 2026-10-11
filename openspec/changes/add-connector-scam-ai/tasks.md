@@ -13,3 +13,5 @@
 - [x] 2.3 Run formatting, type checks, tests, and the id-lock update
 - [x] 2.4 Record real image/video responses with a detection-scoped key and add replay coverage for the recorded payloads and credit settlement
 - [x] 2.5 Align the supported-media descriptions and docs link with the current public detection route
+- [x] 2.6 Preserve flat link/scope errors and verify zero-charge success settlement through the compiled connector
+- [x] 2.7 Describe scored-frame billing and billable-image estimates; remove unsupported calibration/compliance claims and document-input wording

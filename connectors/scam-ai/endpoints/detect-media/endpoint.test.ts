@@ -155,6 +155,52 @@ Deno.test(`${ID} input gate: only a public https URL passes`, async () => {
     }
 });
 
+Deno.test(`${ID} link refusal: the compiled connector preserves flat error codes and messages`, async () => {
+    const unit = await testSealedUnit(ID);
+    const fixture = await loadFixture(
+        `${fixturesDir}synthetic-provider-error.json`,
+    );
+    fixture.calls[0].res.status = 422;
+    fixture.calls[0].res.body = {
+        success: false,
+        error: "LINK_NOT_RESOLVABLE",
+        message: "The link does not resolve to supported media.",
+        retryable: false,
+    };
+    const result = await runEndpoint({
+        unit,
+        input: INPUT,
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(result.httpStatus, 422);
+    assertEquals(result.isProviderError, true);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
+    assertEquals(result.output, {
+        code: "LINK_NOT_RESOLVABLE",
+        message: "The link does not resolve to supported media.",
+        raw: fixture.calls[0].res.body,
+    });
+});
+
+Deno.test(`${ID} zero-charge success: a duplicate preserves its reason and settles zero`, async () => {
+    const unit = await testSealedUnit(ID);
+    const fixture = await loadFixture(`${fixturesDir}synthetic-happy.json`);
+    const body = fixture.calls[0].res.body as Record<string, Json>;
+    body.credits_used = 0;
+    body.zero_charge_reason = "duplicate";
+    const result = await runEndpoint({
+        unit,
+        input: INPUT,
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(result.httpStatus, 200);
+    assertEquals(result.usage, { credits: {}, evidence: { CREDIT: 0 } });
+    const { credits_used: _settled, ...output } = body;
+    assertEquals(result.output, output);
+});
+
 Deno.test({
     name: `${ID} live (gated on SCAM_AI_API_KEY)`,
     ignore: liveSkip("scam-ai"),
