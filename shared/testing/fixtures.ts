@@ -236,7 +236,12 @@ export function scrubCalls(calls: RecordedCall[]): RecordedCall[] {
                     headers: Object.fromEntries(
                         Object.entries(call.res.headers).map((
                             [key, value],
-                        ) => [key, scrubUrlCredentials(value)]),
+                        ) => [
+                            key,
+                            key.toLowerCase() === "mcp-session-id"
+                                ? "fixture-session"
+                                : scrubUrlCredentials(value),
+                        ]),
                     ),
                 }
                 : {}),

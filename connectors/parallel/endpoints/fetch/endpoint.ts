@@ -31,7 +31,7 @@ export default defineEndpoint({
                 jsonrpc: "2.0",
                 id: 2,
                 method: "tools/call",
-                params: { name: "web_fetch", arguments: data.input.body },
+                params: { name: "web_fetch", arguments: data.input.body ?? {} },
             },
         }),
     },

@@ -26,7 +26,10 @@ export default defineEndpoint({
                 jsonrpc: "2.0",
                 id: 2,
                 method: "tools/call",
-                params: { name: "web_search", arguments: data.input.body },
+                params: {
+                    name: "web_search",
+                    arguments: data.input.body ?? {},
+                },
             },
         }),
     },

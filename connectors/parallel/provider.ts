@@ -41,6 +41,11 @@ const start: LifecycleStartFn = async ({ data, utils }) => {
                     output: res.body,
                 };
             }
+            if (stage === "initialize") {
+                session = res.headers["mcp-session-id"];
+                if (session) headers["Mcp-Session-Id"] = session;
+                headers["MCP-Protocol-Version"] = "2025-03-26";
+            }
             // The transport buffers the response. Parallel normally returns
             // JSON; finite SSE POST replies may contain progress notifications
             // before the matching response. Join multiline data per SSE rules.
@@ -101,9 +106,6 @@ const start: LifecycleStartFn = async ({ data, utils }) => {
                         output: { message: "Unsupported MCP protocol version" },
                     };
                 }
-                session = res.headers["mcp-session-id"];
-                if (session) headers["Mcp-Session-Id"] = session;
-                headers["MCP-Protocol-Version"] = "2025-03-26";
                 const ready = await utils.http({
                     method: "POST",
                     url: data.request.url,

@@ -68,7 +68,12 @@ async function execute(
                             JSON.stringify(
                                 options.reply ?? { message: "limited" },
                             ),
-                            { status: options.status ?? 200 },
+                            {
+                                status: options.status ?? 200,
+                                headers: method === "initialize"
+                                    ? { "mcp-session-id": "test-session" }
+                                    : {},
+                            },
                         ),
                     );
                 }
@@ -239,7 +244,7 @@ Deno.test("parallel: unsupported negotiated version prevents tool dispatch", asy
         },
     });
     assertEquals(result.httpStatus, 502);
-    assertEquals(methods, ["initialize"]);
+    assertEquals(methods, ["initialize", "DELETE"]);
 });
 
 for (
