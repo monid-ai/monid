@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-unauthorized",
+    "description": "A bad key: 401 with the vendor error envelope on any endpoint. Zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": {
+                        "code": "invalid_api_key",
+                        "message": "That API key is not valid.",
+                        "details": {}
+                    }
+                }
+            }
+        }
+    ]
+}

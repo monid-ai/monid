@@ -1,0 +1,88 @@
+{
+    "name": "synthetic-job-failed",
+    "description": "The scrape itself fails: a synthesized 500 over the status API's real 200, zero usage, and the vendor's error_message surfaces as the public message.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "id": "JOB1",
+                    "status": "queued",
+                    "progress": 0,
+                    "query": "Plumber",
+                    "list_name": "Plumber",
+                    "country": "us",
+                    "states": [],
+                    "cities": [
+                        {
+                            "city": "Austin",
+                            "state": "Texas"
+                        }
+                    ],
+                    "total_limit": 50,
+                    "lead_count": 0,
+                    "email_count": 0,
+                    "stop_reason": null,
+                    "error_message": null,
+                    "export_error": null,
+                    "created_at": "2026-10-09T18:00:00+00:00",
+                    "started_at": null,
+                    "completed_at": null,
+                    "downloads": {
+                        "csv": false,
+                        "xlsx": false,
+                        "csv_all": false,
+                        "xlsx_all": false,
+                        "filtered_csv": false,
+                        "filtered_xlsx": false
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}/JOB1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "JOB1",
+                    "status": "failed",
+                    "progress": 12,
+                    "query": "Plumber",
+                    "list_name": "Plumber",
+                    "country": "us",
+                    "states": [],
+                    "cities": [
+                        {
+                            "city": "Austin",
+                            "state": "Texas"
+                        }
+                    ],
+                    "total_limit": 50,
+                    "lead_count": 0,
+                    "email_count": 0,
+                    "stop_reason": null,
+                    "error_message": "The scrape stopped unexpectedly. No leads were billed.",
+                    "export_error": null,
+                    "created_at": "2026-10-09T18:00:00+00:00",
+                    "started_at": "2026-10-09T18:00:05+00:00",
+                    "completed_at": null,
+                    "downloads": {
+                        "csv": false,
+                        "xlsx": false,
+                        "csv_all": false,
+                        "xlsx_all": false,
+                        "filtered_csv": false,
+                        "filtered_xlsx": false
+                    }
+                }
+            }
+        }
+    ]
+}
