@@ -1,0 +1,56 @@
+{
+    "name": "synthetic-contents-ok",
+    "description": "Synthetic synchronous Contents response based on Valyu OpenAPI; not recorded. Two successful URLs including structured extraction and a USD cost receipt.",
+    "calls": [{
+        "req": {
+            "method": "POST",
+            "url": "{{request.url}}",
+            "body": {
+                "urls": ["https://example.com", "https://example.org"],
+                "summary": true
+            }
+        },
+        "res": {
+            "status": 200,
+            "body": {
+                "success": true,
+                "error": null,
+                "tx_id": "tx_synthetic_contents",
+                "urls_requested": 2,
+                "urls_processed": 2,
+                "urls_failed": 0,
+                "results": [
+                    {
+                        "url": "https://example.com",
+                        "status": "success",
+                        "title": "Example",
+                        "content": "# Example\n\nPage content.",
+                        "source": "web",
+                        "price": 0.002,
+                        "length": 24,
+                        "data_type": "unstructured",
+                        "source_type": "website",
+                        "summary": "Page summary.",
+                        "summary_success": true
+                    },
+                    {
+                        "url": "https://example.org",
+                        "status": "success",
+                        "title": "Example record",
+                        "content": {
+                            "name": "Example",
+                            "total_cost_dollars": 0.1
+                        },
+                        "source": "web",
+                        "price": 0.002,
+                        "length": 40,
+                        "data_type": "structured",
+                        "summary_success": true
+                    }
+                ],
+                "total_cost_dollars": 0.004,
+                "total_characters": 64
+            }
+        }
+    }]
+}
