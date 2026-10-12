@@ -1,0 +1,11 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "Synthetic invalid-key error matching Valyu's documented Error envelope; shared by Search and Contents. No real key or recorded request.",
+    "calls": [{
+        "req": { "method": "POST", "url": "{{request.url}}" },
+        "res": {
+            "status": 401,
+            "body": { "success": false, "error": "Invalid API key" }
+        }
+    }]
+}

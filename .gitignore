@@ -1,4 +1,8 @@
 .output/
-.env
+.env*
+*.pem
+*.key
+credentials.*
+secrets.*
 .DS_Store
 node_modules/
