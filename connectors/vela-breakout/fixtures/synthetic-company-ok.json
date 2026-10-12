@@ -1,0 +1,84 @@
+{
+    "name": "synthetic-company-ok",
+    "description": "SYNTHETIC chain for vela-breakout#company: GET /company?name_or_domain=supabase.com returns the company's summary, measurement date, page and its signals; trimmed to 4 of 11 signals. Flat $0.002. Body is a real Breakout API response captured 2026-10-12 (not via `deno task record`, which needs the API live), trimmed by hand; replace via `deno task record` once a key is provisioned.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://breakout.vela.partners/api/v1/company?name_or_domain=supabase.com"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "name": "Supabase",
+                    "domain": "supabase.com",
+                    "summary": "Supabase is rising on 1 of 7 measures.",
+                    "measured_as_of": "2026-10-11",
+                    "page": "https://breakout.vela.partners/company/supabase.com",
+                    "signals": [
+                        {
+                            "name": "Supabase",
+                            "about": "The Postgres Development Platform",
+                            "group": "Code editor extensions",
+                            "growth_value": 1.0552,
+                            "before_value": 146866,
+                            "now_value": 154967,
+                            "growth": "1.06×",
+                            "before": "147k",
+                            "now": "155k",
+                            "unit": "installs",
+                            "window": "30 days",
+                            "against_peers": "Faster than 94% of editor extensions",
+                            "company_page": "https://breakout.vela.partners/company/supabase.com"
+                        },
+                        {
+                            "name": "Supabase",
+                            "about": "devops",
+                            "group": "Business software",
+                            "growth_value": 1.148267043908809,
+                            "before_value": 0.128653,
+                            "now_value": 0.147728,
+                            "growth": "1.15×",
+                            "before": "12.9",
+                            "now": "14.8",
+                            "unit": "adoption score",
+                            "window": "3 months",
+                            "against_peers": "Faster than 90% of software vendors",
+                            "company_page": "https://breakout.vela.partners/company/supabase.com"
+                        },
+                        {
+                            "name": "postgres-language-server",
+                            "about": null,
+                            "group": "Code editor extensions",
+                            "growth_value": 1.0348,
+                            "before_value": 14355,
+                            "now_value": 14855,
+                            "growth": "1.03×",
+                            "before": "14.4k",
+                            "now": "14.9k",
+                            "unit": "installs",
+                            "window": "30 days",
+                            "against_peers": "Faster than 90% of editor extensions",
+                            "company_page": "https://breakout.vela.partners/company/supabase.com"
+                        },
+                        {
+                            "name": "Supabase",
+                            "about": "supabase.io",
+                            "group": "Companies hiring",
+                            "growth_value": 0.9818181818181818,
+                            "before_value": 55,
+                            "now_value": 54,
+                            "growth": "0.98×",
+                            "before": "55",
+                            "now": "54",
+                            "unit": "open roles",
+                            "window": "14 days",
+                            "against_peers": "Slower than most companies hiring",
+                            "company_page": "https://breakout.vela.partners/company/supabase.com"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

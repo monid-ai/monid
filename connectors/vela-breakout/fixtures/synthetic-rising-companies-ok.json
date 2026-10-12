@@ -1,0 +1,50 @@
+{
+    "name": "synthetic-rising-companies-ok",
+    "description": "SYNTHETIC chain for vela-breakout#rising-companies: GET /rising-companies?limit=3 returns 3 companies rising on two or more measures, with the rule and measurement date. Flat $0.002. Body is a real Breakout API response captured 2026-10-12 (not via `deno task record`, which needs the API live), trimmed by hand; replace via `deno task record` once a key is provisioned.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://breakout.vela.partners/api/v1/rising-companies?limit=3"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "measured_as_of": "2026-10-11",
+                    "rule": "Rising = faster than 90% of its peers and growing at least 10%, on two or more measures. Ranked by how much.",
+                    "companies": [
+                        {
+                            "name": "Context7",
+                            "domain": "context7.com",
+                            "rising_on": [
+                                "AI model usage",
+                                "Web reach"
+                            ],
+                            "page": "https://breakout.vela.partners/company/context7.com"
+                        },
+                        {
+                            "name": "StepFun",
+                            "domain": "stepfun.com",
+                            "rising_on": [
+                                "Model tokens",
+                                "Open model pull",
+                                "Forum points",
+                                "Web reach"
+                            ],
+                            "page": "https://breakout.vela.partners/company/stepfun.com"
+                        },
+                        {
+                            "name": "Poolside",
+                            "domain": "poolside.ai",
+                            "rising_on": [
+                                "Open model pull",
+                                "App installs"
+                            ],
+                            "page": "https://breakout.vela.partners/company/poolside.ai"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

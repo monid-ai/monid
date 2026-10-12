@@ -629,7 +629,12 @@
         "suzanne#v1/models/download",
         "suzanne#v1/uploads",
         "tinyfish#fetch",
-        "tinyfish#search"
+        "tinyfish#search",
+        "vela-breakout#breakouts",
+        "vela-breakout#company",
+        "vela-breakout#groups",
+        "vela-breakout#ideas",
+        "vela-breakout#rising-companies"
     ],
     "resources": [
         "saperly/phone-number"

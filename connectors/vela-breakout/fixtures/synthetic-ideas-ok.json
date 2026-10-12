@@ -1,0 +1,46 @@
+{
+    "name": "synthetic-ideas-ok",
+    "description": "SYNTHETIC chain for vela-breakout#ideas: GET /ideas?direction=rising&limit=2 returns 2 AI research ideas with share before/now, change in points, product readiness and the companies publishing on each. Flat $0.002. Body is a real Breakout API response captured 2026-10-12 (not via `deno task record`, which needs the API live), trimmed by hand (companies_publishing cut to 2 per idea); replace via `deno task record` once a key is provisioned.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://breakout.vela.partners/api/v1/ideas?direction=rising&limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "measured_as_of": "2026-10-11",
+                    "caveat": "Share of all AI research papers, last 3 months against the 3 before. Share, not counts.",
+                    "chart": "https://breakout.vela.partners/ideas",
+                    "ideas": [
+                        {
+                            "idea": "Agentic systems and tool use",
+                            "share_before": "4.7%",
+                            "share_now": "5.6%",
+                            "change": "+0.9 points",
+                            "ready_for_products": "2.5 of 5",
+                            "page": "https://breakout.vela.partners/idea/agentic-systems-and-tool-use-field",
+                            "companies_publishing": [
+                                "IBM (3 papers)",
+                                "Microsoft (3 papers)"
+                            ]
+                        },
+                        {
+                            "idea": "Robotics and embodied control",
+                            "share_before": "3.1%",
+                            "share_now": "3.9%",
+                            "change": "+0.8 points",
+                            "ready_for_products": "2.7 of 5",
+                            "page": "https://breakout.vela.partners/idea/robotics-and-embodied-control-field",
+                            "companies_publishing": [
+                                "Huawei Technologies (1 papers)",
+                                "Meta (1 papers)"
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
