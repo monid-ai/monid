@@ -19,7 +19,7 @@ const IDS = [
     "vela-breakout#rising-companies",
 ];
 
-Deno.test("vela-breakout: five GET docs, bearer auth, dollar pool, flat $0.002 except free /groups, no consolidate", async () => {
+Deno.test("vela-breakout: five GET docs, bearer auth, dollar pool, $0.02 lists, $0.01 /company, free /groups, no consolidate", async () => {
     const bundle = await testBundle();
     const ids = Object.keys(bundle.endpoints).filter((id) =>
         id.startsWith("vela-breakout#")
@@ -48,7 +48,10 @@ Deno.test("vela-breakout: five GET docs, bearer auth, dollar pool, flat $0.002 e
                 "consumes" in doc.usage.model
                     ? doc.usage.model.consumes
                     : undefined,
-                { credit: "default", amount: 0.002 },
+                {
+                    credit: "default",
+                    amount: id === "vela-breakout#company" ? 0.01 : 0.02,
+                },
                 id,
             );
             assertEquals(

@@ -4,13 +4,13 @@
 
 - [x] 1.1 Capture the published OpenAPI (2026-10-12): base url, bearer auth,
       the five GET parameter schemas, the status codes (400/401/402/404/429/
-      503), the flat $0.002 price and the free `/groups`
+      503), the prices ($0.02 a ranked list, $0.01 `/company`) and the free `/groups`
 - [x] 1.2 Confirm no response body carries a cost or credit field
 
 ## 2. Provider
 
 - [x] 2.1 `provider.ts`: bearer auth, `/api/v1` baseUrl, 30 s timeouts, one
-      `default` pool ("US dollars"), provider-level PER_CALL 0.002, no
+      `default` pool ("US dollars"), provider-level PER_CALL 0.02 (`/company` 0.01), no
       consolidate
 - [x] 2.2 `schema/common.ts`: the shared `limit` (1-25)
 - [x] 2.3 `categories.ts`: new `market-trends` leaf

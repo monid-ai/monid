@@ -6,20 +6,24 @@
 The vela-breakout provider SHALL declare name `vela-breakout`,
 `request.baseUrl` `https://breakout.vela.partners/api/v1`, auth
 `presets.auth.bearer()`, timeouts 30 s request / 30 s run, one credit pool
-`default` ("US dollars"), a provider-level `usage.model` of PER_CALL 0.002
-dollars, and NO `usage.consolidate` (no response carries a meter).
+`default` ("US dollars"), a provider-level `usage.model` of PER_CALL 0.02
+dollars (overridden to PER_CALL 0.01 on `/company`), and NO `usage.consolidate` (no response carries a meter).
 
-#### Scenario: A data call costs $0.002
+#### Scenario: A ranked list costs $0.02
 - **WHEN** `GET /breakouts?group=ai_apps&window_days=30&limit=3` returns 200
-- **THEN** usage is `{credits: {default: 0.002}, evidence: {CALL: 1}}`
+- **THEN** usage is `{credits: {default: 0.02}, evidence: {CALL: 1}}`
 - **AND** the output carries `group`, `measured_as_of`, `caveat`, `chart`
   and `rows` unchanged
 
 #### Scenario: The price does not depend on limit
 - **WHEN** `vela-breakout#breakouts` is estimated with `limit: 1` and
   `limit: 25`
-- **THEN** both estimates are `{credits: {default: 0.002}, evidence:
+- **THEN** both estimates are `{credits: {default: 0.02}, evidence:
   {CALL: 1}}`
+
+#### Scenario: A company lookup costs $0.01
+- **WHEN** `GET /company?name_or_domain=pre.dev` returns 200
+- **THEN** usage is `{credits: {default: 0.01}, evidence: {CALL: 1}}`
 
 #### Scenario: Groups are free
 - **WHEN** `GET /groups` returns 200

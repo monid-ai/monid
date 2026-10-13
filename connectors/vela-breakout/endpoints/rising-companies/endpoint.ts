@@ -3,7 +3,7 @@ import { zRisingCompaniesQueryParams } from "./schema/inputs.ts";
 
 /**
  * GET /rising-companies — multi-signal breakouts. Inherits the
- * provider's flat $0.002 PER_CALL.
+ * provider's $0.02 PER_CALL.
  */
 export default defineEndpoint({
     meta: {

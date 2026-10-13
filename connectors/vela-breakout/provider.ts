@@ -7,14 +7,15 @@ import { defineProvider, presets, UsageModelKind } from "@shared/core";
  * url resolution, the fundable posture), auth `Authorization: Bearer
  * <key>`.
  *
- * Billing: Breakout prices every data call at a flat $0.002 taken from
- * the account's prepaid dollar credit; `/groups` is free, and only an
+ * Billing: Breakout prices a ranked list at $0.02 and a company lookup
+ * at $0.01, taken from the account's prepaid dollar credit; `/groups`
+ * is free, and only an
  * HTTP 200 is charged (400/401/402/404/429/503 cost nothing — a 404 for
  * an unknown company is explicitly not charged). The vendor publishes
  * its price in DOLLARS and meters one dollar balance, so the pool IS
  * dollars (the exa/minimax/dataforseo posture, design D26), and the
- * provider states the flat PER_CALL 0.002 that four of the five
- * endpoints inherit; `/groups` overrides it with FREE. Responses carry
+ * provider states the PER_CALL 0.02 the three list endpoints inherit;
+ * `/company` overrides it with PER_CALL 0.01 and `/groups` with FREE. Responses carry
  * NO cost or credit field, so there is no `usage.consolidate` (design
  * D27, the tinyfish/clay/keenable posture): the derived fold settles.
  *
@@ -49,7 +50,9 @@ export default defineProvider({
         docsUrl: "https://breakout.vela.partners/agent",
         categories: ["market-trends", "company-enrichment"],
         notes: [
-            "Every data call costs a flat $0.002; /groups is free. Only " +
+            "A ranked list (/breakouts, /rising-companies, /ideas) costs " +
+            "$0.02 a call, a company lookup (/company) $0.01; /groups is " +
+            "free. Only " +
             "HTTP 200 is charged — bad input (400), a missing key (401), " +
             "out of credit (402), an unknown company (404), the rate " +
             "limit (429) and failures (503) all cost nothing.",
@@ -71,14 +74,14 @@ export default defineProvider({
          *  dollar balance and publishes its price in dollars, so the
          *  pool IS US dollars. */
         credits: { default: { label: "US dollars" } },
-        /** Flat $0.002 per data call (published in the API's own
-         *  OpenAPI `info.description`, 2026-10-12). `/groups` overrides
-         *  with FREE. No `consolidate`: no response body carries a
+        /** $0.02 per ranked-list call (published in the API's own
+         *  OpenAPI `info.description`, 2026-10-12). `/company`
+         *  overrides with $0.01, `/groups` with FREE. No `consolidate`: no response body carries a
          *  meter. */
         model: {
             kind: UsageModelKind.PER_CALL,
-            label: "data call",
-            consumes: { credit: "default", amount: 0.002 },
+            label: "ranked list",
+            consumes: { credit: "default", amount: 0.02 },
         },
     },
 });

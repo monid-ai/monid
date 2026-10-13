@@ -34,8 +34,9 @@ capability.
   `limit` fragment lives in `schema/common.ts`. No `input.toRequest`.
 - **One dollar pool.** Breakout meters one prepaid dollar balance and
   publishes its price in dollars, so the pool `default` is "US dollars"
-  (the exa / minimax / dataforseo posture). The provider declares a flat
-  `PER_CALL` of 0.002; `/groups` overrides it with `FREE`. Only HTTP 200 is
+  (the exa / minimax / dataforseo posture). The provider declares
+  `PER_CALL` 0.02 (a ranked list); `/company` overrides it with `PER_CALL`
+  0.01 (one lookup) and `/groups` with `FREE`. Only HTTP 200 is
   charged upstream, which is exactly the engine's zero-billed non-2xx rule.
 - **No `usage.consolidate`.** No Breakout response carries a cost or credit
   field, so the derived fold settles (design D27; the tinyfish / clay /

@@ -3,7 +3,7 @@ import { zIdeasQueryParams } from "./schema/inputs.ts";
 
 /**
  * GET /ideas — AI research ideas by change in share of new papers.
- * Inherits the provider's flat $0.002 PER_CALL.
+ * Inherits the provider's $0.02 PER_CALL.
  */
 export default defineEndpoint({
     meta: {

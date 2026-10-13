@@ -11,7 +11,7 @@ import {
 const fixturesDir = fromFileUrl(new URL("../../fixtures/", import.meta.url));
 const ID = "vela-breakout#company";
 
-Deno.test("vela-breakout#company happy (synthetic): domain rides the query string; flat $0.002; signals relayed", async () => {
+Deno.test("vela-breakout#company happy (synthetic): domain rides the query string; $0.01; signals relayed", async () => {
     const unit = await testSealedUnit(ID);
     const fixture = await loadFixture(
         `${fixturesDir}synthetic-company-ok.json`,
@@ -25,7 +25,7 @@ Deno.test("vela-breakout#company happy (synthetic): domain rides the query strin
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
     assertEquals(result.usage, {
-        credits: { default: 0.002 },
+        credits: { default: 0.01 },
         evidence: { CALL: 1 },
     });
     const output = result.output as Record<string, Json>;

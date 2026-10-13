@@ -3,7 +3,7 @@ import { zBreakoutsQueryParams } from "./schema/inputs.ts";
 
 /**
  * GET /breakouts — the fastest growers in one group. Inherits the
- * provider's flat $0.002 PER_CALL; estimate and evidence are
+ * provider's $0.02 PER_CALL; estimate and evidence are
  * compiler-synthesized (flat model).
  */
 export default defineEndpoint({

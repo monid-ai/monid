@@ -1,10 +1,10 @@
-import { defineEndpoint } from "@shared/core";
+import { defineEndpoint, UsageModelKind } from "@shared/core";
 import { zCompanyQueryParams } from "./schema/inputs.ts";
 
 /**
- * GET /company — every measured signal for one company. Inherits the
- * provider's flat $0.002 PER_CALL; a 404 (unknown company) is not
- * charged.
+ * GET /company — every measured signal for one company. A lookup is
+ * $0.01 PER_CALL (half the provider's list price); a 404 (unknown
+ * company) is not charged.
  */
 export default defineEndpoint({
     meta: {
@@ -38,4 +38,11 @@ export default defineEndpoint({
     },
     request: { method: "GET", path: "/company" },
     input: { schema: { queryParams: zCompanyQueryParams } },
+    usage: {
+        model: {
+            kind: UsageModelKind.PER_CALL,
+            label: "company lookup",
+            consumes: { credit: "default", amount: 0.01 },
+        },
+    },
 });

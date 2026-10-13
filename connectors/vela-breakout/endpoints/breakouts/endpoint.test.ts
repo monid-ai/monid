@@ -12,7 +12,7 @@ import {
 const fixturesDir = fromFileUrl(new URL("../../fixtures/", import.meta.url));
 const ID = "vela-breakout#breakouts";
 
-Deno.test("vela-breakout#breakouts happy (synthetic): params ride the query string; flat $0.002; rows relayed", async () => {
+Deno.test("vela-breakout#breakouts happy (synthetic): params ride the query string; $0.02; rows relayed", async () => {
     const unit = await testSealedUnit(ID);
     const fixture = await loadFixture(
         `${fixturesDir}synthetic-breakouts-ok.json`,
@@ -29,7 +29,7 @@ Deno.test("vela-breakout#breakouts happy (synthetic): params ride the query stri
     assertEquals(result.isProviderError, false);
     // no consolidate ⇒ the derived fold settles
     assertEquals(result.usage, {
-        credits: { default: 0.002 },
+        credits: { default: 0.02 },
         evidence: { CALL: 1 },
     });
     const output = result.output as Record<string, Json>;
@@ -41,14 +41,14 @@ Deno.test("vela-breakout#breakouts happy (synthetic): params ride the query stri
     assertEquals(rows[0].against_peers, "Faster than 99% of AI apps");
 });
 
-Deno.test("vela-breakout#breakouts estimate: flat $0.002 whatever the limit", async () => {
+Deno.test("vela-breakout#breakouts estimate: $0.02 whatever the limit", async () => {
     const unit = await testSealedUnit(ID);
     for (const limit of [1, 25]) {
         assertEquals(
             await estimateEndpoint(unit, {
                 queryParams: { group: "agent_tools", limit },
             }),
-            { credits: { default: 0.002 }, evidence: { CALL: 1 } },
+            { credits: { default: 0.02 }, evidence: { CALL: 1 } },
         );
     }
 });
