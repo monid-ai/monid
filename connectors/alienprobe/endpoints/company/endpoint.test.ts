@@ -1,6 +1,11 @@
 import { assert, assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
-import { loadFixture, runEndpoint, testSealedUnit } from "@shared/testing";
+import {
+    estimateEndpoint,
+    loadFixture,
+    runEndpoint,
+    testSealedUnit,
+} from "@shared/testing";
 
 const ID = "alienprobe#company";
 const chains = fromFileUrl(new URL("../../fixtures/", import.meta.url));
@@ -17,11 +22,12 @@ const liveOff = Deno.env.get("ALIENPROBE_LIVE") !== "1";
 // Trimmed by the repo's trimCalls (coverage string, `sources` array).
 Deno.test(`${ID} happy (seller-declared 402 example, paid on-chain): flat $0.04, per-field provenance passes through`, async () => {
     const unit = await testSealedUnit(ID);
+    const fixture = await loadFixture(`${chains}company-ok.json`);
     const result = await runEndpoint({
         unit,
         input: { queryParams: { q: LEI } },
         mode: "replay",
-        fixture: await loadFixture(`${chains}company-ok.json`),
+        fixture,
     });
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
@@ -29,6 +35,8 @@ Deno.test(`${ID} happy (seller-declared 402 example, paid on-chain): flat $0.04,
         credits: { default: 0.04 },
         evidence: { CALL: 1 },
     });
+    // the whole answer passes through untouched: no billing fields added
+    assertEquals(result.output, fixture.calls[0].res.body);
     const output = result.output as Record<string, any>;
     assertEquals(output.schema_version, "company-lookup.v1");
     assertEquals(output.subject, { type: "company", value: LEI });
@@ -143,6 +151,14 @@ Deno.test(`${ID} schema gate: q required and bounded, kind enumerated, strict`, 
             "INVALID_INPUT",
         );
     }
+    // the accepted twin of the `knd` misspelling: `kind` is accepted.
+    // Checked through the PURE estimate, so no fixture and no wire call.
+    assertEquals(
+        await estimateEndpoint(unit, {
+            queryParams: { q: "apple.com", kind: "domain" },
+        }),
+        { credits: { default: 0.04 }, evidence: { CALL: 1 } },
+    );
 });
 
 Deno.test({
@@ -156,6 +172,9 @@ Deno.test({
             mode: "live",
         });
         assertEquals(result.httpStatus, 404, JSON.stringify(result.output));
-        assertEquals(result.usage, { credits: {}, evidence: {} });
+        // shape, not amounts: a live refusal is a provider error with a
+        // usage record, whatever the seller bills
+        assertEquals(result.isProviderError, true);
+        assertEquals(Object.keys(result.usage).sort(), ["credits", "evidence"]);
     },
 });

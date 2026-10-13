@@ -1,6 +1,11 @@
 import { assert, assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
-import { loadFixture, runEndpoint, testSealedUnit } from "@shared/testing";
+import {
+    estimateEndpoint,
+    loadFixture,
+    runEndpoint,
+    testSealedUnit,
+} from "@shared/testing";
 
 const ID = "alienprobe#lei";
 const chains = fromFileUrl(new URL("../../fixtures/", import.meta.url));
@@ -92,6 +97,12 @@ Deno.test(`${ID} schema gate: a non-LEI never reaches the wire`, async () => {
             "INVALID_INPUT",
         );
     }
+    // the accepted twin: a real 20-character uppercase LEI passes the gate.
+    // Checked through the PURE estimate, so no fixture and no wire call.
+    assertEquals(
+        await estimateEndpoint(unit, { queryParams: { lei: LEI } }),
+        { credits: { default: 0.005 }, evidence: { CALL: 1 } },
+    );
 });
 
 /** Opt-in live gate — this provider has no credential (x402). */
@@ -106,6 +117,9 @@ Deno.test({
             mode: "live",
         });
         assertEquals(result.httpStatus, 404, JSON.stringify(result.output));
-        assertEquals(result.usage, { credits: {}, evidence: {} });
+        // shape, not amounts: a live refusal is a provider error with a
+        // usage record, whatever the seller bills
+        assertEquals(result.isProviderError, true);
+        assertEquals(Object.keys(result.usage).sort(), ["credits", "evidence"]);
     },
 });
