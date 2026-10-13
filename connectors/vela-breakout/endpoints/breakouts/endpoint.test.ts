@@ -53,6 +53,22 @@ Deno.test("vela-breakout#breakouts estimate: $0.02 whatever the limit", async ()
     }
 });
 
+Deno.test("vela-breakout#breakouts 401 (synthetic): data, zero usage", async () => {
+    const unit = await testSealedUnit(ID);
+    const fixture = await loadFixture(
+        `${fixturesDir}synthetic-breakouts-unauthorized.json`,
+    );
+    const result = await runEndpoint({
+        unit,
+        input: { queryParams: { group: "ai_apps", limit: 3 } },
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(result.httpStatus, 401);
+    assertEquals(result.isProviderError, true);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
+});
+
 Deno.test("vela-breakout#breakouts: group required and closed; window, limit, min_size bounded; unknown keys rejected", async () => {
     const unit = await testSealedUnit(ID);
     const fixture = await loadFixture(
@@ -81,11 +97,24 @@ Deno.test("vela-breakout#breakouts: group required and closed; window, limit, mi
             "INVALID_INPUT",
             JSON.stringify(queryParams),
         );
-    }
+    } // the accepted twins of the rejected values above
+    assertEquals(
+        await estimateEndpoint(unit, {
+            queryParams: {
+                group: "ai_apps",
+                window_days: 365,
+                limit: 25,
+                min_size: "p75",
+                steady: true,
+            },
+        }),
+        { credits: { default: 0.02 }, evidence: { CALL: 1 } },
+    );
 });
 
 Deno.test({
-    name: "vela-breakout#breakouts live (gated on VELA_BREAKOUT_API_KEY)",
+    name:
+        "vela-breakout#breakouts live (gated on VELA_BREAKOUT_CREDENTIALS_API_KEY)",
     ignore: liveSkip("vela-breakout"),
     fn: async () => {
         const unit = await testSealedUnit(ID);

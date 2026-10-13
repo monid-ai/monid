@@ -1,0 +1,18 @@
+{
+    "name": "synthetic-ideas-unauthorized",
+    "description": "SYNTHETIC chain for vela-breakout#ideas: GET /ideas?direction=rising with a missing or unknown key answers 401 {error} — data, zero usage. Its required query values keep it off the shared no-parameter synthetic-unauthorized chain. Body captured 2026-10-12 from a local build with its host rewritten to production.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://breakout.vela.partners/api/v1/ideas?direction=rising"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": "A key is required. Create one at https://breakout.vela.partners/account and send it as \"Authorization: Bearer <key>\"."
+                }
+            }
+        }
+    ]
+}

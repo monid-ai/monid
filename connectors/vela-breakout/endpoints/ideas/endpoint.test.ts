@@ -35,6 +35,22 @@ Deno.test("vela-breakout#ideas happy (synthetic): direction + limit on the wire;
     assertEquals(ideas[0].change, "+0.9 points");
 });
 
+Deno.test("vela-breakout#ideas 401 (synthetic): data, zero usage", async () => {
+    const unit = await testSealedUnit(ID);
+    const fixture = await loadFixture(
+        `${fixturesDir}synthetic-ideas-unauthorized.json`,
+    );
+    const result = await runEndpoint({
+        unit,
+        input: { queryParams: { direction: "rising" } },
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(result.httpStatus, 401);
+    assertEquals(result.isProviderError, true);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
+});
+
 Deno.test("vela-breakout#ideas: direction required and closed; limit bounded", async () => {
     const unit = await testSealedUnit(ID);
     const fixture = await loadFixture(`${fixturesDir}synthetic-ideas-ok.json`);
@@ -61,7 +77,8 @@ Deno.test("vela-breakout#ideas: direction required and closed; limit bounded", a
 });
 
 Deno.test({
-    name: "vela-breakout#ideas live (gated on VELA_BREAKOUT_API_KEY)",
+    name:
+        "vela-breakout#ideas live (gated on VELA_BREAKOUT_CREDENTIALS_API_KEY)",
     ignore: liveSkip("vela-breakout"),
     fn: async () => {
         const unit = await testSealedUnit(ID);

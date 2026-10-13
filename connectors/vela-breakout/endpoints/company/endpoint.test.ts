@@ -84,7 +84,8 @@ Deno.test("vela-breakout#company: name_or_domain required, 2-120 chars, unknown 
 });
 
 Deno.test({
-    name: "vela-breakout#company live (gated on VELA_BREAKOUT_API_KEY)",
+    name:
+        "vela-breakout#company live (gated on VELA_BREAKOUT_CREDENTIALS_API_KEY)",
     ignore: liveSkip("vela-breakout"),
     fn: async () => {
         const unit = await testSealedUnit(ID);

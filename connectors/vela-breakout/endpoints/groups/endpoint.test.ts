@@ -106,7 +106,8 @@ Deno.test("vela-breakout#groups 401 (synthetic): data, zero usage", async () => 
 });
 
 Deno.test({
-    name: "vela-breakout#groups live (gated on VELA_BREAKOUT_API_KEY)",
+    name:
+        "vela-breakout#groups live (gated on VELA_BREAKOUT_CREDENTIALS_API_KEY)",
     ignore: liveSkip("vela-breakout"),
     fn: async () => {
         const unit = await testSealedUnit("vela-breakout#groups");

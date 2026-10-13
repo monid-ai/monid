@@ -1,6 +1,6 @@
 {
     "name": "synthetic-rising-companies-ok",
-    "description": "SYNTHETIC chain for vela-breakout#rising-companies: GET /rising-companies?limit=3 returns 3 companies rising on two or more measures, with the rule and measurement date. Flat $0.002. Body is a real Breakout API response captured 2026-10-12 (not via `deno task record`, which needs the API live), trimmed by hand; replace via `deno task record` once a key is provisioned.",
+    "description": "SYNTHETIC chain for vela-breakout#rising-companies: GET /rising-companies?limit=3 returns 3 companies rising on two or more measures, with the rule and measurement date. $0.02 a call. Body is a real Breakout API response captured 2026-10-12 (not via `deno task record`, which needs the API live), trimmed by hand; replace via `deno task record` once a key is provisioned.",
     "calls": [
         {
             "req": {

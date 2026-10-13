@@ -88,7 +88,7 @@ Deno.test("vela-breakout#rising-companies: limit bounded; unknown keys rejected"
 
 Deno.test({
     name:
-        "vela-breakout#rising-companies live (gated on VELA_BREAKOUT_API_KEY)",
+        "vela-breakout#rising-companies live (gated on VELA_BREAKOUT_CREDENTIALS_API_KEY)",
     ignore: liveSkip("vela-breakout"),
     fn: async () => {
         const unit = await testSealedUnit(ID);
