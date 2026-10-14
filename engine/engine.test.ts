@@ -790,6 +790,33 @@ Deno.test("FN_CONTRACT: a claim on an UNDECLARED credit pool fails closed", asyn
     );
 });
 
+Deno.test("FN_CONTRACT: inherited properties are not declared credit pools", async (t) => {
+    const unit = await usageUnit({
+        model: {
+            kind: "PER_CALL",
+            consumes: { credit: "default", amount: 0.5 },
+        },
+        consolidate: ({ data, utils }) => ({
+            credits: { [utils.json.str(data.output, "$.pool")]: 1 },
+        }),
+    });
+    for (
+        const pool of ["constructor", "toString", "valueOf", "hasOwnProperty"]
+    ) {
+        await t.step(pool, async () => {
+            const loaded = await new Engine({
+                transport: jsonTransport(200, { pool }),
+            }).load(unit);
+            const error = await assertRejects(
+                () => loaded.run({ body: { q: "x" } }),
+                EngineError,
+                `claimed undeclared credit pool "${pool}"`,
+            );
+            assertEquals(error.code, EngineErrorCode.FN_CONTRACT);
+        });
+    }
+});
+
 Deno.test("consolidate.output strip applies even with an EMPTY claim (the octen shape)", async () => {
     // no vendor pool claimed, but the receipt still leaves the payload:
     // {credits: {}, output} — the derived fold settles, output stripped
