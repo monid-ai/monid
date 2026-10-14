@@ -7,8 +7,8 @@
 `hunterio#discover` and `hunterio#discover/people` SHALL accept an optional
 `job_openings` object containing optional boolean `hiring`, string-array
 `department`, `job_title` include/exclude keyword arrays, `posted_date` in
-`last7d` / `last30d` / `last90d`, integer `open_roles.from` / `to`, and boolean
-`include_closed_roles`. Each job-title keyword array SHALL accept at most 100
+`last7d` / `last30d` / `last90d`, non-negative integer `open_roles.from` / `to`,
+and boolean `include_closed_roles`. Each job-title keyword array SHALL accept at most 100
 entries. The mirror SHALL NOT materialize defaults.
 
 #### Scenario: Hiring is the only filter
@@ -21,9 +21,13 @@ entries. The mirror SHALL NOT materialize defaults.
 
 #### Scenario: Malformed hiring fields fail before HTTP
 - **WHEN** a hiring flag is a string, department is a scalar, the posting
-  window is unsupported, an open-role bound is fractional, or a keyword array
-  exceeds 100 entries
+  window is unsupported, an open-role bound is negative or fractional, or a
+  keyword array exceeds 100 entries
 - **THEN** the engine rejects the request with `INVALID_INPUT` before transport
+
+#### Scenario: Zero is a valid role-count bound
+- **WHEN** either `open_roles.from` or `open_roles.to` is zero
+- **THEN** input validation accepts that bound
 
 ### Requirement: Existing request and settlement behavior is preserved
 

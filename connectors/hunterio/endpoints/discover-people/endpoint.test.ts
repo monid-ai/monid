@@ -98,6 +98,8 @@ Deno.test(`${ID}: hiring filters pass validation and remain free`, async () => {
         { job_openings: { posted_date: "last7d" } },
         { job_openings: { posted_date: "last30d" } },
         { job_openings: { posted_date: "last90d" } },
+        { job_openings: { open_roles: { from: 0 } } },
+        { job_openings: { open_roles: { to: 0 } } },
         { job_openings: { open_roles: { from: 1 } } },
         { job_openings: { open_roles: { to: 10 } } },
         {
@@ -141,6 +143,8 @@ Deno.test(`${ID}: malformed hiring filters fail before any HTTP request`, async 
         { job_openings: { department: "engineering" } },
         { job_openings: { department: [""] } },
         { job_openings: { posted_date: "last14d" } },
+        { job_openings: { open_roles: { from: -1 } } },
+        { job_openings: { open_roles: { to: -1 } } },
         { job_openings: { open_roles: { from: 1.5 } } },
         { job_openings: { open_roles: { to: "10" } } },
         { job_openings: { include_closed_roles: "false" } },

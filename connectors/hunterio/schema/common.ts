@@ -205,10 +205,10 @@ export const discoverFilterFields = {
             "Job-posting date window.",
         ).optional(),
         open_roles: z.object({
-            from: z.number().int().describe(
+            from: z.number().int().min(0).describe(
                 "Minimum number of open roles.",
             ).optional(),
-            to: z.number().int().describe(
+            to: z.number().int().min(0).describe(
                 "Maximum number of open roles; must be at least from.",
             ).optional(),
         }).describe("Open-role count range.").optional(),

@@ -36,6 +36,12 @@ version gate reported no contract-surface changes and no required engine bump.
 Final local review confirmed both compiled schemas expose the hiring fields
 and hiring-only selecting arm with the existing FREE usage model.
 
+## Review follow-up: non-negative role counts
+
+- [x] Add `.min(0)` to both open-role bounds in the shared mirror.
+- [x] Cover zero acceptance and negative rejection on both endpoints.
+- [ ] Re-run type-check and Hunter replay tests after the boundary fix.
+
 ## Verification limits
 
 Live evidence covers `hiring: true`, department `engineering`, `last30d`, and
