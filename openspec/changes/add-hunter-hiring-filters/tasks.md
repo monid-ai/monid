@@ -40,7 +40,15 @@ and hiring-only selecting arm with the existing FREE usage model.
 
 - [x] Add `.min(0)` to both open-role bounds in the shared mirror.
 - [x] Cover zero acceptance and negative rejection on both endpoints.
-- [ ] Re-run type-check and Hunter replay tests after the boundary fix.
+- [x] Re-run type-check and Hunter replay tests after the boundary fix.
+
+## Review follow-up: empty hiring filters
+
+- [x] Reject empty `job_openings`, `job_title` and `open_roles` objects via
+      JSON Schema `minProperties: 1` (a `.refine()` would not survive
+      `z.toJSONSchema`).
+- [x] Cover all three empty objects as invalid input on both endpoints.
+- [x] Re-run type-check, the full test suite and `deno task version:check`.
 
 ## Verification limits
 

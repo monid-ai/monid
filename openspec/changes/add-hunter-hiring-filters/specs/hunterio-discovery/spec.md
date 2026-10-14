@@ -21,8 +21,9 @@ entries. The mirror SHALL NOT materialize defaults.
 
 #### Scenario: Malformed hiring fields fail before HTTP
 - **WHEN** a hiring flag is a string, department is a scalar, the posting
-  window is unsupported, an open-role bound is negative or fractional, or a
-  keyword array exceeds 100 entries
+  window is unsupported, an open-role bound is negative or fractional, a
+  keyword array exceeds 100 entries, or `job_openings`, `job_title` or
+  `open_roles` is an empty object
 - **THEN** the engine rejects the request with `INVALID_INPUT` before transport
 
 #### Scenario: Zero is a valid role-count bound
