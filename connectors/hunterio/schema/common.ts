@@ -101,6 +101,38 @@ const zMatchMode = z.enum(["any", "all"]).describe(
     "Match on any or all of the listed values. Default 'all'.",
 ).optional();
 
+const zJobOpenings = z.object({
+    hiring: z.boolean().describe(
+        "Set true to select companies currently hiring.",
+    ).optional(),
+    department: z.array(z.string().min(1)).describe(
+        "Exact, case-sensitive department names from Hunter's Discover " +
+            "filter, e.g. sales, engineering, marketing.",
+    ).optional(),
+    job_title: z.object({
+        include: z.array(z.string().min(1)).max(100).describe(
+            "Job-title keywords to include; at most 100.",
+        ).optional(),
+        exclude: z.array(z.string().min(1)).max(100).describe(
+            "Job-title keywords to exclude; at most 100.",
+        ).optional(),
+    }).describe("Keywords matched against open job titles.").optional(),
+    posted_date: z.enum(["last7d", "last30d", "last90d"]).describe(
+        "Job-posting date window.",
+    ).optional(),
+    open_roles: z.object({
+        from: z.number().int().min(0).describe(
+            "Minimum number of open roles.",
+        ).optional(),
+        to: z.number().int().min(0).describe(
+            "Maximum number of open roles; must be at least from.",
+        ).optional(),
+    }).describe("Open-role count range.").optional(),
+    include_closed_roles: z.boolean().describe(
+        "Also match roles that are no longer open. Vendor default false.",
+    ).optional(),
+});
+
 /** The Discover filter set — shared verbatim by `/discover` and
  *  `/discover/people` (upstream documents them as identical). */
 export const discoverFilterFields = {
@@ -185,39 +217,19 @@ export const discoverFilterFields = {
             to: z.string().describe("YYYY-MM-DD").optional(),
         }).describe("Last funding date range.").optional(),
     }).describe("Funding series, amount, and date filters.").optional(),
-    job_openings: z.object({
-        hiring: z.boolean().describe(
-            "Set true to select companies currently hiring.",
-        ).optional(),
-        department: z.array(z.string().min(1)).describe(
-            "Exact, case-sensitive department names from Hunter's Discover " +
-                "filter, e.g. sales, engineering, marketing.",
-        ).optional(),
-        job_title: z.object({
-            include: z.array(z.string().min(1)).max(100).describe(
-                "Job-title keywords to include; at most 100.",
-            ).optional(),
-            exclude: z.array(z.string().min(1)).max(100).describe(
-                "Job-title keywords to exclude; at most 100.",
-            ).optional(),
-        }).describe("Keywords matched against open job titles.").optional(),
-        posted_date: z.enum(["last7d", "last30d", "last90d"]).describe(
-            "Job-posting date window.",
-        ).optional(),
-        open_roles: z.object({
-            from: z.number().int().min(0).describe(
-                "Minimum number of open roles.",
-            ).optional(),
-            to: z.number().int().min(0).describe(
-                "Maximum number of open roles; must be at least from.",
-            ).optional(),
-        }).describe("Open-role count range.").optional(),
-        include_closed_roles: z.boolean().describe(
-            "Also match roles that are no longer open. Vendor default false.",
-        ).optional(),
-    }).describe(
-        "Filter by hiring activity. Department, job_title, posted_date, or " +
-            "open_roles also select companies currently hiring.",
+    // at least one key — one arm per key; a `.refine()` would be dropped
+    // by `z.toJSONSchema` (same posture as discover's top-level union)
+    job_openings: z.union([
+        zJobOpenings.required({ hiring: true }),
+        zJobOpenings.required({ department: true }),
+        zJobOpenings.required({ job_title: true }),
+        zJobOpenings.required({ posted_date: true }),
+        zJobOpenings.required({ open_roles: true }),
+        zJobOpenings.required({ include_closed_roles: true }),
+    ]).describe(
+        "Filter by hiring activity; provide at least one field. Department, " +
+            "job_title, posted_date, or open_roles also select companies " +
+            "currently hiring.",
     ).optional(),
 } as const;
 

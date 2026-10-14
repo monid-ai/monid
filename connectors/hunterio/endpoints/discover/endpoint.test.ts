@@ -141,6 +141,7 @@ Deno.test(`${ID}: hiring filters pass validation and remain free`, async () => {
 Deno.test(`${ID}: malformed hiring filters fail before any HTTP request`, async () => {
     const unit = await testSealedUnit(ID);
     const invalid: Record<string, Json>[] = [
+        { job_openings: {} },
         { job_openings: { hiring: "true" } },
         { job_openings: { department: "engineering" } },
         { job_openings: { department: [""] } },
