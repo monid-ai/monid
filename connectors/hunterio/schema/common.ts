@@ -185,10 +185,8 @@ export const discoverFilterFields = {
             to: z.string().describe("YYYY-MM-DD").optional(),
         }).describe("Last funding date range.").optional(),
     }).describe("Funding series, amount, and date filters.").optional(),
-    // "at least one key" as JSON Schema `minProperties` (enforced by the
-    // engine's validator) — a `.refine()` would be dropped by
-    // `z.toJSONSchema`, and per-key union arms would be copied into every
-    // top-level filter arm
+    // minProperties, not `.refine()` (dropped by `z.toJSONSchema`) or
+    // per-key unions (copied into every top-level filter arm)
     job_openings: z.object({
         hiring: z.boolean().describe(
             "Set true to select companies currently hiring.",
