@@ -1,0 +1,70 @@
+{
+    "search": {
+        "queryParams": {
+            "searchItem": "from:XDevelopers",
+            "category": "Latest",
+            "count": 5
+        }
+    },
+    "simpletweet/{tweetId}": {
+        "pathParams": { "tweetId": "2019881223666233717" }
+    },
+    "tweet/{tweetId}": {
+        "pathParams": { "tweetId": "2019881223666233717" },
+        "queryParams": { "rankingMode": "Likes" }
+    },
+    "tweet/{tweetId}/quotes": {
+        "pathParams": { "tweetId": "2019881223666233717" },
+        "queryParams": { "count": 5, "rankingMode": "Recency" }
+    },
+    "tweet/{tweetId}/retweets": {
+        "pathParams": { "tweetId": "2019881223666233717" },
+        "queryParams": { "count": 5 }
+    },
+    "user/by/username/{username}": {
+        "pathParams": { "username": "XDevelopers" }
+    },
+    "user/users/by/ids": {
+        "queryParams": { "ids": ["2244994945", "11348282"] }
+    },
+    "user/about/{username}": {
+        "pathParams": { "username": "nasa" }
+    },
+    "user/{userId}/tweets": {
+        "pathParams": { "userId": "2244994945" },
+        "queryParams": { "count": 5 }
+    },
+    "user/{userId}/tweets-and-replies": {
+        "pathParams": { "userId": "2244994945" },
+        "queryParams": { "count": 5 }
+    },
+    "user/{userId}/media": {
+        "pathParams": { "userId": "-1" },
+        "queryParams": { "username": "nasa", "count": 5 }
+    },
+    "user/{userId}/followers": {
+        "pathParams": { "userId": "2244994945" },
+        "queryParams": { "count": 5 }
+    },
+    "user/{userId}/followings": {
+        "pathParams": { "userId": "2244994945" },
+        "queryParams": { "count": 5 }
+    },
+    "user/{userId}/verified-followers": {
+        "pathParams": { "userId": "2244994945" },
+        "queryParams": { "count": 5 }
+    },
+    "lists/tweets": {
+        "queryParams": { "listId": "84839422", "count": 5 }
+    },
+    "lists/members": {
+        "queryParams": { "listId": "84839422", "count": 5 }
+    },
+    "trends/{locationId}": {
+        "pathParams": { "locationId": "1" }
+    },
+    "communities/search/{searchTerm}": {
+        "pathParams": { "searchTerm": "developers" },
+        "queryParams": { "count": 5 }
+    }
+}

@@ -1,0 +1,146 @@
+{
+    "name": "recorded-happy",
+    "description": "TwittrAPI /lists/tweets for list 84839422: tweets from the list's members. PAGE 1. Recorded 2026-10-15 with a vendor key via `deno task record` (arrays trimmed; request headers never captured).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.twittrapi.com/lists/tweets?listId=84839422&count=5&format=simple"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "id": "2110797208182272273",
+                            "url": "https://x.com/Sports/status/2110797208182272273",
+                            "text": "CHANDLER SIMPSON WAS FLYING 💨\n\nA stand-up triple puts the Rays up in the 4th!",
+                            "createdAt": "2026-10-15T18:17:25Z",
+                            "lang": "en",
+                            "author": {
+                                "id": "300392950",
+                                "username": "Sports",
+                                "name": "Sports",
+                                "description": "eat, sleep, sports, repeat",
+                                "location": "",
+                                "url": null,
+                                "createdAt": "2011-05-17T17:54:29Z",
+                                "avatarUrl": "https://pbs.twimg.com/profile_images/2079205452454248448/ew197Npq.jpg",
+                                "bannerUrl": "https://pbs.twimg.com/profile_banners/300392950/1790490462",
+                                "verified": true,
+                                "verifiedType": "Business",
+                                "protected": false,
+                                "counts": {
+                                    "followers": 13831544,
+                                    "following": 2350,
+                                    "tweets": 33691,
+                                    "likes": 30507,
+                                    "media": 6705,
+                                    "listed": 8965
+                                },
+                                "pinnedTweetIds": [
+                                    "2092752406081634501"
+                                ],
+                                "isAutomated": false
+                            },
+                            "counts": {
+                                "likes": 4,
+                                "retweets": 0,
+                                "replies": 0,
+                                "quotes": 0,
+                                "bookmarks": 0,
+                                "views": 3890
+                            },
+                            "media": [
+                                {
+                                    "type": "video",
+                                    "url": "https://video.twimg.com/amplify_video/2110795381827043328/vid/avc1/1280x720/uAsDFu5QNFpTRBtj.mp4?tag=29",
+                                    "previewUrl": "https://pbs.twimg.com/amplify_video_thumb/2110795381827043328/img/p4GZYmy4YUnSHxfZ.jpg",
+                                    "width": 1280,
+                                    "height": 720,
+                                    "altText": null,
+                                    "durationMs": 18872
+                                }
+                            ],
+                            "urls": [],
+                            "hashtags": [],
+                            "mentions": [],
+                            "replyTo": null,
+                            "quoted": null,
+                            "retweetOf": null,
+                            "conversationId": "2110797208182272273",
+                            "isPinned": false,
+                            "source": null,
+                            "article": null
+                        },
+                        {
+                            "id": "2110792728082788716",
+                            "url": "https://x.com/Sports/status/2110792728082788716",
+                            "text": "🚨 GUARDIANS ARE UP AT HOME",
+                            "createdAt": "2026-10-15T17:59:37Z",
+                            "lang": "en",
+                            "author": {
+                                "id": "300392950",
+                                "username": "Sports",
+                                "name": "Sports",
+                                "description": "eat, sleep, sports, repeat",
+                                "location": "",
+                                "url": null,
+                                "createdAt": "2011-05-17T17:54:29Z",
+                                "avatarUrl": "https://pbs.twimg.com/profile_images/2079205452454248448/ew197Npq.jpg",
+                                "bannerUrl": "https://pbs.twimg.com/profile_banners/300392950/1790490462",
+                                "verified": true,
+                                "verifiedType": "Business",
+                                "protected": false,
+                                "counts": {
+                                    "followers": 13831544,
+                                    "following": 2350,
+                                    "tweets": 33691,
+                                    "likes": 30507,
+                                    "media": 6705,
+                                    "listed": 8965
+                                },
+                                "pinnedTweetIds": [
+                                    "2092752406081634501"
+                                ],
+                                "isAutomated": false
+                            },
+                            "counts": {
+                                "likes": 4,
+                                "retweets": 0,
+                                "replies": 0,
+                                "quotes": 0,
+                                "bookmarks": 0,
+                                "views": 4134
+                            },
+                            "media": [
+                                {
+                                    "type": "video",
+                                    "url": "https://video.twimg.com/amplify_video/2110787202493923328/vid/avc1/1280x720/aXdBMxDQOM197Eap.mp4?tag=29",
+                                    "previewUrl": "https://pbs.twimg.com/amplify_video_thumb/2110787202493923328/img/8EojWvkXlSYcC4c_.jpg",
+                                    "width": 1280,
+                                    "height": 720,
+                                    "altText": null,
+                                    "durationMs": 17578
+                                }
+                            ],
+                            "urls": [],
+                            "hashtags": [],
+                            "mentions": [],
+                            "replyTo": null,
+                            "quoted": null,
+                            "retweetOf": null,
+                            "conversationId": "2110792728082788716",
+                            "isPinned": false,
+                            "source": null,
+                            "article": null
+                        }
+                    ],
+                    "nextCursor": "DAABCgABHUsSeIg__5sKAAIdR5Iy1JYRUwgAAwAAAAIAAA",
+                    "previousCursor": "DAABCgABHUsSeIhAJxEKAAIdSw7gmpcxEQgAAwAAAAEAAA",
+                    "hasNextPage": true
+                }
+            }
+        }
+    ]
+}
