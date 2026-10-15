@@ -647,7 +647,8 @@
         "suzanne#v1/models/download",
         "suzanne#v1/uploads",
         "tinyfish#fetch",
-        "tinyfish#search"
+        "tinyfish#search",
+        "truelist#api/v1/verify_inline"
     ],
     "resources": [
         "saperly/phone-number"
