@@ -1,0 +1,18 @@
+{
+    "name": "recorded-not-found",
+    "description": "TwittrAPI /simpletweet/{tweetId} for a tweet id that does not exist: 200 with `data: null` (the vendor charges it) ⇒ PAGE 0, credits {}. Recorded 2026-10-15 with a vendor key via `deno task record` (arrays trimmed; request headers never captured).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.twittrapi.com/simpletweet/1?format=simple"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": null
+                }
+            }
+        }
+    ]
+}

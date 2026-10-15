@@ -1,0 +1,50 @@
+{
+    "name": "recorded-happy",
+    "description": "TwittrAPI /communities/search/{searchTerm} for `developers`: a page of communities. PAGE 1. Recorded 2026-10-15 with a vendor key via `deno task record` (arrays trimmed; request headers never captured).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.twittrapi.com/communities/search/developers?count=5&format=simple"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "id": "1805361872448672165",
+                            "name": "Developers Club",
+                            "description": "",
+                            "createdAt": null,
+                            "memberCount": 10936,
+                            "moderatorCount": 0,
+                            "joinPolicy": null,
+                            "nsfw": false,
+                            "topic": "Software",
+                            "bannerUrl": "https://pbs.twimg.com/community_banner_img/1889065804861210624/0S7oE7DT?format=jpg&name=orig",
+                            "creator": null,
+                            "rules": []
+                        },
+                        {
+                            "id": "1495458135519240192",
+                            "name": "Roblox Developers",
+                            "description": "",
+                            "createdAt": null,
+                            "memberCount": 20434,
+                            "moderatorCount": 0,
+                            "joinPolicy": null,
+                            "nsfw": false,
+                            "topic": "Gaming",
+                            "bannerUrl": "https://pbs.twimg.com/community_banner_img/1495458628341489674/c28Vj6To?format=jpg&name=orig",
+                            "creator": null,
+                            "rules": []
+                        }
+                    ],
+                    "nextCursor": "WzIyNS4wNzQ5NCwxNTEzOTgyMzE1NTg3OTQ0NDUzXQ==",
+                    "previousCursor": null,
+                    "hasNextPage": true
+                }
+            }
+        }
+    ]
+}
