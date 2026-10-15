@@ -4,6 +4,6 @@ import { z } from "zod";
  *  vendor takes ONE comma-separated value (`explode: false`); the provider's
  *  `input.toRequest` joins the array. */
 export const zUsersByIdsQueryParams = z.object({
-    ids: z.array(z.string().regex(/^[0-9]{1,30}$/)).min(1).max(100)
-        .describe("Numeric user IDs, at most 100."),
+    ids: z.array(z.string().regex(/^[0-9]{1,30}$/)).min(1).max(500)
+        .describe("Numeric user IDs, at most 500."),
 }).strict();

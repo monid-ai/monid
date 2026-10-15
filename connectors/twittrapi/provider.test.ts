@@ -510,7 +510,7 @@ Deno.test("twittrapi gates: the id and handle patterns", async () => {
     });
     await rejects("twittrapi#user/users/by/ids", {
         queryParams: {
-            ids: Array.from({ length: 101 }, (_, i) => String(i + 1)),
+            ids: Array.from({ length: 501 }, (_, i) => String(i + 1)),
         },
     });
     await rejects("twittrapi#user/users/by/ids", {

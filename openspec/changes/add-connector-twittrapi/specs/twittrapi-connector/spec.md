@@ -57,7 +57,7 @@ defaults), without the `format` knob, and every declared params object SHALL
 be strict. `search` SHALL require `searchItem` or `filters` (a union), with
 `filters` a strict object of the documented filter keys. Path ids SHALL carry
 the vendor's patterns (tweet id digits, handle `^@?[A-Za-z0-9_]{2,15}$`,
-user id digits or `-1`), `ids` SHALL hold 1 to 100 digit strings, and the
+user id digits or `-1`), `ids` SHALL hold 1 to 500 digit strings, and the
 lookups without query parameters SHALL declare an empty strict query schema.
 
 #### Scenario: Unknown key rejected

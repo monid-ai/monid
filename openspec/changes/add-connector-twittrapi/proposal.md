@@ -61,8 +61,9 @@ retweeters, batched profile lookup, Lists, Communities, trends).
   follow, DMs, bookmarks, profile edits) — they act as a logged-in X
   account, not public-data reads.
 - `format=raw` (X's GraphQL passthrough) — one output contract per endpoint.
-- `/tweet/{tweetId}/favorites` — X made likes private in June 2024; the
-  timeline is always empty for non-authors.
+- `/tweet/{tweetId}/favorites` — X shows likers only to the tweet's author,
+  so the vendor endpoint is a `POST` carrying that author's cookie and a
+  proxy; not a public-data read.
 - Jobs, community detail/members/moderators, list details/followers,
   hashflags, username-to-id helpers, account status, friendship lookup,
   `/misc/locations` and `/balance` — candidates for a follow-up; the set here
