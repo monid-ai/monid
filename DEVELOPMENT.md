@@ -34,23 +34,30 @@ connectors/exa/{provider.ts, endpoints/*/endpoint.ts}   ==compile==>   bundle
 
 ### Hooks, plainly
 
-A compiled doc is a **recipe card of pure data**. Four steps of calling an API
-genuinely need code, and the four doc fields that may hold it are the **hooks**
-— a function anywhere else is rejected. Each hook has a **contract**: one exact
-plug shape (`{data, utils}` in, one exact type out — a wall socket that fits one
-plug), enforced three times: at write time (TypeScript), at compile time (zod
-intake), and on EVERY run (the engine re-validates input and output via the
-contract's `.implement()` — a bad plug stops the run with `FN_CONTRACT` instead
-of producing a garbage request or a wrong bill). In the compiled doc a hook
-holds a fingerprint (`sha256:…` fn id), not code — the code lives once in the
-fnTable, verified against the fingerprint before rebuild.
+A compiled doc is a **recipe card of pure data**. Fields that carry behavior are
+the **hooks**. The table below covers request, usage, and success-response
+hooks; error projection and lifecycle hooks have their own contracts in
+`shared/core/schema/hooks/`. Each hook has a **contract**: one exact plug shape
+(`{data, utils}` in, one exact type out — a wall socket that fits one plug),
+enforced three times: at write time (TypeScript), at compile time (zod intake),
+and on EVERY run (the engine re-validates input and output via the contract's
+`.implement()` — a bad plug stops the run with `FN_CONTRACT` instead of
+producing a garbage request or a wrong bill). In the compiled doc a hook holds a
+fingerprint (`sha256:…` fn id), not code — the code lives once in the fnTable,
+verified against the fingerprint before rebuild.
 
-| Hook                  | ctx.data            | returns                                         |
-| --------------------- | ------------------- | ----------------------------------------------- |
-| `input.toRequest`     | `{input}`           | `RunInput`                                      |
-| `usage.consolidate`   | `{input, output}`   | `{usage: Usage, output?: Json}` (the settle fn) |
-| `output.fromResponse` | `{input, output}`   | `Json`                                          |
-| `auth.inject`         | `{request, params}` | request parts                                   |
+| Hook                  | ctx.data                             | returns                                      |
+| --------------------- | ------------------------------------ | -------------------------------------------- |
+| `input.toRequest`     | `{input}`                            | `RunInput`                                   |
+| `usage.estimate`      | `{input, usage, elapsedMs?}`         | `{counts}` (estimated metered quantities)    |
+| `usage.evidence`      | `{input, output, usage, lifecycle?}` | `{counts}` (settled metered quantities)      |
+| `usage.consolidate`   | `{input, output, usage, lifecycle?}` | `{credits, output?}` (optional vendor claim) |
+| `output.fromResponse` | `{input, output, usage, lifecycle?}` | `Json`                                       |
+| `auth.inject`         | `{request, params}`                  | request parts                                |
+
+For usage and response hooks, `usage` contains the doc's `model`; `lifecycle`,
+when present, contains the run's `state`. `elapsedMs` is available when the host
+re-runs an estimate during a metered run.
 
 ### One composition rule
 
@@ -58,8 +65,11 @@ fnTable, verified against the fingerprint before rebuild.
 default.** The provider def carries the SAME sections as the endpoint (flat —
 `provider.request.baseUrl`, `provider.usage.consolidate`, …); an endpoint hook
 REPLACES the provider's; meta `docsUrl`/`categories` inherit; headers merge
-key-wise. The compiler fails compilation if `url`, `auth.inject`, or
-`usage.consolidate` doesn't resolve anywhere.
+key-wise. The compiler requires a resolved URL, auth injection, and usage model.
+Metered models must resolve `usage.estimate` and `usage.evidence`; for models
+with no metered lines, missing quantity hooks are synthesized as
+`() => ({counts: {}})`. `usage.consolidate` is optional: declare it when the
+provider reports a usage receipt to extract.
 
 ### Two layers, one litmus
 
@@ -70,12 +80,11 @@ key-wise. The compiler fails compilation if `url`, `auth.inject`, or
   never silently bill zero); `optionalGet/optionalNum/optionalLen` return
   undefined on absence; a present value of the wrong type throws in BOTH
   variants. Transformers (`omit/pick/merge`) stay shape-tolerant.
-- **Presets** — ready-made hook fns from `@shared/core`
-  (`presets.transform.strip/pick/append`, `presets.auth.header/bearer`,
-  `presets.usage.perCall/perResult`): connector-shaping behavior, interned into
-  the fnTable as **factory** entries (the closure split into its serializable
-  halves — factory source stored ONCE, per-use args ride as data, applied at
-  link time; every `header(…)` across all connectors shares one row).
+- **Presets** — ready-made auth hook fns from `@shared/core`
+  (`presets.auth.header/bearer`): connector-shaping behavior, interned into the
+  fnTable as **factory** entries (the closure split into its serializable halves
+  — factory source stored ONCE, per-use args ride as data, applied at link time;
+  every `header(…)` across all connectors shares one row).
 
 _Takes a plain value → `utils.*`. Fills a hook → preset (or ad-hoc fn)._
 
@@ -107,7 +116,7 @@ The pure mapping `(defs, options) → bundle`:
 `@monid/connector-engine` — standalone (zero IO at import; logging is a
 structural seam; hosts code against `engine/interfaces/mod.ts`).
 
-Pipeline:
+Successful declarative-request pipeline:
 
 ```
 validate input (JSON Schema)           → INVALID_INPUT
@@ -115,12 +124,18 @@ validate input (JSON Schema)           → INVALID_INPUT
 → build request                          (auth travels UNEXECUTED)
 → transport.execute                      credential injection happens INSIDE the port
 → sniffing decode                        JSON if it parses, else the faithful raw string
-→ usage.consolidate on the RAW envelope  THE settle fn → {usage, output?}; vendor
-                                         non-2xx is DATA → zero usage, no exception
+→ usage.evidence on the RAW envelope     {counts} for metered lines
+→ engine assembles usage                 append flat counts; apply the rate card
+→ optional usage.consolidate             RAW envelope → {credits, output?}; vendor claim
+                                         can override derived credits before presentation
 → output.fromResponse                    (the output is what the doc says —
 → validate final output                   identical for EVERY operator)
                                          → CONTRACT_VIOLATION
 ```
+
+Vendor non-2xx responses complete as data with `{credits: {}, evidence: {}}`;
+neither usage hook runs. Optional `output.fromError` projects the error body,
+and the success output schema does not apply to that projection.
 
 Load gates fail closed in order: `BAD_DOC` → `UNSUPPORTED_DOC` → `UNKNOWN_FN` →
 `LINK_INTEGRITY` → `UNSUPPORTED_FN_ABI`; run-time contract violations are
@@ -133,17 +148,46 @@ sleeper.
 
 ## Usage & billing
 
-`usage.consolidate` is THE settle fn — REQUIRED (endpoint or provider) and run
-on the RAW envelope BEFORE `fromResponse` (billing truth anchors to the wire; a
-presentation change can never silently change a bill). One total job, two halves
-of a single move (like a parser returning `{value, rest}`): EXTRACT the
-structured usage — `units` = billable quantity in vendor-NATIVE units (what
-monid pricing multiplies); `cost` = the vendor's OWN reported price, converted
-via `utils.money.fromDollars` (a `MonetaryValue`, micro-dollar canon);
-`evidence` = audit receipts — and ABSORB those billing fields out of the payload
-(`output`; absent = unchanged, so `presets.usage.perCall()` has zero
-boilerplate). Not hiding, CONSOLIDATION: the same information should not appear
-twice in two shapes, identical for every operator.
+The definition is the rate card: `usage.credits` names credit pools, and each
+billable line in `usage.model` declares `consumes: {credit, amount}`. Public
+usage is `{credits, evidence}`: consumption per pool and quantities per line.
+See D26–D27 in
+[the async-run design](openspec/changes/add-async-run-protocol/design.md).
+
+Three hooks have distinct jobs:
+
+- **`usage.estimate`** returns `{counts}` from validated caller input before
+  execution. Counts describe metered quantities, not prices.
+- **`usage.evidence`** returns `{counts}` from the raw successful response. The
+  engine adds flat per-call counts and calculates credits from the model:
+  `ceil(quantity / every) × consumes.amount` per line, summed by credit pool.
+  The same calculation powers estimates.
+- **`usage.consolidate`** optionally extracts the vendor's own reported
+  consumption as `{credits, output?}`. Use `utils.json.pluck` to read a receipt
+  and remove it from the payload in one operation. Omit `output` to leave the
+  payload unchanged. Both settlement hooks see the raw response before
+  `output.fromResponse`, so presentation changes cannot affect billing.
+
+Estimate and evidence hooks must resolve for metered models. For FREE or
+flat-only models, the compiler supplies missing hooks returning `{counts: {}}`;
+authors do not need a usage preset. Consolidation is optional even on metered
+models.
+
+A non-empty vendor claim takes precedence over calculated credits. A
+disagreement beyond `1e-9` is reported as `usage.mismatch.derived` and logged,
+without failing the run. Omit pool entries the vendor did not report; zero
+entries are pruned, and an empty claim falls back to the rate-card calculation.
+A nonzero claim for an undeclared pool fails with `FN_CONTRACT`. Provider errors
+skip both settlement hooks and return zero usage.
+
+For a worked example, follow
+[Exa's search endpoint](connectors/exa/endpoints/search/endpoint.ts) and
+[provider](connectors/exa/provider.ts). The endpoint estimates and counts
+`additional_result` quantities above the included results; the engine adds the
+flat `call` quantity. The provider's `consolidate` extracts `costDollars.total`
+into the `default` credit pool and removes `costDollars` from the payload. The
+endpoint owns its counting rules, while the provider shares receipt extraction
+across endpoints.
 
 ## Resources
 
