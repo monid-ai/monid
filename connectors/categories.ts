@@ -365,6 +365,12 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "earnings, screeners, and more.",
     },
     {
+        id: "household-finance",
+        displayName: "Household finance",
+        description:
+            "Read an authorized household's financial records and account connection status.",
+    },
+    {
         id: "academic-search",
         displayName: "Academic Search",
         description:

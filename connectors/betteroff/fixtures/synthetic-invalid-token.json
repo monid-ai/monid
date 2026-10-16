@@ -1,0 +1,24 @@
+{
+    "name": "synthetic-invalid-token",
+    "description": "Synthetic invalid-token problem response matching BetterOff MCP authorization; no household records or credentials.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "type": "about:blank",
+                    "title": "Unauthorized",
+                    "status": 401,
+                    "detail": "The agent access token is not valid. Reconnect the agent.",
+                    "code": "AGENT_TOKEN_INVALID",
+                    "error": "The agent access token is not valid. Reconnect the agent.",
+                    "message": "The agent access token is not valid. Reconnect the agent."
+                }
+            }
+        }
+    ]
+}

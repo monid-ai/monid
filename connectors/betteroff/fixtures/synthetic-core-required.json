@@ -1,0 +1,35 @@
+{
+    "name": "synthetic-core-required",
+    "description": "Synthetic recurring-data plan denial matching BetterOff planDenial: HTTP 200 contains a failed tool result. No household records or credentials.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "{\"ok\":false,\"code\":\"AGENT_SUBSCRIPTION_INACTIVE\",\"error\":\"Recurring bills, To-Do findings, and the Checklist need a BetterOff Core subscription. Other reads are free.\",\"retryable\":false,\"nextStep\":\"Subscribe to BetterOff Core in Settings > Billing, then call again.\"}"
+                            }
+                        ],
+                        "structuredContent": {
+                            "ok": false,
+                            "code": "AGENT_SUBSCRIPTION_INACTIVE",
+                            "error": "Recurring bills, To-Do findings, and the Checklist need a BetterOff Core subscription. Other reads are free.",
+                            "retryable": false,
+                            "nextStep": "Subscribe to BetterOff Core in Settings > Billing, then call again."
+                        },
+                        "isError": true
+                    }
+                }
+            }
+        }
+    ]
+}

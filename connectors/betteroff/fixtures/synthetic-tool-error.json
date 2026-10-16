@@ -1,0 +1,30 @@
+{
+    "name": "synthetic-tool-error",
+    "description": "Synthetic shared MCP transport case; contains no household records or credentials.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "isError": true,
+                        "structuredContent": {
+                            "ok": false,
+                            "code": "FORBIDDEN",
+                            "error": "Synthetic denial.",
+                            "retryable": false,
+                            "nextStep": "Review the connection permissions in BetterOff."
+                        },
+                        "content": []
+                    }
+                }
+            }
+        }
+    ]
+}
