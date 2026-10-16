@@ -1,0 +1,88 @@
+{
+    "name": "synthetic-job-no-emails",
+    "description": "The job completes but no business had a deliverable email: email_count=0 and no csv file. Nothing is fetched and nothing bills.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "id": "JOB1",
+                    "status": "queued",
+                    "progress": 0,
+                    "query": "Plumber",
+                    "list_name": "Plumber",
+                    "country": "us",
+                    "states": [],
+                    "cities": [
+                        {
+                            "city": "Austin",
+                            "state": "Texas"
+                        }
+                    ],
+                    "total_limit": 50,
+                    "lead_count": 0,
+                    "email_count": 0,
+                    "stop_reason": null,
+                    "error_message": null,
+                    "export_error": null,
+                    "created_at": "2026-10-09T18:00:00+00:00",
+                    "started_at": null,
+                    "completed_at": null,
+                    "downloads": {
+                        "csv": false,
+                        "xlsx": false,
+                        "csv_all": false,
+                        "xlsx_all": false,
+                        "filtered_csv": false,
+                        "filtered_xlsx": false
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}/JOB1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "JOB1",
+                    "status": "completed",
+                    "progress": 100,
+                    "query": "Plumber",
+                    "list_name": "Plumber",
+                    "country": "us",
+                    "states": [],
+                    "cities": [
+                        {
+                            "city": "Austin",
+                            "state": "Texas"
+                        }
+                    ],
+                    "total_limit": 50,
+                    "lead_count": 4,
+                    "email_count": 0,
+                    "stop_reason": "coverage_exhausted",
+                    "error_message": null,
+                    "export_error": null,
+                    "created_at": "2026-10-09T18:00:00+00:00",
+                    "started_at": "2026-10-09T18:00:05+00:00",
+                    "completed_at": "2026-10-09T18:06:40+00:00",
+                    "downloads": {
+                        "csv": false,
+                        "xlsx": false,
+                        "csv_all": false,
+                        "xlsx_all": false,
+                        "filtered_csv": false,
+                        "filtered_xlsx": false
+                    }
+                }
+            }
+        }
+    ]
+}
