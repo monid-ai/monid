@@ -1,0 +1,45 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC chain for fundable#investor/deals (replace via `deno task record`): GET /investor/deals with page_size 2 returns 2 rows under data.deals; meta reports credits_used 2 plus the account fields the provider strips.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://www.tryfundable.ai/api/v1/investor/deals?id=9e8d7c6b-5a4f-4e3d-8c2b-1a0f9e8d7c6b&page_size=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "deals": [
+                            {
+                                "id": "10a4d2e0-7b3c-4e5f-9a1b-2c3d4e5f6a71",
+                                "round_type": "SERIES_A",
+                                "date": "2026-08-12",
+                                "total_round_raised": 15000000,
+                                "company_id": "cca72384-d735-42f8-99d6-b3e14179c4c1"
+                            },
+                            {
+                                "id": "20a4d2e0-7b3c-4e5f-9a1b-2c3d4e5f6a72",
+                                "round_type": "SEED",
+                                "date": "2025-11-03",
+                                "total_round_raised": 3000000,
+                                "company_id": "cca72384-d735-42f8-99d6-b3e14179c4c1"
+                            }
+                        ]
+                    },
+                    "meta": {
+                        "total_count": 9,
+                        "page": 0,
+                        "page_size": 2,
+                        "credits_used": 2,
+                        "credit_source": "purchased",
+                        "monthly_credits_remaining": 0,
+                        "purchased_credits_remaining": 198
+                    }
+                }
+            }
+        }
+    ]
+}

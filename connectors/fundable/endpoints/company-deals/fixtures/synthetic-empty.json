@@ -1,0 +1,27 @@
+{
+    "name": "synthetic-empty",
+    "description": "SYNTHETIC chain for fundable#company/deals (replace via `deno task record`): an entity with no deal history returns zero rows and credits_used 0 — nothing delivered, nothing billed.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://www.tryfundable.ai/api/v1/company/deals?domain=stripe.com&page_size=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "deals": []
+                    },
+                    "meta": {
+                        "total_count": 0,
+                        "page": 0,
+                        "page_size": 2,
+                        "credits_used": 0
+                    }
+                }
+            }
+        }
+    ]
+}

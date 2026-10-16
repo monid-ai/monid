@@ -1,0 +1,25 @@
+{
+    "name": "synthetic-empty",
+    "description": "SYNTHETIC chain for fundable#person/search (replace via `deno task record`): no candidates — the flat 0.1-credit search fee is charged on zero results too (rate card).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://www.tryfundable.ai/api/v1/person/search?name=zzzz-no-such-person"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "people": []
+                    },
+                    "meta": {
+                        "total_count": 0,
+                        "credits_used": 0.1
+                    }
+                }
+            }
+        }
+    ]
+}

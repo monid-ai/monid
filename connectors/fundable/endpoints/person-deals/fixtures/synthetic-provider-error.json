@@ -1,0 +1,23 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "SYNTHETIC chain for fundable#person/deals (replace via `deno task record`): an unknown identifier answers 404 PERSON_NOT_FOUND — vendor non-2xx is DATA, zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://www.tryfundable.ai/api/v1/person/deals?linkedin=nobody&page_size=2"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "success": false,
+                    "error": {
+                        "code": "PERSON_NOT_FOUND",
+                        "message": "Person not found"
+                    },
+                    "statusCode": 404
+                }
+            }
+        }
+    ]
+}
