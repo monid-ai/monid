@@ -1,0 +1,54 @@
+{
+    "name": "synthetic-extract-list",
+    "description": "SYNTHETIC (no Lev8 key was available on 2026-10-16): shape from docs.lev8.com/openapi.yaml and Lev8's response structs; values are placeholders. Replace via `deno task record` when LEV8_API_KEY exists. Extract social list: 7 rows, which Lev8 bills as ceil(7 / 5) = 2 credits.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": [
+                        {
+                            "username": "user0",
+                            "name": "Example User 0"
+                        },
+                        {
+                            "username": "user1",
+                            "name": "Example User 1"
+                        },
+                        {
+                            "username": "user2",
+                            "name": "Example User 2"
+                        },
+                        {
+                            "username": "user3",
+                            "name": "Example User 3"
+                        },
+                        {
+                            "username": "user4",
+                            "name": "Example User 4"
+                        },
+                        {
+                            "username": "user5",
+                            "name": "Example User 5"
+                        },
+                        {
+                            "username": "user6",
+                            "name": "Example User 6"
+                        }
+                    ],
+                    "metadata": {
+                        "type": "x_followers",
+                        "target": "sama",
+                        "instruction": null,
+                        "limit": 7
+                    }
+                }
+            }
+        }
+    ]
+}

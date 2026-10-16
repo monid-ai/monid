@@ -1,0 +1,27 @@
+{
+    "name": "synthetic-contact-found",
+    "description": "SYNTHETIC (no Lev8 key was available on 2026-10-16): shape from docs.lev8.com/openapi.yaml and Lev8's response structs; values are placeholders. Replace via `deno task record` when LEV8_API_KEY exists. Contact Search hit: non-empty `result.content`.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "object": "contact_search_result",
+                    "request": {
+                        "contact_type": "email",
+                        "objective": "Find the work email of Jane Smith, VP of Engineering at Acme Corp."
+                    },
+                    "result": {
+                        "content": "jane.smith@acme.example",
+                        "reference": "https://acme.example/team"
+                    },
+                    "created_at": "2026-10-16T00:00:00Z"
+                }
+            }
+        }
+    ]
+}
