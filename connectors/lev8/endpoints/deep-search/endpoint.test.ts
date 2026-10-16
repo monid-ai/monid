@@ -78,13 +78,13 @@ Deno.test("lev8: every paid call carries a run-stable Idempotency-Key and the be
     assert(seen[0].get("idempotency-key") !== seen[1].get("idempotency-key"));
 });
 
-Deno.test("lev8#v1/deep-search happy (synthetic): 2 credits, answer passed through", async () => {
+Deno.test("lev8#v1/deep-search happy (recorded): 2 credits, answer passed through", async () => {
     const result = await runEndpoint({
         unit: await testSealedUnit(ID),
         input: { body: { query: "What does OpenAI do and who is its CEO?" } },
         mode: "replay",
         fixture: await loadFixture(
-            `${fixturesDir}synthetic-deep-search-ok.json`,
+            `${fixturesDir}deep-search-ok.json`,
         ),
     });
     assertEquals(result.httpStatus, 200);
@@ -97,7 +97,9 @@ Deno.test("lev8#v1/deep-search happy (synthetic): 2 credits, answer passed throu
     assertEquals(output.success, true);
     assertEquals(
         (output.answer as Record<string, unknown>).Result,
-        "OpenAI is an AI research and product company. Its CEO is Sam Altman.",
+        "OpenAI is an AI research and deployment company whose mission is " +
+            "to ensure that artificial general intelligence benefits all of " +
+            "humanity. Its CEO is Sam Altman.",
     );
 });
 
@@ -143,7 +145,7 @@ Deno.test("lev8#v1/deep-search: estimate promises one answer", async () => {
 Deno.test("lev8#v1/deep-search: query required, 1–4000 chars, strict body", async () => {
     const unit = await testSealedUnit(ID);
     const fixture = await loadFixture(
-        `${fixturesDir}synthetic-deep-search-ok.json`,
+        `${fixturesDir}deep-search-ok.json`,
     );
     const rejected: Json[] = [
         {},

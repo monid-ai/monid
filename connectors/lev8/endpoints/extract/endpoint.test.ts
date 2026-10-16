@@ -18,12 +18,18 @@ const WEB2LIST = {
     instruction: "Extract name and company",
 };
 
-Deno.test("lev8#v1/extract list (synthetic): 7 items bill ceil(7/5) = 2 credits", async () => {
+Deno.test("lev8#v1/extract list (recorded): 7 items bill ceil(7/5) = 2 credits", async () => {
     const result = await runEndpoint({
         unit: await testSealedUnit(ID),
-        input: { body: { type: "x_followers", target: "sama", limit: 7 } },
+        input: {
+            body: {
+                type: "github_repo_contributors",
+                target: "denoland/deno",
+                limit: 7,
+            },
+        },
         mode: "replay",
-        fixture: await loadFixture(`${fixturesDir}synthetic-extract-list.json`),
+        fixture: await loadFixture(`${fixturesDir}extract-list.json`),
     });
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
@@ -34,13 +40,13 @@ Deno.test("lev8#v1/extract list (synthetic): 7 items bill ceil(7/5) = 2 credits"
     assertEquals((result.output as { data: unknown[] }).data.length, 7);
 });
 
-Deno.test("lev8#v1/extract web2list (synthetic): flat 80 on success", async () => {
+Deno.test("lev8#v1/extract web2list (recorded): flat 80 on success, even with no rows", async () => {
     const result = await runEndpoint({
         unit: await testSealedUnit(ID),
         input: { body: WEB2LIST },
         mode: "replay",
         fixture: await loadFixture(
-            `${fixturesDir}synthetic-extract-web2list.json`,
+            `${fixturesDir}extract-web2list.json`,
         ),
     });
     assertEquals(result.httpStatus, 200);
@@ -110,7 +116,7 @@ Deno.test("lev8#v1/extract: estimate mirrors Lev8's reservation", async () => {
 Deno.test("lev8#v1/extract: type enum, target 1–2048, limit 1–10000, strict body", async () => {
     const unit = await testSealedUnit(ID);
     const fixture = await loadFixture(
-        `${fixturesDir}synthetic-extract-list.json`,
+        `${fixturesDir}extract-list.json`,
     );
     const rejected: Json[] = [
         {},

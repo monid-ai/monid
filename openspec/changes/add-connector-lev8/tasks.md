@@ -24,15 +24,17 @@
 
 - [x] 3.1 Recorded 401 (malformed token, 2026-10-16), shared by every
       endpoint via `{{request.url}}`
-- [x] 3.2 Synthetic chains: deep-search / enrich success and
-      `success: false`; contact found / not found; extract list,
-      web2list, failure; entity done (two fetch pages), error with and
-      without results, create 422, status 404, status 503
+- [x] 3.2 Synthetic chains, only for paths a live call cannot trigger on
+      demand: `success: false` (deep-search / enrich, extract); entity
+      short fetch page, error with and without results, create 422,
+      status 404, status 503
 - [x] 3.3 Tests: catalog shape, Idempotency-Key per run, literal credit
       tables per rate line, estimates, schema gates (reject + accept),
       live tests gated on LEV8_API_KEY (shape, not amounts)
-- [ ] 3.4 Replace synthetic happy chains via `deno task record` once a
-      Lev8 token is provisioned for Monid; run `deno task test:live`
+- [x] 3.4 Live token (2026-10-16): 5/5 live tests pass; happy chains
+      re-recorded (deep-search, enrich, contact found / not found, extract
+      list / web2list, entity done) and each settle matched Lev8's balance
+      delta exactly (2, 2, 10, 0, 2, 80, 11)
 
 ## 4. Wiring + docs
 

@@ -14,10 +14,10 @@ const ID = "lev8#v1/contact-search";
 const OBJECTIVE = "Find the work email of Jane Smith, VP of Engineering at " +
     "Acme Corp. Owner signals: linkedin_url=https://www.linkedin.com/in/x";
 
-Deno.test("lev8#v1/contact-search found (synthetic): email bills 10, phone bills 30", async () => {
+Deno.test("lev8#v1/contact-search found (recorded): email bills 10, phone bills 30", async () => {
     const unit = await testSealedUnit(ID);
     const fixture = await loadFixture(
-        `${fixturesDir}synthetic-contact-found.json`,
+        `${fixturesDir}contact-found.json`,
     );
     // literal rates from docs.lev8.com/guides/billing (2026-10-16)
     const rows: [string, number, string][] = [
@@ -42,20 +42,18 @@ Deno.test("lev8#v1/contact-search found (synthetic): email bills 10, phone bills
     }
 });
 
-Deno.test("lev8#v1/contact-search not found (synthetic): whitespace content bills 0", async () => {
+Deno.test("lev8#v1/contact-search not found (recorded): null content bills 0", async () => {
     const result = await runEndpoint({
         unit: await testSealedUnit(ID),
-        input: { body: { contact_type: "email", objective: OBJECTIVE } },
+        input: { body: { contact_type: "phone", objective: OBJECTIVE } },
         mode: "replay",
-        fixture: await loadFixture(
-            `${fixturesDir}synthetic-contact-not-found.json`,
-        ),
+        fixture: await loadFixture(`${fixturesDir}contact-not-found.json`),
     });
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
     assertEquals(result.usage, {
         credits: {},
-        evidence: { email_found: 0 },
+        evidence: { phone_found: 0 },
     });
 });
 
@@ -90,7 +88,7 @@ Deno.test("lev8#v1/contact-search: estimate holds the requested line", async () 
 Deno.test("lev8#v1/contact-search: type enum, objective 1–4000, strict body", async () => {
     const unit = await testSealedUnit(ID);
     const fixture = await loadFixture(
-        `${fixturesDir}synthetic-contact-found.json`,
+        `${fixturesDir}contact-found.json`,
     );
     const rejected: Json[] = [
         {},

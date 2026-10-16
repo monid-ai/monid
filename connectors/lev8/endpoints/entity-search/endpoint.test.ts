@@ -13,6 +13,7 @@ import {
 const fixturesDir = fromFileUrl(new URL("../../fixtures/", import.meta.url));
 const ID = "lev8#v1/entity-search";
 const TASK_ID = "leads_search_01JEXAMPLE000000000000";
+const RECORDED_ID = "leads_search_ac4f5282b7d948708389e9f714f06d3f";
 const COMPANY = {
     entity_type: "company",
     objective: "AI startups that raised Series A in 2024",
@@ -36,28 +37,38 @@ type Output = {
     entities: { name: string }[];
 };
 
-Deno.test("lev8#v1/entity-search done (synthetic): polls, pages every ready entity, bills 5 + 3 × 2", async () => {
-    const result = await run("synthetic-entity-done");
+const NAMES = ["Contextual AI", "Vectara", "Lakera"];
+
+Deno.test("lev8#v1/entity-search done (recorded): polls, fetches every ready entity, bills 5 + 3 × 2", async () => {
+    const result = await run("entity-done");
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
-    // literal: standard startup 5 + 3 companies × 2 (guides/billing)
+    // literal: standard startup 5 + 3 companies × 2 (guides/billing);
+    // Lev8's balance moved by 11 for this recording
     assertEquals(result.usage, {
         credits: { default: 11 },
         evidence: { startup: 5, results: 3 },
     });
     const output = result.output as Output;
-    assertEquals(output.leads_search_id, TASK_ID);
+    assertEquals(output.leads_search_id, RECORDED_ID);
     assertEquals(output.status, "done");
     assertEquals(output.stop_reason, "limit");
     assertEquals(output.ready_count, 3);
-    // fetch returned 2 of 3, the second page (pts 2) the last one
     assertEquals(output.count, 3);
-    assertEquals(
-        output.entities.map((e) => e.name),
-        ["Example AI 0", "Example AI 1", "Example AI 2"],
-    );
+    assertEquals(output.entities.map((e) => e.name), NAMES);
     // one running tick, then the terminal one
     assertEquals(result.timing.attempts, 2);
+});
+
+Deno.test("lev8#v1/entity-search short page (synthetic): fetches again from pts + count", async () => {
+    const result = await run("synthetic-entity-short-page");
+    assertEquals(result.usage, {
+        credits: { default: 11 },
+        evidence: { startup: 5, results: 3 },
+    });
+    const output = result.output as Output;
+    assertEquals(output.count, 3);
+    assertEquals(output.entities.map((e) => e.name), NAMES);
 });
 
 Deno.test("lev8#v1/entity-search: the rate follows entity_type and enable_web_search", async () => {
@@ -88,7 +99,7 @@ Deno.test("lev8#v1/entity-search: the rate follows entity_type and enable_web_se
         ],
     ];
     for (const [overrides, evidence, credits] of rows) {
-        const result = await run("synthetic-entity-done", {
+        const result = await run("entity-done", {
             ...COMPANY,
             ...overrides,
         });
@@ -182,7 +193,7 @@ Deno.test("lev8#v1/entity-search: estimate is Lev8's reservation — startup + l
 Deno.test("lev8#v1/entity-search: enum, limit 1–500, list caps, strict body", async () => {
     const unit = await testSealedUnit(ID);
     const fixture = await loadFixture(
-        `${fixturesDir}synthetic-entity-done.json`,
+        `${fixturesDir}entity-done.json`,
     );
     const rejected: Json[] = [
         {},

@@ -59,7 +59,9 @@ Social and GitHub lists bill 1 credit per five returned items, rounded up
 (Lev8 settles `(len(data) + 4) / 5`): PER_UNIT `RESULT` with `every: 5`,
 evidence `len(data)`, so the engine's `ceil(n / 5)` fold matches exactly.
 `web2list` bills a flat 80 on success: PER_UNIT `PAGE`, evidence 1 when
-`success === true`. The estimate mirrors Lev8's reservation — `limit`
+`success === true` — recorded 2026-10-16: a successful `web2list` with an
+empty `data` array still drew 80 from the balance, so the notes say so. The
+estimate mirrors Lev8's reservation — `limit`
 (default 100, applied at the binding) for lists, one page for `web2list`,
 which ignores `limit`. `web2list` requires `instruction` and a public URL;
 that cross-field rule cannot compile and lives in the endpoint notes.

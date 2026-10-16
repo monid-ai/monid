@@ -37,6 +37,8 @@ export default defineEndpoint({
             "rounded up. `web2list` costs 80 credits per successful page. " +
             "`success: false` costs nothing, and `data` then carries the " +
             "failure reason as a string.",
+            "`web2list` bills 80 whenever it succeeds, including when the " +
+            "page yields no rows (`data: []`).",
             "`web2list` requires `instruction` and a public http(s) URL as " +
             "`target`; it ignores `limit`.",
         ],

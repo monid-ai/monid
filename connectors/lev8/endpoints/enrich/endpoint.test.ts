@@ -25,12 +25,12 @@ const BODY = {
     },
 };
 
-Deno.test("lev8#v1/enrich happy (synthetic): 2 credits, answer follows the schema", async () => {
+Deno.test("lev8#v1/enrich happy (recorded): 2 credits, answer follows the schema", async () => {
     const result = await runEndpoint({
         unit: await testSealedUnit(ID),
         input: { body: BODY },
         mode: "replay",
-        fixture: await loadFixture(`${fixturesDir}synthetic-enrich-ok.json`),
+        fixture: await loadFixture(`${fixturesDir}enrich-ok.json`),
     });
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
@@ -78,7 +78,7 @@ Deno.test("lev8#v1/enrich: estimate promises one enrichment", async () => {
 
 Deno.test("lev8#v1/enrich: both fields required, enrich_fields an object schema", async () => {
     const unit = await testSealedUnit(ID);
-    const fixture = await loadFixture(`${fixturesDir}synthetic-enrich-ok.json`);
+    const fixture = await loadFixture(`${fixturesDir}enrich-ok.json`);
     const rejected: Json[] = [
         {},
         { entity_context: "OpenAI" },

@@ -30,9 +30,11 @@ published surface is small (docs.lev8.com, OpenAPI 2026-10-16).
 - **Idempotency** — every paid call sends
   `Idempotency-Key: {runId}:<op>`, so a retried run replays Lev8's saved
   response instead of paying twice.
-- Fixtures: the 401 is RECORDED (malformed token, 2026-10-16) and shared by
-  every endpoint. Happy and zero-bill paths are `synthetic-`, shaped from
-  the OpenAPI and Lev8's response structs.
+- Fixtures RECORDED 2026-10-16 with a live token: the 401 (shared by every
+  endpoint) and every happy path; each recording's settle matched Lev8's
+  balance delta exactly. Paths a live call cannot trigger on demand (task
+  `error`, status 404 / 503, `success: false`, short fetch pages) stay
+  `synthetic-`.
 
 ## Capabilities
 
