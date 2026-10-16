@@ -1,0 +1,50 @@
+{
+    "name": "hiring",
+    "description": "Recorded from Hunter POST /v2/discover on 2026-10-14; engineering hiring in the last 30 days returns one company. Shared discovery response shape; endpoint-specific aggregate fields are omitted. Both discovery routes were also verified live with these inputs.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "job_openings": {
+                        "hiring": true,
+                        "department": [
+                            "engineering"
+                        ],
+                        "posted_date": "last30d"
+                    },
+                    "limit": 1
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "domain": "amazon.com",
+                            "organization": "Amazon",
+                            "emails_count": {
+                                "personal": 361945,
+                                "generic": 3106,
+                                "total": 365051
+                            }
+                        }
+                    ],
+                    "meta": {
+                        "results": 16076,
+                        "filters": {
+                            "job_openings": {
+                                "hiring": true,
+                                "department": [
+                                    "engineering"
+                                ],
+                                "posted_date": "last30d"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}
