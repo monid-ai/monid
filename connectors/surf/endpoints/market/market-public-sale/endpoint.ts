@@ -9,9 +9,13 @@ export default defineEndpoint({
     meta: {
         displayName: "Public Sale / Crowdsale",
         summary: "Returns public sale (IDO/ICO/IEO) information for a project.",
-        description: "Returns public sale (IDO/ICO/IEO) information for a " +
-            "project. Includes sale type, status, price, raise " +
-            "amount, and ROI data.",
+        description: "Returns a project's public token sales (IDO, ICO, " +
+            "IEO): sale type, status, price, amount raised and ROI. Look the " +
+            "project up by Surf project UUID (id) or by name or symbol (q, " +
+            "e.g. bitcoin); at least one is required, and id wins when both " +
+            "are given. For the project's Token Generation Event status and " +
+            "listing exchanges use /market/tge; for the wider timeline of " +
+            "fundraising and token-sale events use /search/fundraising.",
         docsUrl: "https://docs.asksurf.ai/data-api/market/public-sale",
         categories: ["token-prices"],
         notes: [

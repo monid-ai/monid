@@ -8,9 +8,11 @@ export default defineEndpoint({
     meta: {
         displayName: "Airdrop Activities",
         summary: "Lists airdrop activities with pagination.",
-        description: "Lists airdrop activities with pagination. Returns " +
-            "activity metadata including reward type, status, and " +
-            "social metrics.",
+        description: "Lists airdrop activities as a paginated browse feed " +
+            "(limit up to 100, default 20; offset), each with its reward " +
+            "type, status and social metrics. Takes no filters or keyword. " +
+            "To search airdrops by keyword or filter by status, reward type " +
+            "or task type, use /search/airdrop.",
         docsUrl: "https://docs.asksurf.ai/data-api/search/airdrop-activities",
         categories: ["onchain-data"],
         notes: [

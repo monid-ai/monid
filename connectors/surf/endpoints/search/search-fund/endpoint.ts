@@ -8,9 +8,14 @@ export default defineEndpoint({
     meta: {
         displayName: "Fund Search",
         summary: "Searches funds by keyword.",
-        description:
-            "Searches funds by keyword. Included fields: name, tier, " +
-            "type, logo, top invested projects.",
+        description: "Searches crypto VC funds by name (e.g. a16z, paradigm, " +
+            "coinbase ventures; 2-100 characters) and returns paginated " +
+            "matches with name, tier, type, logo and top invested projects " +
+            "(limit up to 100, default 20; offset). For a fund's full " +
+            "profile and team use /fund/detail, which also accepts a name " +
+            "via q; for its list of investments use /fund/portfolio; for " +
+            "funds ranked against each other use /fund/ranking. For crypto " +
+            "projects rather than funds, use /search/project.",
         docsUrl: "https://docs.asksurf.ai/data-api/search/fund",
         categories: ["company-enrichment", "funding-data"],
         notes: [

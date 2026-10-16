@@ -9,10 +9,14 @@ export default defineEndpoint({
         displayName: "Wallet Search",
         summary:
             "Searches wallets by ENS name, address label, or address prefix.",
-        description:
-            "Searches wallets by ENS name, address label, or address " +
-            "prefix. Returns matching wallet addresses with entity " +
-            "labels.",
+        description: "Searches wallets by ENS name (vitalik.eth), entity " +
+            "label (binance) or address prefix (0xd8dA...), 2-100 " +
+            "characters, and returns matching addresses with their entity " +
+            "labels (limit up to 100, default 20; offset). Use it to turn a " +
+            "name into an address, then pass the address to /wallet/detail " +
+            "for balances and tokens, or to /wallet/history or " +
+            "/wallet/transfers for activity. To label many known addresses " +
+            "at once use /wallet/labels/batch.",
         docsUrl: "https://docs.asksurf.ai/data-api/search/wallet",
         categories: ["onchain-data"],
     },

@@ -9,9 +9,15 @@ export default defineEndpoint({
         displayName: "Polymarket Open Interest History",
         summary: "Daily open interest time series showing total value " +
             "locked in a Polymarket market.",
-        description: "Daily open interest time series showing total value " +
-            "locked in a Polymarket market. Data refresh: ~30 " +
-            "minutes.",
+        description: "Daily open interest history (the total value locked) " +
+            "for one Polymarket market, identified by its condition_id, over " +
+            "a 7d, 30d (default), 90d, 180d or 1y window. Daily points only: " +
+            "this endpoint takes time_range and does NOT accept interval. " +
+            "Find a condition_id with /search/prediction-market. For trading " +
+            "volume use /prediction-market/polymarket/volumes; for prices " +
+            "use /prediction-market/polymarket/prices; for the same series " +
+            "on Kalshi use /prediction-market/kalshi/open-interest. Data " +
+            "refresh: ~30 minutes.",
         docsUrl:
             "https://docs.asksurf.ai/data-api/prediction-market/polymarket-open-interest",
         categories: ["prediction-markets"],
