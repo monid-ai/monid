@@ -1,0 +1,55 @@
+{
+    "name": "synthetic-groups-ok",
+    "description": "SYNTHETIC chain for vela-breakout#groups: GET /groups returns the rankable groups (id, name, signal, meaning, unit, caveat, usual_window_days); trimmed to 4 of 16 groups. FREE — zero usage. Body is a real Breakout API response captured 2026-10-12 (not via `deno task record`, which needs the API live), trimmed by hand; replace via `deno task record` once a key is provisioned.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://breakout.vela.partners/api/v1/groups"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "groups": [
+                        {
+                            "id": "ai_apps",
+                            "name": "AI apps",
+                            "signal": "AI model usage",
+                            "meaning": "How many AI tokens an app uses in a week.",
+                            "unit": "tokens",
+                            "caveat": "Tokens are usage, not users.",
+                            "usual_window_days": 30
+                        },
+                        {
+                            "id": "agent_tools",
+                            "name": "Agent tools",
+                            "signal": "Tool downloads",
+                            "meaning": "How many times a week developers download the code behind an MCP server, a tool an AI agent can use.",
+                            "unit": "downloads a week",
+                            "caveat": "Downloads, not users; servers run only from a hosted address are not counted.",
+                            "usual_window_days": 7
+                        },
+                        {
+                            "id": "business_software",
+                            "name": "Business software",
+                            "signal": "Spend momentum",
+                            "meaning": "How widely a piece of software is adopted by the companies on one large business-spend panel, month by month.",
+                            "unit": "adoption score",
+                            "caveat": "The panel's own adoption score, mostly venture-backed small and mid-size US companies. Not a share of all businesses.",
+                            "usual_window_days": 90
+                        },
+                        {
+                            "id": "company_hiring",
+                            "name": "Companies hiring",
+                            "signal": "Open roles",
+                            "meaning": "How many open roles a company lists on its own careers page.",
+                            "unit": "open roles",
+                            "caveat": "Roles on the company's own careers page, read about once a week. Not every company lists every role.",
+                            "usual_window_days": 14
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

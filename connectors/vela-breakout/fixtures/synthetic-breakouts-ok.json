@@ -1,0 +1,71 @@
+{
+    "name": "synthetic-breakouts-ok",
+    "description": "SYNTHETIC chain for vela-breakout#breakouts: GET /breakouts?group=ai_apps&window_days=30&limit=3 returns the 3 fastest-growing AI apps with growth, before/now, unit, window, peer percentile and company page. $0.02 a call. Body is a real Breakout API response captured 2026-10-12 (not via `deno task record`, which needs the API live), trimmed by hand; replace via `deno task record` once a key is provisioned.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://breakout.vela.partners/api/v1/breakouts?group=ai_apps&window_days=30&limit=3"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "group": "AI apps",
+                    "answer": "The fastest-growing AI apps",
+                    "measured_as_of": "2026-10-11",
+                    "window": "30 days",
+                    "caveat": "Tokens are usage, not users.",
+                    "note": "Only items at least as big as the group's median, so tiny starts do not dominate.",
+                    "chart": "https://breakout.vela.partners/signal/ai_model_usage?segment=ai_apps&window=30",
+                    "rows": [
+                        {
+                            "name": "wenzhang-gen",
+                            "about": null,
+                            "group": "AI apps",
+                            "growth_value": 67.1116,
+                            "before_value": 1003724061,
+                            "now_value": 67361572793,
+                            "growth": "67×",
+                            "before": "1B",
+                            "now": "67.4B",
+                            "unit": "tokens",
+                            "window": "30 days",
+                            "against_peers": "Faster than 99% of AI apps",
+                            "company_page": null
+                        },
+                        {
+                            "name": "BobAI agents",
+                            "about": null,
+                            "group": "AI apps",
+                            "growth_value": 38.5412,
+                            "before_value": 1214957409,
+                            "now_value": 46825913795,
+                            "growth": "39×",
+                            "before": "1.2B",
+                            "now": "46.8B",
+                            "unit": "tokens",
+                            "window": "30 days",
+                            "against_peers": "Faster than 99% of AI apps",
+                            "company_page": "https://breakout.vela.partners/company/puntt.ai"
+                        },
+                        {
+                            "name": "whipsmart-mediadb",
+                            "about": "whipsmart.com",
+                            "group": "AI apps",
+                            "growth_value": 30.9344,
+                            "before_value": 1295071853,
+                            "now_value": 40062277170,
+                            "growth": "31×",
+                            "before": "1.3B",
+                            "now": "40.1B",
+                            "unit": "tokens",
+                            "window": "30 days",
+                            "against_peers": "Faster than 98% of AI apps",
+                            "company_page": "https://breakout.vela.partners/company/whipsmart.com"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
