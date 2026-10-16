@@ -167,7 +167,7 @@ connectors/<name>/
 3. Record a fixture with `deno task record`, then keep it trimmed.
 4. `deno task check && deno task test` must pass with no network.
 5. Open a pull request.
-6. Email [hello@monid.ai](mailto:hello@monid.ai) with the PR link, a link to
+6. Email [support@monid.ai](mailto:support@monid.ai) with the PR link, a link to
    your API docs, and your company name. We review every connector by hand
    and will follow up from there.
 
