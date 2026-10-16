@@ -16,6 +16,7 @@ import {
     contractConfig,
     defineEndpoint,
     defineProvider,
+    defineResource,
     docHash,
     type Json,
     presets,
@@ -33,7 +34,7 @@ const OPTS = {
     leafCategories: [{ id: "demo-cat", displayName: "Demo Category" }],
 } as const;
 
-function makeBundle() {
+function makeBundle(withResource = false) {
     const provider = defineProvider(
         {
             name: "demo",
@@ -61,7 +62,44 @@ function makeBundle() {
         } as Parameters<typeof defineEndpoint>[0],
     );
     return compileBundle(
-        [{ provider, endpoints: [{ name: "search", def }] }],
+        [{
+            provider,
+            endpoints: [{ name: "search", def }],
+            ...(withResource
+                ? {
+                    resources: [{
+                        name: "widget",
+                        def: defineResource({
+                            slug: "widget",
+                            meta: {
+                                displayName: "Widget",
+                                summary: "A demo widget.",
+                            },
+                            data: z.object({ color: z.string() }),
+                            usage: {
+                                period: {
+                                    unit: "MONTH",
+                                    count: 1,
+                                    anchor: "CREATION_TIME",
+                                },
+                                lines: {
+                                    rent: {
+                                        consumes: {
+                                            credit: "default",
+                                            amount: 1,
+                                        },
+                                    },
+                                },
+                            },
+                            lifecycle: {
+                                verify: async () => ({ active: true }),
+                                release: async () => ({ released: true }),
+                            },
+                        }),
+                    }],
+                }
+                : {}),
+        }],
         OPTS,
     );
 }
@@ -148,8 +186,53 @@ Deno.test("emitPublish: layout, manifest shape, content-addressed objects", asyn
     }
 });
 
+Deno.test("emitPublish: resource docs have manifest entries and content-addressed objects", async () => {
+    const bundle = await makeBundle(true);
+    const resource = bundle.resources!["demo/widget"];
+    const dir = await Deno.makeTempDir({ prefix: "publish-resource-test-" });
+    try {
+        const emit = await emitPublish(bundle, "catalog-v1.2.3", dir);
+        const manifest = JSON.parse(
+            await Deno.readTextFile(join(dir, emit.manifestKey)),
+        );
+        const key = `publishes/objects/sha256/${
+            resource.hash.replace("sha256:", "")
+        }.json`;
+        assertEquals(
+            manifest.docs.filter((doc: { kind: string }) =>
+                doc.kind === "resource"
+            ),
+            [{
+                id: resource.id,
+                kind: "resource",
+                provider: resource.provider,
+                hash: resource.hash,
+                key,
+            }],
+        );
+        assertEquals(
+            emit.docCount,
+            Object.keys(bundle.providers).length +
+                Object.keys(bundle.endpoints).length +
+                Object.keys(bundle.resources!).length,
+        );
+        const stored = JSON.parse(await Deno.readTextFile(join(dir, key)));
+        assertEquals(stored, resource);
+        assertEquals(await docHash(stored), resource.hash);
+        for (const ref of Object.values(resource.lifecycle)) {
+            assert(
+                manifest.fns.some((fn: { key: string }) =>
+                    fn.key === ref.$fn.key
+                ),
+            );
+        }
+    } finally {
+        await Deno.remove(dir, { recursive: true });
+    }
+});
+
 Deno.test("emitPublish is deterministic (re-emit byte-identical)", async () => {
-    const bundle = await makeBundle();
+    const bundle = await makeBundle(true);
     const tag = "catalog-v0.0.1";
     const [a, b] = await Promise.all([
         Deno.makeTempDir({ prefix: "publish-a-" }),
