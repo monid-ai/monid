@@ -1,0 +1,27 @@
+{
+    "name": "unauthorized-models",
+    "description": "The same AI/ML API 401 envelope as `unauthorized-get`, for the ONE GET that carries a query string: `aimlapi#models` pins `?include=pricing` at the binding, and replay matches on method AND url, so the roster needs its own chain. Captured 2026-10-15 against /v1/key with a deliberately invalid key; the body is identical because the gateway's 401 envelope does not name the path.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?include=pricing"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "title": "Unauthorized",
+                    "status": 401,
+                    "message": "This request requires a valid API key. You can create a new API key on the Billing page: https://aimlapi.com/app/keys",
+                    "instance": "/v1/key",
+                    "requestId": "iNUssQMEMLWW68borkl9P",
+                    "timestamp": "2026-10-14T20:01:32.151Z",
+                    "error": {
+                        "name": "UnauthorizedException",
+                        "message": "This request requires a valid API key. You can create a new API key on the Billing page: https://aimlapi.com/app/keys"
+                    }
+                }
+            }
+        }
+    ]
+}
