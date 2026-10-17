@@ -1,5 +1,6 @@
 import { assert, assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
+import { EngineError, EngineErrorCode } from "@monid/connector-engine";
 import { type Json, RunKind, StopKind } from "@shared/core";
 import {
     liveSkip,
@@ -82,6 +83,25 @@ Deno.test("call4me calls: 422 Not calling yet is data, zero usage, digested", as
     const out = result.output as Record<string, Json>;
     assert(String(out.message).startsWith("Not calling yet"));
     assert(out.raw !== undefined);
+});
+
+Deno.test("call4me calls: a 429 on POLL is a retriable failure, never a zero-usage completion", async () => {
+    const loaded = await loadEndpoint({
+        unit: await testSealedUnit(CALLS),
+        input: BOOKING_INPUT,
+        mode: "replay",
+        fixture: await fixture("fixtures/synthetic-poll-429"),
+    });
+    const started = await loaded.start(BOOKING_INPUT, {
+        runId: "test-run-429",
+    });
+    assert(started.kind === RunKind.RUNNING, "start parks the live call");
+    const error = await assertRejects(() =>
+        loaded.poll(BOOKING_INPUT, started.state)
+    );
+    assert(error instanceof EngineError);
+    assertEquals(error.code, EngineErrorCode.EXECUTION_FAILED);
+    assertEquals(error.retriable, true);
 });
 
 Deno.test("call4me calls: STOP hangs up and settles on the finished record", async () => {

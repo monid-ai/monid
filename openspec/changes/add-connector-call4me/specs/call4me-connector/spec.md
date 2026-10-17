@@ -24,6 +24,13 @@ read the call until it is finished, at most three times.
 - **THEN** usage is `{credits: {default: 0.5}, evidence: {CREDIT: 50}}` with
   no `mismatch`
 
+#### Scenario: Only a missing call ends the run on a failed poll
+- **WHEN** a poll read answers 404
+- **THEN** the run completes with that error as data and nothing metered
+- **WHEN** a poll read answers any other non-2xx (5xx, 429, 401, 408)
+- **THEN** the poll throws a retriable failure, since the call may still be
+  live and metering
+
 #### Scenario: Stop settles or stays unresolved
 - **WHEN** the run is stopped and a read after the hang-up is finished
 - **THEN** the stop returns COMPLETED and bills that record's `cost_cents`

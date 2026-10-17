@@ -165,11 +165,12 @@ export default defineEndpoint({
                 url: data.request.url + "/" + encodeURIComponent(callId),
                 queryParams: { wait_seconds: "20" },
             });
-            if (res.status >= 500) {
-                // retriable read: never conclude from a flaky poll
+            if (res.status !== 404 && (res.status < 200 || res.status >= 300)) {
+                // retriable read: a 5xx, 429, 401 or 408 says nothing about
+                // the call, which may still be live and metering
                 throw new Error("call4me call poll failed: HTTP " + res.status);
             }
-            if (res.status >= 400) {
+            if (res.status === 404) {
                 // the call record is gone: error as data, nothing metered
                 return {
                     kind: "COMPLETED",

@@ -1,0 +1,47 @@
+{
+    "name": "call4me poll rate limited (synthetic)",
+    "description": "Synthetic chain for a transient 4xx on POLL: POST parks RUNNING; the long-wait read answers 429. The poll must throw a retriable failure, never complete the live call at zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "id": "call_test1",
+                    "status": "dialing",
+                    "finished": false,
+                    "direction": "outbound",
+                    "business": "Example Bistro",
+                    "number": "(555) 000-0000",
+                    "calling_number": "(555) 000-0001",
+                    "goal": "Book a table for 2 tonight at 7pm.",
+                    "outcome": null,
+                    "open_questions": [],
+                    "answered_questions": [],
+                    "talk_minutes": 0,
+                    "cost": "$0.00",
+                    "cost_cents": 0,
+                    "ended": null,
+                    "error": null,
+                    "created_at": "2026-10-17T06:00:00.000Z",
+                    "transcript": []
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}/call_test1?wait_seconds=20"
+            },
+            "res": {
+                "status": 429,
+                "body": {
+                    "error": "rate limited"
+                }
+            }
+        }
+    ]
+}
