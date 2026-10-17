@@ -1,4 +1,5 @@
 import { defineProvider, presets } from "@shared/core";
+import { z } from "zod";
 
 /**
  * Fund Momentum (fundmomentum.vc) — agentic fundraising intelligence:
@@ -26,24 +27,37 @@ import { defineProvider, presets } from "@shared/core";
  *     for exactly these two cases;
  *   - on 200 with no `error`, unwraps the MCP envelope: the real payload
  *     is a JSON-encoded string at `result.content[0].text`, parsed and
- *     returned as `output`. `result._meta` (quota/credit bookkeeping —
- *     `calls_remaining`, `credits_remaining`, `cost_per_call`, …) is
- *     dropped from the output; it duplicates what Monid's own usage
- *     block already reports and never carries data the tool payload
- *     itself lacks (see e.g. `resolved_from`, which rides both places).
+ *     returned as `output`.
  *
- * BILLING: no response carries a reusable per-call delta (`_meta` is a
- * running balance/rate, not a draw), so there is no `usage.consolidate`
- * — the derived fold settles (keenable/fundable posture, no provider
- * claim). The vendor's own unit is credits at a flat €0.01 each, pool
- * `default` "Fund Momentum credits"; each endpoint declares its own
- * model against the published per-tool price (`check_lp_coverage` is
- * FREE — it never draws a credit on any tier, keyless included).
+ * BILLING — CORRECTED 2026-10-17 after re-verifying live against the
+ * vendor. This connector's first PR called `result._meta` "a running
+ * balance/rate, not a draw" and skipped `usage.consolidate` entirely.
+ * That was wrong: a fresh live call (`search_funds`, 3 funds returned,
+ * agent paying on credits) answered
+ * `_meta: {billing: "credits", cost: "€0.03", credits_charged: 3,
+ * credits_remaining: 22, ...}` — `credits_charged` IS the real,
+ * reusable per-call draw (the cloro pattern: relay a response header or
+ * body field into `lifecycle.state`, then a provider-level
+ * `usage.consolidate` reads it from state and settles there), not a
+ * balance snapshot. `credits_remaining` is the balance; `credits_charged`
+ * is the receipt. Every success response carries this `_meta` block
+ * (verified on `search_funds`, `get_fund`, `get_changes`); it is never
+ * part of the tool payload itself, so `lifecycle.start` reads it off
+ * the raw body into `state` BEFORE discarding `result._meta`, and
+ * `usage.consolidate` below is the vendor's own claim, authoritative
+ * over each endpoint's own `usage.model` (which still has to be
+ * declared, as the derived-fold fallback and the pre-run estimate
+ * ceiling — see search-funds/endpoint.ts, now PER_UNIT per fund
+ * returned instead of the flat PER_CALL this connector shipped with).
+ * `check_lp_coverage` never carries `credits_charged` at all
+ * (`_meta: {billing: "free", metered: false, ...}`) — consolidate skips
+ * any endpoint whose own model is FREE, so its zero usage is never
+ * second-guessed by an absent claim.
  *
- * SCOPE (v1): the four tools servable without a payment-protocol
- * integration or a second entitlement — `search_funds`, `get_fund`,
- * `get_changes`, `check_lp_coverage`. The three Pro signal tools
- * (`get_fund_signals`, `get_gp_profile`, `match_startup`) and
+ * SCOPE (v1, unchanged): the four tools servable without a
+ * payment-protocol integration or a second entitlement — `search_funds`,
+ * `get_fund`, `get_changes`, `check_lp_coverage`. The three Pro signal
+ * tools (`get_fund_signals`, `get_gp_profile`, `match_startup`) and
  * `search_lps` (sold only on a separate LP Radar subscription, never
  * per call, on credits, or over MPP) are a deliberate follow-up once
  * pricing/entitlement posture for those is settled.
@@ -75,6 +89,9 @@ export default defineProvider({
     request: { baseUrl: "https://fundmomentum.vc" },
     timeouts: { requestMs: 15_000, runMs: 20_000 },
     lifecycle: {
+        state: z.strictObject({
+            creditsCharged: z.number().nonnegative().optional(),
+        }),
         start: async ({ utils }) => {
             const res = await utils.request();
             if (res.status < 200 || res.status >= 300) {
@@ -104,6 +121,16 @@ export default defineProvider({
                     output: res.body,
                 };
             }
+            // `result._meta.credits_charged` is the vendor's own receipt
+            // for THIS call (absent on a FREE-tier tool like
+            // check_lp_coverage). Read it off the raw body now, before
+            // `result._meta` is discarded below, and carry it in
+            // lifecycle state for usage.consolidate — it never rides in
+            // the tool payload itself.
+            const creditsCharged = utils.json.optionalNum(
+                res.body,
+                "$.result._meta.credits_charged",
+            );
             const text = utils.json.optionalGet(
                 res.body,
                 "$.result.content[0].text",
@@ -115,10 +142,34 @@ export default defineProvider({
                 kind: "COMPLETED",
                 httpStatus: res.status,
                 output: parsed,
+                ...(creditsCharged !== undefined
+                    ? { state: { data: { creditsCharged } } }
+                    : {}),
             };
         },
     },
     usage: {
         credits: { default: { label: "Fund Momentum credits" } },
+        // The vendor's own claim (design D27), read out of lifecycle
+        // state rather than the output payload (see the WIRE note
+        // above: it never rides there). Skipped for a FREE-model
+        // endpoint (check_lp_coverage) so an absent claim can never
+        // second-guess its structurally-enforced zero usage; every
+        // other endpoint falls back to its own model's derived fold
+        // when, for whatever reason, this claim is absent.
+        consolidate: ({ data, utils }) => {
+            if (data.usage.model.kind === "FREE") return { credits: {} };
+            const creditsCharged = utils.json.optionalGet(
+                data.lifecycle?.state ?? null,
+                "$.data.creditsCharged",
+            );
+            return {
+                credits: {
+                    ...(typeof creditsCharged === "number"
+                        ? { default: creditsCharged }
+                        : {}),
+                },
+            };
+        },
     },
 });

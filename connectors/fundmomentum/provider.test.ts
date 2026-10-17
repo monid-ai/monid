@@ -37,13 +37,31 @@ Deno.test("fundmomentum: 4 endpoints share one auth fn, one lifecycle.start, one
         "fundmomentum#mcp/check_lp_coverage": "FREE",
         "fundmomentum#mcp/get_changes": "PER_CALL",
         "fundmomentum#mcp/get_fund": "PER_CALL",
-        "fundmomentum#mcp/search_funds": "PER_CALL",
+        // Re-verified live 2026-10-17: billed per fund returned (1
+        // credit each, minimum 1), not a flat per-call price — see
+        // search-funds/endpoint.ts.
+        "fundmomentum#mcp/search_funds": "PER_UNIT",
     };
     for (const id of ids) {
         const doc = bundle.endpoints[id];
         assertEquals(doc.usage.model.kind, kinds[id], id);
-        if (kinds[id] === "PER_CALL") {
+        if (kinds[id] === "PER_CALL" || kinds[id] === "PER_UNIT") {
             assertEquals(Object.keys(doc.usage.credits), ["default"], id);
         }
+    }
+
+    // All four share the provider-level usage.consolidate (the
+    // vendor's own _meta.credits_charged receipt), not just
+    // lifecycle.start.
+    assert(
+        bundle.endpoints[ids[0]].usage.consolidate !== undefined,
+        "provider declares usage.consolidate",
+    );
+    for (const id of ids) {
+        assertEquals(
+            bundle.endpoints[id].usage.consolidate?.$fn.key,
+            bundle.endpoints[ids[0]].usage.consolidate?.$fn.key,
+            id,
+        );
     }
 });
