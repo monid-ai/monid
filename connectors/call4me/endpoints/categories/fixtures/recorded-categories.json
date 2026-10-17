@@ -1,0 +1,29 @@
+{
+    "name": "recorded-categories",
+    "description": "Real recording (2026-10-17) of GET /api/requirements, trimmed to two categories.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://call4.me/api/requirements"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "categories": [
+                        {
+                            "slug": "medical",
+                            "name": "Doctor, specialist, therapy, labs, urgent care",
+                            "examples": "book/reschedule/cancel a doctor visit, physical, specialist consult, therapy session, lab or imaging appointment"
+                        },
+                        {
+                            "slug": "dental",
+                            "name": "Dentist, orthodontist, oral surgeon",
+                            "examples": "cleaning, checkup, filling, tooth pain, ortho consult"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
