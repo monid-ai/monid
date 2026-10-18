@@ -647,7 +647,9 @@
         "suzanne#v1/models/download",
         "suzanne#v1/uploads",
         "tinyfish#fetch",
-        "tinyfish#search"
+        "tinyfish#search",
+        "valyu#v1/contents",
+        "valyu#v1/search"
     ],
     "resources": [
         "saperly/phone-number"
