@@ -48,8 +48,8 @@ export default defineEndpoint({
             "inbound call answered by one of your numbers' AI personas. " +
             "Started by the webhook pipeline when an inbound call event " +
             "arrives; it stays RUNNING for the life of the call, bills " +
-            "per SECOND from the carrier-settled record, and stopping " +
-            "the run hangs the call up.",
+            "per started minute from the carrier-settled record, and " +
+            "stopping the run hangs the call up.",
         docsUrl: "https://saperly.com/docs/guides/voice",
         categories: ["agentic-phone"],
         notes: [
