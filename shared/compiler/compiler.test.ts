@@ -995,6 +995,47 @@ Deno.test("unknown category fails compilation (closed vocabulary)", async () => 
     );
 });
 
+Deno.test("bundle minimum engine version includes provider webhook requirements", async (t) => {
+    const provider = makeProvider({
+        usage: { model: { kind: "FREE" } },
+        webhooks: {
+            events: {
+                verify: {
+                    scheme: "hmac-sha256",
+                    signatureHeader: "x-signature",
+                    timestampHeader: "x-timestamp",
+                    payload: "${timestamp}.${rawBody}",
+                    toleranceMs: 300_000,
+                },
+                route: () => ({
+                    who: { kind: "unhandled", event: "test" },
+                    what: { action: "ignore" },
+                }),
+            },
+        },
+    });
+    for (const withEndpoint of [false, true]) {
+        await t.step(
+            withEndpoint ? "with endpoint" : "provider only",
+            async () => {
+                const bundle = await compileBundle(
+                    source(
+                        withEndpoint
+                            ? [{ name: "search", def: makeEndpoint() }]
+                            : [],
+                        provider,
+                    ),
+                    OPTS,
+                );
+                assertEquals(
+                    bundle.minEngineVersion,
+                    bundle.providers.demo.minEngineVersion,
+                );
+            },
+        );
+    }
+});
+
 Deno.test("compile is deterministic (double compile, byte-identical)", async () => {
     const make = () =>
         compileBundle(source([{ name: "search", def: makeEndpoint() }]), OPTS);
