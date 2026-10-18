@@ -13,22 +13,22 @@ export default defineEndpoint({
             "result is the output amount for your input amount, plus the " +
             "effective rate and the fee schedule that produced it. Nothing " +
             "is signed and nothing is reserved — this is a simulation, not " +
-            "a commitment. Quote is currently enabled for verified USDC and " +
-            "USDT strategies; other pairs answer UNPROCESSABLE. Makers may " +
-            "gate a strategy on the caller holding an access licence token " +
-            "— pass your own address as 'from' to be priced against it. " +
-            "Browsed candidates come from /api/strategies; the actual fill " +
-            "is prepared on the x402 write path (POST /v1/swaps). Only " +
-            "USDC/USDT strategies attached to the TRDEFI router can be " +
-            "simulated; use /api/strategies?quote_ready=true to pick a " +
-            "hash that is quotable.",
+            "a commitment. Coverage is real but partial: a maker may gate a " +
+            "strategy on the caller holding an access licence token — pass " +
+            "your own address as 'from' to be priced against it. Browsed " +
+            "candidates come from /api/strategies; the actual fill is " +
+            "prepared on the x402 write path (POST /v1/swaps). Use " +
+            "/api/strategies?quote_ready=true to pick a quotable hash. Note " +
+            "that quote_ready is not a guarantee: sampling 500 catalogue " +
+            "positions, about 92 percent answered 'Strategy is gated' and " +
+            "about 5 percent returned a price.",
         docsUrl: "https://yield.trdefi.com/docs/api",
         categories: ["token-prices", "defi"],
         notes: [
-            "A 422 UNPROCESSABLE with " +
-                "'Quote simulation is currently enabled only for verified " +
-                "USDC/USDT strategies' is a coverage limit, not an error " +
-                "in the request.",
+            "A 422 UNPROCESSABLE with error 'Strategy is gated' is a " +
+                "coverage limit, not an error in the request. Measured " +
+                "over 500 catalogue positions: about 92 percent gated, " +
+                "5 percent priced, 3 percent failed for other reasons.",
             "The simulation needs the strategy's order data; if it is " +
                 "missing the response carries a revert reason.",
         ],

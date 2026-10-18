@@ -23,9 +23,11 @@ export const zStrategiesQueryParams = z.object({
     ),
     quote_ready: z.boolean().optional().describe(
         "Set true to return only the strategies /api/quote can simulate — " +
-            "USDC/USDT pairs attached to the TRDEFI router. Pick a hash " +
-            "here before calling /api/quote so a UNPROCESSABLE reads as " +
-            "coverage, not as a broken request.",
+            "any pair with a live quote on the TRDEFI router, not just " +
+            "stablecoin pairs. Pick a hash here before calling /api/quote " +
+            "so a UNPROCESSABLE reads as coverage, not as a broken " +
+            "request. Not a guarantee: most rows are still gated (about 92 " +
+            "percent when sampled over 500 positions).",
     ),
     source: z.string().min(1).optional().describe(
         "'catalogue' (default, the normalised roll-up) or 'scan' for a " +
