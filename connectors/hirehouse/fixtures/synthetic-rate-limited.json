@@ -1,0 +1,21 @@
+{
+    "name": "synthetic-rate-limited",
+    "description": "hirehouse#jobs/{id} (same body on every endpoint): per-IP limit exceeded (429); data, zero usage. Synthetic: shaped from hirehouse.xyz/api/public/openapi.json until the API is live and a recording replaces it.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/public/jobs/7a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d"
+            },
+            "res": {
+                "status": 429,
+                "body": {
+                    "error": {
+                        "code": "rate_limited",
+                        "message": "Rate limit of 60 requests per minute exceeded."
+                    }
+                }
+            }
+        }
+    ]
+}
