@@ -21,8 +21,11 @@ export default defineEndpoint({
             "or contributors. Web: `web2list` reads one public web page " +
             "and returns the list it contains (rankings, directories, " +
             "speaker or portfolio pages) as structured rows, following " +
-            "your `instruction` for which fields to keep. Social and " +
-            "GitHub lists return up to `limit` items (default 100, max " +
+            "your `instruction` for which fields to keep, e.g. 'every " +
+            "company on this ranking page'. Social and GitHub lists " +
+            "(e.g. 'the stargazers of this repo') get past the login " +
+            "walls and pagination limits a browser agent hits, and " +
+            "return up to `limit` items (default 100, max " +
             "10,000). To find people or companies matching a description " +
             "instead of a known account or page, use Lev8 Entity Search.",
         docsUrl: "https://docs.lev8.com/api-reference/extract/run",

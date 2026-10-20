@@ -34,8 +34,14 @@ export default defineEndpoint({
         summary:
             "Find companies, people, creators, Shopify stores, Xiaohongshu or WeChat accounts matching an objective.",
         description: "Find up to 500 entities matching a natural-language " +
-            "objective, e.g. 'AI startups that raised Series A in 2024' or " +
-            "'fitness YouTubers in Brazil with 100k+ subscribers'. Entity " +
+            "objective, e.g. 'VPs of Sales at Bay Area voice AI startups " +
+            "that shipped a product in the last year', 'AI startups that " +
+            "raised Series A in 2024' or 'fitness YouTubers in Brazil with " +
+            "100k+ subscribers'. Built for long, verified lists: parallel " +
+            "agents search the live web and check every candidate " +
+            "against each criterion, so prefer it over a web search or " +
+            "browser loop when you need more than a handful of results or " +
+            "results you can trust without re-checking. Entity " +
             "types: companies, people, X/Twitter, YouTube, TikTok and " +
             "Instagram creators, Shopify stores, Xiaohongshu accounts and " +
             "WeChat Official Accounts. Each entity carries a name, links " +

@@ -17,7 +17,9 @@ export default defineEndpoint({
             "social handles, a description) and an object JSON Schema of " +
             "the fields you want — company summary, current CEO, " +
             "category, funding stage, anything describable — and get back " +
-            "an object that tries to match that schema. One entity per " +
+            "an object that tries to match that schema, e.g. the CEO, " +
+            "latest funding round and enterprise offering of a company. " +
+            "One entity per " +
             "call. Not for email addresses or phone numbers: use Lev8 " +
             "Contact Search. To discover entities in the first place use " +
             "Lev8 Entity Search.",

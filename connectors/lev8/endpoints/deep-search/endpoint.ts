@@ -14,7 +14,9 @@ export default defineEndpoint({
         summary: "Answer a natural-language research question in one call.",
         description: "Answer an open-ended research question about " +
             "companies, people or markets from a single natural-language " +
-            "query, synchronously. The answer is free-form JSON — today " +
+            "query, from current live-web sources, synchronously, e.g. " +
+            "'AI agent startups that announced funding in the past 30 " +
+            "days'. The answer is free-form JSON — today " +
             "usually an object with `Result` (the answer text) and " +
             "`Citations` — and its shape is not guaranteed. Use it for " +
             "one question with one answer. To list many matching entities " +

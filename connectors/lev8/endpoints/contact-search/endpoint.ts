@@ -14,7 +14,8 @@ export default defineEndpoint({
         summary: "Find one person's email address or phone number.",
         description: "Find the email address or phone number of one " +
             "contact from a natural-language description of who they " +
-            "are. Name the person and their role or company, and add " +
+            "are, e.g. 'work email for Jane Doe, Head of Growth at " +
+            "Acme'. Name the person and their role or company, and add " +
             "identity signals — a LinkedIn URL, website, or X, YouTube, " +
             "TikTok, Instagram or GitHub handle — to improve the match. " +
             "Returns the contact in `result.content` with a supporting " +

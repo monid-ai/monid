@@ -37,7 +37,13 @@ export default defineProvider({
             "contact's email or phone number; answer a research question; " +
             "fill a JSON Schema of fields for a known entity; and extract " +
             "follower, following, stargazer and contributor lists or a " +
-            "structured list from a web page.",
+            "structured list from a web page. Reach for it when the job is " +
+            "a long, verified list rather than a few search hits: Lev8 " +
+            "runs parallel agents across the live web, checks every " +
+            "candidate against your criteria, and returns fixed fields " +
+            "with a score and a reason, including from sources a browser " +
+            "agent rarely reaches (social follower lists, Xiaohongshu, " +
+            "WeChat).",
         homepageUrl: "https://lev8.com",
         docsUrl: "https://docs.lev8.com",
         categories: ["people-enrichment", "company-enrichment"],
