@@ -27,7 +27,7 @@
 - [x] 3.2 Synthetic chains, only for paths a live call cannot trigger on
       demand: `success: false` (deep-search / enrich, extract); entity
       short fetch page, error with and without results, create 422,
-      status 404, status 503
+      status 404, status 503, fetch 404
 - [x] 3.3 Tests: catalog shape, Idempotency-Key per run, literal credit
       tables per rate line, estimates, schema gates (reject + accept),
       live tests gated on LEV8_API_KEY (shape, not amounts)

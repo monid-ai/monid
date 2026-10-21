@@ -146,6 +146,14 @@ Deno.test("lev8#v1/entity-search create rejected (synthetic 422) and expired tas
     assertEquals(expired.usage, { credits: {}, evidence: {} });
 });
 
+Deno.test("lev8#v1/entity-search fetch 404 (synthetic): data, zero usage", async () => {
+    // only 408/429/5xx retry (design D7); any other fetch failure settles
+    const expired = await run("synthetic-entity-fetch-expired");
+    assertEquals(expired.httpStatus, 404);
+    assertEquals(expired.isProviderError, true);
+    assertEquals(expired.usage, { credits: {}, evidence: {} });
+});
+
 Deno.test("lev8#v1/entity-search provider error (recorded 401): data, zero usage", async () => {
     const result = await run("unauthorized");
     assertEquals(result.httpStatus, 401);

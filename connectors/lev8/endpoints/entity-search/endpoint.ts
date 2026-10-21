@@ -179,12 +179,19 @@ export default defineEndpoint({
                         num: String(Math.min(500, ready - pts)),
                     },
                 });
-                if (res.status < 200 || res.status >= 300) {
+                if (transient(res.status)) {
                     // the results are already billed upstream — retry the
                     // tick rather than settle without them
                     throw new Error(
                         "Lev8 fetch returned " + String(res.status),
                     );
+                }
+                if (res.status < 200 || res.status >= 300) {
+                    return {
+                        kind: "COMPLETED",
+                        httpStatus: res.status,
+                        output: res.body,
+                    };
                 }
                 const batch = utils.json.optionalGet(res.body, "$.entities");
                 const count = Array.isArray(batch) ? batch.length : 0;
