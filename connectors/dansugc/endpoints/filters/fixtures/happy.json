@@ -1,0 +1,51 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-10-20: the filter vocabulary for clip search. Free.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://dansugc.com/api/v1/broll/filters"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "filters": {
+                        "emotions": [
+                            "amazed",
+                            "angry"
+                        ],
+                        "genders": [
+                            "female",
+                            "male"
+                        ],
+                        "locations": [
+                            "Bathroom",
+                            "Beach"
+                        ],
+                        "age_ranges": [
+                            "18-24",
+                            "25-34"
+                        ],
+                        "hair_colors": [
+                            "Auburn",
+                            "Bald"
+                        ],
+                        "outfits": [
+                            "Athletic",
+                            "Business Casual"
+                        ],
+                        "media_types": [
+                            "image",
+                            "video"
+                        ],
+                        "difficulty_levels": [
+                            1,
+                            2
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

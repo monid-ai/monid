@@ -1,0 +1,51 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-10-20: one clip's details and price (the recording account owns it, so download_url is present). Free. Signature redacted.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://dansugc.com/api/v1/broll/7e568b94-329c-4615-a91e-458d2185f83d"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "video": {
+                        "id": "7e568b94-329c-4615-a91e-458d2185f83d",
+                        "title": "Shocked Woman with Clay Face Mask",
+                        "description": "A young woman wearing a drying green clay face mask stares directly into the camera with wide eyes and her mouth dropped open in shock. She quickly looks down to search her vanity drawer, grabbing facial wipes and a skincare bottle while continuing her surprised reaction.",
+                        "duration_seconds": 11,
+                        "difficulty_level": 1,
+                        "price": 11,
+                        "tier_name": "Easy reaction",
+                        "media_type": "video",
+                        "preview_url": "https://media.dansugcmodels.com/broll/previews/7e568b94-329c-4615-a91e-458d2185f83d.mp4",
+                        "thumbnail_url": "https://media.dansugcmodels.com/broll/thumbnails/7e568b94-329c-4615-a91e-458d2185f83d.jpg",
+                        "download_url": "https://dansugc.com/api/broll/file?p=broll%2Foriginals%2F7e568b94-329c-4615-a91e-458d2185f83d.mp4&m=video&fn=Shocked_Woman_with_Clay_Face_Mask.mp4&exp=1792514561&sig=REDACTED",
+                        "visibility": "published",
+                        "emotion": "shocked",
+                        "gender": "female",
+                        "location": "Bedroom",
+                        "age_range": "18-24",
+                        "hair_color": "Brown",
+                        "outfit": "Casual",
+                        "virality_score": 72,
+                        "download_count": 0,
+                        "purchase_count": 0,
+                        "featured": false,
+                        "is_daily_drop": false,
+                        "drop_date": null,
+                        "model": {
+                            "id": "5247c9a9-7854-44d3-ac17-ee268830d2df",
+                            "name": "Lois Vlas",
+                            "avatar_url": "https://media.dansugcmodels.com/images/onboarding/1788543648243-ct99sbgv.jpg"
+                        },
+                        "created_at": "2026-10-18T17:23:34.254537+00:00",
+                        "updated_at": "2026-10-18T20:37:08.877842+00:00"
+                    }
+                }
+            }
+        }
+    ]
+}
