@@ -1,5 +1,8 @@
 import { z } from "zod";
-import { zJobId } from "../../../schema/common.ts";
 
 /** `GET /jobs/{id}` path parameters. */
-export const zJobPathParams = z.object({ id: zJobId }).strict();
+export const zJobPathParams = z.object({
+    id: z.string().uuid().describe(
+        "A HireHouse job ID (UUID) from hirehouse#jobs/search.",
+    ),
+}).strict();
