@@ -15,61 +15,76 @@ Deno.test("akta: usage fn provenance — OWN evidence vs provider vs synthesized
     const ids = Object.keys(bundle.endpoints).filter((id) =>
         id.startsWith("akta#")
     );
-    assertEquals(ids.length, 6);
+    assertEquals(ids.length, 20);
     const first = bundle.endpoints[ids[0]];
-    // D27 subclassing: evidence resolves endpoint ?? provider, so the
-    // docs that declare NO evidence of their own — news AND the two FREE
-    // lookups — all inherit the PROVIDER's generic fn (one key; on a
-    // FREE model it lawfully returns {counts: {}}). Synthesis never
-    // fires for evidence here because the provider declares one.
+    // exactly four docs OVERRIDE the provider evidence with their own
+    // counting basis — section-keyed (enrichment, markdown) or
+    // requested-quantity billing (the two review feeds)
+    const ownEvidenceIds = [
+        "akta#v1/company/employee-reviews",
+        "akta#v1/company/enrichment",
+        "akta#v1/company/enrichment/markdown",
+        "akta#v1/company/product-reviews",
+    ];
+    // D27 subclassing: evidence resolves endpoint ?? provider, so every
+    // other doc — metered (news, news/by-id, jobs, posts, list generation),
+    // flat, or FREE — inherits the PROVIDER's generic fn (one key; on a
+    // FREE or flat model it lawfully returns {counts: {}}). Synthesis
+    // never fires for evidence here because the provider declares one.
     const providerEvidenceKey =
         bundle.endpoints["akta#v1/news"].usage.evidence.$fn.key;
     const sharedEvidence = ids.filter((id) =>
         bundle.endpoints[id].usage.evidence.$fn.key === providerEvidenceKey
     );
-    assertEquals(sharedEvidence.sort(), [
-        "akta#v1/company/search",
-        "akta#v1/industry/search",
-        "akta#v1/news",
-    ]);
-    // The provider declares no ESTIMATE, so the FREE lookups' estimate
-    // slot is where the compiler-synthesized `() => ({counts: {}})`
-    // lands — the ONE shared entry (same $fn.key on both), provenance-
-    // labeled by core, distinct from every authored fn.
+    assertEquals(
+        sharedEvidence.sort(),
+        ids.filter((id) => !ownEvidenceIds.includes(id)).sort(),
+    );
+    // The provider declares no ESTIMATE, so every FREE and flat doc's
+    // estimate slot is where the compiler-synthesized `() => ({counts: {}})`
+    // lands — the ONE shared entry, provenance-labeled by core, distinct
+    // from every authored fn.
     const synthesizedKey =
         bundle.endpoints["akta#v1/company/search"].usage.estimate.$fn.key;
-    assertEquals(
-        bundle.endpoints["akta#v1/industry/search"].usage.estimate.$fn.key,
-        synthesizedKey,
-    );
     assertEquals(
         bundle.fnTable[synthesizedKey].provenance,
         "core#usage.synthesizedEmpty",
     );
-    // exactly three docs OVERRIDE the provider evidence with their own
-    // counting basis (section-keyed / requested-quantity billing) —
-    // distinct keys, none of them the provider's or the synthesized one
+    const synthesizedEstimate = ids.filter((id) =>
+        bundle.endpoints[id].usage.estimate.$fn.key === synthesizedKey
+    );
+    assertEquals(synthesizedEstimate.sort(), [
+        "akta#v1/company/enrichment/concise",
+        "akta#v1/company/enrichment/logo/{company}",
+        "akta#v1/company/enrichment/partnerships/{company}",
+        "akta#v1/company/enrichment/peers/{company}",
+        "akta#v1/company/enrichment/swot/{company}",
+        "akta#v1/company/headcount-trends",
+        "akta#v1/company/search",
+        "akta#v1/company/website-traffic",
+        "akta#v1/filters/list",
+        "akta#v1/filters/options",
+        "akta#v1/industry/search",
+    ]);
+    // the overriding docs keep distinct keys, none of them the provider's
+    // or the synthesized one
     const ownEvidence = ids.filter((id) => {
         const key = bundle.endpoints[id].usage.evidence.$fn.key;
         return key !== providerEvidenceKey && key !== synthesizedKey;
     });
-    assertEquals(ownEvidence.sort(), [
-        "akta#v1/company/employee-reviews",
-        "akta#v1/company/enrichment",
-        "akta#v1/company/product-reviews",
-    ]);
+    assertEquals(ownEvidence.sort(), ownEvidenceIds);
     assertEquals(
         new Set(
             ownEvidence.map((id) =>
                 bundle.endpoints[id].usage.evidence.$fn.key
             ),
         ).size,
-        3,
+        4,
     );
     for (const id of ids) {
         const doc = bundle.endpoints[id];
         // the vendor-meter fn is a PROVIDER-wide fact (where
-        // credits_consumed lives) — ONE consolidate key across all six
+        // credits_consumed lives) — ONE consolidate key across all docs
         assertEquals(
             doc.usage.consolidate?.$fn.key,
             first.usage.consolidate?.$fn.key,

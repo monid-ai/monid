@@ -1,0 +1,24 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC — not recorded. Shape from the agent-docs OpenAPI response schema (agent-docs.akta.pro/openapi.json, 2026-10-21); two 0.5-credit sections, so credits_consumed is 1",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.akta.pro/api/v1/company/enrichment/markdown/?company=canva.com&sections=trust_signal%2Clocation"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": "# Canva\n\n## Trust Signal\n\n- SOC 2 Type II\n\n## Location\n\n- HQ: Sydney, Australia\n",
+                    "uuid": "00000l1",
+                    "sections_included": [
+                        "trust_signal",
+                        "location"
+                    ],
+                    "credits_consumed": 1
+                }
+            }
+        }
+    ]
+}
