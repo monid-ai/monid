@@ -1,0 +1,28 @@
+{
+    "name": "synthetic-explore-happy",
+    "description": "SYNTHETIC — not recorded. The /explore-variables shape from the monid-services census tests: a variables list plus quota.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://censusdata.xyz/explore-variables?keyword=veterans"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "variables": [
+                        {
+                            "id": "S2101_C03_001E",
+                            "description": "Veterans, civilian population 18 years and over",
+                            "suggested_query": "How many veterans live in Austin, TX?"
+                        }
+                    ],
+                    "quota": {
+                        "used": 1,
+                        "limit": 10
+                    }
+                }
+            }
+        }
+    ]
+}
