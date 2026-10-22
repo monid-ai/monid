@@ -47,7 +47,4 @@ export const zYoutubetranscriptsBody = z.object({
     channel_transcripts: z.boolean().describe(
         "If true, every video listed from the channel(s) is also queued for transcript extraction (newest first, deduplicated against youtube_url entries, subject to the 100 videos per run limit). Each successful transcript is charged as a videoprocessed event, exactly like videos passed via youtube_url. ...",
     ).optional(),
-    max_age_days: z.number().int().describe(
-        "Leave this unset. The default of 90 returns a recently fetched transcript from our cache when one exists, which is faster and identical to a fresh fetch. Set a lower number of days only when you need a newer copy: it is the oldest cached copy you will accept. Use 0 only when a guaranteed fresh fe...",
-    ).optional(),
 });
