@@ -22,8 +22,9 @@ logins. monid-services launched them on 2026-09-30
   throw), `views.domains` = the live saved-domain summary, allowlisted.
 - **endpoints (6)**:
   - `automation/run` — async (`POST /v1/automation/run-async`, poll
-    `GET /v1/runs/{id}`, stop = cancel + drain). `PER_UNIT` `CREDIT` (one
-    TinyFish credit per AI step) at $0.016, the public list rate. Evidence is
+    `GET /v1/runs/{id}`, stop = cancel + drain). `PER_UNIT` at $0.016
+    per AI step, TinyFish's public dollar price (tinyfish.ai/pricing); steps
+    count under `Unit.CREDIT` because the contract has no STEP unit. Evidence is
     the terminal `num_of_steps` for COMPLETED, FAILED, and CANCELLED alike;
     the estimate is `max_steps + 2` (the measured wrap-up overshoot), with
     `max_steps` defaulting to the vendor's 150 at the binding. Output is

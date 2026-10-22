@@ -9,8 +9,9 @@ import { zAutomationRunBody } from "./schema/inputs.ts";
  *   poll   GET  /v1/runs/{id}?screenshots=none&html=none
  *   stop   POST /v1/runs/{id}/cancel      (idempotent upstream), then drain
  *
- * BILLING: one TinyFish credit per AI step, $0.016 at the public list rate.
- * The terminal `num_of_steps` is the evidence for COMPLETED, FAILED, and
+ * BILLING: TinyFish lists the agent in dollars — $0.016 per AI step
+ * (tinyfish.ai/pricing). Steps are counted under `Unit.CREDIT`, the closest
+ * unit the contract has (there is no STEP unit). The terminal `num_of_steps` is the evidence for COMPLETED, FAILED, and
  * CANCELLED runs alike — TinyFish charges every EXECUTED step regardless of
  * outcome (a cancel before step 1 bills nothing).
  *
