@@ -18,7 +18,7 @@ ports with no contract change.
   company records draw separate credit types, so the provider declares two
   pools, `person` and `company`. Every product is `PER_UNIT` `RESULT` at 1
   credit; evidence is the length of the response's `matches`; the estimate
-  is 1 (single-result calls). No dollar amounts are pinned.
+  is 1 (single-result calls).
 - **Six endpoints, two vendor routes.** The vendor has no tier parameter;
   each product is the same route with a field filter:
 
