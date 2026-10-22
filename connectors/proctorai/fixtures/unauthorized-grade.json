@@ -1,0 +1,21 @@
+{
+    "name": "unauthorized-grade",
+    "description": "Recorded 2026-10-20 against POST https://agent.proctorai.io/api/v1/grade with an unknown key. Status and body as served.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": {
+                        "code": "invalid_api_key",
+                        "message": "Send a valid key as `Authorization: Bearer pai_live_…`. Create one at https://agent.proctorai.io/settings?tab=api."
+                    }
+                }
+            }
+        }
+    ]
+}
