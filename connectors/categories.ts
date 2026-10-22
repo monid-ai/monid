@@ -385,4 +385,11 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "Tools to pull public government records, including financial " +
             "disclosures, filings, registries, and more.",
     },
+    {
+        id: "fact-checking",
+        displayName: "Fact-Checking",
+        description:
+            "Tools to check claims against sources, including verdicts, " +
+            "supporting and opposing evidence, citations, and more.",
+    },
 ]);

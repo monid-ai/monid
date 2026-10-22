@@ -653,7 +653,8 @@
         "suzanne#v1/models/download",
         "suzanne#v1/uploads",
         "tinyfish#fetch",
-        "tinyfish#search"
+        "tinyfish#search",
+        "trustmebro#v1/verify"
     ],
     "resources": [
         "saperly/phone-number"
