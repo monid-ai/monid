@@ -50,8 +50,6 @@ logins. monid-services launched them on 2026-09-30
   resource ops can only target the one provider origin, and cross-origin
   calls get no credential (D16). It needs a resource-level origin in the
   contract — a separate engine change.
-- The negotiated vendor rate. The pool pins the public list price; what
-  Monid pays TinyFish is broker data, not connector data.
 - Release timing. Profiles have no billing period, so the host should
   release immediately; that is host config, not def data.
 
