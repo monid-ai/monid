@@ -1,0 +1,26 @@
+{
+    "name": "synthetic-query-unanswerable",
+    "description": "SYNTHETIC — not recorded. An unanswerable question is HTTP 200 with success: false (monid-services census tests).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://censusdata.xyz/query?q=What+is+the+best+pizza%3F"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": false,
+                    "error_details": "Unanswerable / irrelevant",
+                    "query": "What is the best pizza?",
+                    "summary": null,
+                    "raw_data": [],
+                    "quota": {
+                        "used": 4,
+                        "limit": 10
+                    }
+                }
+            }
+        }
+    ]
+}
