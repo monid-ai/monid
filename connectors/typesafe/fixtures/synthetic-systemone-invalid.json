@@ -1,0 +1,32 @@
+{
+    "name": "synthetic-systemone-invalid",
+    "description": "SYNTHETIC — not recorded. The documented 422 HTTPValidationError envelope.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "model": "jev-latest",
+                    "state": "x",
+                    "questions": {}
+                }
+            },
+            "res": {
+                "status": 422,
+                "body": {
+                    "detail": [
+                        {
+                            "loc": [
+                                "body",
+                                "questions"
+                            ],
+                            "msg": "ensure this value has at least 1 items",
+                            "type": "value_error"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
