@@ -1,0 +1,33 @@
+{
+    "name": "synthetic-usage-pending",
+    "description": "A pending retained cost window must fail reconciliation even when posted amount is zero.",
+    "calls": [{
+        "req": {
+            "method": "GET",
+            "url": "{{request.origin}}/api/v1/mailboxes/mbx_owned/usage?start=2026-09-01T00%3A00%3A00.000Z&end=2026-09-02T00%3A00%3A00.000Z"
+        },
+        "res": {
+            "status": 200,
+            "body": {
+                "ok": true,
+                "data": {
+                    "mailbox_id": "mbx_owned",
+                    "start": "2026-09-01T00:00:00.000Z",
+                    "end": "2026-09-02T00:00:00.000Z",
+                    "currency": "USD",
+                    "state": "final",
+                    "posted_amount": "0.000000",
+                    "incoming": {
+                        "state": "final",
+                        "posted_amount": "0.000000"
+                    },
+                    "outgoing": {
+                        "state": "pending",
+                        "posted_amount": "0.000000"
+                    },
+                    "storage": { "state": "final", "posted_amount": "0.000000" }
+                }
+            }
+        }
+    }]
+}
