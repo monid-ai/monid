@@ -12,8 +12,9 @@ so they port without new schema or engine work.
 ## What Changes
 
 - **connectors/akta** — 14 endpoints added beside the existing 6, all
-  inheriting the provider's `x-api-key` auth, array→CSV `toRequest`,
-  `credits_consumed` consolidate, and generic evidence:
+  inheriting the provider's `x-api-key` auth, array→CSV `toRequest`, and
+  `credits_consumed` consolidate; all but markdown also inherit the
+  generic evidence (markdown counts its own sections):
   - Company readers: `v1/company/enrichment/concise` (flat 3),
     `v1/company/enrichment/markdown` (per section),
     `v1/company/enrichment/logo/{company}` (FREE),
@@ -45,7 +46,9 @@ so they port without new schema or engine work.
   `management_profile` at 1 and `industry` at 0.5 where its pins say 1.5
   and 1. The vendor claim settles every run regardless, and a stale pin
   surfaces as `usage.mismatch.derived`; re-pinning is a separate, recorded
-  change.
+  change. Akta's own docs also disagree on `industry`: the API pricing and
+  CLI pages say 0.5, the docs.akta.pro MCP page says 1 — likely
+  plan-dependent, so the account's plan decides the pin.
 - The news `primary_company` filter the docs now mention.
 
 ## Impact
