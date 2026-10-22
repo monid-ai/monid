@@ -1,40 +1,57 @@
-import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
-import { zPersonEnrichBody } from "../../schema/person.ts";
+import { defineEndpoint, UsageModelKind } from "@shared/core";
+import {
+    PERSON_IDENTIFIER_NOTE,
+    zPersonEnrichBody,
+} from "../../schema/person.ts";
 
-/** POST /person/enrich as the `person/enrich/premium/pii` product: the vendor returns every field this product includes, so no filter is added. */
+/** POST /person/enrich under the Person Premium (PII) key — the key selects the product (design D1). */
 export default defineEndpoint({
     meta: {
-        displayName: "Data Legion Person Premium with Contact Data",
-        summary:
-            "A person's full profile: Premium professional attributes plus " +
-            "contact and demographic fields.",
-        description:
-            "Enrich a person with every field: the Base professional " +
-            "profile, Premium attributes (seniority, job function, " +
-            "decision-maker and platform-worker flags, expense category, " +
-            "experience and tenure, highest degree, certifications, " +
-            "LinkedIn audience counts, freshness), and contact and " +
-            "demographic (PII) fields: emails, phones, personal location, " +
-            "age, and sex. Fields vary by matched record.",
+        displayName: "Person Premium (PII)",
+        summary: "Person profile with both Premium professional attributes " +
+            "and contact/demographic (PII) fields. Choose when you need " +
+            "seniority, decision-maker status, experience or tenure " +
+            "together with emails, phones or location.",
+        description: "Professional qualification and contact enrichment " +
+            "using Base profile fields, Premium professional attributes " +
+            "and contact/demographic (PII) fields. Premium attributes " +
+            "include seniority, job function, decision-maker and " +
+            "platform-worker flags, expense category, years of " +
+            "experience, tenure, highest degree, certifications, LinkedIn " +
+            "audience counts and freshness indicators. PII fields include " +
+            "emails, phones, personal location, age and sex. The same " +
+            "person identifier works on every person product: when PII is " +
+            "unnecessary use the cheaper /person/enrich/premium/no-pii; " +
+            "when Premium attributes are unnecessary use " +
+            "/person/enrich/base/pii; when neither is needed use the " +
+            "cheapest, /person/enrich/base/no-pii.",
         docsUrl:
             "https://www.datalegion.ai/docs/api-reference/person-enrichment",
         categories: ["people-enrichment"],
-        notes: [
-            "Billed 1 credit per returned record; a lookup with no match " +
-            "(HTTP 404) is free.",
-        ],
+        notes: [PERSON_IDENTIFIER_NOTE],
     },
+    // the four person products share one wire path, so the id carries the
+    // v1 product suffix
     endpoint: "/person/enrich/premium/pii",
     request: { method: "POST", path: "/person/enrich" },
-    input: {
-        schema: { body: zPersonEnrichBody },
+    auth: {
+        inject: ({ data }) => ({
+            ...data.request,
+            headers: {
+                ...data.request.headers,
+                "API-Key": data.params.personPremiumPiiApiKey,
+            },
+        }),
     },
+    input: { schema: { body: zPersonEnrichBody } },
     usage: {
+        /** One credit per successful call from this product's own pool
+         *  (design D2). Estimate and evidence are compiler-synthesized
+         *  (flat model). */
         model: {
-            kind: UsageModelKind.PER_UNIT,
-            unit: Unit.RESULT,
-            label: "records",
-            consumes: { credit: "person", amount: 1 },
+            kind: UsageModelKind.PER_CALL,
+            label: "match",
+            consumes: { credit: "person_premium_pii", amount: 1 },
         },
     },
 });

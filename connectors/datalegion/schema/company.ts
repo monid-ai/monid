@@ -1,7 +1,9 @@
 import { z } from "zod";
 import { zMatchControls } from "./common.ts";
 
-/** `POST /company/enrich` body: one of six matching methods. */
+/** `POST /company/enrich` body, identical for both company products — the
+ *  key, not the body, selects the product (design D1). Each endpoint binds
+ *  it as a union requiring one of the six identifiers (design D4). */
 export const zCompanyEnrichBody = z.object({
     domain: z.string().min(1).optional().describe(
         "Company website domain (e.g. google.com).",
@@ -26,6 +28,4 @@ export const zCompanyEnrichBody = z.object({
         "Data Legion company id (exact match).",
     ),
     ...zMatchControls,
-}).strict().describe(
-    "Pass a domain, name, LinkedIn id, social URL, ticker, or Legion id.",
-);
+}).strict();

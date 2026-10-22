@@ -1,6 +1,6 @@
 {
-    "name": "synthetic-person-no-match",
-    "description": "SYNTHETIC — not recorded. No person matches: HTTP 404 (OpenAPI: 'Not found - no person matches'); free.",
+    "name": "synthetic-miss",
+    "description": "Synthetic (no Data Legion key held at port time, 2026-10-22): no person matches — HTTP 404 with the vendor's ErrorResponse shape `{error, message}` (OpenAPI: 'Not found'); message text is a placeholder. Free.",
     "calls": [
         {
             "req": {

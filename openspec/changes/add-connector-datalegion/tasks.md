@@ -1,29 +1,28 @@
 # Tasks: add-connector-datalegion
 
-## 1. Drill the vendor surface
+## 1. Read the v1 adaptor and the vendor surface
 
-- [x] 1.1 Capture the OpenAPI (`docs/api-reference/openapi.json`) for
-      `/person/enrich` and `/company/enrich`
-- [x] 1.2 Pin the billing basis from datalegion.ai/pricing: 1 credit per
-      returned record, separate person and company credits, no-match free
-- [x] 1.3 Take the Base / Premium / PII field split from the tier docs
+- [x] 1.1 v1 `adaptors/datalegion`: six keys, six per-call rates, unchanged
+      body, identifier rules, 30 s / 30 s (endpointExecution config)
+- [x] 1.2 Capture the OpenAPI (`docs/api-reference/openapi.json`) for
+      `/person/enrich` and `/company/enrich`: request bodies, the
+      `matches[].{person|company, match_metadata}` response, 404 no-match
 
 ## 2. Connector
 
-- [x] 2.1 `provider.ts`: base URL, `API-Key`, timeouts, two pools, shared
-      estimate and evidence
-- [x] 2.2 Body schemas (`schema/person.ts`, `schema/company.ts`)
-- [x] 2.3 Six product endpoints with request and response field filters
+- [x] 2.1 `schema/auth.ts`: the six-key credential shape
+- [x] 2.2 `provider.ts`: base URL, timeouts, six pools, provider notes
+- [x] 2.3 Body schemas (`schema/person.ts`, `schema/company.ts`)
+- [x] 2.4 Six endpoints, each with its own key inject and pool
 
 ## 3. Identity and tests
 
 - [x] 3.1 Add the 6 ids to `connectors/ids.lock.json`
-- [x] 3.2 Synthetic fixtures + `connector.test.ts` (each product's filter,
-      no-match, the `exclude_fields` merge)
+- [x] 3.2 Synthetic fixtures + one `endpoint.test.ts` per endpoint (happy,
+      404, schema gate, live) + `provider.test.ts` (key per product, rate
+      literals)
 - [x] 3.3 `deno task check && deno task test`
 
 ## 4. Follow-ups
 
-- [ ] 4.1 Record real fixtures with a Data Legion key (`deno task record`)
-- [ ] 4.2 Confirm against a live response whether `exclude_fields` accepts
-      nested paths; if so, move the nested Premium exclusions to the request
+- [ ] 4.1 Record real fixtures with the six keys (`deno task record`)

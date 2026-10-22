@@ -1,8 +1,15 @@
 import { z } from "zod";
 import { zMatchControls } from "./common.ts";
 
-/** `POST /person/enrich` body: a primary identifier, or a name plus
- *  context. The vendor normalizes every input. */
+/** `POST /person/enrich` body, identical for all four person products —
+ *  the key, not the body, selects the product (design D1). The vendor
+ *  normalizes every input.
+ *
+ *  v1 guarded "a primary identifier OR a name plus context" with a
+ *  `.superRefine`; that cross-field rule does not survive compilation (a
+ *  union would need 33 arms: six identifiers plus three names × nine
+ *  contexts), so it rides the endpoints' `meta.notes` and upstream's own
+ *  400 (contactout people-enrich posture, design D4). */
 export const zPersonEnrichBody = z.object({
     email: z.string().min(1).optional().describe("Email address."),
     email_hash: z.string().min(1).optional().describe(
@@ -41,8 +48,11 @@ export const zPersonEnrichBody = z.object({
             "YYYY-MM, or YYYY).",
     ),
     ...zMatchControls,
-}).strict().describe(
-    "Pass a primary identifier (email, email_hash, phone, social_url, " +
-        "linkedin_id, or legion_id), or a name plus context (location, " +
-        "company, school, job_title, or birth_date).",
-);
+}).strict();
+
+export const PERSON_IDENTIFIER_NOTE =
+    "Provide one primary identifier (email, email_hash, phone, " +
+    "linkedin_id, social_url, or legion_id), OR a name (full_name, " +
+    "first_name, or last_name) plus at least one of address, city, state, " +
+    "country, postal_code, job_title, company, school, or birth_date. " +
+    "Upstream answers 400 otherwise.";

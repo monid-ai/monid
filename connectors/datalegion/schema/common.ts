@@ -20,8 +20,7 @@ export const zMatchControls = {
     required_fields: z.string().min(1).optional().describe(
         "Comma-separated fields that must be present, else the record is " +
             "treated as no match (e.g. 'work_email,phones', " +
-            "'emails.type:personal'). A field this product does not return " +
-            "can never be satisfied.",
+            "'emails.type:personal').",
     ),
     include_fields: z.string().min(1).optional().describe(
         "Comma-separated fields to return; omit for every field this " +
