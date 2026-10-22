@@ -1,0 +1,18 @@
+{
+    "name": "recorded-no-such-user",
+    "description": "TwittrAPI /user/by/username/{username} for a handle that does not exist: 200 with `data: null` ⇒ PAGE 0, credits {}. Recorded 2026-10-15 with a vendor key via `deno task record` (arrays trimmed; request headers never captured).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.twittrapi.com/user/by/username/zxqv_nosuch_987?format=simple"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": null
+                }
+            }
+        }
+    ]
+}

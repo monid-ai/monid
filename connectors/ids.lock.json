@@ -653,7 +653,25 @@
         "suzanne#v1/models/download",
         "suzanne#v1/uploads",
         "tinyfish#fetch",
-        "tinyfish#search"
+        "tinyfish#search",
+        "twittrapi#communities/search/{searchTerm}",
+        "twittrapi#lists/members",
+        "twittrapi#lists/tweets",
+        "twittrapi#search",
+        "twittrapi#simpletweet/{tweetId}",
+        "twittrapi#trends/{locationId}",
+        "twittrapi#tweet/{tweetId}",
+        "twittrapi#tweet/{tweetId}/quotes",
+        "twittrapi#tweet/{tweetId}/retweets",
+        "twittrapi#user/about/{username}",
+        "twittrapi#user/by/username/{username}",
+        "twittrapi#user/users/by/ids",
+        "twittrapi#user/{userId}/followers",
+        "twittrapi#user/{userId}/followings",
+        "twittrapi#user/{userId}/media",
+        "twittrapi#user/{userId}/tweets",
+        "twittrapi#user/{userId}/tweets-and-replies",
+        "twittrapi#user/{userId}/verified-followers"
     ],
     "resources": [
         "saperly/phone-number"
