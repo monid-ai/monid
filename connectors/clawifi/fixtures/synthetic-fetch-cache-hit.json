@@ -1,0 +1,48 @@
+{
+    "name": "synthetic-fetch-cache-hit",
+    "description": "SYNTHETIC cache-hit chain for clawifi#fetch: synthetic-fetch-ok with `cache_hit: true` and `credits_charged: 0` (a cached copy keeps its original mode_used and fetched_at). Clawifi charges 0 for a cache hit; the engine prunes the zero claim, so the derived fold must settle at 0 too.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "source": "generic_web",
+                    "mode_used": "http_fetch",
+                    "entity_type": "WebDocument",
+                    "data": {
+                        "entity_type": "WebDocument",
+                        "source": "generic_web",
+                        "source_url": "https://example.com/",
+                        "raw_available": true,
+                        "title": "Example Domain",
+                        "url": "https://example.com/",
+                        "canonical_url": "https://example.com/",
+                        "excerpt": "This domain is for use in documentation examples without needing permission. This is not a service; avoid relying on it for testing and monitoring purposes.",
+                        "content_markdown": "This domain is for use in documentation examples without needing permission. This is not a service; avoid relying on it for testing and monitoring purposes.",
+                        "content_type": null,
+                        "document": null,
+                        "published_at": null,
+                        "modified_at": "2026-10-21T20:09:25Z",
+                        "fetched_at": "2026-10-22T22:11:52Z",
+                        "date_source": "last_modified_header"
+                    },
+                    "cache_hit": true,
+                    "errors": [],
+                    "diagnostics": {
+                        "likely_blocked": false,
+                        "block_type": null,
+                        "evidence": [],
+                        "retryable": false,
+                        "suggested_retry": null
+                    },
+                    "credits_charged": 0
+                }
+            }
+        }
+    ]
+}

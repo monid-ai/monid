@@ -1,0 +1,99 @@
+{
+    "name": "synthetic-map-ok",
+    "description": "SYNTHETIC happy chain for clawifi#map. Body is a real 2026-10-23 response from Clawifi's keyless POST /playground/run (operation 'map', https://example.com; the playground caps max_urls at 10), whose `result` is the /map response model, with `credits_charged: 1` added (10 URLs returned = one started block of 10). Replace via `deno task record` when CLAWIFI_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "url": "https://example.com/",
+                    "urls": [
+                        {
+                            "url": "https://example.com/docs",
+                            "source": "docs_paths",
+                            "reason": "common documentation path",
+                            "score": 0.55
+                        },
+                        {
+                            "url": "https://example.com/documentation",
+                            "source": "docs_paths",
+                            "reason": "common documentation path",
+                            "score": 0.55
+                        },
+                        {
+                            "url": "https://example.com/developers",
+                            "source": "docs_paths",
+                            "reason": "common documentation path",
+                            "score": 0.55
+                        },
+                        {
+                            "url": "https://example.com/developer",
+                            "source": "docs_paths",
+                            "reason": "common documentation path",
+                            "score": 0.55
+                        },
+                        {
+                            "url": "https://example.com/api",
+                            "source": "docs_paths",
+                            "reason": "common documentation path",
+                            "score": 0.55
+                        },
+                        {
+                            "url": "https://example.com/api/docs",
+                            "source": "docs_paths",
+                            "reason": "common documentation path",
+                            "score": 0.55
+                        },
+                        {
+                            "url": "https://example.com/reference",
+                            "source": "docs_paths",
+                            "reason": "common documentation path",
+                            "score": 0.55
+                        },
+                        {
+                            "url": "https://example.com/guides",
+                            "source": "docs_paths",
+                            "reason": "common documentation path",
+                            "score": 0.55
+                        },
+                        {
+                            "url": "https://example.com/blog",
+                            "source": "docs_paths",
+                            "reason": "common documentation path",
+                            "score": 0.55
+                        },
+                        {
+                            "url": "https://example.com/changelog",
+                            "source": "docs_paths",
+                            "reason": "common documentation path",
+                            "score": 0.55
+                        }
+                    ],
+                    "discovered_count": 10,
+                    "errors": [
+                        {
+                            "code": "map_robots_failed",
+                            "message": "GET https://example.com/robots.txt failed after 3 attempts: HTTP Error 404: ",
+                            "details": {
+                                "url": "https://example.com/robots.txt"
+                            }
+                        },
+                        {
+                            "code": "map_sitemap_failed",
+                            "message": "GET https://example.com/sitemap.xml failed after 3 attempts: HTTP Error 404: ",
+                            "details": {
+                                "url": "https://example.com/sitemap.xml"
+                            }
+                        }
+                    ],
+                    "credits_charged": 1
+                }
+            }
+        }
+    ]
+}

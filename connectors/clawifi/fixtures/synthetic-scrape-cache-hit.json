@@ -1,0 +1,67 @@
+{
+    "name": "synthetic-scrape-cache-hit",
+    "description": "SYNTHETIC cache-hit chain for clawifi#scrape: the synthetic-scrape-ok body with `cache_hit: true` (top level and metadata) and `credits_charged: 0`, which is what Clawifi charges for a page served from its cache (pricing.fetch_charge). The zero claim is pruned by the engine, so the derived fold must also settle at 0.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "url": "https://example.com/",
+                    "final_url": "https://example.com/",
+                    "source": "generic_web",
+                    "mode_used": "http_fetch",
+                    "formats": {
+                        "markdown": "This domain is for use in documentation examples without needing permission. This is not a service; avoid relying on it for testing and monitoring purposes."
+                    },
+                    "format_results": {
+                        "markdown": {
+                            "type": "markdown",
+                            "success": true,
+                            "credit_quote": 1
+                        }
+                    },
+                    "metadata": {
+                        "title": "Example Domain",
+                        "url": "https://example.com/",
+                        "final_url": "https://example.com/",
+                        "canonical_url": "https://example.com/",
+                        "excerpt": "This domain is for use in documentation examples without needing permission. This is not a service; avoid relying on it for testing and monitoring purposes.",
+                        "source": "generic_web",
+                        "mode_used": "http_fetch",
+                        "entity_type": "WebDocument",
+                        "cache_hit": true
+                    },
+                    "artifacts": [
+                        {
+                            "kind": "html",
+                            "content_type": "text/html",
+                            "created_at": "2026-10-22T22:11:52.068299Z",
+                            "label": "raw_html",
+                            "artifact_id": "accounts/playground/generic_web/2026/10/22/0f115db062b7c0dd.html"
+                        }
+                    ],
+                    "cache_hit": true,
+                    "errors": [],
+                    "diagnostics": {
+                        "likely_blocked": false,
+                        "block_type": null,
+                        "evidence": [],
+                        "retryable": false,
+                        "suggested_retry": null
+                    },
+                    "query_selection": null,
+                    "published_at": null,
+                    "modified_at": "2026-10-21T20:09:25Z",
+                    "fetched_at": "2026-10-22T22:11:52Z",
+                    "date_source": "last_modified_header",
+                    "credits_charged": 0
+                }
+            }
+        }
+    ]
+}

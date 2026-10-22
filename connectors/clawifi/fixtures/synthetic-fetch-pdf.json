@@ -1,0 +1,54 @@
+{
+    "name": "synthetic-fetch-pdf",
+    "description": "SYNTHETIC PDF chain for clawifi#fetch, built from the documented PDF shape (API reference 'POST /fetch': content_type application/pdf, data.document with page_count, pages_read, table_count, needs_ocr, warnings; markdown with <!-- page N --> markers). 64 pages read -> 2 started blocks of 50 x 2 credits = `credits_charged: 4` (pricing.pdf_credits), in place of the base call. Page text replaced by '(trimmed)'; no real document is claimed.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "source": "generic_web",
+                    "mode_used": "http_fetch",
+                    "entity_type": "WebDocument",
+                    "data": {
+                        "entity_type": "WebDocument",
+                        "source": "generic_web",
+                        "source_url": "https://example.com/report.pdf",
+                        "url": "https://example.com/report.pdf",
+                        "title": null,
+                        "canonical_url": "https://example.com/report.pdf",
+                        "excerpt": null,
+                        "content_markdown": "<!-- page 1 -->\n(trimmed)\n\n<!-- page 64 -->\n(trimmed)",
+                        "content_text": null,
+                        "raw_available": true,
+                        "artifacts": [],
+                        "note": null,
+                        "content_type": "application/pdf",
+                        "document": {
+                            "page_count": 64,
+                            "pages_read": 64,
+                            "table_count": 0,
+                            "needs_ocr": false,
+                            "warnings": []
+                        },
+                        "fetched_at": "2026-10-23T09:00:00Z"
+                    },
+                    "cache_hit": false,
+                    "errors": [],
+                    "diagnostics": {
+                        "likely_blocked": false,
+                        "block_type": null,
+                        "evidence": [],
+                        "retryable": false,
+                        "suggested_retry": null
+                    },
+                    "credits_charged": 4
+                }
+            }
+        }
+    ]
+}
