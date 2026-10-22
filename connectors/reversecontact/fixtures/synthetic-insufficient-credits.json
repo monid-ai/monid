@@ -1,0 +1,31 @@
+{
+    "name": "synthetic-insufficient-credits",
+    "description": "402 before the call: the account cannot fund the endpoint's maximum price. No `quotas` on this error. Synthetic, shaped on the public v2 contract (gateway envelope and OpenAPI document of 2026-10-21); values are placeholders.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 402,
+                "body": {
+                    "success": false,
+                    "data": null,
+                    "error": {
+                        "code": "INSUFFICIENT_CREDITS",
+                        "message": "Insufficient credits: 3 available, 25 required",
+                        "details": {
+                            "required": 25,
+                            "available": 3
+                        }
+                    },
+                    "metadata": {
+                        "requestId": "req_01jexample0000000000000000",
+                        "executionTimeMs": 412
+                    }
+                }
+            }
+        }
+    ]
+}

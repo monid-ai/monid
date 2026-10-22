@@ -1,0 +1,131 @@
+{
+    "name": "synthetic-contact-poll-transient",
+    "description": "A poll answering 503 is a failed read, not a finished job: the next read settles it. Synthetic, shaped on the public v2 contract (gateway envelope and OpenAPI document of 2026-10-21); values are placeholders.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "status": "created",
+                        "webhookId": "6f1c2a9e-3b7d-4c55-9a8e-1d2f3a4b5c6d",
+                        "pollUrl": "/v2/webhooks/6f1c2a9e-3b7d-4c55-9a8e-1d2f3a4b5c6d"
+                    },
+                    "error": null,
+                    "quotas": {
+                        "creditsConsumed": 3,
+                        "workspace": {
+                            "id": "00000000-0000-4000-8000-000000000001",
+                            "credits": {
+                                "total": 10000,
+                                "used": 1237,
+                                "left": 8763
+                            },
+                            "hasUnlimitedCredits": false,
+                            "allowDailyOvercost": false,
+                            "dailyLimit": null,
+                            "minuteRateLimit": {
+                                "limit": 300,
+                                "used": 1,
+                                "left": 299,
+                                "nextReset": "2026-10-21T12:01:00.000Z"
+                            }
+                        },
+                        "key": {
+                            "id": "00000000-0000-4000-8000-000000000002",
+                            "dailyLimit": null,
+                            "minuteRateLimit": null
+                        }
+                    },
+                    "metadata": {
+                        "requestId": "req_01jexample0000000000000000",
+                        "executionTimeMs": 412
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v2/webhooks/6f1c2a9e-3b7d-4c55-9a8e-1d2f3a4b5c6d"
+            },
+            "res": {
+                "status": 503,
+                "body": {
+                    "success": false,
+                    "data": null,
+                    "error": {
+                        "code": "SERVICE_UNAVAILABLE",
+                        "message": "Service unavailable"
+                    },
+                    "metadata": {
+                        "requestId": "req_01jexample0000000000000000",
+                        "executionTimeMs": 412
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v2/webhooks/6f1c2a9e-3b7d-4c55-9a8e-1d2f3a4b5c6d"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "webhookId": "6f1c2a9e-3b7d-4c55-9a8e-1d2f3a4b5c6d",
+                        "status": "succeeded",
+                        "eventType": "FETCH_CONTACT_DATA",
+                        "errorCode": null,
+                        "deliveryStatus": null,
+                        "createdAt": "2026-10-21T12:00:00.000Z",
+                        "result": [
+                            {
+                                "value": "jane.doe@example.com",
+                                "type": "professional"
+                            }
+                        ],
+                        "creditsConsumed": 3
+                    },
+                    "error": null,
+                    "quotas": {
+                        "creditsConsumed": 0,
+                        "workspace": {
+                            "id": "00000000-0000-4000-8000-000000000001",
+                            "credits": {
+                                "total": 10000,
+                                "used": 1234,
+                                "left": 8766
+                            },
+                            "hasUnlimitedCredits": false,
+                            "allowDailyOvercost": false,
+                            "dailyLimit": null,
+                            "minuteRateLimit": {
+                                "limit": 300,
+                                "used": 1,
+                                "left": 299,
+                                "nextReset": "2026-10-21T12:01:00.000Z"
+                            }
+                        },
+                        "key": {
+                            "id": "00000000-0000-4000-8000-000000000002",
+                            "dailyLimit": null,
+                            "minuteRateLimit": null
+                        }
+                    },
+                    "metadata": {
+                        "requestId": "req_01jexample0000000000000000",
+                        "executionTimeMs": 412
+                    }
+                }
+            }
+        }
+    ]
+}
