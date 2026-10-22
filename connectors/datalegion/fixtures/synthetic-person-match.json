@@ -1,0 +1,144 @@
+{
+    "name": "synthetic-person-match",
+    "description": "SYNTHETIC — not recorded. One person match carrying EVERY field group — Base, Premium (top-level and nested), and PII — so each product's filter is visible. Shape from docs/person-data/schema.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.datalegion.ai/person/enrich"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "matches": [
+                        {
+                            "legion_id": "p_123",
+                            "full_name": "jane doe",
+                            "first_name": "jane",
+                            "last_name": "doe",
+                            "sex": "female",
+                            "age": 41,
+                            "birth_year": 1985,
+                            "job_title": "vp of engineering",
+                            "company_name": "acme",
+                            "company_domain": "acme.com",
+                            "seniority_level": "vp",
+                            "job_function": "engineering",
+                            "is_decision_maker": true,
+                            "years_of_experience": 18,
+                            "work_email": "jane@acme.com",
+                            "mobile_phone": "+14155550100",
+                            "city": "austin",
+                            "state": "texas",
+                            "country": "united states",
+                            "linkedin_url": "linkedin.com/in/janedoe",
+                            "linkedin_followers": 2400,
+                            "headline": {
+                                "cleaned": "VP Engineering at Acme",
+                                "raw": "VP Engineering @ Acme!!"
+                            },
+                            "skills": [
+                                {
+                                    "cleaned": "python",
+                                    "raw": "Python"
+                                }
+                            ],
+                            "phones": [
+                                {
+                                    "type": "mobile",
+                                    "number": "+14155550100",
+                                    "current": true,
+                                    "confidence": "high",
+                                    "num_sources": 3,
+                                    "last_seen": "2026-09-01"
+                                }
+                            ],
+                            "emails": [
+                                {
+                                    "address": "jane@acme.com",
+                                    "type": "work",
+                                    "current": true,
+                                    "validated": true,
+                                    "validation_status": "valid",
+                                    "confidence": "high",
+                                    "num_sources": 4,
+                                    "last_seen": "2026-09-01",
+                                    "hash_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+                                }
+                            ],
+                            "locations": [
+                                {
+                                    "city": "austin",
+                                    "state": "texas",
+                                    "country": "united states",
+                                    "current": true,
+                                    "geo": "30.27,-97.74",
+                                    "raw": "Austin, TX",
+                                    "num_sources": 2,
+                                    "confidence": "high",
+                                    "last_seen": "2026-09-01"
+                                }
+                            ],
+                            "experience": [
+                                {
+                                    "title": {
+                                        "cleaned": "vp of engineering",
+                                        "raw": "VP of Engineering"
+                                    },
+                                    "organization": {
+                                        "name": {
+                                            "cleaned": "acme",
+                                            "raw": "ACME Inc."
+                                        },
+                                        "website": "acme.com"
+                                    },
+                                    "start_date": "2022-01",
+                                    "current": true,
+                                    "seniority_level": "vp",
+                                    "job_function": "engineering"
+                                }
+                            ],
+                            "education": [
+                                {
+                                    "organization": {
+                                        "name": {
+                                            "cleaned": "ut austin",
+                                            "raw": "UT Austin"
+                                        }
+                                    },
+                                    "degree": {
+                                        "cleaned": "bachelors",
+                                        "raw": "B.S."
+                                    },
+                                    "degree_level": "bachelors"
+                                }
+                            ],
+                            "socials": [
+                                {
+                                    "network": "linkedin",
+                                    "url": "linkedin.com/in/janedoe",
+                                    "current": true,
+                                    "confidence": "high",
+                                    "num_sources": 2,
+                                    "last_seen": "2026-09-01"
+                                }
+                            ],
+                            "certifications": [
+                                {
+                                    "name": {
+                                        "cleaned": "aws certified",
+                                        "raw": "AWS Certified"
+                                    }
+                                }
+                            ],
+                            "num_sources": 7,
+                            "last_seen": "2026-09-01",
+                            "build_version": "1.5.0"
+                        }
+                    ],
+                    "total": 1
+                }
+            }
+        }
+    ]
+}

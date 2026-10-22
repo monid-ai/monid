@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-person-no-match",
+    "description": "SYNTHETIC — not recorded. No person matches: HTTP 404 (OpenAPI: 'Not found - no person matches'); free.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.datalegion.ai/person/enrich"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": "not_found",
+                    "message": "No person matches the provided parameters."
+                }
+            }
+        }
+    ]
+}

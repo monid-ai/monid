@@ -1,0 +1,79 @@
+{
+    "name": "synthetic-company-match",
+    "description": "SYNTHETIC — not recorded. One company match with Base and Premium fields, top-level and nested. Shape from docs/company-data/schema.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.datalegion.ai/company/enrich"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "matches": [
+                        {
+                            "legion_id": "c_456",
+                            "name": {
+                                "cleaned": "acme",
+                                "display": "Acme",
+                                "raw": "ACME Inc."
+                            },
+                            "headline": {
+                                "cleaned": "Widgets",
+                                "raw": "Widgets!"
+                            },
+                            "description": {
+                                "cleaned": "Acme makes widgets.",
+                                "raw": "Acme makes widgets!"
+                            },
+                            "domain": "acme.com",
+                            "industry": "manufacturing",
+                            "type": "private",
+                            "size": "201-500",
+                            "founded": 1999,
+                            "tickers": [],
+                            "domains": [
+                                {
+                                    "domain": "acme.com"
+                                }
+                            ],
+                            "socials": [
+                                {
+                                    "network": "linkedin",
+                                    "url": "linkedin.com/company/acme"
+                                }
+                            ],
+                            "linkedin_followers": 12000,
+                            "linkedin_employee_count": 350,
+                            "legion_employee_count": 340,
+                            "legion_employee_growth_rate": {
+                                "1m": 0.01,
+                                "12m": 0.12
+                            },
+                            "legion_employee_count_by_month": [
+                                {
+                                    "month": "2026-09",
+                                    "count": 340
+                                }
+                            ],
+                            "locations": [
+                                {
+                                    "city": "austin",
+                                    "country": "united states",
+                                    "geo": "30.27,-97.74",
+                                    "raw": "Austin, TX",
+                                    "num_sources": 2,
+                                    "last_seen": "2026-09-01"
+                                }
+                            ],
+                            "num_sources": 5,
+                            "last_seen": "2026-09-01",
+                            "build_version": "1.5.0"
+                        }
+                    ],
+                    "total": 1
+                }
+            }
+        }
+    ]
+}
