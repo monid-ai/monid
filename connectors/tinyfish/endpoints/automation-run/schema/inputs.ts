@@ -26,12 +26,14 @@ export const zAutomationRunBody = z.object({
             "to take. Example: 'Extract every product name and price on " +
             "page 1, return JSON'.",
     ),
-    max_steps: z.number().int().min(1).max(500).optional().describe(
+    // describe BEFORE optional: the binding unwraps this field to attach
+    // its default, and .unwrap() drops a describe placed outside it
+    max_steps: z.number().int().min(1).max(500).describe(
         "Step limit — the primary cost control: the run is billed per AI " +
             "step, so capping steps bounds cost (the agent may take about " +
             "one final wrap-up step past the cap). The run stops at the cap " +
             "and returns partial results. Default 150.",
-    ),
+    ).optional(),
     max_duration_seconds: z.number().int().min(5).max(1800).optional()
         .describe(
             "Soft wall-clock budget in seconds — the agent honours it " +

@@ -26,7 +26,8 @@
 
 - [x] 4.1 Add the 6 endpoint ids and `tinyfish/browser-profile` to
       `connectors/ids.lock.json`
-- [x] 4.2 Synthetic fixtures + `agent-and-profiles.test.ts`
+- [x] 4.2 Synthetic fixtures + one `endpoint.test.ts` per endpoint and
+      `resources/browser-profile/resource.test.ts`
 - [x] 4.3 `deno task check && deno task test`
 
 ## 5. Follow-ups

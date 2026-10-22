@@ -1,0 +1,21 @@
+{
+    "name": "synthetic-profile-setup-session-gone",
+    "description": "SYNTHETIC — not recorded. The profile no longer exists upstream: 404 is data.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/v1/profiles/prof_1/setup-session"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": {
+                        "code": "NOT_FOUND",
+                        "message": "Profile not found."
+                    }
+                }
+            }
+        }
+    ]
+}

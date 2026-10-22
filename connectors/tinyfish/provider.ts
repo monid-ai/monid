@@ -17,8 +17,8 @@ import { defineProvider, presets, UsageModelKind } from "@shared/core";
  *
  * Usage: FREE stays the provider default (search, fetch, the profile
  * endpoints). The agent run is the one billed doc and drains the `default`
- * pool — TinyFish prices it in US dollars ($0.016 per AI step, the public
- * list rate).
+ * pool — TinyFish prices it in US dollars: $0.016 per AI step, drawn from a
+ * prepaid wallet (https://www.tinyfish.ai/pricing, checked 2026-10-22).
  */
 export default defineProvider({
     name: "tinyfish",
