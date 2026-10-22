@@ -34,6 +34,9 @@ import { type Json, zJson } from "@shared/core";
  * written.
  */
 export const RECORDED_RES_HEADERS = [
+    // MCP transport session. Recorded fixtures replace the live ID
+    // with a fixed placeholder; no reusable session identifier is committed.
+    "mcp-session-id",
     "location",
     "retry-after",
     "x-api-units-cost-total-actual",
@@ -233,7 +236,12 @@ export function scrubCalls(calls: RecordedCall[]): RecordedCall[] {
                     headers: Object.fromEntries(
                         Object.entries(call.res.headers).map((
                             [key, value],
-                        ) => [key, scrubUrlCredentials(value)]),
+                        ) => [
+                            key,
+                            key.toLowerCase() === "mcp-session-id"
+                                ? "fixture-session"
+                                : scrubUrlCredentials(value),
+                        ]),
                     ),
                 }
                 : {}),
