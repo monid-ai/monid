@@ -226,6 +226,90 @@
         "search": "plumber",
         "maxItems": 2
     },
+    "johnvc/apple-app-store-reviews-api": {
+        "product_ids": [
+            "363590051"
+        ],
+        "max_reviews": 2
+    },
+    "johnvc/baidu-search-scraper": {
+        "query": "python",
+        "max_pagination": 1
+    },
+    "johnvc/fuelprices": {
+        "search": "11507"
+    },
+    "johnvc/google-events-api---access-google-events-data": {
+        "q": "concerts in Austin"
+    },
+    "johnvc/google-flights-data-scraper-flight-and-price-search": {
+        "departure_id": "LAX",
+        "arrival_id": "JFK",
+        "outbound_date": "2026-12-01",
+        "max_pages": 1
+    },
+    "johnvc/google-hotels-search-scraper": {
+        "q": "hotels in Paris",
+        "check_in_date": "2026-12-13",
+        "check_out_date": "2026-12-14",
+        "max_pages": 1
+    },
+    "johnvc/google-images-api": {
+        "queries": [
+            "golden retriever"
+        ],
+        "maxResultsPerQuery": 50
+    },
+    "johnvc/google-jobs-scraper": {
+        "query": "software engineer",
+        "location": "Austin, TX",
+        "num_results": 10
+    },
+    "johnvc/google-lens-api": {
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Cat03.jpg",
+        "max_results": 2
+    },
+    "johnvc/google-local-services-api": {
+        "query": "plumber",
+        "location": "Austin, TX",
+        "maxResultsPerQuery": 2
+    },
+    "johnvc/google-maps-directions-api": {
+        "start_addr": "New York, NY",
+        "end_addr": "Boston, MA"
+    },
+    "johnvc/google-scholar-api": {
+        "mode": "search",
+        "q": "machine learning",
+        "max_pages": 1
+    },
+    "johnvc/naver-search-api": {
+        "query": "서울 맛집",
+        "maxResultsPerQuery": 2
+    },
+    "johnvc/scrape-yandex": {
+        "text": "python",
+        "max_pages": 1
+    },
+    "johnvc/us-congress-financial-disclosures-and-stock-trading-data": {
+        "Max_Results": 2
+    },
+    "johnvc/workday-careers-api": {
+        "startUrls": [
+            {
+                "url": "https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite"
+            }
+        ],
+        "maxJobsPerSite": 2
+    },
+    "johnvc/yandex-reverse-image-search": {
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Cat03.jpg",
+        "max_results": 10
+    },
+    "johnvc/youtubetranscripts": {
+        "youtube_url": "https://www.youtube.com/watch?v=UF8uR6Z6KLc",
+        "include_metadata": false
+    },
     "kaitoeasyapi/premium-x-follower-scraper-following-data": {
         "user_names": [
             "elonmusk"

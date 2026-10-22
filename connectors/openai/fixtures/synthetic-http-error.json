@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-http-error",
+    "description": "Native rate-limit failure is relayed without billing.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 429,
+                "body": {
+                    "error": {
+                        "code": "rate_limit_exceeded",
+                        "type": "rate_limit_error",
+                        "message": "Rate limit reached."
+                    }
+                }
+            }
+        }
+    ]
+}

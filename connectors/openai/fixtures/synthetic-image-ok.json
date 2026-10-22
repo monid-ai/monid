@@ -1,0 +1,36 @@
+{
+    "name": "synthetic-image-ok",
+    "description": "Native Images API success with synthetic counts and a tiny 1px PNG (not a live recording).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "created": 1791676800,
+                    "data": [
+                        {
+                            "b64_json": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aD1sAAAAASUVORK5CYII="
+                        }
+                    ],
+                    "background": "opaque",
+                    "output_format": "png",
+                    "quality": "low",
+                    "size": "1024x1024",
+                    "usage": {
+                        "input_tokens": 1020,
+                        "input_tokens_details": {
+                            "text_tokens": 20,
+                            "image_tokens": 1000
+                        },
+                        "output_tokens": 196,
+                        "total_tokens": 1216
+                    }
+                }
+            }
+        }
+    ]
+}
