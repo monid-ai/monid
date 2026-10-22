@@ -11,7 +11,8 @@
 ## 2. Identity and tests
 
 - [x] 2.1 Add `typesafe#systemone` to `connectors/ids.lock.json`
-- [x] 2.2 Synthetic fixtures + `connector.test.ts` (settle, 422, ASCII and
+- [x] 2.2 Synthetic fixtures + `endpoints/systemone/endpoint.test.ts`
+      (settle, 422, schema gate with near-twins, ASCII and
       non-ASCII estimate)
 - [x] 2.3 `deno task check && deno task test`
 

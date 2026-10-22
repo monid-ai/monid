@@ -49,10 +49,12 @@ export default defineEndpoint({
             label: "input tokens",
             consumes: { credit: "default", amount: 0.000000042 },
         },
-        /** A provable CEILING on input tokens: the UTF-8 byte length of the
-         *  serialized body (byte-level BPE consumes at least one byte per
-         *  token). `encodeURIComponent` counts the bytes: every %XX is one
-         *  byte, every other character one ASCII byte. */
+        /** An ESTIMATE of input tokens: the UTF-8 byte length of the
+         *  serialized body. It is not a guaranteed ceiling — TypeSafe does
+         *  not document how it counts input tokens, which may include
+         *  tokens beyond the caller's body. `encodeURIComponent` counts the
+         *  bytes: every %XX is one byte, every other character one ASCII
+         *  byte. */
         estimate: ({ data }) => ({
             counts: {
                 "TOKEN": encodeURIComponent(JSON.stringify(data.input.body))

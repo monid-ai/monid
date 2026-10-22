@@ -1,8 +1,10 @@
 import { z } from "zod";
 
 /**
- * `POST /v1/systemone` body — the vendor mirror (docs.typesafe.ai/api,
- * checked 2026-10-21). Two vendor surfaces are NOT mirrored, matching the
+ * `POST /v1/systemone` body — the vendor mirror (api.typesafe.ai/openapi.json
+ * and docs.typesafe.ai/api, checked 2026-10-22). Every question's
+ * `instructions`, the noul `criteria`, and its `true`/`false` texts are
+ * nullable upstream, so they are here too. Two vendor surfaces are NOT mirrored, matching the
  * hosted catalog: `assets` (images, base64 or multipart) and the `box`
  * question type, both gated behind the `TypeSafe-Danger-Zone-Images`
  * header.
@@ -17,20 +19,22 @@ const zRichValue = z.union([
 
 const zNoulQuestion = z.object({
     type: z.literal("noul"),
-    instructions: zRichValue.optional().describe(
+    instructions: zRichValue.nullable().describe(
         "The yes/no question to evaluate against the state.",
-    ),
+    ).optional(),
     criteria: z.object({
-        true: zRichValue.optional().describe("What a yes (near 1) means."),
-        false: zRichValue.optional().describe("What a no (near 0) means."),
-    }).optional().describe("What a yes and a no mean."),
+        true: zRichValue.nullable().describe("What a yes (near 1) means.")
+            .optional(),
+        false: zRichValue.nullable().describe("What a no (near 0) means.")
+            .optional(),
+    }).nullable().describe("What a yes and a no mean.").optional(),
 }).describe("Yes/no question — answers with the probability of yes (0-1).");
 
 const zChoiceQuestion = z.object({
     type: z.literal("choice"),
-    instructions: zRichValue.optional().describe(
+    instructions: zRichValue.nullable().describe(
         "What the model should decide.",
-    ),
+    ).optional(),
     criteria: z.record(z.string().min(1), zRichValue.nullable()).describe(
         "Map of option -> rubric description (null when an option needs no " +
             "detail). 1 to 255 options.",
@@ -42,9 +46,9 @@ const zChoiceQuestion = z.object({
 
 const zScoreQuestion = z.object({
     type: z.literal("score"),
-    instructions: zRichValue.optional().describe(
+    instructions: zRichValue.nullable().describe(
         "What the model should rate.",
-    ),
+    ).optional(),
     criteria: z.array(zRichValue).min(1).max(10).describe(
         "Ordered level descriptions, low to high (1-10 levels).",
     ),
@@ -54,11 +58,13 @@ const zScoreQuestion = z.object({
 );
 
 export const zSystemoneBody = z.object({
-    model: z.string().min(1).optional().describe(
+    // describe BEFORE optional: the binding unwraps this field to attach
+    // its default, and .unwrap() drops a describe placed outside it
+    model: z.string().min(1).describe(
         'Model name or alias: "jev-latest" (current stable), "jev-preview" ' +
             "(newest release), or a pinned version. The response reports " +
             "the versioned model that answered.",
-    ),
+    ).optional(),
     state: zRichValue.describe(
         "The content to evaluate: a plain string, or structured JSON " +
             "(object or array) for records, chat logs, or application " +

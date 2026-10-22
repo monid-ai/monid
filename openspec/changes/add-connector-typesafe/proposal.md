@@ -20,9 +20,11 @@ contract change.
     `model` to `jev-latest`, so hosted callers that omit it keep working.
   - Usage: `PER_UNIT` `TOKEN` at $0.000000042. Evidence is the response's
     `usage.input_tokens` (output tokens are free). The estimate is the
-    body's UTF-8 byte length — a ceiling, since byte-level BPE consumes at
-    least one byte per token; it counts bytes via `encodeURIComponent`,
-    because closed-term fns have no `TextEncoder`.
+    body's UTF-8 byte length — an estimate, not a guaranteed ceiling, since
+    TypeSafe does not document how it counts input tokens; it counts bytes
+    via `encodeURIComponent`, because closed-term fns have no `TextEncoder`.
+  - The input mirror follows the vendor's nullable fields: every question's
+    `instructions`, and the noul `criteria` with its `true`/`false` texts.
 
 ## Differences from the hosted definition
 
