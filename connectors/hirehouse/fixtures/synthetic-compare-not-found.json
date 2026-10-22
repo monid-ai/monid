@@ -1,0 +1,21 @@
+{
+    "name": "synthetic-compare-not-found",
+    "description": "hirehouse#jobs/compare when fewer than two of the ids are public: 404 not_found. Data, zero usage. Synthetic: shaped from hirehouse.xyz/api/public/openapi.json.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/public/jobs/compare?ids=7a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d%2C3f1c2a4e-8b7d-4c1e-9a2f-5d6e7f8a9b01"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": {
+                        "code": "not_found",
+                        "message": "Fewer than two of those jobs are publicly available to compare."
+                    }
+                }
+            }
+        }
+    ]
+}
