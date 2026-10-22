@@ -6,6 +6,7 @@ import {
     runEndpoint,
     testSealedUnit,
 } from "@shared/testing";
+import { directTransport, Engine } from "@monid/connector-engine";
 
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
 
@@ -92,6 +93,43 @@ Deno.test("exa#search: `stream` is not exposed, and stripped defensively before 
         fixture,
     });
     assertEquals(result.isProviderError, false);
+});
+
+Deno.test("exa#search: the `stream` strip is top-level only — caller schemas keep their `stream` properties", async () => {
+    const unit = await testSealedUnit("exa#search");
+    const fixture = await loadFixture(`${fixturesDir}happy.json`);
+    const response = fixture.calls[0].res;
+    const sent: unknown[] = [];
+    const loaded = await new Engine({
+        transport: directTransport({
+            params: () => Promise.resolve({ apiKey: "test-key" }),
+            fetch: (_url, init) => {
+                sent.push(JSON.parse(String(init?.body)));
+                return Promise.resolve(
+                    Response.json(response.body, { status: response.status }),
+                );
+            },
+        }),
+    }).load(unit);
+    const streamProperty = {
+        type: "object",
+        properties: { stream: { type: "string" } },
+        required: ["stream"],
+    };
+    await loaded.run({
+        body: {
+            query: "rivers that feed into the Danube",
+            numResults: 3,
+            stream: true,
+            outputSchema: streamProperty,
+            contents: { summary: { schema: streamProperty } },
+        },
+    });
+    assertEquals(sent.length, 1);
+    const body = sent[0] as Record<string, unknown>;
+    assert(!("stream" in body), "top-level stream must be stripped");
+    assertEquals(body.outputSchema, streamProperty);
+    assertEquals(body.contents, { summary: { schema: streamProperty } });
 });
 
 Deno.test({
