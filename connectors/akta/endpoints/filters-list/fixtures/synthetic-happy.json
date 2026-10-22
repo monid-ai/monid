@@ -1,0 +1,28 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC — not recorded. Shape from the agent-docs OpenAPI response schema (agent-docs.akta.pro/openapi.json, 2026-10-21); a free endpoint reports credits_consumed 0",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.akta.pro/api/v1/filters/list/"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "count": 1,
+                    "usage": "Pass each key in 'filters' of the List Generation API.",
+                    "filters": [
+                        {
+                            "key": "firmographic.company_type",
+                            "value_shape": "array of strings",
+                            "description": "Company type",
+                            "lookup_required": true
+                        }
+                    ],
+                    "credits_consumed": 0
+                }
+            }
+        }
+    ]
+}

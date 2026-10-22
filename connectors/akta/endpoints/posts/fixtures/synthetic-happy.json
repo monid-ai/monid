@@ -1,0 +1,51 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC — not recorded. Shape from the agent-docs OpenAPI response schema (agent-docs.akta.pro/openapi.json, 2026-10-21); two posts start one 10-record block, so credits_consumed is 1",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.akta.pro/api/v1/company/posts/?company=canva.com&limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "text": "Introducing Canva Code",
+                            "date": "2026-10-02",
+                            "url": "https://www.example.com/posts/1",
+                            "content_type": "video",
+                            "is_paid": false,
+                            "is_repost": false,
+                            "theme": "product launch",
+                            "engagement": {
+                                "reactions": 1200,
+                                "comments": 85,
+                                "reposts": 140
+                            }
+                        },
+                        {
+                            "text": "We're hiring in Sydney",
+                            "date": "2026-09-30",
+                            "url": "https://www.example.com/posts/2",
+                            "content_type": "image",
+                            "is_paid": false,
+                            "is_repost": false,
+                            "theme": "hiring",
+                            "engagement": {
+                                "reactions": 300,
+                                "comments": 12,
+                                "reposts": 20
+                            }
+                        }
+                    ],
+                    "count": 2,
+                    "limit": 2,
+                    "offset": 0,
+                    "credits_consumed": 1
+                }
+            }
+        }
+    ]
+}

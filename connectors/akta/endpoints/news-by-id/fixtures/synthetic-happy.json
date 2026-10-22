@@ -1,0 +1,35 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC — not recorded. Shape from the agent-docs OpenAPI response schema (agent-docs.akta.pro/openapi.json, 2026-10-21); 0.1 base + 2 articles × 0.01, so credits_consumed is 0.12",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.akta.pro/api/v1/news/by-id/?news_ids=34144849%2C34186756"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "count": 2,
+                    "data": [
+                        {
+                            "id": 34144849,
+                            "title": "Canva raises new funding",
+                            "summary": "Canva closed a secondary sale.",
+                            "sentiment": "positive",
+                            "full_text": "Canva said on Monday..."
+                        },
+                        {
+                            "id": 34186756,
+                            "title": "Canva launches Canva Code",
+                            "summary": "A new AI coding feature.",
+                            "sentiment": "neutral",
+                            "full_text": "Canva today announced..."
+                        }
+                    ],
+                    "credits_consumed": 0.12
+                }
+            }
+        }
+    ]
+}
