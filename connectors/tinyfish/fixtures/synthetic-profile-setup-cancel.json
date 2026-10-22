@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-profile-setup-cancel",
+    "description": "SYNTHETIC — not recorded. POST /v1/profiles/{id}/setup-session/cancel closes the setup browser.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/v1/profiles/prof_1/setup-session/cancel",
+                "body": {
+                    "session_id": "setup-1"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "session_id": "setup-1",
+                    "status": "cancelled"
+                }
+            }
+        }
+    ]
+}

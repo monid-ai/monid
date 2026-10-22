@@ -1,34 +1,52 @@
 import { defineProvider, presets, UsageModelKind } from "@shared/core";
 
 /**
- * TinyFish (tinyfish.ai) — both integrated endpoints are FREE (0 credits on
- * every plan; plans differ on rate limit, not price), so usage is a flat
- * provider-level perCall: 1 call unit, no vendor cost. NO provider baseUrl:
- * TinyFish serves each product from its own host, so each endpoint declares
- * its own `request.baseUrl` (the per-endpoint override's first real use).
+ * TinyFish (tinyfish.ai) — three products on three hosts:
+ *
+ *   - Search (`api.search.tinyfish.ai`) and Fetch (`api.fetch.tinyfish.ai`):
+ *     FREE on every plan (plans differ on rate limit, not price). Each
+ *     declares its own `request.baseUrl`.
+ *   - The Agent API and Browser Context Profiles (`agent.tinyfish.ai`): the
+ *     PROVIDER baseUrl. Resource ops always target the provider origin
+ *     (they carry no request section), so the `browser-profile` resource
+ *     pins it here.
+ *
+ * The Browser API (`api.browser.tinyfish.ai`, raw CDP sessions billed per
+ * minute) is NOT ported yet: its session resource would need a second
+ * resource origin, which the contract does not express today.
+ *
+ * Usage: FREE stays the provider default (search, fetch, the profile
+ * endpoints). The agent run is the one billed doc and drains the `default`
+ * pool — TinyFish prices it in US dollars ($0.016 per AI step, the public
+ * list rate).
  */
 export default defineProvider({
     name: "tinyfish",
     meta: {
         displayName: "TinyFish",
-        summary: "Zero-cost live-web search and clean multi-URL fetch.",
-        description: "Zero-cost access to the live web — browser-rendered, " +
-            "never-cached web, news, and research-paper search, plus clean " +
+        summary: "Live-web search, multi-URL fetch, and an AI browser agent.",
+        description: "Access to the live web — browser-rendered, " +
+            "never-cached web, news, and research-paper search; clean " +
             "Markdown, HTML, or JSON extraction for up to 10 URLs per call " +
-            "with CSS-scoped selection and conditional 304 re-fetch.",
+            "with CSS-scoped selection and conditional 304 re-fetch; and an " +
+            "AI browser agent that navigates, clicks, types, and extracts " +
+            "from a natural-language goal, optionally starting from a saved " +
+            "login (browser profile).",
         homepageUrl: "https://tinyfish.ai",
         docsUrl: "https://docs.tinyfish.ai",
-        categories: ["web-search"],
+        categories: ["web-search", "agents"],
     },
     auth: { inject: presets.auth.header("X-API-Key") },
+    request: { baseUrl: "https://agent.tinyfish.ai" },
     usage: {
-        // FREE (designs D25/D27): tinyfish bills nothing on every plan
-        // today — v1 evidence: "$0 wins verbatim … both endpoints are
-        // free". Free-ness is a MODEL fact, and the model ALONE suffices:
-        // the quantities fns are compiler-synthesized ({counts: {}} is
-        // the only lawful return) and there is no vendor meter to
-        // consolidate. A future price change is a MODEL change, not a
-        // rate-card surprise.
+        // FREE (designs D25/D27) is the default: search, fetch, and the
+        // profile endpoints bill nothing. Free-ness is a MODEL fact — the
+        // quantities fns are compiler-synthesized and there is no vendor
+        // meter to consolidate.
         model: { kind: UsageModelKind.FREE },
+        /** The ONE pool (design D26): TinyFish publishes its agent price
+         *  in dollars, so the pool IS dollars. Drained by
+         *  `automation/run`. */
+        credits: { default: { label: "US dollars" } },
     },
 });

@@ -646,10 +646,17 @@
         "suzanne#v1/generations/text-to-3d",
         "suzanne#v1/models/download",
         "suzanne#v1/uploads",
+        "tinyfish#automation/run",
+        "tinyfish#browser-profiles/provision",
+        "tinyfish#browser-profiles/release",
+        "tinyfish#browser-profiles/setup-cancel",
+        "tinyfish#browser-profiles/setup-save",
+        "tinyfish#browser-profiles/setup-session",
         "tinyfish#fetch",
         "tinyfish#search"
     ],
     "resources": [
-        "saperly/phone-number"
+        "saperly/phone-number",
+        "tinyfish/browser-profile"
     ]
 }

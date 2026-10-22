@@ -1,0 +1,26 @@
+{
+    "name": "synthetic-profile-setup-save",
+    "description": "SYNTHETIC — not recorded. POST /v1/profiles/{id}/save answers the save summary.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/v1/profiles/prof_1/save",
+                "body": {
+                    "session_id": "setup-1"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "domains_updated": [
+                        "app.example.com"
+                    ],
+                    "domains_failed": [],
+                    "cookie_count": 12,
+                    "pages_captured": 1
+                }
+            }
+        }
+    ]
+}
