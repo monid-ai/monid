@@ -1,0 +1,40 @@
+{
+    "name": "synthetic-create-mailbox",
+    "description": "An integration credential creates one mailbox with no child credential, and the connector persists its owned public ID.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/mailbox/connection"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "ok": true,
+                    "data": { "credential": { "type": "api_key" } }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": { "email": "agent@example.com" }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "ok": true,
+                    "data": {
+                        "mailbox": {
+                            "id": "mbx_owned",
+                            "email": "agent@example.com"
+                        },
+                        "credential": null,
+                        "warning": null
+                    }
+                }
+            }
+        }
+    ]
+}

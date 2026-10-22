@@ -1,0 +1,27 @@
+{
+    "name": "synthetic-attachment-link",
+    "description": "The owned message contains a short-lived link for one selected attachment.",
+    "calls": [{
+        "req": {
+            "method": "GET",
+            "url": "{{request.origin}}/api/v1/mailbox/messages/msg_1?mailbox_id=mbx_owned"
+        },
+        "res": {
+            "status": 200,
+            "body": {
+                "ok": true,
+                "data": {
+                    "id": "msg_1",
+                    "attachments": [
+                        {
+                            "id": "att_1",
+                            "download_url": "https://app.sendmux.ai/download/att_1?token=test",
+                            "filename": "note.txt",
+                            "content_type": "text/plain"
+                        }
+                    ]
+                }
+            }
+        }
+    }]
+}

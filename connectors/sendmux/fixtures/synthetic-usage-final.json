@@ -1,0 +1,147 @@
+{
+    "name": "synthetic-usage-final",
+    "description": "Final retained cost window returns stable posted amounts for each line after release.",
+    "calls": [
+        {
+            "req": {
+                "method": "DELETE",
+                "url": "{{request.origin}}/api/v1/mailboxes/mbx_owned"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "ok": true,
+                    "data": { "deleted": true, "id": "mbx_owned" }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/mailboxes/mbx_owned/usage?start=2026-09-01T00%3A00%3A00.000Z&end=2026-09-02T00%3A00%3A00.000Z"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "ok": true,
+                    "data": {
+                        "mailbox_id": "mbx_owned",
+                        "start": "2026-09-01T00:00:00.000Z",
+                        "end": "2026-09-02T00:00:00.000Z",
+                        "currency": "USD",
+                        "state": "final",
+                        "posted_amount": "0.006625",
+                        "incoming": {
+                            "state": "final",
+                            "posted_amount": "0.002500"
+                        },
+                        "outgoing": {
+                            "state": "final",
+                            "posted_amount": "0.004000"
+                        },
+                        "storage": {
+                            "state": "final",
+                            "posted_amount": "0.000125"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/mailboxes/mbx_owned/usage?start=2026-09-01T00%3A00%3A00.000Z&end=2026-09-02T00%3A00%3A00.000Z"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "ok": true,
+                    "data": {
+                        "mailbox_id": "mbx_owned",
+                        "start": "2026-09-01T00:00:00.000Z",
+                        "end": "2026-09-02T00:00:00.000Z",
+                        "currency": "USD",
+                        "state": "final",
+                        "posted_amount": "0.006625",
+                        "incoming": {
+                            "state": "final",
+                            "posted_amount": "0.002500"
+                        },
+                        "outgoing": {
+                            "state": "final",
+                            "posted_amount": "0.004000"
+                        },
+                        "storage": {
+                            "state": "final",
+                            "posted_amount": "0.000125"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/mailboxes/mbx_owned/usage?start=2026-09-01T00%3A00%3A00.000Z&end=2026-09-02T00%3A00%3A00.000Z"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "ok": true,
+                    "data": {
+                        "mailbox_id": "mbx_owned",
+                        "start": "2026-09-01T00:00:00.000Z",
+                        "end": "2026-09-02T00:00:00.000Z",
+                        "currency": "USD",
+                        "state": "final",
+                        "posted_amount": "0.006625",
+                        "incoming": {
+                            "state": "final",
+                            "posted_amount": "0.002500"
+                        },
+                        "outgoing": {
+                            "state": "final",
+                            "posted_amount": "0.004000"
+                        },
+                        "storage": {
+                            "state": "final",
+                            "posted_amount": "0.000125"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/mailboxes/mbx_owned/usage?start=2026-09-01T00%3A00%3A00.000Z&end=2026-09-02T00%3A00%3A00.000Z"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "ok": true,
+                    "data": {
+                        "mailbox_id": "mbx_owned",
+                        "start": "2026-09-01T00:00:00.000Z",
+                        "end": "2026-09-02T00:00:00.000Z",
+                        "currency": "USD",
+                        "state": "final",
+                        "posted_amount": "0.006625",
+                        "incoming": {
+                            "state": "final",
+                            "posted_amount": "0.002500"
+                        },
+                        "outgoing": {
+                            "state": "final",
+                            "posted_amount": "0.004000"
+                        },
+                        "storage": {
+                            "state": "final",
+                            "posted_amount": "0.000125"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+{
+    "name": "synthetic-release-twice",
+    "description": "Deleting an owned mailbox succeeds once and is already gone on retry.",
+    "calls": [
+        {
+            "req": {
+                "method": "DELETE",
+                "url": "{{request.origin}}/api/v1/mailboxes/mbx_owned"
+            },
+            "res": { "status": 200, "body": { "ok": true } }
+        },
+        {
+            "req": {
+                "method": "DELETE",
+                "url": "{{request.origin}}/api/v1/mailboxes/mbx_owned"
+            },
+            "res": { "status": 404, "body": { "ok": false } }
+        }
+    ]
+}

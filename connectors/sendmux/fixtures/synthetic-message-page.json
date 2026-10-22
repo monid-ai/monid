@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-message-page",
+    "description": "A filtered owned-inbox message page keeps its continuation cursor.",
+    "calls": [{
+        "req": {
+            "method": "GET",
+            "url": "{{request.origin}}/api/v1/mailbox/messages?mailbox_id=mbx_owned&limit=2&q=invoice"
+        },
+        "res": {
+            "status": 200,
+            "body": {
+                "ok": true,
+                "data": [{ "id": "msg_1", "subject": "Invoice" }],
+                "pagination": { "has_more": true, "next_cursor": "cursor_2" },
+                "meta": { "request_id": "req_1" }
+            }
+        }
+    }]
+}
