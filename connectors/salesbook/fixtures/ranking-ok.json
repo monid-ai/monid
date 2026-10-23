@@ -1,0 +1,22 @@
+{
+    "name": "ranking-ok",
+    "description": "Recorded 2026-10-22 from POST https://mcp.maxeds.org/v1/tools/get_ranking (public, keyless; no request headers kept). HAND-TRIMMED: the live response ranked 86 companies (about 48 KB); `entries` inside the `text` JSON document is cut to the first 3, re-serialized with the vendor's 2-space indent. Every other field verbatim.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "sector": "healthcare"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "text": "{\n  \"sector\": \"healthcare\",\n  \"period\": \"2026-q4\",\n  \"methodologyVersion\": \"v0.2.7\",\n  \"weights\": {\n    \"buyerFit\": 0.3,\n    \"commercialProof\": 0.25,\n    \"stageMaturity\": 0.15,\n    \"pilotMechanics\": 0.15,\n    \"teamTrajectory\": 0.1,\n    \"evalCompleteness\": 0.05\n  },\n  \"honestyLabel\": null,\n  \"entries\": [\n    {\n      \"rank\": 1,\n      \"startupId\": \"nabla\",\n      \"name\": \"Nabla\",\n      \"score\": 79.78,\n      \"evidenceGrade\": 68.5,\n      \"oneLiner\": \"Ambient AI assistant (Nabla Copilot) that turns patient-clinician encounters into structured clinical notes in seconds.\",\n      \"components\": {\n        \"buyerFit\": 84,\n        \"commercialProof\": 56,\n        \"stageMaturity\": 100,\n        \"pilotMechanics\": 100,\n        \"teamTrajectory\": 60,\n        \"evalCompleteness\": 91.67\n      }\n    },\n    {\n      \"rank\": 2,\n      \"startupId\": \"cedar\",\n      \"name\": \"Cedar\",\n      \"score\": 79.5,\n      \"evidenceGrade\": 72.2,\n      \"oneLiner\": \"Patient financial experience platform — personalized, digital billing and payment plans for health systems.\",\n      \"components\": {\n        \"buyerFit\": 85,\n        \"commercialProof\": 56,\n        \"stageMaturity\": 100,\n        \"pilotMechanics\": 93.33,\n        \"teamTrajectory\": 60,\n        \"evalCompleteness\": 100\n      }\n    },\n    {\n      \"rank\": 3,\n      \"startupId\": \"hippocratic-ai\",\n      \"name\": \"Hippocratic AI\",\n      \"score\": 79.1,\n      \"evidenceGrade\": 68.4,\n      \"oneLiner\": \"Generative AI healthcare agents for patient-facing, non-diagnostic tasks — 'super-staffing' to close the clinical staffing gap without replacing clinicians.\",\n      \"components\": {\n        \"buyerFit\": 92,\n        \"commercialProof\": 42,\n        \"stageMaturity\": 100,\n        \"pilotMechanics\": 100,\n        \"teamTrajectory\": 60,\n        \"evalCompleteness\": 100\n      }\n    }\n  ]\n}",
+                    "isError": false
+                }
+            }
+        }
+    ]
+}
