@@ -1,0 +1,25 @@
+{
+    "name": "invalid-recipe",
+    "description": "raw recording (agent-vault#v1/recipes/submissions, scenario invalid-recipe) — hand-minimize into a shared chain before committing",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.agentvault.io/v1/recipes",
+                "body": {
+                    "recipe": {}
+                }
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "error": "Recipe failed validation.",
+                    "code": "invalid_recipe",
+                    "errors": [
+                        "kind: must be \"platform\" or \"merchant\""
+                    ]
+                }
+            }
+        }
+    ]
+}

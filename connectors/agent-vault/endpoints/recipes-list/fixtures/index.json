@@ -1,0 +1,33 @@
+{
+    "name": "index",
+    "description": "raw recording (agent-vault#v1/recipes, scenario index) — hand-minimize into a shared chain before committing",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.agentvault.io/v1/recipes"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "recipes": [
+                        {
+                            "key": "aa.com",
+                            "kind": "merchant",
+                            "platform": "custom",
+                            "registryVersion": "0.1.0",
+                            "status": "dead-end"
+                        },
+                        {
+                            "key": "advanceautoparts.com",
+                            "kind": "merchant",
+                            "platform": "custom",
+                            "registryVersion": "0.1.0",
+                            "status": "unverified"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

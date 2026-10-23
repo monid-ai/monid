@@ -1,0 +1,30 @@
+{
+    "name": "synthetic-accepted",
+    "description": "SYNTHETIC — not recorded. A valid recipe is accepted for screening (HTTP 202, status pending).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.agentvault.io/v1/recipes",
+                "body": {
+                    "recipe": {
+                        "kind": "merchant",
+                        "id": "shop.example.com",
+                        "hosts": [
+                            "shop.example.com"
+                        ],
+                        "status": "unverified"
+                    },
+                    "note": "Drove the checkout to the payment step."
+                }
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "id": "sub_example0001",
+                    "status": "pending"
+                }
+            }
+        }
+    ]
+}

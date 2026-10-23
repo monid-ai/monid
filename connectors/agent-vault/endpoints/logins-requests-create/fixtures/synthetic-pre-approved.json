@@ -1,0 +1,24 @@
+{
+    "name": "synthetic-pre-approved",
+    "description": "SYNTHETIC — not recorded. The holder pre-approved this site and email: the login is created at once (HTTP 202, status approved).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.agentvault.io/v1/logins/requests",
+                "body": {
+                    "website": "shop.example.com",
+                    "email": "agent@example.com"
+                }
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "requestId": "req_example0002",
+                    "status": "approved",
+                    "expiresAt": "2026-10-24T09:00:00.000Z"
+                }
+            }
+        }
+    ]
+}

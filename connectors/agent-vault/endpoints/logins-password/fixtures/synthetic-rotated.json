@@ -1,0 +1,34 @@
+{
+    "name": "synthetic-rotated",
+    "description": "SYNTHETIC — not recorded. Password replaced; tokens unchanged (HTTP 200, rotated true). The login entry fields are illustrative: the HTTP API reference does not enumerate them.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.agentvault.io/v1/logins/password",
+                "body": {
+                    "label": "shop.example.com",
+                    "minLength": 20,
+                    "noSymbols": true
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "login": {
+                        "label": "shop.example.com",
+                        "tokens": {
+                            "email": "av_login_email_example",
+                            "password": "av_login_password_example"
+                        }
+                    },
+                    "passwordPolicy": {
+                        "minLength": 20,
+                        "noSymbols": true
+                    },
+                    "rotated": true
+                }
+            }
+        }
+    ]
+}

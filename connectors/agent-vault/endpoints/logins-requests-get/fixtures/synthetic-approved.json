@@ -1,0 +1,30 @@
+{
+    "name": "synthetic-approved",
+    "description": "SYNTHETIC — not recorded. Approved: the new login mock tokens and the password policy are returned, never a password. The login entry fields are illustrative: the HTTP API reference does not enumerate them.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.agentvault.io/v1/logins/requests/req_example0001"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "approved",
+                    "login": {
+                        "label": "shop.example.com",
+                        "tokens": {
+                            "email": "av_login_email_example",
+                            "password": "av_login_password_example"
+                        }
+                    },
+                    "passwordPolicy": {
+                        "minLength": 24,
+                        "noSymbols": false
+                    },
+                    "passwordOwnerManaged": false
+                }
+            }
+        }
+    ]
+}

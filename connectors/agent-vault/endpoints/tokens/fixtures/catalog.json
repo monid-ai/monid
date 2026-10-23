@@ -1,0 +1,79 @@
+{
+    "name": "catalog",
+    "description": "recorded chain for agent-vault#v1/tokens (GET /v1/tokens?url=...), hand-sanitized: the shape is the live response, every personal value (name, card digits, expiry, address labels, user id) is a placeholder. Tokens are mock strings by design.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.agentvault.io/v1/tokens?url=https%3A%2F%2Fshop.example.com%2Fcheckout"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "addresses": [
+                        {
+                            "label": "home",
+                            "tokens": {
+                                "city": "av_addr_home_city_example",
+                                "country": "av_addr_home_country_example",
+                                "state": "av_addr_home_state_example",
+                                "street1": "av_addr_home_street1_example",
+                                "street2": "av_addr_home_street2_example",
+                                "zip": "av_addr_home_zip_example"
+                            }
+                        }
+                    ],
+                    "cards": [
+                        {
+                            "anySite": true,
+                            "brand": "Visa",
+                            "cvv": "av_card_1_cvv_example",
+                            "expiryMonth": 12,
+                            "expiryYear": 2030,
+                            "last4": "0000",
+                            "nickname": "Example Holder",
+                            "number": "av_card_1_number_example"
+                        }
+                    ],
+                    "connection": {
+                        "approveEveryPurchase": false,
+                        "auth": "api_key",
+                        "testCard": false
+                    },
+                    "identity": [
+                        {
+                            "label": "default",
+                            "missing": [
+                                "dob",
+                                "dob_day"
+                            ],
+                            "tokens": {
+                                "dob": "av_id_dob_example",
+                                "dob_day": "av_id_dob_day_example",
+                                "dob_dmy": "av_id_dob_dmy_example",
+                                "dob_mdy": "av_id_dob_mdy_example",
+                                "dob_month": "av_id_dob_month_example",
+                                "dob_year": "av_id_dob_year_example",
+                                "email": "av_id_email_example",
+                                "first_name": "av_id_first_name_example",
+                                "full_name": "av_id_full_name_example",
+                                "gender": "av_id_gender_example",
+                                "last_name": "av_id_last_name_example",
+                                "phone": "av_id_phone_example",
+                                "phone_area": "av_id_phone_area_example",
+                                "phone_country": "av_id_phone_country_example",
+                                "phone_line": "av_id_phone_line_example",
+                                "phone_national": "av_id_phone_national_example",
+                                "phone_prefix": "av_id_phone_prefix_example",
+                                "title": "av_id_title_example"
+                            }
+                        }
+                    ],
+                    "logins": [],
+                    "userId": "example",
+                    "relatedLogins": []
+                }
+            }
+        }
+    ]
+}

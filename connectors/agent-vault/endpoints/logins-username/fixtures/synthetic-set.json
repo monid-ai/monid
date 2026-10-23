@@ -1,0 +1,29 @@
+{
+    "name": "synthetic-set",
+    "description": "SYNTHETIC — not recorded. Username recorded on an agent-created login (HTTP 200 with the updated login). The login entry fields are illustrative: the HTTP API reference does not enumerate them.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.agentvault.io/v1/logins/username",
+                "body": {
+                    "label": "shop.example.com",
+                    "username": "example_user"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "login": {
+                        "label": "shop.example.com",
+                        "tokens": {
+                            "email": "av_login_email_example",
+                            "password": "av_login_password_example",
+                            "username": "av_login_username_example"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

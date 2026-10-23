@@ -1,0 +1,21 @@
+{
+    "name": "synthetic-needs-human",
+    "description": "SYNTHETIC — not recorded. Screening verdict with status needs_human.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.agentvault.io/v1/recipes/submissions/sub_example0001"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "sub_example0001",
+                    "key": "shop.example.com",
+                    "status": "needs_human",
+                    "verdict": "A selector looks like a filled value; a maintainer must review."
+                }
+            }
+        }
+    ]
+}

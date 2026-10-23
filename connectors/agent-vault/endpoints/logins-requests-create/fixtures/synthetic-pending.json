@@ -1,0 +1,25 @@
+{
+    "name": "synthetic-pending",
+    "description": "SYNTHETIC — not recorded. Request filed; waiting for the account holder (HTTP 202). The login entry fields are illustrative: the HTTP API reference does not enumerate them.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.agentvault.io/v1/logins/requests",
+                "body": {
+                    "website": "shop.example.com",
+                    "email": "agent@example.com",
+                    "minLength": 12
+                }
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "requestId": "req_example0001",
+                    "status": "pending",
+                    "expiresAt": "2026-10-24T09:00:00.000Z"
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,23 @@
+{
+    "name": "invalid-website",
+    "description": "raw recording (agent-vault#v1/logins/requests, scenario invalid-website) — hand-minimize into a shared chain before committing",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.agentvault.io/v1/logins/requests",
+                "body": {
+                    "website": "not a domain",
+                    "email": "user@example.com"
+                }
+            },
+            "res": {
+                "status": 403,
+                "body": {
+                    "error": "This API key is not allowed to create site logins. The account holder turns that on per key in their dashboard.",
+                    "code": "signup_not_enabled"
+                }
+            }
+        }
+    ]
+}

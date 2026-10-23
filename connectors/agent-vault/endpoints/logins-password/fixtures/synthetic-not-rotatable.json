@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-not-rotatable",
+    "description": "SYNTHETIC — not recorded. The holder replaced the password, so the agent cannot rotate it (HTTP 409).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.agentvault.io/v1/logins/password",
+                "body": {
+                    "label": "shop.example.com"
+                }
+            },
+            "res": {
+                "status": 409,
+                "body": {
+                    "error": "This password can no longer be rotated by this key.",
+                    "code": "not_rotatable"
+                }
+            }
+        }
+    ]
+}

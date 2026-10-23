@@ -1,0 +1,23 @@
+{
+    "name": "synthetic-already-set",
+    "description": "SYNTHETIC — not recorded. A different username was already recorded (HTTP 409).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.agentvault.io/v1/logins/username",
+                "body": {
+                    "label": "shop.example.com",
+                    "username": "another_user"
+                }
+            },
+            "res": {
+                "status": 409,
+                "body": {
+                    "error": "A username is already set for this login.",
+                    "code": "username_already_set"
+                }
+            }
+        }
+    ]
+}

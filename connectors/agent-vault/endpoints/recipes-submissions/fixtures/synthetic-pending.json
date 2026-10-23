@@ -1,0 +1,21 @@
+{
+    "name": "synthetic-pending",
+    "description": "SYNTHETIC — not recorded. Screening verdict with status pending.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.agentvault.io/v1/recipes/submissions/sub_example0001"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "sub_example0001",
+                    "key": "shop.example.com",
+                    "status": "pending",
+                    "verdict": ""
+                }
+            }
+        }
+    ]
+}

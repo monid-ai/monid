@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-pending",
+    "description": "SYNTHETIC — not recorded. Still waiting for the holder.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.agentvault.io/v1/logins/requests/req_example0001"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "pending",
+                    "expiresAt": "2026-10-24T09:00:00.000Z"
+                }
+            }
+        }
+    ]
+}

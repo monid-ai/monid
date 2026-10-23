@@ -220,6 +220,13 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "Hosted multi-step research agents that plan, search, and synthesize.",
     },
     {
+        id: "agent-identity",
+        displayName: "Agent Identity",
+        description:
+            "Logins, payment tokens, and checkout recipes for AI agents: " +
+            "let an agent sign in and pay without seeing the real secret.",
+    },
+    {
         // The GENERATIVE leaves: every other id above names data that
         // already exists somewhere and is retrieved. These name an artifact
         // the call creates.

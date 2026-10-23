@@ -1,0 +1,23 @@
+{
+    "name": "unknown-login",
+    "description": "raw recording (agent-vault#v1/logins/username, scenario unknown-login) — hand-minimize into a shared chain before committing",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.agentvault.io/v1/logins/username",
+                "body": {
+                    "label": "does-not-exist",
+                    "username": "example_user"
+                }
+            },
+            "res": {
+                "status": 403,
+                "body": {
+                    "error": "This API key is not allowed to create site logins. The account holder turns that on per key in their dashboard.",
+                    "code": "signup_not_enabled"
+                }
+            }
+        }
+    ]
+}

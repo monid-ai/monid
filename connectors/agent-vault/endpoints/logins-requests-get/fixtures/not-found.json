@@ -1,0 +1,19 @@
+{
+    "name": "not-found",
+    "description": "raw recording (agent-vault#v1/logins/requests/{id}, scenario not-found) — hand-minimize into a shared chain before committing",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.agentvault.io/v1/logins/requests/does-not-exist"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": "No such signup request.",
+                    "code": "request_not_found"
+                }
+            }
+        }
+    ]
+}

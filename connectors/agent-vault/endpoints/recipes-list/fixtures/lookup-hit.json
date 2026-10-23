@@ -1,0 +1,59 @@
+{
+    "name": "lookup-hit",
+    "description": "raw recording (agent-vault#v1/recipes, scenario lookup-hit) — hand-minimize into a shared chain before committing",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.agentvault.io/v1/recipes?url=https%3A%2F%2Fwww.advanceautoparts.com%2Fcheckout"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "merchant": {
+                        "cardSurface": "varies",
+                        "cvvTarget": "the second iframe[src*='cybersource'] under Card Details:input[aria-label='Card security code']",
+                        "gotchas": [
+                            "www.advanceautoparts.com redirects to shop.advanceautoparts.com, and search, product pages, the cart, checkout and the card frames all stay on shop. Open the home page first and wait about 8 seconds before typing, because that load sets the guest region and zip cookies and an earlier fill times out.",
+                            "Search is input[aria-label='Enter search text']; input[type=search] counts 0. Results take about 12 seconds and are a[href*='/p/'] links. Do not use the legacy /web/SearchResults path, which serves a down-for-maintenance page."
+                        ],
+                        "hosts": [
+                            "advanceautoparts.com",
+                            "shop.advanceautoparts.com"
+                        ],
+                        "id": "advanceautoparts.com",
+                        "kind": "merchant",
+                        "notes": "Driven through the Agent Vault proxy in September 2026 from the home page to the CyberSource card-number iframe on shop.advanceautoparts.com: search, product page, the Home Delivery tile, add to cart, the cart, CHECKOUT NOW, the contact step with email and phone, then the delivery address fields. The card was not filled, so the status is unverified. Two things stay unmapped, the State combobox that blocks the delivery step from saving and a usable order-total selector. The local runs settle noth",
+                        "overrides": {
+                            "addToCart": "button:has-text('ADD TO CART')",
+                            "address1": "input[name*='ddress' i]",
+                            "cardExpiry": "input[aria-label='expiry']",
+                            "cardNumber": "input[name*='ardNumber' i]",
+                            "cardNumberFrame": "iframe[src*='cybersource'] >> nth=0",
+                            "cartButton": "button[aria-label='cartButton']",
+                            "checkoutNow": "button:has-text('CHECKOUT NOW')",
+                            "city": "input[name*='city' i]",
+                            "continueStep": "button:has-text('Continue')",
+                            "cvv": "input[aria-label='Card security code']",
+                            "cvvFrame": "iframe[src*='cybersource'] >> nth=1",
+                            "email": "input[name*='email' i]",
+                            "firstName": "input[name*='irstName' i]",
+                            "homeDeliveryTile": "*:has(> [role=group]:has(p:text-is('Home Delivery')))",
+                            "lastName": "input[name*='astName' i]",
+                            "phone": "input[name*='phone' i]",
+                            "placeOrder": "button:has-text('PLACE ORDER')",
+                            "productLinks": "a[href*='/p/']",
+                            "state": "input[name*='state' i]",
+                            "zip": "input[name*='zip' i]"
+                        },
+                        "platform": "custom",
+                        "status": "unverified"
+                    },
+                    "platform": null,
+                    "signup": null,
+                    "signupPlatform": null
+                }
+            }
+        }
+    ]
+}
