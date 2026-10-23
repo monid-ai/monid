@@ -3,6 +3,7 @@ import { fromFileUrl } from "@std/path";
 import type { Json } from "@shared/core";
 import {
     assertInputAccepted,
+    liveSkip,
     loadFixture,
     runEndpoint,
     testSealedUnit,
@@ -10,9 +11,11 @@ import {
 
 /**
  * tinyfish#browser-profiles/provision. Fixtures are SYNTHETIC, shaped from
- * the monid-services live drills. No live test: provisioning creates a real
- * profile on the shared vendor account and needs a teardown release — run
- * it deliberately via `deno task engine:run` (the saperly posture).
+ * the monid-services live drills.
+ *
+ * The live test CREATES a real profile on the vendor account, so it runs
+ * only when TINYFISH_LIVE_MUTATE=1 is set beside the key — a key alone
+ * never creates state. Delete the profile it reports afterwards.
  */
 
 const FIXTURES = fromFileUrl(new URL("../../fixtures/", import.meta.url));
@@ -85,4 +88,31 @@ Deno.test("tinyfish#browser-profiles/provision schema gate: name over 100 chars 
     ) {
         await assertInputAccepted({ unit, input: { body }, mode: "replay" });
     }
+});
+
+Deno.test({
+    name:
+        "tinyfish#browser-profiles/provision live (gated on TINYFISH_API_KEY + TINYFISH_LIVE_MUTATE=1)",
+    ignore: liveSkip("tinyfish") ||
+        Deno.env.get("TINYFISH_LIVE_MUTATE") !== "1",
+    fn: async () => {
+        const result = await runEndpoint({
+            unit: await testSealedUnit(ID),
+            input: { body: { name: "monid live check" } },
+            mode: "live",
+        });
+        assertEquals(
+            result.isProviderError,
+            false,
+            JSON.stringify(result.output),
+        );
+        assertEquals(result.usage, { credits: {}, evidence: {} });
+        const output = result.output as Record<string, Json>;
+        assertEquals(typeof output.profileId, "string");
+        assertEquals("fingerprint_seed" in output, false);
+        const seed = result.resources?.provisions?.[0];
+        assert(seed !== undefined, "expected a provision seed");
+        assertEquals(seed.externalId, output.profileId);
+        console.log(`created TinyFish profile ${seed.externalId} — delete it`);
+    },
 });

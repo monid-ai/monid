@@ -8,6 +8,7 @@ import { fromFileUrl } from "@std/path";
 import { type Json, type OwnedResource, RunKind, StopKind } from "@shared/core";
 import {
     assertInputAccepted,
+    liveSkip,
     loadEndpoint,
     loadFixture,
     runEndpoint,
@@ -22,8 +23,9 @@ import {
  * Rate under test: $0.016 per AI step (https://www.tinyfish.ai/pricing,
  * checked 2026-10-22).
  *
- * No live test: every run bills real agent steps on the shared vendor
- * account — run it deliberately via `deno task engine:run`.
+ * The live test BILLS real agent steps (max_steps 1, about two steps), so it
+ * runs only when TINYFISH_LIVE_MUTATE=1 is set beside the key — a key alone
+ * never spends.
  */
 
 const FIXTURES = fromFileUrl(new URL("../../fixtures/", import.meta.url));
@@ -196,4 +198,40 @@ Deno.test("tinyfish#automation/run schema gate: a bare domain, a step cap over 5
             resources: OWNED,
         });
     }
+});
+
+Deno.test({
+    name:
+        "tinyfish#automation/run live (gated on TINYFISH_API_KEY + TINYFISH_LIVE_MUTATE=1)",
+    ignore: liveSkip("tinyfish") ||
+        Deno.env.get("TINYFISH_LIVE_MUTATE") !== "1",
+    fn: async () => {
+        const result = await runEndpoint({
+            unit: await testSealedUnit(AGENT),
+            input: {
+                body: {
+                    url: "https://example.com",
+                    goal: "Return the page title",
+                    max_steps: 1,
+                },
+            },
+            mode: "live",
+        });
+        assertEquals(
+            result.isProviderError,
+            false,
+            JSON.stringify(result.output),
+        );
+        const output = result.output as Record<string, Json>;
+        assertEquals(Object.keys(output).sort(), [
+            "error",
+            "finished_at",
+            "num_of_steps",
+            "result",
+            "run_id",
+            "started_at",
+            "status",
+        ]);
+        assertEquals(Object.keys(result.usage.evidence), ["CREDIT"]);
+    },
 });
