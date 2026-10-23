@@ -17,7 +17,7 @@ const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
 const INPUT = { body: { url: "https://example.com/ai-portrait.png" } };
 const VIDEO_INPUT = { body: { url: "https://example.com/interview-clip.mp4" } };
 
-Deno.test(`${ID} happy (synthetic): an image run settles one credit`, async () => {
+Deno.test(`${ID} happy (synthetic): an image run sends the expected request and settles one credit`, async () => {
     const unit = await testSealedUnit(ID);
     const fixture = await loadFixture(`${fixturesDir}synthetic-happy.json`);
     const result = await runEndpoint({
@@ -25,6 +25,10 @@ Deno.test(`${ID} happy (synthetic): an image run settles one credit`, async () =
         input: INPUT,
         mode: "replay",
         fixture,
+        assertRequest: async (request) => {
+            assertEquals(await request.json(), INPUT.body);
+            assertEquals(request.headers.has("x-api-key"), true);
+        },
     });
     assertEquals(result.httpStatus, 200);
     // The vendor's meter says 1; the fold ceil(1 / 1) × 1 agrees: no mismatch.
@@ -38,7 +42,7 @@ Deno.test(`${ID} happy (synthetic): an image run settles one credit`, async () =
     assertEquals(result.output, body);
 });
 
-Deno.test(`${ID} happy (synthetic): a video run preserves output and settles per scored frame`, async () => {
+Deno.test(`${ID} happy (synthetic): a video run sends the expected request, preserves output and settles per scored frame`, async () => {
     const unit = await testSealedUnit(ID);
     const fixture = await loadFixture(
         `${fixturesDir}synthetic-video-happy.json`,
@@ -48,6 +52,10 @@ Deno.test(`${ID} happy (synthetic): a video run preserves output and settles per
         input: VIDEO_INPUT,
         mode: "replay",
         fixture,
+        assertRequest: async (request) => {
+            assertEquals(await request.json(), VIDEO_INPUT.body);
+            assertEquals(request.headers.has("x-api-key"), true);
+        },
     });
     assertEquals(result.httpStatus, 200);
     assertEquals(result.usage, {
