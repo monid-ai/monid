@@ -652,6 +652,7 @@
         "suzanne#v1/generations/text-to-3d",
         "suzanne#v1/models/download",
         "suzanne#v1/uploads",
+        "telnyx#web_search",
         "tinyfish#fetch",
         "tinyfish#search"
     ],

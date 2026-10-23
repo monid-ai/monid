@@ -1,0 +1,29 @@
+{
+    "name": "empty",
+    "description": "RECORDED 2026-10-22T10:47:44.385Z through native Monid directTransport and protected proxy. Search only; response trimmed with repository trimCalls/scrubCalls; request unchanged.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.telnyx.com/v2/web_search",
+                "body": {
+                    "query": "ocean tides",
+                    "count": 3,
+                    "include_domains": [
+                        "unregistered-search-fixture.invalid"
+                    ]
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "results": {
+                            "web": []
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}
