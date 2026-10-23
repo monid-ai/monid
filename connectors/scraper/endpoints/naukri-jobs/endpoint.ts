@@ -34,6 +34,17 @@ export default defineEndpoint({
         notes: [
             "1 Scraper credit per call, 2 when `fetchDetails` is true, " +
             "whatever `maxItems` is.",
+            "The call needs at least one search selector (a keyword, a " +
+            "location, or a filter that narrows the search), or it fails " +
+            "with 400 and no credits. Sorting, radii, `maxItems`, and " +
+            "`fetchDetails` are not selectors.",
+            "`filters.locationRadiusKm` needs `location` or " +
+            "`advancedFilters.cityIds`, and " +
+            "`advancedFilters.localityRadiusKm` needs " +
+            "`advancedFilters.localityIds`, or the call fails with 400.",
+            "`fetchDetails: true` needs `maxItems` of 10 or less. Set " +
+            "`maxItems` explicitly, because the default of 20 is " +
+            "rejected.",
         ],
     },
     request: { method: "POST", path: "/naukri/jobs" },

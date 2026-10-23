@@ -38,6 +38,22 @@ export default defineEndpoint({
         notes: [
             "1 Scraper credit per call, whatever `maxItems` or " +
             "`fetchDetails` is.",
+            "Pick exactly one search mode: `keyword`; the Advanced Search" +
+            " fields (`allWords`, `anyWords`, `excludedWords`, " +
+            "`exactPhrase`, `titleWords`; not with `keyword`); filters " +
+            "alone; or `searchUrl` alone. A mixed request fails with 400 " +
+            "and no credits. With `searchUrl`, only `maxItems` and " +
+            "`fetchDetails` may also be given.",
+            "A built search needs `keyword` or one filter that is not a " +
+            "default. `sort` alone, a page size of 10 alone, and " +
+            "`contractToHire` false alone do not count.",
+            "`fetchDetails: true` needs `maxItems` of 10 or less.",
+            "`hourlyRateMax` must be greater than `hourlyRateMin`, and " +
+            "`fixedPriceMax` greater than `fixedPriceMin`, when both are " +
+            "given.",
+            "`projectLengths` and `hoursPerWeek` apply only to hourly " +
+            "jobs. They are rejected when the filters select only fixed-" +
+            "price jobs.",
         ],
     },
     request: { method: "POST", path: "/upwork/jobs" },

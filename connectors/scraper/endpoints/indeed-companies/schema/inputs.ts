@@ -7,28 +7,27 @@ import { zIndeedCompanyCountry } from "../../../schema/common.ts";
  * non-empty and in search mode otherwise.
  */
 export const zIndeedCompaniesBody = z.object({
-    keyword: z.string().max(200).optional().describe(
+    keyword: z.string().max(200).describe(
         "Company keyword for search mode (max 200 characters). Vendor " +
             'default "".',
-    ),
-    location: z.string().max(200).optional().describe(
+    ).optional(),
+    location: z.string().max(200).describe(
         "Location filter for search mode (max 200 characters). Vendor " +
             'default "".',
-    ),
-    country: zIndeedCompanyCountry.optional().describe(
+    ).optional(),
+    country: zIndeedCompanyCountry.describe(
         'Indeed country code (56 countries). Vendor default "US".',
-    ),
-    maxItems: z.number().int().min(1).max(1000).optional().describe(
+    ).optional(),
+    maxItems: z.number().int().min(1).max(1000).describe(
         "Maximum profiles attempted in search mode (1-1000, capped by your " +
             "plan). Vendor default 50.",
-    ),
-    companyKeys: z.array(z.string().min(1).max(500)).max(100).optional()
-        .describe(
-            "Lookup mode: Indeed company keys (the segment after /cmp/) or " +
-                "exact HTTPS /cmp/<key> URLs, up to 100. A non-empty list " +
-                "starts lookup mode and ignores keyword, location, and " +
-                "maxItems.",
-        ),
+    ).optional(),
+    companyKeys: z.array(z.string().min(1).max(500)).max(100).describe(
+        "Lookup mode: Indeed company keys (the segment after /cmp/) or " +
+            "exact HTTPS /cmp/<key> URLs, up to 100. A non-empty list " +
+            "starts lookup mode and ignores keyword, location, and " +
+            "maxItems.",
+    ).optional(),
     fields: z.array(z.enum([
         "*",
         "key",
@@ -59,8 +58,8 @@ export const zIndeedCompaniesBody = z.object({
         "totalJobCount",
         "similarCompanies",
         "meta",
-    ])).min(1).optional().describe(
+    ])).min(1).describe(
         "Top-level profile fields to return. Omit for the defaults. Use " +
             '["*"] alone for every field.',
-    ),
+    ).optional(),
 }).strict();

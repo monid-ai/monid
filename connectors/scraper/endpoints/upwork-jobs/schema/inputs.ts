@@ -21,15 +21,21 @@ const upworkNumericId = z.string().regex(/^\d{6,30}$/);
  *  are Upwork's own, with no published list to enum against. */
 const upworkFilterValue = z.string().min(1).max(100);
 
+/** The vendor's own anchor: the search root, an optional query, no
+ *  fragment. The allowed parameter names and values stay in the field
+ *  text. */
+const upworkSearchUrlPattern =
+    /^https:\/\/www\.upwork\.com\/nx\/search\/jobs\/(?:\?[^#]*)?$/;
+
 const notWithSearchUrl = "Cannot be combined with `searchUrl`.";
 
 export const zUpworkJobsBody = z.object({
-    keyword: z.string().min(1).max(200).optional().describe(
+    keyword: z.string().min(1).max(200).describe(
         'Simple search text, 1 to 200 characters, e.g. "TypeScript ' +
             'developer". Cannot be combined with the Advanced Search fields ' +
             "(`allWords`, `anyWords`, `excludedWords`, `exactPhrase`, " +
             "`titleWords`) or with `searchUrl`.",
-    ),
+    ).optional(),
     allWords: advancedText("results must include all of these words")
         .optional(),
     anyWords: advancedText("results must include at least one of these words")
@@ -38,7 +44,7 @@ export const zUpworkJobsBody = z.object({
     exactPhrase: advancedText("a phrase that results must contain").optional(),
     titleWords: advancedText("words that must appear in the job title")
         .optional(),
-    searchUrl: z.string().max(2048).optional().describe(
+    searchUrl: z.string().max(2048).regex(upworkSearchUrlPattern).describe(
         "Saved-search mode: a public Upwork jobs search URL that starts " +
             "with https://www.upwork.com/nx/search/jobs/ (trailing slash), " +
             "e.g. https://www.upwork.com/nx/search/jobs/?q=react&sort=" +
@@ -53,112 +59,108 @@ export const zUpworkJobsBody = z.object({
             "dropped, so the search starts at the first page. In this mode " +
             "only `maxItems` and `fetchDetails` may also be given; every " +
             "other field is rejected.",
-    ),
-    sort: z.enum(["relevance", "recency"]).optional().describe(
+    ).optional(),
+    sort: z.enum(["relevance", "recency"]).describe(
         'Result order for a built search. Vendor default "relevance". ' +
             notWithSearchUrl,
-    ),
-    skillIds: z.array(upworkNumericId).min(1).max(50).optional().describe(
+    ).optional(),
+    skillIds: z.array(upworkNumericId).min(1).max(50).describe(
         "Public Upwork skill IDs, 1 to 50 values of 6 to 30 digits each. " +
             notWithSearchUrl,
-    ),
-    categoryIds: z.array(upworkNumericId).min(1).max(12).optional().describe(
+    ).optional(),
+    categoryIds: z.array(upworkNumericId).min(1).max(12).describe(
         "Public Upwork category IDs, 1 to 12 values of 6 to 30 digits each. " +
             notWithSearchUrl,
-    ),
-    subcategoryIds: z.array(upworkNumericId).min(1).max(50).optional()
-        .describe(
-            "Public Upwork subcategory IDs, 1 to 50 values of 6 to 30 " +
-                "digits each. " + notWithSearchUrl,
-        ),
-    jobTypes: z.array(z.enum(["hourly", "fixed"])).min(1).max(2).optional()
-        .describe(
-            "Contract types to include: `hourly`, `fixed`, or both. " +
-                notWithSearchUrl,
-        ),
-    hourlyRateMin: z.number().min(0).max(99999).optional().describe(
+    ).optional(),
+    subcategoryIds: z.array(upworkNumericId).min(1).max(50).describe(
+        "Public Upwork subcategory IDs, 1 to 50 values of 6 to 30 " +
+            "digits each. " + notWithSearchUrl,
+    ).optional(),
+    jobTypes: z.array(z.enum(["hourly", "fixed"])).min(1).max(2).describe(
+        "Contract types to include: `hourly`, `fixed`, or both. " +
+            notWithSearchUrl,
+    ).optional(),
+    hourlyRateMin: z.number().min(0).max(99999).describe(
         "Minimum hourly rate in US dollars, 0 to 99999. When " +
             "`hourlyRateMax` is also given it must be greater than this. " +
             notWithSearchUrl,
-    ),
-    hourlyRateMax: z.number().min(0).max(100000).optional().describe(
+    ).optional(),
+    hourlyRateMax: z.number().min(0).max(100000).describe(
         "Maximum hourly rate in US dollars, 0 to 100000. Must be greater " +
             "than `hourlyRateMin` when that is given. " + notWithSearchUrl,
-    ),
+    ).optional(),
     fixedPriceRanges: z.array(z.enum([
         "0-99",
         "100-499",
         "500-999",
         "1000-4999",
         "5000-",
-    ])).min(1).max(5).optional().describe(
+    ])).min(1).max(5).describe(
         "Fixed-price budget buckets in US dollars; `5000-` means $5000 and " +
             "up. " + notWithSearchUrl,
-    ),
-    fixedPriceMin: z.number().min(0).max(99999).optional().describe(
+    ).optional(),
+    fixedPriceMin: z.number().min(0).max(99999).describe(
         "Custom minimum fixed price in US dollars, 0 to 99999. When " +
             "`fixedPriceMax` is also given it must be greater than this. " +
             notWithSearchUrl,
-    ),
-    fixedPriceMax: z.number().min(0).max(100000).optional().describe(
+    ).optional(),
+    fixedPriceMax: z.number().min(0).max(100000).describe(
         "Custom maximum fixed price in US dollars, 0 to 100000. Must be " +
             "greater than `fixedPriceMin` when that is given. " +
             notWithSearchUrl,
-    ),
+    ).optional(),
     experienceLevels: z.array(z.enum(["entry", "intermediate", "expert"]))
-        .min(1).max(3).optional().describe(
+        .min(1).max(3).describe(
             "Required experience levels to include. " + notWithSearchUrl,
-        ),
+        ).optional(),
     clientHistory: z.array(z.enum(["0", "1-9", "10-"])).min(1).max(3)
-        .optional().describe(
+        .describe(
             "Client hire history buckets: `0` hires, `1-9` hires, `10-` " +
                 "means 10 or more. " + notWithSearchUrl,
-        ),
-    clientLocations: z.array(upworkFilterValue).min(1).max(50).optional()
-        .describe(
-            'Client locations as Upwork names them, e.g. "United States". ' +
-                "1 to 50 values of at most 100 characters. " +
-                notWithSearchUrl,
-        ),
-    clientTimezones: z.array(upworkFilterValue).min(1).max(50).optional()
-        .describe(
-            "Client timezones as Upwork names them. 1 to 50 values of at " +
-                "most 100 characters. " + notWithSearchUrl,
-        ),
+        ).optional(),
+    clientLocations: z.array(upworkFilterValue).min(1).max(50).describe(
+        'Client locations as Upwork names them, e.g. "United States". ' +
+            "1 to 50 values of at most 100 characters. " +
+            notWithSearchUrl,
+    ).optional(),
+    clientTimezones: z.array(upworkFilterValue).min(1).max(50).describe(
+        "Client timezones as Upwork names them. 1 to 50 values of at " +
+            "most 100 characters. " + notWithSearchUrl,
+    ).optional(),
     projectLengths: z.array(z.enum(["week", "month", "semester", "ongoing"]))
-        .min(1).max(4).optional().describe(
+        .min(1).max(4).describe(
             "Hourly project lengths to include. Applies only to hourly " +
                 "jobs: rejected when the filters select only fixed-price " +
                 "jobs (fixed `jobTypes`, `fixedPriceRanges`, " +
                 "`fixedPriceMin`, or `fixedPriceMax`, with no hourly " +
                 "filter). " + notWithSearchUrl,
-        ),
+        ).optional(),
     hoursPerWeek: z.array(z.enum(["as_needed", "full_time"])).min(1).max(2)
-        .optional().describe(
+        .describe(
             "Hourly workload to include. Applies only to hourly jobs: " +
                 "rejected when the filters select only fixed-price jobs " +
                 "(see `projectLengths`). " + notWithSearchUrl,
-        ),
-    contractToHire: z.boolean().optional().describe(
+        ).optional(),
+    contractToHire: z.boolean().describe(
         "Return contract-to-hire jobs. Vendor default false. " +
             notWithSearchUrl,
-    ),
+    ).optional(),
     pageSize: z.union([z.literal(10), z.literal(20), z.literal(50)])
-        .optional().describe(
+        .describe(
             "Upwork results per page for a built search: 10, 20, or 50. " +
                 "Vendor default 10. " + notWithSearchUrl,
-        ),
-    maxItems: z.number().int().min(1).max(100).optional().describe(
+        ).optional(),
+    maxItems: z.number().int().min(1).max(100).describe(
         "Maximum jobs to return, 1 to 100, and within your plan's item " +
             "limit. At most 10 when `fetchDetails` is true. Vendor default " +
             "10. Does not change the price.",
-    ),
-    fetchDetails: z.boolean().optional().describe(
+    ).optional(),
+    fetchDetails: z.boolean().describe(
         "Fetch the full details of each returned job, including the " +
             "description text and HTML (`meta.detailStatus` reports the " +
             "outcome per job). Requires `maxItems` of 10 or less. Vendor " +
             "default false. Does not change the price.",
-    ),
+    ).optional(),
 }).strict().describe(
     "Choose exactly one search mode. Simple search: `keyword`. Advanced " +
         "Search: one or more of `allWords`, `anyWords`, `excludedWords`, " +

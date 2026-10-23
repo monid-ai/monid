@@ -27,10 +27,10 @@
                                 "diversityAndInclusionRating": 4,
                                 "overallRating": 3.6,
                                 "ratedCeo": {
-                                    "id": 1319755,
-                                    "largePhoto": "https://media.glassdoor.com/people/sqll/7856/rocket-companies-ceo1713752472105.png",
-                                    "name": "Varun Krishna",
-                                    "regularPhoto": "https://media.glassdoor.com/people/sql/7856/rocket-companies-ceo1713752472105.png",
+                                    "id": 1,
+                                    "largePhoto": "https://media.glassdoor.com/people/example-ceo.png",
+                                    "name": "Example Executive",
+                                    "regularPhoto": "https://media.glassdoor.com/people/example-ceo.png",
                                     "title": "Chief Executive Officer"
                                 },
                                 "recommendToFriendRating": 0.59,
@@ -52,9 +52,9 @@
                             "size": "10000+ Employees",
                             "website": "https://www.rocketcompanies.com",
                             "ceo": {
-                                "id": 1319755,
-                                "name": "Varun Krishna",
-                                "photoUrl": "https://media.glassdoor.com/people/sql/7856/rocket-companies-ceo1713752472105.png",
+                                "id": 1,
+                                "name": "Example Executive",
+                                "photoUrl": "https://media.glassdoor.com/people/example-ceo.png",
                                 "title": "Chief Executive Officer"
                             },
                             "primaryIndustry": {

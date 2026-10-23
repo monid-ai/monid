@@ -69,14 +69,31 @@ default stated in the field's description. The one exception is
 site because the estimate reads it. Every body SHALL be `.strict()`, so an
 unknown key fails INVALID_INPUT before any network call. The detail
 endpoints `linkedin/job-detail`, `naukri/job-detail`, and
-`upwork/job-detail` SHALL accept exactly one of `jobId` or `jobUrl`,
-modeled as a union of strict objects. Cross-field rules that a JSON Schema
-cannot express (for example, `fetchDetails` needs `maxItems` of 10 or
-less) SHALL be stated in the description of the field they constrain.
+`upwork/job-detail` SHALL accept exactly one of `jobId` or `jobUrl`, and
+`linkedin/jobs` exactly one of `keyword` or `companyId` (with `location`
+only on the keyword arm), each modeled as a union of strict objects. The
+Glassdoor tools that take two identifiers SHALL require at least one.
+Identifier URLs (`jobUrl`, `linkedin/post` `url`, `upwork/jobs`
+`searchUrl`) SHALL carry a compiled `pattern` that mirrors the vendor's own
+parser, so a near miss fails before the call, and SHALL never be stricter
+than the vendor (for example, values the vendor trims accept surrounding
+whitespace). Cross-field rules that a JSON Schema cannot express (for
+example, `fetchDetails` needs `maxItems` of 10 or less) SHALL be stated in
+the endpoint's `meta.notes`.
 
 #### Scenario: Unknown key rejected
 - **WHEN** a caller passes a misspelled field (e.g. `max_items`) to
   `scraper#indeed/jobs`
+- **THEN** the run fails with INVALID_INPUT before any network call
+
+#### Scenario: Selector rules enforced
+- **WHEN** a caller passes `{}`, both `keyword` and `companyId`, or
+  `companyId` with `location` to `scraper#linkedin/jobs`
+- **THEN** the run fails with INVALID_INPUT before any network call
+
+#### Scenario: Near-miss URL rejected
+- **WHEN** a caller passes a `jobUrl` on another host, or a LinkedIn URL
+  with no job id, to a detail endpoint
 - **THEN** the run fails with INVALID_INPUT before any network call
 
 #### Scenario: Both identifiers rejected

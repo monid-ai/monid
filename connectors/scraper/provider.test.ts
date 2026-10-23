@@ -282,46 +282,172 @@ Deno.test("scraper: every body is strict, so a typo never reaches a paid call", 
     }
 });
 
-Deno.test("scraper: a detail tool takes exactly one identifier", async () => {
-    for (
-        const [id, one, other] of [
-            [
-                "scraper#linkedin/job-detail",
-                { jobId: "4456874869" },
-                {
-                    jobUrl:
-                        "https://www.linkedin.com/jobs/view/software-engineer-at-example-4456874869",
-                },
-            ],
-            [
-                "scraper#naukri/job-detail",
-                { jobId: "221026501100" },
-                {
-                    jobUrl:
-                        "https://www.naukri.com/job-listings-data-analyst-example-bengaluru-221026501100",
-                },
-            ],
-            [
-                "scraper#upwork/job-detail",
-                { jobId: "~022113101893289196200" },
-                {
-                    jobUrl:
-                        "https://www.upwork.com/jobs/~022113101893289196200",
-                },
-            ],
-        ] as const
-    ) {
+/**
+ * Identifier gates. The compiled schema is all the engine enforces, so each
+ * row pairs inputs the vendor accepts (real URLs from the recordings, plus
+ * the vendor's trimming and alternate forms) with near misses that must fail
+ * before a paid call. The URL patterns mirror the vendor's own parsers, so
+ * an `accept` row that fails here means the mirror is stricter than the
+ * vendor.
+ */
+const GATES: Record<string, { accept: Json[]; reject: Json[] }> = {
+    "scraper#linkedin/jobs": {
+        accept: [
+            { keyword: "platform engineer", location: "Stockholm" },
+            { companyId: "1337" },
+        ],
+        reject: [
+            {},
+            { keyword: "platform engineer", companyId: "1337" },
+            { companyId: "1337", location: "Stockholm" },
+        ],
+    },
+    "scraper#linkedin/job-detail": {
+        accept: [
+            {
+                jobUrl:
+                    "https://www.linkedin.com/jobs/view/senior-platform-engineer-at-doktor-se-4456874869",
+            },
+            { jobUrl: " https://linkedin.com/jobs/view/4456874869/?trk=x\n" },
+            { jobId: " 4456874869 " },
+        ],
+        reject: [
+            {
+                jobId: "4456874869",
+                jobUrl: "https://www.linkedin.com/jobs/view/4456874869",
+            },
+            {},
+            { jobUrl: "not-a-url" },
+            { jobUrl: "https://example.com/jobs/view/4456874869" },
+            {
+                jobUrl:
+                    "https://www.linkedin.com/jobs/view/senior-platform-engineer",
+            },
+        ],
+    },
+    "scraper#linkedin/post": {
+        accept: [
+            {
+                url: "https://www.linkedin.com/feed/update/urn:li:activity:7000000000000000000",
+            },
+            {
+                url: "https://www.linkedin.com/posts/example_hello-activity-7000000000000000000-AbCd",
+            },
+        ],
+        reject: [
+            { url: "https://www.linkedin.com/in/example" },
+            { url: "https://www.linkedin.com/feed/" },
+        ],
+    },
+    "scraper#glassdoor/job-detail": {
+        accept: [
+            {
+                jobUrl:
+                    "https://www.glassdoor.com/job-listing/software-engineer-i-rocket-companies-JV_IC1134644_KO0,19_KE20,36.htm?jl=1010211603604",
+            },
+            {
+                jobUrl:
+                    "https://www.glassdoor.co.uk/partner/jobListing.htm?pos=101&jobListingId=1010211603604",
+            },
+            { jobId: 1010211603604 },
+        ],
+        reject: [
+            {},
+            { jobUrl: "" },
+            {
+                jobUrl:
+                    "https://example.com/job-listing/x.htm?jl=1010211603604",
+            },
+            {
+                jobUrl:
+                    "http://www.glassdoor.com/job-listing/x.htm?jl=1010211603604",
+            },
+            {
+                jobUrl:
+                    "https://www.glassdoor.com/job-listing/x-JV_IC1134644.htm",
+            },
+        ],
+    },
+    "scraper#naukri/job-detail": {
+        accept: [
+            {
+                jobUrl:
+                    "https://www.naukri.com/job-listings-data-analyst-rarr-technologies-bengaluru-8-to-12-years-221026501100",
+            },
+            {
+                jobUrl:
+                    "https://www.naukri.com/job-listings-x-221026501100/?src=a#b",
+            },
+            { jobId: " 221026501100 " },
+        ],
+        reject: [
+            {
+                jobId: "221026501100",
+                jobUrl: "https://www.naukri.com/x-221026501100",
+            },
+            {},
+            { jobUrl: "https://example.com/job-listings-x-221026501100" },
+            { jobUrl: "https://www.naukri.com/jobs-in-bangalore" },
+        ],
+    },
+    "scraper#upwork/job-detail": {
+        accept: [
+            {
+                jobUrl:
+                    "https://www.upwork.com/jobs/Upwork-Job_~022113101893289196200/",
+            },
+            {
+                jobUrl:
+                    "https://www.upwork.com/jobs/~022113101893289196200/?frkscc=abc123",
+            },
+            {
+                jobUrl:
+                    "https://www.upwork.com/freelance-jobs/apply/Example-Job_~022113101893289196200/",
+            },
+        ],
+        reject: [
+            {},
+            {
+                jobUrl:
+                    "https://example.com/jobs/Upwork-Job_~022113101893289196200/",
+            },
+            {
+                jobUrl:
+                    "https://www.upwork.com/jobs/Upwork-Job_~022113101893289196200/#top",
+            },
+            {
+                jobUrl:
+                    "https://www.upwork.com/jobs/Upwork-Job_~022113101893289196200/?a=b",
+            },
+        ],
+    },
+    "scraper#upwork/jobs": {
+        accept: [
+            {
+                searchUrl:
+                    "https://www.upwork.com/nx/search/jobs/?q=react&sort=recency",
+            },
+        ],
+        reject: [
+            { searchUrl: "https://example.com/nx/search/jobs/?q=react" },
+            { searchUrl: "https://www.upwork.com/nx/search/jobs/?q=react#top" },
+        ],
+    },
+};
+
+Deno.test("scraper: identifier fields take the vendor's forms and reject near misses before the call", async () => {
+    for (const [id, gate] of Object.entries(GATES)) {
         const unit = await testSealedUnit(id);
-        const fixture = await loadFixture(
-            `${chains}${RATE[id].fixture}.json`,
-        );
-        await assertInputAccepted({
-            unit,
-            input: { body: other },
-            mode: "replay",
-            fixture,
-        });
-        for (const body of [{ ...one, ...other }, {}]) {
+        const fixture = await loadFixture(`${chains}${RATE[id].fixture}.json`);
+        for (const body of gate.accept) {
+            await assertInputAccepted({
+                unit,
+                input: { body },
+                mode: "replay",
+                fixture,
+            });
+        }
+        for (const body of gate.reject) {
             await assertRejects(
                 () =>
                     runEndpoint({
@@ -332,7 +458,7 @@ Deno.test("scraper: a detail tool takes exactly one identifier", async () => {
                     }),
                 Error,
                 "INVALID_INPUT",
-                id,
+                `${id} ${JSON.stringify(body)}`,
             );
         }
     }
@@ -340,12 +466,11 @@ Deno.test("scraper: a detail tool takes exactly one identifier", async () => {
 
 Deno.test({
     name:
-        "scraper live (gated on SCRAPER_API_KEY): the vendor meter agrees with the rate card",
+        "scraper live (gated on SCRAPER_API_KEY): a real call settles with the vendor meter",
     ignore: liveSkip("scraper"),
     fn: async () => {
-        const id = "scraper#indeed/jobs";
         const result = await runEndpoint({
-            unit: await testSealedUnit(id),
+            unit: await testSealedUnit("scraper#indeed/jobs"),
             input: {
                 body: { keyword: "nurse", location: "Austin, TX", maxItems: 1 },
             },
@@ -356,9 +481,9 @@ Deno.test({
             false,
             JSON.stringify(result.output),
         );
-        assertEquals(result.usage, {
-            credits: { default: 1 },
-            evidence: PER_CALL,
-        });
+        // shape, not amounts: the replay table pins the credits, and a
+        // vendor price change must not fail this live check
+        assertEquals(typeof result.usage.credits.default, "number");
+        assertEquals("mismatch" in result.usage, false);
     },
 });

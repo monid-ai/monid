@@ -6,14 +6,14 @@ import {
 
 /** `POST /glassdoor/company-salaries` request body, the vendor mirror. */
 export const zGlassdoorCompanySalariesBody = zGlassdoorEmployerBody({
-    maxSalaries: z.number().int().min(1).max(250).optional().describe(
+    maxSalaries: z.number().int().min(1).max(250).describe(
         "Maximum salary entries (job titles) to return (1-250, and not " +
             "above your plan's limit). Vendor default 20.",
-    ),
-    jobTitle: z.string().optional().describe(
+    ).optional(),
+    jobTitle: z.string().describe(
         'Job title keyword to filter salaries, e.g. "Senior Software ' +
             'Engineer". Vendor default "" (all titles).',
-    ),
+    ).optional(),
     fields: z.array(z.enum([
         "*",
         "jobTitle",
@@ -23,9 +23,9 @@ export const zGlassdoorCompanySalariesBody = zGlassdoorEmployerBody({
         "payPeriod",
         "currency",
         "totalAdditionalPayStatistics",
-    ])).optional().describe(
+    ])).describe(
         "Fields to include per salary. Omit for the defaults (jobTitle, " +
             "employer, basePayStatistics, totalPayStatistics, payPeriod). " +
             'Use ["*"] for every field.',
-    ),
+    ).optional(),
 }, glassdoorEmployerMustMatch);

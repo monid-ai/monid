@@ -1,6 +1,6 @@
 {
     "name": "glassdoor-company-benefits-ok",
-    "description": "Scraper POST /glassdoor/company-benefits: a real recording, trimmed and PII-scrubbed by the recorder. The url is bound, so the chain does not pin the host.",
+    "description": "Scraper POST /glassdoor/company-benefits: a real recording whose review text, ids, dates, places, and job titles were replaced with placeholders; ratings, counts, and shape are as recorded. The url is bound, so the chain does not pin the host.",
     "calls": [
         {
             "req": {
@@ -41,35 +41,9 @@
                             {
                                 "benefitComments": [
                                     {
-                                        "comment": "Good benefits, not great 401K match",
+                                        "comment": "Example benefit comment 1.1",
                                         "helpfulVotes": 0,
-                                        "id": 14578421
-                                    }
-                                ],
-                                "city": {
-                                    "country": {
-                                        "name": "United States"
-                                    },
-                                    "metro": {
-                                        "name": "Detroit, MI"
-                                    },
-                                    "name": "Detroit, MI",
-                                    "state": {
-                                        "name": "Michigan"
-                                    }
-                                },
-                                "createDate": "2026-10-08T17:35:28.723",
-                                "currentJob": false,
-                                "id": 14596355,
-                                "rating": 3,
-                                "userEnteredJobTitle": "Product Manager"
-                            },
-                            {
-                                "benefitComments": [
-                                    {
-                                        "comment": "Cool job great experience will do",
-                                        "helpfulVotes": 0,
-                                        "id": 14564877
+                                        "id": 2000011
                                     }
                                 ],
                                 "city": {
@@ -77,16 +51,40 @@
                                         "name": "United States"
                                     },
                                     "metro": null,
-                                    "name": "Arkwright, NY",
+                                    "name": "Example City, ST",
                                     "state": {
-                                        "name": "New York State"
+                                        "name": "Example State"
                                     }
                                 },
-                                "createDate": "2026-10-01T21:24:03.593",
+                                "createDate": "2026-01-01T00:00:00.000",
                                 "currentJob": false,
-                                "id": 14582811,
+                                "id": 1000001,
+                                "rating": 3,
+                                "userEnteredJobTitle": "Example Title"
+                            },
+                            {
+                                "benefitComments": [
+                                    {
+                                        "comment": "Example benefit comment 2.1",
+                                        "helpfulVotes": 0,
+                                        "id": 2000021
+                                    }
+                                ],
+                                "city": {
+                                    "country": {
+                                        "name": "United States"
+                                    },
+                                    "metro": null,
+                                    "name": "Example City, ST",
+                                    "state": {
+                                        "name": "Example State"
+                                    }
+                                },
+                                "createDate": "2026-01-01T00:00:00.000",
+                                "currentJob": false,
+                                "id": 1000002,
                                 "rating": 5,
-                                "userEnteredJobTitle": "Loan Officer"
+                                "userEnteredJobTitle": "Example Title"
                             }
                         ]
                     },

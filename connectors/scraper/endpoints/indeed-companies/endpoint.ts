@@ -32,6 +32,8 @@ export default defineEndpoint({
             "minimum 1. Billing follows the number requested (companyKeys " +
             "entries in lookup mode, `maxItems` in search mode), not the " +
             "number returned.",
+            "A non-empty `companyKeys` starts lookup mode and ignores " +
+            "`keyword`, `location`, and `maxItems`.",
         ],
     },
     request: { method: "POST", path: "/indeed/companies" },

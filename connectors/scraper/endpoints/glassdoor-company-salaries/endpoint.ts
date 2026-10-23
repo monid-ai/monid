@@ -22,7 +22,12 @@ export default defineEndpoint({
             "`scraper#glassdoor/company-profile`.",
         docsUrl: "https://scraper.run/docs/glassdoor/salaries",
         categories: ["company-reviews"],
-        notes: ["2 Scraper credits per call, whatever `maxSalaries` is."],
+        notes: [
+            "2 Scraper credits per call, whatever `maxSalaries` is.",
+            "When both `employerUrl` and `employerId` are given they must" +
+            " name the same employer, or the call fails with 400 and no " +
+            "credits.",
+        ],
     },
     request: { method: "POST", path: "/glassdoor/company-salaries" },
     input: { schema: { body: zGlassdoorCompanySalariesBody } },

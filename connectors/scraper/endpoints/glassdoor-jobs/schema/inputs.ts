@@ -9,48 +9,48 @@ export const zGlassdoorJobsBody = z.object({
     keyword: z.string().min(1).describe(
         'Job search keyword or title, e.g. "software engineer". Required.',
     ),
-    location: z.string().optional().describe(
+    location: z.string().describe(
         'City, state, or country to search in, e.g. "San Francisco, CA". ' +
             "Vendor default: no location filter.",
-    ),
-    maxJobs: z.number().int().min(1).max(250).optional().describe(
+    ).optional(),
+    maxJobs: z.number().int().min(1).max(250).describe(
         "Maximum jobs to return (1-250, and not above your plan's limit). " +
             "Vendor default 20.",
-    ),
-    fromAge: z.enum(["1", "3", "7", "14", "30"]).optional().describe(
+    ).optional(),
+    fromAge: z.enum(["1", "3", "7", "14", "30"]).describe(
         "Only jobs posted within this many days, as a string: '1', '3', " +
             "'7', '14', or '30'. Vendor default: no recency filter.",
-    ),
+    ).optional(),
     jobType: z.array(
         z.enum(["fulltime", "parttime", "contract", "internship", "temporary"]),
-    ).optional().describe(
+    ).describe(
         "Employment types to include. Vendor default: all types.",
-    ),
+    ).optional(),
     seniorityType: z.array(
         z.enum(["entrylevel", "midseniorlevel", "director", "executive"]),
-    ).optional().describe(
+    ).describe(
         "Seniority levels to include. Vendor default: all levels.",
-    ),
-    remoteWorkType: z.array(z.enum(["1", "2", "3"])).optional().describe(
+    ).optional(),
+    remoteWorkType: z.array(z.enum(["1", "2", "3"])).describe(
         "Work modes to include, as strings: '1' remote, '2' hybrid, '3' " +
             "on-site. Vendor default: all modes.",
-    ),
-    easyApply: z.boolean().optional().describe(
+    ).optional(),
+    easyApply: z.boolean().describe(
         "true returns only Easy Apply jobs. Vendor default: not filtered.",
-    ),
-    minSalary: z.number().int().positive().optional().describe(
+    ).optional(),
+    minSalary: z.number().int().positive().describe(
         "Minimum salary, a positive integer. Vendor default: no minimum.",
-    ),
-    maxSalary: z.number().int().positive().optional().describe(
+    ).optional(),
+    maxSalary: z.number().int().positive().describe(
         "Maximum salary, a positive integer. When minSalary is also given " +
             "it must be greater than or equal to minSalary, else the " +
             "vendor returns 400. Vendor default: no maximum.",
-    ),
-    radius: z.enum(["5", "10", "15", "25", "50", "100"]).optional().describe(
+    ).optional(),
+    radius: z.enum(["5", "10", "15", "25", "50", "100"]).describe(
         "Search radius around the location in miles, as a string: '5', " +
             "'10', '15', '25', '50', or '100'. Vendor default: Glassdoor's " +
             "own radius.",
-    ),
+    ).optional(),
     employerSizes: z.array(z.enum([
         "1to50",
         "51to200",
@@ -59,14 +59,13 @@ export const zGlassdoorJobsBody = z.object({
         "1001to5000",
         "5001to10000",
         "10001+",
-    ])).optional().describe(
+    ])).describe(
         "Employer headcount bands to include. Vendor default: all sizes.",
-    ),
-    postedBy: z.array(z.enum(["jobPoster", "staffingAgency"])).optional()
-        .describe(
-            "Posting sources to include: the employer's own poster or a " +
-                "staffing agency. Vendor default: both.",
-        ),
+    ).optional(),
+    postedBy: z.array(z.enum(["jobPoster", "staffingAgency"])).describe(
+        "Posting sources to include: the employer's own poster or a " +
+            "staffing agency. Vendor default: both.",
+    ).optional(),
     fields: z.array(z.enum([
         "*",
         "jobId",
@@ -77,11 +76,11 @@ export const zGlassdoorJobsBody = z.object({
         "compensation",
         "employer",
         "meta",
-    ])).optional().describe(
+    ])).describe(
         "Fields to include per job. Omit for the defaults (jobId, url, " +
             'profile, location, compensation, employer, meta). Use ["*"] ' +
             "for every field. applyUrl (the employer's own job page) costs " +
             'one extra upstream request per 50 jobs, so only ["*"] or an ' +
             "explicit applyUrl returns it.",
-    ),
+    ).optional(),
 }).strict();

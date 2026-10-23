@@ -27,7 +27,12 @@ export default defineEndpoint({
             "`scraper#linkedin/jobs`.",
         docsUrl: "https://scraper.run/docs/glassdoor/jobs",
         categories: ["jobs"],
-        notes: ["2 Scraper credits per call, whatever `maxJobs` is."],
+        notes: [
+            "2 Scraper credits per call, whatever `maxJobs` is.",
+            "`maxSalary` must be greater than or equal to `minSalary` " +
+            "when both are given, or the call fails with 400 and no " +
+            "credits.",
+        ],
     },
     request: { method: "POST", path: "/glassdoor/jobs" },
     input: { schema: { body: zGlassdoorJobsBody } },

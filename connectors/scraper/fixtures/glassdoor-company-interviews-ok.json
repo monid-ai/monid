@@ -1,6 +1,6 @@
 {
     "name": "glassdoor-company-interviews-ok",
-    "description": "Scraper POST /glassdoor/company-interviews: a real recording, trimmed and PII-scrubbed by the recorder. The url is bound, so the chain does not pin the host.",
+    "description": "Scraper POST /glassdoor/company-interviews: a real recording whose interview questions, job titles, and dates were replaced with placeholders; statistics, counts, and shape are as recorded. The url is bound, so the chain does not pin the host.",
     "calls": [
         {
             "req": {
@@ -51,24 +51,24 @@
                         "interviews": [
                             {
                                 "jobTitle": {
-                                    "text": "Mlo"
+                                    "text": "Example Title"
                                 },
-                                "reviewDateTime": "2026-05-13T16:00:52.257",
+                                "reviewDateTime": "2026-01-01T00:00:00.000",
                                 "difficulty": "EASY",
                                 "outcome": "ACCEPT_OFFER",
                                 "userQuestions": [
                                     {
                                         "answerCount": 0,
-                                        "question": "What animal would you be?"
+                                        "question": "Example interview question 1.1"
                                     }
                                 ],
                                 "experience": "POSITIVE"
                             },
                             {
                                 "jobTitle": {
-                                    "text": "Summer Itern"
+                                    "text": "Example Title"
                                 },
-                                "reviewDateTime": "2026-10-22T14:09:11.563",
+                                "reviewDateTime": "2026-01-01T00:00:00.000",
                                 "difficulty": "VERY_EASY",
                                 "outcome": "ACCEPT_OFFER",
                                 "userQuestions": [],

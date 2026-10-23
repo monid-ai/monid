@@ -21,7 +21,11 @@ export default defineEndpoint({
             "boards use `scraper#linkedin/jobs` or `scraper#glassdoor/jobs`.",
         docsUrl: "https://scraper.run/docs/indeed/jobs",
         categories: ["jobs"],
-        notes: ["1 Scraper credit per call, whatever `maxItems` is."],
+        notes: [
+            "1 Scraper credit per call, whatever `maxItems` is.",
+            "`jobKeys` overrides `keyword` and `location`: the call then " +
+            "looks up those jobs and does not search.",
+        ],
     },
     request: { method: "POST", path: "/indeed/jobs" },
     input: { schema: { body: zIndeedJobsBody } },

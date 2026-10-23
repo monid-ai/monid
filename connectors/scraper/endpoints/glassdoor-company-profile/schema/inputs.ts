@@ -54,9 +54,9 @@ export const zGlassdoorCompanyProfileBody = zGlassdoorEmployerBody({
         "subsidiaries",
         "siblings",
         "scrapedAt",
-    ])).optional().describe(
+    ])).describe(
         "Company fields to include. Omit for the defaults (employerId, " +
             "name, ratings, counts, headquarters, size, website, ceo, " +
             'primaryIndustry, allReviewsCount). Use ["*"] for every field.',
-    ),
+    ).optional(),
 }, glassdoorEmployerMustMatch);

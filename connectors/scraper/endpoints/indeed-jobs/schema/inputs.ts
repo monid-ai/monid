@@ -7,35 +7,35 @@ import { zIndeedJobCountry } from "../../../schema/common.ts";
  * applied here.
  */
 export const zIndeedJobsBody = z.object({
-    keyword: z.string().optional().describe(
+    keyword: z.string().describe(
         'Search keyword or job title, e.g. "software engineer". Vendor ' +
             'default "" (all jobs).',
-    ),
-    location: z.string().optional().describe(
+    ).optional(),
+    location: z.string().describe(
         'City, state, or region, e.g. "San Francisco, CA". Vendor default ' +
             '"" (nationwide).',
-    ),
-    country: zIndeedJobCountry.optional().describe(
+    ).optional(),
+    country: zIndeedJobCountry.describe(
         'Indeed country code (62 countries). Vendor default "US".',
-    ),
-    maxItems: z.number().int().min(1).optional().describe(
+    ).optional(),
+    maxItems: z.number().int().min(1).describe(
         "Maximum job listings to return (positive integer; the upper bound " +
             "is your plan's). Vendor default 20.",
-    ),
-    radius: z.string().optional().describe(
+    ).optional(),
+    radius: z.string().describe(
         "Search radius from the location, as a number string. Vendor " +
             'default "35".',
-    ),
-    radiusUnit: z.enum(["miles", "km"]).optional().describe(
+    ).optional(),
+    radiusUnit: z.enum(["miles", "km"]).describe(
         'Unit of `radius`. Vendor default "miles".',
-    ),
-    sort: z.enum(["relevance", "date"]).optional().describe(
+    ).optional(),
+    sort: z.enum(["relevance", "date"]).describe(
         'Sort order. Vendor default "relevance".',
-    ),
-    fromDays: z.string().optional().describe(
+    ).optional(),
+    fromDays: z.string().describe(
         "Only jobs posted within this many days, as a number string, e.g. " +
             '"7". Vendor default "" (no recency filter).',
-    ),
+    ).optional(),
     jobType: z.enum([
         "",
         "fulltime",
@@ -43,17 +43,17 @@ export const zIndeedJobsBody = z.object({
         "contract",
         "temporary",
         "internship",
-    ]).optional().describe(
+    ]).describe(
         'Employment type. Vendor default "" (all types).',
-    ),
-    remote: z.enum(["", "remote", "hybrid"]).optional().describe(
+    ).optional(),
+    remote: z.enum(["", "remote", "hybrid"]).describe(
         'Work arrangement. Vendor default "" (all arrangements).',
-    ),
-    jobKeys: z.array(z.string().min(1)).optional().describe(
+    ).optional(),
+    jobKeys: z.array(z.string().min(1)).describe(
         "Look up specific jobs by their Indeed job keys (the `jk` value of " +
             "a viewjob URL). When given, this overrides the keyword and " +
             "location search.",
-    ),
+    ).optional(),
     fields: z.array(z.enum([
         "*",
         "id",
@@ -77,9 +77,9 @@ export const zIndeedJobsBody = z.object({
         "requirements",
         "requiredDocuments",
         "meta",
-    ])).optional().describe(
+    ])).describe(
         "Fields to include per job. Omit for the defaults (id, title, " +
             "urls, description, snippet, salary, location, company, dates, " +
             'workArrangement). Use ["*"] for every field.',
-    ),
+    ).optional(),
 }).strict();

@@ -69,8 +69,8 @@
                                 "sector": "Financial Services",
                                 "website": "https://www.rocketcompanies.com",
                                 "ceo": {
-                                    "name": "Varun Krishna",
-                                    "photoUrl": "https://media.glassdoor.com/people/sql/7856/rocket-companies-ceo1713752472105.png"
+                                    "name": "Example Executive",
+                                    "photoUrl": "https://media.glassdoor.com/people/example-ceo.png"
                                 },
                                 "ratings": {
                                     "overall": 3.5,

@@ -8,14 +8,14 @@ import { zGlassdoorEmployerBody } from "../../../schema/glassdoor.ts";
  * contain an employer id.
  */
 export const zGlassdoorCompanyReviewsBody = zGlassdoorEmployerBody({
-    maxReviews: z.number().int().min(1).max(100_000).optional().describe(
+    maxReviews: z.number().int().min(1).max(100_000).describe(
         "Maximum reviews to return (1-100000, and not above your plan's " +
             "limit). Vendor default 20.",
-    ),
-    sort: z.enum(["DATE", "RATING"]).optional().describe(
+    ).optional(),
+    sort: z.enum(["DATE", "RATING"]).describe(
         "Review order: 'DATE' (newest first) or 'RATING'. Vendor default " +
             "'DATE'.",
-    ),
+    ).optional(),
     fields: z.array(z.enum([
         "*",
         "reviewId",
@@ -27,9 +27,9 @@ export const zGlassdoorCompanyReviewsBody = zGlassdoorEmployerBody({
         "engagement",
         "employer",
         "meta",
-    ])).optional().describe(
+    ])).describe(
         "Top-level fields to include per review. Omit for the defaults " +
             "(reviewId, url, postedAt, content, ratings, employment). Use " +
             '["*"] for every field. Does not change companyStats.',
-    ),
+    ).optional(),
 }, "When both are given, employerId is used and the URL is ignored.");

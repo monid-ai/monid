@@ -30,8 +30,10 @@ export default defineProvider({
             "profiles, reviews, salaries, interviews, and benefits, " +
             "Naukri jobs for India, and Upwork freelance jobs. Every tool " +
             "scrapes the source live. One API key and one credit pool " +
-            "across all tools, at 1 or 2 credits per call. The free plan " +
-            "includes credits at https://scraper.run.",
+            "across all tools, at 1 or 2 credits per call, except Indeed " +
+            "company profiles, which bill 1 credit per started block of 25 " +
+            "requested profiles. The free plan includes credits at " +
+            "https://scraper.run.",
         homepageUrl: "https://scraper.run",
         docsUrl: "https://scraper.run/docs",
         categories: ["jobs"],

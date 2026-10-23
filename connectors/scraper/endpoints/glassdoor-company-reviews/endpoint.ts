@@ -25,7 +25,11 @@ export default defineEndpoint({
             "`scraper#glassdoor/company-interviews`.",
         docsUrl: "https://scraper.run/docs/glassdoor/reviews",
         categories: ["company-reviews"],
-        notes: ["2 Scraper credits per call, whatever `maxReviews` is."],
+        notes: [
+            "2 Scraper credits per call, whatever `maxReviews` is.",
+            "When both `employerUrl` and `employerId` are given, " +
+            "`employerId` is used and the URL is ignored.",
+        ],
     },
     request: { method: "POST", path: "/glassdoor/company-reviews" },
     input: { schema: { body: zGlassdoorCompanyReviewsBody } },

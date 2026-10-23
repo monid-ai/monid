@@ -1,6 +1,6 @@
 {
     "name": "glassdoor-company-reviews-ok",
-    "description": "Scraper POST /glassdoor/company-reviews: a real recording whose free-text review fields were replaced with placeholders; ratings, counts, and shape are as recorded. The url is bound, so the chain does not pin the host.",
+    "description": "Scraper POST /glassdoor/company-reviews: a real recording whose review text, ids, urls, dates, places, and job titles were replaced with placeholders; ratings, counts, and shape are as recorded. The url is bound, so the chain does not pin the host.",
     "calls": [
         {
             "req": {
@@ -17,9 +17,9 @@
                     "data": {
                         "reviews": [
                             {
-                                "reviewId": 106022676,
-                                "url": "https://www.glassdoor.com/Reviews/Employee-Review-Rocket-RVW106022676.htm",
-                                "postedAt": "2026-10-19T13:05:40.977",
+                                "reviewId": 1000001,
+                                "url": "https://www.glassdoor.com/Reviews/Employee-Review-Example-RVW1000001.htm",
+                                "postedAt": "2026-01-01T00:00:00.000",
                                 "content": {
                                     "summary": "Example review summary 1",
                                     "pros": "Example pros 1.",
@@ -45,19 +45,19 @@
                                     "jobEndingYear": 2026,
                                     "jobTitle": {
                                         "id": 62624,
-                                        "text": "Business Strategist"
+                                        "text": "Example Title"
                                     },
                                     "location": {
                                         "id": 1134644,
-                                        "name": "Detroit, MI",
+                                        "name": "Example City, ST",
                                         "type": "CITY"
                                     }
                                 }
                             },
                             {
-                                "reviewId": 106021355,
-                                "url": "https://www.glassdoor.com/Reviews/Employee-Review-Rocket-RVW106021355.htm",
-                                "postedAt": "2026-10-19T11:23:14.590",
+                                "reviewId": 1000002,
+                                "url": "https://www.glassdoor.com/Reviews/Employee-Review-Example-RVW1000002.htm",
+                                "postedAt": "2026-01-01T00:00:00.000",
                                 "content": {
                                     "summary": "Example review summary 2",
                                     "pros": "Example pros 2.",
@@ -82,11 +82,11 @@
                                     "employmentLength": 0,
                                     "jobTitle": {
                                         "id": 850922,
-                                        "text": "Default Resolution Specialist"
+                                        "text": "Example Title"
                                     },
                                     "location": {
                                         "id": 1134644,
-                                        "name": "Detroit, MI",
+                                        "name": "Example City, ST",
                                         "type": "CITY"
                                     }
                                 }
@@ -108,11 +108,11 @@
                                 "compensationAndBenefitsRating": 3.5,
                                 "diversityAndInclusionRating": 4,
                                 "ratedCeo": {
-                                    "id": 1319755,
-                                    "name": "Varun Krishna",
+                                    "id": 1,
+                                    "name": "Example Executive",
                                     "title": "Chief Executive Officer",
-                                    "regularPhoto": "https://media.glassdoor.com/people/sql/7856/rocket-companies-ceo1713752472105.png",
-                                    "largePhoto": "https://media.glassdoor.com/people/sqll/7856/rocket-companies-ceo1713752472105.png"
+                                    "regularPhoto": "https://media.glassdoor.com/people/example-ceo.png",
+                                    "largePhoto": "https://media.glassdoor.com/people/example-ceo.png"
                                 }
                             },
                             "ratingCountDistribution": {

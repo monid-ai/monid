@@ -1,6 +1,13 @@
 import { z } from "zod";
 import { linkedinNumericIdPattern } from "../../../schema/linkedin.ts";
 
+/** The vendor trims, then needs https, host linkedin.com or
+ *  www.linkedin.com (no userinfo, no port), and a /jobs/view/ path whose
+ *  last segment is the id or ends in `-<id>`; a query or fragment is
+ *  ignored. */
+const linkedinJobUrlPattern =
+    /^\s*https:\/\/(?:www\.)?linkedin\.com\/jobs\/view\/(?:[^/?#]*-)?[0-9]+\/?(?:[?#].*)?\s*$/;
+
 /**
  * `POST /linkedin/job-detail` request body: the vendor mirror (D25). The
  * target is the vendor's own one-of (`jobId` or `jobUrl`: both or neither
@@ -15,7 +22,7 @@ export const zLinkedinJobDetailBody = z.union([
         ),
     }).strict(),
     z.object({
-        jobUrl: z.string().min(1).describe(
+        jobUrl: z.string().regex(linkedinJobUrlPattern).describe(
             "Public LinkedIn job URL: HTTPS, host linkedin.com or " +
                 "www.linkedin.com, path /jobs/view/<slug>-<id> or " +
                 "/jobs/view/<id>, with a numeric job id at the end. Any " +

@@ -33,16 +33,20 @@ key and one credit pool, which today takes several vendors.
   as `usage.mismatch`).
 - **Inputs**: each body mirrors the vendor's request schema and is
   `.strict()`. Where the vendor takes "exactly one of `jobId` or
-  `jobUrl`", the schema is a union of strict objects. Vendor defaults live
-  in the `.describe()` text, except `indeed/companies.maxItems`, whose
-  default is applied at the binding site because the estimate needs it.
+  `jobUrl`" (or `keyword` or `companyId` on `linkedin/jobs`), the schema is
+  a union of strict objects. URL fields carry a `pattern` that mirrors the
+  vendor's parser. Cross-field rules that cannot compile live in
+  `meta.notes`. Vendor defaults live in the `.describe()` text, except
+  `indeed/companies.maxItems`, whose default is applied at the binding site
+  because the estimate needs it.
 - **Errors**: provider-level `output.fromError` normalizes the vendor's
   RFC-9457-style problem body (`message`, else `code`).
 - **Provider-level fixture chains**: one real recording per endpoint,
   trimmed by the recorder, plus the `fetchDetails` variant of
-  `naukri/jobs` and a recorded 401. `{{request.url}}` bindings. Free text
-  and people in the LinkedIn post and Glassdoor review recordings are
-  replaced with placeholders.
+  `naukri/jobs` and a recorded 401. `{{request.url}}` bindings. Free text,
+  people, and review ids in the LinkedIn post and Glassdoor review,
+  interview, benefits, and profile recordings are replaced with
+  placeholders.
 - **openspec/changes/add-connector-scraper**: this proposal; no
   `design.md` (no schema/engine contract change, no new Units).
 
