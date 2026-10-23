@@ -344,6 +344,51 @@ Deno.test("creditsDisagree: float dust tolerated (1e-9); real deltas + one-sided
 // loader owns folder identity (the compiler never sees folder names)
 // ---------------------------------------------------------------------------
 
+Deno.test("loadCategoryRegistry: duplicate ids fail at the file boundary", async () => {
+    const dir = await Deno.makeTempDir();
+    try {
+        await Deno.writeTextFile(
+            `${dir}/categories.ts`,
+            `export const LEAF_CATEGORIES = [
+                { id: "demo", displayName: "First" },
+                { id: "demo", displayName: "Second" }
+            ];`,
+        );
+        const { loadCategoryRegistry } = await import(
+            "./load/category-registry.ts"
+        );
+        await assertRejects(
+            () => loadCategoryRegistry(dir),
+            Error,
+            "duplicate leaf category id: demo",
+        );
+    } finally {
+        await Deno.remove(dir, { recursive: true });
+    }
+});
+
+Deno.test("loadCategoryRegistry: distinct ids with shared labels remain valid and frozen", async () => {
+    const dir = await Deno.makeTempDir();
+    const leaves = [
+        { id: "first", displayName: "Demo" },
+        { id: "second", displayName: "Demo", description: "Second leaf." },
+    ];
+    try {
+        await Deno.writeTextFile(
+            `${dir}/categories.ts`,
+            `export const LEAF_CATEGORIES = ${JSON.stringify(leaves)};`,
+        );
+        const { loadCategoryRegistry } = await import(
+            "./load/category-registry.ts"
+        );
+        const loaded = await loadCategoryRegistry(dir);
+        assertEquals(loaded, leaves);
+        assert(Object.isFrozen(loaded));
+    } finally {
+        await Deno.remove(dir, { recursive: true });
+    }
+});
+
 Deno.test("loadConnectorDefs: folder != provider.name fails loudly", async () => {
     const dir = await Deno.makeTempDir();
     try {
