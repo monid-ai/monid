@@ -1,0 +1,34 @@
+{
+    "name": "missing-auth",
+    "description": "RECORDED 2026-10-22T10:48:13.206Z using native Deno fetch and protected proxy; intentionally outside Monid validation to observe provider missing-auth error. Repository trim/scrub applied before persistence.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.telnyx.com/v2/web_search",
+                "body": {
+                    "query": "ocean tides",
+                    "count": 3
+                }
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "errors": [
+                        {
+                            "code": "10009",
+                            "meta": {
+                                "url": "https://developers.telnyx.com/docs/overview/errors/10009"
+                            },
+                            "title": "Authentication failed",
+                            "source": {
+                                "pointer": "/"
+                            },
+                            "detail": "Could not find any usable credentials in the request."
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "name": "provider-error",
+    "description": "RECORDED 2026-10-22T10:46:49.353Z through native Monid directTransport and protected proxy. Search only; response trimmed with repository trimCalls/scrubCalls; request unchanged.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.telnyx.com/v2/web_search",
+                "body": {
+                    "query": "ocean tides",
+                    "count": 3,
+                    "include_domains": [
+                        "noaa.gov"
+                    ],
+                    "exclude_domains": [
+                        "wikipedia.org"
+                    ]
+                }
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "error": {
+                        "message": "Provider rejected the combination of include_domains and exclude_domains"
+                    }
+                }
+            }
+        }
+    ]
+}
