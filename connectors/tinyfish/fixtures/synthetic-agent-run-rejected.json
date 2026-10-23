@@ -1,0 +1,21 @@
+{
+    "name": "synthetic-agent-run-rejected",
+    "description": "SYNTHETIC — not recorded. A 403 on submit (the max_steps beta gate) relays as data, zero-billed.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 403,
+                "body": {
+                    "error": {
+                        "code": "FORBIDDEN",
+                        "message": "max_steps is not enabled for this account"
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,51 @@
+{
+    "name": "synthetic-profile-resource-ops",
+    "description": "SYNTHETIC — not recorded. Resource ops in order: verify (200), the domains view (200, with fingerprint_seed to drop), release (DELETE; TinyFish answers 204, which the replay harness cannot carry with a body, so this synthetic uses 200 {} — both are 2xx and conclude the release).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/profiles/prof_1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "prof_1",
+                    "name": "Salesforce Production"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/profiles/prof_1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "prof_1",
+                    "name": "Salesforce Production",
+                    "proxy_country_code": "US",
+                    "domains": [
+                        {
+                            "domain": "app.example.com",
+                            "cookie_count": 12
+                        }
+                    ],
+                    "fingerprint_seed": "fp-secret",
+                    "created_at": "2026-10-21T01:00:00Z"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "DELETE",
+                "url": "{{request.origin}}/v1/profiles/prof_1"
+            },
+            "res": {
+                "status": 200,
+                "body": {}
+            }
+        }
+    ]
+}

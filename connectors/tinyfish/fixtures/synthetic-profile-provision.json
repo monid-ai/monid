@@ -1,0 +1,26 @@
+{
+    "name": "synthetic-profile-provision",
+    "description": "SYNTHETIC — not recorded. POST /v1/profiles answers the created profile, including fingerprint_seed (device-identity material the output must drop).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "name": "Salesforce Production",
+                    "proxy_country_code": "US"
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "id": "prof_1",
+                    "name": "Salesforce Production",
+                    "proxy_country_code": "US",
+                    "fingerprint_seed": "fp-secret",
+                    "created_at": "2026-10-21T01:00:00Z"
+                }
+            }
+        }
+    ]
+}

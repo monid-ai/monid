@@ -1,0 +1,24 @@
+{
+    "name": "synthetic-profile-setup-cancel-gone",
+    "description": "SYNTHETIC — not recorded. Cancelling an already-cancelled session answers 404 (documented as safe to ignore).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/v1/profiles/prof_1/setup-session/cancel",
+                "body": {
+                    "session_id": "setup-1"
+                }
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": {
+                        "code": "NOT_FOUND",
+                        "message": "Setup session not found."
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "name": "synthetic-profile-resource-gone",
+    "description": "SYNTHETIC — not recorded. Resource ops when the profile is gone upstream: verify 404 (inactive), then a release that answers 409 (cleanup not confirmed — must throw).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/profiles/prof_1"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": {
+                        "code": "NOT_FOUND"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "DELETE",
+                "url": "{{request.origin}}/v1/profiles/prof_1"
+            },
+            "res": {
+                "status": 409,
+                "body": {
+                    "error": {
+                        "code": "CLEANUP_PENDING"
+                    }
+                }
+            }
+        }
+    ]
+}
