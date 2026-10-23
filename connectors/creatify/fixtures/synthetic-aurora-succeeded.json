@@ -1,0 +1,79 @@
+{
+    "name": "synthetic-aurora-succeeded",
+    "description": "SYNTHETIC — the canonical Aurora v1 happy run: POST /api/aurora/ answers 201 with the job row, one running tick, then done with the CDN mp4. A 12 s speech track bills 12 whole seconds × 1 credit, so the claim equals the fold. Synthetic until a recording with a live key lands.",
+    "calls": [
+        {
+            "req": { "method": "POST", "url": "{{request.url}}" },
+            "res": {
+                "status": 201,
+                "body": {
+                    "id": "JOB1",
+                    "created_at": "2026-10-22T10:00:00.000000Z",
+                    "updated_at": "2026-10-22T10:00:00.000000Z",
+                    "name": null,
+                    "audio": "https://example.com/voice.mp3",
+                    "image": "https://example.com/face.png",
+                    "text_prompt": null,
+                    "prompt_guidance_scale": 1.0,
+                    "model_version": "aurora_v1",
+                    "resolution": null,
+                    "ttl_days": null,
+                    "expires_at": null,
+                    "video_output": null,
+                    "credits_used": 0,
+                    "duration": null,
+                    "progress": 0.0,
+                    "failed_reason": null,
+                    "media_job": "MJ1",
+                    "status": "pending",
+                    "is_hidden": false,
+                    "preview": null,
+                    "editor_url": null
+                }
+            }
+        },
+        {
+            "req": { "method": "GET", "url": "{{request.url}}JOB1/" },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "JOB1",
+                    "model_version": "aurora_v1",
+                    "status": "running",
+                    "video_output": null,
+                    "credits_used": 12,
+                    "duration": 12,
+                    "progress": 0.5,
+                    "failed_reason": null
+                }
+            }
+        },
+        {
+            "req": { "method": "GET", "url": "{{request.url}}JOB1/" },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "JOB1",
+                    "created_at": "2026-10-22T10:00:00.000000Z",
+                    "updated_at": "2026-10-22T10:03:10.000000Z",
+                    "audio": "https://example.com/voice.mp3",
+                    "image": "https://example.com/face.png",
+                    "model_version": "aurora_v1",
+                    "resolution": null,
+                    "ttl_days": null,
+                    "expires_at": null,
+                    "video_output": "https://cdn.creatify.ai/avatarx/JOB1.mp4",
+                    "credits_used": 12,
+                    "duration": 12,
+                    "progress": 1.0,
+                    "failed_reason": null,
+                    "media_job": "MJ1",
+                    "status": "done",
+                    "is_hidden": false,
+                    "preview": "https://cdn.creatify.ai/avatarx/JOB1.jpg",
+                    "editor_url": null
+                }
+            }
+        }
+    ]
+}

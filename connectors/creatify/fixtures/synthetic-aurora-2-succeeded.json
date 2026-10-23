@@ -1,0 +1,59 @@
+{
+    "name": "synthetic-aurora-2-succeeded",
+    "description": "SYNTHETIC — the canonical Aurora 2.0 happy run on the 480p tier: submit, one running tick, done. A 10 s track bills 10 × 0.4 = 4 credits, so the claim equals the fold. Synthetic until a recording with a live key lands.",
+    "calls": [
+        {
+            "req": { "method": "POST", "url": "{{request.url}}" },
+            "res": {
+                "status": 201,
+                "body": {
+                    "id": "JOB1",
+                    "model_version": "aurora_v2",
+                    "resolution": "480p",
+                    "status": "pending",
+                    "video_output": null,
+                    "credits_used": 0,
+                    "duration": null,
+                    "progress": 0.0,
+                    "failed_reason": null
+                }
+            }
+        },
+        {
+            "req": { "method": "GET", "url": "{{request.url}}JOB1/" },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "JOB1",
+                    "model_version": "aurora_v2",
+                    "resolution": "480p",
+                    "status": "in_queue",
+                    "video_output": null,
+                    "credits_used": 4,
+                    "duration": 10,
+                    "progress": 0.0,
+                    "failed_reason": null
+                }
+            }
+        },
+        {
+            "req": { "method": "GET", "url": "{{request.url}}JOB1/" },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "JOB1",
+                    "model_version": "aurora_v2",
+                    "resolution": "480p",
+                    "ttl_days": null,
+                    "expires_at": null,
+                    "status": "done",
+                    "video_output": "https://cdn.creatify.ai/avatarx/JOB1.mp4",
+                    "credits_used": 4,
+                    "duration": 10,
+                    "progress": 1.0,
+                    "failed_reason": null
+                }
+            }
+        }
+    ]
+}

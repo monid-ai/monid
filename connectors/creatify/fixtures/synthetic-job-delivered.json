@@ -1,0 +1,36 @@
+{
+    "name": "synthetic-job-delivered",
+    "description": "SYNTHETIC — the caller gave output_upload_url, so the finished mp4 was PUT to their storage and deleted from Creatify's: `done` with video_output null is a SUCCESS here, billed as usual.",
+    "calls": [
+        {
+            "req": { "method": "POST", "url": "{{request.url}}" },
+            "res": {
+                "status": 201,
+                "body": {
+                    "id": "JOB1",
+                    "status": "pending",
+                    "credits_used": 0,
+                    "video_output": null,
+                    "failed_reason": null,
+                    "progress": 0.0
+                }
+            }
+        },
+        {
+            "req": { "method": "GET", "url": "{{request.url}}JOB1/" },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "JOB1",
+                    "resolution": "768p",
+                    "status": "done",
+                    "failed_reason": null,
+                    "video_output": null,
+                    "credits_used": 1,
+                    "duration": 5.0,
+                    "progress": 1.0
+                }
+            }
+        }
+    ]
+}
