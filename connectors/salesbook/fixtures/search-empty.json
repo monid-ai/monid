@@ -1,0 +1,23 @@
+{
+    "name": "search-empty",
+    "description": "Recorded 2026-10-22 from POST https://mcp.maxeds.org/v1/tools/search_startups (public, keyless; no request headers kept). A query that matches nothing: 200 with a plain miss in `text`, isError false; body verbatim.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "query": "zzqxvqqq",
+                    "limit": 2
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "text": "No matches for \"zzqxvqqq\". Try a broader keyword or another sector.\nMethod v0.2.7",
+                    "isError": false
+                }
+            }
+        }
+    ]
+}

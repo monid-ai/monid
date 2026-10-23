@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-server-error",
+    "description": "SYNTHETIC 500: an uncaught failure at the edge, answered with a non-JSON body. Shape assumed (Cloudflare's generic error page, shortened); a fixture for the engine's raw-body handling, not a documented SalesBook response.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "query": "prior authorization"
+                }
+            },
+            "res": {
+                "status": 500,
+                "body": "error code: 1101"
+            }
+        }
+    ]
+}
