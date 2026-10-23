@@ -1,0 +1,42 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC chain for datahyena#companies (shape from the published OpenAPI; replace via `deno task record` once a key is held): 2 rows, meta.creditsUsed 2 plus the account-level creditsRemaining the provider strips.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.datahyena.com/v1/companies?search=sales+automation&limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": [
+                        {
+                            "id": "01a0f60c-793b-76c8-a4d9-d4ff6b99c9a1",
+                            "name": "Example Co 1",
+                            "domain": "example1.com",
+                            "country": "US",
+                            "industryGroup": "Software Development"
+                        },
+                        {
+                            "id": "01a0f60c-793b-76c8-a4d9-d4ff6b99c9a2",
+                            "name": "Example Co 2",
+                            "domain": "example2.com",
+                            "country": "US",
+                            "industryGroup": "Software Development"
+                        }
+                    ],
+                    "pagination": {
+                        "nextCursor": null,
+                        "hasMore": false
+                    },
+                    "meta": {
+                        "creditsUsed": 2,
+                        "creditsRemaining": 498
+                    }
+                }
+            }
+        }
+    ]
+}

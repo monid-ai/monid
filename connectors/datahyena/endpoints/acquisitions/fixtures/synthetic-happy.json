@@ -1,0 +1,58 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC chain for datahyena#acquisitions (shape from the published OpenAPI; replace via `deno task record` once a key is held): 2 rows, meta.creditsUsed 2 plus the account-level creditsRemaining the provider strips.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.datahyena.com/v1/acquisitions?countries=US&limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": [
+                        {
+                            "id": "01a0f60c-793b-76c8-a4d9-d4ff6b99c971",
+                            "acquirer": {
+                                "name": "Buyer Inc",
+                                "domain": "buyer.com"
+                            },
+                            "target": {
+                                "name": "Target 1",
+                                "domain": "target1.com"
+                            },
+                            "amountUsd": null,
+                            "paymentType": "undisclosed",
+                            "isMerger": false,
+                            "announcedAt": "2026-10-11T00:00:00.000Z"
+                        },
+                        {
+                            "id": "01a0f60c-793b-76c8-a4d9-d4ff6b99c972",
+                            "acquirer": {
+                                "name": "Buyer Inc",
+                                "domain": "buyer.com"
+                            },
+                            "target": {
+                                "name": "Target 2",
+                                "domain": "target2.com"
+                            },
+                            "amountUsd": null,
+                            "paymentType": "undisclosed",
+                            "isMerger": false,
+                            "announcedAt": "2026-10-12T00:00:00.000Z"
+                        }
+                    ],
+                    "pagination": {
+                        "nextCursor": null,
+                        "hasMore": false
+                    },
+                    "meta": {
+                        "creditsUsed": 2,
+                        "creditsRemaining": 498
+                    }
+                }
+            }
+        }
+    ]
+}
