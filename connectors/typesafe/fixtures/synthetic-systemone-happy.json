@@ -1,0 +1,56 @@
+{
+    "name": "synthetic-systemone-happy",
+    "description": "SYNTHETIC — not recorded. Response shape from docs.typesafe.ai/api: model, answers keyed by question id, usage.input_tokens (billable) and usage.output_tokens (free).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "model": "jev-latest",
+                    "state": "Customer: my card was charged twice for order 1234.",
+                    "questions": {
+                        "refund": {
+                            "type": "noul",
+                            "instructions": "Is the customer asking for a refund?"
+                        },
+                        "topic": {
+                            "type": "choice",
+                            "criteria": {
+                                "billing": null,
+                                "shipping": null,
+                                "other": null
+                            }
+                        }
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "model": "jev-1.13.0",
+                    "answers": {
+                        "refund": {
+                            "type": "noul",
+                            "noul": 0.91
+                        },
+                        "topic": {
+                            "type": "choice",
+                            "choice": "billing",
+                            "confidence": 0.97,
+                            "probabilities": {
+                                "billing": 0.97,
+                                "shipping": 0.02,
+                                "other": 0.01
+                            }
+                        }
+                    },
+                    "usage": {
+                        "input_tokens": 412,
+                        "output_tokens": 9
+                    }
+                }
+            }
+        }
+    ]
+}
