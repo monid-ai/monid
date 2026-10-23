@@ -40,9 +40,10 @@ the `company-enrichment` category.
     estimated, so nothing needs materializing.
   - **Timeouts** 15 s request / 20 s run (observed 0.2-0.7 s).
 - **Fixtures**: eleven recorded from the public API on 2026-10-22 (a
-  handful of calls, public data only, no headers kept) and three
-  synthetic (429 daily cap, 503 maintenance, 500 edge error) whose shapes
-  come from the vendor's REST handler. `ranking-ok` is hand-trimmed to 3
+  handful of calls, public data only, no headers kept) and two
+  synthetic (429 daily cap, 503 maintenance) whose shapes come from the
+  vendor's REST handler. A non-JSON 500 is driven through a capturing
+  fetch, since replay always serves JSON. `ranking-ok` is hand-trimmed to 3
   of 100 entries and says so.
 - **ids.lock.json**: the five new ids.
 

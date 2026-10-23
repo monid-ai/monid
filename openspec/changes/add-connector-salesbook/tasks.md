@@ -16,8 +16,9 @@
 
 ## 3. Fixtures + tests
 
-- [x] 3.1 Eleven recorded fixtures (2026-10-22, public data), three
-      synthetic error shapes, each file says which it is
+- [x] 3.1 Eleven recorded fixtures (2026-10-22, public data), two
+      synthetic error shapes (a non-JSON 500 runs through a capturing
+      fetch), each file says which it is
 - [x] 3.2 provider.test.ts: compiled shape (5 ids, urls, keyless, FREE,
       nothing mapped), recorded happy replays equal the body, sources and
       dates survive, empty answers, 400/429/503/500 as zero-billed data,

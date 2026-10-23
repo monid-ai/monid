@@ -182,12 +182,6 @@ Deno.test("salesbook: vendor 4xx/5xx are data, zero usage, body untouched", asyn
             { body: { query: "prior authorization" } },
             503,
         ],
-        [
-            "salesbook#v1/tools/search_startups",
-            "synthetic-server-error",
-            { body: { query: "prior authorization" } },
-            500,
-        ],
     ];
     for (const [id, fixture, input, status] of cases) {
         const { result, recorded } = await replay(id, fixture, input);
@@ -211,6 +205,7 @@ Deno.test("salesbook: the binding rejects what the vendor would 400, before any 
     const rejected: [string, Json][] = [
         ["search_startups", {}],
         ["search_startups", { query: "" }],
+        ["search_startups", { query: "   " }],
         ["search_startups", { query: "x", limit: 0 }],
         ["search_startups", { query: "x", limit: 26 }],
         ["search_startups", { query: "x", limit: 2.5 }],
@@ -296,6 +291,26 @@ Deno.test("salesbook: egress is bare: no key, no tracking, body as given", async
     assertEquals(seen[0].init.method, "POST");
     assertEquals(seen[0].init.headers, { "content-type": "application/json" });
     assertEquals(JSON.parse(String(seen[0].init.body)), body);
+});
+
+Deno.test("salesbook: a non-JSON 500 from the edge is data, zero usage", async () => {
+    // replay always serves JSON, so this drives a real text/plain body
+    const seen: { url: string; init: RequestInit }[] = [];
+    const engine = captureEngine(seen, () =>
+        Promise.resolve(
+            new Response("error code: 1101", {
+                status: 500,
+                headers: { "content-type": "text/plain" },
+            }),
+        ));
+    const unit = await testSealedUnit("salesbook#v1/tools/search_startups");
+    const loaded = await engine.load(unit);
+    const result = await loaded.run({ body: { query: "prior authorization" } });
+    assertEquals(result.httpStatus, 500);
+    assertEquals(result.isProviderError, true);
+    assertEquals(result.usage, FREE);
+    assertEquals(result.output, "error code: 1101");
+    assertEquals(seen.length, 1);
 });
 
 Deno.test("salesbook: a hung upstream is cut off at requestMs", async () => {

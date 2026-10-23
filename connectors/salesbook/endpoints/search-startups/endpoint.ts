@@ -23,7 +23,8 @@ export default defineEndpoint({
     input: {
         schema: {
             body: zSalesbookSearchBody.extend({
-                query: zSalesbookSearchBody.shape.query.min(1),
+                // the vendor 400s a query with no searchable token
+                query: zSalesbookSearchBody.shape.query.regex(/\S/),
                 limit: zSalesbookSearchBody.shape.limit.unwrap().min(1)
                     .max(25).optional(),
             }),
