@@ -1,0 +1,82 @@
+{
+    "name": "extract-list",
+    "description": "Recorded 2026-10-16 against https://app.lev8.com with a live token. POST /v1/extract github_repo_contributors denoland/deno, limit 7: 7 rows, ceil(7/5) = 2 credits (Lev8 balance delta 2). Recorded --no-trim so the row count is real.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": [
+                        {
+                            "name": "bartlomieju",
+                            "github_id": 13602871,
+                            "github_url": "https://github.com/bartlomieju",
+                            "avatar_url": "https://avatars.githubusercontent.com/u/13602871?v=4",
+                            "account_type": "User",
+                            "contributions_count": 3267
+                        },
+                        {
+                            "name": "dsherret",
+                            "github_id": 1609021,
+                            "github_url": "https://github.com/dsherret",
+                            "avatar_url": "https://avatars.githubusercontent.com/u/1609021?v=4",
+                            "account_type": "User",
+                            "contributions_count": 1807
+                        },
+                        {
+                            "name": "ry",
+                            "github_id": 80,
+                            "github_url": "https://github.com/ry",
+                            "avatar_url": "https://avatars.githubusercontent.com/u/80?v=4",
+                            "account_type": "User",
+                            "contributions_count": 1434
+                        },
+                        {
+                            "name": "littledivy",
+                            "github_id": 34997667,
+                            "github_url": "https://github.com/littledivy",
+                            "avatar_url": "https://avatars.githubusercontent.com/u/34997667?v=4",
+                            "account_type": "User",
+                            "contributions_count": 852
+                        },
+                        {
+                            "name": "nayeemrmn",
+                            "github_id": 29990554,
+                            "github_url": "https://github.com/nayeemrmn",
+                            "avatar_url": "https://avatars.githubusercontent.com/u/29990554?v=4",
+                            "account_type": "User",
+                            "contributions_count": 628
+                        },
+                        {
+                            "name": "nathanwhit",
+                            "github_id": 17734409,
+                            "github_url": "https://github.com/nathanwhit",
+                            "avatar_url": "https://avatars.githubusercontent.com/u/17734409?v=4",
+                            "account_type": "User",
+                            "contributions_count": 525
+                        },
+                        {
+                            "name": "lucacasonato",
+                            "github_id": 7829205,
+                            "github_url": "https://github.com/lucacasonato",
+                            "avatar_url": "https://avatars.githubusercontent.com/u/7829205?v=4",
+                            "account_type": "User",
+                            "contributions_count": 515
+                        }
+                    ],
+                    "metadata": {
+                        "type": "github_repo_contributors",
+                        "target": "denoland/deno",
+                        "instruction": null,
+                        "limit": 7
+                    }
+                }
+            }
+        }
+    ]
+}
