@@ -1,0 +1,83 @@
+{
+    "name": "synthetic-cash-flow",
+    "description": "Synthetic BetterOff v4 result; contains no household records or credentials.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "structuredContent": {
+                            "ok": true,
+                            "schemaVersion": "4",
+                            "requestId": "synthetic-request",
+                            "currency": "USD",
+                            "timezone": "America/Los_Angeles",
+                            "asOf": "2026-10-10",
+                            "householdRevision": 1,
+                            "quality": {
+                                "state": "complete",
+                                "reasons": []
+                            },
+                            "evidence": [
+                                {
+                                    "source": "synthetic-fixture",
+                                    "id": "synthetic-source",
+                                    "observedAt": "2026-10-10T12:00:00Z"
+                                }
+                            ],
+                            "page": {
+                                "returnedCount": 1,
+                                "totalCount": 1,
+                                "truncated": false,
+                                "nextCursor": null
+                            },
+                            "warnings": [
+                                "Synthetic fixture; no real household records."
+                            ],
+                            "notes": "Preserve source dates and data-quality limits.",
+                            "data": {
+                                "baseCurrency": "USD",
+                                "period": {
+                                    "start": "2026-10-01",
+                                    "end": "2026-10-10",
+                                    "daysElapsed": 10,
+                                    "totalDays": 31
+                                },
+                                "income": "5200.10",
+                                "expenses": "3210.05",
+                                "netCashFlow": "1990.05",
+                                "transactionCount": 24,
+                                "savingsRatePercent": 38,
+                                "dailyRates": {
+                                    "income": "520.01",
+                                    "expenses": "321.01"
+                                },
+                                "projection": {
+                                    "projectedIncome": "16120.31",
+                                    "projectedExpenses": "9951.31",
+                                    "projectedNet": "6169.00"
+                                },
+                                "priorPeriod": {
+                                    "start": "2026-09-01",
+                                    "end": "2026-09-10",
+                                    "income": "4800.00",
+                                    "expenses": "3300.00",
+                                    "netCashFlow": "1500.00",
+                                    "savingsRatePercent": 31
+                                }
+                            }
+                        },
+                        "content": []
+                    }
+                }
+            }
+        }
+    ]
+}

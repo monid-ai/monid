@@ -1,0 +1,82 @@
+{
+    "name": "synthetic-setup-status",
+    "description": "Synthetic BetterOff v4 result; contains no household records or credentials.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "structuredContent": {
+                            "ok": true,
+                            "schemaVersion": "4",
+                            "requestId": "synthetic-request",
+                            "currency": "USD",
+                            "timezone": "America/Los_Angeles",
+                            "asOf": "2026-10-10",
+                            "householdRevision": 1,
+                            "quality": {
+                                "state": "partial",
+                                "reasons": [
+                                    "Synthetic source coverage is incomplete."
+                                ]
+                            },
+                            "evidence": [
+                                {
+                                    "source": "synthetic-fixture",
+                                    "id": "synthetic-source",
+                                    "observedAt": "2026-10-10T12:00:00Z"
+                                }
+                            ],
+                            "page": {
+                                "returnedCount": 1,
+                                "totalCount": 1,
+                                "truncated": false,
+                                "nextCursor": null
+                            },
+                            "warnings": [
+                                "Synthetic fixture; no real household records."
+                            ],
+                            "notes": "Preserve source dates and data-quality limits.",
+                            "data": {
+                                "access": {
+                                    "state": "free",
+                                    "accessEndsAt": null
+                                },
+                                "accounts": {
+                                    "count": 2,
+                                    "needsActionCount": 1
+                                },
+                                "steps": [
+                                    {
+                                        "step": "subscription",
+                                        "status": "optional",
+                                        "url": "https://app.betteroff.finance/settings#billing"
+                                    },
+                                    {
+                                        "step": "connect_accounts",
+                                        "status": "done",
+                                        "url": "https://app.betteroff.finance/connect"
+                                    },
+                                    {
+                                        "step": "fix_connections",
+                                        "status": "action_needed",
+                                        "url": "https://app.betteroff.finance/connect"
+                                    }
+                                ],
+                                "manageAgentAccessUrl": "https://app.betteroff.finance/settings/agents"
+                            }
+                        },
+                        "content": []
+                    }
+                }
+            }
+        }
+    ]
+}

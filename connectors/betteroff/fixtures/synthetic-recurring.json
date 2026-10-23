@@ -1,0 +1,105 @@
+{
+    "name": "synthetic-recurring",
+    "description": "Synthetic BetterOff v4 result; contains no household records or credentials.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "structuredContent": {
+                            "ok": true,
+                            "schemaVersion": "4",
+                            "requestId": "synthetic-request",
+                            "currency": "USD",
+                            "timezone": "America/Los_Angeles",
+                            "asOf": "2026-10-10",
+                            "householdRevision": 1,
+                            "quality": {
+                                "state": "partial",
+                                "reasons": [
+                                    "Synthetic source coverage is incomplete."
+                                ]
+                            },
+                            "evidence": [
+                                {
+                                    "source": "synthetic-fixture",
+                                    "id": "synthetic-source",
+                                    "observedAt": "2026-10-10T12:00:00Z"
+                                }
+                            ],
+                            "page": {
+                                "returnedCount": 2,
+                                "totalCount": 2,
+                                "truncated": false,
+                                "nextCursor": null
+                            },
+                            "warnings": [
+                                "Synthetic fixture; no real household records."
+                            ],
+                            "notes": "Preserve source dates and data-quality limits.",
+                            "data": {
+                                "asOf": "2026-10-08",
+                                "count": 2,
+                                "counts": {
+                                    "active": 1,
+                                    "activeCharges": 1,
+                                    "activeIncoming": 0,
+                                    "inactive": 0,
+                                    "inactiveCharges": 0,
+                                    "inactiveIncoming": 0,
+                                    "unknownStatus": 1
+                                },
+                                "items": [
+                                    {
+                                        "streamId": "synthetic-stream-1",
+                                        "direction": "outflow",
+                                        "merchant": "Synthetic utility",
+                                        "amount": "80.05",
+                                        "averageAmount": "79.50",
+                                        "currency": "USD",
+                                        "frequency": "MONTHLY",
+                                        "lastDate": "2026-10-08",
+                                        "nextDate": "2026-11-08",
+                                        "plaidCategory": "UTILITIES",
+                                        "status": "MATURE",
+                                        "isActive": true,
+                                        "stale": false,
+                                        "source": "plaid",
+                                        "account": "Synthetic checking",
+                                        "occurrences": 4
+                                    },
+                                    {
+                                        "streamId": "synthetic-stream-2",
+                                        "direction": "inflow",
+                                        "merchant": null,
+                                        "amount": null,
+                                        "averageAmount": null,
+                                        "currency": null,
+                                        "frequency": null,
+                                        "lastDate": null,
+                                        "nextDate": null,
+                                        "plaidCategory": null,
+                                        "status": null,
+                                        "isActive": null,
+                                        "stale": false,
+                                        "source": "plaid",
+                                        "account": null,
+                                        "occurrences": null
+                                    }
+                                ]
+                            }
+                        },
+                        "content": []
+                    }
+                }
+            }
+        }
+    ]
+}
