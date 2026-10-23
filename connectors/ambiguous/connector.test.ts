@@ -288,7 +288,7 @@ Deno.test("ambiguous: file envelopes, explicit nulls, query inputs and required 
     );
 });
 
-Deno.test("ambiguous: destination errors, response metadata, binary data and finite streams remain lossless", async () => {
+Deno.test("ambiguous: destination errors, response metadata, binary data and text bodies remain lossless", async () => {
     const h = await connected();
     const pathParams = { monid_connection: ID_A };
     h.respond(429, { error: "Quota exhausted" });
@@ -311,15 +311,15 @@ Deno.test("ambiguous: destination errors, response metadata, binary data and fin
         body: { pathParams: { id: ID_B }, body: { format: "pdf" } },
     });
     assertEquals((exported.output as { output: Json }).output, binary);
-    const stream = {
+    const calendar = {
         encoding: "utf8",
-        contentType: "text/event-stream",
-        text: "data: first\n\ndata: second\n\n",
+        contentType: "text/calendar",
+        text: "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nEND:VCALENDAR\r\n",
     };
-    h.respond(200, stream);
-    const completed = await h.run("documents_completions", {
+    h.respond(200, calendar);
+    const ics = await h.run("calendar_export_ics", {
         pathParams,
-        body: { body: { document_id: ID_B, prompt: "Continue" } },
+        body: { pathParams: { id: ID_B } },
     });
-    assertEquals((completed.output as { output: Json }).output, stream);
+    assertEquals((ics.output as { output: Json }).output, calendar);
 });

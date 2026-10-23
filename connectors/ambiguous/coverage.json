@@ -1,6 +1,6 @@
 {
-  "totalOperations": 1335,
-  "includedOperations": 928,
+  "totalOperations": 1601,
+  "includedOperations": 964,
   "notExposedToMcp": [
     {
       "operationId": "acknowledge_onboarding_agent",
@@ -81,7 +81,7 @@
     },
     {
       "operationId": "admin_invite_link",
-      "method": "GET",
+      "method": "POST",
       "path": "/api/admin/invites/{id}/link",
       "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
@@ -90,6 +90,13 @@
       "operationId": "admin_referrals_get",
       "method": "GET",
       "path": "/api/admin/referrals",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "admin_user_mfa_recovery",
+      "method": "POST",
+      "path": "/api/admin/users/{id}/mfa-recovery",
       "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
     },
@@ -192,6 +199,13 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
+      "operationId": "agent_auth_create_registration",
+      "method": "POST",
+      "path": "/oauth/agent/registrations",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
       "operationId": "agent_auth_register",
       "method": "POST",
       "path": "/oauth/agent/identity",
@@ -202,6 +216,13 @@
       "operationId": "agent_auth_restart_claim",
       "method": "POST",
       "path": "/oauth/agent/claim",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "agent_auth_restart_confirmation",
+      "method": "POST",
+      "path": "/oauth/agent/claims",
       "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
     },
@@ -251,6 +272,13 @@
       "operationId": "agent_create_api_key",
       "method": "POST",
       "path": "/api/agents/{id}/api-keys",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "agent_create_setup_handoff",
+      "method": "POST",
+      "path": "/api/agents/{id}/setup-handoff",
       "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
     },
@@ -381,9 +409,79 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
-      "operationId": "analytics_dashboard_share_get",
+      "operationId": "agent_work",
       "method": "GET",
-      "path": "/api/analytics/dashboards/{id}/share",
+      "path": "/api/agents/{id}/work",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "agent_work_content",
+      "method": "GET",
+      "path": "/api/agents/{id}/work/content/{kind}/{resource_id}",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "analytics_annotations_create",
+      "method": "POST",
+      "path": "/api/analytics/projects/{id}/annotations",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "analytics_annotations_delete",
+      "method": "DELETE",
+      "path": "/api/analytics/projects/{id}/annotations/{annotationId}",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "analytics_annotations_update",
+      "method": "PATCH",
+      "path": "/api/analytics/projects/{id}/annotations/{annotationId}",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "analytics_catalog_overrides_upsert",
+      "method": "PUT",
+      "path": "/api/analytics/catalog-overrides/{event}",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "analytics_cohorts_delete",
+      "method": "DELETE",
+      "path": "/api/analytics/cohorts/{id}",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "analytics_dashboard_permissions_grant",
+      "method": "POST",
+      "path": "/api/analytics/dashboards/{id}/permissions",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "analytics_dashboard_permissions_list",
+      "method": "GET",
+      "path": "/api/analytics/dashboards/{id}/permissions",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "analytics_dashboard_permissions_revoke",
+      "method": "DELETE",
+      "path": "/api/analytics/dashboards/{id}/permissions/{userId}",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "analytics_dashboards_delete",
+      "method": "DELETE",
+      "path": "/api/analytics/dashboards/{id}",
       "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
     },
@@ -395,9 +493,149 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
+      "operationId": "analytics_funnels_delete",
+      "method": "DELETE",
+      "path": "/api/analytics/funnels/{id}",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "analytics_insights_delete",
+      "method": "DELETE",
+      "path": "/api/analytics/insights/{id}",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "analytics_metric_definition_upsert",
+      "method": "PUT",
+      "path": "/api/analytics/metric-definitions/{metric}",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "analytics_projects_create",
+      "method": "POST",
+      "path": "/api/analytics/projects",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "analytics_projects_delete",
+      "method": "DELETE",
+      "path": "/api/analytics/projects/{id}",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "analytics_projects_leave",
+      "method": "POST",
+      "path": "/api/analytics/projects/{id}/leave",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "analytics_projects_permissions_remove",
+      "method": "DELETE",
+      "path": "/api/analytics/projects/{id}/permissions/{principalId}",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "analytics_projects_permissions_set",
+      "method": "POST",
+      "path": "/api/analytics/projects/{id}/permissions",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "analytics_projects_permissions_update",
+      "method": "PATCH",
+      "path": "/api/analytics/projects/{id}/permissions/{principalId}",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "analytics_projects_update",
+      "method": "PATCH",
+      "path": "/api/analytics/projects/{id}",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "analytics_projects_visibility_update",
+      "method": "PATCH",
+      "path": "/api/analytics/projects/{id}/visibility",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "analytics_restricted_mark_delete",
+      "method": "DELETE",
+      "path": "/api/analytics/restricted/{kind}/{key}",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "analytics_restricted_mark_upsert",
+      "method": "PUT",
+      "path": "/api/analytics/restricted/{kind}/{key}",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "analytics_retentions_delete",
+      "method": "DELETE",
+      "path": "/api/analytics/retentions/{id}",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
       "operationId": "analytics_saved_report_export",
       "method": "GET",
       "path": "/api/analytics/{type}/{id}/export",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "analytics_settings_update",
+      "method": "PUT",
+      "path": "/api/analytics/settings",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "analytics_subject_export",
+      "method": "GET",
+      "path": "/api/analytics/subjects/{id}/export",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "analytics_write_key_create",
+      "method": "POST",
+      "path": "/api/analytics/write-keys",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "analytics_write_key_revoke",
+      "method": "DELETE",
+      "path": "/api/analytics/write-keys/{id}",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "analytics_write_key_rotate",
+      "method": "POST",
+      "path": "/api/analytics/write-keys/{id}/rotate",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "api_health",
+      "method": "GET",
+      "path": "/api/health",
       "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
     },
@@ -415,6 +653,17 @@
       "method": "GET",
       "path": "/api/assistant/capabilities",
       "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "assistant_chat",
+      "method": "POST",
+      "path": "/api/assistant/chat",
+      "expose": [
+        "assistant",
+        "automations",
+        "coworker"
+      ],
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
@@ -537,9 +786,44 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
+      "operationId": "auth_mfa_recovery_cancel",
+      "method": "POST",
+      "path": "/api/auth/mfa/recovery/cancel",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
       "operationId": "auth_mfa_recovery_codes",
       "method": "POST",
       "path": "/api/users/me/mfa/recovery-codes",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "auth_mfa_recovery_complete",
+      "method": "POST",
+      "path": "/api/auth/mfa/recovery/complete",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "auth_mfa_recovery_proof",
+      "method": "POST",
+      "path": "/api/auth/mfa/recovery/proof",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "auth_mfa_recovery_request",
+      "method": "POST",
+      "path": "/api/auth/mfa/recovery/request",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "auth_mfa_recovery_session_cancel",
+      "method": "POST",
+      "path": "/api/users/me/mfa/recovery/cancel",
       "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
     },
@@ -1052,6 +1336,13 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
+      "operationId": "chat_channel_typing",
+      "method": "POST",
+      "path": "/api/channels/{id}/typing",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
       "operationId": "chat_draft_upsert_inflight",
       "method": "PUT",
       "path": "/api/chat-drafts",
@@ -1073,6 +1364,13 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
+      "operationId": "claim_token_context",
+      "method": "POST",
+      "path": "/api/public/claim/context",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
       "operationId": "claim_token_state",
       "method": "GET",
       "path": "/api/public/claim/{token}",
@@ -1089,16 +1387,16 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
-      "operationId": "create_api_key",
+      "operationId": "correct_document_change_details",
       "method": "POST",
-      "path": "/api/admin/api-keys",
+      "path": "/api/documents/{id}/change-details",
       "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
-      "operationId": "create_file_comment",
+      "operationId": "create_api_key",
       "method": "POST",
-      "path": "/api/drive/{id}/comments",
+      "path": "/api/admin/api-keys",
       "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
     },
@@ -1124,20 +1422,6 @@
       "operationId": "create_onboarding_agent",
       "method": "POST",
       "path": "/api/identity/onboarding-agent",
-      "expose": [],
-      "reason": "Not exposed to MCP by the public API contract"
-    },
-    {
-      "operationId": "create_sign_document",
-      "method": "POST",
-      "path": "/api/sign",
-      "expose": [],
-      "reason": "Not exposed to MCP by the public API contract"
-    },
-    {
-      "operationId": "create_sign_template",
-      "method": "POST",
-      "path": "/api/sign/templates",
       "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
     },
@@ -1188,13 +1472,6 @@
       "operationId": "delete_domain",
       "method": "DELETE",
       "path": "/api/admin/domains/{id}",
-      "expose": [],
-      "reason": "Not exposed to MCP by the public API contract"
-    },
-    {
-      "operationId": "delete_file_comment",
-      "method": "DELETE",
-      "path": "/api/drive/{id}/comments/{commentId}",
       "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
     },
@@ -1298,9 +1575,28 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
-      "operationId": "drive_file_content",
-      "method": "GET",
-      "path": "/api/drive/{id}/content",
+      "operationId": "dispatch_coworker",
+      "method": "POST",
+      "path": "/api/coworkers/{id}/dispatch",
+      "expose": [
+        "automations",
+        "assistant"
+      ],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "documents_completions",
+      "method": "POST",
+      "path": "/api/documents/completions",
+      "expose": [
+        "assistant"
+      ],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "download_drive_files_zip",
+      "method": "POST",
+      "path": "/api/drive/download-zip",
       "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
     },
@@ -1326,9 +1622,23 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
+      "operationId": "drive_file_request_meta_by_id",
+      "method": "GET",
+      "path": "/api/public/file-requests/by-id/{requestId}/meta",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
       "operationId": "drive_file_request_upload",
       "method": "POST",
       "path": "/api/public/file-requests/{token}/upload",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "drive_file_request_upload_by_id",
+      "method": "POST",
+      "path": "/api/public/file-requests/by-id/{requestId}/upload",
       "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
     },
@@ -1521,15 +1831,6 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
-      "operationId": "get_billing_bonuses",
-      "method": "GET",
-      "path": "/api/billing/bonuses",
-      "expose": [
-        "assistant"
-      ],
-      "reason": "Not exposed to MCP by the public API contract"
-    },
-    {
       "operationId": "get_billing_discount",
       "method": "GET",
       "path": "/api/billing/discount",
@@ -1542,15 +1843,6 @@
       "operationId": "get_billing_features",
       "method": "GET",
       "path": "/api/billing/features",
-      "expose": [
-        "assistant"
-      ],
-      "reason": "Not exposed to MCP by the public API contract"
-    },
-    {
-      "operationId": "get_billing_quota",
-      "method": "GET",
-      "path": "/api/billing/quota",
       "expose": [
         "assistant"
       ],
@@ -1612,6 +1904,13 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
+      "operationId": "get_email_attachment_content",
+      "method": "GET",
+      "path": "/api/mail/{id}/attachments/{attachment_id}/content",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
       "operationId": "get_goal",
       "method": "GET",
       "path": "/api/tasks/goals/{id}",
@@ -1637,30 +1936,9 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
-      "operationId": "get_module_availability",
-      "method": "GET",
-      "path": "/api/module-availability",
-      "expose": [],
-      "reason": "Not exposed to MCP by the public API contract"
-    },
-    {
       "operationId": "get_notification_settings",
       "method": "GET",
       "path": "/api/users/{id}/notifications",
-      "expose": [],
-      "reason": "Not exposed to MCP by the public API contract"
-    },
-    {
-      "operationId": "get_sign_audit",
-      "method": "GET",
-      "path": "/api/sign/{id}/audit",
-      "expose": [],
-      "reason": "Not exposed to MCP by the public API contract"
-    },
-    {
-      "operationId": "get_sign_document",
-      "method": "GET",
-      "path": "/api/sign/{id}",
       "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
     },
@@ -1704,13 +1982,6 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
-      "operationId": "get_users_notification_preferences",
-      "method": "GET",
-      "path": "/api/users/notification-preferences",
-      "expose": [],
-      "reason": "Not exposed to MCP by the public API contract"
-    },
-    {
       "operationId": "get_widget_summary",
       "method": "GET",
       "path": "/api/widget/summary",
@@ -1732,18 +2003,33 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
-      "operationId": "home_digest",
-      "method": "GET",
-      "path": "/api/home/digest",
-      "expose": [],
-      "reason": "Not exposed to MCP by the public API contract"
-    },
-    {
       "operationId": "http_request",
       "method": "POST",
       "path": "/api/automations/http/request",
       "expose": [
         "automations"
+      ],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "import_presentation",
+      "method": "POST",
+      "path": "/api/slides/import",
+      "expose": [
+        "assistant",
+        "automations",
+        "coworker"
+      ],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "import_sheet",
+      "method": "POST",
+      "path": "/api/sheets/import",
+      "expose": [
+        "assistant",
+        "automations",
+        "coworker"
       ],
       "reason": "Not exposed to MCP by the public API contract"
     },
@@ -1807,6 +2093,55 @@
       "operationId": "internal_assessments_result_siblings_get",
       "method": "GET",
       "path": "/api/internal/assessments/results/{id}/siblings",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "internal_assessments_tool_cases_list",
+      "method": "GET",
+      "path": "/api/internal/assessments/tool-cases",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "internal_assessments_tool_run_get",
+      "method": "GET",
+      "path": "/api/internal/assessments/tool-runs/{id}",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "internal_assessments_tool_runs_list",
+      "method": "GET",
+      "path": "/api/internal/assessments/tool-runs",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "internal_bi_account_label",
+      "method": "PATCH",
+      "path": "/api/internal/bi/accounts/{accountId}/classification",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "internal_bi_account_labels",
+      "method": "GET",
+      "path": "/api/internal/bi/account-labels",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "internal_bi_workspace_label",
+      "method": "PATCH",
+      "path": "/api/internal/bi/workspaces/{workspaceId}/classification",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "internal_bi_workspace_labels",
+      "method": "GET",
+      "path": "/api/internal/bi/workspace-labels",
       "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
     },
@@ -1944,6 +2279,13 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
+      "operationId": "leave_onboarding_step",
+      "method": "POST",
+      "path": "/api/identity/onboarding-step",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
       "operationId": "list_api_keys",
       "method": "GET",
       "path": "/api/admin/api-keys",
@@ -1979,13 +2321,6 @@
       "operationId": "list_domains",
       "method": "GET",
       "path": "/api/admin/domains",
-      "expose": [],
-      "reason": "Not exposed to MCP by the public API contract"
-    },
-    {
-      "operationId": "list_file_comments",
-      "method": "GET",
-      "path": "/api/drive/{id}/comments",
       "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
     },
@@ -2031,23 +2366,9 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
-      "operationId": "list_sign_documents",
-      "method": "GET",
-      "path": "/api/sign",
-      "expose": [],
-      "reason": "Not exposed to MCP by the public API contract"
-    },
-    {
       "operationId": "list_sign_purge_queue",
       "method": "GET",
       "path": "/api/sign/purge-queue",
-      "expose": [],
-      "reason": "Not exposed to MCP by the public API contract"
-    },
-    {
-      "operationId": "list_sign_templates",
-      "method": "GET",
-      "path": "/api/sign/templates",
       "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
     },
@@ -2086,6 +2407,27 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
+      "operationId": "live_access",
+      "method": "GET",
+      "path": "/api/live/access",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "live_interpret",
+      "method": "POST",
+      "path": "/api/live/interpret",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "live_text_tokens",
+      "method": "POST",
+      "path": "/api/live/text-tokens",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
       "operationId": "llm",
       "method": "POST",
       "path": "/api/llm",
@@ -2118,6 +2460,42 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
+      "operationId": "mail_merge_parse_csv",
+      "method": "POST",
+      "path": "/api/mail/merge-parse-csv",
+      "expose": [
+        "assistant"
+      ],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "mail_merge_preview",
+      "method": "POST",
+      "path": "/api/mail/merge-preview",
+      "expose": [
+        "assistant"
+      ],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "mail_merge_send",
+      "method": "POST",
+      "path": "/api/mail/merge-send",
+      "expose": [
+        "assistant",
+        "automations",
+        "coworker"
+      ],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "mint_canvas_embed_url",
+      "method": "POST",
+      "path": "/api/canvas/{id}/elements/{elId}/embed-url",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
       "operationId": "oauth_authorization_server_metadata",
       "method": "GET",
       "path": "/.well-known/oauth-authorization-server",
@@ -2146,9 +2524,23 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
+      "operationId": "oauth_jwks",
+      "method": "GET",
+      "path": "/oauth/jwks",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
       "operationId": "oauth_list_authorizable_agents",
       "method": "GET",
       "path": "/api/oauth/agents",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "oauth_openid_configuration",
+      "method": "GET",
+      "path": "/.well-known/openid-configuration",
       "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
     },
@@ -2174,6 +2566,13 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
+      "operationId": "oauth_sign_in_preview",
+      "method": "GET",
+      "path": "/api/oauth/sign-in-preview",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
       "operationId": "oauth_token",
       "method": "POST",
       "path": "/oauth/token",
@@ -2181,9 +2580,37 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
-      "operationId": "patch_users_notification_preferences",
-      "method": "PATCH",
-      "path": "/api/users/notification-preferences",
+      "operationId": "oauth_userinfo",
+      "method": "GET",
+      "path": "/oauth/userinfo",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "oauth_userinfo_post",
+      "method": "POST",
+      "path": "/oauth/userinfo",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "pending_invite_accept",
+      "method": "POST",
+      "path": "/api/invite/pending/{id}/accept",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "pending_invite_decline",
+      "method": "POST",
+      "path": "/api/invite/pending/{id}/decline",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "pending_invites_list",
+      "method": "GET",
+      "path": "/api/invite/pending",
       "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
     },
@@ -2428,6 +2855,41 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
+      "operationId": "provider_connection_connect",
+      "method": "POST",
+      "path": "/api/provider-connections/connect",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "provider_connection_create",
+      "method": "POST",
+      "path": "/api/provider-connections/create",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "provider_connection_disconnect",
+      "method": "DELETE",
+      "path": "/api/provider-connections/{connectionId}",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "provider_connection_execute",
+      "method": "POST",
+      "path": "/api/provider-connections/{connectionId}/operations/{operationId}",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "provider_connection_get",
+      "method": "GET",
+      "path": "/api/provider-connections/{connectionId}",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
       "operationId": "provision_agent",
       "method": "POST",
       "path": "/api/admin/users/provision-agent",
@@ -2444,9 +2906,86 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
+      "operationId": "public_asset_embed",
+      "method": "GET",
+      "path": "/api/public/assets/{id}/embed",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
       "operationId": "public_assistant_conversation_get",
       "method": "GET",
       "path": "/api/public/assistant/conversations/{id}",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "public_assistant_conversation_read",
+      "method": "POST",
+      "path": "/api/public/assistant/conversations/{id}",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "public_calendar_guest_cancel",
+      "method": "POST",
+      "path": "/api/public/calendar/guest/cancel",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "public_calendar_guest_get",
+      "method": "GET",
+      "path": "/api/public/calendar/guest",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "public_calendar_guest_read",
+      "method": "POST",
+      "path": "/api/public/calendar/guest",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "public_calendar_guest_read_slots",
+      "method": "POST",
+      "path": "/api/public/calendar/guest/slots",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "public_calendar_guest_reschedule",
+      "method": "POST",
+      "path": "/api/public/calendar/guest/reschedule",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "public_calendar_guest_respond",
+      "method": "POST",
+      "path": "/api/public/calendar/guest/respond",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "public_calendar_guest_slots",
+      "method": "GET",
+      "path": "/api/public/calendar/guest/slots",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "public_canvas_embed_url",
+      "method": "POST",
+      "path": "/api/public/canvas/{id}/elements/{elId}/embed-url",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "public_document_comments",
+      "method": "GET",
+      "path": "/api/public/documents/{id}/comments",
       "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
     },
@@ -2458,9 +2997,23 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
+      "operationId": "public_document_get_asset",
+      "method": "GET",
+      "path": "/api/public/documents/{id}/assets/{assetId}",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
       "operationId": "public_document_verify_password",
       "method": "POST",
       "path": "/api/public/documents/{id}/verify-password",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "public_drive_children",
+      "method": "GET",
+      "path": "/api/public/drive/{id}/children",
       "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
     },
@@ -2482,6 +3035,27 @@
       "operationId": "public_drive_verify_password",
       "method": "POST",
       "path": "/api/public/drive/{id}/verify-password",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "public_quote_accept",
+      "method": "POST",
+      "path": "/api/public/crm/quote/accept",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "public_quote_get",
+      "method": "GET",
+      "path": "/api/public/crm/quote",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "public_quote_read",
+      "method": "POST",
+      "path": "/api/public/crm/quote",
       "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
     },
@@ -2542,6 +3116,13 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
+      "operationId": "public_synthetic_run_purge",
+      "method": "DELETE",
+      "path": "/api/public/synthetic/runs/{runId}",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
       "operationId": "public_wiki_legacy_get",
       "method": "GET",
       "path": "/api/public/wiki/{id}",
@@ -2556,9 +3137,23 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
+      "operationId": "public_wiki_page_comments",
+      "method": "GET",
+      "path": "/api/public/wiki/pages/{id}/comments",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
       "operationId": "public_wiki_page_get",
       "method": "GET",
       "path": "/api/public/wiki/pages/{id}",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
+      "operationId": "public_wiki_page_get_asset",
+      "method": "GET",
+      "path": "/api/public/wiki/pages/{id}/assets/{assetId}",
       "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
     },
@@ -2636,20 +3231,6 @@
       "operationId": "realtime_catchup_stream",
       "method": "POST",
       "path": "/api/edge/realtime/catchup",
-      "expose": [],
-      "reason": "Not exposed to MCP by the public API contract"
-    },
-    {
-      "operationId": "realtime_exchange_connection_capability",
-      "method": "POST",
-      "path": "/api/realtime/capabilities/connection",
-      "expose": [],
-      "reason": "Not exposed to MCP by the public API contract"
-    },
-    {
-      "operationId": "realtime_exchange_resource_capability",
-      "method": "POST",
-      "path": "/api/realtime/capabilities/resource",
       "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
     },
@@ -2762,16 +3343,16 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
-      "operationId": "sign_add_field",
+      "operationId": "set_document_paragraph_mark",
       "method": "POST",
-      "path": "/api/sign/{id}/fields",
+      "path": "/api/documents/{id}/paragraph-mark",
       "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
-      "operationId": "sign_add_signer",
+      "operationId": "set_mail_client_setup",
       "method": "POST",
-      "path": "/api/sign/{id}/signers",
+      "path": "/api/users/me/mail-client-setup",
       "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
     },
@@ -2790,27 +3371,6 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
-      "operationId": "sign_get_certificate",
-      "method": "GET",
-      "path": "/api/sign/{id}/certificate",
-      "expose": [],
-      "reason": "Not exposed to MCP by the public API contract"
-    },
-    {
-      "operationId": "sign_get_references",
-      "method": "GET",
-      "path": "/api/documents/{id}/sign-references",
-      "expose": [],
-      "reason": "Not exposed to MCP by the public API contract"
-    },
-    {
-      "operationId": "sign_prepare_send",
-      "method": "POST",
-      "path": "/api/sign/{id}/prepare-send",
-      "expose": [],
-      "reason": "Not exposed to MCP by the public API contract"
-    },
-    {
       "operationId": "sign_record_internal_consent",
       "method": "POST",
       "path": "/api/sign/{id}/consent",
@@ -2825,44 +3385,9 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
-      "operationId": "sign_remove_field",
-      "method": "DELETE",
-      "path": "/api/sign/{id}/fields/{field_id}",
-      "expose": [],
-      "reason": "Not exposed to MCP by the public API contract"
-    },
-    {
-      "operationId": "sign_remove_signer",
-      "method": "DELETE",
-      "path": "/api/sign/{id}/signers/{signer_id}",
-      "expose": [],
-      "reason": "Not exposed to MCP by the public API contract"
-    },
-    {
-      "operationId": "sign_reorder_signers",
-      "method": "PUT",
-      "path": "/api/sign/{id}/signers/order",
-      "expose": [],
-      "reason": "Not exposed to MCP by the public API contract"
-    },
-    {
       "operationId": "sign_revert_to_draft",
       "method": "POST",
       "path": "/api/sign/{id}/revert-to-draft",
-      "expose": [],
-      "reason": "Not exposed to MCP by the public API contract"
-    },
-    {
-      "operationId": "sign_update_field",
-      "method": "PATCH",
-      "path": "/api/sign/{id}/fields/{field_id}",
-      "expose": [],
-      "reason": "Not exposed to MCP by the public API contract"
-    },
-    {
-      "operationId": "sign_verify_document",
-      "method": "GET",
-      "path": "/api/sign/{id}/verify",
       "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
     },
@@ -2888,6 +3413,13 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
+      "operationId": "tasks_by_keys",
+      "method": "GET",
+      "path": "/api/tasks/by-keys",
+      "expose": [],
+      "reason": "Not exposed to MCP by the public API contract"
+    },
+    {
       "operationId": "tasks_maintenance_auto_archive",
       "method": "POST",
       "path": "/api/tasks/maintenance/auto-archive",
@@ -2902,10 +3434,12 @@
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
-      "operationId": "update_file_comment",
+      "operationId": "update_domain_preferences",
       "method": "PATCH",
-      "path": "/api/drive/{id}/comments/{commentId}",
-      "expose": [],
+      "path": "/api/admin/workspace/domains/{id}",
+      "expose": [
+        "assistant"
+      ],
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
@@ -2921,13 +3455,6 @@
       "operationId": "update_notification_settings",
       "method": "PUT",
       "path": "/api/users/{id}/notifications",
-      "expose": [],
-      "reason": "Not exposed to MCP by the public API contract"
-    },
-    {
-      "operationId": "update_sign_document",
-      "method": "PATCH",
-      "path": "/api/sign/{id}",
       "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
     },
@@ -2961,27 +3488,6 @@
       "expose": [
         "assistant"
       ],
-      "reason": "Not exposed to MCP by the public API contract"
-    },
-    {
-      "operationId": "use_sign_template",
-      "method": "POST",
-      "path": "/api/sign/templates/{id}/use",
-      "expose": [],
-      "reason": "Not exposed to MCP by the public API contract"
-    },
-    {
-      "operationId": "webhooks_create",
-      "method": "POST",
-      "path": "/api/webhooks",
-      "expose": [],
-      "reason": "Not exposed to MCP by the public API contract"
-    },
-    {
-      "operationId": "webhooks_list",
-      "method": "GET",
-      "path": "/api/webhooks",
-      "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
     },
     {
@@ -3050,6 +3556,1521 @@
       "path": "/api/zoom/status",
       "expose": [],
       "reason": "Not exposed to MCP by the public API contract"
+    }
+  ],
+  "notListedToModels": [
+    {
+      "operationId": "add_mail_thread_comment_reaction",
+      "method": "POST",
+      "path": "/api/mail/thread/{thread_id}/comments/{comment_id}/reactions",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of set_reaction"
+    },
+    {
+      "operationId": "add_task_comment_reaction",
+      "method": "POST",
+      "path": "/api/tasks/{task_id}/comments/{comment_id}/reactions",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of set_reaction"
+    },
+    {
+      "operationId": "archive_email",
+      "method": "POST",
+      "path": "/api/mail/{id}/archive",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of set_email_archived"
+    },
+    {
+      "operationId": "assign_mail_thread",
+      "method": "PUT",
+      "path": "/api/mail/thread/{thread_id}/assignee",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of set_mail_thread_assignee"
+    },
+    {
+      "operationId": "calendars_access_request_create",
+      "method": "POST",
+      "path": "/api/calendars/{id}/access-requests",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of request_access"
+    },
+    {
+      "operationId": "calendars_access_request_current",
+      "method": "GET",
+      "path": "/api/calendars/{id}/access-requests/current",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of get_my_access_request"
+    },
+    {
+      "operationId": "calendars_access_request_decide",
+      "method": "POST",
+      "path": "/api/calendars/{id}/access-requests/{requestId}/decision",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of decide_access_request"
+    },
+    {
+      "operationId": "calendars_leave",
+      "method": "POST",
+      "path": "/api/calendars/{id}/leave",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of leave_resource"
+    },
+    {
+      "operationId": "calendars_pending_share_revoke",
+      "method": "DELETE",
+      "path": "/api/calendars/{id}/pending-shares/{pendingId}",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of remove_access"
+    },
+    {
+      "operationId": "calendars_permissions_list",
+      "method": "GET",
+      "path": "/api/calendars/{calendar_id}/permissions",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of list_access"
+    },
+    {
+      "operationId": "calendars_permissions_remove",
+      "method": "DELETE",
+      "path": "/api/calendars/{id}/permissions/{principalId}",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of remove_access"
+    },
+    {
+      "operationId": "calendars_permissions_set",
+      "method": "POST",
+      "path": "/api/calendars/{calendar_id}/permissions",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of grant_access"
+    },
+    {
+      "operationId": "calendars_permissions_update",
+      "method": "PATCH",
+      "path": "/api/calendars/{id}/permissions/{principalId}",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of update_access"
+    },
+    {
+      "operationId": "calendars_share_invite",
+      "method": "POST",
+      "path": "/api/calendars/{id}/share-invite",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of grant_access"
+    },
+    {
+      "operationId": "calendars_visibility_update",
+      "method": "PATCH",
+      "path": "/api/calendars/{id}/visibility",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of set_visibility"
+    },
+    {
+      "operationId": "chat_channel_archive",
+      "method": "POST",
+      "path": "/api/channels/{id}/archive",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of set_channel_archived"
+    },
+    {
+      "operationId": "chat_channel_mute",
+      "method": "POST",
+      "path": "/api/channels/{id}/mute",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of set_channel_muted"
+    },
+    {
+      "operationId": "chat_channel_star",
+      "method": "POST",
+      "path": "/api/channels/{id}/star",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of set_resource_starred"
+    },
+    {
+      "operationId": "chat_channel_unarchive",
+      "method": "POST",
+      "path": "/api/channels/{id}/unarchive",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of set_channel_archived"
+    },
+    {
+      "operationId": "chat_channel_unmute",
+      "method": "POST",
+      "path": "/api/channels/{id}/unmute",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of set_channel_muted"
+    },
+    {
+      "operationId": "chat_channel_unstar",
+      "method": "DELETE",
+      "path": "/api/channels/{id}/star",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of set_resource_starred"
+    },
+    {
+      "operationId": "chat_message_reaction_add",
+      "method": "POST",
+      "path": "/api/channels/{id}/messages/{msgId}/reactions",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of set_reaction"
+    },
+    {
+      "operationId": "chat_message_reaction_remove",
+      "method": "DELETE",
+      "path": "/api/channels/{id}/messages/{msgId}/reactions/{emoji}",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of set_reaction"
+    },
+    {
+      "operationId": "code_comment_update",
+      "method": "PATCH",
+      "path": "/api/code/pulls/{id}/comments/{commentId}",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of update_resource_comment"
+    },
+    {
+      "operationId": "code_comments_mark_read",
+      "method": "POST",
+      "path": "/api/code/pulls/{id}/comments/mark-read",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of mark_resource_comments_read"
+    },
+    {
+      "operationId": "code_pull_comment",
+      "method": "POST",
+      "path": "/api/code/pulls/{id}/comments",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of create_resource_comment"
+    },
+    {
+      "operationId": "code_pull_comments_list",
+      "method": "GET",
+      "path": "/api/code/pulls/{id}/comments",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of list_resource_comments"
+    },
+    {
+      "operationId": "code_thread_read_set",
+      "method": "POST",
+      "path": "/api/code/pulls/{id}/thread-read",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of set_comment_thread_read"
+    },
+    {
+      "operationId": "code_thread_resolve",
+      "method": "POST",
+      "path": "/api/code/pulls/{id}/resolve-thread",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of update_resource_comment"
+    },
+    {
+      "operationId": "create_file_comment",
+      "method": "POST",
+      "path": "/api/drive/{id}/comments",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of create_resource_comment"
+    },
+    {
+      "operationId": "create_mail_thread_comment",
+      "method": "POST",
+      "path": "/api/mail/thread/{thread_id}/comments",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of create_resource_comment"
+    },
+    {
+      "operationId": "create_task_comment",
+      "method": "POST",
+      "path": "/api/tasks/{task_id}/comments",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of create_resource_comment"
+    },
+    {
+      "operationId": "create_workflow",
+      "method": "POST",
+      "path": "/api/crm/workflows",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Deprecated without a sunset"
+    },
+    {
+      "operationId": "delete_file_comment",
+      "method": "DELETE",
+      "path": "/api/drive/{id}/comments/{commentId}",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of delete_resource_comment"
+    },
+    {
+      "operationId": "delete_mail_thread_comment",
+      "method": "DELETE",
+      "path": "/api/mail/thread/{thread_id}/comments/{comment_id}",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of delete_resource_comment"
+    },
+    {
+      "operationId": "delete_task_comment",
+      "method": "DELETE",
+      "path": "/api/tasks/{task_id}/comments/{comment_id}",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of delete_resource_comment"
+    },
+    {
+      "operationId": "delete_workflow",
+      "method": "DELETE",
+      "path": "/api/crm/workflows/{id}",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Deprecated without a sunset"
+    },
+    {
+      "operationId": "documents_access_request_create",
+      "method": "POST",
+      "path": "/api/documents/{id}/access-requests",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of request_access"
+    },
+    {
+      "operationId": "documents_access_request_current",
+      "method": "GET",
+      "path": "/api/documents/{id}/access-requests/current",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of get_my_access_request"
+    },
+    {
+      "operationId": "documents_access_request_decide",
+      "method": "POST",
+      "path": "/api/documents/{id}/access-requests/{requestId}/decision",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of decide_access_request"
+    },
+    {
+      "operationId": "documents_comment_delete",
+      "method": "DELETE",
+      "path": "/api/documents/{id}/comments/{commentId}",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Supports Ambiguous's embedded editor only"
+    },
+    {
+      "operationId": "documents_comment_reaction_add",
+      "method": "POST",
+      "path": "/api/documents/{id}/comments/{commentId}/reactions",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Supports Ambiguous's embedded editor only"
+    },
+    {
+      "operationId": "documents_comment_reaction_remove",
+      "method": "DELETE",
+      "path": "/api/documents/{id}/comments/{commentId}/reactions/{emoji}",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Supports Ambiguous's embedded editor only"
+    },
+    {
+      "operationId": "documents_comment_resolve",
+      "method": "PATCH",
+      "path": "/api/documents/{id}/comments/{commentId}",
+      "expose": [
+        "all"
+      ],
+      "reason": "Supports Ambiguous's embedded editor only"
+    },
+    {
+      "operationId": "documents_comment_thread_mark_read",
+      "method": "POST",
+      "path": "/api/documents/{id}/comments/{commentId}/mark-read",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of set_comment_thread_read"
+    },
+    {
+      "operationId": "documents_comment_thread_mark_unread",
+      "method": "POST",
+      "path": "/api/documents/{id}/comments/{commentId}/mark-unread",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of set_comment_thread_read"
+    },
+    {
+      "operationId": "documents_comments_create",
+      "method": "POST",
+      "path": "/api/documents/{id}/comments",
+      "expose": [
+        "all"
+      ],
+      "reason": "Supports Ambiguous's embedded editor only"
+    },
+    {
+      "operationId": "documents_comments_list",
+      "method": "GET",
+      "path": "/api/documents/{id}/comments",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Supports Ambiguous's embedded editor only"
+    },
+    {
+      "operationId": "documents_comments_mark_read",
+      "method": "POST",
+      "path": "/api/documents/{id}/comments/mark-read",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of mark_resource_comments_read"
+    },
+    {
+      "operationId": "documents_leave",
+      "method": "POST",
+      "path": "/api/documents/{id}/leave",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of leave_resource"
+    },
+    {
+      "operationId": "documents_pending_share_revoke",
+      "method": "DELETE",
+      "path": "/api/documents/{id}/pending-shares/{pendingId}",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of remove_access"
+    },
+    {
+      "operationId": "documents_permissions_list",
+      "method": "GET",
+      "path": "/api/documents/{id}/permissions",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of list_access"
+    },
+    {
+      "operationId": "documents_permissions_remove",
+      "method": "DELETE",
+      "path": "/api/documents/{id}/permissions/{principalId}",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of remove_access"
+    },
+    {
+      "operationId": "documents_permissions_set",
+      "method": "POST",
+      "path": "/api/documents/{id}/permissions",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of grant_access"
+    },
+    {
+      "operationId": "documents_permissions_update",
+      "method": "PATCH",
+      "path": "/api/documents/{id}/permissions/{principalId}",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of update_access"
+    },
+    {
+      "operationId": "documents_revoke_link",
+      "method": "POST",
+      "path": "/api/documents/{id}/revoke-link",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of remove_access"
+    },
+    {
+      "operationId": "documents_share_invite",
+      "method": "POST",
+      "path": "/api/documents/{id}/share-invite",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of grant_access"
+    },
+    {
+      "operationId": "documents_star",
+      "method": "POST",
+      "path": "/api/documents/{id}/star",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Supports Ambiguous's embedded editor only"
+    },
+    {
+      "operationId": "documents_transfer_ownership",
+      "method": "POST",
+      "path": "/api/documents/{id}/transfer-ownership",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of transfer_ownership"
+    },
+    {
+      "operationId": "documents_visibility_update",
+      "method": "PATCH",
+      "path": "/api/documents/{id}/visibility",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of set_visibility"
+    },
+    {
+      "operationId": "drive_access_request_create",
+      "method": "POST",
+      "path": "/api/drive/{id}/access-requests",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of request_access"
+    },
+    {
+      "operationId": "drive_access_request_current",
+      "method": "GET",
+      "path": "/api/drive/{id}/access-requests/current",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of get_my_access_request"
+    },
+    {
+      "operationId": "drive_access_request_decide",
+      "method": "POST",
+      "path": "/api/drive/{id}/access-requests/{requestId}/decision",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of decide_access_request"
+    },
+    {
+      "operationId": "drive_file_content",
+      "method": "GET",
+      "path": "/api/drive/{id}/content",
+      "expose": [
+        "mcp"
+      ],
+      "reason": "Supports Ambiguous's embedded editor only"
+    },
+    {
+      "operationId": "drive_file_star",
+      "method": "POST",
+      "path": "/api/drive/{id}/star",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of set_resource_starred"
+    },
+    {
+      "operationId": "drive_leave",
+      "method": "POST",
+      "path": "/api/drive/{id}/leave",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of leave_resource"
+    },
+    {
+      "operationId": "drive_pending_share_revoke",
+      "method": "DELETE",
+      "path": "/api/drive/{id}/pending-shares/{pendingId}",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of remove_access"
+    },
+    {
+      "operationId": "drive_permissions_list",
+      "method": "GET",
+      "path": "/api/drive/{id}/permissions",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of list_access"
+    },
+    {
+      "operationId": "drive_permissions_remove",
+      "method": "DELETE",
+      "path": "/api/drive/{id}/permissions/{principalId}",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of remove_access"
+    },
+    {
+      "operationId": "drive_permissions_set",
+      "method": "POST",
+      "path": "/api/drive/{id}/permissions",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of grant_access"
+    },
+    {
+      "operationId": "drive_permissions_update",
+      "method": "PATCH",
+      "path": "/api/drive/{id}/permissions/{principalId}",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of update_access"
+    },
+    {
+      "operationId": "drive_revoke_link",
+      "method": "POST",
+      "path": "/api/drive/{id}/revoke-link",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of remove_access"
+    },
+    {
+      "operationId": "drive_share_invite",
+      "method": "POST",
+      "path": "/api/drive/{id}/share-invite",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of grant_access"
+    },
+    {
+      "operationId": "drive_transfer_ownership",
+      "method": "POST",
+      "path": "/api/drive/{id}/transfer-ownership",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of transfer_ownership"
+    },
+    {
+      "operationId": "drive_visibility_update",
+      "method": "PATCH",
+      "path": "/api/drive/{id}/visibility",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of set_visibility"
+    },
+    {
+      "operationId": "file_comment_reaction_add",
+      "method": "POST",
+      "path": "/api/drive/{id}/comments/{commentId}/reactions",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of set_reaction"
+    },
+    {
+      "operationId": "file_comment_reaction_remove",
+      "method": "DELETE",
+      "path": "/api/drive/{id}/comments/{commentId}/reactions/{emoji}",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of set_reaction"
+    },
+    {
+      "operationId": "file_comment_thread_read_set",
+      "method": "PATCH",
+      "path": "/api/drive/{id}/comments/{commentId}/read",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of set_comment_thread_read"
+    },
+    {
+      "operationId": "file_comments_mark_read",
+      "method": "POST",
+      "path": "/api/drive/{id}/comments/mark-read",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of mark_resource_comments_read"
+    },
+    {
+      "operationId": "file_get_content",
+      "method": "GET",
+      "path": "/api/files/{id}/content",
+      "expose": [
+        "mcp"
+      ],
+      "reason": "Supports Ambiguous's embedded editor only"
+    },
+    {
+      "operationId": "forms_access_request_create",
+      "method": "POST",
+      "path": "/api/forms/{id}/access-requests",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of request_access"
+    },
+    {
+      "operationId": "forms_access_request_current",
+      "method": "GET",
+      "path": "/api/forms/{id}/access-requests/current",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of get_my_access_request"
+    },
+    {
+      "operationId": "forms_access_request_decide",
+      "method": "POST",
+      "path": "/api/forms/{id}/access-requests/{requestId}/decision",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of decide_access_request"
+    },
+    {
+      "operationId": "forms_leave",
+      "method": "POST",
+      "path": "/api/forms/{id}/leave",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of leave_resource"
+    },
+    {
+      "operationId": "forms_pending_share_revoke",
+      "method": "DELETE",
+      "path": "/api/forms/{id}/pending-shares/{pendingId}",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of remove_access"
+    },
+    {
+      "operationId": "forms_permissions_list",
+      "method": "GET",
+      "path": "/api/forms/{id}/permissions",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of list_access"
+    },
+    {
+      "operationId": "forms_permissions_remove",
+      "method": "DELETE",
+      "path": "/api/forms/{id}/permissions/{principalId}",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of remove_access"
+    },
+    {
+      "operationId": "forms_permissions_set",
+      "method": "POST",
+      "path": "/api/forms/{id}/permissions",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of grant_access"
+    },
+    {
+      "operationId": "forms_permissions_update",
+      "method": "PATCH",
+      "path": "/api/forms/{id}/permissions/{principalId}",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of update_access"
+    },
+    {
+      "operationId": "forms_revoke_link",
+      "method": "POST",
+      "path": "/api/forms/{id}/revoke-link",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of remove_access"
+    },
+    {
+      "operationId": "forms_share_invite",
+      "method": "POST",
+      "path": "/api/forms/{id}/share-invite",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of grant_access"
+    },
+    {
+      "operationId": "forms_star",
+      "method": "POST",
+      "path": "/api/forms/{id}/star",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of set_resource_starred"
+    },
+    {
+      "operationId": "forms_transfer_ownership",
+      "method": "POST",
+      "path": "/api/forms/{id}/transfer-ownership",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of transfer_ownership"
+    },
+    {
+      "operationId": "forms_visibility_update",
+      "method": "PATCH",
+      "path": "/api/forms/{id}/visibility",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of set_visibility"
+    },
+    {
+      "operationId": "get_billing_bonuses",
+      "method": "GET",
+      "path": "/api/billing/bonuses",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Supports Ambiguous's embedded editor only"
+    },
+    {
+      "operationId": "get_billing_quota",
+      "method": "GET",
+      "path": "/api/billing/quota",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Supports Ambiguous's embedded editor only"
+    },
+    {
+      "operationId": "get_module_availability",
+      "method": "GET",
+      "path": "/api/module-availability",
+      "expose": [
+        "mcp"
+      ],
+      "reason": "Supports Ambiguous's embedded editor only"
+    },
+    {
+      "operationId": "get_users_notification_preferences",
+      "method": "GET",
+      "path": "/api/users/notification-preferences",
+      "expose": [
+        "mcp"
+      ],
+      "reason": "Supports Ambiguous's embedded editor only"
+    },
+    {
+      "operationId": "get_workflow",
+      "method": "GET",
+      "path": "/api/crm/workflows/{id}",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Deprecated without a sunset"
+    },
+    {
+      "operationId": "get_workflow_logs",
+      "method": "GET",
+      "path": "/api/crm/workflows/{id}/logs",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Deprecated without a sunset"
+    },
+    {
+      "operationId": "home_digest",
+      "method": "GET",
+      "path": "/api/home/digest",
+      "expose": [
+        "mcp"
+      ],
+      "reason": "Supports Ambiguous's embedded editor only"
+    },
+    {
+      "operationId": "list_file_comments",
+      "method": "GET",
+      "path": "/api/drive/{id}/comments",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of list_resource_comments"
+    },
+    {
+      "operationId": "list_mail_thread_comments",
+      "method": "GET",
+      "path": "/api/mail/thread/{thread_id}/comments",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of list_resource_comments"
+    },
+    {
+      "operationId": "list_task_comments",
+      "method": "GET",
+      "path": "/api/tasks/{task_id}/comments",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of list_resource_comments"
+    },
+    {
+      "operationId": "list_workflows",
+      "method": "GET",
+      "path": "/api/crm/workflows",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Deprecated without a sunset"
+    },
+    {
+      "operationId": "mail_thread_comment_thread_read_set",
+      "method": "PATCH",
+      "path": "/api/mail/thread/{thread_id}/comments/{comment_id}/read",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of set_comment_thread_read"
+    },
+    {
+      "operationId": "mail_thread_comments_mark_read",
+      "method": "POST",
+      "path": "/api/mail/thread/{thread_id}/comments/mark-read",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of mark_resource_comments_read"
+    },
+    {
+      "operationId": "mute_mail_thread",
+      "method": "POST",
+      "path": "/api/mail/thread/{thread_id}/mute",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of set_mail_thread_muted"
+    },
+    {
+      "operationId": "patch_users_notification_preferences",
+      "method": "PATCH",
+      "path": "/api/users/notification-preferences",
+      "expose": [
+        "mcp"
+      ],
+      "reason": "Supports Ambiguous's embedded editor only"
+    },
+    {
+      "operationId": "pipeline_access_request_create",
+      "method": "POST",
+      "path": "/api/crm/pipelines/{id}/access-requests",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of request_access"
+    },
+    {
+      "operationId": "pipeline_access_request_current",
+      "method": "GET",
+      "path": "/api/crm/pipelines/{id}/access-requests/current",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of get_my_access_request"
+    },
+    {
+      "operationId": "pipeline_access_request_decide",
+      "method": "POST",
+      "path": "/api/crm/pipelines/{id}/access-requests/{requestId}/decision",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of decide_access_request"
+    },
+    {
+      "operationId": "project_access_request_create",
+      "method": "POST",
+      "path": "/api/projects/{id}/access-requests",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of request_access"
+    },
+    {
+      "operationId": "project_access_request_current",
+      "method": "GET",
+      "path": "/api/projects/{id}/access-requests/current",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of get_my_access_request"
+    },
+    {
+      "operationId": "project_access_request_decide",
+      "method": "POST",
+      "path": "/api/projects/{id}/access-requests/{requestId}/decision",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of decide_access_request"
+    },
+    {
+      "operationId": "realtime_exchange_connection_capability",
+      "method": "POST",
+      "path": "/api/realtime/capabilities/connection",
+      "expose": [
+        "mcp"
+      ],
+      "reason": "Supports Ambiguous's embedded editor only"
+    },
+    {
+      "operationId": "realtime_exchange_resource_capability",
+      "method": "POST",
+      "path": "/api/realtime/capabilities/resource",
+      "expose": [
+        "mcp"
+      ],
+      "reason": "Supports Ambiguous's embedded editor only"
+    },
+    {
+      "operationId": "remove_mail_thread_comment_reaction",
+      "method": "DELETE",
+      "path": "/api/mail/thread/{thread_id}/comments/{comment_id}/reactions/{emoji}",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of set_reaction"
+    },
+    {
+      "operationId": "remove_task_comment_reaction",
+      "method": "DELETE",
+      "path": "/api/tasks/{task_id}/comments/{comment_id}/reactions/{emoji}",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of set_reaction"
+    },
+    {
+      "operationId": "report_agent_capability_gap",
+      "method": "POST",
+      "path": "/api/feedback/agent-capability-gap",
+      "expose": [
+        "mcp"
+      ],
+      "reason": "Compatibility alias of submit_feedback"
+    },
+    {
+      "operationId": "report_agent_outcome",
+      "method": "POST",
+      "path": "/api/feedback/agent-outcome",
+      "expose": [
+        "mcp"
+      ],
+      "reason": "Compatibility alias of submit_feedback"
+    },
+    {
+      "operationId": "slide_star",
+      "method": "POST",
+      "path": "/api/slides/{id}/star",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Supports Ambiguous's embedded editor only"
+    },
+    {
+      "operationId": "slide_unstar",
+      "method": "DELETE",
+      "path": "/api/slides/{id}/star",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Supports Ambiguous's embedded editor only"
+    },
+    {
+      "operationId": "task_access_request_create",
+      "method": "POST",
+      "path": "/api/tasks/{id}/access-requests",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of request_access"
+    },
+    {
+      "operationId": "task_access_request_current",
+      "method": "GET",
+      "path": "/api/tasks/{id}/access-requests/current",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of get_my_access_request"
+    },
+    {
+      "operationId": "task_access_request_decide",
+      "method": "POST",
+      "path": "/api/tasks/{id}/access-requests/{requestId}/decision",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of decide_access_request"
+    },
+    {
+      "operationId": "task_comment_thread_read_set",
+      "method": "PATCH",
+      "path": "/api/tasks/{task_id}/comments/{comment_id}/read",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of set_comment_thread_read"
+    },
+    {
+      "operationId": "task_comments_mark_read",
+      "method": "POST",
+      "path": "/api/tasks/{task_id}/comments/mark-read",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of mark_resource_comments_read"
+    },
+    {
+      "operationId": "tasks_archive",
+      "method": "POST",
+      "path": "/api/tasks/{id}/archive",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of set_task_archived"
+    },
+    {
+      "operationId": "tasks_subscribe",
+      "method": "POST",
+      "path": "/api/tasks/{id}/subscribe",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of set_task_subscription"
+    },
+    {
+      "operationId": "tasks_unarchive",
+      "method": "POST",
+      "path": "/api/tasks/{id}/unarchive",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of set_task_archived"
+    },
+    {
+      "operationId": "tasks_unsubscribe",
+      "method": "DELETE",
+      "path": "/api/tasks/{id}/subscribe",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of set_task_subscription"
+    },
+    {
+      "operationId": "teams_star",
+      "method": "POST",
+      "path": "/api/teams/{id}/star",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of set_resource_starred"
+    },
+    {
+      "operationId": "teams_unstar",
+      "method": "DELETE",
+      "path": "/api/teams/{id}/star",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of set_resource_starred"
+    },
+    {
+      "operationId": "unarchive_email",
+      "method": "DELETE",
+      "path": "/api/mail/{id}/archive",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of set_email_archived"
+    },
+    {
+      "operationId": "unassign_mail_thread",
+      "method": "DELETE",
+      "path": "/api/mail/thread/{thread_id}/assignee",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of set_mail_thread_assignee"
+    },
+    {
+      "operationId": "unmute_mail_thread",
+      "method": "DELETE",
+      "path": "/api/mail/thread/{thread_id}/mute",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of set_mail_thread_muted"
+    },
+    {
+      "operationId": "update_file_comment",
+      "method": "PATCH",
+      "path": "/api/drive/{id}/comments/{commentId}",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of update_resource_comment"
+    },
+    {
+      "operationId": "update_mail_thread_comment",
+      "method": "PATCH",
+      "path": "/api/mail/thread/{thread_id}/comments/{comment_id}",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of update_resource_comment"
+    },
+    {
+      "operationId": "update_task_comment",
+      "method": "PATCH",
+      "path": "/api/tasks/{task_id}/comments/{comment_id}",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of update_resource_comment"
+    },
+    {
+      "operationId": "update_workflow",
+      "method": "PATCH",
+      "path": "/api/crm/workflows/{id}",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Deprecated without a sunset"
+    },
+    {
+      "operationId": "wiki_access_request_create",
+      "method": "POST",
+      "path": "/api/wiki/pages/{id}/access-requests",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of request_access"
+    },
+    {
+      "operationId": "wiki_access_request_current",
+      "method": "GET",
+      "path": "/api/wiki/pages/{id}/access-requests/current",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of get_my_access_request"
+    },
+    {
+      "operationId": "wiki_access_request_decide",
+      "method": "POST",
+      "path": "/api/wiki/pages/{id}/access-requests/{requestId}/decision",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of decide_access_request"
+    },
+    {
+      "operationId": "wiki_leave",
+      "method": "POST",
+      "path": "/api/wiki/pages/{id}/leave",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of leave_resource"
+    },
+    {
+      "operationId": "wiki_page_comment_create",
+      "method": "POST",
+      "path": "/api/wiki/pages/{id}/comments",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of create_resource_comment"
+    },
+    {
+      "operationId": "wiki_page_comment_delete",
+      "method": "DELETE",
+      "path": "/api/wiki/pages/{id}/comments/{commentId}",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of delete_resource_comment"
+    },
+    {
+      "operationId": "wiki_page_comment_reaction_add",
+      "method": "POST",
+      "path": "/api/wiki/pages/{id}/comments/{commentId}/reactions",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of set_reaction"
+    },
+    {
+      "operationId": "wiki_page_comment_reaction_remove",
+      "method": "DELETE",
+      "path": "/api/wiki/pages/{id}/comments/{commentId}/reactions/{emoji}",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of set_reaction"
+    },
+    {
+      "operationId": "wiki_page_comment_thread_read_set",
+      "method": "PATCH",
+      "path": "/api/wiki/pages/{id}/comments/{commentId}/read",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of set_comment_thread_read"
+    },
+    {
+      "operationId": "wiki_page_comment_update",
+      "method": "PATCH",
+      "path": "/api/wiki/pages/{id}/comments/{commentId}",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of update_resource_comment"
+    },
+    {
+      "operationId": "wiki_page_comments_list",
+      "method": "GET",
+      "path": "/api/wiki/pages/{id}/comments",
+      "expose": [
+        "assistant",
+        "mcp"
+      ],
+      "reason": "Compatibility alias of list_resource_comments"
+    },
+    {
+      "operationId": "wiki_page_comments_mark_read",
+      "method": "POST",
+      "path": "/api/wiki/pages/{id}/comments/mark-read",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of mark_resource_comments_read"
+    },
+    {
+      "operationId": "wiki_pending_share_revoke",
+      "method": "DELETE",
+      "path": "/api/wiki/pages/{id}/pending-shares/{pendingId}",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of remove_access"
+    },
+    {
+      "operationId": "wiki_permissions_list",
+      "method": "GET",
+      "path": "/api/wiki/pages/{id}/permissions",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of list_access"
+    },
+    {
+      "operationId": "wiki_permissions_remove",
+      "method": "DELETE",
+      "path": "/api/wiki/pages/{id}/permissions/{userId}",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of remove_access"
+    },
+    {
+      "operationId": "wiki_permissions_set",
+      "method": "POST",
+      "path": "/api/wiki/pages/{id}/permissions",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of grant_access"
+    },
+    {
+      "operationId": "wiki_permissions_update",
+      "method": "PATCH",
+      "path": "/api/wiki/pages/{id}/permissions/{principalId}",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of update_access"
+    },
+    {
+      "operationId": "wiki_revoke_link",
+      "method": "POST",
+      "path": "/api/wiki/pages/{id}/revoke-link",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of remove_access"
+    },
+    {
+      "operationId": "wiki_share_invite",
+      "method": "POST",
+      "path": "/api/wiki/pages/{id}/share-invite",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of grant_access"
+    },
+    {
+      "operationId": "wiki_visibility_update",
+      "method": "PATCH",
+      "path": "/api/wiki/pages/{id}/visibility",
+      "expose": [
+        "all"
+      ],
+      "reason": "Compatibility alias of set_visibility"
     }
   ]
 }

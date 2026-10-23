@@ -14,7 +14,9 @@ export default defineEndpoint({
     input: {
         schema: {
             body: z.object({
-                setup_code: z.string().regex(/^ahc_[A-Za-z0-9_-]{43}$/),
+                setup_code: z.string().regex(
+                    /^ahc_(?:[0-9A-HJKMNP-TV-Z]{26}|[A-Za-z0-9_-]{43})$/,
+                ),
                 request_id: z.string().uuid(),
             }).strict(),
         },

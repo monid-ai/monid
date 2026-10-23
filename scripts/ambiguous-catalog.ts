@@ -59,6 +59,14 @@ const report = JSON.stringify(
                 ...item,
                 reason: "Not exposed to MCP by the public API contract",
             })),
+        notListedToModels: coverage.filter((item) => item.excluded).sort((
+            a,
+            b,
+        ) => a.operationId.localeCompare(b.operationId))
+            .map(({ exposed: _exposed, excluded, ...item }) => ({
+                ...item,
+                reason: excluded,
+            })),
     },
     null,
     2,

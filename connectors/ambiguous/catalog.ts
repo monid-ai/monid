@@ -27,8 +27,12 @@ interface ApiDocument {
             description?: string;
             summary?: string;
             tags?: string[];
+            deprecated?: boolean;
+            "x-sunset"?: unknown;
             "x-tool"?: {
                 expose?: string[];
+                replacedBy?: string;
+                appOnly?: boolean;
                 annotations?: ApiOperation["annotations"];
             };
             parameters?: {
@@ -54,7 +58,23 @@ export const coverage: {
     path: string;
     exposed: boolean;
     expose: string[];
+    excluded?: string;
 }[] = [];
+
+/** Why an MCP-exposed operation is withheld from models, matching Ambiguous's own MCP listing. */
+function unlistedReason(
+    operation: ApiDocument["paths"][string][string],
+): string | undefined {
+    const tool = operation["x-tool"];
+    if (operation.deprecated && !operation["x-sunset"]) {
+        return "Deprecated without a sunset";
+    }
+    if (tool?.appOnly) return "Supports Ambiguous's embedded editor only";
+    if (tool?.replacedBy) {
+        return `Compatibility alias of ${tool.replacedBy}`;
+    }
+    return undefined;
+}
 const apiOperations: ApiOperation[] = [];
 for (const [path, methods] of Object.entries(document.paths)) {
     for (const [method, operation] of Object.entries(methods)) {
@@ -64,14 +84,16 @@ for (const [path, methods] of Object.entries(document.paths)) {
         ) continue;
         const expose = operation["x-tool"]?.expose ?? [];
         const exposed = expose.includes("all") || expose.includes("mcp");
+        const excluded = exposed ? unlistedReason(operation) : undefined;
         coverage.push({
             operationId: operation.operationId,
             method: method.toUpperCase(),
             path,
             exposed,
             expose,
+            ...(excluded ? { excluded } : {}),
         });
-        if (!exposed) continue;
+        if (!exposed || excluded) continue;
         const inputs: ApiOperation["inputs"] = {};
         for (
             const [location, key] of [["path", "pathParams"], [
