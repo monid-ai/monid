@@ -1,0 +1,76 @@
+{
+    "name": "synthetic-image-4k-succeeded",
+    "description": "SYNTHETIC: the 1K success chain with a 4K request \u2014 submit 202, one PROCESSING tick, then SUCCESS. The status body is resolution-agnostic; the rate line is keyed from the request.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "job_id": "11111111-2222-4333-8444-555555555555",
+                    "type": "image_ad",
+                    "credits_used": 10,
+                    "job_ids": [
+                        "11111111-2222-4333-8444-555555555555"
+                    ]
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/external-api/jobs/11111111-2222-4333-8444-555555555555"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "job_id": "11111111-2222-4333-8444-555555555555",
+                    "type": "image_ad",
+                    "status": "PENDING",
+                    "response": null,
+                    "error": null,
+                    "result_url": null
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/external-api/jobs/11111111-2222-4333-8444-555555555555"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "job_id": "11111111-2222-4333-8444-555555555555",
+                    "type": "image_ad",
+                    "status": "PROCESSING",
+                    "response": null,
+                    "error": null,
+                    "result_url": null
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/external-api/jobs/11111111-2222-4333-8444-555555555555"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "job_id": "11111111-2222-4333-8444-555555555555",
+                    "type": "image_ad",
+                    "status": "SUCCESS",
+                    "response": {
+                        "url": "https://cdn.example.com/synthetic/omneky-image-ad.png"
+                    },
+                    "error": null,
+                    "result_url": "https://cdn.example.com/synthetic/omneky-image-ad.png"
+                }
+            }
+        }
+    ]
+}
