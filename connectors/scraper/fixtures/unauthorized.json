@@ -1,0 +1,28 @@
+{
+    "name": "unauthorized",
+    "description": "Scraper 401 problem-details body for an invalid API key, recorded live with a deliberately wrong key. The url is bound, so one chain serves every endpoint. Vendor non-2xx is data: zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "keyword": "nurse",
+                    "maxItems": 1
+                }
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "type": "https://api.scraper.run/errors/unauthorized",
+                    "status": 401,
+                    "code": "unauthorized",
+                    "message": "Unauthorized",
+                    "requestId": "req_daaf39e1f204463f7956b882",
+                    "docUrl": "https://docs.scraper.run/errors/unauthorized",
+                    "retryable": false
+                }
+            }
+        }
+    ]
+}

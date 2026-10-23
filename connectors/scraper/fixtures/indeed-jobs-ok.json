@@ -1,0 +1,174 @@
+{
+    "name": "indeed-jobs-ok",
+    "description": "Scraper POST /indeed/jobs: a real recording, trimmed and PII-scrubbed by the recorder. The url is bound, so the chain does not pin the host.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "keyword": "registered nurse",
+                    "location": "Austin, TX",
+                    "maxItems": 2
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "data": {
+                        "jobs": [
+                            {
+                                "id": "debcb5ccc44dec48",
+                                "title": {
+                                    "text": "OR Registered Nurse PRN",
+                                    "normalized": "registered nurse"
+                                },
+                                "urls": {
+                                    "indeed": "https://www.indeed.com/viewjob?jk=debcb5ccc44dec48",
+                                    "external": "https://grnh.se/di1hy38c9us",
+                                    "apply": "https://grnh.se/di1hy38c9us"
+                                },
+                                "snippet": "Accessibility Note:\n\nSurgery Partners is committed to complying with all applicable provisions of the Americans with Disabilities Act, as amended (\"ADA\"), and applicable state and local laws. It is th",
+                                "salary": {
+                                    "estimated": false
+                                },
+                                "location": {
+                                    "formatted": "Lakeway, TX",
+                                    "formattedShort": "Lakeway, TX",
+                                    "fullAddress": "Lakeway, TX",
+                                    "city": "Lakeway",
+                                    "state": "TX",
+                                    "stateName": "Texas",
+                                    "admin2Code": "453",
+                                    "admin2Name": "Travis County",
+                                    "latitude": 30.36377,
+                                    "longitude": -97.97959,
+                                    "country": "US",
+                                    "countryName": "United States"
+                                },
+                                "company": {
+                                    "name": "Surgery Partners",
+                                    "key": "a94fd40cdeaff87c",
+                                    "sourceName": "Surgery Partners",
+                                    "tier": "FREE",
+                                    "industry": "INSURANCE",
+                                    "sectors": [
+                                        "Hospitals & Health Clinics"
+                                    ],
+                                    "size": "5,001 to 10,000",
+                                    "revenue": "$1B to $5B (USD)",
+                                    "fullDescription": "We see value in individuality. Surgery Partners doesn't take a \"one-size-fits-all\" approach to healthcare. We're about meeting the diverse healthcare needs of the communities we serve.  We are a leading operator of surgical facilities across the United States. Additionally, through our portfolio of companies, we provide ancillary services focused on developing innovative solutions for our physicians and patients. We are dedicated to improving quality of care in a convenient and cost-effective ma",
+                                    "subsidiaryOptOut": false,
+                                    "urls": {
+                                        "website": "http://www.surgery-partners.com",
+                                        "indeed": "https://www.indeed.com/cmp/Surgery-Partners"
+                                    },
+                                    "logos": {
+                                        "square": "https://d2q79iu7y748jz.cloudfront.net/s/_squarelogo/256x256/74db554b3e08ed27636e0cde8d0a8fec",
+                                        "squareSizes": {
+                                            "url64": "https://d2q79iu7y748jz.cloudfront.net/s/_squarelogo/64x64/74db554b3e08ed27636e0cde8d0a8fec",
+                                            "url96": "https://d2q79iu7y748jz.cloudfront.net/s/_squarelogo/96x96/74db554b3e08ed27636e0cde8d0a8fec",
+                                            "url128": "https://d2q79iu7y748jz.cloudfront.net/s/_squarelogo/128x128/74db554b3e08ed27636e0cde8d0a8fec",
+                                            "url256": "https://d2q79iu7y748jz.cloudfront.net/s/_squarelogo/256x256/74db554b3e08ed27636e0cde8d0a8fec"
+                                        }
+                                    },
+                                    "ratings": {
+                                        "overall": 2.7,
+                                        "count": 234,
+                                        "reviewCount": 234
+                                    },
+                                    "stockSymbol": "SGRY",
+                                    "addresses": [
+                                        "Nashville"
+                                    ]
+                                },
+                                "dates": {
+                                    "posted": "2026-10-20",
+                                    "onIndeed": "2026-10-20T23:11:47.835Z",
+                                    "age": "2 days ago",
+                                    "postedToday": false
+                                },
+                                "workArrangement": {
+                                    "isRemote": false
+                                }
+                            },
+                            {
+                                "id": "430e51301878c152",
+                                "title": {
+                                    "text": "Aesthetic Nurse Injector - RN",
+                                    "normalized": "nurse injector"
+                                },
+                                "urls": {
+                                    "indeed": "https://www.indeed.com/viewjob?jk=430e51301878c152",
+                                    "external": "https://managermauimedspa.bamboohr.com/careers/25?source=indeed&src=indeed&postedDate=2026-09-30",
+                                    "apply": "https://managermauimedspa.bamboohr.com/careers/25?source=indeed&src=indeed&postedDate=2026-09-30"
+                                },
+                                "snippet": "Aesthetic Nurse Injector (RN)\n\nAbout the Role\n\nMaui MedSpa is seeking a confident, experienced, and patient-focused Registered Nurse (RN) Aesthetic Injector who is passionate about facial aesthetics, ",
+                                "salary": {
+                                    "text": "From $120,000 a year",
+                                    "min": 120000,
+                                    "currency": "USD",
+                                    "period": "yearly",
+                                    "source": "EXTRACTION",
+                                    "estimated": false,
+                                    "extras": [
+                                        "Commission pay"
+                                    ]
+                                },
+                                "location": {
+                                    "formatted": "Austin, TX 78717",
+                                    "formattedShort": "Austin, TX",
+                                    "fullAddress": "Austin, TX 78717",
+                                    "city": "Austin",
+                                    "state": "TX",
+                                    "stateName": "Texas",
+                                    "admin2Code": "491",
+                                    "admin2Name": "Williamson County",
+                                    "postalCode": "78717",
+                                    "latitude": 30.497381,
+                                    "longitude": -97.77396,
+                                    "country": "US",
+                                    "countryName": "United States"
+                                },
+                                "company": {
+                                    "name": "Maui Medspa",
+                                    "key": "062976c427de4518",
+                                    "sourceName": "Maui Medspa",
+                                    "tier": "FREE",
+                                    "sectors": [
+                                        "Beauty & Wellness"
+                                    ],
+                                    "subsidiaryOptOut": false,
+                                    "urls": {
+                                        "indeed": "https://www.indeed.com/cmp/Maui-Medspa"
+                                    },
+                                    "ratings": {
+                                        "overall": 0,
+                                        "count": 0,
+                                        "reviewCount": 0
+                                    }
+                                },
+                                "dates": {
+                                    "posted": "2026-09-28",
+                                    "onIndeed": "2026-09-29T03:16:51.882Z",
+                                    "age": "24 days ago",
+                                    "postedToday": false
+                                },
+                                "workArrangement": {
+                                    "isRemote": false
+                                }
+                            }
+                        ],
+                        "count": 2,
+                        "estimatedTotalResults": 1164
+                    },
+                    "meta": {
+                        "tool": "indeed-jobs",
+                        "creditsUsed": 1,
+                        "requestId": "req_9a44c5d7ad7481971c31d3d8"
+                    }
+                }
+            }
+        }
+    ]
+}

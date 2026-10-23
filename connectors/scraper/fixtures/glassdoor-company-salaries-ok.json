@@ -1,0 +1,121 @@
+{
+    "name": "glassdoor-company-salaries-ok",
+    "description": "Scraper POST /glassdoor/company-salaries: a real recording, trimmed and PII-scrubbed by the recorder. The url is bound, so the chain does not pin the host.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "employerId": 7856,
+                    "employerUrl": "https://www.glassdoor.com/Overview/Working-at-Rocket-EI_IE7856.11,17.htm",
+                    "maxSalaries": 3
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "data": {
+                        "employerId": 7856,
+                        "status": "complete",
+                        "failedSections": [],
+                        "salaryMeta": {
+                            "resultCount": 1860,
+                            "numPages": 93,
+                            "queryLocation": {
+                                "id": 1,
+                                "name": "United States",
+                                "type": "COUNTRY"
+                            }
+                        },
+                        "salaries": [
+                            {
+                                "jobTitle": {
+                                    "gocId": 100980,
+                                    "id": 14062,
+                                    "mgocId": 10010,
+                                    "text": "Mortgage Banker"
+                                },
+                                "employer": {
+                                    "counts": {
+                                        "globalJobCount": {
+                                            "jobCount": 286
+                                        }
+                                    },
+                                    "id": 7856,
+                                    "name": "Rocket Companies, Inc.",
+                                    "ratings": {
+                                        "overallRating": 3.5
+                                    },
+                                    "shortName": "Rocket",
+                                    "squareLogoUrl": "https://media.glassdoor.com/sql/7856/rocket-companies-squareLogo-1736880869351.png"
+                                },
+                                "basePayStatistics": {
+                                    "mean": 79424.6
+                                },
+                                "totalPayStatistics": {
+                                    "percentiles": [
+                                        {
+                                            "ident": "P10",
+                                            "value": 94094.76
+                                        },
+                                        {
+                                            "ident": "P25",
+                                            "value": 121674.27
+                                        }
+                                    ]
+                                },
+                                "payPeriod": "ANNUAL"
+                            },
+                            {
+                                "jobTitle": {
+                                    "gocId": 100063,
+                                    "id": 4279,
+                                    "mgocId": 10132,
+                                    "text": "Software Engineer"
+                                },
+                                "employer": {
+                                    "counts": {
+                                        "globalJobCount": {
+                                            "jobCount": 286
+                                        }
+                                    },
+                                    "id": 7856,
+                                    "name": "Rocket Companies, Inc.",
+                                    "ratings": {
+                                        "overallRating": 3.5
+                                    },
+                                    "shortName": "Rocket",
+                                    "squareLogoUrl": "https://media.glassdoor.com/sql/7856/rocket-companies-squareLogo-1736880869351.png"
+                                },
+                                "basePayStatistics": {
+                                    "mean": 128026.15
+                                },
+                                "totalPayStatistics": {
+                                    "percentiles": [
+                                        {
+                                            "ident": "P10",
+                                            "value": 94918.16
+                                        },
+                                        {
+                                            "ident": "P25",
+                                            "value": 112347.53
+                                        }
+                                    ]
+                                },
+                                "payPeriod": "ANNUAL"
+                            }
+                        ],
+                        "count": 2,
+                        "scrapedAt": "2026-10-22T22:03:22.843Z"
+                    },
+                    "meta": {
+                        "tool": "glassdoor-company-salaries",
+                        "creditsUsed": 2,
+                        "requestId": "req_31c486d0c55de66c2e404c09"
+                    }
+                }
+            }
+        }
+    ]
+}

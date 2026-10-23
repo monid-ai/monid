@@ -1,0 +1,80 @@
+{
+    "name": "glassdoor-company-profile-ok",
+    "description": "Scraper POST /glassdoor/company-profile: a real recording, trimmed and PII-scrubbed by the recorder. The url is bound, so the chain does not pin the host.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "employerUrl": "https://www.glassdoor.com/Overview/Working-at-Rocket-EI_IE7856.11,17.htm"
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "data": {
+                        "company": {
+                            "employerId": 7856,
+                            "name": "Rocket Companies, Inc.",
+                            "ratings": {
+                                "businessOutlookRating": 0.53,
+                                "careerOpportunitiesRating": 3.4,
+                                "ceoRating": 0.68,
+                                "ceoRatingsCount": 318,
+                                "compensationAndBenefitsRating": 3.5,
+                                "cultureAndValuesRating": 3.6,
+                                "diversityAndInclusionRating": 4,
+                                "overallRating": 3.6,
+                                "ratedCeo": {
+                                    "id": 1,
+                                    "largePhoto": "https://media.glassdoor.com/people/example-ceo.png",
+                                    "name": "Example Executive",
+                                    "regularPhoto": "https://media.glassdoor.com/people/example-ceo.png",
+                                    "title": "Chief Executive Officer"
+                                },
+                                "recommendToFriendRating": 0.59,
+                                "reviewCount": 6661,
+                                "seniorManagementRating": 3.1,
+                                "workLifeBalanceRating": 3.3
+                            },
+                            "counts": {
+                                "benefitCount": 2302,
+                                "globalJobCount": {
+                                    "jobCount": 286
+                                },
+                                "interviewCount": 1861,
+                                "photoCount": 70,
+                                "reviewCount": 6664,
+                                "salaryCount": 10711
+                            },
+                            "headquarters": "Detroit, MI",
+                            "size": "10000+ Employees",
+                            "website": "https://www.rocketcompanies.com",
+                            "ceo": {
+                                "id": 1,
+                                "name": "Example Executive",
+                                "photoUrl": "https://media.glassdoor.com/people/example-ceo.png",
+                                "title": "Chief Executive Officer"
+                            },
+                            "primaryIndustry": {
+                                "industryId": 200048,
+                                "industryName": "Banking & Lending",
+                                "sectorId": 10010,
+                                "sectorName": "Financial Services"
+                            },
+                            "allReviewsCount": 6664
+                        },
+                        "status": "complete",
+                        "failedSections": []
+                    },
+                    "meta": {
+                        "tool": "glassdoor-company-profile",
+                        "creditsUsed": 2,
+                        "requestId": "req_05998b7556abfcb59cd83be1"
+                    }
+                }
+            }
+        }
+    ]
+}
