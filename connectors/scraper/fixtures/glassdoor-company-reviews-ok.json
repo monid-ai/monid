@@ -1,0 +1,199 @@
+{
+    "name": "glassdoor-company-reviews-ok",
+    "description": "Scraper POST /glassdoor/company-reviews: a real recording whose free-text review fields were replaced with placeholders; ratings, counts, and shape are as recorded. The url is bound, so the chain does not pin the host.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "employerId": 7856,
+                    "maxReviews": 2
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "data": {
+                        "reviews": [
+                            {
+                                "reviewId": 106022676,
+                                "url": "https://www.glassdoor.com/Reviews/Employee-Review-Rocket-RVW106022676.htm",
+                                "postedAt": "2026-10-19T13:05:40.977",
+                                "content": {
+                                    "summary": "Example review summary 1",
+                                    "pros": "Example pros 1.",
+                                    "cons": "Example cons 1.",
+                                    "languageId": "eng"
+                                },
+                                "ratings": {
+                                    "overall": 3,
+                                    "workLifeBalance": 3,
+                                    "cultureAndValues": 3,
+                                    "seniorLeadership": 3,
+                                    "compensationAndBenefits": 3,
+                                    "careerOpportunities": 3,
+                                    "diversityAndInclusion": 5,
+                                    "ceo": "NO_OPINION",
+                                    "outlook": "NEGATIVE",
+                                    "recommendation": "POSITIVE"
+                                },
+                                "employment": {
+                                    "isCurrentJob": false,
+                                    "status": "REGULAR",
+                                    "employmentLength": 0,
+                                    "jobEndingYear": 2026,
+                                    "jobTitle": {
+                                        "id": 62624,
+                                        "text": "Business Strategist"
+                                    },
+                                    "location": {
+                                        "id": 1134644,
+                                        "name": "Detroit, MI",
+                                        "type": "CITY"
+                                    }
+                                }
+                            },
+                            {
+                                "reviewId": 106021355,
+                                "url": "https://www.glassdoor.com/Reviews/Employee-Review-Rocket-RVW106021355.htm",
+                                "postedAt": "2026-10-19T11:23:14.590",
+                                "content": {
+                                    "summary": "Example review summary 2",
+                                    "pros": "Example pros 2.",
+                                    "cons": "Example cons 2.",
+                                    "languageId": "eng"
+                                },
+                                "ratings": {
+                                    "overall": 2,
+                                    "workLifeBalance": 2,
+                                    "cultureAndValues": 3,
+                                    "seniorLeadership": 2,
+                                    "compensationAndBenefits": 4,
+                                    "careerOpportunities": 3,
+                                    "diversityAndInclusion": 4,
+                                    "ceo": "NO_OPINION",
+                                    "outlook": "NEGATIVE",
+                                    "recommendation": "NEGATIVE"
+                                },
+                                "employment": {
+                                    "isCurrentJob": true,
+                                    "status": "REGULAR",
+                                    "employmentLength": 0,
+                                    "jobTitle": {
+                                        "id": 850922,
+                                        "text": "Default Resolution Specialist"
+                                    },
+                                    "location": {
+                                        "id": 1134644,
+                                        "name": "Detroit, MI",
+                                        "type": "CITY"
+                                    }
+                                }
+                            }
+                        ],
+                        "companyStats": {
+                            "employerId": 7856,
+                            "ratings": {
+                                "overallRating": 3.6,
+                                "reviewCount": 6661,
+                                "ceoRating": 0.68,
+                                "ceoRatingsCount": 318,
+                                "recommendToFriendRating": 0.59,
+                                "businessOutlookRating": 0.53,
+                                "cultureAndValuesRating": 3.6,
+                                "careerOpportunitiesRating": 3.4,
+                                "workLifeBalanceRating": 3.3,
+                                "seniorManagementRating": 3.1,
+                                "compensationAndBenefitsRating": 3.5,
+                                "diversityAndInclusionRating": 4,
+                                "ratedCeo": {
+                                    "id": 1319755,
+                                    "name": "Varun Krishna",
+                                    "title": "Chief Executive Officer",
+                                    "regularPhoto": "https://media.glassdoor.com/people/sql/7856/rocket-companies-ceo1713752472105.png",
+                                    "largePhoto": "https://media.glassdoor.com/people/sqll/7856/rocket-companies-ceo1713752472105.png"
+                                }
+                            },
+                            "ratingCountDistribution": {
+                                "overall": {
+                                    "1": 682,
+                                    "2": 702,
+                                    "3": 1374,
+                                    "4": 1697,
+                                    "5": 2205
+                                },
+                                "cultureAndValues": {
+                                    "1": 628,
+                                    "2": 448,
+                                    "3": 650,
+                                    "4": 902,
+                                    "5": 2605
+                                },
+                                "careerOpportunities": {
+                                    "1": 504,
+                                    "2": 513,
+                                    "3": 1001,
+                                    "4": 1199,
+                                    "5": 2120
+                                },
+                                "workLifeBalance": {
+                                    "1": 1646,
+                                    "2": 691,
+                                    "3": 819,
+                                    "4": 899,
+                                    "5": 1258
+                                },
+                                "seniorManagement": {
+                                    "1": 917,
+                                    "2": 599,
+                                    "3": 1003,
+                                    "4": 1112,
+                                    "5": 1648
+                                },
+                                "compensationAndBenefits": {
+                                    "1": 415,
+                                    "2": 509,
+                                    "3": 1164,
+                                    "4": 1355,
+                                    "5": 1887
+                                },
+                                "diversityAndInclusion": {
+                                    "1": 255,
+                                    "2": 148,
+                                    "3": 382,
+                                    "4": 615,
+                                    "5": 1678
+                                },
+                                "recommendToFriend": {
+                                    "RECOMMEND": 3033,
+                                    "WONT_RECOMMEND": 1706
+                                }
+                            },
+                            "filteredReviewsCountByLang": [
+                                {
+                                    "isoLanguage": "eng",
+                                    "count": 6651
+                                },
+                                {
+                                    "isoLanguage": "spa",
+                                    "count": 5
+                                }
+                            ],
+                            "allReviewsCount": 6664,
+                            "filteredReviewsCount": 6651,
+                            "ratedReviewsCount": 6664
+                        },
+                        "count": 2,
+                        "totalReviews": 6651
+                    },
+                    "meta": {
+                        "tool": "glassdoor-company-reviews",
+                        "creditsUsed": 2,
+                        "requestId": "req_754135ec5399aab5a78b3a5a"
+                    }
+                }
+            }
+        }
+    ]
+}

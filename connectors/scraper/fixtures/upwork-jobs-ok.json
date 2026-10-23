@@ -1,0 +1,142 @@
+{
+    "name": "upwork-jobs-ok",
+    "description": "Scraper POST /upwork/jobs: a real recording, trimmed and PII-scrubbed by the recorder. The url is bound, so the chain does not pin the host.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "keyword": "TypeScript developer",
+                    "jobTypes": [
+                        "hourly"
+                    ],
+                    "sort": "recency",
+                    "maxItems": 3
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "data": {
+                        "jobs": [
+                            {
+                                "id": "~022113101893289196200",
+                                "title": "Senior Full-Stack Engineer | Python, AI & API Development | Long-Term Opportunity",
+                                "url": "https://www.upwork.com/jobs/Senior-Full-Stack-Engineer-Python-amp-API-span-class-highlight-Development-span-Long-Term-Opportunity_~022113101893289196200/",
+                                "postedText": "2026-10-22T02:55:45.020Z",
+                                "description": {
+                                    "snippet": "I'm looking for an experienced, hands-on Senior Full-Stack Engineer to support the development and ongoing improvement of my software projects. I'm looking for someone with strong technical skills, sound engineering judgment, and the ability to take ownership of development tasks from planning through deployment. The ideal candidate has experience building real-world web applications, backend services, APIs, and AI-powered features. You should be comfortable working independently, understanding ",
+                                    "text": null,
+                                    "html": null
+                                },
+                                "locationEligibility": null,
+                                "contract": {
+                                    "type": "hourly",
+                                    "hourlyRate": {
+                                        "min": 60,
+                                        "max": 120,
+                                        "currency": "USD"
+                                    },
+                                    "fixedPrice": null,
+                                    "experienceLevel": "Expert",
+                                    "duration": "More than 6 months",
+                                    "weeklyHours": "Less than 30 hrs/week"
+                                },
+                                "skills": [
+                                    "API Development",
+                                    "Back-End Development"
+                                ],
+                                "activity": {
+                                    "proposals": null,
+                                    "interviewing": null,
+                                    "invitesSent": null,
+                                    "unansweredInvites": null
+                                },
+                                "client": {
+                                    "paymentVerified": null,
+                                    "location": null,
+                                    "localTime": null,
+                                    "memberSince": null,
+                                    "totalSpentText": null,
+                                    "hiresText": null,
+                                    "hoursText": null,
+                                    "rating": null,
+                                    "reviewCount": null
+                                },
+                                "meta": {
+                                    "sourceUrl": "https://www.upwork.com/nx/search/jobs/?q=TypeScript+developer&sort=recency&t=0",
+                                    "page": 1,
+                                    "position": 1,
+                                    "scrapedAt": "2026-10-22T22:00:27.559Z",
+                                    "detailStatus": "not_requested"
+                                }
+                            },
+                            {
+                                "id": "~022113077029286601014",
+                                "title": "Full-Stack Developer for an AI Invoice Processing App — Long-Term",
+                                "url": "https://www.upwork.com/jobs/Full-Stack-span-class-highlight-Developer-span-for-Invoice-Processing-App-Long-Term_~022113077029286601014/",
+                                "postedText": "2026-10-22T01:16:40.361Z",
+                                "description": {
+                                    "snippet": "Build an app where small businesses upload PDF invoices and AI extracts the vendor, invoice number, dates, line items, tax, and total. - Next.js frontend, Python/FastAPI backend, and PostgreSQL. - Support scanned PDFs using OCR. - Show the invoice beside editable extracted fields for review. - Flag missing fields, incorrect totals, and duplicate invoices. - Export approved invoices to CSV. - Include login and separate data for each business. - Deploy the MVP with setup documentation. Start with ",
+                                    "text": null,
+                                    "html": null
+                                },
+                                "locationEligibility": null,
+                                "contract": {
+                                    "type": "hourly",
+                                    "hourlyRate": {
+                                        "min": 50,
+                                        "max": 60,
+                                        "currency": "USD"
+                                    },
+                                    "fixedPrice": null,
+                                    "experienceLevel": "Expert",
+                                    "duration": "3 to 6 months",
+                                    "weeklyHours": "30+ hrs/week"
+                                },
+                                "skills": [
+                                    "TypeScript",
+                                    "Full-Stack Development"
+                                ],
+                                "activity": {
+                                    "proposals": null,
+                                    "interviewing": null,
+                                    "invitesSent": null,
+                                    "unansweredInvites": null
+                                },
+                                "client": {
+                                    "paymentVerified": null,
+                                    "location": null,
+                                    "localTime": null,
+                                    "memberSince": null,
+                                    "totalSpentText": null,
+                                    "hiresText": null,
+                                    "hoursText": null,
+                                    "rating": null,
+                                    "reviewCount": null
+                                },
+                                "meta": {
+                                    "sourceUrl": "https://www.upwork.com/nx/search/jobs/?q=TypeScript+developer&sort=recency&t=0",
+                                    "page": 1,
+                                    "position": 2,
+                                    "scrapedAt": "2026-10-22T22:00:27.559Z",
+                                    "detailStatus": "not_requested"
+                                }
+                            }
+                        ],
+                        "count": 3,
+                        "estimatedTotal": 44,
+                        "truncated": true,
+                        "partial": false
+                    },
+                    "meta": {
+                        "tool": "upwork-jobs",
+                        "creditsUsed": 1,
+                        "requestId": "req_fa3ffc6687dcaa94217ae0ae"
+                    }
+                }
+            }
+        }
+    ]
+}

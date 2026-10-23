@@ -1,0 +1,90 @@
+{
+    "name": "glassdoor-company-interviews-ok",
+    "description": "Scraper POST /glassdoor/company-interviews: a real recording, trimmed and PII-scrubbed by the recorder. The url is bound, so the chain does not pin the host.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "employerId": 7856,
+                    "maxInterviews": 2
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "data": {
+                        "employerId": 7856,
+                        "status": "complete",
+                        "failedSections": [],
+                        "interviewStats": {
+                            "difficultySubmissionCount": 1783,
+                            "difficultySum": 4682,
+                            "filteredInterviewCount": 1857,
+                            "totalInterviewCount": 1856,
+                            "interviewExperienceCounts": [
+                                {
+                                    "count": 1116,
+                                    "percentage": 62.276787,
+                                    "type": "POSITIVE"
+                                },
+                                {
+                                    "count": 305,
+                                    "percentage": 17.02009,
+                                    "type": "NEGATIVE"
+                                }
+                            ],
+                            "interviewObtainedChannelCounts": [
+                                {
+                                    "count": 145,
+                                    "percentage": 9.241555,
+                                    "type": "RECRUITER"
+                                },
+                                {
+                                    "count": 20,
+                                    "percentage": 1.2746973,
+                                    "type": "OTHER"
+                                }
+                            ]
+                        },
+                        "interviews": [
+                            {
+                                "jobTitle": {
+                                    "text": "Mlo"
+                                },
+                                "reviewDateTime": "2026-05-13T16:00:52.257",
+                                "difficulty": "EASY",
+                                "outcome": "ACCEPT_OFFER",
+                                "userQuestions": [
+                                    {
+                                        "answerCount": 0,
+                                        "question": "What animal would you be?"
+                                    }
+                                ],
+                                "experience": "POSITIVE"
+                            },
+                            {
+                                "jobTitle": {
+                                    "text": "Summer Itern"
+                                },
+                                "reviewDateTime": "2026-10-22T14:09:11.563",
+                                "difficulty": "VERY_EASY",
+                                "outcome": "ACCEPT_OFFER",
+                                "userQuestions": [],
+                                "experience": "POSITIVE"
+                            }
+                        ],
+                        "count": 2,
+                        "scrapedAt": "2026-10-22T22:03:36.375Z"
+                    },
+                    "meta": {
+                        "tool": "glassdoor-company-interviews",
+                        "creditsUsed": 2,
+                        "requestId": "req_4d1e8f4dcf379e31af1c4781"
+                    }
+                }
+            }
+        }
+    ]
+}

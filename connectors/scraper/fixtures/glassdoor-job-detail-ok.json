@@ -1,0 +1,132 @@
+{
+    "name": "glassdoor-job-detail-ok",
+    "description": "Scraper POST /glassdoor/job-detail: a real recording, trimmed and PII-scrubbed by the recorder. The url is bound, so the chain does not pin the host.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "jobId": 1010211603604
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "data": {
+                        "job": {
+                            "jobId": 1010211603604,
+                            "url": "https://www.glassdoor.com/job-listing/software-engineer-i-rocket-companies-JV_IC1134644_KO0,19_KE20,36.htm?jl=1010211603604",
+                            "profile": {
+                                "title": "Software Engineer I",
+                                "normalizedTitle": "software engineer",
+                                "description": "<div><div><div><p>As a Software Engineer I within Servicing Technology, you&rsquo;ll help build and maintain the client-facing and team member-facing servicing applications used by millions of Rocket homeowners. Servicing Technology is undergoing a full-scale System of Record modernization, and you&rsquo;ll contribute across the stack &mdash; front end and back end &mdash; while growing your craft alongside experienced engineers.</p><p><br>\nThis is a role for someone eager to ship real products ",
+                                "discoverDate": "2026-09-28T00:00:00",
+                                "ageInDays": 86,
+                                "postedDate": "2026-07-28",
+                                "expired": false,
+                                "easyApply": false,
+                                "jobType": [
+                                    "Full-time"
+                                ],
+                                "remoteWorkTypes": [],
+                                "skills": [
+                                    "C#",
+                                    "GitHub"
+                                ],
+                                "education": [],
+                                "yearsOfExperience": "1"
+                            },
+                            "location": {
+                                "name": "Detroit, MI",
+                                "type": "C",
+                                "city": "Detroit, MI",
+                                "state": "Michigan",
+                                "country": "United States",
+                                "lat": 42.33139,
+                                "lng": -83.04583
+                            },
+                            "compensation": {
+                                "salaryMin": 84000,
+                                "salaryMax": 207000,
+                                "salaryMedian": 145500,
+                                "currency": "USD",
+                                "period": "ANNUAL",
+                                "source": "EMPLOYER_PROVIDED"
+                            },
+                            "employer": {
+                                "id": 7856,
+                                "name": "Rocket Companies, Inc.",
+                                "shortName": "Rocket",
+                                "logoUrl": "https://media.glassdoor.com/sql/7856/rocket-companies-squareLogo-1736880869351.png",
+                                "size": "10000+ Employees",
+                                "sizeCategory": "GIANT",
+                                "type": "Company - Public",
+                                "revenue": "$10+ billion (USD)",
+                                "yearFounded": 1985,
+                                "headquarters": "Detroit, MI",
+                                "industry": "Banking & Lending",
+                                "sector": "Financial Services",
+                                "website": "https://www.rocketcompanies.com",
+                                "ceo": {
+                                    "name": "Varun Krishna",
+                                    "photoUrl": "https://media.glassdoor.com/people/sql/7856/rocket-companies-ceo1713752472105.png"
+                                },
+                                "ratings": {
+                                    "overall": 3.5,
+                                    "careerOpportunities": 3.4,
+                                    "compensationAndBenefits": 3.4,
+                                    "cultureAndValues": 3.6,
+                                    "seniorManagement": 3,
+                                    "workLifeBalance": 3.2,
+                                    "ceoRating": 0.64,
+                                    "ceoRatingsCount": 286,
+                                    "recommendToFriend": 0.56,
+                                    "businessOutlook": 0.51,
+                                    "diversityAndInclusion": 4
+                                },
+                                "reviewCount": 6664,
+                                "salaryCount": 10711,
+                                "openJobCount": 286,
+                                "links": {
+                                    "overview": "https://www.glassdoor.com/Overview/Working-at-Rocket-EI_IE7856.11,17.htm",
+                                    "reviews": "https://www.glassdoor.com/Reviews/Rocket-Reviews-E7856.htm",
+                                    "salaries": "https://www.glassdoor.com/Salary/Rocket-Salaries-E7856.htm",
+                                    "benefits": "https://www.glassdoor.com/Benefits/Rocket-Benefits-E7856.htm",
+                                    "photos": "https://www.glassdoor.com/Photos/Rocket-Office-Photos-E7856.htm"
+                                },
+                                "benefits": {
+                                    "rating": 4.5,
+                                    "reviewCount": 1085,
+                                    "summary": "<p><strong>We Invest In What Matters</strong></p><p>Our team members are the ultimate driving force behind our success, which is why we invest in each and every one of them. From training and development programs to an extensive range of benefits and perks, you’ll have peace of mind knowing we’ve got your back.</p><ul><li><p>Exclusive mortgage benefits for team members,&nbsp;family and friends&nbsp;</p></li><li><p>Rock Academy (100% fully-funded degrees)</p></li><li><p>Team Member Stock Purchase",
+                                    "highlights": [
+                                        {
+                                            "name": "Health Insurance",
+                                            "commentCount": 212,
+                                            "phrase": "For a single person it can cost around 145 a month, with a 375 deductible and 1500 max out of pocket. That also covers a lot. Low copays."
+                                        },
+                                        {
+                                            "name": "401K Plan",
+                                            "commentCount": 130,
+                                            "phrase": "Not competitive, 4% matching which isn’t much"
+                                        }
+                                    ]
+                                }
+                            },
+                            "meta": {
+                                "seoJobLink": "https://www.glassdoor.com/job-listing/software-engineer-i-rocket-companies-JV_IC1134644_KO0,19_KE20,36.htm?jl=1010211603604",
+                                "scrapedAt": "2026-10-22T22:02:33.780Z"
+                            }
+                        },
+                        "scrapedAt": "2026-10-22T22:02:33.780Z"
+                    },
+                    "meta": {
+                        "tool": "glassdoor-job-detail",
+                        "creditsUsed": 2,
+                        "requestId": "req_d5be2ce4ec9f69c1633f75c5"
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,79 @@
+{
+    "name": "linkedin-post-ok",
+    "description": "Scraper POST /linkedin/post: a real recording whose post, comment text, and people were replaced with placeholders; shape, counts, and meter are as recorded. The url is bound, so the chain does not pin the host.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "url": "https://www.linkedin.com/feed/update/urn:li:activity:7000000000000000000",
+                    "maxComments": 3
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "data": {
+                        "post": {
+                            "activityUrn": "7000000000000000000",
+                            "text": "Example post text. The recorded text was replaced with a placeholder.",
+                            "createdAt": 1774616332249,
+                            "likeCount": 2773,
+                            "commentCount": 223,
+                            "repostCount": 0,
+                            "author": {
+                                "urn": "",
+                                "firstName": "Example",
+                                "lastName": "Author",
+                                "headline": "",
+                                "publicIdentifier": "example-author",
+                                "profilePicUrl": ""
+                            }
+                        },
+                        "comments": [
+                            {
+                                "urn": "ssr-comment-0",
+                                "text": "Example comment 1.",
+                                "createdAt": 1774616895774,
+                                "likeCount": 81,
+                                "replyCount": 0,
+                                "parentUrn": "7000000000000000000",
+                                "author": {
+                                    "urn": "",
+                                    "firstName": "Sam",
+                                    "lastName": "Rivera",
+                                    "headline": "",
+                                    "publicIdentifier": "",
+                                    "profilePicUrl": ""
+                                }
+                            },
+                            {
+                                "urn": "ssr-comment-1",
+                                "text": "Example comment 2.",
+                                "createdAt": 1774623248694,
+                                "likeCount": 14,
+                                "replyCount": 0,
+                                "parentUrn": "7000000000000000000",
+                                "author": {
+                                    "urn": "",
+                                    "firstName": "Alex",
+                                    "lastName": "Morgan",
+                                    "headline": "",
+                                    "publicIdentifier": "",
+                                    "profilePicUrl": ""
+                                }
+                            }
+                        ],
+                        "totalComments": 223
+                    },
+                    "meta": {
+                        "tool": "linkedin-post",
+                        "creditsUsed": 2,
+                        "requestId": "req_084ba5b270030c3976ace968"
+                    }
+                }
+            }
+        }
+    ]
+}

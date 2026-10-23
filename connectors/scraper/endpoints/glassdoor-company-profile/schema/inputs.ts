@@ -1,0 +1,62 @@
+import { z } from "zod";
+import {
+    glassdoorEmployerMustMatch,
+    zGlassdoorEmployerBody,
+} from "../../../schema/glassdoor.ts";
+
+/** `POST /glassdoor/company-profile` request body, the vendor mirror. */
+export const zGlassdoorCompanyProfileBody = zGlassdoorEmployerBody({
+    fields: z.array(z.enum([
+        "*",
+        "name",
+        "ratings",
+        "counts",
+        "headquarters",
+        "size",
+        "website",
+        "ceo",
+        "primaryIndustry",
+        "allReviewsCount",
+        "employerId",
+        "id",
+        "shortName",
+        "activeStatus",
+        "approvalStatus",
+        "isValid",
+        "revenue",
+        "sizeCategory",
+        "type",
+        "yearFounded",
+        "primaryIndustryId",
+        "bestProfile",
+        "squareLogoUrl",
+        "regularLogoUrl",
+        "largeLogoUrl",
+        "overview",
+        "ratingCountDistribution",
+        "filteredReviewsCountByLang",
+        "filteredReviewsCount",
+        "ratedReviewsCount",
+        "demographicRatings",
+        "reviewLocations",
+        "officeLocations",
+        "employerManagedContent",
+        "companyUpdates",
+        "companyUpdatesTotalCount",
+        "photos",
+        "links",
+        "awards",
+        "bestPlacesToWork",
+        "bestLedCompanies",
+        "coverPhoto",
+        "officeAddresses",
+        "parent",
+        "subsidiaries",
+        "siblings",
+        "scrapedAt",
+    ])).optional().describe(
+        "Company fields to include. Omit for the defaults (employerId, " +
+            "name, ratings, counts, headquarters, size, website, ceo, " +
+            'primaryIndustry, allReviewsCount). Use ["*"] for every field.',
+    ),
+}, glassdoorEmployerMustMatch);

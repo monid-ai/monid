@@ -1,0 +1,102 @@
+{
+    "name": "glassdoor-company-benefits-ok",
+    "description": "Scraper POST /glassdoor/company-benefits: a real recording, trimmed and PII-scrubbed by the recorder. The url is bound, so the chain does not pin the host.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "employerId": 7856,
+                    "maxBenefitReviews": 2
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "data": {
+                        "employerId": 7856,
+                        "status": "complete",
+                        "failedSections": [],
+                        "overallRating": 4.5,
+                        "totalReviews": 1085,
+                        "summary": "<p><strong>We Invest In What Matters</strong></p><p>Our team members are the ultimate driving force behind our success, which is why we invest in each and every one of them. From training and development programs to an extensive range of benefits and perks, you’ll have peace of mind knowing we’ve got your back.</p><ul><li><p>Exclusive mortgage benefits for team members,&nbsp;family and friends&nbsp;</p></li><li><p>Rock Academy (100% fully-funded degrees)</p></li><li><p>Team Member Stock Purchase",
+                        "benefits": [
+                            {
+                                "category": "Insurance, Health & Wellness",
+                                "name": "Health Insurance",
+                                "rating": 4.6,
+                                "reviewCount": 212,
+                                "verified": true
+                            },
+                            {
+                                "category": "Insurance, Health & Wellness",
+                                "name": "Dental Insurance",
+                                "rating": 4.4,
+                                "reviewCount": 31,
+                                "verified": true
+                            }
+                        ],
+                        "benefitReviews": [
+                            {
+                                "benefitComments": [
+                                    {
+                                        "comment": "Good benefits, not great 401K match",
+                                        "helpfulVotes": 0,
+                                        "id": 14578421
+                                    }
+                                ],
+                                "city": {
+                                    "country": {
+                                        "name": "United States"
+                                    },
+                                    "metro": {
+                                        "name": "Detroit, MI"
+                                    },
+                                    "name": "Detroit, MI",
+                                    "state": {
+                                        "name": "Michigan"
+                                    }
+                                },
+                                "createDate": "2026-10-08T17:35:28.723",
+                                "currentJob": false,
+                                "id": 14596355,
+                                "rating": 3,
+                                "userEnteredJobTitle": "Product Manager"
+                            },
+                            {
+                                "benefitComments": [
+                                    {
+                                        "comment": "Cool job great experience will do",
+                                        "helpfulVotes": 0,
+                                        "id": 14564877
+                                    }
+                                ],
+                                "city": {
+                                    "country": {
+                                        "name": "United States"
+                                    },
+                                    "metro": null,
+                                    "name": "Arkwright, NY",
+                                    "state": {
+                                        "name": "New York State"
+                                    }
+                                },
+                                "createDate": "2026-10-01T21:24:03.593",
+                                "currentJob": false,
+                                "id": 14582811,
+                                "rating": 5,
+                                "userEnteredJobTitle": "Loan Officer"
+                            }
+                        ]
+                    },
+                    "meta": {
+                        "tool": "glassdoor-company-benefits",
+                        "creditsUsed": 2,
+                        "requestId": "req_c5e36f76e900cf13d7ee6f6c"
+                    }
+                }
+            }
+        }
+    ]
+}
