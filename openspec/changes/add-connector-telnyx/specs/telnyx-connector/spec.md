@@ -17,9 +17,9 @@ credit pool and no consolidate hook. Exactly `telnyx#web_search` SHALL be added.
 The endpoint SHALL consume 0.005 default credits per RESULT unit, estimate
 one, and settle one for a nonempty `data.results.web` array or zero for an
 empty array. Source: https://telnyx.com/products/web-search-api FAQ,
-"$5 per 1,000 calls", checked 2026-10-22. Telnyx prices per call; an empty
-search is still an upstream call, which the buyer is not billed for (Monid
-absorbs it, search1api #40 posture).
+"$5 per 1,000 calls", checked 2026-10-22. Any upstream cost for an empty
+search is not passed to the buyer. This follows the search1api #40 design
+posture; it does not establish actual Telnyx empty/error/livecrawl charges.
 
 #### Scenario: Any positive result count
 - WHEN a successful response contains 1, 3, 10 or 100 web results

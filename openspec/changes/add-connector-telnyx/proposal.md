@@ -19,7 +19,7 @@ capability.
   `data.results.web` is non-empty, regardless of result count. Source:
   "$5 per 1,000 calls", https://telnyx.com/products/web-search-api FAQ,
   checked 2026-10-22. An empty result list bills the buyer 0 (search1api
-  #40 / keenable posture — Monid absorbs the upstream call). The evidence fn
+  #40 / keenable posture — any upstream empty-call cost is not passed to the buyer). The evidence fn
   reads the array with strict `utils.json.len`, so a 2xx without
   `data.results.web` (or with a non-array value) fails `FN_CONTRACT` instead
   of settling as an empty search.

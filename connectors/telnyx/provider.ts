@@ -8,8 +8,9 @@ import { defineProvider, presets } from "@shared/core";
  *
  * Billing: Telnyx publishes "$5 per 1,000 calls" for search
  * (https://telnyx.com/products/web-search-api FAQ, checked 2026-10-22)
- * ⇒ $0.005 per search, US-dollar pool. No separate livecrawl price is
- * published. REST responses carry no cost receipt, so there is no
+ * ⇒ $0.005 per nonempty search on this connector, US-dollar pool.
+ * The pinned card also applies to livecrawl; it is not a guarantee of
+ * Telnyx account-level charges. REST responses carry no cost receipt, so there is no
  * `usage.consolidate` and the derived fold settles (keenable/search1api
  * posture).
  */

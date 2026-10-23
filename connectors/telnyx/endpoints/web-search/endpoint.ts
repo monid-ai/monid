@@ -6,9 +6,9 @@ import { zTelnyxWebSearchBody } from "./schema/inputs.ts";
  *
  * $0.005 per search ("$5 per 1,000 calls",
  * https://telnyx.com/products/web-search-api FAQ, checked 2026-10-22),
- * billed only when `data.results.web` is non-empty: Telnyx prices per call,
- * so an empty search is still an upstream call, which Monid absorbs
- * (search1api #40; keenable "searches with results").
+ * charged to the Monid buyer only when `data.results.web` is non-empty.
+ * Any upstream cost for an empty call is not passed to the buyer
+ * (search1api #40 design precedent, not a Telnyx billing guarantee).
  */
 export default defineEndpoint({
     meta: {
@@ -37,10 +37,11 @@ export default defineEndpoint({
             "`data.results.news` is absent, not empty, for most queries.",
             "After a livecrawl 504, a caller may retry with livecrawl false; " +
             "a retry is another provider request and may incur another charge.",
-            "Billed $0.005 per search that returns at least one web " +
-            "result, not per result. Empty and error responses bill 0.",
-            "livecrawl is billed at the same per-search rate; Telnyx " +
-            "publishes no separate livecrawl price.",
+            "The Monid card charges $0.005 per search that returns at least " +
+            "one web result, not per result. Empty and error responses " +
+            "settle zero Monid usage; upstream charges are not verified.",
+            "The Monid card uses the same rate for livecrawl; this does " +
+            "not establish Telnyx account-level livecrawl charges.",
         ],
     },
     request: { method: "POST", path: "/web_search" },

@@ -15,7 +15,7 @@ const ID = "telnyx#web_search";
 const fixtures = fromFileUrl(new URL("./fixtures/", import.meta.url));
 
 // "$5 per 1,000 calls", https://telnyx.com/products/web-search-api FAQ,
-// checked 2026-10-22. Empty/error runs bill 0 (no cost receipt to claim).
+// checked 2026-10-22. Empty/error runs settle zero Monid usage; no vendor cost receipt.
 const PER_SEARCH = 0.005;
 
 Deno.test(`${ID}: compiled surface — POST v2 URL, PER_UNIT $0.005, no consolidate`, async () => {
