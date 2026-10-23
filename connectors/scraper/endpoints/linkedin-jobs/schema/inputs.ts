@@ -11,11 +11,15 @@ import { linkedinNumericIdPattern } from "../../../schema/linkedin.ts";
  * rule on the filter arrays cannot reach the JSON Schema and is stated in
  * the field text.
  */
-const keyword = z.string().min(1).max(200).describe(
+/** The vendor trims the text and then needs at least one character, so a
+ *  whitespace-only value is a 400 it can never accept. */
+const nonBlankPattern = /\S/;
+
+const keyword = z.string().min(1).max(200).regex(nonBlankPattern).describe(
     'Search text, 1-200 characters, not blank, e.g. "platform engineer". ' +
         "Give exactly one of `keyword` or `companyId`.",
 );
-const location = z.string().min(1).max(200).describe(
+const location = z.string().min(1).max(200).regex(nonBlankPattern).describe(
     'Location text, 1-200 characters, not blank, e.g. "Stockholm". Valid ' +
         "only with `keyword`. Omit for no location filter.",
 );

@@ -300,6 +300,8 @@ const GATES: Record<string, { accept: Json[]; reject: Json[] }> = {
             {},
             { keyword: "platform engineer", companyId: "1337" },
             { companyId: "1337", location: "Stockholm" },
+            { keyword: "   " },
+            { keyword: "platform engineer", location: "  " },
         ],
     },
     "scraper#linkedin/job-detail": {
