@@ -1,0 +1,105 @@
+{
+    "name": "letsfg#flights/search happy (synthetic)",
+    "description": "Synthetic LetsFG flight search, LON-BCN one way, limit 2. Response shape taken from the LetsFG sandbox (POST /developers/api/v1/sandbox/flights/search, 2026-10-23), which mirrors the production schema; flight data and ids are made up, and booking_url follows the production letsfg.co offer-page scheme.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://letsfg.co/developers/api/v1/flights/search",
+                "body": {
+                    "origin": "LON",
+                    "destination": "BCN",
+                    "date_from": "2026-12-10",
+                    "currency": "EUR",
+                    "limit": 2
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "search_id": "ws_example0001",
+                    "offer_request_id": "req_example0001",
+                    "passenger_ids": ["pas_0"],
+                    "origin": "LON",
+                    "destination": "BCN",
+                    "currency": "EUR",
+                    "offers": [
+                        {
+                            "id": "off_example_vy7821",
+                            "price": 58.99,
+                            "currency": "EUR",
+                            "price_formatted": "58.99 EUR",
+                            "outbound": {
+                                "segments": [
+                                    {
+                                        "airline": "VY",
+                                        "airline_name": "Vueling",
+                                        "flight_no": "VY7821",
+                                        "origin": "LGW",
+                                        "destination": "BCN",
+                                        "origin_city": "London",
+                                        "destination_city": "Barcelona",
+                                        "departure": "2026-12-10T06:55:00",
+                                        "arrival": "2026-12-10T10:05:00",
+                                        "duration_seconds": 7800,
+                                        "cabin_class": "economy",
+                                        "aircraft": "A320"
+                                    }
+                                ],
+                                "total_duration_seconds": 7800,
+                                "stopovers": 0
+                            },
+                            "inbound": null,
+                            "airlines": ["VY"],
+                            "owner_airline": "VY",
+                            "bags_price": { "1_bag": 32.0 },
+                            "conditions": {
+                                "refundable": "Non-refundable",
+                                "changeable": "For a fee"
+                            },
+                            "booking_url": "https://letsfg.co/en?stage=results&sid=ws_example0001&offer=off_example_vy7821&offerSearch=ws_example0001&o=LON&d=BCN&dep=2026-12-10&cur=EUR&dref=example",
+                            "book_url": "https://letsfg.co/developers/api/v1/flights/book"
+                        },
+                        {
+                            "id": "off_example_ba478",
+                            "price": 94.2,
+                            "currency": "EUR",
+                            "price_formatted": "94.20 EUR",
+                            "outbound": {
+                                "segments": [
+                                    {
+                                        "airline": "BA",
+                                        "airline_name": "British Airways",
+                                        "flight_no": "BA478",
+                                        "origin": "LHR",
+                                        "destination": "BCN",
+                                        "origin_city": "London",
+                                        "destination_city": "Barcelona",
+                                        "departure": "2026-12-10T08:15:00",
+                                        "arrival": "2026-12-10T11:35:00",
+                                        "duration_seconds": 8400,
+                                        "cabin_class": "economy",
+                                        "aircraft": "A320neo"
+                                    }
+                                ],
+                                "total_duration_seconds": 8400,
+                                "stopovers": 0
+                            },
+                            "inbound": null,
+                            "airlines": ["BA"],
+                            "owner_airline": "BA",
+                            "bags_price": { "1_bag": 40.0 },
+                            "conditions": {
+                                "refundable": "Non-refundable",
+                                "changeable": "For a fee"
+                            },
+                            "booking_url": "https://letsfg.co/en?stage=results&sid=ws_example0001&offer=off_example_ba478&offerSearch=ws_example0001&o=LON&d=BCN&dep=2026-12-10&cur=EUR&dref=example",
+                            "book_url": "https://letsfg.co/developers/api/v1/flights/book"
+                        }
+                    ],
+                    "total_results": 2
+                }
+            }
+        }
+    ]
+}

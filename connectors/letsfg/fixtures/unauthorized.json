@@ -1,0 +1,18 @@
+{
+    "name": "letsfg unauthorized",
+    "description": "LetsFG 401 for a request with no X-API-Key, captured from production (POST /flights/search, 2026-10-23). The body is the same on every Developer API route.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": "API key is required."
+                }
+            }
+        }
+    ]
+}

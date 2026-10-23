@@ -1,0 +1,54 @@
+{
+    "name": "letsfg#flights/discover happy (synthetic)",
+    "description": "Synthetic LetsFG discovery batch from LON to three destinations, two priced. Response shape taken from the LetsFG sandbox (POST /developers/api/v1/sandbox/flights/discover, 2026-10-23); prices are made up.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://letsfg.co/developers/api/v1/flights/discover",
+                "body": {
+                    "origin": "LON",
+                    "destinations": ["BCN", "LIS", "ROM"],
+                    "date_from": "2026-12-10",
+                    "currency": "EUR"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "origin": "LON",
+                    "date_from": "2026-12-10",
+                    "return_from": null,
+                    "currency": "EUR",
+                    "results": [
+                        {
+                            "destination": "ROM",
+                            "price": 41.5,
+                            "currency": "EUR",
+                            "found": true
+                        },
+                        {
+                            "destination": "BCN",
+                            "price": 58.99,
+                            "currency": "EUR",
+                            "found": true
+                        },
+                        {
+                            "destination": "LIS",
+                            "price": null,
+                            "found": false
+                        }
+                    ],
+                    "summary": {
+                        "destinations_checked": 3,
+                        "prices_found": 2,
+                        "cheapest_destination": "ROM",
+                        "cheapest_price": 41.5
+                    },
+                    "data_note": "Indicative prices. Run POST /flights/search on your chosen destination for final accurate pricing.",
+                    "billed_as": "1 search for the full batch"
+                }
+            }
+        }
+    ]
+}

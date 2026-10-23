@@ -1,0 +1,23 @@
+{
+    "name": "letsfg allowance exhausted (synthetic)",
+    "description": "Synthetic LetsFG 402 with the documented search_allowance_exhausted body (https://letsfg.co/developers/docs/api-onboarding/): the key has used its free look-to-book searches and has no prepaid block left.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 402,
+                "body": {
+                    "error": "search_allowance_exhausted",
+                    "message": "You have used 200 searches since your last booking, past the 200 that come free with one.",
+                    "free_searches_per_booking": 200,
+                    "searches_since_booking": 200,
+                    "block_size": 500,
+                    "block_price_cents": 500
+                }
+            }
+        }
+    ]
+}

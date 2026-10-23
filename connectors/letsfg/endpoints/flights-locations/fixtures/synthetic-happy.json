@@ -1,0 +1,41 @@
+{
+    "name": "letsfg#flights/locations happy (synthetic)",
+    "description": "Synthetic LetsFG location lookup for London. Response shape taken from the LetsFG sandbox (GET /developers/api/v1/sandbox/flights/locations/London, 2026-10-23); the rows are illustrative.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://letsfg.co/developers/api/v1/flights/locations/London"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "query": "London",
+                    "results": [
+                        {
+                            "iata": "LON",
+                            "name": "London (all airports)",
+                            "city": "London",
+                            "country": "United Kingdom",
+                            "type": "city"
+                        },
+                        {
+                            "iata": "LHR",
+                            "name": "Heathrow",
+                            "city": "London",
+                            "country": "United Kingdom",
+                            "type": "airport"
+                        },
+                        {
+                            "iata": "LGW",
+                            "name": "Gatwick",
+                            "city": "London",
+                            "country": "United Kingdom",
+                            "type": "airport"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

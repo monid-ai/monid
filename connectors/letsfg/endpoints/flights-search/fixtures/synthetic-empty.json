@@ -1,0 +1,30 @@
+{
+    "name": "letsfg#flights/search empty (synthetic)",
+    "description": "Synthetic LetsFG flight search that completed with no flights (the documented 200 with total_results 0, https://letsfg.co/developers/docs/api-search/). LetsFG does not count it against the allowance.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://letsfg.co/developers/api/v1/flights/search",
+                "body": {
+                    "origin": "LON",
+                    "destination": "BCN",
+                    "date_from": "2026-12-10",
+                    "cabin_class": "F"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "search_id": "ws_example0002",
+                    "passenger_ids": ["pas_0"],
+                    "origin": "LON",
+                    "destination": "BCN",
+                    "currency": "EUR",
+                    "offers": [],
+                    "total_results": 0
+                }
+            }
+        }
+    ]
+}
