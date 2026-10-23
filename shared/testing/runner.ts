@@ -95,6 +95,9 @@ export interface RunEndpointOptions {
      *  local completions) — any fetch then fails loudly instead of
      *  silently consuming a placeholder chain. */
     fixture?: Fixture;
+    /** replay mode: assert the outgoing request with synthetic credentials
+     *  before serving the recorded response. */
+    assertRequest?: (request: Request) => void | Promise<void>;
     /** record mode: captured calls are pushed here. */
     sink?: RecordedCall[];
     /** Owned-resource rows served to `utils.resources` and the ownership
@@ -108,6 +111,7 @@ export interface RunEndpointOptions {
 function testTransport(opts: {
     mode: RunMode;
     fixture?: Fixture;
+    assertRequest?: RunEndpointOptions["assertRequest"];
     sink?: RecordedCall[];
     bindings?: Record<string, string>;
     /** The doc's compiled auth.credentials schema. */
@@ -141,9 +145,15 @@ function testTransport(opts: {
                         ),
                 });
             }
+            const replay = replayFetch(opts.fixture, opts.bindings ?? {});
             return directTransport({
                 params: () => Promise.resolve(testParams),
-                fetch: replayFetch(opts.fixture, opts.bindings ?? {}),
+                fetch: async (input, init) => {
+                    if (opts.assertRequest) {
+                        await opts.assertRequest(new Request(input, init));
+                    }
+                    return await replay(input, init);
+                },
             });
         }
         case "record": {
@@ -171,6 +181,7 @@ export async function loadEndpoint(
         transport: testTransport({
             mode: opts.mode,
             fixture: opts.fixture,
+            assertRequest: opts.assertRequest,
             sink: opts.sink,
             bindings: {
                 "request.url": requestUrl,
