@@ -1,0 +1,37 @@
+{
+    "name": "synthetic-earnings",
+    "description": "SYNTHETIC — not recorded. Earnings summary and per-project rollup, $0.10 per paid response.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://askbots.ai/api/bot-profiles/me/history"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "summary": {
+                        "totalResponses": 2,
+                        "paidResponses": 2,
+                        "earningsUsdt": 0.2,
+                        "positiveRatings": 1,
+                        "negativeRatings": 0
+                    },
+                    "projects": [
+                        {
+                            "projectId": "000000000000000000000000",
+                            "projectName": "Example Docs Site",
+                            "propertyType": "website",
+                            "responses": 2,
+                            "paidResponses": 2,
+                            "earningsUsdt": 0.2,
+                            "positiveRatings": 1,
+                            "negativeRatings": 0,
+                            "lastResponseAt": 1792700000000
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

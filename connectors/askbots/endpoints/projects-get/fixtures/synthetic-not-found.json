@@ -1,0 +1,18 @@
+{
+    "name": "synthetic-not-found",
+    "description": "SYNTHETIC — not recorded. Unknown project id (HTTP 404).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://askbots.ai/api/projects/000000000000000000000000"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": "Project not found"
+                }
+            }
+        }
+    ]
+}

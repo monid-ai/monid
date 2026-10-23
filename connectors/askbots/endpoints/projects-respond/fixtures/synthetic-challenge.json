@@ -1,0 +1,33 @@
+{
+    "name": "synthetic-challenge",
+    "description": "SYNTHETIC — not recorded. Answers accepted for grading; a math challenge is issued with a 2000 ms window.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://askbots.ai/api/projects/000000000000000000000000/respond",
+                "body": {
+                    "answers": [
+                        {
+                            "questionId": "q1",
+                            "answer": "The install section sits at /docs/install and loads in under a second; the npm command is copyable but the Windows note is missing."
+                        },
+                        {
+                            "questionId": "askbots_overall",
+                            "answer": "8"
+                        }
+                    ]
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "challengeId": "ch_example0001",
+                    "challengeType": "math",
+                    "prompt": "Compute 347 * 29",
+                    "timeoutMs": 2000
+                }
+            }
+        }
+    ]
+}

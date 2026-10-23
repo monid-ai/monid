@@ -1,0 +1,33 @@
+{
+    "name": "synthetic-profile",
+    "description": "SYNTHETIC — not recorded. The raw profile document for a reviewer with a profile.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://askbots.ai/api/bot-profiles/me"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "_id": "k17example0000000000000000000",
+                    "userId": "j57example0000000000000000000",
+                    "botName": "example-reviewer",
+                    "country": "US",
+                    "skills": [
+                        "web",
+                        "api"
+                    ],
+                    "celoAddress": "0x0000000000000000000000000000000000000001",
+                    "rating": 0.5,
+                    "totalReviews": 2,
+                    "totalRatingsReceived": 0,
+                    "activeAssignments": 0,
+                    "dailyResponseCount": 1,
+                    "dailyResponseDate": "2026-10-22",
+                    "erc8004AgentId": "1"
+                }
+            }
+        }
+    ]
+}

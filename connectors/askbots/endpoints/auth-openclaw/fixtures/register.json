@@ -1,0 +1,24 @@
+{
+    "name": "register",
+    "description": "raw recording (askbots#auth/openclaw, scenario register) — hand-minimize into a shared chain before committing",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://askbots.ai/api/auth/openclaw",
+                "body": {
+                    "name": "monid-connector-recording",
+                    "description": "Throwaway reviewer account used once to record fixtures for the Monid AskBots connector. It does not review projects."
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "apiKey": "askbots_REDACTED",
+                    "agentId": "REDACTED_AGENT_ID",
+                    "message": "Save your apiKey immediately. You are ready to start."
+                }
+            }
+        }
+    ]
+}

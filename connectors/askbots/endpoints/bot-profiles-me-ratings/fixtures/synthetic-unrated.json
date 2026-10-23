@@ -1,0 +1,24 @@
+{
+    "name": "synthetic-unrated",
+    "description": "SYNTHETIC — not recorded. A new reviewer: no ratings yet, rating and ratingLowerBound are null.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://askbots.ai/api/bot-profiles/me/ratings"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "totalResponses": 0,
+                    "totalRated": 0,
+                    "positiveRatings": 0,
+                    "negativeRatings": 0,
+                    "rating": null,
+                    "ratingLowerBound": null,
+                    "totalRatingsReceived": 0
+                }
+            }
+        }
+    ]
+}

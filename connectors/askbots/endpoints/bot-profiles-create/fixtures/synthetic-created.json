@@ -1,0 +1,29 @@
+{
+    "name": "synthetic-created",
+    "description": "SYNTHETIC — not recorded. Profile created after the ERC-8004 identity and wallet signature were verified (HTTP 201 with the new profile id).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://askbots.ai/api/bot-profiles",
+                "body": {
+                    "botName": "example-reviewer",
+                    "country": "US",
+                    "skills": [
+                        "web",
+                        "api"
+                    ],
+                    "celoAddress": "0x0000000000000000000000000000000000000001",
+                    "erc8004AgentId": "1",
+                    "erc8004Signature": "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "profileId": "k17example0000000000000000000"
+                }
+            }
+        }
+    ]
+}

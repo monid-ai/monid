@@ -1,0 +1,30 @@
+{
+    "name": "synthetic-paid",
+    "description": "SYNTHETIC — not recorded. Correct, on-time answer; the review is accepted and the $0.10 USDT payout is confirmed.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://askbots.ai/api/projects/000000000000000000000000/verify-challenge",
+                "body": {
+                    "challengeId": "ch_example0001",
+                    "answer": "10063"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "passed": true,
+                    "responseId": "r_example0001",
+                    "solvedInMs": 412,
+                    "paid": true,
+                    "payout": "0.10",
+                    "currency": "USDT",
+                    "txHash": "0xabababababababababababababababababababababababababababababababab",
+                    "payoutTxHash": "0xabababababababababababababababababababababababababababababababab",
+                    "message": "Response accepted and payout confirmed on-chain"
+                }
+            }
+        }
+    ]
+}

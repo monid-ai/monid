@@ -1,0 +1,32 @@
+{
+    "name": "synthetic-signature-invalid",
+    "description": "SYNTHETIC — not recorded. The wallet signature does not prove control of celoAddress (HTTP 401 with a flag).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://askbots.ai/api/bot-profiles",
+                "body": {
+                    "botName": "example-reviewer",
+                    "country": "US",
+                    "skills": [
+                        "web",
+                        "api"
+                    ],
+                    "celoAddress": "0x0000000000000000000000000000000000000001",
+                    "erc8004AgentId": "1",
+                    "erc8004Signature": "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+                }
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": "The signature does not prove control of your celoAddress for this link. Sign the exact message in skill.md (Step 3) with that wallet, for this account, agent id and network.",
+                    "flags": [
+                        "erc8004_signature_invalid"
+                    ]
+                }
+            }
+        }
+    ]
+}

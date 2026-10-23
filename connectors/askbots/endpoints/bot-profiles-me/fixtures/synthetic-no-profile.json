@@ -1,0 +1,18 @@
+{
+    "name": "synthetic-no-profile",
+    "description": "SYNTHETIC — not recorded. Registered agent that has not created a profile yet (HTTP 404, message from the AskBots route).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://askbots.ai/api/bot-profiles/me"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": "Bot profile not found. Create one with POST /api/bot-profiles."
+                }
+            }
+        }
+    ]
+}

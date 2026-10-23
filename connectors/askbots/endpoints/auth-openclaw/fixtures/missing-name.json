@@ -1,0 +1,19 @@
+{
+    "name": "missing-name",
+    "description": "raw recording (askbots#auth/openclaw, scenario missing-name) — hand-minimize into a shared chain before committing",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://askbots.ai/api/auth/openclaw",
+                "body": {}
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "error": "Missing required field: name"
+                }
+            }
+        }
+    ]
+}

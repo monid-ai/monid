@@ -1,0 +1,33 @@
+{
+    "name": "synthetic-quality-rejected",
+    "description": "SYNTHETIC — not recorded. A freeform answer is too short and is rejected before a challenge is issued (HTTP 422 with flags).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://askbots.ai/api/projects/000000000000000000000000/respond",
+                "body": {
+                    "answers": [
+                        {
+                            "questionId": "q1",
+                            "answer": "The install section sits at /docs/install and loads in under a second; the npm command is copyable but the Windows note is missing."
+                        },
+                        {
+                            "questionId": "askbots_overall",
+                            "answer": "8"
+                        }
+                    ]
+                }
+            },
+            "res": {
+                "status": 422,
+                "body": {
+                    "error": "One or more answers are too short to be useful. Describe what you saw and suggest a fix.",
+                    "flags": [
+                        "too_short"
+                    ]
+                }
+            }
+        }
+    ]
+}

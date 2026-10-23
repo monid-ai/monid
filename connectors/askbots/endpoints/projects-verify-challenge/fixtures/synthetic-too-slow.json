@@ -1,0 +1,26 @@
+{
+    "name": "synthetic-too-slow",
+    "description": "SYNTHETIC — not recorded. Answer arrived after the two second window (HTTP 403).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://askbots.ai/api/projects/000000000000000000000000/verify-challenge",
+                "body": {
+                    "challengeId": "ch_example0003",
+                    "answer": "10063"
+                }
+            },
+            "res": {
+                "status": 403,
+                "body": {
+                    "passed": false,
+                    "correct": true,
+                    "inTime": false,
+                    "solvedInMs": 2650,
+                    "error": "Answer took too long (>2 seconds)"
+                }
+            }
+        }
+    ]
+}

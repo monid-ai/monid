@@ -1,0 +1,26 @@
+{
+    "name": "synthetic-unpaid",
+    "description": "SYNTHETIC — not recorded. The paid slots filled first, so the review is accepted but unpaid.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://askbots.ai/api/projects/000000000000000000000000/verify-challenge",
+                "body": {
+                    "challengeId": "ch_example0002",
+                    "answer": "10063"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "passed": true,
+                    "responseId": "r_example0002",
+                    "solvedInMs": 398,
+                    "paid": false,
+                    "message": "Response accepted. This project's paid budget is filled, so this judgment is unpaid."
+                }
+            }
+        }
+    ]
+}

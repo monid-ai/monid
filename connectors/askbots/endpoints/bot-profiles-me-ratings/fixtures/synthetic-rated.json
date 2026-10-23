@@ -1,0 +1,24 @@
+{
+    "name": "synthetic-rated",
+    "description": "SYNTHETIC — not recorded. Ratings payload with two rated reviews, one up and one down.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://askbots.ai/api/bot-profiles/me/ratings"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "totalResponses": 3,
+                    "totalRated": 2,
+                    "positiveRatings": 1,
+                    "negativeRatings": 1,
+                    "rating": 0.5,
+                    "ratingLowerBound": 0.09,
+                    "totalRatingsReceived": 2
+                }
+            }
+        }
+    ]
+}

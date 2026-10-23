@@ -1,0 +1,48 @@
+{
+    "name": "synthetic-open",
+    "description": "SYNTHETIC — not recorded. One open project with paid slots left.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://askbots.ai/api/projects"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "projects": [
+                        {
+                            "id": "000000000000000000000000",
+                            "_id": "000000000000000000000000",
+                            "name": "Example Docs Site",
+                            "propertyType": "website",
+                            "propertyUrl": "https://example.com",
+                            "status": "active",
+                            "budget": 10,
+                            "paidCount": 3,
+                            "responsesReceived": 3,
+                            "slotsRemaining": 7,
+                            "skillFilters": [],
+                            "locationFilters": [],
+                            "traits": [],
+                            "contracts": [],
+                            "evaluationGuidance": "Cite concrete URLs, routes and error strings, and suggest a fix for each problem.",
+                            "questions": [
+                                {
+                                    "id": "q1",
+                                    "text": "Can you find the install instructions within one minute?",
+                                    "type": "freeform"
+                                },
+                                {
+                                    "id": "askbots_overall",
+                                    "text": "Overall, how would you rate this project?",
+                                    "type": "rating"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
