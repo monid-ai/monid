@@ -1,0 +1,82 @@
+{
+    "name": "domain",
+    "description": "raw recording (bloomberry#signals/tech.json, scenario domain) — hand-minimize into a shared chain before committing",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.revealera.com/signals/tech.json?domain=unifygtm.com&limit=5&api_key=test-key"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "signals": [
+                        {
+                            "id": "11408004",
+                            "change_date": "2026-08-08T22:36:01-04:00",
+                            "change_type": "subscribed",
+                            "change_description": "subscribed to AWS Route 53",
+                            "linkedin_username": "unifygtm",
+                            "linkedin_company_id": "90419204",
+                            "domain": "unifygtm.com",
+                            "company_name": "Unify",
+                            "company_logo": "https://media.licdn.com/dms/image/v2/D4E0BAQEjvW4QHMjKTg/company-logo_200_200/B4EZ74INbpKwAE-/0/1782279362496/unifygtm_logo?e=2147483647&v=beta&t=ypA-6vckknB_WGGgJeU12yxxi56U5A6Z1ZiEwrX6eo4",
+                            "company_address": "",
+                            "industry": "Software Development",
+                            "company_size_range": "51–200",
+                            "company_size_range_estimated": "false",
+                            "company_description": "Building AI for outbound sellers. Proud to be serving hundreds of the world's leading revenue teams at companies like Perplexity, Together AI, Decagon and Juicebox. ",
+                            "country": "US",
+                            "region": "North America",
+                            "vendor_name": "AWS Route 53",
+                            "vendor_category": "managed DNS provider",
+                            "vendor_market": "Mid-Market",
+                            "vendor_notes": "",
+                            "vendor_market_leader": true,
+                            "vendor_url": "https://aws.amazon.com/route53/",
+                            "vendor_source": "dns record",
+                            "context_url": null,
+                            "plan_name": null,
+                            "vendor_ticker": "AWS"
+                        },
+                        {
+                            "id": "11347720",
+                            "change_date": "2026-08-05T07:25:50-04:00",
+                            "change_type": "subscribed",
+                            "change_description": "subscribed to Metabase",
+                            "linkedin_username": "unifygtm",
+                            "linkedin_company_id": "90419204",
+                            "domain": "unifygtm.com",
+                            "company_name": "Unify",
+                            "company_logo": "https://media.licdn.com/dms/image/v2/D4E0BAQEjvW4QHMjKTg/company-logo_200_200/B4EZ74INbpKwAE-/0/1782279362496/unifygtm_logo?e=2147483647&v=beta&t=ypA-6vckknB_WGGgJeU12yxxi56U5A6Z1ZiEwrX6eo4",
+                            "company_address": "",
+                            "industry": "Software Development",
+                            "company_size_range": "51–200",
+                            "company_size_range_estimated": "false",
+                            "company_description": "Building AI for outbound sellers. Proud to be serving hundreds of the world's leading revenue teams at companies like Perplexity, Together AI, Decagon and Juicebox. ",
+                            "country": "US",
+                            "region": "North America",
+                            "vendor_name": "Metabase",
+                            "vendor_category": "business intelligence and analytics",
+                            "vendor_market": "Mid-Market",
+                            "vendor_notes": "",
+                            "vendor_market_leader": false,
+                            "vendor_url": "metabase.com",
+                            "vendor_source": "link found",
+                            "context_url": "https://unifygtm.metabaseapp.com",
+                            "plan_name": null,
+                            "vendor_ticker": ""
+                        }
+                    ],
+                    "pagination": {
+                        "page": 1,
+                        "per_page": 5,
+                        "total_pages": 7,
+                        "total_items": 32,
+                        "next_token": "eyJzb3J0IjpbMTc4NDI2NDUyNiwibWNwIiwxNDAsInVuaWZ5Z3RtLmNvbSJdLCJwYWdlIjoyfQ=="
+                    }
+                }
+            }
+        }
+    ]
+}

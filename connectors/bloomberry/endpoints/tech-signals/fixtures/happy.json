@@ -1,0 +1,82 @@
+{
+    "name": "happy",
+    "description": "raw recording (bloomberry#signals/tech.json, scenario happy) — hand-minimize into a shared chain before committing",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.revealera.com/signals/tech.json?vendor_name=Clay+Web+Intent&new_only=true&company_country=US%3BGB&limit=2&api_key=test-key"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "signals": [
+                        {
+                            "id": "13176511",
+                            "change_date": "2026-10-20T00:12:05-04:00",
+                            "change_type": "usage",
+                            "change_description": "added Clay Web Intent to their website",
+                            "linkedin_username": "peldon-rose-group-limited",
+                            "linkedin_company_id": "408870",
+                            "domain": "peldonrose.com",
+                            "company_name": "Peldon Rose",
+                            "company_logo": "https://media.licdn.com/dms/image/v2/D4E0BAQGEBkrvgwuU7Q/company-logo_200_200/B4EaB6uz45JoAE-/0/1788765486873/peldon_rose_group_limited_logo?e=2147483647&v=beta&t=2mRu8D-1mkO_SOTuy2vJCgtmfgx5PpYtrEarKGAZ16I",
+                            "company_address": "Sterling House, 42 Worple Road, London, GB",
+                            "industry": "Design Services",
+                            "company_size_range": "51–200",
+                            "company_size_range_estimated": "false",
+                            "company_description": "Peldon Rose is London’s leading office design and build expert.\n\nWe create workplaces that deliver business value, while providing exceptional everyday experiences for the people who use them.",
+                            "country": "GB",
+                            "region": "Europe",
+                            "vendor_name": "Clay Web Intent",
+                            "vendor_category": "sales intelligence for visitor identification",
+                            "vendor_market": "SMB",
+                            "vendor_notes": "",
+                            "vendor_market_leader": false,
+                            "vendor_url": "clay.com",
+                            "vendor_source": "website javascript",
+                            "context_url": null,
+                            "plan_name": null,
+                            "vendor_ticker": ""
+                        },
+                        {
+                            "id": "13133750",
+                            "change_date": "2026-10-18T15:05:41-04:00",
+                            "change_type": "usage",
+                            "change_description": "added Clay Web Intent to their website",
+                            "linkedin_username": "it-by-design",
+                            "linkedin_company_id": "420558",
+                            "domain": "itbd.net",
+                            "company_name": "IT BY DESIGN",
+                            "company_logo": "https://media.licdn.com/dms/image/v2/D4E0BAQGre2r7SoM8BQ/company-logo_200_200/company-logo_200_200/0/1719836702178/it_by_design_logo?e=2147483647&v=beta&t=QrmDqNsVJQlKuqE_vdiQ1yx9sgu_O4TA5RDYQlrFG7A",
+                            "company_address": "3441 US Highway 9, Freehold, New Jersey, United States",
+                            "industry": "IT Services and IT Consulting",
+                            "company_size_range": "501–1,000",
+                            "company_size_range_estimated": "false",
+                            "company_description": "𝗕𝘂𝗶𝗹𝘁 𝗳𝗼𝗿 𝗠𝗦𝗣𝘀, 𝗯𝘆 𝗮𝗻 𝗠𝗦𝗣. \nFor more than 20 years, IT By Design has been the growth partner MSPs trust to scale profitably. We deliver dedicated engineers, always-on infrastructure management, and practical AI solutions designed to help you build, optimize, and future-proof your business. \n\n𝗖𝗼𝗿𝗲 𝗦𝗲𝗿𝘃𝗶𝗰𝗲𝘀 \n\n● 𝗗𝗲𝗱𝗶𝗰𝗮𝘁𝗲𝗱 𝗘𝗻𝗴𝗶𝗻𝗲𝗲𝗿𝘀 (𝗦𝗲𝗹𝗳 𝗼𝗿 𝗖𝗼-𝗠𝗮𝗻𝗮𝗴𝗲𝗱): Global, MSP-trained talent from India or the Philippines. Flexible models, fast onb",
+                            "country": "US",
+                            "region": "North America",
+                            "vendor_name": "Clay Web Intent",
+                            "vendor_category": "sales intelligence for visitor identification",
+                            "vendor_market": "SMB",
+                            "vendor_notes": "",
+                            "vendor_market_leader": false,
+                            "vendor_url": "clay.com",
+                            "vendor_source": "website javascript",
+                            "context_url": null,
+                            "plan_name": null,
+                            "vendor_ticker": ""
+                        }
+                    ],
+                    "pagination": {
+                        "page": 1,
+                        "per_page": 2,
+                        "total_pages": 532,
+                        "total_items": 1063,
+                        "next_token": "eyJzb3J0IjpbMTc5MjM1MDM0MSwiY2xheSIsMTg1MCwiaXRiZC5uZXQiXSwicGFnZSI6Mn0="
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -35,6 +35,12 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "Company data: identity resolution, firmographics, and enrichment.",
     },
     {
+        id: "technographics",
+        displayName: "Technographics",
+        description:
+            "Which software companies use — tech stacks, adoption and churn signals.",
+    },
+    {
         id: "company-news",
         displayName: "Company News",
         description:

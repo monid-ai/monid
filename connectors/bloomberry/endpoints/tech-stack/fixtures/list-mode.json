@@ -1,0 +1,21 @@
+{
+    "name": "list-mode",
+    "description": "raw recording (bloomberry#enrichments/tech.json, scenario list-mode) — hand-minimize into a shared chain before committing",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.revealera.com/enrichments/tech.json?domain=unifygtm.com&list_mode=true&api_key=test-key"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "vendors": [
+                        "AWS Route 53",
+                        "Metabase"
+                    ]
+                }
+            }
+        }
+    ]
+}
