@@ -203,6 +203,17 @@ export async function compileBundle(
     const intake = connectors.map((connector) =>
         parseDoc(zProviderDef, connector.provider, "provider def")
     );
+    const providerNames = new Set<string>();
+    for (const provider of intake) {
+        if (providerNames.has(provider.name)) {
+            throw new CompileError(
+                CompileErrorCode.DOC_MALFORMED,
+                `duplicate provider name "${provider.name}" — each connector ` +
+                    `must declare a unique provider`,
+            );
+        }
+        providerNames.add(provider.name);
+    }
     // DETERMINISM: input order (filesystem enumeration) is platform-dependent,
     // and iteration order decides fnTable insertion (first occurrence wins
     // provenance) — sorting by provider/endpoint name makes the bundle a pure
