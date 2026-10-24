@@ -1,0 +1,43 @@
+{
+    "name": "happy",
+    "description": "raw recording (rheono#check, scenario happy) — recorded live against rheono.dev on 2026-10-24",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://rheono.dev/api/check-app",
+                "body": {
+                    "url": "https://example.com"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "ok": true,
+                    "url": "https://example.com",
+                    "status": 200,
+                    "tls": "valid",
+                    "findings": [
+                        {
+                            "id": "hsts-missing",
+                            "severity": "medium",
+                            "title": "No HSTS",
+                            "detail": "Responses are downgradable to plain HTTP on the first hit."
+                        },
+                        {
+                            "id": "csp-missing",
+                            "severity": "medium",
+                            "title": "No Content-Security-Policy",
+                            "detail": "An injected script has no policy to stop it."
+                        }
+                    ],
+                    "checkedPaths": [
+                        "/.env",
+                        "/.git/config"
+                    ],
+                    "summary": "https://example.com — HTTP 200, TLS valid, 2 medium, 2 low, 2 info.\n[medium] No HSTS — Responses are downgradable to plain HTTP on the first hit.\n[medium] No Content-Security-Policy — An injected script has no policy to stop it.\n[low] No framing protection — Neither X-Frame-Options nor CSP frame-ancestors is set.\n[low] No X-Content-Type-Options — Browsers may sniff a response into a different content type.\n[info] No Referrer-Policy — Full URLs, including query strings, leak to third parties.\n[in"
+                }
+            }
+        }
+    ]
+}

@@ -385,4 +385,11 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "Tools to pull public government records, including financial " +
             "disclosures, filings, registries, and more.",
     },
+    {
+        id: "security",
+        displayName: "Security",
+        description:
+            "Tools to check a live site or API's security posture, including " +
+            "TLS state, security headers, and exposed paths, and more.",
+    },
 ]);
