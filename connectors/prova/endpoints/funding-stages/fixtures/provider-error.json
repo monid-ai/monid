@@ -1,0 +1,19 @@
+{
+    "name": "provider-error",
+    "description": "recorded 2026-10-24 from the live API: an empty body (no identifier) answers 422, zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.provaapi.com/api/v1/funding-stages",
+                "body": {}
+            },
+            "res": {
+                "status": 422,
+                "body": {
+                    "error": "send exactly one of name, domain or linkedinSlug"
+                }
+            }
+        }
+    ]
+}
