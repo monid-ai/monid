@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "synthetic chain for rheono#check — the endpoint answers 400 {ok:false,error} for an unusable host; re-record against the live endpoint once rheono.dev/api/check-app is deployed",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://rheono.dev/api/check-app",
+                "body": {
+                    "url": "not a host"
+                }
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "ok": false,
+                    "error": "invalid url"
+                }
+            }
+        }
+    ]
+}

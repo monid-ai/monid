@@ -1,0 +1,54 @@
+{
+    "name": "synthetic-happy",
+    "description": "synthetic chain for rheono#check (response body mirrors the published /docs/check-api example) — re-record against the live endpoint once rheono.dev/api/check-app is deployed",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://rheono.dev/api/check-app",
+                "body": {
+                    "url": "https://app.example.com"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "ok": true,
+                    "url": "https://app.example.com",
+                    "status": 200,
+                    "tls": "valid",
+                    "findings": [
+                        {
+                            "id": "hsts-missing",
+                            "severity": "medium",
+                            "title": "No HSTS",
+                            "detail": "Responses are downgradable to plain HTTP on the first hit."
+                        },
+                        {
+                            "id": "csp-missing",
+                            "severity": "medium",
+                            "title": "No Content-Security-Policy",
+                            "detail": "An injected script has no policy to stop it."
+                        },
+                        {
+                            "id": "clickjacking",
+                            "severity": "low",
+                            "title": "No framing protection",
+                            "detail": "Neither X-Frame-Options nor CSP frame-ancestors is set."
+                        }
+                    ],
+                    "checkedPaths": [
+                        "/.env",
+                        "/.git/config",
+                        "/admin",
+                        "/wp-admin/",
+                        "/server-status",
+                        "/actuator/health",
+                        "/.well-known/security.txt"
+                    ],
+                    "summary": "2 medium and 1 low finding. The page answers 200 over valid TLS. No HSTS, no Content-Security-Policy, no framing protection."
+                }
+            }
+        }
+    ]
+}
