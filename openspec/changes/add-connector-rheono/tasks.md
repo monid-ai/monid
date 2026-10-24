@@ -27,16 +27,16 @@
 
 ## 4. Fixtures + tests
 
-- [x] 4.1 Synthetic chains for both endpoints (happy + provider-error) —
-      live recording is deliberate (real lead creation) and lands before
-      review
+- [x] 4.1 Real recorded chains for both endpoints (happy +
+      provider-error), recorded live against rheono.dev on 2026-10-24;
+      request-pentest against example.com + the vendor's support address
 - [x] 4.2 Per-endpoint replay tests: compiled urls, FREE settle wiring
       (synthesized fns, shared key), keyless credential compile, body-is-
       the-contract output pinning, provider-error zero-billing
 - [x] 4.3 `check` live test runs keyless wherever the network reaches
       rheono.dev; `request-pentest` live test gated on explicit
       RHEONO_LIVE_DOMAIN / RHEONO_LIVE_EMAIL so a CI run never creates a
-      stray lead
+      stray lead — both verified live
 
 ## 5. Wiring + docs
 

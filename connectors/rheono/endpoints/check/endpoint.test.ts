@@ -43,9 +43,9 @@ Deno.test("rheono: compiled urls, FREE settle wiring, keyless auth", async () =>
     assert("url" in properties, "url is the one caller-facing field");
 });
 
-Deno.test("rheono#check happy (synthetic): free — zero usage, body is the contract", async () => {
+Deno.test("rheono#check happy (recorded 2026-10-24): free — zero usage, body is the contract", async () => {
     const unit = await testSealedUnit("rheono#check");
-    const fixture = await loadFixture(`${fixturesDir}synthetic-happy.json`);
+    const fixture = await loadFixture(`${fixturesDir}happy.json`);
     const result = await runEndpoint({
         unit,
         input: { body: { url: "https://app.example.com" } },
@@ -61,10 +61,10 @@ Deno.test("rheono#check happy (synthetic): free — zero usage, body is the cont
     assertEquals(result.output, fixture.calls[0].res.body);
 });
 
-Deno.test("rheono#check provider error (synthetic): 400 is data, zero usage", async () => {
+Deno.test("rheono#check provider error (recorded 2026-10-24): 400 is data, zero usage", async () => {
     const unit = await testSealedUnit("rheono#check");
     const fixture = await loadFixture(
-        `${fixturesDir}synthetic-provider-error.json`,
+        `${fixturesDir}provider-error.json`,
     );
     const result = await runEndpoint({
         unit,

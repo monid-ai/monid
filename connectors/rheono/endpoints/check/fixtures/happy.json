@@ -1,20 +1,20 @@
 {
-    "name": "synthetic-happy",
-    "description": "synthetic chain for rheono#check (response body mirrors the published /docs/check-api example) — re-record against the live endpoint once rheono.dev/api/check-app is deployed",
+    "name": "happy",
+    "description": "raw recording (rheono#check, scenario happy) — recorded live against rheono.dev on 2026-10-24",
     "calls": [
         {
             "req": {
                 "method": "POST",
                 "url": "https://rheono.dev/api/check-app",
                 "body": {
-                    "url": "https://app.example.com"
+                    "url": "https://example.com"
                 }
             },
             "res": {
                 "status": 200,
                 "body": {
                     "ok": true,
-                    "url": "https://app.example.com",
+                    "url": "https://example.com",
                     "status": 200,
                     "tls": "valid",
                     "findings": [
@@ -29,24 +29,13 @@
                             "severity": "medium",
                             "title": "No Content-Security-Policy",
                             "detail": "An injected script has no policy to stop it."
-                        },
-                        {
-                            "id": "clickjacking",
-                            "severity": "low",
-                            "title": "No framing protection",
-                            "detail": "Neither X-Frame-Options nor CSP frame-ancestors is set."
                         }
                     ],
                     "checkedPaths": [
                         "/.env",
-                        "/.git/config",
-                        "/admin",
-                        "/wp-admin/",
-                        "/server-status",
-                        "/actuator/health",
-                        "/.well-known/security.txt"
+                        "/.git/config"
                     ],
-                    "summary": "2 medium and 1 low finding. The page answers 200 over valid TLS. No HSTS, no Content-Security-Policy, no framing protection."
+                    "summary": "https://example.com — HTTP 200, TLS valid, 2 medium, 2 low, 2 info.\n[medium] No HSTS — Responses are downgradable to plain HTTP on the first hit.\n[medium] No Content-Security-Policy — An injected script has no policy to stop it.\n[low] No framing protection — Neither X-Frame-Options nor CSP frame-ancestors is set.\n[low] No X-Content-Type-Options — Browsers may sniff a response into a different content type.\n[info] No Referrer-Policy — Full URLs, including query strings, leak to third parties.\n[in"
                 }
             }
         }

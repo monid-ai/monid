@@ -1,6 +1,6 @@
 {
-    "name": "synthetic-provider-error",
-    "description": "synthetic chain for rheono#check — the endpoint answers 400 {ok:false,error} for an unusable host; re-record against the live endpoint once rheono.dev/api/check-app is deployed",
+    "name": "provider-error",
+    "description": "raw recording (rheono#check, scenario provider-error) — recorded live against rheono.dev on 2026-10-24",
     "calls": [
         {
             "req": {

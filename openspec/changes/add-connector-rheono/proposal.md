@@ -45,10 +45,10 @@ new wrinkle: the first connector with NO credentials at all.
 - No metered deep-run endpoint. The vendor's paid surface is sold per
   surface, not per call; if a per-call run-status API emerges, that is a
   MODEL change on a new endpoint.
-- Fixtures are synthetic (`synthetic-` prefix per fixture strategy): the
-  check endpoint is not yet deployed on rheono.dev, and `request-pentest`
-  creates a real lead, so live recording happens deliberately, before
-  review, against a domain the vendor owns.
+- Fixtures are real recordings against the deployed endpoint
+  (rheono.dev, 2026-10-24). `request-pentest` was recorded against
+  example.com (IANA-reserved, harmless to probe) with the vendor's own
+  support address as the report recipient — one real lead row, deliberate.
 
 ## Impact
 
