@@ -1,0 +1,24 @@
+{
+    "name": "synthetic-company-no-match",
+    "description": "Synthetic company no-match; documentation-derived, not a live recording. No real PII or keys.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "domain": "example.com",
+                    "limit": 2,
+                    "multiple_results": true
+                }
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": "not_found",
+                    "message": "No matching record."
+                }
+            }
+        }
+    ]
+}
