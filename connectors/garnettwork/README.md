@@ -45,12 +45,14 @@ No network permission is required for the replay tests.
 
 ## Explicit live validation
 
-The live test is disabled unless `GARNETTWORK_RUN_LIVE=1` and the isolated
-partner credential is available through the existing credential mechanism. Set
-`GARNETTWORK_LIVE_LISTING_URL` privately to an approved, current eBay US PS5
-Disc Buy It Now listing. Missing or invalid configuration fails before the
-upstream request; replay fixtures retain their synthetic all-zero URL. Do not
-commit a real listing, credential or private result.
+The live test is skipped unless `GARNETTWORK_RUN_LIVE=1` and the isolated
+partner credential is available through the existing credential mechanism.
+Missing credentials skip the test; a skipped test is not live validation.
+Once both gates pass, a missing or invalid `GARNETTWORK_LIVE_LISTING_URL`
+fails before the upstream request. Set that URL privately to an approved,
+current eBay US PS5 Disc Buy It Now listing. Replay fixtures retain their
+synthetic all-zero URL. Do not commit a real listing, credential or private
+result.
 
 A live test can call the upstream service/provider and must be separately
 authorized. Merely having a credential configured does not opt in. The URL check
