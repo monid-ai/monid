@@ -1,5 +1,6 @@
 import { assert, assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
+import { liveListingInput } from "./live-input.ts";
 import type { Json } from "@shared/core";
 import {
     directTransport,
@@ -349,20 +350,28 @@ Deno.test("garnettwork: invalid HTTP 200 bodies fail output validation, never be
     }
 });
 
-
 Deno.test({
-    name: "garnettwork#verify-listing live (gated on GARNETTWORK_API_KEY)",
-    ignore: liveSkip("garnettwork"),
+    name:
+        "garnettwork#verify-listing live (explicit opt-in and configured listing)",
+    ignore: Deno.env.get("GARNETTWORK_RUN_LIVE") !== "1" ||
+        liveSkip("garnettwork"),
     fn: async () => {
+        const body = liveListingInput(
+            Deno.env.get("GARNETTWORK_LIVE_LISTING_URL"),
+        );
         const result = await runEndpoint({
             unit: await testSealedUnit(endpointId),
-            input: { body: listingInput },
+            input: { body },
             mode: "live",
         });
-        assertEquals(result.isProviderError, false, JSON.stringify(result.output));
-        const body = result.output as Record<string, Json>;
-        assertEquals(body.schema_version, "garnett-deal-or-disaster-v1");
-        const decision = body.decision as Record<string, Json>;
+        assertEquals(
+            result.isProviderError,
+            false,
+            JSON.stringify(result.output),
+        );
+        const output = result.output as Record<string, Json>;
+        assertEquals(output.schema_version, "garnett-deal-or-disaster-v1");
+        const decision = output.decision as Record<string, Json>;
         assert(["PASS", "FAIL", "REFUSE"].includes(String(decision.verdict)));
     },
 });

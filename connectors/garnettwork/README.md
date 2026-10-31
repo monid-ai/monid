@@ -1,21 +1,21 @@
 # GarnettWork private connector proposal
 
-GarnettWork checks a supported secondhand listing before purchase and returns its
-native decision, evidence, unknowns and limitations. This connector is limited
-to the private eBay US Buy It Now PS5 Disc BUY flow.
+GarnettWork checks a supported secondhand listing before purchase and returns
+its native decision, evidence, unknowns and limitations. This connector is
+limited to the private eBay US Buy It Now PS5 Disc BUY flow.
 
 ## Contract
 
-| Field | Value |
-| --- | --- |
-| Endpoint ID | `garnettwork#verify-listing` |
-| HTTP request | `POST https://mcp.garnettwork.com/monid/verify` |
-| Authentication | Isolated partner bearer injected by Monid; no real credential is stored here |
-| Required JSON | `url` and explicit `intent: "BUY"` |
-| Optional JSON | `destination: {country: "US", postal_code: "12345"}`; ZIP+4 accepted |
-| Scope | eBay US, Buy It Now, PS5 Disc, BUY |
-| Output | Native `garnett-deal-or-disaster-v1`; PASS / FAIL / REFUSE remain application decisions |
-| Usage model | FREE is a private-pilot modeling assumption, not an agreed commercial term |
+| Field          | Value                                                                                   |
+| -------------- | --------------------------------------------------------------------------------------- |
+| Endpoint ID    | `garnettwork#verify-listing`                                                            |
+| HTTP request   | `POST https://mcp.garnettwork.com/monid/verify`                                         |
+| Authentication | Isolated partner bearer injected by Monid; no real credential is stored here            |
+| Required JSON  | `url` and explicit `intent: "BUY"`                                                      |
+| Optional JSON  | `destination: {country: "US", postal_code: "12345"}`; ZIP+4 accepted                    |
+| Scope          | eBay US, Buy It Now, PS5 Disc, BUY                                                      |
+| Output         | Native `garnett-deal-or-disaster-v1`; PASS / FAIL / REFUSE remain application decisions |
+| Usage model    | FREE is a private-pilot modeling assumption, not an agreed commercial term              |
 
 The connector does not calculate its own market price, invent a fallback
 verdict, purchase an item, contact a seller, or move money. Operational HTTP and
@@ -29,8 +29,8 @@ the connector does not turn it into a public receipt or signature.
 ## Public test data
 
 All committed fixtures are synthetic contract fixtures. They contain no live
-listing identifier, receipt identifier/hash, private timestamp, live pricing,
-or private verification result. They exist only to exercise request shape,
+listing identifier, receipt identifier/hash, private timestamp, live pricing, or
+private verification result. They exist only to exercise request shape,
 native-response passthrough, PASS / FAIL / REFUSE semantics, operational errors,
 authentication injection, unknowns and output validation.
 
@@ -42,6 +42,20 @@ deno check connectors/garnettwork/provider.ts connectors/garnettwork/endpoints/v
 ```
 
 No network permission is required for the replay tests.
+
+## Explicit live validation
+
+The live test is disabled unless `GARNETTWORK_RUN_LIVE=1` and the isolated
+partner credential is available through the existing credential mechanism. Set
+`GARNETTWORK_LIVE_LISTING_URL` privately to an approved, current eBay US PS5
+Disc Buy It Now listing. Missing or invalid configuration fails before the
+upstream request; replay fixtures retain their synthetic all-zero URL. Do not
+commit a real listing, credential or private result.
+
+A live test can call the upstream service/provider and must be separately
+authorized. Merely having a credential configured does not opt in. The URL check
+establishes syntax only; the service still validates product, format,
+availability and evidence. Offline replay tests require no network access.
 
 ## Activation and merge prerequisites
 
