@@ -1,0 +1,33 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-11-02 against API Indonesia production (GET /api/v1/ump?year=2026&province_name=kalimantan+barat) with a vendor key. Response trimmed by the recorder; real public-registry data.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?year=2026&province_name=kalimantan+barat"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": [
+                        {
+                            "id": "ump-61-2026",
+                            "province_code": "61",
+                            "province_name": "KALIMANTAN BARAT",
+                            "year": 2026,
+                            "salary": 3054552
+                        }
+                    ],
+                    "meta": {
+                        "total": 1,
+                        "page": 1,
+                        "per_page": 20,
+                        "total_pages": 1
+                    }
+                }
+            }
+        }
+    ]
+}
