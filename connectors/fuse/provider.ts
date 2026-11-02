@@ -2,8 +2,9 @@ import { defineProvider } from "@shared/core";
 
 /**
  * Fuse (fuseai.com) — B2B people and company data for prospecting: search,
- * counts, filter vocabularies, a company resolver, and email / phone lookups
- * with email verification. JSON over HTTPS against
+ * counts, filter vocabularies, a company resolver, a company's people, email
+ * / phone lookups both ways with email verification, and a free check of
+ * what Fuse already holds for a person. JSON over HTTPS against
  * `https://api.tryfuse.ai/api/v1/business`, one `af_` API key.
  *
  * AUTH: the key is sent RAW, `Authorization: Basic af_…`, which is the form
@@ -13,8 +14,10 @@ import { defineProvider } from "@shared/core";
  *
  * TWO SHAPES live behind the one host:
  *
- *   - SYNC — search, filter values, the company resolver, the email and
- *     phone lookups, email verification. One request, one answer.
+ *   - SYNC — search, filter values, the company resolver, a company's
+ *     people, the email and phone lookups and their reverse lookups (who an
+ *     address or a number belongs to), email verification and the contact
+ *     check. One request, one answer.
  *   - ASYNC — the people and company counts and the bulk lookup job. A new
  *     count answers `202 pending` with the filters it is counting, and the
  *     same request with those filters answers `200 ready` once counted. The
@@ -31,13 +34,15 @@ import { defineProvider } from "@shared/core";
  * what Fuse debited for that call, 0 for a miss, an `unknown` verdict or a
  * free endpoint. So every billed endpoint here is metered in Fuse credits:
  *
- *   - the lookups, the verification and the bulk job price a leaf
- *     `PER_UNIT` in `CREDIT` units, and the receipt is the EVIDENCE as well
- *     as the claim. It has to be: the engine prunes a zero claim and falls
- *     back to the derived fold, and Fuse's zero receipts are real answers.
+ *   - the lookups, the reverse lookups, the verification, the bulk job
+ *     and a company's people price a leaf `PER_UNIT` in `CREDIT` units, and
+ *     the receipt is the EVIDENCE as well as the claim. It has to be: the
+ *     engine prunes a zero claim and falls back to the derived fold, and
+ *     Fuse's zero receipts are real answers.
  *   - the two searches carry no receipt field. Fuse debits 1 credit per row
  *     returned, so each search counts its rows (`PER_UNIT` in `RESULT`).
- *   - counts, filter values and the resolver are `FREE`.
+ *   - counts, filter values, the resolver and the contact check are
+ *     `FREE`.
  *
  * Provider-level `usage.consolidate` plucks the receipt out of every
  * payload, the free endpoints' zero included.
@@ -47,8 +52,11 @@ import { defineProvider } from "@shared/core";
  * (`GET /business/data/pricing`, 2026-10-29): `people_email` 5 per email
  * found, `people_phone` 10 per phone found, `email_verify` 1 per verdict
  * (`unknown` free), the bulk job priced per row by those two, and 1 per row
- * returned by either search. A rate change on Fuse's side moves the settle
- * with it; only the ceiling is pinned.
+ * returned by either search; and the entries Fuse sets on that plan for the
+ * routes added 2026-11-02: `people_reverse_email` 1 and
+ * `people_reverse_phone` 2 per person found, `company_people` 1 per person
+ * returned. A rate change on Fuse's side moves the settle with it; only the
+ * ceiling is pinned.
  *
  * ERRORS: every non-2xx carries `{error: {code, message, param, values?,
  * doc_url, request_id}}`; every 5xx answers `UNEXPECTED_ERROR`. Fuse
@@ -70,7 +78,7 @@ export default defineProvider({
     meta: {
         displayName: "Fuse",
         summary:
-            "B2B people and company search, free counts and company resolution, and work email and phone lookups.",
+            "B2B people and company search, a company's people, free counts and company resolution, and email and phone lookups both ways.",
         description: "Fuse finds the people and companies a sales or " +
             "recruiting agent is looking for, and the contact details to " +
             'reach them. Describe the search in plain English ("VPs of ' +
@@ -80,7 +88,11 @@ export default defineProvider({
             "Size it first with a free count, list the matching people or " +
             "companies, then find a work email or phone for the ones that " +
             "matter, one at a time or 100 at once, and verify an address " +
-            "before sending to it. Lookups charge only for what they find. " +
+            "before sending to it. List the decision makers at one company, " +
+            "turn an email address or a phone number back into the person " +
+            "who owns it, and check for free whether Fuse already holds " +
+            "someone's email or phone. Lookups charge only for what they " +
+            "find. " +
             "Free tools list every filter's accepted values and turn a " +
             "company name into its domain, LinkedIn page and logo.",
         homepageUrl: "https://fuseai.com",

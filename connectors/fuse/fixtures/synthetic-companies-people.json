@@ -1,0 +1,62 @@
+{
+    "name": "synthetic-companies-people",
+    "description": "A two-person page of a company's VPs with a token for the next page; the receipt is the plan's company_people price per person returned. Synthetic, shaped on Fuse's Business API contract for the route (2026-11-02); to be recorded once the route is live.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "found",
+                    "company": {
+                        "name": "Northwind Payments",
+                        "domain": "northwind-payments.example",
+                        "linkedinUrl": "linkedin.com/company/northwind-payments",
+                        "logoUrl": null
+                    },
+                    "people": [
+                        {
+                            "linkedinMemberId": "100000001",
+                            "linkedin_url": "linkedin.com/in/ada-fielding",
+                            "full_name": "Ada Fielding",
+                            "first_name": "Ada",
+                            "last_name": "Fielding",
+                            "job_title": "Senior Vice President of Sales",
+                            "job_title_levels": [
+                                "vp",
+                                "senior"
+                            ],
+                            "job_title_role": "sales",
+                            "job_company_name": "Northwind Payments",
+                            "job_company_website": "northwind-payments.example",
+                            "job_company_linkedin_url": "linkedin.com/company/northwind-payments",
+                            "location_name": "new york, new york, united states"
+                        },
+                        {
+                            "linkedinMemberId": "100000003",
+                            "linkedin_url": "linkedin.com/in/lena-park-northwind",
+                            "full_name": "Lena Park",
+                            "first_name": "Lena",
+                            "last_name": "Park",
+                            "job_title": "Vice President of Marketing",
+                            "job_title_levels": [
+                                "vp"
+                            ],
+                            "job_title_role": "marketing",
+                            "job_company_name": "Northwind Payments",
+                            "job_company_website": "northwind-payments.example",
+                            "job_company_linkedin_url": "linkedin.com/company/northwind-payments",
+                            "location_name": "new york, new york, united states"
+                        }
+                    ],
+                    "scrollToken": "st_synthetic_page_2",
+                    "total": 48,
+                    "creditsCharged": 2
+                }
+            }
+        }
+    ]
+}

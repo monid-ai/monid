@@ -14,12 +14,16 @@ const FUSE_IDS = [
     "fuse#companies/filter-options",
     "fuse#companies/search",
     "fuse#data/companies/count",
+    "fuse#data/companies/people",
     "fuse#data/companies/resolve",
     "fuse#data/emails/verify",
+    "fuse#data/people/contact-status",
     "fuse#data/people/count",
     "fuse#data/people/email",
     "fuse#data/people/enrich-jobs",
     "fuse#data/people/phone",
+    "fuse#data/people/reverse-email",
+    "fuse#data/people/reverse-phone",
     "fuse#prospects/filter-options",
     "fuse#prospects/search",
 ];
@@ -67,7 +71,7 @@ const wire = async (
     return seen;
 };
 
-Deno.test("fuse docs: eleven ids, one inject, one receipt claim and one error digest", async () => {
+Deno.test("fuse docs: fifteen ids, one inject, one receipt claim and one error digest", async () => {
     const bundle = await testBundle();
     const ids = Object.keys(bundle.endpoints)
         .filter((id) => id.startsWith("fuse#"))
