@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { zPeopleFilters } from "../../../schema/people-filters.ts";
-import { zResolveCompanyBody } from "../../companies-resolve/schema/inputs.ts";
+import { zCompany } from "../../../schema/company.ts";
 
 /**
  * `POST /data/companies/people` body — the mirror of Fuse's published
@@ -10,7 +10,7 @@ import { zResolveCompanyBody } from "../../companies-resolve/schema/inputs.ts";
  * names the company. `size`'s vendor default (10) is applied at the binding.
  */
 export const zCompanyPeopleBody = z.strictObject({
-    company: zResolveCompanyBody.describe(
+    company: zCompany.describe(
         "The company, by `name`, `domain` or `linkedinUrl`, as " +
             "`fuse#data/companies/resolve` takes them; only the most precise " +
             "one sent is looked up.",

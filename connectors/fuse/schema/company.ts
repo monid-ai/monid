@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const zResolveCompanyFields = z.strictObject({
+const zCompanyFields = z.strictObject({
     name: z.string().min(1).max(255).describe(
         "The company's name, e.g. `Stripe`. The least precise identifier: " +
             "used only when no `domain` or `linkedinUrl` is given.",
@@ -17,12 +17,13 @@ const zResolveCompanyFields = z.strictObject({
 });
 
 /**
- * `POST /data/companies/resolve` body — the mirror of Fuse's published
- * request (design D25), STRICT like the API. Fuse takes AT LEAST ONE of the
- * three identifiers, so the mirror is a union of arms each requiring one.
+ * One company to look up, as Fuse's company resolver and a company's people
+ * both take it: the mirror of Fuse's published request (design D25), STRICT
+ * like the API. Fuse takes AT LEAST ONE of the three identifiers, so the
+ * mirror is a union of arms each requiring one.
  */
-export const zResolveCompanyBody = z.union([
-    zResolveCompanyFields.required({ name: true }),
-    zResolveCompanyFields.required({ domain: true }),
-    zResolveCompanyFields.required({ linkedinUrl: true }),
+export const zCompany = z.union([
+    zCompanyFields.required({ name: true }),
+    zCompanyFields.required({ domain: true }),
+    zCompanyFields.required({ linkedinUrl: true }),
 ]);

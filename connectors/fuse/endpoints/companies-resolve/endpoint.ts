@@ -1,5 +1,5 @@
 import { defineEndpoint, UsageModelKind } from "@shared/core";
-import { zResolveCompanyBody } from "./schema/inputs.ts";
+import { zCompany } from "../../schema/company.ts";
 
 /** `POST /data/companies/resolve` — a company's domain, LinkedIn page and
  *  logo from its name, domain or LinkedIn URL, free. SYNC. A company nothing
@@ -32,6 +32,6 @@ export default defineEndpoint({
         ],
     },
     request: { method: "POST", path: "/data/companies/resolve" },
-    input: { schema: { body: zResolveCompanyBody } },
+    input: { schema: { body: zCompany } },
     usage: { model: { kind: UsageModelKind.FREE } },
 });
