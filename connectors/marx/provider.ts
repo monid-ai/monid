@@ -1,14 +1,22 @@
-import { defineProvider } from "../../types/provider.ts";
+import { defineProvider } from "@shared/core";
 
 export default defineProvider({
-  name: "marx",
-  displayName: "Marx",
-  description: "Real-time market sentiment and multi-agent consensus intelligence for financial assets.",
-  categories: ["finance", "data"],
-  pricing: {
-    model: "free",
+  meta: {
+    id: "marx",
+    name: "Marx",
+    description: "Real-time market sentiment and multi-agent consensus intelligence for financial assets.",
   },
   auth: {
-    type: "none",
+    inject: "header",
+    credentials: {
+      apiKey: {
+        type: "string",
+        header: "x-api-key",
+        required: false,
+      },
+    },
+  },
+  usage: {
+    model: "free",
   },
 });
