@@ -433,7 +433,6 @@
         "fuse#data/companies/people",
         "fuse#data/companies/resolve",
         "fuse#data/emails/verify",
-        "fuse#data/people/contact-status",
         "fuse#data/people/count",
         "fuse#data/people/email",
         "fuse#data/people/enrich-jobs",

@@ -23,14 +23,6 @@ email and 2 for a phone.
 - **THEN** `isProviderError` is true and usage is
   `{credits: {}, evidence: {}}`
 
-### Requirement: The contact check is free and takes no company name
-`fuse#data/people/contact-status` SHALL be `FREE`, and its input SHALL be a
-strict union of a `linkedinUrl` arm and a `name` with `companyDomain` arm.
-
-#### Scenario: A name with a company name
-- **WHEN** the check is sent `{name, companyName}`
-- **THEN** the run fails `INVALID_INPUT` before any request
-
 ### Requirement: A company's people page on the receipt
 `fuse#data/companies/people` SHALL price a leaf `PER_UNIT` in `CREDIT` units
 at amount 1, settled by the receipt, and SHALL estimate a full page: `size`,

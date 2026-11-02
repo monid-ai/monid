@@ -2,10 +2,9 @@ import { defineProvider } from "@shared/core";
 
 /**
  * Fuse (fuseai.com) — B2B people and company data for prospecting: search,
- * counts, filter vocabularies, a company resolver, a company's people, email
- * / phone lookups both ways with email verification, and a free check of
- * what Fuse already holds for a person. JSON over HTTPS against
- * `https://api.tryfuse.ai/api/v1/business`, one `af_` API key.
+ * counts, filter vocabularies, a company resolver, a company's people, and
+ * email / phone lookups both ways with email verification. JSON over HTTPS
+ * against `https://api.tryfuse.ai/api/v1/business`, one `af_` API key.
  *
  * AUTH: the key is sent RAW, `Authorization: Basic af_…`, which is the form
  * Fuse's docs show. Fuse also takes RFC 7617's base64 of `af_…:`; neither
@@ -16,8 +15,8 @@ import { defineProvider } from "@shared/core";
  *
  *   - SYNC — search, filter values, the company resolver, a company's
  *     people, the email and phone lookups and their reverse lookups (who an
- *     address or a number belongs to), email verification and the contact
- *     check. One request, one answer.
+ *     address or a number belongs to), and email verification. One request,
+ *     one answer.
  *   - ASYNC — the people and company counts and the bulk lookup job. A new
  *     count answers `202 pending` with the filters it is counting, and the
  *     same request with those filters answers `200 ready` once counted. The
@@ -41,8 +40,7 @@ import { defineProvider } from "@shared/core";
  *     Fuse's zero receipts are real answers.
  *   - the two searches carry no receipt field. Fuse debits 1 credit per row
  *     returned, so each search counts its rows (`PER_UNIT` in `RESULT`).
- *   - counts, filter values, the resolver and the contact check are
- *     `FREE`.
+ *   - counts, filter values and the resolver are `FREE`.
  *
  * Provider-level `usage.consolidate` plucks the receipt out of every
  * payload, the free endpoints' zero included.
@@ -89,10 +87,8 @@ export default defineProvider({
             "companies, then find a work email or phone for the ones that " +
             "matter, one at a time or 100 at once, and verify an address " +
             "before sending to it. List the decision makers at one company, " +
-            "turn an email address or a phone number back into the person " +
-            "who owns it, and check for free whether Fuse already holds " +
-            "someone's email or phone. Lookups charge only for what they " +
-            "find. " +
+            "and turn an email address or a phone number back into the " +
+            "person who owns it. Lookups charge only for what they find. " +
             "Free tools list every filter's accepted values and turn a " +
             "company name into its domain, LinkedIn page and logo.",
         homepageUrl: "https://fuseai.com",
