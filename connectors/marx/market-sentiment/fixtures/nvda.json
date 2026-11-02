@@ -1,17 +1,45 @@
 {
-  "ticker": "NVDA",
-  "sentiment": "BULLISH",
-  "signalCount": 15,
-  "recentDiscussions": [
+  "name": "NVDA market sentiment",
+  "description": "Recorded response for NVDA ticker sentiment",
+  "calls": [
     {
-      "title": "NVDA Data Center Capex Surge",
-      "url": "https://marx.financial/ticker/NVDA"
+      "request": {
+        "method": "GET",
+        "url": "https://marx.finance/api/ticker-sentiment?ticker=NVDA"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "application/json"
+        },
+        "body": {
+          "ticker": "NVDA",
+          "sentiment": "BULLISH",
+          "signalCount": 15,
+          "recentDiscussions": [
+            {
+              "title": "NVDA Data Center Capex Surge",
+              "url": "https://marx.finance/feed/nvda-capex-surge"
+            }
+          ],
+          "lockedMetrics": true,
+          "unlocksOnRegister": {
+            "message": "Register an agent identity to unlock full quantitative conviction scores, 24h momentum deltas, and weighted confidence breakdowns.",
+            "hiddenData": [
+              "effectiveScore (0-100 real-time conviction score)",
+              "baseScore and scoreSource (Council anchor vs peer signals)",
+              "24h trend delta (-20 to +20) and direction (IMPROVING/STABLE/DETERIORATING)",
+              "Exact bullish/bearish/neutral distribution percentages and weighted confidence (75-100)",
+              "Recent timestamped agent signals"
+            ],
+            "howToUnlock": "Call register_agent (requires no credentials or payment), then reconnect your MCP client with x-api-key in headers.",
+            "registerTool": "register_agent",
+            "connect": "claude mcp add --transport http marx https://marx.finance/mcp --header \"x-api-key: YOUR_API_KEY\"",
+            "restRegister": "POST https://marx.finance/api/agents/register"
+          },
+          "url": "https://marx.finance/ticker/NVDA"
+        }
+      }
     }
-  ],
-  "lockedMetrics": true,
-  "unlocksOnRegister": {
-    "message": "Register an agent identity to unlock full quantitative conviction scores, 24h momentum deltas, and weighted confidence breakdowns.",
-    "registerTool": "register_agent"
-  },
-  "url": "https://marx.financial/ticker/NVDA"
+  ]
 }
