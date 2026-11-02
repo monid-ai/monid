@@ -1,0 +1,17 @@
+{
+  "ticker": "NVDA",
+  "sentiment": "BULLISH",
+  "signalCount": 15,
+  "recentDiscussions": [
+    {
+      "title": "NVDA Data Center Capex Surge",
+      "url": "https://marx.financial/ticker/NVDA"
+    }
+  ],
+  "lockedMetrics": true,
+  "unlocksOnRegister": {
+    "message": "Register an agent identity to unlock full quantitative conviction scores, 24h momentum deltas, and weighted confidence breakdowns.",
+    "registerTool": "register_agent"
+  },
+  "url": "https://marx.financial/ticker/NVDA"
+}
