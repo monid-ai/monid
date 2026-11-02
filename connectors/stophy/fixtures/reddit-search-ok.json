@@ -1,0 +1,65 @@
+{
+    "name": "reddit-search-ok",
+    "description": "Stophy /v1/reddit/search happy path, recorded on the keyless tier 2026-11-02 (record diet: results trimmed). 1 Stophy call: results non-empty.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "query": "bun runtime"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "results": [
+                            {
+                                "type": "post",
+                                "postId": "16f3422",
+                                "postUrl": "https://www.reddit.com/r/node/comments/16f3422/any_evidence_that_bun_is_actually_faster_for/",
+                                "title": "Any evidence that Bun is actually faster for practical tasks than node.js?",
+                                "text": "I tried Bun for type-checking, running tests, building a project, and I see zero speed improvement. Let's not talk about server speed, I think it's manipulation, as you can see in [these benchmarks](https://github.com/SaltyAom/bun-http-framework-benchmark) that the top performer is on node.js.\n\nI really and honestly wish to speed up my tooling and was hoping that Bun can deliver that, not necessarily 100 times faster as in marketing, but 5% faster would make me 5% happier.\n\nAre there any blog po",
+                                "authorId": "5f3madhj",
+                                "authorUsername": "romeeres",
+                                "authorUrl": "https://www.reddit.com/user/romeeres/",
+                                "subreddit": "node",
+                                "score": 1,
+                                "upvotePercent": 51.6,
+                                "comments": 34,
+                                "publishedAt": "2023-09-10T15:29:28.192Z",
+                                "thumbnailUrl": "https://external-preview.redd.it/RupJRhsu2lzNFWzpL-A4jsr0bY54OznMOwqYULPPPSw.jpg?auto=webp&s=22e4e45e64134cda7250b17e9462bfe515aee9dc",
+                                "isNsfw": false,
+                                "isVideo": false,
+                                "isPinned": false
+                            },
+                            {
+                                "type": "post",
+                                "postId": "16e19xi",
+                                "postUrl": "https://www.reddit.com/r/node/comments/16e19xi/why_bun_is_so_much_faster_then_node/",
+                                "title": "Why Bun is so much faster then node?",
+                                "text": "Why bun is so much faster then node its not like C++ is slower, node is made with c++ and js. Bun is build with zig. Its not like zig is 2 times better then C++. **Why there is so much performance gap both are JavaScript and build in Low level language?** If WebKit is so better then V8 then why not use it with electron then that would improve electron too right?\n\n**Note: I am not thinking about switching to it any time soon till its popular enough. I don't think bun is better just because its fa",
+                                "authorId": "76d5k911",
+                                "authorUsername": "Professional-League3",
+                                "authorUrl": "https://www.reddit.com/user/Professional-League3/",
+                                "subreddit": "node",
+                                "score": 101,
+                                "upvotePercent": 81,
+                                "comments": 131,
+                                "publishedAt": "2023-09-09T09:20:51.907Z",
+                                "isNsfw": false,
+                                "isVideo": false,
+                                "isPinned": false
+                            }
+                        ],
+                        "cursor": "4e7V-_HEMjQ="
+                    },
+                    "creditsUsed": 0,
+                    "requestId": "c279087c-e707-469b-a440-33a8cd41f81b"
+                }
+            }
+        }
+    ]
+}

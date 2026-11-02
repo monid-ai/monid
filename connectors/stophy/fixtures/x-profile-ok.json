@@ -1,0 +1,41 @@
+{
+    "name": "x-profile-ok",
+    "description": "Stophy /v1/x/profile happy path, recorded on the keyless tier 2026-11-02 (record diet: lists trimmed). Flat 1 Stophy call.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "username": "nasa"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "userId": "11348282",
+                        "username": "NASA",
+                        "profileUrl": "https://x.com/NASA",
+                        "name": "NASA",
+                        "bio": "Making the seemingly impossible, possible. ✨",
+                        "location": "Pale Blue Dot",
+                        "website": "http://www.nasa.gov/",
+                        "joinedAt": "2007-12-19T20:20:32.000Z",
+                        "followers": 92291899,
+                        "following": 115,
+                        "posts": 74481,
+                        "isVerified": true,
+                        "verifiedType": "Government",
+                        "isProtected": false,
+                        "avatarUrl": "https://pbs.twimg.com/profile_images/1321163587679784960/0ZxKlEKB_400x400.jpg",
+                        "bannerUrl": "https://pbs.twimg.com/profile_banners/11348282/1788992290"
+                    },
+                    "creditsUsed": 0,
+                    "requestId": "367eaf74-81b7-43ed-af40-2bbb08dfe503"
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "name": "provider-error",
+    "description": "Stophy 401 envelope, recorded 2026-11-02 with an invalid key: {success: false, error: {code, message}}. Zero-billed.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "query": "test"
+                }
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": {
+                        "code": "apiKeyRequired",
+                        "message": "This needs an API key. Get one at https://stophy.dev/signup, then send it as Authorization: Bearer <key>.",
+                        "retryable": false,
+                        "requestId": "99d2eacf-c91e-4a01-ae54-4db2c4f96a0c",
+                        "signupUrl": "https://stophy.dev/signup"
+                    },
+                    "success": false
+                }
+            }
+        }
+    ]
+}

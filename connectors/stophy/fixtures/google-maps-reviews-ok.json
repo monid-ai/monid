@@ -1,0 +1,78 @@
+{
+    "name": "google-maps-reviews-ok",
+    "description": "Stophy /v1/google/maps/reviews happy path, recorded on the keyless tier 2026-11-02 (record diet: lists trimmed). 1 Stophy call: results non-empty. Reviewer identity fields replaced with placeholders.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "placeId": "0x8644cc752bbe37bf:0x4a9e56f256689bb2"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "results": [
+                            {
+                                "reviewId": "Ci9DQUlRQUNvZENodHljRjlvT2w4eWR6UklRV2xJUkRCNllXcDNjR2RXVDBsU04xRRAB",
+                                "reviewUrl": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2w4eWR6UklRV2xJUkRCNllXcDNjR2RXVDBsU04xRRAB!2m1!1s0x0:0x4a9e56f256689bb2!3m1!1s2@1:CAIQACodChtycF9oOl8ydzRIQWlIRDB6YWp3cGdWT0lSN1E%7C%7C?hl=en-US",
+                                "rating": 2,
+                                "text": "Service was really poor, not what I’ve expected at other locations. The muffins were also not the quality I’ve had at other locations.",
+                                "language": "en",
+                                "publishedAt": "2026-11-02T00:53:42.534Z",
+                                "authorName": "Reviewer 1",
+                                "authorUrl": "https://www.google.com/maps/contrib/100000000000000000001",
+                                "authorAvatarUrl": "https://lh3.googleusercontent.com/a/placeholder",
+                                "authorReviews": 17,
+                                "authorPhotos": 6,
+                                "authorIsLocalGuide": true,
+                                "details": [
+                                    {
+                                        "label": "Order type",
+                                        "value": "Dine in"
+                                    },
+                                    {
+                                        "label": "Meal type",
+                                        "value": "Other"
+                                    }
+                                ]
+                            },
+                            {
+                                "reviewId": "Ci9DQUlRQUNvZENodHljRjlvT2sxS1dWZExNRTQ1VEdKdFNuRlZaRTQzVkRCM1FuYxAB",
+                                "reviewUrl": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2sxS1dWZExNRTQ1VEdKdFNuRlZaRTQzVkRCM1FuYxAB!2m1!1s0x0:0x4a9e56f256689bb2!3m1!1s2@1:CAIQACodChtycF9oOk1KWVdLME45TGJtSnFVZE43VDB3Qnc%7C%7C?hl=en-US",
+                                "rating": 5,
+                                "text": "This place is fantastic. I LOVE the coffee. It’s great all on its own. The moon milk is delicious, and helps make the drinks here a bit more unique (in a good way). I love the pastries, and the other foods they serve are actually quite good! I’ve been here several times now and the service is always great too. I will absolutely be back.",
+                                "language": "en",
+                                "publishedAt": "2026-10-30T19:17:51.757Z",
+                                "authorName": "Reviewer 2",
+                                "authorUrl": "https://www.google.com/maps/contrib/100000000000000000002",
+                                "authorAvatarUrl": "https://lh3.googleusercontent.com/a/placeholder",
+                                "authorReviews": 29,
+                                "authorPhotos": 0,
+                                "authorIsLocalGuide": true,
+                                "details": [
+                                    {
+                                        "label": "Order type",
+                                        "value": "Take out"
+                                    },
+                                    {
+                                        "label": "Meal type",
+                                        "value": "Breakfast"
+                                    }
+                                ],
+                                "ownerReplyText": "Howdy Jonathan, thank you for being part of the Summer Moon family! We're so glad we could be a bright spot in your day. We hope to see you again soon at Summer Moon Coffee!",
+                                "ownerReplyAt": "2026-11-02T01:16:13.000Z"
+                            }
+                        ],
+                        "cursor": "QRBPjhZBCi8IARInCgoAP72F7S0M_Y__EhAvvP-C6JTWhA9CkCMAAAAAGgf_Al7S0M_YGAAiAA"
+                    },
+                    "creditsUsed": 0,
+                    "requestId": "901904b2-3da0-43fa-8e40-8df6414b0f30"
+                }
+            }
+        }
+    ]
+}
