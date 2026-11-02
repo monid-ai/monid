@@ -1,0 +1,24 @@
+{
+    "name": "synthetic-person-reverse-phone-invalid",
+    "description": "A reverse phone lookup sent a number that reads as no phone number: 422 PHONE_NUMBER_INVALID, nothing charged. Synthetic, shaped on Fuse's Business API contract for the route (2026-11-02); to be recorded once the route is live.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 422,
+                "body": {
+                    "error": {
+                        "code": "PHONE_NUMBER_INVALID",
+                        "message": "`phone` does not read as a phone number, even as a US one. Send it with its country code, such as `+14155550123`. Nothing was charged.",
+                        "param": null,
+                        "doc_url": "https://docs.fuseai.com/concepts/errors#phone_number_invalid",
+                        "request_id": "11111111-1111-4111-8111-111111111111"
+                    }
+                }
+            }
+        }
+    ]
+}
