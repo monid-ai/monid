@@ -28,6 +28,22 @@ Deno.test("specstream#v1/parse: a runnable reading hands back the ast_hash and b
     assertEquals(result.usage, { credits: {}, evidence: {} });
 });
 
+Deno.test("specstream#v1/parse: a refused key is zero-billed error data", async () => {
+    const result = await runEndpoint({
+        unit: await testSealedUnit(ID),
+        input: { body: BODY },
+        mode: "replay",
+        fixture: await loadFixture(`${chains}synthetic-quote-refused.json`),
+    });
+    assertEquals(result.httpStatus, 401);
+    assertEquals(result.isProviderError, true);
+    assertEquals(
+        (result.output as { message: string; code?: string }).code,
+        "invalid_token",
+    );
+    assertEquals(result.usage, { credits: {}, evidence: {} });
+});
+
 Deno.test("specstream#v1/parse: an ambiguous request comes back needs_edit with no hash to price", async () => {
     const result = await runEndpoint({
         unit: await testSealedUnit(ID),

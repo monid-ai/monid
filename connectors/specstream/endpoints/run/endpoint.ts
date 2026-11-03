@@ -105,9 +105,7 @@ export default defineEndpoint({
                     "/rows",
             });
             if (
-                res.status === 408 || res.status === 429 ||
-                res.status === 500 || res.status === 502 ||
-                res.status === 503 || res.status === 504
+                res.status === 408 || res.status === 429 || res.status >= 500
             ) {
                 // The status LOOKUP failed, not the run: the find keeps
                 // working and its charge is reserved, so declaring the run

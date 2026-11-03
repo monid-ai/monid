@@ -58,7 +58,7 @@ RUNNING with the caller's `idempotency_key` as the job handle; poll
 `GET /v1/capacity/requests/{idempotency_key}/rows`; and stop by
 cancelling the find. The run SHALL complete only when `done` is true and
 `commerce.settlement_status` is not `pending`. A lookup that answers 408,
-429, 500, 502, 503 or 504 SHALL keep the run alive. A submit answered
+429 or any 5xx status SHALL keep the run alive. A submit answered
 with a non-2xx status SHALL complete as data without starting a job.
 
 #### Scenario: A running find, then a pending charge, then a settled page

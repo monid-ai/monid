@@ -37,6 +37,22 @@ Deno.test("specstream#v1/finds/{id}/rows: rows keep the page each value came fro
     assertEquals(result.usage, { credits: {}, evidence: {} });
 });
 
+Deno.test("specstream#v1/finds/{id}/rows: an unknown find is zero-billed error data", async () => {
+    const result = await runEndpoint({
+        unit: await testSealedUnit(ID),
+        input: { pathParams: { id: FIND } },
+        mode: "replay",
+        fixture: await loadFixture(`${chains}synthetic-find-rows-refused.json`),
+    });
+    assertEquals(result.httpStatus, 404);
+    assertEquals(result.isProviderError, true);
+    assertEquals(
+        (result.output as { message: string; code?: string }).code,
+        "find_not_found",
+    );
+    assertEquals(result.usage, { credits: {}, evidence: {} });
+});
+
 Deno.test("specstream#v1/finds/{id}/rows: the gate needs the find id and bounds the page size", async () => {
     const unit = await testSealedUnit(ID);
     const fixture = await loadFixture(`${chains}synthetic-find-rows-ok.json`);

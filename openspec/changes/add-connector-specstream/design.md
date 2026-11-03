@@ -75,7 +75,7 @@ the same key never buys twice, so the run needs no other state.
 
 `poll` reads that page. `done` and `retry_after_seconds` set the cadence
 (`retry_after_seconds` is `null` once the find is done, so it is read
-without a type gate). A 408, 429, 5xx on the lookup keeps the run alive
+without a type gate). A 408, 429 or any 5xx status on the lookup keeps the run alive
 rather than ending it, because the find keeps working and its charge is
 reserved. Other non-2xx answers complete as data and the engine zero
 bills them.
