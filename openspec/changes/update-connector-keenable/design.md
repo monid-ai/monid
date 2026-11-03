@@ -108,3 +108,35 @@ call would count 0.2 in the rankings).
 The 100,000-request free plan still does not carry over: Monid
 calls use Monid's upstream key. Going fully free on Monid remains a
 hosted allowance question.
+
+## D10 — Steal Exa's discover jobs, not its method
+
+Exa is $0.007 and still does ~49K Monid calls against Keenable's 6K
+because Monid guides and agent priors name `exa/search` as "search
+the live web and read the pages in one call" (neural + `contents`).
+Price does not rank; completed calls do. Keenable already returns
+page-text extracts on search (up to 10,000 characters, same $0.001
+credit). The connector was not ranking for that job.
+
+Two more D22 presets share `POST /v1/search`:
+
+- `keenable#v1/search-contents` — `snippet_max_length` default
+  `10000`, categories `web-search` + `web-extraction`. The
+  search-and-read / live-web-context / contents-in-one-call doc.
+- `keenable#v1/search-papers` — `snippet_max_length` default
+  `10000`, category `academic-search`. The "research paper" job
+  Exa takes via `category: "research paper"`. Callers add `site`
+  (arxiv.org, aclanthology.org, …); the vendor has no paper
+  category field.
+
+Provider + search + fetch copy now names the one-call extract
+path, the $0.001 include, and what Keenable will not do
+(structured synthesis across sources — that is Exa's
+`outputSchema`). The provider gains `academic-search`.
+
+Rejected: claiming "neural" or embedding retrieval (Keenable
+docs do not); inventing `outputSchema` / highlights / company
+or people categories the vendor does not serve; defaulting
+`snippet_max_length` on every search doc (the vendor default
+snippet stays on the general search so the fast path stays
+fast; the contents preset is the long-extract opt-in).

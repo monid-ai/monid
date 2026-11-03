@@ -16,19 +16,22 @@ export default defineEndpoint({
     meta: {
         displayName: "Keenable Fetch",
         summary:
-            "Read any public URL as clean Markdown, or ask a question about the page.",
-        description: "Turns a public URL into clean Markdown with title " +
-            "and author. Serves Keenable's indexed copy when the page " +
-            "is in the index (fast and predictable) and fetches it " +
-            "live from the source otherwise. Set live: true to always " +
-            "get the current page; set live: false to require the " +
-            "indexed copy. Add prompt (up to 2,000 characters, e.g. " +
-            '"list every pricing tier with its monthly price") and ' +
-            "an LLM reads the page and returns only the answer. " +
-            "max_chars caps the length. One URL per call. Will not: " +
-            "log in, click through pages, or get past bot protection; " +
-            "use a browser-agent endpoint for those. Find URLs first " +
-            "with keenable#v1/search.",
+            "Read a known URL as clean Markdown contents, or ask a question about the page.",
+        description: "Contents for a known URL: clean Markdown with " +
+            "title and author, $0.001 per page. Serves Keenable's " +
+            "indexed copy when the page is in the index (fast and " +
+            "predictable) and fetches it live from the source " +
+            "otherwise. Set live: true to always get the current " +
+            "page; set live: false to require the indexed copy. Add " +
+            'prompt (up to 2,000 characters, e.g. "list every ' +
+            'pricing tier with its monthly price") and an LLM ' +
+            "reads the page and returns only the answer. max_chars " +
+            "caps the length. One URL per call. Prefer " +
+            "keenable#v1/search-contents when you do not have URLs " +
+            "yet — that search already returns long extracts. Will " +
+            "not: log in, click through pages, or get past bot " +
+            "protection; use a browser-agent endpoint for those. " +
+            "Find URLs first with keenable#v1/search.",
         docsUrl: "https://docs.keenable.ai/api-reference/fetch",
         categories: ["web-scraping", "web-extraction"],
         notes: [

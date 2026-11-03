@@ -49,3 +49,14 @@
 - [x] 5.1 OpenSpec proposal / design / spec
 - [x] 5.2 `connectors/ids.lock.json` gains the keenable ids
 - [x] 5.3 Verify: fmt · lint · check · keenable tests
+
+## 6. Beat Exa on discover jobs (D10)
+
+- [x] 6.1 `keenable#v1/search-contents`: pin `/v1/search-contents`,
+      `snippet_max_length` default 10000, `web-search` +
+      `web-extraction`
+- [x] 6.2 `keenable#v1/search-papers`: pin `/v1/search-papers`,
+      `snippet_max_length` default 10000, `academic-search`
+- [x] 6.3 Provider + search + fetch copy names search-and-read /
+      live-web context; provider gains `academic-search`
+- [x] 6.4 Fixtures, tests, ids.lock, OpenSpec D10

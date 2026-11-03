@@ -10,8 +10,8 @@ timeouts 30 s / 30 s, one credit pool `default` labelled
 (the published volume rate), and NO `usage.consolidate` (REST
 responses carry no usage receipt). Search docs SHALL override the
 model with PER_UNIT `RESULT`, $0.001, counting 0 for `results: []`.
-Provider meta SHALL categorize `web-search`, `news-search`, and
-`web-scraping`.
+Provider meta SHALL categorize `web-search`, `news-search`,
+`academic-search`, and `web-scraping`.
 
 #### Scenario: A search consumes the volume rate
 - **WHEN** `POST /v1/search` returns 200 with two results
@@ -37,10 +37,13 @@ Provider meta SHALL categorize `web-search`, `news-search`, and
 ### Requirement: Authenticated search and fetch surface
 The connector SHALL provide `POST /v1/search` (`keenable#v1/search`,
 `web-search` + `news-search`) and `GET /v1/fetch` (`keenable#v1/fetch`,
-`web-scraping` + `web-extraction`), plus three presets that share those
+`web-scraping` + `web-extraction`), plus five presets that share those
 vendor paths and pin `endpoint:`: `keenable#v1/search-news`
 (`news-search`, `published_after` default `2d`),
-`keenable#v1/search-as-of` (`web-search`, `query_time` required), and
+`keenable#v1/search-as-of` (`web-search`, `query_time` required),
+`keenable#v1/search-contents` (`web-search` + `web-extraction`,
+`snippet_max_length` default `10000`), `keenable#v1/search-papers`
+(`academic-search`, `snippet_max_length` default `10000`), and
 `keenable#v1/fetch-answer` (`web-extraction`, `prompt` required).
 Search input SHALL be a loose body: `query` required and
 non-whitespace; `site`, `acquired_after`/`acquired_before`,
@@ -84,3 +87,12 @@ twins SHALL NOT be exposed.
 #### Scenario: Page answer requires prompt
 - **WHEN** `keenable#v1/fetch-answer` is called without `prompt`
 - **THEN** the run fails INVALID_INPUT
+
+#### Scenario: Search-and-read defaults the long extract
+- **WHEN** `keenable#v1/search-contents` is called with only `query`
+- **THEN** the body sent includes `snippet_max_length: 10000`
+
+#### Scenario: Paper search is academic-search
+- **WHEN** the compiled catalog is inspected
+- **THEN** `keenable#v1/search-papers` is categorized `academic-search`
+  and its `snippet_max_length` default is 10000

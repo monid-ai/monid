@@ -21,18 +21,24 @@ Deno.test("keenable: fetch inherits PER_CALL 1, search counts RESULT, one auth f
         "keenable#v1/fetch-answer",
         "keenable#v1/search",
         "keenable#v1/search-as-of",
+        "keenable#v1/search-contents",
         "keenable#v1/search-news",
+        "keenable#v1/search-papers",
     ]);
 
     const search = bundle.endpoints["keenable#v1/search"];
     const news = bundle.endpoints["keenable#v1/search-news"];
     const asOf = bundle.endpoints["keenable#v1/search-as-of"];
+    const contents = bundle.endpoints["keenable#v1/search-contents"];
+    const papers = bundle.endpoints["keenable#v1/search-papers"];
     const fetchDoc = bundle.endpoints["keenable#v1/fetch"];
     const answer = bundle.endpoints["keenable#v1/fetch-answer"];
     assertEquals(search.request.method, "POST");
     assertEquals(search.request.url, "https://api.keenable.ai/v1/search");
     assertEquals(news.request.url, "https://api.keenable.ai/v1/search");
     assertEquals(asOf.request.url, "https://api.keenable.ai/v1/search");
+    assertEquals(contents.request.url, "https://api.keenable.ai/v1/search");
+    assertEquals(papers.request.url, "https://api.keenable.ai/v1/search");
     assertEquals(fetchDoc.request.method, "GET");
     assertEquals(fetchDoc.request.url, "https://api.keenable.ai/v1/fetch");
     assertEquals(answer.request.url, "https://api.keenable.ai/v1/fetch");
@@ -43,6 +49,8 @@ Deno.test("keenable: fetch inherits PER_CALL 1, search counts RESULT, one auth f
     assertEquals(search.input.toRequest, undefined);
     assertEquals(news.input.toRequest, undefined);
     assertEquals(asOf.input.toRequest, undefined);
+    assertEquals(contents.input.toRequest, undefined);
+    assertEquals(papers.input.toRequest, undefined);
     assertEquals(fetchDoc.input.toRequest, undefined);
     assertEquals(answer.input.toRequest, undefined);
 
@@ -54,18 +62,25 @@ Deno.test("keenable: fetch inherits PER_CALL 1, search counts RESULT, one auth f
         bundle.fnTable[synthesizedKey].provenance,
         "core#usage.synthesizedEmpty",
     );
-    // search: its own 0|1 evidence (empty result bills 0); the three
+    // search: its own 0|1 evidence (empty result bills 0); the five
     // search docs share one interned pair
     assert(search.usage.evidence.$fn.key !== synthesizedKey);
     assertEquals(search.usage.evidence.$fn.key, news.usage.evidence.$fn.key);
     assertEquals(search.usage.evidence.$fn.key, asOf.usage.evidence.$fn.key);
+    assertEquals(
+        search.usage.evidence.$fn.key,
+        contents.usage.evidence.$fn.key,
+    );
+    assertEquals(search.usage.evidence.$fn.key, papers.usage.evidence.$fn.key);
 
     const kinds: Record<string, string> = {
         "keenable#v1/fetch": "PER_CALL",
         "keenable#v1/fetch-answer": "PER_CALL",
         "keenable#v1/search": "PER_UNIT",
         "keenable#v1/search-as-of": "PER_UNIT",
+        "keenable#v1/search-contents": "PER_UNIT",
         "keenable#v1/search-news": "PER_UNIT",
+        "keenable#v1/search-papers": "PER_UNIT",
     };
     for (const id of ids) {
         const doc = bundle.endpoints[id];
@@ -87,11 +102,12 @@ Deno.test("keenable: agent-facing meta, news category, live-fallback fetch", asy
     assertEquals(provider.meta.displayName, "Keenable");
     assertEquals(
         provider.meta.summary,
-        "Fast independent web search with long page-text extracts, plus clean page fetch.",
+        "Search the live web and read the top pages in one call, plus clean page fetch.",
     );
     assertEquals(provider.meta.categories, [
         "web-search",
         "news-search",
+        "academic-search",
         "web-scraping",
     ]);
 
@@ -114,6 +130,22 @@ Deno.test("keenable: agent-facing meta, news category, live-fallback fetch", asy
     const asOf = bundle.endpoints["keenable#v1/search-as-of"];
     assertEquals(asOf.meta.displayName, "Keenable Point-in-Time Search");
     assertEquals(asOf.meta.categories, ["web-search"]);
+
+    const contents = bundle.endpoints["keenable#v1/search-contents"];
+    assertEquals(contents.meta.displayName, "Keenable Search and Read");
+    assertEquals(contents.meta.categories, ["web-search", "web-extraction"]);
+    assert(
+        contents.meta.description?.includes("10,000"),
+        "contents description names the long extract",
+    );
+
+    const papers = bundle.endpoints["keenable#v1/search-papers"];
+    assertEquals(papers.meta.displayName, "Keenable Paper Search");
+    assertEquals(papers.meta.categories, ["academic-search"]);
+    assert(
+        papers.meta.description?.includes("arxiv.org"),
+        "papers description names a scholarly site",
+    );
 
     const fetchDoc = bundle.endpoints["keenable#v1/fetch"];
     assertEquals(fetchDoc.meta.displayName, "Keenable Fetch");

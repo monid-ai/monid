@@ -20,6 +20,9 @@ this change ships the connector half.
   to "Search Web Pages"). Categories: provider
   `web-search` + `news-search` + `web-scraping`; search
   `web-search` + `news-search`; fetch `web-scraping` + `web-extraction`.
+  Provider also lists `academic-search`. Copy names the one-call
+  extract path so discover can rank Keenable for the job Exa
+  currently owns.
 - **Live-fallback fetch (D6)** — `live` defaults to `true` at the
   binding. Indexed and live cost the same credit (D4), so there is no
   cost reason to make a miss an error. Callers set `live: false` for
@@ -36,6 +39,10 @@ this change ships the connector half.
   - `keenable#v1/search-as-of` — `query_time` required, point-in-time
     search.
   - `keenable#v1/fetch-answer` — `prompt` required, `web-extraction`.
+  - `keenable#v1/search-contents` — `snippet_max_length` defaults to
+    `10000`, `web-search` + `web-extraction` (search-and-read).
+  - `keenable#v1/search-papers` — `snippet_max_length` defaults to
+    `10000`, `academic-search`.
 - **Volume rate in USD (D9)** — pool label `US dollars`, draw `0.001`
   per successful search or fetch (Keenable's dedicated-capacity rate,
   $1 / 1,000 at 100+ RPS). Same posture as Exa. Empty `results: []`
@@ -59,5 +66,5 @@ this change ships the connector half.
 ## Impact
 
 Connector-only. No schema / engine / compiler contract change —
-`ENGINE_VERSION` unchanged. `connectors/ids.lock.json` gains the three
-new ids plus the two that PR #27 never locked.
+`ENGINE_VERSION` unchanged. `connectors/ids.lock.json` gains the five
+new preset ids plus the two that PR #27 never locked.

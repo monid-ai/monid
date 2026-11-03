@@ -13,6 +13,7 @@ export const zKeenableTimeBoundBinding = zKeenableSearchBody.shape.query_time
 export function keenableSearchBodySchema(options?: {
     queryTimeRequired?: boolean;
     publishedAfterDefault?: string;
+    snippetMaxLengthDefault?: number;
 }) {
     const timeBound = zKeenableTimeBoundBinding.optional();
     const publishedAfter = options?.publishedAfterDefault !== undefined
@@ -21,6 +22,11 @@ export function keenableSearchBodySchema(options?: {
     const queryTime = options?.queryTimeRequired === true
         ? zKeenableTimeBoundBinding
         : timeBound;
+    const snippet = zKeenableSearchBody.shape.snippet_max_length
+        .unwrap().min(180).max(10000);
+    const snippetMaxLength = options?.snippetMaxLengthDefault !== undefined
+        ? snippet.default(options.snippetMaxLengthDefault)
+        : snippet.optional();
     return zKeenableSearchBody.extend({
         query: zKeenableSearchBody.shape.query.min(1).regex(/\S/),
         site: zKeenableSearchBody.shape.site.unwrap().min(1).regex(/\S/)
@@ -30,9 +36,7 @@ export function keenableSearchBodySchema(options?: {
         published_after: publishedAfter,
         published_before: timeBound,
         query_time: queryTime,
-        snippet_max_length: zKeenableSearchBody.shape
-            .snippet_max_length.unwrap().min(180).max(10000)
-            .optional(),
+        snippet_max_length: snippetMaxLength,
         max_results: zKeenableSearchBody.shape.max_results
             .unwrap().min(1).max(50).optional(),
     });
@@ -40,7 +44,7 @@ export function keenableSearchBodySchema(options?: {
 
 /**
  * Search bills PER_UNIT RESULT, 0 when `results: []` (design D2). Shared
- * by the three docs that hit `POST /v1/search`.
+ * by the five docs that hit `POST /v1/search`.
  */
 export const keenableSearchUsage = {
     model: {
