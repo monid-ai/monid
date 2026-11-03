@@ -1,45 +1,36 @@
 {
     "name": "insufficient-credits",
-    "description": "Recorded 2026-10-28, new in the vendor's v1.9.0 release: a real agent key drained to a 0 balance (see fixtures/balance-bound.json for the prior call that reached 0), then asked for 5 more funds. Unlike the balance-bound case (balance partially covers the page), a ZERO balance refuses outright: a real HTTP 402 — this connector's non-MCP-transport posture (plain JSON over HTTP, no SSE Accept header) gets the real transport status rather than an isError:true MCP result, per the vendor's own isMcpTransport split. error_reason 'insufficient_credits', nothing_charged true. The provider's lifecycle.start already relays any non-2xx untouched (its very first branch), so no code change was needed for this case — only this fixture and test to lock it in. Verbatim, no trimming needed.",
-    "calls": [{
-        "req": {
-            "method": "POST",
-            "url": "{{request.url}}",
-            "body": {
-                "jsonrpc": "2.0",
-                "method": "tools/call",
-                "params": {
-                    "name": "search_funds",
-                    "arguments": {
-                        "stage": "seed",
-                        "industry": "fintech",
-                        "limit": 5
-                    }
-                },
-                "id": 1
-            }
-        },
-        "res": {
-            "status": 402,
-            "body": {
-                "jsonrpc": "2.0",
-                "id": 1,
-                "error": {
-                    "code": -32001,
-                    "message": "Insufficient credits. You have 0 credits. This operation requires 5 credits. Short by 5. Top up: https://fundmomentum.vc/pricing. Nothing was charged.",
-                    "data": {
-                        "error_reason": "insufficient_credits",
-                        "required": 5,
-                        "available": 0,
-                        "shortfall": 5,
-                        "top_up": {
-                            "url": "https://fundmomentum.vc/pricing",
-                            "tool": null
-                        },
-                        "nothing_charged": true
-                    }
+    "description": "RE-VERIFIED LIVE 2026-11-04 (replaces the 2026-10-28 recording, which is now stale): a real agent key drained to a 0 balance, asked for 5 more funds. The vendor's insufficient-credits response shape changed between 2026-10-28 and today -- it used to be an ad-hoc JSON-RPC body ({error: {data: {error_reason: 'insufficient_credits', nothing_charged: true}}}); it is now a real MPP (micropayment protocol, https://mpp.dev) payment-required challenge: HTTP 402, Content-Type application/problem+json, a WWW-Authenticate: Payment ... header (omitted from this fixture -- the testing harness's replay mode only exercises status + body, same as every other fixture here), and an RFC 9457 problem-details body. Found while building search-lps/, which returns the identical shape for its own insufficient-credits case -- this appears to be a platform-wide change, not tool-specific. Still a real non-2xx either way, so provider.ts's lifecycle.start relays it untouched without caring about the difference; only this fixture and test needed updating, no code change.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "jsonrpc": "2.0",
+                    "method": "tools/call",
+                    "params": {
+                        "name": "search_funds",
+                        "arguments": {
+                            "stage": "seed",
+                            "industry": "fintech",
+                            "limit": 5
+                        }
+                    },
+                    "id": 1
+                }
+            },
+            "res": {
+                "status": 402,
+                "body": {
+                    "type": "https://paymentauth.org/problems/payment-required",
+                    "title": "Payment Required",
+                    "status": 402,
+                    "detail": "Payment is required (Fund Momentum search_funds).",
+                    "hint": "Use a supported wallet to pay for this resource using one of the supported payment methods returned in the WWW-Authenticate header. See https://mpp.dev/tools/wallet.md",
+                    "challengeId": "EttuRRBSJwU7-vYPAqhMM233pY6bNvUWuG9aAjACYX0"
                 }
             }
         }
-    }]
+    ]
 }

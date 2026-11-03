@@ -101,7 +101,7 @@ Deno.test("fundmomentum#mcp/search_funds: a balance that covers only part of a p
     assertEquals(billing.balance_after, 0);
 });
 
-Deno.test("fundmomentum#mcp/search_funds: a zero balance is refused outright as a real HTTP 402, zero usage (v1.9.0)", async () => {
+Deno.test("fundmomentum#mcp/search_funds: a zero balance is a real HTTP 402 MPP payment challenge, zero usage (RE-VERIFIED 2026-11-04)", async () => {
     const unit = await testSealedUnit("fundmomentum#mcp/search_funds");
     const fixture = await loadFixture(
         `${fixturesDir}insufficient-credits.json`,
@@ -112,19 +112,23 @@ Deno.test("fundmomentum#mcp/search_funds: a zero balance is refused outright as 
         mode: "replay",
         fixture,
     });
-    // This connector's plain-JSON-over-HTTP posture (no SSE Accept
-    // header) means the vendor's isMcpTransport check sees it as a
-    // non-MCP caller, so insufficient credits arrives as a REAL
-    // non-2xx — relayed untouched by lifecycle.start's first branch,
-    // same as any other provider error (401, 403, 429).
+    // RE-VERIFIED LIVE 2026-11-04: the vendor's insufficient-credits
+    // shape changed since the 2026-10-28 recording this replaces — it
+    // is now a real MPP (micropayment protocol) payment-required
+    // challenge, not the old ad-hoc JSON-RPC {error: {data: {
+    // error_reason: "insufficient_credits"}}} body. Either way it's a
+    // real non-2xx — relayed untouched by lifecycle.start's first
+    // branch, same as any other provider error (401, 403, 429); no
+    // code change was needed, only this fixture and test.
     assertEquals(result.httpStatus, 402);
     assertEquals(result.isProviderError, true);
     assertEquals(result.usage, { credits: {}, evidence: {} });
     const body = result.output as Record<string, unknown>;
-    const error = body.error as Record<string, unknown>;
-    const data = error.data as Record<string, unknown>;
-    assertEquals(data.error_reason, "insufficient_credits");
-    assertEquals(data.nothing_charged, true);
+    assertEquals(
+        body.type,
+        "https://paymentauth.org/problems/payment-required",
+    );
+    assertEquals(body.status, 402);
 });
 
 Deno.test("fundmomentum#mcp/search_funds: an exact repeat of a prior call is a free idempotent replay, never double-billed", async () => {
