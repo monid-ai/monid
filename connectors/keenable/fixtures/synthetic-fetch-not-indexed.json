@@ -1,0 +1,21 @@
+{
+    "name": "synthetic-fetch-not-indexed",
+    "description": "SYNTHETIC live-fallback fetch for a URL treated as missing from the index. The caller omitted live; the connector default sends live=true so the run succeeds instead of a provider error (design D6).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.keenable.ai/v1/fetch?url=https%3A%2F%2Fexample.com%2Fnot-in-index&live=true"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "url": "https://example.com/not-in-index",
+                    "title": "Unindexed Example",
+                    "content": "# Unindexed Example\n\nFetched live because the URL was not in the index.",
+                    "description": ""
+                }
+            }
+        }
+    ]
+}

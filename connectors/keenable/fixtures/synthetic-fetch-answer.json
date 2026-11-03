@@ -1,0 +1,21 @@
+{
+    "name": "synthetic-fetch-answer",
+    "description": "SYNTHETIC prompt extraction for keenable#v1/fetch-answer. live=true is the connector default; prompt is required. Response content is the instruction output, not the full page.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.keenable.ai/v1/fetch?url=https%3A%2F%2Fexample.com&prompt=list+every+pricing+tier&live=true"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "url": "https://example.com/",
+                    "title": "Example Domain",
+                    "content": "No pricing tiers on this page.",
+                    "description": ""
+                }
+            }
+        }
+    ]
+}

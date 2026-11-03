@@ -5,7 +5,7 @@
         {
             "req": {
                 "method": "GET",
-                "url": "https://api.keenable.ai/v1/fetch?url=https%3A%2F%2Fexample.com&max_chars=1"
+                "url": "https://api.keenable.ai/v1/fetch?url=https%3A%2F%2Fexample.com&max_chars=1&live=true"
             },
             "res": {
                 "status": 200,
