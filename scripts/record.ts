@@ -4,8 +4,8 @@
  *
  * The fixture RECORDER: replay tests need real {req, res} exchanges, so this
  * runs the endpoint LIVE once (env <NAME>_API_KEY) through the engine with a
- * wrapped fetch, captures the request/response pairs (headers NEVER recorded
- * — credentials cannot leak), and writes
+ * wrapped fetch, captures the request/response pairs (request headers omitted,
+ * response headers allowlisted, clientKey body fields redacted), and writes
  * <endpoint>/fixtures/<scenario>.json inside the endpoint's SOURCE dir,
  * which is located by WALKING connectors/<provider>/endpoints/ — endpoints
  * may sit inside platform group directories (apify: amazon/, x/, …).
@@ -16,7 +16,7 @@
  * pass through the deterministic trim (arrays capped, long strings
  * truncated) AND the PII scrub (emails/phones → structural placeholders —
  * see shared/testing/fixtures.ts) BEFORE writing. The wire chain
- * (requests/urls/statuses) is untouched, so replay matching is unaffected;
+ * (methods/urls/statuses) is untouched, so replay matching is unaffected;
  * only the consumed payload bulk shrinks. NOTE: the printed usage below
  * reflects the LIVE (untrimmed) responses — replay assertions must count
  * the trimmed fixture's reality. Recordings are RAW MATERIAL: shared
