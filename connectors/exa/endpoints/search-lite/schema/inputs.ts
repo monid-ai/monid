@@ -13,7 +13,7 @@ import { zExaSearchBody } from "../../../schema/search-body.ts";
 export const zExaLiteContents = z.object({
     text: zText.optional(),
     highlights: zHighlights.optional(),
-});
+}).strict();
 
 export const zExaLiteSearchBody = zExaSearchBody.pick({
     query: true,
@@ -27,4 +27,4 @@ export const zExaLiteSearchBody = zExaSearchBody.pick({
     moderation: true,
 }).extend({
     contents: zExaLiteContents.optional(),
-});
+}).strict();

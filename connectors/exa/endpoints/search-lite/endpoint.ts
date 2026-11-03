@@ -43,10 +43,9 @@ export default defineEndpoint({
                     .default(10),
                 moderation: zExaLiteSearchBody.shape.moderation.unwrap()
                     .default(false),
-            }),
+            }).strict(),
         },
-        // pin the search type; a caller-supplied `type` (the schema is
-        // non-strict) is overwritten rather than forwarded.
+        // pin the search type after strict validation of caller inputs.
         toRequest: ({ data, utils }) => ({
             ...data.input,
             body: utils.json.merge(data.input.body ?? {}, { type: "lite" }),

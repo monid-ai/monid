@@ -5,6 +5,7 @@ import {
     assertRejects,
 } from "@std/assert";
 import { fromFileUrl } from "@std/path";
+import type { Json } from "@shared/core";
 import {
     assertInputAccepted,
     estimateEndpoint,
@@ -104,6 +105,38 @@ Deno.test(`${ID} schema gate: result bounds and category are enforced`, async ()
     });
 });
 
+Deno.test(`${ID} schema gate: unsupported properties are rejected before the wire`, async () => {
+    const unit = await testSealedUnit(ID);
+    const invalidBodies: Json[] = [
+        { query: "q", stream: true },
+        { query: "q", outputSchema: {} },
+        { query: "q", contents: { summary: {} } },
+        { query: "q", type: "deep" },
+    ];
+    for (const body of invalidBodies) {
+        await assertRejects(
+            () =>
+                runEndpoint({
+                    unit,
+                    input: { body },
+                    mode: "replay",
+                }),
+            Error,
+            "INVALID_INPUT",
+        );
+    }
+    await assertInputAccepted({
+        unit,
+        input: {
+            body: {
+                query: "q",
+                contents: { text: true, highlights: true },
+            },
+        },
+        mode: "replay",
+    });
+});
+
 Deno.test(`${ID} estimate: $0.004 base plus $0.001 per result above 10`, async () => {
     const unit = await testSealedUnit(ID);
     const base = await estimateEndpoint(unit, { body: { query: "q" } });
@@ -128,9 +161,6 @@ Deno.test({
                 body: {
                     query: "deno 2 workspace monorepo guide",
                     numResults: 2,
-                    // a caller-supplied type is overwritten, never forwarded:
-                    // were "deep" sent, the vendor would bill $0.012
-                    type: "deep",
                 },
             },
             mode: "live",
