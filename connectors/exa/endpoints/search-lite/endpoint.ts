@@ -1,4 +1,4 @@
-import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
+import { defineEndpoint, UsageModelKind } from "@shared/core";
 import { zExaLiteSearchBody } from "./schema/inputs.ts";
 
 /**
@@ -11,11 +11,8 @@ import { zExaLiteSearchBody } from "./schema/inputs.ts";
  * The PUBLIC identity is `/search/lite` (design D22); the wire path is the
  * shared `/search`.
  *
- * BASE-PLUS-OVERAGE billing (exa's published card): $0.004 per call
- * including the first 10 results, plus $0.001 per result above 10 — a
- * flat "call" line and a metered "additional_result" line whose count is
- * the OFFSET rule `max(0, results − 10)` (design D19). Exa's own
- * `costDollars.total` settles every run (provider consolidate, D27).
+ * Flat billing: $0.004 per call, capped at 10 results at the binding.
+ * Exa's own costDollars.total settles every run (provider consolidate).
  */
 export default defineEndpoint({
     meta: {
@@ -27,8 +24,8 @@ export default defineEndpoint({
             "with titles, URLs and dates. Set contents.highlights to true " +
             "for the most relevant passages of each page, or contents.text " +
             "for full page text. Pages come from Exa's index and are not " +
-            "fetched at query time. $0.004 per call with up to 10 results, " +
-            "plus $0.001 per result above 10.",
+            "fetched at query time. Returns up to 10 results. $0.004 per call. " +
+            "Use Exa Search for more results.",
         docsUrl: "https://exa.ai/docs/reference/search",
         categories: ["web-search"],
     },
@@ -40,7 +37,7 @@ export default defineEndpoint({
             // numResults 10, moderation false.
             body: zExaLiteSearchBody.extend({
                 numResults: zExaLiteSearchBody.shape.numResults.unwrap()
-                    .default(10),
+                    .max(10).default(10),
                 moderation: zExaLiteSearchBody.shape.moderation.unwrap()
                     .default(false),
             }).strict(),
@@ -53,42 +50,8 @@ export default defineEndpoint({
     },
     usage: {
         model: {
-            kind: UsageModelKind.COMPOSITE,
-            components: {
-                call: {
-                    kind: UsageModelKind.PER_CALL,
-                    consumes: { credit: "default", amount: 0.004 },
-                    label: "base fee",
-                    description: "base fee, includes the first 10 results",
-                },
-                additional_result: {
-                    kind: UsageModelKind.PER_UNIT,
-                    consumes: { credit: "default", amount: 0.001 },
-                    unit: Unit.RESULT,
-                    label: "extra results",
-                    description:
-                        "results above the 10 included in the base fee",
-                },
-            },
-        },
-        /** OFFSET estimate: only the requested surplus above the included
-         *  10 is promisable. */
-        estimate: ({ data }) => {
-            const above = Math.max(0, data.input.body.numResults - 10);
-            return {
-                counts: {
-                    ...(above > 0 ? { "additional_result": above } : {}),
-                },
-            };
-        },
-        evidence: ({ data, utils }) => {
-            const results = utils.json.len(data.output, "$.results");
-            const above = Math.max(0, results - 10);
-            return {
-                counts: {
-                    ...(above > 0 ? { "additional_result": above } : {}),
-                },
-            };
+            kind: UsageModelKind.PER_CALL,
+            consumes: { credit: "default", amount: 0.004 },
         },
     },
 });

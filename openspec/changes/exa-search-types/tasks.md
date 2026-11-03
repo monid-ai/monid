@@ -12,10 +12,11 @@
 
 - [x] 2.1 search-lite: `endpoint: "/search/lite"`, wire `POST /search`,
       lite parameter subset, `toRequest` merges `type: "lite"`; PER_CALL
-      $0.004 + `additional_result`
+      $0.004 flat, binding cap of 10 results, synthesized estimate/evidence
 - [x] 2.2 search-deep: `endpoint: "/search/deep"`, wire `POST /search`,
-      `type` ∈ deep-lite/deep/deep-reasoning (default deep), 180 s budget,
-      per-type cells + `additional_result` + `summary`
+      `type` ∈ deep-lite/deep (default deep), 180 s budget, binding cap of
+      10 results and strict contents without summary; PER_CALL $0.012 flat,
+      synthesized estimate/evidence
 
 ## 3. Fixtures + tests
 
@@ -24,10 +25,12 @@
 - [x] 3.2 exa#search: happy/live evidence moves to `standard_search`;
       estimate per type; extra results + summaries ($0.018 case)
 - [x] 3.3 search-lite: identity + advertised schema, happy (claim =
-      fold), 401, estimate, unsupported-field gate with a passing near-twin,
+      fold), 401, flat estimate, 11-result and unsupported-field rejection
+      with passing near-twins,
       live (finite nonnegative usage, receipt removed, no mismatch)
 - [x] 3.4 search-deep: happy with `output.content`/`grounding`, 401,
-      type gate with a passing near-twin, estimate, live deep-reasoning
+      deep-reasoning/11-result/summary rejection with passing near-twins,
+      flat estimate, live deep search
 
 ## 4. Wiring
 

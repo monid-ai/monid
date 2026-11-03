@@ -1,9 +1,4 @@
-import {
-    assert,
-    assertAlmostEquals,
-    assertEquals,
-    assertRejects,
-} from "@std/assert";
+import { assert, assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import type { Json } from "@shared/core";
 import {
@@ -57,7 +52,7 @@ Deno.test(`${ID} happy: $0.004 claim equals the fold, receipt consolidated away`
     // pinned fold (flat call, nothing above 10) agree — no mismatch rides
     assertEquals(result.usage, {
         credits: { default: 0.004 },
-        evidence: { call: 1 },
+        evidence: { CALL: 1 },
     });
     const output = result.output as Record<string, unknown>;
     assertEquals("costDollars" in output, false);
@@ -82,7 +77,7 @@ Deno.test(`${ID} provider error: 401 is data, zero usage`, async () => {
 Deno.test(`${ID} schema gate: result bounds and category are enforced`, async () => {
     const unit = await testSealedUnit(ID);
     const invalidBodies: Array<Record<string, string | number>> = [
-        { query: "q", numResults: 101 },
+        { query: "q", numResults: 11 },
         { query: "q", category: "github" },
     ];
     for (const body of invalidBodies) {
@@ -100,7 +95,7 @@ Deno.test(`${ID} schema gate: result bounds and category are enforced`, async ()
     // the passing near-twin
     await assertInputAccepted({
         unit,
-        input: { body: { query: "q", numResults: 100 } },
+        input: { body: { query: "q", numResults: 10 } },
         mode: "replay",
     });
 });
@@ -179,17 +174,20 @@ Deno.test(`${ID} schema gate: snapshot dates and compliance match the vendor sch
     });
 });
 
-Deno.test(`${ID} estimate: $0.004 base plus $0.001 per result above 10`, async () => {
+Deno.test(`${ID} estimate: $0.004 flat for accepted inputs`, async () => {
     const unit = await testSealedUnit(ID);
-    const base = await estimateEndpoint(unit, { body: { query: "q" } });
-    assertEquals(base.evidence, { call: 1 });
-    assertAlmostEquals(base.credits.default, 0.004, 1e-9);
-
-    const twelve = await estimateEndpoint(unit, {
-        body: { query: "q", numResults: 12 },
-    });
-    assertEquals(twelve.evidence, { call: 1, additional_result: 2 });
-    assertAlmostEquals(twelve.credits.default, 0.006, 1e-9);
+    for (const numResults of [undefined, 1, 3, 10]) {
+        const usage = await estimateEndpoint(unit, {
+            body: {
+                query: "q",
+                ...(numResults === undefined ? {} : { numResults }),
+            },
+        });
+        assertEquals(usage, {
+            credits: { default: 0.004 },
+            evidence: { CALL: 1 },
+        });
+    }
 });
 
 Deno.test({
@@ -212,7 +210,7 @@ Deno.test({
             false,
             JSON.stringify(result.output),
         );
-        assertEquals(result.usage.evidence, { call: 1 });
+        assertEquals(result.usage.evidence, { CALL: 1 });
         assert(Number.isFinite(result.usage.credits.default));
         assert(result.usage.credits.default >= 0);
         assert(!("costDollars" in (result.output as Record<string, unknown>)));

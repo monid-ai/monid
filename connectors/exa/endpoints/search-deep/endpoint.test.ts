@@ -1,10 +1,6 @@
-import {
-    assert,
-    assertAlmostEquals,
-    assertEquals,
-    assertRejects,
-} from "@std/assert";
+import { assert, assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
+import type { Json } from "@shared/core";
 import {
     assertInputAccepted,
     estimateEndpoint,
@@ -51,11 +47,10 @@ Deno.test(`${ID} happy: structured output with grounding, $0.012 claim equals th
 
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
-    // recorded live 2026-11-02: no `type` ⇒ the binding's "deep" ⇒ the
-    // deep_search cell; exa's costDollars.total ($0.012) agrees
+    // recorded live 2026-11-02: the default deep search matches the flat rate.
     assertEquals(result.usage, {
         credits: { default: 0.012 },
-        evidence: { deep_search: 1 },
+        evidence: { CALL: 1 },
     });
     const output = result.output as {
         costDollars?: unknown;
@@ -81,43 +76,54 @@ Deno.test(`${ID} provider error: 401 is data, zero usage`, async () => {
     assertEquals(result.usage, { credits: {}, evidence: {} });
 });
 
-Deno.test(`${ID} schema gate: only the deep search types are accepted`, async () => {
+Deno.test(`${ID} schema gate: flat-price limits are enforced`, async () => {
     const unit = await testSealedUnit(ID);
-    for (const type of ["auto", "lite", "fast"]) {
+    const invalidBodies: Json[] = [
+        ...["auto", "lite", "fast", "deep-reasoning"].map((type) => ({
+            query: "q",
+            type,
+        })),
+        { query: "q", numResults: 11 },
+        { query: "q", contents: { summary: {} } },
+    ];
+    for (const body of invalidBodies) {
         await assertRejects(
-            () =>
-                runEndpoint({
-                    unit,
-                    input: { body: { query: "q", type } },
-                    mode: "replay",
-                }),
+            () => runEndpoint({ unit, input: { body }, mode: "replay" }),
             Error,
             "INVALID_INPUT",
         );
     }
-    // the passing near-twin
     await assertInputAccepted({
         unit,
-        input: { body: { query: "q", type: "deep-reasoning" } },
+        input: {
+            body: {
+                query: "q",
+                type: "deep-lite",
+                numResults: 10,
+                contents: { highlights: true },
+            },
+        },
         mode: "replay",
     });
 });
 
-Deno.test(`${ID} estimate: the base price follows \`type\``, async () => {
+Deno.test(`${ID} estimate: $0.012 flat for accepted inputs`, async () => {
     const unit = await testSealedUnit(ID);
     // Search rate sources and dates: see ../../provider.ts.
-    const cases: Array<[string | undefined, string, number]> = [
-        [undefined, "deep_search", 0.012], // binding default "deep"
-        ["deep-lite", "deep_search", 0.012],
-        ["deep", "deep_search", 0.012],
-        ["deep-reasoning", "deep_reasoning_search", 0.015],
-    ];
-    for (const [type, cell, dollars] of cases) {
-        const usage = await estimateEndpoint(unit, {
-            body: { query: "q", ...(type ? { type } : {}) },
-        });
-        assertEquals(usage.evidence, { [cell]: 1 }, String(type));
-        assertAlmostEquals(usage.credits.default, dollars, 1e-9, String(type));
+    for (const type of [undefined, "deep-lite", "deep"]) {
+        for (const numResults of [undefined, 1, 3, 10]) {
+            const usage = await estimateEndpoint(unit, {
+                body: {
+                    query: "q",
+                    ...(type ? { type } : {}),
+                    ...(numResults === undefined ? {} : { numResults }),
+                },
+            });
+            assertEquals(usage, {
+                credits: { default: 0.012 },
+                evidence: { CALL: 1 },
+            });
+        }
     }
 });
 
@@ -131,7 +137,7 @@ Deno.test({
             input: {
                 body: {
                     query: "latest developments in LLMs",
-                    type: "deep-reasoning",
+                    type: "deep",
                     numResults: 3,
                 },
             },
@@ -142,7 +148,7 @@ Deno.test({
             false,
             JSON.stringify(result.output),
         );
-        assertEquals(result.usage.evidence, { deep_reasoning_search: 1 });
+        assertEquals(result.usage.evidence, { CALL: 1 });
         assert(Number.isFinite(result.usage.credits.default));
         assert(result.usage.credits.default >= 0);
         assert(!("costDollars" in (result.output as Record<string, unknown>)));

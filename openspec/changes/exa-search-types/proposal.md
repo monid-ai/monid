@@ -30,12 +30,13 @@ the endpoint it discovers. A single `/search` endpoint carrying an
   line meters `contents.summary` per returned result. Meta copy rewritten
   to say when to use each type and what each costs.
 - **`exa#search/lite`** (new): `POST /search` pinned to `type: "lite"`,
-  with the parameter set lite accepts. $0.004 per call including 10
-  results, $0.001 per result above 10.
+  with the parameter set lite accepts and a binding limit of 10 results.
+  Flat PER_CALL $0.004; use `exa#search` for more results.
 - **`exa#search/deep`** (new): `POST /search` restricted to `deep-lite`,
-  `deep` (default) and `deep-reasoning`, for `outputSchema` research with
-  per-field grounding. Per-type cells as on `exa#search`, 180 s request
-  budget.
+  `deep` (default), for `outputSchema` research with per-field grounding.
+  Flat PER_CALL $0.012, capped at 10 results without result summaries,
+  with a 180 s request budget. Deep-reasoning and result summaries remain
+  available on `exa#search`.
 - Fixtures for both new endpoints recorded live (vendor request
   diagnostics removed). `connectors/ids.lock.json` gains the two ids.
 

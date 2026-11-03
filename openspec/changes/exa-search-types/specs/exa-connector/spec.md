@@ -36,12 +36,13 @@ The connector SHALL provide `exa#search/lite` (public path
 Unsupported fields, including a
 caller-supplied `type`, SHALL fail with `INVALID_INPUT` before any upstream
 call. Accepted requests SHALL carry `type: "lite"`. It SHALL bill PER_CALL
-$0.004 plus `additional_result` $0.001 per result above 10.
+$0.004 flat and cap `numResults` at 10 at the binding (default 10).
+The compiler SHALL synthesize the empty estimate/evidence functions.
 
 #### Scenario: A lite search costs $0.004
 - **WHEN** `exa#search/lite` returns 200 with 3 results and
   `costDollars.total` 0.004
-- **THEN** usage is `{credits: {default: 0.004}, evidence: {call: 1}}`
+- **THEN** usage is `{credits: {default: 0.004}, evidence: {CALL: 1}}`
   with no mismatch
 
 #### Scenario: Unsupported fields are rejected before the wire
@@ -49,19 +50,36 @@ $0.004 plus `additional_result` $0.001 per result above 10.
   `contents.summary`
 - **THEN** the run fails with `INVALID_INPUT` and no upstream call
 
+#### Scenario: Lite result limit
+- **WHEN** `numResults` is 11
+- **THEN** the run fails with `INVALID_INPUT` and no upstream call
+- **AND** the near-twin with 10 results is accepted
+
+#### Scenario: Lite estimate is flat
+- **WHEN** any accepted lite input is estimated
+- **THEN** usage is `{credits: {default: 0.004}, evidence: {CALL: 1}}`
+
 ### Requirement: Deep search endpoint
 The connector SHALL provide `exa#search/deep` (public path
-`/search/deep`, wire `POST /search`, `web-search`) whose `type` accepts
-only `deep-lite`, `deep` (default) and `deep-reasoning`, with the
-`exa#search` body otherwise unchanged and a 180 s request budget. It
-SHALL meter `deep_search` $0.012, `deep_reasoning_search` $0.015,
-`additional_result` and `summary` as `exa#search` does.
+`/search/deep`, wire `POST /search`, `web-search`) whose binding accepts
+only `deep-lite` and `deep` (default), caps `numResults` at 10 (default
+10), and omits `summary` from strict contents options. It SHALL retain
+its 180 s request budget and bill flat PER_CALL $0.012. The compiler
+SHALL synthesize the empty estimate/evidence functions. Deep-reasoning,
+more results and result summaries remain available on `exa#search`.
 
 #### Scenario: Structured output with grounding
 - **WHEN** `exa#search/deep` runs with an `outputSchema` and no `type`
 - **THEN** output carries `output.content` and `output.grounding`, and
-  usage is `{credits: {default: 0.012}, evidence: {deep_search: 1}}`
+  usage is `{credits: {default: 0.012}, evidence: {CALL: 1}}`
 
-#### Scenario: A non-deep type is rejected before the wire
-- **WHEN** the body carries `type: "auto"`
+#### Scenario: Deep flat-price limits are enforced
+- **WHEN** the body carries `type: "deep-reasoning"`, `numResults: 11`,
+  or `contents.summary`
 - **THEN** the run fails with `INVALID_INPUT` and no upstream call
+- **AND** the near-twins `type: "deep-lite"`, `numResults: 10`, and
+  `contents.highlights: true` are accepted
+
+#### Scenario: Deep estimate is flat
+- **WHEN** any accepted deep input is estimated
+- **THEN** usage is `{credits: {default: 0.012}, evidence: {CALL: 1}}`
