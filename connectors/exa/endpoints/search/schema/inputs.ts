@@ -15,6 +15,7 @@ export const zExaSearchBody = z.object({
     query: z.string().min(1).describe("Natural-language search query."),
     type: z.enum([
         "auto",
+        "lite",
         "instant",
         "fast",
         "neural",

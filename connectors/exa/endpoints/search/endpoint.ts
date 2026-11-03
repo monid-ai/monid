@@ -4,33 +4,52 @@ import { zExaSearchBody } from "./schema/inputs.ts";
 /**
  * Exa /search — neural + keyword search across the open web.
  *
- * BASE-PLUS-OVERAGE billing (exa's published card, verified against the v1
- * TIERED price: default PER_CALL covers the FIRST 10 results; "Results
- * above 10" bills per result — v1 kept the threshold in `selector.offset`):
- * a COMPOSITE of a flat "call" component and a metered "additional_result"
- * component whose count is the OFFSET rule `max(0, results − 10)` — the
- * threshold is COUNTING logic owned by the fns, never a model shape
- * (design D19). Exa's real cost arrives on `costDollars.total` (usd,
- * sometimes absent → optionalNum) — converted to micro-dollars for
- * billing, receipts kept as `evidence`, and the loose vendor billing field
- * absorbed out of the payload (one shape, not two). Fn bodies are closed
- * terms (names are string literals; imports would fail the compiler lint).
+ * PER-TYPE BILLING (exa's published card): the base price of a call depends
+ * on the search `type` and covers the first 10 results —
+ *   lite / instant / neural   $0.004
+ *   auto / fast               $0.007
+ *   deep-lite / deep          $0.012
+ *   deep-reasoning            $0.015
+ * — plus $0.001 per result above 10 and $0.001 per result summary
+ * (`contents.summary`). Text and highlights are included in the base.
+ *
+ * The base is a rate SELECTION, so per design D19 it is a COUNTING rule:
+ * one PER_UNIT line per price cell, and the fns put `1` on the cell the
+ * request's `type` selects (the minimax per-cell posture). `type` defaults
+ * to "auto" at the binding, so the cell is always readable. Exa's own
+ * `costDollars.total` still settles every run (provider consolidate, D27);
+ * the cells make the estimate and the published card honest per type.
+ *
+ * Fn bodies are closed terms (names are string literals; imports would fail
+ * the compiler lint), so the type → cell map is written out in each fn.
  */
 export default defineEndpoint({
     meta: {
         displayName: "Exa Search",
-        summary: "Search the web with Exa's neural + keyword search.",
-        description: "Search the web with Exa's neural + keyword search. " +
-            "Finds pages by meaning rather than keyword overlap — phrase the " +
-            "query as a description of the page you are looking for. Supports " +
-            "search types ('auto', 'instant', 'fast', 'neural', 'deep-lite', " +
-            "'deep', 'deep-reasoning'), categories ('company', 'people', " +
-            "'research paper', 'news', 'personal site', 'financial " +
-            "report'), domain filters, published-date ranges, and inline " +
-            "contents extraction (text/highlights/summary). Optionally use " +
-            "'outputSchema' to synthesize structured JSON output across " +
-            "multiple sources. Returns a list of result URLs with optional " +
-            "content.",
+        summary: "Search the web for any topic. Returns ranked pages with " +
+            "clean text or highlights, or JSON you define.",
+        description: "Searches the web and returns ranked pages with their " +
+            "content in one call. Write the query as a description of the " +
+            'page you want, such as "blog post comparing React and Vue ' +
+            'performance". Set contents.highlights to true for the most ' +
+            "relevant passages of each page, or contents.text for full page " +
+            "text. Without contents, results carry only title, URL and " +
+            "dates. Add outputSchema to get a JSON object filled from the " +
+            "results. The search types differ in speed, depth and price. " +
+            "auto is the default. lite " +
+            "and instant are the fastest and cheapest. deep-lite, deep and " +
+            "deep-reasoning run several searches for wide schemas and " +
+            "multi-step questions. category limits results to one kind of " +
+            "page, such as company pages, people profiles, news or research " +
+            "papers. Priced per call by type. $0.004 for lite, instant and " +
+            "neural. $0.007 for auto and fast. $0.012 for deep-lite and " +
+            "deep. $0.015 for deep-reasoning. Each call includes 10 results. " +
+            "Each result above 10 adds $0.001, and each result summary adds " +
+            "$0.001.",
+        notes: [
+            "type lite rejects outputSchema, systemPrompt, " +
+            "contents.summary and contents.maxAgeHours.",
+        ],
         docsUrl: "https://exa.ai/docs/reference/search",
         categories: ["web-search"],
     },
@@ -39,7 +58,8 @@ export default defineEndpoint({
         schema: {
             // vendor-documented API defaults, applied at the binding (moved
             // from the mirror — D25: mirrors carry optionality only):
-            // type "auto", numResults 10, moderation false.
+            // type "auto", numResults 10, moderation false. `type` is also
+            // the PRICE CELL's coordinate, so it must always be readable.
             body: zExaSearchBody.extend({
                 type: zExaSearchBody.shape.type.unwrap().default("auto"),
                 numResults: zExaSearchBody.shape.numResults.unwrap()
@@ -59,47 +79,112 @@ export default defineEndpoint({
         model: {
             kind: UsageModelKind.COMPOSITE,
             components: {
-                call: {
-                    kind: UsageModelKind.PER_CALL,
-                    // $0.007 per search — v1 vendor unit price (exa's
-                    // published $-rates are two independent lines, so the
-                    // pool is usd; the tier concern is handled the apify
-                    // way: pinned + re-audited)
+                lite_search: {
+                    kind: UsageModelKind.PER_UNIT,
+                    unit: Unit.RESULT,
+                    consumes: { credit: "default", amount: 0.004 },
+                    label: "lite, instant or neural search",
+                    description: "base price for type lite, instant or " +
+                        "neural, including the first 10 results",
+                },
+                standard_search: {
+                    kind: UsageModelKind.PER_UNIT,
+                    unit: Unit.RESULT,
                     consumes: { credit: "default", amount: 0.007 },
-                    label: "base fee",
-                    description: "base fee — includes the first 10 results",
+                    label: "auto or fast search",
+                    description: "base price for type auto or fast, " +
+                        "including the first 10 results",
+                },
+                deep_search: {
+                    kind: UsageModelKind.PER_UNIT,
+                    unit: Unit.RESULT,
+                    consumes: { credit: "default", amount: 0.012 },
+                    label: "deep search",
+                    description: "base price for type deep-lite or deep, " +
+                        "including the first 10 results",
+                },
+                deep_reasoning_search: {
+                    kind: UsageModelKind.PER_UNIT,
+                    unit: Unit.RESULT,
+                    consumes: { credit: "default", amount: 0.015 },
+                    label: "deep-reasoning search",
+                    description: "base price for type deep-reasoning, " +
+                        "including the first 10 results",
                 },
                 additional_result: {
                     kind: UsageModelKind.PER_UNIT,
-                    // $0.001 per result above 10 — v1 vendor unit price
-                    consumes: { credit: "default", amount: 0.001 },
                     unit: Unit.RESULT,
+                    consumes: { credit: "default", amount: 0.001 },
                     label: "extra results",
-                    description:
-                        "results above the 10 included in the base fee",
+                    description: "results above the 10 included in the " +
+                        "base price",
+                },
+                summary: {
+                    kind: UsageModelKind.PER_UNIT,
+                    unit: Unit.RESULT,
+                    consumes: { credit: "default", amount: 0.001 },
+                    label: "result summaries",
+                    description: "a contents.summary on each result",
                 },
             },
         },
-        /** OFFSET estimate: exa's request defaults to 10 results — only the
-         *  requested surplus above the included 10 is promisable. */
+        /** Promise the cell `type` selects, the requested surplus above the
+         *  included 10, and a summary per requested result when asked. */
         estimate: ({ data }) => {
-            const above = Math.max(0, data.input.body.numResults - 10);
+            const body = data.input.body;
+            const type = body.type;
+            const cell = type === "lite" || type === "instant" ||
+                    type === "neural"
+                ? "lite_search"
+                : type === "deep-lite" || type === "deep"
+                ? "deep_search"
+                : type === "deep-reasoning"
+                ? "deep_reasoning_search"
+                : "standard_search";
+            const above = Math.max(0, body.numResults - 10);
+            const summaries = body.contents?.summary !== undefined
+                ? body.numResults
+                : 0;
             return {
                 counts: {
+                    [cell]: 1,
                     ...(above > 0 ? { "additional_result": above } : {}),
+                    ...(summaries > 0 ? { "summary": summaries } : {}),
                 },
             };
         },
+        /** Settle on DELIVERED results: the same cell, the surplus above the
+         *  included 10, and one summary per returned result that carries
+         *  one. The costDollars receipt is the provider consolidate's job
+         *  (claim + strip — design D27). */
         evidence: ({ data, utils }) => {
+            const body = data.input.body;
+            const type = body.type;
+            const cell = type === "lite" || type === "instant" ||
+                    type === "neural"
+                ? "lite_search"
+                : type === "deep-lite" || type === "deep"
+                ? "deep_search"
+                : type === "deep-reasoning"
+                ? "deep_reasoning_search"
+                : "standard_search";
             const results = utils.json.len(data.output, "$.results");
-            // OFFSET counting rule (v1 selector.offset: 10): the base "call"
-            // component covers the first 10 — only the surplus is counted.
-            // The costDollars receipt is the provider consolidate's job
-            // (claim + strip — design D27).
             const above = Math.max(0, results - 10);
+            let summaries = 0;
+            if (body.contents?.summary !== undefined) {
+                const rows = utils.json.optionalGet(data.output, "$.results");
+                if (Array.isArray(rows)) {
+                    for (const row of rows) {
+                        const text = utils.json.optionalGet(row, "$.summary");
+                        if (typeof text === "string") summaries += 1;
+                    }
+                }
+            }
             return {
                 counts: {
+                    [cell]: 1,
                     ...(above > 0 ? { "additional_result": above } : {}),
+                    ...(summaries > 0 ? { "summary": summaries } : {}),
                 },
             };
         },
