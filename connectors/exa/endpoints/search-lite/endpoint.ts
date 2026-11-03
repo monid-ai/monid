@@ -26,6 +26,9 @@ export default defineEndpoint({
             "for full page text. Pages come from Exa's index and are not " +
             "fetched at query time. Returns up to 10 results. $0.004 per call. " +
             "Use Exa Search for more results.",
+        notes: [
+            "contents.snapshotAsOf does not support the category parameter on Search.",
+        ],
         docsUrl: "https://exa.ai/docs/reference/search",
         categories: ["web-search"],
     },
@@ -37,7 +40,7 @@ export default defineEndpoint({
             // numResults 10, moderation false.
             body: zExaLiteSearchBody.extend({
                 numResults: zExaLiteSearchBody.shape.numResults.unwrap()
-                    .max(10).default(10),
+                    .max(10).describe("Number of results (1-10).").default(10),
                 moderation: zExaLiteSearchBody.shape.moderation.unwrap()
                     .default(false),
             }).strict(),

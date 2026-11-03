@@ -30,6 +30,28 @@ Deno.test(`${ID} identity: a public path of its own over the shared /search wire
     }
 });
 
+Deno.test(`${ID} compiled schema advertises the 10-result limit`, async () => {
+    const unit = await testSealedUnit(ID);
+    const properties = unit.doc.input.schema.body?.properties as Record<
+        string,
+        { maximum?: number; description?: string }
+    >;
+    assertEquals(properties.numResults.maximum, 10);
+    assertEquals(
+        properties.numResults.description,
+        "Number of results (1-10).",
+    );
+});
+
+Deno.test(`${ID} documents the snapshot category restriction`, async () => {
+    const unit = await testSealedUnit(ID);
+    assert(
+        unit.doc.meta.notes?.includes(
+            "contents.snapshotAsOf does not support the category parameter on Search.",
+        ),
+    );
+});
+
 Deno.test(`${ID} happy: $0.004 claim equals the fold, receipt consolidated away`, async () => {
     const unit = await testSealedUnit(ID);
     const fixture = await loadFixture(`${fixturesDir}happy.json`);

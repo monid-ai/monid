@@ -10,6 +10,11 @@ import {
 
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
 
+Deno.test("exa#search allows time for deep search types", async () => {
+    const unit = await testSealedUnit("exa#search");
+    assertEquals(unit.doc.timeouts, { requestMs: 180_000, runMs: 190_000 });
+});
+
 Deno.test("exa#search happy: costDollars claim wins (fold rides as mismatch), receipt consolidated away", async () => {
     const unit = await testSealedUnit("exa#search");
     const fixture = await loadFixture(`${fixturesDir}happy.json`);

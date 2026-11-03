@@ -7,6 +7,8 @@
       `summary`; estimate and evidence select the cell from the bound
       `type` (default `auto`)
 - [x] 1.3 meta: summary, description and a lite-limits note
+- [x] 1.4 search timeout: 180 s request / 190 s run for deep types;
+      provider defaults remain unchanged
 
 ## 2. New endpoints
 
@@ -17,6 +19,8 @@
       `type` ∈ deep-lite/deep (default deep), 180 s budget, binding cap of
       10 results and strict contents without summary; PER_CALL $0.012 flat,
       synthesized estimate/evidence
+- [x] 2.3 Lite and Deep compiled result descriptions advertise 1-10;
+      Lite notes the Snapshot/category restriction from the current docs
 
 ## 3. Fixtures + tests
 
@@ -31,6 +35,8 @@
 - [x] 3.4 search-deep: happy with `output.content`/`grounding`, 401,
       deep-reasoning/11-result/summary rejection with passing near-twins,
       flat estimate, live deep search
+- [x] 3.5 Compiled-doc tests: Lite/Deep result maximum and description,
+      search timeouts, and Lite snapshot note
 
 ## 4. Wiring
 

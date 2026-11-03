@@ -13,6 +13,19 @@ import {
 const ID = "exa#search/deep";
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
 
+Deno.test(`${ID} compiled schema advertises the 10-result limit`, async () => {
+    const unit = await testSealedUnit(ID);
+    const properties = unit.doc.input.schema.body?.properties as Record<
+        string,
+        { maximum?: number; description?: string }
+    >;
+    assertEquals(properties.numResults.maximum, 10);
+    assertEquals(
+        properties.numResults.description,
+        "Number of results (1-10).",
+    );
+});
+
 Deno.test(`${ID} happy: structured output with grounding, $0.012 claim equals the fold`, async () => {
     const unit = await testSealedUnit(ID);
     assertEquals(unit.doc.id, ID);

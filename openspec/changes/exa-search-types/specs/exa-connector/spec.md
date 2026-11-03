@@ -12,6 +12,8 @@ SHALL meter the base price as one PER_UNIT cell per published rate:
 10 results. `additional_result` SHALL meter $0.001 per result above 10 and
 `summary` $0.001 per returned result carrying a summary. Exa's
 `costDollars.total` SHALL settle the run (provider consolidate).
+`exa#search` SHALL use a 180 s request timeout and 190 s run timeout so
+that deep types can complete; provider defaults SHALL remain unchanged.
 
 #### Scenario: A default search is billed at the auto rate
 - **WHEN** `exa#search` runs with no `type` and returns 3 results
@@ -37,6 +39,9 @@ Unsupported fields, including a
 caller-supplied `type`, SHALL fail with `INVALID_INPUT` before any upstream
 call. Accepted requests SHALL carry `type: "lite"`. It SHALL bill PER_CALL
 $0.004 flat and cap `numResults` at 10 at the binding (default 10).
+The compiled `numResults` description SHALL be "Number of results (1-10)."
+Lite metadata SHALL note that `contents.snapshotAsOf` does not support
+`category`, matching the current Snapshot documentation.
 The compiler SHALL synthesize the empty estimate/evidence functions.
 
 #### Scenario: A lite search costs $0.004
@@ -64,7 +69,8 @@ The connector SHALL provide `exa#search/deep` (public path
 `/search/deep`, wire `POST /search`, `web-search`) whose binding accepts
 only `deep-lite` and `deep` (default), caps `numResults` at 10 (default
 10), and omits `summary` from strict contents options. It SHALL retain
-its 180 s request budget and bill flat PER_CALL $0.012. The compiler
+its 180 s request budget and bill flat PER_CALL $0.012. Its compiled
+`numResults` description SHALL be "Number of results (1-10)." The compiler
 SHALL synthesize the empty estimate/evidence functions. Deep-reasoning,
 more results and result summaries remain available on `exa#search`.
 

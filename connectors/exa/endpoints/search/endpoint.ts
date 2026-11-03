@@ -54,6 +54,8 @@ export default defineEndpoint({
         categories: ["web-search"],
     },
     request: { method: "POST", path: "/search" },
+    // Deep search types can run past the provider's 30 s timeout.
+    timeouts: { requestMs: 180_000, runMs: 190_000 },
     input: {
         schema: {
             // vendor-documented API defaults, applied at the binding (moved

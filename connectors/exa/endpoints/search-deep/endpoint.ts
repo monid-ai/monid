@@ -32,8 +32,8 @@ export default defineEndpoint({
             "output.grounding. Use it for wide schemas, comparisons and " +
             "questions that take more than one search. deep is the default. " +
             "deep-lite is a lighter pass. $0.012 per call, up to 10 results. " +
-            "For deep-reasoning or result summaries use Exa Search with " +
-            "type deep-reasoning.",
+            "For deep-reasoning, more than 10 results or result summaries, " +
+            "use Exa Search.",
         docsUrl: "https://exa.ai/docs/reference/search",
         categories: ["web-search"],
     },
@@ -46,7 +46,7 @@ export default defineEndpoint({
             body: zExaDeepSearchBody.extend({
                 type: z.enum(["deep-lite", "deep"]).default("deep"),
                 numResults: zExaDeepSearchBody.shape.numResults.unwrap()
-                    .max(10).default(10),
+                    .max(10).describe("Number of results (1-10).").default(10),
                 contents: zContentsOptions.omit({ summary: true }).strict()
                     .optional(),
                 moderation: zExaDeepSearchBody.shape.moderation.unwrap()
