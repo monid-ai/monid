@@ -29,9 +29,13 @@ SHALL meter the base price as one PER_UNIT cell per published rate:
 The connector SHALL provide `exa#search/lite` (public path
 `/search/lite`, wire `POST /search`, `web-search`) whose body accepts only
 `query`, `numResults`, `category`, `includeDomains`, `excludeDomains`,
-`startPublishedDate`, `endPublishedDate`, `userLocation`, `moderation` and
-`contents` (`text`, `highlights`), and whose request always carries
-`type: "lite"`, overwriting any caller value. It SHALL bill PER_CALL
+`startPublishedDate`, `endPublishedDate`, `userLocation`, `moderation`,
+`compliance` (`"hipaa"` or null) and `contents` (`text`, `highlights`,
+`snapshotAsOf`). `snapshotAsOf` SHALL accept an ISO 8601 date-time, a
+`YYYY-MM-DD` date (midnight UTC), or null. Both new fields are optional.
+Unsupported fields, including a
+caller-supplied `type`, SHALL fail with `INVALID_INPUT` before any upstream
+call. Accepted requests SHALL carry `type: "lite"`. It SHALL bill PER_CALL
 $0.004 plus `additional_result` $0.001 per result above 10.
 
 #### Scenario: A lite search costs $0.004
@@ -40,9 +44,10 @@ $0.004 plus `additional_result` $0.001 per result above 10.
 - **THEN** usage is `{credits: {default: 0.004}, evidence: {call: 1}}`
   with no mismatch
 
-#### Scenario: A caller type is not forwarded
-- **WHEN** the body carries `type: "deep"`
-- **THEN** the wire body carries `type: "lite"` and the vendor bills $0.004
+#### Scenario: Unsupported fields are rejected before the wire
+- **WHEN** the body carries `type: "deep"`, `stream`, `outputSchema`, or
+  `contents.summary`
+- **THEN** the run fails with `INVALID_INPUT` and no upstream call
 
 ### Requirement: Deep search endpoint
 The connector SHALL provide `exa#search/deep` (public path

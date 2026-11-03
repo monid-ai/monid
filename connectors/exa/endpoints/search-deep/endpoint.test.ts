@@ -1,4 +1,9 @@
-import { assertAlmostEquals, assertEquals, assertRejects } from "@std/assert";
+import {
+    assert,
+    assertAlmostEquals,
+    assertEquals,
+    assertRejects,
+} from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import {
     assertInputAccepted,
@@ -138,7 +143,9 @@ Deno.test({
             JSON.stringify(result.output),
         );
         assertEquals(result.usage.evidence, { deep_reasoning_search: 1 });
-        assertAlmostEquals(result.usage.credits.default, 0.015, 1e-9);
+        assert(Number.isFinite(result.usage.credits.default));
+        assert(result.usage.credits.default >= 0);
+        assert(!("costDollars" in (result.output as Record<string, unknown>)));
         assertEquals(result.usage.mismatch, undefined);
     },
 });

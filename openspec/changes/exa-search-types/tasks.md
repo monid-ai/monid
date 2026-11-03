@@ -24,7 +24,8 @@
 - [x] 3.2 exa#search: happy/live evidence moves to `standard_search`;
       estimate per type; extra results + summaries ($0.018 case)
 - [x] 3.3 search-lite: identity + advertised schema, happy (claim =
-      fold), 401, estimate, live (caller `type` overwritten, claim $0.004)
+      fold), 401, estimate, unsupported-field gate with a passing near-twin,
+      live (finite nonnegative usage, receipt removed, no mismatch)
 - [x] 3.4 search-deep: happy with `output.content`/`grounding`, 401,
       type gate with a passing near-twin, estimate, live deep-reasoning
 

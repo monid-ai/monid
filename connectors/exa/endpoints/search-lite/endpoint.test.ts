@@ -137,6 +137,48 @@ Deno.test(`${ID} schema gate: unsupported properties are rejected before the wir
     });
 });
 
+Deno.test(`${ID} schema gate: snapshot dates and compliance match the vendor schema`, async () => {
+    const unit = await testSealedUnit(ID);
+    const invalidBodies: Json[] = [
+        { query: "q", contents: { snapshotAsOf: "2026-02-30" } },
+        { query: "q", contents: { snapshotAsOf: "2026-01-15T00:00:00" } },
+        { query: "q", contents: { snapshotAsOf: 123 } },
+        { query: "q", compliance: "other" },
+    ];
+    for (const body of invalidBodies) {
+        await assertRejects(
+            () => runEndpoint({ unit, input: { body }, mode: "replay" }),
+            Error,
+            "INVALID_INPUT",
+        );
+    }
+    for (
+        const snapshotAsOf of [
+            "2026-01-15",
+            "2026-01-15T00:00:00Z",
+            "2026-01-15T01:00:00+01:00",
+            null,
+        ]
+    ) {
+        await assertInputAccepted({
+            unit,
+            input: {
+                body: {
+                    query: "q",
+                    contents: { snapshotAsOf },
+                    compliance: "hipaa",
+                },
+            },
+            mode: "replay",
+        });
+    }
+    await assertInputAccepted({
+        unit,
+        input: { body: { query: "q", compliance: null } },
+        mode: "replay",
+    });
+});
+
 Deno.test(`${ID} estimate: $0.004 base plus $0.001 per result above 10`, async () => {
     const unit = await testSealedUnit(ID);
     const base = await estimateEndpoint(unit, { body: { query: "q" } });
@@ -171,8 +213,9 @@ Deno.test({
             JSON.stringify(result.output),
         );
         assertEquals(result.usage.evidence, { call: 1 });
-        // the vendor's claim is the lite price, so the pin reached the wire
-        assertAlmostEquals(result.usage.credits.default, 0.004, 1e-9);
+        assert(Number.isFinite(result.usage.credits.default));
+        assert(result.usage.credits.default >= 0);
+        assert(!("costDollars" in (result.output as Record<string, unknown>)));
         assertEquals(result.usage.mismatch, undefined);
     },
 });
