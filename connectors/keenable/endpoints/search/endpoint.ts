@@ -26,7 +26,7 @@ export default defineEndpoint({
             "description of the page you want. Pipe result URLs into " +
             "Keenable /fetch when you need the full page as markdown.",
         docsUrl: "https://docs.keenable.ai/api-reference/search",
-        categories: ["web-search"],
+        categories: ["web-search", "news-search"],
         notes: [
             "One credit per search in either mode. A search that returns " +
             "no results is free.",
