@@ -87,19 +87,23 @@ import { z } from "zod";
  * deliberate follow-up once pricing/entitlement posture for those is
  * settled.
  *
- * UPDATE 2026-11-04: `search_lps`'s billing/entitlement posture is now
- * settled, so it is no longer excluded above for that reason — it is
- * a deliberate follow-up only in the sense that it still needs its
- * own endpoint folder, not because anything about its billing is
- * unresolved. The vendor retired its standalone LP Radar subscription
- * (the `error_reason: "lp_access_required"` 403 this connector's
- * `lifecycle.start` already maps to httpStatus 403 above was that
- * gate; it no longer fires for this tool). `search_lps` is now billed
- * exactly like `search_funds` — PER_UNIT, 1 credit per LP row
- * returned, same `_meta.credits_charged` / `billing.credits_charged`
- * receipt shape already read above — so wiring it in needs no new
- * billing design, the same `usage.consolidate` and `lifecycle.start`
- * handling already cover it.
+ * UPDATE 2026-11-04: `search_lps` is now wired in (`../search-lps/`),
+ * after the vendor retired its standalone LP Radar subscription gate
+ * (the `error_reason: "lp_access_required"` 403 `lifecycle.start`
+ * already maps to httpStatus 403 above was that gate; live-verified it
+ * no longer fires for this tool). LIVE-VERIFIED against a freshly
+ * self-registered agent key (real calls, dated 2026-11-03 — see
+ * search-lps/schema/inputs.ts for the full story): billed per LP row
+ * returned, same as `search_funds`, settled from `_meta.
+ * credits_charged` above — but UNLIKE `search_funds`, this tool's
+ * responses carry no in-payload `billing` block (so the documented-
+ * field preference above never applies to it, only the `_meta`
+ * fallback) and, also unlike `search_funds`, an exact repeat of the
+ * same call is NOT served from an idempotency cache (billed again in
+ * full both times, live-verified) — so `idempotentReplay` above never
+ * fires for this tool based on what was observed. Neither difference
+ * needed any change here: both are already the fallback/default
+ * behavior when their counterpart is absent.
  */
 export default defineProvider({
     name: "fundmomentum",
@@ -114,11 +118,10 @@ export default defineProvider({
             "industry; pull a full fund profile with GP background and " +
             "a provenance block (source, last-checked date, " +
             "confidence); poll only what changed since a timestamp " +
-            "instead of re-searching; and check LP coverage by country " +
+            "instead of re-searching; check LP coverage by country " +
             "and LP type across 700+ disclosed limited partners " +
-            "(counts only — full LP records, names included, are a " +
-            "separate per-row-billed tool not yet wired into this " +
-            "connector). Two more " +
+            "(counts only); and search those LPs directly, billed per " +
+            "row returned, once coverage looks worth it. Two more " +
             "tools are always free and never draw a credit: check your " +
             "own usage before a batch of calls, and send short " +
             "feedback on a tool or the data. Every fund profile is " +

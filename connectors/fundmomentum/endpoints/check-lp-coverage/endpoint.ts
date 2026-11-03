@@ -5,8 +5,10 @@ import { zFundmomentumCheckLpCoverageArgs } from "./schema/inputs.ts";
  * `check_lp_coverage` — how many disclosed LPs match a country and LP
  * type. FREE on every tier, keyless included: it never draws a credit
  * (the vendor's own guarantee — this is the free "should I buy LP
- * Radar" check ahead of `search_lps`, which this connector does not
- * expose). Counts only, never a name, website, or commitment; counts
+ * Radar" check ahead of `search_lps`, now wired in at `../search-lps/`
+ * — UPDATED 2026-11-04, see that endpoint for the full story; it used
+ * to need a separate LP Radar subscription and was not exposed by this
+ * connector). Counts only, never a name, website, or commitment; counts
  * under 5 come back as the literal string "<5" and zero as "none" — not
  * integers.
  */
@@ -23,9 +25,9 @@ export default defineEndpoint({
             "commitment amount. Counts under 5 are returned as the " +
             "literal string '<5' and zero as 'none', so read them as " +
             "strings, not integers. Free on every tier, including " +
-            "keyless. The LP records themselves ('search_lps') need a " +
-            "separate LP Radar subscription and are not exposed by " +
-            "this connector.",
+            "keyless. The LP records themselves are a separate, " +
+            "per-row-billed tool ('search_lps', see ../search-lps/) " +
+            "now wired into this connector too.",
         docsUrl: "https://fundmomentum.vc/mcp",
         categories: ["funding-data"],
         notes: [

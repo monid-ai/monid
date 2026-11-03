@@ -1,7 +1,7 @@
 import { assert, assertEquals } from "@std/assert";
 import { testBundle } from "@shared/testing";
 
-Deno.test("fundmomentum: 6 endpoints share one auth fn, one lifecycle.start, one credit pool", async () => {
+Deno.test("fundmomentum: 7 endpoints share one auth fn, one lifecycle.start, one credit pool", async () => {
     const bundle = await testBundle();
     const ids = Object.keys(bundle.endpoints).filter((id) =>
         id.startsWith("fundmomentum#")
@@ -12,6 +12,10 @@ Deno.test("fundmomentum: 6 endpoints share one auth fn, one lifecycle.start, one
         "fundmomentum#mcp/get_fund",
         "fundmomentum#mcp/get_usage",
         "fundmomentum#mcp/search_funds",
+        // Added 2026-11-04: the vendor retired this tool's standalone
+        // LP Radar subscription gate, so it's now wired in here too —
+        // see search-lps/endpoint.ts and schema/inputs.ts.
+        "fundmomentum#mcp/search_lps",
         "fundmomentum#mcp/send_feedback",
     ]);
 
@@ -46,6 +50,9 @@ Deno.test("fundmomentum: 6 endpoints share one auth fn, one lifecycle.start, one
         // credit each, minimum 1), not a flat per-call price — see
         // search-funds/endpoint.ts.
         "fundmomentum#mcp/search_funds": "PER_UNIT",
+        // Added 2026-11-04, billed per LP row returned — see
+        // search-lps/endpoint.ts.
+        "fundmomentum#mcp/search_lps": "PER_UNIT",
     };
     for (const id of ids) {
         const doc = bundle.endpoints[id];
