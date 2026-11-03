@@ -1,0 +1,94 @@
+{
+    "name": "synthetic-run-empty",
+    "description": "A find that matches nothing: the reservation is released in full and the run settles at zero.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "data": {
+                        "reservation_id": "res_synthetic_0001",
+                        "find_id": null,
+                        "maximum_cents": 60,
+                        "state": "reserved",
+                        "replay": false
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/capacity/requests/specstream-run-0001/rows"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "find_id": "find_synthetic_0001",
+                        "status": "completed",
+                        "accepted_count": 0,
+                        "rows": [],
+                        "possible": [],
+                        "flat_rows": [],
+                        "entitlement": "paid",
+                        "commerce": {
+                            "spec_version": "commerce.v1",
+                            "find_id": "find_synthetic_0001",
+                            "payment_status": "paid",
+                            "fulfillment_status": "fulfilled",
+                            "settlement_status": "settled",
+                            "access_state": "granted",
+                            "access_allowed": true,
+                            "next_action": "none",
+                            "currency": "USD",
+                            "amount_authorized_cents": 60,
+                            "amount_captured_cents": 0,
+                            "amount_refunded_cents": 60,
+                            "delivered_rows": 0,
+                            "fulfilled_at": null,
+                            "access_expires_at": null,
+                            "cancel_requested": false,
+                            "capacity_offer": {
+                                "pricing_version": "capacity.v1",
+                                "quote_id": "qt_synthetic_0001",
+                                "quote_hash": "0f9e8d7c6b5a49382716f5e4d3c2b1a09f8e7d6c5b4a39281706f5e4d3c2b1a0",
+                                "currency": "USD",
+                                "maximum_cents": 60,
+                                "expires_at": "2026-11-03T09:30:00Z",
+                                "scope": {
+                                    "entity_type": "local_business",
+                                    "requested_units": 3
+                                },
+                                "terms": {
+                                    "unit_cents": 15,
+                                    "contact_unit_cents": 20
+                                },
+                                "cost_basis": "estimated",
+                                "cost_profile_version": "synthetic-1",
+                                "retained_work_cents": 0,
+                                "existing_execution": null,
+                                "can_authorize": true
+                            },
+                            "billing_model": "capacity.v1",
+                            "reservation_id": "res_synthetic_0001",
+                            "billed_unit_ids": [],
+                            "billed_units": [],
+                            "shortfall": null
+                        },
+                        "next_cursor": null,
+                        "idempotency_key": "specstream-run-0001",
+                        "state": "released",
+                        "maximum_cents": 60,
+                        "done": true,
+                        "retry_after_seconds": null
+                    }
+                }
+            }
+        }
+    ]
+}

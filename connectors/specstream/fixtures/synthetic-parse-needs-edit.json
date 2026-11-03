@@ -1,0 +1,34 @@
+{
+    "name": "synthetic-parse-needs-edit",
+    "description": "A request that names an ambiguous place comes back needs_edit with no ast_hash, so there is nothing to price yet. Free either way.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "status": "needs_edit",
+                        "ast": null,
+                        "chips": [
+                            {
+                                "chip_id": "chip-place",
+                                "category": "place",
+                                "label": "Springfield",
+                                "status": "ambiguous"
+                            }
+                        ],
+                        "unsupported": [],
+                        "compiler_version": "synthetic-1",
+                        "ast_hash": null,
+                        "canonical_sentence": null,
+                        "read_back": "Dental clinics in Springfield. There is more than one Springfield: say which one."
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,473 @@
+{
+    "name": "synthetic-run-ok",
+    "description": "The approved quote is reserved, the find runs, and the rows page goes from running, to done with its charge still pending, to settled. The run completes only on the settled page and settles on the 35 cents captured.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "data": {
+                        "reservation_id": "res_synthetic_0001",
+                        "find_id": null,
+                        "maximum_cents": 60,
+                        "state": "reserved",
+                        "replay": false
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/capacity/requests/specstream-run-0001/rows"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "find_id": "find_synthetic_0001",
+                        "status": "running",
+                        "accepted_count": 0,
+                        "rows": [],
+                        "possible": [],
+                        "flat_rows": [],
+                        "entitlement": "paid",
+                        "commerce": null,
+                        "next_cursor": null,
+                        "idempotency_key": "specstream-run-0001",
+                        "state": "running",
+                        "maximum_cents": 60,
+                        "done": false,
+                        "retry_after_seconds": 5
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/capacity/requests/specstream-run-0001/rows"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "find_id": "find_synthetic_0001",
+                        "status": "completed",
+                        "accepted_count": 2,
+                        "rows": [
+                            {
+                                "spec_version": "accepted_row.v1",
+                                "entity_id": "ent_synthetic_0001",
+                                "ordinal": 0,
+                                "cells": [
+                                    {
+                                        "column_id": "name",
+                                        "label": "Name",
+                                        "value": "Clinique Test Un",
+                                        "display": "Clinique Test Un",
+                                        "provenance": {
+                                            "entity_id": "ent_synthetic_name",
+                                            "field_id": "name",
+                                            "value": "Clinique Test Un",
+                                            "normalized_value": "Clinique Test Un",
+                                            "source": "page",
+                                            "source_url": "https://clinic-1.example.org/about",
+                                            "observed_at": "2026-11-03T09:00:00Z",
+                                            "observation_id": "obs_synthetic_name",
+                                            "request_hash": "0c85f280cf7589092edc7487029bb4ddf97e5b69cdaf84090d350f6b4693a734",
+                                            "join_method": null,
+                                            "null_reason": null
+                                        }
+                                    },
+                                    {
+                                        "column_id": "website",
+                                        "label": "Website",
+                                        "value": "https://clinic-1.example.org/",
+                                        "display": "https://clinic-1.example.org/",
+                                        "provenance": {
+                                            "entity_id": "ent_synthetic_website",
+                                            "field_id": "website",
+                                            "value": "https://clinic-1.example.org/",
+                                            "normalized_value": "https://clinic-1.example.org/",
+                                            "source": "page",
+                                            "source_url": "https://clinic-1.example.org/",
+                                            "observed_at": "2026-11-03T09:00:00Z",
+                                            "observation_id": "obs_synthetic_website",
+                                            "request_hash": "0c85f280cf7589092edc7487029bb4ddf97e5b69cdaf84090d350f6b4693a734",
+                                            "join_method": null,
+                                            "null_reason": null
+                                        }
+                                    },
+                                    {
+                                        "column_id": "email",
+                                        "label": "Email",
+                                        "value": "contact@clinic-1.example.org",
+                                        "display": "contact@clinic-1.example.org",
+                                        "provenance": {
+                                            "entity_id": "ent_synthetic_email",
+                                            "field_id": "email",
+                                            "value": "contact@clinic-1.example.org",
+                                            "normalized_value": "contact@clinic-1.example.org",
+                                            "source": "page",
+                                            "source_url": "https://clinic-1.example.org/contact",
+                                            "observed_at": "2026-11-03T09:00:00Z",
+                                            "observation_id": "obs_synthetic_email",
+                                            "request_hash": "0c85f280cf7589092edc7487029bb4ddf97e5b69cdaf84090d350f6b4693a734",
+                                            "join_method": null,
+                                            "null_reason": null
+                                        }
+                                    }
+                                ],
+                                "predicates": [],
+                                "billable": true,
+                                "contact_visibility": "full",
+                                "locked": false,
+                                "details": []
+                            },
+                            {
+                                "spec_version": "accepted_row.v1",
+                                "entity_id": "ent_synthetic_0002",
+                                "ordinal": 1,
+                                "cells": [
+                                    {
+                                        "column_id": "name",
+                                        "label": "Name",
+                                        "value": "Clinique Test Deux",
+                                        "display": "Clinique Test Deux",
+                                        "provenance": {
+                                            "entity_id": "ent_synthetic_name",
+                                            "field_id": "name",
+                                            "value": "Clinique Test Deux",
+                                            "normalized_value": "Clinique Test Deux",
+                                            "source": "page",
+                                            "source_url": "https://clinic-2.example.org/about",
+                                            "observed_at": "2026-11-03T09:00:00Z",
+                                            "observation_id": "obs_synthetic_name",
+                                            "request_hash": "0c85f280cf7589092edc7487029bb4ddf97e5b69cdaf84090d350f6b4693a734",
+                                            "join_method": null,
+                                            "null_reason": null
+                                        }
+                                    },
+                                    {
+                                        "column_id": "website",
+                                        "label": "Website",
+                                        "value": "https://clinic-2.example.org/",
+                                        "display": "https://clinic-2.example.org/",
+                                        "provenance": {
+                                            "entity_id": "ent_synthetic_website",
+                                            "field_id": "website",
+                                            "value": "https://clinic-2.example.org/",
+                                            "normalized_value": "https://clinic-2.example.org/",
+                                            "source": "page",
+                                            "source_url": "https://clinic-2.example.org/",
+                                            "observed_at": "2026-11-03T09:00:00Z",
+                                            "observation_id": "obs_synthetic_website",
+                                            "request_hash": "0c85f280cf7589092edc7487029bb4ddf97e5b69cdaf84090d350f6b4693a734",
+                                            "join_method": null,
+                                            "null_reason": null
+                                        }
+                                    },
+                                    {
+                                        "column_id": "email",
+                                        "label": "Email",
+                                        "value": null,
+                                        "display": null,
+                                        "absence": "Not published"
+                                    }
+                                ],
+                                "predicates": [],
+                                "billable": true,
+                                "contact_visibility": "hidden",
+                                "locked": false,
+                                "details": []
+                            }
+                        ],
+                        "possible": [],
+                        "flat_rows": [],
+                        "entitlement": "paid",
+                        "commerce": {
+                            "spec_version": "commerce.v1",
+                            "find_id": "find_synthetic_0001",
+                            "payment_status": "paid",
+                            "fulfillment_status": "fulfilled",
+                            "settlement_status": "pending",
+                            "access_state": "granted",
+                            "access_allowed": true,
+                            "next_action": "wait",
+                            "currency": "USD",
+                            "amount_authorized_cents": 60,
+                            "amount_captured_cents": 0,
+                            "amount_refunded_cents": 0,
+                            "delivered_rows": 2,
+                            "fulfilled_at": "2026-11-03T09:00:00Z",
+                            "access_expires_at": null,
+                            "cancel_requested": false,
+                            "capacity_offer": {
+                                "pricing_version": "capacity.v1",
+                                "quote_id": "qt_synthetic_0001",
+                                "quote_hash": "0f9e8d7c6b5a49382716f5e4d3c2b1a09f8e7d6c5b4a39281706f5e4d3c2b1a0",
+                                "currency": "USD",
+                                "maximum_cents": 60,
+                                "expires_at": "2026-11-03T09:30:00Z",
+                                "scope": {
+                                    "entity_type": "local_business",
+                                    "requested_units": 3
+                                },
+                                "terms": {
+                                    "unit_cents": 15,
+                                    "contact_unit_cents": 20
+                                },
+                                "cost_basis": "estimated",
+                                "cost_profile_version": "synthetic-1",
+                                "retained_work_cents": 0,
+                                "existing_execution": null,
+                                "can_authorize": true
+                            },
+                            "billing_model": "capacity.v1",
+                            "reservation_id": "res_synthetic_0001",
+                            "billed_unit_ids": [
+                                "ent_synthetic_0001",
+                                "ent_synthetic_0002"
+                            ],
+                            "billed_units": [
+                                {
+                                    "id": "ent_synthetic_0001",
+                                    "unit_cents": 20
+                                },
+                                {
+                                    "id": "ent_synthetic_0002",
+                                    "unit_cents": 15
+                                }
+                            ],
+                            "shortfall": null
+                        },
+                        "next_cursor": null,
+                        "idempotency_key": "specstream-run-0001",
+                        "state": "running",
+                        "maximum_cents": 60,
+                        "done": true,
+                        "retry_after_seconds": null
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/capacity/requests/specstream-run-0001/rows"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "find_id": "find_synthetic_0001",
+                        "status": "completed",
+                        "accepted_count": 2,
+                        "rows": [
+                            {
+                                "spec_version": "accepted_row.v1",
+                                "entity_id": "ent_synthetic_0001",
+                                "ordinal": 0,
+                                "cells": [
+                                    {
+                                        "column_id": "name",
+                                        "label": "Name",
+                                        "value": "Clinique Test Un",
+                                        "display": "Clinique Test Un",
+                                        "provenance": {
+                                            "entity_id": "ent_synthetic_name",
+                                            "field_id": "name",
+                                            "value": "Clinique Test Un",
+                                            "normalized_value": "Clinique Test Un",
+                                            "source": "page",
+                                            "source_url": "https://clinic-1.example.org/about",
+                                            "observed_at": "2026-11-03T09:00:00Z",
+                                            "observation_id": "obs_synthetic_name",
+                                            "request_hash": "0c85f280cf7589092edc7487029bb4ddf97e5b69cdaf84090d350f6b4693a734",
+                                            "join_method": null,
+                                            "null_reason": null
+                                        }
+                                    },
+                                    {
+                                        "column_id": "website",
+                                        "label": "Website",
+                                        "value": "https://clinic-1.example.org/",
+                                        "display": "https://clinic-1.example.org/",
+                                        "provenance": {
+                                            "entity_id": "ent_synthetic_website",
+                                            "field_id": "website",
+                                            "value": "https://clinic-1.example.org/",
+                                            "normalized_value": "https://clinic-1.example.org/",
+                                            "source": "page",
+                                            "source_url": "https://clinic-1.example.org/",
+                                            "observed_at": "2026-11-03T09:00:00Z",
+                                            "observation_id": "obs_synthetic_website",
+                                            "request_hash": "0c85f280cf7589092edc7487029bb4ddf97e5b69cdaf84090d350f6b4693a734",
+                                            "join_method": null,
+                                            "null_reason": null
+                                        }
+                                    },
+                                    {
+                                        "column_id": "email",
+                                        "label": "Email",
+                                        "value": "contact@clinic-1.example.org",
+                                        "display": "contact@clinic-1.example.org",
+                                        "provenance": {
+                                            "entity_id": "ent_synthetic_email",
+                                            "field_id": "email",
+                                            "value": "contact@clinic-1.example.org",
+                                            "normalized_value": "contact@clinic-1.example.org",
+                                            "source": "page",
+                                            "source_url": "https://clinic-1.example.org/contact",
+                                            "observed_at": "2026-11-03T09:00:00Z",
+                                            "observation_id": "obs_synthetic_email",
+                                            "request_hash": "0c85f280cf7589092edc7487029bb4ddf97e5b69cdaf84090d350f6b4693a734",
+                                            "join_method": null,
+                                            "null_reason": null
+                                        }
+                                    }
+                                ],
+                                "predicates": [],
+                                "billable": true,
+                                "contact_visibility": "full",
+                                "locked": false,
+                                "details": []
+                            },
+                            {
+                                "spec_version": "accepted_row.v1",
+                                "entity_id": "ent_synthetic_0002",
+                                "ordinal": 1,
+                                "cells": [
+                                    {
+                                        "column_id": "name",
+                                        "label": "Name",
+                                        "value": "Clinique Test Deux",
+                                        "display": "Clinique Test Deux",
+                                        "provenance": {
+                                            "entity_id": "ent_synthetic_name",
+                                            "field_id": "name",
+                                            "value": "Clinique Test Deux",
+                                            "normalized_value": "Clinique Test Deux",
+                                            "source": "page",
+                                            "source_url": "https://clinic-2.example.org/about",
+                                            "observed_at": "2026-11-03T09:00:00Z",
+                                            "observation_id": "obs_synthetic_name",
+                                            "request_hash": "0c85f280cf7589092edc7487029bb4ddf97e5b69cdaf84090d350f6b4693a734",
+                                            "join_method": null,
+                                            "null_reason": null
+                                        }
+                                    },
+                                    {
+                                        "column_id": "website",
+                                        "label": "Website",
+                                        "value": "https://clinic-2.example.org/",
+                                        "display": "https://clinic-2.example.org/",
+                                        "provenance": {
+                                            "entity_id": "ent_synthetic_website",
+                                            "field_id": "website",
+                                            "value": "https://clinic-2.example.org/",
+                                            "normalized_value": "https://clinic-2.example.org/",
+                                            "source": "page",
+                                            "source_url": "https://clinic-2.example.org/",
+                                            "observed_at": "2026-11-03T09:00:00Z",
+                                            "observation_id": "obs_synthetic_website",
+                                            "request_hash": "0c85f280cf7589092edc7487029bb4ddf97e5b69cdaf84090d350f6b4693a734",
+                                            "join_method": null,
+                                            "null_reason": null
+                                        }
+                                    },
+                                    {
+                                        "column_id": "email",
+                                        "label": "Email",
+                                        "value": null,
+                                        "display": null,
+                                        "absence": "Not published"
+                                    }
+                                ],
+                                "predicates": [],
+                                "billable": true,
+                                "contact_visibility": "hidden",
+                                "locked": false,
+                                "details": []
+                            }
+                        ],
+                        "possible": [],
+                        "flat_rows": [],
+                        "entitlement": "paid",
+                        "commerce": {
+                            "spec_version": "commerce.v1",
+                            "find_id": "find_synthetic_0001",
+                            "payment_status": "paid",
+                            "fulfillment_status": "fulfilled",
+                            "settlement_status": "settled",
+                            "access_state": "granted",
+                            "access_allowed": true,
+                            "next_action": "none",
+                            "currency": "USD",
+                            "amount_authorized_cents": 60,
+                            "amount_captured_cents": 35,
+                            "amount_refunded_cents": 25,
+                            "delivered_rows": 2,
+                            "fulfilled_at": "2026-11-03T09:00:00Z",
+                            "access_expires_at": null,
+                            "cancel_requested": false,
+                            "capacity_offer": {
+                                "pricing_version": "capacity.v1",
+                                "quote_id": "qt_synthetic_0001",
+                                "quote_hash": "0f9e8d7c6b5a49382716f5e4d3c2b1a09f8e7d6c5b4a39281706f5e4d3c2b1a0",
+                                "currency": "USD",
+                                "maximum_cents": 60,
+                                "expires_at": "2026-11-03T09:30:00Z",
+                                "scope": {
+                                    "entity_type": "local_business",
+                                    "requested_units": 3
+                                },
+                                "terms": {
+                                    "unit_cents": 15,
+                                    "contact_unit_cents": 20
+                                },
+                                "cost_basis": "estimated",
+                                "cost_profile_version": "synthetic-1",
+                                "retained_work_cents": 0,
+                                "existing_execution": null,
+                                "can_authorize": true
+                            },
+                            "billing_model": "capacity.v1",
+                            "reservation_id": "res_synthetic_0001",
+                            "billed_unit_ids": [
+                                "ent_synthetic_0001",
+                                "ent_synthetic_0002"
+                            ],
+                            "billed_units": [
+                                {
+                                    "id": "ent_synthetic_0001",
+                                    "unit_cents": 20
+                                },
+                                {
+                                    "id": "ent_synthetic_0002",
+                                    "unit_cents": 15
+                                }
+                            ],
+                            "shortfall": {
+                                "requested_units": 3,
+                                "delivered_units": 2,
+                                "refunded_cents": 25
+                            }
+                        },
+                        "next_cursor": null,
+                        "idempotency_key": "specstream-run-0001",
+                        "state": "committed",
+                        "maximum_cents": 60,
+                        "done": true,
+                        "retry_after_seconds": null
+                    }
+                }
+            }
+        }
+    ]
+}
