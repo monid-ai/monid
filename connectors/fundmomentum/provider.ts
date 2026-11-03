@@ -83,10 +83,23 @@ import { z } from "zod";
  * credentials entitlement issue, so they slot in the same way: `usage.
  * consolidate` above already skips any FREE-model endpoint, no change
  * needed there for the two new ones). The three Pro signal tools
- * (`get_fund_signals`, `get_gp_profile`, `match_startup`) and
- * `search_lps` (sold only on a separate LP Radar subscription, never
- * per call, on credits, or over MPP) are still a deliberate follow-up
- * once pricing/entitlement posture for those is settled.
+ * (`get_fund_signals`, `get_gp_profile`, `match_startup`) are still a
+ * deliberate follow-up once pricing/entitlement posture for those is
+ * settled.
+ *
+ * UPDATE 2026-11-04: `search_lps`'s billing/entitlement posture is now
+ * settled, so it is no longer excluded above for that reason — it is
+ * a deliberate follow-up only in the sense that it still needs its
+ * own endpoint folder, not because anything about its billing is
+ * unresolved. The vendor retired its standalone LP Radar subscription
+ * (the `error_reason: "lp_access_required"` 403 this connector's
+ * `lifecycle.start` already maps to httpStatus 403 above was that
+ * gate; it no longer fires for this tool). `search_lps` is now billed
+ * exactly like `search_funds` — PER_UNIT, 1 credit per LP row
+ * returned, same `_meta.credits_charged` / `billing.credits_charged`
+ * receipt shape already read above — so wiring it in needs no new
+ * billing design, the same `usage.consolidate` and `lifecycle.start`
+ * handling already cover it.
  */
 export default defineProvider({
     name: "fundmomentum",
@@ -103,8 +116,9 @@ export default defineProvider({
             "confidence); poll only what changed since a timestamp " +
             "instead of re-searching; and check LP coverage by country " +
             "and LP type across 700+ disclosed limited partners " +
-            "(counts only — no name or website without an LP Radar " +
-            "subscription, not sold through this connector). Two more " +
+            "(counts only — full LP records, names included, are a " +
+            "separate per-row-billed tool not yet wired into this " +
+            "connector). Two more " +
             "tools are always free and never draw a credit: check your " +
             "own usage before a batch of calls, and send short " +
             "feedback on a tool or the data. Every fund profile is " +
