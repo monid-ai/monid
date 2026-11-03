@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { zHighlights, zText } from "../../../schema/contents-options.ts";
-import { zExaSearchBody } from "../../search/schema/inputs.ts";
+import { zExaSearchBody } from "../../../schema/search-body.ts";
 
 /**
  * Exa /search with `type: "lite"` — the vendor's reduced parameter set.

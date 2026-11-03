@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { zExaSearchBody } from "../../search/schema/inputs.ts";
+import { zExaSearchBody } from "../../../schema/search-body.ts";
 
 /**
  * Exa /search restricted to the deep search types. Every other field is the

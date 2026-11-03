@@ -100,6 +100,7 @@ Deno.test(`${ID} schema gate: only the deep search types are accepted`, async ()
 
 Deno.test(`${ID} estimate: the base price follows \`type\``, async () => {
     const unit = await testSealedUnit(ID);
+    // Search rate sources and dates: see ../../provider.ts.
     const cases: Array<[string | undefined, string, number]> = [
         [undefined, "deep_search", 0.012], // binding default "deep"
         ["deep-lite", "deep_search", 0.012],

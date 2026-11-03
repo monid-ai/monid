@@ -129,7 +129,7 @@ Deno.test({
 
 Deno.test("exa#search estimate: the base price follows `type`", async () => {
     const unit = await testSealedUnit("exa#search");
-    // exa's published per-type card: the cell `type` selects, at count 1
+    // Search rates: https://exa.ai/pricing, checked 2026-11-03; see provider.ts for live-only types.
     const cases: Array<[string | undefined, string, number]> = [
         [undefined, "standard_search", 0.007], // binding default "auto"
         ["auto", "standard_search", 0.007],

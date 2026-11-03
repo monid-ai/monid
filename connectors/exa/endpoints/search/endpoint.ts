@@ -1,5 +1,5 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
-import { zExaSearchBody } from "./schema/inputs.ts";
+import { zExaSearchBody } from "../../schema/search-body.ts";
 
 /**
  * Exa /search — neural + keyword search across the open web.

@@ -1,6 +1,12 @@
-import { assert, assertAlmostEquals, assertEquals } from "@std/assert";
+import {
+    assert,
+    assertAlmostEquals,
+    assertEquals,
+    assertRejects,
+} from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import {
+    assertInputAccepted,
     estimateEndpoint,
     liveSkip,
     loadFixture,
@@ -70,6 +76,32 @@ Deno.test(`${ID} provider error: 401 is data, zero usage`, async () => {
     assertEquals(result.httpStatus, 401);
     assertEquals(result.isProviderError, true);
     assertEquals(result.usage, { credits: {}, evidence: {} });
+});
+
+Deno.test(`${ID} schema gate: result bounds and category are enforced`, async () => {
+    const unit = await testSealedUnit(ID);
+    const invalidBodies: Array<Record<string, string | number>> = [
+        { query: "q", numResults: 101 },
+        { query: "q", category: "github" },
+    ];
+    for (const body of invalidBodies) {
+        await assertRejects(
+            () =>
+                runEndpoint({
+                    unit,
+                    input: { body },
+                    mode: "replay",
+                }),
+            Error,
+            "INVALID_INPUT",
+        );
+    }
+    // the passing near-twin
+    await assertInputAccepted({
+        unit,
+        input: { body: { query: "q", numResults: 100 } },
+        mode: "replay",
+    });
 });
 
 Deno.test(`${ID} estimate: $0.004 base plus $0.001 per result above 10`, async () => {
