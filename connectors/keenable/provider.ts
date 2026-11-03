@@ -12,14 +12,17 @@ import { defineProvider, presets, UsageModelKind } from "@shared/core";
  * per-IP pool, `X-Keenable-Title`, no credits) and are not exposed —
  * design D1.
  *
- * Billing: Keenable meters authenticated usage in credits, 100,000
- * requests/month free on a direct key; every SKU either doc can select
- * (`search.pro`, `search.realtime`, `fetch`, `fetch.live`, with or
- * without `prompt`) drew one credit (MCP `_meta["keenable/usage"]`,
- * drill 2026-09-28). REST responses carry no usage receipt, so there is
- * no `usage.consolidate` and the derived fold settles (design D2; same
- * posture as pdl). One pool `default`, PER_CALL 1 on the provider;
- * search overrides it so an empty result bills 0.
+ * Billing: Keenable meters authenticated usage in credits (one per
+ * search or fetch). REST responses carry no usage receipt, so there
+ * is no `usage.consolidate` and the derived fold settles (design D2).
+ * The Monid-facing pool is US dollars, pinned at the dedicated-capacity
+ * volume rate of $0.001 per successful call ($1 / 1,000 requests at
+ * 100+ RPS — keenable.ai/pricing, 2026-11-03). That is the Exa / Apify
+ * posture: vendors whose published prices are in dollars pin them in
+ * the doc so discover can price without a separate broker-card row.
+ * Pay-as-you-go Builder is $0.004; this connector does not use it
+ * because Monid's aggregate search traffic is volume. Search still
+ * bills 0 when `results: []`.
  */
 export default defineProvider({
     name: "keenable",
@@ -50,15 +53,17 @@ export default defineProvider({
     request: { baseUrl: "https://api.keenable.ai" },
     timeouts: { requestMs: 30_000, runMs: 30_000 },
     usage: {
-        /** THE credit system (design D26): Keenable's native meter is
-         *  credits, one per search (either mode, D3) or fetch (indexed
-         *  or live, D4). No `consolidate`: no REST body carries a
+        /** THE credit system (design D26 / D9): Keenable's native
+         *  meter is one vendor credit per search or fetch, but the
+         *  published prices are in dollars, so the pool is USD — same
+         *  as exa. $0.001 is the volume rate (dedicated capacity,
+         *  $1 / 1,000). No `consolidate`: no REST body carries a
          *  receipt. */
-        credits: { default: { label: "Keenable credits" } },
+        credits: { default: { label: "US dollars" } },
         model: {
             kind: UsageModelKind.PER_CALL,
             label: "call",
-            consumes: { credit: "default", amount: 1 },
+            consumes: { credit: "default", amount: 0.001 },
         },
     },
 });

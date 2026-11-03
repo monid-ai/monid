@@ -37,6 +37,13 @@
       fallback, indexed opt-out, news preset, required query_time /
       prompt, existing happy / 401 / empty-search / bound twins
 
+## 4b. Volume rate (D9)
+
+- [x] 4b.1 Provider pool label `US dollars`; PER_CALL / PER_UNIT
+      draw `0.001` (dedicated-capacity rate)
+- [x] 4b.2 Tests expect `{credits: {default: 0.001}}`; empty search
+      still bills 0
+
 ## 5. Wiring + docs
 
 - [x] 5.1 OpenSpec proposal / design / spec

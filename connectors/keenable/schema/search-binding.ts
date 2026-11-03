@@ -49,7 +49,7 @@ export const keenableSearchUsage = {
         label: "searches with results",
         description: "searches whose response carried at least one " +
             "result",
-        consumes: { credit: "default", amount: 1 },
+        consumes: { credit: "default", amount: 0.001 },
     },
     /** The hold promises one search. */
     estimate: () => ({ counts: { RESULT: 1 } }),

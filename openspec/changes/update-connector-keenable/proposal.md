@@ -36,8 +36,10 @@ this change ships the connector half.
   - `keenable#v1/search-as-of` — `query_time` required, point-in-time
     search.
   - `keenable#v1/fetch-answer` — `prompt` required, `web-extraction`.
-- Billing unchanged: search (and its presets) PER_UNIT RESULT, empty
-  `results: []` bills 0; fetch (and fetch-answer) inherit PER_CALL 1.
+- **Volume rate in USD (D9)** — pool label `US dollars`, draw `0.001`
+  per successful search or fetch (Keenable's dedicated-capacity rate,
+  $1 / 1,000 at 100+ RPS). Same posture as Exa. Empty `results: []`
+  still bills 0. The Builder $0.004 rate is not used.
 
 ## Capabilities
 
@@ -45,8 +47,9 @@ this change ships the connector half.
 
 ## Non-goals
 
-- Hosted price, a Keenable-funded free allowance, or writing "free" in
-  meta (the Monid wallet price is not this repo).
+- A Keenable-funded free allowance, or writing "free" in meta. The
+  volume rate is pinned here; going fully FREE is still a hosted
+  allowance question (and would down-weight each call to 0.2).
 - An API-side `live: "auto"` or language-variant collapse — vendor
   changes. The fetch default is the connector interim; language
   variants stay a description caveat (`site` or a language word).

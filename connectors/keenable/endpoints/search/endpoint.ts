@@ -37,8 +37,8 @@ export default defineEndpoint({
         docsUrl: "https://docs.keenable.ai/api-reference/search",
         categories: ["web-search", "news-search"],
         notes: [
-            "One credit per search in either mode. A search that returns " +
-            "no results is free.",
+            "$0.001 per search with results (volume rate, either mode). " +
+            "A search that returns no results is free.",
         ],
     },
     request: { method: "POST", path: "/v1/search" },

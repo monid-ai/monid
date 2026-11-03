@@ -22,7 +22,7 @@ Deno.test("keenable#v1/fetch happy (synthetic): one credit; fold settles; markdo
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
     assertEquals(result.usage, {
-        credits: { default: 1 },
+        credits: { default: 0.001 },
         evidence: { CALL: 1 },
     });
     const output = result.output as Record<string, unknown>;
@@ -54,7 +54,7 @@ Deno.test("keenable#v1/fetch: omitted live defaults to true so a non-indexed URL
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
     assertEquals(result.usage, {
-        credits: { default: 1 },
+        credits: { default: 0.001 },
         evidence: { CALL: 1 },
     });
     const output = result.output as Record<string, unknown>;
@@ -81,7 +81,7 @@ Deno.test("keenable#v1/fetch: live false keeps the indexed-only path", async () 
     });
     assertEquals(result.isProviderError, false);
     assertEquals(result.usage, {
-        credits: { default: 1 },
+        credits: { default: 0.001 },
         evidence: { CALL: 1 },
     });
 });
@@ -180,7 +180,7 @@ Deno.test("keenable#v1/fetch: url required; prompt bounded; live accepted; unkno
     });
     assertEquals(okLive.isProviderError, false);
     assertEquals(okLive.usage, {
-        credits: { default: 1 },
+        credits: { default: 0.001 },
         evidence: { CALL: 1 },
     });
 });

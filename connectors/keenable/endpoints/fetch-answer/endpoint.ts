@@ -29,8 +29,8 @@ export default defineEndpoint({
         docsUrl: "https://docs.keenable.ai/api-reference/fetch",
         categories: ["web-extraction"],
         notes: [
-            "One credit, same as keenable#v1/fetch. prompt is required. " +
-            "live defaults to true.",
+            "Same $0.001 volume rate as keenable#v1/fetch. prompt is " +
+            "required. live defaults to true.",
         ],
     },
     /** PUBLIC identity (design D22): shares upstream `GET /v1/fetch`. */

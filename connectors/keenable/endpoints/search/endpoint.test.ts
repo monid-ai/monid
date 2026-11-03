@@ -69,12 +69,13 @@ Deno.test("keenable: fetch inherits PER_CALL 1, search counts RESULT, one auth f
     };
     for (const id of ids) {
         const doc = bundle.endpoints[id];
+        assertEquals(doc.usage.credits.default.label, "US dollars", id);
         assertEquals(Object.keys(doc.usage.credits), ["default"], id);
         const model = doc.usage.model;
         assertEquals(model.kind, kinds[id], id);
         assertEquals(
             "consumes" in model ? model.consumes : undefined,
-            { credit: "default", amount: 1 },
+            { credit: "default", amount: 0.001 },
             id,
         );
     }
@@ -143,7 +144,7 @@ Deno.test("keenable#v1/search happy (synthetic): one credit; fold settles; mode 
     assertEquals(result.isProviderError, false);
     // no consolidate ⇒ no claim ⇒ the DERIVED fold is the bill (D2)
     assertEquals(result.usage, {
-        credits: { default: 1 },
+        credits: { default: 0.001 },
         evidence: { RESULT: 1 },
     });
     const output = result.output as Record<string, unknown>;

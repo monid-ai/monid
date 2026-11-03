@@ -24,7 +24,7 @@ Deno.test("keenable#v1/fetch-answer happy (synthetic): prompt required; one cred
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
     assertEquals(result.usage, {
-        credits: { default: 1 },
+        credits: { default: 0.001 },
         evidence: { CALL: 1 },
     });
     assertEquals(

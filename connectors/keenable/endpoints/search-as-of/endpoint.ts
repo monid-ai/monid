@@ -36,8 +36,8 @@ export default defineEndpoint({
         docsUrl: "https://docs.keenable.ai/api-reference/search",
         categories: ["web-search"],
         notes: [
-            "Same credit as keenable#v1/search. query_time is required. " +
-            "A search that returns no results is free.",
+            "Same $0.001 volume rate as keenable#v1/search. query_time " +
+            "is required. A search that returns no results is free.",
         ],
     },
     /** PUBLIC identity (design D22): shares upstream `POST /v1/search`. */

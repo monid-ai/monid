@@ -5,16 +5,17 @@
 ### Requirement: Keenable provider definition
 The keenable provider SHALL declare name `keenable`, `request.baseUrl`
 `https://api.keenable.ai`, auth `presets.auth.header("X-API-Key")`,
-timeouts 30 s / 30 s, one credit pool `default` ("Keenable credits"), a
-provider-level `usage.model` of PER_CALL 1 Keenable credit, and NO
-`usage.consolidate` (REST responses carry no usage receipt). Search
-docs SHALL override the model with PER_UNIT `RESULT`, 1 credit, counting
-0 for `results: []`. Provider meta SHALL categorize
-`web-search`, `news-search`, and `web-scraping`.
+timeouts 30 s / 30 s, one credit pool `default` labelled
+"US dollars", a provider-level `usage.model` of PER_CALL $0.001
+(the published volume rate), and NO `usage.consolidate` (REST
+responses carry no usage receipt). Search docs SHALL override the
+model with PER_UNIT `RESULT`, $0.001, counting 0 for `results: []`.
+Provider meta SHALL categorize `web-search`, `news-search`, and
+`web-scraping`.
 
-#### Scenario: A search consumes one credit
+#### Scenario: A search consumes the volume rate
 - **WHEN** `POST /v1/search` returns 200 with two results
-- **THEN** usage is `{credits: {default: 1}, evidence: {RESULT: 1}}`
+- **THEN** usage is `{credits: {default: 0.001}, evidence: {RESULT: 1}}`
 - **AND** the payload still carries `query`, `results`, and the
   vendor-echoed `mode`
 
@@ -22,9 +23,9 @@ docs SHALL override the model with PER_UNIT `RESULT`, 1 credit, counting
 - **WHEN** `POST /v1/search` returns 200 with `results: []`
 - **THEN** usage is `{credits: {}, evidence: {RESULT: 0}}`
 
-#### Scenario: A fetch consumes one credit
+#### Scenario: A fetch consumes the volume rate
 - **WHEN** `GET /v1/fetch?url=https://example.com` returns 200
-- **THEN** usage is `{credits: {default: 1}, evidence: {CALL: 1}}`
+- **THEN** usage is `{credits: {default: 0.001}, evidence: {CALL: 1}}`
 - **AND** output carries `url`, `title`, and markdown `content`
 
 #### Scenario: A 401 is data, zero usage
@@ -66,11 +67,11 @@ twins SHALL NOT be exposed.
 
 #### Scenario: Fetch live defaults to true
 - **WHEN** `GET /v1/fetch` is called with a URL and no `live`
-- **THEN** the request carries `live=true` and settles one credit
+- **THEN** the request carries `live=true` and settles $0.001
 
 #### Scenario: Indexed-only fetch is opt-in
 - **WHEN** `GET /v1/fetch` is called with `live: false`
-- **THEN** the request carries `live=false` and settles one credit
+- **THEN** the request carries `live=false` and settles $0.001
 
 #### Scenario: News preset defaults published_after
 - **WHEN** `keenable#v1/search-news` is called with only `query`

@@ -24,7 +24,7 @@ Deno.test("keenable#v1/search-as-of happy (synthetic): query_time required; one 
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
     assertEquals(result.usage, {
-        credits: { default: 1 },
+        credits: { default: 0.001 },
         evidence: { RESULT: 1 },
     });
 });

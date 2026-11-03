@@ -32,9 +32,9 @@ export default defineEndpoint({
         docsUrl: "https://docs.keenable.ai/api-reference/fetch",
         categories: ["web-scraping", "web-extraction"],
         notes: [
-            "One credit per page, indexed or live, with or without a " +
-            "prompt. Errors are free. live defaults to true so a URL " +
-            "missing from the index is fetched from the source.",
+            "$0.001 per page (volume rate), indexed or live, with or " +
+            "without a prompt. Errors are free. live defaults to true " +
+            "so a URL missing from the index is fetched from the source.",
         ],
     },
     request: { method: "GET", path: "/v1/fetch" },
