@@ -57,16 +57,20 @@ import { z } from "zod";
  * applies here and it always falls back to the `_meta` reading — no
  * code change was needed there for this.
  *
- * NOT FOUND, unlike `search_funds`: an exact repeat of the same call is
- * NOT served from an idempotency cache here. Live-verified by firing
- * the identical `{country: "Germany", limit: 3}` call twice in a row:
- * the second charged 3 credits again (`credits_remaining` dropped
- * 22 → 19, not echoed back unchanged), with no `idempotent_replay`
- * flag anywhere in `_meta`. So `../endpoint.ts`'s `usage.evidence`
- * below does not special-case that flag the way `search-funds/
- * endpoint.ts` does — provider.ts's existing state check is generic
- * and would simply never fire for this tool based on what was
- * observed; a repeat call is billed again, same as any other call.
+ * UPDATE 2026-11-04 (later the same day as the verification above):
+ * the vendor ADDED idempotency caching for this tool, closing the gap
+ * first found when this file was written (an identical repeat used
+ * to bill twice — live-verified at the time by firing the identical
+ * `{country: "Germany", limit: 3}` call twice in a row and seeing
+ * `credits_remaining` drop twice, with no `idempotent_replay` flag
+ * either time). Re-verified live against a fresh agent key after the
+ * fix: the second of two identical calls now comes back with `_meta.
+ * idempotent_replay: true`, `replay_note`, and `originally_charged_
+ * eur`, same shape as `search_funds`, and `credits_remaining` is
+ * unchanged by the repeat. `../endpoint.ts`'s `usage.evidence` now
+ * zeroes its fold on that flag, mirroring `search-funds/endpoint.ts`'s
+ * own check — provider.ts's state flag is generic per-tool and needed
+ * no code change to start firing here.
  *
  * `z.looseObject`: vendor-forward keys ride through, same as every
  * other endpoint here.

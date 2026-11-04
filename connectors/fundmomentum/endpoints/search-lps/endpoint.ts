@@ -25,14 +25,19 @@ import { zFundmomentumSearchLpsArgs } from "./schema/inputs.ts";
  *      its fallback. No provider.ts change was needed for this: it
  *      already prefers the documented field only when present and
  *      falls back to `_meta` otherwise.
- *   3. UNLIKE `search_funds`, an exact repeat of the same call is NOT
- *      served from an idempotency cache (live-verified: firing the
- *      identical call twice billed twice, no `idempotent_replay` flag
- *      either time). So, unlike `search-funds/endpoint.ts`, this
- *      endpoint's `usage.evidence` below does not zero its fold on
- *      that flag — provider.ts's check for it is generic per-provider
- *      state and simply never fires for this tool based on what was
- *      observed.
+ *   3. UPDATE 2026-11-04 (later the same day): the vendor ADDED
+ *      idempotency caching for this tool too, closing the one real
+ *      gap noted above when this was first written (an identical
+ *      repeat used to bill twice, live-verified at the time against a
+ *      fresh agent key). Re-verified live against another fresh key:
+ *      an exact repeat now comes back with `_meta.idempotent_replay:
+ *      true`, `replay_note`, and `originally_charged_eur`, same shape
+ *      as `search_funds`, and the real balance is untouched by the
+ *      repeat. provider.ts's `idempotentReplay` state flag is generic
+ *      per-tool and needed no code change to start firing here; only
+ *      this file's `usage.evidence` below (now mirroring `search-
+ *      funds/endpoint.ts`'s own zeroing) and schema/inputs.ts needed
+ *      updating.
  *   4. A real HTTP 402 on insufficient credits for THIS tool is a live
  *      MPP (micropayment) payment-required challenge
  *      (`application/problem+json`, a `WWW-Authenticate: Payment ...`
@@ -79,9 +84,9 @@ export default defineEndpoint({
             "`limit` defaults to 10 if omitted, hard range 1-25; a " +
             "value above 25 is rejected outright, not clamped, and " +
             "never charged.",
-            "An exact repeat of a prior call is billed again in " +
-            "full — unlike `search_funds`, no idempotency cache was " +
-            "found for this tool (live-verified).",
+            "An exact repeat of a prior call is a free idempotent " +
+            "replay (added by the vendor 2026-11-04), same as " +
+            "`search_funds` — not double-billed.",
         ],
     },
     endpoint: "/mcp/search_lps",
@@ -127,14 +132,23 @@ export default defineEndpoint({
         // The settled fold when provider.ts's own usage.consolidate
         // claim is absent: count the LPs actually in `results` (never
         // `matched`, which can run far ahead of what was returned and
-        // billed). No idempotent-replay zeroing here — see schema/
-        // inputs.ts and the top comment above: live-verified, this
-        // tool does not serve repeats from a free cache the way
-        // search_funds does, so there is no flag to zero against.
+        // billed) — EXCEPT on an idempotent replay (provider.ts's
+        // lifecycle.start flags this in state, added 2026-11-04,
+        // mirroring search-funds/endpoint.ts's own check), where real
+        // results still come back but the vendor charged nothing for
+        // them: zero the fold too, so this endpoint's own derived
+        // count can't re-introduce the double-bill that zeroing
+        // consolidate's claim alone cannot prevent (that claim, once
+        // zero, is pruned by the engine and falls back to exactly this
+        // fold).
         evidence: ({ data, utils }) => ({
             counts: {
-                RESULT: utils.json.optionalLen(data.output, "$.results") ??
-                    0,
+                RESULT: utils.json.optionalGet(
+                        data.lifecycle?.state ?? null,
+                        "$.data.idempotentReplay",
+                    ) === true
+                    ? 0
+                    : utils.json.optionalLen(data.output, "$.results") ?? 0,
             },
         }),
     },

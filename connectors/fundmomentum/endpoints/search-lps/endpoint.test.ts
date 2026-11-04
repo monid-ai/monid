@@ -118,6 +118,30 @@ Deno.test("fundmomentum#mcp/search_lps: a zero balance is a real HTTP 402 MPP pa
     assertEquals(body.status, 402);
 });
 
+Deno.test("fundmomentum#mcp/search_lps: an exact repeat of a prior call is a free idempotent replay, never double-billed (added by the vendor 2026-11-04)", async () => {
+    const unit = await testSealedUnit("fundmomentum#mcp/search_lps");
+    const fixture = await loadFixture(`${fixturesDir}idempotent-replay.json`);
+    const result = await runEndpoint({
+        unit,
+        input: { body: { country: "Germany", limit: 3 } },
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(result.httpStatus, 200);
+    assertEquals(result.isProviderError, false);
+    // The echoed _meta has idempotent_replay: true, so nothing is
+    // charged this time even though `results` still carries 3 real
+    // rows — endpoint.ts's usage.evidence zeroes its own fold when
+    // this flag is set, same as search-funds/endpoint.ts.
+    assertEquals(result.usage, {
+        credits: {},
+        evidence: { RESULT: 0 },
+    });
+    const output = result.output as Record<string, unknown>;
+    const results = output.results as unknown[];
+    assertEquals(results.length, 3);
+});
+
 Deno.test("fundmomentum#mcp/search_lps: limit above 25 is rejected outright, not clamped, and never charged", async () => {
     const unit = await testSealedUnit("fundmomentum#mcp/search_lps");
     const fixture = await loadFixture(`${fixturesDir}invalid-args.json`);

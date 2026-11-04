@@ -98,12 +98,20 @@ import { z } from "zod";
  * credits_charged` above — but UNLIKE `search_funds`, this tool's
  * responses carry no in-payload `billing` block (so the documented-
  * field preference above never applies to it, only the `_meta`
- * fallback) and, also unlike `search_funds`, an exact repeat of the
- * same call is NOT served from an idempotency cache (billed again in
- * full both times, live-verified) — so `idempotentReplay` above never
- * fires for this tool based on what was observed. Neither difference
- * needed any change here: both are already the fallback/default
- * behavior when their counterpart is absent.
+ * fallback). Neither needed any change here: it's already the
+ * fallback behavior when the documented field is absent.
+ *
+ * UPDATE 2026-11-04 (later the same day): the vendor ADDED idempotency
+ * caching for `search_lps`, closing the one real gap versus
+ * `search_funds` noted above when this tool was first wired in a few
+ * hours earlier (an identical repeat used to bill twice, live-
+ * verified at the time). Re-verified live against a fresh agent key:
+ * an exact repeat now comes back with `_meta.idempotent_replay: true`,
+ * same shape as `search_funds`. No code change was needed HERE either
+ * — `idempotentReplay` above already reads `_meta.idempotent_replay`
+ * generically for any tool, so it started firing for this one the
+ * moment the vendor turned it on; only search-lps/'s own comments,
+ * fixtures and tests needed updating to match.
  */
 export default defineProvider({
     name: "fundmomentum",
