@@ -14,7 +14,7 @@
 
 ## 3. Fixtures + tests
 
-- [x] 3.1 Recorded find happy, use happy, use 404 (2026-11-03)
+- [x] 3.1 Recorded find happy, find 400, use happy, use 404
 - [x] 3.2 Tests: wire form + shared bearer fn + FREE synthesized
       quantities, happy / 404 / schema gates (bound near-twins), live
       find and find -> use chain gated on EDGE_API_KEY

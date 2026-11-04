@@ -28,8 +28,8 @@ no new engine capability.
 - **New category leaf** `agent-skills` ("Agent Skills") in
   `connectors/categories.ts`: no existing leaf names skill search; the
   closest, `agents`, is hosted research agents.
-- Fixtures: all three RECORDED against https://getedge.cc on 2026-11-03
-  (find happy, use happy, use 404) with `deno task record`, trimmed,
+- Fixtures: all four RECORDED against https://getedge.cc on 2026-11-03 and 04
+  (find happy, find 400, use happy, use 404) with `deno task record`, trimmed,
   moved into provider-level shared chains.
 
 ## Capabilities

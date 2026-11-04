@@ -35,15 +35,5 @@ export default defineEndpoint({
         ],
     },
     request: { method: "POST", path: "/find_skill" },
-    input: {
-        schema: {
-            body: zEdgeFindSkillBody.extend({
-                query: zEdgeFindSkillBody.shape.query.min(3).max(500),
-                keywords: zEdgeFindSkillBody.shape.keywords.unwrap().min(1)
-                    .max(200).optional(),
-                limit: zEdgeFindSkillBody.shape.limit.unwrap().min(1).max(5)
-                    .optional(),
-            }),
-        },
-    },
+    input: { schema: { body: zEdgeFindSkillBody } },
 });

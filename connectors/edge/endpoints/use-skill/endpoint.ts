@@ -27,17 +27,5 @@ export default defineEndpoint({
         ],
     },
     request: { method: "POST", path: "/use_skill" },
-    input: {
-        schema: {
-            body: zEdgeUseSkillBody.extend({
-                skill: zEdgeUseSkillBody.shape.skill.min(1).max(200),
-                source: zEdgeUseSkillBody.shape.source.unwrap().min(1)
-                    .max(200).optional(),
-                request_id: zEdgeUseSkillBody.shape.request_id.unwrap()
-                    .min(1).max(32).optional(),
-                version: zEdgeUseSkillBody.shape.version.unwrap().min(1)
-                    .max(80).optional(),
-            }),
-        },
-    },
+    input: { schema: { body: zEdgeUseSkillBody } },
 });

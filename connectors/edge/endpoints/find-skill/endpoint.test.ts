@@ -77,6 +77,24 @@ Deno.test("edge#find_skill happy (recorded 2026-11-03): ranked skills, free sett
     assert(output.request_id.length > 0);
 });
 
+Deno.test("edge#find_skill provider error (recorded 400): data, zero usage", async () => {
+    const unit = await testSealedUnit("edge#find_skill");
+    const fixture = await loadFixture(
+        `${fixturesDir}find-skill-blank-query.json`,
+    );
+    const result = await runEndpoint({
+        unit,
+        // passes the schema (3 characters); Edge trims it and answers 400
+        input: { body: { query: "   " } },
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(result.httpStatus, 400);
+    assertEquals(result.isProviderError, true);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
+    assertEquals(result.output, fixture.calls[0].res.body);
+});
+
 Deno.test("edge#find_skill: query required (3-500 chars), limit 1-5, strict body", async () => {
     const unit = await testSealedUnit("edge#find_skill");
     const fixture = await loadFixture(`${fixturesDir}find-skill-ok.json`);
@@ -139,7 +157,12 @@ Deno.test({
         assertEquals(result.usage, { credits: {}, evidence: {} });
         const output = result.output as Record<string, unknown>;
         assert(Array.isArray(output.skills), "skills array present");
-        assertEquals(typeof output.request_id, "string");
+        // OpenAPI: request_id is string | null
+        assert(
+            output.request_id === null ||
+                typeof output.request_id === "string",
+            "request_id is a string or null",
+        );
         assertEquals(
             typeof (output.recommendation as Record<string, unknown>)
                 .strength,
