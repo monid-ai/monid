@@ -400,6 +400,8 @@
         "dataforseo#tripadvisor/search",
         "dataforseo#trustpilot/reviews",
         "dataforseo#trustpilot/search",
+        "edge#find_skill",
+        "edge#use_skill",
         "exa#contents",
         "exa#search",
         "firecrawl#agent",
