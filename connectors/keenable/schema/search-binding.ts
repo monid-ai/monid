@@ -10,18 +10,37 @@ import { zKeenableSearchBody } from "../endpoints/search/schema/inputs.ts";
 export const zKeenableTimeBoundBinding = zKeenableSearchBody.shape.query_time
     .unwrap().min(1).regex(/\S/);
 
+/** `.unwrap()` drops the field-level `.describe()` (it sits on the
+ *  optional wrapper), so re-apply each field's own description after
+ *  tightening. */
+type TimeBoundField =
+    | "acquired_after"
+    | "acquired_before"
+    | "published_after"
+    | "published_before"
+    | "query_time";
+
+function tightenTimeBound(field: TimeBoundField) {
+    const source = zKeenableSearchBody.shape[field];
+    const tightened = zKeenableTimeBoundBinding;
+    return source.description !== undefined
+        ? tightened.describe(source.description)
+        : tightened;
+}
+
 export function keenableSearchBodySchema(options?: {
     queryTimeRequired?: boolean;
     publishedAfterDefault?: string;
     snippetMaxLengthDefault?: number;
 }) {
-    const timeBound = zKeenableTimeBoundBinding.optional();
     const publishedAfter = options?.publishedAfterDefault !== undefined
-        ? zKeenableTimeBoundBinding.default(options.publishedAfterDefault)
-        : timeBound;
+        ? tightenTimeBound("published_after").default(
+            options.publishedAfterDefault,
+        )
+        : tightenTimeBound("published_after").optional();
     const queryTime = options?.queryTimeRequired === true
-        ? zKeenableTimeBoundBinding
-        : timeBound;
+        ? tightenTimeBound("query_time")
+        : tightenTimeBound("query_time").optional();
     const snippet = zKeenableSearchBody.shape.snippet_max_length
         .unwrap().min(180).max(10000);
     const snippetMaxLength = options?.snippetMaxLengthDefault !== undefined
@@ -31,10 +50,10 @@ export function keenableSearchBodySchema(options?: {
         query: zKeenableSearchBody.shape.query.min(1).regex(/\S/),
         site: zKeenableSearchBody.shape.site.unwrap().min(1).regex(/\S/)
             .optional(),
-        acquired_after: timeBound,
-        acquired_before: timeBound,
+        acquired_after: tightenTimeBound("acquired_after").optional(),
+        acquired_before: tightenTimeBound("acquired_before").optional(),
         published_after: publishedAfter,
-        published_before: timeBound,
+        published_before: tightenTimeBound("published_before").optional(),
         query_time: queryTime,
         snippet_max_length: snippetMaxLength,
         max_results: zKeenableSearchBody.shape.max_results
