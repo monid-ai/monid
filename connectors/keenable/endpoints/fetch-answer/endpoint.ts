@@ -1,5 +1,5 @@
 import { defineEndpoint } from "@shared/core";
-import { zKeenableFetchQueryParams } from "../fetch/schema/inputs.ts";
+import { zKeenableFetchAnswerQueryParams } from "./schema/inputs.ts";
 
 /**
  * Prompt-required twin of `GET /v1/fetch` — the fetch-with-prompt path
@@ -19,9 +19,10 @@ export default defineEndpoint({
             "prompt about the page instead of returning the full " +
             "Markdown. prompt is required (up to 2,000 characters, " +
             'e.g. "list every pricing tier with its monthly price"). ' +
-            "Serves Keenable's indexed copy when the page is in the " +
-            "index and fetches it live from the source otherwise; set " +
-            "live: false to require the indexed copy. max_chars caps " +
+            "By default (live: true) the page is fetched live from the " +
+            "source, a few seconds slower than the index; set live: " +
+            "false to serve only the indexed copy (a URL not in the " +
+            "index is then an error). max_chars caps " +
             "the answer length. One URL per call. Will not: log in, " +
             "click through pages, or get past bot protection. Find " +
             "URLs first with keenable#v1/search; use keenable#v1/fetch " +
@@ -38,12 +39,12 @@ export default defineEndpoint({
     request: { method: "GET", path: "/v1/fetch" },
     input: {
         schema: {
-            queryParams: zKeenableFetchQueryParams.extend({
-                max_chars: zKeenableFetchQueryParams.shape.max_chars
+            queryParams: zKeenableFetchAnswerQueryParams.extend({
+                max_chars: zKeenableFetchAnswerQueryParams.shape.max_chars
                     .unwrap().min(1).optional(),
-                prompt: zKeenableFetchQueryParams.shape.prompt.unwrap()
+                prompt: zKeenableFetchAnswerQueryParams.shape.prompt.unwrap()
                     .min(1).max(2000).regex(/\S/),
-                live: zKeenableFetchQueryParams.shape.live.unwrap()
+                live: zKeenableFetchAnswerQueryParams.shape.live.unwrap()
                     .default(true),
             }),
         },

@@ -18,11 +18,11 @@ export default defineEndpoint({
         summary:
             "Read a known URL as clean Markdown contents, or ask a question about the page.",
         description: "Contents for a known URL: clean Markdown with " +
-            "title and author, $0.001 per page. Serves Keenable's " +
-            "indexed copy when the page is in the index (fast and " +
-            "predictable) and fetches it live from the source " +
-            "otherwise. Set live: true to always get the current " +
-            "page; set live: false to require the indexed copy. Add " +
+            "title and author, $0.001 per page. By default (live: " +
+            "true) the page is fetched live from the source, which " +
+            "is a few seconds slower than the index. Set live: false " +
+            "to serve only Keenable's indexed copy; a URL not in the " +
+            "index is then an error. Add " +
             'prompt (up to 2,000 characters, e.g. "list every ' +
             'pricing tier with its monthly price") and an LLM ' +
             "reads the page and returns only the answer. max_chars " +

@@ -15,8 +15,7 @@ import {
 export default defineEndpoint({
     meta: {
         displayName: "Keenable News Search",
-        summary:
-            "Search recent news; each result carries a long page-text extract.",
+        summary: "Search recent news; each result carries a page-text snippet.",
         description: "News-oriented web search over Keenable's own " +
             '100B+ page index. published_after defaults to "2d" so ' +
             "one call covers the last two days of coverage; override " +

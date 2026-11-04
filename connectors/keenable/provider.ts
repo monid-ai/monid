@@ -42,9 +42,9 @@ export default defineProvider({
             "extracts included. Filter by site, publish date, or " +
             "index date (dates, timestamps, or relative values like " +
             "7d). query_time searches the web as it stood at a past " +
-            "moment. Fetch turns a public URL into clean Markdown and " +
-            "falls back to a live retrieve when the page is not in " +
-            "the index; an optional prompt asks a question about the " +
+            "moment. Fetch turns a public URL into clean Markdown, " +
+            "fetched live from the source by default (live: false " +
+            "serves only the indexed copy); an optional prompt asks a question about the " +
             "page instead of returning the full text. Will not " +
             "reproduce Google's exact SERP order, synthesize a " +
             "structured object across sources, or return ads, maps, " +
