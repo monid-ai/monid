@@ -316,3 +316,44 @@ Deno.test({
         assertEquals(output.query, "deno 2 workspace monorepo guide");
     },
 });
+
+Deno.test("keenable search binding keeps each time filter's own description", async () => {
+    for (
+        const id of [
+            "keenable#v1/search",
+            "keenable#v1/search-news",
+            "keenable#v1/search-as-of",
+        ]
+    ) {
+        const unit = await testSealedUnit(id);
+        const properties = unit.doc.input.schema.body?.properties as Record<
+            string,
+            { description?: string }
+        >;
+        assert(
+            properties.query_time.description?.includes("as it stood"),
+            `${id} query_time description`,
+        );
+        assert(
+            properties.query_time.description?.includes("Unix epoch"),
+            `${id} query_time keeps QUERY_TIME_FORMAT`,
+        );
+        for (
+            const field of [
+                "acquired_after",
+                "acquired_before",
+                "published_after",
+                "published_before",
+            ]
+        ) {
+            assert(
+                !properties[field].description?.includes("as it stood"),
+                `${id} ${field} is not the query_time description`,
+            );
+        }
+        assert(
+            properties.acquired_after.description?.includes("acquired"),
+            `${id} acquired_after description`,
+        );
+    }
+});

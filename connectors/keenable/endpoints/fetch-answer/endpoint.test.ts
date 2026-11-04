@@ -1,7 +1,12 @@
 import { assertEquals, assertRejects } from "@std/assert";
 import type { Json } from "@shared/core";
 import { fromFileUrl } from "@std/path";
-import { loadFixture, runEndpoint, testSealedUnit } from "@shared/testing";
+import {
+    liveSkip,
+    loadFixture,
+    runEndpoint,
+    testSealedUnit,
+} from "@shared/testing";
 
 const fixturesDir = fromFileUrl(new URL("../../fixtures/", import.meta.url));
 
@@ -58,4 +63,55 @@ Deno.test("keenable#v1/fetch-answer: prompt required; whitespace rejected", asyn
             JSON.stringify(queryParams),
         );
     }
+});
+
+Deno.test("keenable#v1/fetch-answer provider error (recorded 401): data, zero usage", async () => {
+    const unit = await testSealedUnit("keenable#v1/fetch-answer");
+    const fixture = await loadFixture(
+        `${fixturesDir}unauthorized-fetch-answer.json`,
+    );
+    const result = await runEndpoint({
+        unit,
+        input: {
+            queryParams: {
+                url: "https://example.com",
+                prompt: "list every pricing tier",
+            },
+        },
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(result.httpStatus, 401);
+    assertEquals(result.isProviderError, true);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
+    assertEquals(result.output, {
+        error: "Authentication failed",
+        message: "Malformed API key",
+    });
+});
+
+Deno.test({
+    name: "keenable#v1/fetch-answer live (gated on KEENABLE_API_KEY)",
+    ignore: liveSkip("keenable"),
+    fn: async () => {
+        const unit = await testSealedUnit("keenable#v1/fetch-answer");
+        const result = await runEndpoint({
+            unit,
+            input: {
+                queryParams: {
+                    url: "https://example.com",
+                    prompt: "what is this page for",
+                },
+            },
+            mode: "live",
+        });
+        assertEquals(
+            result.isProviderError,
+            false,
+            JSON.stringify(result.output),
+        );
+        assertEquals(Object.keys(result.usage.evidence).sort(), ["CALL"]);
+        const output = result.output as Record<string, unknown>;
+        assertEquals(typeof output.content, "string");
+    },
 });
