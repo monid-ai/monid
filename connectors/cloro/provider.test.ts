@@ -118,17 +118,11 @@ const cards: {
         credits: 7,
         evidence: { call: 1 },
     },
-    ...["gemini", "perplexity"].map((engine) => ({
-        id: `cloro#monitor/${engine}`,
+    {
+        id: "cloro#monitor/gemini",
         body: { prompt: "p", country: "US", state: "NY" },
         credits: 8,
         evidence: { call: 1, state_targeting: 1 },
-    })),
-    {
-        id: "cloro#monitor/copilot",
-        body: { prompt: "p", country: "US" },
-        credits: 7,
-        evidence: { call: 1 },
     },
     {
         id: "cloro#monitor/google",
@@ -291,14 +285,14 @@ Deno.test("cloro input: localization is required before the wire", async () => {
 // Run mode by measured latency (2026-09-22 drill, 2026-09-23 run): the
 // fast engines stay sync, the slow assistants run async on monid's side.
 const SYNC = ["google", "google/news", "aimode"];
-const ASYNC = ["chatgpt", "gemini", "copilot", "perplexity"];
+const ASYNC = ["chatgpt", "gemini"];
 
 Deno.test("cloro: every endpoint shares the meter relay, the claim and the error digest", async () => {
     const bundle = await testBundle();
     const docs = Object.values(bundle.endpoints).filter((doc) =>
         doc.id.startsWith("cloro#")
     );
-    assertEquals(docs.length, 7);
+    assertEquals(docs.length, 5);
     const keys = (pick: (doc: typeof docs[number]) => unknown) =>
         new Set(docs.map(pick)).size;
     const doc = (engine: string) => bundle.endpoints[`cloro#monitor/${engine}`];
@@ -316,16 +310,6 @@ Deno.test("cloro: every endpoint shares the meter relay, the claim and the error
     }
     assertEquals(keys((doc) => doc.usage.consolidate?.$fn.key), 1);
     assertEquals(keys((doc) => doc.output?.fromError?.$fn.key), 1);
-    // the three assistant engines without add-ons intern to one estimate
-    const plain = docs.filter((doc) =>
-        ["gemini", "copilot", "perplexity"].some((engine) =>
-            doc.id === `cloro#monitor/${engine}`
-        )
-    );
-    assertEquals(
-        new Set(plain.map((doc) => doc.usage.estimate.$fn.key)).size,
-        1,
-    );
 });
 
 Deno.test("cloro run mode: an async engine is acknowledged, then one poll makes the call", async () => {

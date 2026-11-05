@@ -3,13 +3,13 @@ import { z } from "zod";
 
 /**
  * cloro (cloro.dev) — structured scrapes of AI assistants and Google
- * search surfaces. Seven JSON endpoints on ONE wire surface:
+ * search surfaces. Five JSON endpoints on ONE wire surface:
  * `POST https://api.cloro.dev/v1/monitor/<engine>`, Bearer auth. Each
  * answers `{ success: true, result: {...} }`.
  *
  * RUN MODE BY MEASURED LATENCY. Google Search, Google News and AI Mode
  * answer in seconds and run sync: the lifecycle start below makes the call.
- * ChatGPT, Gemini, Copilot and Perplexity take 30 s to minutes and run
+ * ChatGPT and Gemini take 30 s to minutes and run
  * async on monid's side: their endpoint start acknowledges the run, and
  * the first poll makes the same single call with this relay.
  *
@@ -34,7 +34,7 @@ export default defineProvider({
     meta: {
         displayName: "cloro",
         summary:
-            "Structured answers from ChatGPT, Gemini, Perplexity, Copilot, Google AI Mode and Google Search.",
+            "Structured answers from ChatGPT, Gemini, Google AI Mode and Google Search.",
         description: "cloro runs a prompt or a query on a real AI assistant " +
             "or Google surface, in a chosen country, and returns the answer " +
             "as structured JSON: the answer text, the cited sources, " +
@@ -52,7 +52,7 @@ export default defineProvider({
             "on. The X-Credits-Charged response header settles the bill; " +
             "without it, settlement falls back to the published rate card.",
             "Google Search, Google News and AI Mode answer in seconds and " +
-            "run synchronously. ChatGPT, Gemini, Copilot and Perplexity " +
+            "run synchronously. ChatGPT and Gemini " +
             "take 30 seconds to a few minutes and run asynchronously: the " +
             "run is acknowledged at once and completes on the first poll.",
         ],
