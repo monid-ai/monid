@@ -1,0 +1,127 @@
+{
+    "name": "instant-ok",
+    "description": "A real instant check recorded with Pressfront's public demo key, which answers for its one INVENTED trace (@quillandclaw.bsky.social: every account in it is made up, no real person). Long strings trimmed. The url is literal: the engine substitutes {handle} before the call.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://pressfront.co/api/v1/instant/quillandclaw.bsky.social"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "handle": "@quillandclaw.bsky.social",
+                    "platform": "bluesky",
+                    "asOf": "2026-10-23T14:00:00.000Z",
+                    "ageMinutes": null,
+                    "headline": "Of 187 accounts: 135 critical and 17 supportive of @quillandclaw.bsky.social.",
+                    "subline": "24 stayed neutral, 11 were not read.",
+                    "counts": {
+                        "critical": 135,
+                        "stronglyCritical": null,
+                        "mocking": null,
+                        "disagreeing": null,
+                        "criticalToneNotRead": null,
+                        "supportive": 17,
+                        "neutral": 24,
+                        "notRead": 11
+                    },
+                    "sides": [
+                        {
+                            "side": "against",
+                            "label": "critical",
+                            "count": 135,
+                            "share": 0.767,
+                            "quote": {
+                                "text": "This is the person who lectured all of us about honesty. Read the replies and decide for yourself.",
+                                "url": "https://bsky.app/profile/gravelmouth.bsky.social/post/3fakesf3bn2",
+                                "at": "2026-10-22T01:40:00.000Z",
+                                "account": "@gravelmouth.bsky.social",
+                                "name": "Gravel Mouth",
+                                "followers": 40200,
+                                "profile": "https://bsky.app/profile/gravelmouth.bsky.social"
+                            }
+                        },
+                        {
+                            "side": "neutral",
+                            "label": "neutral",
+                            "count": 24,
+                            "share": 0.136,
+                            "quote": null
+                        },
+                        {
+                            "side": "with",
+                            "label": "supportive",
+                            "count": 17,
+                            "share": 0.097,
+                            "quote": null
+                        }
+                    ],
+                    "started": {
+                        "kind": "their_post",
+                        "url": "https://bsky.app/profile/quillandclaw.bsky.social/post/3root0",
+                        "at": "2026-10-21T20:12:00.000Z",
+                        "text": "I wrote up what actually happened with the review, dates and all. It's long. Read it before you decide what you think.",
+                        "replies": 388,
+                        "quotes": 97,
+                        "likes": 412,
+                        "reposts": 61,
+                        "accountsAtIt": 509
+                    },
+                    "trigger": {
+                        "handle": "@gravelmouth.bsky.social",
+                        "platform": "bluesky",
+                        "name": "Gravel Mouth",
+                        "followers": 40200,
+                        "profile": "https://bsky.app/profile/gravelmouth.bsky.social",
+                        "url": "https://bsky.app/profile/gravelmouth.bsky.social/post/3fakesf3bn2",
+                        "at": "2026-10-22T01:40:00.000Z",
+                        "text": "This is the person who lectured all of us about honesty. Read the replies and decide for yourself.",
+                        "type": "quote",
+                        "arrivedAfter": 54,
+                        "arrivedBefore": 4,
+                        "minutes": 40,
+                        "basis": "linked"
+                    },
+                    "carriers": [],
+                    "claims": [
+                        {
+                            "text": "the dates don't line up",
+                            "accounts": 20,
+                            "handles": []
+                        },
+                        {
+                            "text": "changed the story three times",
+                            "accounts": 16,
+                            "handles": []
+                        },
+                        {
+                            "text": "deleted the thread last time",
+                            "accounts": 16,
+                            "handles": []
+                        },
+                        {
+                            "text": "took money for the review",
+                            "accounts": 15,
+                            "handles": []
+                        },
+                        {
+                            "text": "blocked people asking questions",
+                            "accounts": 12,
+                            "handles": []
+                        }
+                    ],
+                    "pace": {
+                        "state": "slowing",
+                        "lastHour": 0,
+                        "previousHour": null,
+                        "lastDay": null,
+                        "line": "0 accounts arrived in the last hour."
+                    },
+                    "brief": "# Trace: @quillandclaw.bsky.social\n\nSource: Pressfront Trace, https://pressfront.co/developers#try.\nWindow: 2026-10-21T14:00:00.000Z to 2026-10-23T14:00:00.000Z.\nSubject: @quillandclaw.bsky.social (Quill & Claw) on bluesky, 12,400 followers.\n\n## What happened\nOf 187 accounts: 135 critical and 17 supportive of @quillandclaw.bsky.social. 24 stayed neutral, 11 were not read.\n- critical (135): \"This is the person who lectured all of us about honesty. Read the replies and decide for yourself.\" [1] by @gravelmouth.bsky.social (40,200 followers)\n\n## How it started\nIt started with the subject's post at 2026-10-21T20:12:00.000Z: \"I wrote up what actually happened with the review, dates and all. It's long. Read it before you decide what you think.\" [2] It drew 388 replies and 97 quotes.\nFirst critical post: @tinfoilteapot.bsky.social (1,930 followers) at 2026-10-21T20:23:00.000Z: \"you deleted the thread last time too. we remember.\" [3]\nJump: after @gravelmouth.bsky.social (40,200 followers) quoted the subject at 2026-10-22T01:40:00.000Z, 54 accounts arrived in the next 40 minutes (4 in the same stretch before), replying to their post. Their post: \"This is the person who lectured all of us about honesty. Read the replies and decide for yourself.\" [1]\nBusiest stretch: 71 accounts in 40 minutes from 2026-10-22T01:43:00.000Z, 71 of them under 30 days old.\n\n## What the critical posts claim (summarized by a model)\n- \"the dates don't line up\": 20 accounts\n...",
+                    "demo": true
+                }
+            }
+        }
+    ]
+}

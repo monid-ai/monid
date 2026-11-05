@@ -1,0 +1,21 @@
+{
+    "name": "instant-none",
+    "description": "A real 404 recorded with the demo key: no trace of the name in the window. Vendor non-2xx is DATA, so the engine zero-bills it.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://pressfront.co/api/v1/instant/someoneelse.bsky.social"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": "no_recent_trace",
+                    "handle": "@someoneelse.bsky.social",
+                    "demo": true,
+                    "message": "The demo key answers the instant check for @quillandclaw.bsky.social only."
+                }
+            }
+        }
+    ]
+}
