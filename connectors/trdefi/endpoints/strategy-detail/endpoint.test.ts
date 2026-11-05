@@ -43,7 +43,9 @@ Deno.test("trdefi#api/strategy-detail input gate: empty hash rejects, the near-t
             input: { queryParams: { hash: "" } },
             mode: "replay",
             fixture,
-        })
+        }),
+        Error,
+        "INVALID_INPUT",
     );
     const twin = await runEndpoint({
         unit,

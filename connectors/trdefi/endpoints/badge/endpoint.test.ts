@@ -41,7 +41,9 @@ Deno.test("trdefi#api/badge input gate: empty metric rejects, the near-twin pass
             input: { queryParams: { metric: "" } },
             mode: "replay",
             fixture,
-        })
+        }),
+        Error,
+        "INVALID_INPUT",
     );
     const twin = await runEndpoint({
         unit,

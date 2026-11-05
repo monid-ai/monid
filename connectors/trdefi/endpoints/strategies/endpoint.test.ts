@@ -43,7 +43,9 @@ Deno.test("trdefi#api/strategies input gate: limit 0 rejects, the near-twin pass
             input: { queryParams: { ...INPUT, limit: 0 } },
             mode: "replay",
             fixture,
-        })
+        }),
+        Error,
+        "INVALID_INPUT",
     );
     const twin = await runEndpoint({
         unit,

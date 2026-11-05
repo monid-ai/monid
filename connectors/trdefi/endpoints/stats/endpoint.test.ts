@@ -59,7 +59,9 @@ Deno.test("trdefi#api/stats input gate: an unknown query key rejects, the empty 
             input: { queryParams: { bogus: 1 } },
             mode: "replay",
             fixture,
-        })
+        }),
+        Error,
+        "INVALID_INPUT",
     );
     const twin = await runEndpoint({
         unit,
