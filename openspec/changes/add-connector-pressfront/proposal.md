@@ -22,9 +22,12 @@ for the one slow operation. Nothing about it needs a new engine capability.
   US dollars, a provider-level `output.fromError` for `{error, message}`. No
   vendor meter rides the responses, so there is no consolidate: the pinned
   PER_CALL rates are the bill.
-  - `GET /instant/{handle}` (sync, PER_CALL $0.49): the newest trace of the
-    name from the last 24 h, in about a second. 404 `no_recent_trace` when
-    there is none (zero-billed).
+  - `GET /instant/{handle}` (async, PER_CALL $0.49): never empty. Traced in
+    the last 24 h = 200 in about a second. Not traced = Pressfront searches
+    the name now (about a minute) and answers 202 `searching` until done.
+    `lifecycle.start` sends the call with `wait=20`; a 202 parks RUNNING and
+    `lifecycle.poll` repeats the same call until the 200. Only the 200 bills;
+    202s, a 502 `search_failed` and other non-2xx are zero-billed.
   - `POST /traces` (async, PER_CALL $4.99): a fresh trace, about 4 to 7
     minutes. `lifecycle.start` submits; `lifecycle.poll` long-polls
     `GET /traces/{id}?wait=20` and, on done, reads the story and the brief

@@ -5,7 +5,7 @@
         {
             "req": {
                 "method": "GET",
-                "url": "https://pressfront.co/api/v1/instant/someoneelse.bsky.social"
+                "url": "https://pressfront.co/api/v1/instant/someoneelse.bsky.social?wait=20"
             },
             "res": {
                 "status": 404,

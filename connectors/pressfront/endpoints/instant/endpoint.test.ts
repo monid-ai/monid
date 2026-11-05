@@ -28,7 +28,20 @@ Deno.test("pressfront#instant/{handle}: answers from the newest trace, bills $0.
     );
 });
 
-Deno.test("pressfront#instant/{handle}: no recent trace is a 404, zero-billed", async () => {
+Deno.test("pressfront#instant/{handle}: not traced today, searches, polls to the answer, bills $0.49", async () => {
+    const unit = await testSealedUnit("pressfront#instant/{handle}");
+    const result = await runEndpoint({
+        unit,
+        input: { pathParams: { handle: "newname.bsky.social" } },
+        mode: "replay",
+        fixture: await loadFixture(`${chains}synthetic-instant-search.json`),
+    });
+    assertEquals(result.httpStatus, 200);
+    assertEquals(result.usage.credits, { default: 0.49 });
+    assertEquals((result.output as Record<string, unknown>).depth, "quick");
+});
+
+Deno.test("pressfront#instant/{handle}: a 404 (the demo key's other names) is zero-billed", async () => {
     const unit = await testSealedUnit("pressfront#instant/{handle}");
     const result = await runEndpoint({
         unit,

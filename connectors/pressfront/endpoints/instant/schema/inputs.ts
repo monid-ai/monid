@@ -12,6 +12,6 @@ export const zInstantPathParams = z.object({
 export const zInstantQueryParams = z.object({
     maxAgeHours: z.number().int().min(1).max(72).optional().describe(
         "How old the newest trace may be, 1 to 72 hours. Pressfront's " +
-            "default is 24.",
+            "default is 24. Older or none: Pressfront searches the name now.",
     ),
 });

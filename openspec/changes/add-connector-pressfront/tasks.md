@@ -20,6 +20,6 @@
 ## 3. Tests and record
 
 - [x] 3.1 Real demo-key recordings (invented trace) + two synthetic chains
-- [x] 3.2 Replay tests: answered, zero-billed 404, done, failed, read, free
-      status; live instant test with the demo key
+- [x] 3.2 Replay tests: answered, searched then answered, zero-billed 404,
+      done, failed, read, free status; live instant test with the demo key
 - [x] 3.3 `ids.lock.json` updated (`deno task ids:check --update`)

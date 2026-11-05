@@ -17,14 +17,23 @@ NOT declare a lifecycle.
 
 ### Requirement: Instant check is a flat $0.49 that bills only an answer
 `pressfront#instant/{handle}` SHALL be `GET /instant/{handle}` with a
-`maxAgeHours` query parameter (1 to 72), priced PER_CALL 0.49.
+`maxAgeHours` query parameter (1 to 72), priced PER_CALL 0.49. It SHALL be
+async: `lifecycle.start` sends the call with `wait=20`; a 202 `searching`
+parks RUNNING with the call's URL, and `lifecycle.poll` repeats that URL
+until a non-202. Transient reads (429, 503, 504) SHALL keep it RUNNING.
 
 #### Scenario: Answered
 - **WHEN** the vendor answers 200 with a headline and a brief
 - **THEN** usage credits are `{default: 0.49}`
 
-#### Scenario: No recent trace
-- **WHEN** the vendor answers 404 `no_recent_trace`
+#### Scenario: Not traced today
+- **WHEN** the vendor answers 202 `searching`, then 202, then 200
+- **THEN** the run settles 200 with `depth` `quick` and usage credits
+  `{default: 0.49}`
+
+#### Scenario: Not an answer
+- **WHEN** the vendor answers 404 (the demo key's other names) or 502
+  `search_failed`
 - **THEN** usage is `{credits: {}, evidence: {}}`
 
 ### Requirement: Full trace is an async job billed once, on success
