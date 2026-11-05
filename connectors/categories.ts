@@ -265,6 +265,12 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "recordings.",
     },
     {
+        id: "agentic-email",
+        displayName: "Agentic Email",
+        description:
+            "Create and manage workspace-owned email inboxes for agents.",
+    },
+    {
         id: "sms",
         displayName: "SMS",
         description: "Send and receive SMS from owned phone numbers.",

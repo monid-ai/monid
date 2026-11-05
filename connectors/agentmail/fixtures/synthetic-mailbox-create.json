@@ -1,0 +1,27 @@
+{
+    "name": "synthetic-mailbox-create",
+    "description": "Synthetic native mailbox create response; the native inbox ID differs from the public address. Account/pod/client metadata must not leak through the success projection. Not a live recording.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/v0/inboxes"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "inbox_id": "mbx-1",
+                    "email": "synthetic-inbox@agentmail.to",
+                    "display_name": "Synthetic Inbox",
+                    "created_at": "2026-10-27T00:00:00Z",
+                    "updated_at": "2026-10-27T00:00:00Z",
+                    "pod_id": "synthetic-private-pod",
+                    "client_id": "synthetic-private-client",
+                    "metadata": {
+                        "internal": "not-public"
+                    }
+                }
+            }
+        }
+    ]
+}

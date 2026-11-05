@@ -180,7 +180,11 @@ charges):
   CUMULATIVE meter over a window → `{consumes, vendorConsumes?}`; hold ticks,
   the boundary settle, and the post-teardown tail all read the same meter. Host
   policy (charge/release leads, buffers, hold cadence) lives host-side, never in
-  defs.
+  defs. The host passes `window: {startIso, endIso, periodEndIso}`: start is the
+  usage-period start; end is the current reading cutoff; periodEndIso is the
+  full usage period's end (`usagePeriod.periodEnd.toISOString()`). A release
+  tail may extend beyond that end. Resource hooks can convert explicit UTC ISO
+  values with `utils.time.parseIso`, without a wall-clock capability.
 
 What USERS do to a resource is ordinary ENDPOINTS, bound via ONE purpose-keyed
 `resources:` block on the endpoint def — every purpose an array:

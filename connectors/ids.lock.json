@@ -1,5 +1,10 @@
 {
     "endpoints": [
+        "agentmail#create-inboxes",
+        "agentmail#inboxes/{id}",
+        "agentmail#list-inboxes",
+        "agentmail#release-inboxes/{id}",
+        "agentmail#update-inboxes/{id}",
         "ahrefs#batch-analysis/batch-analysis",
         "ahrefs#keywords-explorer/matching-terms",
         "ahrefs#keywords-explorer/overview",
@@ -656,6 +661,7 @@
         "tinyfish#search"
     ],
     "resources": [
+        "agentmail/mailbox",
         "saperly/phone-number"
     ]
 }
