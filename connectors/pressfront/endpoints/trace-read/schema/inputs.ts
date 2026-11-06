@@ -6,6 +6,7 @@ export const zTraceReadPathParams = z.object({
         "The trace id, returned as `id` by pressfront#traces.",
     ),
     part: z.enum([
+        "case",
         "brief",
         "story",
         "accounts",
@@ -16,11 +17,15 @@ export const zTraceReadPathParams = z.object({
         "sites",
         "evidence",
     ]).describe(
-        "brief = Markdown facts with sources; story = what happened as data; " +
+        "case = the answer in four stops (who said it first, how it spread, " +
+            "who they are, whether it happened before), for a name or a story " +
+            "trace; brief = Markdown facts with sources (name or story); " +
+            "story = what happened as data; " +
             "accounts / posts = every one, filterable and paged; timeline = " +
             "arrivals over time; groups = who moved together; who = where X " +
             "says accounts are based, bios, big and press accounts, AI " +
-            "answers; sites = other sites; evidence = saved posts and threats.",
+            "answers; sites = other sites; evidence = saved posts and threats. " +
+            "A story (rumor) trace has case and brief only.",
     ),
 });
 

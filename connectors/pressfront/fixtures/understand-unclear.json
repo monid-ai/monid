@@ -1,0 +1,19 @@
+{
+    "name": "understand-unclear",
+    "description": "SYNTHETIC: POST /understand with nothing to look up: the API's exact 422 unclear body. Zero-billed.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://pressfront.co/api/v1/understand"
+            },
+            "res": {
+                "status": 422,
+                "body": {
+                    "error": "unclear",
+                    "message": "We could not tell what to look up. Name the person (an @handle) or the story people are passing around, in a few words."
+                }
+            }
+        }
+    ]
+}

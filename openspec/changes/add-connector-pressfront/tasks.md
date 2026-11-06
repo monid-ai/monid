@@ -23,3 +23,16 @@
 - [x] 3.2 Replay tests: answered, searched then answered, zero-billed 404,
       done, failed, read, free status; live instant test with the demo key
 - [x] 3.3 `ids.lock.json` updated (`deno task ids:check --update`)
+
+## 4. Stories, plain words, the case card (2026-11-06)
+
+- [x] 4.1 `pressfront#traces` takes exactly one of name / claim / text
+      (+ files); settles `case`; skips `story` on a story trace
+- [x] 4.2 `pressfront#understand` PER_CALL 0.05 (sync)
+- [x] 4.3 `case` added to `pressfront#traces/{id}/{part}`
+- [x] 4.4 Fixtures from Pressfront's own API code (case-target, case-rumor,
+      understand-ok, understand-unclear, synthetic-trace-rumor-done); replay
+      tests: name done with case, text story done, exactly-one gate, both
+      case reads, understood, zero-billed unclear, text required
+- [x] 4.5 `ids.lock.json` gains `pressfront#understand`
+- [ ] 4.6 Re-record `case-target` with the demo key once `/case` is live

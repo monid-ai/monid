@@ -530,6 +530,7 @@
         "pressfront#traces",
         "pressfront#traces/{id}",
         "pressfront#traces/{id}/{part}",
+        "pressfront#understand",
         "saperly#call-recordings",
         "saperly#call-transcripts",
         "saperly#get-calls",

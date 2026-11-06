@@ -36,17 +36,45 @@ until a non-202. Transient reads (429, 503, 504) SHALL keep it RUNNING.
   `search_failed`
 - **THEN** usage is `{credits: {}, evidence: {}}`
 
-### Requirement: Full trace is an async job billed once, on success
-`pressfront#traces` SHALL submit `POST /traces {name}`, park RUNNING with the
-returned `id`, poll `GET /traces/{id}?wait=20` until the status is `done` or
-`thin`, then read `/traces/{id}/story` and `/traces/{id}/brief?format=json`
-and settle the status body merged with `{id, story, brief}`, priced PER_CALL
-4.99. Transient status reads (429, 5xx) SHALL keep the run RUNNING.
+### Requirement: Understanding a situation is a flat $0.05 that bills only an answer
+`pressfront#understand` SHALL be `POST /understand` with a body of `text`
+(2 to 6,000 characters, required) and optional `files` (1 to 5 of
+`{mediaType, data}`, png / jpeg / webp / gif / pdf, base64), priced PER_CALL
+0.05, synchronous.
 
-#### Scenario: Done
+#### Scenario: Understood
+- **WHEN** the vendor answers 200 `{understood: {kind, query, goal, ...}}`
+- **THEN** usage credits are `{default: 0.05}`
+
+#### Scenario: Nothing to look up
+- **WHEN** the vendor answers 422 `unclear`
+- **THEN** usage is `{credits: {}, evidence: {}}`
+
+### Requirement: Full trace is an async job billed once, on success
+`pressfront#traces` SHALL take exactly one of `{name}`, `{claim}` or
+`{text, files?}` (a union of closed objects: none, or two together, is
+INVALID_INPUT), submit `POST /traces`, park RUNNING with the returned `id`,
+poll `GET /traces/{id}?wait=20` until the status is `done` or `thin`, then
+read `/traces/{id}/case`, `/traces/{id}/story` (skipped when the status says
+`kind` `origin`: a story trace has no story tab) and
+`/traces/{id}/brief?format=json`, and settle the status body merged with
+`{id, case, story, brief}` (a read that is not a 200 settles as null), priced
+PER_CALL 4.99. Transient status reads (429, 5xx) SHALL keep the run RUNNING.
+
+#### Scenario: Done (a name)
 - **WHEN** the poll sees `running`, then `done`
-- **THEN** the run settles 200 with the id, the story and the brief, and
+- **THEN** the run settles 200 with the id, the case, the story and the
+  brief, and usage credits `{default: 4.99}`
+
+#### Scenario: Done (a story, from plain words)
+- **WHEN** `{text}` is submitted and the poll sees `done` with `kind`
+  `origin`
+- **THEN** the run settles 200 with the case and the brief, `story` null, and
   usage credits `{default: 4.99}`
+
+#### Scenario: Not exactly one way in
+- **WHEN** the body is empty, or has two of name, claim and text
+- **THEN** the run is refused as INVALID_INPUT before any call
 
 #### Scenario: Failed
 - **WHEN** the poll sees `failed`
@@ -55,9 +83,14 @@ and settle the status body merged with `{id, story, brief}`, priced PER_CALL
 
 ### Requirement: Reading a trace
 `pressfront#traces/{id}` SHALL be FREE. `pressfront#traces/{id}/{part}` SHALL
-be PER_CALL 0.05 with `part` one of brief, story, accounts, posts, timeline,
-groups, who, sites, evidence.
+be PER_CALL 0.05 with `part` one of case, brief, story, accounts, posts,
+timeline, groups, who, sites, evidence.
 
 #### Scenario: A part read
 - **WHEN** `accounts` is read with `limit` 2
 - **THEN** two accounts come back and usage credits are `{default: 0.05}`
+
+#### Scenario: The case card
+- **WHEN** `case` is read on a name trace or a story trace
+- **THEN** four stops (Started, Spread, Who, Before?) come back with a
+  headline and usage credits are `{default: 0.05}`

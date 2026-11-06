@@ -1,0 +1,43 @@
+{
+    "name": "understand-ok",
+    "description": "SYNTHETIC: POST /understand. The body is what the API's own reader (trace-understand.ts understand()) returns for this text with the model's reply stubbed; invented names, no real person.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://pressfront.co/api/v1/understand"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "understood": {
+                        "kind": "claim",
+                        "goal": "origin",
+                        "query": "Lara went partying after the concert was cancelled",
+                        "handle": null,
+                        "claim": "Lara went partying after the concert was cancelled",
+                        "people": [
+                            "Lara"
+                        ],
+                        "sides": [
+                            "Manon fans"
+                        ],
+                        "lines": [
+                            "Who first said Lara went partying after the concert was cancelled",
+                            "Who is spreading it"
+                        ],
+                        "missing": null,
+                        "from": "model",
+                        "seen": [],
+                        "seeds": [],
+                        "also": [],
+                        "period": {
+                            "days": null,
+                            "words": null
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}
