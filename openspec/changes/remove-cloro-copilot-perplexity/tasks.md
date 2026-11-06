@@ -16,4 +16,4 @@
 
 - [x] 3.1 `provider.test.ts`: rate-card cases, async list, doc count
 - [x] 3.2 `ids.lock.json`: remove the two cloro identities (design D2)
-- [x] 3.3 `deno check` and `deno test connectors/cloro` pass
+- [x] 3.3 `deno check` and `deno test -A connectors/cloro` pass
