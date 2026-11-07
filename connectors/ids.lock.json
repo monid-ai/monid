@@ -145,6 +145,8 @@
         "cloro#monitor/google",
         "cloro#monitor/google/news",
         "cloro#monitor/perplexity",
+        "companyregistryapi#v1/companies/{company_id}",
+        "companyregistryapi#v1/search",
         "contactout#v1/company/search",
         "contactout#v1/domain/enrich",
         "contactout#v1/email/enrich/personal-email",

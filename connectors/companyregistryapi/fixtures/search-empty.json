@@ -1,0 +1,23 @@
+{
+    "name": "search-empty",
+    "description": "Recorded 2026-11-07: GET /v1/search with no match. HTTP 200 with data [] and next_cursor null; empty is not proof of absence. Free: zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?q=zzqxvw"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "object": "list",
+                    "query": "zzqxvw",
+                    "address_countries": [],
+                    "data": [],
+                    "next_cursor": null,
+                    "attribution": "Powered by Coragrid"
+                }
+            }
+        }
+    ]
+}
