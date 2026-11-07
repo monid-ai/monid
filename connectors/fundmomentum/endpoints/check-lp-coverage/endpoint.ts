@@ -17,7 +17,7 @@ export default defineEndpoint({
         displayName: "Fund Momentum Check LP Coverage",
         summary: "Free LP-coverage check by country and LP type — " +
             "counts only, never a name.",
-        description: "Check how many of Fund Momentum's 700+ disclosed " +
+        description: "Check how many of Fund Momentum's 600+ disclosed " +
             "limited partners match a country and LP type, before " +
             "deciding whether to buy LP Radar. Returns counts only — " +
             "matched LPs, how many back emerging managers, and how " +

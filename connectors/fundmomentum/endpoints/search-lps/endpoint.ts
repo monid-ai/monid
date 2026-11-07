@@ -2,7 +2,7 @@ import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zFundmomentumSearchLpsArgs } from "./schema/inputs.ts";
 
 /**
- * `search_lps` — search Fund Momentum's 700+ disclosed limited
+ * `search_lps` — search Fund Momentum's 600+ disclosed limited
  * partners by country, LP type, and whether they back emerging
  * managers. Call `check_lp_coverage` first (free, unmetered) to see
  * whether a filter combination is worth paying for before calling this.
@@ -61,10 +61,10 @@ import { zFundmomentumSearchLpsArgs } from "./schema/inputs.ts";
 export default defineEndpoint({
     meta: {
         displayName: "Fund Momentum Search LPs",
-        summary: "Search Fund Momentum's 700+ disclosed limited " +
+        summary: "Search Fund Momentum's 600+ disclosed limited " +
             "partners by country, LP type, and emerging-manager " +
             "backing.",
-        description: "Search Fund Momentum's index of 700+ disclosed " +
+        description: "Search Fund Momentum's index of 600+ disclosed " +
             "limited partners, filtered by HQ country (full name or " +
             "ISO code), LP type, and whether the LP backs emerging " +
             "managers. Returns each matching LP's name, type, HQ " +

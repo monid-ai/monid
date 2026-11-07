@@ -87,7 +87,7 @@ export default defineEndpoint({
         displayName: "Fund Momentum Search Funds",
         summary: "Search actively-deploying VC funds by stage, " +
             "country, industry and recent closes.",
-        description: "Search Fund Momentum's index of 1,100+ VC funds " +
+        description: "Search Fund Momentum's index of 950+ VC funds " +
             "that have raised capital since September 2024, filtered " +
             "by funding stage, HQ country (spelled out, not an ISO " +
             "code), industry focus, and a 'closed on or after' date. " +

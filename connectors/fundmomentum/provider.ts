@@ -3,7 +3,7 @@ import { z } from "zod";
 
 /**
  * Fund Momentum (fundmomentum.vc) — agentic fundraising intelligence:
- * 1,100+ actively-deploying VC funds and 700+ disclosed LPs, plus GP
+ * 950+ actively-deploying VC funds and 600+ disclosed LPs, plus GP
  * investor-signal profiles and AI-powered startup-to-fund matching.
  *
  * WIRE: every tool is JSON-RPC 2.0 over ONE endpoint, `POST /_api/mcp`
@@ -121,13 +121,13 @@ export default defineProvider({
             "VC funds and disclosed LPs for founders and emerging " +
             "managers.",
         description: "Fundraising intelligence for founders and " +
-            "emerging fund managers — search 1,100+ VC funds that have " +
+            "emerging fund managers — search 950+ VC funds that have " +
             "raised capital since September 2024 by stage, country, and " +
             "industry; pull a full fund profile with GP background and " +
             "a provenance block (source, last-checked date, " +
             "confidence); poll only what changed since a timestamp " +
             "instead of re-searching; check LP coverage by country " +
-            "and LP type across 700+ disclosed limited partners " +
+            "and LP type across 600+ disclosed limited partners " +
             "(counts only); and search those LPs directly, billed per " +
             "row returned, once coverage looks worth it. Two more " +
             "tools are always free and never draw a credit: check your " +
