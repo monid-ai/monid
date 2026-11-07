@@ -25,9 +25,18 @@ selects it gets an error for every call.
   now the only one.
 - **connectors/ids.lock.json**: remove the two cloro identities by hand (see
   design.md).
+- **connectors/cloro/endpoints/bing-aimode**: add `cloro#monitor/bing/aimode`
+  (`POST /v1/monitor/bing/aimode`). It returns Bing AI Mode's answer text,
+  sources and citation pills. The connector then has 6 endpoints. The body
+  is `prompt` (at most 3,500 characters), `country`, optional `state` and
+  optional `include.markdown` / `include.html`. The card is 6 credits, plus
+  2 when `state` is set. cloro states 20–45 s per sync call, so it runs
+  async on monid's side, as Gemini does. `ids.lock.json` gets its id by
+  hand (design D2).
 
 ## Impact
 
 - Breaking for a caller that uses either id. The vendor already rejects
   those calls, so no working call stops working.
+- New endpoint `cloro#monitor/bing/aimode`. Additive.
 - No engine, schema or compiler change.

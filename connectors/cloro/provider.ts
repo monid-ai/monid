@@ -3,13 +3,13 @@ import { z } from "zod";
 
 /**
  * cloro (cloro.dev) — structured scrapes of AI assistants and Google
- * search surfaces. Five JSON endpoints on ONE wire surface:
+ * and Bing search surfaces. Six JSON endpoints on ONE wire surface:
  * `POST https://api.cloro.dev/v1/monitor/<engine>`, Bearer auth. Each
  * answers `{ success: true, result: {...} }`.
  *
  * RUN MODE BY MEASURED LATENCY. Google Search, Google News and AI Mode
  * answer in seconds and run sync: the lifecycle start below makes the call.
- * ChatGPT and Gemini take 30 s to minutes and run
+ * ChatGPT, Gemini and Bing AI Mode take 20 s to minutes and run
  * async on monid's side: their endpoint start acknowledges the run, and
  * the first poll makes the same single call with this relay.
  *
@@ -34,9 +34,9 @@ export default defineProvider({
     meta: {
         displayName: "cloro",
         summary:
-            "Structured answers from ChatGPT, Gemini, Google AI Mode and Google Search.",
+            "Structured answers from ChatGPT, Gemini, Google AI Mode, Bing AI Mode and Google Search.",
         description: "cloro runs a prompt or a query on a real AI assistant " +
-            "or Google surface, in a chosen country, and returns the answer " +
+            "or search surface, in a chosen country, and returns the answer " +
             "as structured JSON: the answer text, the cited sources, " +
             "shopping cards, brand entities and ads, or the full Google " +
             "SERP with organic results, People Also Ask and the AI " +
@@ -52,8 +52,8 @@ export default defineProvider({
             "on. The X-Credits-Charged response header settles the bill; " +
             "without it, settlement falls back to the published rate card.",
             "Google Search, Google News and AI Mode answer in seconds and " +
-            "run synchronously. ChatGPT and Gemini " +
-            "take 30 seconds to a few minutes and run asynchronously: the " +
+            "run synchronously. ChatGPT, Gemini and Bing AI Mode " +
+            "take 20 seconds to a few minutes and run asynchronously: the " +
             "run is acknowledged at once and completes on the first poll.",
         ],
     },

@@ -31,6 +31,7 @@ async function run(
 }
 
 const CHATGPT = "cloro#monitor/chatgpt";
+const BING_AIMODE = "cloro#monitor/bing/aimode";
 const CHATGPT_BODY = {
     prompt: "What is Example Corp?",
     country: "US",
@@ -190,6 +191,18 @@ const cards: {
         credits: 9,
         evidence: { call: 1, expanded_product: 3 },
     },
+    {
+        id: BING_AIMODE,
+        body: { prompt: "p", country: "DE", include: { markdown: true } },
+        credits: 6,
+        evidence: { call: 1 },
+    },
+    {
+        id: BING_AIMODE,
+        body: { prompt: "p", country: "US", state: "NY" },
+        credits: 8,
+        evidence: { call: 1, state_targeting: 1 },
+    },
 ];
 
 for (const card of cards) {
@@ -231,6 +244,14 @@ Deno.test("cloro estimates: holds match the card before the run", async () => {
         }),
         { default: 12 },
     );
+    assertEquals(
+        await estimate(BING_AIMODE, {
+            prompt: "p",
+            country: "US",
+            state: "CA",
+        }),
+        { default: 8 },
+    );
 });
 
 Deno.test("cloro input: bodies are strict, like the vendor's", async () => {
@@ -249,6 +270,21 @@ Deno.test("cloro input: bodies are strict, like the vendor's", async () => {
         Error,
         "INVALID_INPUT",
     );
+    // Bing AI Mode: no rawResponse, a 3,500-character prompt cap
+    for (
+        const body of <Record<string, Json>[]> [
+            { prompt: "p", country: "US", include: { rawResponse: true } },
+            { prompt: "p".repeat(3_501), country: "US" },
+            { prompt: "p" },
+        ]
+    ) {
+        await assertRejects(
+            () => run(BING_AIMODE, body),
+            Error,
+            "INVALID_INPUT",
+            JSON.stringify(body).slice(0, 80),
+        );
+    }
 });
 
 Deno.test("cloro input: localization is required before the wire", async () => {
@@ -285,14 +321,14 @@ Deno.test("cloro input: localization is required before the wire", async () => {
 // Run mode by measured latency (2026-09-22 drill, 2026-09-23 run): the
 // fast engines stay sync, the slow assistants run async on monid's side.
 const SYNC = ["google", "google/news", "aimode"];
-const ASYNC = ["chatgpt", "gemini"];
+const ASYNC = ["chatgpt", "gemini", "bing/aimode"];
 
 Deno.test("cloro: every endpoint shares the meter relay, the claim and the error digest", async () => {
     const bundle = await testBundle();
     const docs = Object.values(bundle.endpoints).filter((doc) =>
         doc.id.startsWith("cloro#")
     );
-    assertEquals(docs.length, 5);
+    assertEquals(docs.length, 6);
     const keys = (pick: (doc: typeof docs[number]) => unknown) =>
         new Set(docs.map(pick)).size;
     const doc = (engine: string) => bundle.endpoints[`cloro#monitor/${engine}`];
@@ -310,6 +346,11 @@ Deno.test("cloro: every endpoint shares the meter relay, the claim and the error
     }
     assertEquals(keys((doc) => doc.usage.consolidate?.$fn.key), 1);
     assertEquals(keys((doc) => doc.output?.fromError?.$fn.key), 1);
+    // the engines whose only add-on is state targeting share one estimate
+    assertEquals(
+        doc("bing/aimode").usage.estimate.$fn.key,
+        doc("gemini").usage.estimate.$fn.key,
+    );
 });
 
 Deno.test("cloro run mode: an async engine is acknowledged, then one poll makes the call", async () => {

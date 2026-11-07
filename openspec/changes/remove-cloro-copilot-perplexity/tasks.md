@@ -17,3 +17,13 @@
 - [x] 3.1 `provider.test.ts`: rate-card cases, async list, doc count
 - [x] 3.2 `ids.lock.json`: remove the two cloro identities (design D2)
 - [x] 3.3 `deno check` and `deno test -A connectors/cloro` pass
+
+## 4. Bing AI Mode
+
+- [x] 4.1 Add `endpoints/bing-aimode/` (`cloro#monitor/bing/aimode`), async
+      run, card 6 plus 2 for state
+- [x] 4.2 `provider.ts`: summary and notes name Bing AI Mode
+- [x] 4.3 `provider.test.ts`: cards, estimate, strict input, async list,
+      doc count 6, shared estimate with Gemini
+- [x] 4.4 `ids.lock.json`: add `cloro#monitor/bing/aimode` (design D2)
+- [x] 4.5 `deno check` and `deno test -A connectors/cloro` pass
