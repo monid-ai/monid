@@ -11,8 +11,9 @@
 
 ## 2. Live-fallback fetch + input hygiene
 
-- [x] 2.1 fetch `live` default true at the binding (D6); `live: false`
-      remains valid
+- [x] 2.1 fetch `live` keeps the vendor default (D6, revised
+      2026-11-07: the API reads unindexed URLs live); `live: true`
+      forces a fresh read
 - [x] 2.2 `/\S/` on query, site, date bounds, query_time, prompt (D8)
 - [x] 2.3 query_time formats documented (YYYY-MM-DD, ISO 8601,
       relative delta, Unix epoch as a string)
@@ -30,7 +31,7 @@
 
 ## 4. Fixtures + tests
 
-- [x] 4.1 Update fetch fixtures for the `live=true` default; add
+- [x] 4.1 Update fetch fixtures for the vendor `live` default; add
       indexed-only, not-in-index, news, as-of, and fetch-answer
       synthetics
 - [x] 4.2 Tests: meta/categories, whitespace rejection, default-live

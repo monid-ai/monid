@@ -33,8 +33,8 @@ export default defineProvider({
             "Search the live web and read the top pages in one call, plus clean page fetch.",
         description: "Independent web search and page fetch for agents " +
             "over Keenable's own 100B+ page index (its own crawler and " +
-            "ranking, not a Google or Bing wrapper; vendor-claimed " +
-            "sub-250ms p95). Phrase the query as a description of the " +
+            "ranking, not a Google or Bing wrapper). Phrase the " +
+            "query as a description of the " +
             "page you want. One search returns up to 50 ranked " +
             "results, each with a page-text extract of up to 10,000 " +
             "characters, so search-and-read is a single call — no " +
@@ -43,8 +43,8 @@ export default defineProvider({
             "index date (dates, timestamps, or relative values like " +
             "7d). query_time searches the web as it stood at a past " +
             "moment. Fetch turns a public URL into clean Markdown, " +
-            "fetched live from the source by default (live: false " +
-            "serves only the indexed copy); an optional prompt asks a question about the " +
+            "served from the index or read live when the page is not " +
+            "indexed (live: true always reads live); an optional prompt asks a question about the " +
             "page instead of returning the full text. Will not " +
             "reproduce Google's exact SERP order, synthesize a " +
             "structured object across sources, or return ads, maps, " +

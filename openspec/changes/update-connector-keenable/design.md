@@ -4,7 +4,17 @@ Decision record for the Keenable ranking pass. The original connector
 decisions (D1–D5) in `add-connector-keenable/design.md` still hold;
 this file records only what this change adds.
 
-## D6 — Fetch `live` defaults to true
+## D6 — Fetch `live` keeps the vendor default (revised 2026-11-07)
+
+**Revision.** The API-side follow-up below has shipped: with `live`
+omitted, Keenable serves the indexed copy and reads the page live when
+it is not indexed (checked 2026-11-07: an unindexed URL answers `200`
+without `live`). A missing URL is no longer an HTTP error, and forcing
+`live=true` only made every fetch slower (indexed ~0.25s vs live
+seconds). The binding now leaves `live` optional with no default;
+`live: true` forces a fresh read. The original reasoning is kept below.
+
+### Original (2026-11-03): Fetch `live` defaults to true
 
 Indexed fetch and live fetch cost one Keenable credit (D4, drill
 2026-09-28). The vendor default is `live=false`: a URL missing from

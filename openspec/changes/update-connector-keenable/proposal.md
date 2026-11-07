@@ -23,11 +23,11 @@ this change ships the connector half.
   Provider also lists `academic-search`. Copy names the one-call
   extract path so discover can rank Keenable for the job Exa
   currently owns.
-- **Live-fallback fetch (D6)** — `live` defaults to `true` at the
-  binding. Indexed and live cost the same credit (D4), so there is no
-  cost reason to make a miss an error. Callers set `live: false` for
-  the indexed copy only. The vendor API has no `live: "auto"` (boolean
-  only, docs 2026-11-03); the connector default is the interim.
+- **Live-fallback fetch (D6, revised 2026-11-07)** — the API now
+  serves the indexed copy and reads an unindexed URL live when `live`
+  is omitted, so the binding keeps the vendor default instead of
+  forcing `live: true`. A miss is not a provider error, and indexed
+  pages stay fast. `live: true` forces a fresh read.
 - **Input hygiene (D8)** — whitespace-only `query` / `site` / date
   bounds / `prompt` fail INVALID_INPUT via `/\S/` (a zod `.trim()` does
   not survive `z.toJSONSchema`). `query_time` formats documented

@@ -52,7 +52,7 @@ non-whitespace strings), `mode`, `snippet_max_length` (180–10000),
 `max_results` (1–50) optional; unspecified keys SHALL pass through.
 Fetch input SHALL be strict query params: `url` required (URI);
 `max_chars` (≥1), `prompt` (1–2000 non-whitespace characters)
-optional; `live` boolean defaulting to true. The keyless `/public`
+optional; `live` boolean, optional, with the vendor default. The keyless `/public`
 twins SHALL NOT be exposed.
 
 #### Scenario: Search mode is a request field
@@ -68,11 +68,12 @@ twins SHALL NOT be exposed.
   that is not a URI
 - **THEN** the run fails INVALID_INPUT
 
-#### Scenario: Fetch live defaults to true
+#### Scenario: Fetch without live keeps the vendor default
 - **WHEN** `GET /v1/fetch` is called with a URL and no `live`
-- **THEN** the request carries `live=true` and settles $0.001
+- **THEN** the request carries no `live` parameter and settles $0.001,
+  including for a URL that is not indexed
 
-#### Scenario: Indexed-only fetch is opt-in
+#### Scenario: An explicit live value is passed through
 - **WHEN** `GET /v1/fetch` is called with `live: false`
 - **THEN** the request carries `live=false` and settles $0.001
 

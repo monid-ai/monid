@@ -5,7 +5,7 @@
         {
             "req": {
                 "method": "GET",
-                "url": "{{request.url}}?url=https%3A%2F%2Fexample.com&prompt=list+every+pricing+tier&live=true"
+                "url": "{{request.url}}?url=https%3A%2F%2Fexample.com&prompt=list+every+pricing+tier"
             },
             "res": {
                 "status": 401,

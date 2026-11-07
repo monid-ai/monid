@@ -1,11 +1,11 @@
 {
     "name": "synthetic-fetch-not-indexed",
-    "description": "SYNTHETIC live-fallback fetch for a URL treated as missing from the index. The caller omitted live; the connector default sends live=true so the run succeeds instead of a provider error (design D6).",
+    "description": "SYNTHETIC live-fallback fetch for a URL treated as missing from the index. The caller omitted live and the connector sends none; the API reads an unindexed URL live by itself, so the run succeeds instead of a provider error (design D6, revised 2026-11-07).",
     "calls": [
         {
             "req": {
                 "method": "GET",
-                "url": "{{request.url}}?url=https%3A%2F%2Fexample.com%2Fnot-in-index&live=true"
+                "url": "{{request.url}}?url=https%3A%2F%2Fexample.com%2Fnot-in-index"
             },
             "res": {
                 "status": 200,

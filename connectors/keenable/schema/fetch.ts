@@ -9,30 +9,30 @@ import { z } from "zod";
  * estimate does not read (the model is PER_CALL), so it stays
  * optional. Bounds live at the binding in each endpoint.ts. `live`
  * draws one credit like an indexed fetch (MCP `_meta["keenable/usage"]`,
- * drill 2026-09-28; design D4). The connector default for `live` is
- * true (design D6) — vendor default remains false; the binding
- * overrides it so a URL missing from the index is fetched from the
- * source instead of becoming a provider error.
+ * drill 2026-09-28; design D4). `live` is left to the vendor default
+ * (design D6, revised 2026-11-07): an omitted `live` serves the
+ * indexed copy and reads the page live when it is not indexed, so a
+ * URL missing from the index is not a provider error.
  */
 export const zKeenableFetchParams = z.object({
     url: z.url({ protocol: /^https?$/ }).describe(
-        "URL to fetch. By default (live: true, the connector default) " +
-            "the page is fetched live from the source, which is a few " +
-            "seconds slower than the index. Set live: false to serve " +
-            "only Keenable's indexed copy — a URL not in the index is " +
-            "then an error.",
+        "URL to fetch. By default Keenable serves its indexed copy " +
+            "and reads the page live from the source when it is not " +
+            "indexed. Set live: true to always read it live.",
     ),
     max_chars: z.number().int().describe(
         "Maximum number of characters of content to return. Longer " +
-            "content is truncated and a notice is appended after the " +
-            "cut, so the response runs slightly past this number. " +
+            "content is cut so it is never longer than this, ending in " +
+            "'...' (no '...' when this is 3 or less), and the response " +
+            "sets truncated: true and total_chars to the full length. " +
             "Vendor default 50000.",
     ).optional(),
     live: z.boolean().describe(
-        "Fetch the page live from the source instead of Keenable's " +
-            "indexed copy. Connector default true (same price; a few " +
-            "seconds slower). Set false to serve only the indexed " +
-            "copy; a URL not in the index is then an error.",
+        "Always read the page live from the source instead of " +
+            "serving Keenable's indexed copy (same price; a few seconds " +
+            "slower). Use it for pages that change often. Omitted, " +
+            "the indexed copy is served and unindexed pages are read " +
+            "live automatically.",
     ).optional(),
     prompt: z.string().describe(
         "Optional extraction instruction, at most 2000 characters. " +

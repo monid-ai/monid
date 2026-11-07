@@ -4,8 +4,8 @@ import { zKeenableFetchAnswerQueryParams } from "./schema/inputs.ts";
 /**
  * Prompt-required twin of `GET /v1/fetch` — the fetch-with-prompt path
  * as its own endpoint so discover can rank it for page Q&A /
- * extraction. Same PER_CALL 1 credit (design D4). live defaults to
- * true (design D6).
+ * extraction. Same PER_CALL 1 credit (design D4). live keeps the
+ * vendor default (design D6, revised 2026-11-07).
  *
  * PUBLIC identity is pinned (design D22): the vendor path is transport
  * plumbing shared with `/v1/fetch`.
@@ -19,10 +19,9 @@ export default defineEndpoint({
             "prompt about the page instead of returning the full " +
             "Markdown. prompt is required (up to 2,000 characters, " +
             'e.g. "list every pricing tier with its monthly price"). ' +
-            "By default (live: true) the page is fetched live from the " +
-            "source, a few seconds slower than the index; set live: " +
-            "false to serve only the indexed copy (a URL not in the " +
-            "index is then an error). max_chars caps " +
+            "By default Keenable serves its indexed copy and reads the " +
+            "page live when it is not indexed; set live: true to " +
+            "always read it live. max_chars caps " +
             "the answer length. One URL per call. Will not: log in, " +
             "click through pages, or get past bot protection. Find " +
             "URLs first with keenable#v1/search; use keenable#v1/fetch " +
@@ -31,7 +30,8 @@ export default defineEndpoint({
         categories: ["web-extraction"],
         notes: [
             "Same $0.001 volume rate as keenable#v1/fetch. prompt is " +
-            "required. live defaults to true.",
+            "required. A URL missing from the index is read live " +
+            "automatically.",
         ],
     },
     /** PUBLIC identity (design D22): shares upstream `GET /v1/fetch`. */
@@ -44,8 +44,7 @@ export default defineEndpoint({
                     .unwrap().min(1).optional(),
                 prompt: zKeenableFetchAnswerQueryParams.shape.prompt.unwrap()
                     .min(1).max(2000).regex(/\S/),
-                live: zKeenableFetchAnswerQueryParams.shape.live.unwrap()
-                    .default(true),
+                live: zKeenableFetchAnswerQueryParams.shape.live,
             }),
         },
     },

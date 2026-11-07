@@ -38,7 +38,7 @@ Deno.test("keenable#v1/fetch happy (synthetic): one credit; fold settles; markdo
     );
 });
 
-Deno.test("keenable#v1/fetch: omitted live defaults to true so a non-indexed URL succeeds", async () => {
+Deno.test("keenable#v1/fetch: omitted live sends no live param and a non-indexed URL still succeeds", async () => {
     const unit = await testSealedUnit("keenable#v1/fetch");
     const fixture = await loadFixture(
         `${fixturesDir}synthetic-fetch-not-indexed.json`,
@@ -66,7 +66,7 @@ Deno.test("keenable#v1/fetch: omitted live defaults to true so a non-indexed URL
     );
 });
 
-Deno.test("keenable#v1/fetch: live false keeps the indexed-only path", async () => {
+Deno.test("keenable#v1/fetch: an explicit live false is passed through", async () => {
     const unit = await testSealedUnit("keenable#v1/fetch");
     const fixture = await loadFixture(
         `${fixturesDir}synthetic-fetch-indexed.json`,

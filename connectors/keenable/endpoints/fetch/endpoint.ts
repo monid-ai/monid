@@ -7,10 +7,10 @@ import { zKeenableFetchQueryParams } from "./schema/inputs.ts";
  * Usage falls back to the provider's PER_CALL 1 credit; estimate and
  * evidence are compiler-synthesized (flat model).
  *
- * `live` defaults to true at the binding (design D6): indexed and live
- * cost the same credit, and an omitted `live` used to turn every
- * non-indexed URL into a provider error. Callers who want the indexed
- * copy only set `live: false`.
+ * `live` is optional with the vendor default (design D6, revised
+ * 2026-11-07): an omitted `live` serves the indexed copy and reads
+ * unindexed URLs live, so it is both faster and never a provider
+ * error for a missing URL.
  */
 export default defineEndpoint({
     meta: {
@@ -18,15 +18,15 @@ export default defineEndpoint({
         summary:
             "Read a known URL as clean Markdown contents, or ask a question about the page.",
         description: "Contents for a known URL: clean Markdown with " +
-            "title and author, $0.001 per page. By default (live: " +
-            "true) the page is fetched live from the source, which " +
-            "is a few seconds slower than the index. Set live: false " +
-            "to serve only Keenable's indexed copy; a URL not in the " +
-            "index is then an error. Add " +
+            "title and author, $0.001 per page. By default Keenable " +
+            "serves its indexed copy and reads the page live when it " +
+            "is not indexed; set live: true to always read it live. " +
+            "Add " +
             'prompt (up to 2,000 characters, e.g. "list every ' +
             'pricing tier with its monthly price") and an LLM ' +
             "reads the page and returns only the answer. max_chars " +
-            "caps the length. One URL per call. Prefer " +
+            "caps the length; truncated and total_chars say when " +
+            "a page was cut. One URL per call. Prefer " +
             "keenable#v1/search-contents when you do not have URLs " +
             "yet — that search already returns long extracts. Will " +
             "not: log in, click through pages, or get past bot " +
@@ -36,8 +36,8 @@ export default defineEndpoint({
         categories: ["web-scraping", "web-extraction"],
         notes: [
             "$0.001 per page (volume rate), indexed or live, with or " +
-            "without a prompt. Errors are free. live defaults to true " +
-            "so a URL missing from the index is fetched from the source.",
+            "without a prompt. Errors are free. A URL missing from the " +
+            "index is read live automatically.",
         ],
     },
     request: { method: "GET", path: "/v1/fetch" },
@@ -48,8 +48,7 @@ export default defineEndpoint({
                     .unwrap().min(1).optional(),
                 prompt: zKeenableFetchQueryParams.shape.prompt.unwrap()
                     .min(1).max(2000).regex(/\S/).optional(),
-                live: zKeenableFetchQueryParams.shape.live.unwrap()
-                    .default(true),
+                live: zKeenableFetchQueryParams.shape.live,
             }),
         },
     },
