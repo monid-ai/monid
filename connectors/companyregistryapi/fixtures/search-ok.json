@@ -1,0 +1,58 @@
+{
+    "name": "search-ok",
+    "description": "Recorded 2026-11-07: GET /v1/search for the start of a name in one address country, limit 2. Two results in registry name order, a non-null next_cursor, the attribution field. Free: zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?q=nokia+oyj&address_country=FI&limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "object": "list",
+                    "query": "nokia oyj",
+                    "address_countries": [
+                        "FI"
+                    ],
+                    "data": [
+                        {
+                            "id": "co_0fmfc6rde9be1xcdmq2hr4320g",
+                            "object": "company",
+                            "lifecycle": {
+                                "status": "active"
+                            },
+                            "name": "NOKIA OYJ",
+                            "summary": "NOKIA OYJ",
+                            "country_code": "FI",
+                            "company_type": "3220",
+                            "legal_form": "Société étrangère non immatriculée au RCS",
+                            "branch": false,
+                            "industry": "Télécommunications filaires",
+                            "business_model": "Télécommunications filaires",
+                            "operating_geography": "Finland",
+                            "as_of_date": "2026-10-30"
+                        },
+                        {
+                            "id": "co_2735hhcwhjzdd92k4whn5tcw59",
+                            "object": "company",
+                            "lifecycle": {
+                                "status": "active"
+                            },
+                            "name": "NOKIA OYJ",
+                            "summary": "NOKIA OYJ",
+                            "country_code": "FI",
+                            "company_type": "030",
+                            "legal_form": "Buitenlandse entiteit",
+                            "branch": true,
+                            "operating_geography": "Finland",
+                            "as_of_date": "2026-09-16"
+                        }
+                    ],
+                    "next_cursor": "cur_eyJ2ZXJzaW9uIjoyLCJ0ZW5hbnRfcHJpb3JpdHlfcmFuayI6MCwiY29tcGFueV9pZCI6ImNvXzI3MzVoaGN3aGp6ZGQ5Mms0d2huNXRjdzU5IiwiYmluZGluZyI6ImNPRF9HQlJnZlZEYU1WWXlwVDNzOFRRYkthZ2NFSWQyVEJNdnhuU2libEUiLCJleHBpcmVzX2F0IjoxNzk0MDA5OTM4fQ.qFMusVjf00rfqhl7_bAnEOp4yZGg5uWoykgZIGL3UX8",
+                    "attribution": "Powered by Coragrid"
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "name": "search-expired-cursor",
+    "description": "Recorded 2026-11-07: GET /v1/search with an invalid or expired cursor. RFC 9457 problem document, 400 invalid_request, retryable false: DATA with zero usage; the caller restarts from page one.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?q=nokia+oyj&limit=2&cursor=cur_expired"
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "type": "https://companyregistryapi.com/problems/invalid-request",
+                    "title": "Invalid request",
+                    "status": 400,
+                    "detail": "search cursor is invalid or expired",
+                    "instance": "https://api.companyregistryapi.com/v1/search",
+                    "request_id": "req_06hzgqstx7c4ycsbst9a8s2hse",
+                    "code": "invalid_request",
+                    "retryable": false
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,65 @@
+{
+    "name": "company-ok",
+    "description": "Recorded 2026-11-07: GET /v1/companies/{company_id} for an active Finnish company. Profile under data with identifiers strongest first, classifications, lifecycle, as_of_date, register_check and the attribution field. Free: zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/companies/co_59hdg9w2ndfh5sv4stabqgxxak"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "id": "co_59hdg9w2ndfh5sv4stabqgxxak",
+                        "object": "company",
+                        "lifecycle": {
+                            "status": "active"
+                        },
+                        "name": "Nokia Oyj",
+                        "summary": "Nokia Oyj",
+                        "country_code": "FI",
+                        "company_status": "Rekisterissä",
+                        "legal_form": "Julkinen osakeyhtiö",
+                        "branch": false,
+                        "industry": "Pääkonttorien toiminta",
+                        "business_model": "Pääkonttorien toiminta",
+                        "operating_geography": "Uusimaa, Finland",
+                        "as_of_date": "2026-10-23",
+                        "identifiers": [
+                            {
+                                "scheme": "national_registry_number",
+                                "value": "0112038-9",
+                                "country_scope": "FI",
+                                "role": "root",
+                                "status": "active"
+                            },
+                            {
+                                "scheme": "eu_vat_number",
+                                "value": "FI01120389",
+                                "country_scope": "FI",
+                                "role": "alias",
+                                "status": "active",
+                                "source": "prh"
+                            }
+                        ],
+                        "classifications": [
+                            {
+                                "scheme": "tol_2025",
+                                "code": "70100",
+                                "label": "Activities of head offices",
+                                "is_primary": true
+                            }
+                        ],
+                        "register_check": {
+                            "status": "completed",
+                            "outcome": "verified",
+                            "checked_at": "2026-11-06T17:57:02Z"
+                        }
+                    },
+                    "attribution": "Powered by Coragrid"
+                }
+            }
+        }
+    ]
+}

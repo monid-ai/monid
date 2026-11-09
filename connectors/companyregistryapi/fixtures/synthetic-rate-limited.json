@@ -1,0 +1,25 @@
+{
+    "name": "synthetic-rate-limited",
+    "description": "SYNTHETIC: GET /v1/search over the 60-per-minute per-client limit. Body is the published OpenAPI RateLimited example (429 rate_limited, retryable true): DATA with zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?q=nokia+oyj"
+            },
+            "res": {
+                "status": 429,
+                "body": {
+                    "type": "https://companyregistryapi.com/problems/rate-limited",
+                    "title": "Too many requests",
+                    "status": 429,
+                    "detail": "The free API allows a bounded number of requests per minute per client; retry after 1 seconds.",
+                    "instance": "https://api.companyregistryapi.com/v1/search",
+                    "request_id": "req_014d2pf2dbsqqg28t5cy4tqkff",
+                    "code": "rate_limited",
+                    "retryable": true
+                }
+            }
+        }
+    ]
+}

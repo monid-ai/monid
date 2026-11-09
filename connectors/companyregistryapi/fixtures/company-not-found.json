@@ -1,0 +1,25 @@
+{
+    "name": "company-not-found",
+    "description": "Recorded 2026-11-07: GET /v1/companies/{company_id} for a well-formed id no company carries. RFC 9457 problem document, 404 not_found: DATA with zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/companies/co_00000000000000000000000009"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "type": "https://companyregistryapi.com/problems/not-found",
+                    "title": "Resource not found",
+                    "status": 404,
+                    "detail": "The requested resource was not found or is not visible.",
+                    "instance": "https://api.companyregistryapi.com/v1/companies/co_00000000000000000000000009",
+                    "request_id": "req_62shmdvgvz3bdfezyzha8z666v",
+                    "code": "not_found",
+                    "retryable": false
+                }
+            }
+        }
+    ]
+}
