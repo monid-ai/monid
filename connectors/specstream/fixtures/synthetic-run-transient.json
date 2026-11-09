@@ -1,6 +1,6 @@
 {
     "name": "synthetic-run-transient",
-    "description": "The status lookup fails with a 503 while the find keeps working. The poll stays alive and the run settles on the next read.",
+    "description": "The status lookup fails with a 501, then a 503, while the find keeps working. The poll stays alive through both and the run settles on the next read.",
     "calls": [
         {
             "req": {
@@ -16,6 +16,21 @@
                         "maximum_cents": 60,
                         "state": "reserved",
                         "replay": false
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/capacity/requests/specstream-run-0001/rows"
+            },
+            "res": {
+                "status": 501,
+                "body": {
+                    "error": {
+                        "code": "internal_failure",
+                        "message": "Not implemented."
                     }
                 }
             }

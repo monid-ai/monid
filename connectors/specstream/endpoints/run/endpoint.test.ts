@@ -114,8 +114,8 @@ Deno.test("specstream#v1/capacity/executions: a failed status lookup keeps the f
         mode: "replay",
         fixture: await fixture("synthetic-run-transient"),
     });
-    // the 503 was the lookup failing, not the find: the run reads again and
-    // settles on the receipt
+    // the 501 and the 503 were the lookup failing, not the find: the run
+    // reads again and settles on the receipt
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
     assertEquals(result.usage.credits, { default: 0.35 });
