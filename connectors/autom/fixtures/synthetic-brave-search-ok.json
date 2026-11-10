@@ -1,0 +1,25 @@
+{
+    "name": "synthetic-brave-search-ok",
+    "description": "SYNTHETIC happy chain for autom#v1/brave/search. Body shape from Autom's OpenAPI spec and a live call made for the Treg catalog (2026-11-09), trimmed; the URL is the query string the engine emits. Replace via `deno task record` when AUTOM_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.autom.dev/v1/brave/search?query=open+source+vector+database"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "organic_results": [
+                        {
+                            "position": 1,
+                            "title": "Example DB",
+                            "link": "https://example.org/",
+                            "snippet": "An open source vector database."
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
