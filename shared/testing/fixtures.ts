@@ -326,6 +326,7 @@ export function recordingFetch(
             : undefined;
         const response = await realFetch(input, init);
         const text = await response.text();
+        const parsedBody = parseMaybeJson(text);
         const headers = pickRecordedHeaders(response.headers);
         sink.push({
             req: {
@@ -336,7 +337,7 @@ export function recordingFetch(
             res: {
                 status: response.status,
                 ...(headers !== undefined ? { headers } : {}),
-                body: parseMaybeJson(text) ?? text,
+                body: parsedBody !== undefined ? parsedBody : text,
             },
         });
         return new Response(text, {
