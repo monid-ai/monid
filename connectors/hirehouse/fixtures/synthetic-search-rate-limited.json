@@ -1,0 +1,21 @@
+{
+    "name": "synthetic-search-rate-limited",
+    "description": "hirehouse#jobs/search over the per-IP limit: 429 with the documented error body. Data, zero usage. Synthetic: shaped from hirehouse.xyz/api/public/openapi.json.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/public/jobs/search?query=engineer"
+            },
+            "res": {
+                "status": 429,
+                "body": {
+                    "error": {
+                        "code": "rate_limited",
+                        "message": "Rate limit of 60 requests per minute exceeded."
+                    }
+                }
+            }
+        }
+    ]
+}
