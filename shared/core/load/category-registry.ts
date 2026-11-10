@@ -1,7 +1,11 @@
 import { join, toFileUrl } from "@std/path";
 import { z } from "zod";
 import { parseSchema } from "../schema/parse.ts";
-import { type LeafCategory, zLeafCategory } from "../schema/taxonomy/leaf.ts";
+import {
+    defineLeafCategories,
+    type LeafCategory,
+    zLeafCategory,
+} from "../schema/taxonomy/leaf.ts";
 
 /**
  * Load the closed category vocabulary from `<connectorsDir>/categories.ts`.
@@ -21,9 +25,9 @@ export async function loadCategoryRegistry(
             `${connectorsDir}/categories.ts must export LEAF_CATEGORIES`,
         );
     }
-    return parseSchema(
-        z.array(zLeafCategory).readonly(),
+    return defineLeafCategories(parseSchema(
+        z.array(zLeafCategory),
         leaves,
         `${connectorsDir}/categories.ts`,
-    );
+    ));
 }
