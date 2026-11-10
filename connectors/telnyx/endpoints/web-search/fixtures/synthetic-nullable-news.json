@@ -1,0 +1,50 @@
+{
+    "name": "synthetic-nullable-news",
+    "description": "SYNTHETIC edge case, NOT observed live: optional news and image fields are null. Derived from the recorded happy envelope solely to pin non-destructive passthrough; no claim that the provider returned these nulls.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.telnyx.com/v2/web_search",
+                "body": {
+                    "query": "James Webb Space Telescope science overview",
+                    "count": 3
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "results": {
+                            "web": [
+                                {
+                                    "url": "https://science.nasa.gov/mission/webb/",
+                                    "title": "James Webb Space Telescope - NASA Science",
+                                    "description": "The feed below is a mix of Webb Science Releases and associated images/videos, Webb Science Blogs, Webb press releases and articles tagged with \"James Webb Space Telescope\". To filter out everything except the Webb Science Releases (or Science Blogs) - simply select that filter check box.",
+                                    "snippets": [
+                                        "The feed below is a mix of Webb Science Releases and associated images/videos, Webb Science Blogs, Webb press releases and articles tagged with \"James Webb Space Telescope\". To filter out everything except the Webb Science Releases (or Science Blogs) - simply select that filter check box.",
+                                        "NASA\u2019s retired Spitzer Space Telescope observed the gas and dust within NGC 7129; however, NASA\u2019s James Webb Space Telescope\u2019s improved\u2026 ... In the early history of our solar system, scientists theorize that a Mars-sized object called Theia smashed into the infant\u2026 ... This feed only contains articles from Webb's Blog which offers an insider's point of view covering a variety of topics. The feed below supports a deeper dive into Webb's Blog which contains early release science (not yet peer revi"
+                                    ],
+                                    "thumbnail_url": null,
+                                    "favicon_url": null
+                                },
+                                {
+                                    "url": "https://science.nasa.gov/mission/webb/about-overview/",
+                                    "title": "Overview - NASA Science",
+                                    "description": "A brief overview of the James Webb Space Telescope mission from its construction, launch, and complex unfolding, to the incredible science it achieves.",
+                                    "snippets": [
+                                        "A brief overview of the James Webb Space Telescope mission from its construction, launch, and complex unfolding, to the incredible science it achieves.",
+                                        "The main industrial partner is Northrop Grumman; the Space Telescope Science Institute operates Webb after launch. Thousands of scientists, engineers and technicians from 14 countries, 29 U.S. states, and Washington, D.C. contributed to the design, build, test, integration, launch, commissioning and operations of Webb. The International Team about Webb is an International Collaboration \u00b7 NASA\u2019s James Webb Space Telescope, or Webb, emerged from Chamber A at NASA\u2019s Johnson Space Center in Houston "
+                                    ],
+                                    "thumbnail_url": null,
+                                    "favicon_url": null
+                                }
+                            ],
+                            "news": null
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}
