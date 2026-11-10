@@ -1,6 +1,6 @@
 {
     "name": "synthetic-analyze-unauthorized",
-    "description": "SYNTHETIC 401 for capturekit#v1/analyze: CaptureKit's error envelope for a missing or invalid key, as the API returns it.",
+    "description": "SYNTHETIC 401 for capturekit#v1/analyze: CaptureKit's error envelope for an invalid key sent upstream, as the API returns it.",
     "calls": [
         {
             "req": {
