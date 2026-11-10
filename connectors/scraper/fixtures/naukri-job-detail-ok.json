@@ -1,0 +1,235 @@
+{
+    "name": "naukri-job-detail-ok",
+    "description": "Scraper POST /naukri/job-detail: a real recording, trimmed and PII-scrubbed by the recorder. The url is bound, so the chain does not pin the host.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "jobId": "221026501100"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "job": {
+                            "id": "221026501100",
+                            "title": {
+                                "text": "Data Analyst"
+                            },
+                            "urls": {
+                                "naukri": "https://www.naukri.com/job-listings-data-analyst-rarr-technologies-bengaluru-8-to-12-years-221026501100",
+                                "apply": "https://atsmantra.com/job-detail-rarr-technologies-data-analyst-bangalore-bengaluru-8-12-years-176414",
+                                "external": "https://atsmantra.com/job-detail-rarr-technologies-data-analyst-bangalore-bengaluru-8-12-years-176414"
+                            },
+                            "description": {
+                                "snippet": "Experience in finance or business reporting. . Ability to analyze complex datasets and communicate findings clearly. . Strong analytical,problem-solving,and communication skills. . Disclaimer: This job posting has been aggregated from external source|Required Skills |Preferred Experience and Attributes",
+                                "text": "We are seeking a skilled Data Analyst with strong SQL , data analysis, and business intelligence skills. The candidate will analyze business and financial data, develop reports and dashboards, maintain data quality, and provide actionable insights to support business decision-making. Key Responsibilities Analyze large datasets using advanced SQL and Excel . Develop reports, dashboards, and business intelligence (BI) solutions. Perform data and financial analysis to identify trends and business i",
+                                "html": null
+                            },
+                            "company": {
+                                "id": "5761892",
+                                "groupId": "4653200",
+                                "name": "Rarr Technologies",
+                                "url": "https://www.naukri.com/rarr-technologies-overview-4653200",
+                                "logoUrl": "https://img.naukimg.com/logo_images/groups/v1/mobile/4653200.gif",
+                                "website": null,
+                                "address": null,
+                                "isKycVerified": null,
+                                "isCustomName": null,
+                                "hiringFor": null,
+                                "description": "At RARR Technologies Pvt. Ltd., we believe in the power of collaboration and open communication. Our collaborative approach enables us to deeply understand our clients requirements, allowing us to craft software products that are not only technically superior but also align perfectly with their business goals. By combining our expertise with a meticulous attention to detail, we ensure that every line of code we write contributes to the creation of robust, scalable, and future-proof digital solut",
+                                "industry": "IT Services & Consulting",
+                                "rating": {
+                                    "value": 4.1,
+                                    "count": 38,
+                                    "source": "ambitionbox",
+                                    "url": "https://www.ambitionbox.com/reviews/rarr-technologies-reviews",
+                                    "title": "RARR Technologies Reviews by Employees"
+                                },
+                                "media": {
+                                    "photos": [],
+                                    "videos": [],
+                                    "presentations": []
+                                },
+                                "branding": {
+                                    "bannerUrl": null
+                                },
+                                "ambitionBox": {
+                                    "benefits": {
+                                        "names": [],
+                                        "reportedBy": null,
+                                        "url": null
+                                    },
+                                    "salaryInsights": {
+                                        "role": "Data Analyst",
+                                        "minCtcText": "3.8",
+                                        "averageCtcText": "4.0",
+                                        "maxCtcText": "4.2",
+                                        "url": "https://www.ambitionbox.com/salaries/rarr-technologies-salaries/data-analyst"
+                                    },
+                                    "award": {
+                                        "title": null,
+                                        "url": null
+                                    }
+                                }
+                            },
+                            "location": {
+                                "text": "Bengaluru",
+                                "places": [
+                                    "Bengaluru"
+                                ],
+                                "countryCode": "IN",
+                                "details": [
+                                    {
+                                        "id": "97",
+                                        "label": "Bengaluru",
+                                        "url": "https://www.naukri.com/jobs-in-bangalore",
+                                        "localities": []
+                                    }
+                                ]
+                            },
+                            "workArrangement": {
+                                "type": "office",
+                                "label": null,
+                                "hybridDetail": null
+                            },
+                            "experience": {
+                                "text": "8-12 Yrs",
+                                "minYears": 8,
+                                "maxYears": 12
+                            },
+                            "salary": {
+                                "text": "Not Disclosed",
+                                "min": null,
+                                "max": null,
+                                "currency": null,
+                                "period": null,
+                                "disclosed": false,
+                                "monthlyMin": null,
+                                "monthlyMax": null,
+                                "variablePercentage": null,
+                                "breakdown": []
+                            },
+                            "classification": {
+                                "skills": [
+                                    "advanced excel",
+                                    "advanced sql"
+                                ],
+                                "preferredSkills": [],
+                                "otherSkills": [
+                                    "advanced excel",
+                                    "advanced sql"
+                                ],
+                                "department": "Data Science & Analytics",
+                                "roleCategory": "Business Intelligence & Analytics",
+                                "role": "Data Analyst",
+                                "industry": "IT Services & Consulting",
+                                "jobType": "fulltime",
+                                "employmentTypes": [
+                                    "Full Time",
+                                    "Permanent"
+                                ],
+                                "education": {
+                                    "undergraduate": [
+                                        "Any Graduate"
+                                    ],
+                                    "postgraduate": [
+                                        "Any Postgraduate"
+                                    ],
+                                    "postPostgraduate": [],
+                                    "tenth": [],
+                                    "twelfth": [],
+                                    "doesNotMatter": null,
+                                    "requirementText": null,
+                                    "degreeCombination": null
+                                }
+                            },
+                            "apply": {
+                                "url": "https://atsmantra.com/job-detail-rarr-technologies-data-analyst-bangalore-bengaluru-8-12-years-176414",
+                                "method": "external",
+                                "count": 51,
+                                "vacancies": 1,
+                                "deadline": null,
+                                "referenceCode": null,
+                                "isAvailable": true,
+                                "requiresQuestionnaire": null,
+                                "hasMultipleMethods": null
+                            },
+                            "dates": {
+                                "posted": "2026-10-22T10:07:55.000Z",
+                                "postedText": null,
+                                "validThrough": null
+                            },
+                            "signals": {
+                                "status": "unknown",
+                                "isSponsored": null,
+                                "postedBy": "company",
+                                "isWalkIn": false,
+                                "viewCount": 182,
+                                "isPostedToday": null,
+                                "isBranded": false,
+                                "tags": [
+                                    "1 Vacancy"
+                                ],
+                                "diversity": {
+                                    "gender": null,
+                                    "label": null,
+                                    "url": null,
+                                    "bannerUrl": null
+                                }
+                            },
+                            "walkIn": {
+                                "start": null,
+                                "end": null,
+                                "timing": null,
+                                "venue": null,
+                                "mapUrl": null,
+                                "workingDays": []
+                            },
+                            "source": {
+                                "board": "1",
+                                "mode": "crawled",
+                                "roleCategoryId": null,
+                                "isTopGroup": false
+                            },
+                            "internship": {
+                                "isInternship": false,
+                                "duration": null,
+                                "stipend": {
+                                    "text": null,
+                                    "currency": null
+                                },
+                                "startDate": null,
+                                "endDate": null,
+                                "applyBy": null,
+                                "hasPrePlacementOffer": null,
+                                "perks": []
+                            },
+                            "meta": {
+                                "schemaVersion": "2.1",
+                                "source": "naukri",
+                                "scrapedAt": "2026-10-22T22:00:56.292Z",
+                                "detailStatus": "complete",
+                                "search": {
+                                    "keyword": null,
+                                    "location": null,
+                                    "totalResults": null
+                                },
+                                "page": null,
+                                "position": null
+                            }
+                        }
+                    },
+                    "meta": {
+                        "tool": "naukri-job-detail",
+                        "creditsUsed": 2,
+                        "requestId": "req_997f5bee50180855987dea6c"
+                    }
+                }
+            }
+        }
+    ]
+}

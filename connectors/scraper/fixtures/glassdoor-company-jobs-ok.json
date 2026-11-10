@@ -1,0 +1,164 @@
+{
+    "name": "glassdoor-company-jobs-ok",
+    "description": "Scraper POST /glassdoor/company-jobs: a real recording, trimmed and PII-scrubbed by the recorder. The url is bound, so the chain does not pin the host.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "employerId": 7856,
+                    "maxJobs": 2
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "data": {
+                        "employerId": 7856,
+                        "status": "complete",
+                        "failedSections": [],
+                        "companyFilterOptions": [],
+                        "jobs": [
+                            {
+                                "job": {
+                                    "description": null,
+                                    "descriptionFragments": null,
+                                    "idFromSource": "d6afc0c35844961c",
+                                    "jobTitleText": "Real Estate Associate Agent (1099) - Grand County (Application Deadline: 9/30/2026)",
+                                    "listingId": 1010232977124
+                                },
+                                "header": {
+                                    "ageInDays": 65,
+                                    "applyUrl": "/partner/jobListing.htm?pos=101&ao=1136043&s=21&guid=000001a165a3575ea9f952c2c0cf043f&src=GD_JOB_VIEW&t=ESR&vt=w&cs=1_d645098f&cb=1792706566168&jobListingId=1010232977124&jrtk=5-yul1-0-1k5iq6lsdh77q800-d6afc0c35844961c",
+                                    "categoryMgocId": 10115,
+                                    "coverPhoto": {
+                                        "employerId": 7856,
+                                        "sgocId": 1021,
+                                        "url": "https://media.glassdoor.com/banner/bh/7856/rocket-companies-banner-1736962107844.png"
+                                    },
+                                    "easyApply": false,
+                                    "employer": {
+                                        "id": 7856,
+                                        "name": "Rocket Companies, Inc.",
+                                        "ratings": {
+                                            "overallRating": 3.5
+                                        },
+                                        "shortName": "Rocket",
+                                        "squareLogoUrl": "https://media.glassdoor.com/sql/7856/rocket-companies-squareLogo-1736880869351.png"
+                                    },
+                                    "employerNameFromSearch": "Rocket Companies",
+                                    "expired": false,
+                                    "goc": "realtor",
+                                    "indeedJobAttribute": null,
+                                    "isSponsoredEmployer": true,
+                                    "isSponsoredJob": false,
+                                    "jobCountryId": 1,
+                                    "jobLink": "/partner/jobListing.htm?pos=101&ao=1136043&s=21&guid=000001a165a3575ea9f952c2c0cf043f&src=GD_JOB_AD&t=ESR&vt=w&cs=1_eaa962d4&cb=1792706566168&jobListingId=1010232977124&jrtk=5-yul1-0-1k5iq6lsdh77q800-d6afc0c35844961c",
+                                    "jobTitleText": "Real Estate Associate Agent (1099) - Grand County (Application Deadline: 9/30/2026)",
+                                    "jobViewUrl": "/partner/jobListing.htm?pos=101&ao=1136043&s=21&guid=000001a165a3575ea9f952c2c0cf043f&src=GD_JOB_AD&t=ESR&vt=n&ugo=c7d8c3bd-67ec-4476-b067-52b9385f1170&cs=1_eaa962d4&cb=1792706566168&jobListingId=1010232977124&jrtk=5-yul1-0-1k5iq6lsdh77q800-d6afc0c35844961c",
+                                    "locId": 1148170,
+                                    "locationName": "Denver, CO",
+                                    "locationType": "C",
+                                    "normalizedJobTitle": "realtor",
+                                    "occupations": [
+                                        {
+                                            "key": "G94VN"
+                                        },
+                                        {
+                                            "key": "GEC9K"
+                                        }
+                                    ],
+                                    "payCurrency": "USD",
+                                    "payPeriod": null,
+                                    "payPeriodAdjustedPay": null,
+                                    "posted": "Aug 18, 2026",
+                                    "rating": 3.6,
+                                    "remoteWorkTypes": [
+                                        "WORK_FROM_HOME"
+                                    ],
+                                    "salarySource": null,
+                                    "seoJobLink": "https://www.glassdoor.com/job-listing/real-estate-associate-agent-1099-grand-county-application-deadline-9-30-2026-rocket-companies-JV_IC1148170_KO0,76_KE77,93.htm?jl=1010232977124",
+                                    "serpUrlForJobListing": "/Job/denver-co-realtor-jobs-SRCH_IL.0,9_IC1148170_KO10,17.htm?jl=1010232977124&srs=JV_APPLYPANE",
+                                    "sgocId": 1021,
+                                    "urgencySignal": null
+                                }
+                            },
+                            {
+                                "job": {
+                                    "description": null,
+                                    "descriptionFragments": null,
+                                    "idFromSource": "24f03e782d4ca57d",
+                                    "jobTitleText": "Real Estate Associate Agent (1099) - Breckenridge/Summit County (Application Deadline: 9/30/2026)",
+                                    "listingId": 1010232977261
+                                },
+                                "header": {
+                                    "ageInDays": 65,
+                                    "applyUrl": "/partner/jobListing.htm?pos=102&ao=1136043&s=21&guid=000001a165a3575ea9f952c2c0cf043f&src=GD_JOB_VIEW&t=ESR&vt=w&cs=1_d7734f88&cb=1792706566168&jobListingId=1010232977261&jrtk=5-yul1-0-1k5iq6lsdh77q800-24f03e782d4ca57d",
+                                    "categoryMgocId": 10115,
+                                    "coverPhoto": {
+                                        "employerId": 7856,
+                                        "sgocId": 1021,
+                                        "url": "https://media.glassdoor.com/banner/bh/7856/rocket-companies-banner-1736962107844.png"
+                                    },
+                                    "easyApply": false,
+                                    "employer": {
+                                        "id": 7856,
+                                        "name": "Rocket Companies, Inc.",
+                                        "ratings": {
+                                            "overallRating": 3.5
+                                        },
+                                        "shortName": "Rocket",
+                                        "squareLogoUrl": "https://media.glassdoor.com/sql/7856/rocket-companies-squareLogo-1736880869351.png"
+                                    },
+                                    "employerNameFromSearch": "Rocket Companies",
+                                    "expired": false,
+                                    "goc": "realtor",
+                                    "indeedJobAttribute": null,
+                                    "isSponsoredEmployer": true,
+                                    "isSponsoredJob": false,
+                                    "jobCountryId": 1,
+                                    "jobLink": "/partner/jobListing.htm?pos=102&ao=1136043&s=21&guid=000001a165a3575ea9f952c2c0cf043f&src=GD_JOB_AD&t=ESR&vt=w&cs=1_503f2092&cb=1792706566168&jobListingId=1010232977261&jrtk=5-yul1-0-1k5iq6lsdh77q800-24f03e782d4ca57d",
+                                    "jobTitleText": "Real Estate Associate Agent (1099) - Breckenridge/Summit County (Application Deadline: 9/30/2026)",
+                                    "jobViewUrl": "/partner/jobListing.htm?pos=102&ao=1136043&s=21&guid=000001a165a3575ea9f952c2c0cf043f&src=GD_JOB_AD&t=ESR&vt=n&ugo=c7d8c3bd-67ec-4476-b067-52b9385f1170&cs=1_503f2092&cb=1792706566168&jobListingId=1010232977261&jrtk=5-yul1-0-1k5iq6lsdh77q800-24f03e782d4ca57d",
+                                    "locId": 1148170,
+                                    "locationName": "Denver, CO",
+                                    "locationType": "C",
+                                    "normalizedJobTitle": "realtor",
+                                    "occupations": [
+                                        {
+                                            "key": "G94VN"
+                                        },
+                                        {
+                                            "key": "GEC9K"
+                                        }
+                                    ],
+                                    "payCurrency": "USD",
+                                    "payPeriod": null,
+                                    "payPeriodAdjustedPay": null,
+                                    "posted": "Aug 18, 2026",
+                                    "rating": 3.6,
+                                    "remoteWorkTypes": [
+                                        "WORK_FROM_HOME"
+                                    ],
+                                    "salarySource": null,
+                                    "seoJobLink": "https://www.glassdoor.com/job-listing/real-estate-associate-agent-1099-breckenridge-summit-county-application-deadline-9-30-2026-rocket-companies-JV_IC1148170_KO0,90_KE91,107.htm?jl=1010232977261",
+                                    "serpUrlForJobListing": "/Job/denver-co-realtor-jobs-SRCH_IL.0,9_IC1148170_KO10,17.htm?jl=1010232977261&srs=JV_APPLYPANE",
+                                    "sgocId": 1021,
+                                    "urgencySignal": null
+                                }
+                            }
+                        ],
+                        "count": 2,
+                        "scrapedAt": "2026-10-22T22:02:46.242Z"
+                    },
+                    "meta": {
+                        "tool": "glassdoor-company-jobs",
+                        "creditsUsed": 2,
+                        "requestId": "req_c471979dad8790268d727676"
+                    }
+                }
+            }
+        }
+    ]
+}
