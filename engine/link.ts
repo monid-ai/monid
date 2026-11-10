@@ -128,6 +128,25 @@ export interface LinkedFns {
     >;
 }
 
+/** Every function kind's `.constructor` is a global-scope eval; the lint cannot
+ *  exclude computed keys (`x["con"+"structor"]`), so make it inert. Idempotent. */
+function sealFunctionConstructors(): void {
+    for (
+        const fn of [
+            function () {},
+            async () => {},
+            function* () {},
+            async function* () {},
+        ]
+    ) {
+        Object.defineProperty(Object.getPrototypeOf(fn), "constructor", {
+            value: undefined,
+            writable: false,
+            configurable: false,
+        });
+    }
+}
+
 /** Instantiate a verified entry in an empty scope; factories get their args applied. */
 export function instantiate(
     entry: FnEntry,
@@ -135,6 +154,7 @@ export function instantiate(
     label: string,
 ): unknown {
     let value: unknown;
+    sealFunctionConstructors();
     try {
         value = new Function(`"use strict"; return (${entry.src});`)();
     } catch (error) {
