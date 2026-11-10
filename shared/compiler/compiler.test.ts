@@ -160,6 +160,32 @@ Deno.test("normalization: literal contents survive verbatim", () => {
     assertEquals(normalizeFnSource("(a, b) => a / b / 2"), "(a,b)=>a/b/2");
 });
 
+Deno.test("normalization: division after keyword properties is layout-independent", () => {
+    for (const property of ["type", "number", "default", "async", "return"]) {
+        for (const access of [".", "?."]) {
+            const expression = `x${access}${property} / 2`;
+            const compact = normalizeFnSource(
+                `(x) => ({ a: ${expression}, b: x.total })`,
+            );
+            assertEquals(
+                compact,
+                normalizeFnSource(
+                    `(x) => ({\n a: ${expression},\n b: x.total\n})`,
+                ),
+            );
+            assertEquals(
+                compact,
+                `(x)=>({a:x${access}${property}/2,b:x.total})`,
+            );
+        }
+    }
+    // Division followed by a regex must not become a line comment.
+    assertEquals(
+        normalizeFnSource("(x) => x.type / / a /.test(x.name)"),
+        "(x)=>x.type/ / a /.test(x.name)",
+    );
+});
+
 Deno.test("closed-term lint rejects free identifiers, allows params/locals/whitelist", () => {
     lintClosedTerm(
         `({ data, utils }) => { const n = utils.json.len(data.output, "$.r"); return Math.min(n, 5); }`,
