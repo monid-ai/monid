@@ -1,0 +1,22 @@
+{
+    "name": "not-found",
+    "description": "recorded 2026-10-24 from the live API (domain example.com): no funding found, free.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.provaapi.com/api/v1/funding-stages",
+                "body": {
+                    "domain": "example.com"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "not_found",
+                    "message": "No funding found for this company."
+                }
+            }
+        }
+    ]
+}
