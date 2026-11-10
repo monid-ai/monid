@@ -886,7 +886,7 @@ export class LoadedEndpoint implements RunnableEndpoint {
                 const consolidated = this.fns.usageConsolidate(envelope);
                 const claim = pruneZeroCredits(consolidated.credits);
                 for (const pool of Object.keys(claim)) {
-                    if (!(pool in doc.usage.credits)) {
+                    if (!Object.hasOwn(doc.usage.credits, pool)) {
                         throw new EngineError(
                             EngineErrorCode.FN_CONTRACT,
                             `${doc.id}: consolidate claimed undeclared ` +
