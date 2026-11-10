@@ -1,0 +1,68 @@
+{
+    "name": "synthetic-research",
+    "description": "Synthetic submit/pending/in-progress/completed Tavily research chain; not a live recording.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "request_id": "synthetic-research",
+                    "status": "pending"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}/synthetic-research?include_usage=true"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "request_id": "synthetic-research",
+                    "status": "pending"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}/synthetic-research?include_usage=true"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "request_id": "synthetic-research",
+                    "status": "in_progress"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}/synthetic-research?include_usage=true"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "request_id": "synthetic-research",
+                    "status": "completed",
+                    "content": "# Example report\nResearch summary with a source [1].",
+                    "sources": [
+                        {
+                            "title": "Example",
+                            "url": "https://example.com"
+                        }
+                    ],
+                    "usage": {
+                        "credits": 4
+                    }
+                }
+            }
+        }
+    ]
+}

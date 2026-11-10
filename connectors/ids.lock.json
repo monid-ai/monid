@@ -651,6 +651,12 @@
         "suzanne#v1/generations/text-to-3d",
         "suzanne#v1/models/download",
         "suzanne#v1/uploads",
+        "tavily#crawl",
+        "tavily#extract",
+        "tavily#map",
+        "tavily#research",
+        "tavily#research/{request_id}",
+        "tavily#search",
         "tinyfish#fetch",
         "tinyfish#search"
     ],

@@ -1,0 +1,32 @@
+{
+    "name": "synthetic-search",
+    "description": "Synthetic Tavily search response based on the public API contract; not a live recording.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "query": "Tavily API",
+                    "answer": null,
+                    "results": [
+                        {
+                            "title": "Example",
+                            "url": "https://example.com",
+                            "content": "Example result",
+                            "score": 0.9
+                        }
+                    ],
+                    "response_time": 0.5,
+                    "request_id": "synthetic-search",
+                    "usage": {
+                        "credits": 1
+                    }
+                }
+            }
+        }
+    ]
+}
