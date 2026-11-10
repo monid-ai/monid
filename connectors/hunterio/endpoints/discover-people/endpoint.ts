@@ -42,6 +42,7 @@ export default defineEndpoint({
                 zDiscoverPeopleBody.required({ keywords: true }),
                 zDiscoverPeopleBody.required({ technology: true }),
                 zDiscoverPeopleBody.required({ funding: true }),
+                zDiscoverPeopleBody.required({ job_openings: true }),
             ]).describe(
                 "Provide at least one filter — the same filter set as " +
                     "/discover.",

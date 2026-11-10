@@ -16,7 +16,8 @@ export default defineEndpoint({
             "companies, headquarters location (continent/region/country/" +
             "state/city include+exclude), industry, headcount ranges, " +
             "company type, founding year, keywords, technologies in use, " +
-            "and funding series/amount/date; paginate with limit/offset " +
+            "funding series/amount/date, and hiring activity through " +
+            "job_openings; paginate with limit/offset " +
             "up to 10,000. Suited for building target account lists and " +
             "market mapping before pulling emails per company. To pull " +
             "the emails for a matched company, pass its domain to " +
@@ -45,11 +46,12 @@ export default defineEndpoint({
                 zDiscoverBody.required({ keywords: true }),
                 zDiscoverBody.required({ technology: true }),
                 zDiscoverBody.required({ funding: true }),
+                zDiscoverBody.required({ job_openings: true }),
             ]).describe(
                 "Provide at least one filter (organization, similar_to, " +
                     "headquarters_location, industry, headcount, " +
                     "company_type, year_founded, keywords, technology, " +
-                    "funding).",
+                    "funding, job_openings).",
             ),
         },
     },
