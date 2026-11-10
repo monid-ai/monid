@@ -139,6 +139,26 @@ Deno.test("pdl#v5/person/search empty (synthetic): a 200 with no records bills n
     assertEquals(result.usage, { credits: {}, evidence: { RESULT: 0 } });
 });
 
+Deno.test("pdl#v5/person/search provider error (synthetic 400): data, zero usage", async () => {
+    const unit = await testSealedUnit("pdl#v5/person/search");
+    const fixture = await loadFixture(
+        `${fixturesDir}synthetic-provider-error.json`,
+    );
+    const result = await runEndpoint({
+        unit,
+        input: { body: { sql: "SELECT * FROM person WHERE", size: 2 } },
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(result.httpStatus, 400);
+    assertEquals(result.isProviderError, true);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
+    assertEquals(
+        (result.output as Record<string, Record<string, unknown>>).error.type,
+        "invalid_request_error",
+    );
+});
+
 Deno.test("pdl#v5/person/search: size REQUIRED; query XOR sql survives as two strict variants", async () => {
     const unit = await testSealedUnit("pdl#v5/person/search");
     const fixture = await loadFixture(`${fixturesDir}synthetic-happy.json`);
