@@ -1,0 +1,25 @@
+{
+    "name": "synthetic-yahoo-search-ok",
+    "description": "SYNTHETIC happy chain for autom#v1/yahoo/search. Body shape from Autom's OpenAPI spec and a live call made for the Treg catalog (2026-11-09), trimmed; the URL is the query string the engine emits. Replace via `deno task record` when AUTOM_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.autom.dev/v1/yahoo/search?query=weather+paris"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "organic_results": [
+                        {
+                            "position": 1,
+                            "title": "Paris weather",
+                            "link": "https://weather.example.com/paris",
+                            "snippet": "Forecast for Paris."
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
