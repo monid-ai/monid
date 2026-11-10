@@ -915,7 +915,13 @@ export class LoadedEndpoint implements RunnableEndpoint {
                         });
                     }
                 }
-                output = consolidated.output ?? raw;
+                // Only an ABSENT output leaves the raw payload (D27).
+                // An explicit null is valid JSON and stands as the
+                // consolidated result: restoring raw there would re-expose
+                // the vendor billing fields the hook stripped (#104).
+                output = consolidated.output === undefined
+                    ? raw
+                    : consolidated.output;
             } else {
                 output = raw;
             }
