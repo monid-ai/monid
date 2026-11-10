@@ -1,0 +1,32 @@
+{
+    "name": "synthetic-content-ok",
+    "description": "SYNTHETIC happy chain for capturekit#v1/content. Body shape from CaptureKit's OpenAPI spec and a live call made for the Treg catalog (2026-11-09), trimmed; the URL is the query string the engine emits. Replace via `deno task record` when CAPTUREKIT_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.capturekit.dev/v1/content?url=https%3A%2F%2Fexample.com&include_markdown=true"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "metadata": {
+                            "title": "Example Domain",
+                            "description": ""
+                        },
+                        "links": {
+                            "internal": [],
+                            "external": [
+                                "https://iana.org/help/example-domains"
+                            ],
+                            "social": []
+                        },
+                        "markdown": "Example Domain\n\nThis domain is for use in documentation examples."
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "name": "synthetic-analyze-ok",
+    "description": "SYNTHETIC happy chain for capturekit#v1/analyze. Body shape from CaptureKit's OpenAPI spec and a live call made for the Treg catalog (2026-11-09), trimmed; the URL is the query string the engine emits. Replace via `deno task record` when CAPTUREKIT_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.capturekit.dev/v1/analyze?url=https%3A%2F%2Fexample.com"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "summary": "A domain for documentation examples.",
+                        "categories": [
+                            "Reference"
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}
