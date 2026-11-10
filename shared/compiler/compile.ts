@@ -1136,6 +1136,7 @@ export async function compileBundle(
         minEngineVersion: semverMax([
             ...allDocs.map((doc) => doc.minEngineVersion),
             ...allResourceDocs.map((doc) => doc.minEngineVersion),
+            ...Object.values(providers).map((doc) => doc.minEngineVersion),
         ]),
         toolchain: {
             compilerVersion: opts.compilerVersion,
