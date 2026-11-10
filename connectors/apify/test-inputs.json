@@ -110,6 +110,41 @@
             }
         ]
     },
+    "benthepythondev/arbeitsagentur-jobs-scraper": {
+        "keywords": [
+            "Python Entwickler"
+        ],
+        "locations": [
+            "Berlin"
+        ],
+        "maxResultsPerSearch": 3
+    },
+    "benthepythondev/reddit-scraper": {
+        "mode": "subreddit",
+        "subreddit": "python",
+        "sort": "top",
+        "timeFilter": "week",
+        "maxPosts": 5
+    },
+    "benthepythondev/remote-jobs-aggregator": {
+        "searchQueries": [
+            "python developer"
+        ],
+        "maxTotalJobs": 5
+    },
+    "benthepythondev/socialblade-scraper": {
+        "profileUrls": [
+            {
+                "url": "https://www.youtube.com/@mkbhd"
+            }
+        ]
+    },
+    "benthepythondev/yahoo-finance-scraper": {
+        "tickers": "AAPL, MSFT",
+        "dataTypes": [
+            "quote"
+        ]
+    },
     "burbn/google-shopping-scraper": {
         "searchQuery": "usb cable",
         "limit": 10
