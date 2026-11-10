@@ -1,0 +1,73 @@
+{
+    "name": "costs-live",
+    "description": "Real 2026-10-26 recording of a running Small VM's costs, minimized to its last 3 settled runs (834 micros a minute) plus the run in progress.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v2/sandboxes/sbx_224ff457bf3f4724841f4ccf343f1fcd/costs"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "costs": {
+                        "sandbox": {
+                            "runs": 3,
+                            "billableSeconds": 4751,
+                            "settledMicros": 66040,
+                            "estimatedMicros": 834,
+                            "id": "sbx_224ff457bf3f4724841f4ccf343f1fcd",
+                            "sandboxId": "sbx_224ff457bf3f4724841f4ccf343f1fcd",
+                            "name": "new-vm",
+                            "deleted": false,
+                            "vmSandbox": true,
+                            "size": "small",
+                            "createdByApiKeyId": null,
+                            "createdAt": 1792421587941,
+                            "deletedAt": null,
+                            "firstStartedAt": 1792832186506,
+                            "lastEndedAt": 1792911534000
+                        },
+                        "createdByApiKey": null,
+                        "currency": "usd",
+                        "estimates": "available",
+                        "runs": [
+                            {
+                                "startedAt": 1792832186506,
+                                "endedAt": 1792833455000,
+                                "runtimeSeconds": 1269,
+                                "billableSeconds": 1269,
+                                "rateMicrosPerMinute": 834,
+                                "amountMicros": 17640
+                            },
+                            {
+                                "startedAt": 1792860315000,
+                                "endedAt": 1792860367000,
+                                "runtimeSeconds": 52,
+                                "billableSeconds": 60,
+                                "rateMicrosPerMinute": 834,
+                                "amountMicros": 834
+                            },
+                            {
+                                "startedAt": 1792908112804,
+                                "endedAt": 1792911534000,
+                                "runtimeSeconds": 3422,
+                                "billableSeconds": 3422,
+                                "rateMicrosPerMinute": 834,
+                                "amountMicros": 47566
+                            }
+                        ],
+                        "running": [
+                            {
+                                "startedAt": 1793000582399,
+                                "billableSeconds": 60,
+                                "estimatedMicros": 834
+                            }
+                        ],
+                        "truncated": false
+                    }
+                }
+            }
+        }
+    ]
+}

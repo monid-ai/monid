@@ -1,0 +1,31 @@
+{
+    "name": "start-ok",
+    "description": "Real 2026-10-26 recording: starting a stopped Small VM answered 201 'running' after 33 s.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/api/v2/sandboxes/sbx_224ff457bf3f4724841f4ccf343f1fcd/start"
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "sandbox": {
+                        "id": "sbx_224ff457bf3f4724841f4ccf343f1fcd",
+                        "workspaceId": "ws_0123456789abcdef0123456789abcdef",
+                        "name": "new-vm",
+                        "state": "running",
+                        "vmSandbox": true,
+                        "blockNetwork": false,
+                        "size": "small",
+                        "diskGiB": 30,
+                        "metadata": {},
+                        "autoResume": true,
+                        "createdAt": 1792421587941,
+                        "lastUsedAt": 1793000584334
+                    }
+                }
+            }
+        }
+    ]
+}

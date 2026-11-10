@@ -1,0 +1,19 @@
+{
+    "name": "unauthorized",
+    "description": "Real 2026-10-26 recording: a request with an invalid API key answers 401 INVALID_API_KEY.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v2/workspaces"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "code": "INVALID_API_KEY",
+                    "error": "A valid BoxCompute API key is required"
+                }
+            }
+        }
+    ]
+}

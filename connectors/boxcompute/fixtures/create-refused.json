@@ -1,0 +1,97 @@
+{
+    "name": "create-refused",
+    "description": "Real 2026-10-26 recording: POST /api/v2/sandboxes answers 202 pending, the next read 3 s later shows 'expired' because the account was at its VM limit, and DELETE removes the dead slot (204, no body: its replay fails until monid-ai/monid#199, which create-sandbox tolerates as a best-effort cleanup). Workspace and key ids scrubbed.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v2/workspaces"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "workspaces": [
+                        {
+                            "id": "ws_0123456789abcdef0123456789abcdef",
+                            "name": "default",
+                            "createdAt": 1790000000000
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/api/v2/sandboxes",
+                "body": {
+                    "workspaceId": "ws_0123456789abcdef0123456789abcdef",
+                    "vmSandbox": true,
+                    "size": "small",
+                    "name": "monid-fixture",
+                    "metadata": {
+                        "monid/run": "fixture-run-1"
+                    }
+                }
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "sandbox": {
+                        "id": "sbx_ed730f785e584b43982a8ada3722af1b",
+                        "workspaceId": "ws_0123456789abcdef0123456789abcdef",
+                        "name": "monid-fixture",
+                        "state": "pending",
+                        "vmSandbox": true,
+                        "blockNetwork": false,
+                        "size": "small",
+                        "diskGiB": 30,
+                        "metadata": {
+                            "monid/run": "fixture-run-1"
+                        },
+                        "autoResume": true,
+                        "createdAt": 1793000443358,
+                        "lastUsedAt": 1793000443358
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v2/sandboxes/sbx_ed730f785e584b43982a8ada3722af1b"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "sandbox": {
+                        "id": "sbx_ed730f785e584b43982a8ada3722af1b",
+                        "workspaceId": "ws_0123456789abcdef0123456789abcdef",
+                        "name": "monid-fixture",
+                        "state": "expired",
+                        "vmSandbox": true,
+                        "blockNetwork": false,
+                        "size": "small",
+                        "diskGiB": 30,
+                        "metadata": {
+                            "monid/run": "fixture-run-1"
+                        },
+                        "autoResume": true,
+                        "createdAt": 1793000443358,
+                        "lastUsedAt": 1793000443976
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "DELETE",
+                "url": "{{request.origin}}/api/v2/sandboxes/sbx_ed730f785e584b43982a8ada3722af1b"
+            },
+            "res": {
+                "status": 204,
+                "body": null
+            }
+        }
+    ]
+}

@@ -1,0 +1,107 @@
+{
+    "name": "costs-deleted",
+    "description": "Real 2026-10-26 chain after a delete: the live cost read is 404, the deleted-VM list finds the history id by sandboxId (minimized to two rows), and that history's costs are read.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v2/sandboxes/sbx_ed730f785e584b43982a8ada3722af1b/costs"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "code": "NOT_FOUND",
+                    "error": "Sandbox not found"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v2/deleted-sandboxes"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "deletedSandboxes": [
+                        {
+                            "id": "dsb_ffffffffffffffffffffffffffffffff",
+                            "sandboxId": "sbx_ffffffffffffffffffffffffffffffff",
+                            "name": "another-workspaces-vm",
+                            "workspaceId": "ws_0123456789abcdef0123456789abcdef",
+                            "workspaceName": "default",
+                            "vmSandbox": true,
+                            "size": "small",
+                            "runtimes": [],
+                            "deletedVia": "api",
+                            "deletedByApiKeyId": "00000000-0000-4000-8000-000000000000",
+                            "createdVia": "cli",
+                            "createdByApiKeyId": "00000000-0000-4000-8000-000000000000",
+                            "createdAt": 1793000443358,
+                            "lastUsedAt": 1793000443976,
+                            "deletedAt": 1793000490605
+                        },
+                        {
+                            "id": "dsb_00e8540a1100401b90b082def784a424",
+                            "sandboxId": "sbx_ed730f785e584b43982a8ada3722af1b",
+                            "name": "monid-fixture",
+                            "workspaceId": "ws_0123456789abcdef0123456789abcdef",
+                            "workspaceName": "default",
+                            "vmSandbox": true,
+                            "size": "small",
+                            "runtimes": [],
+                            "deletedVia": "api",
+                            "deletedByApiKeyId": "00000000-0000-4000-8000-000000000000",
+                            "createdVia": "cli",
+                            "createdByApiKeyId": "00000000-0000-4000-8000-000000000000",
+                            "createdAt": 1793000443358,
+                            "lastUsedAt": 1793000443976,
+                            "deletedAt": 1793000490605
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v2/deleted-sandboxes/dsb_00e8540a1100401b90b082def784a424/costs"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "costs": {
+                        "sandbox": {
+                            "runs": 0,
+                            "billableSeconds": 0,
+                            "settledMicros": 0,
+                            "estimatedMicros": 0,
+                            "id": "dsb_00e8540a1100401b90b082def784a424",
+                            "sandboxId": "sbx_ed730f785e584b43982a8ada3722af1b",
+                            "name": "monid-fixture",
+                            "deleted": true,
+                            "vmSandbox": true,
+                            "size": "small",
+                            "createdByApiKeyId": "00000000-0000-4000-8000-000000000000",
+                            "createdAt": 1793000443358,
+                            "deletedAt": 1793000490605,
+                            "firstStartedAt": null,
+                            "lastEndedAt": null
+                        },
+                        "createdByApiKey": {
+                            "id": "00000000-0000-4000-8000-000000000000",
+                            "name": "monid",
+                            "hint": "abcd",
+                            "revoked": false
+                        },
+                        "currency": "usd",
+                        "estimates": "not_applicable",
+                        "runs": [],
+                        "running": [],
+                        "truncated": false
+                    }
+                }
+            }
+        }
+    ]
+}

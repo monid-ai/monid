@@ -1,0 +1,19 @@
+{
+    "name": "start-unauthorized",
+    "description": "Real 2026-10-27 recording: a request to start a VM with an invalid API key answers 401 INVALID_API_KEY.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/api/v2/sandboxes/sbx_224ff457bf3f4724841f4ccf343f1fcd/start"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "code": "INVALID_API_KEY",
+                    "error": "A valid BoxCompute API key is required"
+                }
+            }
+        }
+    ]
+}

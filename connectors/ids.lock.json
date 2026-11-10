@@ -124,6 +124,15 @@
         "apollo#organizations/show",
         "apollo#people/match",
         "apollo#people/show",
+        "boxcompute#create-sandbox",
+        "boxcompute#delete-sandbox",
+        "boxcompute#get-sandbox",
+        "boxcompute#list-files",
+        "boxcompute#list-sandboxes",
+        "boxcompute#open-preview",
+        "boxcompute#run-command",
+        "boxcompute#start-sandbox",
+        "boxcompute#stop-sandbox",
         "bytedance#seedance-2.0",
         "bytedance#seedance-2.0-fast",
         "bytedance#seedance-2.0-mini",
@@ -655,6 +664,7 @@
         "tinyfish#search"
     ],
     "resources": [
+        "boxcompute/vm",
         "saperly/phone-number"
     ]
 }

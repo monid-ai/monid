@@ -1,0 +1,33 @@
+{
+    "name": "get-expired",
+    "description": "Real 2026-10-26 recording: GET of a VM BoxCompute refused at creation ('expired').",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v2/sandboxes/sbx_ed730f785e584b43982a8ada3722af1b"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "sandbox": {
+                        "id": "sbx_ed730f785e584b43982a8ada3722af1b",
+                        "workspaceId": "ws_0123456789abcdef0123456789abcdef",
+                        "name": "monid-fixture",
+                        "state": "expired",
+                        "vmSandbox": true,
+                        "blockNetwork": false,
+                        "size": "small",
+                        "diskGiB": 30,
+                        "metadata": {
+                            "monid/run": "fixture-run-1"
+                        },
+                        "autoResume": true,
+                        "createdAt": 1793000443358,
+                        "lastUsedAt": 1793000443976
+                    }
+                }
+            }
+        }
+    ]
+}

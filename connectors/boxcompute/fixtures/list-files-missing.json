@@ -1,0 +1,19 @@
+{
+    "name": "list-files-missing",
+    "description": "Real 2026-10-26 recording: listing a directory that does not exist answers 404 FILE_NOT_FOUND.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v2/sandboxes/sbx_224ff457bf3f4724841f4ccf343f1fcd/files/list?path=%2Fworkspace%2F.monid-fixture-missing"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "code": "FILE_NOT_FOUND",
+                    "error": "File not found"
+                }
+            }
+        }
+    ]
+}

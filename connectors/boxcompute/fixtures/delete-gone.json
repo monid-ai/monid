@@ -1,0 +1,19 @@
+{
+    "name": "delete-gone",
+    "description": "Real 2026-10-26 recording: DELETE of a VM that is already gone answers 404 NOT_FOUND.",
+    "calls": [
+        {
+            "req": {
+                "method": "DELETE",
+                "url": "{{request.origin}}/api/v2/sandboxes/sbx_ed730f785e584b43982a8ada3722af1b"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "code": "NOT_FOUND",
+                    "error": "Sandbox not found"
+                }
+            }
+        }
+    ]
+}

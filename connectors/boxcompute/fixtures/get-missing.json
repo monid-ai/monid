@@ -1,0 +1,19 @@
+{
+    "name": "get-missing",
+    "description": "Real 2026-10-26 recording: GET of a deleted VM answers 404 NOT_FOUND.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v2/sandboxes/sbx_ed730f785e584b43982a8ada3722af1b"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "code": "NOT_FOUND",
+                    "error": "Sandbox not found"
+                }
+            }
+        }
+    ]
+}

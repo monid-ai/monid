@@ -1,0 +1,73 @@
+{
+    "name": "synthetic-costs-window",
+    "description": "Synthetic cost history around the window 2026-10-26 00:00-12:00Z: a run straddling the start (half inside), one wholly inside, one after the end, and a run in progress straddling the end (half inside).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v2/sandboxes/sbx_224ff457bf3f4724841f4ccf343f1fcd/costs"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "costs": {
+                        "sandbox": {
+                            "runs": 3,
+                            "billableSeconds": 4751,
+                            "settledMicros": 66040,
+                            "estimatedMicros": 834,
+                            "id": "sbx_224ff457bf3f4724841f4ccf343f1fcd",
+                            "sandboxId": "sbx_224ff457bf3f4724841f4ccf343f1fcd",
+                            "name": "new-vm",
+                            "deleted": false,
+                            "vmSandbox": true,
+                            "size": "small",
+                            "createdByApiKeyId": null,
+                            "createdAt": 1792421587941,
+                            "deletedAt": null,
+                            "firstStartedAt": 1792832186506,
+                            "lastEndedAt": 1792911534000
+                        },
+                        "createdByApiKey": null,
+                        "currency": "usd",
+                        "estimates": "available",
+                        "runs": [
+                            {
+                                "startedAt": 1792969200000,
+                                "endedAt": 1792976400000,
+                                "runtimeSeconds": 7200,
+                                "billableSeconds": 7200,
+                                "rateMicrosPerMinute": 834,
+                                "amountMicros": 100080
+                            },
+                            {
+                                "startedAt": 1792980000000,
+                                "endedAt": 1792983600000,
+                                "runtimeSeconds": 3600,
+                                "billableSeconds": 3600,
+                                "rateMicrosPerMinute": 834,
+                                "amountMicros": 50040
+                            },
+                            {
+                                "startedAt": 1793019600000,
+                                "endedAt": 1793023200000,
+                                "runtimeSeconds": 3600,
+                                "billableSeconds": 3600,
+                                "rateMicrosPerMinute": 834,
+                                "amountMicros": 50040
+                            }
+                        ],
+                        "running": [
+                            {
+                                "startedAt": 1793012400000,
+                                "billableSeconds": 7200,
+                                "estimatedMicros": 100080
+                            }
+                        ],
+                        "truncated": false
+                    }
+                }
+            }
+        }
+    ]
+}
