@@ -1,0 +1,24 @@
+{
+    "name": "fetch-example",
+    "description": "Recorded 2026-10-24 against POST https://request.usestring.ai/v1/fetch for {url: \"https://example.com\"}, string#fetch's plain read: the request body shows the Markdown and solveCaptcha defaults the binding sends. The response is the page as Markdown with `x-billed-request-type: request_standard`. Url bound to {{request.url}} (fixture strategy v2).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "url": "https://example.com",
+                    "format": "markdown",
+                    "solveCaptcha": false
+                }
+            },
+            "res": {
+                "status": 200,
+                "headers": {
+                    "x-billed-request-type": "request_standard"
+                },
+                "body": "# Example Domain\n\nThis domain is for use in documentation examples without needing permission. This is not a service; avoid relying on it for testing and monitoring purposes."
+            }
+        }
+    ]
+}

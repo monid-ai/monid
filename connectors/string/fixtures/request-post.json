@@ -1,0 +1,43 @@
+{
+    "name": "request-post",
+    "description": "Recorded 2026-10-24 against POST https://request.usestring.ai/v1/fetch for a string#request POST to JSONPlaceholder's fake /posts API, which answers 201 with the posted JSON and an id. The request body shows the json and solveCaptcha defaults the binding sends; `x-billed-request-type: request_standard`. Hand-minimized: the destination's headers cut to Content-Type and Location. Url bound to {{request.url}} (fixture strategy v2).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "url": "https://jsonplaceholder.typicode.com/posts",
+                    "method": "POST",
+                    "body": {
+                        "title": "widget",
+                        "body": "one widget",
+                        "userId": 1
+                    },
+                    "format": "json",
+                    "solveCaptcha": false
+                }
+            },
+            "res": {
+                "status": 200,
+                "headers": {
+                    "x-billed-request-type": "request_standard"
+                },
+                "body": {
+                    "statusCode": 201,
+                    "headers": {
+                        "Content-Type": "application/json; charset=utf-8",
+                        "Location": "https://jsonplaceholder.typicode.com/posts/101"
+                    },
+                    "data": {
+                        "title": "widget",
+                        "body": "one widget",
+                        "userId": 1,
+                        "id": 101
+                    },
+                    "finalUrl": "https://jsonplaceholder.typicode.com/posts"
+                }
+            }
+        }
+    ]
+}

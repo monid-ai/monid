@@ -1,0 +1,31 @@
+{
+    "name": "synthetic-fetch-google-search",
+    "description": "SYNTHETIC, not recorded against a live key. A Google results URL sent to /fetch, which String answers through Search: the `x-billed-request-type: search` case from portal.usestring.ai/docs/api-reference/overview (\"bills at the search rate\"), with a structured results body trimmed to one result. Replace via `deno task record` with a real capture.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "headers": {
+                    "x-billed-request-type": "search"
+                },
+                "body": {
+                    "results": [
+                        {
+                            "position": 1,
+                            "rank": 1,
+                            "title": "Specification",
+                            "url": "https://modelcontextprotocol.io/specification/2025-06-18",
+                            "snippet": "Model Context Protocol (MCP) is an open protocol that enables seamless integration between LLM applications and external data sources and tools.",
+                            "displayUrl": "https://modelcontextprotocol.io › specification"
+                        }
+                    ],
+                    "zeroResults": false
+                }
+            }
+        }
+    ]
+}

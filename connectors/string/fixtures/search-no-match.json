@@ -1,0 +1,27 @@
+{
+    "name": "search-no-match",
+    "description": "Recorded 2026-10-24 against POST https://request.usestring.ai/v1/search for a quoted nonsense query with `autocorrect: false`: Google found nothing, yet `zeroResults` is false, and String billed it (`x-billed-request-type: search`). The empty-response rule settles it at zero. Url bound to {{request.url}} (fixture strategy v2).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "query": "\"qzxvplorktanu fnarglewibbet 88127\"",
+                    "autocorrect": false,
+                    "engine": "google"
+                }
+            },
+            "res": {
+                "status": 200,
+                "headers": {
+                    "x-billed-request-type": "search"
+                },
+                "body": {
+                    "results": [],
+                    "zeroResults": false
+                }
+            }
+        }
+    ]
+}

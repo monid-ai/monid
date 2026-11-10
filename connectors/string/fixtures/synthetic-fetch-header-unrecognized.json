@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-fetch-header-unrecognized",
+    "description": "SYNTHETIC. Same 200 body as fetch-example.json (a real 2026-10-24 recording), but x-billed-request-type carries a value outside every documented billed type — proves usage.evidence, which bills only a line of its own doc's model, settles zero usage on an unrecognized value instead of charging it anyway. This case cannot be recorded.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "headers": {
+                    "x-billed-request-type": "request_extra_premium"
+                },
+                "body": "# Example Domain\n\nThis domain is for use in documentation examples without needing permission. This is not a service; avoid relying on it for testing and monitoring purposes."
+            }
+        }
+    ]
+}

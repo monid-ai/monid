@@ -1,0 +1,27 @@
+{
+    "name": "synthetic-search-zero-results",
+    "description": "SYNTHETIC. A search Google itself reported no match for: `zeroResults: true`, an empty `results`, and the `spelling` suggestion the search docs describe ({ kind, query, asked }). Settles at zero even though another field is present. Replace via `deno task record` with a real capture.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "headers": {
+                    "x-billed-request-type": "search"
+                },
+                "body": {
+                    "results": [],
+                    "zeroResults": true,
+                    "spelling": {
+                        "kind": "suggested",
+                        "query": "heat pump grants",
+                        "asked": "heat pump grnts"
+                    }
+                }
+            }
+        }
+    ]
+}

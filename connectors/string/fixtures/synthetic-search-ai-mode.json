@@ -1,0 +1,31 @@
+{
+    "name": "synthetic-search-ai-mode",
+    "description": "SYNTHETIC, not recorded against a live key. An `engine: \"google_ai_mode\"` search: one generated answer and the pages it cites, with an empty `results` (\"Google AI Mode\" on portal.usestring.ai/docs/api-reference/search), trimmed to one source. Replace via `deno task record` with a real capture.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "results": [],
+                    "zeroResults": false,
+                    "aiMode": {
+                        "text": "A heat pump moves heat from one place to another instead of making it.",
+                        "markdown": "A heat pump moves heat from one place to another instead of making it.",
+                        "sources": [
+                            {
+                                "title": "How a heat pump works",
+                                "url": "https://example.org/how-heat-pumps-work",
+                                "snippet": "A heat pump moves heat rather than generating it.",
+                                "source": "Example"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

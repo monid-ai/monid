@@ -1,0 +1,16 @@
+{
+    "name": "synthetic-search-raw",
+    "description": "SYNTHETIC, not recorded against a live key. A `format: \"raw\"` search: the Google results page as HTML, one page per request (\"Raw HTML\" on portal.usestring.ai/docs/api-reference/search), trimmed to the example's skeleton. The output is a string, so `paging.pages` is absent and the call settles at one page. Replace via `deno task record` with a real capture.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": "<!doctype html><html lang=\"en\"><head><title>heat pump grants - Google Search</title></head><body></body></html>"
+            }
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+{
+    "name": "synthetic-unauthorized",
+    "description": "SYNTHETIC, not recorded against a live key. Shape matches the documented error body on portal.usestring.ai/docs/api-reference/errors (retrieved 2026-10-24): {error, message, statusCode}. One shared chain for every string endpoint. Replace via `deno task record` with a real capture.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": "Unauthorized",
+                    "message": "Missing or invalid API key.",
+                    "statusCode": 401
+                }
+            }
+        }
+    ]
+}
