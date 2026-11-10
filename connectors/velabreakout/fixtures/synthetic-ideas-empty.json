@@ -1,0 +1,21 @@
+{
+    "name": "synthetic-ideas-empty",
+    "description": "SYNTHETIC chain for velabreakout#ideas: an answer with no ideas (200 + ideas: []) — free to the buyer (zero usage). Hand-built from the shape of synthetic-ideas-ok; not yet observed live.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?direction=fading&limit=3"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "measured_as_of": "2026-10-28",
+                    "caveat": "Share of all AI research papers, last 3 months against the 3 before. Share, not counts.",
+                    "chart": "https://breakout.vela.partners/ideas",
+                    "ideas": []
+                }
+            }
+        }
+    ]
+}

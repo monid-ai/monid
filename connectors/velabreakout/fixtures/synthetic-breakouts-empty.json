@@ -1,0 +1,25 @@
+{
+    "name": "synthetic-breakouts-empty",
+    "description": "SYNTHETIC chain for velabreakout#breakouts: a ranking with no rows (200 + rows: []) — free to the buyer (zero usage). Body is a real Breakout answer to the same query captured 2026-10-28 through its keyless MCP tool (the MCP-only `charts` block dropped); replace via `deno task record` once a key is provisioned.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?group=ai_work&window_days=7&steady=true"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "group": "AI work",
+                    "answer": "The fastest-growing fields of AI work",
+                    "measured_as_of": "2026-10-28",
+                    "window": "7 days",
+                    "caveat": "Open jobs on one large AI work marketplace, not all hiring. One job can seek many people.",
+                    "note": "Only items at least as big as the group's median, so tiny starts do not dominate. Also up over 6 weeks, so a rebound after a fall does not count.",
+                    "chart": "https://breakout.vela.partners/signal/work_demand?segment=ai_work&window=7",
+                    "rows": []
+                }
+            }
+        }
+    ]
+}

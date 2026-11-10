@@ -1,0 +1,35 @@
+{
+    "name": "synthetic-breakouts-launches-only",
+    "description": "SYNTHETIC chain for velabreakout#breakouts: a ranking with no rows but new launches beside it (200 + rows: [] + new_launches) — data, so billed $0.02, as on Breakout's rate card (https://breakout.vela.partners/pricing). Shape from Breakout's findBreakouts; values written by hand 2026-10-29.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?group=open_models&window_days=7&steady=true"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "group": "Open models",
+                    "answer": "The fastest-growing open models",
+                    "measured_as_of": "2026-10-28",
+                    "window": "7 days",
+                    "caveat": "Downloads, not users.",
+                    "note": "Only items at least as big as the group's median, so tiny starts do not dominate.",
+                    "chart": "https://breakout.vela.partners/signal/open_model_pulls?segment=open_models&window=7",
+                    "rows": [],
+                    "new_launches": [
+                        {
+                            "name": "example-model",
+                            "about": null,
+                            "now": "12.4K",
+                            "unit": "downloads",
+                            "company_page": null
+                        }
+                    ],
+                    "new_launches_note": "First used inside the window, so no growth figure yet; biggest first. Often the bigger story than the ranking."
+                }
+            }
+        }
+    ]
+}

@@ -652,7 +652,12 @@
         "suzanne#v1/models/download",
         "suzanne#v1/uploads",
         "tinyfish#fetch",
-        "tinyfish#search"
+        "tinyfish#search",
+        "velabreakout#breakouts",
+        "velabreakout#company",
+        "velabreakout#groups",
+        "velabreakout#ideas",
+        "velabreakout#rising-companies"
     ],
     "resources": [
         "saperly/phone-number"

@@ -1,0 +1,20 @@
+{
+    "name": "synthetic-rising-companies-empty",
+    "description": "SYNTHETIC chain for velabreakout#rising-companies: an answer with no companies (200 + companies: []) — free to the buyer (zero usage). Hand-built from the shape of synthetic-rising-companies-ok; not yet observed live.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?limit=3"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "measured_as_of": "2026-10-28",
+                    "rule": "Rising = faster than 90% of its peers and growing at least 10%, on two or more measures. Ranked by how much.",
+                    "companies": []
+                }
+            }
+        }
+    ]
+}
