@@ -385,4 +385,11 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "Tools to pull public government records, including financial " +
             "disclosures, filings, registries, and more.",
     },
+    {
+        id: "ai-detection",
+        displayName: "AI Detection",
+        description:
+            "Detect AI-generated or manipulated media — images, video, " +
+            "audio, and documents.",
+    },
 ]);
