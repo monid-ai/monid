@@ -1,0 +1,88 @@
+{
+    "name": "synthetic-recaptcha-succeeded",
+    "description": "Synthetic boundary fixture: idle and processing polls followed by a recaptcha token, with extension fields preserved. Not a live recording.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.capsolver.com/createTask",
+                "body": {
+                    "clientKey": "REDACTED",
+                    "task": {
+                        "type": "ReCaptchaV2TaskProxyLess",
+                        "websiteURL": "https://example.com/login",
+                        "websiteKey": "public-test-site-key"
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "errorId": 0,
+                    "status": "idle",
+                    "taskId": "synthetic-task-id"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.capsolver.com/getTaskResult",
+                "body": {
+                    "clientKey": "REDACTED",
+                    "taskId": "synthetic-task-id"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "errorId": 0,
+                    "status": "idle"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.capsolver.com/getTaskResult",
+                "body": {
+                    "clientKey": "REDACTED",
+                    "taskId": "synthetic-task-id"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "errorId": 0,
+                    "status": "processing"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.capsolver.com/getTaskResult",
+                "body": {
+                    "clientKey": "REDACTED",
+                    "taskId": "synthetic-task-id"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "errorId": 0,
+                    "status": "ready",
+                    "taskId": "synthetic-task-id",
+                    "solution": {
+                        "gRecaptchaResponse": "synthetic-solution-token",
+                        "userAgent": "synthetic-user-agent",
+                        "session": {
+                            "cookie": "synthetic-session-value"
+                        }
+                    },
+                    "extension": "preserved"
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "name": "synthetic-start-rejected",
+    "description": "Synthetic createTask business error returned with HTTP 200; logical error and zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.capsolver.com/createTask",
+                "body": {
+                    "clientKey": "REDACTED",
+                    "task": {
+                        "type": "ReCaptchaV2TaskProxyLess",
+                        "websiteURL": "https://example.com/login",
+                        "websiteKey": "public-test-site-key"
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "errorId": 1,
+                    "errorCode": "ERROR_TASK_NOT_SUPPORTED",
+                    "errorDescription": "Synthetic provider rejection"
+                }
+            }
+        }
+    ]
+}

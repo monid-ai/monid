@@ -1,0 +1,89 @@
+{
+    "name": "recaptcha-v2-succeeded",
+    "description": "Recorded from the compiled CapSolver connector on 2026-10-30 against https://www.google.com/recaptcha/api2/demo. Request sequence, task IDs, statuses and response fields retained; clientKey redacted, response strings trimmed and expiring solution values replaced with inert placeholders.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.capsolver.com/createTask",
+                "body": {
+                    "task": {
+                        "websiteURL": "https://www.google.com/recaptcha/api2/demo",
+                        "websiteKey": "6Le-wvkSAAAAAPBMRTvw0Q4Muexq9bi0DJwx_mJ-",
+                        "pageAction": "action",
+                        "type": "ReCaptchaV2TaskProxyLess"
+                    },
+                    "clientKey": "REDACTED"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "errorId": 0,
+                    "taskId": "6356f026-ab7d-4cdf-ac24-dc29c1def8cf",
+                    "status": "idle"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.capsolver.com/getTaskResult",
+                "body": {
+                    "taskId": "6356f026-ab7d-4cdf-ac24-dc29c1def8cf",
+                    "clientKey": "REDACTED"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "errorId": 0,
+                    "taskId": "6356f026-ab7d-4cdf-ac24-dc29c1def8cf",
+                    "status": "processing"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.capsolver.com/getTaskResult",
+                "body": {
+                    "taskId": "6356f026-ab7d-4cdf-ac24-dc29c1def8cf",
+                    "clientKey": "REDACTED"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "errorId": 0,
+                    "taskId": "6356f026-ab7d-4cdf-ac24-dc29c1def8cf",
+                    "status": "processing"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.capsolver.com/getTaskResult",
+                "body": {
+                    "taskId": "6356f026-ab7d-4cdf-ac24-dc29c1def8cf",
+                    "clientKey": "REDACTED"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "errorId": 0,
+                    "taskId": "6356f026-ab7d-4cdf-ac24-dc29c1def8cf",
+                    "status": "ready",
+                    "solution": {
+                        "createTime": 1793347910925,
+                        "gRecaptchaResponse": "RECORDED_GRECAPTCHARESPONSE",
+                        "secChUa": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+                        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36"
+                    }
+                }
+            }
+        }
+    ]
+}
