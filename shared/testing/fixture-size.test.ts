@@ -177,6 +177,72 @@ Deno.test("replayFetch: recorded headers are served back; absent ⇒ none", asyn
     assertEquals(plain.headers.get("location"), null);
 });
 
+Deno.test("replayFetch: no-content statuses have no response body", async () => {
+    for (const status of [204, 205, 304]) {
+        for (const body of [null, ""]) {
+            const serve = replayFetch({
+                name: "no-content",
+                description: "A response with a status that forbids a body.",
+                calls: [{
+                    req: { method: "DELETE", url: "https://api.test/item" },
+                    res: { status, body, headers: { "retry-after": "1" } },
+                }],
+            });
+            const response = await serve("https://api.test/item", {
+                method: "DELETE",
+            });
+            assertEquals(response.status, status);
+            assertEquals(response.body, null);
+            assertEquals(await response.text(), "");
+            assertEquals(response.headers.get("retry-after"), "1");
+        }
+    }
+});
+
+Deno.test("recordingFetch: no-content responses survive recording and replay", async () => {
+    for (const status of [204, 205, 304]) {
+        const calls: Parameters<typeof scrubCalls>[0] = [];
+        const record = recordingFetch(
+            () =>
+                Promise.resolve(
+                    new Response(null, {
+                        status,
+                        headers: { "retry-after": "1", "set-cookie": "secret" },
+                    }),
+                ),
+            calls,
+        );
+        const response = await record("https://api.test/item", {
+            method: "DELETE",
+        });
+        assertEquals(response.status, status);
+        assertEquals(response.body, null);
+        assertEquals(await response.text(), "");
+        assertEquals(response.headers.get("set-cookie"), null);
+        assertEquals(calls[0].res.headers, { "retry-after": "1" });
+        const replayed = await replayFetch({
+            name: "empty",
+            description: "Recorded empty response.",
+            calls,
+        })("https://api.test/item", { method: "DELETE" });
+        assertEquals(replayed.status, status);
+        assertEquals(replayed.body, null);
+    }
+});
+
+Deno.test("replayFetch: JSON null remains a body for ordinary statuses", async () => {
+    const response = await replayFetch({
+        name: "json-null",
+        description: "A JSON null payload is not an absent body.",
+        calls: [{
+            req: { method: "GET", url: "https://api.test/item" },
+            res: { status: 200, body: null },
+        }],
+    })("https://api.test/item");
+    assert(response.body !== null);
+    assertEquals(await response.text(), "null");
+});
+
 Deno.test("trimCalls/scrubCalls: response headers ride through both passes", () => {
     const calls = [{
         req: { method: "GET", url: "https://api.test/d" },
