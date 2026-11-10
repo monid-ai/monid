@@ -19,6 +19,7 @@ import {
     fnKey,
     getPath,
     hasMeteredLines,
+    type Json,
     parseSchema,
     presets,
     pruneUndefined,
@@ -152,6 +153,11 @@ Deno.test("getPath: dotted keys + numeric indexes; unsupported syntax → undefi
     assertEquals(getPath(value, "$.cost.total"), 5);
     assertEquals(getPath(value, "$.results[1].id"), "b");
     assertEquals(getPath(value, "$.missing.deep"), undefined);
+    assertEquals(getPath({}, "$.constructor"), undefined);
+    assertEquals(getPath({}, "$.toString"), undefined);
+    const inheritedIndex: Json[] = [];
+    Object.setPrototypeOf(inheritedIndex, { 0: "inherited" });
+    assertEquals(getPath(inheritedIndex, "$[0]"), undefined);
     assertEquals(getPath(value, "$..recursive"), undefined); // not in the subset
     assertEquals(getPath(value, "$.results[*]"), undefined); // no wildcards
 });

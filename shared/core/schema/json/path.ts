@@ -35,12 +35,16 @@ export function getPath(
         if (current === null || current === undefined) return undefined;
         if (segment.startsWith("[")) {
             if (!Array.isArray(current)) return undefined;
-            current = current[Number(segment.slice(1, -1))];
+            const index = Number(segment.slice(1, -1));
+            if (!Object.hasOwn(current, index)) return undefined;
+            current = current[index];
         } else {
             if (typeof current !== "object" || Array.isArray(current)) {
                 return undefined;
             }
-            current = (current as Record<string, Json>)[segment.slice(1)];
+            const key = segment.slice(1);
+            if (!Object.hasOwn(current, key)) return undefined;
+            current = (current as Record<string, Json>)[key];
         }
     }
     return current;
