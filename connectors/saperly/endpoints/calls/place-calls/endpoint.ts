@@ -52,8 +52,9 @@ export default defineEndpoint({
         docsUrl: "https://saperly.com/docs/guides/voice",
         categories: ["agentic-phone"],
         notes: [
-            "Billing is per SECOND pro-rata; an unanswered call bills " +
-            "nothing (ring time never bills).",
+            "Billing is per started minute of call time (a 61-second " +
+            "call bills as 2 minutes); an unanswered call bills nothing " +
+            "(ring time never bills).",
             "A live call accrues cost continuously — the estimate " +
             "re-prices on a 30-second clock while the run is RUNNING.",
         ],
@@ -75,8 +76,8 @@ export default defineEndpoint({
     },
     usage: {
         /** $0.28 per 60 seconds keeps the per-minute carrier-derived rate
-         *  EXACT (vs a rounded per-second amount); billing is still by
-         *  the SECOND — the fold is ceil(seconds/60) × $0.28. */
+         *  EXACT (vs a rounded per-second amount); usage is still counted
+         *  in SECONDS — the fold is ceil(seconds/60) × $0.28. */
         model: {
             kind: UsageModelKind.PER_UNIT,
             unit: Unit.SECOND,
