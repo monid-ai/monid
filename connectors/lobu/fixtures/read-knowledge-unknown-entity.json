@@ -1,0 +1,22 @@
+{
+    "name": "read-knowledge-unknown-entity",
+    "description": "Recorded 2026-10-24 from POST https://app.lobu.ai/api/market/read_knowledge (public, keyless; no request headers kept). Unknown or unshared entity_id returns 403 with error message; body verbatim.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "entity_id": 999999999,
+                    "limit": 1
+                }
+            },
+            "res": {
+                "status": 403,
+                "body": {
+                    "error": "This record was not found in this workspace, or you do not have access to it."
+                }
+            }
+        }
+    ]
+}

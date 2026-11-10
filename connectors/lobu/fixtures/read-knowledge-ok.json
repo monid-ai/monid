@@ -1,0 +1,87 @@
+{
+    "name": "read-knowledge-ok",
+    "description": "Recorded 2026-10-24 from POST https://app.lobu.ai/api/market/read_knowledge (public, keyless; no request headers kept). Single Reddit discussion fetched by content_ids with source_url and permalink; payload_text/text_content trimmed to stay under 4 KiB.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "content_ids": [
+                        2286657
+                    ]
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "content": [
+                        {
+                            "id": 2286657,
+                            "entity_ids": [
+                                1626
+                            ],
+                            "platform": "reddit",
+                            "origin_id": "reddit_1kam74j",
+                            "semantic_type": "content",
+                            "origin_type": "post",
+                            "payload_type": "text",
+                            "payload_text": "Hey fellow webdevs,\n\nI just wanted to share that I've been using **Cursor AI**  for the past few months, and it's been a game-changer. (The same you can now get with VS Code, Windsurf, and other) -- This is not a promotional for Cursor; its just the one I've been using, (I'm actu...",
+                            "content_length": 283,
+                            "payload_data": {},
+                            "payload_template": null,
+                            "attachments": [],
+                            "author_name": "creasta29",
+                            "client_id": null,
+                            "client_name": null,
+                            "connection_id": 70,
+                            "connection_name": null,
+                            "feed_id": null,
+                            "feed_key": null,
+                            "feed_name": null,
+                            "automation_id": null,
+                            "automation_name": null,
+                            "agent_id": null,
+                            "agent_name": null,
+                            "device_worker_id": null,
+                            "device_label": null,
+                            "device_platform": null,
+                            "title": "AI coding assistants inside IDEs are about to change everything for web developers",
+                            "text_content": "Hey fellow webdevs,\n\nI just wanted to share that I've been using **Cursor AI**  for the past few months, and it's been a game-changer. (The same you can now get with VS Code, Windsurf, and other) -- This is not a promotional for Cursor; its just the one I've been using, (I'm actu...",
+                            "rating": null,
+                            "source_url": "https://reddit.com/r/webdev/comments/1kam74j/ai_coding_assistants_inside_ides_are_about_to/",
+                            "score": 0,
+                            "metadata": {
+                                "score": 0,
+                                "upvotes": 0,
+                                "downvotes": 0,
+                                "reply_count": 1
+                            },
+                            "classifications": {},
+                            "created_at": "2025-11-17T01:54:23.040Z",
+                            "occurred_at": "2025-04-29T12:02:32.000Z",
+                            "content_date": "2025-04-29T12:02:32.000Z",
+                            "origin_parent_id": null,
+                            "root_origin_id": "reddit_1kam74j",
+                            "depth": 0,
+                            "interaction_type": "none",
+                            "supersedes_event_id": null,
+                            "superseded_by": null,
+                            "is_superseded": false,
+                            "run_id": null,
+                            "parent_context": null,
+                            "permalink": "https://app.lobu.ai/market/events/2286657"
+                        }
+                    ],
+                    "total": 1,
+                    "page": {
+                        "limit": 50,
+                        "offset": 0,
+                        "has_more": false
+                    },
+                    "chain_total": 1
+                }
+            }
+        }
+    ]
+}
