@@ -1,0 +1,27 @@
+{
+    "name": "synthetic-check-pass",
+    "description": "MailDignity /check happy path returning PASS verdict.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "email_text": "Hi Alex,\n\nI saw your recent post about sales outreach. Would you be open to a quick exchange next week?\n\nBest,\nEnrico",
+                    "mode": "full"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "mode": "full",
+                    "verdict": "PASS",
+                    "summary": "The message is respectful, clear, and makes no presumptuous demands.",
+                    "issues": [],
+                    "repaired_body": null,
+                    "stage": "full"
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,35 @@
+{
+    "name": "synthetic-check-review",
+    "description": "MailDignity /check path returning REVIEW verdict with detected issues and repaired body.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "email_text": "Hey Alex, let's talk Tuesday at 2pm. I know you're struggling with lead gen.",
+                    "mode": "full"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "mode": "full",
+                    "verdict": "REVIEW",
+                    "summary": "The draft assumes availability and presumes knowledge of recipient problems.",
+                    "issues": [
+                        {
+                            "rule": "asymmetric_ask",
+                            "severity": "medium",
+                            "snippet": "let's talk Tuesday at 2pm",
+                            "reason": "Assumes availability without asking",
+                            "rewrite": "Would you be open to a brief chat next week?"
+                        }
+                    ],
+                    "repaired_body": "Hi Alex,\n\nWould you be open to a brief chat next week if lead gen is currently on your radar?\n\nBest,\nEnrico",
+                    "stage": "full"
+                }
+            }
+        }
+    ]
+}
