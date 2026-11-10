@@ -1130,8 +1130,7 @@ export class LoadedResource implements RunnableResource {
         resource: OwnedResource,
         window: UsageWindow,
     ): Promise<UsageReading> {
-        const get = this.fns.reconcile[line];
-        if (!get) {
+        if (!Object.hasOwn(this.fns.reconcile, line)) {
             throw new EngineError(
                 EngineErrorCode.NOT_ASYNC,
                 `${this.doc.id} declares no reconcileUsage for line ` +
@@ -1140,6 +1139,7 @@ export class LoadedResource implements RunnableResource {
                     })`,
             );
         }
+        const get = this.fns.reconcile[line];
         const valid = this.parseResource(resource);
         return get({ resource: valid, window }, this.utils());
     }
@@ -1150,8 +1150,7 @@ export class LoadedResource implements RunnableResource {
         resource: OwnedResource,
         args?: Json,
     ): Promise<Json> {
-        const read = this.fns.views[kind];
-        if (!read) {
+        if (!Object.hasOwn(this.fns.views, kind)) {
             throw new EngineError(
                 EngineErrorCode.NOT_ASYNC,
                 `${this.doc.id} declares no view "${kind}" (declared: ${
@@ -1159,6 +1158,7 @@ export class LoadedResource implements RunnableResource {
                 })`,
             );
         }
+        const read = this.fns.views[kind];
         const valid = this.parseResource(resource);
         return read(
             {
