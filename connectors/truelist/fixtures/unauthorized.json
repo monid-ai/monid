@@ -1,0 +1,18 @@
+{
+    "name": "unauthorized",
+    "description": "Recorded 2026-10-15 with an invalid API key: HTTP 401 {error} (the OpenAPI says {\"error\": \"Unauthorized\"}). Zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.truelist.io/api/v1/verify_inline?email=support%40github.com"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": "Could not find user via token"
+                }
+            }
+        }
+    ]
+}

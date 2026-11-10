@@ -1,0 +1,31 @@
+{
+    "name": "unknown",
+    "description": "Recorded 2026-10-15: the mail server did not answer within ~30s, so unknown / timed_out. Free.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.truelist.io/api/v1/verify_inline?email=nonexistent-qq81%40microsoft.com"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "emails": [
+                        {
+                            "address": "user@example.com",
+                            "domain": "microsoft.com",
+                            "first_name": null,
+                            "last_name": null,
+                            "canonical": "nonexistent-qq81",
+                            "mx_record": null,
+                            "email_state": "unknown",
+                            "email_sub_state": "timed_out",
+                            "verified_at": "2026-10-15T20:35:02.755Z",
+                            "did_you_mean": null
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
