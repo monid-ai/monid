@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-rate-limited",
+    "description": "SYNTHETIC 429: the service-wide daily call cap is spent. Shape taken from the SalesBook worker's REST handler (read 2026-10-22); not recorded, because triggering it live would need the service-wide cap exhausted or the service down.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "query": "prior authorization"
+                }
+            },
+            "res": {
+                "status": 429,
+                "body": {
+                    "text": "MaxedS SalesBook is at capacity for today. Please try again tomorrow.",
+                    "isError": true
+                }
+            }
+        }
+    ]
+}

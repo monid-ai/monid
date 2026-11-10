@@ -1,0 +1,22 @@
+{
+    "name": "alternatives-empty",
+    "description": "Recorded 2026-10-22 from POST https://mcp.maxeds.org/v1/tools/find_alternatives (public, keyless; no request headers kept). A vendor SalesBook has not ranked: 200 with a plain miss in `text`; body verbatim.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "company": "zzqxvqqq"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "text": "No ranked enterprise alternatives found for \"zzqxvqqq\". Try search_startups with a broader problem keyword.",
+                    "isError": false
+                }
+            }
+        }
+    ]
+}

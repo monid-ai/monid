@@ -1,0 +1,22 @@
+{
+    "name": "profile-unknown-id",
+    "description": "Recorded 2026-10-22 from POST https://mcp.maxeds.org/v1/tools/get_profile (public, keyless; no request headers kept). Unknown id: vendor 400 with isError true and a hint to use search_startups; body verbatim.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "startup_id": "x"
+                }
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "text": "{\"error\":\"No startup with id \\\"x\\\". Use search_startups to find the right id (ids look like \\\"commerceiq\\\").\"}",
+                    "isError": true
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "name": "compare-partial",
+    "description": "Recorded 2026-10-22 from POST https://mcp.maxeds.org/v1/tools/compare_vendors (public, keyless; no request headers kept). One ranked vendor and one SalesBook has not listed: 200, the unlisted one reported as such; body verbatim.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "vendors": [
+                        "Glean",
+                        "zzqxvqqq"
+                    ]
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "text": "SalesBook Head-to-Head Enterprise Vendor Comparison (Method v0.2.7)\n\n1. Glean (https://glean.com)\n   • Rank & Sector: #6 in horizontal\n   • Buyer-Readiness Score: 994 · Evidence Grade: 85/100\n   • Agent-Readiness: MCP Connector: NO · llms.txt: NO\n   • Summary: Enterprise search and Work AI platform bought by knowledge workers at Fortune 500s to find, summarize, and automate work across company systems.\n   • Public Deal Proof: Listed in corpus; call get_tombstones for full deal history.\n2. zzqxvqqq — Not listed in SalesBook yet (use report_correction with a public source to add).\n\n\nUnsponsored: SalesBook rankings are never for sale. Every claim is graded from dated public sources.",
+                    "isError": false
+                }
+            }
+        }
+    ]
+}
