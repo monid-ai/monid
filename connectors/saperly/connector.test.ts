@@ -1,8 +1,9 @@
-import { assert, assertEquals } from "@std/assert";
+import { assert, assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import { type Json, type OwnedResource, RunKind, StopKind } from "@shared/core";
 import { fnUtils } from "@monid/connector-engine";
 import {
+    estimateEndpoint,
     liveSkip,
     loadEndpoint,
     loadFixture,
@@ -280,6 +281,23 @@ Deno.test("saperly place-calls: STOP that cannot observe settlement is UNRESOLVE
     assertEquals(stopped.kind, StopKind.UNRESOLVED);
     assert(stopped.kind === StopKind.UNRESOLVED);
     assertEquals(stopped.state.externalRunId, "call-1");
+});
+
+Deno.test("saperly: estimateEndpoint supports resource-bound endpoints without ownership", async () => {
+    const read = await testSealedUnit("saperly#list-numbers");
+    assertEquals(await estimateEndpoint(read, {}), {
+        credits: {},
+        evidence: {},
+    });
+
+    const call = await testSealedUnit("saperly#place-calls");
+    const usage = await estimateEndpoint(call, CALL_INPUT);
+    assertEquals(usage.credits, { default: 0.28 });
+    await assertRejects(
+        () => estimateEndpoint(call, {}),
+        Error,
+        "INVALID_INPUT",
+    );
 });
 
 Deno.test("saperly place-calls: estimate floors at one minute; accrued() prices the mid-flight", async () => {
