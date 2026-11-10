@@ -80,10 +80,15 @@ export function substituteUrl(doc: EndpointDoc, input: RunInput): string {
     for (const placeholder of url.match(/\{[A-Za-z_][A-Za-z0-9_]*\}/g) ?? []) {
         const name = placeholder.slice(1, -1);
         const value = input.pathParams?.[name];
-        if (value === undefined) {
+        // an EMPTY value is as invalid as a missing one: substituted, it
+        // yields an empty path segment (`/v1/items//sub`) that can address
+        // a different vendor route, sent with the endpoint's credentials
+        if (value === undefined || value === "") {
             throw new EngineError(
                 EngineErrorCode.INVALID_INPUT,
-                `${doc.id}: missing pathParams.${name} for url placeholder`,
+                `${doc.id}: ${
+                    value === undefined ? "missing" : "empty"
+                } pathParams.${name} for url placeholder`,
             );
         }
         url = url.replaceAll(placeholder, encodeURIComponent(value));

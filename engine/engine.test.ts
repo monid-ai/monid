@@ -380,6 +380,69 @@ Deno.test("query: nesting is still refused — a query string cannot encode it",
     }
 });
 
+// ---------------------------------------------------------------------------
+// path substitution — an empty placeholder is invalid input, not an empty
+// segment
+// ---------------------------------------------------------------------------
+
+/** demoUnit with the id moved into the URL path, so the substituted URL is
+ *  the assertion surface. */
+async function pathUnit(): Promise<SealedUnit> {
+    const connectors = demoConnector();
+    const endpoint = connectors[0].endpoints[0];
+    endpoint.def.request = { method: "GET", path: "/items/{id}/sub" };
+    endpoint.def.input = {
+        schema: {
+            // deliberately no minLength: the ENGINE boundary must reject
+            // the empty string, not each connector's own schema
+            pathParams: z.object({ id: z.string() }),
+        },
+    };
+    delete endpoint.def.output;
+    // public identity is provider#path (design D22) — the placeholder
+    // stays in the id
+    return sealUnit(
+        await compileBundle(connectors, COMPILE_OPTS),
+        "demo#items/{id}/sub",
+    );
+}
+
+Deno.test("path: a NON-EMPTY id substitutes into the url", async () => {
+    const seen: { url?: string } = {};
+    const engine = new Engine({
+        transport: jsonTransport(200, { results: [] }, seen),
+    });
+    const loaded = await engine.load(await pathUnit());
+    await loaded.run({ pathParams: { id: "abc" } });
+    assertEquals(seen.url, "https://api.demo.test/items/abc/sub");
+});
+
+Deno.test("path: an EMPTY placeholder is INVALID_INPUT — no request is built", async () => {
+    const seen: { url?: string } = {};
+    const engine = new Engine({
+        transport: jsonTransport(200, { results: [] }, seen),
+    });
+    const loaded = await engine.load(await pathUnit());
+    await expectCode(
+        loaded.run({ pathParams: { id: "" } }),
+        EngineErrorCode.INVALID_INPUT,
+    );
+    // `/items//sub` would address a DIFFERENT vendor route with this
+    // endpoint's credentials — nothing may leave the engine
+    assertEquals(seen.url, undefined);
+});
+
+Deno.test("path: a MISSING placeholder stays INVALID_INPUT", async () => {
+    const engine = new Engine({
+        transport: jsonTransport(200, { results: [] }),
+    });
+    const loaded = await engine.load(await pathUnit());
+    await expectCode(
+        loaded.run({ pathParams: {} }),
+        EngineErrorCode.INVALID_INPUT,
+    );
+});
+
 Deno.test("MISSING_CREDENTIAL: fail-closed before any network call", async () => {
     let fetched = false;
     const engine = new Engine({
