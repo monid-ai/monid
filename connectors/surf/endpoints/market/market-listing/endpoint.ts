@@ -9,8 +9,13 @@ export default defineEndpoint({
         displayName: "Exchange Listing Events",
         summary: "Returns historical exchange listing and delisting events.",
         description: "Returns historical exchange listing and delisting " +
-            "events. Filters: date range, exchange, token symbol, " +
-            "product type, event type.",
+            "events from a required start date (from) to an optional end " +
+            "date (to, default now). Filter by token symbol, exchange, " +
+            "product (spot, margin, perp, pre_market_perp, or all by " +
+            "default) and event type (listing by default; also delisting, " +
+            "cancelled, advanced or postponed). Paginated: limit up to 100, " +
+            "default 20; offset. For one project's TGE status and current " +
+            "listing exchanges use /market/tge.",
         docsUrl: "https://docs.asksurf.ai/data-api/market/listing",
         categories: ["token-prices"],
     },

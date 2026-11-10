@@ -9,9 +9,14 @@ export default defineEndpoint({
     meta: {
         displayName: "Token Generation Event",
         summary: "Returns Token Generation Event (TGE) status for a project.",
-        description: "Returns Token Generation Event (TGE) status for a " +
-            "project. Includes current status, last event time, and " +
-            "listing exchanges.",
+        description: "Returns a project's Token Generation Event (TGE) " +
+            "status: current status, last event time, and the exchanges " +
+            "listing the token. Look the project up by Surf project UUID " +
+            "(id) or by name or symbol (q, e.g. bitcoin); at least one is " +
+            "required, and id wins when both are given. For its public sale " +
+            "(IDO/ICO/IEO) price and ROI use /market/public-sale; for " +
+            "listing and delisting events across exchanges use " +
+            "/market/listing.",
         docsUrl: "https://docs.asksurf.ai/data-api/market/tge",
         categories: ["token-prices"],
         notes: [
