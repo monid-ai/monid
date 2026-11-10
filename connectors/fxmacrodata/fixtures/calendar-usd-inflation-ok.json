@@ -1,0 +1,88 @@
+{
+    "name": "calendar-usd-inflation-ok",
+    "description": "Recorded 2026-10-15, keyless GET /v1/calendar/USD?indicator=inflation&start_date=2026-10-01&end_date=2026-12-31. Untrimmed.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.fxmacrodata.com/v1/calendar/USD?indicator=inflation&start_date=2026-10-01&end_date=2026-12-31"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "currency": "USD",
+                    "timezone": "America/New_York",
+                    "indicator": "inflation",
+                    "start_date": "2026-10-01",
+                    "end_date": "2026-12-31",
+                    "history_start_date": "2026-07-27",
+                    "history_truncated": false,
+                    "data_quality": {
+                        "is_official": true,
+                        "is_proxy": false,
+                        "is_fallback": false,
+                        "is_stale": false,
+                        "has_announcement_datetime": true,
+                        "point_in_time_safe": true,
+                        "unverified_vintage_count": 0,
+                        "unknown_publication_time_count": 0,
+                        "latest_available_date": "2026-12-10",
+                        "source_name": "Official release calendars",
+                        "source_type": "official",
+                        "is_derived": false,
+                        "row_count": 2,
+                        "announcement_datetime_count": 2,
+                        "missing_announcement_datetime_count": 0,
+                        "has_assumed_release_times": false,
+                        "assumed_release_time_count": 0,
+                        "bounded_release_time_count": 0,
+                        "unbounded_release_time_count": 0,
+                        "quality_scope": "scheduled_releases"
+                    },
+                    "data": [
+                        {
+                            "announcement_datetime": 1794317400,
+                            "release": "inflation",
+                            "calendar_event_id": "usd_inflation_1794317400",
+                            "announcement_datetime_utc": "2026-11-10T13:30:00+00:00",
+                            "announcement_datetime_local": "2026-11-10T08:30:00-05:00",
+                            "release_date_confirmed": true,
+                            "time_announced": true,
+                            "name": "Inflation (CPI)",
+                            "unit": "%YoY",
+                            "frequency": "Monthly",
+                            "annualization": "NOT_ANNUALIZED",
+                            "source": "Bureau of Labor Statistics news release schedule",
+                            "source_url": "https://www.bls.gov/schedule/news_release/cpi.htm",
+                            "reference_period": "October 2026",
+                            "date": "2026-10-31",
+                            "event_importance": "high",
+                            "market_tier": 1,
+                            "top_tier_for_currency": true
+                        },
+                        {
+                            "announcement_datetime": 1796909400,
+                            "release": "inflation",
+                            "calendar_event_id": "usd_inflation_1796909400",
+                            "announcement_datetime_utc": "2026-12-10T13:30:00+00:00",
+                            "announcement_datetime_local": "2026-12-10T08:30:00-05:00",
+                            "release_date_confirmed": true,
+                            "time_announced": true,
+                            "name": "Inflation (CPI)",
+                            "unit": "%YoY",
+                            "frequency": "Monthly",
+                            "annualization": "NOT_ANNUALIZED",
+                            "source": "Bureau of Labor Statistics news release schedule",
+                            "source_url": "https://www.bls.gov/schedule/news_release/cpi.htm",
+                            "reference_period": "November 2026",
+                            "date": "2026-11-30",
+                            "event_importance": "high",
+                            "market_tier": 1,
+                            "top_tier_for_currency": true
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

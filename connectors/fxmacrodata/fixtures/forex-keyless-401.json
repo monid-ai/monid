@@ -1,0 +1,22 @@
+{
+    "name": "forex-keyless-401",
+    "description": "Recorded 2026-10-15, GET /v1/forex/EUR/USD?limit=2 without an API key: 401 api_key_required. FX rates need a key for every pair.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.fxmacrodata.com/v1/forex/EUR/USD?limit=2"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "detail": "This endpoint requires an Individual or Business API key. Subscribe at https://fxmacrodata.com/subscribe?utm_source=api&utm_medium=referral&utm_campaign=api_message",
+                    "code": "api_key_required",
+                    "error": "api_key_required",
+                    "subscribe_url": "https://fxmacrodata.com/subscribe?utm_source=api&utm_medium=referral&utm_campaign=api_key_required",
+                    "free_example": "https://api.fxmacrodata.com/v1/announcements/usd/inflation"
+                }
+            }
+        }
+    ]
+}

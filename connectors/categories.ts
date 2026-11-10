@@ -385,4 +385,11 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "Tools to pull public government records, including financial " +
             "disclosures, filings, registries, and more.",
     },
+    {
+        id: "economic-data",
+        displayName: "Economic Data",
+        description:
+            "Tools to pull macroeconomic data, including official indicator " +
+            "releases, release calendars, exchange rates, and more.",
+    },
 ]);

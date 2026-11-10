@@ -1,0 +1,212 @@
+{
+    "name": "announcements-usd-inflation-ok",
+    "description": "Recorded 2026-10-15, keyless GET /v1/announcements/USD/inflation?limit=2&fields=compact. Untrimmed. Shows the free-tier freemium_window (90 days) and freemium_delay notices.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.fxmacrodata.com/v1/announcements/USD/inflation?limit=2&fields=compact"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "currency": "USD",
+                    "indicator": "inflation",
+                    "name": "Inflation (CPI)",
+                    "source": "BLS",
+                    "source_url": "https://www.bls.gov/",
+                    "source_series_id": "BLS:CUUR0000SA0",
+                    "source_series_name": "Consumer Price Index for All Urban Consumers: All Items",
+                    "seasonal_adjustment": "NSA",
+                    "is_proxy": false,
+                    "provenance": {
+                        "storage": "FXMacroData",
+                        "is_proxy": false,
+                        "publisher": "BLS",
+                        "served_by": "/v1/announcements/{currency}/{indicator}",
+                        "proxy_note": null,
+                        "price_basis": null,
+                        "value_field": "val",
+                        "publisher_url": "https://www.bls.gov/",
+                        "timestamp_field": "announcement_datetime",
+                        "source_series_id": "BLS:CUUR0000SA0",
+                        "source_local_name": null,
+                        "source_series_name": "Consumer Price Index for All Urban Consumers: All Items",
+                        "seasonal_adjustment": "NSA"
+                    },
+                    "has_official_forecast": true,
+                    "requested_start_date": "2026-07-17",
+                    "requested_end_date": "2026-10-15",
+                    "requested_window_has_data": true,
+                    "page_includes_latest_available": true,
+                    "start_date": "2026-07-31",
+                    "end_date": "2026-10-15",
+                    "earliest_available_date": "2026-07-31",
+                    "latest_available_date": "2026-09-30",
+                    "cb_target": {
+                        "description": "Federal Reserve inflation objective (2% goal is defined on PCE, not CPI)",
+                        "source": "Federal Reserve Statement on Longer-Run Goals and Monetary Policy Strategy",
+                        "current": {
+                            "effective_from": "2020-08-27",
+                            "target": 2.0,
+                            "notes": "Flexible Average Inflation Targeting (FAIT) adopted; 2% remains the long-run goal (defined on PCE)"
+                        },
+                        "history": [
+                            {
+                                "effective_from": "2012-01-25",
+                                "target": 2.0,
+                                "notes": "First explicit 2% inflation goal announced by FOMC (defined on the PCE price index)"
+                            },
+                            {
+                                "effective_from": "2020-08-27",
+                                "target": 2.0,
+                                "notes": "Flexible Average Inflation Targeting (FAIT) adopted; 2% remains the long-run goal (defined on PCE)"
+                            }
+                        ]
+                    },
+                    "remap": {
+                        "applied": false,
+                        "rule_id": null,
+                        "transform": "raw",
+                        "canonical_indicator": "inflation"
+                    },
+                    "filters": {
+                        "basis": null,
+                        "frequency": null,
+                        "revisions": "latest",
+                        "seasonality": null,
+                        "annualization": null,
+                        "period_aggregation": null
+                    },
+                    "selected_series_id": "usd_inflation_canonical_yoy_nsa_not_annualized_monthly",
+                    "selected_series": {
+                        "basis": null,
+                        "label": "Inflation, YOY, NSA",
+                        "frequency": "yoy",
+                        "revisions": "latest",
+                        "series_id": "usd_inflation_canonical_yoy_nsa_not_annualized_monthly",
+                        "seasonality": "nsa",
+                        "annualization": "not_annualized",
+                        "source_series_id": "BLS:CUUR0000SA0",
+                        "period_aggregation": "monthly"
+                    },
+                    "supported_options": {
+                        "basis": [],
+                        "frequency": [
+                            "yoy",
+                            "mom",
+                            "qoq"
+                        ],
+                        "revisions": [
+                            "latest",
+                            "first",
+                            "final",
+                            "all"
+                        ],
+                        "seasonality": [
+                            "nsa",
+                            "sa"
+                        ],
+                        "annualization": [
+                            "not_annualized",
+                            "saar"
+                        ],
+                        "period_aggregation": [
+                            "monthly",
+                            "quarterly_average"
+                        ]
+                    },
+                    "data_quality": {
+                        "is_official": true,
+                        "is_proxy": false,
+                        "is_fallback": false,
+                        "is_stale": false,
+                        "has_announcement_datetime": true,
+                        "point_in_time_safe": false,
+                        "unverified_vintage_count": 3,
+                        "unknown_publication_time_count": 0,
+                        "latest_available_date": "2026-09-30",
+                        "data_lag_days": 15,
+                        "source_name": "BLS",
+                        "source_type": "official",
+                        "is_derived": false,
+                        "row_count": 3,
+                        "announcement_datetime_count": 3,
+                        "missing_announcement_datetime_count": 0,
+                        "has_assumed_release_times": false,
+                        "assumed_release_time_count": 0,
+                        "bounded_release_time_count": 0,
+                        "unbounded_release_time_count": 0,
+                        "quality_scope": "full_result",
+                        "stale_after_days": 95,
+                        "requested_window_has_data": true,
+                        "page_includes_latest_available": true
+                    },
+                    "dataset_version": "19af538663c9fede8f8ff52796ddd5f1d930e9c0061cfd420da9850b5ba53df0",
+                    "value_mode": "normalized",
+                    "value_metadata": {
+                        "source_unit": "%YoY",
+                        "normalization_applied": true
+                    },
+                    "pagination": {
+                        "limit": 2,
+                        "offset": 0,
+                        "returned_count": 2,
+                        "total_count": 3,
+                        "has_more": true,
+                        "next_offset": 2,
+                        "page_includes_latest_available": true
+                    },
+                    "freemium_window": {
+                        "applied": true,
+                        "max_days": 90,
+                        "cutoff_date": "2026-07-17",
+                        "message": "Anonymous access returns the most recent 90 days. Supply an API key for the full history."
+                    },
+                    "freemium_delay": {
+                        "applied": true,
+                        "delay_seconds": 900,
+                        "delay_minutes": 15,
+                        "cutoff": 1792050900,
+                        "cutoff_iso": "2026-10-15T07:55:00Z",
+                        "withheld_count": 0,
+                        "message": "Free access is delayed by 15 minutes. Releases published in the last 15 minutes are withheld. An Individual or Business API key returns them in real time.",
+                        "subscribe_url": "https://fxmacrodata.com/subscribe?utm_source=api&utm_medium=referral&utm_campaign=freemium_delay"
+                    },
+                    "data": [
+                        {
+                            "date": "2026-09-30",
+                            "val": 3.7,
+                            "previous_value": 3.4,
+                            "change_from_previous": 0.30000000000000027,
+                            "announcement_datetime": 1791981000,
+                            "announcement_datetime_local": "2026-10-14T08:30:00-04:00",
+                            "publication_time_status": "unverified",
+                            "revisions_summary": {
+                                "count": 1,
+                                "first": 3.7,
+                                "latest": 3.7,
+                                "revised": false
+                            }
+                        },
+                        {
+                            "date": "2026-08-31",
+                            "val": 3.4,
+                            "previous_value": 3.4,
+                            "change_from_previous": 0.0,
+                            "announcement_datetime": 1789129800,
+                            "announcement_datetime_local": "2026-09-11T08:30:00-04:00",
+                            "publication_time_status": "unverified",
+                            "revisions_summary": {
+                                "count": 1,
+                                "first": 3.4,
+                                "latest": 3.4,
+                                "revised": false
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,211 @@
+{
+    "name": "catalogue-usd-ok",
+    "description": "Recorded 2026-10-15, keyless GET /v1/data_catalogue/USD. Trimmed to two of the 78 indicator entries (gdp, inflation); entries otherwise as served.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.fxmacrodata.com/v1/data_catalogue/USD"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "gdp": {
+                        "name": "GDP",
+                        "unit": "USD bn",
+                        "source": "BEA",
+                        "coverage": {
+                            "available": true,
+                            "row_count": 318,
+                            "data_lag_days": 77,
+                            "has_recent_data": true,
+                            "value_available": true,
+                            "coverage_quality": "complete",
+                            "requires_api_key": false,
+                            "stale_after_days": 170,
+                            "freshness_quality": "fresh",
+                            "has_mom_transform": null,
+                            "has_qoq_transform": null,
+                            "has_yoy_transform": null,
+                            "usable_for_signal": true,
+                            "usable_for_context": true,
+                            "latest_release_date": "2026-07-30",
+                            "latest_available_date": "2026-06-30",
+                            "earliest_available_date": "1947-03-31",
+                            "history_coverage_quality": "complete",
+                            "recent_observation_count": 1,
+                            "source_freshness": "monitoring_unknown",
+                            "source_monitoring_complete": false,
+                            "known_source_gap": false
+                        },
+                        "frequency": "Quarterly",
+                        "price_basis": "REAL",
+                        "series_variants": [
+                            {
+                                "unit": "USD bn",
+                                "frequency": "Quarterly",
+                                "series_id": "usd_gdp_real_sa",
+                                "is_default": true,
+                                "price_basis": "REAL",
+                                "annualization": "NOT_ANNUALIZED",
+                                "source_series_id": "BEA:NIPA:T10106:Line1",
+                                "storage_indicator": "gdp",
+                                "source_series_name": "Real Gross Domestic Product, chained dollars",
+                                "seasonal_adjustment": "SA"
+                            },
+                            {
+                                "unit": "USD bn",
+                                "frequency": "Quarterly",
+                                "series_id": "usd_gdp_nominal_sa",
+                                "price_basis": "NOMINAL",
+                                "annualization": "NOT_ANNUALIZED",
+                                "source_series_id": "BEA:NIPA:T10105:Line1",
+                                "storage_indicator": "gdp_nominal",
+                                "source_series_name": "Gross Domestic Product, current dollars",
+                                "seasonal_adjustment": "SA"
+                            },
+                            {
+                                "unit": "%QoQ SAAR",
+                                "frequency": "Quarterly",
+                                "series_id": "usd_gdp_real_qoq_saar_sa",
+                                "price_basis": "REAL",
+                                "annualization": "SAAR",
+                                "source_series_id": "BEA:NIPA:T10101:Line1",
+                                "storage_indicator": "gdp_growth_qoq_saar",
+                                "frequency_selector": "qoq",
+                                "source_series_name": "Real Gross Domestic Product, percent change from preceding period",
+                                "seasonal_adjustment": "SA"
+                            }
+                        ],
+                        "source_series_id": "BEA:NIPA:T10106:Line1",
+                        "supported_options": {
+                            "basis": [
+                                "real",
+                                "nominal"
+                            ],
+                            "frequency": [
+                                "level",
+                                "qoq",
+                                "yoy"
+                            ],
+                            "revisions": [
+                                "latest"
+                            ],
+                            "seasonality": [
+                                "sa"
+                            ],
+                            "annualization": [
+                                "not_annualized",
+                                "saar"
+                            ],
+                            "period_aggregation": []
+                        },
+                        "source_series_name": "Real Gross Domestic Product, chained dollars",
+                        "seasonal_adjustment": "SA",
+                        "source_history_start": "1947-03-31",
+                        "has_official_forecast": true
+                    },
+                    "inflation": {
+                        "name": "Inflation (CPI)",
+                        "unit": "%YoY",
+                        "source": "BLS",
+                        "coverage": {
+                            "available": true,
+                            "row_count": 1351,
+                            "data_lag_days": 34,
+                            "has_recent_data": true,
+                            "value_available": true,
+                            "coverage_quality": "complete",
+                            "requires_api_key": false,
+                            "stale_after_days": 95,
+                            "freshness_quality": "fresh",
+                            "has_mom_transform": null,
+                            "has_qoq_transform": null,
+                            "has_yoy_transform": null,
+                            "usable_for_signal": true,
+                            "usable_for_context": true,
+                            "latest_release_date": "2026-09-11",
+                            "latest_available_date": "2026-08-31",
+                            "earliest_available_date": "1914-01-31",
+                            "history_coverage_quality": "complete",
+                            "recent_observation_count": 2,
+                            "source_freshness": "monitoring_unknown",
+                            "source_monitoring_complete": false,
+                            "known_source_gap": false
+                        },
+                        "frequency": "Monthly",
+                        "annualization": "NOT_ANNUALIZED",
+                        "series_variants": [
+                            {
+                                "unit": "%YoY",
+                                "frequency": "Monthly",
+                                "series_id": "usd_inflation_cpi_yoy_nsa",
+                                "is_default": true,
+                                "annualization": "NOT_ANNUALIZED",
+                                "source_series_id": "BLS:CUUR0000SA0",
+                                "storage_indicator": "inflation",
+                                "frequency_selector": "yoy",
+                                "period_aggregation": "monthly",
+                                "source_series_name": "Consumer Price Index for All Urban Consumers: All Items",
+                                "seasonal_adjustment": "NSA"
+                            },
+                            {
+                                "unit": "%MoM",
+                                "frequency": "Monthly",
+                                "series_id": "usd_inflation_cpi_mom_sa",
+                                "annualization": "NOT_ANNUALIZED",
+                                "source_series_id": "BLS:CUSR0000SA0",
+                                "storage_indicator": "inflation_mom",
+                                "frequency_selector": "mom",
+                                "period_aggregation": "monthly",
+                                "source_series_name": "Consumer Price Index for All Urban Consumers: All Items",
+                                "seasonal_adjustment": "SA"
+                            },
+                            {
+                                "unit": "%QoQ SAAR",
+                                "frequency": "Quarterly",
+                                "series_id": "usd_inflation_cpi_qavg_qoq_saar_sa",
+                                "annualization": "SAAR",
+                                "source_series_id": "BLS:CUSR0000SA0:qoq_saar",
+                                "storage_indicator": "inflation_qoq_saar",
+                                "frequency_selector": "qoq",
+                                "period_aggregation": "quarterly_average",
+                                "source_series_name": "Consumer Price Index for All Urban Consumers: All Items, quarterly average QoQ SAAR",
+                                "seasonal_adjustment": "SA"
+                            }
+                        ],
+                        "source_series_id": "BLS:CUUR0000SA0",
+                        "supported_options": {
+                            "basis": [],
+                            "frequency": [
+                                "yoy",
+                                "mom",
+                                "qoq"
+                            ],
+                            "revisions": [
+                                "latest"
+                            ],
+                            "seasonality": [
+                                "nsa",
+                                "sa"
+                            ],
+                            "annualization": [
+                                "not_annualized",
+                                "saar"
+                            ],
+                            "period_aggregation": [
+                                "monthly",
+                                "quarterly_average"
+                            ]
+                        },
+                        "period_aggregation": "monthly",
+                        "source_series_name": "Consumer Price Index for All Urban Consumers: All Items",
+                        "seasonal_adjustment": "NSA",
+                        "source_history_start": "1914-01-31",
+                        "has_official_forecast": true
+                    }
+                }
+            }
+        }
+    ]
+}
