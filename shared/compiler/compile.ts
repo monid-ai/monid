@@ -107,6 +107,27 @@ export interface CompileOptions {
     logger?: Logger;
 }
 
+/** Detect explicit type restrictions that rule out RunInput's parameter maps.
+ *  This is conservative: unconstrained schemas and refs are left to validation,
+ *  rather than requiring a top-level type that object compositions may omit. */
+function excludesObjectType(schema: Json): boolean {
+    if (
+        schema === null || typeof schema !== "object" || Array.isArray(schema)
+    ) {
+        return schema === false;
+    }
+    if (
+        (typeof schema.type === "string" && schema.type !== "object") ||
+        (Array.isArray(schema.type) && !schema.type.includes("object"))
+    ) return true;
+    if (Array.isArray(schema.allOf) && schema.allOf.some(excludesObjectType)) {
+        return true;
+    }
+    return [schema.anyOf, schema.oneOf].some((branches) =>
+        Array.isArray(branches) && branches.every(excludesObjectType)
+    );
+}
+
 function semverMax(versions: string[]): string {
     let max = parseSemver(SC.docFormatSince);
     for (const version of versions) {
@@ -723,6 +744,17 @@ export async function compileBundle(
                     `${where}: input.schema.pathParams`,
                 ),
             };
+
+            for (const section of ["queryParams", "pathParams"] as const) {
+                const schema = inputSchemas[section];
+                if (schema && excludesObjectType(schema)) {
+                    throw new CompileError(
+                        CompileErrorCode.DOC_MALFORMED,
+                        `${where}: input.schema.${section} must allow object values ` +
+                            `— RunInput supplies a parameter map`,
+                    );
+                }
+            }
 
             // ---- usage.updateEstimateEveryMs (design D40) -----------------
             // Resolved endpoint ?? provider like every other usage leaf
