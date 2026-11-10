@@ -1,0 +1,169 @@
+{
+    "name": "parallel-fetch-recorded",
+    "description": "Recorded anonymous MCP initialization, notification, tool result and session termination, 2026-10-11. Session header replaced with fixture-session; responses trimmed and scrubbed.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://search.parallel.ai/mcp",
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "method": "initialize",
+                    "params": {
+                        "protocolVersion": "2025-03-26",
+                        "capabilities": {},
+                        "clientInfo": {
+                            "name": "monid",
+                            "version": "1.0.0"
+                        }
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "headers": {
+                    "mcp-session-id": "fixture-session"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "protocolVersion": "2025-03-26",
+                        "capabilities": {
+                            "experimental": {},
+                            "prompts": {
+                                "listChanged": false
+                            },
+                            "resources": {
+                                "subscribe": false,
+                                "listChanged": false
+                            },
+                            "tools": {
+                                "listChanged": false
+                            }
+                        },
+                        "serverInfo": {
+                            "name": "Parallel Web Search MCP Server",
+                            "version": "1.27.0",
+                            "websiteUrl": "https://parallel.ai",
+                            "icons": [
+                                {
+                                    "src": "https://assets.parallel.ai/dark-parallel-avatar-270.svg",
+                                    "mimeType": "image/svg+xml",
+                                    "theme": "light"
+                                },
+                                {
+                                    "src": "https://assets.parallel.ai/dark-parallel-avatar-270.png",
+                                    "mimeType": "image/png",
+                                    "sizes": [
+                                        "270x270"
+                                    ],
+                                    "theme": "light"
+                                }
+                            ]
+                        },
+                        "instructions": "\nThe search and fetch tools are read-only, idempotent, and safe to call\nconcurrently. When several independent search or fetch objectives are already\nknown, issue one tool call per objective concurrently; do not wait for one\nresult before starting another. Batch related search queries or URLs that share\na common objective into one call.\n\n\n\nUse web_search first for most factual, current-information, research,\ncomparison, documentation, and troubleshooting questions.\n\nThe web_search results includ"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://search.parallel.ai/mcp",
+                "body": {
+                    "jsonrpc": "2.0",
+                    "method": "notifications/initialized"
+                }
+            },
+            "res": {
+                "status": 202,
+                "headers": {
+                    "mcp-session-id": "fixture-session"
+                },
+                "body": null
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://search.parallel.ai/mcp",
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 2,
+                    "method": "tools/call",
+                    "params": {
+                        "name": "web_fetch",
+                        "arguments": {
+                            "urls": [
+                                "https://deno.com/blog/v2.0"
+                            ],
+                            "objective": "Deno 2 release features",
+                            "session_id": "c60dac7f-d33a-4643-bd06-7f7bf514b1f8"
+                        }
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "headers": {
+                    "mcp-session-id": "fixture-session"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 2,
+                    "result": {
+                        "_meta": {
+                            "parallel/usage": [
+                                {
+                                    "name": "sku_extract_excerpts",
+                                    "count": 1,
+                                    "cost_usd": 0.001
+                                }
+                            ]
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "{\n  \"extract_id\": \"extract_35ba304a689e504f491225a3be81a805\",\n  \"results\": [\n    {\n      \"url\": \"https://deno.com/blog/v2.0\",\n      \"title\": \"Announcing Deno 2 | Deno\",\n      \"publish_date\": null,\n      \"excerpts\": [\n        \"Introducing celld: self-hosted, distributed Durable Objects\\n[Learn more ->](https://celld.dev/)\\nDismiss\\n[](https://deno.com/)\\n`⌘K`\\n`↑↓ Up or down to` navigate `↵ Enter to` select `ESC Escape to` close Search powered by Orama Search powered by Orama\\n`⌘K`\\n\\n...\\n\\n# An"
+                            }
+                        ],
+                        "structuredContent": {
+                            "extract_id": "extract_35ba304a689e504f491225a3be81a805",
+                            "results": [
+                                {
+                                    "url": "https://deno.com/blog/v2.0",
+                                    "title": "Announcing Deno 2 | Deno",
+                                    "publish_date": null,
+                                    "excerpts": [
+                                        "Introducing celld: self-hosted, distributed Durable Objects\n[Learn more ->](https://celld.dev/)\nDismiss\n[](https://deno.com/)\n`⌘K`\n`↑↓ Up or down to` navigate `↵ Enter to` select `ESC Escape to` close Search powered by Orama Search powered by Orama\n`⌘K`\n\n...\n\n# Announcing Deno 2\n## Announcing Deno 2\n* **Native TypeScript support**\n* **Built on web standards** : Promises, fetch, and ES Modules\n* **Batteries included** : builtin formatter, linter, type checker, test\n  framework, compile to executa"
+                                    ],
+                                    "full_content": null
+                                }
+                            ],
+                            "errors": [],
+                            "warnings": null,
+                            "metadata": null,
+                            "session_id": "c60dac7f-d33a-4643-bd06-7f7bf514b1f8"
+                        },
+                        "isError": false
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "DELETE",
+                "url": "https://search.parallel.ai/mcp"
+            },
+            "res": {
+                "status": 200,
+                "headers": {
+                    "mcp-session-id": "fixture-session"
+                },
+                "body": null
+            }
+        }
+    ]
+}

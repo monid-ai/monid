@@ -265,3 +265,30 @@ Deno.test("zRecordedCall: response headers outside the allowlist are rejected", 
     };
     assertEquals(zRecordedCall.safeParse(smuggled).success, false);
 });
+
+Deno.test("MCP recording: live session is forwarded for execution and redacted before disk", async () => {
+    const sink: Parameters<typeof scrubCalls>[0] = [];
+    const recorded = recordingFetch(() =>
+        Promise.resolve(
+            new Response("{}", {
+                headers: {
+                    "mcp-session-id": "live-opaque-session-token",
+                    "set-cookie": "secret",
+                },
+            }),
+        ), sink);
+    const response = await recorded("https://search.parallel.ai/mcp", {
+        method: "POST",
+    });
+    assertEquals(
+        response.headers.get("mcp-session-id"),
+        "live-opaque-session-token",
+    );
+    assertEquals(response.headers.get("set-cookie"), null);
+    assertEquals(scrubCalls(sink)[0].res.headers, {
+        "mcp-session-id": "fixture-session",
+    });
+    assertEquals(zRecordedCall.parse(scrubCalls(sink)[0]).res.headers, {
+        "mcp-session-id": "fixture-session",
+    });
+});

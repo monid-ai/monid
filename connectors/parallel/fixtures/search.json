@@ -1,0 +1,175 @@
+{
+    "name": "parallel-search-recorded",
+    "description": "Recorded anonymous MCP initialization, notification, tool result and session termination, 2026-10-11. Session header replaced with fixture-session; responses trimmed and scrubbed.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://search.parallel.ai/mcp",
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "method": "initialize",
+                    "params": {
+                        "protocolVersion": "2025-03-26",
+                        "capabilities": {},
+                        "clientInfo": {
+                            "name": "monid",
+                            "version": "1.0.0"
+                        }
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "headers": {
+                    "mcp-session-id": "fixture-session"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "protocolVersion": "2025-03-26",
+                        "capabilities": {
+                            "experimental": {},
+                            "prompts": {
+                                "listChanged": false
+                            },
+                            "resources": {
+                                "subscribe": false,
+                                "listChanged": false
+                            },
+                            "tools": {
+                                "listChanged": false
+                            }
+                        },
+                        "serverInfo": {
+                            "name": "Parallel Web Search MCP Server",
+                            "version": "1.27.0",
+                            "websiteUrl": "https://parallel.ai",
+                            "icons": [
+                                {
+                                    "src": "https://assets.parallel.ai/dark-parallel-avatar-270.svg",
+                                    "mimeType": "image/svg+xml",
+                                    "theme": "light"
+                                },
+                                {
+                                    "src": "https://assets.parallel.ai/dark-parallel-avatar-270.png",
+                                    "mimeType": "image/png",
+                                    "sizes": [
+                                        "270x270"
+                                    ],
+                                    "theme": "light"
+                                }
+                            ]
+                        },
+                        "instructions": "\nThe search and fetch tools are read-only, idempotent, and safe to call\nconcurrently. When several independent search or fetch objectives are already\nknown, issue one tool call per objective concurrently; do not wait for one\nresult before starting another. Batch related search queries or URLs that share\na common objective into one call.\n\n\n\nUse web_search first for most factual, current-information, research,\ncomparison, documentation, and troubleshooting questions.\n\nThe web_search results includ"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://search.parallel.ai/mcp",
+                "body": {
+                    "jsonrpc": "2.0",
+                    "method": "notifications/initialized"
+                }
+            },
+            "res": {
+                "status": 202,
+                "headers": {
+                    "mcp-session-id": "fixture-session"
+                },
+                "body": null
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://search.parallel.ai/mcp",
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 2,
+                    "method": "tools/call",
+                    "params": {
+                        "name": "web_search",
+                        "arguments": {
+                            "objective": "Find the official Deno 2 release announcement",
+                            "search_queries": [
+                                "Deno 2 release official"
+                            ],
+                            "session_id": "c60dac7f-d33a-4643-bd06-7f7bf514b1f8"
+                        }
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "headers": {
+                    "mcp-session-id": "fixture-session"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 2,
+                    "result": {
+                        "_meta": {
+                            "parallel/usage": [
+                                {
+                                    "name": "sku_search",
+                                    "count": 1,
+                                    "cost_usd": 0.001
+                                }
+                            ]
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "{\n  \"search_id\": \"search_749ce92b31312340c980ea9e5171f7fe\",\n  \"results\": [\n    {\n      \"url\": \"https://deno.com/blog/v2.0\",\n      \"title\": \"Announcing Deno 2 | Deno\",\n      \"publish_date\": null,\n      \"excerpts\": [\n        \"Announcing Deno 2\\nOctober 9, 2024\\n* Ryan Dahl\\n* Bert Belder\\n* Bartek Iwańczuk\\n* Andy Jiang\\n* Product Update\\n  Watch our video announcement.\\nAnnouncing Deno 2\\nIn an effort to simplify web programming, we created Deno: a modern, all-in-one, zero-config toolchain for Ja"
+                            }
+                        ],
+                        "structuredContent": {
+                            "search_id": "search_749ce92b31312340c980ea9e5171f7fe",
+                            "results": [
+                                {
+                                    "url": "https://deno.com/blog/v2.0",
+                                    "title": "Announcing Deno 2 | Deno",
+                                    "publish_date": null,
+                                    "excerpts": [
+                                        "Announcing Deno 2\nOctober 9, 2024\n* Ryan Dahl\n* Bert Belder\n* Bartek Iwańczuk\n* Andy Jiang\n* Product Update\n  Watch our video announcement.\nAnnouncing Deno 2\nIn an effort to simplify web programming, we created Deno: a modern, all-in-one, zero-config toolchain for JavaScript and TypeScript development.\nThis means seamless interoperability with legacy JavaScript infrastructure and support for a wider range of projects and development teams. All without sacrificing the simplicity, security, and “b"
+                                    ]
+                                },
+                                {
+                                    "url": "https://deno.com/blog?tag=product-update",
+                                    "title": "Blog | Deno",
+                                    "publish_date": null,
+                                    "excerpts": [
+                                        "Deno 2.9 deno desktop for building native desktop apps from web tech, first-class migration from npm/pnpm/yarn/Bun, CSS module imports, snapshot and parameterized testing, smaller deno compile --bundle binaries, and Node.js 26 compatibility. > Deno 2.8 import defer, six new subcommands (deno transpile, deno pack, deno bump-version, deno ci, deno why, deno audit fix), network debugging in Chrome DevTools, framework-aware deno compile, and 3.66x faster cold npm installs. > Deno 2.0 Release Candida"
+                                    ]
+                                }
+                            ],
+                            "warnings": null,
+                            "metadata": null,
+                            "session_id": "c60dac7f-d33a-4643-bd06-7f7bf514b1f8"
+                        },
+                        "isError": false
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "DELETE",
+                "url": "https://search.parallel.ai/mcp"
+            },
+            "res": {
+                "status": 200,
+                "headers": {
+                    "mcp-session-id": "fixture-session"
+                },
+                "body": null
+            }
+        }
+    ]
+}
