@@ -21,7 +21,7 @@ export default defineEndpoint({
             "instead of the full text. Use this when you already know " +
             "the URL; start from /search if you don't.",
         docsUrl: "https://docs.keenable.ai/api-reference/fetch",
-        categories: ["web-scraping"],
+        categories: ["web-scraping", "web-extraction"],
         notes: [
             "One credit per page, indexed or live, with or without a " +
             "prompt. Errors are free.",

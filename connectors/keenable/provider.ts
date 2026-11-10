@@ -33,7 +33,12 @@ export default defineProvider({
             "returning the whole page.",
         homepageUrl: "https://keenable.ai",
         docsUrl: "https://docs.keenable.ai",
-        categories: ["web-search"],
+        categories: [
+            "web-search",
+            "news-search",
+            "web-scraping",
+            "web-extraction",
+        ],
     },
     auth: { inject: presets.auth.header("X-API-Key") },
     request: { baseUrl: "https://api.keenable.ai" },
