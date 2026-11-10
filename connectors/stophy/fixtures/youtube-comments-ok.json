@@ -1,0 +1,60 @@
+{
+    "name": "youtube-comments-ok",
+    "description": "Stophy /v1/youtube/comments happy path, recorded on the keyless tier 2026-11-02 (record diet: lists trimmed). 1 Stophy call: results non-empty. Commenter identity fields replaced with placeholders.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "videoId": "p0fybvFyOlM"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "results": [
+                            {
+                                "commentId": "UgxzofZjVZTGbGSqq9N4AaABAg",
+                                "commentUrl": "https://www.youtube.com/watch?v=p0fybvFyOlM&lc=UgxzofZjVZTGbGSqq9N4AaABAg",
+                                "text": "Sandbox aren't enough. Your agents need a devbox. A full development environment with all your dependencies. https://trm.sh/namespace",
+                                "authorId": "UC000000000000000000000001",
+                                "authorName": "@commenter1",
+                                "authorUsername": "commenter1",
+                                "authorUrl": "https://www.youtube.com/@commenter1",
+                                "likes": 46,
+                                "replies": 13,
+                                "publishedAt": "2026-10-05T00:00:00.000Z",
+                                "isPinned": true,
+                                "isHearted": false,
+                                "isChannelOwner": true,
+                                "repliesCursor": "of3LST9mEg0SC3AwZnlidkZ5T2xNGAYygwEaUBIaVWd4em9mWmpWWlRHYkdTcXE5TjRBYUFCQWciAggAKhhVQ1V5ZWx1QlJoR1BDVzRyUGVfVXZCWlEyC3AwZnlidkZ5T2xNQAFICoIBAggBQi9jb21tZW50LXJlcGxpZXMtaXRlbS1VZ3h6b2ZaalZaVEdiR1NxcTlONEFhQUJBZw%3D%3D"
+                            },
+                            {
+                                "commentId": "Ugxo_XEYhOVjl0IfmNh4AaABAg",
+                                "commentUrl": "https://www.youtube.com/watch?v=p0fybvFyOlM&lc=Ugxo_XEYhOVjl0IfmNh4AaABAg",
+                                "text": "available 24/7: that's 24 minutes a day, 7 days a month",
+                                "authorId": "UC000000000000000000000002",
+                                "authorName": "@commenter2",
+                                "authorUsername": "commenter2",
+                                "authorUrl": "https://www.youtube.com/@commenter2",
+                                "likes": 1000,
+                                "replies": 5,
+                                "publishedAt": "2026-10-05T00:00:00.000Z",
+                                "isPinned": false,
+                                "isHearted": false,
+                                "isChannelOwner": false,
+                                "repliesCursor": "99LsEDoQEg0SC3AwZnlidkZ5T2xNGAYygwEaUBIaVWd4b19YRVloT1ZqbDBJZm1OaDRBYUFCQWciAggAKhhVQ1V5ZWx1QlJoR1BDVzRyUGVfVXZCWlEyC3AwZnlidkZ5T2xNQAFICoIBAggBQi9jb21tZW50LXJlcGxpZXMtaXRlbS1VZ3hvX1hFWWhPVmpsMElmbU5oNEFhQUJBZw%3D%3D"
+                            }
+                        ],
+                        "cursor": "vJaWqnqrEg0SC3AwZnlidkZ5T2xNGAYygAMK1gJnZXRfcmFua2VkX3N0cmVhbXMtLUNxVUJDSUFFRlJlMzBUZ2FtZ0VLbFFFSTJGOFFnQVFZQnlLS0Fkc2RNVHBYVkdVLXNfVlM3aldPRmpsSVh4MWFGTHBCdUttOU0wNWxMdlBuTk1jWXdRNExGSmJaVW5sM3B3LXp2aGtuMjY1elNMNExkMmJtMXdnTWkwVHNaTGRIWEJqWVl3UVNJVW9kQzJxTlZ5VGE2SjY4TWgwd2NyZjRoRGVGVmJBd0ZVdGJNWXlKakxtZ1M2ZHZRSV91aXl4SVNPbTd4RUJrWkpjVWFsTjVnZmRaN2JManZxaHlPeEFVRWdjSWhDQVFGQmdCRWdVSWhpQVlBQklGQ0lrZ0dBQVNCUWlJSUJnQUVnVUlxQ0FZQUJJRkNNQWdHQUFTQndpRklCQVVHQUVTQndpSElCQUJHQUFTQlFpN0lCZ0FVQUJZQVEiESIL"
+                    },
+                    "creditsUsed": 0,
+                    "requestId": "24cf08fe-ac50-49c1-816c-750df3e72276"
+                }
+            }
+        }
+    ]
+}

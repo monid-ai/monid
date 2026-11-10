@@ -1,0 +1,106 @@
+{
+    "name": "google-maps-search-ok",
+    "description": "Stophy /v1/google/maps/search happy path, recorded on the keyless tier 2026-11-02 (record diet: lists trimmed). 1 Stophy call: results non-empty.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "query": "coffee",
+                    "location": "Austin, TX"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "results": [
+                            {
+                                "placeId": "0x865b33ee6a9856e5:0x5064d03fde124e36",
+                                "googlePlaceId": "ChIJ5VaYau4zW4YRNk4S3j_QZFA",
+                                "placeUrl": "https://www.google.com/maps?cid=5792983993432559158",
+                                "name": "Mojo Coffee Lakeline",
+                                "categories": [
+                                    "Coffee shop"
+                                ],
+                                "address": "12206 Ranch Rd 620 N, Austin, TX 78750",
+                                "latitude": 30.462303,
+                                "longitude": -97.817188,
+                                "rating": 4.7,
+                                "reviews": 687,
+                                "photos": 271,
+                                "phone": "+15550000000",
+                                "website": "http://www.mojodrivethru.com/",
+                                "hours": [
+                                    {
+                                        "days": "Monday",
+                                        "times": [
+                                            "5:30 AM–8 PM"
+                                        ]
+                                    },
+                                    {
+                                        "days": "Tuesday",
+                                        "times": [
+                                            "5:30 AM–8 PM"
+                                        ]
+                                    }
+                                ],
+                                "hoursToday": "5:30 AM–8 PM",
+                                "openStatus": "Open · Closes 8 PM",
+                                "timezone": "America/Chicago",
+                                "thumbnailUrl": "https://lh3.googleusercontent.com/grass-cs/AABkmLfHIkRRUy5_8wc1qvwums34pxM2HbfGVsunm3jpcZA0aD3qaxis841339Wb88QvQIOFUz8q01lwpgJHfThaht-EHFm-jxmUF2cZ36NGx1FmSg7J0df1NiUE1XL1hnuTWESC_mG23Bu9Xuh_=w87-h86-k-no",
+                                "attributes": [
+                                    "Wheelchair accessible entrance",
+                                    "Wheelchair accessible parking lot"
+                                ]
+                            },
+                            {
+                                "placeId": "0x8644eb01e1b6f12b:0xfd2a1ae49e89ca16",
+                                "googlePlaceId": "ChIJK_G24QHrRIYRFsqJnuQaKv0",
+                                "placeUrl": "https://www.google.com/maps?cid=18242422809832311318",
+                                "name": "Flora Coffee & Culture",
+                                "categories": [
+                                    "Coffee shop"
+                                ],
+                                "address": "3300 W Anderson Ln. Ste 300, Austin, TX 78757",
+                                "latitude": 30.362347,
+                                "longitude": -97.7421123,
+                                "rating": 4.9,
+                                "reviews": 416,
+                                "photos": 221,
+                                "website": "http://floracoffee.co/",
+                                "hours": [
+                                    {
+                                        "days": "Monday",
+                                        "times": [
+                                            "7 AM–3 PM"
+                                        ]
+                                    },
+                                    {
+                                        "days": "Tuesday",
+                                        "times": [
+                                            "7 AM–3 PM"
+                                        ]
+                                    }
+                                ],
+                                "hoursToday": "7 AM–3 PM",
+                                "openStatus": "Open · Closes 3 PM",
+                                "timezone": "America/Chicago",
+                                "thumbnailUrl": "https://lh3.googleusercontent.com/grass-cs/AABkmLdm6YVA5shwz_UB83UYEPEmhMsyouVof7LfDlfmi54AI9nWEENnZyHMObzDZ6dCO7ekg6_7sRF1m6F-7mxW1bncBBavN6p3NF4hNpqhHIxBcLCvUw3-l2L5aVjk-Ao1TVrTYgZEYHnQDwaG=w86-h114-k-no",
+                                "attributes": [
+                                    "Wheelchair accessible entrance",
+                                    "Wheelchair accessible parking lot"
+                                ]
+                            }
+                        ],
+                        "page": 1
+                    },
+                    "creditsUsed": 0,
+                    "requestId": "a97f80c4-21b1-4551-9af1-8a2ca68ef51f"
+                }
+            }
+        }
+    ]
+}

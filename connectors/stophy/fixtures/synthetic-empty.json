@@ -1,0 +1,26 @@
+{
+    "name": "synthetic-empty",
+    "description": "Stophy list endpoint that found nothing: 200 with data.results [] and creditsUsed 0. Stophy bills an empty answer nothing, so the list endpoints count 0. Hand-built from the vendor's documented envelope.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "query": "zxqv no such phrase 7f3k"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "results": []
+                    },
+                    "creditsUsed": 0,
+                    "requestId": "00000000-0000-4000-8000-000000000000"
+                }
+            }
+        }
+    ]
+}
