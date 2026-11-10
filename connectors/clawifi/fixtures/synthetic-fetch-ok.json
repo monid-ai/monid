@@ -1,0 +1,48 @@
+{
+    "name": "synthetic-fetch-ok",
+    "description": "SYNTHETIC happy chain for clawifi#fetch. Shape is Clawifi's FetchEnvelope + WebDocument models (clawifi/core/models.py, 1.7.5); values (title, excerpt as markdown, dates, diagnostics) come from the real 2026-10-23 keyless playground scrape of https://example.com, trimmed to the fields both responses share. `credits_charged: 1`: plain HTTP fetch, not cached. Replace via `deno task record` when CLAWIFI_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "source": "generic_web",
+                    "mode_used": "http_fetch",
+                    "entity_type": "WebDocument",
+                    "data": {
+                        "entity_type": "WebDocument",
+                        "source": "generic_web",
+                        "source_url": "https://example.com/",
+                        "raw_available": true,
+                        "title": "Example Domain",
+                        "url": "https://example.com/",
+                        "canonical_url": "https://example.com/",
+                        "excerpt": "This domain is for use in documentation examples without needing permission. This is not a service; avoid relying on it for testing and monitoring purposes.",
+                        "content_markdown": "This domain is for use in documentation examples without needing permission. This is not a service; avoid relying on it for testing and monitoring purposes.",
+                        "content_type": null,
+                        "document": null,
+                        "published_at": null,
+                        "modified_at": "2026-10-21T20:09:25Z",
+                        "fetched_at": "2026-10-22T22:11:52Z",
+                        "date_source": "last_modified_header"
+                    },
+                    "cache_hit": false,
+                    "errors": [],
+                    "diagnostics": {
+                        "likely_blocked": false,
+                        "block_type": null,
+                        "evidence": [],
+                        "retryable": false,
+                        "suggested_retry": null
+                    },
+                    "credits_charged": 1
+                }
+            }
+        }
+    ]
+}
