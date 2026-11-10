@@ -1,0 +1,18 @@
+{
+    "name": "synthetic-website-rendering-unauthorized",
+    "description": "SYNTHETIC 401 for piloterr#v2/website/rendering: Piloterr's error envelope for a missing or invalid key, as the API returns it.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.piloterr.com/v2/website/rendering?query=https%3A%2F%2Fexample.com"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": "Invalid API Key"
+                }
+            }
+        }
+    ]
+}
