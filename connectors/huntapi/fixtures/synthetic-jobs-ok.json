@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-jobs-ok",
+    "description": "SYNTHETIC happy chain for huntapi#v1/jobs/{id}. Body shape from HuntAPI's OpenAPI spec and a live call made for the Treg catalog (2026-11-09), trimmed; the URL is the query string the engine emits. Replace via `deno task record` when HUNTAPI_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.huntapi.com/v1/jobs/01a1c71d-153b-117e-781c-b8fe35fb9824"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "01a1c71d-153b-117e-781c-b8fe35fb9824",
+                    "status": "Running",
+                    "progress": 40,
+                    "success": null,
+                    "result": null
+                }
+            }
+        }
+    ]
+}

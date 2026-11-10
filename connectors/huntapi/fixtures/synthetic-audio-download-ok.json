@@ -1,0 +1,18 @@
+{
+    "name": "synthetic-audio-download-ok",
+    "description": "SYNTHETIC happy chain for huntapi#v1/audio/download. Body shape from HuntAPI's OpenAPI spec and a live call made for the Treg catalog (2026-11-09), trimmed; the URL is the query string the engine emits. Replace via `deno task record` when HUNTAPI_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.huntapi.com/v1/audio/download?query=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DjNQXAC9IVRw"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "job_id": "01a1c71d-153b-117e-781c-b8fe35fb9825"
+                }
+            }
+        }
+    ]
+}

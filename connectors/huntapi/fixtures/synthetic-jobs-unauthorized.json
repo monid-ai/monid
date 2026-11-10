@@ -1,0 +1,18 @@
+{
+    "name": "synthetic-jobs-unauthorized",
+    "description": "SYNTHETIC 401 for huntapi#v1/jobs/{id}: HuntAPI's error envelope for a missing or invalid key, as the API returns it.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.huntapi.com/v1/jobs/01a1c71d-153b-117e-781c-b8fe35fb9824"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": "Invalid API Key"
+                }
+            }
+        }
+    ]
+}
