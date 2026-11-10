@@ -1,0 +1,130 @@
+{
+    "name": "entity-done",
+    "description": "Recorded 2026-10-16 against https://app.lev8.com with a live token. Entity Search company, limit 3: create_task -> status (running) -> status (done, ready_count 3, stop_reason limit) -> one fetch page of 3. 5 + 3 x 2 = 11 credits (Lev8 balance delta 11). Recorded --no-trim so every ready entity is present; long strings hand-truncated.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "created_at": "2026-10-16T11:02:15.056303Z",
+                    "entity_type": "company",
+                    "leads_search_id": "leads_search_ac4f5282b7d948708389e9f714f06d3f",
+                    "limit": 3,
+                    "object": "entity_search_task",
+                    "objective": "AI developer tools startups that raised a Series A in 2024",
+                    "status": "created"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/entity-search/status?leads_search_id=leads_search_ac4f5282b7d948708389e9f714f06d3f"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "object": "entity_search_status",
+                    "leads_search_id": "leads_search_ac4f5282b7d948708389e9f714f06d3f",
+                    "status": {
+                        "status": "running",
+                        "ready_count": 1,
+                        "verified_count": 1
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/entity-search/status?leads_search_id=leads_search_ac4f5282b7d948708389e9f714f06d3f"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "object": "entity_search_status",
+                    "leads_search_id": "leads_search_ac4f5282b7d948708389e9f714f06d3f",
+                    "status": {
+                        "status": "done",
+                        "ready_count": 3,
+                        "verified_count": 3,
+                        "stop_reason": "limit"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/entity-search/fetch?leads_search_id=leads_search_ac4f5282b7d948708389e9f714f06d3f&pts=0&num=3"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "object": "entity_search_items",
+                    "status": "done",
+                    "leads_search_id": "leads_search_ac4f5282b7d948708389e9f714f06d3f",
+                    "pts": 0,
+                    "num": 3,
+                    "count": 3,
+                    "ready_count": 3,
+                    "limit": 3,
+                    "entities": [
+                        {
+                            "name": "Contextual AI",
+                            "links": {
+                                "website": "https://www.contextual.ai",
+                                "linkedin_url": "https://www.linkedin.com/company/contextualai",
+                                "twitter_url": "https://www.twitter.com/contextualai"
+                            },
+                            "description": "Contextual AI provides a complete, modular development platform for building enterprise AI agents that delivers exceptional accuracy out of the box. We fill the gap between the unique AI experience needed for each organization and the massi…",
+                            "score": {
+                                "score": "excellent",
+                                "reason": "Matches exactly: AI developer tools startup with Series A raised Aug 2024 ($80M)"
+                            },
+                            "enrich_fields": {}
+                        },
+                        {
+                            "name": "Vectara",
+                            "links": {
+                                "website": "https://www.vectara.com",
+                                "linkedin_url": "https://www.linkedin.com/company/vectara",
+                                "twitter_url": "https://www.twitter.com/vectara",
+                                "instagram_url": "https://www.instagram.com/vectara",
+                                "youtube_url": "https://www.youtube.com/@vectara",
+                                "github_url": "https://github.com/vectara"
+                            },
+                            "description": "Vectara developed an integrated AI Assistant/Agent solution which focuses on enterprise readiness, especially when it comes to: Accuracy (eliminating \"Hallucinations\"), explainability of results/actions, and secure access control. More tech…",
+                            "score": {
+                                "score": "excellent",
+                                "reason": "Vectara is an AI developer tools startup (RAG/GenAI platform) that raised Series A in 2024"
+                            },
+                            "enrich_fields": {}
+                        },
+                        {
+                            "name": "Lakera",
+                            "links": {
+                                "website": "https://www.lakera.ai",
+                                "linkedin_url": "https://www.linkedin.com/company/lakeraai",
+                                "twitter_url": "https://www.twitter.com/lakeraai",
+                                "instagram_url": "https://www.instagram.com/lakeraai",
+                                "youtube_url": "https://www.youtube.com/watch?v=uprd-zudg0i&t=220s",
+                                "github_url": "https://github.com/lakeraai"
+                            },
+                            "description": "Lakera is an AI security company helping enterprises secure AI systems that don’t just generate content, but take action.\n\nAs AI moves into applications, workflows, and autonomous agents, traditional security models fall short. Lakera provi…",
+                            "score": {
+                                "score": "high",
+                                "reason": "Raised $20M Series A on 2024-07-24; AI security platform with developer-tools category, but primarily enterprise security rather than core dev tools"
+                            },
+                            "enrich_fields": {}
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

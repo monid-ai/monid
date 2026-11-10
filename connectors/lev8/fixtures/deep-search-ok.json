@@ -1,0 +1,25 @@
+{
+    "name": "deep-search-ok",
+    "description": "Recorded 2026-10-16 against https://app.lev8.com with a live token. POST /v1/deep-search, 2 credits (Lev8 balance delta 2).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "answer": {
+                        "Result": "OpenAI is an AI research and deployment company whose mission is to ensure that artificial general intelligence benefits all of humanity. Its CEO is Sam Altman.",
+                        "Citations": [
+                            "https://openai.com/about/",
+                            "https://en.wikipedia.org/wiki/OpenAI"
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

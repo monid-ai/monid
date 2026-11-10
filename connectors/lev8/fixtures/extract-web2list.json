@@ -1,0 +1,25 @@
+{
+    "name": "extract-web2list",
+    "description": "Recorded 2026-10-16 against https://app.lev8.com with a live token. POST /v1/extract web2list: `success: true` with an EMPTY `data` array still bills the flat 80 (Lev8 balance delta 80).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": [],
+                    "metadata": {
+                        "type": "web2list",
+                        "target": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+                        "instruction": "Extract the company name and revenue for each row of the main table",
+                        "limit": 100
+                    }
+                }
+            }
+        }
+    ]
+}

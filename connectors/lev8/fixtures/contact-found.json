@@ -1,0 +1,32 @@
+{
+    "name": "contact-found",
+    "description": "Recorded 2026-10-16 against https://app.lev8.com with a live token. POST /v1/contact-search, contact_type email, found; 10 credits (Lev8 balance delta 10). The address was replaced by the recorder's PII scrub.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "object": "contact_search_result",
+                    "request_id": "req_c2ec0220-d685-4647-9bae-dc83a351217a",
+                    "request": {
+                        "contact_type": "email",
+                        "objective": "Find the work email of Sam Altman, CEO of OpenAI. Owner signals: x=sama, linkedin_url=https://www.linkedin.com/in/samaltman",
+                        "lightweight": true
+                    },
+                    "result": {
+                        "content": "user@example.com",
+                        "reference": "user@example.com is a direct contact for Sam Altman. Ownership evidence: trusted linkedin profile origin https://www.linkedin.com/in/samaltman. Verification: verified; reliability: high.",
+                        "outcome": "found",
+                        "retryable": false,
+                        "retry_strategy": "none"
+                    },
+                    "created_at": "2026-10-16T10:59:45.013221Z"
+                }
+            }
+        }
+    ]
+}

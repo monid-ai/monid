@@ -1,0 +1,25 @@
+{
+    "name": "synthetic-extract-failed",
+    "description": "SYNTHETIC (no Lev8 key was available on 2026-10-16): shape from docs.lev8.com/openapi.yaml and Lev8's response structs; values are placeholders. Replace via `deno task record` when LEV8_API_KEY exists. Extract business failure: `success: false` with the reason as a string in `data`; 0 credits.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": false,
+                    "data": "Account not found or private.",
+                    "metadata": {
+                        "type": "x_followers",
+                        "target": "no_such_account_x",
+                        "instruction": null,
+                        "limit": 100
+                    }
+                }
+            }
+        }
+    ]
+}

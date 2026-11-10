@@ -1,0 +1,82 @@
+{
+    "name": "synthetic-entity-error-partial",
+    "description": "SYNTHETIC (no Lev8 key was available on 2026-10-16): shape from docs.lev8.com/openapi.yaml and Lev8's response structs; values are placeholders. Replace via `deno task record` when LEV8_API_KEY exists. Entity Search terminal `error` that still produced 1 entity: Lev8 refunds the startup credits but bills and serves the ready result, so the run settles 200 with per-result credits only.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "object": "entity_search_task",
+                    "leads_search_id": "leads_search_01JEXAMPLE000000000000",
+                    "entity_type": "company",
+                    "objective": "AI startups that raised Series A in 2024",
+                    "limit": 3,
+                    "status": "created",
+                    "created_at": "2026-10-16T00:00:00Z"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/entity-search/status?leads_search_id=leads_search_01JEXAMPLE000000000000"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "object": "entity_search_status",
+                    "leads_search_id": "leads_search_01JEXAMPLE000000000000",
+                    "status": {
+                        "status": "error",
+                        "verified_count": 5,
+                        "ready_count": 1,
+                        "error": "internal error"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/entity-search/fetch?leads_search_id=leads_search_01JEXAMPLE000000000000&pts=0&num=1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "object": "entity_search_items",
+                    "leads_search_id": "leads_search_01JEXAMPLE000000000000",
+                    "status": "error",
+                    "pts": 0,
+                    "num": 1,
+                    "count": 1,
+                    "ready_count": 1,
+                    "limit": 3,
+                    "entities": [
+                        {
+                            "name": "Example AI 0",
+                            "links": {
+                                "website": "https://example0.ai",
+                                "linkedin_url": "https://www.linkedin.com/company/example-ai-0"
+                            },
+                            "description": "AI startup building developer tools.",
+                            "score": {
+                                "score": "high",
+                                "reason": "Raised a Series A in 2024."
+                            },
+                            "enrich_fields": {
+                                "funding stage": {
+                                    "content": "Series A",
+                                    "reference": "https://news.example/a"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

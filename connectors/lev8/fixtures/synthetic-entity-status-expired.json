@@ -1,0 +1,42 @@
+{
+    "name": "synthetic-entity-status-expired",
+    "description": "SYNTHETIC (no Lev8 key was available on 2026-10-16): shape from docs.lev8.com/openapi.yaml and Lev8's response structs; values are placeholders. Replace via `deno task record` when LEV8_API_KEY exists. The task outlived Lev8's recovery window: status answers 404 (Lev8 refunded the reservation). Settles as data at zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "object": "entity_search_task",
+                    "leads_search_id": "leads_search_01JEXAMPLE000000000000",
+                    "entity_type": "company",
+                    "objective": "AI startups that raised Series A in 2024",
+                    "limit": 3,
+                    "status": "created",
+                    "created_at": "2026-10-16T00:00:00Z"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/entity-search/status?leads_search_id=leads_search_01JEXAMPLE000000000000"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "object": "error",
+                    "error": {
+                        "type": "not_found_error",
+                        "message": "Task not found",
+                        "param": null,
+                        "request_id": null
+                    }
+                }
+            }
+        }
+    ]
+}

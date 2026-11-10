@@ -1,0 +1,32 @@
+{
+    "name": "contact-not-found",
+    "description": "Recorded 2026-10-16 against https://app.lev8.com with a live token. POST /v1/contact-search, contact_type phone, not found (`result.content: null`, `outcome: not_found`); 0 credits (Lev8 balance delta 0).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "object": "contact_search_result",
+                    "request_id": "req_ad300326-d66a-4533-a9ef-3fe232730b85",
+                    "request": {
+                        "contact_type": "phone",
+                        "objective": "Find the phone number of Zxqvtor Blemwick, a fictional person who does not exist, at Nonexistent Holdings Ltd.",
+                        "lightweight": false
+                    },
+                    "result": {
+                        "content": null,
+                        "reference": null,
+                        "outcome": "not_found",
+                        "retryable": false,
+                        "retry_strategy": "none"
+                    },
+                    "created_at": "2026-10-16T11:00:11.001487Z"
+                }
+            }
+        }
+    ]
+}
