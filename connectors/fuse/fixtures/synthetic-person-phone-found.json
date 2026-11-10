@@ -1,0 +1,23 @@
+{
+    "name": "synthetic-person-phone-found",
+    "description": "A phone lookup that finds a mobile number; the receipt is the plan's people_phone price. Synthetic, shaped on Fuse's published Business API contract (2026-10-29).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "found",
+                    "phone": {
+                        "value": "+12025550143"
+                    },
+                    "linkedinUrl": "linkedin.com/in/ada-fielding",
+                    "creditsCharged": 10
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "name": "synthetic-person-email-found",
+    "description": "An email lookup that finds a valid work email; the receipt is the plan's people_email price. Synthetic, shaped on Fuse's published Business API contract (2026-10-29).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "found",
+                    "email": {
+                        "value": "ada@northwind-payments.example",
+                        "status": "valid",
+                        "type": "work"
+                    },
+                    "linkedinUrl": "linkedin.com/in/ada-fielding",
+                    "creditsCharged": 5
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,26 @@
+{
+    "name": "companies-filter-options",
+    "description": "One company filter (`investors`): no values, and the `autocomplete` pointer the connector drops. Recorded from Fuse's production API on 2026-10-29, trimmed and scrubbed by the recorder.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?field=investors"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "filterOptions": {
+                        "fields": {
+                            "investors": {
+                                "valueShape": "include_exclude",
+                                "values": [],
+                                "autocomplete": "/companies/autocomplete?field=company&orgType=investor"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,27 @@
+{
+    "name": "synthetic-prospects-search-unresolved",
+    "description": "A filter search naming a company nothing matches: 422 FILTER_VALUE_UNRESOLVED, with `param` naming the filter and `values` the names that matched nothing. Nothing was charged. Synthetic, shaped on Fuse's published Business API contract (2026-10-29).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 422,
+                "body": {
+                    "error": {
+                        "code": "FILTER_VALUE_UNRESOLVED",
+                        "message": "No company, place or LinkedIn profile named in one filter could be found, so the search was refused rather than run without it.",
+                        "param": "filters.job_company_name",
+                        "values": [
+                            "Northwind Paymnts"
+                        ],
+                        "doc_url": "https://docs.fuseai.com/concepts/errors#filter_value_unresolved",
+                        "request_id": "11111111-1111-4111-8111-111111111111"
+                    }
+                }
+            }
+        }
+    ]
+}

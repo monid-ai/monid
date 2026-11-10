@@ -1,0 +1,23 @@
+{
+    "name": "synthetic-companies-people-not-found",
+    "description": "A company people list for a company nothing matches: `not_found`, no people and a zero receipt. Synthetic, shaped on Fuse's Business API contract for the route (2026-11-02); to be recorded once the route is live.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "not_found",
+                    "company": null,
+                    "people": [],
+                    "scrollToken": null,
+                    "total": 0,
+                    "creditsCharged": 0
+                }
+            }
+        }
+    ]
+}

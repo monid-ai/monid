@@ -1,0 +1,47 @@
+{
+    "name": "companies-count",
+    "description": "A company count Fuse already holds: 200 ready on the first call. Recorded from Fuse's production API on 2026-10-29, trimmed and scrubbed by the recorder.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "ready",
+                    "total": 45,
+                    "filters": {
+                        "crunchbaseCategories": [
+                            {
+                                "status": "include",
+                                "value": "FinTech",
+                                "label": "FinTech"
+                            }
+                        ],
+                        "headquartersStateName": [
+                            {
+                                "status": "include",
+                                "value": "New York",
+                                "label": "New York"
+                            }
+                        ],
+                        "stage": [
+                            {
+                                "status": "include",
+                                "value": "series_b",
+                                "label": "series_b"
+                            }
+                        ],
+                        "employeeCountV2": {
+                            "min": 50,
+                            "max": 200
+                        }
+                    },
+                    "creditsCharged": 0
+                }
+            }
+        }
+    ]
+}

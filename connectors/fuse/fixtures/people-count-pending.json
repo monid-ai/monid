@@ -1,0 +1,110 @@
+{
+    "name": "people-count-pending",
+    "description": "A new people count from a sentence: two 202 pending answers, then 200 ready on the repeat with the counted filters. The recorder keeps two entries per list, so the echoed keywords are restored to the three Fuse sent, from the production logs. Recorded from Fuse's production API on 2026-10-29, trimmed and scrubbed by the recorder.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "pending",
+                    "total": null,
+                    "filters": {
+                        "keywords": [
+                            "vice president of sales",
+                            "vp of sales",
+                            "vp sales"
+                        ],
+                        "job_title_role": [
+                            {
+                                "status": "include",
+                                "value": "sales"
+                            }
+                        ],
+                        "location_country": [
+                            {
+                                "status": "include",
+                                "value": "united states"
+                            }
+                        ],
+                        "job_start_date": 12
+                    },
+                    "unresolvedCriteria": [],
+                    "closestCompanyMatches": [],
+                    "creditsCharged": 0
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "pending",
+                    "total": null,
+                    "filters": {
+                        "keywords": [
+                            "vice president of sales",
+                            "vp of sales",
+                            "vp sales"
+                        ],
+                        "job_title_role": [
+                            {
+                                "status": "include",
+                                "value": "sales"
+                            }
+                        ],
+                        "location_country": [
+                            {
+                                "status": "include",
+                                "value": "united states"
+                            }
+                        ],
+                        "job_start_date": 12
+                    },
+                    "creditsCharged": 0
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "ready",
+                    "total": 11090,
+                    "filters": {
+                        "keywords": [
+                            "vice president of sales",
+                            "vp of sales",
+                            "vp sales"
+                        ],
+                        "job_title_role": [
+                            {
+                                "status": "include",
+                                "value": "sales"
+                            }
+                        ],
+                        "location_country": [
+                            {
+                                "status": "include",
+                                "value": "united states"
+                            }
+                        ],
+                        "job_start_date": 12
+                    },
+                    "creditsCharged": 0
+                }
+            }
+        }
+    ]
+}

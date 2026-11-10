@@ -1,0 +1,25 @@
+{
+    "name": "companies-resolve-found",
+    "description": "A domain (`stripe.com`) resolved to the company's name, LinkedIn page and logo, free. Recorded from Fuse's production API on 2026-10-29, trimmed and scrubbed by the recorder.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "found",
+                    "company": {
+                        "name": "Stripe",
+                        "domain": "stripe.com",
+                        "linkedinUrl": "linkedin.com/company/stripe",
+                        "logoUrl": "https://img.imagecdn.dev/company-logo/at_82700c1a09d149ef87c707c065d73317.jpeg"
+                    },
+                    "creditsCharged": 0
+                }
+            }
+        }
+    ]
+}

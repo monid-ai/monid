@@ -1,0 +1,93 @@
+{
+    "name": "synthetic-companies-count-poll-rate-limited",
+    "description": "A new filter company count whose first repeat is refused 429 RATE_LIMITED with Retry-After 2 while the count keeps running; the next repeat answers 200 ready. Synthetic, shaped on Fuse's published Business API contract (2026-10-29).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "pending",
+                    "total": null,
+                    "filters": {
+                        "crunchbaseCategoryGroups": [
+                            "Financial Services"
+                        ],
+                        "stage": [
+                            {
+                                "label": "Series B",
+                                "value": "series_b",
+                                "status": "include"
+                            }
+                        ],
+                        "headquartersCity": [
+                            "New York, New York, United States"
+                        ],
+                        "employeeCountV2": {
+                            "min": 50,
+                            "max": 200
+                        }
+                    },
+                    "creditsCharged": 0
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 429,
+                "headers": {
+                    "retry-after": "2"
+                },
+                "body": {
+                    "error": {
+                        "code": "RATE_LIMITED",
+                        "message": "You have exceeded the rate limit. Please retry after the window resets.",
+                        "param": null,
+                        "doc_url": "https://docs.fuseai.com/concepts/errors#rate_limited",
+                        "request_id": "11111111-1111-4111-8111-111111111111"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "ready",
+                    "total": 1287,
+                    "filters": {
+                        "crunchbaseCategoryGroups": [
+                            "Financial Services"
+                        ],
+                        "stage": [
+                            {
+                                "label": "Series B",
+                                "value": "series_b",
+                                "status": "include"
+                            }
+                        ],
+                        "headquartersCity": [
+                            "New York, New York, United States"
+                        ],
+                        "employeeCountV2": {
+                            "min": 50,
+                            "max": 200
+                        }
+                    },
+                    "creditsCharged": 0
+                }
+            }
+        }
+    ]
+}

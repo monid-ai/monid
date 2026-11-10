@@ -1,0 +1,27 @@
+{
+    "name": "synthetic-rate-limited",
+    "description": "Fuse refuses a POST outright: 429 RATE_LIMITED with Retry-After, the refusal every POST endpoint can answer with. Vendor non-2xx is DATA: the engine classifies it as a provider error and forces zero usage. Synthetic, shaped on Fuse's published Business API contract (2026-10-29).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 429,
+                "headers": {
+                    "retry-after": "30"
+                },
+                "body": {
+                    "error": {
+                        "code": "RATE_LIMITED",
+                        "message": "You have exceeded the rate limit. Please retry after the window resets.",
+                        "param": null,
+                        "doc_url": "https://docs.fuseai.com/concepts/errors#rate_limited",
+                        "request_id": "11111111-1111-4111-8111-111111111111"
+                    }
+                }
+            }
+        }
+    ]
+}

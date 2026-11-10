@@ -1,0 +1,149 @@
+{
+    "name": "prospects-search",
+    "description": "A two-row people search page from a sentence, with the workspace fields the connector strips. The two people are replaced with the placeholder personas (name, LinkedIn page, member id, photo, summary, employers); the scroll token is a placeholder. Recorded from Fuse's production API on 2026-10-29, trimmed and scrubbed by the recorder.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "profiles": [
+                        {
+                            "linkedinMemberId": "100000001",
+                            "linkedin_url": "linkedin.com/in/ada-fielding",
+                            "full_name": "Ada Fielding",
+                            "first_name": "Ada",
+                            "last_name": "Fielding",
+                            "profile_picture_url": "https://images.northwind-payments.example/people/ada-fielding.jpg",
+                            "job_title": "Senior Vice President of Sales",
+                            "job_title_levels": [
+                                "vp",
+                                "senior"
+                            ],
+                            "job_title_role": "sales",
+                            "job_title_sub_role": "account_executive",
+                            "job_company_name": "Northwind Payments",
+                            "job_company_website": "northwind-payments.example",
+                            "job_company_linkedin_url": "linkedin.com/company/northwind-payments",
+                            "job_company_industry": "financial services",
+                            "job_company_employee_count": "420",
+                            "industry": "financial services",
+                            "location_name": "new york, new york, united states",
+                            "summary": "Leads enterprise sales for a payments company in New York.",
+                            "experience": [
+                                {
+                                    "company": {
+                                        "name": "Northwind Payments",
+                                        "website": "northwind-payments.example"
+                                    },
+                                    "title": {
+                                        "name": "Senior Vice President of Sales"
+                                    },
+                                    "start_date": "2024-01-01",
+                                    "summary": "Leads the sales team."
+                                },
+                                {
+                                    "company": {
+                                        "name": "Ledgerline",
+                                        "website": "ledgerline.example"
+                                    },
+                                    "title": {
+                                        "name": "Senior Vice President, Business Development"
+                                    },
+                                    "start_date": "2024-08-01",
+                                    "summary": "Sold to financial institutions."
+                                }
+                            ],
+                            "savedProfile": false,
+                            "savedBy": null,
+                            "linkedinConnectedAccountIds": [],
+                            "linkedinInvitationSentAccountIds": []
+                        },
+                        {
+                            "linkedinMemberId": "100000002",
+                            "linkedin_url": "linkedin.com/in/rafael-ortiz-sales",
+                            "full_name": "Rafael Ortiz",
+                            "first_name": "Rafael",
+                            "last_name": "Ortiz",
+                            "profile_picture_url": "https://images.ledgerline.example/people/rafael-ortiz.jpg",
+                            "job_title": "Senior Vice President of Sales",
+                            "job_title_levels": [
+                                "vp",
+                                "senior"
+                            ],
+                            "job_title_role": "sales",
+                            "job_title_sub_role": "account_executive",
+                            "job_company_name": "Ledgerline",
+                            "job_company_website": "ledgerline.example",
+                            "job_company_linkedin_url": "linkedin.com/company/ledgerline",
+                            "job_company_industry": "financial services",
+                            "job_company_employee_count": "180",
+                            "industry": "information services",
+                            "location_name": "new york, new york, united states",
+                            "summary": "Runs the sales team of a fintech company in New York.",
+                            "experience": [
+                                {
+                                    "company": {
+                                        "name": "Ledgerline",
+                                        "website": "ledgerline.example"
+                                    },
+                                    "title": {
+                                        "name": "Senior Vice President of Sales"
+                                    },
+                                    "start_date": "2023-09-01"
+                                },
+                                {
+                                    "company": {
+                                        "name": "Northwind Payments",
+                                        "website": "northwind-payments.example"
+                                    },
+                                    "title": {
+                                        "name": "Senior Sales Director - Americas"
+                                    },
+                                    "start_date": "2021-06-01",
+                                    "end_date": "2023-09-30",
+                                    "summary": "Sold to financial institutions."
+                                }
+                            ],
+                            "savedProfile": false,
+                            "savedBy": null,
+                            "linkedinConnectedAccountIds": [],
+                            "linkedinInvitationSentAccountIds": []
+                        }
+                    ],
+                    "scrollToken": "st_recorded_page_2",
+                    "total": null,
+                    "filters": {
+                        "keywords": [
+                            "vice president of sales",
+                            "vp of sales"
+                        ],
+                        "job_title_role": [
+                            {
+                                "status": "include",
+                                "value": "sales"
+                            }
+                        ],
+                        "location_name": [
+                            "new york, new york, united states"
+                        ],
+                        "company_filters": {
+                            "crunchbaseCategories": [
+                                {
+                                    "status": "include",
+                                    "value": "FinTech",
+                                    "label": "FinTech"
+                                }
+                            ]
+                        }
+                    },
+                    "unresolvedCriteria": [],
+                    "closestCompanyMatches": []
+                }
+            }
+        }
+    ]
+}

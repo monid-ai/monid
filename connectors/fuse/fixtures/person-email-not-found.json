@@ -1,0 +1,21 @@
+{
+    "name": "person-email-not-found",
+    "description": "An email lookup that found nothing: `not_found`, a null email and a zero receipt. Recorded from Fuse's production API on 2026-10-29, trimmed and scrubbed by the recorder.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "not_found",
+                    "email": null,
+                    "linkedinUrl": null,
+                    "creditsCharged": 0
+                }
+            }
+        }
+    ]
+}

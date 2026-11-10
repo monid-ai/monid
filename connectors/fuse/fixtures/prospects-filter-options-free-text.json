@@ -1,0 +1,26 @@
+{
+    "name": "prospects-filter-options-free-text",
+    "description": "A free-text people filter (`job_title`): no values, and the `autocomplete` pointer the connector drops. Recorded from Fuse's production API on 2026-10-29, trimmed and scrubbed by the recorder.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?field=job_title"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "filterOptions": {
+                        "fields": {
+                            "job_title": {
+                                "valueShape": "term",
+                                "values": [],
+                                "autocomplete": "/prospects/autocomplete?field=title"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

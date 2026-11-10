@@ -1,0 +1,58 @@
+{
+    "name": "synthetic-people-count-failed",
+    "description": "A new filter count that fails in the background: 202 pending, then 503 UNEXPECTED_ERROR on the repeat. Synthetic, shaped on Fuse's published Business API contract (2026-10-29).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "pending",
+                    "total": null,
+                    "filters": {
+                        "job_title_levels": [
+                            {
+                                "status": "include",
+                                "value": "vp"
+                            }
+                        ],
+                        "job_title_role": [
+                            {
+                                "status": "include",
+                                "value": "sales"
+                            }
+                        ],
+                        "location_country": [
+                            {
+                                "status": "include",
+                                "value": "united states"
+                            }
+                        ]
+                    },
+                    "creditsCharged": 0
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 503,
+                "body": {
+                    "error": {
+                        "code": "UNEXPECTED_ERROR",
+                        "message": "An unexpected error occurred. Please try again later.",
+                        "param": null,
+                        "doc_url": "https://docs.fuseai.com/concepts/errors#unexpected_error",
+                        "request_id": "11111111-1111-4111-8111-111111111111"
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+{
+    "name": "synthetic-email-verify-unknown",
+    "description": "A verification answering unknown, which Fuse does not charge: a zero receipt. Synthetic, shaped on Fuse's published Business API contract (2026-10-29).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "email": "ops@ledgerline.example",
+                    "status": "unknown",
+                    "creditsCharged": 0
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,599 @@
+{
+    "name": "companies-search",
+    "description": "A two-row company search page from a sentence, with the next page's cursor and the total. Nested lists keep one entry and long text is cut to keep the file small; investors who are people are replaced with the placeholder personas, and the cursor is a placeholder. Recorded from Fuse's production API on 2026-10-29, trimmed and scrubbed by the recorder.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "companies": [
+                        {
+                            "linkedin_id": "3513445",
+                            "accelerator_statuses": [],
+                            "accelerators": null,
+                            "blog_urls": [],
+                            "custom_data": null,
+                            "domains": [
+                                "loan-street.com"
+                            ],
+                            "emails": [
+                                "user@example.com"
+                            ],
+                            "phone_numbers": [
+                                "6468289000"
+                            ],
+                            "employee_count_consensus": {
+                                "gte": 92,
+                                "lte": 92
+                            },
+                            "facebook_urls": [],
+                            "fortune_rankings": null,
+                            "founded_on_consensus": "2013-01-01T00:00:00.000Z",
+                            "github_usernames": [],
+                            "instagram_handles": [],
+                            "latest_funding_consensus": 25000000,
+                            "linkedin_slugs": [
+                                "loanstreet-llc"
+                            ],
+                            "linkedin_primary_slug": "loanstreet-llc",
+                            "li_org_id": "3513445",
+                            "li_category": null,
+                            "li_job_posts_stats": {
+                                "total_count": 10,
+                                "seniority_stats": {
+                                    "Associate": {
+                                        "count": 7,
+                                        "fraction": 0.7
+                                    },
+                                    "Director": {
+                                        "count": 2,
+                                        "fraction": 0.2
+                                    },
+                                    "Mid-Senior level": {
+                                        "count": 1,
+                                        "fraction": 0.1
+                                    }
+                                },
+                                "employment_type_stats": {
+                                    "Full-time": {
+                                        "count": 10,
+                                        "fraction": 1
+                                    }
+                                },
+                                "country_location_stats": {
+                                    "USA": {
+                                        "count": 10,
+                                        "fraction": 1
+                                    }
+                                }
+                            },
+                            "li_description": "LoanStreet is the only cloud-based platform that streamlines the process of syndicating, managing...",
+                            "li_follower_count": 52192,
+                            "li_headline": "The only cloud-based platform providing software to syndicate, service, agent, and analyze any lo...",
+                            "li_industries": [
+                                {
+                                    "id": "synth-Financial Services",
+                                    "name": "Financial Services"
+                                }
+                            ],
+                            "li_locations": null,
+                            "li_specialties": [
+                                "Loan Syndication"
+                            ],
+                            "location_consensus": {
+                                "street_address": "530 7th Ave",
+                                "neighborhood": null,
+                                "city": "New York",
+                                "state_name": "New York"
+                            },
+                            "locations_stats": {
+                                "USA": 1,
+                                "X-AMERICAS": 1,
+                                "X-ANGLOSPHERE": 1,
+                                "X-G20": 1
+                            },
+                            "market_cap_usd": null,
+                            "naics_codes": [
+                                "513210"
+                            ],
+                            "names": [
+                                "LoanStreet"
+                            ],
+                            "preferred_name": "LoanStreet Inc.",
+                            "preferred_name_word_count": 1,
+                            "revenue_estimate": {
+                                "sources": [
+                                    "https://growjo.com/company/LoanStreet"
+                                ],
+                                "fiscal_year": 2025,
+                                "value_usd": {
+                                    "gte": 13400000,
+                                    "lte": 13400000
+                                }
+                            },
+                            "standard_industries": [
+                                "Finance"
+                            ],
+                            "status_consensus": "active",
+                            "stock_info_consensus": null,
+                            "tags": [
+                                "venture-backed-startup"
+                            ],
+                            "total_funding_consensus": 39000000,
+                            "twitter_handles": [
+                                "loanstreetus"
+                            ],
+                            "websites": [
+                                "loan-street.com"
+                            ],
+                            "wellfound_slugs": [],
+                            "youtube_urls": [],
+                            "role_count_matches": null,
+                            "num_matching_locations": null,
+                            "linkedin_ids": [
+                                "3513445"
+                            ],
+                            "last_sort_key": "gAAAAABq45Yslvd42Maul6L9kXyncmRjF1fCPVfrDKBUelM_u33VqPslLrIXh0dlN3RTJZoSbgSGRj06dnVqryX_B4JkHD-a0...",
+                            "relevance_score": 4.7176123,
+                            "technology_spend_usd": 0,
+                            "historical_headcount": {
+                                "latest_snapshot_date": "2025-10-01",
+                                "snapshots": [
+                                    {
+                                        "date": "2022-04-01",
+                                        "employees": 299
+                                    }
+                                ],
+                                "growth": {
+                                    "1m": {
+                                        "percent": 0.03646,
+                                        "quantity": 7
+                                    },
+                                    "2m": {
+                                        "percent": 0.05851,
+                                        "quantity": 11
+                                    },
+                                    "3m": {
+                                        "percent": 0.03646,
+                                        "quantity": 7
+                                    },
+                                    "6m": {
+                                        "percent": 0.05851,
+                                        "quantity": 11
+                                    }
+                                }
+                            },
+                            "cik_numbers": [],
+                            "cage_codes": [],
+                            "duns_numbers": [],
+                            "num_li_locations": 1,
+                            "location_name": "New York",
+                            "crunchbase_slug": "loanstreet",
+                            "primary_role": "company",
+                            "roles": [
+                                "company"
+                            ],
+                            "short_description": "LoanStreet is a marketplace that enables the efficient syndication of loans and loan pools.",
+                            "long_description": "LoanStreet is a new marketplace that enables the efficient syndication of any sized loan. LoanStr...",
+                            "is_subsidiary": false,
+                            "parent": null,
+                            "num_funding_rounds": 4,
+                            "funding_rounds": [
+                                {
+                                    "round_type": "seed",
+                                    "announced_on_date": "2016-12-20T00:00:00+00:00",
+                                    "raised_amount_usd": 2500000,
+                                    "post_money_valuation_usd": 11180934
+                                }
+                            ],
+                            "num_exits": null,
+                            "investors": [
+                                {
+                                    "logo_url": null,
+                                    "entity_type": "person",
+                                    "investor_name": "Ada Fielding",
+                                    "linkedin_slug": "ada-fielding"
+                                }
+                            ],
+                            "acquisitions": null,
+                            "best_funding_round": {
+                                "round_type": "series_b",
+                                "announced_on_date": "2022-02-08T00:00:00+00:00",
+                                "raised_amount_usd": 25000000,
+                                "post_money_valuation_usd": 141054183
+                            },
+                            "funding_stage": "series_b",
+                            "alt_industries": [
+                                "financial services"
+                            ],
+                            "alt_keywords": [
+                                "loan syndication"
+                            ],
+                            "alt_description": "About LoanStreet Inc.LoanStreet is the first fully-integrated, online platform that streamlines t...",
+                            "employee_trends": null,
+                            "logo_url": "https://img.imagecdn.dev/company-logo/at_cdghbpix9d1acbibwpyy.jpeg",
+                            "similar_companies": [
+                                {
+                                    "name": "JUBILEE LIFE MORTAGE BANK LIMITED",
+                                    "industries": [
+                                        "financial services"
+                                    ],
+                                    "employee_count": 41,
+                                    "revenue": null
+                                }
+                            ],
+                            "full_funding_rounds": [
+                                {
+                                    "investors": [
+                                        {
+                                            "is_lead": true,
+                                            "investor_name": "Third Prime",
+                                            "investor_type": "organization",
+                                            "investor_domain": "thirdprime.vc"
+                                        }
+                                    ],
+                                    "round_city": "New York",
+                                    "round_date": "2016-12-20T00:00:00.000Z",
+                                    "round_type": "seed"
+                                }
+                            ],
+                            "funding_round_stats": {
+                                "round_count": 4,
+                                "total_raised_usd": 39000000,
+                                "peak_valuation_usd": 141054183,
+                                "unique_investor_count": 17
+                            },
+                            "investment_stats": null,
+                            "is_investor": false,
+                            "investor_type": null,
+                            "investor_categories": null,
+                            "technologies_used": [
+                                {
+                                    "name": "slack"
+                                }
+                            ],
+                            "platforms": {
+                                "ecommerce": null,
+                                "cms": [
+                                    "HubSpot CMS Hub"
+                                ],
+                                "crm": [
+                                    "Hubspot"
+                                ],
+                                "marketing": [
+                                    "Hubspot"
+                                ]
+                            },
+                            "isSaved": false
+                        },
+                        {
+                            "linkedin_id": "12908147",
+                            "accelerator_statuses": [
+                                "active"
+                            ],
+                            "accelerators": [
+                                {
+                                    "id": "plug_and_play_shogun-enterprises",
+                                    "slug": null,
+                                    "tags": [
+                                        "Real Estate & Construction"
+                                    ],
+                                    "year": null
+                                }
+                            ],
+                            "blog_urls": [],
+                            "custom_data": null,
+                            "domains": [
+                                "gethearth.com"
+                            ],
+                            "emails": [
+                                "user@example.com"
+                            ],
+                            "phone_numbers": [
+                                "15125663566"
+                            ],
+                            "employee_count_consensus": {
+                                "gte": 184,
+                                "lte": 184
+                            },
+                            "facebook_urls": [
+                                "https://facebook.com/gethearth"
+                            ],
+                            "fortune_rankings": null,
+                            "founded_on_consensus": "2016-01-01T00:00:00.000Z",
+                            "github_usernames": [],
+                            "instagram_handles": [
+                                "gethearth"
+                            ],
+                            "latest_funding_consensus": 23000000,
+                            "linkedin_slugs": [
+                                "gethearth"
+                            ],
+                            "linkedin_primary_slug": "gethearth",
+                            "li_org_id": "12908147",
+                            "li_category": "C",
+                            "li_job_posts_stats": {
+                                "total_count": 237,
+                                "seniority_stats": {
+                                    "Associate": {
+                                        "count": 106,
+                                        "fraction": 0.4472573839662447
+                                    },
+                                    "Director": {
+                                        "count": 2,
+                                        "fraction": 0.008438818565400843
+                                    },
+                                    "Entry level": {
+                                        "count": 28,
+                                        "fraction": 0.11814345991561181
+                                    },
+                                    "Executive": {
+                                        "count": 1,
+                                        "fraction": 0.004219409282700422
+                                    }
+                                },
+                                "employment_type_stats": {
+                                    "Contract": {
+                                        "count": 14,
+                                        "fraction": 0.05907172995780591
+                                    },
+                                    "Full-time": {
+                                        "count": 221,
+                                        "fraction": 0.9324894514767933
+                                    },
+                                    "Volunteer": {
+                                        "count": 1,
+                                        "fraction": 0.004219409282700422
+                                    }
+                                },
+                                "country_location_stats": {
+                                    "BRA": {
+                                        "count": 14,
+                                        "fraction": 0.05907172995780591
+                                    },
+                                    "MEX": {
+                                        "count": 28,
+                                        "fraction": 0.11814345991561181
+                                    },
+                                    "PRI": {
+                                        "count": 1,
+                                        "fraction": 0.004219409282700422
+                                    },
+                                    "USA": {
+                                        "count": 193,
+                                        "fraction": 0.8143459915611815
+                                    }
+                                }
+                            },
+                            "li_description": "Hearth is the AI growth system for local home improvement businesses — built for the roofers, HVA...",
+                            "li_follower_count": 24877,
+                            "li_headline": "The AI growth system and revenue-critical software for the home improvement pros who keep America...",
+                            "li_industries": [
+                                {
+                                    "id": "synth-Software Development",
+                                    "name": "Software Development"
+                                }
+                            ],
+                            "li_locations": null,
+                            "li_specialties": [
+                                "Software & SaaS"
+                            ],
+                            "location_consensus": {
+                                "street_address": "368 9th Ave",
+                                "neighborhood": null,
+                                "city": "New York",
+                                "state_name": "New York"
+                            },
+                            "locations_stats": {
+                                "USA": 1,
+                                "X-AMERICAS": 1,
+                                "X-ANGLOSPHERE": 1,
+                                "X-G20": 1
+                            },
+                            "market_cap_usd": null,
+                            "naics_codes": [
+                                "513210"
+                            ],
+                            "names": [
+                                "Hearth"
+                            ],
+                            "preferred_name": "Hearth",
+                            "preferred_name_word_count": 1,
+                            "revenue_estimate": {
+                                "sources": [
+                                    "https://getlatka.com/"
+                                ],
+                                "fiscal_year": 2025,
+                                "value_usd": {
+                                    "gte": 35000000,
+                                    "lte": 35000000
+                                }
+                            },
+                            "standard_industries": [
+                                "Construction"
+                            ],
+                            "status_consensus": "active",
+                            "stock_info_consensus": null,
+                            "tags": [
+                                "raised-from-top-vc"
+                            ],
+                            "total_funding_consensus": 47800000,
+                            "twitter_handles": [
+                                "gethearth"
+                            ],
+                            "websites": [
+                                "gethearth.com"
+                            ],
+                            "wellfound_slugs": [],
+                            "youtube_urls": [],
+                            "role_count_matches": null,
+                            "num_matching_locations": null,
+                            "linkedin_ids": [
+                                "12908147"
+                            ],
+                            "last_sort_key": "gAAAAABq45Ys18pNV3PUGnBXx_GMuFchT4jhkp0oQ01s7ABMHABCb89pQvK3jgZQ-cH_weT1-ZSvzA_XrsFAAoyCraUYxfjTp...",
+                            "relevance_score": 4.3958154,
+                            "technology_spend_usd": 0,
+                            "historical_headcount": {
+                                "latest_snapshot_date": "2026-01-01",
+                                "snapshots": [
+                                    {
+                                        "date": "2023-01-01",
+                                        "employees": 158
+                                    }
+                                ],
+                                "growth": {
+                                    "1m": {
+                                        "percent": 0.01235,
+                                        "quantity": 2
+                                    },
+                                    "2m": {
+                                        "percent": 0.01235,
+                                        "quantity": 2
+                                    },
+                                    "3m": {
+                                        "percent": 0.05128,
+                                        "quantity": 8
+                                    },
+                                    "6m": {
+                                        "percent": 0.04459,
+                                        "quantity": 7
+                                    }
+                                }
+                            },
+                            "cik_numbers": [],
+                            "cage_codes": [],
+                            "duns_numbers": [],
+                            "num_li_locations": 1,
+                            "location_name": "New York",
+                            "crunchbase_slug": "gethearth",
+                            "primary_role": "company",
+                            "roles": [
+                                "company"
+                            ],
+                            "short_description": "Financial Technology for built for the Home Improvement industry",
+                            "long_description": "Shogun Enterprises is a financial technology platform for home improvement.",
+                            "is_subsidiary": false,
+                            "parent": null,
+                            "num_funding_rounds": 3,
+                            "funding_rounds": [
+                                {
+                                    "round_type": "seed",
+                                    "announced_on_date": "2018-08-15T00:00:00+00:00",
+                                    "raised_amount_usd": 8700000,
+                                    "post_money_valuation_usd": 35633392
+                                }
+                            ],
+                            "num_exits": null,
+                            "investors": [
+                                {
+                                    "logo_url": null,
+                                    "entity_type": "person",
+                                    "investor_name": "Rafael Ortiz",
+                                    "linkedin_slug": null
+                                }
+                            ],
+                            "acquisitions": [
+                                {
+                                    "price_usd": null,
+                                    "acquiree_name": "AMS Financial Solutions Inc",
+                                    "acquisition_date": "2017-11-01T00:00:00+00:00"
+                                }
+                            ],
+                            "best_funding_round": {
+                                "round_type": "series_b",
+                                "announced_on_date": "2021-05-17T00:00:00+00:00",
+                                "raised_amount_usd": 23000000,
+                                "post_money_valuation_usd": 209544334
+                            },
+                            "funding_stage": "series_b",
+                            "alt_industries": [
+                                "information technology & services"
+                            ],
+                            "alt_keywords": [
+                                "information technology & services"
+                            ],
+                            "alt_description": "Hearth is a Fintech company helping home improvement contractors grow and manage their business. ...",
+                            "employee_trends": null,
+                            "logo_url": "https://img.imagecdn.dev/company-logo/at_sp7shlocthjel8qyrpzi.jpeg",
+                            "similar_companies": null,
+                            "full_funding_rounds": [
+                                {
+                                    "investors": [
+                                        {
+                                            "is_lead": true,
+                                            "investor_name": "8VC",
+                                            "investor_type": "organization",
+                                            "investor_domain": "8vc.com"
+                                        }
+                                    ],
+                                    "round_city": "Austin",
+                                    "round_date": "2018-08-15T00:00:00.000Z",
+                                    "round_type": "seed"
+                                }
+                            ],
+                            "funding_round_stats": {
+                                "round_count": 3,
+                                "total_raised_usd": 47800000,
+                                "peak_valuation_usd": 209544334,
+                                "unique_investor_count": 15
+                            },
+                            "investment_stats": null,
+                            "is_investor": false,
+                            "investor_type": null,
+                            "investor_categories": null,
+                            "technologies_used": [
+                                {
+                                    "name": "hubspot"
+                                }
+                            ],
+                            "platforms": {
+                                "ecommerce": null,
+                                "cms": [
+                                    "Webflow"
+                                ],
+                                "crm": [
+                                    "Hubspot"
+                                ],
+                                "marketing": [
+                                    "Hubspot"
+                                ]
+                            },
+                            "isSaved": false
+                        }
+                    ],
+                    "total": 50,
+                    "nextCursor": "c_recorded_page_2",
+                    "filters": {
+                        "crunchbaseCategories": [
+                            {
+                                "status": "include",
+                                "value": "FinTech",
+                                "label": "FinTech"
+                            }
+                        ],
+                        "stage": [
+                            {
+                                "status": "include",
+                                "value": "series_b",
+                                "label": "series_b"
+                            }
+                        ],
+                        "headquartersCity": [
+                            "New York City"
+                        ],
+                        "employeeCountV2": {
+                            "min": 50,
+                            "max": 200
+                        }
+                    },
+                    "unresolvedCriteria": []
+                }
+            }
+        }
+    ]
+}

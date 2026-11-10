@@ -1,0 +1,40 @@
+{
+    "name": "people-count-ready",
+    "description": "A people count Fuse already holds: 200 ready on the first call, the final answer of the recorded count's repeats (the same search as people-count-pending). Recorded from Fuse's production API on 2026-10-29, trimmed and scrubbed by the recorder.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "ready",
+                    "total": 11090,
+                    "filters": {
+                        "keywords": [
+                            "vice president of sales",
+                            "vp of sales",
+                            "vp sales"
+                        ],
+                        "job_title_role": [
+                            {
+                                "status": "include",
+                                "value": "sales"
+                            }
+                        ],
+                        "location_country": [
+                            {
+                                "status": "include",
+                                "value": "united states"
+                            }
+                        ],
+                        "job_start_date": 12
+                    },
+                    "creditsCharged": 0
+                }
+            }
+        }
+    ]
+}

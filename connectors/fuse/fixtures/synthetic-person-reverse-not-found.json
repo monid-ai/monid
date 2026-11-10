@@ -1,0 +1,20 @@
+{
+    "name": "synthetic-person-reverse-not-found",
+    "description": "A reverse email or phone lookup that names nobody: `not_found`, a null person and a zero receipt. Synthetic, shaped on Fuse's Business API contract for the route (2026-11-02); to be recorded once the route is live.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "not_found",
+                    "person": null,
+                    "creditsCharged": 0
+                }
+            }
+        }
+    ]
+}

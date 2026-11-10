@@ -1,0 +1,34 @@
+{
+    "name": "prospects-filter-options",
+    "description": "One people filter (`job_title_levels`) answered with its value shape and values. Recorded from Fuse's production API on 2026-10-29, trimmed and scrubbed by the recorder.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?field=job_title_levels"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "filterOptions": {
+                        "fields": {
+                            "job_title_levels": {
+                                "valueShape": "include_exclude",
+                                "values": [
+                                    {
+                                        "label": "CXO",
+                                        "value": "cxo"
+                                    },
+                                    {
+                                        "label": "Director",
+                                        "value": "director"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

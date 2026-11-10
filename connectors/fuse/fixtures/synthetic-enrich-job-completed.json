@@ -1,0 +1,95 @@
+{
+    "name": "synthetic-enrich-job-completed",
+    "description": "A two-person email and phone job: 202 with the jobId, one read while processing, then completed. One person found on both kinds (5 + 10), one found nothing; the job's receipt is 15. Synthetic, shaped on Fuse's published Business API contract (2026-10-29).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "jobId": "6a1f2c3d4e5f6a7b8c9d0e1f",
+                    "status": "pending"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}/6a1f2c3d4e5f6a7b8c9d0e1f"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jobId": "6a1f2c3d4e5f6a7b8c9d0e1f",
+                    "status": "processing",
+                    "total": 2,
+                    "processed": 1,
+                    "found": 1,
+                    "creditsCharged": 15,
+                    "rows": [
+                        {
+                            "index": 0,
+                            "status": "found",
+                            "email": {
+                                "value": "ada@northwind-payments.example",
+                                "status": "valid",
+                                "type": "work"
+                            },
+                            "phone": {
+                                "value": "+12025550143"
+                            },
+                            "linkedinUrl": "linkedin.com/in/ada-fielding",
+                            "creditsCharged": 15
+                        }
+                    ],
+                    "stoppedReason": null
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}/6a1f2c3d4e5f6a7b8c9d0e1f"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jobId": "6a1f2c3d4e5f6a7b8c9d0e1f",
+                    "status": "completed",
+                    "total": 2,
+                    "processed": 2,
+                    "found": 1,
+                    "creditsCharged": 15,
+                    "rows": [
+                        {
+                            "index": 0,
+                            "status": "found",
+                            "email": {
+                                "value": "ada@northwind-payments.example",
+                                "status": "valid",
+                                "type": "work"
+                            },
+                            "phone": {
+                                "value": "+12025550143"
+                            },
+                            "linkedinUrl": "linkedin.com/in/ada-fielding",
+                            "creditsCharged": 15
+                        },
+                        {
+                            "index": 1,
+                            "status": "not_found",
+                            "email": null,
+                            "phone": null,
+                            "linkedinUrl": null,
+                            "creditsCharged": 0
+                        }
+                    ],
+                    "stoppedReason": null
+                }
+            }
+        }
+    ]
+}
