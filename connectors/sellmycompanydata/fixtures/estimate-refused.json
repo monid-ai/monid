@@ -1,0 +1,67 @@
+{
+    "name": "estimate-refused",
+    "description": "Recorded 2026-10-29 with curl from POST https://sellmycompanydata.com/mcp (public, keyless; the request body is the one the connector sends; no headers kept). tools/call estimate_data_value with founded_year 2030. The server's own year check refuses in-band: HTTP 200 with result.isError true. Response body verbatim.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": "sellmycompanydata-estimate-data-value",
+                    "method": "tools/call",
+                    "params": {
+                        "name": "estimate_data_value",
+                        "arguments": {
+                            "employees": 60,
+                            "founded_year": 2030,
+                            "country": "uk",
+                            "systems": [
+                                {
+                                    "tool": "Slack",
+                                    "category": "chat",
+                                    "since_year": 2016,
+                                    "volume": "400k messages",
+                                    "measured": false
+                                },
+                                {
+                                    "tool": "HubSpot",
+                                    "category": "crm",
+                                    "since_year": 2017
+                                },
+                                {
+                                    "tool": "Zendesk",
+                                    "category": "support",
+                                    "since_year": 2018
+                                }
+                            ],
+                            "slack_public_share": "half"
+                        },
+                        "_meta": {
+                            "io.modelcontextprotocol/clientInfo": {
+                                "name": "monid",
+                                "version": "1.0.0"
+                            }
+                        }
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": "sellmycompanydata-estimate-data-value",
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "founded_year must be between 1800 and 2026. Ask the user for the missing or corrected value and call again."
+                            }
+                        ],
+                        "isError": true
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -542,6 +542,8 @@
         "saperly#send-messages",
         "saperly#sync-numbers",
         "saperly#update-numbers",
+        "sellmycompanydata#assessment-checklist",
+        "sellmycompanydata#estimate-data-value",
         "surf#dex/token/price",
         "surf#exchange/candles",
         "surf#exchange/coverage",

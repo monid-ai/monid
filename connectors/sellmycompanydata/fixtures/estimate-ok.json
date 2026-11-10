@@ -1,0 +1,94 @@
+{
+    "name": "estimate-ok",
+    "description": "Recorded 2026-10-29 with curl from POST https://sellmycompanydata.com/mcp (public, keyless; the request body is the one the connector sends; no headers kept). tools/call estimate_data_value for 60 staff, founded 2015, UK, Slack + HubSpot + Zendesk (made-up figures, no real company). A qualifying range. Response body verbatim.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": "sellmycompanydata-estimate-data-value",
+                    "method": "tools/call",
+                    "params": {
+                        "name": "estimate_data_value",
+                        "arguments": {
+                            "employees": 60,
+                            "founded_year": 2015,
+                            "country": "uk",
+                            "systems": [
+                                {
+                                    "tool": "Slack",
+                                    "category": "chat",
+                                    "since_year": 2016,
+                                    "volume": "400k messages",
+                                    "measured": false
+                                },
+                                {
+                                    "tool": "HubSpot",
+                                    "category": "crm",
+                                    "since_year": 2017
+                                },
+                                {
+                                    "tool": "Zendesk",
+                                    "category": "support",
+                                    "since_year": 2018
+                                }
+                            ],
+                            "slack_public_share": "half"
+                        },
+                        "_meta": {
+                            "io.modelcontextprotocol/clientInfo": {
+                                "name": "monid",
+                                "version": "1.0.0"
+                            }
+                        }
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": "sellmycompanydata-estimate-data-value",
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Estimated range: $238K – $460K (United Kingdom).\nYears in business: 11. Systems counted: 3.\nCaveats:\n- This is an estimate, not a quote.\n- A buyer sets the final price after checking a sample, and offers can land lower.\n- Record volume behind the top of the range is assumed from how many systems are listed. It is not measured.\n- The figure is scaled for United Kingdom.\n- 3 of 3 systems were not confirmed as measured. Tell the user which numbers are estimates.\n- Eligibility, data quality, rights and export access are checked in review.\nWhat would move it:\n- Listing more systems that hold company data raises the top of the range. The model counts up to 6.\n- Data that can be exported cleanly is easier to license.\nNot sure what you're allowed to license? Say \"check my data rights\" and we'll go through your contracts, privacy notices and platform terms with you before any buyer sees anything.\nPrefer the website? Your numbers are saved here: https://sellmycompanydata.com/?e=60&f=2015&c=uk&t=Slack%2CHubSpot%2CZendesk&utm_source=mcp-other&utm_medium=ai-connector&utm_campaign=estimate-handoff#value\nIndicative only, not a market valuation or buyer offer. Subject to eligibility, data review and agreed terms."
+                            }
+                        ],
+                        "structuredContent": {
+                            "estimate": true,
+                            "qualifies": true,
+                            "headline": "Estimated range: $238K – $460K (United Kingdom).",
+                            "low_usd": 237882,
+                            "high_usd": 460446,
+                            "range": "$238K – $460K",
+                            "years_in_business": 11,
+                            "region": "United Kingdom",
+                            "systems_counted": 3,
+                            "capped": false,
+                            "caveats": [
+                                "This is an estimate, not a quote.",
+                                "A buyer sets the final price after checking a sample, and offers can land lower.",
+                                "Record volume behind the top of the range is assumed from how many systems are listed. It is not measured.",
+                                "The figure is scaled for United Kingdom.",
+                                "3 of 3 systems were not confirmed as measured. Tell the user which numbers are estimates.",
+                                "Eligibility, data quality, rights and export access are checked in review."
+                            ],
+                            "what_would_move_it": [
+                                "Listing more systems that hold company data raises the top of the range. The model counts up to 6.",
+                                "Data that can be exported cleanly is easier to license."
+                            ],
+                            "next_step": "If the user says \"check my data rights\", \"get me offers\" or \"review my data\", or otherwise asks for a rights check, review or offer, collect and confirm their contact details and consent, then call request_offer. For a rights check, put \"Data rights check requested\" in notes.",
+                            "offer_prompt": "Not sure what you're allowed to license? Say \"check my data rights\" and we'll go through your contracts, privacy notices and platform terms with you before any buyer sees anything.",
+                            "estimate_url": "https://sellmycompanydata.com/?e=60&f=2015&c=uk&t=Slack%2CHubSpot%2CZendesk&utm_source=mcp-other&utm_medium=ai-connector&utm_campaign=estimate-handoff#value",
+                            "disclaimer": "Indicative only, not a market valuation or buyer offer. Subject to eligibility, data review and agreed terms."
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}
