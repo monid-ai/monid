@@ -1,0 +1,61 @@
+{
+    "name": "synthetic-agent-run-stop",
+    "description": "SYNTHETIC — not recorded. Stop: cancel answers 200, then the drain reads a CANCELLED record that executed 2 steps — the stop settles and bills them.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "run_id": "run-1",
+                    "error": null
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/v1/runs/run-1/cancel"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "run_id": "run-1",
+                    "status": "CANCELLED"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/runs/run-1?screenshots=none&html=none"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "run_id": "run-1",
+                    "status": "CANCELLED",
+                    "result": null,
+                    "error": null,
+                    "num_of_steps": 2,
+                    "started_at": "2026-10-21T01:00:01Z",
+                    "finished_at": "2026-10-21T01:00:40Z",
+                    "streaming_url": "https://stream.example.com/run-1",
+                    "video_url": "https://video.example.com/run-1.mp4",
+                    "steps": [
+                        {
+                            "screenshot": "https://shots.example.com/1.png"
+                        }
+                    ],
+                    "profile_id": "prof_1",
+                    "browser_config": {
+                        "proxy": "US"
+                    }
+                }
+            }
+        }
+    ]
+}

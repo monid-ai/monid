@@ -1,0 +1,25 @@
+{
+    "name": "synthetic-profile-provision-rejected",
+    "description": "SYNTHETIC — not recorded. The vendor rejects the create (a profile cap on the shared account): non-2xx is data, nothing is provisioned.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "name": "Salesforce Production",
+                    "proxy_country_code": "US"
+                }
+            },
+            "res": {
+                "status": 409,
+                "body": {
+                    "error": {
+                        "code": "PROFILE_LIMIT_REACHED",
+                        "message": "Profile limit reached for this account."
+                    }
+                }
+            }
+        }
+    ]
+}
