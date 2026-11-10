@@ -1,0 +1,62 @@
+{
+    "name": "recorded-six-ai-aimode-url-fresh",
+    "description": "Recorded own-account request on 2026-10-23. Secrets/PII removed, result arrays capped at 3 and strings at 1500 characters; all actual protocol calls retained. Not a receipt or production acceptance.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v2/scraper/request",
+                "body": {
+                    "actor": "scraper.aimode",
+                    "input": {
+                        "url": "https://www.google.com/async/folwr?srtst=&garc=ChswYTdqV05KU1RmaS1nU3hVTjZydUFNZmtLczASF0pQcmFhc1hGSXVXSWdMUVB2ZVQ3a0FjGgtNdGdmNDhmMFhlSQ&mlro=0a7IP6Urojh2QRQUT2SWTQBh6k7q8P6o5KGENaEX1k-7_iwrnacXJ4Z3Oq4GHa2LQyHppfZejBAzfazBV955sgJbz8rr0HfxCEsP9J2i8hHP58BPX7zXBAisAFVkhM_PrRqRbSKBdVIVoSSOPDpH&mlros=RPu9ojA5u0o&ei=JPraasXFIuWIgLQPveT7kAc&q=Recommended+attractions+in+New+York&yv=3&vet=12ahUKEwjF54Gbvc-XAxVlBIAAHT3yHnIQ-a4TegYIAggCEAA..i&ved=2ahUKEwjF54Gbvc-XAxVlBIAAHT3yHnIQ-a4TegYIAggCEAA&aep=48&sourceid=chrome&udm=50&stkp=AeYwpWnxcfdEpfKHJCC8yWocH-hZWT4FxFaL9p3uKUby3OLXtUxt-bK4c7aAainyzSe57He2oqctNVI8rW2VO6JXNy9sJvBfHAVmVUcOpfezZ8aEiX776Yf1WQ%3D%3D&cs=1&async=_fmt:adl,_xsrf:AF5tSO5nwrZjmXd8QqP6c4I8knRRWZJV5Q%3A1792735780690"
+                    }
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "status": "pending",
+                    "task_id": "bd3ee177-ea57-43ad-b11d-a19fdc3bd6f7"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/bd3ee177-ea57-43ad-b11d-a19fdc3bd6f7"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/bd3ee177-ea57-43ad-b11d-a19fdc3bd6f7"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/bd3ee177-ea57-43ad-b11d-a19fdc3bd6f7"
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "message": "Execution failed. Please try again later. We’re working to resolve the issue.",
+                    "status": "failed"
+                }
+            }
+        }
+    ]
+}

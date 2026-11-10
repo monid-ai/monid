@@ -1,0 +1,145 @@
+{
+    "name": "recorded-controls-google-offset-0",
+    "description": "Real 2026-10-22 bounded probe. Response arrays/strings trimmed; full redacted native evidence in research/live-controls-2026-10-22. Test billing is fictional and is NOT a supplier receipt.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v1/scraper/request",
+                "body": {
+                    "actor": "scraper.google.search",
+                    "input": {
+                        "q": "web scraping API documentation",
+                        "gl": "us",
+                        "hl": "en",
+                        "safe": "active",
+                        "start": 0
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "inline_videos": [
+                        {
+                            "position": 1,
+                            "title": "How to Set Up and Use Web Scraping API | Decodo Product ...",
+                            "link": "https://www.youtube.com/watch?v=L8zSWbQN-v8",
+                            "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAFMAlAMBIgACEQEDEQH/xAAcAAABBAMBAAAAAAAAAAAAAAAAAgMFBwEEBgj/xABFEAABAwMDAgMFAwcHDQAAAAABAgMEAAURBhIhMUETIlEHMmFxkRQVgSRSY3KTocEWFzNCVbHRCCM0U1Zic4SFkpTS8P/EABcBAQEBAQAAAAAAAAAAAAAAAAABAgP/xAAbEQEBAQEAAwEAAAAAAAAAAAAAARECEiExUf/aAAwDAQACEQMRAD8ArWxWhF2TMU7ORERFbSsks",
+                            "snippet": "Set up Decodo's web scraping API by choosing a plan, entering your target URL, selecting location, HTTP method, and defining response codes.",
+                            "channel": "Decodo (formerly Smartproxy)",
+                            "duration": "4:16",
+                            "platform": "YouTube",
+                            "date": "May 16, 2025",
+                            "short_clip": "https://encrypted-vtbn0.gstatic.com/video?q=tbn:ANd9GcQ-oeFSxjX4A2A2glWJvrA1fRcwy0-xPm9-Nw",
+                            "key_moments": [
+                                {
+                                    "time": "00:00",
+                                    "title": "Core Solution Setup",
+                                    "link": "https://www.youtube.com/watch?v=L8zSWbQN-v8&t=0"
+                                },
+                                {
+                                    "time": "01:21",
+                                    "title": "Advanced Solution Setup",
+                                    "link": "https://www.youtube.com/watch?v=L8zSWbQN-v8&t=81"
+                                }
+                            ]
+                        },
+                        {
+                            "position": 2,
+                            "title": "What is Web Scraping API?",
+                            "link": "https://www.youtube.com/shorts/LhzqzVredy0",
+                            "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAFMAlAMBIgACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAADAAECBAUGB//EAD4QAAIBAwICBwQHBQkBAAAAAAECAwAEEQUhEjEGEyJBUWFxMoGRoQcUI0JyscE1UnPR8BYzNGJkgpLS4RX/xAAYAQADAQEAAAAAAAAAAAAAAAAAAQIDBP/EAB8RAQEAAgICAwEAAAAAAAAAAAABAhEDIRIxIjJRE//aAAwDAQACEQMRAD8A8PpClVjT7Vry5WJdhzY+AoAMc",
+                            "snippet": "Web scraping API handles proxies, CAPTCHAs, IP rotation, and geo-restrictions, providing clean, structured data in minutes.",
+                            "channel": "Decodo (formerly Smartproxy)",
+                            "duration": "0:32",
+                            "platform": "YouTube",
+                            "date": "Jun 8, 2026",
+                            "short_clip": "https://encrypted-vtbn0.gstatic.com/video?q=tbn:ANd9GcRQhAu0NAHU6KnUnUBFOZqKkGWFgJJPTQpJOA"
+                        }
+                    ],
+                    "organic_results": [
+                        {
+                            "position": 1,
+                            "title": "Developer Center: APIs, Docs & SDKs",
+                            "link": "https://www.webscrapingapi.com/developers",
+                            "redirect_link": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=CAESZAHrOzAVYfEjSvCsFgHzvzKBeoC2s9iifABY9iT2XnLTXk6SKeNcFl6yjZseIIeoCGEf_5iKX3reee_mMkJqIwOxVQJAY-tCs1Uc4F-ja_cC4DaQ8zZi35MuMqRH9-uv_aT5ms0&ved=2ahUKEwj2s_-4ss2XAxWnTTABHe6sNIoQFnoECCIQAQ&uoh=1",
+                            "favicon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACbUlEQVR4Ab2XA5AcQBBFJ7Zt27Zt27ZtuxDbtm07hTgpxLaNf577NT27teqqd759b3qtmjVrpurUqeMyRbaMSQpSGojr6H/93Gro0KHKxQmS/xPoqBwM3G4HDBPk30BsXwTcFQI2KoxXAyApbFl/VZcCii24UQJ0NNDUEDBPkD8HYZQ2s0+kqgo6GqgbHABJGPAE/DOwnOSRwFshYCrJo4IP4J+BSXpATV1KlKGA+pb1Z6eA5rqUyOwnzqTChPX7fEiQPwC8/t2C/IqigeSQID/vd3g/cT9w03L6MSRPBP4KAb1JnsJy+i5BAYnBX0tAGgoYIMh/g/gUMFKQfwdxgu8FkOwW5CcMt/5rQsAOkvtxXwjYoDB6QB0hoB3J82lCpg4FlLWsvzIHhAMvSf4FxKSAGYL8DYhIAasF+VNAD0QYyK",
+                            "displayed_link": "https://www.webscrapingapi.com › developers",
+                            "snippet": "Choose a WebScrapingAPI product by workload, then open the matching documentation, REST examples, SDK directory, account tools or technical support.",
+                            "snippet_highlighted_words": [
+                                "Choose a WebScrapingAPI product by workload"
+                            ],
+                            "source": "WebScrapingAPI"
+                        },
+                        {
+                            "position": 2,
+                            "title": "Understanding the Scraping API Process : r/learnpython",
+                            "link": "https://www.reddit.com/r/learnpython/comments/goqgjm/understanding_the_scraping_api_process/",
+                            "redirect_link": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=CAESlwEB6zswFSORTdniQnZN1FDN8Hss4pjS1y96l-L1yNgrHwOAC-LtmIL57qPalDuhAp11H4yNDlO5XpiT0Y9FpjJp9IjPZFl5xz3wm02MdOx7lwD9rbOlCzY2FZm84Qr9c41iajtFv3pwZyfktcZpGh_0AEpZ82o7w3GN0t1uzhCy0OZoPdUMr3u29rc-VTvyZa79ddNX6S-D&ved=2ahUKEwj2s_-4ss2XAxWnTTABHe6sNIoQFnoECCkQAQ&uoh=1",
+                            "favicon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAqFBMVEVHcEz/RQD/RQD/RQD/RQD/RQD/RQD/RQD/RQD/RQD/RQD/RQD/PAD/////RQD/PAD/QAD/MQDS4Of/RAD/NwD6+vv4/v/K2N/z+fra5uzm7/H72NLq9vkCCAvweWDol4r/hm3+mYX9YTj+cFDW7PP45uP4qJjbUTNBR0rRtbD/wLO+MgW1vsHfzc/gFQDUqKf/WAb/UgAxODwAHilxLR1scnTHa13kHQCLRbHLAAAADHRSTlMA/kAZ4YjF7WQ0GH3klhKFAAABhUlEQVQokW2T53aDMAyFoSGQpMfyJmaEnb1X+/5vVttkkDT3BxJ8xyBdCce5a9j3A9cN/P7QedcggIeCwQvqeU8EhIA3erKvDgJa1ZTD10cmVghNxYOOugzWY4RQiQF6Fna/tz5fNigMDfRsnd1z5zleNs0Yc5",
+                            "displayed_link": "4 comments  ·  6 years ago",
+                            "snippet": "You just need to make sure you have the correct URL. From the documentation, the URL should be https://urlscan.io/api/v1/result/UUID/ , where ...",
+                            "snippet_highlighted_words": [
+                                "https://urlscan.io/api/v1/result/UUID"
+                            ],
+                            "source": "Reddit · r/learnpython",
+                            "read_more_link": "https://www.reddit.com/r/learnpython/comments/goqgjm/understanding_the_scraping_api_process/#:~:text=You%20just%20need%20to%20make,the%20scan_uuid%20you%20already%20have."
+                        }
+                    ],
+                    "pagination": {
+                        "current": 1,
+                        "next": "https://www.google.com/search?q=web+scraping+API+documentation&safe=active&sca_esv=2351a38461d14f4c&gl=us&hl=en&sxsrf=APpeQntnA2E1JKA-9Q-VQelg_z0G5py47Q:1792664171182&ei=a-LZarbSCqebwbkP7tnS0Qg&start=10&sa=N&sstk=AS6-VmKd_1oQ5gsTBi-9t1FZGfV8UyaFtovbW9qCDTB8Tmrtm2kjQpSFhLDmewLAOAstsgXI8Rb3Q9vUa5bX7buTqw1bYQFRrA8c2g&ved=2ahUKEwj2s_-4ss2XAxWnTTABHe6sNIoQ8NMDegQIPRAW",
+                        "other_pages": {
+                            "2": "https://www.google.com/search?q=web+scraping+API+documentation&safe=active&sca_esv=2351a38461d14f4c&gl=us&hl=en&sxsrf=APpeQntnA2E1JKA-9Q-VQelg_z0G5py47Q:1792664171182&ei=a-LZarbSCqebwbkP7tnS0Qg&start=10&sa=N&sstk=AS6-VmKd_1oQ5gsTBi-9t1FZGfV8UyaFtovbW9qCDTB8Tmrtm2kjQpSFhLDmewLAOAstsgXI8Rb3Q9vUa5bX7buTqw1bYQFRrA8c2g&ved=2ahUKEwj2s_-4ss2XAxWnTTABHe6sNIoQ8tMDegQIPRAE",
+                            "3": "https://www.google.com/search?q=web+scraping+API+documentation&safe=active&sca_esv=2351a38461d14f4c&gl=us&hl=en&sxsrf=APpeQntnA2E1JKA-9Q-VQelg_z0G5py47Q:1792664171182&ei=a-LZarbSCqebwbkP7tnS0Qg&start=20&sa=N&sstk=AS6-VmKd_1oQ5gsTBi-9t1FZGfV8UyaFtovbW9qCDTB8Tmrtm2kjQpSFhLDmewLAOAstsgXI8Rb3Q9vUa5bX7buTqw1bYQFRrA8c2g&ved=2ahUKEwj2s_-4ss2XAxWnTTABHe6sNIoQ8tMDegQIPRAG",
+                            "4": "https://www.google.com/search?q=web+scraping+API+documentation&safe=active&sca_esv=2351a38461d14f4c&gl=us&hl=en&sxsrf=APpeQntnA2E1JKA-9Q-VQelg_z0G5py47Q:1792664171182&ei=a-LZarbSCqebwbkP7tnS0Qg&start=30&sa=N&sstk=AS6-VmKd_1oQ5gsTBi-9t1FZGfV8UyaFtovbW9qCDTB8Tmrtm2kjQpSFhLDmewLAOAstsgXI8Rb3Q9vUa5bX7buTqw1bYQFRrA8c2g&ved=2ahUKEwj2s_-4ss2XAxWnTTABHe6sNIoQ8tMDegQIPRAI",
+                            "5": "https://www.google.com/search?q=web+scraping+API+documentation&safe=active&sca_esv=2351a38461d14f4c&gl=us&hl=en&sxsrf=APpeQntnA2E1JKA-9Q-VQelg_z0G5py47Q:1792664171182&ei=a-LZarbSCqebwbkP7tnS0Qg&start=40&sa=N&sstk=AS6-VmKd_1oQ5gsTBi-9t1FZGfV8UyaFtovbW9qCDTB8Tmrtm2kjQpSFhLDmewLAOAstsgXI8Rb3Q9vUa5bX7buTqw1bYQFRrA8c2g&ved=2ahUKEwj2s_-4ss2XAxWnTTABHe6sNIoQ8tMDegQIPRAK",
+                            "6": "https://www.google.com/search?q=web+scraping+API+documentation&safe=active&sca_esv=2351a38461d14f4c&gl=us&hl=en&sxsrf=APpeQntnA2E1JKA-9Q-VQelg_z0G5py47Q:1792664171182&ei=a-LZarbSCqebwbkP7tnS0Qg&start=50&sa=N&sstk=AS6-VmKd_1oQ5gsTBi-9t1FZGfV8UyaFtovbW9qCDTB8Tmrtm2kjQpSFhLDmewLAOAstsgXI8Rb3Q9vUa5bX7buTqw1bYQFRrA8c2g&ved=2ahUKEwj2s_-4ss2XAxWnTTABHe6sNIoQ8tMDegQIPRAM",
+                            "7": "https://www.google.com/search?q=web+scraping+API+documentation&safe=active&sca_esv=2351a38461d14f4c&gl=us&hl=en&sxsrf=APpeQntnA2E1JKA-9Q-VQelg_z0G5py47Q:1792664171182&ei=a-LZarbSCqebwbkP7tnS0Qg&start=60&sa=N&sstk=AS6-VmKd_1oQ5gsTBi-9t1FZGfV8UyaFtovbW9qCDTB8Tmrtm2kjQpSFhLDmewLAOAstsgXI8Rb3Q9vUa5bX7buTqw1bYQFRrA8c2g&ved=2ahUKEwj2s_-4ss2XAxWnTTABHe6sNIoQ8tMDegQIPRAO",
+                            "8": "https://www.google.com/search?q=web+scraping+API+documentation&safe=active&sca_esv=2351a38461d14f4c&gl=us&hl=en&sxsrf=APpeQntnA2E1JKA-9Q-VQelg_z0G5py47Q:1792664171182&ei=a-LZarbSCqebwbkP7tnS0Qg&start=70&sa=N&sstk=AS6-VmKd_1oQ5gsTBi-9t1FZGfV8UyaFtovbW9qCDTB8Tmrtm2kjQpSFhLDmewLAOAstsgXI8Rb3Q9vUa5bX7buTqw1bYQFRrA8c2g&ved=2ahUKEwj2s_-4ss2XAxWnTTABHe6sNIoQ8tMDegQIPRAQ",
+                            "9": "https://www.google.com/search?q=web+scraping+API+documentation&safe=active&sca_esv=2351a38461d14f4c&gl=us&hl=en&sxsrf=APpeQntnA2E1JKA-9Q-VQelg_z0G5py47Q:1792664171182&ei=a-LZarbSCqebwbkP7tnS0Qg&start=80&sa=N&sstk=AS6-VmKd_1oQ5gsTBi-9t1FZGfV8UyaFtovbW9qCDTB8Tmrtm2kjQpSFhLDmewLAOAstsgXI8Rb3Q9vUa5bX7buTqw1bYQFRrA8c2g&ved=2ahUKEwj2s_-4ss2XAxWnTTABHe6sNIoQ8tMDegQIPRAS",
+                            "10": "https://www.google.com/search?q=web+scraping+API+documentation&safe=active&sca_esv=2351a38461d14f4c&gl=us&hl=en&sxsrf=APpeQntnA2E1JKA-9Q-VQelg_z0G5py47Q:1792664171182&ei=a-LZarbSCqebwbkP7tnS0Qg&start=90&sa=N&sstk=AS6-VmKd_1oQ5gsTBi-9t1FZGfV8UyaFtovbW9qCDTB8Tmrtm2kjQpSFhLDmewLAOAstsgXI8Rb3Q9vUa5bX7buTqw1bYQFRrA8c2g&ved=2ahUKEwj2s_-4ss2XAxWnTTABHe6sNIoQ8tMDegQIPRAU"
+                        }
+                    },
+                    "related_questions": [
+                        {
+                            "type": "ai_overview",
+                            "question": "What does API documentation provide?",
+                            "next_page_token": "eyJvbnMiOiIxMDA0MSIsImZjIjoiRXFFQkNtSkJTbWxVTkhSSlRtMHRRakZaUW14Zk9VMVRTM0k0T1hCaWVUQm9hRWxTUVc5aGRqQkNja1pwV2tOd2QyaE9XWEV5VFdwU2MwMHlkRUpKTW1wVVlWTkJPR0ZLWDBwNVIwZHhSR05XZWtoWE5WZzFVR0ppTld0Rk1XUkljRGR2Y0ZSa1VSSVhZUzFNV21GeVlsTkRjV1ZpZDJKclVEZDBibE13VVdjYUlrRkVjM0k1WmxKWVVUWjZXR28yYWtKVVJuaEZUemhFU21kbmFEaHBSakZEWmxFIiwiZmN2IjoiMyIsImVpIjoiYS1MWmFyYlNDcWVid2JrUDd0blMwUWciLCJxYyI6IkNoNTNaV0lnYzJOeVlYQnBibWNnWVhCcElHUnZZM1Z0Wlc1MFlYUnBiMjRRQUgwR2ZnVV8iLCJxdWVzdGlvbiI6IldoYXQgZG9lcyBBUEkgZG9jdW1l",
+                            "page_token": "eyJvbnMiOiI2NzYxIiwiZmMiOiJFdUlCQ3FJQlFVcHBWRFIwUzNZNFJtaHNSMEpNUTFVMk5UVlVTRnB4YVZocWJ6RllXRUpVYlZwNFRWcDJYMVphU0RaRFgwZFdURGhqT1RZeFZWSndkVkIxU0hSRVFURkhURlExWDJOYWRIQjJjRFZyUzBoc2NVSkRXa1k0YUd4TVlrVmtXbWRtY1ZWdFNtRk5SMWxyWjJSbVYxQmhhWEp2UVZWM1ZUUkhhRkJZWDAxVVNITkhNMTl1Y1Y5c2JqSjBjVnA2VmxwaFFVOVFPRFJoVkZseVUxOVpjbkV0U1RWQkVoZGhMVXhhWVhKaVUwTnhaV0ozWW10UU4zUnVVekJSWnhvaVFVUnpjamxtVkZWRWVsRlVPRTVrVWtOUVdVbzRYemREUjFvMU1EaGhkWGRRUVEiLCJmY3YiOiIzIn0="
+                        },
+                        {
+                            "type": "ai_overview",
+                            "question": "Is AI scraping illegal?",
+                            "next_page_token": "eyJvbnMiOiIxMDA0MSIsImZjIjoiRXFFQkNtSkJTbWxVTkhSSlRtMHRRakZaUW14Zk9VMVRTM0k0T1hCaWVUQm9hRWxTUVc5aGRqQkNja1pwV2tOd2QyaE9XWEV5VFdwU2MwMHlkRUpKTW1wVVlWTkJPR0ZLWDBwNVIwZHhSR05XZWtoWE5WZzFVR0ppTld0Rk1XUkljRGR2Y0ZSa1VSSVhZUzFNV21GeVlsTkRjV1ZpZDJKclVEZDBibE13VVdjYUlrRkVjM0k1WmxKWVVUWjZXR28yYWtKVVJuaEZUemhFU21kbmFEaHBSakZEWmxFIiwiZmN2IjoiMyIsImVpIjoiYS1MWmFyYlNDcWVid2JrUDd0blMwUWciLCJxYyI6IkNoNTNaV0lnYzJOeVlYQnBibWNnWVhCcElHUnZZM1Z0Wlc1MFlYUnBiMjRRQUgwR2ZnVV8iLCJxdWVzdGlvbiI6IklzIEFJIHNjcmFwaW5nIGlsbGVn",
+                            "page_token": "eyJvbnMiOiI2NzYxIiwiZmMiOiJFc3dCQ293QlFVcHBWRFIwU21GMU5qYzRRazltUzNKS1owWnlUa0YxWjJKTVNXOXdUbGN0VTJ0aFNXRTRNbU16VWpoTFV6RmFhWEJ0WW5kTGVteEdjMmRpWTAxVWVYRTFValo1YmpsMVZUUlVhMVJtUlVwS1FXWnVXVTQzTkV0UkxXcFJWWGxQZFVKQ2RYSldNREJDZGxKNlRXMUdNV0ZhYjBKak4wcHRhV0Y2UmxsWlExY3dYMUI0Ym5KSGNIVjJMVEFTRjJFdFRGcGhjbUpUUTNGbFluZGlhMUEzZEc1VE1GRm5HaUpCUkhOeU9XWlJlREpST1hSRmFGRnlNRVpmTURRMFNEVnhSMWRCVW1oQlMxSlIiLCJmY3YiOiIzIn0="
+                        }
+                    ],
+                    "related_searches": [
+                        {
+                            "block_position": "1",
+                            "query": "Web scraping api documentation template",
+                            "link": "https://www.google.com/search?safe=active&sca_esv=2351a38461d14f4c&gl=us&hl=en&sxsrf=APpeQntnA2E1JKA-9Q-VQelg_z0G5py47Q:1792664171182&q=Web+scraping+api+documentation+template&sa=X&ved=2ahUKEwj2s_-4ss2XAxWnTTABHe6sNIoQ1QJ6BAhAEAE"
+                        },
+                        {
+                            "block_position": "1",
+                            "query": "Web scraping api documentation github",
+                            "link": "https://www.google.com/search?safe=active&sca_esv=2351a38461d14f4c&gl=us&hl=en&sxsrf=APpeQntnA2E1JKA-9Q-VQelg_z0G5py47Q:1792664171182&q=Web+scraping+api+documentation+github&sa=X&ved=2ahUKEwj2s_-4ss2XAxWnTTABHe6sNIoQ1QJ6BAhIEAE"
+                        }
+                    ],
+                    "search_information": {
+                        "organic_results_state": "Results for exact spelling",
+                        "query_displayed": "web scraping API documentation",
+                        "total_results": 116,
+                        "time_taken_displayed": "0.25"
+                    },
+                    "metadata": {
+                        "engine": "google.search",
+                        "rawUrl": "https://api.scrapeless.com/storage/scrapeless.scraper.google.search/1343d0d6218f5d5d4d80861f5b44db20/664ffb9c76e38a63e004ed766c05ba2e_1792664171.html"
+                    }
+                }
+            }
+        }
+    ]
+}

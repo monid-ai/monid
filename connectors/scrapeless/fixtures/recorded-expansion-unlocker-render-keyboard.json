@@ -1,0 +1,44 @@
+{
+    "name": "recorded-expansion-unlocker-render-keyboard",
+    "description": "Real Scrapeless responses, 2026-10-22; header allowlist applied; Monid trimCalls caps response arrays at 2 and strings at 500. Full redacted records remain in research/live-expansion-2026-10-22. Replay usage is TEST ONLY, never actual charges.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v2/unlocker/request",
+                "body": {
+                    "actor": "unlocker.webunlocker",
+                    "input": {
+                        "url": "https://example.com",
+                        "jsRender": {
+                            "enabled": true,
+                            "waitUntil": "domcontentloaded",
+                            "instructions": [
+                                {
+                                    "evaluate": "document.body.innerHTML = '<input id=probe><h1 id=result>waiting</h1>'; document.querySelector('#probe').addEventListener('input', e => document.querySelector('#result').textContent = e.target.value); document.querySelector('#probe').focus();"
+                                },
+                                {
+                                    "keyboard": [
+                                        "type",
+                                        "MONID_KEYBOARD_OK",
+                                        1
+                                    ]
+                                }
+                            ],
+                            "response": {
+                                "type": "markdown"
+                            }
+                        }
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "code": 200,
+                    "data": "# MONID\\_KEYBOARD\\_OK"
+                }
+            }
+        }
+    ]
+}

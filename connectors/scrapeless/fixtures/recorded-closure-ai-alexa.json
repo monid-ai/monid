@@ -1,0 +1,240 @@
+{
+    "name": "recorded-closure-ai-alexa",
+    "description": "Real response chain, 2026-10-23. Public test inputs; PII and storage links redacted, response arrays/strings trimmed. Native success/error is distinct from connector acceptance and observed balances are not task invoices.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v2/scraper/request",
+                "body": {
+                    "actor": "scraper.alexa",
+                    "input": {
+                        "prompt": "In one sentence, what is example.com used for?",
+                        "country": "US"
+                    }
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "status": "pending",
+                    "task_id": "14706c41-a051-4ed3-8557-8ab649715ee4"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/14706c41-a051-4ed3-8557-8ab649715ee4"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/14706c41-a051-4ed3-8557-8ab649715ee4"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/14706c41-a051-4ed3-8557-8ab649715ee4"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/14706c41-a051-4ed3-8557-8ab649715ee4"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/14706c41-a051-4ed3-8557-8ab649715ee4"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/14706c41-a051-4ed3-8557-8ab649715ee4"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/14706c41-a051-4ed3-8557-8ab649715ee4"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/14706c41-a051-4ed3-8557-8ab649715ee4"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/14706c41-a051-4ed3-8557-8ab649715ee4"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/14706c41-a051-4ed3-8557-8ab649715ee4"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/14706c41-a051-4ed3-8557-8ab649715ee4"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/14706c41-a051-4ed3-8557-8ab649715ee4"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/14706c41-a051-4ed3-8557-8ab649715ee4"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "success",
+                    "task_result": {
+                        "answer_fragment_uri": "fragment://LLM:APE/d02282de-8af5-459e-a977-7a23cd4eac5b",
+                        "answer_revision": 2,
+                        "completed": true,
+                        "conversation": {
+                            "id": "amzn1.conversation.a29d220a-61bc-4017-a25c-b08c2726b80e"
+                        },
+                        "dialog_request_id": "e819f5a4-9831-48e0-9ca6-5c71c159e0d6",
+                        "directives": [
+                            {
+                                "dialog_request_id": "e819f5a4-9831-48e0-9ca6-5c71c159e0d6",
+                                "fragment_count": 0,
+                                "message_id": "58e1ae99-71c4-4049-a208-b04368a1033e",
+                                "name": "RequestProcessingStarted",
+                                "namespace": "InteractionModel"
+                            },
+                            {
+                                "dialog_request_id": "e819f5a4-9831-48e0-9ca6-5c71c159e0d6",
+                                "fragment_count": 1,
+                                "message_id": "12d19b77-3687-408b-a26c-d70764bee4cc",
+                                "name": "AddFragments",
+                                "namespace": "Alexa.Conversation"
+                            }
+                        ],
+                        "endpoint_id": "A3C6EYC2ZE0KUH:07d2ab86e15e4ff99ffb851814bb89f9PRDSPK1",
+                        "fragment_count": 11,
+                        "md_text": "**example.com** is a domain reserved by IANA specifically for use in documentation, tutorials, and sample code — so writers can reference a domain name in examples without accidentally pointing readers to a real website. ([en.wikipedia.org](https://en.wikipedia.org/wiki/Example.com))",
+                        "products": [],
+                        "raw_text": "**example.com** is a domain reserved by IANA specifically for use in documentation, tutorials, and sample code — so writers can reference a domain name in examples without accidentally pointing readers to a real website. {ref cite_vFJGtSc}",
+                        "references": [
+                            {
+                                "id": "cite_vFJGtSc",
+                                "title": "wikipedia.org",
+                                "url": "https://en.wikipedia.org/wiki/Example.com"
+                            },
+                            {
+                                "id": "cite_3x8SIEp",
+                                "title": "docs.aws.amazon.com",
+                                "url": "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/route-53-concepts.html"
+                            }
+                        ],
+                        "sources": [
+                            {
+                                "fragment_uri": "fragment://com.amazon.infovisualdomain.api.InfoVisual_live/95765c59-f926-4cb0-bf4c-224da6d64177",
+                                "text": "docs.aws.amazon.com",
+                                "type": "OpenURL",
+                                "url": "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/route-53-concepts.html"
+                            },
+                            {
+                                "fragment_uri": "fragment://com.amazon.infovisualdomain.api.InfoVisual_live/8cd1b516-9ec6-4503-aac2-fd5cd46641e6",
+                                "text": "stackoverflow.com",
+                                "type": "OpenURL",
+                                "url": "https://stackoverflow.com/questions/1368163/is-there-a-standard-domain-for-testing-throwaway-email"
+                            }
+                        ],
+                        "suggestions": [],
+                        "user_text": "In one sentence, what is example.com used for?"
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,203 @@
+{
+    "name": "recorded-shopping-aimode",
+    "description": "Real bounded shopping request, 2026-10-23. Response arrays/strings trimmed by Monid; full redacted evidence retained in research/shopping-20261023. Balance observation is not a task invoice. All products/references remain in raw local evidence.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v2/scraper/request",
+                "body": {
+                    "actor": "scraper.aimode",
+                    "input": {
+                        "prompt": "Recommend one affordable USB-C charging cable to buy in the United States. Include a product and store offer if available.",
+                        "country": "US",
+                        "shopping": true,
+                        "should_fetch_share_link": false
+                    }
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "status": "pending",
+                    "task_id": "aff9280a-2476-4e32-8825-1c48f3d4d84d"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/aff9280a-2476-4e32-8825-1c48f3d4d84d"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/aff9280a-2476-4e32-8825-1c48f3d4d84d"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/aff9280a-2476-4e32-8825-1c48f3d4d84d"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/aff9280a-2476-4e32-8825-1c48f3d4d84d"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/aff9280a-2476-4e32-8825-1c48f3d4d84d"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/aff9280a-2476-4e32-8825-1c48f3d4d84d"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/aff9280a-2476-4e32-8825-1c48f3d4d84d"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "success",
+                    "task_result": {
+                        "citations": [],
+                        "products": [
+                            {
+                                "about_the_product": {
+                                    "description": "Enjoy the benefit of fast charging and transferring your data with the white 322 Braided USB-C Cable from ANKER. Quickly charge any fast charge compatible device such as a cellphone, tablet, or laptop. Additionally, the cable is MFi certified and USB-IF compliant, ensuring safe and reliable charging for most USB-C devices. Transfer your photos and videos with data transfer rates up to 480 MB/s. The 6' cable length allows you to conveniently reach most outlets, enabling you to charge almost anywh",
+                                    "displayed_link": "www.google.com",
+                                    "features": [
+                                        {
+                                            "title": "Brand",
+                                            "value": "Anker"
+                                        },
+                                        {
+                                            "title": "Connection Type",
+                                            "value": "USB-C"
+                                        }
+                                    ],
+                                    "link": "https://www.google.com/preferences/shopping?ibp=oshop&prds=pvt:hg,pvo:29,imageDocid:14262579180132422595,gpcid:6468618272990748451,headlineOfferDocid:16494164843640957768,catalogid:13345024594996230882,productDocid:14801467540470938216,rds:PC_8453546969088941221%7CPROD_PC_8453546969088941221&sa=X&ved=2ahUKEwiAup3xjs-XAxX_hSsGHd5ODeAQgLcPeggIAggBCBQQAQ&gl=US&hl=en&gbv=1",
+                                    "title": "About this product"
+                                },
+                                "brand": "Anker",
+                                "price_range": "$7.99 - $15.99",
+                                "rating": "4.9",
+                                "ratings": [
+                                    {
+                                        "amount": 1274,
+                                        "stars": 1
+                                    },
+                                    {
+                                        "amount": 1274,
+                                        "stars": 2
+                                    }
+                                ],
+                                "reviews": 1,
+                                "stores": [
+                                    {
+                                        "extensions": [
+                                            "In stock online",
+                                            "4.8/5"
+                                        ],
+                                        "link": "/goto?url=CAESsgEB6zswFZQTUYx2f9zj25BSlvTU-imlyj8HS096ZAdB0w9ze2O7hYo22SUDgYoFSntydynuTYy9GfLJmXQse--ldLTWGpLbPmJMN4UcvONDWCPvsy6a0pe-mcjb4GcEDlxfLvr0_3_t5L6r5v5mSARatVllQRI1ptXSYd-fi5JdY4hHtEKIOjgfazvbkYJD3TLYJl_R-ARK1xOS81VZoNydwZoFSee9U_nRDysRvnssF3pN",
+                                        "name": "Micro Center",
+                                        "price": "$7.99",
+                                        "ratings": "4.8/5",
+                                        "title": "Anker USB Type-C to USB Type-C Braided 6 Ft. Cable",
+                                        "total_price": "$7.99"
+                                    },
+                                    {
+                                        "delivery_fee": "Free delivery",
+                                        "extensions": [
+                                            "In stock online",
+                                            "4.6/5"
+                                        ],
+                                        "link": "/goto?url=CAESjwIB6zswFUkW7BtQ1I5JVhBv6AHZpSRdc_o3jU9rrkTqtRnCUjfgR99FnBhDFcXBLg4bVCzcoFPYhZFvuyPsXKBlKlDNJxINtezO_m9IZujHTF71FYHYu7IATd56A1V8cp-Ow-3KssQ4bPaIqPGvF_KvAe76fFF-zynG3ePQaXdV00r_aIpAq29kEoqgMGE1Myt2pSmH9O5wZS06RVDUySA83RLi4XlIvVp3vvMutlWPjuOthLSUBDsUuhtEtUxblhlFYv4corYlcxI3m41nGt2QzY92nxLstaK7IVGms9HlZhUcH_-IzOGLsM7JORQXEnZ81JZTPVm1lVXHmffZKTeyzB3fMq32ddkrFLo78Esv",
+                                        "name": "Home Depot",
+                                        "price": "$9.09",
+                                        "ratings": "4.6/5",
+                                        "title": "Anker 322 USB-C to USB-C Cable, 6 ft. Braided, White",
+                                        "total_price": "$9.09"
+                                    }
+                                ],
+                                "thumbnails": [
+                                    "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRBQVj22YmsPoQYiQ9Yr5b23HKSxCrqBqBjtUJpF_WMvGZCF3DqLrC5S0kj-wHsiR2AzU2oRRfryXQftZ4RUl7R6tMnck6JHNeeytOHXRknKFEzGXqCK937VA",
+                                    "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRqpa4CCqMs3Rqk-Xnc82lOG2xJamgIAWw5iwwBq9bwoTJDZHkVPJJjS_dYZy_vcd1sTZicwDFfoWwUdVDSgDfD2VM878BqbkLP7g4UErweJDJbjIRQ6ac"
+                                ],
+                                "title": "Anker 322 USB-C to USB-C Cable",
+                                "url": "https://www.google.com/search?ibp=oshop&prds=pvt:hg,pvo:29,imageDocid:14262579180132422595,gpcid:6468618272990748451,headlineOfferDocid:16494164843640957768,catalogid:13345024594996230882,productDocid:14801467540470938216,rds:PC_8453546969088941221%7CPROD_PC_8453546969088941221&q=product&sa=X&ved=2ahUKEwiAup3xjs-XAxX_hSsGHd5ODeAQgLcPeggIAggBCBQQAQ&gl=US",
+                                "user_reviews": [
+                                    {
+                                        "date": "7 months ago",
+                                        "name": "William",
+                                        "rating": 5,
+                                        "source": "Reviewed on staples.com",
+                                        "text": "I was looking for a cable that was resistant to breaking due to multiple bending and twisting near the connection. It also had to be resistant to my bunnies chewing on the cable. This cable is stiffer due to the harder covering. That covering is also textured which my bunnies don’t like so no chewing. So this cable wins on two fronts. I kno there are many bunny owners out there but the stiffness of cable makes this a good cable for anyone that moves their equipment around frequently.",
+                                        "title": "Bunny and movement proof"
+                                    },
+                                    {
+                                        "date": "a year ago",
+                                        "name": "shopee.ph Shopper",
+                                        "rating": 5,
+                                        "source": "Reviewed on shopee.ph",
+                                        "text": "I’ve been using this fast charging wire for a few weeks now, and it’s been performing exceptionally well. It charges my phone incredibly fast—almost 50% in just 20–30 minutes. The build quality feels premium, with a strong, tangle-free braided cable and reinforced connectors that don’t bend or fray. I’ve tried it with both my phone and tablet, and it consistently delivers quick and stable charging. Data transfer speeds are solid too. It's compatible with my 65W charger and doesn't overheat."
+                                    }
+                                ]
+                            }
+                        ],
+                        "raw_url": "https://www.google.com/async/folwr?srtst=&garc=ChswYTdlZ1RPU002ZTZVdk9mc3dNbm9iYWg5RjQSF2tNbmFhdFRiTTdEWXJ1RVA4T1h5b0FNGgtTTnZOVkE4SWxyNA&mlro=0a6WcCGKXqQ0cgIQS40IBHHvYLndft2GMrEcb0m2HWgbFEVbaquxe1__6bUCKmGIcjKuaAbGXsjPQmBAP_-D_eWWR7QaxJxSfk1uhU53LL8Ji5yoUt81-GEVA256R5cvXGUJ_sQVHvFBoGM&mlros=IS7kzONwLeo&ei=kMnaatTbM7DYruEP8OXyoAM&q=Recommend+one+affordable+USB-C+charging+cable+to+buy+in+the+United+States.+Include+a+product+and+store+offer+if+available.&yv=3&vet=12ahUKEwjU45nxjs-XAxUwrCsGHfCyHDQQ",
+                        "result_html": "<div><div data-container-id=\"kcnaaq_ZGZiuptQPyb-eqQ8\"></div><div eid=\"kcnaaq_ZGZiuptQPyb-eqQ8\"></div><div><div data-session-thread-id=\"kMnaatTbM7DYruEP8OXyoAM\" style=\"display:none\"> </div><div data-target-container-id=\"kcnaaq_ZGZiuptQPyb-eqQ8\"><div data-msei=\"AUtExfCtsXrklwrDyd13Bej1WG-r6SzK4qfCRJNOWdv1sk7MkS63v_IK5W-dnDotOODnn95PWA9p71KBIENGf1qabjKhkkVj\" data-mseni=\"kMnaatTbM7DYruEP8OXyoAM\" data-mstk=\"AUtExfDc5o9GX4hBfomm-P_ZanQ3SwxzrOnnJpiZwC5jECKJsT-Jol8feS26aPTU7VcQfXOJRojAaQVsthN16Y19s0YpbU",
+                        "result_md": "The **Anker 322 USB-C to USB-C Cable** is a highly recommended and exceptionally affordable choice available in the United States.\n\nThe Anker 322 is a **6-foot braided nylon cable** built to withstand up to 12,000 bends, making it vastly more durable than standard plastic cords. It supports reliable fast charging up to 60W, making it suitable for smartphones, tablets, and smaller laptops, with standard data transfer speeds up to 480 Mbps.\n\n<div html-index=\"1\" style=\"display:flex;align-items:cent",
+                        "result_text": "The **Anker 322 USB-C to USB-C Cable** is a highly recommended and exceptionally affordable choice available in the United States.\n\nThe Anker 322 is a **6-foot braided nylon cable** built to withstand up to 12,000 bends, making it vastly more durable than standard plastic cords. It supports reliable fast charging up to 60W, making it suitable for smartphones, tablets, and smaller laptops, with standard data transfer speeds up to 480 Mbps.\n\n#### Anker 322 USB-C to USB-C Cable (6ft Braided)\nPrice:"
+                    }
+                }
+            }
+        }
+    ]
+}

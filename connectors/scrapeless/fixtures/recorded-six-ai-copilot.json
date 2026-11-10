@@ -1,0 +1,160 @@
+{
+    "name": "recorded-six-ai-copilot",
+    "description": "Recorded own-account request on 2026-10-23. Secrets/PII removed, result arrays capped at 3 and strings at 1500 characters; all actual protocol calls retained. Not a receipt or production acceptance.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v2/scraper/request",
+                "body": {
+                    "actor": "scraper.copilot",
+                    "input": {
+                        "prompt": "Recommended attractions in New York",
+                        "country": "US",
+                        "mode": "search"
+                    }
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "status": "pending",
+                    "task_id": "3e9737c4-e99c-4e50-83f5-8ddd15c86722"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/3e9737c4-e99c-4e50-83f5-8ddd15c86722"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/3e9737c4-e99c-4e50-83f5-8ddd15c86722"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/3e9737c4-e99c-4e50-83f5-8ddd15c86722"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/3e9737c4-e99c-4e50-83f5-8ddd15c86722"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/3e9737c4-e99c-4e50-83f5-8ddd15c86722"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/3e9737c4-e99c-4e50-83f5-8ddd15c86722"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/3e9737c4-e99c-4e50-83f5-8ddd15c86722"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/3e9737c4-e99c-4e50-83f5-8ddd15c86722"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/3e9737c4-e99c-4e50-83f5-8ddd15c86722"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "success",
+                    "task_result": {
+                        "citations": [
+                            {
+                                "title": "Central Park",
+                                "url": "https://www.centralparknyc.org/"
+                            },
+                            {
+                                "title": "Empire State Building",
+                                "url": "https://www.esbnyc.com/"
+                            },
+                            {
+                                "title": "Rockefeller Park",
+                                "url": "https://bpca.ny.gov/place/rockefeller-park/"
+                            }
+                        ],
+                        "links": [
+                            "http://www.thebattery.org/",
+                            "https://bpca.ny.gov/place/rockefeller-park/",
+                            "https://www.centralparknyc.org/"
+                        ],
+                        "mode": "search",
+                        "prompt": "Recommended attractions in New York",
+                        "result_text": "**Top recommended attractions in New York include Times Square, Central Park, the Statue of Liberty, and the Empire State Building — each offering iconic experiences that define the city.**  \n\n---\n\n## 🌟 Must-See Highlights\n\n- **Times Square** – Famous for its neon lights, Broadway theaters, and bustling energy. A must for first-time visitors.  \n- **Central Park** – An urban oasis with walking paths, lakes, a zoo, and seasonal activities. Perfect for relaxation or recreation.  \n- **Statue of Liberty** – The ultimate American icon, accessible via ferry tours, with a museum and panoramic harbor views.  \n- **Empire State Building** – A 102-story Art Deco landmark with observatories on the 86th and 102nd floors.  \n\n\n\n---\n\n## 🏙️ Other Notable Attractions\n\n- **Top of the Rock (Rockefeller Center)** – Offers sweeping views of Manhattan, including the Empire State Building and Central Park.  \n- **Rockefeller Park** – Riverside lawns, gardens, and public art installations, ideal for a quieter stroll.  \n- **Channel Gardens** – Seasonal landscaped gardens at Rockefeller Center, often decorated for holidays.  \n- **Statue of Liberty Lookout (Battery Park)** – A free alternative for viewing Lady Liberty without taking the ferry.  \n\n\n\n---\n\n## 📊 Quick Comparison Table\n\n| Attraction              | Best For                          | Rating | Opening Hours |\n|--------------------------|-----------------------------------|--------|---------------|\n| **Times Square**         | Lights, Broadway[RECORDED_TRUNCATED]",
+                        "share_url": ""
+                    }
+                }
+            }
+        }
+    ]
+}

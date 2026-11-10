@@ -1,0 +1,107 @@
+{
+    "name": "recorded-shopping-gemini",
+    "description": "Real bounded shopping request, 2026-10-23. Response arrays/strings trimmed by Monid; full redacted evidence retained in research/shopping-20261023. Balance observation is not a task invoice. All products/references remain in raw local evidence.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v2/scraper/request",
+                "body": {
+                    "actor": "scraper.gemini",
+                    "input": {
+                        "prompt": "Recommend one affordable USB-C charging cable to buy in the United States. Include a product and store offer if available.",
+                        "country": "US",
+                        "shopping": true
+                    }
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "status": "pending",
+                    "task_id": "b888e0ab-b9c5-44fd-a8d4-15f889714125"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/b888e0ab-b9c5-44fd-a8d4-15f889714125"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/b888e0ab-b9c5-44fd-a8d4-15f889714125"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/b888e0ab-b9c5-44fd-a8d4-15f889714125"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/b888e0ab-b9c5-44fd-a8d4-15f889714125"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "success",
+                    "task_result": {
+                        "citations": [
+                            {
+                                "cited_count": 0,
+                                "favicon": "https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn%3AANd9GcTThPdrujR6x0cZkEdA5y__Q5lbqERC-r8TXeFJAYmyo_8C7bn9yh6uQuioVWbFmOfGEpM_szxWsPoz482o3lhYJhJ98LQk",
+                                "highlights": [
+                                    "**Product Recommendation:** Anker PowerLine III USB-C to USB-C Cable (60W)"
+                                ],
+                                "index": 1,
+                                "snippet": "It performed well for charging and data transfers, though it did not \nsupport the promised 100 watt charging spec in our testing. On the data \nside, PowerLine II ...",
+                                "title": "Best USB-C cables in 2026 | CNN Underscored",
+                                "url": "https://www.cnn.com/cnn-underscored/reviews/best-usb-c-cables#:~:text=It%20performed%20well%20for%20charging%20and%20data,is%20a%20bit%20more%20expensive%20at%20%2413.",
+                                "website_name": "CNN"
+                            },
+                            {
+                                "cited_count": 1,
+                                "favicon": "https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn%3AANd9GcTThPdrujR6x0cZkEdA5y__Q5lbqERC-r8TXeFJAYmyo_8C7bn9yh6uQuioVWbFmOfGEpM_szxWsPoz482o3lhYJhJ98LQk",
+                                "highlights": [
+                                    "It is durable, features a flexible and tangle-free silicone/rubber finish, and safely delivers fast-charging speeds for smartphones, tablets, and mid-range USB-C laptops."
+                                ],
+                                "index": 2,
+                                "snippet": "Anker Powerline+ USB-C to USB-C cable. Best overall USB-C cable. ANKER. \nAnker's Powerline + USB-C cable is durable and functional, with a braided \njacket, robust...",
+                                "title": "Best USB-C cables in 2026 | CNN Underscored",
+                                "url": "https://www.cnn.com/cnn-underscored/reviews/best-usb-c-cables#:~:text=Anker%20Powerline%2B%20USB%2DC%20to%20USB%2DC%20cable.%20Best,watts%20of%20power%2C%20enough%20to%20charge%20laptops.",
+                                "website_name": "CNN"
+                            }
+                        ],
+                        "prompt": "Recommend one affordable USB-C charging cable to buy in the United States. Include a product and store offer if available.",
+                        "rawtext": "**Product Recommendation:** Anker PowerLine III USB\\-C to USB\\-C Cable (60W)\n\n- **Why it’s a great buy:** It is durable, features a flexible and tangle\\-free silicone/rubber finish, and safely delivers fast\\-charging speeds for smartphones, tablets, and mid\\-range USB\\-C laptops\\.\n- **Store Offer:** Available at **Amazon** and directly through the <strong>Anker US Online Store</strong>, typically priced around <strong>$10 to $13</strong>\\.",
+                        "related_queries": [],
+                        "result_text": "**Product Recommendation:** Anker PowerLine III USB\\-C to USB\\-C Cable (60W)\n\n- **Why it’s a great buy:** It is durable, features a flexible and tangle\\-free silicone/rubber finish, and safely delivers fast\\-charging speeds for smartphones, tablets, and mid\\-range USB\\-C laptops\\. ([CNN][2])\n- **Store Offer:** Available at **Amazon** and directly through the <strong>Anker US Online Store</strong>, typically priced around <strong>$10 to $13</strong>\\.\n\n[2]: https://www.cnn.com/cnn-underscored/rev"
+                    }
+                }
+            }
+        }
+    ]
+}

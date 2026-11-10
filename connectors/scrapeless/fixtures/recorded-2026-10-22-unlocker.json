@@ -1,0 +1,26 @@
+{
+    "name": "recorded-2026-10-22-unlocker",
+    "description": "Redacted real Scrapeless API responses recorded 2026-10-22. One submission only. Replayed offline through the compiled Monid draft; test-only usage is not actual billing.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v2/unlocker/request",
+                "body": {
+                    "actor": "unlocker.webunlocker",
+                    "input": {
+                        "url": "https://example.com"
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "headers": {},
+                "body": {
+                    "code": 200,
+                    "data": "<!doctype html><html lang=en><head><meta charset=utf-8><link rel=icon href=data:,><meta name=viewport content=\"width=device-width,initial-scale=1\"><title>Example Domain</title><style>html{color-scheme:light dark;background:light-dark(#eee,#222)}body{font:16px/1.6 system-ui,sans-serif;max-width:26em;margin:auto;padding:25vh 2em 2em;text-align:center}</style></head><body><p>This domain is for use in documentation examples without needing permission. This is not a service; avoid relying on it for testing and monitoring purposes.</p><script src=/s.js></script></body></html>\n"
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,167 @@
+{
+    "name": "recorded-expansion-google-videos",
+    "description": "Real Scrapeless responses, 2026-10-22; header allowlist applied; Monid trimCalls caps response arrays at 2 and strings at 500. Full redacted records remain in research/live-expansion-2026-10-22. Replay usage is TEST ONLY, never actual charges.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v1/scraper/request",
+                "body": {
+                    "actor": "scraper.google.search",
+                    "input": {
+                        "q": "IANA example domains",
+                        "gl": "us",
+                        "hl": "en",
+                        "tbm": "vid"
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "organic_results": [
+                        {
+                            "position": 1,
+                            "title": "IANA Functions: Domain Names",
+                            "link": "https://www.youtube.com/watch?v=3HCYXlhaH_I",
+                            "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAFMAlAMBIgACEQEDEQH/xAAcAAABBAMBAAAAAAAAAAAAAAAAAwQFBgECBwj/xABIEAABAgQEAQULCQYFBQAAAAABAgMABAURBhIhMUETIlFhcQcUFSQyNnSRlLHRFiNCVYGTobLSNFJiosHhM1NWZPAlNURUkv/EABkBAQADAQEAAAAAAAAAAAAAAAABAgMEBf/EACIRAAICAgICAgMAAAAAAAAAAAABAhEDITFBBBIycRMiUf/aAAwDAQACEQMRAD8A6Lgek",
+                            "displayed_link": "www.youtube.com › watch",
+                            "snippet": "Comments · IANA Functions: Number Resources · How to Disappear Online and Become Untraceable · DNS Overview and Hierarchy | Intro to Computer ...",
+                            "rich_snippet": {
+                                "bottom": {},
+                                "top": {
+                                    "extensions": [
+                                        "YouTube",
+                                        "ICANN"
+                                    ],
+                                    "detected_extensions": {
+                                        "date": "Aug 18, 2015"
+                                    }
+                                }
+                            },
+                            "about_this_result": {
+                                "source": {
+                                    "description": "Comments · IANA Functions: Number Resources · How to Disappear Online and Become Untraceable · DNS Overview and Hierarchy | Intro to Computer ...",
+                                    "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABJklEQVR4Ae2WpVaFQRSFcaeS4QVwIjTiLbgk7D1w9xeg4FQcOu6acHeXtNnDmsFd7in/WetLI+f7dbYDAFEsAUvgoeAQ5k5iSQFpIH1kkMyQFXJMTsgpwTuc6jlHes2M3qNP71mge7g76DLNg8gygZ1QckGmuSdZJ7Azq8RDCSQTCJGgBCoFBWqVQLegQJcSmPnWIr9oICMXcIr4C4FJJbD9rUX+NtzX+CIQlfVbgS0lcP4jAVNt/UCA7acCZ0oAPxfQdXMLFNUBvpHflvgbAVM7h0B6zrfeD3kB+Ucg/xLKf4biPyLJX3GH9GFUogRSBQUSTSBZEwskQpFs1USyl6E0gRSRJtJPhsnci1B69oVQeqzXzOo9+kmj3juBeDw2BkSxBCyBO+9s03HRLVCoAAAAAElFTkSuQmCC"
+                                }
+                            },
+                            "duration": "26:11",
+                            "release_time": "Aug 18, 2015",
+                            "about_page_link": "https://www.google.com/search/about-this-result?origin=www.google.com&req=CpgBL2dvdG8_dXJsPUNBRVNaZ0hyT3pBVjV0NjRla0lubjZiM0hJRWdJQnhOWkhrZ3IxUU5qZnRKTGw3LVpKQkFzOVRLRDljY1FwVnBjaGdiNVRvMjJJSHhCSENwNHZ0RGI2dGEwWjg0ZEhBcnFRa1RzYXpJTE5vRXRpT2p4T1pOaVFSYWZUMkVQdWo2NjRaQkszVFROVUtmT3cSFgoQCgQIMEgCCgQISEgCCgIIPxoCCAAa1QQSAggAGgAiACoAMgYIAxICdXM6AEIECAEQAEoAWgByAHoAgkCvBAgAEAAYACAAKhYKBGlhbmEVuugdQBoJaXY7cDtpYW5hKlcKB2V4YW1wbGUVAZUJPxoKZGVmaW5pdGlvbhoIZXhhbXBsZXMaBnNhbXBsZRoHc2FtcGxlcxoIdGVtcGxhdGUaCH",
+                            "key_moments": [
+                                {
+                                    "time": "00:16",
+                                    "title": "Domain Name Functions",
+                                    "link": "https://www.youtube.com/watch?v=3HCYXlhaH_I&t=16"
+                                },
+                                {
+                                    "time": "00:21",
+                                    "title": "Recap",
+                                    "link": "https://www.youtube.com/watch?v=3HCYXlhaH_I&t=21"
+                                }
+                            ]
+                        },
+                        {
+                            "position": 2,
+                            "title": "What is IANA in simple words?",
+                            "link": "https://www.youtube.com/watch?v=Wuo-98akCyo",
+                            "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAFMAlAMBEQACEQEDEQH/xAAcAAACAgMBAQAAAAAAAAAAAAADBAUGAAECBwj/xAA8EAACAQMDAQUFBQUIAwAAAAABAgMABBEFEiExBhNBUWEicYGRsQcUIzJCFVKh0fAWM0OSosHS4VRicv/EABoBAAIDAQEAAAAAAAAAAAAAAAABAgMEBQb/xAA3EQACAQIEAwMLAgcBAAAAAAAAAQIDEQQSITEFE2FBUZEUFSIygaGxwdHh8DNCBhYjYnGS8VL/2gAMAwEAA",
+                            "displayed_link": "www.youtube.com › watch",
+                            "snippet": "... example.com. IANA manages the top-level domain names, like \".com,\" \".org,\" and \".net,\" and makes sure they are assigned to the right ...",
+                            "rich_snippet": {
+                                "bottom": {},
+                                "top": {
+                                    "extensions": [
+                                        "YouTube",
+                                        "Internet Services Providers Near Me"
+                                    ],
+                                    "detected_extensions": {
+                                        "date": "Aug 3, 2023"
+                                    }
+                                }
+                            },
+                            "about_this_result": {
+                                "source": {
+                                    "description": "... example.com. IANA manages the top-level domain names, like \".com,\" \".org,\" and \".net,\" and makes sure they are assigned to the right ...",
+                                    "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABJklEQVR4Ae2WpVaFQRSFcaeS4QVwIjTiLbgk7D1w9xeg4FQcOu6acHeXtNnDmsFd7in/WetLI+f7dbYDAFEsAUvgoeAQ5k5iSQFpIH1kkMyQFXJMTsgpwTuc6jlHes2M3qNP71mge7g76DLNg8gygZ1QckGmuSdZJ7Azq8RDCSQTCJGgBCoFBWqVQLegQJcSmPnWIr9oICMXcIr4C4FJJbD9rUX+NtzX+CIQlfVbgS0lcP4jAVNt/UCA7acCZ0oAPxfQdXMLFNUBvpHflvgbAVM7h0B6zrfeD3kB+Ucg/xLKf4biPyLJX3GH9GFUogRSBQUSTSBZEwskQpFs1USyl6E0gRSRJtJPhsnci1B69oVQeqzXzOo9+kmj3juBeDw2BkSxBCyBO+9s03HRLVCoAAAAAElFTkSuQmCC"
+                                }
+                            },
+                            "video_link": "https://encrypted-vtbn0.gstatic.com/video?q=tbn:ANd9GcTNzxeeR05n_ZC52AbmIkx4kzH1CI2ER1duwA",
+                            "duration": "2:51",
+                            "release_time": "Aug 3, 2023",
+                            "about_page_link": "https://www.google.com/search/about-this-result?origin=www.google.com&req=CpgBL2dvdG8_dXJsPUNBRVNaZ0hyT3pBVjM2X0F0ZG9pcWpDRXF3TXc4dl9sTng4SVRhMmQ5Y2l2WEx5MnR3VEo4bGRJaWxjX3hoR2JSdFRvbzBRdmM5ZmowOEtXT3J0YS1URk9hM0NaSVpKQWczd2JWeXZ1VGJyaDNDbG1JUDQ2UndiaWZFdW9wS0MyRWgxMTNaYWVFZVEwbWcSFgoQCgQIMEgCCgQISEgCCgIIPxoCCAAa3wQSABoAIgAqADIGCAMSAnVzOgBCBAgBEABKAFoAcgB6AIJAuwQIABAAGAAgACoWCgRpYW5hFXh1oD8aCWl2O3A7aWFuYSpXCgdleGFtcGxlFWlkZD4aCmRlZmluaXRpb24aCGV4YW1wbGVzGgZzYW1wbGUaB3NhbXBsZXMaCHRlbXBsYXRlGgh0dX"
+                        }
+                    ],
+                    "pagination": {},
+                    "search_information": {
+                        "organic_results_state": "Results for exact spelling",
+                        "query_displayed": "IANA example domains",
+                        "total_results": 1190,
+                        "time_taken_displayed": "0.21"
+                    },
+                    "video_results": [
+                        {
+                            "date": "Aug 18, 2015",
+                            "key_moments": [
+                                {
+                                    "time": "00:16",
+                                    "title": "Domain Name Functions",
+                                    "link": "https://www.youtube.com/watch?v=3HCYXlhaH_I&t=16"
+                                },
+                                {
+                                    "time": "00:21",
+                                    "title": "Recap",
+                                    "link": "https://www.youtube.com/watch?v=3HCYXlhaH_I&t=21"
+                                }
+                            ],
+                            "position": 1,
+                            "title": "IANA Functions: Domain Names",
+                            "link": "https://www.youtube.com/watch?v=3HCYXlhaH_I",
+                            "displayed_link": "www.youtube.com › watch",
+                            "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAFMAlAMBIgACEQEDEQH/xAAcAAABBAMBAAAAAAAAAAAAAAAAAwQFBgECBwj/xABIEAABAgQEAQULCQYFBQAAAAABAgMABAURBhIhMUETIlFhcQcUFSQyNnSRlLHRFiNCVYGTobLSNFJiosHhM1NWZPAlNURUkv/EABkBAQADAQEAAAAAAAAAAAAAAAABAgMEBf/EACIRAAICAgICAgMAAAAAAAAAAAABAhEDITFBBBIycRMiUf/aAAwDAQACEQMRAD8A6Lgek",
+                            "snippet": "Comments · IANA Functions: Number Resources · How to Disappear Online and Become Untraceable · DNS Overview and Hierarchy | Intro to Computer ...",
+                            "duration": "26:11",
+                            "rich_snippet": {
+                                "top": {
+                                    "detected_extensions": {
+                                        "date": "Aug 18, 2015"
+                                    },
+                                    "extensions": [
+                                        "YouTube",
+                                        "ICANN"
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "date": "Aug 3, 2023",
+                            "position": 2,
+                            "title": "What is IANA in simple words?",
+                            "link": "https://www.youtube.com/watch?v=Wuo-98akCyo",
+                            "displayed_link": "www.youtube.com › watch",
+                            "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAFMAlAMBEQACEQEDEQH/xAAcAAACAgMBAQAAAAAAAAAAAAADBAUGAAECBwj/xAA8EAACAQMDAQUFBQUIAwAAAAABAgMABBEFEiExBhNBUWEicYGRsQcUIzJCFVKh0fAWM0OSosHS4VRicv/EABoBAAIDAQEAAAAAAAAAAAAAAAABAgMEBQb/xAA3EQACAQIEAwMLAgcBAAAAAAAAAQIDEQQSITEFE2FBUZEUFSIygaGxwdHh8DNCBhYjYnGS8VL/2gAMAwEAA",
+                            "snippet": "... example.com. IANA manages the top-level domain names, like \".com,\" \".org,\" and \".net,\" and makes sure they are assigned to the right ...",
+                            "duration": "2:51",
+                            "rich_snippet": {
+                                "top": {
+                                    "detected_extensions": {
+                                        "date": "Aug 3, 2023"
+                                    },
+                                    "extensions": [
+                                        "YouTube",
+                                        "Internet Services Providers Near Me"
+                                    ]
+                                }
+                            },
+                            "video_link": "https://encrypted-vtbn0.gstatic.com/video?q=tbn:ANd9GcTNzxeeR05n_ZC52AbmIkx4kzH1CI2ER1duwA"
+                        }
+                    ],
+                    "metadata": {
+                        "engine": "google.search",
+                        "rawUrl": "https://api.scrapeless.com/storage/scrapeless.scraper.google.search/fb5f6d885cfbec9f30130e5a9c25495c/ae4d1cbd60409d0671ecf1eb01092752_1792661970.html"
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,49 @@
+{
+    "name": "recorded-closure-tiktok-user-detail",
+    "description": "Real response chain, 2026-10-23. Public test inputs; PII and storage links redacted, response arrays/strings trimmed. Native success/error is distinct from connector acceptance and observed balances are not task invoices.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v1/scraper/request",
+                "body": {
+                    "actor": "scraper.tiktok.user.detail",
+                    "input": {
+                        "unique_id": "tiktok"
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "account_id": "[REDACTED]",
+                    "unique_id": "tiktok",
+                    "sec_uid": "MS4wLjABAAAAv7iSuuXDJGDvJkmH_vz1qkDZYo1apxgzaxdBSeIuPiM",
+                    "nickname": "TikTok",
+                    "profile_url": "https://www.tiktok.com/@tiktok",
+                    "bio_link": "tiktok.com/discovermore",
+                    "avatar": {
+                        "thumbnail_url": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-avt-0068-tx/ba67b11de451691939223e9d978e613a~tplv-tiktokx-cropcenter:100:100.jpeg?dr=9640&refresh_token=9ef6bd41&x-expires=1792897200&x-signature=nmjdAIkaakBAE%2Fhl18%2F%2BXdwvqvw%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=useast8",
+                        "medium_url": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-avt-0068-tx/ba67b11de451691939223e9d978e613a~tplv-tiktokx-cropcenter:720:720.jpeg?dr=9640&refresh_token=a83f45dd&x-expires=1792897200&x-signature=O55DQBKj8bJx9qkpJDM%2FoU7snww%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=useast8",
+                        "large_url": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-avt-0068-tx/ba67b11de451691939223e9d978e613a~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=9640&refresh_token=73891b92&x-expires=1792897200&x-signature=BSAagZepY9rvQlqfgFgzV%2FGFnr0%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=useast8"
+                    },
+                    "statistics": {
+                        "followers": "96389890",
+                        "following": "1",
+                        "friends": "1",
+                        "likes": "465957808",
+                        "videos": "1511",
+                        "liked_videos": "0"
+                    },
+                    "create_time": 1425144149,
+                    "create_time_iso": "2015-02-28T17:22:29.000Z",
+                    "language": "en",
+                    "country": "US",
+                    "is_verified": true,
+                    "is_private": false,
+                    "is_seller": false
+                }
+            }
+        }
+    ]
+}

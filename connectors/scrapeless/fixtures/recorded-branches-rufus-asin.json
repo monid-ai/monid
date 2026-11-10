@@ -1,0 +1,75 @@
+{
+    "name": "recorded-branches-rufus-asin",
+    "description": "Actual bounded own-account branch probe 2026-10-23. Secrets/PII scrubbed; result arrays capped at 3 and strings at 4500 characters; all protocol calls retained. Not an invoice or full production acceptance.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v1/scraper/request",
+                "body": {
+                    "actor": "scraper.amazon",
+                    "input": {
+                        "type": "rufus",
+                        "keywords": "Is this good for the gym and running?",
+                        "domain": "www.amazon.com",
+                        "asin": "B0GN4CFF6H"
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "metadata": {
+                        "rawUrl": "https://api.scrapeless.com/storage/scrapeless.scraper.amazon/d766b7ebd917663b615c4d5586114864/6af5b67997253dfe9632f7245e467cf5_1792741719.html",
+                        "type": "rufus"
+                    },
+                    "result": {
+                        "request_context": {
+                            "requestId": "KJE0515ZA8FWXVB6GEDJ",
+                            "sessionId": "134-2707968-0500152",
+                            "bsr": {
+                                "bottomSheetSize": "expanded",
+                                "peekBehaviour": null
+                            }
+                        },
+                        "user_query": "Is this good for the gym and running?",
+                        "interim_messages": [
+                            "Thinking...",
+                            "Thinking... Gathering products..."
+                        ],
+                        "inference_text": "No, the Sony WH-1000XM6 isn't ideal for gym and running. These are over-ear headphones designed for stationary listening—they're bulky, won't stay in place during movement, and their open design exposes your ears to heat and sweat buildup, which customers say becomes uncomfortable during workouts.Here's my top recommendation for gym and running:",
+                        "inference_text_with_products": "No, the Sony WH-1000XM6 isn't ideal for gym and running. These are over-ear headphones designed for stationary listening—they're bulky, won't stay in place during movement, and their open design exposes your ears to heat and sweat buildup, which customers say becomes uncomfortable during workouts.Here's my top recommendation for gym and running:\n\nJLab, Go Sport+, True Wireless Workout Earbuds, Bluetooth Sport Earbuds, Clear Calling, Graphite 9K+ bought in past monthFREE delivery Wed, Oct 28 on $35.00 of items shipped by AmazonAdd to cartLink: https://www.amazon.com/dp/B0CYNFWD2R?niid=nl_cl_lst_a_1_0&ref_=nl_cl_lst_a_1_0&nrid=KJE0515ZA8FWXVB6GEDJ IP55 sweat-resistant sport earbuds with secure earhook design and 35+ hours total batteryMore details",
+                        "inference_text_parts": [
+                            "No, the Sony WH-1000XM6 isn't ideal for gym and running. These are over-ear headphones designed for stationary listening—they're bulky, won't stay in place during movement, and their open design exposes your ears to heat and sweat buildup, which customers say becomes uncomfortable during workouts.Here's my top recommendation for gym and running:"
+                        ],
+                        "content_blocks": [
+                            {
+                                "type": "text",
+                                "text": "No, the Sony WH-1000XM6 isn't ideal for gym and running. These are over-ear headphones designed for stationary listening—they're bulky, won't stay in place during movement, and their open design exposes your ears to heat and sweat buildup, which customers say becomes uncomfortable during workouts.Here's my top recommendation for gym and running:"
+                            },
+                            {
+                                "type": "product_section",
+                                "category": "JLab, Go Sport+, True Wireless Workout Earbuds, Bluetooth Sport Earbuds, Clear Calling, Graphite 9K+ bought in past monthFREE delivery Wed, Oct 28 on $35.00 of items shipped by AmazonAdd to cartLink: https://www.amazon.com/dp/B0CYNFWD2R?niid=nl_cl_lst_a_1_0&ref_=nl_cl_lst_a_1_0&nrid=KJE0515ZA8FWXVB6GEDJ IP55 sweat-resistant sport earbuds with secure earhook design and 35+ hours total batteryMore details"
+                            }
+                        ],
+                        "related_questions": [
+                            "See more sports earbuds",
+                            "What's the difference between fitness vs everyday headphones",
+                            "Best noise cancelling sports earbuds"
+                        ],
+                        "feedback_controls": {
+                            "groupId": "section_groupId_feedback_controls_KJE0515ZA8FWXVB6GEDJ_0",
+                            "text": "Your feedback has been submitted!",
+                            "options": [
+                                "This is irrelevant",
+                                "This is inaccurate",
+                                "This is harmful / unsafe"
+                            ],
+                            "submit_label": "Submit"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

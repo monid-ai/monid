@@ -1,0 +1,86 @@
+{
+    "name": "recorded-2026-10-22-ai",
+    "description": "Redacted real Scrapeless API responses recorded 2026-10-22. One submission only. Replayed offline through the compiled Monid draft; test-only usage is not actual billing.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v2/scraper/request",
+                "body": {
+                    "actor": "scraper.chatgpt",
+                    "input": {
+                        "prompt": "In one sentence, what is example.com used for?",
+                        "country": "US",
+                        "web_search": false,
+                        "shopping": false,
+                        "should_fetch_share_link": false
+                    }
+                }
+            },
+            "res": {
+                "status": 201,
+                "headers": {},
+                "body": {
+                    "status": "pending",
+                    "task_id": "b973032f-017d-4063-b11d-9e0ff73ec180"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/b973032f-017d-4063-b11d-9e0ff73ec180"
+            },
+            "res": {
+                "status": 202,
+                "headers": {},
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/b973032f-017d-4063-b11d-9e0ff73ec180"
+            },
+            "res": {
+                "status": 200,
+                "headers": {},
+                "body": {
+                    "status": "success",
+                    "task_result": {
+                        "ads": {
+                            "content": {
+                                "ad_cards": null,
+                                "advertiser_brand": {
+                                    "favicon_url": "",
+                                    "id": "",
+                                    "name": "[REDACTED]",
+                                    "url": ""
+                                },
+                                "carousel_cards": null,
+                                "type": ""
+                            },
+                            "type": ""
+                        },
+                        "content_references": [],
+                        "conversation_id": "6ad9d708-5bcc-83ea-90a4-11509a9631f0",
+                        "links": [],
+                        "map": {},
+                        "model": "gpt-6",
+                        "products": [],
+                        "prompt": "In one sentence, what is example.com used for?",
+                        "result_text": "**example.com** is a reserved example domain used in documentation, tutorials, and software testing to demonstrate website addresses without referring to a real service.",
+                        "search_model_queries": {
+                            "queries": null,
+                            "type": ""
+                        },
+                        "search_result": [],
+                        "web_search": false
+                    }
+                }
+            }
+        }
+    ]
+}

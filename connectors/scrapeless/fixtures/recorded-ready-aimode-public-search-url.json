@@ -1,0 +1,255 @@
+{
+    "name": "recorded-ready-aimode-public-search-url",
+    "description": "Actual own-account 2026-10-23 continuation request. PII/secrets redacted; large result strings and arrays shortened, all protocol requests retained. Not an invoice or production acceptance.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v2/scraper/request",
+                "body": {
+                    "actor": "scraper.aimode",
+                    "input": {
+                        "url": "https://www.google.com/search?udm=50&q=Recommended+attractions+in+New+York"
+                    }
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "status": "pending",
+                    "task_id": "10419a5c-5a6d-45da-9dfa-7b2a4ddecaac"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/10419a5c-5a6d-45da-9dfa-7b2a4ddecaac"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/10419a5c-5a6d-45da-9dfa-7b2a4ddecaac"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/10419a5c-5a6d-45da-9dfa-7b2a4ddecaac"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/10419a5c-5a6d-45da-9dfa-7b2a4ddecaac"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/10419a5c-5a6d-45da-9dfa-7b2a4ddecaac"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/10419a5c-5a6d-45da-9dfa-7b2a4ddecaac"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/10419a5c-5a6d-45da-9dfa-7b2a4ddecaac"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/10419a5c-5a6d-45da-9dfa-7b2a4ddecaac"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/10419a5c-5a6d-45da-9dfa-7b2a4ddecaac"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/10419a5c-5a6d-45da-9dfa-7b2a4ddecaac"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/10419a5c-5a6d-45da-9dfa-7b2a4ddecaac"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/10419a5c-5a6d-45da-9dfa-7b2a4ddecaac"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/10419a5c-5a6d-45da-9dfa-7b2a4ddecaac"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/10419a5c-5a6d-45da-9dfa-7b2a4ddecaac"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/10419a5c-5a6d-45da-9dfa-7b2a4ddecaac"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/10419a5c-5a6d-45da-9dfa-7b2a4ddecaac"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "success",
+                    "task_result": {
+                        "citations": [
+                            {
+                                "cited_count": 1,
+                                "favicon": "https://encrypted-tbn2.gstatic.com/faviconV2?url=https://www.youtube.com&client=AIM&size=128&type=FAVICON&fallback_opts=TYPE,SIZE,URL",
+                                "index": 1,
+                                "snippet": "",
+                                "thumbnail": "",
+                                "title": "Top 10 Best Tourist Attractions in New York City - Travel Guide ...",
+                                "url": "https://www.youtube.com/watch?v=_T9bUOPB4lk&vl=en-US&t=8",
+                                "website_name": "YouTube"
+                            },
+                            {
+                                "cited_count": 1,
+                                "favicon": "",
+                                "index": 2,
+                                "snippet": "Free/Low-Cost Attractions: Central Park. Staten Island Ferry, The High Line, Chelsea Market, SoHo, Washington Square Park, William...",
+                                "thumbnail": "",
+                                "title": "New York Travel Guide: Must Sees and Hidden Gems",
+                                "url": "https://capturencrave.com/new-york-a-city-guide/",
+                                "website_name": "Capture 'n Crave"
+                            },
+                            {
+                                "cited_count": 2,
+                                "favicon": "https://encrypted-tbn1.gstatic.com/faviconV2?url=https://www.instagram.com&client=AIM&size=128&type=FAVICON&fallback_opts=TYPE,SIZE,URL",
+                                "index": 3,
+                                "snippet": "Take the free Staten Island Ferry for views of the Manhattan skyline and Statue of Liberty. Hire a. Park to see a large portion of...",
+                                "thumbnail": "",
+                                "title": "Looking for the ultimate New York bucket list? 🇺🇸🗽 If you're ...",
+                                "url": "https://www.instagram.com/reel/Db5_Vviobup/",
+                                "website_name": "Instagram"
+                            }
+                        ],
+                        "raw_url": "https://www.google.com/async/folwr?srtst=&garc=ChswYTVhQWVGR0tEbzdPOWk4NDFXaUlIRlpXclUSF0l3TGJhdENJSjZHVjVPTVBodi1iMEFnGgs0SGpXUzNyWkQ2cw&mlro=0a7sVm982Q58DfQhvpjZhkwof-KmOq6c4uQZJktYWfXkoJq8SWZct4XMxrwa5UkmPy_qsOLaUtz1gSG04cMSa_GzlKxI5MVr4G3LiJDJqHJ8hzd3jSVnh-aNa7ih2saSheMTIOc&mlros=IevaNMeKLAg&ei=IwLbatCIJ6GV5OMPhv-b0Ag&q=&yv=3&vet=12ahUKEwiQppHrxM-XAxWhCnkGHYb_BooQ-a4TegYIAggCEAA..i&ved=2ahUKEwiQppHrxM-XAxWhCnkGHYb_BooQ-a4TegYIAggCEAA&aep=48&sourceid=chrome&udm=50&stkp=AeYwpWlfqF1d-mt-jaKYh4chJiA0s-zEFRUR4AmmISDh3wvyq80Gel3LWEhzas_n9GGxXWHe7rgK5oUBOFHHgUYmHWkfVsEjyaF3tJy6gkstElj7jQrLrTOr_Q%3D%3D&cs=1&async=_fmt:adl,_xsrf:AF5tSO7yNKyC-IL6T_-3UWwr0sn939hEig%3A1792737827749",
+                        "result_html": "<div><div data-container-id=\"IwLbapnYNqKuiLMP5Puu4QQ\"></div><div eid=\"IwLbapnYNqKuiLMP5Puu4QQ\"></div><div><div data-session-thread-id=\"IwLbatCIJ6GV5OMPhv-b0Ag\" style=\"display:none\"> </div><div data-target-container-id=\"IwLbapnYNqKuiLMP5Puu4QQ\"><div data-msei=\"AUtExfCs-9tlEDV61s6WwQwz9C_D80xhY4U3HoIDe04OS-rLEa0zlyForTNcd63iJEnNUVYFoviODG2_rSi4XaQ-HlBBpnrB\" data-mseni=\"IwLbatCIJ6GV5OMPhv-b0Ag\" data-mstk=\"AUtExfB1D3oakOUpcjZQguxooRgjEFtIrwz_TpcGAghsSGilit51HYEh0UQEYDt2DgtQQ5Kuw7YYiDsSRQPEftOlRfjFqFw6JkBNtcRNO3B8u3oMXr-MFUXNjIlPVPDzGCy6eh9DezNwsuKMl9rzgA6cxnMoLfKT8NcHAvg\" style=\"display:none\"></div></div><style data-ck=\"search-next.aim.7pCM9eGtUR4.L.B1.O\" data-css-ids=\"XmAqMd,E1OJWe,eucJfe,nCphfe,W8NV9d\">:root{--COEmY:#1f1f1f;--xhUGwc:#fff}:root{--vZe0jb:#dcdfe5;--nwXobb:#dcdfe5;--VuZXBd:var(--bbQxAb);--uLz37c:var(--IXoxUe);--jINu6c:var(--YLNNHc);--TyVYld:#0b57d0;--ZEpPmd:#f0f2f5;--QWaaaf:#dcdfe5;--DEeStf:var(--XKMDxc);--TSWZIb:var(--aYn2S);--BRLwE:var(--Lm570b);--gS5jXb:#dcdfe5;--Aqn7xd:#dcdfe5;--EpFNW:#fff;--Xqboce:#1f1f1f;--IXoxUe:#656773;--bbQxAb:#16171a;--YLNNHc:#16171a;--TMYS9:#0a0a0a;--JKqx2:#1558d6;--rrJJUc:#1558d6;--mXZkqc:#dcdfe5;--JclFj:#dcdfe5;--Nsm0ce:#336ef3;--vdwxpe:#0b50d0;--ywz01c:#fbbc04;--XKMDxc:#f0f2f5;--aYn2S:#e9ebf0;--Lm570b:#e1e3e8}:root{--amnPwe:#656773;--ZXiaGf:#e6e8f0;--EoKObe:#fff;--cIehld:#fff;--ONhrGd:var(--Aqn7xd);--gVUKcd:rgba(0,0,0,0.6);--jwFC2e:#d3e3fd;--yTtsEf:#013a00}:root{--aim-input-plate-height:60px}:root{--aim-input-plate-margin-bottom:34px}.CKgc1d~.CKgc1d{margin-top:30px;padding-top:30px}.iZr6mc img{filter:url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"><filter id=\"degrade-pixelate\" x=\"0\" y=\"0\" width=\"100%\" height=\"100%\"><feFlood x=\"2\" y=\"2\" height=\"1\" width=\"1\" result=\"flood\"/><feComposite width=\"4\" height=\"4\" in",
+                        "result_md": "\nStatue of Liberty & Ellis Island: The ultimate symbol of freedom. Take the ferry out to Liberty Island to see her up close, or jump on the free Staten Island Ferry for a fantastic, budget-friendly view of the skyline and monument. ([YouTube][1]) ([Capture'n Crave][2]) ([Instagram][3])  \n\nEmpire State Building: This historic 1931 Art Deco masterpiece offers panoramic views from its 86th and 102nd floors. If you prefer a view that actually includes the Empire State Building, check out SUMMIT One Vanderbilt or **Top of the Rock** . ([THE TRAVELING GINGER][4])  \n\n**Times Square** : Love it or hate it, the \"Crossroads of the World\" is a must-see sensory overload of flashing digital billboards, street performers, and theater marquees. It's also the gateway to catching a world-class Broadway show. ([NYC Tourism + Conventions][5])  \n\nBrooklyn Bridge: Walk across this iconic 1883 suspension bridge at sunrise or sunset for breathtaking views of Lower Manhattan. Once across, explore the trendy waterfront neighborhood of **DUMBO** . ([Instagram][3]) ([YouTube][6])  \n\n**Grand Central Terminal** : More than just a transit hub, this stunning architectural gem features a famous celestial ceiling, a bustling food hall, and the hidden \"Whispering Gallery\". ([bookish wayfarer][7])  \n\n\nCentral Park: Spanning 840 acres in the heart of Manhattan, this urban oasis features Bethesda Fountain, Sheep Meadow, Belvedere Castle, and miles of winding paths. Renting a bike is a highly recommended way to cover ground quickly.  \n\nThe High Line: A public park built on a historic, elevated freight rail line. It weaves nearly 1.5 miles through the West Side, offering unique perspectives of Chelsea’s architecture and the Hudson River. ([YouTube][6])  \n\n\nThe Metropolitan Museum of Art (The Met): The larges",
+                        "result_text": "- Statue of Liberty & Ellis Island: The ultimate symbol of freedom. Take the ferry out to Liberty Island to see her up close, or jump on the free Staten Island Ferry for a fantastic, budget-friendly view of the skyline and monument.  \n- Empire State Building: This historic 1931 Art Deco masterpiece offers panoramic views from its 86th and 102nd floors. If you prefer a view that actually includes the Empire State Building, check out SUMMIT One Vanderbilt or **Top of the Rock** .  \n- **Times Square** : Love it or hate it, the \"Crossroads of the World\" is a must-see sensory overload of flashing digital billboards, street performers, and theater marquees. It's also the gateway to catching a world-class Broadway show.  \n- Brooklyn Bridge: Walk across this iconic 1883 suspension bridge at sunrise or sunset for breathtaking views of Lower Manhattan. Once across, explore the trendy waterfront neighborhood of **DUMBO** .  \n- **Grand Central Terminal** : More than just a transit hub, this stunning architectural gem features a famous celestial ceiling, a bustling food hall, and the hidden \"Whispering Gallery\".  \n\n- Central Park: Spanning 840 acres in the heart of Manhattan, this urban oasis features Bethesda Fountain, Sheep Meadow, Belvedere Castle, and miles of winding paths. Renting a bike is a highly recommended way to cover ground quickly.  \n- The High Line: A public park built on a historic, elevated freight rail line. It weaves nearly 1.5 miles through the West Side, offering unique perspectives of Chelsea’s architecture and the Hudson River.  \n\n- The Metropolitan Museum of Art (The Met): The largest art museum in the United States, housing over two million works spanning 5,000 years of global history, from ancient Egyptian temples to European masterpieces.  \n- Museum of Mod"
+                    }
+                }
+            }
+        }
+    ]
+}

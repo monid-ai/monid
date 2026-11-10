@@ -1,0 +1,92 @@
+{
+    "name": "recorded-2026-10-22-google",
+    "description": "Redacted real Scrapeless API responses recorded 2026-10-22. One submission only. Replayed offline through the compiled Monid draft; test-only usage is not actual billing.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v1/scraper/request",
+                "body": {
+                    "actor": "scraper.google.search",
+                    "input": {
+                        "q": "site:example.com Example Domain",
+                        "gl": "us",
+                        "hl": "en",
+                        "num": 1
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "headers": {},
+                "body": {
+                    "dmca_messages": {
+                        "title": "Notices about Filtered Results",
+                        "messages": [
+                            {
+                                "content": "In order to show you the most relevant results, we have omitted some entries very similar to the 2 already displayed.If you like, you can repeat the search with the omitted results included.",
+                                "highlighted_words": [
+                                    {
+                                        "link": "https://www.google.com/search?q=site:example.com+Example+Domain&sca_esv=9e44a9c1964ca618&gl=us&hl=en&sxsrf=APpeQntsMC43hlQoNq_ekfqw6f3ISrhE0Q:1792661256242&filter=0",
+                                        "text": "repeat the search with the omitted results included"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "organic_results": [
+                        {
+                            "position": 1,
+                            "title": "Example Domain",
+                            "link": "https://example.com/",
+                            "redirect_link": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=CAESTwHrOzAVj5xlbsDvZ_9Vt-tpxrE-dw2CfMjsKD3zDBLDfLOXup74ldZhBo2oRX_EnAeR0Hpf4Z4eGbqIrGRGdYLKGEEmQTi-BAqqssTu2p0&ved=2ahUKEwjz0YXLp82XAxX-STABHcerL1cQFnoECA8QAQ&uoh=1",
+                            "displayed_link": "https://example.com",
+                            "snippet": "Este dominio está destinado al uso en ejemplos de documentación sin necesidad de permiso. Esto no es un servicio; evitar utilizarlo para realizar pruebas o ...",
+                            "snippet_highlighted_words": [
+                                "Este dominio está destinado al uso en ejemplos de documentación sin necesidad de permiso"
+                            ],
+                            "source": "Example Domain",
+                            "read_more_link": "https://example.com/#:~:text=Este%20dominio%20est%C3%A1%20destinado%20al,para%20realizar%20pruebas%20o%20monitoreos."
+                        },
+                        {
+                            "position": 2,
+                            "title": "Example Domain",
+                            "link": "http://www.example.com/?tag=uqgibc",
+                            "redirect_link": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=CAESXQHrOzAVaKv1rPje6P_tIRS8bN90MkmoaLonnb6J35rwITDc0kmxuPilbc9pa7UfRwk4nwrIM9NpgmDgt2ZJu_pUeUa3oIvu8_BSczBuVHNje-dP-eLFAlPo4ZYvVQ&ved=2ahUKEwjz0YXLp82XAxX-STABHcerL1cQFnoECCUQAQ&uoh=1",
+                            "displayed_link": "http://www.example.com › ...",
+                            "snippet": "This domain is for use in documentation examples without needing permission. This is not a service; avoid relying on it for testing and monitoring purposes.",
+                            "snippet_highlighted_words": [
+                                "for use in documentation examples"
+                            ],
+                            "about_this_result": {
+                                "source": {
+                                    "description": "This domain is for use in documentation examples without needing permission. This is not a service; avoid relying on it for testing and monitoring purposes.",
+                                    "source_info_link": "http://www.example.com/?tag=uqgibc"
+                                },
+                                "languages": [
+                                    "en"
+                                ],
+                                "regions": [
+                                    "US"
+                                ]
+                            },
+                            "source": "Example Domain",
+                            "about_page_link": "https://www.google.com/search/about-this-result?origin=www.google.com&req=CowBL2dvdG8_dXJsPUNBRVNYUUhyT3pBVmFLdjFyUGplNlBfdElSUzhiTjkwTWttb2FMb25uYjZKMzVyd0lURGMwa214dVBpbGJjOXBhN1VmUndrNG53cklNOU5wZ21EZ3QyWkp1X3BVZVVhM29JdnU4X0JTY3pCdVZITmplLWRQLWVMRkFsUG80Wll2VlESBBoCCAAa3wMSABoAIgAqADIGCAMSAnVzOgBCBAgBEABKAFoPCAESC2V4YW1wbGUuY29tcgB6AIJArAMIABAAGAAgACovCgdleGFtcGxlFQAALEAaCGV4YW1wbGVzGgZzYW1wbGUaDWV4YW1wbGVkb21haW4qJQoGZG9tYWluFQcxbkAaB2RvbWFpbnMaDWV4YW1wbGVkb21haW4yjAEvZ290bz91cmw9Q0FFU1hRSHJPekFWYUt2MXJQamU2UF90SVJTOGJOOTBNa21vYUxvbm5iNkozNXJ3SVREYzBrbXh1UGlsYmM5cGE3VWZSd2s0bndySU05TnBnbURndDJaSnVfcFVlVWEzb0l2dThfQlNjekJ1VkhOamUtZFAtZUxGQWxQbzRaWXZWUToVPGI-RXhhbXBsZSBEb21haW48L2I-QqMBVGhpcyBkb21haW4gaXMgPGI-Zm9yIHVzZSBpbiBkb2N1bWVudGF0aW9uIGV4YW1wbGVzPC9iPiB3aXRob3V0IG5lZWRpbmcgcGVybWlzc2lvbi4gVGhpcyBpcyBub3QgYSBzZXJ2aWNlOyBhdm9pZCByZWx5aW5nIG9uIGl0IGZvciB0ZXN0aW5nIGFuZCBtb25pdG9yaW5nIHB1cnBvc2VzLiICEAFIAFgAaAA"
+                        }
+                    ],
+                    "pagination": {},
+                    "search_information": {
+                        "organic_results_state": "Results for exact spelling",
+                        "query_displayed": "site:example.com Example Domain",
+                        "total_results": 2,
+                        "time_taken_displayed": "0.13"
+                    },
+                    "metadata": {
+                        "engine": "google.search",
+                        "rawUrl": "https://api.scrapeless.com/storage/scrapeless.scraper.google.search/d10b30f41161778fe9fd3e9a52e4e31b/cf15ab0fd10127bef07f1c1db94dbc78_1792661256.html"
+                    }
+                }
+            }
+        }
+    ]
+}

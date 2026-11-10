@@ -1,0 +1,127 @@
+{
+    "name": "recorded-isolation-google-string-controls",
+    "description": "Real 2026-10-23 bounded isolation chain. Responses trimmed/redacted; complete small network JSON retained to compare all four requests and filtering. Native source records in research/live-isolation-2026-10-23. Test units are fictional, never actual charges.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v1/scraper/request",
+                "body": {
+                    "actor": "scraper.google.search",
+                    "input": {
+                        "q": "musée Paris",
+                        "location": "Paris, France",
+                        "gl": "fr",
+                        "hl": "fr",
+                        "safe": "active",
+                        "nfpr": "1",
+                        "filter": "1"
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "organic_results": [
+                        {
+                            "position": 1,
+                            "title": "Les expositions | Paris Musées",
+                            "link": "https://www.parismusees.paris.fr/fr/expositions",
+                            "redirect_link": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=CAESagHrOzAV2bk5i_wJVfZhBtGCpCgVnKzzKgllIT7B3McpBKrqlee7JHfuKMRoZOsttl-8_3MM8-uJg9UCF1vuF6kk_dYzL9rzW0DIajwZpSPgKUgPhY82vTa5qJbSNgdYvsufUDUdDvDLQuc&ved=2ahUKEwimtOHL_86XAxXlJEQIHS3BNe8QFnoECCMQAQ&uoh=1",
+                            "favicon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAYFBMVEUkICIkGBlMrag0ZmQfERMkJyZMwLosODlEnJhU0MpCi4g8cW1c6OEsQUFU2NJTx8Nc8Ok0WVlY4ds8eXYsSEc8hYRFpJ9ElJE0YGBMurRMtK8oMDEyT048fnxc9uwcCQwmnUweAAAB5klEQVR4AWXQBYLjQAxE0Spb6jYzxC1n5v63XCuwQz9geiYBzHLBKw2RLEp4kKISKIAQ8Erqpr1Apz+A9sP7Eto34x/AWE7htWeepvovWPp1qAVXWlZd9QfIWGooFYCsvZYbuf8CdS+3YRZAu5v0B6SaIh0wm8VBlQRHZ5AqkFmpF89FAWp30kFRCMdhFetGcp+M2netiCBLBBRMq4DZpGuiyt0H0fbTtu7lYQ6Avhbl2Wz9STAfRio134tqBOFAy5EAi4/CF+fzjSkihKdou4UAl671RT",
+                            "displayed_link": "https://www.parismusees.paris.fr › expositions",
+                            "snippet": "Retrouvez toutes les expositions des 14 musées de la Ville de Paris. 11 expositions en cours. Musée. En cours. À venir. Passées ...",
+                            "snippet_highlighted_words": [
+                                "Retrouvez toutes les expositions des 14 musées de la Ville de Paris"
+                            ],
+                            "source": "Paris Musées"
+                        },
+                        {
+                            "position": 2,
+                            "title": "Tous les musées à Paris",
+                            "link": "https://www.offi.fr/tendances/expositions-musees/musees-paris-558.html",
+                            "redirect_link": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=CAESgQEB6zswFaqAgENrWgbSmAsJX3WoDXgIwO_9MmHzVjDUVHNYvzOY5S4P5hDBH1dOi_ot0rlaSxeV85dQJw6EX8z6LBeFfCUEiGws99mwv58vv9cGityvEwJXHAs4KN4hGE-Qr135eEHy_SlFxQQYaNRDEN7jWIxTSVrIb-YOoMPIQ4s&ved=2ahUKEwimtOHL_86XAxXlJEQIHS3BNe8QFnoECCYQAQ&uoh=1",
+                            "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAFwAXAMBIgACEQEDEQH/xAAbAAADAAMBAQAAAAAAAAAAAAAEBQYCAwcBCP/EADwQAAIBAgUABwcCBAQHAAAAAAECAwQRAAUSITEGEyJBUWFxFDKBkaGx8BUjwdHh8TNCYpIHFiQ1cnOC/8QAGAEBAQEBAQAAAAAAAAAAAAAAAgMEAAH/xAAhEQACAgIDAQADAQAAAAAAAAAAAQIRAyESIjFBEzJRBP/aAAwDAQACEQMRAD8ArqKE5lRpV1lHEXhfq9TLd0t3E",
+                            "favicon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcBAMAAACAI8KnAAAAMFBMVEUAi9AAi9AAiM8Ahc56tODL4fLZ6vZapdqPv+QAgM2w0uw5mNX8/v++2e+hyejs9Pu/hs7qAAAAAXRSTlN4HjghaAAAALpJREFUeAFjYBREAgIMgiiAxlxlRUEjI0NhRUFDEFfI1VkpPSJylrN1MpjbNcX97KnX60q6f0K4brl5/3Ja41Oh3FfPorNzavNjIdwS29uvXz+5VXV7MYOQobLwq53yxhMtr880nsig/dpP/brem4pOr/R3do8ZzFJ+3Vlz180t60hYfowTg/q3GzFhUTVr246HfX13mMFuRej267J9VUtcX7+928wgPOOmkJGwsrKRspGxsSLdAgctUgBXsVUzivE8EwAAAABJRU5ErkJggg==",
+                            "displayed_link": "https://www.offi.fr › ... › Tendances Musées, Expositions",
+                            "snippet": "Musées nationaux, musées privés, musées de la Ville de Paris... : découvrez la liste des musées parisiens, des plus confidentiels aux plus ...",
+                            "snippet_highlighted_words": [
+                                "Musées nationaux, musées privés, musées de la Ville de Paris"
+                            ],
+                            "source": "L'Officiel des Spectacles Paris",
+                            "release_time": "10 nov. 2025"
+                        }
+                    ],
+                    "pagination": {
+                        "current": 1,
+                        "next": "https://www.google.com/search?q=mus%C3%A9e+Paris&safe=active&sca_esv=2ceecd03995af008&gl=fr&hl=fr&nfpr=1&sxsrf=APpeQntShNjirMZdt7wsEOYtm14WGQFF9A:1792719239806&ei=h7naaubUMOXJkPIPrYLX-Q4&start=10&sa=N&sstk=AS6-VmJSyWAGQaCCJG1HjZ8nwtPisOXd51bGrJUcDZtfLtuDuBX5nOGF7QuyKhuh-2TbziZ0oGQXsPEafk6ZRDHvhMPzHAvrWJJrig&ved=2ahUKEwimtOHL_86XAxXlJEQIHS3BNe8Q8NMDegQIXhAW",
+                        "other_pages": {
+                            "2": "https://www.google.com/search?q=mus%C3%A9e+Paris&safe=active&sca_esv=2ceecd03995af008&gl=fr&hl=fr&nfpr=1&sxsrf=APpeQntShNjirMZdt7wsEOYtm14WGQFF9A:1792719239806&ei=h7naaubUMOXJkPIPrYLX-Q4&start=10&sa=N&sstk=AS6-VmJSyWAGQaCCJG1HjZ8nwtPisOXd51bGrJUcDZtfLtuDuBX5nOGF7QuyKhuh-2TbziZ0oGQXsPEafk6ZRDHvhMPzHAvrWJJrig&ved=2ahUKEwimtOHL_86XAxXlJEQIHS3BNe8Q8tMDegQIXhAE",
+                            "3": "https://www.google.com/search?q=mus%C3%A9e+Paris&safe=active&sca_esv=2ceecd03995af008&gl=fr&hl=fr&nfpr=1&sxsrf=APpeQntShNjirMZdt7wsEOYtm14WGQFF9A:1792719239806&ei=h7naaubUMOXJkPIPrYLX-Q4&start=20&sa=N&sstk=AS6-VmJSyWAGQaCCJG1HjZ8nwtPisOXd51bGrJUcDZtfLtuDuBX5nOGF7QuyKhuh-2TbziZ0oGQXsPEafk6ZRDHvhMPzHAvrWJJrig&ved=2ahUKEwimtOHL_86XAxXlJEQIHS3BNe8Q8tMDegQIXhAG",
+                            "4": "https://www.google.com/search?q=mus%C3%A9e+Paris&safe=active&sca_esv=2ceecd03995af008&gl=fr&hl=fr&nfpr=1&sxsrf=APpeQntShNjirMZdt7wsEOYtm14WGQFF9A:1792719239806&ei=h7naaubUMOXJkPIPrYLX-Q4&start=30&sa=N&sstk=AS6-VmJSyWAGQaCCJG1HjZ8nwtPisOXd51bGrJUcDZtfLtuDuBX5nOGF7QuyKhuh-2TbziZ0oGQXsPEafk6ZRDHvhMPzHAvrWJJrig&ved=2ahUKEwimtOHL_86XAxXlJEQIHS3BNe8Q8tMDegQIXhAI",
+                            "5": "https://www.google.com/search?q=mus%C3%A9e+Paris&safe=active&sca_esv=2ceecd03995af008&gl=fr&hl=fr&nfpr=1&sxsrf=APpeQntShNjirMZdt7wsEOYtm14WGQFF9A:1792719239806&ei=h7naaubUMOXJkPIPrYLX-Q4&start=40&sa=N&sstk=AS6-VmJSyWAGQaCCJG1HjZ8nwtPisOXd51bGrJUcDZtfLtuDuBX5nOGF7QuyKhuh-2TbziZ0oGQXsPEafk6ZRDHvhMPzHAvrWJJrig&ved=2ahUKEwimtOHL_86XAxXlJEQIHS3BNe8Q8tMDegQIXhAK",
+                            "6": "https://www.google.com/search?q=mus%C3%A9e+Paris&safe=active&sca_esv=2ceecd03995af008&gl=fr&hl=fr&nfpr=1&sxsrf=APpeQntShNjirMZdt7wsEOYtm14WGQFF9A:1792719239806&ei=h7naaubUMOXJkPIPrYLX-Q4&start=50&sa=N&sstk=AS6-VmJSyWAGQaCCJG1HjZ8nwtPisOXd51bGrJUcDZtfLtuDuBX5nOGF7QuyKhuh-2TbziZ0oGQXsPEafk6ZRDHvhMPzHAvrWJJrig&ved=2ahUKEwimtOHL_86XAxXlJEQIHS3BNe8Q8tMDegQIXhAM",
+                            "7": "https://www.google.com/search?q=mus%C3%A9e+Paris&safe=active&sca_esv=2ceecd03995af008&gl=fr&hl=fr&nfpr=1&sxsrf=APpeQntShNjirMZdt7wsEOYtm14WGQFF9A:1792719239806&ei=h7naaubUMOXJkPIPrYLX-Q4&start=60&sa=N&sstk=AS6-VmJSyWAGQaCCJG1HjZ8nwtPisOXd51bGrJUcDZtfLtuDuBX5nOGF7QuyKhuh-2TbziZ0oGQXsPEafk6ZRDHvhMPzHAvrWJJrig&ved=2ahUKEwimtOHL_86XAxXlJEQIHS3BNe8Q8tMDegQIXhAO",
+                            "8": "https://www.google.com/search?q=mus%C3%A9e+Paris&safe=active&sca_esv=2ceecd03995af008&gl=fr&hl=fr&nfpr=1&sxsrf=APpeQntShNjirMZdt7wsEOYtm14WGQFF9A:1792719239806&ei=h7naaubUMOXJkPIPrYLX-Q4&start=70&sa=N&sstk=AS6-VmJSyWAGQaCCJG1HjZ8nwtPisOXd51bGrJUcDZtfLtuDuBX5nOGF7QuyKhuh-2TbziZ0oGQXsPEafk6ZRDHvhMPzHAvrWJJrig&ved=2ahUKEwimtOHL_86XAxXlJEQIHS3BNe8Q8tMDegQIXhAQ",
+                            "9": "https://www.google.com/search?q=mus%C3%A9e+Paris&safe=active&sca_esv=2ceecd03995af008&gl=fr&hl=fr&nfpr=1&sxsrf=APpeQntShNjirMZdt7wsEOYtm14WGQFF9A:1792719239806&ei=h7naaubUMOXJkPIPrYLX-Q4&start=80&sa=N&sstk=AS6-VmJSyWAGQaCCJG1HjZ8nwtPisOXd51bGrJUcDZtfLtuDuBX5nOGF7QuyKhuh-2TbziZ0oGQXsPEafk6ZRDHvhMPzHAvrWJJrig&ved=2ahUKEwimtOHL_86XAxXlJEQIHS3BNe8Q8tMDegQIXhAS",
+                            "10": "https://www.google.com/search?q=mus%C3%A9e+Paris&safe=active&sca_esv=2ceecd03995af008&gl=fr&hl=fr&nfpr=1&sxsrf=APpeQntShNjirMZdt7wsEOYtm14WGQFF9A:1792719239806&ei=h7naaubUMOXJkPIPrYLX-Q4&start=90&sa=N&sstk=AS6-VmJSyWAGQaCCJG1HjZ8nwtPisOXd51bGrJUcDZtfLtuDuBX5nOGF7QuyKhuh-2TbziZ0oGQXsPEafk6ZRDHvhMPzHAvrWJJrig&ved=2ahUKEwimtOHL_86XAxXlJEQIHS3BNe8Q8tMDegQIXhAU"
+                        }
+                    },
+                    "places_sites": [
+                        {
+                            "position": 1,
+                            "title": "Petit Palais",
+                            "link": "https://www.petitpalais.paris.fr/",
+                            "image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4QBoRXhpZgAASUkqAAgAAAACADEBAgAHAAAAJgAAAGmHBAABAAAALgAAAAAAAABQaWNhc2EAAAIAAJAHAAQAAAAwMjIwA5ACABQAAABMAAAAAAAAADIwMjE6MDk6MjkgMTA6NTg6MDIA/+ICNElDQ19QUk9GSUxFAAEBAAACJGFwcGwEAAAAbW50clJHQiBYWVogB+EABwAHAA0AFgAgYWNzcEFQUEwAAAAAQVBQTAAAAAAAAAAAAAAAAAAAAAAAAPbWAAEAAAAA0y1hcHBsyhqVgiV/EE04mRPV0eoVggAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKZGVzYwAAAPwAAABlY3BydAAAAWQAAAAjd3RwdAAAAYgAAAAUclhZWgAAAZwAAAAUZ1hZWgAAAbAAAAAUYlhZWgAAAcQAAAAUclRSQwAAAdgAA",
+                            "source": "www.petitpalais.paris.fr"
+                        },
+                        {
+                            "position": 2,
+                            "title": "Musée du Louvre",
+                            "link": "https://www.louvre.fr/",
+                            "image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAMCAgoKCgoICAoKCggKCggICAoICAgICAoICAgICAgKCgoICAgICAgICAgICAoICAgICgoKCAgLDQoIDQgICggBAwQEBgUGCgYGCg8NCg0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDf/AABEIAZoCAAMBEQACEQEDEQH/xAAdAAACAwEBAQEBAAAAAAAAAAAFBgQHCAMCAQAJ/8QAVxAAAgECAwUDCAUJBAcFCAEFAQIDBBEAEiEFBhMiMQdBURQjMmFxgZGhCDNCscEVJFJicqKy0fBDgpLhJTRTY3Oj8XSDs8LSFhdEVGST0+JVwzWVpRj/xAAbAQACAwEBAQAAAAAAAAAAAAADBAABAgUGB//EADoRAAICAQMCBAQEBQMEAwEBAAABAhEDEiExBEETIjJRB",
+                            "source": "www.louvre.fr"
+                        }
+                    ],
+                    "related_questions": [
+                        {
+                            "type": "ai_overview",
+                            "question": "Quels sont les 10 meilleurs musées à Paris ?",
+                            "next_page_token": "eyJvbnMiOiIxMDA0MSIsImZjIjoiRXFFQkNtSkJTbWxVTkhSTWJIb3dVbk5HZEZCSWJGVnJTR2xNV21aUE16RktjVVV5VW1wMlVucFhTRlJmUW1SeWIyOVdMVTFsUlVKMloyUnNVbHAwU1Vsck0yVklNM1JXWDNsd1FsTkVWRlJEZUc5clZscGtXVVZDU1V4R1FuQjNTVWRCYms5MmR4SVhhRGR1WVdGMVlsVk5UMWhLYTFCSlVISlpURmd0VVRRYUlrRkVjM0k1WmxSRVoyMTNibmh3VW1oYU4wYzFaRWxyV2kxMVEwczBUMUo0WldjIiwiZmN2IjoiMyIsImVpIjoiaDduYWF1YlVNT1hKa1BJUHJZTFgtUTQiLCJxYyI6IkNneHRkWFBEcVdVZ2NHRnlhWE1RQkgwZkx6c18iLCJxdWVzdGlvbiI6IlF1ZWxzIHNvbnQgbGVzIDEwIG1laWxsZXVycyBtdXPDqWVzIMOgIFBhcmlz",
+                            "page_token": "eyJvbnMiOiI2NzYxIiwiZmMiOiJFdUlCQ3FJQlFVcHBWRFIwUzJWSmF6ZFJUREZEZWpsRVoySndhelZIVFhrelJWWjNNR2xIUzBSSWRrSnlia1ptZG10UmRWTTFjM1ZoUVMxT2IyODBRMmhpTld4YU5UWTBhRUZYTVZwZmRVMXdRamMzUlhGaU9VOTFiVWQ1Y1dWdFkzbG5VVXR3U0c1elpsVnNUbkY0TTBwVVVIQnlSa2czVWpSdlFsRkRNM2hZUVVnMmIzWlhSbkJtWjE5S1lqRnpTMGN5WDFKc1VrMXFkRVp2UWxGemFsRjNRV2hMUjAxbkVoZG9OMjVoWVhWaVZVMVBXRXByVUVsUWNsbE1XQzFSTkJvaVFVUnpjamxtVWpodGF5MVJRVE5NVEd4UlpUSkxSeTF1WTAxbVlXZ3RiakY1ZHciLCJmY3YiOiIzIn0="
+                        },
+                        {
+                            "type": "ai_overview",
+                            "question": "Quels sont les 14 musées de la Ville de Paris ?",
+                            "next_page_token": "eyJvbnMiOiIxMDA0MSIsImZjIjoiRXFFQkNtSkJTbWxVTkhSTWJIb3dVbk5HZEZCSWJGVnJTR2xNV21aUE16RktjVVV5VW1wMlVucFhTRlJmUW1SeWIyOVdMVTFsUlVKMloyUnNVbHAwU1Vsck0yVklNM1JXWDNsd1FsTkVWRlJEZUc5clZscGtXVVZDU1V4R1FuQjNTVWRCYms5MmR4SVhhRGR1WVdGMVlsVk5UMWhLYTFCSlVISlpURmd0VVRRYUlrRkVjM0k1WmxSRVoyMTNibmh3VW1oYU4wYzFaRWxyV2kxMVEwczBUMUo0WldjIiwiZmN2IjoiMyIsImVpIjoiaDduYWF1YlVNT1hKa1BJUHJZTFgtUTQiLCJxYyI6IkNneHRkWFBEcVdVZ2NHRnlhWE1RQkgwZkx6c18iLCJxdWVzdGlvbiI6IlF1ZWxzIHNvbnQgbGVzIDE0IG11c8OpZXMgZGUgbGEgVmlsbGUgZGUgUGFy",
+                            "page_token": "eyJvbnMiOiI2NzYxIiwiZmMiOiJFc3dCQ293QlFVcHBWRFIwVEZFMFlWZ3dabVkyTVVwV1FVbFJOakpOUkhOUmNVUlJiMjl5TkROVVR6ZzBkbWRpZFZSclpWVjNZaTFzWkhOc01HUndhbmMzZG1ocFJrRXphMmhsV0VsaE9VeFZaM040VlhaMlMzQndSR2xmT0VZeVRVczJhWGh5U2xCVU5XOVpSMWRmTTJsSmJrTnFjR0ZoTUdkelNpMXhhMnRTTjBZNGRHaHFZMmwzTjNGSlpXWTBSMGtTRjJnM2JtRmhkV0pWVFU5WVNtdFFTVkJ5V1V4WUxWRTBHaUpCUkhOeU9XWlVUV2x5ZGtwRk5WVk9lWEpwTUVWMmFGVnVXblZXWVVZeFNFVm4iLCJmY3YiOiIzIn0="
+                        }
+                    ],
+                    "related_searches": [
+                        {
+                            "block_position": "1",
+                            "query": "Musée Paris gratuit",
+                            "link": "https://www.google.com/search?safe=active&sca_esv=2ceecd03995af008&gl=fr&hl=fr&nfpr=1&sxsrf=APpeQntShNjirMZdt7wsEOYtm14WGQFF9A:1792719239806&q=Mus%C3%A9e+Paris+gratuit&sa=X&ved=2ahUKEwimtOHL_86XAxXlJEQIHS3BNe8Q1QJ6BAhhEAE"
+                        },
+                        {
+                            "block_position": "1",
+                            "query": "Musée Paris Illusion",
+                            "link": "https://www.google.com/search?safe=active&sca_esv=2ceecd03995af008&gl=fr&hl=fr&nfpr=1&sxsrf=APpeQntShNjirMZdt7wsEOYtm14WGQFF9A:1792719239806&q=Mus%C3%A9e+Paris+Illusion&sa=X&ved=2ahUKEwimtOHL_86XAxXlJEQIHS3BNe8Q1QJ6BAh_EAE"
+                        }
+                    ],
+                    "search_information": {
+                        "organic_results_state": "Results for exact spelling",
+                        "query_displayed": "musée Paris",
+                        "total_results": 137,
+                        "time_taken_displayed": "0,51",
+                        "results_for": "Paris"
+                    },
+                    "metadata": {
+                        "engine": "google.search",
+                        "rawUrl": "https://api.scrapeless.com/storage/scrapeless.scraper.google.search/f8f51728ca42fd0e661be121b09dadba/9d1648bd35266da7dcdf0e665e083f14_1792719241.html"
+                    }
+                }
+            }
+        }
+    ]
+}

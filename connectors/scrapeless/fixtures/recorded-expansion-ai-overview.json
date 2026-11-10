@@ -1,0 +1,110 @@
+{
+    "name": "recorded-expansion-ai-overview",
+    "description": "Real Scrapeless responses, 2026-10-22; header allowlist applied; Monid trimCalls caps response arrays at 2 and strings at 500. Full redacted records remain in research/live-expansion-2026-10-22. Replay usage is TEST ONLY, never actual charges.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v2/scraper/request",
+                "body": {
+                    "actor": "scraper.overview",
+                    "input": {
+                        "prompt": "What are example domains used for?",
+                        "country": "US",
+                        "shopping": false,
+                        "should_fetch_share_link": false
+                    }
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "status": "pending",
+                    "task_id": "790baa6c-2d44-483a-a06b-b3e4f60816f8"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/790baa6c-2d44-483a-a06b-b3e4f60816f8"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/790baa6c-2d44-483a-a06b-b3e4f60816f8"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "success",
+                    "task_result": {
+                        "ads": null,
+                        "ads_count": 0,
+                        "content": "Example domains (such as example.com, example.org, example.net, and example.edu) are reserved addresses maintained by the Internet Assigned Numbers Authority (IANA) specifically for use in documentation, manuals, tutorials, and sample software configurations. ([Internet Assigned Numbers Authority (IANA)][1]) ([Wikipedia][2])\n\n### Key Uses\n\n  - **Technical Documentation:**  Writers and developers use them in code snippets, network configurations, and API guides so readers know to replace them wit",
+                        "is_ads": false,
+                        "is_overview_shopping": false,
+                        "is_shopping": false,
+                        "metadata": {
+                            "rawUrl": "https://www.google.com/search?gl=US&oq=What+are+example+domains+used+for%3F&q=What+are+example+domains+used+for%3F&sclient=gws-wiz-serp&uact=5"
+                        },
+                        "products": null,
+                        "rawtext": "Example domains (such as example.com, example.org, example.net, and example.edu) are reserved addresses maintained by the Internet Assigned Numbers Authority (IANA) specifically for use in documentation, manuals, tutorials, and sample software configurations.\n\n### Key Uses\n\n- **Technical Documentation:** Writers and developers use them in code snippets, network configurations, and API guides so readers know to replace them with a real address.  \n- **Avoiding Naming Conflicts:** They prevent real",
+                        "shopping_count": 0,
+                        "source": [
+                            {
+                                "cited_count": 1,
+                                "favicon": "https://encrypted-tbn0.gstatic.com/faviconV2?url=https://www.iana.org&client=AIM&size=32&type=FAVICON&fallback_opts=TYPE,SIZE,URL",
+                                "index": 1,
+                                "snippet": "",
+                                "thumbnail": "",
+                                "title": "Example Domains",
+                                "type": "",
+                                "url": "https://www.iana.org/help/example-domains",
+                                "website_name": "Internet Assigned Numbers Authority (IANA)"
+                            },
+                            {
+                                "cited_count": 4,
+                                "favicon": "https://encrypted-tbn1.gstatic.com/faviconV2?url=https://en.wikipedia.org&client=AIM&size=32&type=FAVICON&fallback_opts=TYPE,SIZE,URL",
+                                "index": 2,
+                                "snippet": "Purpose The domains example.com, example.net, example.org and example.edu are intended for general use in any kind of documentatio...",
+                                "thumbnail": "",
+                                "title": "example.com",
+                                "type": "",
+                                "url": "https://en.wikipedia.org/wiki/Example.com",
+                                "website_name": "Wikipedia"
+                            }
+                        ],
+                        "web_source": [
+                            {
+                                "favicon": "",
+                                "snippet": "Sep 27, 2026 — These domains may be used as illustrative examples in documents without prior coordination with us. They are not available for registration or ...",
+                                "thumbnail": "",
+                                "title": "Example Domains",
+                                "type": "",
+                                "url": "https://www.iana.org/help/example-domains",
+                                "website_name": "Internet Assigned Numbers Authority (IANA)"
+                            },
+                            {
+                                "favicon": "",
+                                "snippet": "The domain names are used widely in books, tutorials, sample network configurations, and generally as examples for the use of domain names.",
+                                "thumbnail": "",
+                                "title": "example.com",
+                                "type": "",
+                                "url": "https://en.wikipedia.org/wiki/Example.com",
+                                "website_name": "Wikipedia"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

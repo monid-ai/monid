@@ -1,0 +1,283 @@
+{
+    "name": "recorded-branches-rufus-base",
+    "description": "Actual bounded own-account branch probe 2026-10-23. Secrets/PII scrubbed; result arrays capped at 3 and strings at 4500 characters; all protocol calls retained. Not an invoice or full production acceptance.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v1/scraper/request",
+                "body": {
+                    "actor": "scraper.amazon",
+                    "input": {
+                        "type": "rufus",
+                        "keywords": "best noise cancelling headphones",
+                        "domain": "www.amazon.com",
+                        "is_sse_data": false,
+                        "is_get_question": false
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "metadata": {
+                        "rawUrl": "https://api.scrapeless.com/storage/scrapeless.scraper.amazon/a1565e796f29ff563b23a690af230ca2/f40cc7f603d37658b4d1f1b241393992_1792741658.html",
+                        "type": "rufus"
+                    },
+                    "result": {
+                        "request_context": {
+                            "requestId": "AAEWX6981RQRKWYHV63Q",
+                            "sessionId": "141-7659681-2523342",
+                            "bsr": {
+                                "bottomSheetSize": "expanded",
+                                "peekBehaviour": null
+                            }
+                        },
+                        "user_query": "best noise cancelling headphones",
+                        "interim_messages": [
+                            "Thinking..."
+                        ],
+                        "inference_text": "The best noise cancellers right now span three tiers — here's the lineup with something at each price point:\n\nThe Sony XM6 and Bose QC Ultra 2nd Gen are the two top over-ear picks this year — Sony edges ahead on ANC strength and battery, Bose wins on comfort and spatial audio. Are you looking for over-ear headphones or earbuds, and do you have a budget in mind?",
+                        "inference_text_with_products": "The best noise cancellers right now span three tiers — here's the lineup with something at each price point:\n\nBest Overall (Over-Ear)\nSee more: https://www.amazon.com/s?k=More%20Best%20Overall%20%28Over-Ear%29%2C%20excluding%20the%20ones%20recommended\n\n- Sony WH-1000XM6 The Best Noise Cancelling Wireless Headphones, Black | HD NC Processor QN3, 12 Microphones, Adaptive NC Optimizer, Mastered by Engineers, Studio-Quality, Up to 30 Hrs of Battery\n  ASIN: B0F3PQHWTZ\n  Price: $458.00\nRating: 4.2 5,300\n  Purchase volume: 3K+ bought in past month\n  Delivery: FREE delivery Wed, Oct 28\n  Explanation: Rated the #1 ANC headphone by multiple 2026 reviews. The new QN3 processor (7x faster than XM5) and 12-mic system block everything from office chatter to airplane engines. 30-hr battery, 3-min quick charge, and a carbon fiber driver for studio-tuned sound.\n  Link: https://www.amazon.com/dp/B0F3PQHWTZ?niid=nl_cl_lst_a_1_1&ref_=nl_cl_lst_a_1_1&nrid=AAEWX6981RQRKWYHV63Q\n  More details: https://www.amazon.com/s?k=More%20details%20about%20Sony%20WH-1000XM6%20The%20Best%20Noise%20Cancelling%20Wireless%20Headphones%2C%20Black%20%7C%20HD%20NC%20Processor%20QN3%2C%2012%20Microphones%2C%20Adaptive%20NC%20Optimizer%2C%20Mastered%20by%20Engineers%2C%20Studio-Quality%2C%20Up%20to%2030%20Hrs%20of%20Battery%20B0F3PQHWTZ\n\n- Bose QuietComfort Ultra Bluetooth Headphones (2nd Gen), Wireless Headphones with Spatial Audio, Over Ear Noise Cancelling with Mic, Up to 30 Hours of Play time, Black\n  ASIN: B0FDKR293G\n  Price: $449.00\nRating: 4.2 3,040\n  Purchase volume: 3K+ bought in past month\n  Delivery: FREE delivery Wed, Oct 28\n  Explanation: Bose's best-ever noise cancellation with CustomTune that personalizes audio to your ear shape every time you put them on. Adds Cinema and Immersive Audio modes. Up to 30 hrs battery, 15-min quick charge.\n  Link: https://www.amazon.com/dp/B0FDKR293G?niid=nl_cl_lst_a_1_2&ref_=nl_cl_lst_a_1_2&nrid=AAEWX6981RQRKWYHV63Q\n  More details: https://www.amazon.com/s?k=More%20details%20about%20Bose%20QuietComfort%20Ultra%20Bluetooth%20Headphones%20%282nd%20Gen%29%2C%20Wireless%20Headphones%20with%20Spatial%20Audio%2C%20Over%20Ear%20Noise%20Cancelling%20with%20Mic%2C%20Up%20to%2030%20Hours%20of%20Play%20time%2C%20Black%20B0FDKR293G\n\n- Bose QuietComfort Headphones (2nd Gen) - Wireless Headphones, Active Over Ear Noise Cancelling and Mic, Immersive Audio, USB-C Charging and Lossless Audio, Up to 24 Hours of Play time, Black\n  ASIN: B0GXW9C8QC\n  Price: $359.00\nRating: 4.6 243\n  Purchase volume: 1K+ bought in past month\n  Delivery: FREE delivery Wed, Oct 28\n  Explanation: New 2026 Bose model — lighter, updated design with TrueSpatial audio and Bose's legendary QuietControl ANC. Up to 24 hrs battery. A more affordable entry into the Bose lineup.\n  Link: https://www.amazon.com/dp/B0GXW9C8QC?niid=nl_cl_lst_a_1_3&ref_=nl_cl_lst_a_1_3&nrid=AAEWX6981RQRKWYHV63Q\n  More details: https://www.amazon.com/s?k=More%20details%20about%20Bose%20QuietComfort%20Headphones%20%282nd%20Gen%29%20-%20Wireless%20Headphones%2C%20Active%20Over%20Ear%20Noise%20Cancelling%20and%20Mic%2C%20Immersive%20Audio%2C%20USB-C%20Charging%20and%20Lossless%20Audio%2C%20Up%20to%2024%20Hours%20of%20Play%20time%2C%20Black%20B0GXW9C8QC\n\nBest for Apple Ecosystem\nSee more: https://www.amazon.com/s?k=More%20Best%20for%20Apple%20Ecosystem%2C%20excluding%20the%20ones%20recommended\n\n- Apple AirPods Max 2 Wireless Over-Ear Headphones – Starlight | Active Noise Cancellation, Adaptive Audio, Personalized Spatial Audio, Live Translation, Bluetooth Headphones for iPhone\n  ASIN: B0GSRYXZM5\n  Price: $449.00 (Original price: $549.00)\nRating: 4.5 1,120\n  Purchase volume: 3K+ bought in past month\n  Delivery: FREE delivery Wed, Oct 28\n  Explanation: AirPods Max 2 with H2 chip delivers up to 1.5x more ANC than the previous gen, Adaptive Audio, Personalized Spatial Audio, and Live Translation. Best pick if you're in the Apple ecosystem. 20-hr battery, lossless audio via USB-C.\n  Link: https://www.amazon.com/dp/B0GSRYXZM5?niid=nl_cl_lst_a_2_1&ref_=nl_cl_lst_a_2_1&nrid=AAEWX6981RQRKWYHV63Q\n  More details: https://www.amazon.com/s?k=More%20details%20about%20Apple%20AirPods%20Max%202%20Wireless%20Over-Ear%20Headphones%20%E2%80%93%20Starlight%20%7C%20Active%20Noise%20Cancellation%2C%20Adaptive%20Audio%2C%20Personalized%20Spatial%20Audio%2C%20Live%20Translation%2C%20Bluetooth%20Headphones%20for%20iPhone%20B0GSRYXZM5\n\nBest for Audiophiles\nSee more: https://www.amazon.com/s?k=More%20Best%20for%20Aud",
+                        "inference_text_parts": [
+                            "The best noise cancellers right now span three tiers — here's the lineup with something at each price point:",
+                            "The Sony XM6 and Bose QC Ultra 2nd Gen are the two top over-ear picks this year — Sony edges ahead on ANC strength and battery, Bose wins on comfort and spatial audio. Are you looking for over-ear headphones or earbuds, and do you have a budget in mind?"
+                        ],
+                        "content_blocks": [
+                            {
+                                "type": "text",
+                                "text": "The best noise cancellers right now span three tiers — here's the lineup with something at each price point:"
+                            },
+                            {
+                                "type": "product_section",
+                                "category": "Best Overall (Over-Ear)",
+                                "see_more": {
+                                    "text": "see more",
+                                    "url": "https://www.amazon.com/s?k=More%20Best%20Overall%20%28Over-Ear%29%2C%20excluding%20the%20ones%20recommended",
+                                    "payload": {
+                                        "qis": "NileAsinListSeeMoreHyperLink",
+                                        "query": "More Best Overall (Over-Ear), excluding the ones recommended",
+                                        "refmarker": "nl_cl_hl_al_sm_1"
+                                    }
+                                },
+                                "products": [
+                                    {
+                                        "asin": "B0F3PQHWTZ",
+                                        "url": "https://www.amazon.com/dp/B0F3PQHWTZ?niid=nl_cl_lst_a_1_1&ref_=nl_cl_lst_a_1_1&nrid=AAEWX6981RQRKWYHV63Q",
+                                        "title": "Sony WH-1000XM6 The Best Noise Cancelling Wireless Headphones, Black | HD NC Processor QN3, 12 Microphones, Adaptive NC Optimizer, Mastered by Engineers, Studio-Quality, Up to 30 Hrs of Battery",
+                                        "price": "$458.00",
+                                        "rating": "4.2",
+                                        "reviews": "5,300",
+                                        "category": "Best Overall (Over-Ear)",
+                                        "delivery": "FREE delivery Wed, Oct 28",
+                                        "bought": "3K+ bought in past month",
+                                        "image_url": "https://m.media-amazon.com/images/I/61ddahpESML._AC_.jpg",
+                                        "image_alt": "Sony WH-1000XM6 The Best Noise Cancelling Wireless Headphones, Black | HD NC Processor QN3, 12 Microphones, Adaptive NC Optimizer, Mastered by Engineers, Studio-Quality, Up to 30 Hrs of Battery",
+                                        "footer": "Rated the #1 ANC headphone by multiple 2026 reviews. The new QN3 processor (7x faster than XM5) and 12-mic system block everything from office chatter to airplane engines. 30-hr battery, 3-min quick charge, and a carbon fiber driver for studio-tuned sound.",
+                                        "more_details": {
+                                            "text": "More details",
+                                            "url": "https://www.amazon.com/s?k=More%20details%20about%20Sony%20WH-1000XM6%20The%20Best%20Noise%20Cancelling%20Wireless%20Headphones%2C%20Black%20%7C%20HD%20NC%20Processor%20QN3%2C%2012%20Microphones%2C%20Adaptive%20NC%20Optimizer%2C%20Mastered%20by%20Engineers%2C%20Studio-Quality%2C%20Up%20to%2030%20Hrs%20of%20Battery%20B0F3PQHWTZ",
+                                            "payload": {
+                                                "qis": "NileAsinListLearnMoreHyperLink",
+                                                "query": "More details about Sony WH-1000XM6 The Best Noise Cancelling Wireless Headphones, Black | HD NC Processor QN3, 12 Microphones, Adaptive NC Optimizer, Mastered by Engineers, Studio-Quality, Up to 30 Hrs of Battery B0F3PQHWTZ",
+                                                "refmarker": "nl_cl_hl_al_lm_1_0"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "asin": "B0FDKR293G",
+                                        "url": "https://www.amazon.com/dp/B0FDKR293G?niid=nl_cl_lst_a_1_2&ref_=nl_cl_lst_a_1_2&nrid=AAEWX6981RQRKWYHV63Q",
+                                        "title": "Bose QuietComfort Ultra Bluetooth Headphones (2nd Gen), Wireless Headphones with Spatial Audio, Over Ear Noise Cancelling with Mic, Up to 30 Hours of Play time, Black",
+                                        "price": "$449.00",
+                                        "rating": "4.2",
+                                        "reviews": "3,040",
+                                        "category": "Best Overall (Over-Ear)",
+                                        "delivery": "FREE delivery Wed, Oct 28",
+                                        "bought": "3K+ bought in past month",
+                                        "image_url": "https://m.media-amazon.com/images/I/51revx-zToL._AC_.jpg",
+                                        "image_alt": "Bose QuietComfort Ultra Bluetooth Headphones (2nd Gen), Wireless Headphones with Spatial Audio, Over Ear Noise Cancelling with Mic, Up to 30 Hours of Play time, Black",
+                                        "footer": "Bose's best-ever noise cancellation with CustomTune that personalizes audio to your ear shape every time you put them on. Adds Cinema and Immersive Audio modes. Up to 30 hrs battery, 15-min quick charge.",
+                                        "more_details": {
+                                            "text": "More details",
+                                            "url": "https://www.amazon.com/s?k=More%20details%20about%20Bose%20QuietComfort%20Ultra%20Bluetooth%20Headphones%20%282nd%20Gen%29%2C%20Wireless%20Headphones%20with%20Spatial%20Audio%2C%20Over%20Ear%20Noise%20Cancelling%20with%20Mic%2C%20Up%20to%2030%20Hours%20of%20Play%20time%2C%20Black%20B0FDKR293G",
+                                            "payload": {
+                                                "qis": "NileAsinListLearnMoreHyperLink",
+                                                "query": "More details about Bose QuietComfort Ultra Bluetooth Headphones (2nd Gen), Wireless Headphones with Spatial Audio, Over Ear Noise Cancelling with Mic, Up to 30 Hours of Play time, Black B0FDKR293G",
+                                                "refmarker": "nl_cl_hl_al_lm_1_1"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "asin": "B0GXW9C8QC",
+                                        "url": "https://www.amazon.com/dp/B0GXW9C8QC?niid=nl_cl_lst_a_1_3&ref_=nl_cl_lst_a_1_3&nrid=AAEWX6981RQRKWYHV63Q",
+                                        "title": "Bose QuietComfort Headphones (2nd Gen) - Wireless Headphones, Active Over Ear Noise Cancelling and Mic, Immersive Audio, USB-C Charging and Lossless Audio, Up to 24 Hours of Play time, Black",
+                                        "price": "$359.00",
+                                        "rating": "4.6",
+                                        "reviews": "243",
+                                        "category": "Best Overall (Over-Ear)",
+                                        "delivery": "FREE delivery Wed, Oct 28",
+                                        "bought": "1K+ bought in past month",
+                                        "image_url": "https://m.media-amazon.com/images/I/615XBVqPGaL._AC_.jpg",
+                                        "image_alt": "Bose QuietComfort Headphones (2nd Gen) - Wireless Headphones, Active Over Ear Noise Cancelling and Mic, Immersive Audio, USB-C Charging and Lossless Audio, Up to 24 Hours of Play time, Black",
+                                        "footer": "New 2026 Bose model — lighter, updated design with TrueSpatial audio and Bose's legendary QuietControl ANC. Up to 24 hrs battery. A more affordable entry into the Bose lineup.",
+                                        "more_details": {
+                                            "text": "More details",
+                                            "url": "https://www.amazon.com/s?k=More%20details%20about%20Bose%20QuietComfort%20Headphones%20%282nd%20Gen%29%20-%20Wireless%20Headphones%2C%20Active%20Over%20Ear%20Noise%20Cancelling%20and%20Mic%2C%20Immersive%20Audio%2C%20USB-C%20Charging%20and%20Lossless%20Audio%2C%20Up%20to%2024%20Hours%20of%20Play%20time%2C%20Black%20B0GXW9C8QC",
+                                            "payload": {
+                                                "qis": "NileAsinListLearnMoreHyperLink",
+                                                "query": "More details about Bose QuietComfort Headphones (2nd Gen) - Wireless Headphones, Active Over Ear Noise Cancelling and Mic, Immersive Audio, USB-C Charging and Lossless Audio, Up to 24 Hours of Play time, Black B0GXW9C8QC",
+                                                "refmarker": "nl_cl_hl_al_lm_1_2"
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "product_section",
+                                "category": "Best for Apple Ecosystem",
+                                "see_more": {
+                                    "text": "see more",
+                                    "url": "https://www.amazon.com/s?k=More%20Best%20for%20Apple%20Ecosystem%2C%20excluding%20the%20ones%20recommended",
+                                    "payload": {
+                                        "qis": "NileAsinListSeeMoreHyperLink",
+                                        "query": "More Best for Apple Ecosystem, excluding the ones recommended",
+                                        "refmarker": "nl_cl_hl_al_sm_2"
+                                    }
+                                },
+                                "products": [
+                                    {
+                                        "asin": "B0GSRYXZM5",
+                                        "url": "https://www.amazon.com/dp/B0GSRYXZM5?niid=nl_cl_lst_a_2_1&ref_=nl_cl_lst_a_2_1&nrid=AAEWX6981RQRKWYHV63Q",
+                                        "title": "Apple AirPods Max 2 Wireless Over-Ear Headphones – Starlight | Active Noise Cancellation, Adaptive Audio, Personalized Spatial Audio, Live Translation, Bluetooth Headphones for iPhone",
+                                        "price": "$449.00",
+                                        "original_price": "$549.00",
+                                        "rating": "4.5",
+                                        "reviews": "1,120",
+                                        "category": "Best for Apple Ecosystem",
+                                        "delivery": "FREE delivery Wed, Oct 28",
+                                        "bought": "3K+ bought in past month",
+                                        "image_url": "https://m.media-amazon.com/images/I/71BLGXjQsNL._AC_.jpg",
+                                        "image_alt": "Apple AirPods Max 2 Wireless Over-Ear Headphones – Starlight | Active Noise Cancellation, Adaptive Audio, Personalized Spatial Audio, Live Translation, Bluetooth Headphones for iPhone",
+                                        "footer": "AirPods Max 2 with H2 chip delivers up to 1.5x more ANC than the previous gen, Adaptive Audio, Personalized Spatial Audio, and Live Translation. Best pick if you're in the Apple ecosystem. 20-hr battery, lossless audio via USB-C.",
+                                        "more_details": {
+                                            "text": "More details",
+                                            "url": "https://www.amazon.com/s?k=More%20details%20about%20Apple%20AirPods%20Max%202%20Wireless%20Over-Ear%20Headphones%20%E2%80%93%20Starlight%20%7C%20Active%20Noise%20Cancellation%2C%20Adaptive%20Audio%2C%20Personalized%20Spatial%20Audio%2C%20Live%20Translation%2C%20Bluetooth%20Headphones%20for%20iPhone%20B0GSRYXZM5",
+                                            "payload": {
+                                                "qis": "NileAsinListLearnMoreHyperLink",
+                                                "query": "More details about Apple AirPods Max 2 Wireless Over-Ear Headphones – Starlight | Active Noise Cancellation, Adaptive Audio, Personalized Spatial Audio, Live Translation, Bluetooth Headphones for iPhone B0GSRYXZM5",
+                                                "refmarker": "nl_cl_hl_al_lm_2_0"
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "products": [
+                            {
+                                "asin": "B0F3PQHWTZ",
+                                "url": "https://www.amazon.com/dp/B0F3PQHWTZ?niid=nl_cl_lst_a_1_1&ref_=nl_cl_lst_a_1_1&nrid=AAEWX6981RQRKWYHV63Q",
+                                "title": "Sony WH-1000XM6 The Best Noise Cancelling Wireless Headphones, Black | HD NC Processor QN3, 12 Microphones, Adaptive NC Optimizer, Mastered by Engineers, Studio-Quality, Up to 30 Hrs of Battery",
+                                "price": "$458.00",
+                                "rating": "4.2",
+                                "reviews": "5,300",
+                                "category": "Best Overall (Over-Ear)",
+                                "delivery": "FREE delivery Wed, Oct 28",
+                                "bought": "3K+ bought in past month",
+                                "image_url": "https://m.media-amazon.com/images/I/61ddahpESML._AC_.jpg",
+                                "image_alt": "Sony WH-1000XM6 The Best Noise Cancelling Wireless Headphones, Black | HD NC Processor QN3, 12 Microphones, Adaptive NC Optimizer, Mastered by Engineers, Studio-Quality, Up to 30 Hrs of Battery",
+                                "footer": "Rated the #1 ANC headphone by multiple 2026 reviews. The new QN3 processor (7x faster than XM5) and 12-mic system block everything from office chatter to airplane engines. 30-hr battery, 3-min quick charge, and a carbon fiber driver for studio-tuned sound.",
+                                "more_details": {
+                                    "text": "More details",
+                                    "url": "https://www.amazon.com/s?k=More%20details%20about%20Sony%20WH-1000XM6%20The%20Best%20Noise%20Cancelling%20Wireless%20Headphones%2C%20Black%20%7C%20HD%20NC%20Processor%20QN3%2C%2012%20Microphones%2C%20Adaptive%20NC%20Optimizer%2C%20Mastered%20by%20Engineers%2C%20Studio-Quality%2C%20Up%20to%2030%20Hrs%20of%20Battery%20B0F3PQHWTZ",
+                                    "payload": {
+                                        "qis": "NileAsinListLearnMoreHyperLink",
+                                        "query": "More details about Sony WH-1000XM6 The Best Noise Cancelling Wireless Headphones, Black | HD NC Processor QN3, 12 Microphones, Adaptive NC Optimizer, Mastered by Engineers, Studio-Quality, Up to 30 Hrs of Battery B0F3PQHWTZ",
+                                        "refmarker": "nl_cl_hl_al_lm_1_0"
+                                    }
+                                }
+                            },
+                            {
+                                "asin": "B0FDKR293G",
+                                "url": "https://www.amazon.com/dp/B0FDKR293G?niid=nl_cl_lst_a_1_2&ref_=nl_cl_lst_a_1_2&nrid=AAEWX6981RQRKWYHV63Q",
+                                "title": "Bose QuietComfort Ultra Bluetooth Headphones (2nd Gen), Wireless Headphones with Spatial Audio, Over Ear Noise Cancelling with Mic, Up to 30 Hours of Play time, Black",
+                                "price": "$449.00",
+                                "rating": "4.2",
+                                "reviews": "3,040",
+                                "category": "Best Overall (Over-Ear)",
+                                "delivery": "FREE delivery Wed, Oct 28",
+                                "bought": "3K+ bought in past month",
+                                "image_url": "https://m.media-amazon.com/images/I/51revx-zToL._AC_.jpg",
+                                "image_alt": "Bose QuietComfort Ultra Bluetooth Headphones (2nd Gen), Wireless Headphones with Spatial Audio, Over Ear Noise Cancelling with Mic, Up to 30 Hours of Play time, Black",
+                                "footer": "Bose's best-ever noise cancellation with CustomTune that personalizes audio to your ear shape every time you put them on. Adds Cinema and Immersive Audio modes. Up to 30 hrs battery, 15-min quick charge.",
+                                "more_details": {
+                                    "text": "More details",
+                                    "url": "https://www.amazon.com/s?k=More%20details%20about%20Bose%20QuietComfort%20Ultra%20Bluetooth%20Headphones%20%282nd%20Gen%29%2C%20Wireless%20Headphones%20with%20Spatial%20Audio%2C%20Over%20Ear%20Noise%20Cancelling%20with%20Mic%2C%20Up%20to%2030%20Hours%20of%20Play%20time%2C%20Black%20B0FDKR293G",
+                                    "payload": {
+                                        "qis": "NileAsinListLearnMoreHyperLink",
+                                        "query": "More details about Bose QuietComfort Ultra Bluetooth Headphones (2nd Gen), Wireless Headphones with Spatial Audio, Over Ear Noise Cancelling with Mic, Up to 30 Hours of Play time, Black B0FDKR293G",
+                                        "refmarker": "nl_cl_hl_al_lm_1_1"
+                                    }
+                                }
+                            },
+                            {
+                                "asin": "B0GXW9C8QC",
+                                "url": "https://www.amazon.com/dp/B0GXW9C8QC?niid=nl_cl_lst_a_1_3&ref_=nl_cl_lst_a_1_3&nrid=AAEWX6981RQRKWYHV63Q",
+                                "title": "Bose QuietComfort Headphones (2nd Gen) - Wireless Headphones, Active Over Ear Noise Cancelling and Mic, Immersive Audio, USB-C Charging and Lossless Audio, Up to 24 Hours of Play time, Black",
+                                "price": "$359.00",
+                                "rating": "4.6",
+                                "reviews": "243",
+                                "category": "Best Overall (Over-Ear)",
+                                "delivery": "FREE delivery Wed, Oct 28",
+                                "bought": "1K+ bought in past month",
+                                "image_url": "https://m.media-amazon.com/images/I/615XBVqPGaL._AC_.jpg",
+                                "image_alt": "Bose QuietComfort Headphones (2nd Gen) - Wireless Headphones, Active Over Ear Noise Cancelling and Mic, Immersive Audio, USB-C Charging and Lossless Audio, Up to 24 Hours of Play time, Black",
+                                "footer": "New 2026 Bose model — lighter, updated design with TrueSpatial audio and Bose's legendary QuietControl ANC. Up to 24 hrs battery. A more affordable entry into the Bose lineup.",
+                                "more_details": {
+                                    "text": "More details",
+                                    "url": "https://www.amazon.com/s?k=More%20details%20about%20Bose%20QuietComfort%20Headphones%20%282nd%20Gen%29%20-%20Wireless%20Headphones%2C%20Active%20Over%20Ear%20Noise%20Cancelling%20and%20Mic%2C%20Immersive%20Audio%2C%20USB-C%20Charging%20and%20Lossless%20Audio%2C%20Up%20to%2024%20Hours%20of%20Play%20time%2C%20Black%20B0GXW9C8QC",
+                                    "payload": {
+                                        "qis": "NileAsinListLearnMoreHyperLink",
+                                        "query": "More details about Bose QuietComfort Headphones (2nd Gen) - Wireless Headphones, Active Over Ear Noise Cancelling and Mic, Immersive Audio, USB-C Charging and Lossless Audio, Up to 24 Hours of Play time, Black B0GXW9C8QC",
+                                        "refmarker": "nl_cl_hl_al_lm_1_2"
+                                    }
+                                }
+                            }
+                        ],
+                        "related_questions": [
+                            "Sony XM6 vs Bose QC Ultra 2nd Gen comparison",
+                            "Best noise cancelling earbuds under $100",
+                            "Best ANC headphones for travel"
+                        ],
+                        "sources": [
+                            {
+                                "text": "rtings.com",
+                                "url": "https://www.rtings.com/headphones/reviews/best/by-feature/noise-cancelling"
+                            },
+                            {
+                                "text": "SoundGuys",
+                                "url": "https://www.soundguys.com/best-noise-cancelling-headphones-for-work-76177/"
+                            },
+                            {
+                                "text": "RecordingNOW.com",
+                                "url": "https://recordingnow.com/blog/best-noise-cancelling-headphones/"
+                            }
+                        ],
+                        "informed_by": [
+                            "Sources rtings.com SoundGuys RecordingNOW.com techradar.com"
+                        ],
+                        "feedback_controls": {
+                            "groupId": "section_groupId_feedback_controls_AAEWX6981RQRKWYHV63Q_0",
+                            "text": "Your feedback has been submitted!",
+                            "options": [
+                                "This is inaccurate",
+                                "This is irrelevant",
+                                "This is harmful / unsafe"
+                            ],
+                            "submit_label": "Submit"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

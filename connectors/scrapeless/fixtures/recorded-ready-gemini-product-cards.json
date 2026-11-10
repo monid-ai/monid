@@ -1,0 +1,155 @@
+{
+    "name": "recorded-ready-gemini-product-cards",
+    "description": "Actual own-account 2026-10-23 continuation request. PII/secrets redacted; large result strings and arrays shortened, all protocol requests retained. Not an invoice or production acceptance.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v2/scraper/request",
+                "body": {
+                    "actor": "scraper.gemini",
+                    "input": {
+                        "prompt": "Shop for a cordless vacuum cleaner under $300. Show me the shopping product carousel with available merchant offers so I can choose a product to buy.",
+                        "country": "US",
+                        "shopping": true
+                    }
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "status": "pending",
+                    "task_id": "acf49f24-8665-4220-af49-f407b9ec0fda"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/acf49f24-8665-4220-af49-f407b9ec0fda"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/acf49f24-8665-4220-af49-f407b9ec0fda"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/acf49f24-8665-4220-af49-f407b9ec0fda"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/acf49f24-8665-4220-af49-f407b9ec0fda"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/acf49f24-8665-4220-af49-f407b9ec0fda"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/acf49f24-8665-4220-af49-f407b9ec0fda"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/acf49f24-8665-4220-af49-f407b9ec0fda"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/acf49f24-8665-4220-af49-f407b9ec0fda"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/acf49f24-8665-4220-af49-f407b9ec0fda"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "success",
+                    "task_result": {
+                        "citations": [
+                            {
+                                "cited_count": 1,
+                                "favicon": "https://encrypted-tbn1.gstatic.com/favicon-tbn?q=tbn%3AANd9GcQuqL8cMs7gCI4d2bEGmp3HQ71-0z6Dya6jZC4elVVha6guT3CT3Vi2WUToEH_KzDpRhh2OHSw4qzMx9Cfs5Yv8yqw2OB1D99WO7AA",
+                                "highlights": [
+                                    "**Tineco Pure One S15 Pet** — Standout option in this price tier due to its real-time dust-sensing technology that optimizes battery life automatically."
+                                ],
+                                "index": 1,
+                                "snippet": "Tineco Pure One S15 Pet. The Tineco Pure One S15 Pet at $299 has the \nsmartest suction system under $300. The iLoop sensor adjusts power in real \ntime as it detec...",
+                                "title": "Best Cordless Vacuum Under $300 in 2026 - NowLetsGet",
+                                "url": "https://now-lets-get.com/best-cordless-vacuum-under-300/#:~:text=Tineco%20Pure%20One%20S15%20Pet.%20The%20Tineco,it%20is%20not.%20Check%20Price%20on%20Amazon.",
+                                "website_name": "NowLetsGet"
+                            }
+                        ],
+                        "prompt": "Shop for a cordless vacuum cleaner under $300. Show me the shopping product carousel with available merchant offers so I can choose a product to buy.",
+                        "rawtext": "Here are top\\-rated cordless vacuum cleaners under <strong>$300</strong>, complete with key features and available merchant offers to help you choose the right fit for your home:\n\n| Vacuum&#32;Model | Price | Key&#32;Features | Available&#32;Merchants | \n| --- | --- | --- | --- |\n| **Tineco&#32;Pure&#32;One&#32;S15&#32;Pet** | \\~$299\\.00 | Smart&#32;iLoop&#32;sensor&#32;(auto\\-adjusts&#32;suction),&#32;LED&#32;display,&#32;anti\\-tangle&#32;brush | Amazon,&#32;Walmart | \n| **Samsung&#32;Jet&#32;60&#32;Pet** | \\~$249\\.00 | 150&#32;AW&#32;suction,&#32;40\\-min&#32;runtime,&#32;turbo&#32;action&#32;pet&#32;brush | Amazon,&#32;Samsung,&#32;Best&#32;Buy | \n| **Shark&#32;PowerPro&#32;Flex&#32;/&#32;Pet** | \\~$199\\.00&#32;–&#32;$249\\.00 | Self\\-cleaning&#32;brushroll&#32;(great&#32;for&#32;hair),&#32;flexible&#32;wand,&#32;XL&#32;dustbin | Target,&#32;Home&#32;Depot,&#32;Amazon | \n| **Dyson&#32;V8&#32;Origin** | \\~$279\\.00 | Lightweight&#32;design,&#32;signature&#32;Dyson&#32;motor&#32;suction,&#32;hygienic&#32;bin&#32;emptying | Amazon,&#32;Best&#32;Buy,&#32;Dyson | \n\n---\n\n### Key Recommendations Based on Your Needs:\n\n- **Best for Smart Features &amp; Performance:** **Tineco Pure One S15 Pet** — Standout option in this price tier due to its real\\-time dust\\-sensing technology that optimizes battery life automatically\\.\n- **Best Brand Reliability:** **Dyson V8 Origin** — Brings classic Dyson engineering and powerful suction into a sub\\-$300 bracket, perfect if you prefer tried\\-and\\-true brand reliability\\.\n- **Best for Pet Owners on a Budget:** **Shark IX141 / PowerPro** — Features a self\\-cleaning brushroll that actively prevents hair wrap, saving you time on maintenance\\.\n\n*Note: Prices and promotional offers fluctuate frequently across retailers\\. Let me know which model you",
+                        "related_queries": [],
+                        "result_text": "Here are top\\-rated cordless vacuum cleaners under <strong>$300</strong>, complete with key features and available merchant offers to help you choose the right fit for your home:\n\n| Vacuum&#32;Model | Price | Key&#32;Features | Available&#32;Merchants | \n| --- | --- | --- | --- |\n| **Tineco&#32;Pure&#32;One&#32;S15&#32;Pet** | \\~$299\\.00 | Smart&#32;iLoop&#32;sensor&#32;(auto\\-adjusts&#32;suction),&#32;LED&#32;display,&#32;anti\\-tangle&#32;brush | Amazon,&#32;Walmart | \n| **Samsung&#32;Jet&#32;60&#32;Pet** | \\~$249\\.00 | 150&#32;AW&#32;suction,&#32;40\\-min&#32;runtime,&#32;turbo&#32;action&#32;pet&#32;brush | Amazon,&#32;Samsung,&#32;Best&#32;Buy | \n| **Shark&#32;PowerPro&#32;Flex&#32;/&#32;Pet** | \\~$199\\.00&#32;–&#32;$249\\.00 | Self\\-cleaning&#32;brushroll&#32;(great&#32;for&#32;hair),&#32;flexible&#32;wand,&#32;XL&#32;dustbin | Target,&#32;Home&#32;Depot,&#32;Amazon | \n| **Dyson&#32;V8&#32;Origin** | \\~$279\\.00 | Lightweight&#32;design,&#32;signature&#32;Dyson&#32;motor&#32;suction,&#32;hygienic&#32;bin&#32;emptying | Amazon,&#32;Best&#32;Buy,&#32;Dyson | \n\n---\n\n### Key Recommendations Based on Your Needs:\n\n- **Best for Smart Features &amp; Performance:** **Tineco Pure One S15 Pet ([NowLetsGet][1])** — Standout option in this price tier due to its real\\-time dust\\-sensing technology that optimizes battery life automatically\\.\n- **Best Brand Reliability:** **Dyson V8 Origin** — Brings classic Dyson engineering and powerful suction into a sub\\-$300 bracket, perfect if you prefer tried\\-and\\-true brand reliability\\.\n- **Best for Pet Owners on a Budget:** **Shark IX141 / PowerPro** — Features a self\\-cleaning brushroll that actively prevents hair wrap, saving you time on maintenance\\.\n\n*Note: Prices and promotional offers fluctuate frequently across retailers\\. Let me kn"
+                    }
+                }
+            }
+        }
+    ]
+}

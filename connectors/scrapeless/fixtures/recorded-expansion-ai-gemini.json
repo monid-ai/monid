@@ -1,0 +1,58 @@
+{
+    "name": "recorded-expansion-ai-gemini",
+    "description": "Real Scrapeless responses, 2026-10-22; header allowlist applied; Monid trimCalls caps response arrays at 2 and strings at 500. Full redacted records remain in research/live-expansion-2026-10-22. Replay usage is TEST ONLY, never actual charges.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v2/scraper/request",
+                "body": {
+                    "actor": "scraper.gemini",
+                    "input": {
+                        "prompt": "What is the purpose of example.com? Answer briefly and cite a source if available.",
+                        "country": "US",
+                        "shopping": false
+                    }
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "status": "pending",
+                    "task_id": "5e48dd41-3db0-43b8-9c46-c6a4dad22dce"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/5e48dd41-3db0-43b8-9c46-c6a4dad22dce"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/5e48dd41-3db0-43b8-9c46-c6a4dad22dce"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "success",
+                    "task_result": {
+                        "citations": [],
+                        "prompt": "What is the purpose of example.com? Answer briefly and cite a source if available.",
+                        "rawtext": "The purpose of **example\\.com** is to serve as a placeholder and illustrative domain name for use in documentation, manuals, tutorials, and technical examples\\. It ensures that writers and developers can reference a valid domain format without risking conflicts with real websites or organizations\\.\n\nIt was officially set aside by the Internet Engineering Task Force (IETF) (Internet Assigned Numbers Authority \\[IANA\\], 2024)\\.",
+                        "related_queries": [],
+                        "result_text": "The purpose of **example\\.com** is to serve as a placeholder and illustrative domain name for use in documentation, manuals, tutorials, and technical examples\\. It ensures that writers and developers can reference a valid domain format without risking conflicts with real websites or organizations\\.\n\nIt was officially set aside by the Internet Engineering Task Force (IETF) (Internet Assigned Numbers Authority \\[IANA\\], 2024)\\."
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,79 @@
+{
+    "name": "recorded-branches-aimode-share",
+    "description": "Actual bounded own-account branch probe 2026-10-23. Secrets/PII scrubbed; result arrays capped at 3 and strings at 4500 characters; all protocol calls retained. Not an invoice or full production acceptance.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v2/scraper/request",
+                "body": {
+                    "actor": "scraper.aimode",
+                    "input": {
+                        "prompt": "What is the Eiffel Tower?",
+                        "country": "US",
+                        "shopping": false,
+                        "should_fetch_share_link": true
+                    }
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "status": "pending",
+                    "task_id": "75f5eb3e-e414-4f3a-9c9e-564f37510b83"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/75f5eb3e-e414-4f3a-9c9e-564f37510b83"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "success",
+                    "task_result": {
+                        "citations": [
+                            {
+                                "cited_count": 1,
+                                "favicon": "https://encrypted-tbn0.gstatic.com/faviconV2?url=https://www.britannica.com&client=AIM&size=128&type=FAVICON&fallback_opts=TYPE,SIZE,URL",
+                                "index": 1,
+                                "snippet": "",
+                                "thumbnail": "",
+                                "title": "Eiffel Tower | History, Height, & Facts | Britannica",
+                                "url": "https://www.britannica.com/topic/Eiffel-Tower-Paris-France",
+                                "website_name": "Britannica"
+                            },
+                            {
+                                "cited_count": 1,
+                                "favicon": "",
+                                "index": 2,
+                                "snippet": "is a wrought-iron lattice tower on the Champ de Mars. It was built between 1887 and 1889 … tower rises 330 metres (1,083 feet) and...",
+                                "thumbnail": "",
+                                "title": "Eiffel Tower: The Arch That Was Meant to Come Down",
+                                "url": "https://www.confinity.com/landmarks/eiffel-tower",
+                                "website_name": "www.confinity.com"
+                            },
+                            {
+                                "cited_count": 1,
+                                "favicon": "",
+                                "index": 3,
+                                "snippet": "The tower is 330 metres (1,083 ft) tall, about the same height as an 81-storey building, and the tallest structure in Paris. Its b...",
+                                "thumbnail": "",
+                                "title": "Eiffel Tower - Wikipedia",
+                                "url": "https://en.wikipedia.org/wiki/Eiffel_Tower",
+                                "website_name": "Wikipedia"
+                            }
+                        ],
+                        "raw_url": "https://www.google.com/async/folwr?srtst=&garc=ChswYTVrTU93NUlwbWtvRFNJR25vWGR2SlM3MXcSF2NSSGJhb2JmSllhMTBQRVBzdGlBOFFzGgtjVGJvclZvWWhFUQ&mlro=0a7tYu1od4GU3xrhQ_j_kzp7NSW4ACbgwBZtHCTEzXVhAs0q9x_k9Aumll1EfRiWZS5DgSNIpgTpuwPjqPvzH2v4ZszJbVXDt-CKaqsAATYg49pYBxdKm-Akfgal4CPhmKeYTcU3kKpNNxI&mlros=7PwpWo6NmUE&ei=cRHbaobfJYa10PEPstiA8Qs&q=What+is+the+Eiffel+Tower%3F&yv=3&vet=12ahUKEwjG26-308-XAxWGGjQIHTIsIL4Q-a4TegYIAggCEAA..i&ved=2ahUKEwjG26-308-XAxWGGjQIHTIsIL4Q-a4TegYIAggCEAA&aep=48&sourceid=chrome&udm=50&stkp=AeYwpWnLKDgWA8J2dNfE_Zz27Em90JuUCTs7F6D_UtQTJDYTZoSgjhWn8NzmvcGEFnH4nMWX5PC69VqjS-zjMXmsa8OA6j0Mdnu4l7tCuIZYlRSeMNIcmH8p4g%3D%3D&cs=1&async=_fmt:adl,_xsrf:AF5tSO67Q5Z0jDx3jcTBjg0YU_V3xkIf5A%3A1792741745760",
+                        "result_html": "<div><div data-container-id=\"chHbatbuD7Kz5NoPqZPf0A8\"></div><div eid=\"chHbatbuD7Kz5NoPqZPf0A8\"></div><div><div data-session-thread-id=\"cRHbaobfJYa10PEPstiA8Qs\" style=\"display:none\"> </div><div data-target-container-id=\"chHbatbuD7Kz5NoPqZPf0A8\"><div data-msei=\"AUtExfDLCo8HK0K0xfV3ghzrZZWtf86kiYjYOEIGBwotyYr0cIdkkExK_v5iCDQDa8hEXRMBmUNs1FFd9sqsPfVRhS5W4-Wr\" data-mseni=\"cRHbaobfJYa10PEPstiA8Qs\" data-mstk=\"AUtExfBE96yb3g7Xmdw62oApnl-n1QvUsIgLZjnLaFZvdxZtaudlcvHNcn9c7aAhgN3Mf8AofQwkHUix4J_ujwx2_eknx2ULqgnkRhsRr-qbKb60yrVwvF_keLTKj3ClHq3lZFbkqT3OgQ0cE-jGCT6YLKVYBg_w1M-y0WI\" style=\"display:none\"></div></div><style data-ck=\"search-next.aim.7pCM9eGtUR4.L.B1.O\" data-css-ids=\"XmAqMd,E1OJWe,eucJfe,nCphfe,W8NV9d\">:root{--COEmY:#1f1f1f;--xhUGwc:#fff}:root{--vZe0jb:#dcdfe5;--nwXobb:#dcdfe5;--VuZXBd:var(--bbQxAb);--uLz37c:var(--IXoxUe);--jINu6c:var(--YLNNHc);--TyVYld:#0b57d0;--ZEpPmd:#f0f2f5;--QWaaaf:#dcdfe5;--DEeStf:var(--XKMDxc);--TSWZIb:var(--aYn2S);--BRLwE:var(--Lm570b);--gS5jXb:#dcdfe5;--Aqn7xd:#dcdfe5;--EpFNW:#fff;--Xqboce:#1f1f1f;--IXoxUe:#656773;--bbQxAb:#16171a;--YLNNHc:#16171a;--TMYS9:#0a0a0a;--JKqx2:#1558d6;--rrJJUc:#1558d6;--mXZkqc:#dcdfe5;--JclFj:#dcdfe5;--Nsm0ce:#336ef3;--vdwxpe:#0b50d0;--ywz01c:#fbbc04;--XKMDxc:#f0f2f5;--aYn2S:#e9ebf0;--Lm570b:#e1e3e8}:root{--amnPwe:#656773;--ZXiaGf:#e6e8f0;--EoKObe:#fff;--cIehld:#fff;--ONhrGd:var(--Aqn7xd);--gVUKcd:rgba(0,0,0,0.6);--jwFC2e:#d3e3fd;--yTtsEf:#013a00}:root{--aim-input-plate-height:60px}:root{--aim-input-plate-margin-bottom:34px}.CKgc1d~.CKgc1d{margin-top:30px;padding-top:30px}.iZr6mc img{filter:url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"><filter id=\"degrade-pixelate\" x=\"0\" y=\"0\" width=\"100%\" height=\"100%\"><feFlood x=\"2\" y=\"2\" height=\"1\" width=\"1\" result=\"flood\"/><feComposite width=\"4\" height=\"4\" in=\"flood\" result=\"composite\"/><feTile in=\"composite\" result=\"tiled\"/><feComposite in=\"SourceGraphic\" in2=\"tiled\" operator=\"in\" result=\"sampled\"/><feMorphology operator=\"dilate\" radius=\"2\" in=\"sampled\" result=\"blocky\"/><feGaussianBlur stdDeviation=\"1\" in=\"blocky\"/></filter></svg>#degrade-pixelate')}.EsR5bd{inline-size:100%}.EsR5bd{max-inline-size:var(--CYi3c--fRcLaf,652px)}:root{--nkmQOe:Google Sans,Roboto,Arial,sans-serif,Noto Color Emoji;--a9X0Jc:24px;--z3BFIe:16px;--XWliwc:400;--LI4Bo:Google Sans,Roboto,Arial,sans-serif,Noto Color Emoji;--XWv1if:22px;--Mhs7de:14px;--ofwUBc:400;--YfiKf:Google Sans,Roboto,Arial,sans-serif,Noto Color Emoji;--punZlc:16px;--gOs6Bf:12px;--MzKBpd:400;--IT7y3c:Google Sans,Roboto,Arial,sans-serif,Noto Color Emoji;--hPDMFf:32px;--Ia70Xd:24px;--Vyi8yc:500;--Aoh9Xe:Google Sans,Roboto,Arial,sans-serif,Noto Color Emoji;--qYGXw:28px;--qpdFp:20px;--JT4IPc:600;--rTk0E:Google Sans,Roboto,Arial,sans-serif,Noto Color Emoji;--Ok3irf:24px;--uBdgTe:16px;--Zf9Xnd:700;--qR8X0:Google Sans,Roboto,Arial,sans-serif,Noto Color Emoji;--CbdmE:20px;--hbmnje:14px;--Oycjt:400;--qBwyqb:Google Sans,Roboto,Arial,sans-serif,Noto Color Emoji;--nUOqEc:16px;--cMTvjf:12px;--CUS15e:500;--Eou8Yc:Google Sans,Roboto,Arial,sans-serif,Noto Color Emoji;--qWZYEc:26px;--GiToJf:20px;--p2Lqxe:400;--ztTqPe:Google Sans,Roboto,Arial,sans-serif,Noto Color Emoji;--C74x2e:18px;--gyu5L:14px;--Yoa6qd:500;--lI1Trc:Google Sans,Roboto,Arial,sans-serif,Noto Color Emoji;--HIyEKc:16px;--ZNg88:12px;--qjVU3d:500}:root{--emphasized-curve:cubic-bezier(0.38,0.72,0,1)}@supports (animation-timing-function:linear(0,1)){:root{--emphasized-curve:linear(0,0.00245 1.753%,0.004 2.29%,0.00994 3.55%,0.01966 4.916%,0.03415 6.402%,0.05334 7.836%,0.07441 9.061%,0.07376 9.061%,0.10031 10.32%,0.12808 11.414%,0.15979 12.444%,0.19399 13.366%,0.23105 14.21%,0.27138 14.974%,0.34474 16.052%,0.34403 16.052%,0.47679 17.475%,0.54434 18.338%,0.60689 19.389%,0.66036 20.609%,0.68967 21.461%,0.71671 22.4%,0.74193 23.444%,0.76532 24.589%,0.78755 25.874%,0.80828 27.285%,0.82719 28.791%,0.84475 30.42%,0.86492 32.632%,0.86558 32.713%,0.8645 32.713%,0.86561 32.715%,0.86856 33.078%,0.88332 35.056%,0.88876 35.862%,0.88763 35.862%,0.88881 35.871%,0.9002 37.721%,0.90085 37.833%,0.90007 37.833%,0.9039 38.373%,0.91554 40.622%,0.9295 43.795%,0.94208 47.239%,0.95333 50.97%,0.96327 54.986%,0.97199 59.335%,0.9795 64.011%,0.9858 69.036%,0.99095 74.434%,0.99492 80.205%,0.99774 86.373%,1)}}@keyframes SpringIn{0%{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}.Zkbeff{font-family:Google Sans,Roboto,Arial,sans-serif,Noto Color Emoji;color:var(--jINu6c);font-weight:400;position:relative}.Zkbeff{display:flex}.Z",
+                        "result_md": "The **Eiffel Tower** is an iconic **wrought-iron lattice tower** located on the Champ de Mars in Paris, France. Designed and built from 1887 to 1889 by the company of renowned engineer Gustave Eiffel, it stands **330 meters (1,083 feet) tall** . Today, it is universally recognized as the definitive global symbol of Paris and France, welcoming nearly seven million visitors each year as one of the world's most popular paid attractions. ([Britannica][1]) ([www.confinity.com][2]) ([Wikipedia][3]) ([National Geographic Kids][4])\n\n\n**The 1889 World's Fair:**  It was constructed as the grand entrance gateway and centerpiece for the 1889 Exposition Universelle. This fair celebrated the centennial of the French Revolution and aimed to showcase France's industrial and engineering prowess. ([La tour Eiffel][5]) ([YouTube][6])  \n\n**Saved by Science:**  The tower was originally intended to stand for only 20 years before being dismantled. Gustave Eiffel saved it from destruction by advocating for its scientific utility, building meteorology and aerodynamics laboratories on-site, and installing military radio antennas. ([La tour Eiffel][5]) ([La tour Eiffel][7]) ([YouTube][8])  \n\n**Wartime Role:**  During World War I, the tower acted as a massive antenna that intercepted critical German radio transmissions, including messages that exposed the famous spy Mata Hari. ([National Geographic Kids][4]) ([Facebook][9])  \n\n\n**The Structure:**  The \"Iron Lady\" is built from 18,000 individual iron pieces held together by 2.5 million rivets.  \n\n**Visitor Levels:**  There are three accessible levels. The first two levels house shops and restaurants (including the Madame Brasserie), while the third-level summit sits at 276 meters, making it the highest public observation deck in the European Union.  \n\n**Gustave's Secret Apartment:**  At the very top level, Gustave Eiffel built a private apartment where he hosted famous guests, including inventor Thomas Edison.  \n\n**Nightly Illuminations:**  Every evening, the tower lights up in a golden glow, featuring a beacon at the top and a spectacular five-minute sparkling display at the start of every hour. ([La tour Eiffel][5]) ([La tour Eiffel][10])  \n\nIf you are planning a trip or studying the tower, let me know if you would like to know about:\n\n\n**Ticket prices and how to book** an ascent  \n\n**How to get there** using public transit  \n\nDeep-dive **engineering details** about how it handles high winds  \n\n\n\n[1]: https://www.britannica.com/topic/Eiffel-Tower-Paris-France \"Britannica - Eiffel Tower | History, Height, & Facts | Britannica\"\n[2]: https://www.confinity.com/landmarks/eiffel-tower \"www.confinity.com - Eiffel Tower: The Arch That Was Meant to Come Down\"\n[3]: https://en.wikipedia.org/wiki/Eiffel_Tower \"Wikipedia - Eiffel Tower - Wikipedia\"\n[4]: https://kids.nationalgeographic.com/history/article/eiffel-tower \"National Geographic Kids - Eiffel Tower | National Geographic Kids\"\n[5]: https://www.toureiffel.paris/en/the-monument \"La tour Eiffel - Eiffel Tower : to know everything about the monument\"\n[6]: https://www.youtube.com/watch?v=vurh8_SO6_c&t=303 \"YouTube - Gustave Eiffel, The Eiffel Tower\"\n[7]: https://www.toureiffel.paris/en/the-monument/eiffel-tower-and-science \"La tour Eiffel - The Eiffel Tower and science - OFFICIAL Eiffel Tower Website\"\n[8]: https://www.youtube.com/watch?v=o9a_liqKDqQ \"YouTube - The Real Story Behind the Eiffel Tower\"\n[9]: https://www.facebook.com/NOVApbs/videos/5-things-to-know-about-the-eiffel-tower/1675585573875035/ \"Facebook - 5 Surprising Eiffel Tower Facts: From WWI Antenna to 1889 ...\"\n[10]: https://www.toureiffel.paris/en \"La tour Eiffel - The OFFICIAL Eiffel Tower website: tickets, news, info...\"\n   ",
+                        "result_text": "The **Eiffel Tower** is an iconic **wrought-iron lattice tower** located on the Champ de Mars in Paris, France. Designed and built from 1887 to 1889 by the company of renowned engineer Gustave Eiffel, it stands **330 meters (1,083 feet) tall** . Today, it is universally recognized as the definitive global symbol of Paris and France, welcoming nearly seven million visitors each year as one of the world's most popular paid attractions.\n\n- **The 1889 World's Fair:** It was constructed as the grand entrance gateway and centerpiece for the 1889 Exposition Universelle. This fair celebrated the centennial of the French Revolution and aimed to showcase France's industrial and engineering prowess.  \n- **Saved by Science:** The tower was originally intended to stand for only 20 years before being dismantled. Gustave Eiffel saved it from destruction by advocating for its scientific utility, building meteorology and aerodynamics laboratories on-site, and installing military radio antennas.  \n- **Wartime Role:** During World War I, the tower acted as a massive antenna that intercepted critical German radio transmissions, including messages that exposed the famous spy Mata Hari.  \n\n- **The Structure:** The \"Iron Lady\" is built from 18,000 individual iron pieces held together by 2.5 million rivets.  \n- **Visitor Levels:** There are three accessible levels. The first two levels house shops and restaurants (including the Madame Brasserie), while the third-level summit sits at 276 meters, making it the highest public observation deck in the European Union.  \n- **Gustave's Secret Apartment:** At the very top level, Gustave Eiffel built a private apartment where he hosted famous guests, including inventor Thomas Edison.  \n- **Nightly Illuminations:** Every evening, the tower lights up in a golden glow, featuring a beacon at the top and a spectacular five-minute sparkling display at the start of every hour.  \n\nIf you are planning a trip or studying the tower, let me know if you would like to know about:\n\n- **Ticket prices and how to book** an ascent  \n- **How to get there** using public transit  \n- Deep-dive **engineering details** about how it handles high winds  \n",
+                        "share_url": "https://share.google/aimode/3oxDfuC2jHWsmtYSK"
+                    }
+                }
+            }
+        }
+    ]
+}

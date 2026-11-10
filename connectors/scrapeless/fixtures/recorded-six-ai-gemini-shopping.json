@@ -1,0 +1,109 @@
+{
+    "name": "recorded-six-ai-gemini-shopping",
+    "description": "Recorded own-account request on 2026-10-23. Secrets/PII removed, result arrays capped at 3 and strings at 1500 characters; all actual protocol calls retained. Not a receipt or production acceptance.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v2/scraper/request",
+                "body": {
+                    "actor": "scraper.gemini",
+                    "input": {
+                        "prompt": "Show shopping product cards for Sony WH-1000XM5 headphones with merchant offers in the United States.",
+                        "country": "US",
+                        "shopping": true
+                    }
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "status": "pending",
+                    "task_id": "732cdadc-b9ee-4dd3-8f60-0adae7ef71b4"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/732cdadc-b9ee-4dd3-8f60-0adae7ef71b4"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/732cdadc-b9ee-4dd3-8f60-0adae7ef71b4"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/732cdadc-b9ee-4dd3-8f60-0adae7ef71b4"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "success",
+                    "task_result": {
+                        "citations": [
+                            {
+                                "cited_count": 0,
+                                "favicon": "https://encrypted-tbn0.gstatic.com/favicon-tbn?q=tbn%3AANd9GcTWjjCuPKtN3h1mi8dBavxdYQGntK-keIUhY3bN40onOU3spV_Jlhqlknfx5bGzefvMJwVMbdf5QGhTHo-RCHu_TJb7oiqAWatIkLIRjusC",
+                                "highlights": [
+                                    "$228.00 – $399.99 *(Depending on color and active promotions; standard MSRP is $399.99)*"
+                                ],
+                                "index": 1,
+                                "snippet": "How much do the WH-1000XM5 headphones cost? MSRP is listed as $399.99. \nGiven ... *FAQ generated on 07/23/2026. Financing, pricing and promotions \nmay no",
+                                "title": "Sony WH-1000XM5 Premium Wireless Noise Cancelling Headphones",
+                                "url": "https://electronics.sony.com/audio/headphones/headband/p/wh1000xm5-l",
+                                "website_name": "Sony"
+                            },
+                            {
+                                "cited_count": 1,
+                                "favicon": "https://encrypted-tbn0.gstatic.com/favicon-tbn?q=tbn%3AANd9GcTWjjCuPKtN3h1mi8dBavxdYQGntK-keIUhY3bN40onOU3spV_Jlhqlknfx5bGzefvMJwVMbdf5QGhTHo-RCHu_TJb7oiqAWatIkLIRjusC",
+                                "highlights": [
+                                    "Free shipping, eligible for student/military discounts via ID.me or UNiDAYS, and Sony Rewards points."
+                                ],
+                                "index": 2,
+                                "snippet": " MSRP is listed as $399.99. Given that, these models can go on sale from \ntime to time, and there are several other opportunities to save on price \nlike through t...",
+                                "title": "Sony WH-1000XM5 Premium Wireless Noise Cancelling Headphones",
+                                "url": "https://electronics.sony.com/audio/headphones/headband/p/wh1000xm5-l#:~:text=MSRP%20is%20listed%20as%20%24399.99.%20Given%20that%2C,gives%20up%20to%205%25%20back%20in%20points.",
+                                "website_name": "Sony Electronics"
+                            },
+                            {
+                                "cited_count": 0,
+                                "favicon": "https://encrypted-tbn3.gstatic.com/favicon-tbn?q=tbn%3AANd9GcSPMHGqjRbuI5IO_USVweksd2Krh0t-YIercMwF1iIIfTnGPVnpS3d2G19-sPzi0nRR18yfi5eTPthpAPMKC88agyirOJD2MmvuWg",
+                                "highlights": [
+                                    "Midnight Blue: **$248.00**",
+                                    "Black / Silver: **$288.00**",
+                                    "Pink: **$298.00**"
+                                ],
+                                "index": 3,
+                                "snippet": "Sony WH-1000XM5 The Best Wireless Noise Canceling Headphones, Black ; \nBlack. $288.00 · 288 ; Pink. $298.00 · 298 ; Silver. $288.00 · 288 ; \nMidnight Blue. $248.0...",
+                                "title": "Sony, Wireless Noise Canceling Headphones, Black, 30-Hour Battery",
+                                "url": "https://www.walmart.com/ip/Sony-WH-1000XM5-The-Best-Wireless-Noise-Canceling-Headphones-Black/386006068",
+                                "website_name": "Walmart"
+                            }
+                        ],
+                        "prompt": "Show shopping product cards for Sony WH-1000XM5 headphones with merchant offers in the United States.",
+                        "rawtext": "Here are the current merchant offers and pricing options for the **Sony WH\\-1000XM5** Wireless Noise\\-Cancelling Headphones in the United States:\n\n---\n\n### **Sony Official Store**\n\n- **Price:** $228\\.00 – $399\\.99 *(Depending on color and active promotions; standard MSRP is $399\\.99)*\n- **Colors Available:** Black, Midnight Blue, Silver, Smoky Pink\n- **Perks:** Free shipping, eligible for student/military discounts via ID\\.me or UNiDAYS, and Sony Rewards points\\.\n- **Offer Link:** [Sony Electronics](<https://electronics.sony.com/audio/headphones/headband/p/wh1000xm5-b>)\n\n---\n\n### **Walmart**\n\n- **Price:**\n  - Midnight Blue: **$248\\.00**\n  - Black / Silver: **$288\\.00**\n  - Pink: **$298\\.00**\n- **Perks:** Free shipping options, easy returns\\.\n- **Offer Link:** [Walmart](<https://www.walmart.com/ip/Sony-WH-1000XM5-The-Best-Wireless-Noise-Canceling-Headphones-Black/386006068>)\n\n---\n\n### **Target**\n\n- **Price:** **$399\\.99** (New) / **$189\\.99** (Target Certified Refurbished)\n- **Perks:** RedCard holder discounts, flexible financing options (e\\.g\\., Affirm)\\.\n- **Offer Link:** [Target](<https://www.target.com/p/sony-wh-1000xm5-bluetooth-wireless-noise-canceling-headphones-black/-/A-86314264>)\n\n---\n\n### **Amazon**\n\n- **Price:** Varies around **$198\\.00 – $288\\.00** depending on third\\-party new/used marketplace listings and lightning deals (List price: $399\\.99)\\.\n- **Perks:** Prime free shipping benefits\\.\n- **Offer Link:** [Amazon Product Page](<https://www.amazon.com/dp/B09XSDM[RECORDED_TRUNCATED]",
+                        "related_queries": [],
+                        "result_text": "Here are the current merchant offers and pricing options for the **Sony WH\\-1000XM5** Wireless Noise\\-Cancelling Headphones in the United States:\n\n---\n\n### **Sony Official Store**\n\n- **Price:** $228\\.00 – $399\\.99 *(Depending on color and active promotions; standard MSRP is $399\\.99)*\n- **Colors Available:** Black, Midnight Blue, Silver, Smoky Pink\n- **Perks:** Free shipping, eligible for student/military discounts via ID\\.me or UNiDAYS, and Sony Rewards points\\. ([Sony Electronics][2])\n- **Offer Link:** [Sony Electronics](<https://electronics.sony.com/audio/headphones/headband/p/wh1000xm5-b>)\n\n---\n\n### **Walmart**\n\n- **Price:**\n  - Midnight Blue: **$248\\.00**\n  - Black / Silver: **$288\\.00**\n  - Pink: **$298\\.00**\n- **Perks:** Free shipping options, easy returns\\.\n- **Offer Link:** [Walmart](<https://www.walmart.com/ip/Sony-WH-1000XM5-The-Best-Wireless-Noise-Canceling-Headphones-Black/386006068>)\n\n---\n\n### **Target**\n\n- **Price:** **$399\\.99** (New) / **$189\\.99** (Target Certified Refurbished)\n- **Perks:** RedCard holder discounts, flexible financing options (e\\.g\\., Affirm)\\.\n- **Offer Link:** [Target](<https://www.target.com/p/sony-wh-1000xm5-bluetooth-wireless-noise-canceling-headphones-black/-/A-86314264>)\n\n---\n\n### **Amazon**\n\n- **Price:** Varies around **$198\\.00 – $288\\.00** depending on third\\-party new/used marketplace listings and lightning deals (List price: $399\\.99)\\.\n- **Perks:** Prime free shipping benefits\\.\n- **Offer Link:** [Amazon Product Page](<https://w[RECORDED_TRUNCATED]"
+                    }
+                }
+            }
+        }
+    ]
+}

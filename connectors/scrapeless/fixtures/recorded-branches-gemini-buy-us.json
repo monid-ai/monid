@@ -1,0 +1,89 @@
+{
+    "name": "recorded-branches-gemini-buy-us",
+    "description": "Actual bounded own-account branch probe 2026-10-23. Secrets/PII scrubbed; result arrays capped at 3 and strings at 4500 characters; all protocol calls retained. Not an invoice or full production acceptance.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v2/scraper/request",
+                "body": {
+                    "actor": "scraper.gemini",
+                    "input": {
+                        "prompt": "I want to buy Apple AirPods Pro 3 in the United States. Show shopping product cards with current store offers, prices and links so I can choose where to buy.",
+                        "country": "US",
+                        "shopping": true
+                    }
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "status": "pending",
+                    "task_id": "929ece88-c628-4ab2-a009-c0ad8cf1fd67"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/929ece88-c628-4ab2-a009-c0ad8cf1fd67"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/929ece88-c628-4ab2-a009-c0ad8cf1fd67"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "success",
+                    "task_result": {
+                        "citations": [
+                            {
+                                "cited_count": 0,
+                                "favicon": "",
+                                "highlights": null,
+                                "index": 0,
+                                "snippet": "",
+                                "title": "",
+                                "url": "https://www.apple.com/shop/buy-airpods/airpods-pro-3\\u003e",
+                                "website_name": ""
+                            },
+                            {
+                                "cited_count": 0,
+                                "favicon": "",
+                                "highlights": null,
+                                "index": 0,
+                                "snippet": "",
+                                "title": "",
+                                "url": "https://www.walmart.com/ip/AirPods-Pro-3/17835006350\\u003e",
+                                "website_name": ""
+                            },
+                            {
+                                "cited_count": 0,
+                                "favicon": "",
+                                "highlights": null,
+                                "index": 0,
+                                "snippet": "",
+                                "title": "",
+                                "url": "https://www.bestbuy.com\\u003e",
+                                "website_name": ""
+                            }
+                        ],
+                        "prompt": "I want to buy Apple AirPods Pro 3 in the United States. Show shopping product cards with current store offers, prices and links so I can choose where to buy.",
+                        "rawtext": "Here are the current top store offers, prices, and options for buying the **Apple AirPods Pro 3** in the United States:\n\n| Retailer | Price&#32;/&#32;Offer | Details&#32;&amp;&#32;Perks | Link | \n| --- | --- | --- | --- |\n| **Apple&#32;Store** | **$249\\.00** | Standard&#32;MSRP\\.&#32;Includes&#32;free&#32;laser&#32;engraving,&#32;and&#32;3&#32;free&#32;months&#32;of&#32;Apple&#32;Music&#32;&amp;&#32;Apple&#32;Fitness\\+&#32;for&#32;new&#32;subscribers\\. | [Buy&#32;at&#32;Apple](<https://www.apple.com/shop/buy-airpods/airpods-pro-3>) | \n| **Walmart** | **$199\\.00**&#32;*(Save&#32;$50)* | Significant&#32;discount&#32;off&#32;standard&#32;retail&#32;pricing;&#32;optional&#32;Allstate&#32;protection&#32;plans&#32;available\\. | [Buy&#32;at&#32;Walmart](<https://www.walmart.com/ip/AirPods-Pro-3/17835006350>) | \n| **Best&#32;Buy** | **$199\\.99** | Eligible&#32;for&#32;My&#32;Best&#32;Buy&#32;member&#32;rewards&#32;and&#32;trade\\-in&#32;programs&#32;for&#32;older&#32;AirPods\\. | [Check&#32;Best&#32;Buy](<https://www.bestbuy.com>) | \n| **Sam's&#32;Club** | **$249\\.00** | Member\\-exclusive&#32;pricing&#32;and&#32;a&#32;90\\-day&#32;return&#32;window\\. | [Buy&#32;at&#32;Sam's&#32;Club](<https://www.samsclub.com/ip/airpod-pro-3/17809063756>) | \n| **Verizon&#32;/&#32;T\\-Mobile** | **$249\\.99** | Carrier&#32;installment&#32;plans&#32;available&#32;(e\\.g\\.,&#32;\\~$20\\.84/mo&#32;for&#32;12&#32;months&#32;for&#32;qualified&#32;buyers)\\. | [Check&#32;Verizon](<https://www.verizon.com/products/apple-airpods-pro-3/>)&#32;/&#32;[T\\-Mobile](<https://www.t-mobile.com>) | \n\n### Tips for Purchasing:\n\n- **Check for Stock Fluctuations:** Major discount prices (like those at Walmart or promotional drops) can fluctuate quickly based on inventory\\.\n- **Warranty &amp; Perks:** Buying directly from Apple guarantees full eligibility for standard promotions, free personal engraving, and easy integration with AppleCare\\+\\.",
+                        "related_queries": [],
+                        "result_text": "Here are the current top store offers, prices, and options for buying the **Apple AirPods Pro 3** in the United States:\n\n| Retailer | Price&#32;/&#32;Offer | Details&#32;&amp;&#32;Perks | Link | \n| --- | --- | --- | --- |\n| **Apple&#32;Store** | **$249\\.00** | Standard&#32;MSRP\\.&#32;Includes&#32;free&#32;laser&#32;engraving,&#32;and&#32;3&#32;free&#32;months&#32;of&#32;Apple&#32;Music&#32;&amp;&#32;Apple&#32;Fitness\\+&#32;for&#32;new&#32;subscribers\\. | [Buy&#32;at&#32;Apple](<https://www.apple.com/shop/buy-airpods/airpods-pro-3>) | \n| **Walmart** | **$199\\.00**&#32;*(Save&#32;$50)* | Significant&#32;discount&#32;off&#32;standard&#32;retail&#32;pricing;&#32;optional&#32;Allstate&#32;protection&#32;plans&#32;available\\. | [Buy&#32;at&#32;Walmart](<https://www.walmart.com/ip/AirPods-Pro-3/17835006350>) | \n| **Best&#32;Buy** | **$199\\.99** | Eligible&#32;for&#32;My&#32;Best&#32;Buy&#32;member&#32;rewards&#32;and&#32;trade\\-in&#32;programs&#32;for&#32;older&#32;AirPods\\. | [Check&#32;Best&#32;Buy](<https://www.bestbuy.com>) | \n| **Sam's&#32;Club** | **$249\\.00** | Member\\-exclusive&#32;pricing&#32;and&#32;a&#32;90\\-day&#32;return&#32;window\\. | [Buy&#32;at&#32;Sam's&#32;Club](<https://www.samsclub.com/ip/airpod-pro-3/17809063756>) | \n| **Verizon&#32;/&#32;T\\-Mobile** | **$249\\.99** | Carrier&#32;installment&#32;plans&#32;available&#32;(e\\.g\\.,&#32;\\~$20\\.84/mo&#32;for&#32;12&#32;months&#32;for&#32;qualified&#32;buyers)\\. | [Check&#32;Verizon](<https://www.verizon.com/products/apple-airpods-pro-3/>)&#32;/&#32;[T\\-Mobile](<https://www.t-mobile.com>) | \n\n### Tips for Purchasing:\n\n- **Check for Stock Fluctuations:** Major discount prices (like those at Walmart or promotional drops) can fluctuate quickly based on inventory\\.\n- **Warranty &amp; Perks:** Buying directly from Apple guarantees full eligibility for standard promotions, free personal engraving, and easy integration with AppleCare\\+\\."
+                    }
+                }
+            }
+        }
+    ]
+}

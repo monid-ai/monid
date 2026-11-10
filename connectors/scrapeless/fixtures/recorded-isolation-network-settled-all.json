@@ -1,0 +1,40 @@
+{
+    "name": "recorded-isolation-network-settled-all",
+    "description": "Real 2026-10-23 bounded isolation chain. Responses trimmed/redacted; complete small network JSON retained to compare all four requests and filtering. Native source records in research/live-isolation-2026-10-23. Test units are fictional, never actual charges.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v2/unlocker/request",
+                "body": {
+                    "actor": "unlocker.webunlocker",
+                    "input": {
+                        "url": "https://httpbin.org/html",
+                        "jsRender": {
+                            "enabled": true,
+                            "waitUntil": "domcontentloaded",
+                            "instructions": [
+                                {
+                                    "evaluate": "(async()=>{await Promise.all([fetch('/get?monid_isolate=keep'),fetch('/get?monid_isolate=drop'),fetch('/status/418?monid_isolate=keep'),fetch('/post?monid_isolate=keep',{method:'POST',body:'MONID_FILTER_PROBE'})])})()"
+                                },
+                                {
+                                    "wait": 3000
+                                }
+                            ],
+                            "response": {
+                                "type": "network"
+                            }
+                        }
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "code": 200,
+                    "data": "[{\"url\":\"https://httpbin.org/get?monid_isolate=keep\",\"method\":\"GET\",\"resourceType\":\"fetch\",\"status\":200,\"timestamp\":1792719296062,\"payload\":null,\"requestReaders\":{\"sec-ch-ua-platform\":\"\\\"Windows\\\"\",\"referer\":\"https://httpbin.org/html\",\"user-agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36\",\"sec-ch-ua\":\"\\\"Chromium\\\";v=\\\"140\\\", \\\"Not=A?Brand\\\";v=\\\"24\\\", \\\"Google Chrome\\\";v=\\\"140\\\"\",\"sec-ch-ua-mobile\":\"?0\",\"accept\":\"*/*\"},\"responseHeaders\":{\"access-control-allow-credentials\":\"true\",\"access-control-allow-origin\":\"*\",\"content-length\":\"844\",\"content-type\":\"application/json\",\"date\":\"Fri, 23 Oct 2026 01:34:55 GMT\",\"server\":\"gunicorn/19.9.0\"},\"responseBody\":{\"args\":{\"monid_isolate\":\"keep\"},\"headers\":{\"Accept\":\"*/*\",\"Accept-Encoding\":\"gzip, deflate, br, zstd\",\"Accept-Language\":\"en,en-US;q=0.9\",\"Host\":\"httpbin.org\",\"Priority\":\"u=1, i\",\"Referer\":\"https://httpbin.org/html\",\"Sec-Ch-Ua\":\"\\\"Chromium\\\";v=\\\"140\\\", \\\"Not=A?Brand\\\";v=\\\"24\\\", \\\"Google Chrome\\\";v=\\\"140\\\"\",\"Sec-Ch-Ua-Mobile\":\"?0\",\"Sec-Ch-Ua-Platform\":\"\\\"Windows\\\"\",\"Sec-Fetch-Dest\":\"empty\",\"Sec-Fetch-Mode\":\"cors\",\"Sec-Fetch-Site\":\"same-origin\",\"User-Agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36\",\"X-Amzn-Trace-Id\":\"Root=1-6adab9bf-0f51f59135e376e971c36d1f\"},\"origin\":\"[REDACTED_PROXY_IP]\",\"url\":\"https://httpbin.org/get?monid_isolate=keep\"},\"responseSize\":844,\"error\":null},{\"url\":\"https://httpbin.org/get?monid_isolate=drop\",\"method\":\"GET\",\"resourceType\":\"fetch\",\"status\":200,\"timestamp\":1792719296062,\"payload\":null,\"requestReaders\":{\"sec-ch-ua-platform\":\"\\\"Windows\\\"\",\"referer\":\"https://httpbin.org/html\",\"user-agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36\",\"sec-ch-ua\":\"\\\"Chromium\\\";v=\\\"140\\\", \\\"Not=A?Brand\\\";v=\\\"24\\\", \\\"Google Chrome\\\";v=\\\"140\\\"\",\"sec-ch-ua-mobile\":\"?0\",\"accept\":\"*/*\"},\"responseHeaders\":{\"access-control-allow-credentials\":\"true\",\"access-control-allow-origin\":\"*\",\"content-length\":\"844\",\"content-type\":\"application/json\",\"date\":\"Fri, 23 Oct 2026 01:34:55 GMT\",\"server\":\"gunicorn/19.9.0\"},\"responseBody\":{\"args\":{\"monid_isolate\":\"drop\"},\"headers\":{\"Accept\":\"*/*\",\"Accept-Encoding\":\"gzip, deflate, br, zstd\",\"Accept-Language\":\"en,en-US;q=0.9\",\"Host\":\"httpbin.org\",\"Priority\":\"u=1, i\",\"Referer\":\"https://httpbin.org/html\",\"Sec-Ch-Ua\":\"\\\"Chromium\\\";v=\\\"140\\\", \\\"Not=A?Brand\\\";v=\\\"24\\\", \\\"Google Chrome\\\";v=\\\"140\\\"\",\"Sec-Ch-Ua-Mobile\":\"?0\",\"Sec-Ch-Ua-Platform\":\"\\\"Windows\\\"\",\"Sec-Fetch-Dest\":\"empty\",\"Sec-Fetch-Mode\":\"cors\",\"Sec-Fetch-Site\":\"same-origin\",\"User-Agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36\",\"X-Amzn-Trace-Id\":\"Root=1-6adab9bf-643f679f2a9c4c85545f750f\"},\"origin\":\"[REDACTED_PROXY_IP]\",\"url\":\"https://httpbin.org/get?monid_isolate=drop\"},\"responseSize\":844,\"error\":null},{\"url\":\"https://httpbin.org/post?monid_isolate=keep\",\"method\":\"POST\",\"resourceType\":\"fetch\",\"status\":200,\"timestamp\":1792719296070,\"payload\":\"MONID_FILTER_PROBE\",\"requestReaders\":{\"sec-ch-ua-platform\":\"\\\"Windows\\\"\",\"referer\":\"https://httpbin.org/html\",\"user-agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36\",\"sec-ch-ua\":\"\\\"Chromium\\\";v=\\\"140\\\", \\\"Not=A?Brand\\\";v=\\\"24\\\", \\\"Google Chrome\\\";v=\\\"140\\\"\",\"content-type\":\"text/plain;charset=UTF-8\",\"sec-ch-ua-mobile\":\"?0\",\"accept\":\"*/*\",\"origin\":\"https://httpbin.org\"},\"responseHeaders\":{\"access-control-allow-credentials\":\"true\",\"access-control-allow-origin\":\"https://httpbin.org\",\"content-length\":\"1042\",\"content-type\":\"application/json\",\"date\":\"Fri, 23 Oct 2026 01:34:55 GMT\",\"server\":\"gunicorn/19.9.0\"},\"responseBody\":{\"args\":{\"monid_isolate\":\"keep\"},\"data\":\"MONID_FILTER_PROBE\",\"files\":{},\"form\":{},\"headers\":{\"Accept\":\"*/*\",\"Accept-Encoding\":\"gzip, deflate, br, zstd\",\"Accept-Language\":\"en,en-US;q=0.9\",\"Content-Length\":\"18\",\"Content-Type\":\"text/plain;charset=UTF-8\",\"Host\":\"httpbin.org\",\"Origin\":\"https://httpbin.org\",\"Priority\":\"u=1, i\",\"Referer\":\"https://httpbin.org/html\",\"Sec-Ch-Ua\":\"\\\"Chromium\\\";v=\\\"140\\\", \\\"Not=A?Brand\\\";v=\\\"24\\\", \\\"Google Chrome\\\";v=\\\"140\\\"\",\"Sec-Ch-Ua-Mobile\":\"?0\",\"Sec-Ch-Ua-Platform\":\"\\\"Windows\\\"\",\"Sec-Fetch-Dest\":\"empty\",\"Sec-Fetch-Mode\":\"cors\",\"Sec-Fetch-Site\":\"same-origin\",\"User-Agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36\",\"X-Amzn-Trace-Id\":\"Root=1-6adab9bf-6af3d94e5ad67a2f3e9e3307\"},\"json\":null,\"origin\":\"[REDACTED_PROXY_IP]\",\"url\":\"https://httpbin.org/post?monid_isolate=keep\"},\"responseSize\":1042,\"error\":null},{\"url\":\"https://httpbin.org/status/418?monid_isolate=keep\",\"method\":\"GET\",\"resourceType\":\"fetch\",\"status\":418,\"timestamp\":1792719296122,\"payload\":null,\"requestReaders\":{\"sec-ch-ua-platform\":\"\\\"Windows\\\"\",\"referer\":\"https://httpbin.org/html\",\"user-agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36\",\"sec-ch-ua\":\"\\\"Chromium\\\";v=\\\"140\\\", \\\"Not=A?Brand\\\";v=\\\"24\\\", \\\"Google Chrome\\\";v=\\\"140\\\"\",\"sec-ch-ua-mobile\":\"?0\",\"accept\":\"*/*\"},\"responseHeaders\":{\"access-control-allow-credentials\":\"true\",\"access-control-allow-origin\":\"*\",\"content-length\":\"135\",\"date\":\"Fri, 23 Oct 2026 01:34:55 GMT\",\"server\":\"gunicorn/19.9.0\",\"x-more-info\":\"http://tools.ietf.org/html/rfc2324\"},\"responseBody\":\"[Preview not available with content-type: unknown, 135.0 B]\",\"responseSize\":135,\"error\":null}]"
+                }
+            }
+        }
+    ]
+}

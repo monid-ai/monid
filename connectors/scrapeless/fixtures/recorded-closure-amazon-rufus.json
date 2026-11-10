@@ -1,0 +1,179 @@
+{
+    "name": "recorded-closure-amazon-rufus",
+    "description": "Real response chain, 2026-10-23. Public test inputs; PII and storage links redacted, response arrays/strings trimmed. Native success/error is distinct from connector acceptance and observed balances are not task invoices.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v1/scraper/request",
+                "body": {
+                    "actor": "scraper.amazon",
+                    "input": {
+                        "type": "rufus",
+                        "keywords": "usb c cable",
+                        "domain": "www.amazon.com"
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "metadata": {
+                        "rawUrl": "https://example.com/redacted-storage",
+                        "type": "rufus"
+                    },
+                    "result": {
+                        "request_context": {
+                            "requestId": "[REDACTED]",
+                            "sessionId": "[REDACTED]",
+                            "bsr": {
+                                "bottomSheetSize": "expanded",
+                                "peekBehaviour": null
+                            }
+                        },
+                        "user_query": "usb c cable",
+                        "interim_messages": [
+                            "Thinking..."
+                        ],
+                        "inference_text": "Here are some top-rated USB-C cables across different needs and budgets:\n\nWhat device are you mainly charging? That'll help me narrow it down further — for example, phone-only use doesn't need 240W, while a MacBook Pro benefits from it.",
+                        "inference_text_with_products": "Here are some top-rated USB-C cables across different needs and budgets:\n\nBest Value (Under $10)\nSee more: https://www.amazon.com/s?k=More%20Best%20Value%20%28Under%20%2410%29%2C%20excluding%20the%20ones%20recommended\n\n- Anker USB C to USB C Cable, 60W Fast Charging Cable (2-Pack, 6 ft, Black) | For iPhone 18 / 17 Series, iPad mini 6, and More\n  ASIN: B088NRLMPV\n  Price: $9.99\nRating: 4.7 90,226\n  Purchase volume: 10K+ bought in past month\n  Delivery: FREE delivery Tue, Oct 27 on $35.00 of items",
+                        "inference_text_parts": [
+                            "Here are some top-rated USB-C cables across different needs and budgets:",
+                            "What device are you mainly charging? That'll help me narrow it down further — for example, phone-only use doesn't need 240W, while a MacBook Pro benefits from it."
+                        ],
+                        "content_blocks": [
+                            {
+                                "type": "text",
+                                "text": "Here are some top-rated USB-C cables across different needs and budgets:"
+                            },
+                            {
+                                "type": "product_section",
+                                "category": "Best Value (Under $10)",
+                                "see_more": {
+                                    "text": "see more",
+                                    "url": "https://www.amazon.com/s?k=More%20Best%20Value%20%28Under%20%2410%29%2C%20excluding%20the%20ones%20recommended",
+                                    "payload": {
+                                        "qis": "NileAsinListSeeMoreHyperLink",
+                                        "query": "More Best Value (Under $10), excluding the ones recommended",
+                                        "refmarker": "nl_cl_hl_al_sm_1"
+                                    }
+                                },
+                                "products": [
+                                    {
+                                        "asin": "B088NRLMPV",
+                                        "url": "https://www.amazon.com/dp/B088NRLMPV?niid=nl_cl_lst_a_1_1&ref_=nl_cl_lst_a_1_1&nrid=CZR9AJHSX0Q8FAK6S8TX",
+                                        "title": "Anker USB C to USB C Cable, 60W Fast Charging Cable (2-Pack, 6 ft, Black) | For iPhone 18 / 17 Series, iPad mini 6, and More",
+                                        "price": "$9.99",
+                                        "rating": "4.7",
+                                        "reviews": "90,226",
+                                        "category": "Best Value (Under $10)",
+                                        "delivery": "FREE delivery Tue, Oct 27 on $35.00 of items shipped by Amazon",
+                                        "bought": "10K+ bought in past month",
+                                        "image_url": "https://m.media-amazon.com/images/I/71IE9dLBduL._AC_.jpg",
+                                        "image_alt": "Anker USB C to USB C Cable, 60W Fast Charging Cable (2-Pack, 6 ft, Black) | For iPhone 18 / 17 Series, iPad mini 6, and More",
+                                        "footer": "A 2-pack at 60W fast charging — great for everyday phone and tablet use. One of the most reviewed USB-C cables on Amazon with 90K+ ratings",
+                                        "more_details": {
+                                            "text": "More details",
+                                            "url": "https://www.amazon.com/s?k=More%20details%20about%20Anker%20USB%20C%20to%20USB%20C%20Cable%2C%2060W%20Fast%20Charging%20Cable%20%282-Pack%2C%206%20ft%2C%20Black%29%20%7C%20For%20iPhone%2018%20%2F%2017%20Series%2C%20iPad%20mini%206%2C%20and%20More%20B088NRLMPV",
+                                            "payload": {
+                                                "qis": "NileAsinListLearnMoreHyperLink",
+                                                "query": "More details about Anker USB C to USB C Cable, 60W Fast Charging Cable (2-Pack, 6 ft, Black) | For iPhone 18 / 17 Series, iPad mini 6, and More B088NRLMPV",
+                                                "refmarker": "nl_cl_hl_al_lm_1_0"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "asin": "B0CP1MD9LW",
+                                        "url": "https://www.amazon.com/dp/B0CP1MD9LW?niid=nl_cl_lst_a_1_2&ref_=nl_cl_lst_a_1_2&nrid=CZR9AJHSX0Q8FAK6S8TX",
+                                        "title": "USB C to USB C Cable, 2Pack 6FT 60W Type C Fast Charging Woven Cord | C to C Cable for iPhone Duo/iPhone 18/18 Pro Max/17/16/15 Pro Series/Samsung S23 Note 20 MacBook Air",
+                                        "price": "$5.59",
+                                        "original_price": "$7.59",
+                                        "rating": "4.6",
+                                        "reviews": "986",
+                                        "category": "Best Value (Under $10)",
+                                        "delivery": "FREE delivery Tue, Oct 27 on $35.00 of items shipped by Amazon",
+                                        "bought": "4K+ bought in past month",
+                                        "image_url": "https://m.media-amazon.com/images/I/71YjznnDNQL._AC_.jpg",
+                                        "image_alt": "Wangmai USB C to USB C Cable, 2Pack 6FT 60W Type C Fast Charging Woven Cord | C to C Cable for iPhone Duo/iPhone 18/18 Pro Max/17/16/15 Pro Series/Samsung S23 Note 20 MacBook Air",
+                                        "footer": "Budget-friendly 2-pack at 60W with 40,000+ bend cycle durability — currently on deal",
+                                        "more_details": {
+                                            "text": "More details",
+                                            "url": "https://www.amazon.com/s?k=More%20details%20about%20Wangmai%20USB%20C%20to%20USB%20C%20Cable%2C%202Pack%206FT%2060W%20Type%20C%20Fast%20Charging%20Woven%20Cord%20%7C%20C%20to%20C%20Cable%20for%20iPhone%20Duo%2FiPhone%2018%2F18%20Pro%20Max%2F17%2F16%2F15%20Pro%20Series%2FSamsung%20S23%20Note%2020%20MacBook%20Air%20B0CP1MD9LW",
+                                            "payload": {
+                                                "qis": "NileAsinListLearnMoreHyperLink",
+                                                "query": "More details about Wangmai USB C to USB C Cable, 2Pack 6FT 60W Type C Fast Charging Woven Cord | C to C Cable for iPhone Duo/iPhone 18/18 Pro Max/17/16/15 Pro Series/Samsung S23 Note 20 MacBook Air B0CP1MD9LW",
+                                                "refmarker": "nl_cl_hl_al_lm_1_1"
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "products": [
+                            {
+                                "asin": "B088NRLMPV",
+                                "url": "https://www.amazon.com/dp/B088NRLMPV?niid=nl_cl_lst_a_1_1&ref_=nl_cl_lst_a_1_1&nrid=CZR9AJHSX0Q8FAK6S8TX",
+                                "title": "Anker USB C to USB C Cable, 60W Fast Charging Cable (2-Pack, 6 ft, Black) | For iPhone 18 / 17 Series, iPad mini 6, and More",
+                                "price": "$9.99",
+                                "rating": "4.7",
+                                "reviews": "90,226",
+                                "category": "Best Value (Under $10)",
+                                "delivery": "FREE delivery Tue, Oct 27 on $35.00 of items shipped by Amazon",
+                                "bought": "10K+ bought in past month",
+                                "image_url": "https://m.media-amazon.com/images/I/71IE9dLBduL._AC_.jpg",
+                                "image_alt": "Anker USB C to USB C Cable, 60W Fast Charging Cable (2-Pack, 6 ft, Black) | For iPhone 18 / 17 Series, iPad mini 6, and More",
+                                "footer": "A 2-pack at 60W fast charging — great for everyday phone and tablet use. One of the most reviewed USB-C cables on Amazon with 90K+ ratings",
+                                "more_details": {
+                                    "text": "More details",
+                                    "url": "https://www.amazon.com/s?k=More%20details%20about%20Anker%20USB%20C%20to%20USB%20C%20Cable%2C%2060W%20Fast%20Charging%20Cable%20%282-Pack%2C%206%20ft%2C%20Black%29%20%7C%20For%20iPhone%2018%20%2F%2017%20Series%2C%20iPad%20mini%206%2C%20and%20More%20B088NRLMPV",
+                                    "payload": {
+                                        "qis": "NileAsinListLearnMoreHyperLink",
+                                        "query": "More details about Anker USB C to USB C Cable, 60W Fast Charging Cable (2-Pack, 6 ft, Black) | For iPhone 18 / 17 Series, iPad mini 6, and More B088NRLMPV",
+                                        "refmarker": "nl_cl_hl_al_lm_1_0"
+                                    }
+                                }
+                            },
+                            {
+                                "asin": "B0CP1MD9LW",
+                                "url": "https://www.amazon.com/dp/B0CP1MD9LW?niid=nl_cl_lst_a_1_2&ref_=nl_cl_lst_a_1_2&nrid=CZR9AJHSX0Q8FAK6S8TX",
+                                "title": "USB C to USB C Cable, 2Pack 6FT 60W Type C Fast Charging Woven Cord | C to C Cable for iPhone Duo/iPhone 18/18 Pro Max/17/16/15 Pro Series/Samsung S23 Note 20 MacBook Air",
+                                "price": "$5.59",
+                                "original_price": "$7.59",
+                                "rating": "4.6",
+                                "reviews": "986",
+                                "category": "Best Value (Under $10)",
+                                "delivery": "FREE delivery Tue, Oct 27 on $35.00 of items shipped by Amazon",
+                                "bought": "4K+ bought in past month",
+                                "image_url": "https://m.media-amazon.com/images/I/71YjznnDNQL._AC_.jpg",
+                                "image_alt": "Wangmai USB C to USB C Cable, 2Pack 6FT 60W Type C Fast Charging Woven Cord | C to C Cable for iPhone Duo/iPhone 18/18 Pro Max/17/16/15 Pro Series/Samsung S23 Note 20 MacBook Air",
+                                "footer": "Budget-friendly 2-pack at 60W with 40,000+ bend cycle durability — currently on deal",
+                                "more_details": {
+                                    "text": "More details",
+                                    "url": "https://www.amazon.com/s?k=More%20details%20about%20Wangmai%20USB%20C%20to%20USB%20C%20Cable%2C%202Pack%206FT%2060W%20Type%20C%20Fast%20Charging%20Woven%20Cord%20%7C%20C%20to%20C%20Cable%20for%20iPhone%20Duo%2FiPhone%2018%2F18%20Pro%20Max%2F17%2F16%2F15%20Pro%20Series%2FSamsung%20S23%20Note%2020%20MacBook%20Air%20B0CP1MD9LW",
+                                    "payload": {
+                                        "qis": "NileAsinListLearnMoreHyperLink",
+                                        "query": "More details about Wangmai USB C to USB C Cable, 2Pack 6FT 60W Type C Fast Charging Woven Cord | C to C Cable for iPhone Duo/iPhone 18/18 Pro Max/17/16/15 Pro Series/Samsung S23 Note 20 MacBook Air B0CP1MD9LW",
+                                        "refmarker": "nl_cl_hl_al_lm_1_1"
+                                    }
+                                }
+                            }
+                        ],
+                        "related_questions": [
+                            "What wattage do I need for my laptop?",
+                            "Show USB-C to USB-A cables"
+                        ],
+                        "feedback_controls": {
+                            "groupId": "section_groupId_feedback_controls_CZR9AJHSX0Q8FAK6S8TX_0",
+                            "text": "Your feedback has been submitted!",
+                            "options": [
+                                "This is harmful / unsafe",
+                                "This is inaccurate"
+                            ],
+                            "submit_label": "Submit"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,86 @@
+{
+    "name": "recorded-expansion-ai-perplexity",
+    "description": "Real Scrapeless responses, 2026-10-22; header allowlist applied; Monid trimCalls caps response arrays at 2 and strings at 500. Full redacted records remain in research/live-expansion-2026-10-22. Replay usage is TEST ONLY, never actual charges.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v2/scraper/request",
+                "body": {
+                    "actor": "scraper.perplexity",
+                    "input": {
+                        "prompt": "What is the purpose of example.com? Answer briefly and cite a source if available.",
+                        "country": "US",
+                        "web_search": true,
+                        "should_fetch_share_link": false
+                    }
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "status": "pending",
+                    "task_id": "d0e803ba-b939-47ea-9f05-b5fb55c3e1cf"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/d0e803ba-b939-47ea-9f05-b5fb55c3e1cf"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/d0e803ba-b939-47ea-9f05-b5fb55c3e1cf"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/d0e803ba-b939-47ea-9f05-b5fb55c3e1cf"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "success",
+                    "task_result": {
+                        "media_items": [],
+                        "prompt": "What is the purpose of example.com? Answer briefly and cite a source if available.",
+                        "related_prompt": null,
+                        "result_text": "example.com is reserved for use in documentation and illustrative examples, so people can use it without conflicting with a real website.([iana.org][1])\n\n[1]: https://www.iana.org/help/example-domains \"Example Domains\"\n",
+                        "web_results": [
+                            {
+                                "cited_count": 1,
+                                "index": 1,
+                                "name": "Example Domains",
+                                "snippet": "A number of domains such as example.com and example.org are maintained for documentation purposes. These domains may be used as illustrative examples in documents without prior coordination with us. They are not available for registration or transfer. We provide a web service on the example domain hosts to provide basic information on the purpose of the domain. These web services are provided as best effort, but are not designed to support production applications. We strongly recommend you do...",
+                                "url": "https://www.iana.org/help/example-domains"
+                            },
+                            {
+                                "cited_count": 0,
+                                "index": 2,
+                                "name": "example.com - Wikipedia",
+                                "snippet": "The domains *example.com*, *example.net*, *example.org* and *example.edu* are intended for general use in any kind of documentation, such as technical and software documentation, manuals, and sample software configurations. Thus, documentation writers can be sure to select a domain name without creating naming conflicts if end-users try to use the sample configurations or examples verbatim. The domains may be used in documentation without prior consultation with IANA or ICANN.",
+                                "url": "https://en.wikipedia.org/wiki/Example.com"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

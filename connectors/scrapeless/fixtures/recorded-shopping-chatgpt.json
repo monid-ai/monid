@@ -1,0 +1,196 @@
+{
+    "name": "recorded-controls-ai-chatgpt-shopping",
+    "description": "Real 2026-10-22 bounded probe. Response arrays/strings trimmed; full redacted native evidence in research/live-controls-2026-10-22. Test billing is fictional and is NOT a supplier receipt.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v2/scraper/request",
+                "body": {
+                    "actor": "scraper.chatgpt",
+                    "input": {
+                        "prompt": "Suggest one inexpensive USB-C cable. Give a short answer with one product and a source if available.",
+                        "country": "US",
+                        "web_search": true,
+                        "shopping": true,
+                        "should_fetch_share_link": false
+                    }
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "status": "pending",
+                    "task_id": "c65ccbac-302a-4432-b65b-86de7c7a6db7"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/c65ccbac-302a-4432-b65b-86de7c7a6db7"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/c65ccbac-302a-4432-b65b-86de7c7a6db7"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "success",
+                    "task_result": {
+                        "ads": {
+                            "content": {
+                                "ad_cards": null,
+                                "advertiser_brand": {
+                                    "favicon_url": "",
+                                    "id": "",
+                                    "name": "",
+                                    "url": ""
+                                },
+                                "carousel_cards": null,
+                                "type": ""
+                            },
+                            "type": ""
+                        },
+                        "content_references": [],
+                        "conversation_id": "6ad9e28c-2c24-83ea-8669-13b20315dd61",
+                        "links": [
+                            "https://www.walmart.com/ip/ONN-6FT-C-C-BRD-CBL/19231165418?utm_medium=feed&utm_source=chatgpt.com",
+                            "https://images.openai.com/static-rsc-1/hNL7cWOx38A1thwN93IaDSZmoZIB1QXPpw6H9M5RlcR_biUWPWdF8O2uD-KH_t291jm2IsIcrTnAslzoAW828GNTG5WTadhDpPczZQBYOjcyc2fe-P6hOQoQbPSkOmTuPoYnPhaUn1l42q3rHT0RLZJTW-sIh_dzArujCnfuzEuL4fBLhYalI8M3M_6ygr5_6ShGoAk-YE_ONxaf2K3iJCkUdr9Icc_zqskBa7cE-Fs"
+                        ],
+                        "map": {},
+                        "model": "gpt-6",
+                        "products": [
+                            {
+                                "cite": "turn0product31",
+                                "description": null,
+                                "featured_tag": null,
+                                "id": "19231165418",
+                                "image_urls": [
+                                    "https://images.openai.com/static-rsc-1/hNL7cWOx38A1thwN93IaDSZmoZIB1QXPpw6H9M5RlcR_biUWPWdF8O2uD-KH_t291jm2IsIcrTnAslzoAW828GNTG5WTadhDpPczZQBYOjcyc2fe-P6hOQoQbPSkOmTuPoYnPhaUn1l42q3rHT0RLZJTW-sIh_dzArujCnfuzEuL4fBLhYalI8M3M_6ygr5_6ShGoAk-YE_ONxaf2K3iJCkUdr9Icc_zqskBa7cE-Fs",
+                                    "https://images.openai.com/static-rsc-1/K1XrUCo7EGGvCGDAGbCLuXXRLko_6GANOghxepTXnnCYNnyJR8sxdORMq-Xecj_K5Pt7s2aXdwp1_Txol_TOQE90x20fNcqN4Pkb8cGKIz_YI3Q-_BUH57BWpTUYHN2GDKcfcp0kXIhQ1sDJowMc0WYSUcq9pGohK6OtxP9Q8ABEDMMp6_M1Yk8LbE07XllyvySXphAdyK-nUIWvo4VzknxSx7TBQRXg5wJYi3Liq7g"
+                                ],
+                                "merchants": "Walmart",
+                                "metadata_sources": [
+                                    "p3"
+                                ],
+                                "num_reviews": 0,
+                                "offers": [
+                                    {
+                                        "available": true,
+                                        "checkout_image_urls": [
+                                            "https://i5.walmartimages.com/asr/28282926-2eeb-4b85-8f35-caa50739b108.0c823489bbd2429241338d25b4ad0985.jpeg?odnHeight=2000&odnWidth=2000&odnBg=ffffff"
+                                        ],
+                                        "checkout_payload": null,
+                                        "checkoutable": false,
+                                        "debug_info": {
+                                            "h": "['walmart']",
+                                            "p": "521",
+                                            "source": "p3"
+                                        },
+                                        "details": "In stock",
+                                        "is_digital": null,
+                                        "merchant_name": "Walmart",
+                                        "merchant_subtitle": "onn",
+                                        "original_price": null,
+                                        "price": "$5.97",
+                                        "price_details": {
+                                            "base": "",
+                                            "display_price": null,
+                                            "shipping": null,
+                                            "tax": null,
+                                            "total": ""
+                                        },
+                                        "product_name": "onn 6-Foot Braided USB-C to USB-C Charging Cable, Black",
+                                        "provider": "p3",
+                                        "tag": {
+                                            "text": "Best price",
+                                            "tooltip": null
+                                        },
+                                        "url": "https://www.walmart.com/ip/ONN-6FT-C-C-BRD-CBL/19231165418?utm_medium=feed&utm_source=chatgpt.com&oppcref=c8bac472-2a4c-4068-a5cb-eb8e4bda8cf8"
+                                    }
+                                ],
+                                "offers_see_more_boundary": 3,
+                                "popularity_metadata": null,
+                                "price": "$5.97",
+                                "product_lookup_data": {
+                                    "all_ids": {
+                                        "p2": null
+                                    },
+                                    "known_ids": {},
+                                    "metadata_sources": [
+                                        "p2",
+                                        "p1"
+                                    ],
+                                    "request_query": "onn 6-Foot Braided USB-C to USB-C Charging Cable, Black",
+                                    "variant_options_query": null,
+                                    "variant_sources": [
+                                        "p3"
+                                    ]
+                                },
+                                "product_lookup_key": {
+                                    "data": "{\"request_query\":\"onn 6-Foot Braided USB-C to USB-C Charging Cable, Black\",\"all_ids\":{\"p3\":[\"19231165418\"]},\"known_ids\":{},\"metadata_sources\":[\"p2\",\"p1\"],\"variant_sources\":[\"p3\"],\"last_variant_group_types\":null,\"merchant_hints\":[\"Walmart\"],\"provider_title\":\"onn 6-Foot Braided USB-C to USB-C Charging Cable, Black; Brand: onn\",\"provider_metadata\":{\"p3\":{\"feed_id\":\"oai-shopping-id:v1:feed:2Po1r0CDQHkc4LomZMAWXlcwjQiPxdo42Ri-_U5v\",\"scoped_offer_id\":\"o4:9a89478e-b1b9-582b-b5d6-edd0fb860a84\"}},\"includ",
+                                    "last_variant_selection_group_id": null,
+                                    "variant_options_query": null,
+                                    "version": "1"
+                                },
+                                "provider": "deprecated",
+                                "providers": [
+                                    "product_info"
+                                ],
+                                "query": "deprecated",
+                                "rating": 0,
+                                "rating_grouped_citation": {
+                                    "attribution_segments": null,
+                                    "attributions": null,
+                                    "hue": null,
+                                    "pub_date": null,
+                                    "refs": null,
+                                    "snippet": null,
+                                    "supporting_websites": null,
+                                    "title": "",
+                                    "url": ""
+                                },
+                                "show_price_disclosure": false,
+                                "title": "onn 6-Foot Braided USB-C to USB-C Charging Cable, Black",
+                                "url": "https://www.walmart.com/ip/ONN-6FT-C-C-BRD-CBL/19231165418?utm_medium=feed&utm_source=chatgpt.com&oppcref=c8bac472-2a4c-4068-a5cb-eb8e4bda8cf8",
+                                "variants": null,
+                                "variants_error_state_message": null
+                            }
+                        ],
+                        "prompt": "Suggest one inexpensive USB-C cable. Give a short answer with one product and a source if available.",
+                        "result_text": "**onn 6-Foot Braided USB-C to USB-C Charging Cable, Black** — a budget-friendly 6-foot braided USB-C to USB-C cable for everyday charging, supporting up to 60W.\n\n- **Price\\:** \\$5.97\n- **Rating\\:** 4.9/5\n- **Buy\\:** Walmart",
+                        "search_model_queries": {
+                            "queries": null,
+                            "type": ""
+                        },
+                        "search_result": [
+                            {
+                                "attribution": "pcworld.com",
+                                "snippet": "by PCWorld Staff  THE BEST USB-C CABLES FOR CHARGING AND DATA TRANSFERS — TESTED AND APPROVED!  Best Picks  Oct 5, 2026  WE BOUGHT A BUNCH OF USB-C CABLES AND PUT THEM THROUGH THE RIGORS OF DAILY LIF...",
+                                "title": "Best USB-C cables 2026: Expert reviews and buying advice | PCWorld",
+                                "url": "https://www.pcworld.com/article/395115/the-best-usb-c-cables-for-charging-and-transferring-data.html?utm_source=chatgpt.com"
+                            },
+                            {
+                                "attribution": "pcworld.com",
+                                "snippet": "When you purchase through links in our articles, we may earn a small commission. This doesn't affect our editorial independence.  Image: Joel Lee  by Joel Lee  Senior Editor, PCWorld  ANKER’S 60W USB...",
+                                "title": "Anker's 60W USB-C cable is just $4 each for October Prime Day | PCWorld",
+                                "url": "https://www.pcworld.com/article/3253754/anker-60w-usb-c-cable-is-just-4-each-for-october-prime-day.html?utm_source=chatgpt.com"
+                            }
+                        ],
+                        "web_search": true
+                    }
+                }
+            }
+        }
+    ]
+}

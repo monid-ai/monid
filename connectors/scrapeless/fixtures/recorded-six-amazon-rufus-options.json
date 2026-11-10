@@ -1,0 +1,72 @@
+{
+    "name": "recorded-six-amazon-rufus-options",
+    "description": "Recorded own-account request on 2026-10-23. Secrets/PII removed, result arrays capped at 3 and strings at 1500 characters; all actual protocol calls retained. Not a receipt or production acceptance.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v1/scraper/request",
+                "body": {
+                    "actor": "scraper.amazon",
+                    "input": {
+                        "type": "rufus",
+                        "keywords": "What are the features of this product?",
+                        "domain": "www.amazon.com",
+                        "asin": "B0BQXHK363",
+                        "is_sse_data": false,
+                        "is_get_question": true
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "metadata": {
+                        "rawUrl": "https://api.scrapeless.com/storage/scrapeless.scraper.amazon/2bccb39906f4d5c089bf1108b540015e/14dcca559c3977798b2a786b8fbc479a_1792735778.html",
+                        "type": "rufus"
+                    },
+                    "result": {
+                        "request_context": {
+                            "requestId": "6P7SV5NM9E64KTZSVEQW",
+                            "sessionId": "135-1580991-7893023",
+                            "bsr": {
+                                "bottomSheetSize": "expanded",
+                                "peekBehaviour": null
+                            }
+                        },
+                        "user_query": "What are the features of this product?",
+                        "interim_messages": [
+                            "Thinking..."
+                        ],
+                        "inference_text": "The OLIXIS Guest Reception Desk Chair includes:\n• Comfortable Support – High-density sponge cushion with wide, full backrest to support your back and hips without nerve compression\n• Premium Leather – High-grade PU leather that's waterproof, corrosion-resistant, and easy to clean\n• Sturdy Metal Base – Four-point metal leg support with 275 lb weight capacity; glides on hard floors\n• Padded Armrests – Soft leather armrests with cushioning for elbow support and stability\n• Versatile Design – Suitable for reception rooms, offices, clinics, libraries, and dining areas\n• Easy Assembly – Typically assembled in 20 minutes with included tools and instruction manual\n• Dimensions – 22.24\"W x 24.02\"D x 32.68\"H with 19.09\" seat height\n• Warranty – 1-year free warranty service\nCustomers report the chair works well for office guest seating and post-operative recovery, though assembly experiences and durability are mixed.",
+                        "inference_text_with_products": "The OLIXIS Guest Reception Desk Chair includes:\n• Comfortable Support – High-density sponge cushion with wide, full backrest to support your back and hips without nerve compression\n• Premium Leather – High-grade PU leather that's waterproof, corrosion-resistant, and easy to clean\n• Sturdy Metal Base – Four-point metal leg support with 275 lb weight capacity; glides on hard floors\n• Padded Armrests – Soft leather armrests with cushioning for elbow support and stability\n• Versatile Design – Suitable for reception rooms, offices, clinics, libraries, and dining areas\n• Easy Assembly – Typically assembled in 20 minutes with included tools and instruction manual\n• Dimensions – 22.24\"W x 24.02\"D x 32.68\"H with 19.09\" seat height\n• Warranty – 1-year free warranty service\nCustomers report the chair works well for office guest seating and post-operative recovery, though assembly experiences and durability are mixed.",
+                        "inference_text_parts": [
+                            "The OLIXIS Guest Reception Desk Chair includes:\n• Comfortable Support – High-density sponge cushion with wide, full backrest to support your back and hips without nerve compression\n• Premium Leather – High-grade PU leather that's waterproof, corrosion-resistant, and easy to clean\n• Sturdy Metal Base – Four-point metal leg support with 275 lb weight capacity; glides on hard floors\n• Padded Armrests – Soft leather armrests with cushioning for elbow support and stability\n• Versatile Design – Suitable for reception rooms, offices, clinics, libraries, and dining areas\n• Easy Assembly – Typically assembled in 20 minutes with included tools and instruction manual\n• Dimensions – 22.24\"W x 24.02\"D x 32.68\"H with 19.09\" seat height\n• Warranty – 1-year free warranty service\nCustomers report the chair works well for office guest seating and post-operative recovery, though assembly experiences and durability are mixed."
+                        ],
+                        "content_blocks": [
+                            {
+                                "type": "text",
+                                "text": "The OLIXIS Guest Reception Desk Chair includes:\n• Comfortable Support – High-density sponge cushion with wide, full backrest to support your back and hips without nerve compression\n• Premium Leather – High-grade PU leather that's waterproof, corrosion-resistant, and easy to clean\n• Sturdy Metal Base – Four-point metal leg support with 275 lb weight capacity; glides on hard floors\n• Padded Armrests – Soft leather armrests with cushioning for elbow support and stability\n• Versatile Design – Suitable for reception rooms, offices, clinics, libraries, and dining areas\n• Easy Assembly – Typically assembled in 20 minutes with included tools and instruction manual\n• Dimensions – 22.24\"W x 24.02\"D x 32.68\"H with 19.09\" seat height\n• Warranty – 1-year free warranty service\nCustomers report the chair works well for office guest seating and post-operative recovery, though assembly experiences and durability are mixed."
+                            }
+                        ],
+                        "related_questions": [
+                            "Is it comfortable for long sitting?",
+                            "How durable is the leather?",
+                            "Can I return it?"
+                        ],
+                        "feedback_controls": {
+                            "groupId": "section_groupId_feedback_controls_6P7SV5NM9E64KTZSVEQW_0",
+                            "text": "Your feedback has been submitted!",
+                            "options": [
+                                "This is harmful / unsafe",
+                                "This is inaccurate",
+                                "This is irrelevant"
+                            ],
+                            "submit_label": "Submit"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

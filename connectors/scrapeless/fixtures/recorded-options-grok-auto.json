@@ -1,0 +1,123 @@
+{
+    "name": "recorded-options-grok-auto",
+    "description": "Real bounded Scrapeless option probe, 2026-10-23. Minimal redacted chain; small image/structured strings retained intact for signature and JSON assertions. Full evidence in research/live-options-2026-10-23. Test billing is fictional, never actual charges.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v2/scraper/request",
+                "body": {
+                    "actor": "scraper.grok",
+                    "input": {
+                        "prompt": "Reply briefly: what is example.com used for?",
+                        "country": "US",
+                        "mode": "MODEL_MODE_AUTO",
+                        "should_fetch_share_link": false
+                    }
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "status": "pending",
+                    "task_id": "3e7572e1-22a4-466e-b821-ddc7729157b3"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/3e7572e1-22a4-466e-b821-ddc7729157b3"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/3e7572e1-22a4-466e-b821-ddc7729157b3"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "success",
+                    "task_result": {
+                        "conversation": {
+                            "conversationId": "161dd94c-bdf0-4748-aba9-6c9c7a7426b1",
+                            "createTime": "2026-10-23T01:21:35.83Z",
+                            "modifyTime": "2026-10-23T01:21:38.184737093Z",
+                            "temporary": true,
+                            "title": "Reply briefly: what is example.com used for?"
+                        },
+                        "create_time": "2026-10-23T01:21:35.83Z",
+                        "error_feature": "",
+                        "error_message": "",
+                        "follow_up_suggestions": [
+                            "What is the purpose of the 127.0.0.1 IP",
+                            "What is the purpose of the placeholder page"
+                        ],
+                        "footnotes": {
+                            "3aa223": {
+                                "card_type": "citation_card",
+                                "created_at": null,
+                                "data": null,
+                                "id": "3aa223",
+                                "query": null,
+                                "url": "https://en.wikipedia.org/wiki/Example.com"
+                            },
+                            "dd8e6e": {
+                                "card_type": "citation_card",
+                                "created_at": null,
+                                "data": null,
+                                "id": "dd8e6e",
+                                "query": null,
+                                "url": "https://www.example.com/"
+                            }
+                        },
+                        "full_response": "**example.com is a reserved domain for use in documentation examples** (e.g., tutorials, sample configs, technical manuals). It is **not** a real website or service—ICANN/IANA hosts a placeholder page to avoid accidental reliance.  ([en.wikipedia.org][1])  ([www.example.com][2])\n\n[1]: https://en.wikipedia.org/wiki/Example.com \"example.com - Wikipedia\"\n[2]: https://www.example.com/ \"Example Domain\"",
+                        "raw_response": "**example.com is a reserved domain for use in documentation examples** (e.g., tutorials, sample configs, technical manuals). It is **not** a real website or service—ICANN/IANA hosts a placeholder page to avoid accidental reliance.<grok:render card_id=\"3aa223\" card_type=\"citation_card\" type=\"render_inline_citation\"><argument name=\"citation_id\">11</argument></grok:render><grok:render card_id=\"dd8e6e\" card_type=\"citation_card\" type=\"render_inline_citation\"><argument name=\"citation_id\">10</argument>",
+                        "response_id": "e50dbb66-00b8-4cc5-bc0a-3ef3c00fe9c0",
+                        "token_count": 49,
+                        "tool_usages": [
+                            {
+                                "card_id": "6ed3d7e3-8b92-4025-95b7-52e3573cee51",
+                                "tool_args": "{\"query\":\"what is example.com used for\"}",
+                                "tool_name": "web_search"
+                            },
+                            {
+                                "card_id": "59b528e4-c038-4e76-8342-1c5e04658b08",
+                                "tool_args": "{\"query\":\"example.com domain purpose IANA\"}",
+                                "tool_name": "web_search"
+                            }
+                        ],
+                        "user_model": "fast",
+                        "user_query": "Reply briefly: what is example.com used for?",
+                        "web_search_results": [
+                            {
+                                "description": "",
+                                "favicon": "",
+                                "image": "",
+                                "preview": "# example.com - Wikipedia\n\nJump to content\n\n\n\n\n\nYour favorite thing about Oakland may not be on Wikipedia yet! Join \"Wikicurious: Rooted in Oakland\", a wiki workshop for beginners on Thurs Nov 12! Sign up here.\n\n# example.com\n\nFrom Wikipedia, the free encyclopedia\n\n(Redirected from Example.org )\n\n|  | This article **relies on a single source** . Please help improve this article by adding citations to reliable sources . Unsourced material may be challenged and removed . *Find sources:* \"Example.c",
+                                "title": "example.com - Wikipedia",
+                                "url": "https://en.wikipedia.org/wiki/Example.com"
+                            },
+                            {
+                                "description": "",
+                                "favicon": "",
+                                "image": "",
+                                "preview": "Published: 2026-10-22\n# mail.examplle.com - DNS Lookup\n\n# mail.examplle.com - robtex.com\n\n🛡️ Domain Reputation Check Blocklist, phishing & malware status →\n\n## `mail. examplle.com`\n\n|  | DNSSEC | ⚠️ Not signed |  |  |  |  |  |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n\n|  | DNSSEC | ⚠️ Not signed |  |  |  |  |  |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n|  | A | 2606:4700:3031::6815:1999 🇺🇸 Cloudflare 2606:4700:3031::/48 , Inc. 101 Townsend Street, San Francisco, California 9",
+                                "title": "mail.examplle.com - DNS Lookup",
+                                "url": "https://robtex.com/en/dns-lookup/com/examplle/mail"
+                            }
+                        ],
+                        "x_search_results": []
+                    }
+                }
+            }
+        }
+    ]
+}
