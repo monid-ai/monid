@@ -401,6 +401,8 @@
         "dataforseo#trustpilot/search",
         "exa#contents",
         "exa#search",
+        "exa#search/deep",
+        "exa#search/lite",
         "firecrawl#agent",
         "firecrawl#batch/scrape",
         "firecrawl#batch/scrape/{id}",
