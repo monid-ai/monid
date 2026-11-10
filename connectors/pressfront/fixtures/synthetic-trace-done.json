@@ -1,0 +1,466 @@
+{
+    "name": "synthetic-trace-done",
+    "description": "SYNTHETIC chain in Pressfront's real shapes (the demo key cannot start traces): submit answers 202 with the trace id, one running poll tick (soFar), a done tick, then the case, the story and the brief read on done. Story, brief and done status are REAL demo-key recordings of the invented demo trace; the case is what the API's own code (case-card.mjs) answers for that trace, made before /case was deployed. Settles $4.99.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "id": "01JDEM0SAMP1E000000000000T",
+                    "status": "queued",
+                    "link": "https://pressfront.co/trace.html?id=01JDEM0SAMP1E000000000000T",
+                    "etaSec": 393
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}/01JDEM0SAMP1E000000000000T?wait=20"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "01JDEM0SAMP1E000000000000T",
+                    "query": "@quillandclaw.bsky.social",
+                    "status": "running",
+                    "kind": "target",
+                    "etaSec": 393,
+                    "secondsLeft": 251,
+                    "soFar": {
+                        "asOf": "2026-11-05T19:30:00.000Z",
+                        "stage": "collect",
+                        "accounts": 187,
+                        "critical": 0,
+                        "supportive": 0,
+                        "posts": 189,
+                        "read": "add ?partial=true to /brief, /story, /accounts or /posts"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}/01JDEM0SAMP1E000000000000T?wait=20"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "01JDEM0SAMP1E000000000000T",
+                    "query": "@quillandclaw.bsky.social",
+                    "status": "done",
+                    "kind": "target",
+                    "createdAt": "2026-10-23T14:00:00.000Z",
+                    "finishedAt": "2026-10-23T14:00:00.000Z",
+                    "link": "https://pressfront.co/developers#try",
+                    "demo": true,
+                    "accounts": {
+                        "total": 187,
+                        "critical": 135,
+                        "supportive": 17,
+                        "neutral": 24,
+                        "notRead": 11
+                    },
+                    "api": {
+                        "brief": "https://pressfront.co/api/v1/traces/01JDEM0SAMP1E000000000000T/brief",
+                        "story": "https://pressfront.co/api/v1/traces/01JDEM0SAMP1E000000000000T/story",
+                        "accounts": "https://pressfront.co/api/v1/traces/01JDEM0SAMP1E000000000000T/accounts",
+                        "posts": "https://pressfront.co/api/v1/traces/01JDEM0SAMP1E000000000000T/posts",
+                        "timeline": "https://pressfront.co/api/v1/traces/01JDEM0SAMP1E000000000000T/timeline",
+                        "groups": "https://pressfront.co/api/v1/traces/01JDEM0SAMP1E000000000000T/groups",
+                        "who": "https://pressfront.co/api/v1/traces/01JDEM0SAMP1E000000000000T/who",
+                        "sites": "https://pressfront.co/api/v1/traces/01JDEM0SAMP1E000000000000T/sites",
+                        "evidence": "https://pressfront.co/api/v1/traces/01JDEM0SAMP1E000000000000T/evidence"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}/01JDEM0SAMP1E000000000000T/case"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "trace": {
+                        "id": "01JDEM0SAMP1E000000000000T",
+                        "query": "@quillandclaw.bsky.social",
+                        "kind": "target",
+                        "link": "https://pressfront.co/developers#try"
+                    },
+                    "kind": "target",
+                    "locked": false,
+                    "headline": "Of 187 accounts talking to @quillandclaw, 135 were critical and 17 supportive.",
+                    "headlineParts": [
+                        {
+                            "text": "Of 187 accounts talking to @quillandclaw, ",
+                            "key": false
+                        },
+                        {
+                            "text": "135 were critical",
+                            "key": true
+                        },
+                        {
+                            "text": " and ",
+                            "key": false
+                        },
+                        {
+                            "text": "17 supportive",
+                            "key": true
+                        },
+                        {
+                            "text": ".",
+                            "key": false
+                        }
+                    ],
+                    "stops": [
+                        {
+                            "n": 1,
+                            "label": "Started",
+                            "text": "@quillandclaw · Oct 21, 8:12 PM · 388 replies",
+                            "sub": "Their post that drew the most.",
+                            "url": "https://bsky.app/profile/quillandclaw.bsky.social/post/3root0",
+                            "note": null,
+                            "known": true
+                        },
+                        {
+                            "n": 2,
+                            "label": "Spread",
+                            "text": "187 accounts · 135 critical, 17 supportive, 24 neutral",
+                            "sub": "(we did not read 11)",
+                            "url": null,
+                            "note": null,
+                            "known": true
+                        },
+                        {
+                            "n": 3,
+                            "label": "Who",
+                            "text": "Not checked",
+                            "sub": null,
+                            "url": null,
+                            "note": null,
+                            "known": false
+                        },
+                        {
+                            "n": 4,
+                            "label": "Before?",
+                            "text": "3 of 187 had posted about @quillandclaw before",
+                            "sub": null,
+                            "url": null,
+                            "note": null,
+                            "known": true
+                        }
+                    ],
+                    "huh": null,
+                    "saidBack": null,
+                    "data": {
+                        "subject": {
+                            "handle": "@quillandclaw",
+                            "platform": "bluesky",
+                            "name": "Quill & Claw"
+                        },
+                        "window": {
+                            "from": "2026-10-21T14:00:00.000Z",
+                            "to": "2026-10-23T14:00:00.000Z"
+                        },
+                        "accounts": {
+                            "total": 187,
+                            "critical": 135,
+                            "supportive": 17,
+                            "neutral": 24,
+                            "notRead": 11
+                        },
+                        "started": {
+                            "url": "https://bsky.app/profile/quillandclaw.bsky.social/post/3root0",
+                            "at": "2026-10-21T20:12:00.000Z",
+                            "text": "I wrote up what actually happened with the review, dates and all. It's long. Read it before you decide what you think.",
+                            "replies": 388,
+                            "quotes": 97
+                        },
+                        "firstCritical": {
+                            "account": "@tinfoilteapot",
+                            "url": "https://bsky.app/profile/tinfoilteapot.bsky.social/post/3fakerscbmc",
+                            "at": "2026-10-21T20:23:00.000Z",
+                            "text": "you deleted the thread last time too. we remember."
+                        },
+                        "who": null,
+                        "before": {
+                            "accounts": 3,
+                            "of": 187,
+                            "handles": [
+                                "@mothbucket88",
+                                "@tinfoilteapot",
+                                "@drywallprophet"
+                            ]
+                        },
+                        "concentration": null
+                    },
+                    "note": "We show who said what and when. We never decide who is right. Whether a post repeated, questioned or denied the story, and which side an account took, is read by a language model. Times are UTC."
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}/01JDEM0SAMP1E000000000000T/story"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "trace": {
+                        "id": "01JDEM0SAMP1E000000000000T",
+                        "query": "@quillandclaw.bsky.social",
+                        "link": "https://pressfront.co/developers#try"
+                    },
+                    "subject": {
+                        "handle": "@quillandclaw.bsky.social",
+                        "platform": "bluesky",
+                        "name": "Quill & Claw",
+                        "followers": 12400,
+                        "profile": "https://bsky.app/profile/quillandclaw.bsky.social"
+                    },
+                    "window": {
+                        "from": "2026-10-21T14:00:00.000Z",
+                        "to": "2026-10-23T14:00:00.000Z",
+                        "checkedAt": null
+                    },
+                    "headline": "Of 187 accounts: 135 critical and 17 supportive of @quillandclaw.bsky.social.",
+                    "subline": "24 stayed neutral, 11 were not read.",
+                    "accounts": 187,
+                    "accountsHeld": 187,
+                    "counts": {
+                        "critical": 135,
+                        "stronglyCritical": null,
+                        "mocking": null,
+                        "disagreeing": null,
+                        "criticalToneNotRead": null,
+                        "supportive": 17,
+                        "neutral": 24,
+                        "notRead": 11
+                    },
+                    "sides": [
+                        {
+                            "side": "against",
+                            "label": "critical",
+                            "count": 135,
+                            "share": 0.767,
+                            "quote": {
+                                "text": "This is the person who lectured all of us about honesty. Read the replies and decide for yourself.",
+                                "url": "https://bsky.app/profile/gravelmouth.bsky.social/post/3fakesf3bn2",
+                                "at": "2026-10-22T01:40:00.000Z",
+                                "account": "@gravelmouth.bsky.social",
+                                "name": "Gravel Mouth",
+                                "followers": 40200,
+                                "profile": "https://bsky.app/profile/gravelmouth.bsky.social"
+                            }
+                        },
+                        {
+                            "side": "neutral",
+                            "label": "neutral",
+                            "count": 24,
+                            "share": 0.136,
+                            "quote": null
+                        },
+                        {
+                            "side": "with",
+                            "label": "supportive",
+                            "count": 17,
+                            "share": 0.097,
+                            "quote": null
+                        }
+                    ],
+                    "started": {
+                        "kind": "their_post",
+                        "url": "https://bsky.app/profile/quillandclaw.bsky.social/post/3root0",
+                        "at": "2026-10-21T20:12:00.000Z",
+                        "text": "I wrote up what actually happened with the review, dates and all. It's long. Read it before you decide what you think.",
+                        "replies": 388,
+                        "quotes": 97,
+                        "likes": 412,
+                        "reposts": 61,
+                        "accountsAtIt": 509
+                    },
+                    "firstCritical": {
+                        "url": "https://bsky.app/profile/tinfoilteapot.bsky.social/post/3fakerscbmc",
+                        "at": "2026-10-21T20:23:00.000Z",
+                        "text": "you deleted the thread last time too. we remember.",
+                        "handle": "@tinfoilteapot.bsky.social",
+                        "platform": "bluesky",
+                        "name": "Tinfoil Teapot",
+                        "followers": 1930,
+                        "profile": "https://bsky.app/profile/tinfoilteapot.bsky.social"
+                    },
+                    "trigger": {
+                        "handle": "@gravelmouth.bsky.social",
+                        "platform": "bluesky",
+                        "name": "Gravel Mouth",
+                        "followers": 40200,
+                        "profile": "https://bsky.app/profile/gravelmouth.bsky.social",
+                        "url": "https://bsky.app/profile/gravelmouth.bsky.social/post/3fakesf3bn2",
+                        "at": "2026-10-22T01:40:00.000Z",
+                        "text": "This is the person who lectured all of us about honesty. Read the replies and decide for yourself.",
+                        "type": "quote",
+                        "arrivedAfter": 54,
+                        "arrivedBefore": 4,
+                        "minutes": 40,
+                        "basis": "linked"
+                    },
+                    "burst": {
+                        "from": "2026-10-22T01:43:00.000Z",
+                        "to": "2026-10-22T02:23:00.000Z",
+                        "accounts": 71,
+                        "minutes": 40,
+                        "newAccounts": 71
+                    },
+                    "carriers": [],
+                    "claims": [
+                        {
+                            "text": "the dates don't line up",
+                            "accounts": 20,
+                            "handles": []
+                        },
+                        {
+                            "text": "changed the story three times",
+                            "accounts": 16,
+                            "handles": []
+                        },
+                        {
+                            "text": "deleted the thread last time",
+                            "accounts": 16,
+                            "handles": []
+                        }
+                    ],
+                    "concentration": null,
+                    "pace": {
+                        "state": "slowing",
+                        "lastHour": 0,
+                        "previousHour": null,
+                        "lastDay": null,
+                        "line": "0 accounts arrived in the last hour."
+                    },
+                    "yourPosts": null,
+                    "organized": {
+                        "sameMinutes": 1,
+                        "sameWords": 1,
+                        "lookAlikes": 1
+                    },
+                    "threats": 1,
+                    "personalInfo": 2,
+                    "facts": [
+                        {
+                            "tab": "raid",
+                            "big": "71",
+                            "small": "accounts in 40 minutes",
+                            "fact": "71 accounts arrived inside 40 minutes of @gravelmouth's quote; 71 of them had never touched you before.",
+                            "accounts": [
+                                "@ferrousbucket81.bsky.social",
+                                "@user69203998.bsky.social",
+                                "@user78970035.bsky.social",
+                                "@user14067588.bsky.social",
+                                "@user38731998.bsky.social",
+                                "@sundialnoise20.bsky.social",
+                                "@tallowlamp20.bsky.social",
+                                "@user15901430.bsky.social",
+                                "@orbitteapot11.bsky.social",
+                                "@pewtercrane13.bsky.social",
+                                "@pineprophet12.bsky.social",
+                                "@mothtone54.bsky.social",
+                                "@sundialpatch50.bsky.social",
+                                "@user13078624.bsky.social",
+                                "@saltmarshbasket.bsky.social",
+                                "@harborcone.bsky.social",
+                                "@velvetseed.fakehost.example",
+                                "@wicker_spoon.bsky.social",
+                                "@copper_prophet.bsky.social",
+                                "@pinegate.bsky.social",
+                                "@wickerwire34.bsky.social",
+                                "@pine_lamp.bsky.social",
+                                "@user41482731.bsky.social",
+                                "@user39886637.bsky.social",
+                                "@fennelglass.bsky.social"
+                            ],
+                            "accountCount": 71
+                        },
+                        {
+                            "tab": "organized",
+                            "big": "14",
+                            "small": "accounts inside 4 minutes",
+                            "fact": "14 accounts replied to you inside a 4-minute window at 2:03 AM, all for the first time; every one was created in the last 30 days.",
+                            "accounts": [
+                                "@ferrousbucket81.bsky.social",
+                                "@user69203998.bsky.social",
+                                "@user78970035.bsky.social",
+                                "@user14067588.bsky.social",
+                                "@user38731998.bsky.social",
+                                "@sundialnoise20.bsky.social",
+                                "@tallowlamp20.bsky.social",
+                                "@user15901430.bsky.social",
+                                "@orbitteapot11.bsky.social",
+                                "@pewtercrane13.bsky.social",
+                                "@pineprophet12.bsky.social",
+                                "@mothtone54.bsky.social",
+                                "@sundialpatch50.bsky.social",
+                                "@user13078624.bsky.social"
+                            ],
+                            "accountCount": 14
+                        },
+                        {
+                            "tab": "accounts",
+                            "big": "75",
+                            "small": "created in the last 30 days",
+                            "fact": "75 of the 187 accounts were created in the last 30 days (40%); about 6% is typical on traces in our record.",
+                            "accounts": [
+                                "@user50647611.bsky.social",
+                                "@wickerfish65.fakehost.example",
+                                "@user49305364.bsky.social",
+                                "@lanternnoise93.bsky.social",
+                                "@wickernoise77.bsky.social",
+                                "@user44116670.bsky.social",
+                                "@user86430093.bsky.social",
+                                "@user65218197.bsky.social",
+                                "@sundialbasket16.bsky.social",
+                                "@user81919109.bsky.social",
+                                "@staticreed54.bsky.social",
+                                "@user79979683.bsky.social",
+                                "@user96011474.bsky.social",
+                                "@user10686318.bsky.social",
+                                "@tinfoildrift35.bsky.social",
+                                "@gravelcat54.bsky.social",
+                                "@copperstack26.bsky.social",
+                                "@tallowteapot77.bsky.social",
+                                "@bramblespoon65.fakehost.example",
+                                "@wickerledger12.fakehost.example",
+                                "@tallowfox60.bsky.social",
+                                "@tallownoise85.bsky.social",
+                                "@user96061206.bsky.social",
+                                "@user59989429.bsky.social",
+                                "@user69203998.bsky.social"
+                            ],
+                            "accountCount": 75
+                        }
+                    ],
+                    "note": "Stance and tone were read by a language model from each post's text. A reading, not a finding: read the posts yourself before acting on one."
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}/01JDEM0SAMP1E000000000000T/brief?format=json"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "01JDEM0SAMP1E000000000000T",
+                    "brief": "# Trace: @quillandclaw.bsky.social\n\nSource: Pressfront Trace, trace 01JDEM0SAMP1E000000000000T, https://pressfront.co/developers#try.\nWindow: 2026-10-21T14:00:00.000Z to 2026-10-23T14:00:00.000Z.\nSubject: @quillandclaw.bsky.social (Quill & Claw) on bluesky, 12,400 followers.\n\n## What happened\nOf 187 accounts: 135 critical and 17 supportive of @quillandclaw.bsky.social. 24 stayed neutral, 11 were not read.\n- critical (135): \"This is the person who lectured all of us about honesty. Read the replies and decide for yourself.\" [1] by @gravelmouth.bsky.social (40,200 followers)\n\n## How it started\nIt started with the subject's post at 2026-10-21T20:12:00.000Z: \"I wrote up what actually happened with the review, dates and all. It's long. Read it before you decide what you think.\" [2] It drew 388 replies and 97 quotes.\nFirst critical post: @tinfoilteapot.bsky.social (1,930 followers) at 2026-10-21T20:23:00.000Z: \"you deleted the thread last time too. we remember.\" [3]\nJump: after @gravelmouth.bsky.social (40,200 followers) quoted the subject at 2026-10-22T01:40:00.000Z, 54 accounts arrived in the next 40 minutes (4 in the same stretch before), replying to their post. Their post: \"This is the person who lectured all of us about honesty. Read the replies and decide for yourself.\" [1]\nBusiest stretch: 71 accounts in 40 minutes from 2026-10-22T01:43:00.000Z, 71 of them under 30 days old.\n\n## What the critical posts claim (summarized by a model)\n- \"the dates don't line up\": 20 accounts\n..."
+                }
+            }
+        }
+    ]
+}

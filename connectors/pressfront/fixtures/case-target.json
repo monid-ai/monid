@@ -1,0 +1,131 @@
+{
+    "name": "case-target",
+    "description": "GET /traces/{id}/case on the invented demo trace (a name trace). Built by the API's own code (case-card.mjs on the demo trace, as the demo key's /case answers it) before the endpoint was deployed; re-record with the demo key once it is live.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://pressfront.co/api/v1/traces/01JDEM0SAMP1E000000000000T/case"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "trace": {
+                        "id": "01JDEM0SAMP1E000000000000T",
+                        "query": "@quillandclaw.bsky.social",
+                        "kind": "target",
+                        "link": "https://pressfront.co/developers#try"
+                    },
+                    "kind": "target",
+                    "locked": false,
+                    "headline": "Of 187 accounts talking to @quillandclaw, 135 were critical and 17 supportive.",
+                    "headlineParts": [
+                        {
+                            "text": "Of 187 accounts talking to @quillandclaw, ",
+                            "key": false
+                        },
+                        {
+                            "text": "135 were critical",
+                            "key": true
+                        },
+                        {
+                            "text": " and ",
+                            "key": false
+                        },
+                        {
+                            "text": "17 supportive",
+                            "key": true
+                        },
+                        {
+                            "text": ".",
+                            "key": false
+                        }
+                    ],
+                    "stops": [
+                        {
+                            "n": 1,
+                            "label": "Started",
+                            "text": "@quillandclaw · Oct 21, 8:12 PM · 388 replies",
+                            "sub": "Their post that drew the most.",
+                            "url": "https://bsky.app/profile/quillandclaw.bsky.social/post/3root0",
+                            "note": null,
+                            "known": true
+                        },
+                        {
+                            "n": 2,
+                            "label": "Spread",
+                            "text": "187 accounts · 135 critical, 17 supportive, 24 neutral",
+                            "sub": "(we did not read 11)",
+                            "url": null,
+                            "note": null,
+                            "known": true
+                        },
+                        {
+                            "n": 3,
+                            "label": "Who",
+                            "text": "Not checked",
+                            "sub": null,
+                            "url": null,
+                            "note": null,
+                            "known": false
+                        },
+                        {
+                            "n": 4,
+                            "label": "Before?",
+                            "text": "3 of 187 had posted about @quillandclaw before",
+                            "sub": null,
+                            "url": null,
+                            "note": null,
+                            "known": true
+                        }
+                    ],
+                    "huh": null,
+                    "saidBack": null,
+                    "data": {
+                        "subject": {
+                            "handle": "@quillandclaw",
+                            "platform": "bluesky",
+                            "name": "Quill & Claw"
+                        },
+                        "window": {
+                            "from": "2026-10-21T14:00:00.000Z",
+                            "to": "2026-10-23T14:00:00.000Z"
+                        },
+                        "accounts": {
+                            "total": 187,
+                            "critical": 135,
+                            "supportive": 17,
+                            "neutral": 24,
+                            "notRead": 11
+                        },
+                        "started": {
+                            "url": "https://bsky.app/profile/quillandclaw.bsky.social/post/3root0",
+                            "at": "2026-10-21T20:12:00.000Z",
+                            "text": "I wrote up what actually happened with the review, dates and all. It's long. Read it before you decide what you think.",
+                            "replies": 388,
+                            "quotes": 97
+                        },
+                        "firstCritical": {
+                            "account": "@tinfoilteapot",
+                            "url": "https://bsky.app/profile/tinfoilteapot.bsky.social/post/3fakerscbmc",
+                            "at": "2026-10-21T20:23:00.000Z",
+                            "text": "you deleted the thread last time too. we remember."
+                        },
+                        "who": null,
+                        "before": {
+                            "accounts": 3,
+                            "of": 187,
+                            "handles": [
+                                "@mothbucket88",
+                                "@tinfoilteapot",
+                                "@drywallprophet"
+                            ]
+                        },
+                        "concentration": null
+                    },
+                    "note": "We show who said what and when. We never decide who is right. Whether a post repeated, questioned or denied the story, and which side an account took, is read by a language model. Times are UTC."
+                }
+            }
+        }
+    ]
+}
