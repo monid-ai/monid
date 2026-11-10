@@ -1,0 +1,80 @@
+{
+    "name": "synthetic-grade-ok",
+    "description": "SYNTHETIC happy chain for proctorai#grade. Shape is Proctor AI's documented 200 (agent.proctorai.io/developers, 2026-10-20): marks, per-question grades, feedback lists and the billing receipt. Student details invented. Replace via `deno task record` when PROCTORAI_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "title": "Physics Unit Test 4",
+                    "questions": [
+                        {
+                            "id": "1",
+                            "prompt": "State Ohm's law.",
+                            "maxMarks": 2,
+                            "expectedAnswer": "V = IR (1); at constant temperature (1)"
+                        },
+                        {
+                            "id": "2",
+                            "prompt": "A 12 V battery drives 3 A through a resistor.",
+                            "subQuestions": [
+                                {
+                                    "id": "a",
+                                    "prompt": "Find the resistance.",
+                                    "maxMarks": 2,
+                                    "expectedAnswer": "4 ohm"
+                                }
+                            ]
+                        }
+                    ],
+                    "pages": ["https://example.com/sheets/p1.jpg"]
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "grd_3f9a0c1d2e4b5a6978c0d1e2",
+                    "studentName": "Asha K",
+                    "rollNumber": "14",
+                    "marks": { "earned": 3, "max": 4, "percentage": 75 },
+                    "questions": [
+                        {
+                            "questionId": "1",
+                            "label": "Q1",
+                            "earned": 1,
+                            "max": 2,
+                            "status": "answered",
+                            "feedback": "Right relation, but the constant-temperature condition is missing.",
+                            "reasoning": "+1 V = IR; 0/1 condition not stated",
+                            "studentAnswer": "Voltage is proportional to current, V = IR",
+                            "pages": [1],
+                            "confidence": 0.93,
+                            "needsReview": false,
+                            "reviewReason": null
+                        },
+                        {
+                            "questionId": "2",
+                            "subQuestionId": "a",
+                            "label": "Q2(a)",
+                            "earned": 2,
+                            "max": 2,
+                            "status": "answered",
+                            "feedback": "Correct, with units.",
+                            "reasoning": "+1 R = V/I; +1 4 ohm",
+                            "studentAnswer": "R = 12/3 = 4 ohm",
+                            "pages": [1],
+                            "confidence": 0.97,
+                            "needsReview": false,
+                            "reviewReason": null
+                        }
+                    ],
+                    "strengths": ["Clear working in the numerical"],
+                    "improvements": ["State the conditions a law holds under"],
+                    "overallFeedback": "Good grasp of the formula; be precise about when it applies.",
+                    "billing": { "gradingsCharged": 0.4, "balance": 118.8 }
+                }
+            }
+        }
+    ]
+}
