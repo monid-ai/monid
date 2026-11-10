@@ -1,0 +1,67 @@
+{
+    "name": "synthetic-job-failed",
+    "description": "SYNTHETIC: body shapes are the monid-services 2026-09-16 drill records (adaptors/topaz/provider.test.ts); ids, timestamps and URLs are placeholders. Every Topaz video endpoint posts to the SAME /video/express and polls the same paths, so each chain serves all twelve endpoints. Topaz accepts the job, then the status turns failed (e.g. the stated frame count was far off the file): OUR 500 with the status body as data, zero-billed.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.topazlabs.com/video/express"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "requestId": "01a0a7f9-c9ad-76af-a1e7-6fafd2175069",
+                    "estimates": {
+                        "cost": [
+                            3,
+                            4
+                        ],
+                        "time": [
+                            1128,
+                            1144
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.topazlabs.com/video/01a0a7f9-c9ad-76af-a1e7-6fafd2175069/status"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "initializing",
+                    "message": "Queued - waiting for resources",
+                    "progress": 0,
+                    "estimates": {
+                        "cost": [
+                            3,
+                            4
+                        ],
+                        "time": [
+                            1128,
+                            1144
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.topazlabs.com/video/01a0a7f9-c9ad-76af-a1e7-6fafd2175069/status"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "failed",
+                    "message": "Source video metadata does not match the provided values",
+                    "progress": 5,
+                    "errorCode": "PROCESSING_FAILURE"
+                }
+            }
+        }
+    ]
+}

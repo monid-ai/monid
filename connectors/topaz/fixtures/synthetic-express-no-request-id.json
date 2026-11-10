@@ -1,0 +1,18 @@
+{
+    "name": "synthetic-express-no-request-id",
+    "description": "SYNTHETIC: body shapes are the monid-services 2026-09-16 drill records (adaptors/topaz/provider.test.ts); ids, timestamps and URLs are placeholders. Every Topaz video endpoint posts to the SAME /video/express and polls the same paths, so each chain serves all twelve endpoints. A 2xx express answer with no requestId: nothing to poll, so start THROWS (an infrastructure failure, monid-services parity).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.topazlabs.com/video/express"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "message": "Accepted"
+                }
+            }
+        }
+    ]
+}

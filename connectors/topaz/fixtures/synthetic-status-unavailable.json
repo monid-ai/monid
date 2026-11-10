@@ -1,0 +1,40 @@
+{
+    "name": "synthetic-status-unavailable",
+    "description": "SYNTHETIC: body shapes are the monid-services 2026-09-16 drill records (adaptors/topaz/provider.test.ts); ids, timestamps and URLs are placeholders. Every Topaz video endpoint posts to the SAME /video/express and polls the same paths, so each chain serves all twelve endpoints. The job is accepted, then the status read answers 503. The job is likely still running and may still bill upstream, so the poll THROWS (retriable) rather than settling.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.topazlabs.com/video/express"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "requestId": "01a0a7f9-c9ad-76af-a1e7-6fafd2175069",
+                    "estimates": {
+                        "cost": [
+                            3,
+                            4
+                        ],
+                        "time": [
+                            1128,
+                            1144
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.topazlabs.com/video/01a0a7f9-c9ad-76af-a1e7-6fafd2175069/status"
+            },
+            "res": {
+                "status": 503,
+                "body": {
+                    "message": "Service Unavailable"
+                }
+            }
+        }
+    ]
+}

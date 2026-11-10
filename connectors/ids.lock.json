@@ -652,7 +652,19 @@
         "suzanne#v1/models/download",
         "suzanne#v1/uploads",
         "tinyfish#fetch",
-        "tinyfish#search"
+        "tinyfish#search",
+        "topaz#video/colorize",
+        "topaz#video/deblur",
+        "topaz#video/deinterlace",
+        "topaz#video/denoise",
+        "topaz#video/fix-artifacts",
+        "topaz#video/frame-interpolation",
+        "topaz#video/recover-faces",
+        "topaz#video/sdr-to-hdr",
+        "topaz#video/upscale",
+        "topaz#video/upscale-animation",
+        "topaz#video/upscale-creative",
+        "topaz#video/upscale-generative"
     ],
     "resources": [
         "saperly/phone-number"

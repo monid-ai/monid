@@ -230,6 +230,12 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "clips.",
     },
     {
+        id: "video-enhancement",
+        displayName: "Video Enhancement",
+        description:
+            "Tools to enhance existing video, including upscaling, denoising, frame interpolation, and more.",
+    },
+    {
         id: "3d-generation",
         displayName: "3D Generation",
         description:
