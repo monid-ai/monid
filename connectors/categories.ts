@@ -385,4 +385,11 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "Tools to pull public government records, including financial " +
             "disclosures, filings, registries, and more.",
     },
+    {
+        id: "agent-skills",
+        displayName: "Agent Skills",
+        description:
+            "Tools to find and load expert skills for an agent's task, " +
+            "including ranked SKILL.md workflows, playbooks, and more.",
+    },
 ]);

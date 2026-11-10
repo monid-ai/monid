@@ -1,0 +1,50 @@
+{
+    "name": "find-skill-ok",
+    "description": "Recorded 2026-11-03 against POST https://getedge.cc/api/v1/find_skill (query \"write a cold email sequence\", limit 2). Free: zero usage. Response trimmed by deno task record.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "query": "write a cold email sequence",
+                    "limit": 2
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "request_id": "ph27wv1s",
+                    "skills": [
+                        {
+                            "source": "onewave-ai/claude-skills",
+                            "skill": "cold-email-sequence-generator",
+                            "description": "Generate personalized cold email sequences (7-14 emails) with A/B test subject lines, follow-up timing recommendations, and integrated social proof. Creates multi-touch campaigns optimized for response rates. Use when users need outbound email campaigns, sales sequences, or lead generation emails.",
+                            "fit_score": 0.99,
+                            "recommended": true,
+                            "security_state": "reviewed",
+                            "installs": 511,
+                            "url": "https://raw.githubusercontent.com/onewave-ai/claude-skills/f317e08649a6584ed4cd0b1ae353f123f4daf791/cold-email-sequence-generator/SKILL.md"
+                        },
+                        {
+                            "source": "iblai/vibe-marketing",
+                            "skill": "iblai-marketing-cold-email",
+                            "description": "Write B2B cold emails and follow-up sequences that get replies. Use when the user wants to write cold outreach emails, prospecting emails, cold email campaigns, sales development emails, or SDR emails. Also use when the user mentions \"cold outreach,\" \"prospecting email,\" \"outbound email,\" \"email to leads,\" \"reach out to prospects,\" \"sales email,\" \"follow-up email sequence,\" \"nobody's replying to m",
+                            "fit_score": 0.99,
+                            "recommended": false,
+                            "security_state": "reviewed",
+                            "installs": 1,
+                            "url": "https://raw.githubusercontent.com/iblai/vibe-marketing/875557e1a1729977c6fcad9f24288d6fab5ebfcc/skills/iblai-marketing-cold-email/SKILL.md"
+                        }
+                    ],
+                    "recommendation": {
+                        "strength": "pick",
+                        "source": "onewave-ai/claude-skills",
+                        "skill": "cold-email-sequence-generator",
+                        "text": "Load onewave-ai/claude-skills@cold-email-sequence-generator first with use_skill and this request_id, then apply it. The others are alternatives."
+                    }
+                }
+            }
+        }
+    ]
+}
