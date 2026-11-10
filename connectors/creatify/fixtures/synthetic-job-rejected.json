@@ -1,0 +1,35 @@
+{
+    "name": "synthetic-job-rejected",
+    "description": "SYNTHETIC — a render that reaches `rejected` (content policy): refunded, failed_reason set. Settles as a synthesized 422 over a 200 poll, zero usage.",
+    "calls": [
+        {
+            "req": { "method": "POST", "url": "{{request.url}}" },
+            "res": {
+                "status": 201,
+                "body": {
+                    "id": "JOB1",
+                    "status": "pending",
+                    "credits_used": 0,
+                    "video_output": null,
+                    "failed_reason": null,
+                    "progress": 0.0
+                }
+            }
+        },
+        {
+            "req": { "method": "GET", "url": "{{request.url}}JOB1/" },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "JOB1",
+                    "status": "rejected",
+                    "failed_reason": "Generation rejected: content policy",
+                    "video_output": null,
+                    "credits_used": 0,
+                    "duration": 5.0,
+                    "progress": 0.0
+                }
+            }
+        }
+    ]
+}

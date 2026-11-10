@@ -1,0 +1,49 @@
+{
+    "name": "synthetic-job-unknown-status",
+    "description": "SYNTHETIC — a poll answers 200 with a status this connector does not know: still in flight, never a success, so the run keeps polling and completes on the next `done` tick.",
+    "calls": [
+        {
+            "req": { "method": "POST", "url": "{{request.url}}" },
+            "res": {
+                "status": 201,
+                "body": {
+                    "id": "JOB1",
+                    "status": "pending",
+                    "credits_used": 0,
+                    "video_output": null,
+                    "failed_reason": null,
+                    "progress": 0.0
+                }
+            }
+        },
+        {
+            "req": { "method": "GET", "url": "{{request.url}}JOB1/" },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "JOB1",
+                    "status": "finalizing",
+                    "video_output": null,
+                    "credits_used": 1,
+                    "duration": 5.0,
+                    "progress": 0.9
+                }
+            }
+        },
+        {
+            "req": { "method": "GET", "url": "{{request.url}}JOB1/" },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "JOB1",
+                    "status": "done",
+                    "failed_reason": null,
+                    "video_output": "https://cdn.creatify.ai/boreal_api/JOB1.mp4",
+                    "credits_used": 1,
+                    "duration": 5.0,
+                    "progress": 1.0
+                }
+            }
+        }
+    ]
+}
