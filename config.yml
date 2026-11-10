@@ -34,7 +34,9 @@ schema:
     # feature can ride the fn-api table (async_since does); an IDENTITY is
     # not a fn, so a per-doc floor for it would need its own compiler branch
     # — not worth it with no consumer yet.
-    doc_format_since: "0.3.0" # oldest engine understanding the doc format (minEngineVersion floor)
+    # 0.6.0: Unit.GB_MONTH extends the closed rate-card unit vocabulary.
+    # Older engines reject that enum value; retain the uniform format floor.
+    doc_format_since: "0.6.0" # oldest engine understanding the doc format (minEngineVersion floor)
     # Pre-release: the whole contract (hook ctx {data, utils, logger},
     # structured run state, UPPERCASE run kinds, usage.model + usage.estimate,
     # zero-default utils.http / full-capability utils.request, the
@@ -64,7 +66,11 @@ schema:
     # rather than riding async_since: resource fns are their own hook
     # family with their own ctx (no request, ResourceOpUtils), and endpoint
     # docs WITHOUT bindings must not inherit the resource floor.
-    resources_since: "0.5.0" # engine release of the resource family; resource docs' floor + resource fn entries' `api`
+    # 0.6.0: reconcile window.periodEndIso supplies the full usage-period
+    # denominator; resource utils.time.parseIso converts explicit UTC ISO
+    # values without exposing a wall clock. Private hosts must pass
+    # usagePeriod.periodEnd rather than the current metering cutoff.
+    resources_since: "0.6.0" # engine release of the resource family; resource docs' floor + resource fn entries' `api`
     state_max_bytes: 65536 # hard engine cap on serialized lifecycle state (ids + billing signals, never payloads)
 
 compiler:

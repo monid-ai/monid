@@ -1,0 +1,27 @@
+{
+    "name": "synthetic-mailbox-update",
+    "description": "Synthetic native mailbox update response; the native inbox ID differs from the public address. Account/pod/client metadata must not leak through the success projection. Not a live recording.",
+    "calls": [
+        {
+            "req": {
+                "method": "PATCH",
+                "url": "{{request.origin}}/v0/inboxes/mbx-1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "inbox_id": "mbx-1",
+                    "email": "synthetic-inbox@agentmail.to",
+                    "display_name": "Updated Inbox",
+                    "created_at": "2026-10-27T00:00:00Z",
+                    "updated_at": "2026-10-27T00:00:00Z",
+                    "pod_id": "synthetic-private-pod",
+                    "client_id": "synthetic-private-client",
+                    "metadata": {
+                        "internal": "not-public"
+                    }
+                }
+            }
+        }
+    ]
+}

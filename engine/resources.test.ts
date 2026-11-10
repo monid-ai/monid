@@ -224,6 +224,43 @@ async function bundleOf(mutate?: (c: ConnectorSource[]) => void) {
     return await compileBundle(connectors, COMPILE_OPTS);
 }
 
+Deno.test("resource utils: sealed hooks convert explicit UTC dates without a wall clock", async () => {
+    const bundle = await bundleOf((c) => {
+        c[0].resources![0].def.views = {
+            time: {
+                read: async ({ data, utils }) => ({
+                    milliseconds: utils.time.parseIso(
+                        utils.json.str(data.args ?? {}, "$.iso"),
+                    ),
+                    hasWallClock: "now" in utils.time,
+                }),
+            },
+        };
+    });
+    const resource = await new Engine({ transport: scripted([]) })
+        .loadResource(sealResourceUnit(bundle, "resdemo/widget"));
+    for (
+        const iso of [
+            "1970-01-01T00:00:00Z",
+            "2028-02-29T12:34:56.123Z",
+            "2026-12-31T23:59Z",
+            "2026-10-27T12:34:56.123456Z",
+        ]
+    ) {
+        assertEquals(await resource.view("time", OWNED[0], { iso }), {
+            milliseconds: Date.parse(iso),
+            hasWallClock: false,
+        });
+    }
+    for (const iso of ["2026-02-30T00:00:00Z", "2026-10-27", "not-a-date"]) {
+        const error = await assertRejects(
+            () => resource.view("time", OWNED[0], { iso }),
+            EngineError,
+        );
+        assertEquals(error.code, EngineErrorCode.FN_CONTRACT);
+    }
+});
+
 Deno.test("resources: a bound doc without a ResourceReader fails load — NO_RESOURCE_READER", async () => {
     const bundle = await bundleOf();
     const engine = new Engine({
