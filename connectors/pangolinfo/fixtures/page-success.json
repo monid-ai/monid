@@ -1,0 +1,39 @@
+{
+    "name": "pangolinfo-page-success",
+    "description": "Recorded live 2026-10-29 against Pangolinfo product endpoint; minimized from the shared recorder output. Headers omitted; response PII and billing-independent fields removed. No response values fabricated.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "code": 0,
+                    "message": "ok",
+                    "pointCost": 1,
+                    "data": {
+                        "json": [
+                            {
+                                "code": 0,
+                                "data": {
+                                    "results": [
+                                        {
+                                            "asin": "B0B4NLGCH5",
+                                            "title": "ZESICA Womens Fall Fashion Turtleneck Long Sleeve Knit Oversized Sweaters",
+                                            "price": "$39.99",
+                                            "star": "4.4"
+                                        }
+                                    ]
+                                },
+                                "message": "ok"
+                            }
+                        ],
+                        "url": "https://www.amazon.com/dp/B0B4NLGCH5"
+                    }
+                }
+            }
+        }
+    ]
+}

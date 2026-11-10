@@ -1,0 +1,51 @@
+{
+    "name": "pangolinfo-rufus-success",
+    "description": "Recorded live 2026-10-29 against Pangolinfo rufus endpoint; minimized from the shared recorder output. Headers omitted; response PII and billing-independent fields removed. No response values fabricated.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "code": 0,
+                    "message": "ok",
+                    "data": {
+                        "json": [
+                            {
+                                "prompt": "Recommend one USB-C charger for travel.",
+                                "status": "answered",
+                                "content": "Since you travel often and use multiple laptops, I'd go with the Anker 65W 3-Port GaN II Charger — it's the top-rated pick in multiple 2026 travel charger roundups, and it replaces your laptop brick, phone charger, and tablet charger all in one compact plug. Note: The Razer Blade 14 and Dell XPS 15 may need higher wattage for full-speed laptop charging — this handles lighter use or slower top-ups. Want me to find a 100W option if you need faster laptop charging on the road?",
+                                "products": [
+                                    {
+                                        "title": "",
+                                        "items": [
+                                            {
+                                                "asin": "B09C5RG6KV",
+                                                "url": "https://www.amazon.com/dp/B09C5RG6KV?niid=nl_cl_lst_a_1_0&ref_=nl_cl_lst_a_1_0&nrid=0TH9RNFK3ZY1H6V5FFKR",
+                                                "title": "Anker 65W Max 3-Port USB C Charger Block, Compact Foldable Phone Charger | Type C Charger Fast Charging for MacBook Pro/Air, iPad Pro, Galaxy S20,Dell XPS 13,Note 20/10+,iPhone 18 Pro/17, and More",
+                                                "cover": "https://m.media-amazon.com/images/I/5164giE9fFL._AC_.jpg",
+                                                "score": "4.7",
+                                                "ratingsCount": "22,780",
+                                                "price": "$29.99",
+                                                "originalPrice": "",
+                                                "describe": "Two USB-C + one USB-A port, foldable prongs, and 65W from a single port — enough to charge your Dell XPS 13, HP Spectre, or Razer Blade (paired with a USB-C cable) alongside your phone. About the size of an AirPods case. 4.7 stars from 22,000+ reviews."
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "follow_up_questions": [
+                                    "Show 100W chargers for laptop travel",
+                                    "Does this work internationally?"
+                                ]
+                            }
+                        ],
+                        "url": ""
+                    }
+                }
+            }
+        }
+    ]
+}

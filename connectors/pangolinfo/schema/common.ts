@@ -1,0 +1,86 @@
+import { z } from "zod";
+
+// Native request fields. Endpoint bindings pin parsers and JSON output.
+export const zSite = z.enum([
+    "amz_us",
+    "amz_uk",
+    "amz_de",
+    "amz_jp",
+    "amz_fr",
+    "amz_it",
+    "amz_es",
+    "amz_ca",
+    "amz_au",
+    "amz_sa",
+    "amz_ae",
+    "amz_br",
+    "amz_mx",
+]);
+export const zAsin = z.string().regex(/^[A-Za-z0-9]{10}$/)
+    .describe("Amazon ASIN: ten letters or digits.");
+export const zAmazonUrl = z.string().url().regex(
+    /^https:\/\/(?:www\.)?amazon\.(?:com|co\.uk|de|co\.jp|fr|it|es|ca|com\.au|sa|ae|com\.br|com\.mx|in|eg)(?:\/|$)/i,
+).describe(
+    "Full HTTPS Amazon URL; put pagination, filters and sorting in this URL.",
+);
+export const zZipContext = z.strictObject({
+    zipcode: z.enum([
+        "10041",
+        "90001",
+        "60601",
+        "84104",
+        "W1S 3AS",
+        "EH15 1LR",
+        "M13 9PL",
+        "M2 5BQ",
+        "M4C 4Y4",
+        "V6E 1N2",
+        "H3G 2K8",
+        "T2R 0G5",
+        "80331",
+        "10115",
+        "20095",
+        "60306",
+        "75000",
+        "69001",
+        "06000",
+        "13000",
+        "100-0004",
+        "060-8588",
+        "163-8001",
+        "900-8570",
+        "20019",
+        "50121",
+        "00042",
+        "30100",
+        "41001",
+        "28001",
+        "08001",
+        "46001",
+        "2000_SYDNEY",
+        "3000_MELBOURNE",
+        "01000",
+        "55000",
+        "Riyadh_الرياض",
+        "Jeddah_جدة",
+        "Abu Dhabi_ADCO Compound",
+        "Ajman_Aamra",
+        "03001-000",
+        "20031-000",
+        "110001",
+        "400001",
+        "560001",
+        "600001",
+    ]).optional().describe(
+        "Delivery ZIP code belonging to the marketplace country.",
+    ),
+});
+export const zScrapeBody = z.strictObject({
+    site: zSite.optional(),
+    content: z.string().min(1).optional(),
+    url: zAmazonUrl.optional(),
+    parserName: z.string().optional(),
+    format: z.enum(["json", "markdown", "rawHtml"]).optional(),
+    timeout: z.number().int().min(30000).max(240000).optional(),
+    bizContext: zZipContext.optional(),
+});

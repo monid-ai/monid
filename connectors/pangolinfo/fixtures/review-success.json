@@ -1,0 +1,41 @@
+{
+    "name": "pangolinfo-review-success",
+    "description": "Recorded live 2026-10-29 against Pangolinfo reviews endpoint; minimized from the shared recorder output. Headers omitted; response PII and billing-independent fields removed. No response values fabricated.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "code": 0,
+                    "message": "ok",
+                    "pointCost": 5,
+                    "data": {
+                        "json": [
+                            {
+                                "code": 0,
+                                "data": {
+                                    "totalReviews": "594",
+                                    "results": [
+                                        {
+                                            "asin": "B0B4NJ74VP",
+                                            "title": "Not for me",
+                                            "star": "1.0 out of 5 stars",
+                                            "reviewId": "RQ54ONDMVDMN",
+                                            "content": "The fit was weird! Especially around the neckline. So returning."
+                                        }
+                                    ]
+                                },
+                                "message": "ok"
+                            }
+                        ],
+                        "url": "https://www.amazon.com"
+                    }
+                }
+            }
+        }
+    ]
+}

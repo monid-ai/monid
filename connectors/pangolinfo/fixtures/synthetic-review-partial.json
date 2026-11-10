@@ -1,0 +1,35 @@
+{
+    "name": "pangolinfo-review-partial",
+    "description": "Synthetic contract case (not a live recording): review-partial. Shapes verified against Pangolinfo controllers and public OpenAPI, 2026-10-29.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "code": 0,
+                    "message": "ok",
+                    "pointCost": 5,
+                    "data": {
+                        "json": [
+                            {
+                                "code": 0,
+                                "data": {
+                                    "results": [
+                                        {
+                                            "reviewId": "EXAMPLE-REVIEW",
+                                            "content": "Example review"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

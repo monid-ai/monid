@@ -1,0 +1,42 @@
+{
+    "name": "pangolinfo-paid-empty",
+    "description": "Recorded live 2026-10-29 against Pangolinfo offers endpoint; minimized from the shared recorder output. Headers omitted; response PII and billing-independent fields removed. No response values fabricated.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "code": 9201,
+                    "message": "No other sellers found for this ASIN",
+                    "pointCost": 1,
+                    "data": {
+                        "json": [
+                            {
+                                "code": 0,
+                                "data": {
+                                    "items": [
+                                        {
+                                            "delivery": "Monday, November 2",
+                                            "hasSoldByLink": true,
+                                            "price": "$39.99",
+                                            "soldBy": "ZESICA",
+                                            "options": "New",
+                                            "shipsFrom": "Amazon.com",
+                                            "isFeatured": true
+                                        }
+                                    ]
+                                },
+                                "message": "ok"
+                            }
+                        ],
+                        "url": "https://www.amazon.com"
+                    }
+                }
+            }
+        }
+    ]
+}

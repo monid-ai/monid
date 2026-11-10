@@ -1,0 +1,36 @@
+{
+    "name": "pangolinfo-success",
+    "description": "Synthetic contract case (not a live recording): success. Shapes verified against Pangolinfo controllers and public OpenAPI, 2026-10-29.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "code": 0,
+                    "message": "ok",
+                    "pointCost": 1,
+                    "data": {
+                        "taskId": "example-task",
+                        "json": [
+                            {
+                                "code": 0,
+                                "data": {
+                                    "results": [
+                                        {
+                                            "asin": "B0B4NLGCH5",
+                                            "title": "Example product"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

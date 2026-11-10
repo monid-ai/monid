@@ -124,6 +124,10 @@ is worth more than any number of parameter docs.
 
 ## Quickstart
 
+The [Pangolinfo Scraper API connector](connectors/pangolinfo/README.md) adds
+Amazon product, search, review, ranking and seller data, Rufus shopping answers,
+and Google Maps local-business search. Usage is metered in Pangolinfo points.
+
 Requires [Deno](https://deno.com) 2.x.
 
 ```bash

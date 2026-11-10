@@ -1,0 +1,36 @@
+{
+    "name": "pangolinfo-maps-success",
+    "description": "Recorded live 2026-10-29 against Pangolinfo maps endpoint; minimized from the shared recorder output. Headers omitted; response PII and billing-independent fields removed. No response values fabricated.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "code": 0,
+                    "message": "ok",
+                    "data": {
+                        "data": {
+                            "organicResults": [
+                                {
+                                    "name": "McDonald's",
+                                    "rating": 3.4,
+                                    "city": "San Francisco",
+                                    "place_id": "ChIJ92WDBbuAhYARQZ1TXrfhXv0",
+                                    "number_of_reviews": 2741,
+                                    "street_addr": "1100 Fillmore St"
+                                }
+                            ],
+                            "url": null,
+                            "status": 2
+                        },
+                        "errorMessage": null
+                    }
+                }
+            }
+        }
+    ]
+}
