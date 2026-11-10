@@ -1,0 +1,64 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC chain for socialcrawl#v1/linkedin/profile, shaped from the documented example on https://www.socialcrawl.dev/platforms/linkedin/profile (captured 2026-10-02, redacted: true). Image URLs were shortened to https://example.com/redacted. Re-record with a key.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?url=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fwilliamhgates%2F"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "platform": "linkedin",
+                    "endpoint": "/v1/linkedin/profile",
+                    "data": {
+                        "author": {
+                            "id": "synthetic-member",
+                            "username": "synthetic-member",
+                            "display_name": "Bill Gates",
+                            "avatar_url": "https://example.com/redacted",
+                            "bio": "Chair, Gates Foundation and Founder, Breakthrough Energy",
+                            "verified": true,
+                            "followers": 40695323,
+                            "following": 8,
+                            "posts_count": null,
+                            "likes_count": null,
+                            "url": "https://www.linkedin.com/in/synthetic-member",
+                            "location": "Synthetic City, Synthetic Country",
+                            "private": null,
+                            "joined_at": null,
+                            "ext": {
+                                "country": null,
+                                "website": null,
+                                "cover_url": "https://example.com/redacted",
+                                "urn": "ACoSyntheticMemberUrn000000000000000",
+                                "is_top_voice": true,
+                                "is_premium": true,
+                                "is_creator": null,
+                                "is_influencer": null,
+                                "is_open_to_work": null,
+                                "is_hiring": null,
+                                "member_id": null
+                            }
+                        },
+                        "computed": {
+                            "engagement_rate": null,
+                            "language": null,
+                            "content_category": "other",
+                            "estimated_reach": null
+                        }
+                    },
+                    "credits_used": 5,
+                    "request_id": "req_example000000",
+                    "cached": false,
+                    "credits_remaining": 9999,
+                    "source": "captured",
+                    "captured_at": "2026-10-02T15:38:48.329Z",
+                    "redacted": true
+                }
+            }
+        }
+    ]
+}

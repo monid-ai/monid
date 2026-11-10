@@ -1,0 +1,80 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC chain for socialcrawl#v1/prism/discover, shaped from the documented first-call example on https://www.socialcrawl.dev/docs/prism/discover.md (credits_used 8). credits_remaining, request_id, and cached are the required envelope fields from https://www.socialcrawl.dev/docs/response-schema.md, which that sample abbreviated. Re-record with a key.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?query=electric+cars&context=What+do+women+over+50+say+about+owning+an+electric+car%3F&depth=quick&period=90d"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "platform": "prism",
+                    "endpoint": "/v1/prism/discover",
+                    "data": {
+                        "items": [
+                            {
+                                "id": "nw_akd38616exek",
+                                "platform": "news",
+                                "record_type": "article",
+                                "url": "https://www.motortrend.com/reviews/2025-acura-adx-yearlong-review-update-6-ev-switch-gas-pros-cons",
+                                "published_at": "2026-08-05T07:00:00.000Z",
+                                "in_window": true,
+                                "text": "I Switched Back to Gas After Years of EVs ...",
+                                "judgments": { "relevance": { "p": 0.94 } },
+                                "matched_keywords": ["electric cars"],
+                                "provenance": {
+                                    "endpoint": "/v1/google_news/search",
+                                    "request_id": "req-example",
+                                    "captured_at": "2026-10-16T00:00:00.000Z"
+                                }
+                            }
+                        ],
+                        "run": {
+                            "run_id": "run_EpfL4dXi6qpYZCBRNiybdK",
+                            "status": "completed",
+                            "stopped_because": null,
+                            "deduplicated": false,
+                            "credits": {
+                                "spent": 8,
+                                "by_stage": { "collect": 3, "judge": 5 }
+                            },
+                            "next_step": "The run is complete with 10 rows here and 10 kept in total at next.results_url."
+                        },
+                        "next": {
+                            "status_url": "https://www.socialcrawl.dev/v1/prism/discover/runs/run_EpfL4dXi6qpYZCBRNiybdK?wait_s=25",
+                            "results_url": "https://www.socialcrawl.dev/v1/prism/discover/runs/run_EpfL4dXi6qpYZCBRNiybdK",
+                            "continue_url": "https://www.socialcrawl.dev/v1/prism/discover?query=electric+cars&continue=example",
+                            "resume_url": null
+                        },
+                        "platforms": {
+                            "youtube": { "status": "ok" },
+                            "tiktok": { "status": "ok" },
+                            "news": { "status": "ok" }
+                        },
+                        "summary": {
+                            "rows": {
+                                "returned": 178,
+                                "kept": 10,
+                                "dropped": 166,
+                                "duplicate": 2
+                            }
+                        },
+                        "request": {
+                            "since": "2026-07-19",
+                            "until": "2026-10-16",
+                            "tz": "UTC"
+                        }
+                    },
+                    "pagination": { "next_cursor": null, "has_more": false },
+                    "credits_used": 8,
+                    "credits_remaining": 9992,
+                    "request_id": "req_example000000",
+                    "cached": false
+                }
+            }
+        }
+    ]
+}
