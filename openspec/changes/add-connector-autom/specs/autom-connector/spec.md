@@ -27,7 +27,7 @@ The autom provider SHALL declare name `autom`, `request.baseUrl` `https://api.au
 - **AND** the vendor payload rides through unchanged
 
 #### Scenario: A 401 is data, zero usage
-- **WHEN** any endpoint is called with a missing or invalid API key
+- **WHEN** any endpoint is called with an invalid API key, which is sent upstream (a missing or empty key fails as `MISSING_CREDENTIAL` before any request is built)
 - **THEN** the run completes as HTTP 401, `isProviderError` true, usage `{credits: {}, evidence: {}}`, and the vendor error envelope rides through
 
 ### Requirement: 5 endpoints with strict inputs

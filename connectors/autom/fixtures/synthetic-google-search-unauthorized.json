@@ -1,6 +1,6 @@
 {
     "name": "synthetic-google-search-unauthorized",
-    "description": "SYNTHETIC 401 for autom#v1/google/search: Autom's error envelope for a missing or invalid key, as the API returns it.",
+    "description": "SYNTHETIC 401 for autom#v1/google/search: Autom's error envelope for an invalid key sent upstream, as the API returns it.",
     "calls": [
         {
             "req": {
