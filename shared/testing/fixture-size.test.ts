@@ -223,6 +223,52 @@ Deno.test("scrubUrlCredentials: query VALUES redacted, url shape intact", () => 
     assertEquals(scrubUrlCredentials("/relative/path"), "/relative/path");
 });
 
+Deno.test("scrubUrlCredentials: userinfo and fragments are redacted without a query", () => {
+    for (
+        const input of [
+            "https://demo:example-password@api.test/file",
+            "https://demo@api.test/file",
+            "https://api.test/file#access_token=example-token",
+        ]
+    ) {
+        const scrubbed = new URL(scrubUrlCredentials(input));
+        assertEquals(scrubbed.username, "");
+        assertEquals(scrubbed.password, "");
+        assertEquals(scrubbed.origin, "https://api.test");
+        assertEquals(scrubbed.pathname, "/file");
+        assertEquals(scrubbed.search, "");
+        assertEquals(
+            scrubbed.hash,
+            input.includes("#") ? `#${REDACTED_QUERY_VALUE}` : "",
+        );
+    }
+});
+
+Deno.test("scrubCalls: redirect credentials are removed and repeated query keys survive", () => {
+    const location = "https://demo:example-password@api.test/file" +
+        "?part=one&other=two&part=three#access_token=example-token";
+    const calls = [{
+        req: { method: "GET", url: "https://api.test/download" },
+        res: { status: 302, headers: { location }, body: null },
+    }];
+    const result = scrubCalls(calls);
+    const scrubbed = new URL(result[0].res.headers!.location);
+    assertEquals(scrubbed.username, "");
+    assertEquals(scrubbed.password, "");
+    assertEquals(scrubbed.hash, `#${REDACTED_QUERY_VALUE}`);
+    assertEquals([...scrubbed.searchParams], [
+        ["part", REDACTED_QUERY_VALUE],
+        ["other", REDACTED_QUERY_VALUE],
+        ["part", REDACTED_QUERY_VALUE],
+    ]);
+    assertEquals(result[0].req, calls[0].req);
+    assertEquals(
+        calls[0].res.headers.location,
+        location,
+        "input is not mutated",
+    );
+});
+
 Deno.test("scrubCalls: a recorded presigned location is redacted before disk", () => {
     const calls = [{
         req: { method: "GET", url: "https://api.test/models/j1/download" },

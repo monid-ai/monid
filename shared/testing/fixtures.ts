@@ -186,12 +186,15 @@ export const REDACTED_QUERY_VALUE = "REDACTED";
  * to the vendor's object. So every query VALUE collapses to a placeholder
  * while the scheme, host, path and parameter NAMES survive — which is all a
  * fixture needs, since it exists to pin SHAPE.
+ * Userinfo is removed and fragments are redacted as well: either can carry
+ * credentials, even when no query string is present. Repeated query keys
+ * retain their order and multiplicity.
  *
  * Value-level, not a denylist of known-secret parameter names: a denylist is
  * wrong the first time a vendor signs with a parameter nobody listed.
  *
- * Non-URL values and URLs without a query pass through untouched (a plain
- * trailing-slash 307 `location` is not a secret and stays readable).
+ * Non-URL values and URLs without userinfo, query, or fragment pass through
+ * untouched (a plain trailing-slash 307 `location` stays readable).
  */
 export function scrubUrlCredentials(value: string): string {
     let url: URL;
@@ -200,10 +203,16 @@ export function scrubUrlCredentials(value: string): string {
     } catch {
         return value; // not a URL (relative location, junk) — leave it alone
     }
-    if ([...url.searchParams.keys()].length === 0) return value;
-    for (const key of [...url.searchParams.keys()]) {
-        url.searchParams.set(key, REDACTED_QUERY_VALUE);
+    const keys = [...url.searchParams.keys()];
+    if (keys.length === 0 && !url.username && !url.password && !url.hash) {
+        return value;
     }
+    url.username = "";
+    url.password = "";
+    if (url.hash) url.hash = REDACTED_QUERY_VALUE;
+    url.search = new URLSearchParams(
+        keys.map((key) => [key, REDACTED_QUERY_VALUE]),
+    ).toString();
     return url.toString();
 }
 
