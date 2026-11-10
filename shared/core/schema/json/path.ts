@@ -35,12 +35,21 @@ export function getPath(
         if (current === null || current === undefined) return undefined;
         if (segment.startsWith("[")) {
             if (!Array.isArray(current)) return undefined;
-            current = current[Number(segment.slice(1, -1))];
+            const index = Number(segment.slice(1, -1));
+            // Only own elements: JSON arrays never inherit indices, and a
+            // prototype-set index must not surface as payload data.
+            current = Object.hasOwn(current, index)
+                ? current[index]
+                : undefined;
         } else {
             if (typeof current !== "object" || Array.isArray(current)) {
                 return undefined;
             }
-            current = (current as Record<string, Json>)[segment.slice(1)];
+            // Only own members: `constructor`/`toString` are not payload data.
+            const key = segment.slice(1);
+            current = Object.hasOwn(current, key)
+                ? (current as Record<string, Json>)[key]
+                : undefined;
         }
     }
     return current;

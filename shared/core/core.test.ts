@@ -156,6 +156,32 @@ Deno.test("getPath: dotted keys + numeric indexes; unsupported syntax → undefi
     assertEquals(getPath(value, "$.results[*]"), undefined); // no wildcards
 });
 
+Deno.test("getPath: inherited object members stay absent (#121)", () => {
+    assertEquals(getPath({}, "$.constructor"), undefined);
+    assertEquals(getPath({}, "$.toString"), undefined);
+    assertEquals(getPath({ nested: {} }, "$.nested.constructor"), undefined);
+    assertEquals(
+        getPath({ a: [{}] }, "$.a[0].hasOwnProperty"),
+        undefined,
+    );
+    // own members and elements still read normally
+    assertEquals(getPath({ a: ["own"] }, "$.a[0]"), "own");
+    assertEquals(getPath({ a: [1, 2] }, "$.a[1]"), 2);
+});
+
+Deno.test("getPath: inherited array indices stay absent (#121)", () => {
+    const proto = Object.prototype as unknown as Record<number, unknown>;
+    const saved = proto[0];
+    proto[0] = "inherited";
+    try {
+        assertEquals(getPath({ a: [] }, "$.a[0]"), undefined);
+        assertEquals(getPath({ a: ["own"] }, "$.a[0]"), "own");
+    } finally {
+        if (saved === undefined) delete proto[0];
+        else proto[0] = saved;
+    }
+});
+
 Deno.test("zeroUsage: the forced settle-shape on provider errors", () => {
     assertEquals(zeroUsage(), { credits: {}, evidence: {} });
 });
