@@ -1,0 +1,27 @@
+{
+    "name": "unauthorized-get",
+    "description": "The same AI/ML API 401 envelope as `unauthorized`, on a GET (captured 2026-10-15 against /v1/key with a deliberately invalid key). A separate chain only because replay matches on METHOD and url: the read endpoints (#models, #key) are GETs and the billable ones POSTs, and the gateway's refusal body is identical for both. `instance` is the captured path.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "title": "Unauthorized",
+                    "status": 401,
+                    "message": "This request requires a valid API key. You can create a new API key on the Billing page: https://aimlapi.com/app/keys",
+                    "instance": "/v1/key",
+                    "requestId": "iNUssQMEMLWW68borkl9P",
+                    "timestamp": "2026-10-14T20:01:32.151Z",
+                    "error": {
+                        "name": "UnauthorizedException",
+                        "message": "This request requires a valid API key. You can create a new API key on the Billing page: https://aimlapi.com/app/keys"
+                    }
+                }
+            }
+        }
+    ]
+}
