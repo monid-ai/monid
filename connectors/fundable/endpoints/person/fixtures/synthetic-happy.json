@@ -1,0 +1,28 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC chain for fundable#person (replace via `deno task record`): GET /person returns one object under data.person; meta reports the flat 1 credit.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://www.tryfundable.ai/api/v1/person?id=5b6c7d8e-1f2a-4b3c-8d4e-5f6a7b8c9d0e"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "person": {
+                            "id": "5b6c7d8e-1f2a-4b3c-8d4e-5f6a7b8c9d0e",
+                            "name": "Jane Example",
+                            "person_type": "company"
+                        }
+                    },
+                    "meta": {
+                        "credits_used": 1
+                    }
+                }
+            }
+        }
+    ]
+}

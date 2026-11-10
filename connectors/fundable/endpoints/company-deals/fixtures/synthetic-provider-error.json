@@ -1,0 +1,23 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "SYNTHETIC chain for fundable#company/deals (replace via `deno task record`): an unknown identifier answers 404 COMPANY_NOT_FOUND — vendor non-2xx is DATA, zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://www.tryfundable.ai/api/v1/company/deals?domain=nonexistent-xyz.com&page_size=2"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "success": false,
+                    "error": {
+                        "code": "COMPANY_NOT_FOUND",
+                        "message": "Company not found"
+                    },
+                    "statusCode": 404
+                }
+            }
+        }
+    ]
+}

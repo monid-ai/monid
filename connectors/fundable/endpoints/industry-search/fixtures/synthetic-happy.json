@@ -1,0 +1,35 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC chain for fundable#industry/search (replace via `deno task record`): the free resolver returns industry and super-category permalinks and the vendor reports credits_used 0 — a present zero prunes to an empty claim on a FREE doc.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://www.tryfundable.ai/api/v1/industry/search?name=fintech"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "industries": [
+                            {
+                                "permalink": "fintech",
+                                "name": "FinTech",
+                                "industry_type": "INDUSTRY"
+                            },
+                            {
+                                "permalink": "financial-services-e8f2",
+                                "name": "Financial Services",
+                                "industry_type": "SUPER_CATEGORY"
+                            }
+                        ]
+                    },
+                    "meta": {
+                        "credits_used": 0
+                    }
+                }
+            }
+        }
+    ]
+}

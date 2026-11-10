@@ -1,0 +1,32 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC chain for fundable#person/search (replace via `deno task record`): GET /person/search returns candidates under data.people; the vendor stamps the flat 0.1-credit search fee.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://www.tryfundable.ai/api/v1/person/search?name=jane+example"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "people": [
+                            {
+                                "id": "5b6c7d8e-1f2a-4b3c-8d4e-5f6a7b8c9d0e",
+                                "name": "Jane Example",
+                                "person_type": "company",
+                                "relevance": 0.95
+                            }
+                        ]
+                    },
+                    "meta": {
+                        "total_count": 1,
+                        "credits_used": 0.1
+                    }
+                }
+            }
+        }
+    ]
+}

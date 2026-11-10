@@ -1,0 +1,35 @@
+{
+    "name": "synthetic-empty",
+    "description": "SYNTHETIC chain for fundable#investors (replace via `deno task record`): a filter that matches nothing returns zero rows under data.investors and the vendor reports credits_used 0 — a row-billed run with nothing delivered bills nothing.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://www.tryfundable.ai/api/v1/investors",
+                "body": {
+                    "investor": {
+                        "locations": [
+                            "san-francisco-california"
+                        ]
+                    },
+                    "page_size": 2
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "investors": []
+                    },
+                    "meta": {
+                        "total_count": 0,
+                        "page": 0,
+                        "page_size": 2,
+                        "credits_used": 0
+                    }
+                }
+            }
+        }
+    ]
+}
