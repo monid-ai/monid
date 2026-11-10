@@ -1,0 +1,53 @@
+{
+    "name": "everyday-unit-convert-happy",
+    "description": "Synthetic anonymous MCP tools/call success for a deterministic five-mile to kilometre conversion.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": "everyday-unit-convert",
+                    "method": "tools/call",
+                    "params": {
+                        "name": "unit_convert",
+                        "arguments": {
+                            "dimension": "length",
+                            "value": 5,
+                            "from": "mi",
+                            "to": "km"
+                        },
+                        "_meta": {
+                            "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+                            "io.modelcontextprotocol/clientCapabilities": {}
+                        }
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": "everyday-unit-convert",
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "{\"dimension\":\"length\",\"value\":5,\"from\":\"mi\",\"to\":\"km\",\"result\":8.04672}"
+                            }
+                        ],
+                        "structuredContent": {
+                            "dimension": "length",
+                            "value": 5,
+                            "from": "mi",
+                            "to": "km",
+                            "result": 8.04672
+                        },
+                        "resultType": "complete"
+                    }
+                }
+            }
+        }
+    ]
+}
