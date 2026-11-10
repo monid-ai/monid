@@ -1,0 +1,125 @@
+{
+    "name": "no-match",
+    "description": "recorded 2026-10-24 (hangingcontext#ask), a question no story covers",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://hangingcontext.com/ask?query=zzqqxx+nonsense"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "_meta": {
+                        "response_type": "answer",
+                        "version": "0.5",
+                        "protocol": "NLWeb",
+                        "uses_llm": false,
+                        "key_required": false,
+                        "api_version": "1"
+                    },
+                    "query": "zzqqxx nonsense",
+                    "no_match": true,
+                    "results": [],
+                    "stories": [],
+                    "suggestions": {
+                        "topics": [
+                            "artificial-intelligence",
+                            "research-science",
+                            "finance-investing",
+                            "business-podcasts",
+                            "health-biotech",
+                            "sports",
+                            "federal-government",
+                            "state-government",
+                            "energy-climate",
+                            "culture-media"
+                        ],
+                        "try": [
+                            "Use fewer or different keywords.",
+                            "Search a longer period with days=30.",
+                            "Call hc_latest to see the newest stories."
+                        ],
+                        "latest_stories": [
+                            {
+                                "slug": "world-series-game1-anatomy",
+                                "url": "https://hangingcontext.com/stories/2026-10-24/world-series-game1-anatomy/",
+                                "headline": "Game 1 was decided at second base and in the bullpen, not at the plate",
+                                "dek": "Misiorowski's 103.5 mph fastball set a World Series record, Contreras erased two Rays runners, and Tampa Bay kept its best relievers in reserve while Milwaukee's bullpen held until the ninth. Milwaukee won 3-2, and the margins were everywhere except the box score's headline.",
+                                "newsroom": "sports",
+                                "beat": null,
+                                "published_at": "2026-10-24T12:32:46Z",
+                                "trust": "reported",
+                                "source_count": 5,
+                                "cited_manifest_ids": [
+                                    "1792810258562920541",
+                                    "1792829967681450747",
+                                    "1792829967681332364",
+                                    "1792831284894617034",
+                                    "1792829967681254246"
+                                ],
+                                "json": "https://hangingcontext.com/stories/2026-10-24/world-series-game1-anatomy/index.json",
+                                "markdown": "https://hangingcontext.com/stories/2026-10-24/world-series-game1-anatomy/index.md"
+                            },
+                            {
+                                "slug": "war-department-readiness-bill",
+                                "url": "https://hangingcontext.com/stories/2026-10-24/war-department-readiness-bill/",
+                                "headline": "The War Department's readiness bill: $2.4B for nuclear propulsion, $1.7B for barracks, a new autonomous command",
+                                "dek": "One day's contracts put the largest sum into Naval Nuclear Propulsion work, financial close arrived for a $1.7 billion sailor-housing project, and Project Agincourt set a 2027 date for a four-star Autonomous Warfare Command.",
+                                "newsroom": "federal-government",
+                                "beat": null,
+                                "published_at": "2026-10-24T12:32:43Z",
+                                "trust": "confirmed",
+                                "source_count": 4,
+                                "cited_manifest_ids": [
+                                    "1792799688858900893",
+                                    "1792768783861784077",
+                                    "1792800926807167710",
+                                    "1792795749836955817"
+                                ],
+                                "json": "https://hangingcontext.com/stories/2026-10-24/war-department-readiness-bill/index.json",
+                                "markdown": "https://hangingcontext.com/stories/2026-10-24/war-department-readiness-bill/index.md"
+                            },
+                            {
+                                "slug": "virus-entry-silence-restriction",
+                                "url": "https://hangingcontext.com/stories/2026-10-24/virus-entry-silence-restriction/",
+                                "headline": "How viruses break in, shut the cell up, and get stopped at the door",
+                                "dek": "One preprint maps the fusion chain that lets infected cells merge, another resolves how a viral protein silences host messages, and two more show restriction working — engineered in flu, existing in a 2026 filovirus isolate.",
+                                "newsroom": "research-science",
+                                "beat": null,
+                                "published_at": "2026-10-24T12:32:40Z",
+                                "trust": "confirmed",
+                                "source_count": 4,
+                                "cited_manifest_ids": [
+                                    "1792808752336240294",
+                                    "1792808752337666949",
+                                    "1792788299270846384",
+                                    "1792774065978982041"
+                                ],
+                                "json": "https://hangingcontext.com/stories/2026-10-24/virus-entry-silence-restriction/index.json",
+                                "markdown": "https://hangingcontext.com/stories/2026-10-24/virus-entry-silence-restriction/index.md"
+                            }
+                        ]
+                    },
+                    "freshness": {
+                        "as_of": "2026-10-24T21:35:48Z",
+                        "next_update_at": "2026-10-25T00:00:00Z",
+                        "newest_source_at": "2026-10-24T00:00:00Z"
+                    },
+                    "reuse": {
+                        "version": "1",
+                        "summary": "Free to read, quote, summarise and republish, including commercially. Credit Hanging Context and link to the story. Keep the cited Manifest ids when you republish claims. Do not imply that Synorb endorses you or your product.",
+                        "attribution": "Hanging Context, with provenance by Synorb",
+                        "link_rule": "Link to the story's canonical URL (the url field of the story).",
+                        "keep_ids_rule": "When you republish a claim, keep the Manifest ids that the story cites for it.",
+                        "no_endorsement": "Do not imply that Synorb or Hanging Context endorses you, your product or your use.",
+                        "license_url": "https://hangingcontext.com/terms/reuse/",
+                        "machine_url": "https://hangingcontext.com/.well-known/reuse.json",
+                        "canonical_url": null
+                    },
+                    "next_step": "No story matches. Call hc_topics to see what is covered, or hc_latest for the newest stories."
+                }
+            }
+        }
+    ]
+}

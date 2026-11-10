@@ -1,0 +1,305 @@
+{
+    "name": "happy",
+    "description": "recorded 2026-10-24 (hangingcontext#latest), story lists trimmed to 2",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://hangingcontext.com/editions/latest.json"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "schema": "hangingcontext.desk/1",
+                    "type": "latest_edition",
+                    "description": "Stories for agents from the last 12 hours. Each claim cites a Synorb Manifest.",
+                    "edition": "2026-10-24T12",
+                    "edition_label": "2026-10-24 12:00 UTC",
+                    "next_edition": "2026-10-25 00:00 UTC",
+                    "generated_at": "2026-10-24T12:32:46Z",
+                    "stories": [
+                        {
+                            "slug": "world-series-game1-anatomy",
+                            "url": "https://hangingcontext.com/stories/2026-10-24/world-series-game1-anatomy/",
+                            "json": "https://hangingcontext.com/stories/2026-10-24/world-series-game1-anatomy/index.json",
+                            "markdown": "https://hangingcontext.com/stories/2026-10-24/world-series-game1-anatomy/index.md",
+                            "headline": "Game 1 was decided at second base and in the bullpen, not at the plate",
+                            "dek": "Misiorowski's 103.5 mph fastball set a World Series record, Contreras erased two Rays runners, and Tampa Bay kept its best relievers in reserve while Milwaukee's bullpen held until the ninth. Milwaukee won 3-2, and the margins were everywhere except the box score's headline.",
+                            "newsroom": "sports",
+                            "beat": null,
+                            "edition": "2026-10-24T12",
+                            "published_at": "2026-10-24T12:32:46Z",
+                            "trust": "reported",
+                            "source_count": 5,
+                            "cited_manifest_ids": [
+                                "1792810258562920541",
+                                "1792829967681450747",
+                                "1792829967681332364",
+                                "1792831284894617034",
+                                "1792829967681254246"
+                            ]
+                        },
+                        {
+                            "slug": "war-department-readiness-bill",
+                            "url": "https://hangingcontext.com/stories/2026-10-24/war-department-readiness-bill/",
+                            "json": "https://hangingcontext.com/stories/2026-10-24/war-department-readiness-bill/index.json",
+                            "markdown": "https://hangingcontext.com/stories/2026-10-24/war-department-readiness-bill/index.md",
+                            "headline": "The War Department's readiness bill: $2.4B for nuclear propulsion, $1.7B for barracks, a new autonomous command",
+                            "dek": "One day's contracts put the largest sum into Naval Nuclear Propulsion work, financial close arrived for a $1.7 billion sailor-housing project, and Project Agincourt set a 2027 date for a four-star Autonomous Warfare Command.",
+                            "newsroom": "federal-government",
+                            "beat": null,
+                            "edition": "2026-10-24T12",
+                            "published_at": "2026-10-24T12:32:43Z",
+                            "trust": "confirmed",
+                            "source_count": 4,
+                            "cited_manifest_ids": [
+                                "1792799688858900893",
+                                "1792768783861784077",
+                                "1792800926807167710",
+                                "1792795749836955817"
+                            ]
+                        }
+                    ],
+                    "published_last_24h": [
+                        {
+                            "slug": "world-series-game1-anatomy",
+                            "url": "https://hangingcontext.com/stories/2026-10-24/world-series-game1-anatomy/",
+                            "json": "https://hangingcontext.com/stories/2026-10-24/world-series-game1-anatomy/index.json",
+                            "markdown": "https://hangingcontext.com/stories/2026-10-24/world-series-game1-anatomy/index.md",
+                            "headline": "Game 1 was decided at second base and in the bullpen, not at the plate",
+                            "dek": "Misiorowski's 103.5 mph fastball set a World Series record, Contreras erased two Rays runners, and Tampa Bay kept its best relievers in reserve while Milwaukee's bullpen held until the ninth. Milwaukee won 3-2, and the margins were everywhere except the box score's headline.",
+                            "newsroom": "sports",
+                            "beat": null,
+                            "edition": "2026-10-24T12",
+                            "published_at": "2026-10-24T12:32:46Z",
+                            "trust": "reported",
+                            "source_count": 5,
+                            "cited_manifest_ids": [
+                                "1792810258562920541",
+                                "1792829967681450747",
+                                "1792829967681332364",
+                                "1792831284894617034",
+                                "1792829967681254246"
+                            ]
+                        },
+                        {
+                            "slug": "war-department-readiness-bill",
+                            "url": "https://hangingcontext.com/stories/2026-10-24/war-department-readiness-bill/",
+                            "json": "https://hangingcontext.com/stories/2026-10-24/war-department-readiness-bill/index.json",
+                            "markdown": "https://hangingcontext.com/stories/2026-10-24/war-department-readiness-bill/index.md",
+                            "headline": "The War Department's readiness bill: $2.4B for nuclear propulsion, $1.7B for barracks, a new autonomous command",
+                            "dek": "One day's contracts put the largest sum into Naval Nuclear Propulsion work, financial close arrived for a $1.7 billion sailor-housing project, and Project Agincourt set a 2027 date for a four-star Autonomous Warfare Command.",
+                            "newsroom": "federal-government",
+                            "beat": null,
+                            "edition": "2026-10-24T12",
+                            "published_at": "2026-10-24T12:32:43Z",
+                            "trust": "confirmed",
+                            "source_count": 4,
+                            "cited_manifest_ids": [
+                                "1792799688858900893",
+                                "1792768783861784077",
+                                "1792800926807167710",
+                                "1792795749836955817"
+                            ]
+                        }
+                    ],
+                    "newsrooms": [
+                        {
+                            "id": "artificial-intelligence",
+                            "title": "Artificial Intelligence",
+                            "url": "https://hangingcontext.com/n/artificial-intelligence/",
+                            "json": "https://hangingcontext.com/n/artificial-intelligence/index.json",
+                            "description": "AI companies, models, developer tools, research, infrastructure and policy.",
+                            "beats": [
+                                {
+                                    "id": "models-labs",
+                                    "title": "Models & Labs"
+                                },
+                                {
+                                    "id": "developers",
+                                    "title": "Developer Tools & APIs"
+                                },
+                                {
+                                    "id": "funding-deals",
+                                    "title": "Funding & Deals"
+                                },
+                                {
+                                    "id": "research",
+                                    "title": "Research"
+                                },
+                                {
+                                    "id": "infrastructure",
+                                    "title": "Chips & Infrastructure"
+                                },
+                                {
+                                    "id": "policy",
+                                    "title": "Policy & Regulation"
+                                }
+                            ],
+                            "draws_from": [
+                                "AI Companies",
+                                "Venture Capital",
+                                "Research",
+                                "Business & Technology Podcasts"
+                            ]
+                        },
+                        {
+                            "id": "research-science",
+                            "title": "Research & Science",
+                            "url": "https://hangingcontext.com/n/research-science/",
+                            "json": "https://hangingcontext.com/n/research-science/index.json",
+                            "description": "Research, preprints and science.",
+                            "beats": [],
+                            "draws_from": [
+                                "Research"
+                            ]
+                        },
+                        {
+                            "id": "finance-investing",
+                            "title": "Finance & Investing",
+                            "url": "https://hangingcontext.com/n/finance-investing/",
+                            "json": "https://hangingcontext.com/n/finance-investing/index.json",
+                            "description": "Public and private companies, banks, central banks and capital markets.",
+                            "beats": [],
+                            "draws_from": [
+                                "Public Markets",
+                                "Venture Capital",
+                                "Private Companies",
+                                "Central Banks",
+                                "Corporate Earnings & Executive Transitions"
+                            ]
+                        },
+                        {
+                            "id": "business-podcasts",
+                            "title": "Business Podcasts",
+                            "url": "https://hangingcontext.com/n/business-podcasts/",
+                            "json": "https://hangingcontext.com/n/business-podcasts/index.json",
+                            "description": "What business and technology podcasts are saying.",
+                            "beats": [],
+                            "draws_from": [
+                                "Business & Technology Podcasts"
+                            ]
+                        },
+                        {
+                            "id": "health-biotech",
+                            "title": "Health & Biotech",
+                            "url": "https://hangingcontext.com/n/health-biotech/",
+                            "json": "https://hangingcontext.com/n/health-biotech/index.json",
+                            "description": "Biotech, pharma and healthcare.",
+                            "beats": [],
+                            "draws_from": [
+                                "Research"
+                            ]
+                        },
+                        {
+                            "id": "sports",
+                            "title": "Sports",
+                            "url": "https://hangingcontext.com/n/sports/",
+                            "json": "https://hangingcontext.com/n/sports/index.json",
+                            "description": "Sports business and news.",
+                            "beats": [],
+                            "draws_from": [
+                                "Sports Teams & Sportsbooks"
+                            ]
+                        },
+                        {
+                            "id": "federal-government",
+                            "title": "Federal Government",
+                            "url": "https://hangingcontext.com/n/federal-government/",
+                            "json": "https://hangingcontext.com/n/federal-government/index.json",
+                            "description": "US federal agencies and regulators.",
+                            "beats": [],
+                            "draws_from": [
+                                "Federal Government"
+                            ]
+                        },
+                        {
+                            "id": "state-government",
+                            "title": "State Legislatures & Executives",
+                            "url": "https://hangingcontext.com/n/state-government/",
+                            "json": "https://hangingcontext.com/n/state-government/index.json",
+                            "description": "State legislatures and governors.",
+                            "beats": [],
+                            "draws_from": [
+                                "State Legislatures & Executives"
+                            ]
+                        },
+                        {
+                            "id": "energy-climate",
+                            "title": "Energy & Climate",
+                            "url": "https://hangingcontext.com/n/energy-climate/",
+                            "json": "https://hangingcontext.com/n/energy-climate/index.json",
+                            "description": "Energy, utilities and climate.",
+                            "beats": [],
+                            "draws_from": [
+                                "Research"
+                            ]
+                        },
+                        {
+                            "id": "culture-media",
+                            "title": "Arts, Culture & Media",
+                            "url": "https://hangingcontext.com/n/culture-media/",
+                            "json": "https://hangingcontext.com/n/culture-media/index.json",
+                            "description": "Media, entertainment and culture.",
+                            "beats": [],
+                            "draws_from": [
+                                "media_outlets",
+                                "gaming_entertainment"
+                            ]
+                        }
+                    ],
+                    "feeds": {
+                        "rss": "https://hangingcontext.com/editions/feed.xml",
+                        "atom": "https://hangingcontext.com/editions/atom.xml",
+                        "json_feed": "https://hangingcontext.com/editions/feed.json"
+                    },
+                    "run_these_manifests": {
+                        "title": "Run these Manifests yourself",
+                        "summary": "Every Manifest cited here can be read in full with your own Synorb Key. Check the claims before you rely on them.",
+                        "manifest_ids": [],
+                        "steps": [
+                            {
+                                "n": 1,
+                                "title": "Get a Synorb Key",
+                                "text": "Click Generate Free Agent Key at https://synorb.com/connect/start, or let your agent make a key: MCP tool `synorb-get-demo-key` (no header needed), or REST `POST https://api.synorb.com/api/connect/demo-key` with a JSON body such as `{\"client\":\"your-agent-name\"}`. The key is the `api_key` field of the answer. Save the key. The 72 Hour Agent Demo key needs no email. It lasts 72 hours and can pull up to 25 Manifests. It includes 5 Beacons; 3 of them are starter Beacons."
+                            },
+                            {
+                                "n": 2,
+                                "title": "Read each cited Manifest by id",
+                                "text": "REST: `GET https://api.synorb.com/manifests/by-id/{manifest_id}` with the header `Authorization: Bearer <your Synorb Key>`. Ids are strings; do not parse them as numbers. The reply holds the source, the Signal (claims) and the Brief."
+                            },
+                            {
+                                "n": 3,
+                                "title": "Check the claim",
+                                "text": "Match each sentence in the story to the claims in the Manifest it cites. The claim ids in the ledger point to them."
+                            }
+                        ],
+                        "mcp_url": "https://mcp.synorb.com/mcp",
+                        "connect_url": "https://synorb.com/connect/start",
+                        "request": {
+                            "method": "GET",
+                            "url_template": "https://api.synorb.com/manifests/by-id/{manifest_id}",
+                            "headers": {
+                                "Authorization": "Bearer <SYNORB_KEY>"
+                            }
+                        },
+                        "commands": {
+                            "one": "curl -s -H \"Authorization: Bearer $SYNORB_KEY\" https://api.synorb.com/manifests/by-id/MANIFEST_ID",
+                            "all": "for id in MANIFEST_ID; do\n  curl -s -H \"Authorization: Bearer $SYNORB_KEY\" \"https://api.synorb.com/manifests/by-id/$id\"\ndone"
+                        }
+                    },
+                    "sponsor": {
+                        "label": "From Synorb",
+                        "title": "Claims with a source link",
+                        "text": "A Manifest holds a Signal of structured claims and a Brief, plus the source it came from. Your agent can check a sentence against it.",
+                        "cta": {
+                            "label": "Read the guide",
+                            "url": "https://synorb.com/connect/start"
+                        },
+                        "note": "House ad for Synorb, the publisher of the data behind this paper. Not a news item."
+                    }
+                }
+            }
+        }
+    ]
+}

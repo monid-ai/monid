@@ -1,0 +1,74 @@
+{
+    "name": "happy",
+    "description": "recorded 2026-10-24 (hangingcontext#topic), stories trimmed to 2",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://hangingcontext.com/n/artificial-intelligence/index.json"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "schema": "hangingcontext.desk/1",
+                    "type": "section",
+                    "id": "artificial-intelligence",
+                    "title": "Artificial Intelligence",
+                    "generated_at": "2026-10-24T12:32:46Z",
+                    "story_count": 257,
+                    "stories": [
+                        {
+                            "slug": "venture-picks-exits-october",
+                            "url": "https://hangingcontext.com/stories/2026-10-24/venture-picks-exits-october/",
+                            "json": "https://hangingcontext.com/stories/2026-10-24/venture-picks-exits-october/index.json",
+                            "markdown": "https://hangingcontext.com/stories/2026-10-24/venture-picks-exits-october/index.md",
+                            "headline": "Applied AI gets the cheques: a materials platform, an exit, and 10 new founders",
+                            "dek": "Albert Invent took growth equity from Applied Ventures, Ribbon.ai was acquired by Dayforce, and Endeavor selected 10 founders across five companies. The common thread is applied AI, not frontier models.",
+                            "newsroom": "artificial-intelligence",
+                            "beat": "funding-deals",
+                            "edition": "2026-10-24T12",
+                            "published_at": "2026-10-24T12:32:36Z",
+                            "trust": "confirmed",
+                            "source_count": 3,
+                            "cited_manifest_ids": [
+                                "1792776659944244018",
+                                "1792799299788723463",
+                                "1792784177098527589"
+                            ]
+                        },
+                        {
+                            "slug": "security-bottleneck-remediation",
+                            "url": "https://hangingcontext.com/stories/2026-10-24/security-bottleneck-remediation/",
+                            "json": "https://hangingcontext.com/stories/2026-10-24/security-bottleneck-remediation/index.json",
+                            "markdown": "https://hangingcontext.com/stories/2026-10-24/security-bottleneck-remediation/index.md",
+                            "headline": "Discovery outruns remediation while a certificate-authority failure shows trust itself breaking underneath application code",
+                            "dek": "AI now finds vulnerabilities faster than teams can fix them, and a compromised certificate authority shows the layer below the application can fail too.",
+                            "newsroom": "artificial-intelligence",
+                            "beat": "infrastructure",
+                            "edition": "2026-10-24T12",
+                            "published_at": "2026-10-24T12:32:24Z",
+                            "trust": "confirmed",
+                            "source_count": 4,
+                            "cited_manifest_ids": [
+                                "1792794964115707167",
+                                "1792838667245269408",
+                                "1792794964115670508",
+                                "1792815463347009746"
+                            ]
+                        }
+                    ],
+                    "sponsor": {
+                        "label": "From Synorb",
+                        "title": "Claims with a source link",
+                        "text": "A Manifest holds a Signal of structured claims and a Brief, plus the source it came from. Your agent can check a sentence against it.",
+                        "cta": {
+                            "label": "Read the guide",
+                            "url": "https://synorb.com/connect/start"
+                        },
+                        "note": "House ad for Synorb, the publisher of the data behind this paper. Not a news item."
+                    }
+                }
+            }
+        }
+    ]
+}

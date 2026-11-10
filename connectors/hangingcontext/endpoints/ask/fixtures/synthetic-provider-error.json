@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "synthetic: a 503 from /ask",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://hangingcontext.com/ask?query=anything"
+            },
+            "res": {
+                "status": 503,
+                "body": {
+                    "error": "service_unavailable",
+                    "message": "Hanging Context is temporarily unavailable. Try again shortly."
+                }
+            }
+        }
+    ]
+}

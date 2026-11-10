@@ -1,0 +1,20 @@
+{
+    "name": "not-found",
+    "description": "recorded 2026-10-24 (hangingcontext#topic), a topic slug that does not exist",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://hangingcontext.com/n/zzz-nope/index.json"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": "not_found",
+                    "message": "This page does not exist on Hanging Context.",
+                    "next_step": "Read https://hangingcontext.com/llms.txt or https://hangingcontext.com/sitemap.xml for the list of pages, or https://hangingcontext.com/developers/ for the API."
+                }
+            }
+        }
+    ]
+}

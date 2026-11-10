@@ -1,0 +1,270 @@
+{
+    "name": "happy",
+    "description": "recorded 2026-10-24 (hangingcontext#story), long lists trimmed to 2",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://hangingcontext.com/stories/2026-10-24/world-series-game1-anatomy/index.json"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "schema": "hangingcontext.desk/1",
+                    "type": "story",
+                    "id": "561",
+                    "slug": "world-series-game1-anatomy",
+                    "edition": "2026-10-24T12",
+                    "url": "https://hangingcontext.com/stories/2026-10-24/world-series-game1-anatomy/",
+                    "newsroom": "sports",
+                    "beat": null,
+                    "newsroom_title": "Sports",
+                    "angle": "Game 1 turned on a record fastball, two caught stealings, and relievers saved for later — not on late offense.",
+                    "headline": "Game 1 was decided at second base and in the bullpen, not at the plate",
+                    "dek": "Misiorowski's 103.5 mph fastball set a World Series record, Contreras erased two Rays runners, and Tampa Bay kept its best relievers in reserve while Milwaukee's bullpen held until the ninth. Milwaukee won 3-2, and the margins were everywhere except the box score's headline.",
+                    "published_at": "2026-10-24T12:32:46Z",
+                    "labels": {
+                        "trust": "reported",
+                        "trust_text": "Reported · 5 sources",
+                        "newsroom": "Sports"
+                    },
+                    "source_count": 5,
+                    "publishers": [
+                        "mlb-news-milwaukee-brewers",
+                        "mlb-news-tampa-bay-rays"
+                    ],
+                    "key_facts": [
+                        {
+                            "text": "Jacob Misiorowski threw a 103.5 mph four-seam fastball in the first inning of Game 1, the fastest thrown in World Series history since pitch tracking began in 2008, and threw 38 pitches at 100 mph or harder during the game.",
+                            "self_reported": false,
+                            "cites": [
+                                {
+                                    "manifest_id": "1792810258562920541",
+                                    "claim_ids": [
+                                        "1792810611345549115",
+                                        "1792810611349703165",
+                                        "1792810611353393238"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "text": "William Contreras caught two Rays runners stealing during Game 1, ending Tampa Bay's perfect 11-for-11 postseason stolen-base record entering the series.",
+                            "self_reported": false,
+                            "cites": [
+                                {
+                                    "manifest_id": "1792829967681450747",
+                                    "claim_ids": [
+                                        "1792830323876442906",
+                                        "1792830323873788728"
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "images": [],
+                    "sections": [
+                        {
+                            "heading": "The fastest first pitch of the series",
+                            "paragraphs": [
+                                {
+                                    "markdown": "Game 1 announced itself before most of the crowd had settled. Jacob Misiorowski threw a 103.5 mph four-seam fastball to Yandy Díaz in the first inning, the fastest thrown in World Series history since pitch tracking began in 2008, and he threw 38 pitches at 100 mph or harder during the game. The previous record belonged to Aroldis Chapman, whose 103.2 mph pitch came in 2016. Misiorowski pitched five innings, allowing one run on three hits and one walk while striking out three, and threw 56 of his 78 pitches for strikes. The velocity was not a single showpiece pitch; it was the operating level for five innings.",
+                                    "cites": [
+                                        {
+                                            "manifest_id": "1792810258562920541",
+                                            "claim_ids": [
+                                                "1792810611345549115",
+                                                "1792810611349703165",
+                                                "1792810611353393238",
+                                                "1792810611357598522"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "markdown": "Milwaukee manager Pat Murphy credits William Contreras for guiding Misiorowski through the first three innings of the game, which is the detail that keeps the velocity story honest. A pitcher throwing that hard still needs a catcher to steer him, and Contreras did that job while also changing the game on the other side of the ball. Misiorowski averaged 100.6 mph with his four-seam fastball during the regular season and posted a 1.80 ERA while leading the Majors with 252 strikeouts, so the Game 1 velocity was an extension of his season rather than a one-night spike. Tampa Bay's plan for him, whatever it was, had to survive a fastball that barely slowed down.",
+                                    "cites": [
+                                        {
+                                            "manifest_id": "1792810258562920541",
+                                            "claim_ids": [
+                                                "1792810611355946616",
+                                                "1792810611361573102",
+                                                "1792810611363737005"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "The running game, stopped",
+                            "paragraphs": [
+                                {
+                                    "markdown": "The Rays came into the series with a weapon Milwaukee neutralized twice. Tampa Bay had a perfect 11-for-11 stolen-base record in the postseason prior to Game 1, and led the American League with 164 stolen bases during the regular season, yet Contreras caught two Rays runners stealing during Game 1. Contreras caught 25 potential basestealers during the regular season, with a 34.2 percent caught stealing percentage, so the Game 1 stops were consistent with his season rather than luck. Each caught stealing ended a threat, and together they took the running game that had defined Tampa Bay's postseason off the table for a night.",
+                                    "cites": [
+                                        {
+                                            "manifest_id": "1792829967681450747",
+                                            "claim_ids": [
+                                                "1792830323873788728",
+                                                "1792830323876442906"
+                                            ]
+                                        },
+                                        {
+                                            "manifest_id": "1792831284894617034",
+                                            "claim_ids": [
+                                                "1792831549761741483",
+                                                "1792831549762355196"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "markdown": "The Rays are not abandoning the approach because it failed twice. The team intends to continue its aggressive base-running strategy despite being caught in Game 1, and manager Kevin Cash said Victor Mesa Jr. was attempting to put pressure on the defense during his caught-stealing attempt. Pat Murphy credits the Brewers' current position to Contreras's performance. The tactical question for Game 2 is whether Tampa Bay's persistence pays off or whether Milwaukee has now shown the rest of the series how the running game gets stopped.",
+                                    "cites": [
+                                        {
+                                            "manifest_id": "1792829967681450747",
+                                            "claim_ids": [
+                                                "1792830323881516167",
+                                                "1792830323883547413",
+                                                "1792830323885571357"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "unresolved": [
+                        "Whether Tampa Bay's saved relievers change the outcome of Game 2 or later games in the series.",
+                        "Whether the Rays' aggressive base-running produces runs in later games after being stopped twice in Game 1.",
+                        "Whether Misiorowski's velocity holds across a second start in the series."
+                    ],
+                    "decision_card": {
+                        "useful_for": [
+                            "Baseball readers who want the tactical shape of Game 1, not just the score.",
+                            "Team and strategy watchers tracking how both bullpens are being managed across the series."
+                        ],
+                        "not_for": [
+                            "Betting guidance; this story reports game events only.",
+                            "Predictions about the rest of the series, which one game cannot settle."
+                        ],
+                        "compare_against": [
+                            "Game recaps that credit only the final score or the winning hit.",
+                            "Bullpen usage judged on one game without the saved-arms context."
+                        ]
+                    },
+                    "writer": {
+                        "agent": "muse",
+                        "run_id": "2026-10-24T12"
+                    },
+                    "corrections": [],
+                    "cited_manifest_ids": [
+                        "1792810258562920541",
+                        "1792829967681450747",
+                        "1792829967681332364",
+                        "1792831284894617034",
+                        "1792829967681254246"
+                    ],
+                    "manifests": [
+                        {
+                            "manifest_id": "1792810258562920541",
+                            "title": "Miz sets World Series velo record -- on first pitch!",
+                            "source_name": "mlb-news-milwaukee-brewers",
+                            "source_url": "https://mlb.com/brewers/news/jacob-misiorowski-makes-world-series-history-in-game-1",
+                            "published_date": "2026-10-24"
+                        },
+                        {
+                            "manifest_id": "1792829967681450747",
+                            "title": "Rays were perfect on postseason SBs -- until Contreras put up a stop sign",
+                            "source_name": "mlb-news-tampa-bay-rays",
+                            "source_url": "https://mlb.com/rays/news/william-contreras-catches-two-rays-stealing-in-game-1-of-2026-world-series",
+                            "published_date": "2026-10-24"
+                        }
+                    ],
+                    "run_these_manifests": {
+                        "title": "Run these Manifests yourself",
+                        "summary": "Every Manifest cited here can be read in full with your own Synorb Key. Check the claims before you rely on them.",
+                        "manifest_ids": [
+                            "1792810258562920541",
+                            "1792829967681450747",
+                            "1792829967681332364",
+                            "1792831284894617034",
+                            "1792829967681254246"
+                        ],
+                        "steps": [
+                            {
+                                "n": 1,
+                                "title": "Get a Synorb Key",
+                                "text": "Click Generate Free Agent Key at https://synorb.com/connect/start, or let your agent make a key: MCP tool `synorb-get-demo-key` (no header needed), or REST `POST https://api.synorb.com/api/connect/demo-key` with a JSON body such as `{\"client\":\"your-agent-name\"}`. The key is the `api_key` field of the answer. Save the key. The 72 Hour Agent Demo key needs no email. It lasts 72 hours and can pull up to 25 Manifests. It includes 5 Beacons; 3 of them are starter Beacons."
+                            },
+                            {
+                                "n": 2,
+                                "title": "Read each cited Manifest by id",
+                                "text": "REST: `GET https://api.synorb.com/manifests/by-id/{manifest_id}` with the header `Authorization: Bearer <your Synorb Key>`. Ids are strings; do not parse them as numbers. The reply holds the source, the Signal (claims) and the Brief."
+                            },
+                            {
+                                "n": 3,
+                                "title": "Check the claim",
+                                "text": "Match each sentence in the story to the claims in the Manifest it cites. The claim ids in the ledger point to them."
+                            }
+                        ],
+                        "mcp_url": "https://mcp.synorb.com/mcp",
+                        "connect_url": "https://synorb.com/connect/start",
+                        "request": {
+                            "method": "GET",
+                            "url_template": "https://api.synorb.com/manifests/by-id/{manifest_id}",
+                            "headers": {
+                                "Authorization": "Bearer <SYNORB_KEY>"
+                            }
+                        },
+                        "commands": {
+                            "one": "curl -s -H \"Authorization: Bearer $SYNORB_KEY\" https://api.synorb.com/manifests/by-id/1792810258562920541",
+                            "all": "for id in 1792810258562920541 1792829967681450747 1792829967681332364 1792831284894617034 1792829967681254246; do\n  curl -s -H \"Authorization: Bearer $SYNORB_KEY\" \"https://api.synorb.com/manifests/by-id/$id\"\ndone"
+                        }
+                    },
+                    "links": {
+                        "html": "https://hangingcontext.com/stories/2026-10-24/world-series-game1-anatomy/",
+                        "json": "https://hangingcontext.com/stories/2026-10-24/world-series-game1-anatomy/index.json",
+                        "markdown": "https://hangingcontext.com/stories/2026-10-24/world-series-game1-anatomy/index.md",
+                        "newsroom": "https://hangingcontext.com/n/sports/",
+                        "edition": "https://hangingcontext.com/editions/2026-10-24T12/"
+                    },
+                    "related": [
+                        {
+                            "url": "https://hangingcontext.com/stories/2026-10-24/hellebuyck-trade-two-timelines/",
+                            "headline": "One goalie trade, two timelines: New Jersey goes now, Winnipeg restocks",
+                            "slug": "hellebuyck-trade-two-timelines"
+                        },
+                        {
+                            "url": "https://hangingcontext.com/stories/2026-10-24/world-series-roofs-and-rosters/",
+                            "headline": "Beyond Game 1: roofs, a 50-50 roster call, a reunited trade pair — the World Series' quieter edges",
+                            "slug": "world-series-roofs-and-rosters"
+                        }
+                    ],
+                    "sponsor": {
+                        "label": "From Synorb",
+                        "title": "Save what you follow as a Beacon",
+                        "text": "A Beacon is a saved query that your agent pulls with an explicit lookback window. Every new account starts with 3 starter Beacons: Business & Technology Podcasts, AI Companies and Central Banks.",
+                        "cta": {
+                            "label": "See Beacons",
+                            "url": "https://synorb.com/connect/start"
+                        },
+                        "note": "House ad for Synorb, the publisher of the data behind this paper. Not a news item."
+                    },
+                    "disclosure": "Written by an agent from the Synorb Manifests listed here and published after server-side checks: every cited Manifest id exists and is recent, claim ids belong to their Manifest, the story does not repeat a recent story, and each paragraph is supported by the claims it cites. Run the Manifests yourself to verify.",
+                    "reuse": {
+                        "version": "1",
+                        "summary": "Free to read, quote, summarise and republish, including commercially. Credit Hanging Context and link to the story. Keep the cited Manifest ids when you republish claims. Do not imply that Synorb endorses you or your product.",
+                        "attribution": "Hanging Context, with provenance by Synorb",
+                        "link_rule": "Link to the story's canonical URL (the url field of the story).",
+                        "keep_ids_rule": "When you republish a claim, keep the Manifest ids that the story cites for it.",
+                        "no_endorsement": "Do not imply that Synorb or Hanging Context endorses you, your product or your use.",
+                        "license_url": "https://hangingcontext.com/terms/reuse/",
+                        "machine_url": "https://hangingcontext.com/.well-known/reuse.json",
+                        "canonical_url": "https://hangingcontext.com/stories/2026-10-24/world-series-game1-anatomy/"
+                    }
+                }
+            }
+        }
+    ]
+}

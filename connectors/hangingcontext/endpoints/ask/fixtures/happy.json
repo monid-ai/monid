@@ -1,0 +1,109 @@
+{
+    "name": "happy",
+    "description": "recorded 2026-10-24 (hangingcontext#ask), results trimmed to 2",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://hangingcontext.com/ask?query=federal+reserve+rates"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "_meta": {
+                        "response_type": "answer",
+                        "version": "0.5",
+                        "protocol": "NLWeb",
+                        "uses_llm": false,
+                        "key_required": false,
+                        "api_version": "1"
+                    },
+                    "query": "federal reserve rates",
+                    "no_match": false,
+                    "results": [
+                        {
+                            "url": "https://hangingcontext.com/stories/2026-10-24/podcast-central-bank-preview-week/",
+                            "name": "The podcast preview: central banks hold, France spreads widen, energy lingers",
+                            "site": "hangingcontext.com",
+                            "datePublished": "2026-10-24T12:32:15Z",
+                            "description": "On Nomura's week-ahead podcast, economists expected the Federal Reserve to skip an October hike, the ECB to hold at 2.5% in October, and the Bank of Japan to hold as underlying inflation has not firmly reached 2%.",
+                            "manifest_ids": [
+                                "1792768026993513726"
+                            ],
+                            "match": "key_fact"
+                        },
+                        {
+                            "url": "https://hangingcontext.com/stories/2026-10-20/supervision-reset/",
+                            "name": "After SVB, supervisors are retooling for speed",
+                            "site": "hangingcontext.com",
+                            "datePublished": "2026-10-20T01:05:45Z",
+                            "description": "Federal Reserve Vice Chair Michelle W. Bowman commissioned an independent review of the Silicon Valley Bank failure and the Fed's supervision; the review found frontline examiners knew of SVB's interest-rate and liquidity risk at least nine months before receivership.",
+                            "manifest_ids": [
+                                "1792433673554215788"
+                            ],
+                            "match": "key_fact"
+                        }
+                    ],
+                    "stories": [
+                        {
+                            "slug": "podcast-central-bank-preview-week",
+                            "url": "https://hangingcontext.com/stories/2026-10-24/podcast-central-bank-preview-week/",
+                            "headline": "The podcast preview: central banks hold, France spreads widen, energy lingers",
+                            "dek": "Nomura expects the Fed, ECB, and Bank of Japan to hold. Morgan Stanley economists see the Fed recalibrating and the Bank of Japan hiking twice. J.P. Morgan analysts say French spreads reflect sentiment, not new fiscal news.",
+                            "newsroom": "business-podcasts",
+                            "beat": null,
+                            "published_at": "2026-10-24T12:32:15Z",
+                            "trust": "confirmed",
+                            "source_count": 3,
+                            "cited_manifest_ids": [
+                                "1792768026993513726",
+                                "1792786500252793530",
+                                "1792773084648621687"
+                            ],
+                            "json": "https://hangingcontext.com/stories/2026-10-24/podcast-central-bank-preview-week/index.json",
+                            "markdown": "https://hangingcontext.com/stories/2026-10-24/podcast-central-bank-preview-week/index.md",
+                            "score": 12.363
+                        },
+                        {
+                            "slug": "supervision-reset",
+                            "url": "https://hangingcontext.com/stories/2026-10-20/supervision-reset/",
+                            "headline": "After SVB, supervisors are retooling for speed",
+                            "dek": "The Fed commissioned its own SVB autopsy — and it contradicts the popular story. The same week, the ECB launched a refocusing exercise. What both changed, and what bankers should weigh next.",
+                            "newsroom": "finance-investing",
+                            "beat": null,
+                            "published_at": "2026-10-20T01:05:45Z",
+                            "trust": "reported",
+                            "source_count": 3,
+                            "cited_manifest_ids": [
+                                "1792433673554215788",
+                                "1792433673554430776",
+                                "1792416495325176026"
+                            ],
+                            "json": "https://hangingcontext.com/stories/2026-10-20/supervision-reset/index.json",
+                            "markdown": "https://hangingcontext.com/stories/2026-10-20/supervision-reset/index.md",
+                            "score": 10.706
+                        }
+                    ],
+                    "suggestions": null,
+                    "freshness": {
+                        "as_of": "2026-10-24T21:35:48Z",
+                        "next_update_at": "2026-10-25T00:00:00Z",
+                        "newest_source_at": "2026-10-23T00:00:00Z"
+                    },
+                    "reuse": {
+                        "version": "1",
+                        "summary": "Free to read, quote, summarise and republish, including commercially. Credit Hanging Context and link to the story. Keep the cited Manifest ids when you republish claims. Do not imply that Synorb endorses you or your product.",
+                        "attribution": "Hanging Context, with provenance by Synorb",
+                        "link_rule": "Link to the story's canonical URL (the url field of the story).",
+                        "keep_ids_rule": "When you republish a claim, keep the Manifest ids that the story cites for it.",
+                        "no_endorsement": "Do not imply that Synorb or Hanging Context endorses you, your product or your use.",
+                        "license_url": "https://hangingcontext.com/terms/reuse/",
+                        "machine_url": "https://hangingcontext.com/.well-known/reuse.json",
+                        "canonical_url": null
+                    },
+                    "next_step": "Call hc_get_story with a slug to read more, or hc_sources to check the Manifests behind a fact."
+                }
+            }
+        }
+    ]
+}
