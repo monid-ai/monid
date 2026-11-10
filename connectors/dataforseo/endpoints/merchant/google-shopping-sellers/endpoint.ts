@@ -46,11 +46,13 @@ export default defineEndpoint({
     request: { method: "POST", path: "/v3/merchant/google/sellers/task_post" },
     input: {
         schema: {
-            body: z.union([
+            // Apply shared defaults outside anyOf, where the runtime validator
+            // can materialize them before checking identifier alternatives.
+            body: zBody.and(z.union([
                 zBody.required({ product_id: true }),
                 zBody.required({ data_docid: true }),
                 zBody.required({ gid: true }),
-            ]).describe(
+            ])).describe(
                 "Provide at least one of product_id, data_docid, or gid.",
             ),
         },

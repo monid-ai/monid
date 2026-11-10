@@ -48,11 +48,13 @@ export default defineEndpoint({
     },
     input: {
         schema: {
-            body: z.union([
+            // Apply shared defaults outside anyOf, where the runtime validator
+            // can materialize them before checking identifier alternatives.
+            body: zBody.and(z.union([
                 zBody.required({ keyword: true }),
                 zBody.required({ cid: true }),
                 zBody.required({ place_id: true }),
-            ]).describe(
+            ])).describe(
                 "Provide at least one of keyword, cid, or place_id.",
             ),
         },

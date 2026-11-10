@@ -41,13 +41,15 @@ export default defineEndpoint({
     },
     input: {
         schema: {
-            body: z.union([
+            // Apply shared defaults outside anyOf, where the runtime validator
+            // can materialize them before checking identifier alternatives.
+            body: zBody.and(z.union([
                 zBody.required({ technology_paths: true }),
                 zBody.required({ groups: true }),
                 zBody.required({ categories: true }),
                 zBody.required({ technologies: true }),
                 zBody.required({ keywords: true }),
-            ]).describe(
+            ])).describe(
                 "Provide at least one of technology_paths, groups, categories, technologies, or keywords.",
             ),
         },
