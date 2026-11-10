@@ -1,0 +1,46 @@
+{
+    "name": "empty-match",
+    "description": "Recorded 2026-10-28, re-verifying a real behavior change in the vendor's v1.9.0 release: a zero-match search (closed_since pushed into 2099) now charges 0 credits and leaves the balance untouched (`billing.credits_charged: 0`, `_meta.credits_charged: 0`, `credits_remaining` unchanged at 20). Before this release the vendor billed a 1-credit floor even on an empty result; this connector's docs said so until this fixture replaced the assumption with a live recording. The empty-result shape also differs from a matched one: no `returned`/`limit`/`max_limit`, but `hint`, `filters_as_sent`, and the full `valid_stages`/`valid_industries` enums to help the caller retry. Verbatim, no trimming needed.",
+    "calls": [{
+        "req": {
+            "method": "POST",
+            "url": "{{request.url}}",
+            "body": {
+                "jsonrpc": "2.0",
+                "method": "tools/call",
+                "params": {
+                    "name": "search_funds",
+                    "arguments": {
+                        "stage": "seed",
+                        "country": "Germany",
+                        "closed_since": "2099-01-01",
+                        "limit": 3
+                    }
+                },
+                "id": 1
+            }
+        },
+        "res": {
+            "status": 200,
+            "body": {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "result": {
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "{\"results\":[],\"matched\":0,\"truncated\":false,\"filters_applied\":{\"stage\":\"seed\",\"country\":\"Germany\",\"industry\":null,\"closed_since\":\"2099-01-01\"},\"filters_as_sent\":{\"stage\":\"seed\",\"country\":\"Germany\",\"industry\":null,\"closed_since\":\"2099-01-01\"},\"hint\":\"No fund matched every filter with a close Fund Momentum covered on or after closed_since. Try an earlier date or drop a filter; get_changes also lists recent close_updated rows.\",\"valid_industries\":[\"agritech\",\"ai_ml\",\"biotech\",\"built_environment\",\"carbon_removal\",\"circular_economy\",\"climate_sustainability\",\"cloud_devops\",\"consumer_commerce\",\"creator_economy\",\"cybersecurity\",\"data_infrastructure\",\"deep_tech\",\"defense\",\"developer_tools\",\"diagnostics\",\"digital_banking\",\"digital_education_consumer\",\"digital_health\",\"digital_infrastructure\",\"ecommerce\",\"energy_tech\",\"enterprise_software\",\"evs_charging\",\"fashion_tech\",\"fem_tech\",\"fintech\",\"food_beverage\",\"food_tech\",\"gaming\",\"infrastructure_tech\",\"insur_tech\",\"iot\",\"manufacturing\",\"marketplaces\",\"med_tech\",\"mental_health\",\"mobility_transport\",\"payments_embedded_finance\",\"private_markets\",\"prop_tech\",\"robotics_automation\",\"saas\",\"semiconductors\",\"space\",\"supply_chain\",\"therapeutics\",\"travel_tech\",\"vertical_saas\",\"water_tech\",\"wealth_tech\",\"web3_finance\",\"web3_infrastructure\",\"wellness_lifestyle\"],\"valid_stages\":[\"growth\",\"late_stage\",\"pre_seed\",\"seed\",\"series_a\",\"series_b\",\"series_c\"],\"billing\":{\"credits_charged\":0,\"balance_after\":20,\"next_page_cost\":0,\"next_offset\":null,\"payment_mode\":\"credits\",\"credits_unreturned\":0}}"
+                        }
+                    ],
+                    "_meta": {
+                        "auth": "api_key",
+                        "billing": "credits",
+                        "cost": "€0.00",
+                        "credits_charged": 0,
+                        "credits_remaining": 20
+                    }
+                }
+            }
+        }
+    }]
+}

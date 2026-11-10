@@ -1,0 +1,45 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-10-25 against the live server — verbatim, no trimming needed.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "jsonrpc": "2.0",
+                    "method": "tools/call",
+                    "params": {
+                        "name": "send_feedback",
+                        "arguments": {
+                            "message": "Test call while updating the Monid connector fixtures for get_usage/send_feedback — please disregard.",
+                            "category": "other"
+                        }
+                    },
+                    "id": 1
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "{\"status\":\"received\",\"note\":\"Thanks, your feedback was saved. Nobody is notified instantly and there is no reply to this message.\",\"sent_today\":1,\"remaining_today\":4}"
+                            }
+                        ],
+                        "_meta": {
+                            "auth": "api_key",
+                            "billing": "free",
+                            "metered": false,
+                            "note": "send_feedback is never billed to credits and never counted against any quota."
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

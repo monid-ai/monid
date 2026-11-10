@@ -1,0 +1,46 @@
+{
+    "name": "balance-bound",
+    "description": "Recorded 2026-10-28, new in the vendor's v1.9.0 release: a real agent key drained to a balance of 3 credits by two prior calls, then asked for limit=10 (stage=seed, industry=saas, 108 matches). The vendor silently SHRANK the page to what the balance affords (`limit`/`returned` come back 3, not the requested 10) rather than refusing outright, charged for the reduced count, and marked `truncated_reason: \"balance\"` (distinct from `\"limit\"`, the pre-existing truncation reason for running into the tier ceiling) and `billing.balance_after: 0`. Verbatim, no trimming needed.",
+    "calls": [{
+        "req": {
+            "method": "POST",
+            "url": "{{request.url}}",
+            "body": {
+                "jsonrpc": "2.0",
+                "method": "tools/call",
+                "params": {
+                    "name": "search_funds",
+                    "arguments": {
+                        "stage": "seed",
+                        "industry": "saas",
+                        "limit": 10
+                    }
+                },
+                "id": 1
+            }
+        },
+        "res": {
+            "status": 200,
+            "body": {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "result": {
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "{\"results\":[{\"name\":\"11 Tribes Ventures Fund II\",\"slug\":\"11-tribes-ventures-fund-ii\",\"country\":\"United States\",\"fundingStage\":\"seed\",\"fundingStages\":[\"seed\",\"series_a\"],\"fundSize\":\"$46M\",\"website\":\"https://11tribes.vc\",\"lastCloseDate\":null,\"lastCloseType\":null,\"industries\":[\"fintech\",\"saas\",\"digital_health\",\"food_tech\",\"prop_tech\",\"consumer_commerce\"],\"url\":\"https://fundmomentum.vc/funds/11-tribes-ventures-fund-ii\"},{\"name\":\"20VC\",\"slug\":\"20vc\",\"country\":\"United Kingdom\",\"fundingStage\":\"seed\",\"fundingStages\":[\"seed\",\"series_a\"],\"fundSize\":\"$400M\",\"website\":\"https://www.thetwentyminutevc.com/\",\"lastCloseDate\":null,\"lastCloseType\":null,\"industries\":[\"ai_ml\",\"climate_sustainability\",\"ecommerce\",\"saas\"],\"url\":\"https://fundmomentum.vc/funds/20vc\"},{\"name\":\"Nordwind Ventures II\",\"slug\":\"nordwind-ventures-ii\",\"country\":\"Germany\",\"fundingStage\":\"seed\",\"fundSize\":\"€45M\",\"website\":null,\"industries\":[\"saas\",\"enterprise_software\"],\"url\":\"https://fundmomentum.vc/funds/nordwind-ventures-ii\"}],\"returned\":3,\"matched\":108,\"limit\":3,\"max_limit\":10,\"filters_applied\":{\"stage\":\"seed\",\"country\":null,\"industry\":\"saas\",\"closed_since\":null},\"truncated\":true,\"truncated_reason\":\"balance\",\"note\":\"108 funds match but one call without a paid account returns at most 10. Narrow by country, stage or industry to see the rest. Agents with paid credits get matches at 1 credit (EUR 0.01) per fund returned, up to 150 funds per key per day; the Pro plan (EUR 29/mo) pages through the full list.\",\"billing\":{\"credits_charged\":3,\"balance_after\":0,\"next_page_cost\":0,\"next_offset\":null,\"payment_mode\":\"credits\",\"credits_unreturned\":0}}"
+                        }
+                    ],
+                    "_meta": {
+                        "auth": "api_key",
+                        "billing": "credits",
+                        "cost": "€0.03",
+                        "credits_charged": 3,
+                        "credits_remaining": 0,
+                        "buy_more": "https://fundmomentum.vc/for-agents"
+                    }
+                }
+            }
+        }
+    }]
+}
