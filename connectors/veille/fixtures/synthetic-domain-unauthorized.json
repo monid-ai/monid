@@ -1,6 +1,6 @@
 {
     "name": "synthetic-domain-unauthorized",
-    "description": "SYNTHETIC 401 for veille#v1/intelligence/domain: Veille's error envelope for a missing or invalid key, as the API returns it.",
+    "description": "SYNTHETIC 401 for veille#v1/intelligence/domain: Veille's error envelope for an invalid key sent upstream, as the API returns it.",
     "calls": [
         {
             "req": {
