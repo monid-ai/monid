@@ -1,0 +1,23 @@
+{
+    "name": "synthetic-no-pending-request",
+    "description": "synthetic: POST /calls/{call_id}/answer after the question closed (answered already or expired). 200 with delivered false; not an error, and the answer is dropped. Shaped from the public OpenAPI AnswerResponse.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.voygr.tech/calls/c_synthetic02/answer",
+                "body": {
+                    "answer": "Under the name Rivera.",
+                    "request_id": "req_synthetic01"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "delivered": false,
+                    "reason": "no_pending_request"
+                }
+            }
+        }
+    ]
+}

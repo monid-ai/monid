@@ -1,0 +1,21 @@
+{
+    "name": "synthetic-foreign-call-404",
+    "description": "synthetic: POST /calls/{call_id}/answer for a call this sub-account does not own. VOYGR answers 404 {detail: 'Call not found'}.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.voygr.tech/calls/c_synthetic99/answer",
+                "body": {
+                    "answer": "Under the name Rivera."
+                }
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "detail": "Call not found"
+                }
+            }
+        }
+    ]
+}

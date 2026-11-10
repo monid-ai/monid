@@ -1,0 +1,96 @@
+{
+    "name": "happy-standard",
+    "description": "recorded 2026-10-27 against api.voygr.tech: POST /v1/enrich, three standard attributes for a public bakery (Tartine Bakery, San Francisco). The standard lane answers 200 with no meta block; billed 1 credit.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.voygr.tech/v1/enrich",
+                "body": {
+                    "poi_name": "Tartine Bakery",
+                    "address": "600 Guerrero St, San Francisco, CA 94110",
+                    "country": "US",
+                    "attributes": [
+                        "phone",
+                        "website",
+                        "opening_hours"
+                    ]
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "attributes": {
+                        "phone": {
+                            "value": {
+                                "number": "+14154872600"
+                            },
+                            "as_of": null,
+                            "confidence": "medium"
+                        },
+                        "website": {
+                            "value": {
+                                "url": "https://tartinebakery.com"
+                            },
+                            "as_of": null,
+                            "confidence": "medium"
+                        },
+                        "opening_hours": {
+                            "value": {
+                                "days": {
+                                    "monday": [
+                                        {
+                                            "open": "07:30",
+                                            "close": "18:00"
+                                        }
+                                    ],
+                                    "tuesday": [
+                                        {
+                                            "open": "07:30",
+                                            "close": "18:00"
+                                        }
+                                    ],
+                                    "wednesday": [
+                                        {
+                                            "open": "07:30",
+                                            "close": "18:00"
+                                        }
+                                    ],
+                                    "thursday": [
+                                        {
+                                            "open": "07:30",
+                                            "close": "18:00"
+                                        }
+                                    ],
+                                    "friday": [
+                                        {
+                                            "open": "07:30",
+                                            "close": "18:00"
+                                        }
+                                    ],
+                                    "saturday": [
+                                        {
+                                            "open": "07:30",
+                                            "close": "18:00"
+                                        }
+                                    ],
+                                    "sunday": [
+                                        {
+                                            "open": "07:30",
+                                            "close": "18:00"
+                                        }
+                                    ]
+                                }
+                            },
+                            "as_of": null,
+                            "confidence": "high"
+                        }
+                    },
+                    "enrichment_timestamp": "2026-10-27T07:17:44.633213Z",
+                    "request_id": "req_45c48dd89b61481bb2cdb57e"
+                }
+            }
+        }
+    ]
+}

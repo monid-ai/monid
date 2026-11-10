@@ -1,0 +1,105 @@
+{
+    "name": "happy",
+    "description": "recorded 2026-10-27 against api.voygr.tech: POST /v1/jobs/validate with three public places in San Francisco (Blue Bottle Coffee, Tartine Bakery, Philz Coffee), then GET /v1/jobs/{batch_id}: the first read (running) and the read that found it completed (3 succeeded). Billed 3 credits. The presigned download link's host and query are replaced with a placeholder.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.voygr.tech/v1/jobs/validate",
+                "body": {
+                    "pois": [
+                        {
+                            "id": "blue-bottle-mint",
+                            "poi_name": "Blue Bottle Coffee",
+                            "address": "66 Mint St, San Francisco, CA 94103",
+                            "country": "US"
+                        },
+                        {
+                            "id": "tartine-guerrero",
+                            "poi_name": "Tartine Bakery",
+                            "address": "600 Guerrero St, San Francisco, CA 94110",
+                            "country": "US"
+                        },
+                        {
+                            "id": "philz-24th",
+                            "poi_name": "Philz Coffee",
+                            "address": "3101 24th St, San Francisco, CA 94110",
+                            "country": "US"
+                        }
+                    ]
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "batch_id": "batch_01M5YB5CABS9NJ8C5B9WD5YR6V",
+                    "type": "validate",
+                    "status": "queued",
+                    "created_at": "2026-10-27T09:30:48Z",
+                    "total_items": 3,
+                    "eta_seconds": 2,
+                    "eta_completion_at": "2026-10-27T09:30:50Z"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.voygr.tech/v1/jobs/batch_01M5YB5CABS9NJ8C5B9WD5YR6V"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "batch_id": "batch_01M5YB5CABS9NJ8C5B9WD5YR6V",
+                    "type": "validate",
+                    "status": "running",
+                    "created_at": "2026-10-27T09:30:48Z",
+                    "started_at": "2026-10-27T09:30:48Z",
+                    "total_items": 3,
+                    "progress": {
+                        "processed": 0,
+                        "succeeded": 0,
+                        "failed": 0
+                    },
+                    "eta_seconds": 2,
+                    "eta_completion_at": "2026-10-27T09:30:50Z"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.voygr.tech/v1/jobs/batch_01M5YB5CABS9NJ8C5B9WD5YR6V"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "batch_id": "batch_01M5YB5CABS9NJ8C5B9WD5YR6V",
+                    "type": "validate",
+                    "status": "completed",
+                    "created_at": "2026-10-27T09:30:48Z",
+                    "started_at": "2026-10-27T09:30:48Z",
+                    "completed_at": "2026-10-27T09:31:00Z",
+                    "total_items": 3,
+                    "progress": {
+                        "processed": 3,
+                        "succeeded": 3,
+                        "failed": 0
+                    },
+                    "results": {
+                        "format": "jsonl.gz",
+                        "total_items": 3,
+                        "files": [
+                            {
+                                "url": "https://results.example.invalid/batches/batch_01M5YB5CABS9NJ8C5B9WD5YR6V/result.jsonl.gz",
+                                "size_bytes": 347,
+                                "sha256": "ed2cdb5efac7c594347482eacbc89cd993ceedccd82973a5d25cc92f5efa91df",
+                                "expires_at": "2026-10-27T09:46:01Z"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

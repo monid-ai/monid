@@ -1,0 +1,26 @@
+{
+    "name": "unknown-skill",
+    "description": "recorded 2026-10-27 against api.voygr.tech: GET /skills/no-such-skill/manifest. A 404 that names the skills that exist.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.voygr.tech/skills/no-such-skill/manifest"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "detail": {
+                        "error": "skill_not_found",
+                        "skill_id": "no-such-skill",
+                        "available_skills": [
+                            "cancel-booking",
+                            "concierge",
+                            "restaurant-reservation"
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

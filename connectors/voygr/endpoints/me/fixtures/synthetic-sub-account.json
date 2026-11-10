@@ -1,0 +1,41 @@
+{
+    "name": "synthetic-sub-account",
+    "description": "synthetic: GET /users/me with a sub-account named. max_concurrent_calls and max_calls_per_day are the limits that apply to the sub-account; every other field is still the partner key's own view. Written to match that shape, not recorded; every value is made up.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.voygr.tech/users/me"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "api_key_id": "key_synthetic-0001",
+                    "customer_id": "cus_synthetic-0001",
+                    "customer_name": "Synthetic Partner Ltd",
+                    "api_key_last_4": "0000",
+                    "status": "active",
+                    "quota_limit": 5000,
+                    "current_usage": 1200,
+                    "anchored": false,
+                    "quota_period": "monthly",
+                    "ask_user_webhook_url": "https://hooks.example.com/synthetic",
+                    "ask_user_webhook_configured": true,
+                    "webhook_events": [
+                        "ask_user",
+                        "call_completed"
+                    ],
+                    "max_concurrent_calls": 2,
+                    "max_concurrent_calls_ceiling": 8,
+                    "max_calls_per_day": 30,
+                    "credits_available": 3800,
+                    "credits_held": 60,
+                    "credits_hold_per_call": 30,
+                    "credits_charge_per_successful_call": 10,
+                    "is_admin": false,
+                    "maintenance": null
+                }
+            }
+        }
+    ]
+}

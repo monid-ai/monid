@@ -1,0 +1,19 @@
+{
+    "name": "completed-job",
+    "description": "recorded 2026-10-27 against api.voygr.tech: DELETE /v1/jobs/{batch_id} on the validate job in validate-batch/fixtures/happy.json after it had completed. It answers 200 with the status unchanged, completed; free.",
+    "calls": [
+        {
+            "req": {
+                "method": "DELETE",
+                "url": "https://api.voygr.tech/v1/jobs/batch_01M5YB5CABS9NJ8C5B9WD5YR6V"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "batch_id": "batch_01M5YB5CABS9NJ8C5B9WD5YR6V",
+                    "status": "completed"
+                }
+            }
+        }
+    ]
+}

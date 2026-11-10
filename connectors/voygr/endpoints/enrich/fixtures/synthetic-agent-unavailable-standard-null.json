@@ -1,0 +1,51 @@
+{
+    "name": "synthetic-agent-unavailable-standard-null",
+    "description": "synthetic: as synthetic-agent-unavailable, but the standard lane found nothing either (the phone value is null, abstain_reason not_found). Nothing is left to bill: 0 credits. Written from the shape of the real answers and the backend's settle, not recorded.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.voygr.tech/v1/enrich",
+                "body": {
+                    "poi_name": "Tartine Bakery",
+                    "address": "600 Guerrero St, San Francisco, CA 94110",
+                    "country": "US",
+                    "attributes": [
+                        "phone",
+                        "wheelchair_accessible"
+                    ]
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "id": null,
+                    "attributes": {
+                        "phone": {
+                            "value": null,
+                            "status": "unconfirmed",
+                            "confidence": null,
+                            "abstain_reason": "not_found"
+                        },
+                        "wheelchair_accessible": {
+                            "value": null,
+                            "confidence": null,
+                            "status": "unconfirmed",
+                            "abstain_reason": "failed"
+                        }
+                    },
+                    "meta": {
+                        "steps": 0,
+                        "tool_calls": 1,
+                        "cost_units": 0,
+                        "stopped_reason": "agent_unavailable",
+                        "estimated_credits": 2
+                    },
+                    "enrichment_timestamp": "2026-10-27T09:00:00.000000Z",
+                    "request_id": "req_000000000000000000000001"
+                }
+            }
+        }
+    ]
+}

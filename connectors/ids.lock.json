@@ -652,9 +652,25 @@
         "suzanne#v1/models/download",
         "suzanne#v1/uploads",
         "tinyfish#fetch",
-        "tinyfish#search"
+        "tinyfish#search",
+        "voygr#answer-call",
+        "voygr#call-events",
+        "voygr#cancel-call",
+        "voygr#cancel-job",
+        "voygr#enrich",
+        "voygr#enrich-batch",
+        "voygr#get-call",
+        "voygr#get-job",
+        "voygr#list-calls",
+        "voygr#list-skills",
+        "voygr#me",
+        "voygr#place-call",
+        "voygr#skill-manifest",
+        "voygr#suggest-places",
+        "voygr#validate-batch"
     ],
     "resources": [
-        "saperly/phone-number"
+        "saperly/phone-number",
+        "voygr/sub-account"
     ]
 }

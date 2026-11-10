@@ -1,0 +1,22 @@
+{
+    "name": "unknown-batch-404",
+    "description": "recorded 2026-10-27 against api.voygr.tech: DELETE /v1/jobs/{batch_id} for a made-up id this key does not own. 404 NOT_FOUND; free.",
+    "calls": [
+        {
+            "req": {
+                "method": "DELETE",
+                "url": "https://api.voygr.tech/v1/jobs/batch_00000000000000000000000000000000"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "success": false,
+                    "error_code": "NOT_FOUND",
+                    "error": "Batch not found",
+                    "validation_timestamp": "2026-10-27T09:32:19.903319Z",
+                    "request_id": "req_68ac12a7e8204476b378ca1c"
+                }
+            }
+        }
+    ]
+}

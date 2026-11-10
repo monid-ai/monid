@@ -1,0 +1,20 @@
+{
+    "name": "synthetic-invalid-key-401",
+    "description": "synthetic: GET /skills with a key VOYGR does not accept. 401 with the error under `detail`, as in the public OpenAPI example.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.voygr.tech/skills"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "detail": {
+                        "error": "invalid API key"
+                    }
+                }
+            }
+        }
+    ]
+}

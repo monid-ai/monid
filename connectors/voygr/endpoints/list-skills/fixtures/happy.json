@@ -1,0 +1,38 @@
+{
+    "name": "happy",
+    "description": "recorded 2026-10-27 against api.voygr.tech: GET /skills. Public catalog data: the three runnable PlaceCall skills.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.voygr.tech/skills"
+            },
+            "res": {
+                "status": 200,
+                "body": [
+                    {
+                        "skill_id": "cancel-booking",
+                        "title": "Cancel Booking",
+                        "description": "Place a phone call to a venue to cancel a reservation stored under ``booking_id``. Works only for bookings made before 2026-10-05: the API has stored no bookings since, so no newer ``booking_id`` exists. Not recommended for new integrations. The agent identifies the reservation to staff by name, date and party size, requests cancellation, and confirms it. ``ask_user`` is fired only if staff asks for something not on file.",
+                        "manifest_url": "/skills/cancel-booking/manifest",
+                        "run_url": "/skills/cancel-booking/run"
+                    },
+                    {
+                        "skill_id": "concierge",
+                        "title": "Concierge — info, follow-up, issue resolution",
+                        "description": "Place a phone call to ask a question, collect information, or calmly report a problem and request resolution. NOT for bookings or cancellations — use ``restaurant-reservation`` / ``cancel-booking`` for those. The pre-call analyzer surfaces missing required information as a structured 422 — collect from your user, populate ``pre_filled_slots``, and resubmit.",
+                        "manifest_url": "/skills/concierge/manifest",
+                        "run_url": "/skills/concierge/run"
+                    },
+                    {
+                        "skill_id": "restaurant-reservation",
+                        "title": "Restaurant Reservation",
+                        "description": "Place a phone call to a restaurant and book a table on behalf of an end user. The voice agent introduces itself, requests the table, dictates the contact phone (spelled-out for accuracy), and confirms the reservation. ``ask_user`` is fired if staff requires info not provided in the input (deposit, surname, allergy specifics).",
+                        "manifest_url": "/skills/restaurant-reservation/manifest",
+                        "run_url": "/skills/restaurant-reservation/run"
+                    }
+                ]
+            }
+        }
+    ]
+}

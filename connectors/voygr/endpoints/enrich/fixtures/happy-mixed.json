@@ -1,0 +1,54 @@
+{
+    "name": "happy-mixed",
+    "description": "recorded 2026-10-27 against api.voygr.tech: POST /v1/enrich, one standard attribute (phone) plus one research field (wheelchair_accessible) for a public bakery; billed 2 credits (1 standard lane + 1 research field).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.voygr.tech/v1/enrich",
+                "body": {
+                    "poi_name": "Tartine Bakery",
+                    "address": "600 Guerrero St, San Francisco, CA 94110",
+                    "country": "US",
+                    "attributes": [
+                        "phone",
+                        "wheelchair_accessible"
+                    ]
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "id": null,
+                    "attributes": {
+                        "wheelchair_accessible": {
+                            "value": true,
+                            "confidence": "high",
+                            "status": "confirmed"
+                        },
+                        "phone": {
+                            "value": {
+                                "number": "+14154872600"
+                            },
+                            "status": "confirmed",
+                            "confidence": "high"
+                        }
+                    },
+                    "meta": {
+                        "steps": 2,
+                        "tool_calls": 3,
+                        "cost_units": 3,
+                        "stopped_reason": "completed",
+                        "estimated_credits": 2,
+                        "lanes": {
+                            "deep": 1
+                        }
+                    },
+                    "enrichment_timestamp": "2026-10-27T07:17:59.969727Z",
+                    "request_id": "req_e7ac41cc3a474272972aab90"
+                }
+            }
+        }
+    ]
+}

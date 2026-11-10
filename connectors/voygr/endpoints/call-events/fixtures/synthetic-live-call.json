@@ -1,0 +1,57 @@
+{
+    "name": "synthetic-live-call",
+    "description": "synthetic: the one probe a call-events read makes, GET /calls/{call_id}, on a call that is still running (outcome_type null). The fixture holds no events exchange on purpose: a read that opened the stream would find no recorded call left. Shaped from the public OpenAPI CallDTO. Ids are made up.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.voygr.tech/calls/c_synthetic02"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "call_id": "c_synthetic02",
+                    "customer_id": "cus_synthetic-0001",
+                    "target_phone": "+14155550101",
+                    "language": "en",
+                    "status": "in_progress",
+                    "started_at": "2026-10-27T09:05:03Z",
+                    "ended_at": null,
+                    "duration_sec": null,
+                    "answered_at": "2026-10-27T09:05:12Z",
+                    "recording_started_at": null,
+                    "answer_offset_ms": null,
+                    "result": null,
+                    "ended_by": null,
+                    "line_kind": null,
+                    "result_reason": null,
+                    "outcome_type": null,
+                    "outcome_summary": null,
+                    "outcome_charge_cents": 0,
+                    "created_at": "2026-10-27T09:05:00Z",
+                    "has_recording": false,
+                    "recording_url": null,
+                    "recording_status": "pending",
+                    "reservation_signals": null,
+                    "transcript_full": null,
+                    "transcript_status": null,
+                    "recording_declined": false,
+                    "disclosure_mode": "standard",
+                    "record_call": true,
+                    "disclosure_text": null,
+                    "voice": {
+                        "gender": null,
+                        "gender_used": null
+                    },
+                    "pending_questions": [
+                        {
+                            "request_id": "req_synthetic01",
+                            "question": "They ask for a surname for the table. What name should it be under?",
+                            "expires_at": "2026-10-27T09:06:40"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

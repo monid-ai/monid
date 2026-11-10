@@ -1,0 +1,23 @@
+{
+    "name": "synthetic-delivered",
+    "description": "synthetic: POST /calls/{call_id}/answer while the question is still open. 200 with delivered true. Shaped from the public OpenAPI AnswerResponse. Ids are made up.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.voygr.tech/calls/c_synthetic02/answer",
+                "body": {
+                    "answer": "Under the name Rivera.",
+                    "request_id": "req_synthetic01"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "delivered": true,
+                    "reason": "delivered"
+                }
+            }
+        }
+    ]
+}

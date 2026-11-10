@@ -1,0 +1,104 @@
+{
+    "name": "all-rows-failed",
+    "description": "recorded 2026-10-27 against api.voygr.tech: POST /v1/jobs/enrich with two places at coordinates (0, 0) and no address, then GET /v1/jobs/{batch_id} until completed. Every row failed (the coordinates resolve to no location), so the job completed with 0 succeeded and 2 failed. Billed 0 credits. The presigned download link's host and query are replaced with a placeholder.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.voygr.tech/v1/jobs/enrich",
+                "body": {
+                    "pois": [
+                        {
+                            "id": "nowhere-1",
+                            "poi_name": "Tartine Bakery",
+                            "latitude": 0.0,
+                            "longitude": 0.0,
+                            "attributes": [
+                                "phone"
+                            ]
+                        },
+                        {
+                            "id": "nowhere-2",
+                            "poi_name": "Philz Coffee",
+                            "latitude": 0.0,
+                            "longitude": 0.0,
+                            "attributes": [
+                                "phone"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "batch_id": "batch_01M5YB6MMW6SNZZN4DTFJ5VMHZ",
+                    "type": "enrich",
+                    "status": "queued",
+                    "created_at": "2026-10-27T09:31:29Z",
+                    "total_items": 2,
+                    "eta_seconds": 1,
+                    "eta_completion_at": "2026-10-27T09:31:30Z"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.voygr.tech/v1/jobs/batch_01M5YB6MMW6SNZZN4DTFJ5VMHZ"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "batch_id": "batch_01M5YB6MMW6SNZZN4DTFJ5VMHZ",
+                    "type": "enrich",
+                    "status": "queued",
+                    "created_at": "2026-10-27T09:31:29Z",
+                    "total_items": 2,
+                    "progress": {
+                        "processed": 0,
+                        "succeeded": 0,
+                        "failed": 0
+                    },
+                    "eta_seconds": 1,
+                    "eta_completion_at": "2026-10-27T09:31:30Z"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.voygr.tech/v1/jobs/batch_01M5YB6MMW6SNZZN4DTFJ5VMHZ"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "batch_id": "batch_01M5YB6MMW6SNZZN4DTFJ5VMHZ",
+                    "type": "enrich",
+                    "status": "completed",
+                    "created_at": "2026-10-27T09:31:29Z",
+                    "started_at": "2026-10-27T09:31:29Z",
+                    "completed_at": "2026-10-27T09:31:29Z",
+                    "total_items": 2,
+                    "progress": {
+                        "processed": 2,
+                        "succeeded": 0,
+                        "failed": 2
+                    },
+                    "results": {
+                        "format": "jsonl.gz",
+                        "total_items": 2,
+                        "files": [
+                            {
+                                "url": "https://results.example.invalid/batches/batch_01M5YB6MMW6SNZZN4DTFJ5VMHZ/result.jsonl.gz",
+                                "size_bytes": 171,
+                                "sha256": "d7d399a57e46da30a6bea7ceb509d1338e42fd303d75fb5b3466f17a7b5acac2",
+                                "expires_at": "2026-10-27T09:46:30Z"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}
