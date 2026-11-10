@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-503",
+    "description": "HAND-WRITTEN from docs/api/openapi-public.json (CheckClaimResponse minus `examined`, plus `source` and `billing` from backend/apiwallet_routes.py), NOT recorded from a live call. Sources are placeholders on example.com. Replace with `deno task record` output before the PR. Exercises 503 verification_failed (TMB does not charge this case).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "claim": "Humans use only 10% of their brain."
+                }
+            },
+            "res": {
+                "status": 503,
+                "body": {
+                    "error": "verification_failed",
+                    "detail": "This check could not finish. Your wallet was not charged."
+                }
+            }
+        }
+    ]
+}
