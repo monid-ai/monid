@@ -220,6 +220,12 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "Hosted multi-step research agents that plan, search, and synthesize.",
     },
     {
+        id: "decision-models",
+        displayName: "Decision Models",
+        description:
+            "Tools to make structured AI judgments, including classification, rubric scoring, yes/no verification, and more.",
+    },
+    {
         // The GENERATIVE leaves: every other id above names data that
         // already exists somewhere and is retrieved. These name an artifact
         // the call creates.

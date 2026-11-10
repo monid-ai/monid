@@ -1,0 +1,81 @@
+{
+    "name": "live-systemone-drill",
+    "description": "RECORDED by hand from the monid-services live drill on 2026-09-20 (adaptors/typesafe provider.test.ts LIVE_BODY / LIVE_RESPONSE, fa6ab6ac): HTTP 200, a 526-byte body billed 407 input tokens.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "state": "Help! My payouts have been failing for 3 days and my rent is due.",
+                    "model": "jev-latest",
+                    "questions": {
+                        "is_urgent": {
+                            "type": "noul",
+                            "instructions": "Does this convey urgency?"
+                        },
+                        "department": {
+                            "type": "choice",
+                            "instructions": "Which team should handle this?",
+                            "criteria": {
+                                "billing": "Payments, invoicing, refunds",
+                                "technical": "Bugs, outages, integrations",
+                                "sales": "Pricing, upgrades, new accounts"
+                            }
+                        },
+                        "frustration": {
+                            "type": "score",
+                            "instructions": "How frustrated is the customer?",
+                            "criteria": [
+                                "Calm",
+                                "Frustrated",
+                                "Very angry"
+                            ]
+                        }
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "model": "jev-1.13.0",
+                    "answers": {
+                        "is_urgent": {
+                            "type": "noul",
+                            "noul": 0.98
+                        },
+                        "department": {
+                            "type": "choice",
+                            "choice": "billing",
+                            "confidence": 0.9,
+                            "probabilities": {
+                                "billing": 0.93,
+                                "technical": 0.07,
+                                "sales": 0.0
+                            }
+                        },
+                        "frustration": {
+                            "type": "score",
+                            "score": 1.26,
+                            "confidence": 0.62,
+                            "legend": {
+                                "0": "Calm",
+                                "1": "Frustrated",
+                                "2": "Very angry"
+                            },
+                            "probabilities": {
+                                "0": 0.0,
+                                "1": 0.74,
+                                "2": 0.26
+                            }
+                        }
+                    },
+                    "usage": {
+                        "input_tokens": 407,
+                        "output_tokens": 73
+                    }
+                }
+            }
+        }
+    ]
+}
