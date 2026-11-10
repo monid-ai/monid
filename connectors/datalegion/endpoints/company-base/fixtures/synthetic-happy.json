@@ -1,0 +1,38 @@
+{
+    "name": "synthetic-happy",
+    "description": "Synthetic (no Data Legion key held at port time, 2026-10-22): shape from the vendor OpenAPI example (docs/api-reference/openapi.json) — `matches[].{company, match_metadata}` + `total`; field values are placeholders and the field set follows the product's documented split, unverified against live traffic. Replace via `deno task record`. Company Base: firmographics only. One match, one credit.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.datalegion.ai/company/enrich"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "matches": [
+                        {
+                            "company": {
+                                "legion_id": "00000000-0000-5000-8000-000000000002",
+                                "name": "example co",
+                                "domain": "example.com",
+                                "industry": "technology, information and internet",
+                                "size": "1001-5000",
+                                "type": "private",
+                                "founded": 2010
+                            },
+                            "match_metadata": {
+                                "matched_on": [
+                                    "domain"
+                                ],
+                                "match_type": "exact",
+                                "match_confidence": "high"
+                            }
+                        }
+                    ],
+                    "total": 1
+                }
+            }
+        }
+    ]
+}

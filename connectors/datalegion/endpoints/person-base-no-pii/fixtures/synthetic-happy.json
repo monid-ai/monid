@@ -1,0 +1,39 @@
+{
+    "name": "synthetic-happy",
+    "description": "Synthetic (no Data Legion key held at port time, 2026-10-22): shape from the vendor OpenAPI example (docs/api-reference/openapi.json) — `matches[].{person, match_metadata}` + `total`; field values are placeholders and the field set follows the product's documented split, unverified against live traffic. Replace via `deno task record`. Person Base (No PII): Base fields only. One match, one credit.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.datalegion.ai/person/enrich"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "matches": [
+                        {
+                            "person": {
+                                "legion_id": "00000000-0000-5000-8000-000000000001",
+                                "full_name": "jane doe",
+                                "first_name": "jane",
+                                "last_name": "doe",
+                                "linkedin_url": "https://www.linkedin.com/in/example-person",
+                                "job_title": "senior product manager",
+                                "company_name": "example co",
+                                "company_domain": "example.com"
+                            },
+                            "match_metadata": {
+                                "matched_on": [
+                                    "email"
+                                ],
+                                "match_type": "exact",
+                                "match_confidence": "high"
+                            }
+                        }
+                    ],
+                    "total": 1
+                }
+            }
+        }
+    ]
+}
