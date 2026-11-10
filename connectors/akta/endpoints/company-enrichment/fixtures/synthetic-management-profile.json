@@ -1,0 +1,43 @@
+{
+    "name": "synthetic-management-profile",
+    "description": "SYNTHETIC \u2014 not recorded. One management_profile section; credits_consumed is 1, v1's SECTION_CREDITS rate, so the claim and the derived fold agree.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.akta.pro/api/v1/company/enrichment/?company=canva.com&sections=management_profile"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "uuid": "00000l1",
+                        "management_profile": {
+                            "founders": [
+                                {
+                                    "name": "Melanie Perkins",
+                                    "title": "Co-founder and CEO"
+                                },
+                                {
+                                    "name": "Cliff Obrecht",
+                                    "title": "Co-founder and COO"
+                                },
+                                {
+                                    "name": "Cameron Adams",
+                                    "title": "Co-founder and CPO"
+                                }
+                            ],
+                            "leadership": [
+                                {
+                                    "name": "Melanie Perkins",
+                                    "title": "Chief Executive Officer"
+                                }
+                            ]
+                        }
+                    },
+                    "credits_consumed": 1
+                }
+            }
+        }
+    ]
+}

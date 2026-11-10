@@ -1,0 +1,33 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC — not recorded. Shape from the agent-docs OpenAPI response schema (agent-docs.akta.pro/openapi.json, 2026-10-21); credits_consumed is the published flat 3-credit rate",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.akta.pro/api/v1/company/enrichment/concise/?company=canva.com"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "success",
+                    "data": {
+                        "uuid": "00000l1",
+                        "name": "Canva",
+                        "website": "https://www.canva.com",
+                        "founded_year": 2012,
+                        "headquarters": "Sydney, Australia",
+                        "employee_range": "5001-10000",
+                        "business_model": "B2C and B2B SaaS",
+                        "competitors": [
+                            "Adobe Express",
+                            "Figma"
+                        ]
+                    },
+                    "count": 1,
+                    "credits_consumed": 3
+                }
+            }
+        }
+    ]
+}

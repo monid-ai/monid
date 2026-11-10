@@ -1,0 +1,40 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC — not recorded. Shape from the agent-docs OpenAPI response schema (agent-docs.akta.pro/openapi.json, 2026-10-21); two posts start one 10-record block, so credits_consumed is 4",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.akta.pro/api/v1/company/jobs/?company=canva.com&limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "success",
+                    "data": [
+                        {
+                            "title": "Senior Backend Engineer",
+                            "location": "Sydney, Australia",
+                            "posted_date": "2026-10-01",
+                            "url": "https://www.example.com/jobs/1",
+                            "employment_type": "full_time",
+                            "remote": false
+                        },
+                        {
+                            "title": "Product Designer",
+                            "location": "Remote",
+                            "posted_date": "2026-09-28",
+                            "url": "https://www.example.com/jobs/2",
+                            "employment_type": "full_time",
+                            "remote": true
+                        }
+                    ],
+                    "count": 2,
+                    "limit": 2,
+                    "offset": 0,
+                    "credits_consumed": 4
+                }
+            }
+        }
+    ]
+}

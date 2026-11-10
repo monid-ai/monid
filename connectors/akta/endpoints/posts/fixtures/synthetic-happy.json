@@ -1,0 +1,72 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC — not recorded. Shape from the agent-docs Social Posts reference (agent-docs.akta.pro/api-reference/alternative-data/social-posts, checked 2026-10-23): `data` is an object holding the company `uuid` and `posts[]`; two posts start one 10-record block, so credits_consumed is 1.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.akta.pro/api/v1/company/posts/?company=canva.com&limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "count": 2,
+                    "limit": 2,
+                    "offset": 0,
+                    "data": {
+                        "uuid": "b9f3c2de-0000-4000-8000-00000000c0a1",
+                        "posts": [
+                            {
+                                "id": "urn:li:activity:73811",
+                                "content_type": "video",
+                                "url": "https://www.example.com/posts/1",
+                                "posted_date": "2026-10-02T09:00:00+00:00",
+                                "is_paid": false,
+                                "reposted": false,
+                                "engagement_metrics": {
+                                    "total_reaction_count": 1200,
+                                    "like_count": 1140,
+                                    "empathy_count": 20,
+                                    "praise_count": 25,
+                                    "appreciation_count": 5,
+                                    "interest_count": 8,
+                                    "funny_count": 2,
+                                    "comments_count": 85,
+                                    "reposts_count": 140
+                                },
+                                "text_content": "Introducing Canva Code",
+                                "post_classification": "Product Launch",
+                                "author": {},
+                                "mentions": []
+                            },
+                            {
+                                "id": "urn:li:activity:73812",
+                                "content_type": "image",
+                                "url": "https://www.example.com/posts/2",
+                                "posted_date": "2026-09-30T08:30:00+00:00",
+                                "is_paid": false,
+                                "reposted": false,
+                                "engagement_metrics": {
+                                    "total_reaction_count": 300,
+                                    "like_count": 240,
+                                    "empathy_count": 20,
+                                    "praise_count": 25,
+                                    "appreciation_count": 5,
+                                    "interest_count": 8,
+                                    "funny_count": 2,
+                                    "comments_count": 85,
+                                    "reposts_count": 140
+                                },
+                                "text_content": "We're hiring in Sydney",
+                                "post_classification": "Hiring",
+                                "author": {},
+                                "mentions": []
+                            }
+                        ]
+                    },
+                    "credits_consumed": 1
+                }
+            }
+        }
+    ]
+}

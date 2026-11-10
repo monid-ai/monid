@@ -1,0 +1,32 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC — not recorded. Shape from the agent-docs OpenAPI response schema (agent-docs.akta.pro/openapi.json, 2026-10-21); 1.5 base + 2 companies × 0.2, so credits_consumed is 1.9",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.akta.pro/api/v1/list/generate/companies/"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "uuid": "00000l1",
+                            "name": "Canva",
+                            "website": "https://www.canva.com"
+                        },
+                        {
+                            "uuid": "0000def",
+                            "name": "Figma",
+                            "website": "https://www.figma.com"
+                        }
+                    ],
+                    "count": 2,
+                    "total_count": 120,
+                    "credits_consumed": 1.9
+                }
+            }
+        }
+    ]
+}

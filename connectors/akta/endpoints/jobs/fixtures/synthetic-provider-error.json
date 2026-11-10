@@ -1,0 +1,18 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "SYNTHETIC — not recorded. The 401 envelope for a bad key; mirrors akta#news's recorded provider error.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.akta.pro/api/v1/company/jobs/?company=canva.com&limit=2"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "detail": "Invalid API key."
+                }
+            }
+        }
+    ]
+}

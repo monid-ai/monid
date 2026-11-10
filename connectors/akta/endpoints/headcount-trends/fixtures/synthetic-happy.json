@@ -1,0 +1,44 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC — not recorded. Shape from the agent-docs OpenAPI response schema (agent-docs.akta.pro/openapi.json, 2026-10-21); credits_consumed is the published flat 2.5-credit rate",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.akta.pro/api/v1/company/headcount-trends/?company=canva.com"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "current_employees": 5200,
+                        "growth": {
+                            "6m": 0.04,
+                            "12m": 0.09,
+                            "24m": 0.21
+                        },
+                        "monthly": [
+                            {
+                                "month": "2026-08",
+                                "headcount": 5150
+                            },
+                            {
+                                "month": "2026-09",
+                                "headcount": 5200
+                            }
+                        ],
+                        "departments": [
+                            {
+                                "department": "Engineering",
+                                "headcount": 1800,
+                                "growth_6m": 0.05,
+                                "growth_12m": 0.11
+                            }
+                        ]
+                    },
+                    "credits_consumed": 2.5
+                }
+            }
+        }
+    ]
+}
