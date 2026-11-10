@@ -1,0 +1,30 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-11-02 against API Indonesia production (GET /api/v1/hijriah/konversi?tanggal=2026-11-02) with a vendor key. Response trimmed by the recorder; real public-registry data.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?tanggal=2026-11-02"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "gregorian_date": "2026-11-02",
+                        "hijri_year": 1448,
+                        "hijri_month": 5,
+                        "hijri_day": 22,
+                        "hijri_month_name": "Jumadil Awal",
+                        "hijri_formatted": "22 Jumadil Awal 1448 H"
+                    },
+                    "meta": {
+                        "attribution": "Sumber: Kalender Hijriah Indonesia, Kementerian Agama",
+                        "source": "Kementerian Agama RI",
+                        "disclaimer": "Berdasarkan Kalender Hijriah Indonesia (hisab MABIMS). Mungkin selisih 1-2 hari dengan penetapan rukyat."
+                    }
+                }
+            }
+        }
+    ]
+}

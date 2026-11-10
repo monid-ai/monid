@@ -1,0 +1,54 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-11-02 against API Indonesia production (GET /api/v1/halal?q=indomie&limit=2) with a vendor key. Response trimmed by the recorder; real public-registry data. supervisor_name replaced with a placeholder persona.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?q=indomie&limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": [
+                        {
+                            "id_penyelia": "C7A753BB-3282-4D57-A485-B2B724D8267C",
+                            "company_name": "Dapoer indomie_keputran",
+                            "supervisor_name": null,
+                            "business_scale": "Kecil",
+                            "religion": "Islam",
+                            "cert_no": null,
+                            "status": null,
+                            "issue_date": null,
+                            "expiry_date": null,
+                            "issuer": "BPJPH",
+                            "fetched_at": "2026-11-02T07:44:23.357Z"
+                        },
+                        {
+                            "id_penyelia": "5332FA2F-C7E4-4B1D-80C0-C14CD5DF8177",
+                            "company_name": "Dapoer indomie_keputran",
+                            "supervisor_name": "Siti Contoh",
+                            "business_scale": "Kecil",
+                            "religion": "Islam",
+                            "cert_no": null,
+                            "status": null,
+                            "issue_date": null,
+                            "expiry_date": null,
+                            "issuer": "BPJPH",
+                            "fetched_at": "2026-11-02T07:44:23.357Z"
+                        }
+                    ],
+                    "meta": {
+                        "attribution": "Sumber: BPJPH (cmsbl.halal.go.id)",
+                        "source": "BPJPH",
+                        "cache_ttl_hours": 24,
+                        "refreshed": false,
+                        "cached_at": "2026-11-02T07:44:23.357Z",
+                        "disclaimer": "Data penyelia halal dari portal BPJPH. Nomor sertifikat belum tersedia dari API publik saat ini."
+                    }
+                }
+            }
+        }
+    ]
+}

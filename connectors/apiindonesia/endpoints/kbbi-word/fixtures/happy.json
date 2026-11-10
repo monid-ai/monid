@@ -1,0 +1,26 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-11-02 against API Indonesia production (GET /api/v1/kbbi/word/rumah) with a vendor key. Response trimmed by the recorder; real public-registry data.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://use.apiindonesia.id/api/v1/kbbi/word/rumah"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": [
+                        {
+                            "id": 78881,
+                            "word": "rumah",
+                            "arti": "<b>ru·mah</b> <i>n</i> <b>1</b> bangunan untuk tempat tinggal; <b>2</b> bangunan pd umumnya (spt gedung);<br>--<i> gedang ketirisan, pb</i> istri yg tidak mampu mendatangkan kebahagiaan kpd suami; --<i> sudah, tukul berbunyi, pb</i> memajukan keterangan dsb sesudah perkara diputuskan; <i>dl -- membuat -- , pb</i> mencari keuntungan untuk diri sendiri ketika bekerja pd orang lain;<br>--<b> adat</b> rumah tempat diselenggarakan upacara adat istiadat; balairung; --<b> api</b> menara api; mercu suar",
+                            "type": 1
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

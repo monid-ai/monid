@@ -1,0 +1,50 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-11-02 against API Indonesia production (GET /api/v1/lei?q=telkom&per_page=2) with a vendor key. Response trimmed by the recorder; real public-registry data.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?q=telkom&per_page=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": [
+                        {
+                            "lei": "529900M5SQZAOKV1PC81",
+                            "legal_name": "PT Telkom Indonesia (Persero) TBK",
+                            "entity_status": "ACTIVE",
+                            "registration_status": "LAPSED",
+                            "legal_form_code": "8888",
+                            "legal_city": "Bandung",
+                            "legal_region": "ID-JW",
+                            "legal_country": "ID",
+                            "hq_city": "Jakarta",
+                            "hq_region": "ID-JW",
+                            "next_renewal_date": "2019-11-02T08:54:10+01:00",
+                            "legal_region_name": "Jawa",
+                            "hq_region_name": "Jawa"
+                        }
+                    ],
+                    "meta": {
+                        "total": 1,
+                        "page": 1,
+                        "per_page": 2,
+                        "total_pages": 1,
+                        "attribution": {
+                            "source": "GLEIF Golden Copy (LEI-CDF dan RR-CDF)",
+                            "license": "CC0 1.0",
+                            "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+                            "source_url": "https://goldencopy.gleif.org",
+                            "attribution_page": "https://www.gleif.org/en/meta/lei-data-terms-of-use",
+                            "notice": "Data diubah: difilter ke entitas beralamat di Indonesia beserta induknya dan dinormalisasi ke format JSON API Indonesia. API Indonesia tidak berafiliasi dengan GLEIF dan layanan ini tidak didukung atau disahkan oleh GLEIF. / Filtered to Indonesian entities and their parents and normalised to the API Indonesia JSON format. API Indonesia is not affiliated with or endorsed by GLEIF.",
+                            "file_date": "2026-11-01T00:00:00Z"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

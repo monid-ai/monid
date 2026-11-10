@@ -1,0 +1,70 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-11-02 against API Indonesia production (GET /api/v1/kampus?q=tanjungpura&per_page=2) with a vendor key. Response trimmed by the recorder; real public-registry data.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?q=tanjungpura&per_page=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": [
+                        {
+                            "id": "pddikti-113100",
+                            "name": "Sekolah Tinggi Keguruan dan Ilmu Pendidikan Tanjungpura",
+                            "short_name": null,
+                            "jenis": "sekolah_tinggi",
+                            "kelompok": "PTS",
+                            "province_id": "61",
+                            "regency_id": "6104",
+                            "address": null,
+                            "postal_code": null,
+                            "lat": null,
+                            "lng": null,
+                            "phone": "0811568221",
+                            "email": "user@example.com",
+                            "website": null,
+                            "accreditation": null,
+                            "is_active": 1,
+                            "created_at": "2026-10-29 08:36:40",
+                            "updated_at": "2026-10-29 08:36:40",
+                            "province_name": "Kalimantan Barat",
+                            "regency_name": "Kabupaten Ketapang"
+                        },
+                        {
+                            "id": "pddikti-001022",
+                            "name": "Universitas Tanjungpura",
+                            "short_name": null,
+                            "jenis": "universitas",
+                            "kelompok": "PTN",
+                            "province_id": "61",
+                            "regency_id": "6171",
+                            "address": "Jalan Jenderal Ahmad Yani",
+                            "postal_code": null,
+                            "lat": null,
+                            "lng": null,
+                            "phone": "0561-736033,739630",
+                            "email": "1) user@example.com; 2) user@example.com",
+                            "website": null,
+                            "accreditation": null,
+                            "is_active": 1,
+                            "created_at": "2026-10-29 08:36:35",
+                            "updated_at": "2026-10-29 08:36:35",
+                            "province_name": "Kalimantan Barat",
+                            "regency_name": "Kota Pontianak"
+                        }
+                    ],
+                    "meta": {
+                        "total": 2,
+                        "page": 1,
+                        "per_page": 2,
+                        "total_pages": 1
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,80 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-11-02 against API Indonesia production (GET /api/v1/cuaca?adm4=6171031001) with a vendor key. Response trimmed by the recorder; real public-registry data.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?adm4=6171031001"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": [
+                        {
+                            "id": "w_6171031001_20261102080000",
+                            "adm4": "61.71.03.1001",
+                            "provinsi": "Kalimantan Barat",
+                            "kotkab": "Kota Pontianak",
+                            "kecamatan": "Pontianak Barat",
+                            "desa": "Pallima",
+                            "lat": -0.027545062,
+                            "lng": 109.2877534854,
+                            "timezone": "+0700",
+                            "datetime": "2026-11-02T08:00:00",
+                            "local_datetime": "2026-11-02 15:00:00",
+                            "weather": "Cerah",
+                            "weather_code": "1",
+                            "weather_desc": "Cerah",
+                            "weather_desc_en": "Sunny",
+                            "temperature_c": 31,
+                            "humidity_percent": 68,
+                            "cloud_cover_percent": 53,
+                            "precipitation_mm": 0.1,
+                            "wind_direction": "SW",
+                            "wind_direction_to": "NE",
+                            "wind_direction_degrees": 246,
+                            "wind_speed": 0.9,
+                            "visibility_m": null,
+                            "visibility_text": null,
+                            "analysis_date": "2026-11-02T00:00:00",
+                            "source": "BMKG",
+                            "fetched_at": "2026-11-02T07:44:55.252Z"
+                        },
+                        {
+                            "id": "w_6171031001_20261102110000",
+                            "adm4": "61.71.03.1001",
+                            "provinsi": "Kalimantan Barat",
+                            "kotkab": "Kota Pontianak",
+                            "kecamatan": "Pontianak Barat",
+                            "desa": "Pallima",
+                            "lat": -0.027545062,
+                            "lng": 109.2877534854,
+                            "timezone": "+0700",
+                            "datetime": "2026-11-02T11:00:00",
+                            "local_datetime": "2026-11-02 18:00:00",
+                            "weather": "Berawan",
+                            "weather_code": "3",
+                            "weather_desc": "Berawan",
+                            "weather_desc_en": "Mostly Cloudy",
+                            "temperature_c": 27,
+                            "humidity_percent": 92,
+                            "cloud_cover_percent": 98,
+                            "precipitation_mm": 0.2,
+                            "wind_direction": "NE",
+                            "wind_direction_to": "SW",
+                            "wind_direction_degrees": 77,
+                            "wind_speed": 2,
+                            "visibility_m": null,
+                            "visibility_text": null,
+                            "analysis_date": "2026-11-02T00:00:00",
+                            "source": "BMKG",
+                            "fetched_at": "2026-11-02T07:44:55.252Z"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
