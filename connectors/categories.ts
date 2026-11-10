@@ -351,6 +351,13 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "input, and more.",
     },
     {
+        id: "stock-media",
+        displayName: "Stock Media",
+        description:
+            "Tools to search and license ready-made media, including UGC " +
+            "clips, stock video, images, and more.",
+    },
+    {
         id: "video-search",
         displayName: "Video Search",
         description:
