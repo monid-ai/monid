@@ -1,0 +1,21 @@
+{
+    "name": "synthetic-draft-create",
+    "description": "Prepare a reply-all from a message in the owned inbox and return a saved draft revision.",
+    "calls": [{
+        "req": {
+            "method": "POST",
+            "url": "{{request.origin}}/api/v1/mailbox/drafts?mailbox_id=mbx_owned",
+            "body": {
+                "source": { "message_id": "msg_1", "action": "reply_all" },
+                "text_body": "Thanks"
+            }
+        },
+        "res": {
+            "status": 201,
+            "body": {
+                "ok": true,
+                "data": { "id": "draft_1", "revision": 1, "status": "ready" }
+            }
+        }
+    }]
+}

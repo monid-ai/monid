@@ -1,0 +1,17 @@
+{
+    "name": "synthetic-read-mailbox",
+    "description": "Read of a resource already owned by the Monid workspace.",
+    "calls": [{
+        "req": {
+            "method": "GET",
+            "url": "{{request.origin}}/api/v1/mailboxes/mbx_owned"
+        },
+        "res": {
+            "status": 200,
+            "body": {
+                "ok": true,
+                "data": { "id": "mbx_owned", "email": "agent@example.com" }
+            }
+        }
+    }]
+}
