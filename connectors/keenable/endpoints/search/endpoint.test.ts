@@ -16,20 +16,43 @@ Deno.test("keenable: fetch inherits PER_CALL 1, search counts RESULT, one auth f
     const ids = Object.keys(bundle.endpoints).filter((id) =>
         id.startsWith("keenable#")
     ).sort();
-    assertEquals(ids, ["keenable#v1/fetch", "keenable#v1/search"]);
+    assertEquals(ids, [
+        "keenable#v1/fetch",
+        "keenable#v1/fetch-answer",
+        "keenable#v1/search",
+        "keenable#v1/search-as-of",
+        "keenable#v1/search-contents",
+        "keenable#v1/search-news",
+        "keenable#v1/search-papers",
+    ]);
 
     const search = bundle.endpoints["keenable#v1/search"];
+    const news = bundle.endpoints["keenable#v1/search-news"];
+    const asOf = bundle.endpoints["keenable#v1/search-as-of"];
+    const contents = bundle.endpoints["keenable#v1/search-contents"];
+    const papers = bundle.endpoints["keenable#v1/search-papers"];
     const fetchDoc = bundle.endpoints["keenable#v1/fetch"];
+    const answer = bundle.endpoints["keenable#v1/fetch-answer"];
     assertEquals(search.request.method, "POST");
     assertEquals(search.request.url, "https://api.keenable.ai/v1/search");
+    assertEquals(news.request.url, "https://api.keenable.ai/v1/search");
+    assertEquals(asOf.request.url, "https://api.keenable.ai/v1/search");
+    assertEquals(contents.request.url, "https://api.keenable.ai/v1/search");
+    assertEquals(papers.request.url, "https://api.keenable.ai/v1/search");
     assertEquals(fetchDoc.request.method, "GET");
     assertEquals(fetchDoc.request.url, "https://api.keenable.ai/v1/fetch");
+    assertEquals(answer.request.url, "https://api.keenable.ai/v1/fetch");
 
     assertEquals(search.auth.inject.$fn.key, fetchDoc.auth.inject.$fn.key);
     assertEquals(search.usage.consolidate, undefined);
     assertEquals(fetchDoc.usage.consolidate, undefined);
     assertEquals(search.input.toRequest, undefined);
+    assertEquals(news.input.toRequest, undefined);
+    assertEquals(asOf.input.toRequest, undefined);
+    assertEquals(contents.input.toRequest, undefined);
+    assertEquals(papers.input.toRequest, undefined);
     assertEquals(fetchDoc.input.toRequest, undefined);
+    assertEquals(answer.input.toRequest, undefined);
 
     // fetch: flat PER_CALL, compiler-synthesized empty quantities
     // (tinyfish/pdl enrich posture); engine appends CALL at settle
@@ -39,24 +62,105 @@ Deno.test("keenable: fetch inherits PER_CALL 1, search counts RESULT, one auth f
         bundle.fnTable[synthesizedKey].provenance,
         "core#usage.synthesizedEmpty",
     );
-    // search: its own 0|1 evidence (empty result bills 0)
+    // search: its own 0|1 evidence (empty result bills 0); the five
+    // search docs share one interned pair
     assert(search.usage.evidence.$fn.key !== synthesizedKey);
+    assertEquals(search.usage.evidence.$fn.key, news.usage.evidence.$fn.key);
+    assertEquals(search.usage.evidence.$fn.key, asOf.usage.evidence.$fn.key);
+    assertEquals(
+        search.usage.evidence.$fn.key,
+        contents.usage.evidence.$fn.key,
+    );
+    assertEquals(search.usage.evidence.$fn.key, papers.usage.evidence.$fn.key);
 
     const kinds: Record<string, string> = {
         "keenable#v1/fetch": "PER_CALL",
+        "keenable#v1/fetch-answer": "PER_CALL",
         "keenable#v1/search": "PER_UNIT",
+        "keenable#v1/search-as-of": "PER_UNIT",
+        "keenable#v1/search-contents": "PER_UNIT",
+        "keenable#v1/search-news": "PER_UNIT",
+        "keenable#v1/search-papers": "PER_UNIT",
     };
     for (const id of ids) {
         const doc = bundle.endpoints[id];
+        assertEquals(doc.usage.credits.default.label, "US dollars", id);
         assertEquals(Object.keys(doc.usage.credits), ["default"], id);
         const model = doc.usage.model;
         assertEquals(model.kind, kinds[id], id);
         assertEquals(
             "consumes" in model ? model.consumes : undefined,
-            { credit: "default", amount: 1 },
+            { credit: "default", amount: 0.001 },
             id,
         );
     }
+});
+
+Deno.test("keenable: agent-facing meta, news category, live-fallback fetch", async () => {
+    const bundle = await testBundle();
+    const provider = bundle.providers.keenable;
+    assertEquals(provider.meta.displayName, "Keenable");
+    assertEquals(
+        provider.meta.summary,
+        "Search the live web and read the top pages in one call, plus clean page fetch.",
+    );
+    assertEquals(provider.meta.categories, [
+        "web-search",
+        "news-search",
+        "academic-search",
+        "web-scraping",
+    ]);
+
+    const search = bundle.endpoints["keenable#v1/search"];
+    assertEquals(search.meta.displayName, "Keenable Web Search");
+    assertEquals(search.meta.categories, ["web-search", "news-search"]);
+    assert(
+        search.meta.description?.includes("published_after"),
+        "search description names the news filter",
+    );
+    assert(
+        search.meta.description?.includes("keenable#v1/fetch"),
+        "search description names the next endpoint",
+    );
+
+    const news = bundle.endpoints["keenable#v1/search-news"];
+    assertEquals(news.meta.displayName, "Keenable News Search");
+    assertEquals(news.meta.categories, ["news-search"]);
+
+    const asOf = bundle.endpoints["keenable#v1/search-as-of"];
+    assertEquals(asOf.meta.displayName, "Keenable Point-in-Time Search");
+    assertEquals(asOf.meta.categories, ["web-search"]);
+
+    const contents = bundle.endpoints["keenable#v1/search-contents"];
+    assertEquals(contents.meta.displayName, "Keenable Search and Read");
+    assertEquals(contents.meta.categories, ["web-search", "web-extraction"]);
+    assert(
+        contents.meta.description?.includes("10,000"),
+        "contents description names the long extract",
+    );
+
+    const papers = bundle.endpoints["keenable#v1/search-papers"];
+    assertEquals(papers.meta.displayName, "Keenable Paper Search");
+    assertEquals(papers.meta.categories, ["academic-search"]);
+    assert(
+        papers.meta.description?.includes("arxiv.org"),
+        "papers description names a scholarly site",
+    );
+
+    const fetchDoc = bundle.endpoints["keenable#v1/fetch"];
+    assertEquals(fetchDoc.meta.displayName, "Keenable Fetch");
+    assertEquals(fetchDoc.meta.categories, [
+        "web-scraping",
+        "web-extraction",
+    ]);
+    assert(
+        fetchDoc.meta.description?.includes("live"),
+        "fetch description names live fallback",
+    );
+
+    const answer = bundle.endpoints["keenable#v1/fetch-answer"];
+    assertEquals(answer.meta.displayName, "Keenable Page Answer");
+    assertEquals(answer.meta.categories, ["web-extraction"]);
 });
 
 Deno.test("keenable#v1/search happy (synthetic): one credit; fold settles; mode echoed", async () => {
@@ -72,7 +176,7 @@ Deno.test("keenable#v1/search happy (synthetic): one credit; fold settles; mode 
     assertEquals(result.isProviderError, false);
     // no consolidate ⇒ no claim ⇒ the DERIVED fold is the bill (D2)
     assertEquals(result.usage, {
-        credits: { default: 1 },
+        credits: { default: 0.001 },
         evidence: { RESULT: 1 },
     });
     const output = result.output as Record<string, unknown>;
@@ -119,17 +223,23 @@ Deno.test("keenable#v1/search provider error (recorded 401): data, zero usage", 
     });
 });
 
-Deno.test("keenable#v1/search: query required; bounds; mode accepted", async () => {
+Deno.test("keenable#v1/search: query required; whitespace rejected; bounds; mode accepted", async () => {
     const unit = await testSealedUnit("keenable#v1/search");
     const fixture = await loadFixture(`${fixturesDir}synthetic-search-ok.json`);
     const rejected: Json[] = [
         {},
         { query: "" },
+        { query: "   " },
+        { query: "\t" },
+        { query: "x", site: "   " },
         { query: "x", max_results: 0 },
         { query: "x", max_results: 51 },
         { query: "x", snippet_max_length: 179 },
         { query: "x", snippet_max_length: 10001 },
         { query: "x", published_after: "" },
+        { query: "x", published_after: "   " },
+        { query: "x", query_time: "" },
+        { query: "x", query_time: "   " },
         { query: "x", query_time: 1790000000 },
     ];
     for (const body of rejected) {
@@ -152,8 +262,12 @@ Deno.test("keenable#v1/search: query required; bounds; mode accepted", async () 
         { query: "x", bogus: 1 },
         { query: "x", mode: "pro" },
         { query: "x", mode: "realtime" },
+        { query: "x", published_after: "2d" },
         { query: "x", published_after: "2w" },
         { query: "x", query_time: "1790000000" },
+        { query: "x", query_time: "2026-01-01" },
+        { query: "x", query_time: "2026-01-01T00:00:00Z" },
+        { query: "x", query_time: "7d" },
         {
             query: "typescript best practices",
             site: "arxiv.org",
@@ -201,4 +315,45 @@ Deno.test({
         );
         assertEquals(output.query, "deno 2 workspace monorepo guide");
     },
+});
+
+Deno.test("keenable search binding keeps each time filter's own description", async () => {
+    for (
+        const id of [
+            "keenable#v1/search",
+            "keenable#v1/search-news",
+            "keenable#v1/search-as-of",
+        ]
+    ) {
+        const unit = await testSealedUnit(id);
+        const properties = unit.doc.input.schema.body?.properties as Record<
+            string,
+            { description?: string }
+        >;
+        assert(
+            properties.query_time.description?.includes("as it stood"),
+            `${id} query_time description`,
+        );
+        assert(
+            properties.query_time.description?.includes("Unix epoch"),
+            `${id} query_time keeps QUERY_TIME_FORMAT`,
+        );
+        for (
+            const field of [
+                "acquired_after",
+                "acquired_before",
+                "published_after",
+                "published_before",
+            ]
+        ) {
+            assert(
+                !properties[field].description?.includes("as it stood"),
+                `${id} ${field} is not the query_time description`,
+            );
+        }
+        assert(
+            properties.acquired_after.description?.includes("acquired"),
+            `${id} acquired_after description`,
+        );
+    }
 });

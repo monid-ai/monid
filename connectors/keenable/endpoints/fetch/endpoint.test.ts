@@ -22,7 +22,7 @@ Deno.test("keenable#v1/fetch happy (synthetic): one credit; fold settles; markdo
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
     assertEquals(result.usage, {
-        credits: { default: 1 },
+        credits: { default: 0.001 },
         evidence: { CALL: 1 },
     });
     const output = result.output as Record<string, unknown>;
@@ -36,6 +36,54 @@ Deno.test("keenable#v1/fetch happy (synthetic): one credit; fold settles; markdo
             (output.content as string).includes("Example Domain"),
         "markdown content present",
     );
+});
+
+Deno.test("keenable#v1/fetch: omitted live sends no live param and a non-indexed URL still succeeds", async () => {
+    const unit = await testSealedUnit("keenable#v1/fetch");
+    const fixture = await loadFixture(
+        `${fixturesDir}synthetic-fetch-not-indexed.json`,
+    );
+    const result = await runEndpoint({
+        unit,
+        input: {
+            queryParams: { url: "https://example.com/not-in-index" },
+        },
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(result.httpStatus, 200);
+    assertEquals(result.isProviderError, false);
+    assertEquals(result.usage, {
+        credits: { default: 0.001 },
+        evidence: { CALL: 1 },
+    });
+    const output = result.output as Record<string, unknown>;
+    assertEquals(output.url, "https://example.com/not-in-index");
+    assert(
+        typeof output.content === "string" &&
+            (output.content as string).includes("Fetched live"),
+        "live-fallback content present",
+    );
+});
+
+Deno.test("keenable#v1/fetch: an explicit live false is passed through", async () => {
+    const unit = await testSealedUnit("keenable#v1/fetch");
+    const fixture = await loadFixture(
+        `${fixturesDir}synthetic-fetch-indexed.json`,
+    );
+    const result = await runEndpoint({
+        unit,
+        input: {
+            queryParams: { url: "https://example.com", live: false },
+        },
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(result.isProviderError, false);
+    assertEquals(result.usage, {
+        credits: { default: 0.001 },
+        evidence: { CALL: 1 },
+    });
 });
 
 Deno.test("keenable#v1/fetch provider error (recorded 401): data, zero usage", async () => {
@@ -63,6 +111,7 @@ Deno.test("keenable#v1/fetch: url required; prompt bounded; live accepted; unkno
         {},
         { url: "not-a-url" },
         { url: "https://example.com", max_chars: 0 },
+        { url: "https://example.com", prompt: "   " },
         { url: "https://example.com", prompt: "x".repeat(2001) },
         { url: "https://example.com", live: "yes" },
         { url: "https://example.com", bogus: 1 },
@@ -131,7 +180,7 @@ Deno.test("keenable#v1/fetch: url required; prompt bounded; live accepted; unkno
     });
     assertEquals(okLive.isProviderError, false);
     assertEquals(okLive.usage, {
-        credits: { default: 1 },
+        credits: { default: 0.001 },
         evidence: { CALL: 1 },
     });
 });

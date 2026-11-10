@@ -1,0 +1,21 @@
+{
+    "name": "synthetic-fetch-indexed",
+    "description": "SYNTHETIC indexed-only fetch for keenable#v1/fetch with live=false (opt-out of the connector default). Response shape matches the indexed-fetch public twin.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?url=https%3A%2F%2Fexample.com&live=false"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "url": "https://example.com/",
+                    "title": "Example Domain",
+                    "content": "# Example Domain\n\nThis domain is for use in documentation examples without needing permission. Avoid use in operations.",
+                    "description": ""
+                }
+            }
+        }
+    ]
+}

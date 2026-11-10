@@ -1,6 +1,6 @@
 {
     "name": "synthetic-fetch-ok",
-    "description": "SYNTHETIC happy chain for keenable#v1/fetch. Shape taken from a real 2026-09-16 GET /v1/fetch/public?url=https://example.com response (url, title, content, description); URL rewritten to the authenticated /v1/fetch the doc calls, with the query string the engine emits. Replace via `deno task record` when KEENABLE_API_KEY exists.",
+    "description": "SYNTHETIC happy chain for keenable#v1/fetch. Shape taken from a real 2026-09-16 GET /v1/fetch/public?url=https://example.com response (url, title, content, description); URL rewritten to the authenticated /v1/fetch the doc calls. live=true is the connector default (design D6). Replace via `deno task record` when KEENABLE_API_KEY exists.",
     "calls": [
         {
             "req": {
