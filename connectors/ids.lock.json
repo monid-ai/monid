@@ -138,6 +138,8 @@
         "clay#search/query-mode",
         "clay#search/query-mode/reference",
         "clay#search/query-mode/run",
+        "clera#job-filters",
+        "clera#job-search",
         "cloro#monitor/aimode",
         "cloro#monitor/chatgpt",
         "cloro#monitor/copilot",

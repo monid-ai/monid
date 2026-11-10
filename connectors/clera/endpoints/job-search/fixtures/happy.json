@@ -1,0 +1,80 @@
+{
+    "name": "happy",
+    "description": "recorded 2026-11-09 for clera#job-search, scenario 'happy'",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://www.getclera.com/api/public/jobs/search",
+                "body": {
+                    "search_term": "backend engineer",
+                    "cities": [
+                        "San Francisco"
+                    ],
+                    "per_page": 2
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "total_jobs": 46,
+                        "page": 1,
+                        "has_more": true,
+                        "top_jobs": [
+                            {
+                                "id": "cdadd249-3726-4d1b-a3d7-b33f0a1ecf24",
+                                "position": "Founding Engineer (AI/ML)",
+                                "lifecycle": "open",
+                                "role_names": [
+                                    "AI Engineer",
+                                    "Backend Engineer",
+                                    "Founding Engineer",
+                                    "Machine Learning Engineer"
+                                ],
+                                "company_name": "Clera",
+                                "company_logo_url": "https://storage.getclera.com/company-images/companies/e55adcd4-b7ce-4333-a5f6-691126c6db15_e5d8e628c782_1784691824650.png",
+                                "company_slug": "clera",
+                                "slug": "founding-engineer",
+                                "salary_lower_bound": 130000,
+                                "salary_upper_bound": 170000,
+                                "ote_lower_bound": null,
+                                "ote_upper_bound": null,
+                                "currency_type": "USD",
+                                "workplace_type": "on-site",
+                                "cities": [
+                                    "San Francisco"
+                                ],
+                                "normalized_keywords": []
+                            },
+                            {
+                                "id": "336ec258-f902-4e2a-9a28-0c9ded9531fe",
+                                "position": "Software Engineer",
+                                "lifecycle": "open",
+                                "role_names": [
+                                    "AI Engineer",
+                                    "Backend Engineer"
+                                ],
+                                "company_name": "Temper",
+                                "company_logo_url": "https://storage.getclera.com/company-images/logos/gotemper-com/logo.jpg",
+                                "company_slug": "temper-ex-unnbound",
+                                "slug": "software-engineer",
+                                "salary_lower_bound": 150000,
+                                "salary_upper_bound": 300000,
+                                "ote_lower_bound": null,
+                                "ote_upper_bound": null,
+                                "currency_type": "USD",
+                                "workplace_type": "on-site",
+                                "cities": [
+                                    "San Francisco"
+                                ],
+                                "normalized_keywords": []
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

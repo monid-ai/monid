@@ -1,0 +1,125 @@
+{
+    "name": "happy",
+    "description": "recorded 2026-11-09 for clera#job-filters, scenario 'happy' (cities and salarySteps trimmed)",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://www.getclera.com/api/public/search-filters"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "cities": [
+                            {
+                                "value": "San Francisco",
+                                "count": 58
+                            },
+                            {
+                                "value": "Berlin",
+                                "count": 26
+                            },
+                            {
+                                "value": "Munich",
+                                "count": 19
+                            },
+                            {
+                                "value": "Vienna",
+                                "count": 11
+                            }
+                        ],
+                        "workTypes": [
+                            {
+                                "value": "on-site",
+                                "count": 92
+                            },
+                            {
+                                "value": "hybrid",
+                                "count": 24
+                            },
+                            {
+                                "value": "remote",
+                                "count": 22
+                            },
+                            {
+                                "value": "on-site or remote",
+                                "count": 1
+                            }
+                        ],
+                        "roleClusters": [
+                            {
+                                "value": "software_engineering",
+                                "count": 72
+                            },
+                            {
+                                "value": "sales_and_business_development",
+                                "count": 42
+                            },
+                            {
+                                "value": "business_operations_and_management",
+                                "count": 25
+                            },
+                            {
+                                "value": "hardware_engineering",
+                                "count": 5
+                            },
+                            {
+                                "value": "product",
+                                "count": 4
+                            },
+                            {
+                                "value": "design",
+                                "count": 3
+                            }
+                        ],
+                        "fundingRounds": [
+                            {
+                                "value": "Seed",
+                                "count": 55
+                            },
+                            {
+                                "value": "Pre-seed",
+                                "count": 29
+                            },
+                            {
+                                "value": "Series A",
+                                "count": 17
+                            },
+                            {
+                                "value": "Series B",
+                                "count": 1
+                            },
+                            {
+                                "value": "Bootstrapped",
+                                "count": 1
+                            }
+                        ],
+                        "visaSponsorshipCount": 30,
+                        "salarySteps": [
+                            {
+                                "min": 50000,
+                                "max": null,
+                                "label": "50k+",
+                                "count": 139
+                            },
+                            {
+                                "min": 100000,
+                                "max": null,
+                                "label": "100k+",
+                                "count": 113
+                            },
+                            {
+                                "min": 150000,
+                                "max": null,
+                                "label": "150k+",
+                                "count": 93
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}
