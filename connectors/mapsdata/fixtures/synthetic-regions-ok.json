@@ -1,0 +1,23 @@
+{
+    "name": "synthetic-regions-ok",
+    "description": "Region list for Canada.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?country=ca"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "country": "ca",
+                    "country_name": "Canada",
+                    "regions": [
+                        "Alberta",
+                        "British Columbia"
+                    ]
+                }
+            }
+        }
+    ]
+}

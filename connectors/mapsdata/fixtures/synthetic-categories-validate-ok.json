@@ -1,0 +1,20 @@
+{
+    "name": "synthetic-categories-validate-ok",
+    "description": "A free-text term resolves to its canonical category.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?name=plumbers"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "valid": true,
+                    "canonical": "Plumber",
+                    "suggestions": []
+                }
+            }
+        }
+    ]
+}
