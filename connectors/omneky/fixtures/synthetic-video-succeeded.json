@@ -1,0 +1,56 @@
+{
+    "name": "synthetic-video-succeeded",
+    "description": "SYNTHETIC (built from the published OpenAPI response shapes, no live key used): submit 202 {job_id, type, credits_used}, one PROCESSING tick, then SUCCESS with result_url.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "job_id": "11111111-2222-4333-8444-555555555555",
+                    "type": "video_ad",
+                    "credits_used": 10
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/external-api/jobs/11111111-2222-4333-8444-555555555555"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "job_id": "11111111-2222-4333-8444-555555555555",
+                    "type": "video_ad",
+                    "status": "PROCESSING",
+                    "response": null,
+                    "error": null,
+                    "result_url": null
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/external-api/jobs/11111111-2222-4333-8444-555555555555"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "job_id": "11111111-2222-4333-8444-555555555555",
+                    "type": "video_ad",
+                    "status": "SUCCESS",
+                    "response": {
+                        "video_url": "https://cdn.example.com/synthetic/omneky-video-ad.mp4"
+                    },
+                    "error": null,
+                    "result_url": "https://cdn.example.com/synthetic/omneky-video-ad.mp4"
+                }
+            }
+        }
+    ]
+}
