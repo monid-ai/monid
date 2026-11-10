@@ -1,0 +1,56 @@
+{
+    "name": "synthetic-blocked",
+    "description": "451: the data subject asked to be removed (GDPR/CCPA), nothing returned, 0 credits. Synthetic, shaped on the public v2 contract (gateway envelope and OpenAPI document of 2026-10-21); values are placeholders.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 451,
+                "body": {
+                    "success": false,
+                    "data": null,
+                    "error": {
+                        "code": "DATA_SUBJECT_BLOCKED",
+                        "message": "This profile is not available",
+                        "details": {
+                            "requestDate": "2026-01-15",
+                            "regulation": "GDPR/CCPA"
+                        }
+                    },
+                    "quotas": {
+                        "creditsConsumed": 0,
+                        "workspace": {
+                            "id": "00000000-0000-4000-8000-000000000001",
+                            "credits": {
+                                "total": 10000,
+                                "used": 1234,
+                                "left": 8766
+                            },
+                            "hasUnlimitedCredits": false,
+                            "allowDailyOvercost": false,
+                            "dailyLimit": null,
+                            "minuteRateLimit": {
+                                "limit": 300,
+                                "used": 1,
+                                "left": 299,
+                                "nextReset": "2026-10-21T12:01:00.000Z"
+                            }
+                        },
+                        "key": {
+                            "id": "00000000-0000-4000-8000-000000000002",
+                            "dailyLimit": null,
+                            "minuteRateLimit": null
+                        }
+                    },
+                    "metadata": {
+                        "requestId": "req_01jexample0000000000000000",
+                        "executionTimeMs": 412
+                    }
+                }
+            }
+        }
+    ]
+}
