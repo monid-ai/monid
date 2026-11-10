@@ -653,7 +653,13 @@
         "suzanne#v1/models/download",
         "suzanne#v1/uploads",
         "tinyfish#fetch",
-        "tinyfish#search"
+        "tinyfish#search",
+        "veille#v1/intelligence/domain",
+        "veille#v1/intelligence/email",
+        "veille#v1/intelligence/emailq",
+        "veille#v1/intelligence/phone",
+        "veille#v1/vat",
+        "veille#v1/vat/iban"
     ],
     "resources": [
         "saperly/phone-number"
