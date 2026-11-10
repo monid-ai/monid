@@ -385,4 +385,10 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "Tools to pull public government records, including financial " +
             "disclosures, filings, registries, and more.",
     },
+    {
+        id: "podcasts",
+        displayName: "Podcasts",
+        description: "Podcast data: transcripts, episodes, guests, mentions, " +
+            "sponsors, and rankings.",
+    },
 ]);

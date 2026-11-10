@@ -1,0 +1,38 @@
+{
+    "name": "happy-episode-transcript",
+    "description": "Recorded 2026-10-28 with a real key against GET https://api.particle.pro/v1/podcasts/episodes/6bbjvFIPxXcVc1pt00h2y6/transcript?start=0&end=60 (HTTP 200); response trimmed by the fixture diet (arrays capped at 2, strings at 500 chars) and scrubbed. Particle bills this call a flat price; no receipt rides in the body.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.particle.pro/v1/podcasts/episodes/6bbjvFIPxXcVc1pt00h2y6/transcript?start=0&end=60"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "episode_id": "6bbjvFIPxXcVc1pt00h2y6",
+                    "language": "en",
+                    "duration_seconds": 6202.200000015,
+                    "lines": [
+                        {
+                            "number": 1,
+                            "speaker": "Jason Calacanis",
+                            "role": "HOST",
+                            "start_seconds": 0.277,
+                            "end_seconds": 3.878,
+                            "text": "All right, everybody, welcome to the literal number one podcast in the world."
+                        },
+                        {
+                            "number": 2,
+                            "speaker": "Jason Calacanis",
+                            "role": "HOST",
+                            "start_seconds": 4.358,
+                            "end_seconds": 5.158,
+                            "text": "Three weeks running."
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

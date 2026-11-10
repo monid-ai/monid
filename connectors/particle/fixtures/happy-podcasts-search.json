@@ -1,0 +1,132 @@
+{
+    "name": "happy-podcasts-search",
+    "description": "Recorded 2026-10-28 with a real key against GET https://api.particle.pro/v1/podcasts/search?q=all-in&limit=2 (HTTP 200); response trimmed by the fixture diet (arrays capped at 2, strings at 500 chars) and scrubbed. Particle bills this call a flat price; no receipt rides in the body.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.particle.pro/v1/podcasts/search?q=all-in&limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "id": "4t9PU1WkzOroEXfBl6ia7r",
+                            "title": "All-In with Chamath, Jason, Sacks & Friedberg",
+                            "slug": "all-in",
+                            "description": "Industry veterans, degenerate gamblers & besties Chamath Palihapitiya, Jason Calacanis, David Sacks & David Friedberg cover all things economic, tech, political, social & poker.",
+                            "url": "https://allinchamathjason.libsyn.com/rss",
+                            "image_url": "https://cdn.particle.pro/url/media/a0a7b2fa-7c8c-5609-9772-aee22f236ad7/e41c19d263c53225a98980e3049d7eb358bd579c61800fe9de34a50c17140476",
+                            "language": "en",
+                            "explicit": false,
+                            "episode_count": 442,
+                            "bias": "LEANS_RIGHT",
+                            "political_context": "US",
+                            "suitability_tier": "SENSITIVE",
+                            "popularity": 0.9977286336699085,
+                            "format": {
+                                "guest_frequency": "regular",
+                                "signals": [
+                                    "interview"
+                                ],
+                                "has_ads": true,
+                                "has_video": true,
+                                "avg_episode_minutes": 77,
+                                "episodes_per_week": 2.96,
+                                "publishing_status": "active"
+                            },
+                            "match_quality": "exact",
+                            "speakers": [
+                                {
+                                    "name": "Jason Calacanis",
+                                    "role": "HOST",
+                                    "occurrences": 395,
+                                    "entity": {
+                                        "id": "GoNEpqEjj2X4",
+                                        "slug": "jason-calacanis",
+                                        "name": "Jason Calacanis",
+                                        "description": "American internet entrepreneur and angel investor",
+                                        "wikipedia_url": "https://en.wikipedia.org/wiki/Jason_Calacanis",
+                                        "image_url": "https://cdn.particle.pro/url/media/kge/m/082wh2/2201db7170a6395917af54a629a4bdb7f09cc3ca5a0886daadab8d290f0701c9",
+                                        "person": {
+                                            "id": "65sdckHxa80FlEmIW7o9GU"
+                                        }
+                                    }
+                                },
+                                {
+                                    "name": "Chamath Palihapitiya",
+                                    "role": "HOST",
+                                    "occurrences": 361,
+                                    "entity": {
+                                        "id": "17PzxG1slmH46T",
+                                        "slug": "chamath-palihapitiya",
+                                        "name": "Chamath Palihapitiya",
+                                        "description": "Canadian-American venture capitalist",
+                                        "wikipedia_url": "https://en.wikipedia.org/wiki/Chamath_Palihapitiya",
+                                        "image_url": "https://cdn.particle.pro/url/media/kge/m/02h6fl9/657e15fc10a65d90efa52427ab896fa0f1e36e9c8b9ab05b9c672e772184cd6e",
+                                        "person": {
+                                            "id": "1UlqjpuHcBR5ugMpSNkMc4",
+                                            "company": "8090 Solutions"
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "id": "6Ncg0l0SepjbAz77sUAkAY",
+                            "title": "Unblinded with Sean Callagy",
+                            "slug": "unblinded",
+                            "description": "What if you could see what others don\u2019t\u2014and unlock the hidden patterns that quietly drive every outcome in business, relationships, and life?\nHosted by entrepreneur, attorney, philanthropist, and world-class communicator Sean Callagy, Unblinded is where peak performance meets integrity and possibility. Sean\u2014legally blind since childhood\u2014defied the odds to build multiple eight-figure companies, reinvent industries, and train thousands of leaders in the art of influence. His message is clear: infl",
+                            "url": "https://anchor.fm/s/10a340624/podcast/rss",
+                            "image_url": "https://cdn.particle.pro/url/media/d1a91aec-1719-5c55-8086-4e15b0711956/dab32cf448c073b55d861bd001985672e14b0e3d6a0a9ce4b8d71fbc5bd702d4",
+                            "language": "en",
+                            "explicit": false,
+                            "episode_count": 16,
+                            "suitability_tier": "SAFE",
+                            "popularity": 0.9995250779491627,
+                            "format": {
+                                "guest_frequency": "always",
+                                "signals": [
+                                    "interview"
+                                ],
+                                "has_ads": true,
+                                "has_video": true,
+                                "avg_episode_minutes": 73,
+                                "episodes_per_week": 0.31,
+                                "publishing_status": "active"
+                            },
+                            "match_quality": "partial",
+                            "speakers": [
+                                {
+                                    "name": "Sean Callagy",
+                                    "role": "HOST",
+                                    "occurrences": 16,
+                                    "entity": {
+                                        "id": "1GmOP1C2zzr2IKWGPQ",
+                                        "slug": "sean-callagy",
+                                        "name": "Sean Callagy",
+                                        "description": "Internet personality",
+                                        "image_url": "https://callagylaw.com/wp-content/uploads/2018/09/callagy.jpg",
+                                        "person": {
+                                            "id": "1AXzQMAb82Nlu5sJQf6h29",
+                                            "title": "Chief Visionary Officer",
+                                            "company": "UNBLINDED"
+                                        }
+                                    }
+                                },
+                                {
+                                    "name": "Bella Verita",
+                                    "role": "HOST",
+                                    "occurrences": 3
+                                }
+                            ]
+                        }
+                    ],
+                    "has_more": true,
+                    "cursor": "r.4gfFC6"
+                }
+            }
+        }
+    ]
+}

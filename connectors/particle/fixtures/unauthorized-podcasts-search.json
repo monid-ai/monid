@@ -1,0 +1,27 @@
+{
+    "name": "unauthorized-podcasts-search",
+    "description": "Recorded 2026-10-28 against GET https://api.particle.pro/v1/podcasts/search with an invalid key: HTTP 401 RFC 7807 problem+json (error_code api_key_required). Every Particle endpoint answers the same envelope; the request URL is rewritten to this endpoint's happy call so one recording replays per endpoint. Vendor non-2xx is data: zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.particle.pro/v1/podcasts/search?q=all-in&limit=2"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "type": "https://docs.particle.pro/errors/api_key_required",
+                    "title": "Unauthorized",
+                    "status": 401,
+                    "detail": "Valid API key or radar session required.",
+                    "error_code": "api_key_required",
+                    "resolve": {
+                        "message": "Create an API key in your project settings, or sign in at radar.particle.pro.",
+                        "url": "https://platform.particle.pro/tokens",
+                        "action": "create_api_key"
+                    }
+                }
+            }
+        }
+    ]
+}

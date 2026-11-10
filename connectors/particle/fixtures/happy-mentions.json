@@ -1,0 +1,363 @@
+{
+    "name": "happy-mentions",
+    "description": "Recorded 2026-10-28 with a real key against GET https://api.particle.pro/v1/podcasts/mentions?company_id=nvidia.com&limit=2 (HTTP 200); response trimmed by the fixture diet (arrays capped at 2, strings at 500 chars) and scrubbed. Particle bills this call a flat price; no receipt rides in the body.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.particle.pro/v1/podcasts/mentions?company_id=nvidia.com&limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "episode": {
+                                "id": "2IUj1hFDCsxIyZg1RVaOD1",
+                                "slug": "apples-pro-and-tell-googles-two-new-ai-models-openai-eyes-googles-custom-chips",
+                                "title": "Apple\u2019s \u2018Pro and Tell,\u2019 Google\u2019s Two New AI Models, OpenAI Eyes Google\u2019s Custom Chips | Diet TBPN",
+                                "published_at": "2026-10-29T00:23:07Z",
+                                "podcast": {
+                                    "id": "2JBqYZgOplODaaX11mqQee",
+                                    "title": "TBPN Live",
+                                    "slug": "tbpn-live",
+                                    "image_url": "https://cdn.particle.pro/url/media/4be24eec-7d69-5741-a7b0-0710c85f5140/d9b31e2433b99b9a2546c9ac532477a212a824adf110cef6ce21bb10426b41ba",
+                                    "publisher": {
+                                        "id": "7Pd0c1I9kovUIT1YLJKxcj",
+                                        "slug": "john-coogan-jordi-hays",
+                                        "name": "John Coogan & Jordi Hays"
+                                    },
+                                    "popularity": 0.9447851493939582,
+                                    "best_rank": {
+                                        "source": "apple",
+                                        "chart_type": "top_podcasts",
+                                        "country": "bm",
+                                        "category_slug": "technology",
+                                        "rank": 6,
+                                        "captured_at": "2026-10-28T14:55:11.832889Z"
+                                    }
+                                },
+                                "web_url": "https://radar.particle.pro/podcasts/tbpn-live/episodes/apples-pro-and-tell-googles-two-new-ai-models-openai-eyes-googles-custom-chips"
+                            },
+                            "mention_count": 4,
+                            "mention_variants": [
+                                "NVIDIA"
+                            ],
+                            "windows": [
+                                {
+                                    "segment": {
+                                        "id": "2ycoBmbWt8WcOkG68LoVZJ",
+                                        "type": "TOPIC_DISCUSSION",
+                                        "title": "OpenAI\u2019s Compute Expansion"
+                                    },
+                                    "start_seconds": 1124.489,
+                                    "end_seconds": 1137.815,
+                                    "lines": [
+                                        {
+                                            "number": 345,
+                                            "speaker": "Jordi Hays",
+                                            "role": "HOST",
+                                            "start_seconds": 1124.489,
+                                            "end_seconds": 1126.109,
+                                            "text": "ever more massive deals in the pipeline."
+                                        },
+                                        {
+                                            "number": 346,
+                                            "speaker": "Jordi Hays",
+                                            "role": "HOST",
+                                            "start_seconds": 1126.229,
+                                            "end_seconds": 1128.67,
+                                            "text": "AMD taking share, question mark."
+                                        }
+                                    ],
+                                    "url": "https://radar.particle.pro/podcasts/tbpn-live/episodes/apples-pro-and-tell-googles-two-new-ai-models-openai-eyes-googles-custom-chips?t=1124.5"
+                                },
+                                {
+                                    "segment": {
+                                        "id": "2ycoBmbWt8WcOkG68LoVZJ",
+                                        "type": "TOPIC_DISCUSSION",
+                                        "title": "OpenAI\u2019s Compute Expansion"
+                                    },
+                                    "start_seconds": 1271.118,
+                                    "end_seconds": 1299.032,
+                                    "lines": [
+                                        {
+                                            "number": 384,
+                                            "speaker": "John Coogan",
+                                            "role": "HOST",
+                                            "start_seconds": 1271.118,
+                                            "end_seconds": 1274.66,
+                                            "text": "Rougher if you were like, this will not be a car-like market.",
+                                            "speaker_statement_characteristics": {
+                                                "sentiment": "neutral",
+                                                "certainty": "hedged",
+                                                "specificity": "neutral",
+                                                "temporal_orientation": "present"
+                                            }
+                                        },
+                                        {
+                                            "number": 385,
+                                            "speaker": "John Coogan",
+                                            "role": "HOST",
+                                            "start_seconds": 1274.8,
+                                            "end_seconds": 1276.562,
+                                            "text": "But still very, very early."
+                                        }
+                                    ],
+                                    "url": "https://radar.particle.pro/podcasts/tbpn-live/episodes/apples-pro-and-tell-googles-two-new-ai-models-openai-eyes-googles-custom-chips?t=1271.2"
+                                }
+                            ],
+                            "speakers": [
+                                {
+                                    "name": "Jordi Hays",
+                                    "role": "HOST",
+                                    "speaking_duration_seconds": 484.32099991,
+                                    "entity": {
+                                        "id": "1GmOP1C4MCzR9UQhxz",
+                                        "slug": "jordi-hays",
+                                        "name": "Jordi Hays",
+                                        "image_url": "https://media.licdn.com/dms/image/v2/D5603AQEOQjurHxbpIA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1728415770394?e=2147483647&v=beta&t=7kqaJ0CBS3URQ0JDmvx6-l6N8nBNeiOYdmrjQPVduyo",
+                                        "type": {
+                                            "slug": "person",
+                                            "name": "Person"
+                                        }
+                                    },
+                                    "person": {
+                                        "id": "d7VNO4u06SlC24kmUimc0",
+                                        "slug": "jordi-hays",
+                                        "name": "Jordi Hays",
+                                        "description": "Co-founder and co-host of TBPN (Technology Business Programming Network), the daily Silicon Valley tech show, alongside John Coogan; previously co-founded fintech Capital (acquired by Rho in 2023).",
+                                        "image_url": "https://cdn.particle.pro/headshots/3EEe7M3vDVd5GOju59ltsPV7dXG.png"
+                                    },
+                                    "expertise": {
+                                        "standing": "established",
+                                        "seniority": "professional",
+                                        "occupations": [
+                                            {
+                                                "standard": "soc_2018",
+                                                "code": "27-3011",
+                                                "title": "Broadcast Announcers and Radio Disc Jockeys",
+                                                "slug": "broadcast-announcers-and-radio-disc-jockeys",
+                                                "level": 2,
+                                                "parent_code": "27-0000",
+                                                "established": false,
+                                                "practicing": true
+                                            }
+                                        ],
+                                        "fields": [
+                                            {
+                                                "standard": "anzsrc_for_2020",
+                                                "code": "35",
+                                                "title": "Commerce, Management, Tourism and Services",
+                                                "slug": "commerce-management-tourism-and-services",
+                                                "level": 1
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "name": "John Coogan",
+                                    "role": "HOST",
+                                    "speaking_duration_seconds": 1231.897999786,
+                                    "entity": {
+                                        "id": "1GmOP1C3wu4LDpWwNP",
+                                        "slug": "john-coogan",
+                                        "name": "John Coogan",
+                                        "description": "Vlogger",
+                                        "image_url": "https://yt3.googleusercontent.com/U7FN7QZuimBzdRu4Sh7Yj7TcuPTWdZzxvIco20vxTTmYQkhT2qJMOLVDJF4UrP8Pfded07oDpQ=s900-c-k-c0x00ffffff-no-rj",
+                                        "type": {
+                                            "slug": "person",
+                                            "name": "Person"
+                                        }
+                                    },
+                                    "person": {
+                                        "id": "1XvH7nPWgLc9SB4KWZ92Hv",
+                                        "slug": "john-coogan",
+                                        "name": "John Coogan",
+                                        "description": "Co-founder and co-host of TBPN (Technology Business Programming Network), a daily live tech news show, and tech YouTuber.",
+                                        "image_url": "https://cdn.particle.pro/headshots/3EEe774tRj860IYjI1Kg53xI8FG.jpg"
+                                    },
+                                    "expertise": {
+                                        "standing": "established",
+                                        "seniority": "professional",
+                                        "occupations": [
+                                            {
+                                                "standard": "soc_2018",
+                                                "code": "27-3011",
+                                                "title": "Broadcast Announcers and Radio Disc Jockeys",
+                                                "slug": "broadcast-announcers-and-radio-disc-jockeys",
+                                                "level": 2,
+                                                "parent_code": "27-0000",
+                                                "established": false,
+                                                "practicing": true
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "episode": {
+                                "id": "E0ywnaplLSC08LYASuJSY",
+                                "slug": "play-retro-240-dark-seed",
+                                "title": "PLAY RETRO 240: Dark Seed",
+                                "published_at": "2026-10-29T00:11:17Z",
+                                "podcast": {
+                                    "id": "3QGgUSMaAT0fR2PI1JCVqX",
+                                    "title": "Play Retro Show",
+                                    "slug": "play-retro-show",
+                                    "image_url": "https://cdn.particle.pro/url/media/707deb06-d65e-5137-a1cb-07e6e2f4c6e5/7030039df1c89eb485241fa1cfd2a513e4509813529395cca56b7f3a5f76e2f1",
+                                    "publisher": {
+                                        "id": "10HW9kqJ3i7sfbqiwmF8JV",
+                                        "slug": "scott-johnson",
+                                        "name": "Scott Johnson"
+                                    },
+                                    "popularity": 0.6650560614507837,
+                                    "best_rank": {
+                                        "source": "apple",
+                                        "chart_type": "top_podcasts",
+                                        "country": "sg",
+                                        "category_slug": "video-games",
+                                        "rank": 27,
+                                        "captured_at": "2026-10-28T10:13:13.149913Z"
+                                    }
+                                },
+                                "web_url": "https://radar.particle.pro/podcasts/play-retro-show/episodes/play-retro-240-dark-seed"
+                            },
+                            "mention_count": 1,
+                            "mention_variants": [
+                                "nvidia"
+                            ],
+                            "windows": [
+                                {
+                                    "segment": {
+                                        "id": "4N2Gwl6uiDNIPslxKU477g",
+                                        "type": "TOPIC_DISCUSSION",
+                                        "title": "Dark Seed II and the Murder Mystery"
+                                    },
+                                    "start_seconds": 3173.872,
+                                    "end_seconds": 3221.227,
+                                    "lines": [
+                                        {
+                                            "number": 901,
+                                            "speaker": "Scott Johnson",
+                                            "role": "HOST",
+                                            "start_seconds": 3173.872,
+                                            "end_seconds": 3175.413,
+                                            "text": "which was changing very rapidly."
+                                        },
+                                        {
+                                            "number": 902,
+                                            "speaker": "Scott Johnson",
+                                            "role": "HOST",
+                                            "start_seconds": 3175.433,
+                                            "end_seconds": 3175.533,
+                                            "text": "Yeah."
+                                        }
+                                    ],
+                                    "url": "https://radar.particle.pro/podcasts/play-retro-show/episodes/play-retro-240-dark-seed?t=3173.9"
+                                }
+                            ],
+                            "speakers": [
+                                {
+                                    "name": "Scott Johnson",
+                                    "role": "HOST",
+                                    "speaking_duration_seconds": 1785.691999645,
+                                    "person": {
+                                        "id": "2QorVTaM8Oo3ld5DRMHpLM",
+                                        "slug": "scott-johnson-2",
+                                        "name": "Scott Johnson",
+                                        "description": "Scott Blaine Johnson is an American cartoonist, illustrator, game designer, and podcaster who founded Frog Pants Studios in 2008."
+                                    },
+                                    "expertise": {
+                                        "standing": "established",
+                                        "seniority": "senior",
+                                        "occupations": [
+                                            {
+                                                "standard": "soc_2018",
+                                                "code": "27-1013",
+                                                "title": "Fine Artists, Including Painters, Sculptors, and Illustrators",
+                                                "slug": "fine-artists-including-painters-sculptors-and-illustrators",
+                                                "level": 2,
+                                                "parent_code": "27-0000",
+                                                "established": true,
+                                                "practicing": true
+                                            }
+                                        ],
+                                        "fields": [
+                                            {
+                                                "standard": "anzsrc_for_2020",
+                                                "code": "3606",
+                                                "title": "Visual arts",
+                                                "slug": "visual-arts",
+                                                "level": 2,
+                                                "parent_code": "36"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "name": "Brian Dunaway",
+                                    "role": "HOST",
+                                    "speaking_duration_seconds": 2221.083999692,
+                                    "person": {
+                                        "id": "6W5Qflxa0788vH39ATYFvW",
+                                        "slug": "brian-dunaway",
+                                        "name": "Brian Dunaway",
+                                        "description": "Podcast host and panelist at VITRO (FrogPants Studios), co-host of Film Sack and Play Retro, and creator of briandunaway.com."
+                                    },
+                                    "expertise": {
+                                        "standing": "established",
+                                        "seniority": "professional",
+                                        "occupations": [
+                                            {
+                                                "standard": "soc_2018",
+                                                "code": "27-3011",
+                                                "title": "Broadcast Announcers and Radio Disc Jockeys",
+                                                "slug": "broadcast-announcers-and-radio-disc-jockeys",
+                                                "level": 2,
+                                                "parent_code": "27-0000",
+                                                "established": false,
+                                                "practicing": false
+                                            }
+                                        ],
+                                        "fields": [
+                                            {
+                                                "standard": "anzsrc_for_2020",
+                                                "code": "36",
+                                                "title": "Creative Arts and Writing",
+                                                "slug": "creative-arts-and-writing",
+                                                "level": 1
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    "has_more": true,
+                    "cursor": "s.1hwwoMp5FVPlWB9YBd2LUOEGc2Rv6EzN0PCp",
+                    "entity": {
+                        "id": "44RuOBDhphH",
+                        "slug": "nvidia",
+                        "name": "Nvidia",
+                        "description": "Company",
+                        "wikipedia_url": "https://en.wikipedia.org/wiki/Nvidia",
+                        "image_url": "https://cdn.particle.pro/url/media/kge/m/09rh_/4e39a3c9940a5674fa394aeccae839791424adc98086fd900be0de40735efc8e",
+                        "type": {
+                            "slug": "company",
+                            "name": "Company"
+                        }
+                    },
+                    "company": {
+                        "id": "nvidia.com",
+                        "slug": "nvidia",
+                        "name": "Nvidia",
+                        "description": "Nvidia is a leading developer of graphics processing units. Traditionally, GPUs were used to enhance the experience on computing platforms, most notably in gaming applications on PCs. GPU use cases have since emerged as important semiconductors used in artificial intelligence to run large language models. Nvidia not only offers AI GPUs, but also a software platform, Cuda, used for AI model development and training. Nvidia is also expanding its data center networking solutions, helping to tie GPU",
+                        "domain": "nvidia.com"
+                    }
+                }
+            }
+        }
+    ]
+}
