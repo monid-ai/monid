@@ -350,6 +350,47 @@ Deno.test("resources: gated instances ride into lifecycle fns as data.resources[
     }]);
 });
 
+Deno.test("resources: a seed must match its provision binding", async (t) => {
+    const bundle = await bundleOf((connectors) => {
+        connectors[0].endpoints[0].def.resources!.provisions![0].seed = (
+            { data, utils },
+        ) => ({
+            resource: utils.json.str(data.output, "$.resource"),
+            externalId: "w-2",
+            data: { color: "red" },
+        });
+    });
+    const unit = sealUnit(bundle, "resdemo#widgets");
+    for (const resource of ["resdemo/other", "other/widget"]) {
+        await t.step(resource, async () => {
+            const make = await new Engine({
+                transport: scripted([{ status: 200, body: { resource } }]),
+                resources: reader([]),
+            }).load(unit);
+            const error = await assertRejects(
+                () => make.run({ body: { color: "red" } }),
+                EngineError,
+                `seed resource "${resource}"`,
+            );
+            assertEquals(error.code, EngineErrorCode.PROVISION_CONSTRUCT);
+            assert(error.message.includes('"resdemo/widget"'));
+        });
+    }
+});
+
+Deno.test("resources: a null provision seed emits no resource effects", async () => {
+    const bundle = await bundleOf((connectors) => {
+        connectors[0].endpoints[0].def.resources!.provisions![0].seed = () =>
+            null;
+    });
+    const make = await new Engine({
+        transport: scripted([{ status: 200, body: {} }]),
+        resources: reader([]),
+    }).load(sealUnit(bundle, "resdemo#widgets"));
+    const result = await make.run({ body: { color: "red" } });
+    assertEquals(result.resources, undefined);
+});
+
 Deno.test("resources: a seed that cannot construct is PROVISION_CONSTRUCT", async () => {
     const bundle = await bundleOf();
     const engine = new Engine({
