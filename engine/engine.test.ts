@@ -22,6 +22,7 @@ import {
     envCredentialsPresent,
     envParamsResolver,
     resolveCredentialEnv,
+    substituteUrl,
     type Transport,
 } from "@monid/connector-engine";
 
@@ -253,6 +254,18 @@ Deno.test("INVALID_INPUT: RunInput shape enforced before doc schemas", async () 
             EngineErrorCode.INVALID_INPUT,
         );
     }
+});
+
+Deno.test("INVALID_INPUT: empty path placeholder value is rejected", async () => {
+    const unit = clone(await demoUnit());
+    unit.doc.request.url = "https://api.demo.test/items/{id}/sub";
+
+    const error = assertThrows(
+        () => substituteUrl(unit.doc, { pathParams: { id: "" } }),
+        EngineError,
+    );
+    assertEquals(error.code, EngineErrorCode.INVALID_INPUT);
+    assert(error.message.includes("pathParams.id"));
 });
 
 // ---------------------------------------------------------------------------
