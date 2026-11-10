@@ -1,0 +1,54 @@
+{
+    "name": "synthetic-search-ok",
+    "description": "Synthetic Search response based on the published Valyu OpenAPI examples; not a live recording. Exercises fractional USD receipts and preserved source metadata.",
+    "calls": [{
+        "req": {
+            "method": "POST",
+            "url": "{{request.url}}",
+            "body": {
+                "query": "quantum error correction",
+                "max_num_results": 2
+            }
+        },
+        "res": {
+            "status": 200,
+            "body": {
+                "success": true,
+                "error": null,
+                "tx_id": "tx_synthetic_search",
+                "query": "quantum error correction",
+                "results": [
+                    {
+                        "id": "https://example.com/research",
+                        "title": "Quantum error correction",
+                        "url": "https://example.com/research",
+                        "content": "Research on quantum error correction.",
+                        "source": "web",
+                        "price": 0.005,
+                        "length": 35,
+                        "data_type": "unstructured",
+                        "source_type": "website",
+                        "relevance_score": 0.95
+                    },
+                    {
+                        "id": "valyu/valyu-arxiv/synthetic",
+                        "title": "Error correction methods",
+                        "url": "https://example.org/paper",
+                        "content": "A study of error correction methods.",
+                        "source": "valyu/valyu-arxiv",
+                        "price": 0.0025,
+                        "length": 35,
+                        "data_type": "unstructured",
+                        "source_type": "paper",
+                        "doi": "10.0000/synthetic",
+                        "authors": ["Example Author"],
+                        "metadata": { "total_deduction_dollars": 0.123 }
+                    }
+                ],
+                "results_by_source": { "web": 1, "proprietary": 1 },
+                "total_deduction_dollars": 0.0075,
+                "total_characters": 70
+            }
+        }
+    }]
+}
