@@ -1,0 +1,68 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC chain for datahyena#funding-events (shape from the published OpenAPI; replace via `deno task record` once a key is held): 2 rows, meta.creditsUsed 2 plus the account-level creditsRemaining the provider strips.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.datahyena.com/v1/funding-events?round=seed&countries=US&limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": [
+                        {
+                            "id": "01a0f60c-793b-76c8-a4d9-d4ff6b99c961",
+                            "round": "seed",
+                            "amountUsd": 4000001,
+                            "currency": "USD",
+                            "announcedAt": "2026-10-11T00:00:00.000Z",
+                            "company": {
+                                "name": "Example Co 1",
+                                "domain": "example1.com",
+                                "country": "US"
+                            },
+                            "leadInvestors": [
+                                {
+                                    "name": "Example Ventures"
+                                }
+                            ],
+                            "sources": [
+                                "https://news.example.com/round-1"
+                            ]
+                        },
+                        {
+                            "id": "01a0f60c-793b-76c8-a4d9-d4ff6b99c962",
+                            "round": "seed",
+                            "amountUsd": 4000002,
+                            "currency": "USD",
+                            "announcedAt": "2026-10-12T00:00:00.000Z",
+                            "company": {
+                                "name": "Example Co 2",
+                                "domain": "example2.com",
+                                "country": "US"
+                            },
+                            "leadInvestors": [
+                                {
+                                    "name": "Example Ventures"
+                                }
+                            ],
+                            "sources": [
+                                "https://news.example.com/round-2"
+                            ]
+                        }
+                    ],
+                    "pagination": {
+                        "nextCursor": null,
+                        "hasMore": false
+                    },
+                    "meta": {
+                        "creditsUsed": 2,
+                        "creditsRemaining": 498
+                    }
+                }
+            }
+        }
+    ]
+}

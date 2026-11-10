@@ -1,0 +1,27 @@
+{
+    "name": "synthetic-empty",
+    "description": "SYNTHETIC chain for datahyena#exec-moves: no match, 0 rows, meta.creditsUsed 0.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.datahyena.com/v1/exec-moves?roleSeniority=c_level&limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": [],
+                    "pagination": {
+                        "nextCursor": null,
+                        "hasMore": false
+                    },
+                    "meta": {
+                        "creditsUsed": 0,
+                        "creditsRemaining": 500
+                    }
+                }
+            }
+        }
+    ]
+}

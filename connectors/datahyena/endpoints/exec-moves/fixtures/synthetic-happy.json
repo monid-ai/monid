@@ -1,0 +1,56 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC chain for datahyena#exec-moves (shape from the published OpenAPI; replace via `deno task record` once a key is held): 2 rows, meta.creditsUsed 2 plus the account-level creditsRemaining the provider strips.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.datahyena.com/v1/exec-moves?roleSeniority=c_level&limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": [
+                        {
+                            "id": "01a0f60c-793b-76c8-a4d9-d4ff6b99c981",
+                            "person": {
+                                "name": "Jane Doe 1"
+                            },
+                            "role": "Chief Revenue Officer",
+                            "seniority": "c_level",
+                            "moveType": "appointment",
+                            "company": {
+                                "name": "Example Co 1",
+                                "domain": "example1.com"
+                            },
+                            "announcedAt": "2026-10-11T00:00:00.000Z"
+                        },
+                        {
+                            "id": "01a0f60c-793b-76c8-a4d9-d4ff6b99c982",
+                            "person": {
+                                "name": "Jane Doe 2"
+                            },
+                            "role": "Chief Revenue Officer",
+                            "seniority": "c_level",
+                            "moveType": "appointment",
+                            "company": {
+                                "name": "Example Co 2",
+                                "domain": "example2.com"
+                            },
+                            "announcedAt": "2026-10-12T00:00:00.000Z"
+                        }
+                    ],
+                    "pagination": {
+                        "nextCursor": null,
+                        "hasMore": false
+                    },
+                    "meta": {
+                        "creditsUsed": 2,
+                        "creditsRemaining": 498
+                    }
+                }
+            }
+        }
+    ]
+}
