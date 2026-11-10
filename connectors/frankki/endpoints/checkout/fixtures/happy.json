@@ -1,0 +1,61 @@
+{
+    "name": "happy",
+    "description": "recorded 2026-10-27 against the live Monid lane: frankki#checkout happy path with a test letter that was never paid",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://backend.frankki.app/api/v1/public/monid/letter/checkout",
+                "body": {
+                    "draftToken": "dft_recorded000000000000000000000000",
+                    "locale": "en"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "success",
+                    "code": "OK",
+                    "data": {
+                        "checkoutUrl": "https://mcp.frankki.app/redacted-signed-url",
+                        "amountCents": 349,
+                        "recipient": {
+                            "zip": "10115",
+                            "city": "Berlin",
+                            "name": "FrankKi Test",
+                            "street": "Teststrasse",
+                            "country": "DE",
+                            "houseNumber": "1",
+                            "postal_code": "10115",
+                            "house_number": "1"
+                        },
+                        "deliveryType": "standard",
+                        "color": false,
+                        "method": {
+                            "code": "standard",
+                            "nameDe": "Standardbrief",
+                            "nameEn": "Standard letter",
+                            "estimatedDeliveryRange": "ungefähr 1 bis 3 Werktage EN: approximately 1 to 3 working days",
+                            "deliveryTimeDe": "ungefähr 1 bis 3 Werktage",
+                            "deliveryTimeEn": "approximately 1 to 3 working days",
+                            "tracked": false,
+                            "proofOfDelivery": false
+                        },
+                        "shipping": "Versand als Standardbrief, schwarz-weiss gedruckt. EN: Sent as Standard letter, printed in black and white.",
+                        "pages": {
+                            "tokenExpiresAt": "2026-10-27T09:44:04.986Z",
+                            "items": [
+                                {
+                                    "page": 1,
+                                    "url": "https://mcp.frankki.app/redacted-signed-url"
+                                }
+                            ]
+                        },
+                        "estimatedDeliveryRange": "ungefähr 1 bis 3 Werktage EN: approximately 1 to 3 working days"
+                    },
+                    "requestId": "req_recorded_checkout_happy"
+                }
+            }
+        }
+    ]
+}

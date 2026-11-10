@@ -1,0 +1,23 @@
+{
+    "name": "synthetic-checkout-review",
+    "description": "frankki#checkout on a borderline letter: HTTP 202 CONTENT_REVIEW_PENDING, relayed whole",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://backend.frankki.app/api/v1/public/monid/letter/checkout",
+                "body": { "draftToken": "dft_syntheticsyntheticsynthetic" }
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "error",
+                    "code": "CONTENT_REVIEW_PENDING",
+                    "message": "Dieser Brief wird vor dem Versand geprueft. EN: This letter is reviewed before it is sent.",
+                    "data": null,
+                    "requestId": "req_synthetic_review"
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "name": "provider-error",
+    "description": "recorded 2026-10-27 against the live Monid lane: frankki#checkout called with a wrong X-FrankKi-Lane-Key, HTTP 401 UNAUTHORIZED",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://backend.frankki.app/api/v1/public/monid/letter/checkout",
+                "body": {
+                    "draftToken": "dft_recorded000000000000000000000000"
+                }
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "status": "error",
+                    "code": "UNAUTHORIZED",
+                    "message": "Der Schluessel fehlt oder ist ungueltig. EN: The key is missing or invalid.",
+                    "data": null,
+                    "requestId": "req_recorded_checkout_provider-error"
+                }
+            }
+        }
+    ]
+}
