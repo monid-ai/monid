@@ -1,0 +1,21 @@
+{
+    "name": "synthetic-search-unauthorized",
+    "description": "SYNTHETIC 401 for asin#search: Asin's error envelope for a missing or invalid key, as the API returns it.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://www.asin.dev/api/v1/search?query=kindle&marketplace=com"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": {
+                        "code": "unauthorized",
+                        "message": "Missing or invalid API key."
+                    }
+                }
+            }
+        }
+    ]
+}
