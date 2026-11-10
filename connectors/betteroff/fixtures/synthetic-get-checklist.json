@@ -1,0 +1,74 @@
+{
+    "name": "synthetic-get-checklist",
+    "description": "Synthetic schema fixture, not a recording of provider authorization or financial execution.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "structuredContent": {
+                            "ok": true,
+                            "schemaVersion": "4",
+                            "data": {
+                                "score": 0,
+                                "changeOver30Days": 0,
+                                "profileAnswers": {},
+                                "householdAnswers": {},
+                                "items": [
+                                    {
+                                        "id": "synthetic",
+                                        "label": "synthetic",
+                                        "section": "synthetic",
+                                        "status": "open",
+                                        "why": "synthetic",
+                                        "evidence": "synthetic",
+                                        "lostEvidence": "synthetic",
+                                        "notApplicableReason": "synthetic",
+                                        "addsPoints": 0,
+                                        "lastDone": "2026-10-25T12:00:00Z",
+                                        "assignedTo": "synthetic",
+                                        "link": "https://betteroff.finance/synthetic-review"
+                                    }
+                                ],
+                                "pageUrl": "https://betteroff.finance/synthetic-review"
+                            },
+                            "currency": "USD",
+                            "timezone": "America/Los_Angeles",
+                            "asOf": "2026-10-25",
+                            "revision": 1,
+                            "householdRevision": 1,
+                            "quality": {
+                                "state": "complete",
+                                "reasons": []
+                            },
+                            "evidence": [
+                                {
+                                    "source": "synthetic-fixture",
+                                    "observedAt": "2026-10-25T12:00:00Z"
+                                }
+                            ],
+                            "page": {
+                                "returnedCount": 1,
+                                "totalCount": 1,
+                                "truncated": false,
+                                "nextCursor": null
+                            },
+                            "warnings": [
+                                "Synthetic fixture; not a live provider result."
+                            ],
+                            "requestId": "synthetic-request"
+                        },
+                        "content": []
+                    }
+                }
+            }
+        }
+    ]
+}
