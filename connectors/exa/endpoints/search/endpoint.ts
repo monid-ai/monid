@@ -50,9 +50,11 @@ export default defineEndpoint({
         },
         // exa rejects `stream`; the schema doesn't expose it, but it is
         // non-strict (newer exa params pass through) — strip as defense-in-depth.
+        // TOP-LEVEL only: a deep `omit` would also delete `stream` keys inside
+        // caller-authored JSON Schemas (`outputSchema`, `contents.summary.schema`).
         toRequest: ({ data, utils }) => ({
             ...data.input,
-            body: utils.json.omit(data.input.body ?? {}, ["stream"]),
+            body: utils.json.pluck(data.input.body ?? {}, "$.stream").rest,
         }),
     },
     usage: {
