@@ -1,0 +1,18 @@
+{
+    "name": "provider-error",
+    "description": "raw recording (bloomberry#accounts/tech.json, scenario provider-error) — hand-minimize into a shared chain before committing",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.revealera.com/accounts/tech.json?vendor_name=Clay+Web+Intent&limit=2&api_key=test-key"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": "You are not authorized!"
+                }
+            }
+        }
+    ]
+}

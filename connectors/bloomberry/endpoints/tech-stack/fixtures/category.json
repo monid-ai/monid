@@ -1,0 +1,26 @@
+{
+    "name": "category",
+    "description": "raw recording (bloomberry#enrichments/tech.json, scenario category) — hand-minimize into a shared chain before committing",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.revealera.com/enrichments/tech.json?domain=unifygtm.com&category=managed+DNS+provider&api_key=test-key"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "vendors": [
+                        {
+                            "vendor_name": "AWS Route 53",
+                            "vendor_category": "managed DNS provider",
+                            "vendor_url": "https://aws.amazon.com/route53/",
+                            "usage_started_at": 1786161600,
+                            "vendor_upper_level_category": "IT & Infrastructure"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

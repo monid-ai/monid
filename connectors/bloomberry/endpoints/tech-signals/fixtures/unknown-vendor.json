@@ -1,0 +1,18 @@
+{
+    "name": "unknown-vendor",
+    "description": "raw recording (bloomberry#signals/tech.json, scenario unknown-vendor) \u2014 hand-minimize into a shared chain before committing",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.revealera.com/signals/tech.json?vendor_name=Clay&new_only=true&company_country=US%3BGB&limit=3&api_key=test-key"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "error": "That vendor does not exist in our database"
+                }
+            }
+        }
+    ]
+}

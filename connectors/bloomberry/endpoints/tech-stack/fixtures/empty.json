@@ -1,0 +1,18 @@
+{
+    "name": "empty",
+    "description": "raw recording (bloomberry#enrichments/tech.json, scenario empty) — hand-minimize into a shared chain before committing",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.revealera.com/enrichments/tech.json?domain=no-such-company-zzz-qq.com&api_key=test-key"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "vendors": []
+                }
+            }
+        }
+    ]
+}

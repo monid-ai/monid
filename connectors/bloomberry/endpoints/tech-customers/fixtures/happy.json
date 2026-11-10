@@ -1,0 +1,74 @@
+{
+    "name": "happy",
+    "description": "raw recording (bloomberry#accounts/tech.json, scenario happy) — hand-minimize into a shared chain before committing",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.revealera.com/accounts/tech.json?vendor_name=Clay+Web+Intent&company_employee_size_range=11-50%3B51-200&limit=2&api_key=test-key"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "users": [
+                        {
+                            "id": "3687097632",
+                            "linkedin_username": "sarvam-ai",
+                            "linkedin_company_id": "101315625",
+                            "linkedin_organization_id": "695716",
+                            "domain": "sarvam.ai",
+                            "company_name": "Sarvam",
+                            "company_logo": "https://bloomberry-uploads.s3.us-east-1.amazonaws.com/orgs/695716.jpg",
+                            "company_address": "",
+                            "industry": "Software Development",
+                            "company_size_range": "51–200",
+                            "company_size_range_estimated": "false",
+                            "company_description": "At Sarvam, we're on a mission to build the bedrock of Sovereign AI for India. We’re working toward creating a sovereign AI ecosystem that empowers governments, enterprises, and nonprofits to use GenAI solutions. We are a full-stack Generative AI platform built with sovereign models that deeply understand India’s culture and diversity, enabling AI agents and applications tailored for the nation. Today, Sarvam is backed by top investors, including Lightspeed, Peak XV, and Khosla Ventures.\n\nIndus i",
+                            "country": null,
+                            "region": "Asia",
+                            "vendor_name": "Clay Web Intent",
+                            "vendor_category": "sales intelligence for visitor identification",
+                            "vendor_logo": "https://media.licdn.com/dms/image/v2/D4E0BAQF0p3ccgnHKdg/company-logo_200_200/B4EZpKiSF6IIAI-/0/1762187092795/grow_with_clay_logo?e=2147483647&v=beta&t=pOLkkbyjk92v92r-NPIlA4obtUnGtHNTOILKJ-AOGcI",
+                            "vendor_url": "clay.com",
+                            "context_url": null,
+                            "usage_started_at": "2026-10-20",
+                            "plan_name": null,
+                            "vendor_ticker": ""
+                        },
+                        {
+                            "id": "3686762455",
+                            "linkedin_username": "sales-star",
+                            "linkedin_company_id": "515790",
+                            "linkedin_organization_id": "196800",
+                            "domain": "salesstar.com",
+                            "company_name": "SalesSTAR",
+                            "company_logo": "https://bloomberry-uploads.s3.us-east-1.amazonaws.com/orgs/196800.jpg",
+                            "company_address": "",
+                            "industry": "Professional Training and Coaching",
+                            "company_size_range": "51–200",
+                            "company_size_range_estimated": "false",
+                            "company_description": "We develop your Strategic Sales Systems and people for measurable, predictable and profitable growth.\n\nSalesStar is not just a sales training company - we are a strategic sales partner that helps Entrepreneurs, CEOs, and Sales Leaders of B2B companies transform their sales organizations. \n\nOur unique approach goes beyond conventional training, focusing on building scalable sales systems that deliver sustainable results.\n\n👉 www.salesstar.com",
+                            "country": "NZ",
+                            "region": "Oceania",
+                            "vendor_name": "Clay Web Intent",
+                            "vendor_category": "sales intelligence for visitor identification",
+                            "vendor_logo": "https://media.licdn.com/dms/image/v2/D4E0BAQF0p3ccgnHKdg/company-logo_200_200/B4EZpKiSF6IIAI-/0/1762187092795/grow_with_clay_logo?e=2147483647&v=beta&t=pOLkkbyjk92v92r-NPIlA4obtUnGtHNTOILKJ-AOGcI",
+                            "vendor_url": "clay.com",
+                            "context_url": null,
+                            "usage_started_at": "2026-10-20",
+                            "plan_name": null,
+                            "vendor_ticker": ""
+                        }
+                    ],
+                    "pagination": {
+                        "page": 1,
+                        "per_page": 2,
+                        "total_pages": 593,
+                        "total_items": 1185,
+                        "next_token": "eyJzb3J0IjpbMTc5MjUxNzc4MCwiY2xheSIsNjAsInNhbGVzc3Rhci5jb20iXSwicGFnZSI6Mn0="
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,53 @@
+{
+    "name": "happy",
+    "description": "raw recording (bloomberry#vendors/all_vendors.json, scenario happy) — hand-minimize into a shared chain before committing",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.revealera.com/vendors/all_vendors.json?api_key=test-key"
+            },
+            "res": {
+                "status": 200,
+                "body": [
+                    {
+                        "id": 1153,
+                        "name": "Canopy",
+                        "url": "getcanopy.com",
+                        "topics": "client collaboration, workflow automation",
+                        "category": "accounting and tax practice management",
+                        "upper_level_category": "Finance & Accounting",
+                        "market": "Mid-Market",
+                        "logo": "https://media.licdn.com/dms/image/v2/C560BAQEE0Rjqw2i9NQ/company-logo_200_200/company-logo_200_200/0/1630589615597/canopy_inc_logo?e=2147483647&v=beta&t=VVHIZafOGr-iFGr1R-uFpPVd8TRwZ1TN5nvP5p4VRlM",
+                        "plan_names": "",
+                        "description": "provides cloud-based practice management software for accounting and tax firms that consolidates client management, document management, workflow automation, billing, time tracking, and CRM into one AI-enhanced platform. The system enables firms to replace multiple disparate tools with a single integrated solution that includes mobile access and a secure client portal.",
+                        "display_name": "Canopy",
+                        "ticker": null,
+                        "associated_domains": "getcanopy.com",
+                        "source": "link found",
+                        "trend_begin_date": "2025-06-01",
+                        "track_churn": true
+                    },
+                    {
+                        "id": 1155,
+                        "name": "KeeperHQ",
+                        "url": "keeper.app",
+                        "topics": null,
+                        "category": "accounting and tax practice management",
+                        "upper_level_category": "Finance & Accounting",
+                        "market": "SMB",
+                        "logo": "https://media.licdn.com/dms/image/v2/D560BAQEime8dzgItxA/company-logo_200_200/B56ZoRFdglKAAI-/0/1761223235881/keeperhq_logo?e=2147483647&v=beta&t=91A7IxMpPqqlUCtOFLe7hs98J8cIMwTD-4PgVPbbWk4",
+                        "plan_names": "",
+                        "description": "provides practice management software for bookkeepers and accountants to communicate with clients, streamline month-end close, and offer advisory services. The platform functions as an all-in-one client portal, task manager, file quality assurance tool, and management reporting application.",
+                        "display_name": "KeeperHQ",
+                        "ticker": null,
+                        "associated_domains": "keeper.app,doublehq.com",
+                        "source": "internal subdomain",
+                        "trend_begin_date": "2025-07-01",
+                        "track_churn": false
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "name": "empty",
+    "description": "raw recording (bloomberry#accounts/tech.json, scenario empty) — hand-minimize into a shared chain before committing",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.revealera.com/accounts/tech.json?vendor_name=Clay+Web+Intent&company_country=AQ&limit=2&api_key=test-key"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "users": [],
+                    "pagination": {
+                        "page": 1,
+                        "per_page": 2,
+                        "total_pages": 0,
+                        "total_items": 0,
+                        "next_token": null
+                    }
+                }
+            }
+        }
+    ]
+}
