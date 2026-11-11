@@ -250,6 +250,38 @@ Deno.test("specstream#v1/capacity/executions: a start SpecStream never received 
     assertEquals(result.usage.credits, {});
 });
 
+Deno.test("specstream#v1/capacity/executions: a status lookup with no answer keeps the find alive", async () => {
+    const chain = await fixture("synthetic-run-ok");
+    const unit = await testSealedUnit(ID);
+    const url = unit.doc.request.url;
+    const replay = replayFetch(chain, {
+        "request.url": url,
+        "request.origin": new URL(url).origin,
+    });
+    let gets = 0;
+    const engine = new Engine({
+        transport: directTransport({
+            params: () => Promise.resolve({ apiKey: "test-key" }),
+            fetch: (input, init) => {
+                // the first two status reads get no answer at all
+                if ((init?.method ?? "GET") === "GET" && gets++ < 2) {
+                    return Promise.reject(
+                        new TypeError("connection reset by peer"),
+                    );
+                }
+                return replay(input, init);
+            },
+        }),
+        sleep: () => Promise.resolve(),
+    });
+    const result = await (await engine.load(unit)).run(INPUT);
+    // the run read again and settled on the receipt
+    assertEquals(gets, 5);
+    assertEquals(result.httpStatus, 200);
+    assertEquals(result.isProviderError, false);
+    assertEquals(result.usage.credits, { default: 0.35 });
+});
+
 Deno.test("specstream#v1/capacity/executions: stop cancels the find and settles what it had already matched", async () => {
     const loaded = await loadEndpoint({
         unit: await testSealedUnit(ID),

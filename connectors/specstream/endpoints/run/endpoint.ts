@@ -124,11 +124,24 @@ export default defineEndpoint({
                     { retriable: false },
                 );
             }
-            const res = await utils.http({
-                method: "GET",
-                path: "/v1/capacity/requests/" + encodeURIComponent(key) +
-                    "/rows",
-            });
+            let res;
+            try {
+                res = await utils.http({
+                    method: "GET",
+                    path: "/v1/capacity/requests/" + encodeURIComponent(key) +
+                        "/rows",
+                });
+            } catch (error) {
+                // no answer is not an end: the find may still run and be paid
+                if ((error as { retriable?: unknown }).retriable !== true) {
+                    throw error;
+                }
+                logger.warn("specstream status lookup got no answer", {
+                    key,
+                    error: String(error),
+                });
+                return { kind: "RUNNING", pollAfterMs: 30_000 };
+            }
             if (
                 res.status === 408 || res.status === 429 || res.status >= 500
             ) {
