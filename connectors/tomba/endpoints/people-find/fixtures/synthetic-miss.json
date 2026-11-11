@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-miss",
+    "description": "SYNTHETIC — not recorded (2026-11-11): the body follows docs.tomba.io's own OpenAPI example for this path; values are placeholders. No match: a 200 carrying an errors object (not_found) — free.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.tomba.io/v1/people/find?email=john.roe%40stripe.com"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "errors": {
+                        "type": "not_found",
+                        "message": "The email does not exist in our database",
+                        "code": 404
+                    }
+                }
+            }
+        }
+    ]
+}

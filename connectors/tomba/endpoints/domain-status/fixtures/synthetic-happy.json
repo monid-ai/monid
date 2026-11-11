@@ -1,0 +1,20 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC — not recorded (2026-11-11): the body follows docs.tomba.io's own OpenAPI example for this path; values are placeholders. Free.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.tomba.io/v1/domain-status?domain=gmail.com"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "domain": "gmail.com",
+                    "webmail": true,
+                    "disposable": false
+                }
+            }
+        }
+    ]
+}

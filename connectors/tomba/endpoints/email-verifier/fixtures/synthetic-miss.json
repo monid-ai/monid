@@ -1,0 +1,42 @@
+{
+    "name": "synthetic-miss",
+    "description": "SYNTHETIC — not recorded (2026-11-11): the body follows docs.tomba.io's own OpenAPI example for this path; values are placeholders. A disposable domain — free.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.tomba.io/v1/email-verifier?email=jane%40mailinator.com"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "email": {
+                            "email": "",
+                            "result": "",
+                            "status": "disposable",
+                            "score": 2,
+                            "smtp_provider": null,
+                            "mx": {
+                                "records": null
+                            },
+                            "mx_check": false,
+                            "smtp_server": false,
+                            "smtp_check": false,
+                            "accept_all": false,
+                            "greylisted": false,
+                            "block": false,
+                            "gibberish": false,
+                            "disposable": true,
+                            "webmail": false,
+                            "regex": false,
+                            "phone_number": false
+                        },
+                        "sources": [],
+                        "phone_data": null
+                    }
+                }
+            }
+        }
+    ]
+}

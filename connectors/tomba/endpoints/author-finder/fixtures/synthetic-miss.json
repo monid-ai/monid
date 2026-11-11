@@ -1,0 +1,42 @@
+{
+    "name": "synthetic-miss",
+    "description": "SYNTHETIC — not recorded (2026-11-11): the body follows docs.tomba.io's own OpenAPI example for this path; values are placeholders. No author address: 200 with data.email null — free.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.tomba.io/v1/author-finder?url=https%3A%2F%2Fstripe.com%2Fblog%2Funsigned"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "email": null,
+                        "first_name": null,
+                        "last_name": null,
+                        "full_name": null,
+                        "website_url": null,
+                        "company": null,
+                        "pattern": null,
+                        "department": null,
+                        "type": null,
+                        "position": null,
+                        "country": null,
+                        "gender": null,
+                        "twitter": null,
+                        "linkedin": null,
+                        "score": 0,
+                        "accept_all": null,
+                        "phone_number": false,
+                        "sources": null,
+                        "info": {
+                            "url": "https://stripe.com/blog/unsigned",
+                            "title": "An unsigned post",
+                            "candidates": null
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

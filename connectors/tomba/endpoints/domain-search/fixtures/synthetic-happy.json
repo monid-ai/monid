@@ -1,0 +1,114 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC — not recorded (2026-11-11): the body follows docs.tomba.io's own OpenAPI example for this path; values are placeholders. Two addresses on a limit-10 page: ceil(10/10) = 1 search credit.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.tomba.io/v1/domain-search?domain=stripe.com&limit=10"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "organization": {
+                            "website_url": "stripe.com",
+                            "organization": "Stripe",
+                            "location": {
+                                "country": "US",
+                                "city": "South San Francisco",
+                                "state": "California",
+                                "street_address": "354 Oyster Point Blvd",
+                                "postal_code": "94080"
+                            },
+                            "disposable": false,
+                            "webmail": false,
+                            "phone_number": true,
+                            "industries": "financial services",
+                            "founded": "2010",
+                            "company_size": "5K-10K",
+                            "company_type": "private",
+                            "revenue": "$1B-$10B",
+                            "accept_all": false,
+                            "pattern": "{first}.{last}"
+                        },
+                        "emails": [
+                            {
+                                "email": "jane.doe@stripe.com",
+                                "first_name": "Jane",
+                                "last_name": "Doe",
+                                "full_name": "Jane Doe",
+                                "gender": null,
+                                "phone_number": false,
+                                "type": "personal",
+                                "country": "US",
+                                "position": "Software Engineer",
+                                "department": "engineering",
+                                "seniority": "senior",
+                                "twitter": null,
+                                "linkedin": null,
+                                "score": 100,
+                                "verification": {
+                                    "date": "2025-01-15T10:32:00+01:00",
+                                    "status": "valid"
+                                },
+                                "phone_data": [],
+                                "sources": [
+                                    {
+                                        "uri": "https://stripe.com/blog/engineering",
+                                        "website_url": "stripe.com",
+                                        "extracted_on": "2024-06-01T09:14:07+01:00",
+                                        "last_seen_on": "2025-01-10T17:02:44+01:00",
+                                        "still_on_page": true
+                                    }
+                                ]
+                            },
+                            {
+                                "email": "john.smith@stripe.com",
+                                "first_name": "John",
+                                "last_name": "Smith",
+                                "full_name": "John Smith",
+                                "gender": null,
+                                "phone_number": false,
+                                "type": "personal",
+                                "country": "US",
+                                "position": "Software Engineer",
+                                "department": "engineering",
+                                "seniority": "senior",
+                                "twitter": null,
+                                "linkedin": null,
+                                "score": 100,
+                                "verification": {
+                                    "date": "2025-01-15T10:32:00+01:00",
+                                    "status": "valid"
+                                },
+                                "phone_data": [],
+                                "sources": [
+                                    {
+                                        "uri": "https://stripe.com/blog/engineering",
+                                        "website_url": "stripe.com",
+                                        "extracted_on": "2024-06-01T09:14:07+01:00",
+                                        "last_seen_on": "2025-01-10T17:02:44+01:00",
+                                        "still_on_page": true
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "meta": {
+                        "total": 1250,
+                        "pageSize": 10,
+                        "current": 1,
+                        "total_pages": 125,
+                        "params": {
+                            "domain": "stripe.com",
+                            "page": 1,
+                            "limit": 10,
+                            "type": "all"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

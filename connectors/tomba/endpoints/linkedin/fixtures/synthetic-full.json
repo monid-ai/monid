@@ -1,0 +1,83 @@
+{
+    "name": "synthetic-full",
+    "description": "SYNTHETIC — not recorded (2026-11-11): the body follows docs.tomba.io's own OpenAPI example for this path; values are placeholders. full=true: two stored addresses, 1 search credit each = 2.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.tomba.io/v1/linkedin?url=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fjane-doe&full=true"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "email": "jane.doe@stripe.com",
+                            "first_name": "Jane",
+                            "last_name": "Doe",
+                            "full_name": "Jane Doe",
+                            "website_url": "stripe.com",
+                            "company": "Stripe",
+                            "pattern": "{first}.{last}",
+                            "department": "engineering",
+                            "type": "personal",
+                            "position": "Software Engineer",
+                            "country": "US",
+                            "gender": "female",
+                            "twitter": null,
+                            "linkedin": "https://www.linkedin.com/in/jane-doe",
+                            "score": 100,
+                            "accept_all": false,
+                            "phone_number": false,
+                            "verification": {
+                                "date": "2025-01-15T10:32:00+01:00",
+                                "status": "valid"
+                            },
+                            "sources": [
+                                {
+                                    "uri": "https://stripe.com/blog/engineering",
+                                    "website_url": "stripe.com",
+                                    "extracted_on": "2024-06-01T09:14:07+01:00",
+                                    "last_seen_on": "2025-01-10T17:02:44+01:00",
+                                    "still_on_page": true
+                                }
+                            ]
+                        },
+                        {
+                            "email": "jdoe@stripe.com",
+                            "first_name": "Jane",
+                            "last_name": "Doe",
+                            "full_name": "Jane Doe",
+                            "website_url": "stripe.com",
+                            "company": "Stripe",
+                            "pattern": "{first}.{last}",
+                            "department": "engineering",
+                            "type": "personal",
+                            "position": "Software Engineer",
+                            "country": "US",
+                            "gender": "female",
+                            "twitter": null,
+                            "linkedin": "https://www.linkedin.com/in/jane-doe",
+                            "score": 82,
+                            "accept_all": false,
+                            "phone_number": false,
+                            "verification": {
+                                "date": "2025-01-15T10:32:00+01:00",
+                                "status": "valid"
+                            },
+                            "sources": [
+                                {
+                                    "uri": "https://stripe.com/blog/engineering",
+                                    "website_url": "stripe.com",
+                                    "extracted_on": "2024-06-01T09:14:07+01:00",
+                                    "last_seen_on": "2025-01-10T17:02:44+01:00",
+                                    "still_on_page": true
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,32 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC — not recorded (2026-11-11): the body follows docs.tomba.io's own OpenAPI example for this path; values are placeholders. Free.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.tomba.io/v1/technology?domain=stripe.com"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "domain": "stripe.com",
+                    "data": [
+                        {
+                            "slug": "intercom",
+                            "name": "Intercom",
+                            "website": "https://www.intercom.com",
+                            "categories": [
+                                {
+                                    "id": 52,
+                                    "slug": "live-chat",
+                                    "name": "Live chat"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
