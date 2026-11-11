@@ -1,0 +1,27 @@
+{
+    "name": "synthetic-create-profile",
+    "description": "POST /profiles provisions the profile: the upstream name carries the run id (names are unique across the pooled account), the seed and output show the caller's name.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/api/v1/profiles"
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "message": "Profile created successfully",
+                    "profile": {
+                        "_id": "aaaaaaaaaaaaaaaaaaaaaaaa",
+                        "userId": "0123456789abcdef01234567",
+                        "name": "Acme [run-1]",
+                        "externalId": "run-1",
+                        "timezone": "Europe/Madrid",
+                        "isDefault": false,
+                        "createdAt": "2026-11-11T21:00:00.000Z"
+                    }
+                }
+            }
+        }
+    ]
+}

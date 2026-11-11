@@ -1,0 +1,82 @@
+{
+    "name": "synthetic-profile-release",
+    "description": "The resource doc's release: disconnect every account of the profile, then delete it.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/accounts?profileId=aaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "accounts": [
+                        {
+                            "_id": "cccccccccccccccccccccccc",
+                            "platform": "twitter",
+                            "profileId": {
+                                "_id": "aaaaaaaaaaaaaaaaaaaaaaaa",
+                                "name": "Acme [run]"
+                            },
+                            "username": "@acme",
+                            "displayName": "Acme",
+                            "profileUrl": "https://x.com/acme",
+                            "isActive": true,
+                            "userId": "0123456789abcdef01234567"
+                        },
+                        {
+                            "_id": "c2c2c2c2c2c2c2c2c2c2c2c2",
+                            "platform": "linkedin",
+                            "profileId": {
+                                "_id": "aaaaaaaaaaaaaaaaaaaaaaaa",
+                                "name": "Acme [run]"
+                            },
+                            "username": "acme-corp",
+                            "displayName": "Acme Corp",
+                            "profileUrl": "https://www.linkedin.com/company/acme-corp",
+                            "isActive": true,
+                            "userId": "0123456789abcdef01234567"
+                        }
+                    ],
+                    "hasAnalyticsAccess": false
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "DELETE",
+                "url": "{{request.origin}}/api/v1/accounts/cccccccccccccccccccccccc"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "message": "Account disconnected"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "DELETE",
+                "url": "{{request.origin}}/api/v1/accounts/c2c2c2c2c2c2c2c2c2c2c2c2"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": "Account not found"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "DELETE",
+                "url": "{{request.origin}}/api/v1/profiles/aaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "message": "Profile deleted successfully"
+                }
+            }
+        }
+    ]
+}
