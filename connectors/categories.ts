@@ -364,4 +364,25 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "Tools to pull public market data, including quotes, fundamentals, " +
             "earnings, screeners, and more.",
     },
+    {
+        id: "academic-search",
+        displayName: "Academic Search",
+        description:
+            "Tools to search scholarly sources, including papers, authors, " +
+            "citations, and more.",
+    },
+    {
+        id: "events",
+        displayName: "Events",
+        description:
+            "Tools to pull event listings, including concerts, conferences, " +
+            "dates, venues, and more.",
+    },
+    {
+        id: "government-data",
+        displayName: "Government Data",
+        description:
+            "Tools to pull public government records, including financial " +
+            "disclosures, filings, registries, and more.",
+    },
 ]);

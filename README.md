@@ -167,6 +167,9 @@ connectors/<name>/
 3. Record a fixture with `deno task record`, then keep it trimmed.
 4. `deno task check && deno task test` must pass with no network.
 5. Open a pull request.
+6. Email [support@monid.ai](mailto:support@monid.ai) with the PR link, a link to
+   your API docs, and your company name. We review every connector by hand and
+   will follow up from there.
 
 Tests replay from fixtures, so CI needs no vendor keys. Live tests run only when
 the provider's credentials are in the environment, and skip otherwise. Each
@@ -238,6 +241,14 @@ scripts/           CLI entrypoints (compile, run, catalog, record)
 openspec/          spec-driven changes; the decision record
 config.yml         schema.* and compiler.* are contract; engine and scripts are tooling
 ```
+
+## OpenAI image endpoints
+
+[OpenAI images](connectors/openai/README.md) adds generation and editing for GPT
+Image 2, GPT Image 2.5 Sunburst and GPT Image 2.5 Flare. The six public
+identities use fixed models, one PNG per request and receipt-based token
+billing. See the connector guide for inputs, local use and the hosted
+artifact-storage integration boundary.
 
 ## Learn more
 
