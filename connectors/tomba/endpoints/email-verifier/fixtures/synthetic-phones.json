@@ -1,0 +1,87 @@
+{
+    "name": "synthetic-phones",
+    "description": "SYNTHETIC — not recorded (2026-11-11): the body follows docs.tomba.io's own OpenAPI example for this path; values are placeholders. A valid verdict with two phone numbers (enrich_mobile): 1 verification credit + 2 × 5 = 10 search credits.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?email=jane.doe%40stripe.com&enrich_mobile=true"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "email": {
+                            "email": "jane.doe@stripe.com",
+                            "result": "deliverable",
+                            "status": "valid",
+                            "score": 99,
+                            "smtp_provider": "Google",
+                            "mx": {
+                                "records": [
+                                    "aspmx.l.google.com"
+                                ]
+                            },
+                            "mx_check": true,
+                            "smtp_server": true,
+                            "smtp_check": true,
+                            "accept_all": false,
+                            "greylisted": false,
+                            "block": false,
+                            "gibberish": false,
+                            "disposable": false,
+                            "webmail": false,
+                            "regex": true,
+                            "phone_number": true
+                        },
+                        "sources": [
+                            {
+                                "uri": "https://stripe.com/blog/engineering",
+                                "website_url": "stripe.com",
+                                "extracted_on": "2024-06-01T09:14:07+01:00",
+                                "last_seen_on": "2025-01-10T17:02:44+01:00",
+                                "still_on_page": true
+                            }
+                        ],
+                        "phone_data": [
+                            {
+                                "valid": true,
+                                "local_format": "(415) 555-0132",
+                                "intl_format": "+1 415-555-0132",
+                                "e164_format": "+14155550132",
+                                "rfc3966_format": "tel:+14155550132",
+                                "country_code": "US",
+                                "line_type": "MOBILE",
+                                "carrier": "AT&T",
+                                "region": {
+                                    "name": "California",
+                                    "code": "CA"
+                                },
+                                "timezones": [
+                                    "America/Los_Angeles"
+                                ]
+                            },
+                            {
+                                "valid": true,
+                                "local_format": "(212) 555-0147",
+                                "intl_format": "+1 212-555-0147",
+                                "e164_format": "+12125550147",
+                                "rfc3966_format": "tel:+12125550147",
+                                "country_code": "US",
+                                "line_type": "MOBILE",
+                                "carrier": "AT&T",
+                                "region": {
+                                    "name": "California",
+                                    "code": "CA"
+                                },
+                                "timezones": [
+                                    "America/Los_Angeles"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

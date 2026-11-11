@@ -1,0 +1,28 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC — not recorded (2026-11-11): the body follows docs.tomba.io's own OpenAPI example for this path; values are placeholders. Free.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?query=stripe"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "name": "Stripe",
+                            "domain": "stripe.com",
+                            "email_count": 1250
+                        }
+                    ],
+                    "meta": {
+                        "query": "stripe",
+                        "limit": 5
+                    }
+                }
+            }
+        }
+    ]
+}

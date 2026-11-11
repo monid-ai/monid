@@ -652,7 +652,27 @@
         "suzanne#v1/models/download",
         "suzanne#v1/uploads",
         "tinyfish#fetch",
-        "tinyfish#search"
+        "tinyfish#search",
+        "tomba#author-finder",
+        "tomba#combined/find",
+        "tomba#companies/find",
+        "tomba#domain-search",
+        "tomba#domain-status",
+        "tomba#domain-suggestions",
+        "tomba#email-count",
+        "tomba#email-finder",
+        "tomba#email-format",
+        "tomba#email-sources",
+        "tomba#email-verifier",
+        "tomba#enrich",
+        "tomba#linkedin",
+        "tomba#location",
+        "tomba#people/find",
+        "tomba#phone-finder",
+        "tomba#phone-validator",
+        "tomba#reveal/search",
+        "tomba#similar",
+        "tomba#technology"
     ],
     "resources": [
         "saperly/phone-number"

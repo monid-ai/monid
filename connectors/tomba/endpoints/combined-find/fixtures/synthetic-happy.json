@@ -1,0 +1,84 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC — not recorded (2026-11-11): the body follows docs.tomba.io's own OpenAPI example for this path; values are placeholders. A person found: 2 search credits.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?email=jane.doe%40stripe.com"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "person": {
+                            "name": {
+                                "fullName": "Jane Doe",
+                                "givenName": "Jane",
+                                "familyName": "Doe"
+                            },
+                            "email": "jane.doe@stripe.com",
+                            "location": "US",
+                            "gender": "female",
+                            "geo": {
+                                "country": "United States",
+                                "countryCode": "US"
+                            },
+                            "employment": {
+                                "domain": "stripe.com",
+                                "name": "Stripe",
+                                "title": "Software Engineer",
+                                "role": "engineering",
+                                "subRole": null,
+                                "seniority": null
+                            },
+                            "linkedin": {
+                                "handle": "https://www.linkedin.com/in/jane-doe"
+                            },
+                            "verification": {
+                                "date": "2025-01-15T10:32:00+01:00",
+                                "status": "valid"
+                            },
+                            "phone": false,
+                            "indexedAt": "2025-04-03T13:23:24+02:00"
+                        },
+                        "company": {
+                            "name": "Stripe",
+                            "legalName": "Stripe",
+                            "domain": "stripe.com",
+                            "tags": [
+                                "payments",
+                                "billing",
+                                "fintech"
+                            ],
+                            "description": "Stripe is a financial infrastructure platform for businesses.",
+                            "foundedYear": "2010",
+                            "location": "US",
+                            "geo": {
+                                "city": "South San Francisco",
+                                "state": "California",
+                                "country": "United States",
+                                "countryCode": "US"
+                            },
+                            "linkedin": {
+                                "handle": "stripe"
+                            },
+                            "type": "private",
+                            "metrics": {
+                                "employees": "5K-10K",
+                                "annualRevenue": "$1B-$10B"
+                            },
+                            "tech": [
+                                "Intercom",
+                                "Stripe"
+                            ]
+                        }
+                    },
+                    "meta": {
+                        "email": "jane.doe@stripe.com"
+                    }
+                }
+            }
+        }
+    ]
+}
