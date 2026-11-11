@@ -382,13 +382,16 @@ Deno.test("specstream#v1/capacity/executions: the gate needs the approved quote,
     await rejected({ ...INPUT.body, quote_hash: QUOTE_HASH.slice(1) });
     await rejected({ ...INPUT.body, confirm_max_cents: -1 });
     await rejected({ ...INPUT.body, confirm_max_cents: 1.5 });
+    // the poll reads the run back by its key, so the replay answers that key
+    const shortKey = "k".repeat(8);
+    const keyed: Fixture = JSON.parse(
+        JSON.stringify(chain).replaceAll(INPUT.body.idempotency_key, shortKey),
+    );
     await assertInputAccepted({
         unit,
-        input: {
-            body: { ...INPUT.body, idempotency_key: "k".repeat(8) },
-        },
+        input: { body: { ...INPUT.body, idempotency_key: shortKey } },
         mode: "replay",
-        fixture: chain,
+        fixture: keyed,
     });
     await assertInputAccepted({
         unit,
