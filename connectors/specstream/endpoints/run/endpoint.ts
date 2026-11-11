@@ -11,7 +11,8 @@ import { zRunBody } from "./schema/inputs.ts";
  *   `stop`   POST /v1/finds/{find_id}/cancel                  -> keep what was found
  * The job handle is the caller's own `idempotency_key`: SpecStream reads a
  * run back by it, and it is also what makes a retried start safe (the same key
- * never buys twice), so the run needs no state beyond it.
+ * never buys twice), so the run needs no state beyond it. A start whose answer
+ * is lost is sent again with that key, then followed by it.
  *
  * The poll answers COMPLETED with SpecStream's own rows page: the first page of
  * matches (each cell with its `source_url` and `observed_at`), the `possible`
@@ -78,7 +79,31 @@ export default defineEndpoint({
             if (typeof key !== "string" || key === "") {
                 throw new Error("SpecStream run input has no idempotency_key");
             }
-            const res = await utils.request();
+            let res;
+            try {
+                res = await utils.request();
+            } catch (error) {
+                // No answer is not a refusal: SpecStream may have reserved
+                // the maximum and started the find. The same key never buys
+                // twice, so sending it again returns the run it started (or
+                // starts the approved one if the first POST never arrived).
+                logger.warn("specstream start got no answer; resending", {
+                    key,
+                    error: String(error),
+                });
+                try {
+                    res = await utils.request();
+                } catch (again) {
+                    // still no answer: the poll reads the run back by its
+                    // key and settles it, or ends on SpecStream's 404 when
+                    // nothing ran, so nothing is owed
+                    logger.warn("specstream start still unanswered; polling", {
+                        key,
+                        error: String(again),
+                    });
+                    return { kind: "RUNNING", state: { externalRunId: key } };
+                }
+            }
             if (res.status < 200 || res.status >= 300) {
                 // an expired quote, a missing scope or a balance below the
                 // maximum: DATA, zero-billed by the engine, nothing started

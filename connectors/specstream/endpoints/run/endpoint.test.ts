@@ -1,12 +1,15 @@
 import { assert, assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import { type Json, RunKind, StopKind } from "@shared/core";
+import { directTransport, Engine } from "@monid/connector-engine";
 import {
     assertInputAccepted,
     estimateEndpoint,
+    type Fixture,
     liveSkip,
     loadEndpoint,
     loadFixture,
+    replayFetch,
     runEndpoint,
     testSealedUnit,
 } from "@shared/testing";
@@ -135,6 +138,116 @@ Deno.test("specstream#v1/capacity/executions: an expired quote is refused as dat
         (result.output as { message: string }).message,
         "This quote has expired. Get a new quote and approve it again.",
     );
+});
+
+/**
+ * Replays `chain`, but the first `lost` POSTs get no answer: `accepted`
+ * says whether SpecStream took each one (its recorded answer is used up and
+ * thrown away) or never saw it. No network: the chain is the only upstream.
+ */
+async function withLostStarts(
+    chain: Fixture,
+    lost: number,
+    accepted: boolean,
+) {
+    const unit = await testSealedUnit(ID);
+    const url = unit.doc.request.url;
+    const replay = replayFetch(chain, {
+        "request.url": url,
+        "request.origin": new URL(url).origin,
+    });
+    const keys: unknown[] = [];
+    let dropped = 0;
+    const engine = new Engine({
+        transport: directTransport({
+            params: () => Promise.resolve({ apiKey: "test-key" }),
+            fetch: async (input, init) => {
+                if ((init?.method ?? "GET") === "POST") {
+                    const sent = typeof init?.body === "string"
+                        ? JSON.parse(init.body)
+                        : {};
+                    keys.push(sent.idempotency_key);
+                    if (dropped < lost) {
+                        dropped++;
+                        if (accepted) await replay(input, init);
+                        throw new TypeError("connection reset by peer");
+                    }
+                }
+                return await replay(input, init);
+            },
+        }),
+        sleep: () => Promise.resolve(),
+    });
+    const loaded = await engine.load(unit);
+    return { result: await loaded.run(INPUT), keys };
+}
+
+/** The ok chain with one more recorded POST answer per resend: SpecStream
+ *  answers a repeated key with the run it already started. */
+async function chainWithReplays(resends: number): Promise<Fixture> {
+    const chain = structuredClone(await fixture("synthetic-run-ok"));
+    const post = chain.calls[0];
+    assertEquals(post.req.method, "POST");
+    const replayed = structuredClone(post);
+    (replayed.res.body as { data: { replay: boolean } }).data.replay = true;
+    for (let index = 0; index < resends; index++) {
+        chain.calls.splice(1, 0, structuredClone(replayed));
+    }
+    return chain;
+}
+
+Deno.test("specstream#v1/capacity/executions: a start whose answer is lost is sent again with the same key and followed to its receipt", async () => {
+    const { result, keys } = await withLostStarts(
+        await chainWithReplays(1),
+        1,
+        true,
+    );
+    // the resend carried the original key, so SpecStream answered with the
+    // run it had already started, and that run settles on its receipt
+    assertEquals(keys, ["specstream-run-0001", "specstream-run-0001"]);
+    assertEquals(result.httpStatus, 200);
+    assertEquals(result.isProviderError, false);
+    assertEquals(result.usage.credits, { default: 0.35 });
+});
+
+Deno.test("specstream#v1/capacity/executions: a start that stays unanswered is read back by its key and settled", async () => {
+    const { result, keys } = await withLostStarts(
+        await chainWithReplays(1),
+        2,
+        true,
+    );
+    // both answers lost: the run is not abandoned, the poll finds it by the
+    // key and settles the 35 cents captured
+    assertEquals(keys, ["specstream-run-0001", "specstream-run-0001"]);
+    assertEquals(result.httpStatus, 200);
+    assertEquals(result.usage.credits, { default: 0.35 });
+});
+
+Deno.test("specstream#v1/capacity/executions: a start SpecStream never received ends with nothing owed", async () => {
+    const chain: Fixture = {
+        name: "synthetic-run-never-received",
+        description: "Neither POST reached SpecStream, so the key has no run.",
+        calls: [{
+            req: {
+                method: "GET",
+                url: "{{request.origin}}/v1/capacity/requests/specstream-run-0001/rows",
+            },
+            res: {
+                status: 404,
+                body: {
+                    error: {
+                        code: "not_found",
+                        message: "Nothing has run for this request ID.",
+                    },
+                },
+            },
+        }],
+    };
+    const { result, keys } = await withLostStarts(chain, 2, false);
+    assertEquals(keys.length, 2);
+    assertEquals(result.httpStatus, 404);
+    assertEquals(result.isProviderError, true);
+    assertEquals(result.usage.credits, {});
 });
 
 Deno.test("specstream#v1/capacity/executions: stop cancels the find and settles what it had already matched", async () => {
