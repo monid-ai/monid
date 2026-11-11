@@ -1,16 +1,25 @@
 import { assertEquals } from "@std/assert";
+import type { Json } from "@shared/core";
 import { liveSkip } from "@shared/testing";
 import { TOMBA_KEYS } from "../../schema/auth.ts";
-import { assertGate, assertLive, replay } from "../../test-data.ts";
+import {
+    assertGate,
+    assertLive,
+    assertProviderError,
+    replay,
+} from "../../test-data.ts";
 
 const ID = "tomba#reveal/search";
 
 Deno.test(`${ID} happy (synthetic): companies returned — 1 search credit`, async () => {
-    const { result } = await replay(ID, "happy");
+    const { result, fixture } = await replay(ID, "happy");
     assertEquals(result.usage, {
         credits: { search: 1 },
         evidence: { PAGE: 1 },
     });
+    // the whole vendor body relays untouched — no billing field stripped
+    // or added, the result count is the fixture's
+    assertEquals(result.output, fixture.calls[0].res.body);
 });
 
 Deno.test(`${ID} no company matches: free`, async () => {
@@ -20,8 +29,14 @@ Deno.test(`${ID} no company matches: free`, async () => {
     assertEquals(result.usage, { credits: {}, evidence: { PAGE: 0 } });
 });
 
-Deno.test(`${ID}: the schema gate — query or filters, the vendor bounds`, () =>
-    assertGate(ID, [
+Deno.test(`${ID}: the schema gate — query or filters, the vendor bounds`, async () => {
+    // the returned `meta.filters` (with `exclude: null`) must be sendable
+    // back unchanged for the next page, as the field description says
+    const { fixture } = await replay(ID, "happy");
+    const returned = (fixture.calls[0].res.body as {
+        meta: { filters: Json };
+    }).meta.filters;
+    await assertGate(ID, [
         { body: {} },
         { body: { page: 1 } },
         { body: { query: "short" } },
@@ -39,7 +54,12 @@ Deno.test(`${ID}: the schema gate — query or filters, the vendor bounds`, () =
                 page: 2,
             },
         },
-    ]));
+        { body: { filters: returned, page: 2 } },
+    ]);
+});
+
+Deno.test(`${ID} provider error (synthetic 401): zero usage, the errors envelope digested`, () =>
+    assertProviderError(ID));
 
 Deno.test({
     name: `${ID} live (gated on TOMBA_CREDENTIALS_API_KEY + _SECRET_KEY)`,

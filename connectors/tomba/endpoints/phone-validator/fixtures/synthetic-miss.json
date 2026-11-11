@@ -5,7 +5,7 @@
         {
             "req": {
                 "method": "GET",
-                "url": "https://api.tomba.io/v1/phone-validator?phone=%2B3312345"
+                "url": "{{request.url}}?phone=%2B3312345"
             },
             "res": {
                 "status": 200,

@@ -5,7 +5,7 @@
         {
             "req": {
                 "method": "GET",
-                "url": "https://api.tomba.io/v1/domain-status?domain=gmail.com"
+                "url": "{{request.url}}?domain=gmail.com"
             },
             "res": {
                 "status": 200,

@@ -1,16 +1,24 @@
 import { assertEquals } from "@std/assert";
 import { liveSkip } from "@shared/testing";
 import { TOMBA_KEYS } from "../../schema/auth.ts";
-import { assertGate, assertLive, replay } from "../../test-data.ts";
+import {
+    assertGate,
+    assertLive,
+    assertProviderError,
+    replay,
+} from "../../test-data.ts";
 
 const ID = "tomba#people/find";
 
 Deno.test(`${ID} happy (synthetic): a person found — 1 search credit`, async () => {
-    const { result } = await replay(ID, "happy");
+    const { result, fixture } = await replay(ID, "happy");
     assertEquals(result.usage, {
         credits: { search: 1 },
         evidence: { RESULT: 1 },
     });
+    // the whole vendor body relays untouched — no billing field stripped
+    // or added, the result count is the fixture's
+    assertEquals(result.output, fixture.calls[0].res.body);
 });
 
 Deno.test(`${ID} no match (200 carrying errors.not_found): free, not a provider error`, async () => {
@@ -34,6 +42,9 @@ Deno.test(`${ID}: the schema gate — one email`, () =>
     ], [
         { queryParams: { email: "john.roe@stripe.com" } },
     ]));
+
+Deno.test(`${ID} provider error (synthetic 401): zero usage, the errors envelope digested`, () =>
+    assertProviderError(ID));
 
 Deno.test({
     name: `${ID} live (gated on TOMBA_CREDENTIALS_API_KEY + _SECRET_KEY)`,

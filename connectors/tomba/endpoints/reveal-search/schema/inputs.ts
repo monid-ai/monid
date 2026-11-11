@@ -5,8 +5,11 @@ import { z } from "zod";
  *  2026-11-11). Send `query` or `filters`; bound as a union in
  *  endpoint.ts. */
 
+/** `include` / `exclude` are nullable upstream: `meta.filters` returns
+ *  `exclude: null`, and callers are told to send it back for the next
+ *  pages. */
 const zValues = (description: string) =>
-    z.array(z.string()).max(50).describe(description).optional();
+    z.array(z.string()).max(50).nullable().describe(description).optional();
 
 /** One include / exclude filter (SearchFilter / PremiumSearchFilter). */
 const zFilter = (description: string) =>

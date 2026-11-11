@@ -32,7 +32,9 @@
 - [x] 3.5 phone-finder (3-arm union, input-selected price) and
       phone-validator (PER_CALL)
 - [x] 3.6 reveal/search: POST body mirror of RevealSearchRequest /
-      RevealFilters, query | filters union, PER_UNIT·PAGE
+      RevealFilters (nullable include / exclude, so a returned
+      `meta.filters` pages back unchanged), query | filters union,
+      PER_UNIT·PAGE
 - [x] 3.7 email-count, email-format, location (PER_CALL email_count),
       email-sources (sources; 201 miss), technology, domain-suggestions,
       domain-status (FREE)
@@ -46,10 +48,18 @@
       every 401 is zero-billed and digested; provenance (one inject, one
       fromError, no consolidate / lifecycle / fromResponse, the pool
       set, metered docs own their evidence)
-- [x] 4.3 Twenty `endpoint.test.ts`: variant and miss chains with exact
-      usage, estimates for the input-dependent docs, the schema gate
-      with near twins, and live tests gated on `TOMBA_KEYS`
+- [x] 4.3 Twenty `endpoint.test.ts`: happy (whole usage and whole
+      output against the fixture body), variant and miss chains with
+      exact usage, the 401 provider error (zero usage, digested),
+      estimates for the input-dependent docs, the schema gate with near
+      twins (`assertInputAccepted`), and live tests gated on `TOMBA_KEYS`.
+      Fixture urls use the `{{request.url}}` binding; only each
+      endpoint's own query is literal. A GET chain cannot be shared
+      across endpoints, because the binding carries no query and replay
+      matches the exact url
 - [x] 4.4 Red once: setting combined/find to 3 fails the rate table;
+      dropping `.nullable()` from the reveal filters fails the gate on
+      the returned `meta.filters`;
       the null `phone_data` / `data` examples caught an `optionalLen`
       throw before merge (D6)
 - [x] 4.5 fmt · lint · check · test · ids (tomba rows only) ·

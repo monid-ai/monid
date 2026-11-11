@@ -5,7 +5,7 @@
         {
             "req": {
                 "method": "GET",
-                "url": "https://api.tomba.io/v1/email-finder?domain=stripe.com&full_name=Jane+Doe&enrich_mobile=true"
+                "url": "{{request.url}}?domain=stripe.com&full_name=Jane+Doe&enrich_mobile=true"
             },
             "res": {
                 "status": 200,

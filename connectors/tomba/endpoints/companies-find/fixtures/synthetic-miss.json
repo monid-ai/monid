@@ -5,7 +5,7 @@
         {
             "req": {
                 "method": "GET",
-                "url": "https://api.tomba.io/v1/companies/find?domain=unknown-company-example.com"
+                "url": "{{request.url}}?domain=unknown-company-example.com"
             },
             "res": {
                 "status": 200,

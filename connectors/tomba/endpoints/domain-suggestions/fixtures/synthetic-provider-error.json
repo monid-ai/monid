@@ -5,7 +5,7 @@
         {
             "req": {
                 "method": "GET",
-                "url": "https://api.tomba.io/v1/domain-suggestions?query=stripe"
+                "url": "{{request.url}}?query=stripe"
             },
             "res": {
                 "status": 401,

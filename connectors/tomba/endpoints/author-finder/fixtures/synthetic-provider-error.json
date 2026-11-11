@@ -5,7 +5,7 @@
         {
             "req": {
                 "method": "GET",
-                "url": "https://api.tomba.io/v1/author-finder?url=https%3A%2F%2Fstripe.com%2Fblog%2Fonline-payments-guide"
+                "url": "{{request.url}}?url=https%3A%2F%2Fstripe.com%2Fblog%2Fonline-payments-guide"
             },
             "res": {
                 "status": 401,

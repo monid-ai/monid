@@ -5,7 +5,7 @@
         {
             "req": {
                 "method": "GET",
-                "url": "https://api.tomba.io/v1/email-finder?company=Stripe&full_name=Jane+Doe"
+                "url": "{{request.url}}?company=Stripe&full_name=Jane+Doe"
             },
             "res": {
                 "status": 200,

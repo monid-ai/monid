@@ -5,7 +5,7 @@
         {
             "req": {
                 "method": "GET",
-                "url": "https://api.tomba.io/v1/email-verifier?email=jane.doe%40stripe.com"
+                "url": "{{request.url}}?email=jane.doe%40stripe.com"
             },
             "res": {
                 "status": 200,

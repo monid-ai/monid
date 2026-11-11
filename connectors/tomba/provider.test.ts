@@ -113,22 +113,6 @@ Deno.test("tomba: every endpoint's happy run settles its published draw", async 
     }
 });
 
-Deno.test("tomba: every endpoint's 401 settles as a provider error with zero usage", async () => {
-    for (const id of Object.keys(RATE)) {
-        const { result } = await replay(id as TombaId, "provider-error");
-        assertEquals(result.httpStatus, 401, id);
-        assertEquals(result.isProviderError, true, id);
-        assertEquals(result.usage, { credits: {}, evidence: {} }, id);
-        const output = result.output as {
-            message: string;
-            error_code: string;
-            raw: unknown;
-        };
-        assertEquals(output.message, "Invalid credentials.", id);
-        assertEquals(output.error_code, "authentication_failed", id);
-    }
-});
-
 Deno.test("tomba: provenance — one inject, one fromError, the pool set, the metered docs' own evidence", async () => {
     const bundle = await testBundle();
     const ids = await tombaIds();

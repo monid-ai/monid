@@ -5,7 +5,7 @@
         {
             "req": {
                 "method": "GET",
-                "url": "https://api.tomba.io/v1/domain-search?domain=stripe.com&limit=10"
+                "url": "{{request.url}}?domain=stripe.com&limit=10"
             },
             "res": {
                 "status": 200,

@@ -2,6 +2,7 @@ import { assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import type { RunInput } from "@shared/core";
 import {
+    assertInputAccepted,
     estimateEndpoint,
     loadFixture,
     runEndpoint,
@@ -166,10 +167,9 @@ export const fixturesDir = (id: string): string =>
 
 /**
  * The schema gate: every `bad` input is refused as INVALID_INPUT before the
- * wire; every `good` near twin passes validation. A GET twin then fails
- * LATER, at replay URL matching (its query is not the happy fixture's); a
- * POST twin replays the happy chain (replay matches method + URL only) —
- * either way, never INVALID_INPUT.
+ * wire; every `good` near twin passes validation (`assertInputAccepted`: a
+ * GET twin fails LATER, at replay URL matching; a POST twin replays the
+ * happy chain — either way, never INVALID_INPUT).
  */
 export async function assertGate(
     id: TombaId,
@@ -191,15 +191,7 @@ export async function assertGate(
         );
     }
     for (const input of good) {
-        const message = await run(input).then(
-            () => "",
-            (err: Error) => err.message,
-        );
-        assertEquals(
-            message.includes("INVALID_INPUT"),
-            false,
-            `${JSON.stringify(input)}: ${message}`,
-        );
+        await assertInputAccepted({ unit, input, mode: "replay", fixture });
     }
 }
 
@@ -220,6 +212,20 @@ export async function assertLive(id: TombaId): Promise<void> {
         Object.prototype.toString.call(result.output) === "[object Object]",
         true,
     );
+}
+
+/** The provider-error chain: a 401 `{errors: {...}}` settles as a provider
+ *  error with ZERO usage, digested to `{message, error_code, raw}`. */
+export async function assertProviderError(id: TombaId): Promise<void> {
+    const { result, fixture } = await replay(id, "provider-error");
+    assertEquals(result.httpStatus, 401);
+    assertEquals(result.isProviderError, true);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
+    assertEquals(result.output, {
+        message: "Invalid credentials.",
+        error_code: "authentication_failed",
+        raw: fixture.calls[0].res.body,
+    });
 }
 
 /** The PRE-RUN estimate of one endpoint for one input (pure, no IO). */

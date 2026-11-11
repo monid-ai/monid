@@ -5,7 +5,7 @@
         {
             "req": {
                 "method": "POST",
-                "url": "https://api.tomba.io/v1/reveal/search",
+                "url": "{{request.url}}",
                 "body": {
                     "filters": {
                         "location_city": {

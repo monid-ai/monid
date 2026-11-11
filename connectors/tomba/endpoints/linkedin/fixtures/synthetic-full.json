@@ -5,7 +5,7 @@
         {
             "req": {
                 "method": "GET",
-                "url": "https://api.tomba.io/v1/linkedin?url=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fjane-doe&full=true"
+                "url": "{{request.url}}?url=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fjane-doe&full=true"
             },
             "res": {
                 "status": 200,

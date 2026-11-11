@@ -4,6 +4,7 @@ import { TOMBA_KEYS } from "../../schema/auth.ts";
 import {
     assertGate,
     assertLive,
+    assertProviderError,
     estimate,
     INPUTS,
     replay,
@@ -12,11 +13,14 @@ import {
 const ID = "tomba#phone-finder";
 
 Deno.test(`${ID} happy (synthetic): a valid number by email — 5 search credits`, async () => {
-    const { result } = await replay(ID, "happy");
+    const { result, fixture } = await replay(ID, "happy");
     assertEquals(result.usage, {
         credits: { search: 5 },
         evidence: { lookup: 1, domain_lookup: 0 },
     });
+    // the whole vendor body relays untouched — no billing field stripped
+    // or added, the result count is the fixture's
+    assertEquals(result.output, fixture.calls[0].res.body);
 });
 
 Deno.test(`${ID} with domain (synthetic): a valid number — 1 search credit`, async () => {
@@ -66,6 +70,9 @@ Deno.test(`${ID}: the schema gate — at least one of email, domain, linkedin`, 
             },
         },
     ]));
+
+Deno.test(`${ID} provider error (synthetic 401): zero usage, the errors envelope digested`, () =>
+    assertProviderError(ID));
 
 Deno.test({
     name: `${ID} live (gated on TOMBA_CREDENTIALS_API_KEY + _SECRET_KEY)`,
