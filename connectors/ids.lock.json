@@ -652,9 +652,19 @@
         "suzanne#v1/models/download",
         "suzanne#v1/uploads",
         "tinyfish#fetch",
-        "tinyfish#search"
+        "tinyfish#search",
+        "zernio#connect-account",
+        "zernio#connect-status",
+        "zernio#create-post",
+        "zernio#create-profile",
+        "zernio#get-post",
+        "zernio#list-accounts",
+        "zernio#list-profiles",
+        "zernio#release-profile",
+        "zernio#upload-media"
     ],
     "resources": [
-        "saperly/phone-number"
+        "saperly/phone-number",
+        "zernio/profile"
     ]
 }

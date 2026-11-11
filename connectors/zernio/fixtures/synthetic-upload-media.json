@@ -1,0 +1,21 @@
+{
+    "name": "synthetic-upload-media",
+    "description": "POST /media/presign, a declarative relay: uploadUrl for the PUT, publicUrl for mediaItems.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "uploadUrl": "https://storage.example.com/temp/1_abc_launch.mp4?X-Amz-Signature=x",
+                    "publicUrl": "https://media.zernio.com/temp/1_abc_launch.mp4",
+                    "key": "temp/1_abc_launch.mp4",
+                    "expiresIn": 3600
+                }
+            }
+        }
+    ]
+}

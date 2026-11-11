@@ -1,0 +1,21 @@
+{
+    "name": "synthetic-create-profile-conflict",
+    "description": "A rejected create (402 payment required) completes as error-as-data: no seed, zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/api/v1/profiles"
+            },
+            "res": {
+                "status": 402,
+                "body": {
+                    "error": "Payment required",
+                    "type": "invalid_request_error",
+                    "code": "payment_required",
+                    "userId": "0123456789abcdef01234567"
+                }
+            }
+        }
+    ]
+}

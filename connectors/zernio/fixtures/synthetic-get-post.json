@@ -1,0 +1,37 @@
+{
+    "name": "synthetic-get-post",
+    "description": "GET /posts/{id} whose tenancy tag matches the gated profile: projected through the shared post allowlist.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/posts/eeeeeeeeeeeeeeeeeeeeeeee"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "post": {
+                        "_id": "eeeeeeeeeeeeeeeeeeeeeeee",
+                        "userId": "0123456789abcdef01234567",
+                        "content": "We just launched!",
+                        "status": "scheduled",
+                        "scheduledFor": "2026-12-01T10:00:00.000Z",
+                        "timezone": "UTC",
+                        "metadata": {
+                            "monidProfileId": "aaaaaaaaaaaaaaaaaaaaaaaa"
+                        },
+                        "platforms": [
+                            {
+                                "platform": "twitter",
+                                "accountId": {
+                                    "_id": "cccccccccccccccccccccccc"
+                                },
+                                "status": "pending"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

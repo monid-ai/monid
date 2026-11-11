@@ -1,0 +1,92 @@
+{
+    "name": "synthetic-create-post-now",
+    "description": "Ownership read, then POST /posts: no scheduledFor means publishNow, and each network's result comes back with its public url.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/accounts?profileId=aaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "accounts": [
+                        {
+                            "_id": "cccccccccccccccccccccccc",
+                            "platform": "twitter",
+                            "profileId": {
+                                "_id": "aaaaaaaaaaaaaaaaaaaaaaaa",
+                                "name": "Acme [run]"
+                            },
+                            "username": "@acme",
+                            "displayName": "Acme",
+                            "profileUrl": "https://x.com/acme",
+                            "isActive": true,
+                            "userId": "0123456789abcdef01234567"
+                        },
+                        {
+                            "_id": "c2c2c2c2c2c2c2c2c2c2c2c2",
+                            "platform": "linkedin",
+                            "profileId": {
+                                "_id": "aaaaaaaaaaaaaaaaaaaaaaaa",
+                                "name": "Acme [run]"
+                            },
+                            "username": "acme-corp",
+                            "displayName": "Acme Corp",
+                            "profileUrl": "https://www.linkedin.com/company/acme-corp",
+                            "isActive": true,
+                            "userId": "0123456789abcdef01234567"
+                        }
+                    ],
+                    "hasAnalyticsAccess": false
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/api/v1/posts"
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "message": "Post published",
+                    "post": {
+                        "_id": "eeeeeeeeeeeeeeeeeeeeeeee",
+                        "userId": "0123456789abcdef01234567",
+                        "content": "We just launched!",
+                        "status": "published",
+                        "scheduledFor": "2026-12-01T10:00:00.000Z",
+                        "timezone": "UTC",
+                        "metadata": {
+                            "monidProfileId": "aaaaaaaaaaaaaaaaaaaaaaaa"
+                        },
+                        "platforms": [
+                            {
+                                "platform": "twitter",
+                                "accountId": {
+                                    "_id": "cccccccccccccccccccccccc",
+                                    "username": "@acme"
+                                },
+                                "status": "published",
+                                "platformPostId": "1850",
+                                "platformPostUrl": "https://x.com/acme/status/1850",
+                                "publishedAt": "2026-11-11T21:05:00.000Z"
+                            },
+                            {
+                                "platform": "linkedin",
+                                "accountId": {
+                                    "_id": "c2c2c2c2c2c2c2c2c2c2c2c2",
+                                    "username": "acme-corp"
+                                },
+                                "status": "published",
+                                "platformPostUrl": "https://www.linkedin.com/feed/update/urn:li:share:1",
+                                "publishedAt": "2026-11-11T21:05:01.000Z"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}
