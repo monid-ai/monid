@@ -84,6 +84,9 @@ with a non-2xx status SHALL complete as data without starting a job.
   evidence: {CREDIT: 20}}`
 - **WHEN** the charge is still pending on read back
 - **THEN** the stop returns UNRESOLVED and claims nothing
+- **WHEN** the lookup of the find to cancel fails, or the cancel gets no
+  answer
+- **THEN** the stop returns UNRESOLVED and claims nothing
 
 ### Requirement: Billing on captured cents
 The run endpoint SHALL declare a `PER_UNIT` model on `Unit.CREDIT`

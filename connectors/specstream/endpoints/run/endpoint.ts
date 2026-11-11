@@ -147,43 +147,79 @@ export default defineEndpoint({
             if (key === undefined) return;
             const rows = "/v1/capacity/requests/" + encodeURIComponent(key) +
                 "/rows";
-            const before = await utils.http({
-                method: "GET",
-                path: rows,
-                queryParams: { limit: "1" },
-            });
-            const findId = utils.json.optionalGet(
-                before.body,
-                "$.data.find_id",
-            );
-            if (typeof findId !== "string") return;
-            // cancel keeps what the find already matched, and that is charged
-            await utils.http({
-                method: "POST",
-                path: "/v1/finds/" + encodeURIComponent(findId) + "/cancel",
-            });
-            const after = await utils.http({ method: "GET", path: rows });
-            const done = utils.json.optionalGet(after.body, "$.data.done");
-            const settlement = utils.json.optionalGet(
-                after.body,
-                "$.data.commerce.settlement_status",
-            );
-            if (
-                after.status >= 200 && after.status < 300 && done === true &&
-                settlement !== "pending"
-            ) {
+            try {
+                const before = await utils.http({
+                    method: "GET",
+                    path: rows,
+                    queryParams: { limit: "1" },
+                });
+                const findId = utils.json.optionalGet(
+                    before.body,
+                    "$.data.find_id",
+                );
+                if (typeof findId !== "string") {
+                    // done with no find: the request stopped before a run
+                    // and nothing is owed. A failed lookup or a request that
+                    // is still being read cannot show that.
+                    const ended = utils.json.optionalGet(
+                        before.body,
+                        "$.data.done",
+                    );
+                    if (
+                        before.status >= 200 && before.status < 300 &&
+                        ended === true
+                    ) return;
+                    logger.warn("specstream stop found no find to cancel", {
+                        key,
+                        status: before.status,
+                    });
+                    return {
+                        kind: "UNRESOLVED",
+                        reason: "no find to cancel for request " + key +
+                            "; its charge could not be confirmed",
+                    };
+                }
+                // cancel keeps what the find already matched, and that is charged
+                await utils.http({
+                    method: "POST",
+                    path: "/v1/finds/" + encodeURIComponent(findId) +
+                        "/cancel",
+                });
+                const after = await utils.http({ method: "GET", path: rows });
+                const done = utils.json.optionalGet(after.body, "$.data.done");
+                const settlement = utils.json.optionalGet(
+                    after.body,
+                    "$.data.commerce.settlement_status",
+                );
+                if (
+                    after.status >= 200 && after.status < 300 &&
+                    done === true && settlement !== "pending"
+                ) {
+                    return {
+                        kind: "COMPLETED",
+                        httpStatus: 200,
+                        output: after.body,
+                    };
+                }
+                logger.warn("specstream cancel not yet settled", { findId });
                 return {
-                    kind: "COMPLETED",
-                    httpStatus: 200,
-                    output: after.body,
+                    kind: "UNRESOLVED",
+                    reason: "cancel requested for find " + findId +
+                        "; its charge has not settled yet",
+                };
+            } catch (error) {
+                // the engine reads a throw here as nothing owed, but a paid
+                // find can still run: the host must reconcile it
+                logger.warn("specstream stop failed", {
+                    key,
+                    error: String(error),
+                });
+                return {
+                    kind: "UNRESOLVED",
+                    reason: "stop for request " + key +
+                        " failed; its charge could not be confirmed",
                 };
             }
-            logger.warn("specstream cancel not yet settled", { findId });
-            return {
-                kind: "UNRESOLVED",
-                reason: "cancel requested for find " + findId +
-                    "; its charge has not settled yet",
-            };
         },
     },
     usage: {

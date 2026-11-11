@@ -170,6 +170,29 @@ Deno.test("specstream#v1/capacity/executions: a stop whose charge has not settle
     assertEquals(stopped.state.externalRunId, "specstream-run-0001");
 });
 
+for (
+    const name of [
+        "synthetic-run-stop-lookup-failed",
+        "synthetic-run-stop-transport",
+    ]
+) {
+    Deno.test(`specstream#v1/capacity/executions: a stop that cannot confirm the cancel is unresolved (${name})`, async () => {
+        const loaded = await loadEndpoint({
+            unit: await testSealedUnit(ID),
+            input: INPUT,
+            mode: "replay",
+            fixture: await fixture(name),
+        });
+        const run = { runId: "test-run-3" };
+        const started = await loaded.start(INPUT, run);
+        assert(started.kind === RunKind.RUNNING);
+        const stopped = await loaded.stop(INPUT, started.state, run);
+        assertEquals(stopped.kind, StopKind.UNRESOLVED);
+        assert(stopped.kind === StopKind.UNRESOLVED);
+        assertEquals(stopped.state.externalRunId, "specstream-run-0001");
+    });
+}
+
 Deno.test("specstream#v1/capacity/executions: the estimate is the approved maximum SpecStream reserves", async () => {
     const unit = await testSealedUnit(ID);
     const promised = await estimateEndpoint(unit, INPUT);

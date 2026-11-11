@@ -1,0 +1,39 @@
+{
+    "name": "synthetic-run-stop-lookup-failed",
+    "description": "The run is stopped, but the lookup of the find to cancel answers 503, so the find cannot be canceled or its charge confirmed: the stop is unresolved and nothing is claimed.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "data": {
+                        "reservation_id": "res_synthetic_0001",
+                        "find_id": null,
+                        "maximum_cents": 60,
+                        "state": "reserved",
+                        "replay": false
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/capacity/requests/specstream-run-0001/rows?limit=1"
+            },
+            "res": {
+                "status": 503,
+                "body": {
+                    "error": {
+                        "code": "internal_failure",
+                        "message": "Service unavailable."
+                    }
+                }
+            }
+        }
+    ]
+}
