@@ -1188,3 +1188,36 @@ Deno.test("golden: compiled exa#search doc shape (zBundle round-trip)", async ()
     assert(bundle.taxonomy.membership["web-search"].includes("exa#search"));
     assert(bundle.taxonomy.membership["web-scraping"].includes("exa#contents"));
 });
+
+Deno.test("catalog: inherited names are absent from inspection and membership", async () => {
+    const { inspectResource } = await import("../core/catalog.ts");
+    const bundle = await compileBundle(
+        source([{ name: "search", def: makeEndpoint() }]),
+        OPTS,
+    );
+    for (const id of ["constructor", "toString", "valueOf", "__proto__"]) {
+        assertThrows(
+            () => inspectEndpoint(bundle, id),
+            Error,
+            `endpoint not in bundle: ${id}`,
+        );
+        assertThrows(
+            () => inspectResource(bundle, id),
+            Error,
+            `resource not in bundle: ${id}`,
+        );
+    }
+    assertEquals(
+        inspectEndpoint(bundle, "demo#search"),
+        bundle.endpoints["demo#search"],
+    );
+    bundle.taxonomy.leaves = [{
+        id: "constructor",
+        displayName: "Constructor",
+    }];
+    assertEquals(listCategories(bundle)[0].endpointCount, 0);
+    Object.defineProperty(bundle.taxonomy.membership, "constructor", {
+        value: ["demo#search"],
+    });
+    assertEquals(listCategories(bundle)[0].endpointCount, 1);
+});
