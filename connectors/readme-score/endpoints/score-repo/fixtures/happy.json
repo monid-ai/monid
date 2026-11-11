@@ -1,0 +1,121 @@
+{
+    "name": "happy",
+    "description": "recorded chain for readme-score#api/score on 2026-11-11 (flisk-sh/readme-score), trimmed to two groups of three checks",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://readme.flisk.si/api/score?repo=flisk-sh%2Freadme-score"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "score": 98,
+                    "grade": "A",
+                    "earned": 87,
+                    "available": 89,
+                    "type": {
+                        "type": "api",
+                        "reason": "the README reads like a backend API (2 of 4 signals)",
+                        "title": "Backend API",
+                        "chosen": false
+                    },
+                    "groups": [
+                        {
+                            "id": "sections",
+                            "title": "Sections",
+                            "checks": [
+                                {
+                                    "id": "section.overview",
+                                    "title": "Overview",
+                                    "pass": true,
+                                    "max": 2.2,
+                                    "measured": "\"What is README Score?\"",
+                                    "limit": "recommended for a backend API",
+                                    "line": 20,
+                                    "points": 2.2
+                                },
+                                {
+                                    "id": "section.features",
+                                    "title": "Key features",
+                                    "pass": true,
+                                    "max": 1.1,
+                                    "measured": "\"Key features\"",
+                                    "limit": "nice to have for a backend API",
+                                    "line": 26,
+                                    "points": 1.1
+                                },
+                                {
+                                    "id": "section.prerequisites",
+                                    "title": "Prerequisites",
+                                    "pass": true,
+                                    "max": 3.2,
+                                    "measured": "\"Prerequisites\"",
+                                    "limit": "required for a backend API",
+                                    "line": 85,
+                                    "points": 3.2
+                                }
+                            ],
+                            "points": 27,
+                            "max": 27
+                        },
+                        {
+                            "id": "first-screen",
+                            "title": "First screen",
+                            "checks": [
+                                {
+                                    "id": "first-screen.h1",
+                                    "title": "Title near the top",
+                                    "pass": true,
+                                    "max": 4,
+                                    "measured": "non-empty line 1",
+                                    "limit": "within 5 non-empty lines",
+                                    "line": 1,
+                                    "points": 4
+                                },
+                                {
+                                    "id": "first-screen.install",
+                                    "title": "Install command",
+                                    "pass": true,
+                                    "max": 4,
+                                    "measured": "line 9",
+                                    "limit": "within 40 lines",
+                                    "line": 9,
+                                    "points": 4
+                                },
+                                {
+                                    "id": "first-screen.image",
+                                    "title": "Picture of it working",
+                                    "pass": true,
+                                    "max": 4,
+                                    "measured": "line 3",
+                                    "limit": "within 20 lines; badges do not count",
+                                    "line": 3,
+                                    "points": 4
+                                }
+                            ],
+                            "points": 20,
+                            "max": 20
+                        }
+                    ],
+                    "counts": {
+                        "passed": 29,
+                        "failed": 1,
+                        "skipped": 3
+                    },
+                    "readme": {
+                        "path": "README.md"
+                    },
+                    "repo": {
+                        "owner": "flisk-sh",
+                        "name": "readme-score",
+                        "ref": "main",
+                        "sha": "bd959d166585024bbdfa7adb6ff1ac8241f8522f",
+                        "description": "README Score: your README, scored out of 100, with a fix for every miss. https://readme.flisk.si"
+                    },
+                    "url": "https://readme.flisk.si/flisk-sh/readme-score"
+                }
+            }
+        }
+    ]
+}
