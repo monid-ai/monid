@@ -1,12 +1,17 @@
 import { assert, assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import type { Json } from "@shared/core";
-import { loadFixture, runEndpoint, testSealedUnit } from "@shared/testing";
+import {
+    assertInputAccepted,
+    loadFixture,
+    runEndpoint,
+    testSealedUnit,
+} from "@shared/testing";
 
 const ID = "readme-score#api/score";
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
 
-Deno.test(`${ID} happy: a report, free, no credentials`, async () => {
+Deno.test(`${ID} happy: the whole report, free, no credentials`, async () => {
     const unit = await testSealedUnit(ID);
     const fixture = await loadFixture(`${fixturesDir}happy.json`);
     const result = await runEndpoint({
@@ -18,10 +23,7 @@ Deno.test(`${ID} happy: a report, free, no credentials`, async () => {
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
     assertEquals(result.usage, { credits: {}, evidence: {} });
-    const output = result.output as Record<string, unknown>;
-    assertEquals(output.score, 98);
-    assertEquals(output.grade, "A");
-    assert(Array.isArray(output.groups));
+    assertEquals(result.output, fixture.calls[0].res.body);
 });
 
 Deno.test(`${ID} provider error: a 404 is data, zero usage, body untouched`, async () => {
@@ -41,7 +43,7 @@ Deno.test(`${ID} provider error: a 404 is data, zero usage, body untouched`, asy
     });
 });
 
-Deno.test(`${ID}: the schema gate — repo is required, type is one of four, nothing else passes`, async () => {
+Deno.test(`${ID}: the schema gate — repo is required, type is one of four, and a valid type passes`, async () => {
     const unit = await testSealedUnit(ID);
     const fixture = await loadFixture(`${fixturesDir}happy.json`);
     const run = (input: Record<string, unknown>) =>
@@ -61,8 +63,19 @@ Deno.test(`${ID}: the schema gate — repo is required, type is one of four, not
     ) {
         await assertRejects(() => run(bad), Error, "INVALID_INPUT");
     }
+    // the near twin: an explicit valid `type` clears the gate (it then
+    // misses the replay URL, which is the point: validation let it through)
+    await assertInputAccepted({
+        unit,
+        input: { queryParams: { repo: "flisk-sh/readme-score", type: "api" } },
+        mode: "replay",
+        fixture,
+    });
 });
 
+// liveSkip("readme-score", []) is always true (it opens only when every
+// declared credential field is set, and this provider has none), so a keyless
+// provider gates its live test on an explicit variable instead.
 Deno.test({
     name: `${ID} live (no key needed; set README_SCORE_LIVE=1 to run)`,
     ignore: Deno.env.get("README_SCORE_LIVE") !== "1",
@@ -79,5 +92,10 @@ Deno.test({
             JSON.stringify(result.output).slice(0, 500),
         );
         assertEquals(result.usage, { credits: {}, evidence: {} });
+        // shape, never values: a live README's score moves
+        const report = result.output as Record<string, unknown>;
+        assertEquals(typeof report.score, "number");
+        assertEquals(typeof report.grade, "string");
+        assert(Array.isArray(report.groups));
     },
 });
