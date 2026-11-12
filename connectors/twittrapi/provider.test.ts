@@ -477,7 +477,21 @@ Deno.test("twittrapi gates: search needs searchItem or filters; filters are a cl
     await rejects(id, {
         queryParams: { filters: { sinceTime: "yesterday" } },
     });
+    await rejects(id, { queryParams: { filters: { since: "tomorrow" } } });
+    await rejects(id, {
+        queryParams: { filters: { until: "2026-10-15 12:00:00" } },
+    });
+    await rejects(id, { queryParams: { filters: { withinTime: "2 days" } } });
     // near twins
+    await estimate(id, {
+        queryParams: {
+            filters: {
+                since: "2026-10-01",
+                until: "2026-10-15_12:00:00_UTC",
+                withinTime: "3h",
+            },
+        },
+    });
     await estimate(id, { queryParams: { filters: { lang: "en" } } });
     await estimate(id, {
         queryParams: { searchItem: "x", category: "People" },
@@ -555,9 +569,9 @@ Deno.test({
         const user = (result.output as { data: Record<string, Json> }).data;
         assertEquals(user.username, "XDevelopers");
         assertEquals(typeof user.id, "string");
-        assertEquals(result.usage, {
-            credits: { default: 0.0001 },
-            evidence: { PAGE: 1 },
-        });
+        // shape, not amounts: exact settlement lives in the replay tests
+        assertEquals(Object.keys(result.usage.evidence), ["PAGE"]);
+        assertEquals(typeof result.usage.evidence.PAGE, "number");
+        assertEquals(typeof (result.usage.credits.default ?? 0), "number");
     },
 });

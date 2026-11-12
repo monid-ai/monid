@@ -6,14 +6,20 @@ import { zCount, zCursor } from "../../../schema/common.ts";
  * "Filter keys"): each key becomes an X search operator appended to the
  * query. Sent JSON-encoded by the provider's `input.toRequest`.
  */
+/** since:/until: — `YYYY-MM-DD` or `YYYY-MM-DD_HH:MM:SS_UTC` (vendor
+ *  "Filter keys" table). */
+const zSearchDate = z.string().regex(
+    /^[0-9]{4}-[0-9]{2}-[0-9]{2}(_[0-9]{2}:[0-9]{2}:[0-9]{2}_UTC)?$/,
+);
+
 const zSearchFilters = z.object({
     lang: z.string().optional().describe(
         "lang:<code> — a language code X knows, e.g. en, de, ja, und.",
     ),
-    since: z.string().optional().describe(
+    since: zSearchDate.optional().describe(
         "since: — YYYY-MM-DD or YYYY-MM-DD_HH:MM:SS_UTC.",
     ),
-    until: z.string().optional().describe(
+    until: zSearchDate.optional().describe(
         "until: — YYYY-MM-DD or YYYY-MM-DD_HH:MM:SS_UTC.",
     ),
     sinceTime: z.string().regex(/^[0-9]+$/).optional().describe(
@@ -22,7 +28,7 @@ const zSearchFilters = z.object({
     untilTime: z.string().regex(/^[0-9]+$/).optional().describe(
         "until_time: — Unix seconds.",
     ),
-    withinTime: z.string().optional().describe(
+    withinTime: z.string().regex(/^[0-9]+[dhms]$/).optional().describe(
         "within_time: — e.g. 2d, 3h, 5m, 30s.",
     ),
     sinceId: z.string().regex(/^[0-9]+$/).optional().describe("since_id:"),
