@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-list-templates-unauthorized",
+    "description": "GET /v1/templates with a revoked key: 401 unauthorized (auth.js). Constructed by hand from the kosa8 Cloud worker source (workers/cloud-api/src: sandboxes.js and auth.js error paths), not recorded: no live key was used.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/templates"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": "unauthorized",
+                    "message": "API key is unknown, revoked or expired"
+                }
+            }
+        }
+    ]
+}

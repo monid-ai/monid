@@ -1,0 +1,144 @@
+import { assertEquals, assertRejects } from "@std/assert";
+import { fromFileUrl } from "@std/path";
+import type { Json, OwnedResource } from "@shared/core";
+import { EngineError, EngineErrorCode } from "@monid/connector-engine";
+import {
+    liveSkip,
+    loadFixture,
+    runEndpoint,
+    testSealedUnit,
+} from "@shared/testing";
+import {
+    assertSandboxShape,
+    FREE_RUN,
+    withLiveSandbox,
+} from "../../live-sandbox.ts";
+
+/**
+ * kosa8#get-sandbox — READS `kosa8/sandbox`. Every fixture is SYNTHETIC:
+ * constructed by hand from the kosa8 Cloud worker source
+ * (workers/cloud-api/src), not recorded — no live key was used.
+ *
+ * The live test (gated on KOSA8_API_KEY, shape only) runs on its own
+ * sandbox from ../../live-sandbox.ts: smallest template, ttl_s 300,
+ * deleted in `finally`.
+ */
+
+const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
+const fixture = (name: string) => loadFixture(`${fixturesDir}${name}.json`);
+
+const SID = "sbx_4fQm9TzR2kLw8VbN1cXyPa";
+const OWNED: OwnedResource[] = [{
+    resource: "kosa8/sandbox",
+    externalId: SID,
+    data: { template: "python", region: "eu-hel1", cpus: 2, memMb: 4096 },
+    syncedAt: "2026-11-03T08:00:00.000Z",
+}];
+const UNIT = "kosa8#get-sandbox";
+
+Deno.test("kosa8#get-sandbox happy (synthetic 200): owned read, free, cost_usd stripped", async () => {
+    const result = await runEndpoint({
+        unit: await testSealedUnit(UNIT),
+        input: { pathParams: { id: SID } },
+        mode: "replay",
+        fixture: await fixture("synthetic-get-sandbox"),
+        resources: OWNED,
+    });
+    assertEquals(result.httpStatus, 200);
+    assertEquals(result.isProviderError, false);
+    assertEquals(result.usage, FREE_RUN);
+    const sandbox = (result.output as Record<string, Json>).sandbox as Record<
+        string,
+        Json
+    >;
+    assertEquals(sandbox.id, SID);
+    assertEquals(sandbox.state, "running");
+    assertEquals(sandbox.running_s, 3600);
+    assertEquals("cost_usd" in sandbox, false);
+});
+
+Deno.test("kosa8#get-sandbox: FOREIGN sandbox → the uniform 404, upstream untouched", async () => {
+    const result = await runEndpoint({
+        unit: await testSealedUnit(UNIT),
+        input: { pathParams: { id: "sbx_someoneElse0000000000" } },
+        mode: "replay",
+        // no fixture: the ownership gate must fire before ANY upstream call
+        resources: OWNED,
+    });
+    assertEquals(result.httpStatus, 404);
+    assertEquals(result.isProviderError, true);
+    assertEquals(result.usage, FREE_RUN);
+    assertEquals(result.timing.attempts, 0);
+});
+
+Deno.test("kosa8#get-sandbox: schema gate — a malformed or over-long id is refused; a 64-char id passes", async () => {
+    for (
+        const pathParams of [
+            { id: "sbx-4fQm9TzR2kLw8VbN1cXyPa" },
+            { id: "s".repeat(65) },
+            { id: SID, extra: "x" },
+        ] as Record<string, string>[]
+    ) {
+        const error = await assertRejects(
+            async () =>
+                runEndpoint({
+                    unit: await testSealedUnit(UNIT),
+                    input: { pathParams },
+                    mode: "replay",
+                    resources: OWNED,
+                }),
+            EngineError,
+        );
+        assertEquals(
+            (error as EngineError).code,
+            EngineErrorCode.INVALID_INPUT,
+            JSON.stringify(pathParams),
+        );
+    }
+    // near-twin: 64 characters is the route's limit — the schema lets it
+    // through and the ownership gate answers (not ours → 404, no call)
+    const result = await runEndpoint({
+        unit: await testSealedUnit(UNIT),
+        input: { pathParams: { id: "s".repeat(64) } },
+        mode: "replay",
+        resources: OWNED,
+    });
+    assertEquals(result.httpStatus, 404);
+    assertEquals(result.timing.attempts, 0);
+});
+
+Deno.test("kosa8#get-sandbox provider error (synthetic 404 not_found): data, empty usage", async () => {
+    const result = await runEndpoint({
+        unit: await testSealedUnit(UNIT),
+        input: { pathParams: { id: SID } },
+        mode: "replay",
+        fixture: await fixture("synthetic-get-not-found"),
+        resources: OWNED,
+    });
+    assertEquals(result.httpStatus, 404);
+    assertEquals(result.isProviderError, true);
+    assertEquals(result.usage, FREE_RUN);
+    assertEquals((result.output as Record<string, Json>).error, "not_found");
+});
+
+Deno.test({
+    name:
+        "kosa8#get-sandbox live (gated on KOSA8_API_KEY): reads its own sandbox; deleted in finally",
+    ignore: liveSkip("kosa8"),
+    fn: () =>
+        withLiveSandbox(async ({ id, owned }) => {
+            const result = await runEndpoint({
+                unit: await testSealedUnit(UNIT),
+                input: { pathParams: { id } },
+                mode: "live",
+                resources: owned,
+            });
+            assertEquals(
+                result.isProviderError,
+                false,
+                JSON.stringify(result.output),
+            );
+            assertEquals(result.usage, FREE_RUN);
+            assertSandboxShape(result.output, id);
+        }),
+});

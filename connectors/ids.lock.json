@@ -438,6 +438,13 @@
         "kling#text-to-video/kling-2.6",
         "kling#text-to-video/kling-3.0",
         "kling#text-to-video/kling-3.0-turbo",
+        "kosa8#create-sandbox",
+        "kosa8#delete-sandbox",
+        "kosa8#exec",
+        "kosa8#get-sandbox",
+        "kosa8#list-templates",
+        "kosa8#sleep-sandbox",
+        "kosa8#wake-sandbox",
         "minimax#v1/image_generation",
         "minimax#v1/music_generation",
         "minimax#v1/t2a_v2",
@@ -655,6 +662,7 @@
         "tinyfish#search"
     ],
     "resources": [
+        "kosa8/sandbox",
         "saperly/phone-number"
     ]
 }
