@@ -1,0 +1,56 @@
+{
+    "name": "synthetic-list-templates",
+    "description": "GET /v1/templates: templates aggregated over live hosts (sandboxes.js listTemplates). Sizes and image refs are illustrative; real sizes come from each host's template config. Constructed by hand from the kosa8 Cloud worker source (workers/cloud-api/src: sandboxes.js publicSandbox and the route handlers), not recorded: no live key was used.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/templates"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "templates": [
+                        {
+                            "key": "base",
+                            "cpus": 2,
+                            "mem_mb": 4096,
+                            "image": "alpine:3.20",
+                            "regions": [
+                                "eu-hel1"
+                            ],
+                            "hosts": 1,
+                            "warm": 3,
+                            "own_host": false
+                        },
+                        {
+                            "key": "node",
+                            "cpus": 2,
+                            "mem_mb": 4096,
+                            "image": "node:22-alpine",
+                            "regions": [
+                                "eu-hel1"
+                            ],
+                            "hosts": 1,
+                            "warm": 2,
+                            "own_host": false
+                        },
+                        {
+                            "key": "python",
+                            "cpus": 2,
+                            "mem_mb": 4096,
+                            "image": "python:3.12-alpine",
+                            "regions": [
+                                "eu-hel1"
+                            ],
+                            "hosts": 1,
+                            "warm": 2,
+                            "own_host": false
+                        }
+                    ],
+                    "default_template": "base"
+                }
+            }
+        }
+    ]
+}

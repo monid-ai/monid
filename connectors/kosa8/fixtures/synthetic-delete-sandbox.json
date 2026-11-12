@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-delete-sandbox",
+    "description": "DELETE /v1/sandboxes/{id}: {ok, id}. Constructed by hand from the kosa8 Cloud worker source (workers/cloud-api/src: sandboxes.js publicSandbox and the route handlers), not recorded: no live key was used.",
+    "calls": [
+        {
+            "req": {
+                "method": "DELETE",
+                "url": "{{request.origin}}/v1/sandboxes/sbx_4fQm9TzR2kLw8VbN1cXyPa"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "ok": true,
+                    "id": "sbx_4fQm9TzR2kLw8VbN1cXyPa"
+                }
+            }
+        }
+    ]
+}

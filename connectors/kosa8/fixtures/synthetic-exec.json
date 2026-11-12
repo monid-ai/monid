@@ -1,0 +1,27 @@
+{
+    "name": "synthetic-exec",
+    "description": "POST /v1/sandboxes/{id}/exec, buffered: {exit, stdout, stderr} with output already decoded from base64 by the worker. Constructed by hand from the kosa8 Cloud worker source (workers/cloud-api/src: sandboxes.js publicSandbox and the route handlers), not recorded: no live key was used.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/v1/sandboxes/sbx_4fQm9TzR2kLw8VbN1cXyPa/exec",
+                "body": {
+                    "cmd": [
+                        "python3",
+                        "-c",
+                        "print(6 * 7)"
+                    ]
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "exit": 0,
+                    "stdout": "42\n",
+                    "stderr": ""
+                }
+            }
+        }
+    ]
+}
