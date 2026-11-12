@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-unauthorized",
+    "description": "Synthetic 401 from any Tako endpoint, shaped from Tako's AuthenticationError envelope for an invalid API key.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error_type": "AUTHENTICATION_ERROR",
+                    "error_message": "Invalid API key"
+                }
+            }
+        }
+    ]
+}
