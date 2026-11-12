@@ -1,0 +1,61 @@
+{
+    "name": "scan",
+    "description": "Recorded Appear homepage scan. Includes one page, one score check and one crawler observation. The inline screenshot is truncated.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://joinappear.com/api/how-ai-sees-you",
+                "body": {
+                    "domain": "joinappear.com"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "result": {
+                        "domain": "joinappear.com",
+                        "scannedAt": "2026-11-12T00:18:53.252Z",
+                        "scoreVersion": "1.1.0",
+                        "finalUrl": "https://joinappear.com/",
+                        "score": {
+                            "score": 99,
+                            "grade": "A",
+                            "diagnosis": "98% of tested critical facts appear in the first HTML response.",
+                            "checks": [
+                                {
+                                    "id": "homepage_reachable",
+                                    "tier": "essential",
+                                    "label": "Homepage reachable",
+                                    "awardedPoints": 15,
+                                    "availablePoints": 15,
+                                    "status": "pass",
+                                    "evidence": "The homepage returned a readable response.",
+                                    "recommendation": null
+                                }
+                            ]
+                        },
+                        "pages": [
+                            {
+                                "kind": "homepage",
+                                "path": "/",
+                                "coveragePercent": 97,
+                                "screenshotDataUrl": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQA"
+                            }
+                        ],
+                        "crawlerChecks": [
+                            {
+                                "name": "GPTBot",
+                                "tier": "training",
+                                "statusCode": 200,
+                                "readable": true,
+                                "evidence": "HTTP 200 with 1289 readable text units."
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}
