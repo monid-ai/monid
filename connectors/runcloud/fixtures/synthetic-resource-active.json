@@ -1,0 +1,98 @@
+{
+    "name": "synthetic-resource-active",
+    "description": "Two reads of a session still running (createdAt 10:00:00.000Z, no release): verify says active, then a mid-session reconcile counts seconds up to the window end.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/run-cloud/ios/sess-1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "sess-1",
+                    "orgId": "org-monid-pool",
+                    "platform": "ios",
+                    "status": "active",
+                    "model": "iphone",
+                    "region": null,
+                    "displayName": null,
+                    "tags": {},
+                    "url": "https://sim-7.run.cloud/view/sess-1?token=signed-viewer-token",
+                    "device": "C0FFEE00-1111-2222-3333-444455556666",
+                    "hostId": "host-7",
+                    "leaseId": "lease-1",
+                    "codec": "auto",
+                    "osVersion": "26.5",
+                    "runtime": "iOS 26.5",
+                    "architecture": "arm64",
+                    "platformVersion": "26.5",
+                    "deviceName": "iPhone 17e",
+                    "capabilities": {
+                        "requested": [],
+                        "enabled": [],
+                        "failed": [],
+                        "standby": []
+                    },
+                    "stream": {
+                        "codec": "auto",
+                        "viewerCodec": "auto",
+                        "hostCodec": "unknown"
+                    },
+                    "inactivityTimeoutSeconds": 300,
+                    "inactivityCountdownSeconds": 10,
+                    "createdAt": "2026-11-12T10:00:00.000Z",
+                    "releasedAt": null,
+                    "expiresAt": "2026-11-12T10:30:00.000Z",
+                    "queued": false
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/run-cloud/ios/sess-1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "sess-1",
+                    "orgId": "org-monid-pool",
+                    "platform": "ios",
+                    "status": "active",
+                    "model": "iphone",
+                    "region": null,
+                    "displayName": null,
+                    "tags": {},
+                    "url": "https://sim-7.run.cloud/view/sess-1?token=signed-viewer-token",
+                    "device": "C0FFEE00-1111-2222-3333-444455556666",
+                    "hostId": "host-7",
+                    "leaseId": "lease-1",
+                    "codec": "auto",
+                    "osVersion": "26.5",
+                    "runtime": "iOS 26.5",
+                    "architecture": "arm64",
+                    "platformVersion": "26.5",
+                    "deviceName": "iPhone 17e",
+                    "capabilities": {
+                        "requested": [],
+                        "enabled": [],
+                        "failed": [],
+                        "standby": []
+                    },
+                    "stream": {
+                        "codec": "auto",
+                        "viewerCodec": "auto",
+                        "hostCodec": "unknown"
+                    },
+                    "inactivityTimeoutSeconds": 300,
+                    "inactivityCountdownSeconds": 10,
+                    "createdAt": "2026-11-12T10:00:00.000Z",
+                    "releasedAt": null,
+                    "expiresAt": "2026-11-12T10:30:00.000Z",
+                    "queued": false
+                }
+            }
+        }
+    ]
+}

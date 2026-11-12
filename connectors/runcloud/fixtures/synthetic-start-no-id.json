@@ -1,0 +1,23 @@
+{
+    "name": "synthetic-start-no-id",
+    "description": "A 2xx create with no readable session id: the seed must throw (PROVISION_CONSTRUCT), never record 'nothing provisioned'.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/run-cloud/ios",
+                "body": {
+                    "inactivityTimeout": "5m",
+                    "hardTimeout": "30m"
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "status": "active",
+                    "platform": "ios"
+                }
+            }
+        }
+    ]
+}
