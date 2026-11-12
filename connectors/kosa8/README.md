@@ -1,9 +1,8 @@
 # kosa8 Cloud
 
 Sealed microVM sandboxes for AI agents, from
-[kosa8 Cloud](https://docs.kosa8.com/guides/cloud.html)
-(`https://api.kosa8.com`, `Authorization: Bearer k8c_live_…`, read from
-`KOSA8_API_KEY`).
+[kosa8 Cloud](https://docs.kosa8.com/guides/cloud/) (`https://api.kosa8.com`,
+`Authorization: Bearer k8c_live_…`, read from `KOSA8_API_KEY`).
 
 ## Model
 
@@ -57,5 +56,11 @@ Every fixture is **synthetic**: constructed by hand from the worker source
 (`workers/cloud-api/src`: `sandboxes.js` handlers and `publicSandbox`,
 `billing.js`), not recorded. No live key was used. Template sizes and image
 references in `synthetic-list-templates.json` are illustrative; real sizes come
-from each host's template config. There is no live test because every useful
-kosa8 call starts a billed sandbox.
+from each host's template config. Endpoint fixtures sit next to their endpoint
+(`endpoints/<name>/fixtures/`), the resource's under
+`resources/sandbox/fixtures/`.
+
+The one live test is `list-templates` (`GET /v1/templates`, gated on
+`KOSA8_API_KEY` via `liveSkip("kosa8")`, shape only): it creates nothing and
+costs nothing. Every other kosa8 call needs or starts a billed sandbox, so it
+has no live test.

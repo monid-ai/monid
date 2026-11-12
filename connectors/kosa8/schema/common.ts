@@ -23,3 +23,7 @@ export const zTemplateKey = z.string().regex(/^[a-z0-9][a-z0-9-]{0,31}$/);
 
 /** A region id (eu-hel1). */
 export const zRegionId = z.string().regex(/^[a-z0-9][a-z0-9-]{0,31}$/);
+
+/** `GET /v1/templates` takes no parameters — strict, so a stray query
+ *  param is an INVALID_INPUT instead of one the worker would ignore. */
+export const zNoQuery = z.object({}).strict();

@@ -19,7 +19,7 @@ export default defineEndpoint({
             "it), `last_error`, and `host_unreachable` (its host has " +
             "missed heartbeats; the sandbox is kept and returns with the " +
             "host).",
-        docsUrl: "https://docs.kosa8.com/guides/cloud.html",
+        docsUrl: "https://docs.kosa8.com/guides/cloud/",
         categories: ["code-execution"],
     },
     endpoint: "/get-sandbox",

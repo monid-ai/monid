@@ -56,7 +56,7 @@ export default defineEndpoint({
             "/delete-sandbox. `ttl_s` is required: kosa8 deletes the " +
             "sandbox when it runs out. Nothing in one sandbox is visible " +
             "to another; each starts clean from its template.",
-        docsUrl: "https://docs.kosa8.com/guides/cloud.html",
+        docsUrl: "https://docs.kosa8.com/guides/cloud/",
         categories: ["code-execution"],
         notes: [
             "Creating a sandbox STARTS A METER: $0.048 per vCPU-hour plus " +

@@ -3,7 +3,7 @@ import { defineProvider, presets } from "@shared/core";
 /**
  * kosa8 Cloud — sealed microVM sandboxes for AI agents
  * (https://api.kosa8.com, the Cloudflare Worker behind
- * https://docs.kosa8.com/guides/cloud.html).
+ * https://docs.kosa8.com/guides/cloud/).
  *
  * Bearer-key REST: `Authorization: Bearer k8c_live_…`. The organization is
  * resolved from the key. Monid holds ONE pooled kosa8 organization, which
@@ -41,7 +41,7 @@ export default defineProvider({
             "packages, or run a build or test suite away from the host " +
             "that called it.",
         homepageUrl: "https://kosa8.com",
-        docsUrl: "https://docs.kosa8.com/guides/cloud.html",
+        docsUrl: "https://docs.kosa8.com/guides/cloud/",
         categories: ["code-execution"],
         notes: [
             "Sandboxes are OWNED RESOURCES: every sandbox-scoped endpoint " +

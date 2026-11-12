@@ -42,7 +42,7 @@ export default defineResource({
             "second while running ($0.048 per vCPU-hour plus $0.0154 per " +
             "GiB-hour of RAM in the EU); while asleep only its snapshot " +
             "is billed ($0.08 per GiB-month).",
-        docsUrl: "https://docs.kosa8.com/guides/cloud.html",
+        docsUrl: "https://docs.kosa8.com/guides/cloud/",
     },
     data: z.strictObject({
         template: z.string(),

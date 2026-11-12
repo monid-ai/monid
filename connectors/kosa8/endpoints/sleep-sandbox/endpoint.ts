@@ -20,7 +20,7 @@ export default defineEndpoint({
             "/exec (or /wake-sandbox) restores it exactly as it was. " +
             "Returns the sandbox object; sleeping an already-sleeping " +
             "sandbox is a no-op.",
-        docsUrl: "https://docs.kosa8.com/guides/cloud.html",
+        docsUrl: "https://docs.kosa8.com/guides/cloud/",
         categories: ["code-execution"],
         notes: [
             "Only a running sandbox can sleep; any other state answers " +

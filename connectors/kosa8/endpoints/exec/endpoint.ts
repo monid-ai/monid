@@ -44,7 +44,7 @@ export default defineEndpoint({
             "packages are still there). The filesystem persists between " +
             "calls on the same sandbox, so an agent can write a file in " +
             "one exec and run it in the next.",
-        docsUrl: "https://docs.kosa8.com/guides/cloud.html",
+        docsUrl: "https://docs.kosa8.com/guides/cloud/",
         categories: ["code-execution"],
         notes: [
             "The command must finish within about 30 seconds: kosa8 " +

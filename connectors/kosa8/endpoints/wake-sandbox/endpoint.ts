@@ -17,7 +17,7 @@ export default defineEndpoint({
             "sandbox object and `wake_ms`, how long the restore took. " +
             "Waking a running sandbox is a no-op (`wake_ms: 0`). An /exec " +
             "on a sleeping sandbox wakes it anyway, so this is optional.",
-        docsUrl: "https://docs.kosa8.com/guides/cloud.html",
+        docsUrl: "https://docs.kosa8.com/guides/cloud/",
         categories: ["code-execution"],
         notes: [
             "Waking restarts the per-second compute meter.",

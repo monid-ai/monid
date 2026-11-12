@@ -14,7 +14,7 @@ import { EngineError } from "@monid/connector-engine";
  * 7200 s asleep on a 4 GiB snapshot.
  */
 
-const HERE = fromFileUrl(new URL("../../", import.meta.url));
+const HERE = fromFileUrl(new URL("./", import.meta.url));
 const fixture = (name: string) => loadFixture(`${HERE}fixtures/${name}.json`);
 
 const ROW: OwnedResource = {

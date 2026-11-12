@@ -1,4 +1,5 @@
 import { defineEndpoint, UsageModelKind } from "@shared/core";
+import { zNoQuery } from "../../schema/common.ts";
 
 /**
  * /list-templates — the templates a sandbox can start from right now
@@ -19,10 +20,11 @@ export default defineEndpoint({
             "a second). `default_template` is what a create without " +
             "`template` uses. Use the size to work out what a sandbox " +
             "costs per hour before creating it.",
-        docsUrl: "https://docs.kosa8.com/guides/cloud.html",
+        docsUrl: "https://docs.kosa8.com/guides/cloud/",
         categories: ["code-execution"],
     },
     endpoint: "/list-templates",
     request: { method: "GET", path: "/v1/templates" },
+    input: { schema: { queryParams: zNoQuery } },
     usage: { model: { kind: UsageModelKind.FREE } },
 });

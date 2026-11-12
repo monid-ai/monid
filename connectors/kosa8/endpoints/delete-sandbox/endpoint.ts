@@ -23,7 +23,7 @@ export default defineEndpoint({
             "with its memory and files, and billing stops. Returns " +
             "`{ok: true, id}`. This cannot be undone; copy anything you " +
             "need out with /exec first.",
-        docsUrl: "https://docs.kosa8.com/guides/cloud.html",
+        docsUrl: "https://docs.kosa8.com/guides/cloud/",
         categories: ["code-execution"],
     },
     endpoint: "/delete-sandbox",

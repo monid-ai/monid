@@ -23,4 +23,5 @@
       gates, release and reconcile marks
 - [x] 3.3 Resource tests: verify / release, meter formula, deleted-sandbox
       fallback, unreadable meter throws
-- [ ] 3.4 Record real fixtures once Monid holds a kosa8 organization key
+- [x] 3.4 Live test for list-templates only (free, gated on `KOSA8_API_KEY`)
+- [ ] 3.5 Record real fixtures once Monid holds a kosa8 organization key

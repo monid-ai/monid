@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-get-not-found",
+    "description": "GET /v1/sandboxes/{id} for a sandbox kosa8 already deleted (its TTL ran out before the owned row was released): 404 not_found (sandboxes.js ownedRow). Constructed by hand from the kosa8 Cloud worker source (workers/cloud-api/src: sandboxes.js and auth.js error paths), not recorded: no live key was used.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/sandboxes/sbx_4fQm9TzR2kLw8VbN1cXyPa"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": "not_found",
+                    "message": "no such sandbox"
+                }
+            }
+        }
+    ]
+}
