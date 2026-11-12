@@ -1,0 +1,18 @@
+{
+    "name": "recorded-unauthorized",
+    "description": "TwittrAPI 401 (recorded with an invalid key): `{error}` body, not charged by the vendor, zero usage here. Recorded 2026-10-15 with a vendor key via `deno task record` (arrays trimmed; request headers never captured).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.twittrapi.com/user/by/username/XDevelopers?format=simple"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": "user not found"
+                }
+            }
+        }
+    ]
+}

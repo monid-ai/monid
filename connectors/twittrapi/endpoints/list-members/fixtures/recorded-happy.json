@@ -1,0 +1,74 @@
+{
+    "name": "recorded-happy",
+    "description": "TwittrAPI /lists/members for list 84839422: member accounts. PAGE 1. Recorded 2026-10-15 with a vendor key via `deno task record` (arrays trimmed; request headers never captured).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.twittrapi.com/lists/members?listId=84839422&count=5&format=simple"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "id": "1319036828964454402",
+                            "username": "CommunityNotes",
+                            "name": "Community Notes",
+                            "description": "Empowering users to create a better-informed world.\n\nWe're open source and data is publicly available: https://communitynotes.x.com/guide/en/\n\nQ? Reply/DM",
+                            "location": "",
+                            "url": "https://x.com/HelpfulNotes",
+                            "createdAt": "2020-10-21T22:04:47Z",
+                            "avatarUrl": "https://pbs.twimg.com/profile_images/1685001119934607360/Dh2Z7jCt.png",
+                            "bannerUrl": "https://pbs.twimg.com/profile_banners/1319036828964454402/1690212143",
+                            "verified": true,
+                            "verifiedType": "Business",
+                            "protected": false,
+                            "counts": {
+                                "followers": 1192046,
+                                "following": 0,
+                                "tweets": 478,
+                                "likes": 218,
+                                "media": 114,
+                                "listed": 1842
+                            },
+                            "pinnedTweetIds": [
+                                "1635491237439602691"
+                            ],
+                            "isAutomated": false
+                        },
+                        {
+                            "id": "1244731491088809984",
+                            "username": "TwitterThailand",
+                            "name": "Twitter Thailand",
+                            "description": "Please follow @X for updates.",
+                            "location": "",
+                            "url": null,
+                            "createdAt": "2020-03-30T21:02:29Z",
+                            "avatarUrl": "https://pbs.twimg.com/profile_images/1354486384329854984/BXv7J1j2.jpg",
+                            "bannerUrl": "https://pbs.twimg.com/profile_banners/1244731491088809984/1611791443",
+                            "verified": false,
+                            "verifiedType": null,
+                            "protected": true,
+                            "counts": {
+                                "followers": 37815,
+                                "following": 16,
+                                "tweets": 1263,
+                                "likes": 16,
+                                "media": 333,
+                                "listed": 39
+                            },
+                            "pinnedTweetIds": [
+                                "1580793959307436032"
+                            ],
+                            "isAutomated": false
+                        }
+                    ],
+                    "nextCursor": "5616053818016268288|2110801177061883897",
+                    "previousCursor": null,
+                    "hasNextPage": true
+                }
+            }
+        }
+    ]
+}

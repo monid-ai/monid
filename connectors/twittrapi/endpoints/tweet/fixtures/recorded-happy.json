@@ -1,0 +1,71 @@
+{
+    "name": "recorded-happy",
+    "description": "TwittrAPI /simpletweet/{tweetId}: one XDevelopers tweet as a single simple-format object ({data}). PAGE 1. Recorded 2026-10-15 with a vendor key via `deno task record` (arrays trimmed; request headers never captured).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.twittrapi.com/simpletweet/2019881223666233717?format=simple"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "id": "2019881223666233717",
+                        "url": "https://x.com/XDevelopers/status/2019881223666233717",
+                        "text": "Officially launching X API Pay-Per-Use\n\nThe core of X developers are indie builders, early stage products, startups, and hobbyists\n\nIt’s time to open up our X API ecosystem and instill a new wave of next generation X apps\n\nWe’re so back. http://developer.x.com",
+                        "createdAt": "2026-02-06T21:09:45Z",
+                        "lang": "en",
+                        "author": {
+                            "id": "2244994945",
+                            "username": "XDevelopers",
+                            "name": "Developers",
+                            "description": "The voice of the X Dev team and your official source for updates, news, and events, related to the X API.",
+                            "location": "127.0.0.1",
+                            "url": "https://docs.x.com/",
+                            "createdAt": "2013-12-14T04:35:55Z",
+                            "avatarUrl": "https://pbs.twimg.com/profile_images/1683501992314798080/xl1POYLw.jpg",
+                            "bannerUrl": "https://pbs.twimg.com/profile_banners/2244994945/1690213128",
+                            "verified": true,
+                            "verifiedType": "Business",
+                            "protected": false,
+                            "counts": {
+                                "followers": 698642,
+                                "following": 770,
+                                "tweets": 4377,
+                                "likes": 2760,
+                                "media": 832,
+                                "listed": 2977
+                            },
+                            "pinnedTweetIds": [
+                                "2019881223666233717"
+                            ],
+                            "isAutomated": false
+                        },
+                        "counts": {
+                            "likes": 5599,
+                            "retweets": 896,
+                            "replies": 791,
+                            "quotes": 596,
+                            "bookmarks": 2800,
+                            "views": 2554009
+                        },
+                        "media": [],
+                        "urls": [
+                            "http://developer.x.com"
+                        ],
+                        "hashtags": [],
+                        "mentions": [],
+                        "replyTo": null,
+                        "quoted": null,
+                        "retweetOf": null,
+                        "conversationId": "2019881223666233717",
+                        "isPinned": false,
+                        "source": null,
+                        "article": null
+                    }
+                }
+            }
+        }
+    ]
+}

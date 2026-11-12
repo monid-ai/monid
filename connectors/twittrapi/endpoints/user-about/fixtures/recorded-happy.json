@@ -1,0 +1,52 @@
+{
+    "name": "recorded-happy",
+    "description": "TwittrAPI /user/about/{username} for NASA: the profile plus the About-this-account fields. PAGE 1. Recorded 2026-10-15 with a vendor key via `deno task record` (arrays trimmed; request headers never captured).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.twittrapi.com/user/about/nasa?format=simple"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "id": "11348282",
+                        "username": "NASA",
+                        "name": "NASA",
+                        "description": "",
+                        "location": "",
+                        "url": null,
+                        "createdAt": "2007-12-19T20:20:32Z",
+                        "avatarUrl": "https://pbs.twimg.com/profile_images/1321163587679784960/0ZxKlEKB.jpg",
+                        "bannerUrl": null,
+                        "verified": true,
+                        "verifiedType": "Government",
+                        "protected": false,
+                        "counts": {
+                            "followers": 0,
+                            "following": 0,
+                            "tweets": 0,
+                            "likes": 0,
+                            "media": 0,
+                            "listed": 0
+                        },
+                        "pinnedTweetIds": [],
+                        "isAutomated": false,
+                        "about": {
+                            "accountBasedIn": null,
+                            "locationAccurate": true,
+                            "createdCountryAccurate": null,
+                            "source": null,
+                            "usernameChanges": 0,
+                            "lastUsernameChangeAt": null,
+                            "affiliateUsername": null,
+                            "identityVerified": false,
+                            "verifiedSince": "2009-08-07T19:53:50Z"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

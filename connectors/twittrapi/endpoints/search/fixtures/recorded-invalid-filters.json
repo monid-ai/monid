@@ -1,0 +1,18 @@
+{
+    "name": "recorded-invalid-filters",
+    "description": "TwittrAPI /search 422: mutually exclusive filters (removeReplies + onlyReplies). The vendor charges a 422; the engine zero-bills every non-2xx here. Recorded 2026-10-15 with a vendor key via `deno task record` (arrays trimmed; request headers never captured).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.twittrapi.com/search?searchItem=nasa&filters=%7B%22removeReplies%22%3Atrue%2C%22onlyReplies%22%3Atrue%7D&format=simple"
+            },
+            "res": {
+                "status": 422,
+                "body": {
+                    "error": "filters \"removeReplies\" and \"onlyReplies\" cannot both be true"
+                }
+            }
+        }
+    ]
+}
