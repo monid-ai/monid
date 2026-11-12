@@ -1,6 +1,13 @@
-import { assertEquals } from "@std/assert";
+import { assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
-import { loadFixture, runEndpoint, testSealedUnit } from "@shared/testing";
+import {
+    estimateEndpoint,
+    liveSkip,
+    loadFixture,
+    runEndpoint,
+    testSealedUnit,
+} from "@shared/testing";
+import { z } from "zod";
 
 const endpointId = "appear#how-ai-sees-you";
 const fixturesDir = fromFileUrl(new URL("../../fixtures/", import.meta.url));
@@ -40,4 +47,46 @@ Deno.test("Appear forwards a rejected scan and charges zero usage", async () => 
     assertEquals(result.isProviderError, true);
     assertEquals(result.output, fixture.calls[0].res.body);
     assertEquals(result.usage, { credits: {}, evidence: {} });
+});
+
+Deno.test("Appear's compiled input schema rejects an empty domain and accepts a public hostname", async () => {
+    const unit = await testSealedUnit(endpointId);
+    await assertRejects(
+        () => estimateEndpoint(unit, { body: { domain: "" } }),
+        Error,
+        "INVALID_INPUT",
+    );
+    assertEquals(
+        await estimateEndpoint(unit, { body: { domain: "joinappear.com" } }),
+        { credits: {}, evidence: {} },
+    );
+});
+
+Deno.test({
+    name: "Appear live scan returns a scored report for its own homepage",
+    // Any nonempty APPEAR_API_KEY opts into this test. The public endpoint receives no key.
+    ignore: liveSkip("appear"),
+    fn: async () => {
+        const unit = await testSealedUnit(endpointId);
+        const result = await runEndpoint({
+            unit,
+            input: { body: { domain: "joinappear.com" } },
+            mode: "live",
+        });
+        assertEquals(result.httpStatus, 200);
+        assertEquals(result.isProviderError, false);
+        z.object({
+            success: z.literal(true),
+            result: z.object({
+                domain: z.string(),
+                score: z.object({ score: z.number(), grade: z.string() }),
+                pages: z.array(
+                    z.object({
+                        path: z.string(),
+                        screenshotDataUrl: z.never().optional(),
+                    }),
+                ).min(1),
+            }),
+        }).parse(result.output);
+    },
 });
