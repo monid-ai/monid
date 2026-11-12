@@ -1,0 +1,33 @@
+{
+    "name": "synthetic-search-deep",
+    "description": "Synthetic /v3/search 200 at deep effort, shaped from Tako's public SearchResponse schema: one card, no per-unit data. usage reports the $0.012 deep base price.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "request_id": "req_synthetic_search_2",
+                    "cards": [
+                        {
+                            "card_id": "def456",
+                            "title": "US unemployment rate",
+                            "description": "Monthly US unemployment rate, seasonally adjusted, 2016 to 2026.",
+                            "webpage_url": "https://tako.com/card/def456",
+                            "card_type": "timeseries",
+                            "exportable": true
+                        }
+                    ],
+                    "web_results": [],
+                    "usage": {
+                        "total_cost_usd": 0.012,
+                        "compute": { "cost_usd": 0.012 }
+                    }
+                }
+            }
+        }
+    ]
+}

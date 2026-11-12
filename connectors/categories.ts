@@ -385,4 +385,25 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "Tools to pull public government records, including financial " +
             "disclosures, filings, registries, and more.",
     },
+    {
+        id: "macro-data",
+        displayName: "Macro & Economic Data",
+        description:
+            "Tools to pull economic indicators, including GDP, inflation, " +
+            "employment, interest rates, demographics, and more.",
+    },
+    {
+        id: "weather",
+        displayName: "Weather",
+        description:
+            "Tools to pull weather data, including current conditions, " +
+            "forecasts, history, and more.",
+    },
+    {
+        id: "sports",
+        displayName: "Sports",
+        description:
+            "Tools to pull sports data, including scores, schedules, " +
+            "standings, player and team statistics, and more.",
+    },
 ]);

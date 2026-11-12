@@ -651,6 +651,8 @@
         "suzanne#v1/generations/text-to-3d",
         "suzanne#v1/models/download",
         "suzanne#v1/uploads",
+        "tako#v1/contents",
+        "tako#v3/search",
         "tinyfish#fetch",
         "tinyfish#search"
     ],
