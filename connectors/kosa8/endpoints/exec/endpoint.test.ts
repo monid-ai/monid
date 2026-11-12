@@ -2,14 +2,26 @@ import { assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import type { Json, OwnedResource } from "@shared/core";
 import { EngineError, EngineErrorCode } from "@monid/connector-engine";
-import { loadFixture, runEndpoint, testSealedUnit } from "@shared/testing";
+import {
+    liveSkip,
+    loadFixture,
+    runEndpoint,
+    testSealedUnit,
+} from "@shared/testing";
+import {
+    assertSandboxShape,
+    FREE_RUN,
+    withLiveSandbox,
+} from "../../live-sandbox.ts";
 
 /**
  * kosa8#exec — USES `kosa8/sandbox`. Every fixture is SYNTHETIC:
  * constructed by hand from the kosa8 Cloud worker source
  * (workers/cloud-api/src), not recorded — no live key was used.
  *
- * No live test: exec needs a sandbox, and a sandbox is billed.
+ * The live test (gated on KOSA8_API_KEY, shape only) runs on its own
+ * sandbox from ../../live-sandbox.ts: smallest template, ttl_s 300,
+ * deleted in `finally`.
  */
 
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
@@ -22,7 +34,6 @@ const OWNED: OwnedResource[] = [{
     data: { template: "python", region: "eu-hel1", cpus: 2, memMb: 4096 },
     syncedAt: "2026-11-03T08:00:00.000Z",
 }];
-const FREE_RUN = { credits: {}, evidence: {} };
 
 Deno.test("kosa8#exec happy (synthetic 200): runs in an owned sandbox, free, marks it for reconcile", async () => {
     const result = await runEndpoint({
@@ -114,4 +125,29 @@ Deno.test("kosa8#exec provider error (synthetic 409 not_running): data, empty us
     assertEquals(result.isProviderError, true);
     assertEquals(result.usage, FREE_RUN);
     assertEquals((result.output as Record<string, Json>).error, "not_running");
+});
+
+Deno.test({
+    name:
+        "kosa8#exec live (gated on KOSA8_API_KEY): runs in its own sandbox; deleted in finally",
+    ignore: liveSkip("kosa8"),
+    fn: () =>
+        withLiveSandbox(async ({ id, owned }) => {
+            const result = await runEndpoint({
+                unit: await testSealedUnit("kosa8#exec"),
+                input: { pathParams: { id }, body: { cmd: ["echo", "ok"] } },
+                mode: "live",
+                resources: owned,
+            });
+            assertEquals(
+                result.isProviderError,
+                false,
+                JSON.stringify(result.output),
+            );
+            assertEquals(result.usage, FREE_RUN);
+            const out = result.output as Record<string, Json>;
+            assertEquals(typeof out.exit, "number");
+            assertEquals(typeof out.stdout, "string");
+            assertEquals(typeof out.stderr, "string");
+        }),
 });

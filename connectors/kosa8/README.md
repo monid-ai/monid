@@ -60,7 +60,8 @@ from each host's template config. Endpoint fixtures sit next to their endpoint
 (`endpoints/<name>/fixtures/`), the resource's under
 `resources/sandbox/fixtures/`.
 
-The one live test is `list-templates` (`GET /v1/templates`, gated on
-`KOSA8_API_KEY` via `liveSkip("kosa8")`, shape only): it creates nothing and
-costs nothing. Every other kosa8 call needs or starts a billed sandbox, so it
-has no live test.
+Every endpoint suite has a live test, gated on `KOSA8_API_KEY` via
+`liveSkip("kosa8")`, asserting shape only. `list-templates` creates nothing.
+Every other live test creates its own sandbox through `live-sandbox.ts` (the
+`base` template, `ttl_s` 300) and deletes it in `finally`, so a failed assertion
+never leaves a billed sandbox running; the wake test sleeps its sandbox first.

@@ -13,8 +13,8 @@ import {
  * kosa8#list-templates — free and unbound (`GET /v1/templates`). The
  * replay fixtures are SYNTHETIC: constructed by hand from the kosa8 Cloud
  * worker source (workers/cloud-api/src), not recorded — no live key was
- * used. The live test is the one kosa8 live test: listing templates
- * creates nothing and costs nothing.
+ * used. The live test needs no sandbox: listing templates creates
+ * nothing and costs nothing.
  */
 
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));

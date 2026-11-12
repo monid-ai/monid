@@ -2,14 +2,26 @@ import { assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import type { Json, OwnedResource } from "@shared/core";
 import { EngineError, EngineErrorCode } from "@monid/connector-engine";
-import { loadFixture, runEndpoint, testSealedUnit } from "@shared/testing";
+import {
+    liveSkip,
+    loadFixture,
+    runEndpoint,
+    testSealedUnit,
+} from "@shared/testing";
+import {
+    assertSandboxShape,
+    FREE_RUN,
+    withLiveSandbox,
+} from "../../live-sandbox.ts";
 
 /**
  * kosa8#delete-sandbox — RELEASES `kosa8/sandbox`. Every fixture is SYNTHETIC:
  * constructed by hand from the kosa8 Cloud worker source
  * (workers/cloud-api/src), not recorded — no live key was used.
  *
- * No live test: it needs a sandbox, and a sandbox is billed.
+ * The live test (gated on KOSA8_API_KEY, shape only) runs on its own
+ * sandbox from ../../live-sandbox.ts: smallest template, ttl_s 300,
+ * deleted in `finally`.
  */
 
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
@@ -22,7 +34,6 @@ const OWNED: OwnedResource[] = [{
     data: { template: "python", region: "eu-hel1", cpus: 2, memMb: 4096 },
     syncedAt: "2026-11-03T08:00:00.000Z",
 }];
-const FREE_RUN = { credits: {}, evidence: {} };
 const UNIT = "kosa8#delete-sandbox";
 
 Deno.test("kosa8#delete-sandbox happy (synthetic 200): deletes upstream now, free, emits the release mark", async () => {
@@ -109,4 +120,28 @@ Deno.test("kosa8#delete-sandbox provider error (synthetic 502 host_failed): data
     assertEquals((result.output as Record<string, Json>).error, "host_failed");
     // a failed delete releases nothing: the sandbox may still exist
     assertEquals(result.resources?.releases ?? [], []);
+});
+
+Deno.test({
+    name:
+        "kosa8#delete-sandbox live (gated on KOSA8_API_KEY): deletes its own sandbox",
+    ignore: liveSkip("kosa8"),
+    fn: () =>
+        withLiveSandbox(async ({ id, owned }) => {
+            const result = await runEndpoint({
+                unit: await testSealedUnit(UNIT),
+                input: { pathParams: { id } },
+                mode: "live",
+                resources: owned,
+            });
+            assertEquals(
+                result.isProviderError,
+                false,
+                JSON.stringify(result.output),
+            );
+            assertEquals(result.usage, FREE_RUN);
+            const out = result.output as Record<string, Json>;
+            assertEquals(out.ok, true);
+            assertEquals(out.id, id);
+        }),
 });

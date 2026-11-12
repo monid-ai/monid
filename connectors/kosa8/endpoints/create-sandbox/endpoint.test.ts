@@ -2,21 +2,32 @@ import { assert, assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import type { Json } from "@shared/core";
 import { EngineError, EngineErrorCode } from "@monid/connector-engine";
-import { loadFixture, runEndpoint, testSealedUnit } from "@shared/testing";
+import {
+    liveSkip,
+    loadFixture,
+    runEndpoint,
+    testSealedUnit,
+} from "@shared/testing";
+import {
+    assertSandboxShape,
+    FREE_RUN,
+    withLiveSandbox,
+} from "../../live-sandbox.ts";
 
 /**
  * kosa8#create-sandbox — the PROVISIONS anchor of `kosa8/sandbox`. Every
  * fixture is SYNTHETIC: constructed by hand from the kosa8 Cloud worker
  * source (workers/cloud-api/src), not recorded — no live key was used.
  *
- * No live test: a create starts a billed sandbox.
+ * The live test (gated on KOSA8_API_KEY, shape only) runs on its own
+ * sandbox from ../../live-sandbox.ts: smallest template, ttl_s 300,
+ * deleted in `finally`.
  */
 
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
 const fixture = (name: string) => loadFixture(`${fixturesDir}${name}.json`);
 
 const SID = "sbx_4fQm9TzR2kLw8VbN1cXyPa";
-const FREE_RUN = { credits: {}, evidence: {} };
 
 Deno.test("kosa8#create-sandbox happy (synthetic 201): seeds the owned sandbox; the run is free; cost_usd stripped", async () => {
     const result = await runEndpoint({
@@ -98,4 +109,26 @@ Deno.test("kosa8#create-sandbox provider error (synthetic 503 no_capacity): no s
     assertEquals(result.usage, FREE_RUN);
     assertEquals(result.resources?.provisions ?? [], []);
     assertEquals((result.output as Record<string, Json>).error, "no_capacity");
+});
+
+Deno.test({
+    name:
+        "kosa8#create-sandbox live (gated on KOSA8_API_KEY): seeds the sandbox; deleted in finally",
+    ignore: liveSkip("kosa8"),
+    fn: () =>
+        withLiveSandbox(({ id, created }) => {
+            assertEquals(
+                created.isProviderError,
+                false,
+                JSON.stringify(created.output),
+            );
+            assertEquals(created.httpStatus, 201);
+            assertEquals(created.usage, FREE_RUN);
+            const seed = created.resources?.provisions?.[0];
+            assert(seed !== undefined, "expected a provision seed");
+            assertEquals(seed.resource, "kosa8/sandbox");
+            assertEquals(seed.externalId, id);
+            assertSandboxShape(created.output, id);
+            return Promise.resolve();
+        }),
 });
