@@ -1,0 +1,16 @@
+{
+    "name": "provider-error",
+    "description": "recorded 404 from diagram.flisk.si for a repository that does not exist, 2026-11-12; the body is the plain text not-found",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://diagram.flisk.si/nonexistent-zz/none-zz.svg"
+            },
+            "res": {
+                "status": 404,
+                "body": "not-found"
+            }
+        }
+    ]
+}
