@@ -1,0 +1,66 @@
+{
+    "name": "synthetic-release-pending-settled",
+    "description": "DELETE answers 503 simulator_release_pending, but the re-read shows the session released (run.cloud stops billing before it returns the device): released.",
+    "calls": [
+        {
+            "req": {
+                "method": "DELETE",
+                "url": "{{request.origin}}/run-cloud/ios/sess-1"
+            },
+            "res": {
+                "status": 503,
+                "body": {
+                    "error": "The run.cloud iOS simulator session is still being released",
+                    "code": "simulator_release_pending",
+                    "retryable": true
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/run-cloud/ios/sess-1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "sess-1",
+                    "orgId": "org-monid-pool",
+                    "platform": "ios",
+                    "status": "released",
+                    "model": "iphone",
+                    "region": null,
+                    "displayName": null,
+                    "tags": {},
+                    "url": "https://sim-7.run.cloud/view/sess-1?token=signed-viewer-token",
+                    "device": "C0FFEE00-1111-2222-3333-444455556666",
+                    "hostId": "host-7",
+                    "leaseId": "lease-1",
+                    "codec": "auto",
+                    "osVersion": "26.5",
+                    "runtime": "iOS 26.5",
+                    "architecture": "arm64",
+                    "platformVersion": "26.5",
+                    "deviceName": "iPhone 17e",
+                    "capabilities": {
+                        "requested": [],
+                        "enabled": [],
+                        "failed": [],
+                        "standby": []
+                    },
+                    "stream": {
+                        "codec": "auto",
+                        "viewerCodec": "auto",
+                        "hostCodec": "unknown"
+                    },
+                    "inactivityTimeoutSeconds": 300,
+                    "inactivityCountdownSeconds": 10,
+                    "createdAt": "2026-11-12T10:00:00.000Z",
+                    "releasedAt": "2026-11-12T10:07:30.500Z",
+                    "expiresAt": "2026-11-12T10:30:00.000Z",
+                    "queued": false
+                }
+            }
+        }
+    ]
+}
