@@ -1,0 +1,22 @@
+{
+    "name": "invalid-domain",
+    "description": "Recorded validation error for a name without a public domain suffix.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://joinappear.com/api/how-ai-sees-you",
+                "body": {
+                    "domain": "invalid",
+                    "fresh": true
+                }
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "error": "Enter a website domain like yourbrand.com."
+                }
+            }
+        }
+    ]
+}
