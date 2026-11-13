@@ -1,0 +1,206 @@
+{
+    "name": "synthetic-read-screen",
+    "description": "GET the accessibility tree of an owned session (run-cloud/sdk SimulatorAccessibilitySnapshot): application > group > heading, text field, disabled button. The projection must skip the two textless containers, keep screen order and depth, and add each element's normalized center.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/run-cloud/ios/sess-1/accessibility"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "schemaVersion": 1,
+                    "platform": "ios",
+                    "capturedAt": "2026-11-12T10:01:00.000Z",
+                    "screen": {
+                        "width": 400,
+                        "height": 800,
+                        "unit": "points"
+                    },
+                    "nodeCount": 5,
+                    "truncated": false,
+                    "roots": [
+                        {
+                            "id": "n0",
+                            "path": "0",
+                            "role": "application",
+                            "label": null,
+                            "value": null,
+                            "identifier": null,
+                            "bounds": {
+                                "x": 0,
+                                "y": 0,
+                                "width": 400,
+                                "height": 800
+                            },
+                            "states": {
+                                "enabled": true,
+                                "focused": null,
+                                "selected": null,
+                                "checked": null,
+                                "expanded": null,
+                                "focusable": null,
+                                "clickable": null,
+                                "scrollable": null,
+                                "editable": false,
+                                "secure": false
+                            },
+                            "native": {
+                                "platform": "ios",
+                                "type": "Application",
+                                "roleDescription": null,
+                                "subrole": null,
+                                "title": null,
+                                "help": null
+                            },
+                            "children": [
+                                {
+                                    "id": "n1",
+                                    "path": "0.0",
+                                    "role": "group",
+                                    "label": null,
+                                    "value": null,
+                                    "identifier": null,
+                                    "bounds": {
+                                        "x": 0,
+                                        "y": 0,
+                                        "width": 400,
+                                        "height": 800
+                                    },
+                                    "states": {
+                                        "enabled": true,
+                                        "focused": null,
+                                        "selected": null,
+                                        "checked": null,
+                                        "expanded": null,
+                                        "focusable": null,
+                                        "clickable": null,
+                                        "scrollable": null,
+                                        "editable": false,
+                                        "secure": false
+                                    },
+                                    "native": {
+                                        "platform": "ios",
+                                        "type": "Other",
+                                        "roleDescription": null,
+                                        "subrole": null,
+                                        "title": null,
+                                        "help": null
+                                    },
+                                    "children": [
+                                        {
+                                            "id": "n2",
+                                            "path": "0.0.0",
+                                            "role": "heading",
+                                            "label": "Sign in",
+                                            "value": null,
+                                            "identifier": null,
+                                            "bounds": {
+                                                "x": 20.4,
+                                                "y": 100.6,
+                                                "width": 200,
+                                                "height": 40
+                                            },
+                                            "states": {
+                                                "enabled": true,
+                                                "focused": null,
+                                                "selected": null,
+                                                "checked": null,
+                                                "expanded": null,
+                                                "focusable": null,
+                                                "clickable": null,
+                                                "scrollable": null,
+                                                "editable": false,
+                                                "secure": false
+                                            },
+                                            "native": {
+                                                "platform": "ios",
+                                                "type": "StaticText",
+                                                "roleDescription": null,
+                                                "subrole": null,
+                                                "title": null,
+                                                "help": null
+                                            },
+                                            "children": []
+                                        },
+                                        {
+                                            "id": "n3",
+                                            "path": "0.0.1",
+                                            "role": "text-field",
+                                            "label": "Email",
+                                            "value": "",
+                                            "identifier": "email-input",
+                                            "bounds": {
+                                                "x": 20,
+                                                "y": 200,
+                                                "width": 360,
+                                                "height": 44
+                                            },
+                                            "states": {
+                                                "enabled": true,
+                                                "focused": true,
+                                                "selected": null,
+                                                "checked": null,
+                                                "expanded": null,
+                                                "focusable": true,
+                                                "clickable": true,
+                                                "scrollable": null,
+                                                "editable": true,
+                                                "secure": false
+                                            },
+                                            "native": {
+                                                "platform": "ios",
+                                                "type": "TextField",
+                                                "roleDescription": null,
+                                                "subrole": null,
+                                                "title": null,
+                                                "help": null
+                                            },
+                                            "children": []
+                                        },
+                                        {
+                                            "id": "n4",
+                                            "path": "0.0.2",
+                                            "role": "button",
+                                            "label": "Continue",
+                                            "value": null,
+                                            "identifier": null,
+                                            "bounds": {
+                                                "x": 100,
+                                                "y": 600,
+                                                "width": 200,
+                                                "height": 50
+                                            },
+                                            "states": {
+                                                "enabled": false,
+                                                "focused": false,
+                                                "selected": null,
+                                                "checked": null,
+                                                "expanded": null,
+                                                "focusable": true,
+                                                "clickable": true,
+                                                "scrollable": null,
+                                                "editable": false,
+                                                "secure": false
+                                            },
+                                            "native": {
+                                                "platform": "ios",
+                                                "type": "Button",
+                                                "roleDescription": null,
+                                                "subrole": null,
+                                                "title": null,
+                                                "help": null
+                                            },
+                                            "children": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "name": "synthetic-interaction-session-gone",
+    "description": "The session already timed out upstream: the interaction answers 404 active_session_not_found. Data, zero usage, and no reconcile mark (marks ride only on a success settle).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/run-cloud/ios/sess-1/interactions",
+                "body": {
+                    "x": 0.5,
+                    "y": 0.5,
+                    "action": "tap"
+                }
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "ok": false,
+                    "requestId": "3b0d1f4e-6a51-4b2a-8f0e-1c9d2e3f4a5b",
+                    "sessionId": "sess-1",
+                    "platform": "ios",
+                    "action": "tap",
+                    "status": "failed",
+                    "error": {
+                        "code": "active_session_not_found",
+                        "message": "Active iOS simulator session not found",
+                        "retryable": false
+                    }
+                }
+            }
+        }
+    ]
+}

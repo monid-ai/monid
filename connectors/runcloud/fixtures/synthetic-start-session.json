@@ -1,0 +1,56 @@
+{
+    "name": "synthetic-start-session",
+    "description": "POST /run-cloud/ios answers 201 with the session payload (run-cloud/sdk SimulatorSession): the provision seed reads id + platform, and the provider projection strips the pooled orgId and the lease plumbing.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/run-cloud/ios",
+                "body": {
+                    "inactivityTimeout": "5m",
+                    "hardTimeout": "30m"
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "id": "sess-1",
+                    "orgId": "org-monid-pool",
+                    "platform": "ios",
+                    "status": "active",
+                    "model": "iphone",
+                    "region": null,
+                    "displayName": null,
+                    "tags": {},
+                    "url": "https://sim-7.run.cloud/view/sess-1?token=signed-viewer-token",
+                    "device": "C0FFEE00-1111-2222-3333-444455556666",
+                    "hostId": "host-7",
+                    "leaseId": "lease-1",
+                    "codec": "auto",
+                    "osVersion": "26.5",
+                    "runtime": "iOS 26.5",
+                    "architecture": "arm64",
+                    "platformVersion": "26.5",
+                    "deviceName": "iPhone 17e",
+                    "capabilities": {
+                        "requested": [],
+                        "enabled": [],
+                        "failed": [],
+                        "standby": []
+                    },
+                    "stream": {
+                        "codec": "auto",
+                        "viewerCodec": "auto",
+                        "hostCodec": "unknown"
+                    },
+                    "inactivityTimeoutSeconds": 300,
+                    "inactivityCountdownSeconds": 10,
+                    "createdAt": "2026-11-12T10:00:00.000Z",
+                    "releasedAt": null,
+                    "expiresAt": "2026-11-12T10:30:00.000Z",
+                    "queued": false
+                }
+            }
+        }
+    ]
+}

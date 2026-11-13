@@ -1,0 +1,24 @@
+{
+    "name": "synthetic-start-capacity",
+    "description": "No simulator capacity opened inside the fleet queue window: a 503 is data, nothing is provisioned, zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/run-cloud/ios",
+                "body": {
+                    "inactivityTimeout": "5m",
+                    "hardTimeout": "30m"
+                }
+            },
+            "res": {
+                "status": 503,
+                "body": {
+                    "error": "run.cloud iOS simulator capacity is busy; retry shortly",
+                    "code": "serve_sim_capacity_exhausted",
+                    "retryable": true
+                }
+            }
+        }
+    ]
+}

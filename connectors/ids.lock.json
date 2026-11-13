@@ -525,6 +525,17 @@
         "ploid#v1/linkedin/search",
         "ploid#v1/search",
         "ploid#v1/socials",
+        "runcloud#device-logs",
+        "runcloud#get-session",
+        "runcloud#open-url",
+        "runcloud#press-button",
+        "runcloud#press-key",
+        "runcloud#read-screen",
+        "runcloud#start-session",
+        "runcloud#stop-session",
+        "runcloud#swipe",
+        "runcloud#tap",
+        "runcloud#type-text",
         "saperly#call-recordings",
         "saperly#call-transcripts",
         "saperly#get-calls",
@@ -655,6 +666,7 @@
         "tinyfish#search"
     ],
     "resources": [
+        "runcloud/simulator-session",
         "saperly/phone-number"
     ]
 }

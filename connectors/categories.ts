@@ -270,6 +270,16 @@ export const LEAF_CATEGORIES = defineLeafCategories([
         description: "Send and receive SMS from owned phone numbers.",
     },
     {
+        // A RESOURCE-backed leaf like agentic-phone: the thing is a
+        // short-lived device session the workspace owns, not data.
+        id: "mobile-simulators",
+        displayName: "Mobile Simulators",
+        description:
+            "Cloud iOS simulators and Android emulators for agents: start " +
+            "a device, install an app, tap and type, read the screen and " +
+            "logs.",
+    },
+    {
         id: "token-prices",
         displayName: "Token Prices",
         description:
