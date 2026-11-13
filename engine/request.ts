@@ -86,6 +86,19 @@ export function substituteUrl(doc: EndpointDoc, input: RunInput): string {
                 `${doc.id}: missing pathParams.${name} for url placeholder`,
             );
         }
+        // encodeURIComponent leaves "." and ".." untouched, and the transport's
+        // `new URL(...)` then reads them as DOT SEGMENTS — collapsing them, so
+        // a caller-controlled param climbs out of its own segment onto a
+        // different route of the same origin (credentials attached, billed as
+        // this endpoint). Exactly these two values are affected: "/" is already
+        // %2F and "%" already %25. Refuse them; nothing else changes.
+        if (value === "." || value === "..") {
+            throw new EngineError(
+                EngineErrorCode.INVALID_INPUT,
+                `${doc.id}: pathParams.${name} cannot be "." or ".." (it ` +
+                    `would escape its URL segment)`,
+            );
+        }
         url = url.replaceAll(placeholder, encodeURIComponent(value));
     }
     return url;

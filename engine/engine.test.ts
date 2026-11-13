@@ -380,6 +380,71 @@ Deno.test("query: nesting is still refused — a query string cannot encode it",
     }
 });
 
+// ---------------------------------------------------------------------------
+// path substitution — {pathParam} into the compiled url, and the dot-segment
+// values ("." / "..") that would escape their own segment once `new URL(...)`
+// normalizes the result
+// ---------------------------------------------------------------------------
+
+/** demoUnit with a {id} placeholder in the compiled url, so the ISSUED url
+ *  is the assertion surface (the derived identity carries the placeholder:
+ *  "demo#calls/{id}", design D22). */
+async function pathUnit(): Promise<SealedUnit> {
+    const connectors = demoConnector();
+    const endpoint = connectors[0].endpoints[0];
+    endpoint.def.request = { method: "GET", path: "/calls/{id}" };
+    endpoint.def.input = {
+        schema: { pathParams: z.object({ id: z.string() }) },
+    };
+    delete endpoint.def.output;
+    return sealUnit(
+        await compileBundle(connectors, COMPILE_OPTS),
+        "demo#calls/{id}",
+    );
+}
+
+Deno.test("path substitution: a dot-segment pathParam is refused (INVALID_INPUT)", async () => {
+    const engine = new Engine({
+        transport: jsonTransport(200, { results: [] }),
+    });
+    const loaded = await engine.load(await pathUnit());
+    for (const id of [".", ".."]) {
+        // "." would fetch /calls/ and ".." would fetch / — a DIFFERENT route
+        // on the same origin, credentials attached, billed as this endpoint
+        await expectCode(
+            loaded.run({ pathParams: { id } }),
+            EngineErrorCode.INVALID_INPUT,
+        );
+    }
+    // ...and the message names the offending param, so the caller knows
+    // which input to fix
+    const run = loaded.run({ pathParams: { id: ".." } });
+    const error = await assertRejects(() => run);
+    assert(error instanceof EngineError);
+    assert(String(error.message).includes(`pathParams.id cannot be "."`));
+});
+
+Deno.test("path substitution: everything else substitutes exactly as before", async () => {
+    // the guard is NARROW: only the two dots are refused. A value that merely
+    // CONTAINS dots, or shares no bytes with them at all, is untouched.
+    const cases: [string, string][] = [
+        ["abc", "abc"],
+        ["a/b", "a%2Fb"], // each segment-escape is already encoded
+        ["100%", "100%25"],
+        ["..x", "..x"], // not a dot segment — no normalization applies
+        ["a..b", "a..b"],
+    ];
+    for (const [id, expected] of cases) {
+        const seen: { url?: string } = {};
+        const engine = new Engine({
+            transport: jsonTransport(200, { results: [] }, seen),
+        });
+        const loaded = await engine.load(await pathUnit());
+        await loaded.run({ pathParams: { id } });
+        assertEquals(seen.url, `https://api.demo.test/calls/${expected}`);
+    }
+});
+
 Deno.test("MISSING_CREDENTIAL: fail-closed before any network call", async () => {
     let fetched = false;
     const engine = new Engine({
@@ -1175,11 +1240,12 @@ function asyncConnector(): ConnectorSource[] {
 
 async function asyncUnit(
     mutate?: (connectors: ConnectorSource[]) => void,
+    id = "asyncdemo#jobs",
 ): Promise<SealedUnit> {
     const connectors = asyncConnector();
     mutate?.(connectors);
     const bundle = await compileBundle(connectors, COMPILE_OPTS);
-    return sealUnit(bundle, "asyncdemo#jobs");
+    return sealUnit(bundle, id);
 }
 
 /** Highest of the contract floors — the shape `minEngineVersion` is
@@ -1241,6 +1307,31 @@ Deno.test("lifecycle: utils.http spells lists like the declarative path — repe
         seen[0].url,
         "https://api.asyncdemo.test/jobs?scalar=one&ids=a&ids=b",
     );
+});
+
+Deno.test("path substitution: the lifecycle's ctx.data.request is guarded too", async () => {
+    // the OTHER call site: requestInfo() builds the url a lifecycle fn reads
+    // as data.request.url — same choke point, so the same refusal, before
+    // the start fn ever runs
+    const mutate = (connectors: ConnectorSource[]) => {
+        const endpoint = connectors[0].endpoints[0];
+        endpoint.def.request = { method: "POST", path: "/jobs/{id}" };
+        endpoint.def.input = {
+            schema: {
+                body: z.object({ q: z.string() }),
+                pathParams: z.object({ id: z.string() }),
+            },
+        };
+    };
+    const unit = await asyncUnit(mutate, "asyncdemo#jobs/{id}");
+    const engine = new Engine({ transport: jsonTransport(200, {}) });
+    const loaded = await engine.load(unit);
+    for (const id of [".", ".."]) {
+        await expectCode(
+            loaded.start({ body: { q: "hi" }, pathParams: { id } }),
+            EngineErrorCode.INVALID_INPUT,
+        );
+    }
 });
 
 // ---------------------------------------------------------------------------
