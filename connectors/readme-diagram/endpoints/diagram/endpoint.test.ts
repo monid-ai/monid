@@ -2,6 +2,7 @@ import { assert, assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import {
     assertInputAccepted,
+    liveSkip,
     loadFixture,
     runEndpoint,
     testSealedUnit,
@@ -73,12 +74,13 @@ Deno.test(`${ID}: the schema gate — owner and repo are required, and a valid p
     });
 });
 
-// liveSkip("readme-diagram", []) is always true (it opens only when every
-// declared credential field is set, and this provider has none), so a keyless
-// provider gates its live test on an explicit variable instead.
+// Keyless provider: liveSkip("readme-diagram", []) has no credential fields
+// to open on, so it is always true. README_DIAGRAM_LIVE=1 is the explicit
+// opt-in that lets the live test run.
 Deno.test({
     name: `${ID} live (no key needed; set README_DIAGRAM_LIVE=1 to run)`,
-    ignore: Deno.env.get("README_DIAGRAM_LIVE") !== "1",
+    ignore: liveSkip("readme-diagram", []) &&
+        Deno.env.get("README_DIAGRAM_LIVE") !== "1",
     fn: async () => {
         const unit = await testSealedUnit(ID);
         const result = await runEndpoint({
