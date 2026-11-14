@@ -3,6 +3,7 @@ import { fromFileUrl } from "@std/path";
 import type { Json } from "@shared/core";
 import {
     assertInputAccepted,
+    liveSkip,
     loadFixture,
     runEndpoint,
     testSealedUnit,
@@ -28,6 +29,23 @@ Deno.test(`${ID} happy: the whole report for pasted Markdown, free, no credentia
     assertEquals(result.isProviderError, false);
     assertEquals(result.usage, { credits: {}, evidence: {} });
     assertEquals(result.output, fixture.calls[0].res.body);
+});
+
+Deno.test(`${ID} provider error: a 400 is data, zero usage, body untouched`, async () => {
+    const unit = await testSealedUnit(ID);
+    const fixture = await loadFixture(`${fixturesDir}provider-error.json`);
+    const result = await runEndpoint({
+        unit,
+        input: { body: { readme: "   " } },
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(result.httpStatus, 400);
+    assertEquals(result.isProviderError, true);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
+    assertEquals(result.output, {
+        error: "readme must be the README's Markdown.",
+    });
 });
 
 Deno.test(`${ID}: the schema gate — readme is required, type is one of four, and a valid body passes`, async () => {
@@ -66,12 +84,13 @@ Deno.test(`${ID}: the schema gate — readme is required, type is one of four, a
     });
 });
 
-// liveSkip("readme-score", []) is always true (it opens only when every
-// declared credential field is set, and this provider has none), so a keyless
-// provider gates its live test on an explicit variable instead.
+// Keyless provider: liveSkip("readme-score", []) has no credential fields to
+// open on, so it is always true. README_SCORE_LIVE=1 is the explicit opt-in
+// that lets the live test run.
 Deno.test({
     name: `${ID} live (no key needed; set README_SCORE_LIVE=1 to run)`,
-    ignore: Deno.env.get("README_SCORE_LIVE") !== "1",
+    ignore: liveSkip("readme-score", []) &&
+        Deno.env.get("README_SCORE_LIVE") !== "1",
     fn: async () => {
         const unit = await testSealedUnit(ID);
         const result = await runEndpoint({

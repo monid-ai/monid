@@ -1,0 +1,21 @@
+{
+    "name": "provider-error",
+    "description": "recorded 400 from readme.flisk.si/api/score for a whitespace-only readme, 2026-11-14",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://readme.flisk.si/api/score",
+                "body": {
+                    "readme": "   "
+                }
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "error": "readme must be the README's Markdown."
+                }
+            }
+        }
+    ]
+}
