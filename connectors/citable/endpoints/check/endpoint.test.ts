@@ -3,6 +3,7 @@ import { fromFileUrl } from "@std/path";
 import type { Json } from "@shared/core";
 import {
     assertInputAccepted,
+    liveSkip,
     loadFixture,
     runEndpoint,
     testSealedUnit,
@@ -73,12 +74,12 @@ Deno.test(`${ID}: the schema gate — url is required, fresh is only "1", and "1
     });
 });
 
-// liveSkip("citable", []) is always true (it opens only when every declared
-// credential field is set, and this provider has none), so a keyless provider
-// gates its live test on an explicit variable instead.
+// Keyless provider: liveSkip("citable", []) has no credential fields to
+// open on, so it is always true. CITABLE_LIVE=1 is the explicit opt-in that
+// lets the live test run.
 Deno.test({
     name: `${ID} live (no key needed; set CITABLE_LIVE=1 to run)`,
-    ignore: Deno.env.get("CITABLE_LIVE") !== "1",
+    ignore: liveSkip("citable", []) && Deno.env.get("CITABLE_LIVE") !== "1",
     fn: async () => {
         const unit = await testSealedUnit(ID);
         const result = await runEndpoint({
