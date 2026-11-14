@@ -1,0 +1,107 @@
+{
+    "name": "happy",
+    "description": "recorded chain for xquik#x/users/{id}, scenario 'happy', recorded against the live API on 2026-11-14",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://xquik.com/api/v1/x/users/NASA"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "11348282",
+                    "username": "NASA",
+                    "name": "NASA",
+                    "followers": 92249520,
+                    "accountBasedIn": null,
+                    "accountBasedInAccurate": true,
+                    "contactInfo": {
+                        "links": [
+                            {
+                                "network": "website",
+                                "source": "url",
+                                "url": "http://www.nasa.gov/"
+                            }
+                        ]
+                    },
+                    "usernameChanges": {
+                        "count": 0
+                    },
+                    "following": 115,
+                    "verified": true,
+                    "isBlueVerified": true,
+                    "isVerified": true,
+                    "profilePicture": "https://pbs.twimg.com/profile_images/1321163587679784960/0ZxKlEKB_normal.jpg",
+                    "profilePictureOriginal": "https://pbs.twimg.com/profile_images/1321163587679784960/0ZxKlEKB.jpg",
+                    "coverPicture": "https://pbs.twimg.com/profile_banners/11348282/1788992290",
+                    "profileBannerUrl": "https://pbs.twimg.com/profile_banners/11348282/1788992290",
+                    "description": "Making the seemingly impossible, possible. ✨",
+                    "location": "Pale Blue Dot",
+                    "createdAt": "Wed Dec 19 20:20:32 +0000 2007",
+                    "birthdate": {
+                        "day": 1,
+                        "month": 10,
+                        "year": 1958
+                    },
+                    "statusesCount": 74542,
+                    "mediaCount": 28249,
+                    "protected": false,
+                    "url": "http://www.nasa.gov/",
+                    "favouritesCount": 17110,
+                    "possiblySensitive": false,
+                    "verifiedType": "Government",
+                    "profile_bio": {
+                        "description": "Making the seemingly impossible, possible. ✨",
+                        "entities": {
+                            "description": {},
+                            "url": {
+                                "urls": [
+                                    {
+                                        "display_url": "nasa.gov",
+                                        "expanded_url": "http://www.nasa.gov/",
+                                        "indices": [
+                                            0,
+                                            23
+                                        ],
+                                        "url": "https://t.co/9NkQJKAnuU"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "businessAccountAffiliatesCount": 85,
+                    "creatorSubscriptionsCount": 0,
+                    "hasGraduatedAccess": true,
+                    "hasHiddenSubscriptionsOnProfile": false,
+                    "highlightsInfo": {
+                        "canHighlightTweets": true,
+                        "highlightedTweets": "292"
+                    },
+                    "identityVerification": {
+                        "isIdentityVerified": false,
+                        "verifiedSinceMsec": "1249674830941"
+                    },
+                    "isProfileTranslatable": false,
+                    "parodyCommentaryFanLabel": "None",
+                    "profileDescriptionLanguage": "en",
+                    "profileImageShape": "Square",
+                    "profileSortEnabled": true,
+                    "profileTranslatorType": "regular",
+                    "superFollowEligible": false,
+                    "verificationReason": {
+                        "entities": [
+                            {
+                                "fromIndex": 91,
+                                "toIndex": 101,
+                                "url": "https://help.twitter.com/en/rules-and-policies/profile-labels",
+                                "urlType": "ExternalUrl"
+                            }
+                        ],
+                        "text": "This account is verified because it is a government or multilateral organization account.  Learn more"
+                    }
+                }
+            }
+        }
+    ]
+}

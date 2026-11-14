@@ -1,0 +1,298 @@
+{
+    "name": "happy",
+    "description": "recorded chain for xquik#x/tweets/search, scenario 'happy', 2 rows or fewer, recorded against the live API on 2026-11-14; the replied-to account replaced with a placeholder",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://xquik.com/api/v1/x/tweets/search?q=from%3ANASA&retweets=exclude&limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "tweets": [
+                        {
+                            "id": "2121283479388221509",
+                            "text": "@sampleuser 🫡",
+                            "retweetCount": 1,
+                            "replyCount": 0,
+                            "likeCount": 21,
+                            "quoteCount": 0,
+                            "viewCount": 4464,
+                            "bookmarkCount": 1,
+                            "conversationId": "2121280846183137564",
+                            "displayTextRange": [
+                                12,
+                                13
+                            ],
+                            "edit": {
+                                "editableUntilMsecs": "1794591967000",
+                                "editTweetIds": [
+                                    "2121283479388221509"
+                                ]
+                            },
+                            "entities": {
+                                "hashtags": [],
+                                "urls": [],
+                                "user_mentions": [
+                                    {
+                                        "id_str": "10000001",
+                                        "indices": [
+                                            0,
+                                            11
+                                        ],
+                                        "name": "Sample User",
+                                        "screen_name": "sampleuser"
+                                    }
+                                ]
+                            },
+                            "inReplyToId": "2121281825964460001",
+                            "inReplyToUserId": "10000001",
+                            "inReplyToUsername": "sampleuser",
+                            "isNoteTweet": false,
+                            "isPinned": false,
+                            "isQuoteStatus": false,
+                            "isReply": true,
+                            "isRetweet": false,
+                            "isTranslatable": false,
+                            "lang": "qme",
+                            "type": "reply",
+                            "url": "https://x.com/NASA/status/2121283479388221509",
+                            "viewState": "EnabledWithCount",
+                            "createdAt": "Fri Nov 13 16:46:07 +0000 2026",
+                            "author": {
+                                "id": "11348282",
+                                "username": "NASA",
+                                "name": "NASA",
+                                "followers": 92250664,
+                                "contactInfo": {
+                                    "links": [
+                                        {
+                                            "network": "website",
+                                            "source": "url",
+                                            "url": "http://www.nasa.gov/"
+                                        }
+                                    ]
+                                },
+                                "following": 115,
+                                "verified": true,
+                                "isBlueVerified": true,
+                                "isVerified": true,
+                                "profilePicture": "https://pbs.twimg.com/profile_images/1321163587679784960/0ZxKlEKB_normal.jpg",
+                                "profilePictureOriginal": "https://pbs.twimg.com/profile_images/1321163587679784960/0ZxKlEKB.jpg",
+                                "coverPicture": "https://pbs.twimg.com/profile_banners/11348282/1788992290",
+                                "profileBannerUrl": "https://pbs.twimg.com/profile_banners/11348282/1788992290",
+                                "description": "Making the seemingly impossible, possible. ✨",
+                                "location": "Pale Blue Dot",
+                                "createdAt": "Wed Dec 19 20:20:32 +0000 2007",
+                                "statusesCount": 74542,
+                                "mediaCount": 28249,
+                                "protected": false,
+                                "url": "http://www.nasa.gov/",
+                                "favouritesCount": 17110,
+                                "isTranslator": false,
+                                "possiblySensitive": false,
+                                "verifiedType": "Government",
+                                "profile_bio": {
+                                    "description": "Making the seemingly impossible, possible. ✨",
+                                    "entities": {
+                                        "description": {},
+                                        "url": {
+                                            "urls": [
+                                                {
+                                                    "display_url": "nasa.gov",
+                                                    "expanded_url": "http://www.nasa.gov/",
+                                                    "indices": [
+                                                        0,
+                                                        23
+                                                    ],
+                                                    "url": "https://t.co/9NkQJKAnuU"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                "hasGraduatedAccess": true,
+                                "parodyCommentaryFanLabel": "None",
+                                "profileDescriptionLanguage": "en",
+                                "profileImageShape": "Square",
+                                "profileTranslatorType": "regular",
+                                "superFollowEligible": false
+                            }
+                        },
+                        {
+                            "id": "2121280846183137564",
+                            "text": "Let's talk about Voyager 1 and 2!\n \nJoin us Nov. 19 for a status update on the twin probes and a discussion of their unique mission. Plus, we'll have a Q&A session and a sneak peek at the upcoming NASA+ Voyager documentary. https://t.co/jo0hC3TaIL https://t.co/VwAgAlqSIT",
+                            "retweetCount": 829,
+                            "replyCount": 165,
+                            "likeCount": 4691,
+                            "quoteCount": 50,
+                            "viewCount": 646324,
+                            "bookmarkCount": 321,
+                            "conversationId": "2121280846183137564",
+                            "contentDisclosure": {
+                                "aiGenerated": {
+                                    "hasAiGeneratedMedia": false
+                                }
+                            },
+                            "displayTextRange": [
+                                0,
+                                247
+                            ],
+                            "edit": {
+                                "editableUntilMsecs": "1794591339000",
+                                "editTweetIds": [
+                                    "2121280846183137564"
+                                ]
+                            },
+                            "entities": {
+                                "hashtags": [],
+                                "urls": [
+                                    {
+                                        "display_url": "go.nasa.gov/4k942pz",
+                                        "expanded_url": "https://go.nasa.gov/4k942pz",
+                                        "indices": [
+                                            224,
+                                            247
+                                        ],
+                                        "url": "https://t.co/jo0hC3TaIL"
+                                    }
+                                ],
+                                "user_mentions": []
+                            },
+                            "isNoteTweet": false,
+                            "isPinned": false,
+                            "isQuoteStatus": false,
+                            "isReply": false,
+                            "isRetweet": false,
+                            "isTranslatable": false,
+                            "lang": "en",
+                            "possiblySensitive": false,
+                            "type": "tweet",
+                            "url": "https://x.com/NASA/status/2121280846183137564",
+                            "viewState": "EnabledWithCount",
+                            "createdAt": "Fri Nov 13 16:35:39 +0000 2026",
+                            "media": [
+                                {
+                                    "altText": "An artist's concept of the Voyager spacecraft, with its long antenna pointing down and to the right in the direction of Earth. Earth isn't visible in the image, but Voyager is among the stars. In the background, there is also a long, deep blue ribbon of gas and dust stretching from the bottom of the image to the top.",
+                                    "availabilityStatus": "Available",
+                                    "displayUrl": "pic.x.com/VwAgAlqSIT",
+                                    "expandedUrl": "https://x.com/NASA/status/2121280846183137564/photo/1",
+                                    "focusRects": [
+                                        {
+                                            "h": 717,
+                                            "w": 1280,
+                                            "x": 0,
+                                            "y": 0
+                                        },
+                                        {
+                                            "h": 1058,
+                                            "w": 1058,
+                                            "x": 0,
+                                            "y": 0
+                                        }
+                                    ],
+                                    "height": 1058,
+                                    "id": "2121280843964383232",
+                                    "indices": [
+                                        248,
+                                        271
+                                    ],
+                                    "mediaKey": "3_2121280843964383232",
+                                    "mediaUrl": "https://pbs.twimg.com/media/HXBNsEVWgAAsCUY.jpg",
+                                    "sizes": {
+                                        "large": {
+                                            "h": 1058,
+                                            "resize": "fit",
+                                            "w": 1280
+                                        },
+                                        "medium": {
+                                            "h": 992,
+                                            "resize": "fit",
+                                            "w": 1200
+                                        },
+                                        "small": {
+                                            "h": 562,
+                                            "resize": "fit",
+                                            "w": 680
+                                        },
+                                        "thumb": {
+                                            "h": 150,
+                                            "resize": "crop",
+                                            "w": 150
+                                        }
+                                    },
+                                    "type": "photo",
+                                    "url": "https://t.co/VwAgAlqSIT",
+                                    "width": 1280
+                                }
+                            ],
+                            "author": {
+                                "id": "11348282",
+                                "username": "NASA",
+                                "name": "NASA",
+                                "followers": 92250664,
+                                "contactInfo": {
+                                    "links": [
+                                        {
+                                            "network": "website",
+                                            "source": "url",
+                                            "url": "http://www.nasa.gov/"
+                                        }
+                                    ]
+                                },
+                                "following": 115,
+                                "verified": true,
+                                "isBlueVerified": true,
+                                "isVerified": true,
+                                "profilePicture": "https://pbs.twimg.com/profile_images/1321163587679784960/0ZxKlEKB_normal.jpg",
+                                "profilePictureOriginal": "https://pbs.twimg.com/profile_images/1321163587679784960/0ZxKlEKB.jpg",
+                                "coverPicture": "https://pbs.twimg.com/profile_banners/11348282/1788992290",
+                                "profileBannerUrl": "https://pbs.twimg.com/profile_banners/11348282/1788992290",
+                                "description": "Making the seemingly impossible, possible. ✨",
+                                "location": "Pale Blue Dot",
+                                "createdAt": "Wed Dec 19 20:20:32 +0000 2007",
+                                "statusesCount": 74542,
+                                "mediaCount": 28249,
+                                "protected": false,
+                                "url": "http://www.nasa.gov/",
+                                "favouritesCount": 17110,
+                                "isTranslator": false,
+                                "possiblySensitive": false,
+                                "verifiedType": "Government",
+                                "profile_bio": {
+                                    "description": "Making the seemingly impossible, possible. ✨",
+                                    "entities": {
+                                        "description": {},
+                                        "url": {
+                                            "urls": [
+                                                {
+                                                    "display_url": "nasa.gov",
+                                                    "expanded_url": "http://www.nasa.gov/",
+                                                    "indices": [
+                                                        0,
+                                                        23
+                                                    ],
+                                                    "url": "https://t.co/9NkQJKAnuU"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                "hasGraduatedAccess": true,
+                                "parodyCommentaryFanLabel": "None",
+                                "profileDescriptionLanguage": "en",
+                                "profileImageShape": "Square",
+                                "profileTranslatorType": "regular",
+                                "superFollowEligible": false
+                            }
+                        }
+                    ],
+                    "has_next_page": true,
+                    "next_cursor": "xqcv1_mkD0c2xED-9QS4DnGb5vIHXUKV8djge__bW-u9LPROc.1",
+                    "filtered_count": 0
+                }
+            }
+        }
+    ]
+}

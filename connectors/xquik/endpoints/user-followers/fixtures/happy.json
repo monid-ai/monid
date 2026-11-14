@@ -1,0 +1,99 @@
+{
+    "name": "happy",
+    "description": "recorded chain for xquik#x/users/{id}/followers, scenario 'happy', 2 rows or fewer, recorded against the live API on 2026-11-14; profile identities replaced with placeholders",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://xquik.com/api/v1/x/users/NASA/followers?pageSize=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "users": [
+                        {
+                            "id": "1000000000000000001",
+                            "username": "example_user_1",
+                            "name": "Example User One",
+                            "followers": 2,
+                            "contactInfo": {
+                                "links": []
+                            },
+                            "following": 15,
+                            "verified": false,
+                            "isBlueVerified": false,
+                            "isVerified": false,
+                            "profilePicture": "https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png",
+                            "profilePictureOriginal": "https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png",
+                            "description": "",
+                            "createdAt": "Tue Jan 11 21:50:58 +0000 2022",
+                            "statusesCount": 58,
+                            "mediaCount": 0,
+                            "protected": false,
+                            "favouritesCount": 5,
+                            "hasCustomTimelines": false,
+                            "isTranslator": false,
+                            "profile_bio": {
+                                "description": "",
+                                "entities": {}
+                            },
+                            "parodyCommentaryFanLabel": "None",
+                            "profileImageShape": "Circle",
+                            "profileTranslatorType": "none",
+                            "superFollowEligible": false,
+                            "listedCount": 0,
+                            "fastFollowersCount": 0,
+                            "normalFollowersCount": 2,
+                            "defaultProfile": true,
+                            "defaultProfileImage": false,
+                            "hasExtendedProfile": true,
+                            "isTranslationEnabled": false,
+                            "geoEnabled": false,
+                            "advertiserAccountType": "none",
+                            "businessProfileState": "none"
+                        },
+                        {
+                            "id": "1000000000000000002",
+                            "username": "example_user_2",
+                            "name": "Example User Two",
+                            "followers": 0,
+                            "following": 4,
+                            "verified": false,
+                            "isBlueVerified": false,
+                            "isVerified": false,
+                            "profilePicture": "https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png",
+                            "profilePictureOriginal": "https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png",
+                            "createdAt": "Tue Jan 03 02:50:30 +0000 2023",
+                            "statusesCount": 2,
+                            "mediaCount": 0,
+                            "protected": false,
+                            "favouritesCount": 38,
+                            "hasCustomTimelines": false,
+                            "isTranslator": false,
+                            "profile_bio": {
+                                "description": "",
+                                "entities": {}
+                            },
+                            "parodyCommentaryFanLabel": "None",
+                            "profileImageShape": "Circle",
+                            "profileTranslatorType": "none",
+                            "superFollowEligible": false,
+                            "listedCount": 0,
+                            "fastFollowersCount": 0,
+                            "normalFollowersCount": 0,
+                            "defaultProfile": true,
+                            "defaultProfileImage": false,
+                            "hasExtendedProfile": true,
+                            "isTranslationEnabled": false,
+                            "geoEnabled": false,
+                            "advertiserAccountType": "none",
+                            "businessProfileState": "none"
+                        }
+                    ],
+                    "has_next_page": true,
+                    "next_cursor": "xqcv1_example_cursor.1"
+                }
+            }
+        }
+    ]
+}
