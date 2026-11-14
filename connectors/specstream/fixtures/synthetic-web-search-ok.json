@@ -1,0 +1,73 @@
+{
+    "name": "synthetic-web-search-ok",
+    "description": "SYNTHETIC happy chain for specstream#v1/web-search. Shape taken from a real 2026-11-14 POST /v1/web-search reply (answer, rows, sources, price_usd); ids rewritten and long text cut.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "q": "In what year was Symfony first released?",
+                    "num": 2
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "id": "11111111111111111111111111111111",
+                        "request_id": "11111111111111111111111111111111",
+                        "query": "In what year was Symfony first released?",
+                        "kind": "fact",
+                        "columns": [],
+                        "answer": {
+                            "value": "2005",
+                            "page": "https://en.wikipedia.org/wiki/Symfony",
+                            "sources": [
+                                "https://en.wikipedia.org/wiki/Symfony",
+                                "https://www.wikiwand.com/en/Symfony",
+                                "https://www.todaysoftmag.com/article/1847/symfony-framework-from-1-0-to-3-0"
+                            ],
+                            "seen_at": "2026-11-14T04:07:57+00:00"
+                        },
+                        "rows": [
+                            {
+                                "name": "2005",
+                                "page": "https://en.wikipedia.org/wiki/Symfony",
+                                "snippet": "Symfony is a free and open-source PHP web application framework and a set of reusable PHP component libraries. It was published as free software on October 18, 2005, and released under the MIT License. · Symfony aims to ",
+                                "sources": [
+                                    0
+                                ],
+                                "probability": 0.7251,
+                                "fields": {}
+                            }
+                        ],
+                        "sources": [
+                            {
+                                "url": "https://en.wikipedia.org/wiki/Symfony",
+                                "title": "Symfony - Wikipedia",
+                                "site": "en.wikipedia.org",
+                                "snippet": "Symfony is a free and open-source PHP web application framework and a set of reusable PHP component libraries. It was published as free software on October 18, 2005, and released under the MIT License. · Symfony aims to ",
+                                "cited": true,
+                                "published": "2005-12-16",
+                                "modified": "2026-10-08"
+                            },
+                            {
+                                "url": "https://symfony.com/20years",
+                                "title": "Symfony's 20 Year Anniversary",
+                                "site": "symfony.com",
+                                "snippet": "Launch of \"A Week of Symfony\", fostering sharing of tips and best practices. First SymfonyLive conference! SymfonyLive made its debut in Paris on June 11-12, 2009 — a landmark event that brought the Symfony community tog",
+                                "cited": false
+                            }
+                        ],
+                        "handoff": null,
+                        "took_ms": 3262,
+                        "price_usd": 0.005,
+                        "page": 1,
+                        "next_page": 2
+                    }
+                }
+            }
+        }
+    ]
+}

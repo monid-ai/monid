@@ -1,0 +1,21 @@
+{
+    "name": "synthetic-find-rows-refused",
+    "description": "A rows read for a find id the key does not know: the error envelope is data and bills nothing.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/finds/find_synthetic_0001/rows"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": {
+                        "code": "find_not_found",
+                        "message": "No find with this id exists for this account."
+                    }
+                }
+            }
+        }
+    ]
+}

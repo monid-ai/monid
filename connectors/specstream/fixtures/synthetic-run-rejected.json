@@ -1,0 +1,24 @@
+{
+    "name": "synthetic-run-rejected",
+    "description": "The submit is refused because the quote expired: nothing is reserved, no run starts and nothing is billed.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 409,
+                "body": {
+                    "error": {
+                        "code": "capacity",
+                        "message": "This quote has expired. Get a new quote and approve it again.",
+                        "details": {
+                            "quote_id": "qt_synthetic_0001"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

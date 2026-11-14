@@ -1,0 +1,51 @@
+{
+    "name": "synthetic-run-stop-transport",
+    "description": "The run is stopped and the find is found, but the cancel request gets no answer, so the find may still run: the stop is unresolved and nothing is claimed.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "data": {
+                        "reservation_id": "res_synthetic_0001",
+                        "find_id": null,
+                        "maximum_cents": 60,
+                        "state": "reserved",
+                        "replay": false
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/capacity/requests/specstream-run-0001/rows?limit=1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "find_id": "find_synthetic_0001",
+                        "status": "running",
+                        "accepted_count": 0,
+                        "rows": [],
+                        "possible": [],
+                        "flat_rows": [],
+                        "entitlement": "paid",
+                        "commerce": null,
+                        "next_cursor": null,
+                        "idempotency_key": "specstream-run-0001",
+                        "state": "running",
+                        "maximum_cents": 60,
+                        "done": false,
+                        "retry_after_seconds": 5
+                    }
+                }
+            }
+        }
+    ]
+}

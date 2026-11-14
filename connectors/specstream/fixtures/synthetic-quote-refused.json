@@ -1,0 +1,21 @@
+{
+    "name": "synthetic-quote-refused",
+    "description": "A quote request with a missing or invalid API key: the error envelope is data and bills nothing.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": {
+                        "code": "invalid_token",
+                        "message": "The API key is missing or not valid."
+                    }
+                }
+            }
+        }
+    ]
+}

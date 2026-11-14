@@ -1,0 +1,49 @@
+{
+    "name": "synthetic-extract-ok",
+    "description": "SYNTHETIC happy chain for specstream#v1/extract. Shape taken from a real 2026-11-14 POST /v1/extract reply: one page read and one address refused in the same call, so price_usd is one page.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "urls": [
+                        "https://example.com/",
+                        "notaurl"
+                    ]
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "request_id": "33333333333333333333333333333333",
+                        "results": [
+                            {
+                                "url": "https://example.com/",
+                                "status": "ok",
+                                "title": "Example Domain",
+                                "text": "This domain is for use in documentation examples without needing permission. This is not a service; avoid relying on it for testing and monitoring purposes.\n\nهذا النطاق مُخصص للاستخدام في أمثلة التوثيق دون الحاجة إلى إذن",
+                                "published": null,
+                                "emails": [],
+                                "text_truncated": false,
+                                "read_from": "live"
+                            },
+                            {
+                                "url": "notaurl",
+                                "status": "invalid_url",
+                                "title": null,
+                                "text": "",
+                                "published": null,
+                                "reason": "This is not a public http or https address.",
+                                "text_truncated": false
+                            }
+                        ],
+                        "took_ms": 2674,
+                        "price_usd": 0.0008
+                    }
+                }
+            }
+        }
+    ]
+}

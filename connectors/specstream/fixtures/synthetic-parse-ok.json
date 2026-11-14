@@ -1,0 +1,86 @@
+{
+    "name": "synthetic-parse-ok",
+    "description": "A request in plain words is read into a runnable reading: status runnable, an ast_hash to price, and the read-back to show a person. Shaped like the ParseResult schema.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "status": "runnable",
+                        "ast": {
+                            "spec_version": "query_ast.v1",
+                            "entity_type": "local_business",
+                            "limit": {
+                                "max": 3,
+                                "inferred": false
+                            },
+                            "discovery": {
+                                "term": "dental clinics in Lyon"
+                            },
+                            "where": [],
+                            "output_fields": [
+                                {
+                                    "field_id": "name",
+                                    "required": true
+                                },
+                                {
+                                    "field_id": "website",
+                                    "required": false
+                                },
+                                {
+                                    "field_id": "email",
+                                    "required": false
+                                }
+                            ],
+                            "sort": [],
+                            "locale": "en-US",
+                            "inferred": [],
+                            "unsupported": [],
+                            "geo": {
+                                "kind": "locality",
+                                "query_label": "Lyon",
+                                "country_code": "FR",
+                                "admin1_code": null,
+                                "locality": "Lyon",
+                                "postal_code": null,
+                                "status": "qualified",
+                                "source": "gazetteer"
+                            }
+                        },
+                        "chips": [
+                            {
+                                "chip_id": "chip-type",
+                                "category": "type",
+                                "label": "Dental clinics",
+                                "status": "resolved"
+                            },
+                            {
+                                "chip_id": "chip-place",
+                                "category": "place",
+                                "label": "Lyon",
+                                "status": "resolved"
+                            },
+                            {
+                                "chip_id": "chip-email",
+                                "category": "output",
+                                "field_id": "email",
+                                "label": "Email",
+                                "status": "resolved"
+                            }
+                        ],
+                        "unsupported": [],
+                        "compiler_version": "synthetic-1",
+                        "ast_hash": "0c85f280cf7589092edc7487029bb4ddf97e5b69cdaf84090d350f6b4693a734",
+                        "canonical_sentence": "Find up to 3 dental clinics in Lyon, with name, website and email.",
+                        "read_back": "Dental clinics in Lyon, with their name, website and email."
+                    }
+                }
+            }
+        }
+    ]
+}
