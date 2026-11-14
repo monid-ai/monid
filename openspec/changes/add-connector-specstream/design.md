@@ -97,3 +97,24 @@ poll does not walk pages and a large list does not inflate one run.
 requires `quote_id`, `quote_hash`, `idempotency_key` (8 to 128
 characters) and `confirm_max_cents`; the last one is what makes the
 estimate an enforced ceiling.
+
+## D6: Search and Extract, the two one-call endpoints
+
+`v1/web-search` and `v1/extract` were added on 2026-11-14. They are the calls
+an agent makes most: one request, one reply, no quote and no approval.
+
+Both replies carry their own receipt, `data.price_usd`, the dollars taken for
+that call, so `usage.consolidate` settles on it (D27), like the run settles on
+`commerce.amount_captured_cents`. The prices are fractions of a cent ($0.005 a
+search of up to 10 results, $0.001 a fast or news search, $0.0008 a page
+read), so these two endpoints meter in hundredths of a cent
+(`consumes.amount: 0.0001`) and every count is a whole number.
+
+The estimate is the published price rule applied to the request: for search,
+the base price plus one step for each started block of 10 results past 10;
+for extract, every page asked for. A page that gives no text is not charged,
+so an extract can settle under its estimate, never over it. An error reply
+has no receipt and bills nothing.
+
+Not mirrored: image search and its filters, and the extract form that reads
+HTML the caller sends.

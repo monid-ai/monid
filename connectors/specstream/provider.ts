@@ -2,16 +2,23 @@ import { defineProvider, presets, UsageModelKind } from "@shared/core";
 
 /**
  * SpecStream (specstream.ai): the live web data engine for teams and agents.
- * One host (`https://api.specstream.ai`), one Bearer API key, four endpoints
- * that carry a request from plain words to sourced rows:
+ * One host (`https://api.specstream.ai`), one Bearer API key, six endpoints.
+ *
+ * Two answer in one call, each with its price on the reply (`data.price_usd`):
+ *
+ *   `v1/web-search`           a question -> the answer and the results read
+ *   `v1/extract`              up to 20 URLs -> each page's main text
+ *
+ * Four carry a request for a whole table from plain words to sourced rows:
  *
  *   `v1/parse`                a request in plain words -> a reading (FREE)
  *   `v1/capacity/quotes`      a reading -> a signed quote with its maximum (FREE)
  *   `v1/capacity/executions`  the approved quote -> the run, polled to its end
  *   `v1/finds/{id}/rows`      read the rows of a find, page by page (FREE)
  *
- * Only the run spends. Reading a request and pricing it never do, and a
- * quote names the most the run can cost before anything starts.
+ * In the table flow only the run spends. Reading a request and pricing it
+ * never do, and a quote names the most the run can cost before anything
+ * starts.
  *
  * Billing, and why it is not a per-row rate table. SpecStream charges per
  * matching row, and the rate is set by the job each row replaces: 5 cents
@@ -34,20 +41,23 @@ export default defineProvider({
     meta: {
         displayName: "SpecStream",
         summary:
-            "Describe the data you need in plain words, get sourced rows from the live web.",
+            "Web search with sourced answers, page reading, and sourced tables from the live web.",
         description:
             "SpecStream is the live web data engine for teams and agents. " +
-            "Describe the data you need in plain words, and it returns " +
-            "structured rows from the live web, every value linked to the " +
-            "page it came from. Four steps carry a request end to end: read " +
-            "it into an editable reading, get a signed quote with the most " +
-            "it can cost, approve that maximum to run it, and read the rows " +
-            "with the source page and read time behind each value. Pricing " +
-            "is per matching row, shown and approved before any work runs, " +
-            "and a run that finds nothing costs nothing.",
+            "Search answers a question from the live web in one call, " +
+            "with the page behind each value, or returns the results " +
+            "alone in about a second on the fast tier. Extract reads up " +
+            "to 20 pages live and returns each page's main text. For a " +
+            "whole table, describe the data you need in plain words and " +
+            "get structured rows, every value linked to the page it came " +
+            "from: read the request, get a signed quote with the most it " +
+            "can cost, approve that maximum to run it, and read the rows. " +
+            "A search is $0.005, or $0.001 on the fast tier, and a page " +
+            "read is $0.0008. A table is priced per matching row, shown " +
+            "and approved before any work runs.",
         homepageUrl: "https://specstream.ai",
         docsUrl: "https://specstream.ai/docs/api",
-        categories: ["web-search"],
+        categories: ["web-search", "web-scraping"],
         notes: [
             "Every response wraps its payload in `{ data }`; an error is " +
             "`{ error: { code, message } }`.",
@@ -66,7 +76,8 @@ export default defineProvider({
          *  settles the same numbers in euros for euro accounts), so the pool is
          *  US dollars, like exa. */
         credits: { default: { label: "US dollars" } },
-        // reads are free; `v1/capacity/executions` overrides with the metered model
+        // reads are free; `v1/web-search`, `v1/extract` and
+        // `v1/capacity/executions` override with their metered models
         model: { kind: UsageModelKind.FREE },
     },
     output: {

@@ -36,6 +36,12 @@ needs a list or a dataset with its sources, not a single fact.
   validator. No recorded traffic exists because the connector was never
   run against a live key.
 
+Added on 2026-11-14: the two one-call endpoints, `specstream#v1/web-search`
+(a question answered from the live web with the page behind each value, or
+the results alone on the fast tier) and `specstream#v1/extract` (up to 20
+pages read live, each page's main text). Each reply states its own price
+(design D6).
+
 ## Capabilities
 
 - `specstream-connector`.
