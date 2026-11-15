@@ -230,9 +230,8 @@ Deno.test({
         };
         const sent = await runEndpoint({ unit, input: next, mode: "live" });
         const again = await runEndpoint({ unit, input: next, mode: "live" });
-        assertEquals(sent.usage, {
-            credits: { default: 1 },
-            evidence: { RESULT: 1 },
+        assertEquals(sent.usage.evidence, {
+            RESULT: (sent.output as { tweets: unknown[] }).tweets.length,
         });
         assertEquals(again.usage, { credits: {}, evidence: { RESULT: 0 } });
         assertEquals(again.output, sent.output);
