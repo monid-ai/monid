@@ -984,3 +984,35 @@ Deno.test("apify typed state: a poll fed corrupt state.data fails closed (INVALI
     }
     assert(threw, "corrupt state.data must fail closed");
 });
+
+Deno.test("apify: caller run-control query parameters are rejected before IO", async () => {
+    const { assertRejects } = await import("@std/assert");
+    for (const id of await endpointIds()) {
+        const unit = await testSealedUnit(id);
+        const loaded = await new Engine({
+            transport: {
+                execute: () => Promise.reject(new Error("unexpected IO")),
+            },
+        }).load(unit);
+        loaded.estimate({ body: INPUTS[id.split("#")[1]], queryParams: {} });
+        for (
+            const key of [
+                "memory",
+                "timeout",
+                "maxTotalChargeUsd",
+                "webhooks",
+                "build",
+            ]
+        ) {
+            await assertRejects(
+                async () =>
+                    loaded.estimate({
+                        body: INPUTS[id.split("#")[1]],
+                        queryParams: { [key]: "test" },
+                    }),
+                Error,
+                "INVALID_INPUT",
+            );
+        }
+    }
+});
