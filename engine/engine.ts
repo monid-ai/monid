@@ -633,11 +633,26 @@ export class LoadedEndpoint implements RunnableEndpoint {
             // pollAfterMs must not delay TIMEOUT + best-effort stop past
             // runMs (the loop re-checks the deadline before the next poll)
             const remaining = deadline - this.now().getTime();
-            await doSleep(
-                Math.min(tick.pollAfterMs, Math.max(remaining, 0)),
-                opts?.signal,
-            );
-            tick = await this.poll(runInput, tick.state, run);
+            const lastState = tick.state;
+            try {
+                await doSleep(
+                    Math.min(tick.pollAfterMs, Math.max(remaining, 0)),
+                    opts?.signal,
+                );
+                tick = await this.poll(runInput, tick.state, run);
+            } catch (error) {
+                // A submitted job may still be running after poll/nap failure.
+                // Preserve the last known state and the original failure.
+                try {
+                    await this.stop(runInput, lastState, run);
+                } catch (cleanupError) {
+                    this.logger.warn("run cleanup failed", {
+                        id: this.doc.id,
+                        error: String(cleanupError),
+                    });
+                }
+                throw error;
+            }
         }
         return tick;
     }
