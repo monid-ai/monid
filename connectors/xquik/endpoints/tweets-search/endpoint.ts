@@ -36,13 +36,20 @@ export default defineEndpoint({
             unit: Unit.RESULT,
             label: "tweets",
             description: "tweets returned",
-            consumes: { credit: "default", amount: 0.00015 },
+            consumes: { credit: "default", amount: 1 },
         },
         estimate: ({ data }) => ({
             counts: { RESULT: data.input.queryParams.limit },
         }),
         evidence: ({ data, utils }) => ({
-            counts: { RESULT: utils.json.len(data.output, "$.tweets") },
+            counts: {
+                RESULT: utils.json.optionalGet(
+                        data.lifecycle?.state ?? null,
+                        "$.data.creditsCharged",
+                    ) === 0
+                    ? 0
+                    : utils.json.len(data.output, "$.tweets"),
+            },
         }),
     },
 });

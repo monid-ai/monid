@@ -11,7 +11,7 @@ import {
 const ID = "xquik#x/users/{id}/followers";
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
 
-Deno.test(`${ID} happy: each returned follower bills $0.00015`, async () => {
+Deno.test(`${ID} happy: each returned follower draws 1 Xquik credit`, async () => {
     const unit = await testSealedUnit(ID);
     const fixture = await loadFixture(`${fixturesDir}happy.json`);
     const result = await runEndpoint({
@@ -24,7 +24,7 @@ Deno.test(`${ID} happy: each returned follower bills $0.00015`, async () => {
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
     assertEquals(result.usage, {
-        credits: { default: 2 * 0.00015 },
+        credits: { default: 2 },
         evidence: { RESULT: 2 },
     });
     assertEquals(result.output, fixture.calls[0].res.body);
@@ -55,7 +55,7 @@ Deno.test(`${ID} estimate: the page size is the promise, 200 by default`, async 
     const unit = await testSealedUnit(ID);
     assertEquals(
         await estimateEndpoint(unit, { pathParams: { id: "NASA" } }),
-        { credits: { default: 200 * 0.00015 }, evidence: { RESULT: 200 } },
+        { credits: { default: 200 }, evidence: { RESULT: 200 } },
     );
 });
 

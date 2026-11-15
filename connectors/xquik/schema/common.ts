@@ -2,7 +2,7 @@ import { z } from "zod";
 
 /**
  * Query and path fragments shared by the Xquik reads. Mirrors of
- * https://xquik.com/openapi.yaml (2026-11-14): optionality only, no
+ * https://xquik.com/openapi.yaml (2026-11-15): optionality only, no
  * defaults. Bindings in each endpoint.ts apply the page-size defaults.
  */
 
@@ -55,6 +55,16 @@ export const zTweetFilters = z.object({
     ).optional(),
     untilTime: z.string().max(128).describe(
         "Exclusive end time, as ISO 8601 or Unix seconds.",
+    ).optional(),
+    sinceId: z.string().max(19).describe(
+        "Keep tweets whose IDs exceed this tweet ID. Send the newest ID " +
+            "you hold to read only newer tweets.",
+    ).optional(),
+    maxId: z.string().max(19).describe(
+        "Keep tweets whose IDs are at or below this tweet ID.",
+    ).optional(),
+    keywords: z.string().max(4096).describe(
+        "Words the tweets must match, in X search syntax.",
     ).optional(),
     language: z.string().max(35).describe(
         "Language code X tags, such as en or ja.",

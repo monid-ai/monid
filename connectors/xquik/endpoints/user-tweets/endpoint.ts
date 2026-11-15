@@ -12,7 +12,8 @@ export default defineEndpoint({
         description: "List the tweets 1 X (Twitter) account posted, " +
             "newest first. The first page opens with the pinned tweet, " +
             "flagged isPinned. Pages reach the account's oldest tweets. " +
-            "Filter by date, media, engagement & reposts. Each tweet " +
+            "Filter by date, media, engagement & reposts. Send sinceId " +
+            "to read only tweets newer than one you hold. Each tweet " +
             "carries its author, counts, media, links & URL. Use " +
             "xquik#x/tweets/search to search across accounts.",
         docsUrl: "https://docs.xquik.com/api-reference/x/user-tweets",
@@ -45,13 +46,20 @@ export default defineEndpoint({
             unit: Unit.RESULT,
             label: "tweets",
             description: "tweets returned",
-            consumes: { credit: "default", amount: 0.00015 },
+            consumes: { credit: "default", amount: 1 },
         },
         estimate: ({ data }) => ({
             counts: { RESULT: data.input.queryParams.pageSize },
         }),
         evidence: ({ data, utils }) => ({
-            counts: { RESULT: utils.json.len(data.output, "$.tweets") },
+            counts: {
+                RESULT: utils.json.optionalGet(
+                        data.lifecycle?.state ?? null,
+                        "$.data.creditsCharged",
+                    ) === 0
+                    ? 0
+                    : utils.json.len(data.output, "$.tweets"),
+            },
         }),
     },
 });

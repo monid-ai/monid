@@ -11,7 +11,7 @@ import {
 const ID = "xquik#x/users/{id}";
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
 
-Deno.test(`${ID} happy: 1 profile bills $0.00015`, async () => {
+Deno.test(`${ID} happy: 1 profile draws 1 Xquik credit`, async () => {
     const unit = await testSealedUnit(ID);
     const fixture = await loadFixture(`${fixturesDir}happy.json`);
     const result = await runEndpoint({
@@ -24,7 +24,7 @@ Deno.test(`${ID} happy: 1 profile bills $0.00015`, async () => {
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
     assertEquals(result.usage, {
-        credits: { default: 0.00015 },
+        credits: { default: 1 },
         evidence: { CALL: 1 },
     });
     assertEquals(result.output, fixture.calls[0].res.body);
@@ -62,7 +62,7 @@ Deno.test(`${ID}: a missing id fails INVALID_INPUT, an id passes`, async () => {
     );
     assertEquals(
         await estimateEndpoint(unit, { pathParams: { id: "NASA" } }),
-        { credits: { default: 0.00015 }, evidence: { CALL: 1 } },
+        { credits: { default: 1 }, evidence: { CALL: 1 } },
     );
 });
 

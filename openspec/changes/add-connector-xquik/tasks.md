@@ -3,22 +3,25 @@
 ## 1. Provider and schemas
 
 - [x] 1.1 provider.ts sets `x-api-key` auth, the base URL, 120 s timeouts
-      and one `default` pool in US dollars, with no consolidate
+      and one `default` pool in Xquik credits
 - [x] 1.2 schema/common.ts holds the user ID, cursor, fields, omit, the
       tweet filters and the profile filters the list reads share
+- [x] 1.3 provider.ts relays each request through `lifecycle.start`,
+      carries `X-Xquik-Credits-Charged` into state and claims it in
+      `usage.consolidate`
 
 ## 2. Endpoints (7)
 
-- [x] 2.1 tweets-search, GET /x/tweets/search, PER_UNIT `RESULT`
-      $0.00015, `limit` default 20
-- [x] 2.2 tweet, GET /x/tweets/{id}, PER_CALL $0.00015
-- [x] 2.3 users-search, GET /x/users/search, PER_UNIT `RESULT` $0.00015,
+- [x] 2.1 tweets-search, GET /x/tweets/search, PER_UNIT `RESULT` 1
+      credit, `limit` default 20
+- [x] 2.2 tweet, GET /x/tweets/{id}, PER_CALL 1 credit
+- [x] 2.3 users-search, GET /x/users/search, PER_UNIT `RESULT` 1 credit,
       `pageSize` default 20
-- [x] 2.4 user, GET /x/users/{id}, PER_CALL $0.00015
-- [x] 2.5 user-tweets, GET /x/users/{id}/tweets, PER_UNIT `RESULT`
-      $0.00015, `pageSize` default 20
+- [x] 2.4 user, GET /x/users/{id}, PER_CALL 1 credit
+- [x] 2.5 user-tweets, GET /x/users/{id}/tweets, PER_UNIT `RESULT` 1
+      credit, `pageSize` default 20
 - [x] 2.6 user-followers and user-following, GET /x/users/{id}/followers
-      and /following, PER_UNIT `RESULT` $0.00015, `pageSize` default 200
+      and /following, PER_UNIT `RESULT` 1 credit, `pageSize` default 200
 
 ## 3. Fixtures and tests
 
@@ -32,6 +35,11 @@
       output is Xquik's body unchanged and checks fn provenance
 - [x] 3.4 Strict query schemas refuse filters Xquik prices above the read
       price, and the lookups refuse IDs that would route to other reads
+- [x] 3.5 provider.test.ts settles every endpoint on the meter, settles a
+      list page the meter charged 0 at 0, lets a higher meter win and
+      falls back to the rate card on a malformed meter
+- [x] 3.6 user-tweets replays a recorded cursor page and its free repeat,
+      a recorded `sinceId` read, and a live repeat that settles 0
 
 ## 4. Wiring and docs
 

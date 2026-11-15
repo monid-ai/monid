@@ -14,7 +14,7 @@ const happyInput = {
     queryParams: { q: "from:NASA", retweets: "exclude", limit: 2 },
 };
 
-Deno.test(`${ID} happy: each returned tweet bills $0.00015`, async () => {
+Deno.test(`${ID} happy: each returned tweet draws 1 Xquik credit`, async () => {
     const unit = await testSealedUnit(ID);
     const fixture = await loadFixture(`${fixturesDir}happy.json`);
     const result = await runEndpoint({
@@ -27,7 +27,7 @@ Deno.test(`${ID} happy: each returned tweet bills $0.00015`, async () => {
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
     assertEquals(result.usage, {
-        credits: { default: 2 * 0.00015 },
+        credits: { default: 2 },
         evidence: { RESULT: 2 },
     });
     assertEquals(result.output, fixture.calls[0].res.body);
@@ -62,7 +62,7 @@ Deno.test(`${ID} provider error: 400 missing_query is data, zero usage`, async (
 Deno.test(`${ID} estimate: the limit is the promise, 20 by default`, async () => {
     const unit = await testSealedUnit(ID);
     assertEquals(await estimateEndpoint(unit, { queryParams: { q: "nasa" } }), {
-        credits: { default: 20 * 0.00015 },
+        credits: { default: 20 },
         evidence: { RESULT: 20 },
     });
     assertEquals(
@@ -70,7 +70,7 @@ Deno.test(`${ID} estimate: the limit is the promise, 20 by default`, async () =>
             queryParams: { q: "nasa", limit: 10000 },
         }),
         {
-            credits: { default: 10000 * 0.00015 },
+            credits: { default: 10000 },
             evidence: { RESULT: 10000 },
         },
     );
@@ -108,7 +108,13 @@ Deno.test(`${ID}: a parameter outside the schema fails INVALID_INPUT, a declared
     );
     assertEquals(
         (await estimateEndpoint(unit, {
-            queryParams: { q: "nasa", minLikes: 5 },
+            queryParams: {
+                q: "nasa",
+                minLikes: 5,
+                sinceId: "2120974110335312297",
+                maxId: "2121280846183137564",
+                keywords: "moon",
+            },
         })).evidence,
         { RESULT: 20 },
     );

@@ -12,7 +12,7 @@ const ID = "xquik#x/tweets/{id}";
 const TWEET_ID = "2121280846183137564";
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
 
-Deno.test(`${ID} happy: 1 tweet bills $0.00015`, async () => {
+Deno.test(`${ID} happy: 1 tweet draws 1 Xquik credit`, async () => {
     const unit = await testSealedUnit(ID);
     const fixture = await loadFixture(`${fixturesDir}happy.json`);
     const result = await runEndpoint({
@@ -25,7 +25,7 @@ Deno.test(`${ID} happy: 1 tweet bills $0.00015`, async () => {
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
     assertEquals(result.usage, {
-        credits: { default: 0.00015 },
+        credits: { default: 1 },
         evidence: { CALL: 1 },
     });
     assertEquals(result.output, fixture.calls[0].res.body);
@@ -62,24 +62,26 @@ Deno.test(`${ID}: a missing id fails INVALID_INPUT, an id passes`, async () => {
     );
     assertEquals(
         await estimateEndpoint(unit, { pathParams: { id: TWEET_ID } }),
-        { credits: { default: 0.00015 }, evidence: { CALL: 1 } },
+        { credits: { default: 1 }, evidence: { CALL: 1 } },
     );
 });
 
-Deno.test(`${ID}: a bare top fails INVALID_INPUT, the 2121280846183137564 form passes`, async () => {
+Deno.test(`${ID}: a bare search or top fails INVALID_INPUT, the 2121280846183137564 form passes`, async () => {
     const unit = await testSealedUnit(ID);
     const fixture = await loadFixture(`${fixturesDir}happy.json`);
-    await assertRejects(
-        () =>
-            runEndpoint({
-                unit,
-                input: { pathParams: { id: "top" } },
-                mode: "replay",
-                fixture,
-            }),
-        Error,
-        "INVALID_INPUT",
-    );
+    for (const id of ["search", "top"]) {
+        await assertRejects(
+            () =>
+                runEndpoint({
+                    unit,
+                    input: { pathParams: { id } },
+                    mode: "replay",
+                    fixture,
+                }),
+            Error,
+            "INVALID_INPUT",
+        );
+    }
     assertEquals(
         (await estimateEndpoint(unit, {
             pathParams: { id: "2121280846183137564" },

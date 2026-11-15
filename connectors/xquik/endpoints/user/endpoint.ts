@@ -35,7 +35,7 @@ export default defineEndpoint({
     usage: {
         model: {
             kind: UsageModelKind.PER_CALL,
-            consumes: { credit: "default", amount: 0.00015 },
+            consumes: { credit: "default", amount: 1 },
         },
     },
 });

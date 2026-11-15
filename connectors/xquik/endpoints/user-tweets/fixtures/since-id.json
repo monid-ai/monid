@@ -1,0 +1,38 @@
+{
+    "name": "since-id",
+    "description": "recorded chain for xquik#x/users/{id}/tweets, scenario 'since-id'. The NASA timeline after tweet 2120974110335312297, recorded against the live API on 2026-11-15 with its X-Xquik-Credits-Charged header. Tweet bodies are minimized to the fields under test.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://xquik.com/api/v1/x/users/NASA/tweets?retweets=exclude&pageSize=2&sinceId=2120974110335312297"
+            },
+            "res": {
+                "status": 200,
+                "headers": {
+                    "x-xquik-credits-charged": "1"
+                },
+                "body": {
+                    "tweets": [
+                        {
+                            "id": "2121280846183137564",
+                            "text": "Let's talk about Voyager 1 and 2!\n \nJoin us Nov. 19 for a status update on the twin probes and a discussion of their unique mission. Plus, we'll have a Q&A session and a sneak peek at the upcoming NASA+ Voyager documentary. https://t.co/jo0hC3TaIL https://t.co/VwAgAlqSIT",
+                            "createdAt": "Fri Nov 13 16:35:39 +0000 2026",
+                            "isPinned": false,
+                            "author": {
+                                "id": "11348282",
+                                "username": "NASA",
+                                "name": "NASA"
+                            },
+                            "url": "https://x.com/NASA/status/2121280846183137564"
+                        }
+                    ],
+                    "has_next_page": false,
+                    "next_cursor": "",
+                    "windowComplete": true,
+                    "filtered_count": 3
+                }
+            }
+        }
+    ]
+}
