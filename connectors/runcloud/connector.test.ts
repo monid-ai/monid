@@ -153,6 +153,33 @@ Deno.test("runcloud start-session: seeds the owned session and strips pooled int
     assertEquals(out.hostId, undefined);
 });
 
+Deno.test("runcloud start-session: a recorded live iOS session parses, provisions and strips pooled internals", async () => {
+    const result = await runEndpoint({
+        unit: await testSealedUnit("runcloud#start-session"),
+        input: {
+            pathParams: { platform: "ios" },
+            body: { inactivityTimeout: "2m", hardTimeout: "5m" },
+        },
+        mode: "replay",
+        fixture: await fixture("start-session-ios"),
+    });
+    assertEquals(result.httpStatus, 201);
+    assertEquals(result.isProviderError, false);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
+    assertEquals(result.resources?.provisions, [{
+        resource: "runcloud/simulator-session",
+        externalId: "88b48fe9-596f-4f45-80f7-afda0087e483",
+        data: { platform: "ios" },
+    }]);
+    const out = result.output as Record<string, Json>;
+    assertEquals(out.status, "active");
+    assertEquals(out.deviceName, "iPhone 17e");
+    assert(typeof out.url === "string");
+    assertEquals(out.orgId, undefined);
+    assertEquals(out.leaseId, undefined);
+    assertEquals(out.device, undefined);
+});
+
 Deno.test("runcloud start-session: short timeouts by default and a run-stable Idempotency-Key", async () => {
     const response = (await fixture("synthetic-start-session")).calls[0].res;
     const { engine, sent } = capture(response.status, response.body);

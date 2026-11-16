@@ -33,8 +33,11 @@
       the ownership gate on every session endpoint, interaction wire bodies,
       schema gates, read-screen projection and cap, resource meter, verify and
       release
-- [ ] 4.3 Record real chains and run `deno task test:live` once a run.cloud
-      key is in the platform's secret store
+- [x] 4.3 Live check against api.run.cloud (2026-11-16): a real iOS session
+      started, opened a URL, read the screen, tapped, typed, read logs and was
+      released; every response matched the connector's shapes (real answers
+      omit `hostId` and `queued`, which the projection already drops). The
+      recorded start is committed as `fixtures/start-session-ios.json`.
 
 ## 5. Verification
 
