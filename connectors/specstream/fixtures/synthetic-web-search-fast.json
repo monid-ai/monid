@@ -1,0 +1,55 @@
+{
+    "name": "synthetic-web-search-fast",
+    "description": "SYNTHETIC fast search for specstream#v1/web-search. Shape taken from a real 2026-11-14 reply with speed fast: results with read_at, no answer, price_usd 0.001.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "q": "deno runtime release notes",
+                    "speed": "fast",
+                    "num": 2
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "id": "22222222222222222222222222222222",
+                        "request_id": "22222222222222222222222222222222",
+                        "query": "deno runtime release notes",
+                        "kind": "list",
+                        "columns": [],
+                        "answer": null,
+                        "rows": [],
+                        "sources": [
+                            {
+                                "url": "https://deno.com/",
+                                "title": "Deno, the drop-in JavaScript runtime for Node developers",
+                                "site": "deno.com",
+                                "snippet": "Deno is a fast, open-source, fully Node-compatible JS runtime with TypeScript and everything else you need baked right in. Faster than Node; more stable than Bun.",
+                                "cited": false,
+                                "read_at": "2026-11-14T04:07:59+00:00"
+                            },
+                            {
+                                "url": "https://github.com/denoland/deno",
+                                "title": "GitHub - denoland/deno: A modern runtime for JavaScript and TypeScript.",
+                                "site": "github.com",
+                                "snippet": "Deno (/ˈdiːnoʊ/, pronounced dee-no) is a JavaScript, TypeScript, and WebAssembly runtime with secure defaults and a great developer experience. It's built on V8, Rust, and Tokio.",
+                                "cited": false,
+                                "read_at": "2026-11-14T04:07:59+00:00"
+                            }
+                        ],
+                        "handoff": null,
+                        "took_ms": 913,
+                        "price_usd": 0.001,
+                        "read_at": "2026-11-14T04:07:59+00:00",
+                        "page": 1,
+                        "next_page": 2
+                    }
+                }
+            }
+        }
+    ]
+}

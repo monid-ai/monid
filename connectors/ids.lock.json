@@ -542,6 +542,8 @@
         "saperly#send-messages",
         "saperly#sync-numbers",
         "saperly#update-numbers",
+        "specstream#v1/extract",
+        "specstream#v1/web-search",
         "surf#dex/token/price",
         "surf#exchange/candles",
         "surf#exchange/coverage",
