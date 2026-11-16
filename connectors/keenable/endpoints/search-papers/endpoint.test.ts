@@ -28,7 +28,7 @@ Deno.test("keenable#v1/search-papers happy (synthetic): paper preset bills one c
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
     assertEquals(result.usage, {
-        credits: { default: 0.001 },
+        credits: { default: 0.004 },
         evidence: { RESULT: 1 },
     });
     const output = result.output as Record<string, unknown>;

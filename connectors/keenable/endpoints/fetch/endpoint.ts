@@ -4,7 +4,7 @@ import { zKeenableFetchQueryParams } from "./schema/inputs.ts";
 /**
  * GET /v1/fetch — clean markdown for a known URL.
  *
- * Usage falls back to the provider's PER_CALL 1 credit; estimate and
+ * Usage falls back to the provider's PER_CALL $0.001; estimate and
  * evidence are compiler-synthesized (flat model).
  *
  * `live` is optional with the vendor default (design D6, revised
@@ -35,7 +35,7 @@ export default defineEndpoint({
         docsUrl: "https://docs.keenable.ai/api-reference/fetch",
         categories: ["web-scraping", "web-extraction"],
         notes: [
-            "$0.001 per page (volume rate), indexed or live, with or " +
+            "$0.001 per page, indexed or live, with or " +
             "without a prompt. Errors are free. A URL missing from the " +
             "index is read live automatically.",
         ],

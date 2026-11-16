@@ -13,17 +13,17 @@ import { defineProvider, presets, UsageModelKind } from "@shared/core";
  * per-IP pool, `X-Keenable-Title`, no credits) and are not exposed —
  * design D1.
  *
- * Billing: Keenable meters authenticated usage in credits (one per
- * search or fetch). REST responses carry no usage receipt, so there
- * is no `usage.consolidate` and the derived fold settles (design D2).
- * The Monid-facing pool is US dollars, pinned at the dedicated-capacity
- * volume rate of $0.001 per successful call ($1 / 1,000 requests at
- * 100+ RPS — keenable.ai/pricing, 2026-11-03). That is the Exa / Apify
+ * Billing: the Monid-facing pool is US dollars, the Exa / Apify
  * posture: vendors whose published prices are in dollars pin them in
  * the doc so discover can price without a separate broker-card row.
- * Pay-as-you-go Builder is $0.004; this connector does not use it
- * because Monid's aggregate search traffic is volume. Search still
- * bills 0 when `results: []`.
+ * The prices are the hosted adaptor's (design D9 revision, D11): $0.004
+ * per search with results (`results: []` bills 0) and $0.001 per
+ * fetch. Every 2xx body carries Keenable's `usage` receipt (since
+ * 2026-11-12); `usage.consolidate` removes it from the output and
+ * makes no claim, so the derived fold settles.
+ *
+ * Every call sends `X-Keenable-Title: Monid`, the attribution header
+ * Keenable asked for (design D11).
  */
 export default defineProvider({
     name: "keenable",
@@ -38,12 +38,13 @@ export default defineProvider({
             "page you want. One search returns up to 50 ranked " +
             "results, each with a page-text extract of up to 10,000 " +
             "characters, so search-and-read is a single call — no " +
-            "second contents hop. $0.001 per search with results, " +
+            "second contents hop. $0.004 per search with results, " +
             "extracts included. Filter by site, publish date, or " +
             "index date (dates, timestamps, or relative values like " +
             "7d). query_time searches the web as it stood at a past " +
-            "moment. Fetch turns a public URL into clean Markdown, " +
-            "served from the index or read live when the page is not " +
+            "moment. Fetch turns a public URL into clean Markdown " +
+            "($0.001 per page), served from the index or read live " +
+            "when the page is not " +
             "indexed (live: true always reads live); an optional prompt asks a question about the " +
             "page instead of returning the full text. Will not " +
             "reproduce Google's exact SERP order, synthesize a " +
@@ -59,20 +60,37 @@ export default defineProvider({
         ],
     },
     auth: { inject: presets.auth.header("X-API-Key") },
-    request: { baseUrl: "https://api.keenable.ai" },
+    request: {
+        baseUrl: "https://api.keenable.ai",
+        /** Keenable asked Monid to name itself on every call; the
+         *  hosted adaptor sends it too (design D11). */
+        headers: { "X-Keenable-Title": "Monid" },
+    },
     timeouts: { requestMs: 30_000, runMs: 30_000 },
     usage: {
-        /** THE credit system (design D26 / D9): Keenable's native
-         *  meter is one vendor credit per search or fetch, but the
-         *  published prices are in dollars, so the pool is USD — same
-         *  as exa. $0.001 is the volume rate (dedicated capacity,
-         *  $1 / 1,000). No `consolidate`: no REST body carries a
-         *  receipt. */
+        /** THE credit system (design D26 / D9): the published prices
+         *  are in dollars, so the pool is USD — same as exa. The
+         *  provider model is fetch's $0.001 per call (Keenable's fetch
+         *  rate for Monid); the search docs override it with $0.004
+         *  per search with results (schema/search-binding.ts). */
         credits: { default: { label: "US dollars" } },
         model: {
             kind: UsageModelKind.PER_CALL,
             label: "call",
             consumes: { credit: "default", amount: 0.001 },
         },
+        /** Keenable's `usage` receipt (`{sku, amount, credits, paid,
+         *  credits_remaining}` on every 2xx body since 2026-11-12) is
+         *  Monid's account state with Keenable, so it leaves the
+         *  output here, as the hosted adaptor removes it (design D11).
+         *  The claim stays EMPTY: `credits` counts Keenable credits
+         *  (1 per search, 0.25 per fetch), not dollars, and `paid`
+         *  says whether Monid's account paid, not what the buyer
+         *  owes, so the derived fold settles. `pluck` is exact: only
+         *  the top-level receipt goes (octen posture). */
+        consolidate: ({ data, utils }) => ({
+            credits: {},
+            output: utils.json.pluck(data.output, "$.usage").rest,
+        }),
     },
 });

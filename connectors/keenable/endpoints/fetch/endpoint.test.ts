@@ -10,9 +10,11 @@ import {
 
 const fixturesDir = fromFileUrl(new URL("../../fixtures/", import.meta.url));
 
-Deno.test("keenable#v1/fetch happy (synthetic): one credit; fold settles; markdown content", async () => {
+Deno.test("keenable#v1/fetch happy (synthetic): $0.001; fold settles; receipt removed; markdown content", async () => {
     const unit = await testSealedUnit("keenable#v1/fetch");
     const fixture = await loadFixture(`${fixturesDir}synthetic-fetch-ok.json`);
+    // the recorded body carries Keenable's `usage` receipt
+    assert("usage" in (fixture.calls[0].res.body as Record<string, unknown>));
     const result = await runEndpoint({
         unit,
         input: { queryParams: { url: "https://example.com" } },
@@ -204,5 +206,6 @@ Deno.test({
         assertEquals(typeof result.usage.credits.default, "number");
         const output = result.output as Record<string, unknown>;
         assertEquals(typeof output.content, "string");
+        assertEquals("usage" in output, false);
     },
 });

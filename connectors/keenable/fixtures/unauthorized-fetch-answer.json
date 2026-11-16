@@ -1,6 +1,6 @@
 {
     "name": "unauthorized-fetch-answer",
-    "description": "Provider-error chain for keenable#v1/fetch-answer: the recorded 2026-09-16 malformed-key 401 from unauthorized-fetch, on the fetch-answer wire URL (prompt + connector-default live=true). Vendor 401 `{error, message}` is DATA: zero usage.",
+    "description": "Provider-error chain for keenable#v1/fetch-answer: the recorded 2026-09-16 malformed-key 401 from unauthorized-fetch, on the fetch-answer wire URL (prompt, no live: the vendor default). Vendor 401 `{error, message}` is DATA: zero usage.",
     "calls": [
         {
             "req": {

@@ -52,7 +52,8 @@ Three additional docs share the vendor paths and pin `endpoint:`
 - `keenable#v1/fetch-answer` — `prompt` required, `web-extraction`.
 
 They inherit the same usage as the doc they wrap (search: PER_UNIT
-RESULT at $0.001, empty bills 0; fetch: PER_CALL $0.001). The
+RESULT at $0.004 since the D9 revision, empty bills 0; fetch:
+PER_CALL $0.001). The
 evidence/estimate pair is authored once in `schema/search-binding.ts`
 and interned.
 
@@ -70,7 +71,27 @@ binding adds `.regex(/\S/)` on `query`, `site`, the date bounds,
 this is the form that actually rejects `"   "` at INVALID_INPUT
 before the wire call.
 
-## D9 — Pin the volume rate in USD
+## D9 — Prices in USD (revised 2026-11-16)
+
+**Revision (2026-11-16): the hosted prices.** Search draws `0.004`
+per search with results; fetch stays `0.001` per page. Those are the
+prices the hosted adaptor charges, and Monid keeps search at $0.004
+(decision 2026-11-16). The volume rate below was never Monid's search
+price: the hosted card is $0.004 per search, and $0.001 per fetch is
+Keenable's fetch rate for Monid (confirmed 2026-11-12). A connector
+that priced search at $0.001 would disagree with the hosted listing
+it is meant to replace (D11).
+
+One fact below changed since 2026-11-03: Keenable's meter is no
+longer one credit per call. Since 2026-11-12 every 2xx body carries a
+`usage` receipt, which reads `credits: 1` for a search and
+`credits: 0.25` for a fetch (drill 2026-11-13).
+
+What still holds: the pool is `US dollars`, an empty `results: []`
+bills 0, and `UsageModelKind.FREE` stays rejected. The original
+reasoning is kept below.
+
+### Original (2026-11-03): pin the volume rate
 
 Keenable's native meter is still one vendor credit per search or
 fetch. The published prices are in dollars (keenable.ai/pricing,
@@ -125,8 +146,8 @@ Exa is $0.007 and still does ~49K Monid calls against Keenable's 6K
 because Monid guides and agent priors name `exa/search` as "search
 the live web and read the pages in one call" (neural + `contents`).
 Price does not rank; completed calls do. Keenable already returns
-page-text extracts on search (up to 10,000 characters, same $0.001
-credit). The connector was not ranking for that job.
+page-text extracts on search (up to 10,000 characters, included in
+the search price). The connector was not ranking for that job.
 
 Two more D22 presets share `POST /v1/search`:
 
@@ -140,7 +161,8 @@ Two more D22 presets share `POST /v1/search`:
   category field.
 
 Provider + search + fetch copy now names the one-call extract
-path, the $0.001 include, and what Keenable will not do
+path, that the extracts come with the search price, and what
+Keenable will not do
 (structured synthesis across sources — that is Exa's
 `outputSchema`). The provider gains `academic-search`.
 
@@ -150,3 +172,49 @@ or people categories the vendor does not serve; defaulting
 `snippet_max_length` on every search doc (the vendor default
 snippet stays on the general search so the fast path stays
 fast; the contents preset is the long-extract opt-in).
+
+## D11 — Hosted parity with the monid-services adaptor (2026-11-16)
+
+The Keenable listing Monid serves today comes from the hosted adaptor
+in `monid-services` (`services/shared/providers/adaptors/keenable/`),
+not from this connector. Adaptors are being migrated into connectors
+(AGENT.md), so the connector is kept in step with the adaptor wherever
+a buyer could tell them apart, the posture of the v1-parity reconcile
+(#36). Three changes follow:
+
+1. **Prices**: search $0.004, fetch $0.001 (D9 revision).
+2. **The `usage` receipt leaves the output.** Since 2026-11-12 every
+   2xx body carries a top-level receipt, e.g. `{sku: "search.pro",
+   amount: 1, credits: 1, paid: false, credits_remaining: …}`. It is
+   Monid's account state with Keenable, not search data, and the
+   adaptor removes it from the output. The provider
+   `usage.consolidate` returns an empty claim and
+   `utils.json.pluck(output, "$.usage").rest`, the octen posture: the
+   derived fold settles, and only the top-level key goes (`pluck` is
+   exact; a deep `omit` could reach into page content). The claim
+   stays empty on purpose: `credits` counts Keenable credits (1 per
+   search, 0.25 per fetch), not dollars, and `paid` says whether
+   Monid's account paid, not what the buyer owes.
+3. **`X-Keenable-Title: Monid`** on every call, the attribution header
+   Keenable asked for: provider `request.headers`, inherited by every
+   doc.
+
+Hosted-only, deliberately not mirrored:
+
+- The hosted ledger records Monid's cost apart from the buyer's price
+  (a `paid: false` receipt costs Monid $0, and some failed fetches
+  carry a cost). A connector has one number, the bill. The buyer
+  outcome is the same in both: the card price on success, nothing on
+  any error (the engine zero-bills non-2xx).
+- The Keenable Free promotion and its per-workspace rate limits are
+  hosted offers, not vendor endpoints.
+- Each repo keeps its own input convention (decision 2026-11-16): the
+  adaptor's input is strict, with a `mode` enum and no presets; this
+  connector keeps the loose search body, `mode` as a string, and the
+  five presets.
+
+Rejected: claiming the receipt (it would bill $1 per search);
+leaving it in the output (every buyer would see Monid's remaining
+Keenable balance); an `output.fromResponse` for the strip (billing
+facts leave the payload in `usage.consolidate`, before presentation —
+engine D27).

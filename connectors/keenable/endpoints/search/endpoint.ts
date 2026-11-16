@@ -20,7 +20,7 @@ export default defineEndpoint({
             "wrapper). Phrase the query as a description of the page " +
             "you want. One call returns up to 50 results, and each " +
             "can carry a page-text extract of up to 10,000 " +
-            "characters, so live-web context is a single $0.001 " +
+            "characters, so live-web context is a single $0.004 " +
             "search — no second contents hop. Set " +
             "snippet_max_length to 10000, or use " +
             "keenable#v1/search-contents, when you want the longest " +
@@ -42,7 +42,7 @@ export default defineEndpoint({
         docsUrl: "https://docs.keenable.ai/api-reference/search",
         categories: ["web-search", "news-search"],
         notes: [
-            "$0.001 per search with results (volume rate, either mode). " +
+            "$0.004 per search with results (either mode). " +
             "A search that returns no results is free.",
         ],
     },

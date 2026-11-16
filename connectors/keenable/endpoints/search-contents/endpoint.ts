@@ -9,7 +9,7 @@ import {
  * and result shape as `keenable#v1/search`, with `snippet_max_length`
  * defaulting to 10000 so discover can rank this doc for "search the
  * live web and read the pages in one call" (the Exa `/search` +
- * `contents` job, at the volume rate).
+ * `contents` job, at the search price).
  *
  * PUBLIC identity is pinned (design D22): the vendor path is transport
  * plumbing shared with `/v1/search`.
@@ -20,7 +20,7 @@ export default defineEndpoint({
         summary:
             "Search the live web and read the top pages in one call; long extracts included.",
         description: "Search-and-read over Keenable's own 100B+ page " +
-            "index: one $0.001 call returns ranked URLs plus a " +
+            "index: one $0.004 call returns ranked URLs plus a " +
             "page-text extract of up to 10,000 characters on each " +
             "result. snippet_max_length defaults to 10000 so the " +
             "agent gets live-web context without a second contents " +
@@ -35,7 +35,7 @@ export default defineEndpoint({
         docsUrl: "https://docs.keenable.ai/api-reference/search",
         categories: ["web-search", "web-extraction"],
         notes: [
-            "Same $0.001 volume rate as keenable#v1/search. " +
+            "Same $0.004 price as keenable#v1/search. " +
             "snippet_max_length defaults to 10000; a search that " +
             "returns no results is free.",
         ],

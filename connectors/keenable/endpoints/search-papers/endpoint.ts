@@ -27,7 +27,7 @@ export default defineEndpoint({
             "openreview.net — or omit it to search the open web " +
             "for PDFs and publisher pages. snippet_max_length " +
             "defaults to 10000 so the abstract or page extract " +
-            "comes back with the URL, at $0.001, with no second " +
+            "comes back with the URL, at $0.004, with no second " +
             "contents hop. Filter by published_after for a year " +
             "window. A search with no results is not billed. Will " +
             "not: return a citation graph, author profiles, or " +
@@ -37,7 +37,7 @@ export default defineEndpoint({
         docsUrl: "https://docs.keenable.ai/api-reference/search",
         categories: ["academic-search"],
         notes: [
-            "Same $0.001 volume rate as keenable#v1/search. " +
+            "Same $0.004 price as keenable#v1/search. " +
             "snippet_max_length defaults to 10000; a search that " +
             "returns no results is free.",
         ],

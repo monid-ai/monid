@@ -11,7 +11,7 @@ import {
 
 const fixturesDir = fromFileUrl(new URL("../../fixtures/", import.meta.url));
 
-Deno.test("keenable: fetch inherits PER_CALL 1, search counts RESULT, one auth fn, no consolidate", async () => {
+Deno.test("keenable: fetch inherits PER_CALL $0.001, search counts RESULT at $0.004, one auth fn, one receipt-strip consolidate, title header", async () => {
     const bundle = await testBundle();
     const ids = Object.keys(bundle.endpoints).filter((id) =>
         id.startsWith("keenable#")
@@ -44,8 +44,13 @@ Deno.test("keenable: fetch inherits PER_CALL 1, search counts RESULT, one auth f
     assertEquals(answer.request.url, "https://api.keenable.ai/v1/fetch");
 
     assertEquals(search.auth.inject.$fn.key, fetchDoc.auth.inject.$fn.key);
-    assertEquals(search.usage.consolidate, undefined);
-    assertEquals(fetchDoc.usage.consolidate, undefined);
+    // one provider consolidate (empty claim, receipt strip — design D11)
+    // reaches every doc
+    const consolidateKey = search.usage.consolidate?.$fn.key;
+    assert(consolidateKey !== undefined, "provider consolidate inherited");
+    for (const doc of [news, asOf, contents, papers, fetchDoc, answer]) {
+        assertEquals(doc.usage.consolidate?.$fn.key, consolidateKey);
+    }
     assertEquals(search.input.toRequest, undefined);
     assertEquals(news.input.toRequest, undefined);
     assertEquals(asOf.input.toRequest, undefined);
@@ -88,11 +93,17 @@ Deno.test("keenable: fetch inherits PER_CALL 1, search counts RESULT, one auth f
         assertEquals(Object.keys(doc.usage.credits), ["default"], id);
         const model = doc.usage.model;
         assertEquals(model.kind, kinds[id], id);
+        // search $0.004, fetch $0.001: the hosted prices (design D9
+        // revision, D11)
         assertEquals(
             "consumes" in model ? model.consumes : undefined,
-            { credit: "default", amount: 0.001 },
+            {
+                credit: "default",
+                amount: kinds[id] === "PER_UNIT" ? 0.004 : 0.001,
+            },
             id,
         );
+        assertEquals(doc.request.headers?.["X-Keenable-Title"], "Monid", id);
     }
 });
 
@@ -163,9 +174,11 @@ Deno.test("keenable: agent-facing meta, news category, live-fallback fetch", asy
     assertEquals(answer.meta.categories, ["web-extraction"]);
 });
 
-Deno.test("keenable#v1/search happy (synthetic): one credit; fold settles; mode echoed", async () => {
+Deno.test("keenable#v1/search happy (synthetic): $0.004; fold settles; receipt removed; mode echoed", async () => {
     const unit = await testSealedUnit("keenable#v1/search");
     const fixture = await loadFixture(`${fixturesDir}synthetic-search-ok.json`);
+    // the recorded body carries Keenable's `usage` receipt
+    assert("usage" in (fixture.calls[0].res.body as Record<string, unknown>));
     const result = await runEndpoint({
         unit,
         input: { body: { query: "typescript best practices", max_results: 2 } },
@@ -174,9 +187,10 @@ Deno.test("keenable#v1/search happy (synthetic): one credit; fold settles; mode 
     });
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
-    // no consolidate ⇒ no claim ⇒ the DERIVED fold is the bill (D2)
+    // the consolidate claims nothing ⇒ the DERIVED fold is the bill
+    // (D2, D11)
     assertEquals(result.usage, {
-        credits: { default: 0.001 },
+        credits: { default: 0.004 },
         evidence: { RESULT: 1 },
     });
     const output = result.output as Record<string, unknown>;
@@ -203,6 +217,46 @@ Deno.test("keenable#v1/search empty (synthetic): results [] bills 0", async () =
     assertEquals(result.isProviderError, false);
     assertEquals(result.usage, { credits: {}, evidence: { RESULT: 0 } });
     assertEquals((result.output as Record<string, unknown>).results, []);
+});
+
+Deno.test("keenable#v1/search empty with a receipt (synthetic): the receipt claims nothing, bills 0, leaves the output", async () => {
+    const unit = await testSealedUnit("keenable#v1/search");
+    const empty = await loadFixture(
+        `${fixturesDir}synthetic-search-empty.json`,
+    );
+    const call = empty.calls[0];
+    const fixture = {
+        ...empty,
+        calls: [{
+            ...call,
+            res: {
+                ...call.res,
+                body: {
+                    ...(call.res.body as Record<string, Json>),
+                    usage: {
+                        sku: "search.pro",
+                        amount: 1,
+                        credits: 1,
+                        paid: true,
+                        credits_remaining: 1000,
+                    },
+                },
+            },
+        }],
+    };
+    const result = await runEndpoint({
+        unit,
+        input: { body: { query: "zzqxv no such page" } },
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(result.isProviderError, false);
+    assertEquals(result.usage, { credits: {}, evidence: { RESULT: 0 } });
+    assertEquals(result.output, {
+        query: "zzqxv no such page",
+        mode: "pro",
+        results: [],
+    });
 });
 
 Deno.test("keenable#v1/search provider error (recorded 401): data, zero usage", async () => {
@@ -313,6 +367,7 @@ Deno.test({
             Array.isArray(output.results),
             "results array present",
         );
+        assertEquals("usage" in output, false);
         assertEquals(output.query, "deno 2 workspace monorepo guide");
     },
 });

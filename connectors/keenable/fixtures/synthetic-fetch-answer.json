@@ -1,6 +1,6 @@
 {
     "name": "synthetic-fetch-answer",
-    "description": "SYNTHETIC prompt extraction for keenable#v1/fetch-answer. live=true is the connector default; prompt is required. Response content is the instruction output, not the full page.",
+    "description": "SYNTHETIC prompt extraction for keenable#v1/fetch-answer. live is omitted, so the vendor default applies (design D6, revised 2026-11-07); prompt is required. Response content is the instruction output, not the full page.",
     "calls": [
         {
             "req": {

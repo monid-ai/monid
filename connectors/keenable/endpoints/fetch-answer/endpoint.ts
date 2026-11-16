@@ -4,7 +4,7 @@ import { zKeenableFetchAnswerQueryParams } from "./schema/inputs.ts";
 /**
  * Prompt-required twin of `GET /v1/fetch` — the fetch-with-prompt path
  * as its own endpoint so discover can rank it for page Q&A /
- * extraction. Same PER_CALL 1 credit (design D4). live keeps the
+ * extraction. Same PER_CALL $0.001 (design D4). live keeps the
  * vendor default (design D6, revised 2026-11-07).
  *
  * PUBLIC identity is pinned (design D22): the vendor path is transport
@@ -29,7 +29,7 @@ export default defineEndpoint({
         docsUrl: "https://docs.keenable.ai/api-reference/fetch",
         categories: ["web-extraction"],
         notes: [
-            "Same $0.001 volume rate as keenable#v1/fetch. prompt is " +
+            "Same $0.001 price as keenable#v1/fetch. prompt is " +
             "required. A URL missing from the index is read live " +
             "automatically.",
         ],

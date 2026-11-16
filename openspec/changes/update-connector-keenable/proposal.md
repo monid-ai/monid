@@ -43,10 +43,18 @@ this change ships the connector half.
     `10000`, `web-search` + `web-extraction` (search-and-read).
   - `keenable#v1/search-papers` — `snippet_max_length` defaults to
     `10000`, `academic-search`.
-- **Volume rate in USD (D9)** — pool label `US dollars`, draw `0.001`
-  per successful search or fetch (Keenable's dedicated-capacity rate,
-  $1 / 1,000 at 100+ RPS). Same posture as Exa. Empty `results: []`
-  still bills 0. The Builder $0.004 rate is not used.
+- **Prices in USD, as hosted (D9, revised 2026-11-16)** — pool label
+  `US dollars`, the Exa posture. The search docs draw `0.004` per
+  search with results and the fetch docs `0.001` per page: the prices
+  Monid charges for Keenable today. Empty `results: []` still bills 0.
+- **Hosted parity (D11)** — the connector follows the hosted
+  `monid-services` adaptor wherever a buyer could tell them apart:
+  - Keenable's per-call `usage` receipt (on 2xx bodies since
+    2026-11-12) is removed from the output by a provider
+    `usage.consolidate` that makes no claim, so the derived fold still
+    settles.
+  - Every call sends `X-Keenable-Title: Monid`, the attribution header
+    Keenable asked for.
 
 ## Capabilities
 
@@ -55,8 +63,9 @@ this change ships the connector half.
 ## Non-goals
 
 - A Keenable-funded free allowance, or writing "free" in meta. The
-  volume rate is pinned here; going fully FREE is still a hosted
-  allowance question (and would down-weight each call to 0.2).
+  hosted Keenable Free promotion and its per-workspace rate limits are
+  hosted offers, not vendor endpoints, and stay out of the connector
+  (D11). Going fully FREE would also down-weight each call to 0.2.
 - An API-side `live: "auto"` or language-variant collapse — vendor
   changes. The fetch default is the connector interim; language
   variants stay a description caveat (`site` or a language word).
@@ -68,3 +77,7 @@ this change ships the connector half.
 Connector-only. No schema / engine / compiler contract change —
 `ENGINE_VERSION` unchanged. `connectors/ids.lock.json` gains the five
 new preset ids plus the two that PR #27 never locked.
+
+The Keenable listing Monid serves today still comes from the hosted
+`monid-services` adaptor, so its price and behavior are set there;
+this change keeps the connector in step with it (D11).

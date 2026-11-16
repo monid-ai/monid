@@ -62,8 +62,9 @@ export function keenableSearchBodySchema(options?: {
 }
 
 /**
- * Search bills PER_UNIT RESULT, 0 when `results: []` (design D2). Shared
- * by the five docs that hit `POST /v1/search`.
+ * Search bills PER_UNIT RESULT at $0.004, the hosted price (design D9
+ * revision, D11), and 0 when `results: []` (design D2). Shared by the
+ * five docs that hit `POST /v1/search`.
  */
 export const keenableSearchUsage = {
     model: {
@@ -72,7 +73,7 @@ export const keenableSearchUsage = {
         label: "searches with results",
         description: "searches whose response carried at least one " +
             "result",
-        consumes: { credit: "default", amount: 0.001 },
+        consumes: { credit: "default", amount: 0.004 },
     },
     /** The hold promises one search. */
     estimate: () => ({ counts: { RESULT: 1 } }),

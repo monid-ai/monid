@@ -1,6 +1,6 @@
 {
     "name": "synthetic-fetch-indexed",
-    "description": "SYNTHETIC indexed-only fetch for keenable#v1/fetch with live=false (opt-out of the connector default). Response shape matches the indexed-fetch public twin.",
+    "description": "SYNTHETIC indexed-only fetch for keenable#v1/fetch with an explicit live=false, passed through as sent. Response shape matches the indexed-fetch public twin.",
     "calls": [
         {
             "req": {

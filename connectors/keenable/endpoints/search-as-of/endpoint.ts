@@ -36,7 +36,7 @@ export default defineEndpoint({
         docsUrl: "https://docs.keenable.ai/api-reference/search",
         categories: ["web-search"],
         notes: [
-            "Same $0.001 volume rate as keenable#v1/search. query_time " +
+            "Same $0.004 price as keenable#v1/search. query_time " +
             "is required. A search that returns no results is free.",
         ],
     },

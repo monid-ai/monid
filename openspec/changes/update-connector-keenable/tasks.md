@@ -41,7 +41,8 @@
 ## 4b. Volume rate (D9)
 
 - [x] 4b.1 Provider pool label `US dollars`; PER_CALL / PER_UNIT
-      draw `0.001` (dedicated-capacity rate)
+      draw `0.001` (dedicated-capacity rate; search superseded by
+      7.1)
 - [x] 4b.2 Tests expect `{credits: {default: 0.001}}`; empty search
       still bills 0
 
@@ -61,3 +62,17 @@
 - [x] 6.3 Provider + search + fetch copy names search-and-read /
       live-web context; provider gains `academic-search`
 - [x] 6.4 Fixtures, tests, ids.lock, OpenSpec D10
+
+## 7. Hosted parity (D11, 2026-11-16)
+
+- [x] 7.1 Search docs draw `0.004` (the hosted price); fetch stays
+      `0.001`; meta, notes and doc comments say so (D9 revision)
+- [x] 7.2 Provider `usage.consolidate`: empty claim; `pluck` removes
+      the top-level `usage` receipt (octen posture)
+- [x] 7.3 Provider `request.headers` `X-Keenable-Title: Monid`
+- [x] 7.4 Fixtures: search and fetch happy chains carry a receipt;
+      stale "live=true is the connector default" descriptions fixed
+- [x] 7.5 Tests: $0.004 search, receipt removed, an empty search with
+      a receipt bills 0, title header on every doc
+- [x] 7.6 Verify: fmt · lint · check · keenable tests ·
+      `openspec validate --strict`

@@ -8,8 +8,7 @@ import { z } from "zod";
  * (D25): `max_chars` vendor default 50000 is a behaviour knob the
  * estimate does not read (the model is PER_CALL), so it stays
  * optional. Bounds live at the binding in each endpoint.ts. `live`
- * draws one credit like an indexed fetch (MCP `_meta["keenable/usage"]`,
- * drill 2026-09-28; design D4). `live` is left to the vendor default
+ * is priced like an indexed fetch (drill 2026-09-28; design D4). `live` is left to the vendor default
  * (design D6, revised 2026-11-07): an omitted `live` serves the
  * indexed copy and reads the page live when it is not indexed, so a
  * URL missing from the index is not a provider error.

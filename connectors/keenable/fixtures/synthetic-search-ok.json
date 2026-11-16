@@ -1,6 +1,6 @@
 {
     "name": "synthetic-search-ok",
-    "description": "SYNTHETIC happy chain for keenable#v1/search. Shape taken from a real 2026-09-16 POST /v1/search/public response (query, mode, results[].title/url/description/snippet/published_at/acquired_at); URL rewritten to the authenticated /v1/search the doc calls. Snippets hand-truncated. Replace via `deno task record` when KEENABLE_API_KEY exists.",
+    "description": "SYNTHETIC happy chain for keenable#v1/search. Shape taken from a real 2026-09-16 POST /v1/search/public response (query, mode, results[].title/url/description/snippet/published_at/acquired_at); URL rewritten to the authenticated /v1/search the doc calls. Snippets hand-truncated. Replace via `deno task record` when KEENABLE_API_KEY exists. The `usage` receipt shape is from a 2026-11-13 authenticated response (values synthetic); the provider consolidate removes it from the output (design D11).",
     "calls": [
         {
             "req": {
@@ -32,7 +32,14 @@
                             "published_at": "2026-03-24T15:39:39Z",
                             "acquired_at": "2026-05-19T15:39:16Z"
                         }
-                    ]
+                    ],
+                    "usage": {
+                        "sku": "search.pro",
+                        "amount": 1,
+                        "credits": 1,
+                        "paid": true,
+                        "credits_remaining": 1000
+                    }
                 }
             }
         }

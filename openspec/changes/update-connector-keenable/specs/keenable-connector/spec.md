@@ -5,34 +5,43 @@
 ### Requirement: Keenable provider definition
 The keenable provider SHALL declare name `keenable`, `request.baseUrl`
 `https://api.keenable.ai`, auth `presets.auth.header("X-API-Key")`,
-timeouts 30 s / 30 s, one credit pool `default` labelled
-"US dollars", a provider-level `usage.model` of PER_CALL $0.001
-(the published volume rate), and NO `usage.consolidate` (REST
-responses carry no usage receipt). Search docs SHALL override the
-model with PER_UNIT `RESULT`, $0.001, counting 0 for `results: []`.
+timeouts 30 s / 30 s, `request.headers` `X-Keenable-Title: Monid`,
+one credit pool `default` labelled "US dollars", a provider-level
+`usage.model` of PER_CALL $0.001 (fetch), and a provider-level
+`usage.consolidate` that makes no claim and removes the top-level
+`usage` receipt from the output. Search docs SHALL override the
+model with PER_UNIT `RESULT`, $0.004, counting 0 for `results: []`.
 Provider meta SHALL categorize `web-search`, `news-search`,
 `academic-search`, and `web-scraping`.
 
-#### Scenario: A search consumes the volume rate
-- **WHEN** `POST /v1/search` returns 200 with two results
-- **THEN** usage is `{credits: {default: 0.001}, evidence: {RESULT: 1}}`
+#### Scenario: A search bills the hosted price
+- **WHEN** `POST /v1/search` returns 200 with two results and a
+  `usage` receipt
+- **THEN** usage is `{credits: {default: 0.004}, evidence: {RESULT: 1}}`
 - **AND** the payload still carries `query`, `results`, and the
-  vendor-echoed `mode`
+  vendor-echoed `mode`, and carries no `usage` key
 
 #### Scenario: An empty search is free
-- **WHEN** `POST /v1/search` returns 200 with `results: []`
+- **WHEN** `POST /v1/search` returns 200 with `results: []`, with or
+  without a `usage` receipt
 - **THEN** usage is `{credits: {}, evidence: {RESULT: 0}}`
 
-#### Scenario: A fetch consumes the volume rate
-- **WHEN** `GET /v1/fetch?url=https://example.com` returns 200
+#### Scenario: A fetch bills $0.001
+- **WHEN** `GET /v1/fetch?url=https://example.com` returns 200 with a
+  `usage` receipt
 - **THEN** usage is `{credits: {default: 0.001}, evidence: {CALL: 1}}`
-- **AND** output carries `url`, `title`, and markdown `content`
+- **AND** output carries `url`, `title`, and markdown `content`, and
+  no `usage` key
 
 #### Scenario: A 401 is data, zero usage
 - **WHEN** either endpoint is called with a malformed API key
 - **THEN** the run completes as HTTP 401, `isProviderError` true,
   usage `{credits: {}, evidence: {}}`, and the vendor envelope
   `{error, message}` rides through
+
+#### Scenario: Every call carries the attribution header
+- **WHEN** any `keenable#` doc is compiled
+- **THEN** its `request.headers` carry `X-Keenable-Title: Monid`
 
 ### Requirement: Authenticated search and fetch surface
 The connector SHALL provide `POST /v1/search` (`keenable#v1/search`,

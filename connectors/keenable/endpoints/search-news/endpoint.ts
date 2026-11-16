@@ -31,7 +31,7 @@ export default defineEndpoint({
         docsUrl: "https://docs.keenable.ai/api-reference/search",
         categories: ["news-search"],
         notes: [
-            "Same $0.001 volume rate as keenable#v1/search. " +
+            "Same $0.004 price as keenable#v1/search. " +
             "published_after defaults to 2d; a search that returns no " +
             "results is free.",
         ],
