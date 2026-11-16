@@ -41,7 +41,7 @@ export const zUule = z.string().min(1).describe(
 );
 
 /** The include block of the assistant engines without paid add-ons
- *  (Gemini, Copilot, Perplexity). */
+ *  (Gemini). */
 export const zAssistantInclude = z.strictObject({
     markdown: z.boolean().optional().describe(
         "Include the answer as markdown.",
