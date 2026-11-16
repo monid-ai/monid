@@ -238,3 +238,86 @@ Deno.test("checkPricing: an event in the suite's EXCLUDED map → no finding", (
     assertEquals(findings, []);
     assertEquals(repins, []);
 });
+
+// ---------------------------------------------------------------------------
+// johnvc fleet (add-apify-johnvc-actors D1/D2): `setup`/`startup` are flat
+// one-time fees, and two published events can normalize onto ONE id
+// ---------------------------------------------------------------------------
+
+/** A composite doc with arbitrary components; checkPricing reads only
+ *  id + usage.model. */
+const docWith = (
+    components: Record<
+        string,
+        { kind: "PER_CALL" | "PER_UNIT"; amount: number }
+    >,
+): EndpointDoc =>
+    ({
+        id: "apify#test/actor",
+        usage: {
+            model: {
+                kind: "COMPOSITE",
+                components: Object.fromEntries(
+                    Object.entries(components).map(([id, { kind, amount }]) => [
+                        id,
+                        kind === "PER_CALL"
+                            ? { kind, consumes: { credit: "default", amount } }
+                            : {
+                                kind,
+                                unit: "RESULT",
+                                every: 1,
+                                consumes: { credit: "default", amount },
+                            },
+                    ]),
+                ),
+            },
+        },
+    }) as unknown as EndpointDoc;
+
+Deno.test("checkPricing (D1): a `setup` fee with NO start-shaped event is a flat line — no shape finding", () => {
+    const { findings } = check(
+        docWith({
+            setup: { kind: "PER_CALL", amount: 0.01 },
+            default_dataset_item: { kind: "PER_UNIT", amount: 0.0069 },
+        }),
+        { setup: gold(0.01) },
+    );
+    assertEquals(findings, []);
+});
+
+Deno.test("checkPricing (D1): `startup` is flat too, and a metered pin on it is a shape finding", () => {
+    const { findings } = check(
+        docWith({
+            startup: { kind: "PER_UNIT", amount: 0.00001 },
+            default_dataset_item: { kind: "PER_UNIT", amount: 0.0069 },
+        }),
+        { startup: gold(0.00001) },
+    );
+    assertEquals(findings.map((finding) => finding.check), ["shape"]);
+});
+
+Deno.test("checkPricing (D2): two events normalizing onto one id join by their SUM", () => {
+    // naver-search-api: `apify-actor-start` ($0.00001) + custom `actor_start`
+    // ($0.00005) both fire once per run → the line pins 0.00006
+    const { findings } = check(
+        docWith({
+            actor_start: { kind: "PER_CALL", amount: 0.00006 },
+            default_dataset_item: { kind: "PER_UNIT", amount: 0.0069 },
+        }),
+        { "apify-actor-start": gold(0.00001), actor_start: gold(0.00005) },
+    );
+    assertEquals(findings, []);
+});
+
+Deno.test("checkPricing (D2): pinning only the FIRST of two joined events is a rate finding naming both", () => {
+    const { findings, repins } = check(
+        docWith({
+            actor_start: { kind: "PER_CALL", amount: 0.00001 },
+            default_dataset_item: { kind: "PER_UNIT", amount: 0.0069 },
+        }),
+        { "apify-actor-start": gold(0.00001), actor_start: gold(0.00005) },
+    );
+    assertEquals(findings.map((finding) => finding.check), ["rate"]);
+    assert(findings[0].message.includes("apify-actor-start + actor_start"));
+    assertEquals(repins.map((repin) => repin.live), [0.00006]);
+});
