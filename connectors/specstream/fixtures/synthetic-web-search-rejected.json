@@ -1,0 +1,25 @@
+{
+    "name": "synthetic-web-search-rejected",
+    "description": "Real 2026-11-14 shape of a request SpecStream refuses before it searches (422, error envelope): data, zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "q": "   "
+                }
+            },
+            "res": {
+                "status": 422,
+                "body": {
+                    "error": {
+                        "code": "unquoted_plan",
+                        "message": "Write the request in 1 to 2,000 characters.",
+                        "details": {}
+                    }
+                }
+            }
+        }
+    ]
+}
