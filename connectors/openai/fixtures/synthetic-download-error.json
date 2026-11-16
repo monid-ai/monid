@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-download-error",
+    "description": "An unreachable edit reference fails without billing.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "error": {
+                        "code": "invalid_image_url",
+                        "type": "invalid_request_error",
+                        "message": "Failed to download file"
+                    }
+                }
+            }
+        }
+    ]
+}

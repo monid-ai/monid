@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-moderation-blocked",
+    "description": "Native moderation error: no image, no billable usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "error": {
+                        "code": "moderation_blocked",
+                        "type": "image_generation_user_error",
+                        "message": "Request blocked by content moderation."
+                    }
+                }
+            }
+        }
+    ]
+}
