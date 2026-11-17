@@ -1,0 +1,78 @@
+{
+    "name": "synthetic-agent-run-completed",
+    "description": "SYNTHETIC — not recorded. Agent API shapes from the monid-services live drill (2026-09-18): run-async answers {run_id, error} with no status; one RUNNING poll (num_of_steps null), then COMPLETED with num_of_steps 3. The terminal record carries the capability URLs the output allowlist must drop.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "url": "https://scrapeme.live/shop",
+                    "goal": "Extract the first product name and price",
+                    "agent_config": {
+                        "max_steps": 10
+                    },
+                    "use_profile": true,
+                    "profile_id": "prof_1"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "run_id": "run-1",
+                    "error": null
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/runs/run-1?screenshots=none&html=none"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "run_id": "run-1",
+                    "status": "RUNNING",
+                    "num_of_steps": null
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/runs/run-1?screenshots=none&html=none"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "run_id": "run-1",
+                    "status": "COMPLETED",
+                    "result": {
+                        "products": [
+                            {
+                                "name": "Bulbasaur",
+                                "price": "£63.00"
+                            }
+                        ]
+                    },
+                    "error": null,
+                    "num_of_steps": 3,
+                    "started_at": "2026-10-21T01:00:01Z",
+                    "finished_at": "2026-10-21T01:00:40Z",
+                    "streaming_url": "https://stream.example.com/run-1",
+                    "video_url": "https://video.example.com/run-1.mp4",
+                    "steps": [
+                        {
+                            "screenshot": "https://shots.example.com/1.png"
+                        }
+                    ],
+                    "profile_id": "prof_1",
+                    "browser_config": {
+                        "proxy": "US"
+                    }
+                }
+            }
+        }
+    ]
+}

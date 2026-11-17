@@ -1,0 +1,27 @@
+{
+    "name": "synthetic-profile-setup-session",
+    "description": "SYNTHETIC — not recorded. POST /v1/profiles/{id}/setup-session answers the ephemeral setup handle.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/v1/profiles/prof_1/setup-session",
+                "body": {
+                    "url": "https://app.example.com/login",
+                    "timeout_seconds": 900
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "session_id": "setup-1",
+                    "cdp_url": "wss://cdp.example.com/setup-1",
+                    "base_url": "https://browser.example.com/setup-1",
+                    "timeout_seconds": 900,
+                    "expires_at": "2026-10-21T01:15:00Z",
+                    "account_id": "acct-shared"
+                }
+            }
+        }
+    ]
+}

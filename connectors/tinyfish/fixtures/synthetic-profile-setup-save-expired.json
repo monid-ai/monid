@@ -1,0 +1,24 @@
+{
+    "name": "synthetic-profile-setup-save-expired",
+    "description": "SYNTHETIC — not recorded. Saving an expired or cancelled setup session answers 409 (documented); nothing is saved.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/v1/profiles/prof_1/save",
+                "body": {
+                    "session_id": "setup-1"
+                }
+            },
+            "res": {
+                "status": 409,
+                "body": {
+                    "error": {
+                        "code": "SESSION_EXPIRED",
+                        "message": "Setup session has expired."
+                    }
+                }
+            }
+        }
+    ]
+}
