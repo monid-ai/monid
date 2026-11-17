@@ -28,6 +28,8 @@ export default defineEndpoint({
         docsUrl: "https://docs.mindcase.co/apis/airbnb/listings",
         categories: ["hotels"],
         notes: [
+            "`maxResults` does not apply to `urls`: those return one row " +
+            "per entry.",
             "`checkIn` must be sent together with `checkOut`.",
             "`checkOut` must be sent together with `checkIn`.",
         ],
@@ -36,7 +38,12 @@ export default defineEndpoint({
     request: { method: "POST", path: "/v1/data/airbnb/listings/run" },
     input: {
         schema: {
-            body: zAirbnbListingsBody,
+            body: zAirbnbListingsBody.extend({
+                maxResults: zAirbnbListingsBody.shape.maxResults.unwrap().min(1)
+                    .default(100).describe(
+                        "How many listings to return from a location search. Defaults to 100; at most 5,000. Not used with listing URLs, which return one listing per URL.",
+                    ),
+            }),
         },
     },
     usage: {
@@ -47,11 +54,13 @@ export default defineEndpoint({
         },
         estimate: ({ data }) => {
             const body = data.input.body;
-            const capped = (body.urls?.length ?? 0) +
+            const capped =
                 (body.location ?? "").split("\n").filter((line: string) =>
                     line.trim() !== ""
                 ).length;
-            const rows = capped;
+            const uncapped = body.urls?.length ?? 0;
+            const rows = uncapped +
+                (capped > 0 || uncapped === 0 ? body.maxResults : 0);
             return { counts: { RESULT: rows } };
         },
     },

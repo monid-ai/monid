@@ -17,6 +17,11 @@ export const zAirbnbListingsBody = z.object({
             'Place to search (e.g. "Paris, France" or "Lisbon"). Returns listings in that area.',
         )
         .optional(),
+    maxResults: z.number().int().min(1).max(5000)
+        .describe(
+            "How many listings to return from a location search. Defaults to 100; at most 5,000. Not used with listing URLs, which return one listing per URL.",
+        )
+        .optional(),
     priceMin: z.number().int()
         .describe("Minimum nightly price filter (location search only).")
         .optional(),
