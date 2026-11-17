@@ -1,0 +1,150 @@
+{
+    "name": "latest-usd-ok",
+    "description": "Recorded 2026-10-15, keyless GET /v1/announcements/USD/latest. data[] trimmed to two of 79 rows (inflation, unemployment); `count` is as served. Carries the free-tier freemium_delay notice.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.fxmacrodata.com/v1/announcements/USD/latest"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "currency": "USD",
+                    "source": "FXMacroData",
+                    "provenance": {
+                        "publisher": "Mixed official publishers per indicator",
+                        "storage": "FXMacroData",
+                        "served_by": "/v1/announcements/{currency}/latest",
+                        "timestamp_field": "announcement_datetime",
+                        "value_field": "val"
+                    },
+                    "as_of": "2026-10-14",
+                    "count": 79,
+                    "data": [
+                        {
+                            "indicator": "inflation",
+                            "name": "Inflation (CPI)",
+                            "source": "BLS",
+                            "source_url": "https://www.bls.gov/",
+                            "source_series_id": "BLS:CUUR0000SA0",
+                            "source_series_name": "Consumer Price Index for All Urban Consumers: All Items",
+                            "source_local_name": null,
+                            "seasonal_adjustment": "NSA",
+                            "price_basis": null,
+                            "is_proxy": false,
+                            "proxy_note": null,
+                            "provenance": {
+                                "publisher": "BLS",
+                                "publisher_url": "https://www.bls.gov/",
+                                "source_series_id": "BLS:CUUR0000SA0",
+                                "source_series_name": "Consumer Price Index for All Urban Consumers: All Items",
+                                "source_local_name": null,
+                                "seasonal_adjustment": "NSA",
+                                "price_basis": null,
+                                "storage": "FXMacroData",
+                                "served_by": "/v1/announcements/{currency}/{indicator}",
+                                "timestamp_field": "announcement_datetime",
+                                "value_field": "val",
+                                "is_proxy": false,
+                                "proxy_note": null
+                            },
+                            "unit": "%YoY",
+                            "frequency": "Monthly",
+                            "has_official_forecast": true,
+                            "latest": {
+                                "date": "2026-09-30",
+                                "val": 3.7,
+                                "announcement_datetime": 1791981000,
+                                "publication_time_status": "unverified",
+                                "publication_time_precision": "minute",
+                                "source": "BLS",
+                                "source_url": "https://www.bls.gov/news.release/archives/cpi_10142026.htm",
+                                "source_url_scope": "release"
+                            },
+                            "previous": {
+                                "date": "2026-08-31",
+                                "val": 3.4,
+                                "announcement_datetime": 1789129800,
+                                "publication_time_status": "unverified",
+                                "publication_time_precision": "minute",
+                                "source": "BLS",
+                                "source_url": "https://www.bls.gov/news.release/archives/cpi_09112026.htm",
+                                "source_url_scope": "release"
+                            },
+                            "pct_diff_prev": 8.82,
+                            "pct_change_yoy": null,
+                            "pct_change_qoq": null,
+                            "pct_change_mom": null
+                        },
+                        {
+                            "indicator": "unemployment",
+                            "name": "Unemployment Rate",
+                            "source": "BLS",
+                            "source_url": "https://www.bls.gov/",
+                            "source_series_id": "BLS:LNS14000000",
+                            "source_series_name": "Unemployment Rate",
+                            "source_local_name": null,
+                            "seasonal_adjustment": "SA",
+                            "price_basis": null,
+                            "is_proxy": false,
+                            "proxy_note": null,
+                            "provenance": {
+                                "publisher": "BLS",
+                                "publisher_url": "https://www.bls.gov/",
+                                "source_series_id": "BLS:LNS14000000",
+                                "source_series_name": "Unemployment Rate",
+                                "source_local_name": null,
+                                "seasonal_adjustment": "SA",
+                                "price_basis": null,
+                                "storage": "FXMacroData",
+                                "served_by": "/v1/announcements/{currency}/{indicator}",
+                                "timestamp_field": "announcement_datetime",
+                                "value_field": "val",
+                                "is_proxy": false,
+                                "proxy_note": null
+                            },
+                            "unit": "%",
+                            "frequency": "Monthly",
+                            "has_official_forecast": true,
+                            "latest": {
+                                "date": "2026-09-30",
+                                "val": 4.2,
+                                "announcement_datetime": 1790944200,
+                                "publication_time_status": "unverified",
+                                "publication_time_precision": "minute",
+                                "source": "BLS",
+                                "source_url": "https://www.bls.gov/",
+                                "source_url_scope": "series"
+                            },
+                            "previous": {
+                                "date": "2026-08-31",
+                                "val": 4.1,
+                                "announcement_datetime": 1788525000,
+                                "publication_time_status": "unverified",
+                                "publication_time_precision": "minute",
+                                "source": "BLS",
+                                "source_url": "https://www.bls.gov/",
+                                "source_url_scope": "series"
+                            },
+                            "pct_diff_prev": 2.44,
+                            "pct_change_yoy": null,
+                            "pct_change_qoq": null,
+                            "pct_change_mom": null
+                        }
+                    ],
+                    "freemium_delay": {
+                        "applied": true,
+                        "delay_seconds": 900,
+                        "delay_minutes": 15,
+                        "cutoff": 1792050900,
+                        "cutoff_iso": "2026-10-15T07:55:00Z",
+                        "withheld_count": 0,
+                        "message": "Free access is delayed by 15 minutes. Releases published in the last 15 minutes are withheld. An Individual or Business API key returns them in real time.",
+                        "subscribe_url": "https://fxmacrodata.com/subscribe?utm_source=api&utm_medium=referral&utm_campaign=freemium_delay"
+                    }
+                }
+            }
+        }
+    ]
+}
