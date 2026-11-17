@@ -144,12 +144,20 @@ function compact(printed: string): string {
         if (out.length > 0) {
             const merges = (IDENTISH.test(prevLast) && IDENTISH.test(first)) ||
                 (prevLast === "+" && first === "+") ||
-                (prevLast === "-" && first === "-");
+                (prevLast === "-" && first === "-") ||
+                (prevLast === "/" && (first === "/" || first === "*"));
             if (merges) out += " ";
         }
         out += text;
         prevLast = text[text.length - 1];
-        prevKind = token;
+        // Keywords after property access are identifier names: `x.type`
+        // ends an expression just like `x.value`, including optional access.
+        prevKind = (prevKind === ts.SyntaxKind.DotToken ||
+                prevKind === ts.SyntaxKind.QuestionDotToken) &&
+                token >= ts.SyntaxKind.FirstKeyword &&
+                token <= ts.SyntaxKind.LastKeyword
+            ? ts.SyntaxKind.Identifier
+            : token;
     }
     return out;
 }
