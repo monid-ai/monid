@@ -1,0 +1,73 @@
+{
+    "name": "happy",
+    "description": "recorded chain for citable#check on 2026-11-11 (example.com), trimmed to four checks and three details each",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://citable.flisk.si/api/check?url=example.com"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "url": "https://example.com/",
+                    "finalUrl": "https://example.com/",
+                    "host": "example.com",
+                    "checkedAt": "2026-11-11T22:57:29.773Z",
+                    "score": 50,
+                    "grade": "D",
+                    "checks": [
+                        {
+                            "id": "ai-crawlers",
+                            "title": "AI answer engines can crawl the page",
+                            "status": "pass",
+                            "points": 25,
+                            "max": 25,
+                            "summary": "No robots.txt (404), so every crawler may fetch this page.",
+                            "details": [
+                                "allowed: OAI-SearchBot (ChatGPT search)",
+                                "allowed: ChatGPT-User (ChatGPT, when a user asks)",
+                                "allowed: Claude-SearchBot (Claude search)"
+                            ]
+                        },
+                        {
+                            "id": "training-crawlers",
+                            "title": "Model training crawlers",
+                            "status": "info",
+                            "points": 0,
+                            "max": 0,
+                            "summary": "Training crawlers may fetch this page. That is a choice, not a score: it does not change whether answers cite you.",
+                            "details": [
+                                "allowed: GPTBot (OpenAI model training)",
+                                "allowed: ClaudeBot (Anthropic model training)",
+                                "allowed: Google-Extended (Gemini model training)"
+                            ]
+                        },
+                        {
+                            "id": "indexable",
+                            "title": "The page can be indexed and quoted",
+                            "status": "pass",
+                            "points": 15,
+                            "max": 15,
+                            "summary": "Status 200 over HTTPS, with no noindex or nosnippet.",
+                            "details": [
+                                "status 200",
+                                "meta robots: none",
+                                "X-Robots-Tag: none"
+                            ]
+                        },
+                        {
+                            "id": "content",
+                            "title": "Readable without JavaScript",
+                            "status": "fail",
+                            "points": 0,
+                            "max": 15,
+                            "summary": "The HTML the server sends has 25 words of readable text. The text probably appears only after JavaScript runs, and crawlers that do not run it see an empty page.",
+                            "fix": "Most AI crawlers (GPTBot, ClaudeBot, PerplexityBot) do not run JavaScript. Render the main content on the server: server-side rendering or static generation (Next.js, Astro, Nuxt, SvelteKit all do it), or prerender the page."
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
