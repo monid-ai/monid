@@ -290,13 +290,18 @@ export function replayFetch(
             // a recorded 3xx replays WITH its allowlisted headers — the
             // engine's transport is `redirect: "manual"`, so a Response
             // carrying a `location` is exactly what the live exchange was
-            new Response(JSON.stringify(call.res.body), {
-                status: call.res.status,
-                headers: {
-                    "content-type": "application/json",
-                    ...call.res.headers,
+            new Response(
+                [204, 205, 304].includes(call.res.status)
+                    ? null
+                    : JSON.stringify(call.res.body),
+                {
+                    status: call.res.status,
+                    headers: {
+                        "content-type": "application/json",
+                        ...call.res.headers,
+                    },
                 },
-            }),
+            ),
         );
     };
 }
@@ -339,14 +344,17 @@ export function recordingFetch(
                 body: parseMaybeJson(text) ?? text,
             },
         });
-        return new Response(text, {
-            status: response.status,
-            headers: {
-                "content-type": response.headers.get("content-type") ??
-                    "application/json",
-                ...headers,
+        return new Response(
+            [204, 205, 304].includes(response.status) ? null : text,
+            {
+                status: response.status,
+                headers: {
+                    "content-type": response.headers.get("content-type") ??
+                        "application/json",
+                    ...headers,
+                },
             },
-        });
+        );
     };
 }
 
