@@ -83,6 +83,12 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "YouTube data: videos, transcripts, comments, and channels.",
     },
     {
+        id: "podcasts",
+        displayName: "Podcasts",
+        description:
+            "Podcast data: episodes, transcripts, summaries, and shows.",
+    },
+    {
         id: "maps",
         displayName: "Maps & Local",
         description:

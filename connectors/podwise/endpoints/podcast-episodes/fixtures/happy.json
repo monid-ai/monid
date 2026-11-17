@@ -1,0 +1,52 @@
+{
+    "name": "happy",
+    "description": "recorded live 2026-11-17 against the Podwise Open API v1 (podwise#podcasts/episodes, scenario 'happy'); response bodies trimmed and scrubbed by the recorder, headers never captured",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://app.podwise.ai/api/open/v1/podcasts/1396/episodes?date=2026-11-17&days=60"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "result": [
+                        {
+                            "episodeId": "3f640308404a02d8a7490f4a344a64f59de62e691d6d1a251a8839521d4275f5",
+                            "seq": 9480205,
+                            "title": "Paul Christiano – We could be 12 months away from AIs that can overthrow the government",
+                            "podcastName": "Dwarkesh Podcast",
+                            "cover": "https://apple.dwarkesh-podcast.workers.dev/art/v1/show.jpg",
+                            "epCover": "https://apple.dwarkesh-podcast.workers.dev/art/v1/c3Vic3RhY2s6cG9zdDoyMjUxOTYxMjM.jpg",
+                            "description": "<p><a target=\"_blank\" href=\"https://paulfchristiano.com/\">Paul Christiano</a> is head of the Alignment Research Center. Previously, he was head of AI safety at the US AI Safety Institute. Before that, he led alignment at OpenAI, where he invented RLHF. He’s recently joined OpenAI’s board (though here he is speaking as a private citizen).</p><p>Paul thinks that on the current trajectory (absent any slowing down), there is a 1 in 3 chance that we could have superintelligence powerful enough to ove",
+                            "publishTime": 1794851188,
+                            "link": "https://api.substack.com/feed/podcast/225196123/e31fdeb36d2d8a60f107c733c706a545.mp3",
+                            "linkType": "mp3",
+                            "duration": 5925,
+                            "transcribed": true,
+                            "language": "English",
+                            "isRead": false
+                        },
+                        {
+                            "episodeId": "a1cf999f317ccbbe3212c431d174a0bb80bdf205bd46375d354656133a6c24c8",
+                            "seq": 9466192,
+                            "title": "The avalanche that hit math is coming for AI development",
+                            "podcastName": "Dwarkesh Podcast",
+                            "cover": "https://apple.dwarkesh-podcast.workers.dev/art/v1/show.jpg",
+                            "epCover": "https://apple.dwarkesh-podcast.workers.dev/art/v1/c3Vic3RhY2s6cG9zdDoyMjQ2MjQ3NjU.jpg",
+                            "description": "<p>If you asked me earlier this year how far away we are from superintelligence, I’d probably have said at least the better part of a decade.</p><p>But over the last three months, from debating people on and off the podcast, I’ve updated my views a ton.</p><p>Let me walk you through how my thinking has changed.</p><p>If you want to read the written version (with footnotes and links) you can check it out here: <a target=\"_blank\" href=\"https://www.dwarkesh.com/p/rsi\">https://www.dwarkesh.com/p/rsi",
+                            "publishTime": 1794595071,
+                            "link": "https://api.substack.com/feed/podcast/224624765/6681869400340558d9a7bc295e9a3127.mp3",
+                            "linkType": "mp3",
+                            "duration": 2666,
+                            "transcribed": true,
+                            "language": "English",
+                            "isRead": false
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

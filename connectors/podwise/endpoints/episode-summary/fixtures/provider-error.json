@@ -1,0 +1,23 @@
+{
+    "name": "provider-error",
+    "description": "recorded live 2026-11-17 against the Podwise Open API v1 (podwise#episodes/summary, scenario 'provider-error'); response bodies trimmed and scrubbed by the recorder, headers never captured",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://app.podwise.ai/api/open/v1/episodes/9354876/summary"
+            },
+            "res": {
+                "status": 404,
+                "headers": {
+                    "retry-after": "60"
+                },
+                "body": {
+                    "success": false,
+                    "error": "not_transcribed",
+                    "message": "Episode has not been transcribed yet"
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+{
+    "name": "provider-error",
+    "description": "recorded live 2026-11-17 against the Podwise Open API v1 (podwise#podcasts/episodes, scenario 'provider-error'); response bodies trimmed and scrubbed by the recorder, headers never captured",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://app.podwise.ai/api/open/v1/podcasts/999999999/episodes"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "success": false,
+                    "error": "not_found",
+                    "message": "Podcast not found"
+                }
+            }
+        }
+    ]
+}
