@@ -1,0 +1,35 @@
+{
+    "name": "insufficient-credits",
+    "description": "Recorded live 2026-11-03, same key as the fixtures above, called 5th after balance-bound.json drained the key to 0 credits. UNLIKE search_funds's insufficient-credits fixture (an ad-hoc JSON-RPC body: {error: {data: {error_reason: \"insufficient_credits\", nothing_charged: true}}}), this tool's real zero-balance response is a live MPP (micropayment protocol, https://mpp.dev) payment-required challenge: HTTP 402, Content-Type application/problem+json, a WWW-Authenticate: Payment ... header (omitted from this fixture -- the testing harness's replay mode only exercises status + body, matching every other fixture here), and an RFC 9457 problem-details body. Both shapes are a real non-2xx, so provider.ts's lifecycle.start relays either one untouched without caring about the difference; this fixture exists to lock in what search_lps callers actually see, since it differs from search_funds's.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "jsonrpc": "2.0",
+                    "method": "tools/call",
+                    "params": {
+                        "name": "search_lps",
+                        "arguments": {
+                            "country": "France",
+                            "limit": 5
+                        }
+                    },
+                    "id": 1
+                }
+            },
+            "res": {
+                "status": 402,
+                "body": {
+                    "type": "https://paymentauth.org/problems/payment-required",
+                    "title": "Payment Required",
+                    "status": 402,
+                    "detail": "Payment is required (Fund Momentum search_lps).",
+                    "hint": "Use a supported wallet to pay for this resource using one of the supported payment methods returned in the WWW-Authenticate header. See https://mpp.dev/tools/wallet.md",
+                    "challengeId": "vObxTSbJz2TfFlcfUb2UAciV30tFXPO1oLvs_-xtKk4"
+                }
+            }
+        }
+    ]
+}

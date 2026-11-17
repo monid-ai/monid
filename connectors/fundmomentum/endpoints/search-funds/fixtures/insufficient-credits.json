@@ -1,0 +1,36 @@
+{
+    "name": "insufficient-credits",
+    "description": "RE-VERIFIED LIVE 2026-11-04 (replaces the 2026-10-28 recording, which is now stale): a real agent key drained to a 0 balance, asked for 5 more funds. The vendor's insufficient-credits response shape changed between 2026-10-28 and today -- it used to be an ad-hoc JSON-RPC body ({error: {data: {error_reason: 'insufficient_credits', nothing_charged: true}}}); it is now a real MPP (micropayment protocol, https://mpp.dev) payment-required challenge: HTTP 402, Content-Type application/problem+json, a WWW-Authenticate: Payment ... header (omitted from this fixture -- the testing harness's replay mode only exercises status + body, same as every other fixture here), and an RFC 9457 problem-details body. Found while building search-lps/, which returns the identical shape for its own insufficient-credits case -- this appears to be a platform-wide change, not tool-specific. Still a real non-2xx either way, so provider.ts's lifecycle.start relays it untouched without caring about the difference; only this fixture and test needed updating, no code change.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "jsonrpc": "2.0",
+                    "method": "tools/call",
+                    "params": {
+                        "name": "search_funds",
+                        "arguments": {
+                            "stage": "seed",
+                            "industry": "fintech",
+                            "limit": 5
+                        }
+                    },
+                    "id": 1
+                }
+            },
+            "res": {
+                "status": 402,
+                "body": {
+                    "type": "https://paymentauth.org/problems/payment-required",
+                    "title": "Payment Required",
+                    "status": 402,
+                    "detail": "Payment is required (Fund Momentum search_funds).",
+                    "hint": "Use a supported wallet to pay for this resource using one of the supported payment methods returned in the WWW-Authenticate header. See https://mpp.dev/tools/wallet.md",
+                    "challengeId": "EttuRRBSJwU7-vYPAqhMM233pY6bNvUWuG9aAjACYX0"
+                }
+            }
+        }
+    ]
+}

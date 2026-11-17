@@ -1,0 +1,47 @@
+{
+    "name": "empty-match",
+    "description": "Recorded live 2026-11-03, same agent key as happy.json (called third, after happy.json and an immediate repeat of it used to test for an idempotency cache -- see endpoint.ts's top comment: no such cache was found, the repeat was billed again, 22 -> 19 credits remaining). This call is a filter combination (Germany + Sovereign wealth fund) with no matches. Confirms this tool has no 1-credit floor on a zero match, same as search_funds: credits_charged 0, credits_remaining unchanged (19 -> 19). No truncated/truncated_reason/note keys at all when there is nothing to page through -- they are omitted here, not null.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "jsonrpc": "2.0",
+                    "method": "tools/call",
+                    "params": {
+                        "name": "search_lps",
+                        "arguments": {
+                            "country": "Germany",
+                            "lp_type": "Sovereign wealth fund"
+                        }
+                    },
+                    "id": 1
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "{\"results\": [], \"returned\": 0, \"matched\": 0, \"limit\": 10, \"max_limit\": 25, \"filters_applied\": {\"country\": \"Germany\", \"lp_type\": \"Sovereign wealth fund\"}, \"website_note\": \"website is null where no website is on record. It is a gap in the data, not a missing field.\"}"
+                            }
+                        ],
+                        "_meta": {
+                            "auth": "api_key",
+                            "billing": "credits",
+                            "cost": "€0.00",
+                            "credits_charged": 0,
+                            "credits_remaining": 19,
+                            "entitlement": "per_row"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

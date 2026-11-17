@@ -1,0 +1,46 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-10-28 against a freshly self-registered agent key (25 free credits, `POST /_api/agent/register`), re-verifying this fixture after the vendor's v1.9.0 release. Same query as the 2026-10-17 recording this replaces (stage=seed, country=Germany, limit=3); the match count moved 45→46 as the dataset grew and the response now carries `truncated_reason` and the new `billing` receipt object. Hand-minimized to stay inside the fixture-size budget: the full result set from the real call is reproduced verbatim (field names and values as returned), with no fund added, removed, or altered.",
+    "calls": [{
+        "req": {
+            "method": "POST",
+            "url": "{{request.url}}",
+            "body": {
+                "jsonrpc": "2.0",
+                "method": "tools/call",
+                "params": {
+                    "name": "search_funds",
+                    "arguments": {
+                        "stage": "seed",
+                        "country": "Germany",
+                        "limit": 3
+                    }
+                },
+                "id": 1
+            }
+        },
+        "res": {
+            "status": 200,
+            "body": {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "result": {
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "{\"results\":[{\"name\":\"AENU Fund I\",\"slug\":\"aenu-fund-i\",\"country\":\"Germany\",\"fundingStage\":\"pre_seed\",\"fundingStages\":[\"pre_seed\",\"seed\",\"series_a\"],\"fundSize\":\"€170M\",\"website\":\"https://www.aenu.com\",\"lastCloseDate\":null,\"lastCloseType\":null,\"industries\":[\"energy_tech\",\"ai_ml\",\"climate_sustainability\"],\"url\":\"https://fundmomentum.vc/funds/aenu-fund-i\"},{\"name\":\"Alstin III\",\"slug\":\"alstin-iii\",\"country\":\"Germany\",\"fundingStage\":\"seed\",\"fundingStages\":[\"seed\",\"series_a\"],\"fundSize\":\"€175M\",\"website\":\"https://alstin.capital/\",\"lastCloseDate\":null,\"lastCloseType\":null,\"industries\":[\"fintech\",\"insur_tech\",\"cybersecurity\",\"enterprise_software\",\"climate_sustainability\"],\"url\":\"https://fundmomentum.vc/funds/alstin-iii\"},{\"name\":\"Nordwind Ventures II\",\"slug\":\"nordwind-ventures-ii\",\"country\":\"Germany\",\"fundingStage\":\"seed\",\"fundSize\":\"€45M\",\"website\":null,\"industries\":[\"saas\",\"enterprise_software\"],\"url\":\"https://fundmomentum.vc/funds/nordwind-ventures-ii\"}],\"returned\":3,\"matched\":46,\"limit\":3,\"max_limit\":10,\"filters_applied\":{\"stage\":\"seed\",\"country\":\"Germany\",\"industry\":null,\"closed_since\":null},\"truncated\":true,\"truncated_reason\":\"limit\",\"note\":\"46 funds match but one call without a paid account returns at most 10. Narrow by country, stage or industry to see the rest. Agents with paid credits get matches at 1 credit (EUR 0.01) per fund returned, up to 150 funds per key per day; the Pro plan (EUR 29/mo) pages through the full list.\",\"billing\":{\"credits_charged\":3,\"balance_after\":22,\"next_page_cost\":0,\"next_offset\":null,\"payment_mode\":\"credits\",\"credits_unreturned\":0}}"
+                        }
+                    ],
+                    "_meta": {
+                        "auth": "api_key",
+                        "billing": "credits",
+                        "cost": "€0.03",
+                        "credits_charged": 3,
+                        "credits_remaining": 22,
+                        "buy_more": "https://fundmomentum.vc/for-agents"
+                    }
+                }
+            }
+        }
+    }]
+}

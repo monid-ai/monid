@@ -1,0 +1,48 @@
+{
+    "name": "idempotent-replay",
+    "description": "Recorded 2026-10-28. Found live while re-verifying v1.9.0, unrelated to that release: an EXACT repeat of a prior call's arguments (here, a second `stage=seed, limit=10` after an identical first call already drew 10 credits) is served from an idempotency cache for free instead of re-run and re-billed — `_meta.idempotent_replay: true`, `_meta.replay_note`, `_meta.originally_charged_eur`, and the ORIGINAL call's now-stale `credits_charged`/`credits_remaining`/`billing` numbers echoed back verbatim (this session's real balance had moved on since then). provider.ts's lifecycle.start treats this flag as 0 usage for THIS call regardless of the stale echoed numbers, matching the vendor's own 'you have not been charged again' guarantee. Verbatim, no trimming needed.",
+    "calls": [{
+        "req": {
+            "method": "POST",
+            "url": "{{request.url}}",
+            "body": {
+                "jsonrpc": "2.0",
+                "method": "tools/call",
+                "params": {
+                    "name": "search_funds",
+                    "arguments": {
+                        "stage": "seed",
+                        "limit": 10
+                    }
+                },
+                "id": 1
+            }
+        },
+        "res": {
+            "status": 200,
+            "body": {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "result": {
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "{\"results\":[{\"name\":\"11 Tribes Ventures Fund II\",\"slug\":\"11-tribes-ventures-fund-ii\",\"country\":\"United States\",\"fundingStage\":\"seed\",\"fundingStages\":[\"seed\",\"series_a\"],\"fundSize\":\"$46M\",\"website\":\"https://11tribes.vc\",\"lastCloseDate\":null,\"lastCloseType\":null,\"industries\":[\"fintech\",\"saas\",\"digital_health\",\"food_tech\",\"prop_tech\",\"consumer_commerce\"],\"url\":\"https://fundmomentum.vc/funds/11-tribes-ventures-fund-ii\"},{\"name\":\"2048 Ventures Fund III\",\"slug\":\"2048-ventures\",\"country\":\"United States\",\"fundingStage\":\"pre_seed\",\"fundingStages\":[\"pre_seed\",\"seed\"],\"fundSize\":\"$82M\",\"website\":\"https://www.2048.vc\",\"lastCloseDate\":\"2026-01-29\",\"lastCloseType\":\"closed_unspecified\",\"industries\":[\"ai_ml\",\"deep_tech\",\"biotech\"],\"url\":\"https://fundmomentum.vc/funds/2048-ventures\"}],\"returned\":10,\"matched\":648,\"limit\":10,\"max_limit\":10,\"filters_applied\":{\"stage\":\"seed\",\"country\":null,\"industry\":null,\"closed_since\":null},\"truncated\":true,\"truncated_reason\":\"limit\",\"note\":\"648 funds match but one call without a paid account returns at most 10. Narrow by country, stage or industry to see the rest. Agents with paid credits get matches at 1 credit (EUR 0.01) per fund returned, up to 150 funds per key per day; the Pro plan (EUR 29/mo) pages through the full list.\",\"billing\":{\"credits_charged\":10,\"balance_after\":10,\"next_page_cost\":0,\"next_offset\":null,\"payment_mode\":\"credits\",\"credits_unreturned\":0}}"
+                        }
+                    ],
+                    "_meta": {
+                        "auth": "api_key",
+                        "billing": "credits",
+                        "cost": "€0.10",
+                        "credits_charged": 10,
+                        "credits_remaining": 10,
+                        "buy_more": "https://fundmomentum.vc/for-agents",
+                        "idempotent_replay": true,
+                        "replay_note": "This exact call was already paid for and served. The stored result is returned free; you have not been charged again.",
+                        "originally_charged_eur": "0.1000"
+                    }
+                }
+            }
+        }
+    }]
+}

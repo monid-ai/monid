@@ -1,0 +1,42 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-10-25 against the live server via a real account (Pro tier, monthly window) — verbatim. An agent-credits key gets the same shape with `tier: \"agent\"`, `window: \"daily\"`, `calls_limit`/`calls_remaining: null`, and `credits_remaining` populated instead.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "jsonrpc": "2.0",
+                    "method": "tools/call",
+                    "params": {
+                        "name": "get_usage",
+                        "arguments": {}
+                    },
+                    "id": 1
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "{\"tier\":\"pro\",\"window\":\"monthly\",\"calls_used\":103,\"calls_limit\":10000,\"calls_remaining\":9897,\"credits_remaining\":null,\"resets_at\":\"2026-10-27T14:25:22.160Z\",\"pace_limit_per_minute\":60,\"counts_against_quota\":false}"
+                            }
+                        ],
+                        "_meta": {
+                            "auth": "api_key",
+                            "billing": "free",
+                            "metered": false,
+                            "note": "get_usage is never billed to credits and never counted against any quota."
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

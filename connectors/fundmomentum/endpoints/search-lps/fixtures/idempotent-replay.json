@@ -1,0 +1,51 @@
+{
+    "name": "idempotent-replay",
+    "description": "Recorded live 2026-11-04 against a freshly self-registered agent key: the identical call (country=Germany, limit=3) fired twice in immediate succession. The vendor ADDED idempotent-replay caching for search_lps on 2026-11-04, bringing it to parity with search_funds (it did not have this when search-lps/ was first built earlier the same day -- an identical repeat billed twice, live-verified; superseded by this recording after the vendor's fix went live). The second call's _meta carries idempotent_replay: true, replay_note, and originally_charged_eur, and the real balance was NOT touched a second time (credits_remaining stayed at 22 across both calls).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "jsonrpc": "2.0",
+                    "method": "tools/call",
+                    "params": {
+                        "name": "search_lps",
+                        "arguments": {
+                            "country": "Germany",
+                            "limit": 3
+                        }
+                    },
+                    "id": 1
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "{\"results\": [{\"name\": \"KfW Capital\", \"slug\": \"kfw-capital\", \"lp_type\": \"Public / State institution\", \"hq_country\": \"Germany\", \"hq_city\": \"Frankfurt\", \"geo_focus\": \"Germany / Europe\", \"website\": \"https://www.kfw-capital.de\", \"backs_emerging_managers\": true, \"emerging_manager_funds\": 1, \"verified\": false, \"url\": \"https://fundmomentum.vc/lps/kfw-capital\", \"michael_network\": {\"has_warm_path\": true, \"teaser\": \"A warm path exists for this LP; the matched contact's name is a Pro-tier field.\", \"upgrade_url\": \"https://fundmomentum.vc/pricing\"}}, {\"name\": \"Aurum Impact\", \"slug\": \"aurum-impact\", \"lp_type\": \"Family office / Holding\", \"hq_country\": \"Germany\", \"hq_city\": \"Munich\", \"geo_focus\": \"Europe\", \"website\": \"https://www.aurum-impact.com\", \"backs_emerging_managers\": false, \"emerging_manager_funds\": 0, \"verified\": false, \"url\": \"https://fundmomentum.vc/lps/aurum-impact\", \"michael_network\": {\"has_warm_path\": false}}, {\"name\": \"Commerzbank AG\", \"slug\": \"commerzbank-ag\", \"lp_type\": \"Bank\", \"hq_country\": \"Germany\", \"hq_city\": null, \"geo_focus\": \"Europe, fintech and insurtech\", \"website\": \"https://www.commerzbank.de\", \"backs_emerging_managers\": true, \"emerging_manager_funds\": 2, \"verified\": true, \"url\": \"https://fundmomentum.vc/lps/commerzbank-ag\", \"michael_network\": {\"has_warm_path\": true, \"teaser\": \"A warm path exists for this LP; the matched contact's name is a Pro-tier field.\", \"upgrade_url\": \"https://fundmomentum.vc/pricing\"}}], \"returned\": 3, \"matched\": 36, \"limit\": 3, \"max_limit\": 25, \"filters_applied\": {\"country\": \"Germany\", \"lp_type\": null}, \"truncated\": true, \"truncated_reason\": \"limit\", \"note\": \"36 LPs match but one call returns at most 25. Narrow by country or lp_type to see the rest.\", \"website_note\": \"website is null where no website is on record. It is a gap in the data, not a missing field.\"}"
+                            }
+                        ],
+                        "_meta": {
+                            "auth": "api_key",
+                            "billing": "credits",
+                            "cost": "€0.03",
+                            "credits_charged": 3,
+                            "credits_remaining": 22,
+                            "buy_more": "https://fundmomentum.vc/for-agents",
+                            "entitlement": "per_row",
+                            "idempotent_replay": true,
+                            "replay_note": "This exact call was already paid for and served. The stored result is returned free; you have not been charged again.",
+                            "originally_charged_eur": "0.0300"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}
