@@ -995,7 +995,17 @@ export class LoadedEndpoint implements RunnableEndpoint {
                     }
                     : {}),
             });
-            if (seed !== null) effects.provisions = [seed];
+            if (seed !== null) {
+                const binding = this.doc.resources.provisions![0];
+                if (seed.resource !== binding.id) {
+                    throw new EngineError(
+                        EngineErrorCode.PROVISION_CONSTRUCT,
+                        `${this.doc.id}: seed resource "${seed.resource}" ` +
+                            `does not match provision binding "${binding.id}"`,
+                    );
+                }
+                effects.provisions = [seed];
+            }
         }
         const bucketOf = {
             uses: "reconciles",
