@@ -1,0 +1,47 @@
+{
+    "name": "synthetic-contents-partial",
+    "description": "Synthetic HTTP 206 partial Contents response: one successful extraction and one failed URL; only the success is billed.",
+    "calls": [{
+        "req": {
+            "method": "POST",
+            "url": "{{request.url}}",
+            "body": {
+                "urls": [
+                    "https://example.com",
+                    "https://example.org/unavailable"
+                ]
+            }
+        },
+        "res": {
+            "status": 206,
+            "body": {
+                "success": true,
+                "error": "Some URLs failed processing",
+                "tx_id": "tx_synthetic_partial",
+                "urls_requested": 2,
+                "urls_processed": 1,
+                "urls_failed": 1,
+                "results": [
+                    {
+                        "url": "https://example.com",
+                        "status": "success",
+                        "title": "Example",
+                        "content": "# Example",
+                        "source": "web",
+                        "price": 0.001,
+                        "length": 9,
+                        "data_type": "unstructured",
+                        "source_type": "website"
+                    },
+                    {
+                        "url": "https://example.org/unavailable",
+                        "status": "failed",
+                        "error": "Could not extract content from this URL."
+                    }
+                ],
+                "total_cost_dollars": 0.001,
+                "total_characters": 9
+            }
+        }
+    }]
+}
