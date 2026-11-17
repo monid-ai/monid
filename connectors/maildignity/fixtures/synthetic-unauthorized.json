@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-unauthorized",
+    "description": "MailDignity /check rejected on invalid or missing API key.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "email_text": "Test email draft",
+                    "mode": "full"
+                }
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": "Invalid or missing API key"
+                }
+            }
+        }
+    ]
+}
