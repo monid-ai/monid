@@ -1,0 +1,115 @@
+{
+    "name": "found",
+    "description": "recorded 2026-10-24 from the live API (POST /funding-stages, domain clay.com): a found answer, $0.01. Trimmed: rounds cut to the 3 newest of 9.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.provaapi.com/api/v1/funding-stages",
+                "body": {
+                    "domain": "clay.com"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "found",
+                    "company": {
+                        "name": "Clay",
+                        "domain": "clay.run",
+                        "public": null
+                    },
+                    "latest_round": {
+                        "stage": "series_d",
+                        "amount": 115000000,
+                        "currency": "USD",
+                        "date": "2026-09-09",
+                        "investors": [
+                            "Perennial",
+                            "Evolution Equity Partners",
+                            "BoxGroup",
+                            "Wellington Management",
+                            "boldstart ventures",
+                            "Bloomberg Beta",
+                            "DST Global",
+                            "StepStone Group",
+                            "Meritech Capital Partners",
+                            "CapitalG",
+                            "Sequoia Arc",
+                            "Andreessen Horowitz"
+                        ],
+                        "lead_investors": [
+                            "Wellington Management"
+                        ],
+                        "source": "confirmed"
+                    },
+                    "latest_stage": "series_d",
+                    "rounds": [
+                        {
+                            "stage": "series_d",
+                            "amount": 115000000,
+                            "currency": "USD",
+                            "date": "2026-09-09",
+                            "investors": [
+                                "Perennial",
+                                "Evolution Equity Partners",
+                                "BoxGroup",
+                                "Wellington Management",
+                                "boldstart ventures",
+                                "Bloomberg Beta",
+                                "DST Global",
+                                "StepStone Group",
+                                "Meritech Capital Partners",
+                                "CapitalG",
+                                "Sequoia Arc",
+                                "Andreessen Horowitz"
+                            ],
+                            "lead_investors": [
+                                "Wellington Management"
+                            ],
+                            "source": "confirmed"
+                        },
+                        {
+                            "stage": null,
+                            "amount": 55000000,
+                            "currency": "USD",
+                            "date": "2026-01-28",
+                            "investors": [
+                                "DST Global",
+                                "avra",
+                                "Claire Hughes Johnson",
+                                "Conviction",
+                                "Operator Collective",
+                                "Lenny Rachitsky",
+                                "Shishir Mehrotra"
+                            ],
+                            "lead_investors": [
+                                "DST Global"
+                            ],
+                            "source": "database"
+                        },
+                        {
+                            "stage": "series_c",
+                            "amount": 100000000,
+                            "currency": "USD",
+                            "date": "2025-06-13",
+                            "investors": [
+                                "First Round Capital",
+                                "CapitalG",
+                                "Sapphire Ventures",
+                                "BoxGroup",
+                                "boldstart ventures",
+                                "Sequoia Arc",
+                                "Meritech Capital Partners"
+                            ],
+                            "lead_investors": [
+                                "CapitalG"
+                            ],
+                            "source": "database"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
