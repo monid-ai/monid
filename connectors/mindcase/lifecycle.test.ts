@@ -41,7 +41,7 @@ const run = async (id: string, fixture: string, body?: RunInput["body"]) =>
 
 Deno.test("mindcase: every endpoint has a test input", async () => {
     const ids = await endpointIds();
-    assertEquals(ids.length, 101);
+    assertEquals(ids.length, 242);
     for (const id of ids) {
         assert(INPUTS[id.slice("mindcase#".length)], `no test input for ${id}`);
     }
