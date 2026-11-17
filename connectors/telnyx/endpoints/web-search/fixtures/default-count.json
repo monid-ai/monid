@@ -1,0 +1,46 @@
+{
+    "name": "default-count",
+    "description": "RECORDED 2026-10-22T10:46:43.483Z through native Monid directTransport and protected proxy. Search only; response trimmed with repository trimCalls/scrubCalls; request unchanged.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.telnyx.com/v2/web_search",
+                "body": {
+                    "query": "NASA solar system planets overview"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "results": {
+                            "web": [
+                                {
+                                    "url": "https://science.nasa.gov/solar-system/planets/",
+                                    "title": "About the Planets",
+                                    "description": "Our solar system has eight planets, and five dwarf planets - all located in an outer spiral arm of the Milky Way galaxy called the Orion Arm.",
+                                    "snippets": [
+                                        "Our solar system has eight planets, and five dwarf planets - all located in an outer spiral arm of the Milky Way galaxy called the Orion Arm.",
+                                        "Dwarf planets include longtime favorite Pluto, along with lesser known worlds - Ceres, Makemake, Haumea, and Eris. Ceres is the only dwarf planet in the inner solar system. It's in the main asteroid belt between Mars and Jupiter. It was the first dwarf planet visited by a spacecraft."
+                                    ],
+                                    "thumbnail_url": "https://science.nasa.gov/wp-content/uploads/2023/06/planets3x3-pluto-colormercury-axis-tilt-nolabels-1080p.00001-print.jpg"
+                                },
+                                {
+                                    "url": "https://science.nasa.gov/solar-system/",
+                                    "title": "Solar System Exploration",
+                                    "description": "Our solar system includes the Sun, eight planets, five officially named dwarf planets, hundreds of moons, and thousands of asteroids and comets.",
+                                    "snippets": [
+                                        "Our solar system includes the Sun, eight planets, five officially named dwarf planets, hundreds of moons, and thousands of asteroids and comets.",
+                                        "The solar system has one star, eight planets, five dwarf planets, at least 290 moons, more than 1.3 million asteroids, and about 3,900 comets."
+                                    ],
+                                    "thumbnail_url": "https://assets.science.nasa.gov/content/dam/science/cds/general/images/2023/06/s/solar-system-banner-1920x640-1.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}
