@@ -1,0 +1,78 @@
+{
+    "name": "synthetic-boreal-h3-succeeded",
+    "description": "SYNTHETIC — the canonical boreal-h3 happy run, body shapes from the public API's job row (POST /api/boreal/ answers 201 with the row; GET /api/boreal/<id>/ echoes it): submit parks a pending job, one running tick (the charge lands when the render starts: credits_used 1 = 5 s × 0.13 rounded up to the half credit), then done with the CDN mp4. Settles Creatify's own credits_used; duration is the evidence basis. Synthetic until a recording with a live key lands.",
+    "calls": [
+        {
+            "req": { "method": "POST", "url": "{{request.url}}" },
+            "res": {
+                "status": 201,
+                "body": {
+                    "id": "JOB1",
+                    "created_at": "2026-10-22T10:00:00.000000Z",
+                    "updated_at": "2026-10-22T10:00:00.000000Z",
+                    "model": "boreal-h3",
+                    "prompt": "a kite over the sea",
+                    "image_url": null,
+                    "end_image_url": null,
+                    "audio_url": null,
+                    "reference_image_urls": [],
+                    "reference_video_urls": [],
+                    "reference_audio_urls": [],
+                    "resolution": "768p",
+                    "aspect_ratio": "auto",
+                    "duration": 5.0,
+                    "negative_prompt": null,
+                    "prompt_enhancement": "auto",
+                    "ttl_days": null,
+                    "expires_at": null,
+                    "status": "pending",
+                    "failed_reason": null,
+                    "video_output": null,
+                    "credits_used": 0,
+                    "progress": 0.0
+                }
+            }
+        },
+        {
+            "req": { "method": "GET", "url": "{{request.url}}JOB1/" },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "JOB1",
+                    "model": "boreal-h3",
+                    "resolution": "768p",
+                    "duration": 5.0,
+                    "status": "running",
+                    "failed_reason": null,
+                    "video_output": null,
+                    "credits_used": 1,
+                    "progress": 0.4
+                }
+            }
+        },
+        {
+            "req": { "method": "GET", "url": "{{request.url}}JOB1/" },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "JOB1",
+                    "created_at": "2026-10-22T10:00:00.000000Z",
+                    "updated_at": "2026-10-22T10:02:31.000000Z",
+                    "model": "boreal-h3",
+                    "prompt": "a kite over the sea",
+                    "resolution": "768p",
+                    "aspect_ratio": "auto",
+                    "duration": 5.0,
+                    "prompt_enhancement": "auto",
+                    "ttl_days": null,
+                    "expires_at": null,
+                    "status": "done",
+                    "failed_reason": null,
+                    "video_output": "https://cdn.creatify.ai/boreal_api/JOB1.mp4",
+                    "credits_used": 1,
+                    "progress": 1.0
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,35 @@
+{
+    "name": "synthetic-job-no-output",
+    "description": "SYNTHETIC — a job reports `done` with no video_output although the caller gave no output_upload_url: a contract violation, settled as a synthesized 502 over a 200 poll with zero usage.",
+    "calls": [
+        {
+            "req": { "method": "POST", "url": "{{request.url}}" },
+            "res": {
+                "status": 201,
+                "body": {
+                    "id": "JOB1",
+                    "status": "pending",
+                    "credits_used": 0,
+                    "video_output": null,
+                    "failed_reason": null,
+                    "progress": 0.0
+                }
+            }
+        },
+        {
+            "req": { "method": "GET", "url": "{{request.url}}JOB1/" },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "JOB1",
+                    "status": "done",
+                    "failed_reason": null,
+                    "video_output": null,
+                    "credits_used": 1,
+                    "duration": 5.0,
+                    "progress": 1.0
+                }
+            }
+        }
+    ]
+}

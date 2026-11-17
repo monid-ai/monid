@@ -1,0 +1,13 @@
+{
+    "name": "synthetic-start-rejected",
+    "description": "SYNTHETIC — the API refuses the request synchronously (a DRF validation 400 in the API's own field-keyed shape). No job exists, nothing was charged: the run completes as data with zero usage and never polls.",
+    "calls": [
+        {
+            "req": { "method": "POST", "url": "{{request.url}}" },
+            "res": {
+                "status": 400,
+                "body": { "non_field_errors": ["Not enough credits"] }
+            }
+        }
+    ]
+}
