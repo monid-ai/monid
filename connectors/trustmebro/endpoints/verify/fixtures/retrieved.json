@@ -1,0 +1,62 @@
+{
+    "name": "retrieved",
+    "description": "raw recording (trustmebro#v1/verify, scenario retrieved) — hand-minimize into a shared chain before committing",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://trustmebro.to/v1/verify",
+                "body": {
+                    "claim": "Mount Kosciuszko, the highest peak in mainland Australia, is more than 800 metres taller than Ben Nevis, the highest peak in the United Kingdom."
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "receipt_id": "5FcaFyG",
+                    "balance_verdict": "INSUFFICIENT_LEANING",
+                    "for_sources": [
+                        {
+                            "title": "Mount Kosciuszko",
+                            "year": null,
+                            "doi": null,
+                            "cited_by_count": 0,
+                            "url": "http://dbpedia.org/resource/Mount_Kosciuszko",
+                            "authors": [],
+                            "note": "legacy_relevant=true",
+                            "citation_data": null
+                        },
+                        {
+                            "title": "Wikipedia: List of elevation extremes by region",
+                            "year": null,
+                            "doi": null,
+                            "cited_by_count": 0,
+                            "url": "https://en.wikipedia.org/wiki/List_of_elevation_extremes_by_region",
+                            "authors": [],
+                            "note": "legacy_relevant=true",
+                            "citation_data": null
+                        }
+                    ],
+                    "against_sources": [],
+                    "confidence": 0,
+                    "confidence_breakdown": {
+                        "confidence_unavailable": true,
+                        "reason": "The v6 receipt does not carry a scored confidence value."
+                    },
+                    "summary": "Several reference items confirm Mount Kosciuszko is Australia's highest peak and Ben Nevis is the highest point of the United Kingdom, but none of the placed sources gives either elevation or the 800-metre difference the claim asserts.",
+                    "note": "The evidence leans one way but does not settle the claim. This response does not confirm whether a deeper search is pending.",
+                    "narrower_claim": "",
+                    "actual_figure": "",
+                    "lean": null,
+                    "lean_curve": [],
+                    "evidence_basis": null,
+                    "both_sides_searched": false,
+                    "badges": [],
+                    "story_context": null,
+                    "source": "retrieved",
+                    "billing": "wallet"
+                }
+            }
+        }
+    ]
+}

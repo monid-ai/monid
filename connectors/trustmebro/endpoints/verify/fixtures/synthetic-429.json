@@ -1,0 +1,24 @@
+{
+    "name": "synthetic-429",
+    "description": "HAND-WRITTEN from docs/api/openapi-public.json (CheckClaimResponse minus `examined`, plus `source` and `billing` from backend/apiwallet_routes.py), NOT recorded from a live call. Sources are placeholders on example.com. Replace with `deno task record` output before the PR. Exercises 429 rate limit (FastAPI detail body, Retry-After header).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "claim": "Humans use only 10% of their brain."
+                }
+            },
+            "res": {
+                "status": 429,
+                "body": {
+                    "detail": "Rate limit: 120 requests per minute on your plan. Slow down, or write to user@example.com if you need a higher ceiling."
+                },
+                "headers": {
+                    "retry-after": "5"
+                }
+            }
+        }
+    ]
+}

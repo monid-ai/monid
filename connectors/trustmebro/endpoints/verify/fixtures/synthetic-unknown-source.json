@@ -1,0 +1,50 @@
+{
+    "name": "synthetic-unknown-source",
+    "description": "HAND-WRITTEN from docs/api/openapi-public.json (CheckClaimResponse minus `examined`, plus `source` and `billing` from backend/apiwallet_routes.py), NOT recorded from a live call. Sources are placeholders on example.com. Replace with `deno task record` output before the PR. Exercises a 200 whose `source` is not a known value. TMB never sends this; it pins the fallback to the cheaper line.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "claim": "Humans use only 10% of their brain."
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "receipt_id": "hand-written-retrieved-0001",
+                    "balance_verdict": "REFUTED",
+                    "summary": "Example summary text. Hand-written placeholder, not a real check.",
+                    "confidence": 0,
+                    "both_sides_searched": true,
+                    "evidence_basis": null,
+                    "for_sources": [],
+                    "against_sources": [
+                        {
+                            "title": "Example source A (placeholder)",
+                            "url": "https://example.com/source-a",
+                            "year": 2020,
+                            "authors": [
+                                "Example Author"
+                            ],
+                            "doi": null,
+                            "cited_by_count": 0,
+                            "note": "Hand-written placeholder source."
+                        }
+                    ],
+                    "narrower_claim": "",
+                    "actual_figure": "",
+                    "note": "",
+                    "lean": null,
+                    "lean_curve": [],
+                    "badges": [],
+                    "confidence_breakdown": {},
+                    "story_context": null,
+                    "source": "some-future-tier",
+                    "billing": "wallet"
+                }
+            }
+        }
+    ]
+}

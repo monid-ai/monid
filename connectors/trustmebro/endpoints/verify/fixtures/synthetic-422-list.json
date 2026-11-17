@@ -1,0 +1,30 @@
+{
+    "name": "synthetic-422-list",
+    "description": "HAND-WRITTEN from docs/api/openapi-public.json (CheckClaimResponse minus `examined`, plus `source` and `billing` from backend/apiwallet_routes.py), NOT recorded from a live call. Sources are placeholders on example.com. Replace with `deno task record` output before the PR. Exercises a FastAPI validation error whose `detail` is a LIST, not a string.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "claim": "Humans use only 10% of their brain."
+                }
+            },
+            "res": {
+                "status": 422,
+                "body": {
+                    "detail": [
+                        {
+                            "type": "string_too_long",
+                            "loc": [
+                                "body",
+                                "claim"
+                            ],
+                            "msg": "String should have at most 600 characters"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

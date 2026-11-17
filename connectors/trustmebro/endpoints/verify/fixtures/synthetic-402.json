@@ -1,0 +1,25 @@
+{
+    "name": "synthetic-402",
+    "description": "HAND-WRITTEN from docs/api/openapi-public.json (CheckClaimResponse minus `examined`, plus `source` and `billing` from backend/apiwallet_routes.py), NOT recorded from a live call. Sources are placeholders on example.com. Replace with `deno task record` output before the PR. Exercises 402 insufficient_funds. The body carries TMB wallet fields that must not reach the agent.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "claim": "Humans use only 10% of their brain."
+                }
+            },
+            "res": {
+                "status": 402,
+                "body": {
+                    "error": "insufficient_funds",
+                    "balance_usd": 0.002,
+                    "needed_usd": 0.01,
+                    "topup_url": "/api/wallet",
+                    "detail": "This claim is not in the corpus yet, so it costs $0.01 to construct. Top up to continue."
+                }
+            }
+        }
+    ]
+}
