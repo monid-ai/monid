@@ -242,6 +242,8 @@ export async function estimateEndpoint(
     input: RunInput,
 ): Promise<Usage> {
     const loaded = await new Engine({
+        // Loading a bound doc requires a reader; pure estimates never query it.
+        resources: fixtureReader(),
         transport: {
             execute: () =>
                 Promise.reject(new Error("estimate is pure — no IO allowed")),
