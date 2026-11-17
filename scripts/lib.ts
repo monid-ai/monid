@@ -254,6 +254,16 @@ export async function emitPublish(
             key: objectRelKey(doc.hash),
         });
     }
+    for (const doc of Object.values(bundle.resources ?? {})) {
+        await writeObject(doc.hash, doc as unknown as Json);
+        docs.push({
+            id: doc.id,
+            kind: "resource",
+            provider: doc.provider,
+            hash: doc.hash,
+            key: objectRelKey(doc.hash),
+        });
+    }
     // The fnTable key hashes only the normalized `src`, but the stored
     // object is the FULL entry (api/kind/src/provenance) — provenance can
     // change while src stays identical. Pooled objects must be addressed by
