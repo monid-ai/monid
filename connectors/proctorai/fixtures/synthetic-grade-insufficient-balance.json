@@ -1,0 +1,23 @@
+{
+    "name": "synthetic-grade-insufficient-balance",
+    "description": "SYNTHETIC 402 chain for proctorai#grade: the platform account is out of prepaid gradings. Envelope as documented (agent.proctorai.io/developers#errors, 2026-10-20). Replace via `deno task record` when PROCTORAI_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 402,
+                "body": {
+                    "error": {
+                        "code": "insufficient_balance",
+                        "message": "This call costs 0.4 gradings and the account has 0.2. Buy gradings at https://agent.proctorai.io/pilot#buy.",
+                        "balance": 0.2,
+                        "price": 0.4
+                    }
+                }
+            }
+        }
+    ]
+}
