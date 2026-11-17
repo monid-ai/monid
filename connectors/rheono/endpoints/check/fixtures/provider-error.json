@@ -1,0 +1,22 @@
+{
+    "name": "provider-error",
+    "description": "raw recording (rheono#check, scenario provider-error) — recorded live against rheono.dev on 2026-10-24",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://rheono.dev/api/check-app",
+                "body": {
+                    "url": "not a host"
+                }
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "ok": false,
+                    "error": "invalid url"
+                }
+            }
+        }
+    ]
+}
