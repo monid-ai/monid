@@ -1,0 +1,31 @@
+{
+    "name": "synthetic-google-search-ok",
+    "description": "SYNTHETIC happy chain for autom#v1/google/search. Body shape from Autom's OpenAPI spec and a live call made for the Treg catalog (2026-11-09), trimmed; the URL is the query string the engine emits. Replace via `deno task record` when AUTOM_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.autom.dev/v1/google/search?query=best+running+shoes"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "organic_results": [
+                        {
+                            "position": 1,
+                            "title": "Best Running Shoes of 2026",
+                            "link": "https://example.com/running-shoes",
+                            "domain": "example.com",
+                            "snippet": "Our picks for every runner."
+                        }
+                    ],
+                    "pagination": {
+                        "current": 1,
+                        "next": 2,
+                        "has_next_page": true
+                    }
+                }
+            }
+        }
+    ]
+}
