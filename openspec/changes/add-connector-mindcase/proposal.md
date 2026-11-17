@@ -36,7 +36,7 @@ change.
 - **One endpoint per agent, plus one split.** `linkedin/profiles` is two
   endpoints sharing `schema/linkedin-profiles.ts`: `#linkedin/profiles`
   (by URL, per profile) and `#linkedin/profiles/search` (keyword and filters,
-  a flat $0.05 search fee per run plus per profile). The two modes bill
+  $0.05 per search page of 25 plus per profile). The two modes bill
   differently, so one doc could not estimate both honestly.
 - **Generated mirrors.** Each `schema/inputs.ts` is generated from the agent's
   published schema (`GET /v1/data/{group}/{slug}?expand=options`): types,
@@ -46,8 +46,10 @@ change.
   rejects unknown keys with 422.
 - **Billing.** Pool `default` is US dollars. Most agents are a leaf
   `PER_UNIT` RESULT at the published per-row price. Composites:
+  - `#linkedin/profiles/search`: $0.05 per search page of 25 profiles, and
+    a search that finds nobody still bills its one page;
   - a flat search fee once per run, including runs that find nothing:
-    `#linkedin/profiles/search` ($0.05), `#linkedin/company-employees`,
+    `#linkedin/company-employees`,
     `#linkedin/jobs`, `#linkedin/post-comments`, `#linkedin/post-reactions`,
     `#linkedin/profile-comments`, `#discord/servers`, and the fees declared
     on an input mode (`#amazon/products` keyword, `#reddit/posts`,

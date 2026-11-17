@@ -31,9 +31,9 @@ export default defineEndpoint({
         docsUrl: "https://docs.mindcase.co/apis/linkedin/profiles",
         categories: ["linkedin", "people-enrichment"],
         notes: [
-            "Billed a flat $0.05 search fee per run, charged even when " +
-            "nothing is found, plus the per-profile rate; maxProfiles " +
-            "must be a multiple of 25.",
+            "Billed $0.05 per search page of up to 25 profiles plus the " +
+            "per-profile rate; a search that finds nobody still bills its " +
+            "one page. maxProfiles must be a multiple of 25.",
             "At least one of searchQuery or a search filter is required.",
         ],
     },
@@ -54,9 +54,9 @@ export default defineEndpoint({
                 search_page: {
                     kind: UsageModelKind.PER_UNIT,
                     unit: Unit.PAGE,
-                    label: "search fee",
+                    label: "search pages",
                     description:
-                        "one flat fee per search run, charged even when nothing is found",
+                        "search pages of up to 25 profiles; a search that finds nobody still bills its one page",
                     consumes: { credit: "default", amount: 0.05 },
                 },
                 profile: {
@@ -69,19 +69,24 @@ export default defineEndpoint({
             },
         },
         estimate: ({ data }) => ({
-            // Flat per run, not per 25-profile page: our billing rule
-            // (MIN-185). Settled prod runs 2026-11-14: maxProfiles 175
-            // -> 66 rows, $0.314 = $0.05 + 66 x $0.004; maxProfiles 150
-            // -> 123 rows, $0.542 = $0.05 + 123 x $0.004.
+            // $0.05 per search page of 25 (owner ruling 2026-11-17,
+            // replacing the flat per-run fee). Settled prod run
+            // 2026-11-17: maxProfiles 50 -> 48 rows, $0.292 =
+            // 2 x $0.05 + 48 x $0.004; an empty search bills $0.05.
             counts: {
-                search_page: 1,
+                search_page: data.input.body.maxProfiles / 25,
                 profile: data.input.body.maxProfiles,
             },
         }),
         evidence: ({ data, utils }) => {
             const rows = utils.json.optionalLen(data.output, "$.data") ?? 0;
             return {
-                counts: { search_page: 1, profile: rows },
+                // Pages actually bought are settled from usd_used; this
+                // is the floor: one per 25 delivered, at least one.
+                counts: {
+                    search_page: Math.max(1, Math.ceil(rows / 25)),
+                    profile: rows,
+                },
             };
         },
     },

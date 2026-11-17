@@ -196,13 +196,13 @@ Deno.test("mindcase: estimates price the row cap", async () => {
         })).evidence,
         { RESULT: 2 },
     );
-    // people search: flat $0.05 search fee per run plus $0.004 per profile
+    // people search: $0.05 per search page of 25 plus $0.004 per profile
     assertEquals(
         (await est("mindcase#linkedin/profiles/search", {
             searchQuery: "founder",
             maxProfiles: 50,
         })).evidence,
-        { search_page: 1, profile: 50 },
+        { search_page: 2, profile: 50 },
     );
     // company employees: flat search fee plus profiles
     assertEquals(
