@@ -1,0 +1,126 @@
+{
+    "name": "happy",
+    "description": "recorded chain for readme-score#api/score/markdown on 2026-11-11, trimmed to two groups of three checks",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://readme.flisk.si/api/score",
+                "body": {
+                    "readme": "# slugkit\n\nTurn titles into slugs.\n",
+                    "type": "library"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "score": 34,
+                    "grade": "F",
+                    "earned": 24,
+                    "available": 70,
+                    "type": {
+                        "type": "library",
+                        "reason": "chosen",
+                        "title": "Library",
+                        "chosen": true
+                    },
+                    "groups": [
+                        {
+                            "id": "sections",
+                            "title": "Sections",
+                            "checks": [
+                                {
+                                    "id": "section.overview",
+                                    "title": "Overview",
+                                    "pass": false,
+                                    "max": 2.5,
+                                    "measured": "missing",
+                                    "limit": "recommended for a library",
+                                    "line": 4,
+                                    "fix": "Add \"## What is slugkit?\" at line 4, at the end. Two or three sentences: what slugkit does, who it is for, and what it replaces.",
+                                    "snippet": "## What is slugkit?\n\nTwo or three sentences: what slugkit does, who it is for, and what it replaces.",
+                                    "points": 0
+                                },
+                                {
+                                    "id": "section.features",
+                                    "title": "Key features",
+                                    "pass": false,
+                                    "max": 2.5,
+                                    "measured": "missing",
+                                    "limit": "recommended for a library",
+                                    "line": 4,
+                                    "fix": "Add \"## Key features\" at line 4, at the end. A short list: each feature in one line, with what it saves the reader.",
+                                    "snippet": "## Key features\n\nA short list: each feature in one line, with what it saves the reader.",
+                                    "points": 0
+                                },
+                                {
+                                    "id": "section.prerequisites",
+                                    "title": "Prerequisites",
+                                    "pass": false,
+                                    "max": 1.2,
+                                    "measured": "missing",
+                                    "limit": "nice to have for a library",
+                                    "line": 4,
+                                    "fix": "Add \"## Prerequisites\" at line 4, at the end. What to install first, with versions (Node.js 22+, Docker), and a command that checks each one.",
+                                    "snippet": "## Prerequisites\n\nWhat to install first, with versions (Node.js 22+, Docker), and a command that checks each one.",
+                                    "points": 0
+                                }
+                            ],
+                            "points": 0,
+                            "max": 27
+                        },
+                        {
+                            "id": "first-screen",
+                            "title": "First screen",
+                            "checks": [
+                                {
+                                    "id": "first-screen.h1",
+                                    "title": "Title near the top",
+                                    "pass": true,
+                                    "max": 4,
+                                    "measured": "non-empty line 1",
+                                    "limit": "within 5 non-empty lines",
+                                    "line": 1,
+                                    "points": 4
+                                },
+                                {
+                                    "id": "first-screen.install",
+                                    "title": "Install command",
+                                    "pass": false,
+                                    "max": 4,
+                                    "measured": "none",
+                                    "limit": "within 40 lines",
+                                    "fix": "Add a shell block with the install command under the pitch, within the first 40 lines.",
+                                    "snippet": "```bash\nnpm install slugkit\n```",
+                                    "points": 0
+                                },
+                                {
+                                    "id": "first-screen.image",
+                                    "title": "Picture of it working",
+                                    "pass": false,
+                                    "max": 4,
+                                    "measured": "none",
+                                    "limit": "within 20 lines; badges do not count",
+                                    "fix": "Add a screenshot, GIF or diagram of slugkit at work within the first 20 lines.",
+                                    "snippet": "![slugkit in action](docs/demo.gif)",
+                                    "points": 0
+                                }
+                            ],
+                            "points": 12,
+                            "max": 20
+                        }
+                    ],
+                    "counts": {
+                        "passed": 5,
+                        "failed": 18,
+                        "skipped": 10
+                    },
+                    "readme": {
+                        "path": "README.md",
+                        "lines": 4
+                    }
+                }
+            }
+        }
+    ]
+}

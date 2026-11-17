@@ -379,6 +379,13 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "dates, venues, and more.",
     },
     {
+        id: "documentation",
+        displayName: "Documentation",
+        description:
+            "Tools to score and improve project documentation, including " +
+            "READMEs, missing sections, quickstarts, and more.",
+    },
+    {
         id: "government-data",
         displayName: "Government Data",
         description:
