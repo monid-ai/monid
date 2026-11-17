@@ -1,0 +1,26 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "SYNTHETIC chain for pdl#v5/company/search (error envelope from docs.peopledatalabs.com/docs/errors; replace via `deno task record`): a malformed query answers 400 invalid_request_error \u2014 vendor non-2xx is DATA, zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.peopledatalabs.com/v5/company/search",
+                "body": {
+                    "sql": "SELECT * FROM company WHERE",
+                    "size": 2
+                }
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "status": 400,
+                    "error": {
+                        "type": "invalid_request_error",
+                        "message": "Invalid SQL query"
+                    }
+                }
+            }
+        }
+    ]
+}
