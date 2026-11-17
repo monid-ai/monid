@@ -19,7 +19,7 @@ export const zLinkedinProfilesBody = z.object({
         .optional(),
     maxProfiles: z.number().int().max(2500)
         .describe(
-            "By Search mode: how many matching profiles to enrich, as a multiple of 25 (each search page holds up to 25 profiles). Billed as $0.05 per search page pulled PLUS $0.004 per enriched profile. Leave blank for ALL available matches (up to 2500 / 100 pages).",
+            "By Search mode: how many matching profiles to enrich, as a multiple of 25 (each search page holds up to 25 profiles). Billed as $0.05 per search page pulled (a search that finds nobody still bills its one page) PLUS $0.004 per enriched profile. Leave blank for ALL available matches (up to 2500 / 100 pages).",
         )
         .optional(),
     locations: z.array(z.string()).max(70)

@@ -42,6 +42,6 @@ per-row price, multiplied by the number of inputs when the cap is per input.
 - **WHEN** `#linkedin/jobs` runs with `maxResults: 0` or without `maxResults`
 - **THEN** it fails `INVALID_INPUT` and nothing is sent
 
-#### Scenario: People search prices one search fee and the profiles
+#### Scenario: People search prices its search pages and the profiles
 - **WHEN** `#linkedin/profiles/search` is estimated with `maxProfiles: 50`
-- **THEN** the evidence is `{search_page: 1, profile: 50}` (one flat search fee per run)
+- **THEN** the evidence is `{search_page: 2, profile: 50}` ($0.05 per search page of 25)

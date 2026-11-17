@@ -8,7 +8,7 @@
 - [x] 1.2 Pull every agent's published schema (`?expand=options`), price,
       page fee and add-ons
 - [x] 1.3 Check the fee shapes against settled production jobs: company
-      employees $0.05 flat per run, people search flat $0.05 per run (25
+      employees $0.05 flat per run, people search $0.05 per search page (25
       profiles, Maps photos $0.00025 per row
 
 ## 2. Provider
