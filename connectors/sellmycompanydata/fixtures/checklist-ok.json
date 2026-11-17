@@ -1,0 +1,128 @@
+{
+    "name": "checklist-ok",
+    "description": "Recorded 2026-10-29 with curl from POST https://sellmycompanydata.com/mcp (public, keyless; the request body is the one the connector sends; no headers kept). tools/call assessment_checklist. Response body verbatim.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": "sellmycompanydata-assessment-checklist",
+                    "method": "tools/call",
+                    "params": {
+                        "name": "assessment_checklist",
+                        "arguments": {},
+                        "_meta": {
+                            "io.modelcontextprotocol/clientInfo": {
+                                "name": "monid",
+                                "version": "1.0.0"
+                            }
+                        }
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": "sellmycompanydata-assessment-checklist",
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Privacy rule: Counts and date ranges only. Never read out, copy or send message text, customer or employee names, email addresses of other people, file contents or code to this server.\nRules:\n- Inputs come from the user, or from figures the user has already asked you to gather. Do not guess a number.\n- If you do not have a figure, ask the user for an approximate one and mark it as not measured.\n- If chat volume is not available, ask the user. On paid Slack plans a workspace admin can see total messages in Slack's analytics dashboard.\n- Tell the user which figures were measured and which are their estimates.\n- Set measured to true only for numbers counted from the user's own systems at their request.\n- Show the user the numbers you are about to send before you call estimate_data_value.\n- Do not call request_offer unless the user asks for an offer and confirms their contact details.\nWhat to measure:\n- chat (Slack, Microsoft Teams, Discord): Years of history (oldest message year); Approximate message count; Share of public versus private channels; Number of active people.\n- crm (HubSpot, Salesforce, Pipedrive): Number of contact, company and deal records; Years of history; Whether notes and activities are logged.\n- support (Zendesk, Intercom, Freshdesk): Number of tickets or conversations; Years of history.\n- docs (Notion, Confluence, Google Drive, SharePoint): Approximate page or document count; Oldest document year.\n- code (GitHub, GitLab, Bitbucket): Number of repositories; Years of commit history.\n- email (Gmail, Outlook shared mailboxes): Approximate message count for shared or company mailboxes; Oldest message year.\n- project (Jira, Asana, Linear, Monday): Number of tasks or issues; Years of history.\n- finance (Xero, QuickBooks, NetSuite, other ERP): Years of records; Approximate transaction or invoice count.\nCompany facts to collect: Approximate number of staff; Year the company was founded; Country: us, ca, uk, eu, anz or other.\nNext: call estimate_data_value with the numbers."
+                            }
+                        ],
+                        "structuredContent": {
+                            "privacy_rule": "Counts and date ranges only. Never read out, copy or send message text, customer or employee names, email addresses of other people, file contents or code to this server.",
+                            "rules": [
+                                "Inputs come from the user, or from figures the user has already asked you to gather. Do not guess a number.",
+                                "If you do not have a figure, ask the user for an approximate one and mark it as not measured.",
+                                "If chat volume is not available, ask the user. On paid Slack plans a workspace admin can see total messages in Slack's analytics dashboard.",
+                                "Tell the user which figures were measured and which are their estimates.",
+                                "Set measured to true only for numbers counted from the user's own systems at their request.",
+                                "Show the user the numbers you are about to send before you call estimate_data_value.",
+                                "Do not call request_offer unless the user asks for an offer and confirms their contact details."
+                            ],
+                            "categories": [
+                                {
+                                    "category": "chat",
+                                    "examples": "Slack, Microsoft Teams, Discord",
+                                    "measure": [
+                                        "Years of history (oldest message year)",
+                                        "Approximate message count",
+                                        "Share of public versus private channels",
+                                        "Number of active people"
+                                    ]
+                                },
+                                {
+                                    "category": "crm",
+                                    "examples": "HubSpot, Salesforce, Pipedrive",
+                                    "measure": [
+                                        "Number of contact, company and deal records",
+                                        "Years of history",
+                                        "Whether notes and activities are logged"
+                                    ]
+                                },
+                                {
+                                    "category": "support",
+                                    "examples": "Zendesk, Intercom, Freshdesk",
+                                    "measure": [
+                                        "Number of tickets or conversations",
+                                        "Years of history"
+                                    ]
+                                },
+                                {
+                                    "category": "docs",
+                                    "examples": "Notion, Confluence, Google Drive, SharePoint",
+                                    "measure": [
+                                        "Approximate page or document count",
+                                        "Oldest document year"
+                                    ]
+                                },
+                                {
+                                    "category": "code",
+                                    "examples": "GitHub, GitLab, Bitbucket",
+                                    "measure": [
+                                        "Number of repositories",
+                                        "Years of commit history"
+                                    ]
+                                },
+                                {
+                                    "category": "email",
+                                    "examples": "Gmail, Outlook shared mailboxes",
+                                    "measure": [
+                                        "Approximate message count for shared or company mailboxes",
+                                        "Oldest message year"
+                                    ]
+                                },
+                                {
+                                    "category": "project",
+                                    "examples": "Jira, Asana, Linear, Monday",
+                                    "measure": [
+                                        "Number of tasks or issues",
+                                        "Years of history"
+                                    ]
+                                },
+                                {
+                                    "category": "finance",
+                                    "examples": "Xero, QuickBooks, NetSuite, other ERP",
+                                    "measure": [
+                                        "Years of records",
+                                        "Approximate transaction or invoice count"
+                                    ]
+                                }
+                            ],
+                            "company_facts": [
+                                "Approximate number of staff",
+                                "Year the company was founded",
+                                "Country: us, ca, uk, eu, anz or other"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}
