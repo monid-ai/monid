@@ -1,0 +1,280 @@
+{
+    "name": "happy-episodes-search",
+    "description": "Recorded 2026-10-28 with a real key against GET https://api.particle.pro/v1/podcasts/episodes/search?semantic_search=the+future+of+AI+agents&limit=2 (HTTP 200); response trimmed by the fixture diet (arrays capped at 2, strings at 500 chars) and scrubbed. Particle bills this call a flat price; no receipt rides in the body.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.particle.pro/v1/podcasts/episodes/search?semantic_search=the+future+of+AI+agents&limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "episode": {
+                                "id": "5xwQIqyymoY0X2IoBnAiBs",
+                                "slug": "the-value-creation-imperative-with-ai-by-philipp-haugwitz-partner-mckinsey",
+                                "title": "\u201cThe Value Creation Imperative With AI\u201d by Philipp Haugwitz, Partner, McKinsey & Company (AA1584)",
+                                "published_at": "2026-08-14T07:20:00Z",
+                                "podcast": {
+                                    "id": "ikZ4J7z2kYmMbRclGN4oS",
+                                    "title": "Mexico Business Now Podcast Expert Contributor Audio Articles",
+                                    "slug": "mexico-business-now-podcast-expert-contributor-audio-articles",
+                                    "image_url": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/24404410/24404410-1758311813718-df3d4be53c47e.jpg"
+                                },
+                                "web_url": "https://radar.particle.pro/podcasts/mexico-business-now-podcast-expert-contributor-audio-articles/episodes/the-value-creation-imperative-with-ai-by-philipp-haugwitz-partner-mckinsey"
+                            },
+                            "segment": {
+                                "id": "6q7wAPgxGwhJmSbNKWFP9g",
+                                "number": 3,
+                                "type": "TOPIC_DISCUSSION",
+                                "title": "The Rise of Agentic AI",
+                                "description": "The segment explains how AI agents can reason, plan, and act across workflows to create broader operational and growth benefits.",
+                                "summary": "AI agents combine language models with memory, orchestration, and integrations.\nExamples include modernizing banking technology and drafting credit risk memos.\nAgents are being adopted across technology, media, telecommunications, and healthcare.\nThey can adapt processes, detect risks, and enable personalized customer experiences.\nAgentic AI shifts AI from a reactive assistant to a proactive collaborator.",
+                                "start_seconds": 122.24,
+                                "end_seconds": 215.175,
+                                "duration_seconds": 92.935,
+                                "start_line": 18,
+                                "end_line": 31,
+                                "audio_url": "https://cdn.particle.pro/podcast/episode/c40cf8cd-cbb3-4c93-b2cb-bf3d62645e70/segment/audio/e0c42f72-08ab-4084-a784-ebfbc0007904.mp3",
+                                "url": "https://radar.particle.pro/podcasts/mexico-business-now-podcast-expert-contributor-audio-articles/episodes/the-value-creation-imperative-with-ai-by-philipp-haugwitz-partner-mckinsey?t=122.3"
+                            },
+                            "windows": [
+                                {
+                                    "start_seconds": 122.24,
+                                    "end_seconds": 142.531,
+                                    "lines": [
+                                        {
+                                            "number": 18,
+                                            "speaker": "speaker_0",
+                                            "role": "NARRATOR",
+                                            "start_seconds": 122.24,
+                                            "end_seconds": 128.083,
+                                            "text": "The rise of agentic AI AI agents, if not new, are offering a way to bridge the gap between potential and performance.",
+                                            "is_match": true,
+                                            "speaker_statement_characteristics": {
+                                                "sentiment": "neutral",
+                                                "certainty": "neutral",
+                                                "specificity": "neutral",
+                                                "temporal_orientation": "present"
+                                            }
+                                        },
+                                        {
+                                            "number": 19,
+                                            "speaker": "speaker_0",
+                                            "role": "NARRATOR",
+                                            "start_seconds": 129.424,
+                                            "end_seconds": 134.967,
+                                            "text": "Traditional generative systems, AI agents can reason, plan, and more importantly, can act toward defined goals.",
+                                            "is_match": true,
+                                            "speaker_statement_characteristics": {
+                                                "sentiment": "neutral",
+                                                "certainty": "neutral",
+                                                "specificity": "vague",
+                                                "temporal_orientation": "present"
+                                            }
+                                        }
+                                    ],
+                                    "url": "https://radar.particle.pro/podcasts/mexico-business-now-podcast-expert-contributor-audio-articles/episodes/the-value-creation-imperative-with-ai-by-philipp-haugwitz-partner-mckinsey?t=122.3"
+                                },
+                                {
+                                    "start_seconds": 197.321,
+                                    "end_seconds": 215.175,
+                                    "lines": [
+                                        {
+                                            "number": 30,
+                                            "speaker": "speaker_0",
+                                            "role": "NARRATOR",
+                                            "start_seconds": 197.321,
+                                            "end_seconds": 206.389,
+                                            "text": "In industrial contexts, agents embedded in connected products or equipment could monitor usage, detect performance thresholds, and autonomously unlock features or trigger maintenance actions.",
+                                            "speaker_statement_characteristics": {
+                                                "sentiment": "neutral",
+                                                "certainty": "neutral",
+                                                "specificity": "neutral",
+                                                "temporal_orientation": "present"
+                                            }
+                                        },
+                                        {
+                                            "number": 31,
+                                            "speaker": "speaker_0",
+                                            "role": "NARRATOR",
+                                            "start_seconds": 207.21,
+                                            "end_seconds": 215.175,
+                                            "text": "In short, agentic AI transforms AI from a reactive assistant into a proactive collaborator, one capable of redefining how value is created.",
+                                            "is_match": true,
+                                            "speaker_statement_characteristics": {
+                                                "sentiment": "neutral",
+                                                "certainty": "neutral",
+                                                "specificity": "neutral",
+                                                "temporal_orientation": "present"
+                                            }
+                                        }
+                                    ],
+                                    "url": "https://radar.particle.pro/podcasts/mexico-business-now-podcast-expert-contributor-audio-articles/episodes/the-value-creation-imperative-with-ai-by-philipp-haugwitz-partner-mckinsey?t=197.4"
+                                }
+                            ],
+                            "match": {
+                                "source": "semantic",
+                                "relevance_score": 0.6784173846244812
+                            },
+                            "url": "https://radar.particle.pro/podcasts/mexico-business-now-podcast-expert-contributor-audio-articles/episodes/the-value-creation-imperative-with-ai-by-philipp-haugwitz-partner-mckinsey?t=122.3"
+                        },
+                        {
+                            "episode": {
+                                "id": "38M9zV1Q0FrLy4yXsDGQzX",
+                                "slug": "talking-tech-ai-agents",
+                                "title": "Talking Tech - AI Agents",
+                                "published_at": "2026-09-29T16:40:25Z",
+                                "podcast": {
+                                    "id": "63Sq7py90U3PeTBdEVkoUu",
+                                    "title": "Talking Features",
+                                    "slug": "talking-features",
+                                    "image_url": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/45184702/694dfd19165b4972.jpg"
+                                },
+                                "web_url": "https://radar.particle.pro/podcasts/talking-features/episodes/talking-tech-ai-agents"
+                            },
+                            "segment": {
+                                "id": "FTZv1WK8EQuwJliZhlL4X",
+                                "number": 3,
+                                "type": "TOPIC_DISCUSSION",
+                                "title": "AI Agent Risks and Potential",
+                                "description": "The discussion considers criticism, safety concerns, and the potentially transformative effects of increasingly autonomous AI agents.",
+                                "summary": "AI agents' ability to act independently has raised criticism and concern.\nPoliticians, technology leaders, and academics are debating safeguards and instructions.\nAgents could automate administrative work and tasks such as booking holidays.\nThe technology may create broad ripple effects as it becomes more widely deployed.",
+                                "start_seconds": 108.098,
+                                "end_seconds": 164.545,
+                                "duration_seconds": 56.447,
+                                "start_line": 13,
+                                "end_line": 20,
+                                "audio_url": "https://cdn.particle.pro/podcast/episode/66ffe4d2-1ef6-4370-afa5-10c09b87311f/segment/audio/0833bae9-b81b-4686-b093-a2e751165cc5.mp3",
+                                "url": "https://radar.particle.pro/podcasts/talking-features/episodes/talking-tech-ai-agents?t=108.1"
+                            },
+                            "windows": [
+                                {
+                                    "start_seconds": 108.098,
+                                    "end_seconds": 141.872,
+                                    "lines": [
+                                        {
+                                            "number": 13,
+                                            "speaker": "Rory McGowan",
+                                            "role": "HOST",
+                                            "start_seconds": 108.098,
+                                            "end_seconds": 112.68,
+                                            "text": "Their ability to execute their own will like this has garnered criticism the world over.",
+                                            "speaker_statement_characteristics": {
+                                                "sentiment": "negative",
+                                                "certainty": "neutral",
+                                                "specificity": "vague",
+                                                "temporal_orientation": "past"
+                                            }
+                                        },
+                                        {
+                                            "number": 14,
+                                            "speaker": "Rory McGowan",
+                                            "role": "HOST",
+                                            "start_seconds": 113.721,
+                                            "end_seconds": 120.624,
+                                            "text": "It's part of the reason why politicians, tech leaders and academics are all concerned about the future of AI.",
+                                            "is_match": true,
+                                            "speaker_statement_characteristics": {
+                                                "sentiment": "neutral",
+                                                "certainty": "neutral",
+                                                "specificity": "neutral",
+                                                "temporal_orientation": "present"
+                                            }
+                                        }
+                                    ],
+                                    "url": "https://radar.particle.pro/podcasts/talking-features/episodes/talking-tech-ai-agents?t=108.1"
+                                },
+                                {
+                                    "start_seconds": 152.558,
+                                    "end_seconds": 164.545,
+                                    "lines": [
+                                        {
+                                            "number": 19,
+                                            "speaker": "Rory McGowan",
+                                            "role": "HOST",
+                                            "start_seconds": 152.558,
+                                            "end_seconds": 158.381,
+                                            "text": "Nobody knows what the future looks like, but every technological change creates huge ripple effects.",
+                                            "speaker_statement_characteristics": {
+                                                "sentiment": "neutral",
+                                                "certainty": "confident",
+                                                "specificity": "vague",
+                                                "temporal_orientation": "future"
+                                            }
+                                        },
+                                        {
+                                            "number": 20,
+                                            "speaker": "Rory McGowan",
+                                            "role": "HOST",
+                                            "start_seconds": 159.462,
+                                            "end_seconds": 164.545,
+                                            "text": "And there's no doubt that AI agents will soon make their own waves in the years to come.",
+                                            "is_match": true,
+                                            "speaker_statement_characteristics": {
+                                                "sentiment": "neutral",
+                                                "certainty": "neutral",
+                                                "specificity": "neutral",
+                                                "temporal_orientation": "future"
+                                            }
+                                        }
+                                    ],
+                                    "url": "https://radar.particle.pro/podcasts/talking-features/episodes/talking-tech-ai-agents?t=152.6"
+                                }
+                            ],
+                            "speakers": [
+                                {
+                                    "name": "Rory McGowan",
+                                    "role": "HOST",
+                                    "speaking_duration_seconds": 138.070999988,
+                                    "person": {
+                                        "id": "5loFEVykHZSMdFOe7oyTp3",
+                                        "slug": "rory-mcgowan",
+                                        "name": "Rory McGowan",
+                                        "description": "Media Liaison Coordinator at The Relations Group/Independent Media News and UK podcast host of the 'Talking Features' series and 'A Face for Radio'",
+                                        "image_url": "https://cdn.particle.pro/headshots/3GrdEvcVM7L5NL1DAEKmU9SCqFP.jpg"
+                                    },
+                                    "expertise": {
+                                        "standing": "established",
+                                        "seniority": "professional",
+                                        "occupations": [
+                                            {
+                                                "standard": "soc_2018",
+                                                "code": "27-3031",
+                                                "title": "Public Relations Specialists",
+                                                "slug": "public-relations-specialists",
+                                                "level": 2,
+                                                "parent_code": "27-0000",
+                                                "established": true,
+                                                "practicing": true
+                                            }
+                                        ],
+                                        "fields": [
+                                            {
+                                                "standard": "anzsrc_for_2020",
+                                                "code": "4701",
+                                                "title": "Communication and media studies",
+                                                "slug": "communication-and-media-studies",
+                                                "level": 2,
+                                                "parent_code": "47"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "match": {
+                                "source": "semantic",
+                                "relevance_score": 0.6599322557449341
+                            },
+                            "url": "https://radar.particle.pro/podcasts/talking-features/episodes/talking-tech-ai-agents?t=108.1"
+                        }
+                    ],
+                    "has_more": true,
+                    "cursor": "r.4gfFC8"
+                }
+            }
+        }
+    ]
+}

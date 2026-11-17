@@ -1,0 +1,60 @@
+{
+    "name": "happy-entities-search",
+    "description": "Recorded 2026-10-28 with a real key against GET https://api.particle.pro/v1/entities/search?q=nvidia&limit=2 (HTTP 200); response trimmed by the fixture diet (arrays capped at 2, strings at 500 chars) and scrubbed. Particle bills this call a flat price; no receipt rides in the body.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.particle.pro/v1/entities/search?q=nvidia&limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "type": "company",
+                            "match_quality": "exact",
+                            "mentions": {
+                                "podcast_episodes": 86299,
+                                "news_articles": 249864
+                            },
+                            "social_links": [
+                                {
+                                    "platform": "linkedin",
+                                    "url": "https://www.linkedin.com/company/nvidia/"
+                                }
+                            ],
+                            "company": {
+                                "id": "3CensCwu5G2oKCFgPrNf89",
+                                "slug": "nvidia",
+                                "name": "Nvidia",
+                                "description": "Nvidia is a leading developer of graphics processing units. Traditionally, GPUs were used to enhance the experience on computing platforms, most notably in gaming applications on PCs. GPU use cases have since emerged as important semiconductors used in artificial intelligence to run large language models. Nvidia not only offers AI GPUs, but also a software platform, Cuda, used for AI model development and training. Nvidia is also expanding its data center networking solutions, helping to tie GPU",
+                                "domain": "nvidia.com",
+                                "ticker": "NVDA",
+                                "image_url": "https://storage.googleapis.com/uploads.mongoosehq.com/tickers/NVDA_icon.png"
+                            }
+                        },
+                        {
+                            "type": "knowledge_graph_entity",
+                            "match_quality": "strong",
+                            "mentions": {
+                                "podcast_episodes": 514,
+                                "news_articles": 6130
+                            },
+                            "knowledge_graph_entity": {
+                                "id": "1GmOP1C2uwevi96lly",
+                                "slug": "nvidia-rtx",
+                                "name": "Nvidia RTX",
+                                "description": "Computer application",
+                                "wikipedia_url": "https://en.wikipedia.org/wiki/Nvidia_RTX",
+                                "image_url": "https://cdn.particle.pro/url/media/kge/g/11glxjnmnz/5637874468ba8ec71124ca7bb6fb6d5e6dd09139d5c3ddc0cc36bc6f48b939cb"
+                            }
+                        }
+                    ],
+                    "has_more": true,
+                    "cursor": "r.4gfFC6"
+                }
+            }
+        }
+    ]
+}

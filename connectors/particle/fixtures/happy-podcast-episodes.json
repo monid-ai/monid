@@ -1,0 +1,210 @@
+{
+    "name": "happy-podcast-episodes",
+    "description": "Recorded 2026-10-28 with a real key against GET https://api.particle.pro/v1/podcasts/all-in/episodes?limit=2 (HTTP 200); response trimmed by the fixture diet (arrays capped at 2, strings at 500 chars) and scrubbed. Particle bills this call a flat price; no receipt rides in the body.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.particle.pro/v1/podcasts/all-in/episodes?limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "id": "6bbjvFIPxXcVc1pt00h2y6",
+                            "slug": "ai-cyber-panic-ken-griffins-bubble-warning-the-fall-of-france",
+                            "podcast": {
+                                "id": "4t9PU1WkzOroEXfBl6ia7r",
+                                "title": "All-In with Chamath, Jason, Sacks & Friedberg",
+                                "slug": "all-in",
+                                "image_url": "https://cdn.particle.pro/url/media/a0a7b2fa-7c8c-5609-9772-aee22f236ad7/e41c19d263c53225a98980e3049d7eb358bd579c61800fe9de34a50c17140476"
+                            },
+                            "title": "AI Cyber Panic, Ken Griffin's Bubble Warning, The Fall of France?",
+                            "description": "(0:00) Bestie intros!\n\n(0:11) Ken Griffin's AI bubble warning\n\n(8:19) Palo Alto Networks CEO Nikesh Arora joins\n\n(14:24) AI Cyber panic: PHP exploits and the tumultuous year ahead\n\n(44:17) France on the brink: Riots, immigration referendum, debt crisis\n\n(1:31:49) Trump's second half strategy, Press Secretary J-Cal?\n\nFollow Nikesh:\n\n[https://x.com/nikesharora](https://x.com/nikesharora)\n\nFollow the besties:\n\n[https://x.com/chamath](https://x.com/chamath)\n\n[https://x.com/Jason](https://x.com/Jason",
+                            "url": "https://dts.podtrac.com/redirect.mp3/traffic.libsyn.com/secure/allinchamathjason/ALLIN-E294_Ch.mp3?dest-id=1928300",
+                            "audio_url": "https://cdn.particle.pro/url/media/d91264ac-9e52-4f30-a283-07d52982f17e/b08bd6316cb77064171ed493fb2c4a50c9349a370fd88293914236acb087ab45",
+                            "image_url": "https://cdn.particle.pro/url/media/d91264ac-9e52-4f30-a283-07d52982f17e/fd6142d3f594d810dd638b73548e8ea27d27197fdc6e59531e2bf758ab23647e",
+                            "language": "en",
+                            "explicit": false,
+                            "published_at": "2026-10-23T23:08:00Z",
+                            "duration_seconds": 6202.200000015,
+                            "speakers": [
+                                {
+                                    "name": "Jason Calacanis",
+                                    "role": "HOST",
+                                    "speaking_duration_seconds": 2086.173999714,
+                                    "entity": {
+                                        "id": "GoNEpqEjj2X4",
+                                        "slug": "jason-calacanis",
+                                        "name": "Jason Calacanis",
+                                        "description": "American internet entrepreneur and angel investor",
+                                        "wikipedia_url": "https://en.wikipedia.org/wiki/Jason_Calacanis",
+                                        "image_url": "https://cdn.particle.pro/url/media/kge/m/082wh2/2201db7170a6395917af54a629a4bdb7f09cc3ca5a0886daadab8d290f0701c9",
+                                        "type": {
+                                            "slug": "person",
+                                            "name": "Person"
+                                        },
+                                        "person": {
+                                            "id": "65sdckHxa80FlEmIW7o9GU"
+                                        }
+                                    },
+                                    "person": {
+                                        "id": "65sdckHxa80FlEmIW7o9GU",
+                                        "slug": "jason-calacanis",
+                                        "name": "Jason Calacanis",
+                                        "description": "American podcaster, internet entrepreneur, angel investor, and author; host of the All-In Podcast and This Week in Startups."
+                                    }
+                                },
+                                {
+                                    "name": "Chamath Palihapitiya",
+                                    "role": "HOST",
+                                    "speaking_duration_seconds": 1258.073999841,
+                                    "entity": {
+                                        "id": "17PzxG1slmH46T",
+                                        "slug": "chamath-palihapitiya",
+                                        "name": "Chamath Palihapitiya",
+                                        "description": "Canadian-American venture capitalist",
+                                        "wikipedia_url": "https://en.wikipedia.org/wiki/Chamath_Palihapitiya",
+                                        "image_url": "https://cdn.particle.pro/url/media/kge/m/02h6fl9/657e15fc10a65d90efa52427ab896fa0f1e36e9c8b9ab05b9c672e772184cd6e",
+                                        "type": {
+                                            "slug": "person",
+                                            "name": "Person"
+                                        },
+                                        "person": {
+                                            "id": "1UlqjpuHcBR5ugMpSNkMc4",
+                                            "company": "8090 Solutions"
+                                        }
+                                    },
+                                    "person": {
+                                        "id": "1UlqjpuHcBR5ugMpSNkMc4",
+                                        "slug": "chamath-palihapitiya",
+                                        "name": "Chamath Palihapitiya",
+                                        "description": "Sri Lankan-born Canadian-American venture capitalist, founder of Social Capital, minority owner of the Golden State Warriors, and co-host of the All-In podcast."
+                                    }
+                                }
+                            ],
+                            "topics": [
+                                {
+                                    "id": "4FaC4H9",
+                                    "name": "Business",
+                                    "slug": "business",
+                                    "ancestry_path": "gWDfW"
+                                },
+                                {
+                                    "id": "4FZ5301",
+                                    "name": "Technology",
+                                    "slug": "technology",
+                                    "ancestry_path": "i6hAv"
+                                }
+                            ],
+                            "segment_count": 14,
+                            "clip_count": 10,
+                            "entity_count": 105,
+                            "has_transcript": true,
+                            "transcript_status": "transcribed"
+                        },
+                        {
+                            "id": "25BcWLKshLolmFSsVd4tZn",
+                            "slug": "arvind-krishna-nikesh-arora-quantum-threat-open-vs-frontier-ai-ai-cyber-warfare",
+                            "podcast": {
+                                "id": "4t9PU1WkzOroEXfBl6ia7r",
+                                "title": "All-In with Chamath, Jason, Sacks & Friedberg",
+                                "slug": "all-in",
+                                "image_url": "https://cdn.particle.pro/url/media/a0a7b2fa-7c8c-5609-9772-aee22f236ad7/e41c19d263c53225a98980e3049d7eb358bd579c61800fe9de34a50c17140476"
+                            },
+                            "title": "Arvind Krishna & Nikesh Arora: Quantum Threat, Open vs Frontier AI, AI Cyber Warfare & SaaS Collapse",
+                            "description": "(0:00) Arvind Krishna & Nikesh Arora talk about Quantum Computing's Threat to Encryption\n\n(9:07) Open Weight vs. Frontier AI Models\n\n(18:07) AI and Cyber Warfare\n\n(21:14) AI Regulation and the Global AI Arms Race\n\n(30:32) Vertical Integration and Software Consolidation\n\n\u00a0\n\nFollow Nikesh:\n\nhttps://x.com/nikesharora\n\n\u00a0\n\nFollow Arvind:\n\nhttps://x.com/ArvindKrishna\n\n\u00a0\n\nFollow the besties:\u00a0\n\nhttps://x.com/chamath\n\nhttps://x.com/Jason\n\nhttps://x.com/DavidSacks\n\nhttps://x.com/friedberg\n\n\u00a0\n\nFollow on X:",
+                            "url": "https://dts.podtrac.com/redirect.mp3/traffic.libsyn.com/secure/allinchamathjason/88_AUDIO_NikeshArvink.mp3?dest-id=1928300",
+                            "audio_url": "https://cdn.particle.pro/url/media/44767984-f2eb-4324-941e-406ff8e5eb77/f6bb20e13a0ab60bf78002c70a2c534ac9d68f5ed56c3e61a3aa530bc241bb48",
+                            "image_url": "https://cdn.particle.pro/url/media/44767984-f2eb-4324-941e-406ff8e5eb77/d4a0480060d837adc833450b061e5577ad22111a95419a37f3eae43860dfc9fa",
+                            "language": "en",
+                            "explicit": false,
+                            "published_at": "2026-10-21T23:42:00Z",
+                            "duration_seconds": 2399.855999993,
+                            "speakers": [
+                                {
+                                    "name": "Jason Calacanis",
+                                    "role": "HOST",
+                                    "speaking_duration_seconds": 422.500999944,
+                                    "entity": {
+                                        "id": "GoNEpqEjj2X4",
+                                        "slug": "jason-calacanis",
+                                        "name": "Jason Calacanis",
+                                        "description": "American internet entrepreneur and angel investor",
+                                        "wikipedia_url": "https://en.wikipedia.org/wiki/Jason_Calacanis",
+                                        "image_url": "https://cdn.particle.pro/url/media/kge/m/082wh2/2201db7170a6395917af54a629a4bdb7f09cc3ca5a0886daadab8d290f0701c9",
+                                        "type": {
+                                            "slug": "person",
+                                            "name": "Person"
+                                        },
+                                        "person": {
+                                            "id": "65sdckHxa80FlEmIW7o9GU"
+                                        }
+                                    },
+                                    "person": {
+                                        "id": "65sdckHxa80FlEmIW7o9GU",
+                                        "slug": "jason-calacanis",
+                                        "name": "Jason Calacanis",
+                                        "description": "American podcaster, internet entrepreneur, angel investor, and author; host of the All-In Podcast and This Week in Startups."
+                                    }
+                                },
+                                {
+                                    "name": "Arvind Krishna",
+                                    "role": "GUEST",
+                                    "speaking_duration_seconds": 854.478999911,
+                                    "entity": {
+                                        "id": "1GmOP1C39oLsryrvrn",
+                                        "slug": "arvind-krishna",
+                                        "name": "Arvind Krishna",
+                                        "description": "CEO of IBM",
+                                        "wikipedia_url": "https://en.wikipedia.org/wiki/Arvind_Krishna",
+                                        "image_url": "https://cdn.particle.pro/url/media/kge/g/11j7mhwjrc/8f7abac1794a3efb724c9eb5fba59fb179e73ed78918453daa8cd1f6d46a7328",
+                                        "type": {
+                                            "slug": "person",
+                                            "name": "Person"
+                                        },
+                                        "person": {
+                                            "id": "3karj99xC36CAJyMeVXpHi",
+                                            "image_url": "https://cdn.particle.pro/headshots/3CjbFTcYpTAJYZubypKvceVNH5q.jpg",
+                                            "title": "CEO, President & Chairman",
+                                            "company": "IBM"
+                                        }
+                                    },
+                                    "person": {
+                                        "id": "3karj99xC36CAJyMeVXpHi",
+                                        "slug": "arvind-krishna",
+                                        "name": "Arvind Krishna",
+                                        "description": "Chairman, President and CEO of IBM; technology executive leading AI, cloud, and quantum computing initiatives",
+                                        "image_url": "https://cdn.particle.pro/headshots/3CjbFTcYpTAJYZubypKvceVNH5q.jpg"
+                                    }
+                                }
+                            ],
+                            "topics": [
+                                {
+                                    "id": "4KDS8NM",
+                                    "name": "Geopolitics",
+                                    "slug": "geopolitics",
+                                    "ancestry_path": "l7WlH"
+                                },
+                                {
+                                    "id": "4FZ5301",
+                                    "name": "Technology",
+                                    "slug": "technology",
+                                    "ancestry_path": "i6hAv"
+                                }
+                            ],
+                            "segment_count": 12,
+                            "clip_count": 11,
+                            "entity_count": 43,
+                            "has_transcript": true,
+                            "transcript_status": "transcribed"
+                        }
+                    ],
+                    "has_more": true,
+                    "cursor": "r.4gfFC6"
+                }
+            }
+        }
+    ]
+}

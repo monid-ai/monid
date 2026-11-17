@@ -1,0 +1,107 @@
+{
+    "name": "happy-podcast-get",
+    "description": "Recorded 2026-10-28 with a real key against GET https://api.particle.pro/v1/podcasts/all-in?topic_limit=3 (HTTP 200); response trimmed by the fixture diet (arrays capped at 2, strings at 500 chars) and scrubbed. Particle bills this call a flat price; no receipt rides in the body.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.particle.pro/v1/podcasts/all-in?topic_limit=3"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "4t9PU1WkzOroEXfBl6ia7r",
+                    "title": "All-In with Chamath, Jason, Sacks & Friedberg",
+                    "slug": "all-in",
+                    "description": "Industry veterans, degenerate gamblers & besties Chamath Palihapitiya, Jason Calacanis, David Sacks & David Friedberg cover all things economic, tech, political, social & poker.",
+                    "url": "https://allinchamathjason.libsyn.com/rss",
+                    "image_url": "https://cdn.particle.pro/url/media/a0a7b2fa-7c8c-5609-9772-aee22f236ad7/e41c19d263c53225a98980e3049d7eb358bd579c61800fe9de34a50c17140476",
+                    "language": "en",
+                    "explicit": false,
+                    "episode_count": 442,
+                    "bias": "LEANS_RIGHT",
+                    "political_context": "US",
+                    "suitability_tier": "SENSITIVE",
+                    "popularity": 0.9977286336699085,
+                    "format": {
+                        "guest_frequency": "regular",
+                        "signals": [
+                            "interview"
+                        ],
+                        "has_ads": true,
+                        "has_video": true,
+                        "avg_episode_minutes": 77,
+                        "episodes_per_week": 2.96,
+                        "publishing_status": "active"
+                    },
+                    "speakers": [
+                        {
+                            "name": "Jason Calacanis",
+                            "role": "HOST",
+                            "occurrences": 395,
+                            "entity": {
+                                "id": "GoNEpqEjj2X4",
+                                "slug": "jason-calacanis",
+                                "name": "Jason Calacanis",
+                                "description": "American internet entrepreneur and angel investor",
+                                "wikipedia_url": "https://en.wikipedia.org/wiki/Jason_Calacanis",
+                                "image_url": "https://cdn.particle.pro/url/media/kge/m/082wh2/2201db7170a6395917af54a629a4bdb7f09cc3ca5a0886daadab8d290f0701c9",
+                                "type": {
+                                    "slug": "person",
+                                    "name": "Person"
+                                },
+                                "person": {
+                                    "id": "65sdckHxa80FlEmIW7o9GU"
+                                }
+                            }
+                        },
+                        {
+                            "name": "Chamath Palihapitiya",
+                            "role": "HOST",
+                            "occurrences": 361,
+                            "entity": {
+                                "id": "17PzxG1slmH46T",
+                                "slug": "chamath-palihapitiya",
+                                "name": "Chamath Palihapitiya",
+                                "description": "Canadian-American venture capitalist",
+                                "wikipedia_url": "https://en.wikipedia.org/wiki/Chamath_Palihapitiya",
+                                "image_url": "https://cdn.particle.pro/url/media/kge/m/02h6fl9/657e15fc10a65d90efa52427ab896fa0f1e36e9c8b9ab05b9c672e772184cd6e",
+                                "type": {
+                                    "slug": "person",
+                                    "name": "Person"
+                                },
+                                "person": {
+                                    "id": "1UlqjpuHcBR5ugMpSNkMc4",
+                                    "company": "8090 Solutions"
+                                }
+                            }
+                        }
+                    ],
+                    "topics": [
+                        {
+                            "id": "4FZ4EFh",
+                            "name": "Politics",
+                            "slug": "politics",
+                            "ancestry": "Politics",
+                            "ancestry_path": "GtizK",
+                            "episode_count": 317
+                        },
+                        {
+                            "id": "FMABRApV",
+                            "name": "Society",
+                            "slug": "society",
+                            "ancestry": "Society",
+                            "ancestry_path": "E-sJ7",
+                            "episode_count": 315
+                        }
+                    ],
+                    "publisher": {
+                        "id": "7eQRi7E7CXKm0GYpE0DVkO",
+                        "slug": "all-in-podcast-llc",
+                        "name": "All-In Podcast, LLC"
+                    }
+                }
+            }
+        }
+    ]
+}
