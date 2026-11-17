@@ -1,0 +1,53 @@
+{
+    "name": "recaptcha-v3-succeeded",
+    "description": "Recorded from the compiled CapSolver connector on 2026-10-30 against https://recaptcha-demo.appspot.com/recaptcha-v3-request-scores.php. Request sequence, task IDs, statuses and response fields retained; clientKey redacted, response strings trimmed and expiring solution values replaced with inert placeholders.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.capsolver.com/createTask",
+                "body": {
+                    "task": {
+                        "websiteURL": "https://recaptcha-demo.appspot.com/recaptcha-v3-request-scores.php",
+                        "websiteKey": "6LdKlZEpAAAAAAOQjzC2v_d36tWxCl6dWsozdSy9",
+                        "pageAction": "examples/v3scores",
+                        "type": "ReCaptchaV3TaskProxyLess"
+                    },
+                    "clientKey": "REDACTED"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "errorId": 0,
+                    "taskId": "28be099a-8b39-4e35-a14c-5d8b19967ad5",
+                    "status": "idle"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.capsolver.com/getTaskResult",
+                "body": {
+                    "taskId": "28be099a-8b39-4e35-a14c-5d8b19967ad5",
+                    "clientKey": "REDACTED"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "errorId": 0,
+                    "taskId": "28be099a-8b39-4e35-a14c-5d8b19967ad5",
+                    "status": "ready",
+                    "solution": {
+                        "createTime": 1793347916519,
+                        "gRecaptchaResponse": "RECORDED_GRECAPTCHARESPONSE",
+                        "secChUa": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+                        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+                    }
+                }
+            }
+        }
+    ]
+}

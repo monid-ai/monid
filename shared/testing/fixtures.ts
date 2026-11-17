@@ -3,7 +3,8 @@ import { type Json, zJson } from "@shared/core";
 
 /**
  * HTTP fixture: recorded {req, res} pairs served in order during replay.
- * Headers are NEVER recorded — credentials cannot leak into fixtures.
+ * Request headers are never recorded. Response headers are allowlisted;
+ * known JSON-body credentials are redacted from the recording copy.
  *
  * FIXTURES ARE MINIMAL SHARED CHAINS (fixture strategy v2): committed DATA
  * files at PROVIDER level (`connectors/<provider>/fixtures/<shape>.json`) —
@@ -174,6 +175,25 @@ export function scrubJson(value: Json): Json {
     return value;
 }
 
+/** Redact CapSolver's body credential, including nested/echoed copies.
+ * Keep this separate from the PII pass: it must run BEFORE the recording
+ * enters the sink, and must not change the request or response used live.
+ * Solution tokens are intentionally retained for lifecycle replay. */
+function scrubBodyCredentials(value: Json): Json {
+    if (Array.isArray(value)) return value.map(scrubBodyCredentials);
+    if (value !== null && typeof value === "object") {
+        return Object.fromEntries(
+            Object.entries(value).map(([key, item]) => [
+                key,
+                key.replace(/[_-]/g, "").toLowerCase() === "clientkey"
+                    ? "REDACTED"
+                    : scrubBodyCredentials(item),
+            ]),
+        );
+    }
+    return value;
+}
+
 /** The placeholder every redacted query value collapses to. */
 export const REDACTED_QUERY_VALUE = "REDACTED";
 
@@ -223,7 +243,7 @@ export function scrubCalls(calls: RecordedCall[]): RecordedCall[] {
         req: {
             ...call.req,
             ...(call.req.body !== undefined
-                ? { body: scrubJson(call.req.body) }
+                ? { body: scrubJson(scrubBodyCredentials(call.req.body)) }
                 : {}),
         },
         res: {
@@ -237,7 +257,7 @@ export function scrubCalls(calls: RecordedCall[]): RecordedCall[] {
                     ),
                 }
                 : {}),
-            body: scrubJson(call.res.body),
+            body: scrubJson(scrubBodyCredentials(call.res.body)),
         },
     }));
 }
@@ -306,7 +326,8 @@ export function replayFetch(
  *  RECORDED_RES_HEADERS allowlist — and re-attached to the response relayed
  *  onward, so the recording run and its later replay observe the SAME
  *  exchange (without this, a recorded `location` would be in the fixture but
- *  missing from the live run that produced it). */
+ *  missing from the live run that produced it). Known body credentials are
+ *  redacted from the sink only; the live request/response are unchanged. */
 export function recordingFetch(
     realFetch: typeof fetch,
     sink: RecordedCall[],
@@ -331,12 +352,14 @@ export function recordingFetch(
             req: {
                 method,
                 url,
-                ...(requestBody !== undefined ? { body: requestBody } : {}),
+                ...(requestBody !== undefined
+                    ? { body: scrubBodyCredentials(requestBody) }
+                    : {}),
             },
             res: {
                 status: response.status,
                 ...(headers !== undefined ? { headers } : {}),
-                body: parseMaybeJson(text) ?? text,
+                body: scrubBodyCredentials(parseMaybeJson(text) ?? text),
             },
         });
         return new Response(text, {

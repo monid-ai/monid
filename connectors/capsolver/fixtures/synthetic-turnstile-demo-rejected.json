@@ -1,0 +1,48 @@
+{
+    "name": "synthetic-turnstile-demo-rejected",
+    "description": "Synthetic offline failure fixture using public Cloudflare Turnstile demo inputs and its dummy site key. Simulates task creation followed by a polling error to verify zero usage. Responses and task IDs are test values; this is not a recording or a prediction of the live provider response.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.capsolver.com/createTask",
+                "body": {
+                    "task": {
+                        "websiteURL": "https://demo.turnstile.workers.dev/",
+                        "websiteKey": "1x00000000000000000000AA",
+                        "type": "AntiTurnstileTaskProxyLess"
+                    },
+                    "clientKey": "REDACTED"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "errorId": 0,
+                    "taskId": "synthetic-turnstile-demo-failure-task-id",
+                    "status": "idle"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.capsolver.com/getTaskResult",
+                "body": {
+                    "taskId": "synthetic-turnstile-demo-failure-task-id",
+                    "clientKey": "REDACTED"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "errorId": 1,
+                    "errorCode": "ERROR_CAPTCHA_SOLVE_FAILED",
+                    "errorDescription": "Captcha solve failed",
+                    "taskId": "synthetic-turnstile-demo-failure-task-id",
+                    "status": "failed"
+                }
+            }
+        }
+    ]
+}

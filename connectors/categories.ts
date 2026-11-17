@@ -24,6 +24,12 @@ export const LEAF_CATEGORIES = defineLeafCategories([
         description: "Fetch and extract clean content from known URLs.",
     },
     {
+        id: "captcha-solving",
+        displayName: "CAPTCHA Solving",
+        description:
+            "Solve supported CAPTCHA challenges for authorized automation and testing workflows.",
+    },
+    {
         id: "news-search",
         displayName: "News Search",
         description: "Search and monitor news coverage.",

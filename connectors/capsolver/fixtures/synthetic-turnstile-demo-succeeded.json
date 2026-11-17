@@ -1,0 +1,51 @@
+{
+    "name": "synthetic-turnstile-demo-succeeded",
+    "description": "Synthetic offline success fixture using public Cloudflare Turnstile demo inputs and its dummy site key. Responses, task IDs, token and user agent are test values. Covers completion without optional metadata. Not a live recording and not evidence of provider success or target-page acceptance for this demo.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.capsolver.com/createTask",
+                "body": {
+                    "task": {
+                        "websiteURL": "https://demo.turnstile.workers.dev/",
+                        "websiteKey": "1x00000000000000000000AA",
+                        "type": "AntiTurnstileTaskProxyLess"
+                    },
+                    "clientKey": "REDACTED"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "errorId": 0,
+                    "taskId": "synthetic-turnstile-demo-task-id",
+                    "status": "idle"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.capsolver.com/getTaskResult",
+                "body": {
+                    "taskId": "synthetic-turnstile-demo-task-id",
+                    "clientKey": "REDACTED"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "errorId": 0,
+                    "taskId": "synthetic-turnstile-demo-task-id",
+                    "status": "ready",
+                    "solution": {
+                        "token": "synthetic-demo-solution-token",
+                        "type": "turnstile",
+                        "userAgent": "synthetic-demo-user-agent"
+                    }
+                }
+            }
+        }
+    ]
+}
