@@ -1,0 +1,30 @@
+{
+    "name": "synthetic-device-logs",
+    "description": "GET the default 200-line log snapshot of an owned session (tail=200 is the binding default, so it is on the wire).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/run-cloud/ios/sess-1/logs?tail=200"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "since": "2026-11-12T10:00:00.000Z",
+                    "capturedAt": "2026-11-12T10:03:00.000Z",
+                    "entries": [
+                        {
+                            "timestamp": "2026-11-12T10:02:58.120Z",
+                            "message": "MyApp[812:4411] Login screen appeared"
+                        },
+                        {
+                            "timestamp": "2026-11-12T10:02:59.004Z",
+                            "message": "MyApp[812:4411] TypeError: undefined is not a function"
+                        }
+                    ],
+                    "truncated": false
+                }
+            }
+        }
+    ]
+}

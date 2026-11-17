@@ -1,0 +1,26 @@
+{
+    "name": "synthetic-open-url",
+    "description": "POST open-url to an owned session: the acknowledgement carries the fleet device and lease ids, which the provider projection strips.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/run-cloud/ios/sess-1/open-url",
+                "body": {
+                    "url": "myapp://settings"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "ok": true,
+                    "platform": "ios",
+                    "sessionId": "sess-1",
+                    "device": "C0FFEE00-1111-2222-3333-444455556666",
+                    "leaseId": "lease-1",
+                    "url": "myapp://settings"
+                }
+            }
+        }
+    ]
+}
