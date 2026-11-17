@@ -286,7 +286,11 @@ export class LoadedEndpoint implements RunnableEndpoint {
                 resource: target.resource,
                 externalId: target.externalId,
             });
-            if (rows.length === 0) {
+            const owned = rows.find((row) =>
+                row.resource === target.resource &&
+                row.externalId === target.externalId
+            );
+            if (!owned) {
                 if (lenient) continue;
                 const at = this.now().toISOString();
                 return {
@@ -312,7 +316,7 @@ export class LoadedEndpoint implements RunnableEndpoint {
                     },
                 };
             }
-            instances[alias] = rows[0];
+            instances[alias] = owned;
         }
         return { targets, instances };
     }

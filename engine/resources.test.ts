@@ -674,3 +674,28 @@ Deno.test("trust boundary: a resource doc whose id names a FOREIGN provider fail
         ),
     );
 });
+
+Deno.test("resources: keyed gate requires matching resource and external identity", async () => {
+    const bundle = await bundleOf();
+    for (
+        const rows of [
+            OWNED,
+            [{ ...OWNED[0], resource: "other/widget", externalId: "foreign" }],
+        ]
+    ) {
+        let calls = 0;
+        const loaded = await new Engine({
+            resources: { owned: () => Promise.resolve(rows) },
+            transport: {
+                execute: () => {
+                    calls++;
+                    return Promise.resolve({ status: 200, body: "{}" });
+                },
+            },
+        }).load(sealUnit(bundle, "resdemo#widgets/use"));
+        const result = await loaded.run({ body: { id: "foreign" } });
+        assertEquals(result.httpStatus, 404);
+        assertEquals(result.usage.credits, {});
+        assertEquals(calls, 0);
+    }
+});
