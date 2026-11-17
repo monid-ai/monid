@@ -1,0 +1,28 @@
+{
+    "name": "recorded-expansion-unlocker-header-only",
+    "description": "Real Scrapeless responses, 2026-10-22; header allowlist applied; Monid trimCalls caps response arrays at 2 and strings at 500. Full redacted records remain in research/live-expansion-2026-10-22. Replay usage is TEST ONLY, never actual charges. Header-echo data string is retained in full for semantic assertions.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v2/unlocker/request",
+                "body": {
+                    "actor": "unlocker.webunlocker",
+                    "input": {
+                        "url": "https://httpbin.org/headers",
+                        "header": {
+                            "X-Monid-Probe": "header-singular-only-20261022"
+                        }
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "code": 200,
+                    "data": "{\n  \"headers\": {\n    \"Accept\": \"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7\", \n    \"Accept-Encoding\": \"gzip, deflate, br, zstd\", \n    \"Accept-Language\": \"en-US,en;q=0.9\", \n    \"Host\": \"httpbin.org\", \n    \"Priority\": \"u=0, i\", \n    \"Sec-Ch-Ua\": \"\\\"Not:A-Brand\\\";v=\\\"99\\\", \\\"Google Chrome\\\";v=\\\"145\\\", \\\"Chromium\\\";v=\\\"145\\\"\", \n    \"Sec-Ch-Ua-Mobile\": \"?0\", \n    \"Sec-Ch-Ua-Platform\": \"\\\"Windows\\\"\", \n    \"Sec-Fetch-Dest\": \"document\", \n    \"Sec-Fetch-Mode\": \"navigate\", \n    \"Sec-Fetch-Site\": \"none\", \n    \"Sec-Fetch-User\": \"?1\", \n    \"Upgrade-Insecure-Requests\": \"1\", \n    \"User-Agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36\", \n    \"X-Amzn-Trace-Id\": \"Root=1-6ad9db41-358cdf8a6b4cc24e0995d06d\", \n    \"X-Monid-Probe\": \"header-singular-only-20261022\"\n  }\n}\n"
+                }
+            }
+        }
+    ]
+}

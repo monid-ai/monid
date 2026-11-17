@@ -1,0 +1,131 @@
+{
+    "name": "recorded-closure-amazon-product",
+    "description": "Real response chain, 2026-10-23. Public test inputs; PII and storage links redacted, response arrays/strings trimmed. Native success/error is distinct from connector acceptance and observed balances are not task invoices.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v1/scraper/request",
+                "body": {
+                    "actor": "scraper.amazon",
+                    "input": {
+                        "type": "product",
+                        "url": "https://www.amazon.com/dp/B0BQXHK363",
+                        "zip_code": ""
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "html": "<!doctype html><html lang=\"en-us\" class=\"a-no-js\" data-19ax5a9jf=\"dingo\"><!-- sp:feature:head-start -->\n<head><script>var aPageStart = (new Date()).getTime();</script><meta charset=\"utf-8\"/>\n<!-- sp:end-feature:head-start -->\n<!-- sp:feature:csm:head-open-part1 -->\n\n<script type='text/javascript'>var ue_t0=ue_t0||+new Date();</script>\n<!-- sp:end-feature:csm:head-open-part1 -->\n<!-- sp:feature:cs-optimization -->\n<meta http-equiv='x-dns-prefetch-control' content='on'>\n<link rel=\"preconnect\" href",
+                    "metadata": {
+                        "rawUrl": "https://example.com/redacted-storage",
+                        "type": "product"
+                    },
+                    "result": {
+                        "title": "OLIXIS Guest Reception Desk Chairs Without Wheels, PU Leather Padded Arms, for Office Waiting Room Restaurant Library Barber Store Clinic Lobby Student Adult, Black- 1 Pack",
+                        "seller_name": "",
+                        "brand": "",
+                        "description": "About this item                     🥇 【Comfortable Support】- Made of high density sponge, the cushion of this reception chair is soft and durable. The backrest is wide and full, can perfectly support the back and hips, without compressing the nerves in the back and legs, so you can fully relax your body     🥇【Preferred Leather】- The guest chair with arms uses high-grade leather, which is not easy to wear, surface waterproof, corrosion-resistant, not easy to change color, skin-friendly, and non",
+                        "initial_price": "",
+                        "final_price": "",
+                        "availability": "",
+                        "reviews_count": "197",
+                        "categories": [
+                            "Office Products",
+                            "Office Furniture & Lighting"
+                        ],
+                        "asin": "B0BQXHK363",
+                        "buybox_seller": "",
+                        "number_of_sellers": 1,
+                        "root_bs_rank": "438,105",
+                        "answered_questions": 0,
+                        "domain": "https://www.amazon.com",
+                        "images_count": 0,
+                        "url": "https://www.amazon.com/dp/B0BQXHK363",
+                        "video_count": 3,
+                        "image_url": "https://m.media-amazon.com/images/I/71CO3NYypML._AC_SL1500_.jpg",
+                        "item_weight": "12 pounds",
+                        "rating": "",
+                        "product_dimensions": "",
+                        "seller_id": "ATVPDKIKX0DER",
+                        "date_first_available": "",
+                        "discount": "",
+                        "model_number": "",
+                        "manufacturer": "OLIXIS",
+                        "department": "Office Products",
+                        "plus_content": true,
+                        "upc": "810108654766",
+                        "video": true,
+                        "top_review": "",
+                        "variations": null,
+                        "delivery": ",",
+                        "features": [
+                            "🥇 【Comfortable Support】- Made of high density sponge, the cushion of this reception chair is soft and durable. The backrest is wide and full, can perfectly support the back and hips, without compressing the nerves in the back and legs, so you can fully relax your body",
+                            "🥇【Preferred Leather】- The guest chair with arms uses high-grade leather, which is not easy to wear, surface waterproof, corrosion-resistant, not easy to change color, skin-friendly, and non-irritating odor. The waiting room chair can be used both indoor and outdoor, easy to clean and has a long service life"
+                        ],
+                        "format": "",
+                        "buybox_prices": {
+                            "discount": "",
+                            "final_price": "",
+                            "initial_price": "",
+                            "unit_price": ""
+                        },
+                        "parent_asin": "B0BQXHK363",
+                        "input_asin": "B0BQXHK363",
+                        "ingredients": null,
+                        "origin_url": "https://www.amazon.com",
+                        "bought_past_month": "",
+                        "is_available": true,
+                        "root_bs_category": "Office Products",
+                        "bs_category": "See Top 100 in Office Products",
+                        "bs_rank": "",
+                        "badge": "",
+                        "subcategory_rank": {
+                            "subcategory_name": "See Top 100 in Office Products",
+                            "subcategory_rank": ""
+                        },
+                        "amazon_choice": false,
+                        "images": null,
+                        "product_details": [
+                            {
+                                "type": "Brand Name",
+                                "values": "OLIXIS"
+                            },
+                            {
+                                "type": "Additional Features",
+                                "values": "Arm Rest, Cushion Availability, Upholstered Leather"
+                            }
+                        ],
+                        "prices_breakdown": {
+                            "deal_type": "",
+                            "list_price": "",
+                            "typical_price": ""
+                        },
+                        "country_of_origin": "",
+                        "from_the_brand": [
+                            "https://m.media-amazon.com/images/S/aplus-media-library-service-media/ff99e1c9-d12f-4fce-9919-8f69659fdd28.__CR0,0,1464,625_PT0_SX1464_V1___.jpg",
+                            "https://m.media-amazon.com/images/S/aplus-media-library-service-media/c8fcbebd-08eb-4b7a-820f-c8f2a69c15c6.__CR0,0,315,145_PT0_SX315_V1___.jpg"
+                        ],
+                        "product_description": null,
+                        "seller_url": "https://www.amazon.com/sp?ie=UTF-8&seller=ATVPDKIKX0DER&asin=B0BQXHK363",
+                        "customer_says": "",
+                        "sustainability_features": null,
+                        "climate_pledge_friendly": false,
+                        "videos": [
+                            "https://www.amazon.com/vdp/0d571639c47849a2b8b4cc9b39ee61d4",
+                            "https://www.amazon.com/vdp/0bf57952050a4e3c9247ada1b19e2e72"
+                        ],
+                        "other_sellers_prices": null,
+                        "downloadable_videos": [
+                            "https://m.media-amazon.com/images/S/vse-vms-transcoding-artifact-us-east-1-prod/8979de7f-e61a-4f71-9ed4-04c28d4c91f0/default.jobtemplate.hls.m3u8",
+                            "https://m.media-amazon.com/images/S/vse-vms-transcoding-artifact-us-east-1-prod/f511d7ac-7f1c-4a8e-927c-0a339308967f/default.jobtemplate.hls.m3u8"
+                        ],
+                        "html": ""
+                    }
+                }
+            }
+        }
+    ]
+}

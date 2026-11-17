@@ -1,0 +1,77 @@
+{
+    "name": "recorded-closure-ai-copilot",
+    "description": "Real response chain, 2026-10-23. Public test inputs; PII and storage links redacted, response arrays/strings trimmed. Native success/error is distinct from connector acceptance and observed balances are not task invoices.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v2/scraper/request",
+                "body": {
+                    "actor": "scraper.copilot",
+                    "input": {
+                        "prompt": "In one sentence, what is example.com used for?",
+                        "country": "US",
+                        "mode": "search",
+                        "should_fetch_share_link": false
+                    }
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "status": "pending",
+                    "task_id": "5a7d3c53-2283-4a60-9db5-4958ce77e12f"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/5a7d3c53-2283-4a60-9db5-4958ce77e12f"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/5a7d3c53-2283-4a60-9db5-4958ce77e12f"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/5a7d3c53-2283-4a60-9db5-4958ce77e12f"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/5a7d3c53-2283-4a60-9db5-4958ce77e12f"
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "message": "Execution failed. Please try again later. We’re working to resolve the issue.",
+                    "status": "failed"
+                }
+            }
+        }
+    ]
+}

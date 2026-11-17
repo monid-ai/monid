@@ -1,0 +1,103 @@
+{
+    "name": "recorded-expansion-google-images",
+    "description": "Real Scrapeless responses, 2026-10-22; header allowlist applied; Monid trimCalls caps response arrays at 2 and strings at 500. Full redacted records remain in research/live-expansion-2026-10-22. Replay usage is TEST ONLY, never actual charges.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v1/scraper/request",
+                "body": {
+                    "actor": "scraper.google.search",
+                    "input": {
+                        "q": "IANA logo",
+                        "gl": "us",
+                        "hl": "en",
+                        "tbm": "isch"
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "filters": [
+                        {
+                            "name": "Siege",
+                            "parameters": {
+                                "q": "iana siege logo",
+                                "uds": "AJ5uw1_a2D0D09lxm8gpKKOTUn4rTxqO1E3U3ShBeNd2PQ1JpcsnHN-W-YZUHcGM2FrNq1kDZIXR9AFIXBJUkn9maosCUrXX_XbmmzDN2fJPEe24PRC3c4lKCpKtvgfeBVGWYio-vo1hmtleWmxcOgANH5GSH_XEY5zT5PBaTGDrmg_VO5y_9YA"
+                            },
+                            "link": "https://www.google.com/search?sca_esv=9e44a9c1964ca618&gl=us&hl=en&sxsrf=APpeQns-cx1tdLYfx7NLu4o2uIaovQCGkA:1792661958246&q=iana+siege+logo&uds=AJ5uw1_a2D0D09lxm8gpKKOTUn4rTxqO1E3U3ShBeNd2PQ1JpcsnHN-W-YZUHcGM2FrNq1kDZIXR9AFIXBJUkn9maosCUrXX_XbmmzDN2fJPEe24PRC3c4lKCpKtvgfeBVGWYio-vo1hmtleWmxcOgANH5GSH_XEY5zT5PBaTGDrmg_VO5y_9YA&udm=2&sa=X&ved=2ahUKEwj3w-SZqs2XAxWxGVkFHWXOHUMQxKsJKAB6BAgTEAE&ictx=0"
+                        },
+                        {
+                            "name": "Icann",
+                            "parameters": {
+                                "q": "icann IANA logo",
+                                "uds": "AJ5uw1_a2D0D09lxm8gpKKOTUn4rJ7j7W4i9nAR4pE1i4jX9s7JkmMSAQWaMBpTtjw_RJWNP-LnOoem6f04Z4tyGeCOX6u551NmtFnwn32NbcWUpPoZAzWgZglY53ojMh1a2S1yYAZ64HwOGJWBbPf6LdU6OXyd9Og"
+                            },
+                            "link": "https://www.google.com/search?sca_esv=9e44a9c1964ca618&gl=us&hl=en&sxsrf=APpeQns-cx1tdLYfx7NLu4o2uIaovQCGkA:1792661958246&q=icann+IANA+logo&uds=AJ5uw1_a2D0D09lxm8gpKKOTUn4rJ7j7W4i9nAR4pE1i4jX9s7JkmMSAQWaMBpTtjw_RJWNP-LnOoem6f04Z4tyGeCOX6u551NmtFnwn32NbcWUpPoZAzWgZglY53ojMh1a2S1yYAZ64HwOGJWBbPf6LdU6OXyd9Og&udm=2&sa=X&ved=2ahUKEwj3w-SZqs2XAxWxGVkFHWXOHUMQxKsJKAF6BAgWEAE&ictx=0"
+                        }
+                    ],
+                    "inline_images": [
+                        {
+                            "position": 1,
+                            "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOMYjOZKLe3OBb4gB25XMP72UJRvcpMJa-5mvwgMwjbQ&s=10",
+                            "related_content_id": "UwW1KPE3dehj8M,R-AOZCQBPa5RKM",
+                            "related_content_link": "https://www.google.com/search/about-this-image?img=H4sIAAAAAAAA_wEYAOf_ChYIx8C7oMakwJ6uARDTitTFkv7NuugBKgH8AhgAAAA%3D&q=https://www.reddit.com/r/Rainbow6/comments/pov18l/i_just_realized_that_ianas_logo_isnt_an_egg_its/&ctx=iv&hl=en-US",
+                            "source": "Reddit",
+                            "source_logo": "",
+                            "title": "I just realized that Iana's logo isn't an egg, it's her face : r/Rainbow6",
+                            "link": "https://www.reddit.com/r/Rainbow6/comments/pov18l/i_just_realized_that_ianas_logo_isnt_an_egg_its/",
+                            "original": "https://i.redd.it/zi5rm58repn71.png",
+                            "original_width": 695,
+                            "original_height": 585,
+                            "in_stock": false,
+                            "is_product": false
+                        },
+                        {
+                            "position": 2,
+                            "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSARHbXp5p4QH5weZcUjtTnfJEHx5kyTYiap5lhQmk7sA&s",
+                            "related_content_id": "DQbxgxU1qA1AvM,dvq3HKTYgR7lIM",
+                            "related_content_link": "https://www.google.com/search/about-this-image?img=H4sIAAAAAAAA_-MS4fj25f7Tg1O-HZAT6O05Mv_Got4rvADOtbBaFgAAAA%3D%3D&q=https://commons.wikimedia.org/wiki/File:Iana-logo-homepage.svg&ctx=iv&hl=en-US",
+                            "source": "Wikimedia Commons",
+                            "source_logo": "",
+                            "title": "File:Iana-logo-homepage.svg - Wikimedia Commons",
+                            "link": "https://commons.wikimedia.org/wiki/File:Iana-logo-homepage.svg",
+                            "original": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/25/Iana-logo-homepage.svg/3840px-Iana-logo-homepage.svg.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail",
+                            "original_width": 3840,
+                            "original_height": 1464,
+                            "in_stock": false,
+                            "is_product": false
+                        }
+                    ],
+                    "pagination": {},
+                    "search_information": {
+                        "organic_results_state": "Results for exact spelling",
+                        "query_displayed": "IANA logo",
+                        "total_results": 12200000,
+                        "time_taken_displayed": "0.30"
+                    },
+                    "suggested_searches": [
+                        {
+                            "name": "Siege",
+                            "link": "https://www.google.com/search?sca_esv=9e44a9c1964ca618&gl=us&hl=en&sxsrf=APpeQns-cx1tdLYfx7NLu4o2uIaovQCGkA:1792661958246&q=iana+siege+logo&uds=AJ5uw1_a2D0D09lxm8gpKKOTUn4rTxqO1E3U3ShBeNd2PQ1JpcsnHN-W-YZUHcGM2FrNq1kDZIXR9AFIXBJUkn9maosCUrXX_XbmmzDN2fJPEe24PRC3c4lKCpKtvgfeBVGWYio-vo1hmtleWmxcOgANH5GSH_XEY5zT5PBaTGDrmg_VO5y_9YA&udm=2&sa=X&ved=2ahUKEwj3w-SZqs2XAxWxGVkFHWXOHUMQxKsJKAB6BAgTEAE&ictx=0",
+                            "uds": "",
+                            "q": "Siege IANA logo",
+                            "thumbnail": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAArlBMVEX///8AAAD+/v6Pj4+MY4yZmZmcnJyRZ5FwcXAtGy36+vptbW2FhYX39/eUhZRaWlrU1NTMzMzs7Ow5OTl+fn7h4eGXkpcqKipmZma4uLhNTU0jGSPAwMATExOioqLa2toiIiI1EjWNX41wSXA9QD1jXmMxNjFSMVKBWoFdPF0WABZGMkZnSWcMBwytr61NME0NFA1CJ0I4JzgkDCRSV1IsHyw2MDZ2U3YeDh5YPljs53nvAAAB7ElEQVRIieWV2XabMBCGGSQhKsAYgRtDjJ3FTalLcJIuJO//YpXEYkmoxw+Q/4qj+Rhm0+B5n02+EmPzAWO+KYOOEUIxWSfzCd/Jo4tinfcRISgzP5iExT4gk5CFo40dIINavBA4cXRYJpQB3KUroa8LvHQV4AagyO8fHlY2HjMXjoR7bwePNs"
+                        },
+                        {
+                            "name": "Icann",
+                            "link": "https://www.google.com/search?sca_esv=9e44a9c1964ca618&gl=us&hl=en&sxsrf=APpeQns-cx1tdLYfx7NLu4o2uIaovQCGkA:1792661958246&q=icann+IANA+logo&uds=AJ5uw1_a2D0D09lxm8gpKKOTUn4rJ7j7W4i9nAR4pE1i4jX9s7JkmMSAQWaMBpTtjw_RJWNP-LnOoem6f04Z4tyGeCOX6u551NmtFnwn32NbcWUpPoZAzWgZglY53ojMh1a2S1yYAZ64HwOGJWBbPf6LdU6OXyd9Og&udm=2&sa=X&ved=2ahUKEwj3w-SZqs2XAxWxGVkFHWXOHUMQxKsJKAF6BAgWEAE&ictx=0",
+                            "uds": "",
+                            "q": "Icann IANA logo",
+                            "thumbnail": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADsAAAAuCAMAAACh4JGpAAAAgVBMVEX///8AADMAACoAADEAACIAAC/O0dUAACfY297s7e8AI0QADDgAAC33+PkAHkEAIEIAAB0AETrj5eetsrkAABi7v8WIkp00Rl1faXkAKUjExsxtdoWSmKMAFz0jOFOjqbFVYXNKWGyboap7g5AAABAAAAAWL00sP1g9TmQAAAmEipaXYHmwAAAC+UlEQVRIidWW2bqjKBCAwQVBxSgEXMCVdJKT93/ABjQ9Z7oz0TNf90VzYQrlrw2qCAB/ZjAxykXgr4NUX6/1ECR5WKiv4RQLRr1tXsMibOhxlCOHkXXS3YpThY6izbpSbNaEqdq4O4bWeoO0f8pA6ayNDwU9NeDp4cMpgGkLZNW2B9ClpEBsMl6AhOnVujGnvd5FSWBsrp4zOVWnwUVAYBvuJtvk2J2KTREeinkVddGPOygNC6"
+                        }
+                    ],
+                    "metadata": {
+                        "engine": "google.search",
+                        "rawUrl": "https://api.scrapeless.com/storage/scrapeless.scraper.google.search/2999feabfe627bcd7886db6b5bf20782/da477159c631f951f5b3d59fbb247dc6_1792661959.html"
+                    }
+                }
+            }
+        }
+    ]
+}

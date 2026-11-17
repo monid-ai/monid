@@ -1,0 +1,62 @@
+{
+    "name": "recorded-six-ai-aimode-share-url",
+    "description": "Actual URL-only request using a fresh native share.google/aimode link, not the raw Google async URL. PII/secret redaction; result strings and arrays trimmed, complete request chain retained. Not a task receipt.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v2/scraper/request",
+                "body": {
+                    "actor": "scraper.aimode",
+                    "input": {
+                        "url": "https://share.google/aimode/8ochfnCd1N4bIp42m"
+                    }
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "status": "pending",
+                    "task_id": "7db0cc76-a3de-4155-9f04-430ec26271aa"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/7db0cc76-a3de-4155-9f04-430ec26271aa"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/7db0cc76-a3de-4155-9f04-430ec26271aa"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/7db0cc76-a3de-4155-9f04-430ec26271aa"
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "message": "Execution failed. Please try again later. We’re working to resolve the issue.",
+                    "status": "failed"
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,284 @@
+{
+    "name": "recorded-branches-rufus-sse",
+    "description": "Actual bounded own-account branch probe 2026-10-23. Secrets/PII scrubbed; result arrays capped at 3 and strings at 4500 characters; all protocol calls retained. Not an invoice or full production acceptance.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v1/scraper/request",
+                "body": {
+                    "actor": "scraper.amazon",
+                    "input": {
+                        "type": "rufus",
+                        "keywords": "best noise cancelling headphones",
+                        "domain": "www.amazon.com",
+                        "is_sse_data": true,
+                        "is_get_question": false
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "html": "id:CHUNK_0\nevent:context\ndata:{\"bsr\":{\"peekBehaviour\":null,\"bottomSheetSize\":\"expanded\"},\"requestContext\":{\"requestId\":\"RC3HMW711525A74AWMST\",\"sessionId\":\"135-8093780-5787725\"},\"needsAnswerGenerationOnSwipeUp\":false,\"ftueImpressionPersistenceVerified\":true}\n\nid:CHUNK_1\nevent:conversation_metadata\ndata:{\"threadId\":\"amzn1.rufus.alexa.thread.ffd6d2e0-0191-4de5-8ab8-b5f6b959923a\"}\n\nid:CHUNK_2\nevent:affordance\ndata:{\"sections\":[{\"action\":\"ADD\",\"target\":{\"groupId\":\"section_groupId_customer_text_RC3HMW711525A74AWMST_0\"},\"content\":{\"format\":\"HTML\",\"data\":\"<div class=\\\"rufus-sections-container \\\" id=\\\"section_groupId_customer_text_RC3HMW711525A74AWMST_0\\\" data-rufus-sequenceId=\\\"1\\\" data-csa-c-type=\\\"widget\\\" data-csa-c-content-id=\\\"rufus-dsk-section-container\\\" data-csa-c-slot-id=\\\"rufus-dsk-section-customer_text_RC3HMW711525A74AWMST_0\\\" data-csa-c-nile-request-id=\\\"RC3HMW711525A74AWMST\\\" data-csa-c-group-id=\\\"customer_text_RC3HMW711525A74AWMST_0\\\" data-csa-c-sequence-id=\\\"1\\\" data-section-class=\\\"CustomerText\\\"> <script type=\\\"a-state\\\" data-a-state=\\\"{&quot;key&quot;:&quot;generationModelMetadata&quot;}\\\">{}</script> <div class=\\\"rufus-sr-only\\\"> Customer question </div> <div class=\\\"a-section rufus-conversation-branding-update rufus-customer-text dialog-customer rufus-dialog-customer\\\"> <div class=\\\"a-section speech-bubble rufus-speech-bubble\\\"> <div class=\\\"a-section customer-text-wrap rufus-customer-text-wrap\\\"> <span class=\\\"rufus-color-onyx rufus-font-size-default rufus-text-wrap\\\"><span>best noise cancelling headphones</span></span> </div> </div> </div> </div>\"}}]}\n\nid:CHUNK_3\nevent:interim\ndata:{\"sections\":[{\"action\":\"ADD\",\"target\":{\"groupId\":\"section_groupId_interim_message_RC3HMW711525A74AWMST_0\"},\"content\":{\"format\":\"HTML\",\"data\":\"<div class=\\\"rufus-sections-container \\\" id=\\\"section_groupId_interim_message_RC3HMW711525A74AWMST_0\\\" data-rufus-sequenceId=\\\"2\\\" data-csa-c-type=\\\"widget\\\" data-csa-c-content-id=\\\"rufus-dsk-section-container\\\" data-csa-c-slot-id=\\\"rufus-dsk-section-interim_message_RC3HMW711525A74AWMST_0\\\" data-csa-c-nile-request-id=\\\"RC3HMW711525A74AWMST\\\" data-csa-c-group-id=\\\"interim_message_RC3HMW711525A74AWMST_0\\\" data-csa-c-sequence-id=\\\"2\\\" data-section-class=\\\"LoadingMessageTemplate\\\"> <script type=\\\"a-state\\\" data-a-state=\\\"{&quot;key&quot;:&quot;generationModelMetadata&quot;}\\\">{}</script> <div class=\\\"a-section rufus-conversation-branding-update\\\"> <div data-csa-c-content-id=\\\"rufus-dsk-interim-loading-message\\\" data-csa-c-group-id=\\\"interim_message_RC3HMW711525A74AWMST_0\\\" data-csa-c-nile-request-id=\\\"RC3HMW711525A74AWMST\\\" data-csa-c-sequence-id=\\\"2\\\" data-csa-c-slot-id=\\\"rufus-dsk-interim-loading-message\\\" data-csa-c-type=\\\"widget\\\" class=\\\"a-section rufus-loading-message-template rufus-text-subsections-with-avatar-branding-update\\\"> <div class=\\\"rufus-loading-messages\\\" role=\\\"status\\\"> <div class=\\\"rufus-loading-title rufus-fade-in\\\"> <div class=\\\"ellipse-pulse\\\"></div> <span class=\\\"rufus-color-onyx rufus-font-size-default rufus-text-wrap\\\"><span>Thinking...</span></span> </div> </div> </div> </div> </div>\"}}]}\n\nid:CHUNK_4\nevent:remove\ndata:{\"sections\":[{\"action\":\"REMOVE\",\"target\":{\"type\":\"Section\",\"groupId\":\"interim_message_RC3HMW711525A74AWMST_0\"}}]}\n\nid:CHUNK_5\nevent:inference\ndata:{\"type\":\"JSONPatches\",\"rufusUI\":true,\"patches\":[{\"op\":\"add\",\"path\":\"/\",\"groupId\":\"markdown_processor_RC3HMW711525A74AWMST_0\",\"value\":{\"id\":\"markdownSection-26856e6c-4892-4fdc-ae70-69c8ccd3cb9f\",\"type\":\"container\",\"children\":[],\"rufusUI\":true},\"rufusUI\":true,\"type\":\"JSONPatch\"}]}\n\nid:CHUNK_6\nevent:inference\ndata:{\"type\":\"JSONPatches\",\"rufusUI\":true,\"patches\":[{\"op\":\"replace\",\"path\":\"/\",\"groupId\":\"markdown_processor_RC3HMW711525A74AWMST_0\",\"value\":{\"id\":\"markdownSection-dde6d2c8-ff72-422c-900a-9892ec14cf59\",\"type\":\"container\",\"space\":{\"marginTop\":\"medium\",\"marginBottom\":\"medium\"},\"children\":[{\"id\":\"paragraph-5574d181-48a6-4dd3-8adf-0c8ef3871b69\",\"type\":\"text\",\"children\":[{\"id\":\"text-9788ceca-2272-403f-8fbc-4fd0446a1b24\",\"type\":\"text\",\"children\":\"Here\",\"rufusUI\":true,\"copyTemplate\":{\"prefix\":\"\",\"suffix\":\"\"}}],\"rufusUI\":true,\"copyTemplate\":{\"prefix\":\"\",\"suffix\":\"\"}}],\"rufusUI\":true,\"copyTemplate\":{\"prefix\":\"\",\"suffix\":\"\\n\"}},\"rufusUI\":true,\"type\":\"JSONPatch\"}]}\n\nid:CHUNK_7\nevent:inference\ndata:{\"type\":\"JSONPatches\",\"rufusUI\":true,\"patches\":[{\"op\":\"replace\",\"path\":\"/children/0/children/0\",\"groupId\":\"markdown_processor_RC3HMW711525A74AWMST_0\",\"value\":{\"id\":\"text-a5706b0a-3fdd-4e5c-b336-ba800cc9b332\",\"type\":\"tex",
+                    "metadata": {
+                        "rawUrl": "https://api.scrapeless.com/storage/scrapeless.scraper.amazon/9dd42d10e4791a82c0ccf4cd31f69cfb/775e28a33870b9fdd46390a6d817ae0b_1792741692.html",
+                        "type": "rufus"
+                    },
+                    "result": {
+                        "request_context": {
+                            "requestId": "RC3HMW711525A74AWMST",
+                            "sessionId": "135-8093780-5787725",
+                            "bsr": {
+                                "bottomSheetSize": "expanded",
+                                "peekBehaviour": null
+                            }
+                        },
+                        "user_query": "best noise cancelling headphones",
+                        "interim_messages": [
+                            "Thinking..."
+                        ],
+                        "inference_text": "Here are the top noise-cancelling picks across price ranges and formats:\n\nThe Sony WH-1000XM6 leads for raw ANC performance, while the Bose QC Ultra 2nd Gen wins on comfort. Since you have an iPhone 17, the AirPods Max 2 integrates most seamlessly. Want help narrowing down by use case (travel, office, workouts)?",
+                        "inference_text_with_products": "Here are the top noise-cancelling picks across price ranges and formats:\n\nBest Overall (Over-Ear)\nSee more: https://www.amazon.com/s?k=More%20Best%20Overall%20%28Over-Ear%29%2C%20excluding%20the%20ones%20recommended\n\n- Sony WH-1000XM6 The Best Noise Cancelling Wireless Headphones, Black | HD NC Processor QN3, 12 Microphones, Adaptive NC Optimizer, Mastered by Engineers, Studio-Quality, Up to 30 Hrs of Battery\n  ASIN: B0F3PQHWTZ\n  Price: $458.00\nRating: 4.2 5,300\n  Purchase volume: 3K+ bought in past month\n  Delivery: FREE delivery Wed, Oct 28\n  Explanation: Ranked #1 by multiple 2026 reviewers — the QN3 processor and 12-mic system deliver exceptional low, mid, and high-frequency noise blocking. 30-hr battery, foldable design, LDAC hi-res audio.\n  Link: https://www.amazon.com/dp/B0F3PQHWTZ?niid=nl_cl_lst_a_1_1&ref_=nl_cl_lst_a_1_1&nrid=RC3HMW711525A74AWMST\n  More details: https://www.amazon.com/s?k=More%20details%20about%20Sony%20WH-1000XM6%20The%20Best%20Noise%20Cancelling%20Wireless%20Headphones%2C%20Black%20%7C%20HD%20NC%20Processor%20QN3%2C%2012%20Microphones%2C%20Adaptive%20NC%20Optimizer%2C%20Mastered%20by%20Engineers%2C%20Studio-Quality%2C%20Up%20to%2030%20Hrs%20of%20Battery%20B0F3PQHWTZ\n\n- Bose QuietComfort Ultra Bluetooth Headphones (2nd Gen), Wireless Headphones with Spatial Audio, Over Ear Noise Cancelling with Mic, Up to 30 Hours of Play time, Black\n  ASIN: B0FDKR293G\n  Price: $449.00\nRating: 4.2 3,040\n  Purchase volume: 3K+ bought in past month\n  Delivery: FREE delivery Wed, Oct 28\n  Explanation: Rated most comfortable in its class — CustomTune personalizes sound to your ear shape. Immersive Bose Spatial Audio and up to 30 hrs battery (45 hrs with ANC off). Great for travel and long sessions.\n  Link: https://www.amazon.com/dp/B0FDKR293G?niid=nl_cl_lst_a_1_2&ref_=nl_cl_lst_a_1_2&nrid=RC3HMW711525A74AWMST\n  More details: https://www.amazon.com/s?k=More%20details%20about%20Bose%20QuietComfort%20Ultra%20Bluetooth%20Headphones%20%282nd%20Gen%29%2C%20Wireless%20Headphones%20with%20Spatial%20Audio%2C%20Over%20Ear%20Noise%20Cancelling%20with%20Mic%2C%20Up%20to%2030%20Hours%20of%20Play%20time%2C%20Black%20B0FDKR293G\n\n- Sennheiser HDB 630 Wireless Headphones incl. Hi-Res BT Dongle, Lunar Silver | Included BTD 700 for high resolution audio, parametric EQ in-app and crossfeed function.\n  ASIN: B0HGK7B21H\n  Price: $499.95\nRating: 5.0 17\n  Purchase volume: 100+ bought in past month\n  Delivery: FREE delivery Wed, Oct 28\n  Explanation: Audiophile-grade sound with a 60-hour battery — best-in-class endurance. Parametric EQ, lossless USB-C audio up to 24-bit/96kHz, and 10-min fast charge adds 7 hrs. Includes Hi-Res Bluetooth dongle.\n  Link: https://www.amazon.com/dp/B0HGK7B21H?niid=nl_cl_lst_a_1_3&ref_=nl_cl_lst_a_1_3&nrid=RC3HMW711525A74AWMST\n  More details: https://www.amazon.com/s?k=More%20details%20about%20Sennheiser%20HDB%20630%20Wireless%20Headphones%20incl.%20Hi-Res%20BT%20Dongle%2C%20Lunar%20Silver%20%7C%20Included%20BTD%20700%20for%20high%20resolution%20audio%2C%20parametric%20EQ%20in-app%20and%20crossfeed%20function.%20B0HGK7B21H\n\nPremium Over-Ear (Apple Ecosystem)\nSee more: https://www.amazon.com/s?k=More%20Premium%20Over-Ear%20%28Apple%20Ecosystem%29%2C%20excluding%20the%20ones%20recommended\n\n- Apple AirPods Max 2 Wireless Over-Ear Headphones – Midnight | Active Noise Cancellation, Adaptive Audio, Personalized Spatial Audio, Live Translation, Bluetooth Headphones for iPhone\n  ASIN: B0GSS4SGZR\n  Price: $449.00 (Original price: $549.00)\nRating: 4.5 1,120\n  Purchase volume: 9K+ bought in past month\n  Delivery: FREE delivery Wed, Oct 28\n  Explanation: Best pick if you're on iPhone 17 — H2 chip, 1.5x stronger ANC than previous gen, Personalized Spatial Audio, Live Translation, and lossless USB-C audio. 20-hr battery.\n  Link: https://www.amazon.com/dp/B0GSS4SGZR?niid=nl_cl_lst_a_2_1&ref_=nl_cl_lst_a_2_1&nrid=RC3HMW711525A74AWMST\n  More details: https://www.amazon.com/s?k=More%20details%20about%20Apple%20AirPods%20Max%202%20Wireless%20Over-Ear%20Headphones%20%E2%80%93%20Midnight%20%7C%20Active%20Noise%20Cancellation%2C%20Adaptive%20Audio%2C%20Personalized%20Spatial%20Audio%2C%20Live%20Translation%2C%20Bluetooth%20Headphones%20for%20iPhone%20B0GSS4SGZR\n\nMid-Range\nSee more: https://www.amazon.com/s?k=More%20Mid-Range%2C%20excluding%20the%20ones%20recommended\n\n- Bose QuietComfort Headphones - Wireless Bluetooth Headphones, Active Over Ear Noise Cancelling and Mic, USB-C Charging, Deep Bass, Up to 24 Hours of Playtime, Twi",
+                        "inference_text_parts": [
+                            "Here are the top noise-cancelling picks across price ranges and formats:",
+                            "The Sony WH-1000XM6 leads for raw ANC performance, while the Bose QC Ultra 2nd Gen wins on comfort. Since you have an iPhone 17, the AirPods Max 2 integrates most seamlessly. Want help narrowing down by use case (travel, office, workouts)?"
+                        ],
+                        "content_blocks": [
+                            {
+                                "type": "text",
+                                "text": "Here are the top noise-cancelling picks across price ranges and formats:"
+                            },
+                            {
+                                "type": "product_section",
+                                "category": "Best Overall (Over-Ear)",
+                                "see_more": {
+                                    "text": "see more",
+                                    "url": "https://www.amazon.com/s?k=More%20Best%20Overall%20%28Over-Ear%29%2C%20excluding%20the%20ones%20recommended",
+                                    "payload": {
+                                        "qis": "NileAsinListSeeMoreHyperLink",
+                                        "query": "More Best Overall (Over-Ear), excluding the ones recommended",
+                                        "refmarker": "nl_cl_hl_al_sm_1"
+                                    }
+                                },
+                                "products": [
+                                    {
+                                        "asin": "B0F3PQHWTZ",
+                                        "url": "https://www.amazon.com/dp/B0F3PQHWTZ?niid=nl_cl_lst_a_1_1&ref_=nl_cl_lst_a_1_1&nrid=RC3HMW711525A74AWMST",
+                                        "title": "Sony WH-1000XM6 The Best Noise Cancelling Wireless Headphones, Black | HD NC Processor QN3, 12 Microphones, Adaptive NC Optimizer, Mastered by Engineers, Studio-Quality, Up to 30 Hrs of Battery",
+                                        "price": "$458.00",
+                                        "rating": "4.2",
+                                        "reviews": "5,300",
+                                        "category": "Best Overall (Over-Ear)",
+                                        "delivery": "FREE delivery Wed, Oct 28",
+                                        "bought": "3K+ bought in past month",
+                                        "image_url": "https://m.media-amazon.com/images/I/61ddahpESML._AC_.jpg",
+                                        "image_alt": "Sony WH-1000XM6 The Best Noise Cancelling Wireless Headphones, Black | HD NC Processor QN3, 12 Microphones, Adaptive NC Optimizer, Mastered by Engineers, Studio-Quality, Up to 30 Hrs of Battery",
+                                        "footer": "Ranked #1 by multiple 2026 reviewers — the QN3 processor and 12-mic system deliver exceptional low, mid, and high-frequency noise blocking. 30-hr battery, foldable design, LDAC hi-res audio.",
+                                        "more_details": {
+                                            "text": "More details",
+                                            "url": "https://www.amazon.com/s?k=More%20details%20about%20Sony%20WH-1000XM6%20The%20Best%20Noise%20Cancelling%20Wireless%20Headphones%2C%20Black%20%7C%20HD%20NC%20Processor%20QN3%2C%2012%20Microphones%2C%20Adaptive%20NC%20Optimizer%2C%20Mastered%20by%20Engineers%2C%20Studio-Quality%2C%20Up%20to%2030%20Hrs%20of%20Battery%20B0F3PQHWTZ",
+                                            "payload": {
+                                                "qis": "NileAsinListLearnMoreHyperLink",
+                                                "query": "More details about Sony WH-1000XM6 The Best Noise Cancelling Wireless Headphones, Black | HD NC Processor QN3, 12 Microphones, Adaptive NC Optimizer, Mastered by Engineers, Studio-Quality, Up to 30 Hrs of Battery B0F3PQHWTZ",
+                                                "refmarker": "nl_cl_hl_al_lm_1_0"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "asin": "B0FDKR293G",
+                                        "url": "https://www.amazon.com/dp/B0FDKR293G?niid=nl_cl_lst_a_1_2&ref_=nl_cl_lst_a_1_2&nrid=RC3HMW711525A74AWMST",
+                                        "title": "Bose QuietComfort Ultra Bluetooth Headphones (2nd Gen), Wireless Headphones with Spatial Audio, Over Ear Noise Cancelling with Mic, Up to 30 Hours of Play time, Black",
+                                        "price": "$449.00",
+                                        "rating": "4.2",
+                                        "reviews": "3,040",
+                                        "category": "Best Overall (Over-Ear)",
+                                        "delivery": "FREE delivery Wed, Oct 28",
+                                        "bought": "3K+ bought in past month",
+                                        "image_url": "https://m.media-amazon.com/images/I/51revx-zToL._AC_.jpg",
+                                        "image_alt": "Bose QuietComfort Ultra Bluetooth Headphones (2nd Gen), Wireless Headphones with Spatial Audio, Over Ear Noise Cancelling with Mic, Up to 30 Hours of Play time, Black",
+                                        "footer": "Rated most comfortable in its class — CustomTune personalizes sound to your ear shape. Immersive Bose Spatial Audio and up to 30 hrs battery (45 hrs with ANC off). Great for travel and long sessions.",
+                                        "more_details": {
+                                            "text": "More details",
+                                            "url": "https://www.amazon.com/s?k=More%20details%20about%20Bose%20QuietComfort%20Ultra%20Bluetooth%20Headphones%20%282nd%20Gen%29%2C%20Wireless%20Headphones%20with%20Spatial%20Audio%2C%20Over%20Ear%20Noise%20Cancelling%20with%20Mic%2C%20Up%20to%2030%20Hours%20of%20Play%20time%2C%20Black%20B0FDKR293G",
+                                            "payload": {
+                                                "qis": "NileAsinListLearnMoreHyperLink",
+                                                "query": "More details about Bose QuietComfort Ultra Bluetooth Headphones (2nd Gen), Wireless Headphones with Spatial Audio, Over Ear Noise Cancelling with Mic, Up to 30 Hours of Play time, Black B0FDKR293G",
+                                                "refmarker": "nl_cl_hl_al_lm_1_1"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "asin": "B0HGK7B21H",
+                                        "url": "https://www.amazon.com/dp/B0HGK7B21H?niid=nl_cl_lst_a_1_3&ref_=nl_cl_lst_a_1_3&nrid=RC3HMW711525A74AWMST",
+                                        "title": "Sennheiser HDB 630 Wireless Headphones incl. Hi-Res BT Dongle, Lunar Silver | Included BTD 700 for high resolution audio, parametric EQ in-app and crossfeed function.",
+                                        "price": "$499.95",
+                                        "rating": "5.0",
+                                        "reviews": "17",
+                                        "category": "Best Overall (Over-Ear)",
+                                        "delivery": "FREE delivery Wed, Oct 28",
+                                        "bought": "100+ bought in past month",
+                                        "image_url": "https://m.media-amazon.com/images/I/71M6y0l8t+L._AC_.jpg",
+                                        "image_alt": "Sennheiser HDB 630 Wireless Headphones incl. Hi-Res BT Dongle, Lunar Silver | Included BTD 700 for high resolution audio, parametric EQ in-app and crossfeed function.",
+                                        "footer": "Audiophile-grade sound with a 60-hour battery — best-in-class endurance. Parametric EQ, lossless USB-C audio up to 24-bit/96kHz, and 10-min fast charge adds 7 hrs. Includes Hi-Res Bluetooth dongle.",
+                                        "more_details": {
+                                            "text": "More details",
+                                            "url": "https://www.amazon.com/s?k=More%20details%20about%20Sennheiser%20HDB%20630%20Wireless%20Headphones%20incl.%20Hi-Res%20BT%20Dongle%2C%20Lunar%20Silver%20%7C%20Included%20BTD%20700%20for%20high%20resolution%20audio%2C%20parametric%20EQ%20in-app%20and%20crossfeed%20function.%20B0HGK7B21H",
+                                            "payload": {
+                                                "qis": "NileAsinListLearnMoreHyperLink",
+                                                "query": "More details about Sennheiser HDB 630 Wireless Headphones incl. Hi-Res BT Dongle, Lunar Silver | Included BTD 700 for high resolution audio, parametric EQ in-app and crossfeed function. B0HGK7B21H",
+                                                "refmarker": "nl_cl_hl_al_lm_1_2"
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "product_section",
+                                "category": "Premium Over-Ear (Apple Ecosystem)",
+                                "see_more": {
+                                    "text": "see more",
+                                    "url": "https://www.amazon.com/s?k=More%20Premium%20Over-Ear%20%28Apple%20Ecosystem%29%2C%20excluding%20the%20ones%20recommended",
+                                    "payload": {
+                                        "qis": "NileAsinListSeeMoreHyperLink",
+                                        "query": "More Premium Over-Ear (Apple Ecosystem), excluding the ones recommended",
+                                        "refmarker": "nl_cl_hl_al_sm_2"
+                                    }
+                                },
+                                "products": [
+                                    {
+                                        "asin": "B0GSS4SGZR",
+                                        "url": "https://www.amazon.com/dp/B0GSS4SGZR?niid=nl_cl_lst_a_2_1&ref_=nl_cl_lst_a_2_1&nrid=RC3HMW711525A74AWMST",
+                                        "title": "Apple AirPods Max 2 Wireless Over-Ear Headphones – Midnight | Active Noise Cancellation, Adaptive Audio, Personalized Spatial Audio, Live Translation, Bluetooth Headphones for iPhone",
+                                        "price": "$449.00",
+                                        "original_price": "$549.00",
+                                        "rating": "4.5",
+                                        "reviews": "1,120",
+                                        "category": "Premium Over-Ear (Apple Ecosystem)",
+                                        "delivery": "FREE delivery Wed, Oct 28",
+                                        "bought": "9K+ bought in past month",
+                                        "image_url": "https://m.media-amazon.com/images/I/71umw2cCkOL._AC_.jpg",
+                                        "image_alt": "Apple AirPods Max 2 Wireless Over-Ear Headphones – Midnight | Active Noise Cancellation, Adaptive Audio, Personalized Spatial Audio, Live Translation, Bluetooth Headphones for iPhone",
+                                        "footer": "Best pick if you're on iPhone 17 — H2 chip, 1.5x stronger ANC than previous gen, Personalized Spatial Audio, Live Translation, and lossless USB-C audio. 20-hr battery.",
+                                        "more_details": {
+                                            "text": "More details",
+                                            "url": "https://www.amazon.com/s?k=More%20details%20about%20Apple%20AirPods%20Max%202%20Wireless%20Over-Ear%20Headphones%20%E2%80%93%20Midnight%20%7C%20Active%20Noise%20Cancellation%2C%20Adaptive%20Audio%2C%20Personalized%20Spatial%20Audio%2C%20Live%20Translation%2C%20Bluetooth%20Headphones%20for%20iPhone%20B0GSS4SGZR",
+                                            "payload": {
+                                                "qis": "NileAsinListLearnMoreHyperLink",
+                                                "query": "More details about Apple AirPods Max 2 Wireless Over-Ear Headphones – Midnight | Active Noise Cancellation, Adaptive Audio, Personalized Spatial Audio, Live Translation, Bluetooth Headphones for iPhone B0GSS4SGZR",
+                                                "refmarker": "nl_cl_hl_al_lm_2_0"
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "products": [
+                            {
+                                "asin": "B0F3PQHWTZ",
+                                "url": "https://www.amazon.com/dp/B0F3PQHWTZ?niid=nl_cl_lst_a_1_1&ref_=nl_cl_lst_a_1_1&nrid=RC3HMW711525A74AWMST",
+                                "title": "Sony WH-1000XM6 The Best Noise Cancelling Wireless Headphones, Black | HD NC Processor QN3, 12 Microphones, Adaptive NC Optimizer, Mastered by Engineers, Studio-Quality, Up to 30 Hrs of Battery",
+                                "price": "$458.00",
+                                "rating": "4.2",
+                                "reviews": "5,300",
+                                "category": "Best Overall (Over-Ear)",
+                                "delivery": "FREE delivery Wed, Oct 28",
+                                "bought": "3K+ bought in past month",
+                                "image_url": "https://m.media-amazon.com/images/I/61ddahpESML._AC_.jpg",
+                                "image_alt": "Sony WH-1000XM6 The Best Noise Cancelling Wireless Headphones, Black | HD NC Processor QN3, 12 Microphones, Adaptive NC Optimizer, Mastered by Engineers, Studio-Quality, Up to 30 Hrs of Battery",
+                                "footer": "Ranked #1 by multiple 2026 reviewers — the QN3 processor and 12-mic system deliver exceptional low, mid, and high-frequency noise blocking. 30-hr battery, foldable design, LDAC hi-res audio.",
+                                "more_details": {
+                                    "text": "More details",
+                                    "url": "https://www.amazon.com/s?k=More%20details%20about%20Sony%20WH-1000XM6%20The%20Best%20Noise%20Cancelling%20Wireless%20Headphones%2C%20Black%20%7C%20HD%20NC%20Processor%20QN3%2C%2012%20Microphones%2C%20Adaptive%20NC%20Optimizer%2C%20Mastered%20by%20Engineers%2C%20Studio-Quality%2C%20Up%20to%2030%20Hrs%20of%20Battery%20B0F3PQHWTZ",
+                                    "payload": {
+                                        "qis": "NileAsinListLearnMoreHyperLink",
+                                        "query": "More details about Sony WH-1000XM6 The Best Noise Cancelling Wireless Headphones, Black | HD NC Processor QN3, 12 Microphones, Adaptive NC Optimizer, Mastered by Engineers, Studio-Quality, Up to 30 Hrs of Battery B0F3PQHWTZ",
+                                        "refmarker": "nl_cl_hl_al_lm_1_0"
+                                    }
+                                }
+                            },
+                            {
+                                "asin": "B0FDKR293G",
+                                "url": "https://www.amazon.com/dp/B0FDKR293G?niid=nl_cl_lst_a_1_2&ref_=nl_cl_lst_a_1_2&nrid=RC3HMW711525A74AWMST",
+                                "title": "Bose QuietComfort Ultra Bluetooth Headphones (2nd Gen), Wireless Headphones with Spatial Audio, Over Ear Noise Cancelling with Mic, Up to 30 Hours of Play time, Black",
+                                "price": "$449.00",
+                                "rating": "4.2",
+                                "reviews": "3,040",
+                                "category": "Best Overall (Over-Ear)",
+                                "delivery": "FREE delivery Wed, Oct 28",
+                                "bought": "3K+ bought in past month",
+                                "image_url": "https://m.media-amazon.com/images/I/51revx-zToL._AC_.jpg",
+                                "image_alt": "Bose QuietComfort Ultra Bluetooth Headphones (2nd Gen), Wireless Headphones with Spatial Audio, Over Ear Noise Cancelling with Mic, Up to 30 Hours of Play time, Black",
+                                "footer": "Rated most comfortable in its class — CustomTune personalizes sound to your ear shape. Immersive Bose Spatial Audio and up to 30 hrs battery (45 hrs with ANC off). Great for travel and long sessions.",
+                                "more_details": {
+                                    "text": "More details",
+                                    "url": "https://www.amazon.com/s?k=More%20details%20about%20Bose%20QuietComfort%20Ultra%20Bluetooth%20Headphones%20%282nd%20Gen%29%2C%20Wireless%20Headphones%20with%20Spatial%20Audio%2C%20Over%20Ear%20Noise%20Cancelling%20with%20Mic%2C%20Up%20to%2030%20Hours%20of%20Play%20time%2C%20Black%20B0FDKR293G",
+                                    "payload": {
+                                        "qis": "NileAsinListLearnMoreHyperLink",
+                                        "query": "More details about Bose QuietComfort Ultra Bluetooth Headphones (2nd Gen), Wireless Headphones with Spatial Audio, Over Ear Noise Cancelling with Mic, Up to 30 Hours of Play time, Black B0FDKR293G",
+                                        "refmarker": "nl_cl_hl_al_lm_1_1"
+                                    }
+                                }
+                            },
+                            {
+                                "asin": "B0HGK7B21H",
+                                "url": "https://www.amazon.com/dp/B0HGK7B21H?niid=nl_cl_lst_a_1_3&ref_=nl_cl_lst_a_1_3&nrid=RC3HMW711525A74AWMST",
+                                "title": "Sennheiser HDB 630 Wireless Headphones incl. Hi-Res BT Dongle, Lunar Silver | Included BTD 700 for high resolution audio, parametric EQ in-app and crossfeed function.",
+                                "price": "$499.95",
+                                "rating": "5.0",
+                                "reviews": "17",
+                                "category": "Best Overall (Over-Ear)",
+                                "delivery": "FREE delivery Wed, Oct 28",
+                                "bought": "100+ bought in past month",
+                                "image_url": "https://m.media-amazon.com/images/I/71M6y0l8t+L._AC_.jpg",
+                                "image_alt": "Sennheiser HDB 630 Wireless Headphones incl. Hi-Res BT Dongle, Lunar Silver | Included BTD 700 for high resolution audio, parametric EQ in-app and crossfeed function.",
+                                "footer": "Audiophile-grade sound with a 60-hour battery — best-in-class endurance. Parametric EQ, lossless USB-C audio up to 24-bit/96kHz, and 10-min fast charge adds 7 hrs. Includes Hi-Res Bluetooth dongle.",
+                                "more_details": {
+                                    "text": "More details",
+                                    "url": "https://www.amazon.com/s?k=More%20details%20about%20Sennheiser%20HDB%20630%20Wireless%20Headphones%20incl.%20Hi-Res%20BT%20Dongle%2C%20Lunar%20Silver%20%7C%20Included%20BTD%20700%20for%20high%20resolution%20audio%2C%20parametric%20EQ%20in-app%20and%20crossfeed%20function.%20B0HGK7B21H",
+                                    "payload": {
+                                        "qis": "NileAsinListLearnMoreHyperLink",
+                                        "query": "More details about Sennheiser HDB 630 Wireless Headphones incl. Hi-Res BT Dongle, Lunar Silver | Included BTD 700 for high resolution audio, parametric EQ in-app and crossfeed function. B0HGK7B21H",
+                                        "refmarker": "nl_cl_hl_al_lm_1_2"
+                                    }
+                                }
+                            }
+                        ],
+                        "related_questions": [
+                            "Compare Sony XM6 vs Bose QC Ultra 2nd Gen",
+                            "Best headphones for long flights",
+                            "AirPods Max 2 vs AirPods Pro 3"
+                        ],
+                        "sources": [
+                            {
+                                "text": "rtings.com",
+                                "url": "https://www.rtings.com/headphones/reviews/best/by-feature/noise-cancelling"
+                            },
+                            {
+                                "text": "soundguys.com",
+                                "url": "https://www.soundguys.com/best-noise-cancelling-headphones-5220/"
+                            },
+                            {
+                                "text": "SoundGuys",
+                                "url": "https://www.soundguys.com/best-noise-cancelling-headphones-for-work-76177/"
+                            }
+                        ],
+                        "informed_by": [
+                            "Sources rtings.com soundguys.com SoundGuys RecordingNOW.com pcmag.com"
+                        ],
+                        "feedback_controls": {
+                            "groupId": "section_groupId_feedback_controls_RC3HMW711525A74AWMST_0",
+                            "text": "Your feedback has been submitted!",
+                            "options": [
+                                "This is harmful / unsafe",
+                                "This is irrelevant",
+                                "This is inaccurate"
+                            ],
+                            "submit_label": "Submit"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

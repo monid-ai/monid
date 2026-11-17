@@ -1,0 +1,26 @@
+{
+    "name": "recorded-six-tiktok-shop-page",
+    "description": "Recorded own-account request on 2026-10-23. Secrets/PII removed, result arrays capped at 3 and strings at 1500 characters; all actual protocol calls retained. Not a receipt or production acceptance.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v1/scraper/request",
+                "body": {
+                    "actor": "scraper.tiktok.shop.page",
+                    "input": {
+                        "product_id": "1729411983267761850",
+                        "region": "gb"
+                    }
+                }
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "code": 20500,
+                    "message": "TikTok Shop request failed"
+                }
+            }
+        }
+    ]
+}

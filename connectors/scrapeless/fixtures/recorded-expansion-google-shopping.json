@@ -1,0 +1,108 @@
+{
+    "name": "recorded-expansion-google-shopping",
+    "description": "Real Scrapeless responses, 2026-10-22; header allowlist applied; Monid trimCalls caps response arrays at 2 and strings at 500. Full redacted records remain in research/live-expansion-2026-10-22. Replay usage is TEST ONLY, never actual charges.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v1/scraper/request",
+                "body": {
+                    "actor": "scraper.google.search",
+                    "input": {
+                        "q": "USB cable",
+                        "gl": "us",
+                        "hl": "en",
+                        "tbm": "shop"
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "immersive_products": [
+                        {
+                            "thumbnail": "data:image/webp;base64,UklGRlBQAABXRUJQVlA4IERQAADQ8wCdASq1AZIBPkUgjUUioiETDO0MKAREtLdwuvcADOzrt6yv9Z4I/kHzX+I/tf+P/3v9/9sT/U8FfR//b/0vqH/KPuj+j/uv+Y/8P+H+b/8d/2P8T42/F7/U/yfsC/j389/zn95/dP/IfB98D/4P8V/v++O0r+//97/D/573AvY/63/tv7x/oP/j/sPje+b/7X+Z9R/sX7AP86/sX/T/xP5H/PX+1/ZzyRfwH+v9gH+k/4v/1f6H81Ppm/n//J/pv9T+6Xs+/S/8L/2/8t/rPkJ/m/9o/5n+F/zf7af//6wP/7/v/gd+3X/0/3/ws/sh/9v9gUN9PX0wn0ZYIiMhoKWoyyuF45JhiA5ar9O+jy7pEwsmiYWS0NKyYlKKGk1LNBaGm7KCmHD9m92heRA0MU1HKHPx4ZNEwsmiYWTPA1s3NH5ib+x5tVsQRxh0oku7l",
+                            "source_logo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADqUlEQVRYhe2XT0xcVRTGf+e+GRRkoYCo0HmPaIwuiHWhC1sZwNI0aUyrVevKpJJgu7dJXVjFuOjCP2vbhXVpqKE2RheVOMyQ2mgw0YaFLmr6BhiHv5q0gDDMOy5m6PDmvUF8abqxZ/Vy7ne+73v3vnvufXAnIoaO2a9ppmNG086cpp3+qDwSSfz7HU2sx3LAXeVUgbXlhPTNzvxXLhPFAOvmwU3iAHHi9W1RqKIZWPt7IZgszN8+A4uz86gWKwlVlnKzt8yAjrQ36wR1tYrkMEVgs+Ci7Ge1Fl7HiWuq495/NaApYppxzlEXm2PRyeuoPbCF+elNlqZrgXQs8TrLTh5LFzVjf65DWDUNgP0CyMsgAnIfxpzRtH1BU20tIdyTFRWdCgiPtDdr2hlGrU9Bmkqc5lXanIO1DRgaAjJiDmDFr2",
+                            "source": "Walmart",
+                            "title": "Anker USB-A to USB-C Cable",
+                            "rating": 4.4,
+                            "reviews": 486,
+                            "price": "$7.97",
+                            "extracted_price": 7.97,
+                            "location": "Nearby, 3 mi",
+                            "product_id": "17515011422070168357"
+                        },
+                        {
+                            "thumbnail": "data:image/webp;base64,UklGRg4wAABXRUJQVlA4IAIwAADwvQCdASqQAZABPj0ejEQiIaETSfTYIAPEtLd1AFJ+rF2zngD25aMg5ulnypfJP4Xz38dfWtqKdzfoj25/2Pff8uNQ78z/tPn5Pp+n35XoI4A/5HnV4hPmj/1/Es9H9hjydf7z/9f7P/cevL6r/9n+09dn1m//b7oP2R//Hu7/ssTcWnzBtXwC2mDavgFtMG1fALaYNq+AW0wbV8AtK2z/tFyWfSsDrJd6quOvy71VcdTYJrlMPkizWrTPANa/hDZyYjoDjh8uOvy71VcaYZY13RBW35xUA6l/qiIGgOsjinOJE9FAPT7D5t2jgqjoNUmj2Ci9d2S71Vcde90XTwfMR/sx61Ko2fn3Ef09g25vxglzchpWpojZPaAl+OJQX/YnsAJ21Ml8Rd2Dr8u9VXHUY6h6jtieVuX7L+DiqIPeeiB8HRBW6ox/rmrcEiVtuAKAk",
+                            "source_logo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACBElEQVRYhc2X4W3CMBCFP6IOkBFggyB5AJigdAJgg24AbJANKBPQDegAkeoNYISM0B++QJTcJYYi4EkISM7vns/n83nAlSggBTL5pPK4BDzgXfgdjUGk0yGwAN7FcRc8sAO+HZz+JUBmuwI+I3RqyIFNV1RMAQVMgD2XMN+KEvhw8KO9TAznC+BwB+cIx0E4W2hFQAy3keRevvvyosLSwZcpQMJ+6CA4cUkwX39RBBEzYE5IWgvT+nKcBUjCHbHDvnGw7iCui1kTkldDCYyqxKznwMpwXorqKOcAYjtFz/5qZwESAdnnR4NvamVwH3qWdOTgVEVgZhhtLOcFZAUs5KMmoYzdGNwzuETglzbJycFIc0zYJU17T8hyr4w50k5M72Cc1Gp7EzvD+cGwzwj7PYqLEME0McgAvpVnW7qLU4peQz",
+                            "source": "Target",
+                            "title": "Anker 322 Braided USB-A to USB-C Cable",
+                            "rating": 4.1,
+                            "reviews": 206,
+                            "price": "$15.99",
+                            "extracted_price": 15.99,
+                            "location": "Nearby, 5 mi",
+                            "delivery": "Free delivery on $35+",
+                            "product_id": "3522967817673319086"
+                        }
+                    ],
+                    "pagination": {},
+                    "refine_by_brand": [
+                        {
+                            "link": "https://www.google.com/search?gl=us&hl=en&q=samsung+usb+cable&udm=28&shoprs=CAEYASoJdXNiIGNhYmxlMhcIARIHU2Ftc3VuZzoKCIPzPBDu5j0wAVjf9CBgAg&sa=X&ved=2ahUKEwiV1puhqs2XAxWemYkEHSyYLiEQ268JKAB6BAgLEEE",
+                            "title": "Samsung"
+                        },
+                        {
+                            "link": "https://www.google.com/search?gl=us&hl=en&q=apple+usb+cable&udm=28&shoprs=CAEYASoJdXNiIGNhYmxlMhUIARIFQXBwbGU6CgiD8zwQmd49MAFY3_QgYAI&sa=X&ved=2ahUKEwiV1puhqs2XAxWemYkEHSyYLiEQ268JKAF6BAgLEEI",
+                            "title": "Apple"
+                        }
+                    ],
+                    "refine_search_filters": [
+                        {
+                            "type": "Category",
+                            "options": [
+                                {
+                                    "title": "Lightning Cables",
+                                    "link": "https://www.google.com/search?gl=us&hl=en&q=lightning+cables+usb+cable&udm=28&shoprs=CAEYCSoJdXNiIGNhYmxlMhQICRIQTGlnaHRuaW5nIENhYmxlc2AC&sa=X&ved=2ahUKEwiV1puhqs2XAxWemYkEHSyYLiEQ268JKAB6BAgLEA0"
+                                },
+                                {
+                                    "title": "Power Adapters & Chargers",
+                                    "link": "https://www.google.com/search?gl=us&hl=en&q=power+adapters+%26+chargers+usb+cable&udm=28&shoprs=CAEYCSoJdXNiIGNhYmxlMh0ICRIZUG93ZXIgQWRhcHRlcnMgJiBDaGFyZ2Vyc2AC&sa=X&ved=2ahUKEwiV1puhqs2XAxWemYkEHSyYLiEQ268JKAF6BAgLEA4"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Product Rating",
+                            "options": [
+                                {
+                                    "title": "4 and up",
+                                    "link": "https://www.google.com/search?gl=us&hl=en&q=USB+cable&udm=28&shoprs=CAESBWIDCJADGB4qCXVzYiBjYWJsZTIVCB4SCDQgYW5kIHVwIgViAwiQA0AEYAI&sa=X&ved=2ahUKEwiV1puhqs2XAxWemYkEHSyYLiEQ268JKAB6BAgLEBQ"
+                                }
+                            ]
+                        }
+                    ],
+                    "refine_this_search": [
+                        {
+                            "query": "Nearby",
+                            "link": "https://www.google.com/search?gl=us&hl=en&q=USB+cable+nearby&udm=28&shoprs=CAEYAyoJdXNiIGNhYmxlMgwIAxIGTmVhcmJ5GAJY3_QgYAE&sa=X&ved=2ahUKEwiV1puhqs2XAxWemYkEHSyYLiEQip4GKAJ6BAgLEEw"
+                        },
+                        {
+                            "query": "Extension Cable",
+                            "link": "https://www.google.com/search?gl=us&hl=en&q=extension+cable+usb&udm=28&shoprs=CAEYASoJdXNiIGNhYmxlMiEIARIPRXh0ZW5zaW9uIENhYmxlOgwIo6m2ARCkqbYBMANY3_QgYAE&sa=X&ved=2ahUKEwiV1puhqs2XAxWemYkEHSyYLiEQip4GKAR6BAgLEE4"
+                        }
+                    ],
+                    "search_information": {
+                        "organic_results_state": "Results for exact spelling",
+                        "query_displayed": "USB cable",
+                        "total_results": 0,
+                        "time_taken_displayed": ""
+                    },
+                    "metadata": {
+                        "engine": "google.search",
+                        "rawUrl": "https://api.scrapeless.com/storage/scrapeless.scraper.google.search/5c6af857a8a9a60084736489d5c50383/06b337b19606eedc8a7dee450d721b67_1792661975.html"
+                    }
+                }
+            }
+        }
+    ]
+}

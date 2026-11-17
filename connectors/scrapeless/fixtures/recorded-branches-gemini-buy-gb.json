@@ -1,0 +1,83 @@
+{
+    "name": "recorded-branches-gemini-buy-gb",
+    "description": "Actual bounded own-account branch probe 2026-10-23. Secrets/PII scrubbed; result arrays capped at 3 and strings at 4500 characters; all protocol calls retained. Not an invoice or full production acceptance.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v2/scraper/request",
+                "body": {
+                    "actor": "scraper.gemini",
+                    "input": {
+                        "prompt": "Where can I buy a Samsung Galaxy S25 Ultra 256GB in the United Kingdom? Show shopping product cards and retailer offers with prices.",
+                        "country": "GB",
+                        "shopping": true
+                    }
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "status": "pending",
+                    "task_id": "94d638a4-b046-40c4-9cec-2de78af38c8d"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/94d638a4-b046-40c4-9cec-2de78af38c8d"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/94d638a4-b046-40c4-9cec-2de78af38c8d"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "success",
+                    "task_result": {
+                        "citations": [
+                            {
+                                "cited_count": 0,
+                                "favicon": "https://encrypted-tbn1.gstatic.com/favicon-tbn?q=tbn%3AANd9GcQehftvFv2atLLqeCYjdR3EHcHCMfzlvhM-w9pX4S9FB0IGErJpZnwocY6QAMwCoOC4eZhsEIuZnMURDq2hlVf5jNTXaT-TIcYh",
+                                "highlights": [
+                                    "Here are the current retailer offers and pricing for the **Samsung Galaxy S25 Ultra 256GB** (12GB RAM) in the United Kingdom."
+                                ],
+                                "index": 1,
+                                "snippet": "Compare prices and shops * Samsung Galaxy S25 Ultra S938B 256GB (12GB RAM) \nGray. £656.99. In stock. OnBuy, Samsung Galaxy S25 Ultra S938B 256GB (12GB \nRAM) Gray,...",
+                                "title": "Samsung Galaxy S25 Ultra 5G 12GB RAM 256GB - PriceSpy UK",
+                                "url": "https://pricespy.co.uk/product.php?p=13866336#:~:text=Compare%20prices%20and%20shops%20*%20Samsung%20Galaxy,%2D%20Titanium%20Black.%20%C2%A31%2C249.00.%20%C2%A3759.99.%20In%20stock.",
+                                "website_name": "PriceSpy UK"
+                            },
+                            {
+                                "cited_count": 1,
+                                "favicon": "https://encrypted-tbn3.gstatic.com/favicon-tbn?q=tbn%3AANd9GcS0UzapxOkRw_YtGnLYDm8mFGSyyfXSPcV7wygwsvk7CI6yRtX74PbglyBINRj7ATf56lW97P1T1NAO8jCMIo6bFHlVDRbV9rdNsiA",
+                                "highlights": [
+                                    "Prices fluctuate depending on the retailer, colour option (such as Titanium Black, Titanium Gray, or Titanium Whitesilver), and whether you purchase from major online marketplaces or specialized electronics merchants."
+                                ],
+                                "index": 2,
+                                "snippet": "Samsung Galaxy S25 Ultra Titanium Whitesilver 6.9 256GB Unlocked & SIM Free \nSmartphone £799.00. Samsung Galaxy S25 Ultra 5G 512GB - Titanium Black \n£809.99. Sams...",
+                                "title": "Buy Samsung Galaxy S25 Ultra from £689.00 (October 2026) - idealo",
+                                "url": "https://www.idealo.co.uk/compare/205569277/samsung-galaxy-s25-ultra.html#:~:text=Samsung%20Galaxy%20S25%20Ultra%20Titanium%20Whitesilver%206.9,Ultra%20S938B%201TB%20(12GB%20RAM)%20Black%20%C2%A3833.99.",
+                                "website_name": "idealo"
+                            }
+                        ],
+                        "prompt": "Where can I buy a Samsung Galaxy S25 Ultra 256GB in the United Kingdom? Show shopping product cards and retailer offers with prices.",
+                        "rawtext": "Here are the current retailer offers and pricing for the **Samsung Galaxy S25 Ultra 256GB** (12GB RAM) in the United Kingdom\\.\n\nPrices fluctuate depending on the retailer, colour option (such as Titanium Black, Titanium Gray, or Titanium Whitesilver), and whether you purchase from major online marketplaces or specialized electronics merchants\\.\n\n### Retailer Offers &amp; Price Comparison\n\n| Retailer&#32;/&#32;Marketplace | Colour&#32;Option | Price&#32;(Approx\\.) | Details | \n| --- | --- | --- | --- |\n| **OnBuy** | Titanium&#32;Gray&#32;/&#32;Black | From&#32;**£656\\.99** | Competitive&#32;third\\-party&#32;marketplace&#32;pricing\\. | \n| **Amazon&#32;UK** | Titanium&#32;Black | From&#32;**£685\\.00** | Varies&#32;by&#32;marketplace&#32;seller&#32;availability\\. | \n| **Idealo&#32;/&#32;Tech&#32;Slr&#32;Ltd** | Titanium&#32;Black | From&#32;**£693\\.00** | Includes&#32;delivery&#32;options\\. | \n| **Technyx** | Unlocked&#32;(Brand&#32;New&#32;Sealed) | **£704\\.99** | Includes&#32;free&#32;30\\-day&#32;returns\\. | \n| **John&#32;Lewis&#32;&amp;&#32;Partners&#32;/&#32;High&#32;Street&#32;Stores** | Various&#32;Finishes | Up&#32;to&#32;**£1,249\\.00** | Standard&#32;high&#32;street/direct&#32;retail&#32;pricing&#32;for&#32;fully&#32;backed&#32;manufacturer&#32;warranties\\. | \n\n### Tips Before Buying:\n\n- **SIM\\-Free vs\\. Contract:** Most of the lower upfront prices listed above are for **SIM\\-free and unlocked** devices\\. If you prefer a monthly carrier contract (EE, Vodafone, O2, Three), check their direct sites for bundled data plans\\.\n- **Warranty &amp; Returns:** When buying through online aggregators or marketplace third\\-party sellers, always double\\-check whether the device is a UK stock model and verify the warranty terms\\.",
+                        "related_queries": [],
+                        "result_text": "Here are the current retailer offers and pricing for the **Samsung Galaxy S25 Ultra 256GB** (12GB RAM) in the United Kingdom\\.\n\nPrices fluctuate depending on the retailer, colour option (such as Titanium Black, Titanium Gray, or Titanium Whitesilver), and whether you purchase from major online marketplaces or specialized electronics merchants\\. ([idealo][2])\n\n### Retailer Offers &amp; Price Comparison\n\n| Retailer&#32;/&#32;Marketplace | Colour&#32;Option | Price&#32;(Approx\\.) | Details | \n| --- | --- | --- | --- |\n| **OnBuy** | Titanium&#32;Gray&#32;/&#32;Black | From&#32;**£656\\.99** | Competitive&#32;third\\-party&#32;marketplace&#32;pricing\\. | \n| **Amazon&#32;UK** | Titanium&#32;Black | From&#32;**£685\\.00** | Varies&#32;by&#32;marketplace&#32;seller&#32;availability\\. | \n| **Idealo&#32;/&#32;Tech&#32;Slr&#32;Ltd** | Titanium&#32;Black | From&#32;**£693\\.00** | Includes&#32;delivery&#32;options\\. | \n| **Technyx** | Unlocked&#32;(Brand&#32;New&#32;Sealed) | **£704\\.99** | Includes&#32;free&#32;30\\-day&#32;returns\\. | \n| **John&#32;Lewis&#32;&amp;&#32;Partners&#32;/&#32;High&#32;Street&#32;Stores** | Various&#32;Finishes | Up&#32;to&#32;**£1,249\\.00** | Standard&#32;high&#32;street/direct&#32;retail&#32;pricing&#32;for&#32;fully&#32;backed&#32;manufacturer&#32;warranties\\. | \n\n### Tips Before Buying:\n\n- **SIM\\-Free vs\\. Contract:** Most of the lower upfront prices listed above are for **SIM\\-free and unlocked** devices\\. If you prefer a monthly carrier contract (EE, Vodafone, O2, Three), check their direct sites for bundled data plans\\.\n- **Warranty &amp; Returns:** When buying through online aggregators or marketplace third\\-party sellers, always double\\-check whether the device is a UK stock model and verify the warranty terms\\.\n\n[2]: https://www.idealo.co.uk/compare/205569277/samsung-galaxy-s25-ultra.html#:~:text=Samsung%20Galaxy%20S25%20Ultra%20Titanium%20Whitesilver%206.9,Ultra%20S938B%201TB%20(12GB%20RAM)%20Black%20%C2%A3833.99. \"Buy Samsung Galaxy S25 Ultra from £689.00 (October 2026) - idealo\"\n"
+                    }
+                }
+            }
+        }
+    ]
+}

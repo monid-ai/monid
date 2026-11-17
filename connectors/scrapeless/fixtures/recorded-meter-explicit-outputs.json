@@ -1,0 +1,48 @@
+{
+    "name": "recorded-meter-explicit-outputs",
+    "description": "Real 2026-10-23 own-account API reads and bounded submissions. Sources: research/crawl-meter-access-20261023. Proxy decimal strings are native observations, not vendor-confirmed billable units. Unique-name correlation is one controlled sample, not a complete general join. Credentials, PII and signed URLs removed. Any Engine test meter is fictional TEST ONLY.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v2/unlocker/request",
+                "body": {
+                    "actor": "unlocker.webunlocker",
+                    "input": {
+                        "url": "https://httpbin.org/html",
+                        "jsRender": {
+                            "enabled": true,
+                            "waitUntil": "domcontentloaded",
+                            "response": {
+                                "type": "content",
+                                "options": {
+                                    "outputs": [
+                                        "phone_numbers",
+                                        "headings",
+                                        "images",
+                                        "audios",
+                                        "videos",
+                                        "links",
+                                        "menus",
+                                        "hashtags",
+                                        "emails",
+                                        "metadata",
+                                        "tables",
+                                        "favicon"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "code": 200,
+                    "data": "{\"emails\":[],\"phone_numbers\":[],\"headings\":[\"Herman Melville - Moby-Dick\"],\"images\":[],\"audios\":[],\"videos\":[],\"links\":[],\"menus\":[],\"hashtags\":[],\"metadata\":[],\"tables\":[],\"favicon\":\"https://httpbin.org/favicon.ico\"}"
+                }
+            }
+        }
+    ]
+}

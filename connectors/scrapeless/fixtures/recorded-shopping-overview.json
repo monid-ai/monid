@@ -1,0 +1,313 @@
+{
+    "name": "recorded-shopping-overview",
+    "description": "Real bounded shopping request, 2026-10-23. Response arrays/strings trimmed by Monid; full redacted evidence retained in research/shopping-20261023. Balance observation is not a task invoice. All products/references remain in raw local evidence.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v2/scraper/request",
+                "body": {
+                    "actor": "scraper.overview",
+                    "input": {
+                        "prompt": "Recommend one affordable USB-C charging cable to buy in the United States. Include a product and store offer if available.",
+                        "country": "US",
+                        "shopping": true,
+                        "should_fetch_share_link": false
+                    }
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "status": "pending",
+                    "task_id": "80938cf5-0567-479a-8d52-3e2d5d8353dd"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/80938cf5-0567-479a-8d52-3e2d5d8353dd"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/80938cf5-0567-479a-8d52-3e2d5d8353dd"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/80938cf5-0567-479a-8d52-3e2d5d8353dd"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/80938cf5-0567-479a-8d52-3e2d5d8353dd"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/80938cf5-0567-479a-8d52-3e2d5d8353dd"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/80938cf5-0567-479a-8d52-3e2d5d8353dd"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/80938cf5-0567-479a-8d52-3e2d5d8353dd"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "success",
+                    "task_result": {
+                        "ads": null,
+                        "ads_count": 0,
+                        "content": "The Onn 3ft USB-C to USB-C Charging Cable is an affordable, USB-IF certified option available at Walmart.\n\n### Product Details\n\n  - **Price:**  $3.88  \n  - **Length:**  3 feet  \n  - **Features:**  USB-IF certified, fast charging support, and data transfer speeds up to 480 Mbps.  \n  - **Compatibility:**  Works with the iPhone 17/16/15 series, Samsung Galaxy, Note, and Google Pixel devices.  \n  - **Store Offer:**  Available for purchase directly via Walmart for $3.88.  \n\n### Tips\n\n  - **Check Cert",
+                        "is_ads": false,
+                        "is_overview_shopping": true,
+                        "is_shopping": true,
+                        "metadata": {
+                            "rawUrl": "https://www.google.com/search?gl=US&oq=Recommend+one+affordable+USB-C+charging+cable+to+buy+in+the+United+States.+Include+a+product+and+store+offer+if+available.&q=Recommend+one+affordable+USB-C+charging+cable+to+buy+in+the+United+States.+Include+a+product+and+store+offer+if+available.&sclient=gws-wiz-serp&uact=5"
+                        },
+                        "products": [
+                            {
+                                "delivery": "Free delivery",
+                                "discount": "16% OFF",
+                                "img": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTRs6gwIF9ofaoMtQrUeLyUZWmMdxo7dVwixlfF2fl9IC5ieuD372doUrIvA5tc4MlSjzFtu8uS90yv0CZG3c6aMqxALMxNrQ2BpIX8AkHS",
+                                "name": "Anker USB-C to USB-C Cable",
+                                "orig_price": "$12",
+                                "price": "$9.99",
+                                "rating": "5.0",
+                                "review_count": "(82)",
+                                "section_title": "Deals",
+                                "seller": "Walmart - AnkerDirect",
+                                "stores": [
+                                    {
+                                        "delivery_fee": "Free delivery",
+                                        "extensions": [
+                                            "In stock online",
+                                            "Free delivery"
+                                        ],
+                                        "link": "/goto?url=CAES_gEB6zswFZ8UItx6MuBHAodrupHAdHguHAzU5AAnDrNMBWc9QGWaJUcZdbDysyhENqSJGpd1Bog4TzXZ27bwTBDWXd3gGeXQMM-ssPStkqNARiT8LvoB0zEs7C7HrpHpL47Vo8ng0G4Q7SkNymFbt2xtU2awzKvQ3Ot9IIYuAtxGhsezc5nYLlwXuo8-7IFyGBp41IqS_Rp1AajQFOGb6YcXvmv3KX-7_ZvslnlYl1ttJydfo0JMbvok_Rsygx3PdlhEFsMWOjRyaYmsqnSrxNHT0l-eOlobbGSyW3RdVaIU1Ac0Tv4i76ceTOxxBOz7Ak07Hhraat0vhuxurIwU-A",
+                                        "name": "Walmart - AnkerDirect",
+                                        "original_price": "$12",
+                                        "price": "$9.99",
+                                        "title": "Anker Zolo USB C to USB C Cable, Braided and Dirt-Free Type-C Fast Charging Cable, Slim Connector, Black",
+                                        "total_price": "$9.99"
+                                    },
+                                    {
+                                        "delivery_fee": "Free delivery",
+                                        "extensions": [
+                                            "In stock online",
+                                            "Free delivery"
+                                        ],
+                                        "link": "/goto?url=CAESsAEB6zswFbxzz7Y6uJIynEd0Zfnrmm1o5iqH_2V7LVNEPvUjGNbkB4FnRLvrUHE3pQVAW6gWMIzT4o9Vd7GKgM8aEgb0or2iOGrSyDt5ecsQJrIG5nji2_3TSFV1Z1ZevQlir-dXFVTKPEJ0h4bMflfM19OPEzG8IGh4FIiH69Zh-r8BaLsR6vM38XKU_8qYsGZk07Q861G72XTAUHYInjk5d8qX73QppCFPdCxmMeGUKw",
+                                        "name": "Best Buy",
+                                        "original_price": "$14",
+                                        "price": "$12.99",
+                                        "title": "Anker - Zolo USB C to USB C Cable - Black",
+                                        "total_price": "$12.99"
+                                    }
+                                ],
+                                "url": "https://www.google.com/search?ibp=oshop&prds=catalogid%3A13170027963444508167%2Cgpcid%3A4973399605107329916%2CproductDocid%3A15612648140251366392%2CimageDocid%3A10351226724376871801%2CheadlineOfferDocid%3A9044360040036937257&q=Recommend+one+affordable+USB-C+charging+cable+to+buy+in+the+United+States.+Include+a+product+and+store+offer+if+available.&sa=X&ved=2ahUKEwiH18b3js-XAxWdzvACHZb7HMMQrogGegQIXBAF"
+                            },
+                            {
+                                "delivery": "Free delivery on $40+",
+                                "discount": "29% OFF",
+                                "img": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcToU2Rm8CUp6x8OLK96xZ86IXDla803XK319pvfB2ttSS3AOXVBkMrVot3bUQWtocKIpo_3Ck52HwzbnD5HrFdK3kjb-0y5HXNDCZyStU73",
+                                "name": "CODi 6' USB-C to USB-C Braided Nylon Charge & Sync Cable A01069",
+                                "orig_price": "$17",
+                                "price": "$11.99",
+                                "rating": "5.0",
+                                "review_count": "(2)",
+                                "section_title": "Deals",
+                                "seller": "Peel",
+                                "stores": [
+                                    {
+                                        "delivery_fee": "Free delivery between Oct 27 – 29 on orders $40+",
+                                        "extensions": [
+                                            "In stock online",
+                                            "3.3/5"
+                                        ],
+                                        "link": "/goto?url=CAESvgIB6zswFc2q6ixvwfKEj1oZPYvpXHCvmcSCG_dvaMRZwK_4rnAhmoDAwjz9PHL05kdpkIN3gd5B3umpEUJbzMs61toYYK4zg1E0df_iEkIGKn3jvBTzsbtygjYWgcocLsIbu8qKdmbBokwUtwhgVNuZaNb6JDw_fkusEhJpdD-kJAQD-yxtt9QC1qYuHL-mvNWE0UfCIMiGm6P41n3C7G97ZK2nitDbHdP_09ePLMbS6zau1UHkocKx4dfB7rTSrF_fKDpXgFkjyYI68gGy2-7oeG5hbSGPWRtodzdKL1sfNSRWuBwuj7L-5diTQPWUITGBZNVgEueAzKe_Vwlc7ECHUwfpgRg0x98YhlQnwj4rRXwYCuITcef_P01wwYIxKiK8YlOLDcYzA7tFRIlDyKjTw-Xk7-81N-pethl2N_o",
+                                        "name": "Peel",
+                                        "original_price": "$17",
+                                        "price": "$11.99",
+                                        "ratings": "3.3/5",
+                                        "tag": "Most popular",
+                                        "title": "6ft USB-C Cable by CODi",
+                                        "total_price": "$11.99"
+                                    },
+                                    {
+                                        "delivery_fee": "Delivery by Wed $65.99",
+                                        "extensions": [
+                                            "In stock online",
+                                            "4.5/5"
+                                        ],
+                                        "link": "/goto?url=CAESxwEB6zswFRHV02tfYL8Q6ID46xZBTXd7vb3kD_fM09J2mnzR2nU9FrvTXhuQ9LaHw5wV2Xq4Xi4MxFP1N0CAZ-9cWhr7nbglhsep3neBd4Ujw3qh0LOFUgJG54B9qBHQXVSwXrH9_KwohGQF_4n6JVhhI0vcWpkaJo6cFEAWr62PZiDH5wVWvUP6V1BWjty2VnrIavwQbpRMjMG9eGN4SeQY_Tckm1-MnEvPBVgfqLP83C7OVabqYxTOkLkMbtu-yxAgUb319LcZ",
+                                        "name": "CDW",
+                                        "price": "$10.79",
+                                        "ratings": "4.5/5",
+                                        "tag": "Best price",
+                                        "title": "Codi Usb-c To Usb-c Charge & Sync Cable",
+                                        "total_price": "$10.79"
+                                    }
+                                ],
+                                "url": "https://www.google.com/search?ibp=oshop&prds=catalogid%3A14072059373218268832%2Cgpcid%3A15038266153905475468%2CproductDocid%3A10400877434479253552%2CimageDocid%3A2762233858194006773%2CheadlineOfferDocid%3A7395526082987093630&q=Recommend+one+affordable+USB-C+charging+cable+to+buy+in+the+United+States.+Include+a+product+and+store+offer+if+available.&sa=X&ved=2ahUKEwiH18b3js-XAxWdzvACHZb7HMMQrogGegQIYhAF"
+                            }
+                        ],
+                        "purchase_link": true,
+                        "rawtext": "The Onn 3ft USB-C to USB-C Charging Cable is an affordable, USB-IF certified option available at Walmart.\n\n### Product Details\n\n- **Price:** $3.88  \n- **Length:** 3 feet  \n- **Features:** USB-IF certified, fast charging support, and data transfer speeds up to 480 Mbps.  \n- **Compatibility:** Works with the iPhone 17/16/15 series, Samsung Galaxy, Note, and Google Pixel devices.  \n- **Store Offer:** Available for purchase directly via Walmart for $3.88.  \n\n### Tips\n\n- **Check Certification:** Look",
+                        "shopping_count": 33,
+                        "source": [
+                            {
+                                "favicon": "",
+                                "product_position": "inline_link",
+                                "snippet": "Price: $3.88 | Seller: Walmart | Rating: 4.27 (430)",
+                                "stores": [
+                                    {
+                                        "delivery_fee": "Delivery between Fri - Mon $6.99",
+                                        "extensions": [
+                                            ",",
+                                            "In stock online and nearby"
+                                        ],
+                                        "link": "/goto?url=CAEShwIB6zswFSTCmd_u3KGP531SjGoShF5x-f1rDAUHPAbKx3klggAhF0JVSrfnygFxvo0AJyzDEbl9Lv8qHeFNXRrROO8HxQOYGmjPRlhCdZWtbsRgkUm8KKcb7HuD21t-DxVkxGzONv2S28jGDnUtRPVKaTNyJqk6s0FmN32fVvLwJ5vKV9GtyxAFmP9vaS2UdNr-NHMIbD9vXsZCT-bZgrY62zrGwiCMFKydNGKI9W45-GgJLfrgFSdxHW3dRIFxDtFS__1qyY9VeVefWaodMNc2CQ1Z2-_Vbq2TxJnUQQWMkzXnLwfTYz1Iz7qoC_jFWruL3qHzubHxeU38bZeMYIHeQdIozSsS7Q",
+                                        "name": "Walmart",
+                                        "price": "$3.88",
+                                        "ratings": "4.3/5",
+                                        "tag": "Best price",
+                                        "title": "Onn 3ft Braided Usb-c Charging Cable, Usb-if Certified, White",
+                                        "total_price": "$3.88"
+                                    },
+                                    {
+                                        "delivery_fee": "Free delivery between Oct 23 – 29",
+                                        "extensions": [
+                                            "In stock online",
+                                            "Free delivery between Oct 23 – 29"
+                                        ],
+                                        "link": "/goto?url=CAES2QMB6zswFVMt9I6O2VAe4zirdiwRraohmaB1C6K9vdblOqjzTvag3Dn3MPT4ulX-sxed4FZ3o_zYcGkWr_LSdQ1OQmnod0qrofhYSJR91UsM_2TOh5XFm1ynqlT1MssRnHFxvhMCGX_htDhbJghQKly3V5y4PmVJQz9YdBo0-uTaSk6iUD-sVMmFLdhgOQhlj5MdstWi5DSiMl2FVrZ5USZNtWqhDbHrN9Uv5PwFtnK2G-mw2bAsoEGoPGwiSt-B1bnN6h7IECugPkQ1DZ4gZghOFJmgoN5M13rDza8uGU2MPrCmE22Anic8mBJ6ywcjbgqbAFxH-Krco8GirpqLYnQziguLFAG_G0wKeBLbQfodZjJ045dhHwq5h3txUFkw7Ncfb2oPqJ3dUPAurlzk_V4FCBnaJBowc4BMqn5nNIiKd35RTcZ1UQ4eESyGC3NvK3ouBwd5bwAi8zY7u3ZPkdfloJ-kJgd-LvOnIP",
+                                        "name": "Brands For Less USA",
+                                        "original_price": "$28",
+                                        "price": "$8.09",
+                                        "title": "onn 3ft USB-C To USB-C Braided Charging Cable, Fast Charging, USB-IF Certified, White - Compatible with iPhone 17/16/15 Series, Samsung Galaxy, Note,",
+                                        "total_price": "$8.09"
+                                    }
+                                ],
+                                "thumbnail": "",
+                                "title": "Onn Usb-c to Usb-c Braided Charging Cable",
+                                "type": "product",
+                                "url": "https://www.google.com/search?ibp=oshop&prds=pvt:hg,pvo:48,mid:576462566998573156,imageDocid:4638880263971529903,gpcid:715616580374791125,headlineOfferDocid:10941138010274805799,catalogid:10224010812560012071,productDocid:7200917023127827449,rds:PC_715616580374791125%7CPROD_PC_715616580374791125&q=product&sa=X&ved=2ahUKEwi5ivb4js-XAxVuj4kEHU0nEdkQxa4PegoIAggACAEIEBAD",
+                                "website_name": "Walmart"
+                            },
+                            {
+                                "favicon": "",
+                                "product_position": "inline_link",
+                                "snippet": "Price: $3.88 | Seller: Walmart | Rating: 4.27 (430)",
+                                "stores": [
+                                    {
+                                        "delivery_fee": "Delivery between Fri - Mon $6.99",
+                                        "extensions": [
+                                            ",",
+                                            "In stock online and nearby"
+                                        ],
+                                        "link": "/goto?url=CAEShwIB6zswFRPpqyBvWiX-ZVZfKdS3fVpon4TKql06Mkaey8U-v2bI9GGPaWCjCUdeEUbMm-d4qdXmN8eO3Umdprh-CSb6d91TywAY3EUBDKvVl0TF-EcUUKIxLp4Mvb86MAlFTxriR1sUh6nU8C5T6XzmcMHtRpfx7kjoewWGDCEFe_LitVTuQ9tOFD8VNx84TJ63TVyysTYogj65720KZ7YTka44QN7pxEfZDYT7Iucz6bjCF25gZz5CVyRIy7NHzhtQjqZBG20IMhTuOFlMLLHZIPxscf49zam5Qg4DnQPOvjLqvrNoeem7nS41rBhkU1sWfB1nmds2fttB5F_5ag7Odiv_Dc67YQ",
+                                        "name": "Walmart",
+                                        "price": "$3.88",
+                                        "ratings": "4.3/5",
+                                        "tag": "Best price",
+                                        "title": "Onn 3ft Braided Usb-c Charging Cable, Usb-if Certified, White",
+                                        "total_price": "$3.88"
+                                    },
+                                    {
+                                        "delivery_fee": "Free delivery between Oct 23 – 29",
+                                        "extensions": [
+                                            "In stock online",
+                                            "Free delivery between Oct 23 – 29"
+                                        ],
+                                        "link": "/goto?url=CAES2QMB6zswFV4D-D0iD6kQMZosiztVN31f2MFQz23wV8It-9afeJTkwsG5SLHuPGbzB7_CwaZ1piZNz2KAgXWuohfwf-NCwgyGPSzaAPqZAwGQ-F_g2TkhvHrtqF6D_CJSrkMKDx11sZq0huKagYGP0q-8CLDNohfpTgFcGQbhgdhv5j-grQByd2_0tHi0NSGmWl3bI8cqhNo0qZ1XHYqh_D14xNS3_9hwIUKxr1jCADIplE0Km8wh2dVUWuC2NqrgIQfbkDfbr6R1OgI-rWhCRP5llxUGbMi6BahYKAAPRAH6o8oIXlR5yLTlfrIgB3FHdEiIYTnxZz5mqx7RDmIwHDMAHxwz4aIgZGqKsdJH0Pd9XfVCXFJCAdXpmj4hL-Sn2cMGFqO5SXG-E2lwHkb2uFPhsh8Wy5sMClPBYKXaHY6617Xb9mDpXEZyMwWABnQ68QvJcelyH2gmwXk5pea1Wc6HZjIv4sy90y1ZlJ",
+                                        "name": "Brands For Less USA",
+                                        "original_price": "$28",
+                                        "price": "$8.09",
+                                        "title": "onn 3ft USB-C To USB-C Braided Charging Cable, Fast Charging, USB-IF Certified, White - Compatible with iPhone 17/16/15 Series, Samsung Galaxy, Note,",
+                                        "total_price": "$8.09"
+                                    }
+                                ],
+                                "thumbnail": "",
+                                "title": "Onn 3ft USB-C to USB-C Charging Cable",
+                                "type": "product",
+                                "url": "https://www.google.com/search?ibp=oshop&prds=pvt:hg,pvo:48,mid:576462566998573156,imageDocid:4638880263971529903,gpcid:715616580374791125,headlineOfferDocid:10941138010274805799,catalogid:10224010812560012071,productDocid:7200917023127827449,rds:PC_715616580374791125%7CPROD_PC_715616580374791125&q=product&sa=X&ved=2ahUKEwi5ivb4js-XAxVuj4kEHU0nEdkQxa4PegoIAggACAEIEBAE",
+                                "website_name": "Walmart"
+                            }
+                        ],
+                        "web_source": [
+                            {
+                                "favicon": "",
+                                "snippet": "Dec 19, 2025 — The woven 60 W Anker USB-C to USB-C Cable can fast-charge any device that doesn't demand a 100 W or 240 W connection. At $14 (or $10 for Amazon ...Read more",
+                                "thumbnail": "",
+                                "title": "The Best USB-C Cables and Adapters",
+                                "type": "",
+                                "url": "https://www.nytimes.com/wirecutter/reviews/best-usb-c-cables/",
+                                "website_name": "The New York Times"
+                            },
+                            {
+                                "favicon": "",
+                                "snippet": "Hello I wonder now how to get the USB-C cable that I am entitled to expect. I can’t trust Amazon, since sellers from the marketplace and brands lie about ...",
+                                "thumbnail": "",
+                                "title": "For USB-C cables what brands should I trust?",
+                                "type": "",
+                                "url": "https://www.reddit.com/r/UsbCHardware/comments/17ptf86/for_usbc_cables_what_brands_should_i_trust/",
+                                "website_name": "Reddit · r/UsbCHardware"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

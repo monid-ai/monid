@@ -1,0 +1,131 @@
+{
+    "name": "recorded-expansion-google-local",
+    "description": "Real Scrapeless responses, 2026-10-22; header allowlist applied; Monid trimCalls caps response arrays at 2 and strings at 500. Full redacted records remain in research/live-expansion-2026-10-22. Replay usage is TEST ONLY, never actual charges.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v1/scraper/request",
+                "body": {
+                    "actor": "scraper.google.search",
+                    "input": {
+                        "q": "library San Francisco",
+                        "gl": "us",
+                        "hl": "en",
+                        "tbm": "lcl"
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "filters": [
+                        {
+                            "name": "Open now",
+                            "parameters": {
+                                "q": "library San Francisco open now",
+                                "uds": "AJ5uw1_a2D0D09lxm8gpKKOTUn4r7FdG0i-8ZTZ48vnGFqutXxxdyXf-yazNGiPKrYS0FTCFe0fRnWj6yP3vjAJSci4qQpK_rPKTIi0PgfVkfo9r2skzBGFRTeR72BkwwlXBBBJwKZ5NCRWjwfL_xh7lT8eIxlbchxeCX1bFNTayqOMGw0FHG0c1KcuGTkAGeBR71zSPUDWtqKSIlKgUlhhADn_j-YTSAw"
+                            },
+                            "link": "https://www.google.com/search?sca_esv=9e44a9c1964ca618&gl=us&hl=en&sxsrf=APpeQntx8WikTC3vM18rHgdQvOLrEP-ovQ:1792661966479&q=library+San+Francisco+open+now&uds=AJ5uw1_a2D0D09lxm8gpKKOTUn4r7FdG0i-8ZTZ48vnGFqutXxxdyXf-yazNGiPKrYS0FTCFe0fRnWj6yP3vjAJSci4qQpK_rPKTIi0PgfVkfo9r2skzBGFRTeR72BkwwlXBBBJwKZ5NCRWjwfL_xh7lT8eIxlbchxeCX1bFNTayqOMGw0FHG0c1KcuGTkAGeBR71zSPUDWtqKSIlKgUlhhADn_j-YTSAw&udm=local&sa=X&ved=2ahUKEwjujNudqs2XAxVDtIkEHfsMBmgQxKsJKAB6BAgWEAE&ictx=0"
+                        }
+                    ],
+                    "knowledge_graph": {
+                        "place_id": "ChIJd2spnJuAhYARhkuvhLCp3us",
+                        "source": {}
+                    },
+                    "local_map": {
+                        "link": "",
+                        "image": "",
+                        "gps_coordinates": {
+                            "latitude": 37.73325402695063,
+                            "longitude": -122.43473052978517
+                        }
+                    },
+                    "local_results": {
+                        "places": [
+                            {
+                                "position": 1,
+                                "rating": 0,
+                                "reviews": 1022,
+                                "reviews_original": "",
+                                "description": "\"The library is spacious, clean, and has plenty of seating.\"",
+                                "provider_id": "/m/06vx37s",
+                                "lsig": "",
+                                "thumbnail": "",
+                                "thumbnail_large": "https://lh3.googleusercontent.com/grass-cs/AABkmLfqwmwG-OQzy60vXvc0XQ92Ah4c4FKpJ4PVF03A5d1lMGGqO4I9elzDl8YTzNuxXjvWTZU9-Ef8EplWRctyw-W_vL33SfN75Vr-p4mFhnM92jmookq0BuLOt6sJnlxNgTAtooA=w1000-h1000-c-n",
+                                "place_id": "16996208619348249478",
+                                "place_id_search": "https://www.google.com/searchviewer/10?sca_esv=9e44a9c1964ca618&gl=us&hl=en&udm=local&output=search&svid=CCYSDioMCgovbS8wNnZ4MzdzGAo",
+                                "gps_coordinates": {
+                                    "latitude": 37.779082,
+                                    "longitude": -122.415796
+                                },
+                                "title": "San Francisco Main Public Library",
+                                "type": "Public library",
+                                "address": "100 Larkin St, San Francisco, CA 94102",
+                                "phone": "[REDACTED]",
+                                "hours": "Closed · Opens 9 AM",
+                                "extensions": [
+                                    "       \"The library is spacious, clean, and has plenty of seating.\""
+                                ],
+                                "links": {
+                                    "directions": "https://www.google.com/maps/dir//San+Francisco+Main+Public+Library,+100+Larkin+St,+San+Francisco,+CA+94102/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x8085809b9c296b77:0xebdea9b084af4b86?sa=X&ved=1t:57443&hl=en&gl=us&ictx=111",
+                                    "phone": "[REDACTED]",
+                                    "website": "https://sfpl.org/mainlibrary"
+                                }
+                            },
+                            {
+                                "position": 2,
+                                "rating": 0,
+                                "reviews": 129,
+                                "reviews_original": "",
+                                "provider_id": "/m/02hqw6q",
+                                "lsig": "",
+                                "thumbnail": "",
+                                "thumbnail_large": "https://lh3.googleusercontent.com/grass-cs/AABkmLfqdfcey4W2LN64HZsRaa65G80PIv39d_IpZKUgR3aXIo4rpL-bKG-wwXhuBo_uXSmJFDTXkyNF7UroVMV0DAVbbqVhjOCgGBbTHyoEh81XO66jyRVj8Dv2lY2OsJPzfCuCKrd8=w1000-h1000-c-n",
+                                "place_id": "2067348004204909415",
+                                "place_id_search": "https://www.google.com/searchviewer/10?sca_esv=9e44a9c1964ca618&gl=us&hl=en&udm=local&output=search&svid=CCYSDioMCgovbS8wMmhxdzZxGAo",
+                                "gps_coordinates": {
+                                    "latitude": 37.775428,
+                                    "longitude": -122.393131
+                                },
+                                "title": "Mission Bay Branch Library",
+                                "type": "Public library",
+                                "address": "960 4th St, San Francisco, CA 94158",
+                                "phone": "[REDACTED]",
+                                "hours": "Closed · Opens 10 AM",
+                                "extensions": [
+                                    ""
+                                ],
+                                "links": {
+                                    "directions": "https://www.google.com/maps/dir//Mission+Bay+Branch+Library,+960+4th+St,+San+Francisco,+CA+94158/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x808f7fd12a4a0e4f:0x1cb0b20e79bf1367?sa=X&ved=1t:57443&hl=en&gl=us&ictx=111",
+                                    "phone": "[REDACTED]",
+                                    "website": "https://sfpl.org/locations/mission-bay"
+                                }
+                            }
+                        ]
+                    },
+                    "pagination": {},
+                    "search_information": {
+                        "organic_results_state": "Results for exact spelling",
+                        "query_displayed": "library San Francisco",
+                        "total_results": 73,
+                        "time_taken_displayed": "0.23"
+                    },
+                    "suggested_searches": [
+                        {
+                            "name": "Open now",
+                            "link": "https://www.google.com/search?sca_esv=9e44a9c1964ca618&gl=us&hl=en&sxsrf=APpeQntx8WikTC3vM18rHgdQvOLrEP-ovQ:1792661966479&q=library+San+Francisco+open+now&uds=AJ5uw1_a2D0D09lxm8gpKKOTUn4r7FdG0i-8ZTZ48vnGFqutXxxdyXf-yazNGiPKrYS0FTCFe0fRnWj6yP3vjAJSci4qQpK_rPKTIi0PgfVkfo9r2skzBGFRTeR72BkwwlXBBBJwKZ5NCRWjwfL_xh7lT8eIxlbchxeCX1bFNTayqOMGw0FHG0c1KcuGTkAGeBR71zSPUDWtqKSIlKgUlhhADn_j-YTSAw&udm=local&sa=X&ved=2ahUKEwjujNudqs2XAxVDtIkEHfsMBmgQxKsJKAB6BAgWEAE&ictx=0",
+                            "uds": "",
+                            "q": "Open now library San Francisco",
+                            "thumbnail": ""
+                        }
+                    ],
+                    "metadata": {
+                        "engine": "google.search",
+                        "rawUrl": "https://api.scrapeless.com/storage/scrapeless.scraper.google.search/96f70ac54efe5f5439c011c2c6a7abd0/8b8fb78e2af5248b0454ec2150e512ff_1792661967.html"
+                    }
+                }
+            }
+        }
+    ]
+}

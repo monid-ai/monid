@@ -1,0 +1,159 @@
+{
+    "name": "recorded-branches-tiktok-page",
+    "description": "Actual bounded own-account branch probe 2026-10-23. Secrets/PII scrubbed; result arrays capped at 3 and strings at 4500 characters; all protocol calls retained. Not an invoice or full production acceptance.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v1/scraper/request",
+                "body": {
+                    "actor": "scraper.tiktok.user.work",
+                    "input": {
+                        "sec_uid": "MS4wLjABAAAAv7iSuuXDJGDvJkmH_vz1qkDZYo1apxgzaxdBSeIuPiM",
+                        "cursor": "0",
+                        "count": 2
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "items": [
+                        {
+                            "post_id": "7698770783367171359",
+                            "post_url": "https://www.tiktok.com/@tiktok/video/7698770783367171359",
+                            "description": "The throwback sounds we didn’t know we were missing, brought back to life on the FYF 💖 @Adam Barrera unpacks how nostalgia took over TikTok.",
+                            "sticker_texts": [],
+                            "create_time": "2026-10-20T15:23:03.000Z",
+                            "like_count": 3793,
+                            "share_count": 320,
+                            "repost_count": 0,
+                            "collect_count": 322,
+                            "comment_count": 1242,
+                            "play_count": 240200,
+                            "video_id": "7698770783367171359",
+                            "video_duration": 105,
+                            "video_width": 720,
+                            "video_height": 1280,
+                            "video_definition": "720p",
+                            "video_format": "mp4",
+                            "video_size": 22592237,
+                            "video_url": "https://v16-webapp-prime.us.tiktok.com/video/tos/useast8/tos-useast8-pve-0068-tx2/oE3Cl7iaEIBIq1QANaiAfXiQ1XEqIMyiqV58hA/?a=1988&bti=ODszNWYuMDE6&&bt=1670&ft=aEeq8qT0mIoPD123lo6I3wU_s4AbMeF~O5&mime_type=video_mp4&rc=ZTU3NTNkPGk5ZzU6ODtoO0BpMzdkOG85cm9yZTMzaTczNEAzNDEvLl42X18xNDEuMzViYSNhXnI1MmRjYV9hLS1kMTJzcw%3D%3D&expire=1792914626&l=20261023074841ACD4F8F7FEEE323381EC&ply_type=2&policy=2&signature=[REDACTED]&tk=tt_chain_token&btag=e00090000",
+                            "cover_url": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oYiO1Aj1aA7yiGqAi938DIhBKXXfIw5ACi9AEB~tplv-tiktokx-origin.image?dr=9636&x-expires=1792911600&x-signature=[REDACTED]&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+                            "dynamic_cover_url": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oYiO1Aj1aA7yiGqAi938DIhBKXXfIw5ACi9AEB~tplv-tiktokx-origin.image?dr=9636&x-expires=1792911600&x-signature=[REDACTED]&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+                            "hashtags": [],
+                            "language": "en",
+                            "is_pinned": false,
+                            "is_ad": false,
+                            "is_ec_video": false,
+                            "profile_username": "tiktok",
+                            "profile_nickname": "TikTok",
+                            "profile_url": "https://www.tiktok.com/@tiktok",
+                            "profile_avatar_url": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-avt-0068-tx/ba67b11de451691939223e9d978e613a~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=9640&refresh_token=[REDACTED]&x-expires=1792911600&x-signature=[REDACTED]&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=useast5",
+                            "author_id": "107955",
+                            "author_sec_uid": "MS4wLjABAAAAv7iSuuXDJGDvJkmH_vz1qkDZYo1apxgzaxdBSeIuPiM",
+                            "is_verified": true,
+                            "music": {
+                                "music_id": "7698770883132853023",
+                                "title": "original sound",
+                                "author": "TikTok",
+                                "duration": 105,
+                                "play_url": "https://v16m.tiktokcdn-us.com/d94b43166e13447f2b494925ed54d050/6adb6622/video/tos/useast8/tos-useast8-v-27dcd7-tx2/oIudEVTzZDC1hxAlA4F9EJqADUnAMBk1EefGXE/?a=1233&bti=ODszNWYuMDE6&&bt=125&ft=GSDrKInz7ThX9IFGXq8Zmo&mime_type=audio_mpeg&rc=amZ0eHg5cnByZTMzaTU8NEBpamZ0eHg5cnByZTMzaTU8NEA2YjRwMmRjYl9hLS1kMTJzYSM2YjRwMmRjYl9hLS1kMTJzcw%3D%3D&vvpl=1&l=20261023074841ACD4F8F7FEEE323381EC&btag=e00050000",
+                                "is_original": true,
+                                "is_copyrighted": false,
+                                "is_commerce": true
+                            },
+                            "subtitles": [
+                                {
+                                    "language": "cmn-Hans-CN",
+                                    "format": "webvtt",
+                                    "source": "MT",
+                                    "url": "https://v16m-webapp.tiktokcdn-us.com/30d81d76a46f1396cf1974216f584ef8/6addb4c2/video/tos/useast8/tos-useast8-v-0068-tx2/4a215fdcba404c13a3b138a5f4e16385/?a=1988&bti=ODszNWYuMDE6&&bt=5960&ft=aEKq_qT0mIoPD123lo6I3wU_s4AbMeF~O5&mime_type=video_mp4&rc=MzdkOG85cm9yZTMzaTczNEBpMzdkOG85cm9yZTMzaTczNEBhXnI1MmRjYV9hLS1kMTJzYSNhXnI1MmRjYV9hLS1kMTJzcw%3D%3D&l=20261023074841ACD4F8F7FEEE323381EC&btag=e00050000",
+                                    "is_auto_generated": false,
+                                    "is_original": false
+                                },
+                                {
+                                    "language": "eng-US",
+                                    "format": "webvtt",
+                                    "source": "ASR",
+                                    "url": "https://v16m-webapp.tiktokcdn-us.com/e1168dea25f79cd6adf6d87b01419cdf/6addb4c2/video/tos/useast8/tos-useast8-v-0068-tx2/ac56df9416f64d2d8ef5b826b113bd23/?a=1988&bti=ODszNWYuMDE6&&bt=5960&ft=aEKq_qT0mIoPD123lo6I3wU_s4AbMeF~O5&mime_type=video_mp4&rc=MzdkOG85cm9yZTMzaTczNEBpMzdkOG85cm9yZTMzaTczNEBhXnI1MmRjYV9hLS1kMTJzYSNhXnI1MmRjYV9hLS1kMTJzcw%3D%3D&l=20261023074841ACD4F8F7FEEE323381EC&btag=e00050000",
+                                    "is_auto_generated": false,
+                                    "is_original": false
+                                }
+                            ],
+                            "permissions": {
+                                "can_comment": false,
+                                "can_share": true,
+                                "can_repost": true,
+                                "duet_enabled": true,
+                                "stitch_enabled": true
+                            }
+                        },
+                        {
+                            "post_id": "7694797676306615583",
+                            "post_url": "https://www.tiktok.com/@tiktok/video/7694797676306615583",
+                            "description": "this summer gave us pop songs, glam routines, and a few main-character habits. @McCall Mirabella breaks down this summer's souvenirs 🐬☀️",
+                            "sticker_texts": [],
+                            "create_time": "2026-10-09T22:25:11.000Z",
+                            "like_count": 14100,
+                            "share_count": 1445,
+                            "repost_count": 0,
+                            "collect_count": 1391,
+                            "comment_count": 5476,
+                            "play_count": 1400000,
+                            "video_id": "7694797676306615583",
+                            "video_duration": 49,
+                            "video_width": 720,
+                            "video_height": 1280,
+                            "video_definition": "720p",
+                            "video_format": "mp4",
+                            "video_size": 10246341,
+                            "video_url": "https://v16-webapp-prime.us.tiktok.com/video/tos/useast8/tos-useast8-ve-0068c001-tx2/ogJEilqISNrDaBR0ARVeWfEVFEAR2gyyu8R0TQ/?a=1988&bti=ODszNWYuMDE6&&bt=1603&ft=aEeq8qT0mIoPD123lo6I3wU_s4AbMeF~O5&mime_type=video_mp4&rc=M2czaWg1Ozo7ODVpNjkzOEBpM281NHM5cm5wZTMzaTczNEBjYmItYTU0XzUxLTI2YGI1YSNzZWlhMmRjZjFhLS1kMTJzcw%3D%3D&expire=1792914570&l=20261023074841ACD4F8F7FEEE323381EC&ply_type=2&policy=2&signature=[REDACTED]&tk=tt_chain_token&btag=e00090000",
+                            "cover_url": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/osDEKIayAATxid4XIifhL1BBXAZ8wiCZcATiAJ~tplv-tiktokx-origin.image?dr=9636&x-expires=1792911600&x-signature=[REDACTED]&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+                            "dynamic_cover_url": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/osDEKIayAATxid4XIifhL1BBXAZ8wiCZcATiAJ~tplv-tiktokx-origin.image?dr=9636&x-expires=1792911600&x-signature=[REDACTED]&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+                            "hashtags": [],
+                            "language": "en",
+                            "is_pinned": false,
+                            "is_ad": false,
+                            "is_ec_video": false,
+                            "profile_username": "tiktok",
+                            "profile_nickname": "TikTok",
+                            "profile_url": "https://www.tiktok.com/@tiktok",
+                            "profile_avatar_url": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-avt-0068-tx/ba67b11de451691939223e9d978e613a~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=9640&refresh_token=[REDACTED]&x-expires=1792911600&x-signature=[REDACTED]&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=useast5",
+                            "author_id": "107955",
+                            "author_sec_uid": "MS4wLjABAAAAv7iSuuXDJGDvJkmH_vz1qkDZYo1apxgzaxdBSeIuPiM",
+                            "is_verified": true,
+                            "music": {
+                                "music_id": "7694797733856660255",
+                                "title": "original sound",
+                                "author": "TikTok",
+                                "duration": 49,
+                                "play_url": "https://v16m.tiktokcdn-us.com/48a685adfc7b4885366abad823a9f39e/6adb65ea/video/tos/useast8/tos-useast8-v-27dcd7-tx2/os9zaqADfCBoAMDJUcAJnhEACFJlWyYAfVEEEG/?a=1233&bti=ODszNWYuMDE6&&bt=125&ft=GSDrKInz7ThX9IFGXq8Zmo&mime_type=audio_mpeg&rc=M3c4PHM5cmxwZTMzaTU8NEBpM3c4PHM5cmxwZTMzaTU8NEAwc2RsMmRjZzFhLS1kMTJzYSMwc2RsMmRjZzFhLS1kMTJzcw%3D%3D&vvpl=1&l=20261023074841ACD4F8F7FEEE323381EC&btag=e00050000",
+                                "is_original": true,
+                                "is_copyrighted": false,
+                                "is_commerce": true
+                            },
+                            "subtitles": [
+                                {
+                                    "language": "eng-US",
+                                    "format": "webvtt",
+                                    "source": "ASR",
+                                    "url": "https://v16m-webapp.tiktokcdn-us.com/6dcc47bb3cfb0c1319c508959071668a/6addb48a/video/tos/useast8/tos-useast8-v-0068-tx2/3556003e75fe4dc8aae5aeb9a73bd504/?a=1988&bti=ODszNWYuMDE6&&bt=5451&ft=aEKq_qT0mIoPD123lo6I3wU_s4AbMeF~O5&mime_type=video_mp4&rc=M281NHM5cm5wZTMzaTczNEBpM281NHM5cm5wZTMzaTczNEBzZWlhMmRjZjFhLS1kMTJzYSNzZWlhMmRjZjFhLS1kMTJzcw%3D%3D&l=20261023074841ACD4F8F7FEEE323381EC&btag=e00050000",
+                                    "is_auto_generated": false,
+                                    "is_original": false
+                                }
+                            ],
+                            "permissions": {
+                                "can_comment": false,
+                                "can_share": true,
+                                "can_repost": true,
+                                "duet_enabled": true,
+                                "stitch_enabled": true
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

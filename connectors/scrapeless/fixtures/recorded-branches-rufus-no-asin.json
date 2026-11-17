@@ -1,0 +1,64 @@
+{
+    "name": "recorded-branches-rufus-no-asin",
+    "description": "Actual bounded own-account branch probe 2026-10-23. Secrets/PII scrubbed; result arrays capped at 3 and strings at 4500 characters; all protocol calls retained. Not an invoice or full production acceptance.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v1/scraper/request",
+                "body": {
+                    "actor": "scraper.amazon",
+                    "input": {
+                        "type": "rufus",
+                        "keywords": "Is this good for the gym and running?",
+                        "domain": "www.amazon.com"
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "metadata": {
+                        "rawUrl": "https://api.scrapeless.com/storage/scrapeless.scraper.amazon/ada5c5fae7ec9d8db40c00d1183eb8c9/ebfdaf8c25177dc8cc4e8fb7f7d29835_1792741709.html",
+                        "type": "rufus"
+                    },
+                    "result": {
+                        "request_context": {
+                            "requestId": "1X0G5JB8TM9R2SR0YP06",
+                            "sessionId": "135-8912511-2949257",
+                            "bsr": {
+                                "bottomSheetSize": "expanded",
+                                "peekBehaviour": null
+                            }
+                        },
+                        "user_query": "Is this good for the gym and running?",
+                        "interim_messages": [
+                            "Thinking..."
+                        ],
+                        "inference_text": "It looks like there's no product currently pulled up on your screen that I can reference. Could you clarify what you're asking about? For example:\n• Are you looking at a specific product (like earbuds, shoes, clothing, or gear)?\n• Or are you asking me to recommend something good for the gym and running?\nLet me know and I'll be happy to help!",
+                        "inference_text_with_products": "It looks like there's no product currently pulled up on your screen that I can reference. Could you clarify what you're asking about? For example:\n• Are you looking at a specific product (like earbuds, shoes, clothing, or gear)?\n• Or are you asking me to recommend something good for the gym and running?\nLet me know and I'll be happy to help!",
+                        "inference_text_parts": [
+                            "It looks like there's no product currently pulled up on your screen that I can reference. Could you clarify what you're asking about? For example:\n• Are you looking at a specific product (like earbuds, shoes, clothing, or gear)?\n• Or are you asking me to recommend something good for the gym and running?\nLet me know and I'll be happy to help!"
+                        ],
+                        "content_blocks": [
+                            {
+                                "type": "text",
+                                "text": "It looks like there's no product currently pulled up on your screen that I can reference. Could you clarify what you're asking about? For example:\n• Are you looking at a specific product (like earbuds, shoes, clothing, or gear)?\n• Or are you asking me to recommend something good for the gym and running?\nLet me know and I'll be happy to help!"
+                            }
+                        ],
+                        "feedback_controls": {
+                            "groupId": "section_groupId_feedback_controls_1X0G5JB8TM9R2SR0YP06_0",
+                            "text": "Your feedback has been submitted!",
+                            "options": [
+                                "This is irrelevant",
+                                "This is inaccurate",
+                                "This is harmful / unsafe"
+                            ],
+                            "submit_label": "Submit"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

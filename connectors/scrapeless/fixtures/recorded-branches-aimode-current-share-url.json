@@ -1,0 +1,50 @@
+{
+    "name": "recorded-branches-aimode-current-share-url",
+    "description": "Actual bounded own-account branch probe 2026-10-23. Secrets/PII scrubbed; result arrays capped at 3 and strings at 4500 characters; all protocol calls retained. Not an invoice or full production acceptance.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v2/scraper/request",
+                "body": {
+                    "actor": "scraper.aimode",
+                    "input": {
+                        "url": "https://share.google/aimode/3oxDfuC2jHWsmtYSK"
+                    }
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "status": "pending",
+                    "task_id": "0df5ad25-fa35-4df3-a146-70e7082dbc60"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/0df5ad25-fa35-4df3-a146-70e7082dbc60"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/0df5ad25-fa35-4df3-a146-70e7082dbc60"
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "message": "Execution failed. Please try again later. We’re working to resolve the issue.",
+                    "status": "failed"
+                }
+            }
+        }
+    ]
+}

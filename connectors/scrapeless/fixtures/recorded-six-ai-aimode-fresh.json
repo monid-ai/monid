@@ -1,0 +1,115 @@
+{
+    "name": "recorded-six-ai-aimode-fresh",
+    "description": "Recorded own-account request on 2026-10-23. Secrets/PII removed, result arrays capped at 3 and strings at 1500 characters; all actual protocol calls retained. Not a receipt or production acceptance.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v2/scraper/request",
+                "body": {
+                    "actor": "scraper.aimode",
+                    "input": {
+                        "prompt": "Recommended attractions in New York",
+                        "country": "US",
+                        "shopping": false,
+                        "should_fetch_share_link": true
+                    }
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "status": "pending",
+                    "task_id": "73658760-31f8-4263-8f77-d945202a9f60"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/73658760-31f8-4263-8f77-d945202a9f60"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/73658760-31f8-4263-8f77-d945202a9f60"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/73658760-31f8-4263-8f77-d945202a9f60"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/73658760-31f8-4263-8f77-d945202a9f60"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "success",
+                    "task_result": {
+                        "citations": [
+                            {
+                                "cited_count": 1,
+                                "favicon": "https://encrypted-tbn0.gstatic.com/faviconV2?url=https://newyorkpass.com&client=AIM&size=128&type=FAVICON&fallback_opts=TYPE,SIZE,URL",
+                                "index": 1,
+                                "snippet": "",
+                                "thumbnail": "",
+                                "title": "New York Attractions | The New York Pass®",
+                                "url": "https://newyorkpass.com/en/new-york-attractions",
+                                "website_name": "New York Pass"
+                            },
+                            {
+                                "cited_count": 1,
+                                "favicon": "",
+                                "index": 2,
+                                "snippet": "Free/Low-Cost Attractions: Central Park (Bethesda Fountain), Times Square, Grand Central Terminal, Brooklyn Bridge, World Trade Ce...",
+                                "thumbnail": "",
+                                "title": "New York Travel Guide: Must Sees and Hidden Gems",
+                                "url": "https://capturencrave.com/new-york-a-city-guide/",
+                                "website_name": "Capture 'n Crave"
+                            },
+                            {
+                                "cited_count": 1,
+                                "favicon": "",
+                                "index": 3,
+                                "snippet": "the Statue of Liberty gifted by France in 1886. is one of the most iconic monuments in the world rising 305 ft with pedestal Lady ...",
+                                "thumbnail": "",
+                                "title": "Top 10 Best Tourist Attractions in New York City - Travel Guide ...",
+                                "url": "https://www.youtube.com/watch?v=_T9bUOPB4lk&vl=en-US",
+                                "website_name": "YouTube"
+                            }
+                        ],
+                        "raw_url": "https://www.google.com/async/folwr?srtst=&garc=ChswYTdqV05KU1RmaS1nU3hVTjZydUFNZmtLczASF0pQcmFhc1hGSXVXSWdMUVB2ZVQ3a0FjGgtNdGdmNDhmMFhlSQ&mlro=0a7IP6Urojh2QRQUT2SWTQBh6k7q8P6o5KGENaEX1k-7_iwrnacXJ4Z3Oq4GHa2LQyHppfZejBAzfazBV955sgJbz8rr0HfxCEsP9J2i8hHP58BPX7zXBAisAFVkhM_PrRqRbSKBdVIVoSSOPDpH&mlros=RPu9ojA5u0o&ei=JPraasXFIuWIgLQPveT7kAc&q=Recommended+attractions+in+New+York&yv=3&vet=12ahUKEwjF54Gbvc-XAxVlBIAAHT3yHnIQ-a4TegYIAggCEAA..i&ved=2ahUKEwjF54Gbvc-XAxVlBIAAHT3yHnIQ-a4TegYIAggCEAA&aep=48&sourceid=chrome&udm=50&stkp=AeYwpWnxcfdEpfKHJCC8yWocH-hZWT4FxFaL9p3uKUby3OLXtUxt-bK4c7aAainyzSe57He2oqctNVI8rW2VO6JXNy9sJvBfHAVmVUcOpfezZ8aEiX776Yf1WQ%3D%3D&cs=1&async=_fmt:adl,_xsrf:AF5tSO5nwrZjmXd8QqP6c4I8knRRWZJV5Q%3A1792735780690",
+                        "result_html": "<div><div data-container-id=\"JvraavGvDdCr0PEP1efDmQc\"></div><div eid=\"JvraavGvDdCr0PEP1efDmQc\"></div><div><div data-session-thread-id=\"JPraasXFIuWIgLQPveT7kAc\" style=\"display:none\"> </div><div data-target-container-id=\"JvraavGvDdCr0PEP1efDmQc\"><div data-msei=\"AUtExfBQ0WgrPXn1U1usBVOyRFnHnVYG-pnPxHZAJ79uGa7SL6bL-JZwNQM-6Zg4cHJnq2yAoL-4I9WmAAlwxcvruNyC7nXR\" data-mseni=\"JPraasXFIuWIgLQPveT7kAc\" data-mstk=\"AUtExfAB8H0ggRMPnzOUqV29ktPdHMw_eA5uYvHTDsrGwybRlKuBaQVDPFCfIrGUxiFsrg3Oarg-PWlcPzgYiP7Kzz9SqqITFx8W_uW55eztxVGHNj_vpTWpRs3Mie-y007-ppqzNyrz_QmeX7Mu75NAQXRCi6kR6plZyh4\" style=\"display:none\"></div></div><style data-ck=\"search-next.aim.7pCM9eGtUR4.L.B1.O\" data-css-ids=\"XmAqMd,E1OJWe,eucJfe,nCphfe,W8NV9d\">:root{--COEmY:#1f1f1f;--xhUGwc:#fff}:root{--vZe0jb:#dcdfe5;--nwXobb:#dcdfe5;--VuZXBd:var(--bbQxAb);--uLz37c:var(--IXoxUe);--jINu6c:var(--YLNNHc);--TyVYld:#0b57d0;--ZEpPmd:#f0f2f5;--QWaaaf:#dcdfe5;--DEeStf:var(--XKMDxc);--TSWZIb:var(--aYn2S);--BRLwE:var(--Lm570b);--gS5jXb:#dcdfe5;--Aqn7xd:#dcdfe5;--EpFNW:#fff;--Xqboce:#1f1f1f;--IXoxUe:#656773;--bbQxAb:#16171a;--YLNNHc:#16171a;--TMYS9:#0a0a0a;--JKqx2:#1558d6;--rrJJUc:#1558d6;--mXZkqc:#dcdfe5;--JclFj:#dcdfe5;--Nsm0ce:#336ef3;--vdwxpe:#0b50d0;--ywz01c:#fbbc04;--XKMDxc:#f0f2f5;--aYn2S:#e9ebf0;--Lm570b:#e1e3e8}:root{--amnPwe:#656773;--ZXiaGf:#e6e8f0;--EoKObe:#fff;--cIehld:#fff;--ONhrGd:var(--Aqn7xd);--gVUKcd:rgba(0,0,0,0.6);--jwFC2e:#d3e3fd;--yTtsEf:#013a00}:root{--aim-input-plate-height:60px}:root{--aim-input-plate-margin-bottom:34px}[RECORDED_TRUNCATED]",
+                        "result_md": "If you are planning a trip to New York City, I highly recommend building your itinerary around a mix of **iconic skyline views, world-class museums, and sprawling green spaces** .\n\nA massive 843-acre oasis right in the center of Manhattan. It is completely free to enter. **What to see:**  Walk past the iconic **Bethesda Fountain** , rent a rowboat at the Loeb Boathouse, or stroll down the elm-lined Mall. **Concierge Tip:**  If you want a break from the crowds, head to the northern end of the park to explore the peaceful **Ramble** or the **North Woods** .\n\nThe ultimate symbol of American freedom, gifted by France in 1886. **The Experience:**  You can take a reserved ferry to **Liberty Island** to stand right beneath her, or even climb the 154 steps to the crown if you book months in advance. **Concierge Tip:**  If you are on a tight budget or short on time, hop on the **Staten Island Ferry** . It is completely free and glides right past the statue for fantastic photos.\n\nNew York's most famous Art Deco skyscraper. The 86th-floor open-air observatory offers 360-degree views of the entire city. **Concierge Tip:**  While iconic, it competes with newer decks like **SUMMIT One Vanderbilt** (highly immersive and glassy) and **The Edge** (the highest outdoor sky deck in the Western Hemisphere).\n\nA beautiful 2-kilometer historic suspension bridge connecting Manhattan and Brooklyn. **The Experience:**  Walking across the wooden pedestrian promenade gives you breathtaking views of the l[RECORDED_TRUNCATED]",
+                        "result_text": "If you are planning a trip to New York City, I highly recommend building your itinerary around a mix of **iconic skyline views, world-class museums, and sprawling green spaces** .\n\nA massive 843-acre oasis right in the center of Manhattan. It is completely free to enter. **What to see:** Walk past the iconic **Bethesda Fountain** , rent a rowboat at the Loeb Boathouse, or stroll down the elm-lined Mall. **Concierge Tip:** If you want a break from the crowds, head to the northern end of the park to explore the peaceful **Ramble** or the **North Woods** .\n\nThe ultimate symbol of American freedom, gifted by France in 1886. **The Experience:** You can take a reserved ferry to **Liberty Island** to stand right beneath her, or even climb the 154 steps to the crown if you book months in advance. **Concierge Tip:** If you are on a tight budget or short on time, hop on the **Staten Island Ferry** . It is completely free and glides right past the statue for fantastic photos.\n\nNew York's most famous Art Deco skyscraper. The 86th-floor open-air observatory offers 360-degree views of the entire city. **Concierge Tip:** While iconic, it competes with newer decks like **SUMMIT One Vanderbilt** (highly immersive and glassy) and **The Edge** (the highest outdoor sky deck in the Western Hemisphere).\n\nA beautiful 2-kilometer historic suspension bridge connecting Manhattan and Brooklyn. **The Experience:** Walking across the wooden pedestrian promenade gives you breathtaking views of the lower M[RECORDED_TRUNCATED]",
+                        "share_url": "https://share.google/aimode/8ochfnCd1N4bIp42m"
+                    }
+                }
+            }
+        }
+    ]
+}

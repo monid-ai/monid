@@ -1,0 +1,73 @@
+{
+    "name": "recorded-expansion-google-news",
+    "description": "Real Scrapeless responses, 2026-10-22; header allowlist applied; Monid trimCalls caps response arrays at 2 and strings at 500. Full redacted records remain in research/live-expansion-2026-10-22. Replay usage is TEST ONLY, never actual charges.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v1/scraper/request",
+                "body": {
+                    "actor": "scraper.google.search",
+                    "input": {
+                        "q": "internet standards",
+                        "gl": "us",
+                        "hl": "en",
+                        "tbm": "nws"
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "news_results": [
+                        {
+                            "position": 1,
+                            "link": "https://www.internetsociety.org/blog/2026/05/an-open-fiber-data-standard-to-make-the-internet-for-everyone/",
+                            "title": "An Open Fiber Data Standard to Make the Internet for Everyone",
+                            "source": "Internet Society",
+                            "date": "May 19, 2026",
+                            "snippet": "The Open Fibre Data Standard Initiative. An open standard to describe fiber infrastructure will help to enable an Internet that truly reaches...",
+                            "favicon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAALVBMVEUMHCxHcEwMHCwMHCwMHCwMHCwMHCwMHCwMHCwMHCwMHCwMHCwMHCwMHCwMHCxR/7wKAAAADnRSTlNuAGTTlqi+KeL1HTGCSpnpOrUAAACNSURBVBiVNU8LDsUwCEJr7Wcd9z/uw+3NRIINKQDTjLDkjFEc2s5prOnvQyNb1L1Xq4cBeGsuuCENNoqnA1m6C4KzoiUg6rgwSVujl+QQ7iCXcXfKljr+G9L1LSlf0ZFR9iEpp35xBh6PdSh6CcrDs7IohYLjfnIJMJ7oa1fwqApfuRqbX7mqP5n21v8BOs0GEwWLtywAAAAASUVORK5CYII=",
+                            "thumbnail": "data:image/webp;base64,UklGRkgEAABXRUJQVlA4IDwEAACwFwCdASpcAFwAP3Fm3G40o7S0mVKQLglsAMfcvpUg+Olv6LLH3Q0dys2dVLI67QYJ/++Ci1JWoL3pBNZpyAb1x5rQCJSfGYRFzx3SOyQP7yJqdBozddg1EALBKZhzAmxBUmdq3qFPpiA8L3/e0t2XYT87AzMh5pAkd23gOD7DMLUex2gucNB1cQxYTTjybXs2+ERH8WFppZPy3/BaEa9qNU/Rnw6lgJMCZu7hdp1Bex2PvBfprPDcs554js5zZ5/kJqojPAAA/G7DpSDDwbkq0vfUxL56sqBGA8MPUrLamVumPW0N2Z7KGG8/Gl257HU/nd/Iwzf9Aam55S+VS3ermaYJCo84uiSee/aapEXJRBQ3c7fyajplDw9nTG7qkbdEUy4Ysbezxpn4UHjj32A8BCnTqlJRzf7S7KNCt9YYkC2FM+jnhNHipPm3tGzR5B3H9"
+                        },
+                        {
+                            "position": 2,
+                            "link": "https://www.tradingview.com/news/prnewswire:91c7d08ec1d5d:0-godaddy-infoblox-google-and-cloudflare-demonstrate-secure-ai-agent-transactions-across-platforms/",
+                            "title": "GoDaddy, Infoblox, Google and Cloudflare Demonstrate Secure AI Agent Transactions Across Platforms",
+                            "source": "TradingView",
+                            "date": "1 week ago",
+                            "snippet": "Industry collaboration with Singapore's IMDA shows how open internet standards can verify AI agent identities and establish trust throughout...",
+                            "favicon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAOVBMVEVHcEwKDx2goaM6PEMAAAD///8AAhITFyITFyISFiK5urtYWl9yc3fHyMng4OBKTFHy8/OKi45HcEzBc31wAAAAE3RSTlMA////////9o////////////8AcLZbwgAAAHZJREFUGJVlj1EOhCAMRFucKRRB9P6X3RLd3ajvg5DHMGlFSvYfuYgUv1Ek30UWfyCumCjMDDAXXTgZO9dGbviKlTw2slmI3uM2jhQvO86OFAmgkik6otimMIuP6n8xYx2XaLUuSLWOK+ExgJ5HiNfor+We638A97EHcVroi4wAAAAASUVORK5CYII=",
+                            "thumbnail": "data:image/webp;base64,UklGRo4DAABXRUJQVlA4IIIDAADwEgCdASpcAFwAPxFaxGIsKSwsEyGAIglpANY0CuOSXg7GSNCaoL0kUPZo+H604uB7UVlk72mXA6MsZMUppLok0VQ+9GN0CFtyQI6ez+iQBQDUkcKEfHkXHCjABHcKBcSPYc1wzIlLZvx3Qx5W+tPcmsjQtxXXhrNO+gm0QdICFXc49gdNPYtQwa9e6Ilk8t1qF4exG6wgeoUvnYLVfxqAAP75vljur9TYphbN86nUB0GR9pJzMZzsmKVsRZ6Vl2gL9loop3fA6JiehWhS18D1+IXEv8IWYz6NVvJbWBPMoqtCCAbfASjG9wgXX9FvnJliFiczrxoaPKRgMttBTfKjJDOfWCuN6hauepk5yW1B5ufHn+U9B2cd7kOhnAhngpUKBVNOvXh4f85tlDhgxonaxUQFhhhjCMpHr6TFG2w2Pg9tJKI8t0kBZzTLTVbXPVQll"
+                        }
+                    ],
+                    "pagination": {
+                        "current": 1,
+                        "next": "https://www.google.com/search?q=internet+standards&sca_esv=9e44a9c1964ca618&gl=us&hl=en&tbm=nws&sxsrf=APpeQnsHJhM-VeJKV1CA8ZBgT7zh1yOYXg:1792661978802&ei=2tnZavvMMOawptQP1LetIQ&start=10&sa=N&ved=2ahUKEwj7ocujqs2XAxVmmIkEHdRbKwQQ8NMDegQIHRAW",
+                        "other_pages": {
+                            "2": "https://www.google.com/search?q=internet+standards&sca_esv=9e44a9c1964ca618&gl=us&hl=en&tbm=nws&sxsrf=APpeQnsHJhM-VeJKV1CA8ZBgT7zh1yOYXg:1792661978802&ei=2tnZavvMMOawptQP1LetIQ&start=10&sa=N&ved=2ahUKEwj7ocujqs2XAxVmmIkEHdRbKwQQ8tMDegQIHRAE",
+                            "3": "https://www.google.com/search?q=internet+standards&sca_esv=9e44a9c1964ca618&gl=us&hl=en&tbm=nws&sxsrf=APpeQnsHJhM-VeJKV1CA8ZBgT7zh1yOYXg:1792661978802&ei=2tnZavvMMOawptQP1LetIQ&start=20&sa=N&ved=2ahUKEwj7ocujqs2XAxVmmIkEHdRbKwQQ8tMDegQIHRAG",
+                            "4": "https://www.google.com/search?q=internet+standards&sca_esv=9e44a9c1964ca618&gl=us&hl=en&tbm=nws&sxsrf=APpeQnsHJhM-VeJKV1CA8ZBgT7zh1yOYXg:1792661978802&ei=2tnZavvMMOawptQP1LetIQ&start=30&sa=N&ved=2ahUKEwj7ocujqs2XAxVmmIkEHdRbKwQQ8tMDegQIHRAI",
+                            "5": "https://www.google.com/search?q=internet+standards&sca_esv=9e44a9c1964ca618&gl=us&hl=en&tbm=nws&sxsrf=APpeQnsHJhM-VeJKV1CA8ZBgT7zh1yOYXg:1792661978802&ei=2tnZavvMMOawptQP1LetIQ&start=40&sa=N&ved=2ahUKEwj7ocujqs2XAxVmmIkEHdRbKwQQ8tMDegQIHRAK",
+                            "6": "https://www.google.com/search?q=internet+standards&sca_esv=9e44a9c1964ca618&gl=us&hl=en&tbm=nws&sxsrf=APpeQnsHJhM-VeJKV1CA8ZBgT7zh1yOYXg:1792661978802&ei=2tnZavvMMOawptQP1LetIQ&start=50&sa=N&ved=2ahUKEwj7ocujqs2XAxVmmIkEHdRbKwQQ8tMDegQIHRAM",
+                            "7": "https://www.google.com/search?q=internet+standards&sca_esv=9e44a9c1964ca618&gl=us&hl=en&tbm=nws&sxsrf=APpeQnsHJhM-VeJKV1CA8ZBgT7zh1yOYXg:1792661978802&ei=2tnZavvMMOawptQP1LetIQ&start=60&sa=N&ved=2ahUKEwj7ocujqs2XAxVmmIkEHdRbKwQQ8tMDegQIHRAO",
+                            "8": "https://www.google.com/search?q=internet+standards&sca_esv=9e44a9c1964ca618&gl=us&hl=en&tbm=nws&sxsrf=APpeQnsHJhM-VeJKV1CA8ZBgT7zh1yOYXg:1792661978802&ei=2tnZavvMMOawptQP1LetIQ&start=70&sa=N&ved=2ahUKEwj7ocujqs2XAxVmmIkEHdRbKwQQ8tMDegQIHRAQ",
+                            "9": "https://www.google.com/search?q=internet+standards&sca_esv=9e44a9c1964ca618&gl=us&hl=en&tbm=nws&sxsrf=APpeQnsHJhM-VeJKV1CA8ZBgT7zh1yOYXg:1792661978802&ei=2tnZavvMMOawptQP1LetIQ&start=80&sa=N&ved=2ahUKEwj7ocujqs2XAxVmmIkEHdRbKwQQ8tMDegQIHRAS",
+                            "10": "https://www.google.com/search?q=internet+standards&sca_esv=9e44a9c1964ca618&gl=us&hl=en&tbm=nws&sxsrf=APpeQnsHJhM-VeJKV1CA8ZBgT7zh1yOYXg:1792661978802&ei=2tnZavvMMOawptQP1LetIQ&start=90&sa=N&ved=2ahUKEwj7ocujqs2XAxVmmIkEHdRbKwQQ8tMDegQIHRAU"
+                        }
+                    },
+                    "search_information": {
+                        "organic_results_state": "Results for exact spelling",
+                        "query_displayed": "internet standards",
+                        "total_results": 128000,
+                        "time_taken_displayed": "0.17"
+                    },
+                    "metadata": {
+                        "engine": "google.search",
+                        "rawUrl": "https://api.scrapeless.com/storage/scrapeless.scraper.google.search/39c5db85a007a407722b8ebcca60cc29/4a652f9cfbd60a1eeb6123491988849a_1792661979.html"
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,88 @@
+{
+    "name": "recorded-ready-shop-target-discovery",
+    "description": "Actual own-account 2026-10-23 continuation request. PII/secrets redacted; large result strings and arrays shortened, all protocol requests retained. Not an invoice or production acceptance.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v1/scraper/request",
+                "body": {
+                    "actor": "scraper.google.search",
+                    "input": {
+                        "q": "site:tiktok.com/shop/pdp/ goli nutrition gummies",
+                        "gl": "us",
+                        "hl": "en",
+                        "num": 5
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "organic_results": [
+                        {
+                            "position": 1,
+                            "title": "Goli Nutrition Zero Sugar 3 Pack Gummies Bundle",
+                            "link": "https://www.tiktok.com/shop/pdp/1732769978997641993",
+                            "redirect_link": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=CAESbgHrOzAVWwPfksRNrSiPmn8oCrHolQqrrgPMdS58Sspo1mVLz-Ew8goD7iWjf-Br8ECgLDUbgzz40OuAIhW_StPdUg6hdCW1DVydrTR8q_1wIjPlzFCNOz-578oKTgqsanjAf4bd4-sGcJmywEdj&ved=2ahUKEwj08tbSxM-XAxV0j4kEHa2aIfAQFnoECB0QAQ&uoh=1",
+                            "favicon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAw1BMVEUAAAAAAAAFT1IAQUNBub6u5eexxcpyQ0wIAABaxsv5////9/nGj5oyAAD////84eeEYmvm4uN4f4A5P0MAFBXx+vu019khAAD60tr37vDlmqpXAAsALzAKc3gpo6hjpqr/6O3idYqcbHTSrLP6iJ9rABOc5Ofi+vvJYnXLbn8/AAI9HyWWIDhRz9TH9PffY3oDAAC99vjhSGe7KEenACiF4+f/1961PVaB09bFkZswjJGwuLr//f7xqbYYHh/9tsTiL1Yh8R0/AAAAAXRSTlP+GuMHfQAAANJJREFUeAG90kUCg1AMBNDiPtTd3d2V+5+quMOS2b6vSXI5IjnZIElSyUgzLMcnoSBKspKMUPMpiEKxVE5EVKr5WgTLBkr1BtBsBbHd6fZKOvYHw1F9PAkgSU9njXlNx8Vyxa2XfmxvtoC0M1GH/d6P3QPU8fFkY/Ar7Q0ag3ONIOKQvOB60i0WqSnUG6FnI6rzMJbvkB76zo5+wk0JIf8EGq9ndzN7f9bRrlQBcTYTcT22iAh+X9Ib7/dPm8Q1u5Zvfpq7c4uIQ56otVrLjEYzJX+4mxcG80U+CwAAAABJRU5ErkJggg==",
+                            "displayed_link": "https://www.tiktok.com › shop › pdp",
+                            "snippet": "3 Bottles of Goli Apple Cider Vinegar Gummy Vitamins - Vitamin B12, Gelatin-Free. Free shipping. Goli Nutrition ...",
+                            "snippet_highlighted_words": [
+                                "3 Bottles of Goli Apple Cider Vinegar Gummy Vitamins"
+                            ],
+                            "source": "TikTok"
+                        },
+                        {
+                            "position": 2,
+                            "title": "Newellme Apple Cider Vinegar Gummy Vitamins with ...",
+                            "link": "https://www.tiktok.com/shop/pdp/newellme-apple-cider-vinegar-gummies-vegan-non-gmo-b12/1732408517484581439",
+                            "redirect_link": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=CAESpQEB6zswFelEV2rIDP4FfogkQoymZL1qCGKueeZ-KB1KoyErcuSql9AkZL9Ul4JL9SWQmRTGEIgOmqHNoyiRFrhcINjHBtEIdVN1xtfbb37PCH0WZQtgfgMSXLWqdKiz0pKhopZq5hprzawX8y5V08qrIgPK6xL0VAJ6GsBrmTMYd8O4f8TaKiGgeZ-SrixWIYxuUFEcsarjMNTbBYO82hTnje70x_o&ved=2ahUKEwj08tbSxM-XAxV0j4kEHa2aIfAQFnoECB4QAQ&uoh=1",
+                            "favicon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAw1BMVEUAAAAAAAAFT1IAQUNBub6u5eexxcpyQ0wIAABaxsv5////9/nGj5oyAAD////84eeEYmvm4uN4f4A5P0MAFBXx+vu019khAAD60tr37vDlmqpXAAsALzAKc3gpo6hjpqr/6O3idYqcbHTSrLP6iJ9rABOc5Ofi+vvJYnXLbn8/AAI9HyWWIDhRz9TH9PffY3oDAAC99vjhSGe7KEenACiF4+f/1961PVaB09bFkZswjJGwuLr//f7xqbYYHh/9tsTiL1Yh8R0/AAAAAXRSTlP+GuMHfQAAANJJREFUeAG90kUCg1AMBNDiPtTd3d2V+5+quMOS2b6vSXI5IjnZIElSyUgzLMcnoSBKspKMUPMpiEKxVE5EVKr5WgTLBkr1BtBsBbHd6fZKOvYHw1F9PAkgSU9njXlNx8Vyxa2XfmxvtoC0M1GH/d6P3QPU8fFkY/Ar7Q0ag3ONIOKQvOB60i0WqSnUG6FnI6rzMJbvkB76zo5+wk0JIf8EGq9ndzN7f9bRrlQBcTYTcT22iAh+X9Ib7/dPm8Q1u5Zvfpq7c4uIQ56otVrLjEYzJX+4mxcG80U+CwAAAABJRU5ErkJggg==",
+                            "displayed_link": "https://www.tiktok.com › shop › pdp › newellme-apple...",
+                            "snippet": "Treat yourself to these organic apple-flavored gummies that offer metabolism support, detox benefits, and a tasty way to increase your energy levels ...",
+                            "snippet_highlighted_words": [
+                                "organic apple-flavored gummies"
+                            ],
+                            "source": "TikTok"
+                        },
+                        {
+                            "position": 3,
+                            "title": "TikTok Shop",
+                            "link": "https://www.tiktok.com/shop/pdp/newellme-apple-cider-vinegar-gummies-for-energy-gut-health/1729516591044531775",
+                            "redirect_link": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=CAESqQEB6zswFblkpp6rvWzCb24Xg_KW9nZaFxFs3ASSX7v2b_TlrznGxxvscmxVP_pUa6gJplfzPgj-xfjnX5Hia37NCSedZyruI1u1DHOqi5GkFfZFVepD_pl7kBKKdVSGm8kOZCc5ofX9O0RLDQ3MLRZqxsS-bDnNq9RQG8m64AMaN2nnOewVGsZKh_sUMu5IbOqeYd7AxBpBMjTWnotB7QLG-1ZnV0jM6Iev&ved=2ahUKEwj08tbSxM-XAxV0j4kEHa2aIfAQFnoECBkQAQ&uoh=1",
+                            "favicon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAw1BMVEUAAAAAAAAFT1IAQUNBub6u5eexxcpyQ0wIAABaxsv5////9/nGj5oyAAD////84eeEYmvm4uN4f4A5P0MAFBXx+vu019khAAD60tr37vDlmqpXAAsALzAKc3gpo6hjpqr/6O3idYqcbHTSrLP6iJ9rABOc5Ofi+vvJYnXLbn8/AAI9HyWWIDhRz9TH9PffY3oDAAC99vjhSGe7KEenACiF4+f/1961PVaB09bFkZswjJGwuLr//f7xqbYYHh/9tsTiL1Yh8R0/AAAAAXRSTlP+GuMHfQAAANJJREFUeAG90kUCg1AMBNDiPtTd3d2V+5+quMOS2b6vSXI5IjnZIElSyUgzLMcnoSBKspKMUPMpiEKxVE5EVKr5WgTLBkr1BtBsBbHd6fZKOvYHw1F9PAkgSU9njXlNx8Vyxa2XfmxvtoC0M1GH/d6P3QPU8fFkY/Ar7Q0ag3ONIOKQvOB60i0WqSnUG6FnI6rzMJbvkB76zo5+wk0JIf8EGq9ndzN7f9bRrlQBcTYTcT22iAh+X9Ib7/dPm8Q1u5Zvfpq7c4uIQ56otVrLjEYzJX+4mxcG80U+CwAAAABJRU5ErkJggg==",
+                            "displayed_link": "https://www.tiktok.com › shop › pdp › newellme-apple...",
+                            "snippet": "Goli Renew NAD+ (NR) Gummies. Clinically Studied NR Nicotinamide Riboside, Healthy Aging & Cellular Energy. Gluten Free, Non-GMO, Gelatin-Free, Vegan.",
+                            "snippet_highlighted_words": [
+                                "Goli",
+                                "Gummies"
+                            ],
+                            "source": "TikTok"
+                        }
+                    ],
+                    "pagination": {
+                        "current": 1,
+                        "next": "https://www.google.com/search?q=site:tiktok.com/shop/pdp/+goli+nutrition+gummies&sca_esv=cf4bcfcbc4bd22ce&gl=us&hl=en&sxsrf=APpeQns88S4IcLtuBfG2zi_v5N5E4V6e1w:1792737776359&ei=8AHbavS6FfSeptQPrbWGgQ8&start=10&sa=N&sstk=AS6-VmKw43XJ2uW3_LGlzOyEhe0TWEv4VSjlTres_SdRSfTFO1PcRRjm1WfN_PE1omUc-DTTLCy3emozkKJAQRD3e9LqovPD8cRLFw&ved=2ahUKEwj08tbSxM-XAxV0j4kEHa2aIfAQ8NMDegQILRAM",
+                        "other_pages": {
+                            "2": "https://www.google.com/search?q=site:tiktok.com/shop/pdp/+goli+nutrition+gummies&sca_esv=cf4bcfcbc4bd22ce&gl=us&hl=en&sxsrf=APpeQns88S4IcLtuBfG2zi_v5N5E4V6e1w:1792737776359&ei=8AHbavS6FfSeptQPrbWGgQ8&start=10&sa=N&sstk=AS6-VmKw43XJ2uW3_LGlzOyEhe0TWEv4VSjlTres_SdRSfTFO1PcRRjm1WfN_PE1omUc-DTTLCy3emozkKJAQRD3e9LqovPD8cRLFw&ved=2ahUKEwj08tbSxM-XAxV0j4kEHa2aIfAQ8tMDegQILRAE",
+                            "3": "https://www.google.com/search?q=site:tiktok.com/shop/pdp/+goli+nutrition+gummies&sca_esv=cf4bcfcbc4bd22ce&gl=us&hl=en&sxsrf=APpeQns88S4IcLtuBfG2zi_v5N5E4V6e1w:1792737776359&ei=8AHbavS6FfSeptQPrbWGgQ8&start=20&sa=N&sstk=AS6-VmKw43XJ2uW3_LGlzOyEhe0TWEv4VSjlTres_SdRSfTFO1PcRRjm1WfN_PE1omUc-DTTLCy3emozkKJAQRD3e9LqovPD8cRLFw&ved=2ahUKEwj08tbSxM-XAxV0j4kEHa2aIfAQ8tMDegQILRAG",
+                            "4": "https://www.google.com/search?q=site:tiktok.com/shop/pdp/+goli+nutrition+gummies&sca_esv=cf4bcfcbc4bd22ce&gl=us&hl=en&sxsrf=APpeQns88S4IcLtuBfG2zi_v5N5E4V6e1w:1792737776359&ei=8AHbavS6FfSeptQPrbWGgQ8&start=30&sa=N&sstk=AS6-VmKw43XJ2uW3_LGlzOyEhe0TWEv4VSjlTres_SdRSfTFO1PcRRjm1WfN_PE1omUc-DTTLCy3emozkKJAQRD3e9LqovPD8cRLFw&ved=2ahUKEwj08tbSxM-XAxV0j4kEHa2aIfAQ8tMDegQILRAI",
+                            "5": "https://www.google.com/search?q=site:tiktok.com/shop/pdp/+goli+nutrition+gummies&sca_esv=cf4bcfcbc4bd22ce&gl=us&hl=en&sxsrf=APpeQns88S4IcLtuBfG2zi_v5N5E4V6e1w:1792737776359&ei=8AHbavS6FfSeptQPrbWGgQ8&start=40&sa=N&sstk=AS6-VmKw43XJ2uW3_LGlzOyEhe0TWEv4VSjlTres_SdRSfTFO1PcRRjm1WfN_PE1omUc-DTTLCy3emozkKJAQRD3e9LqovPD8cRLFw&ved=2ahUKEwj08tbSxM-XAxV0j4kEHa2aIfAQ8tMDegQILRAK"
+                        }
+                    },
+                    "search_information": {
+                        "organic_results_state": "Results for exact spelling",
+                        "query_displayed": "site:tiktok.com/shop/pdp/ goli nutrition gummies",
+                        "total_results": 1080,
+                        "time_taken_displayed": "0.36"
+                    },
+                    "metadata": {
+                        "engine": "google.search",
+                        "rawUrl": "https://api.scrapeless.com/storage/scrapeless.scraper.google.search/7a12635385bfbc56cd90139065bb3c71/b7f8c8fb0a9431f93f3833fb30cfa585_1792737777.html"
+                    }
+                }
+            }
+        }
+    ]
+}

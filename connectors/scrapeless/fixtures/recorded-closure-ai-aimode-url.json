@@ -1,0 +1,62 @@
+{
+    "name": "recorded-closure-ai-aimode-url",
+    "description": "Real response chain, 2026-10-23. Public test inputs; PII and storage links redacted, response arrays/strings trimmed. Native success/error is distinct from connector acceptance and observed balances are not task invoices.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v2/scraper/request",
+                "body": {
+                    "actor": "scraper.aimode",
+                    "input": {
+                        "url": "https://www.google.com/async/folwr?srtst=&garc=ChswYTdlZ1RPU002ZTZVdk9mc3dNbm9iYWg5RjQSF2tNbmFhdFRiTTdEWXJ1RVA4T1h5b0FNGgtTTnZOVkE4SWxyNA&mlro=0a6WcCGKXqQ0cgIQS40IBHHvYLndft2GMrEcb0m2HWgbFEVbaquxe1__6bUCKmGIcjKuaAbGXsjPQmBAP_-D_eWWR7QaxJxSfk1uhU53LL8Ji5yoUt81-GEVA256R5cvXGUJ_sQVHvFBoGM&mlros=IS7kzONwLeo&ei=kMnaatTbM7DYruEP8OXyoAM&q=Recommend+one+affordable+USB-C+charging+cable+to+buy+in+the+United+States.+Include+a+product+and+store+offer+if+available.&yv=3&vet=12ahUKEwjU45nxjs-XAxUwrCsGHfCyHDQQ-a4TegYIAggCEAA..i&ved=2ahUKEwjU45nxjs-XAxUwrCsGHfCyHDQQ-a4TegYIAggCEAA&aep=48&sourceid=chrome&udm=50&stkp=AeYwpWl3jJNwItTOgNRXvi1YaGgPitf3RW9buhTPOfTMfute8z9lHqltC3kQi1wGxfbpB3AinP8IvhUYEa2BOfgybHHBhpjOyXxQY6FB8iQ2r_AvAIHIqjjP9w%3D%3D&cs=1&async=_fmt:adl,_xsrf:AF5tSO4B6aFcH8VavRzekg9ekQDW2hLiIQ%3A1792723345027"
+                    }
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "status": "pending",
+                    "task_id": "98a5f00e-b4a4-4573-a94f-17e22353473f"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/98a5f00e-b4a4-4573-a94f-17e22353473f"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/98a5f00e-b4a4-4573-a94f-17e22353473f"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "running"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/98a5f00e-b4a4-4573-a94f-17e22353473f"
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "message": "Execution failed. Please try again later. We’re working to resolve the issue.",
+                    "status": "failed"
+                }
+            }
+        }
+    ]
+}

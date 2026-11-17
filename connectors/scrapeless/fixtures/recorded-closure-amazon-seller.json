@@ -1,0 +1,65 @@
+{
+    "name": "recorded-closure-amazon-seller",
+    "description": "Real response chain, 2026-10-23. Public test inputs; PII and storage links redacted, response arrays/strings trimmed. Native success/error is distinct from connector acceptance and observed balances are not task invoices.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v1/scraper/request",
+                "body": {
+                    "actor": "scraper.amazon",
+                    "input": {
+                        "type": "seller",
+                        "url": "https://www.amazon.com/sp?seller=A2XZ7JICGUQ1CX",
+                        "zip_code": ""
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "html": "<!doctype html><html lang=\"en-us\" class=\"a-no-js\" data-19ax5a9jf=\"dingo\"><!-- sp:feature:head-start -->\n<head><script>var aPageStart = (new Date()).getTime();</script><meta charset=\"utf-8\"/>\n<!-- sp:end-feature:head-start -->\n<!-- sp:feature:csm:head-open-part1 -->\n\n<script type='text/javascript'>var ue_t0=ue_t0||+new Date();</script>\n<!-- sp:end-feature:csm:head-open-part1 -->\n<!-- sp:feature:cs-optimization -->\n<meta http-equiv='x-dns-prefetch-control' content='on'>\n<link rel=\"preconnect\" href",
+                    "metadata": {
+                        "rawUrl": "https://example.com/redacted-storage",
+                        "type": "seller"
+                    },
+                    "result": {
+                        "url": "https://www.amazon.com/sp?seller=A2XZ7JICGUQ1CX",
+                        "seller_id": "A2XZ7JICGUQ1CX",
+                        "seller_name": "Amazon Export Sales LLC",
+                        "description": "About SellerAmazon.com ships products internationally with Amazon Export Sales LLC. Available product lines, shipping rates and fees vary depending on the delivery address for your order. For more information, see Frequently Asked Questions or visit amazon.com/help.",
+                        "detailed_info": "[REDACTED]",
+                        "feedbacks": null,
+                        "stars": "",
+                        "return_policy": "To get information about the Return and Refund policies that may apply, please refer to Amazon’s Return and Refund policy.To initiate a return, visit Amazon's Online Return Center to request a return authorization from the seller. For any issues with your return, if the product was shipped by the seller, you can get help here.",
+                        "shipping_policies": "Unless noted otherwise in the ordering pipeline, Amazon Export Sales LLC ships all items within two days of receiving an order. You will receive notification of any delay or cancellation of your order.",
+                        "privacy_security": "Amazon knows that you care how information about you is used and shared, and we appreciate your trust that we will do so carefully and sensibly. By visiting Amazon.com, you are accepting the practices described in Amazon.com's Privacy Policy . In addition, we want you to be aware that Amazon.com will provide Amazon Export Sales LLC with information related to your transactions involving their products (including, for example, your name, address, products you purchase, and transaction amount), an",
+                        "privacy_policy": "Amazon Export Sales LLC values the privacy of your personal data. For more information see Amazon.com's Privacy Policy .",
+                        "tax_info": "Sales tax is not separately calculated and collected in connection with items ordered from Amazon Export Sales LLC through the Amazon.com Site unless explicitly indicated as such in the ordering process. Items ordered from Amazon Export Sales LLC may be subject to tax in certain states, based on the state to which the order is shipped. If an item is subject to sales tax, in accordance with state tax laws, the tax is generally calculated on the total selling price of each individual item, includi",
+                        "help_content": "For questions about a charge that has been made to your credit card, please contact Amazon. Questions about how to place an order? Search Amazon Help.",
+                        "products_link": "https://www.amazon.com/s?ie=UTF8&marketplaceID=ATVPDKIKX0DER&me=A2XZ7JICGUQ1CX",
+                        "business_name__DUPLICATE": "Amazon Export Sales LLC",
+                        "business_address__DUPLICATE": "[REDACTED]",
+                        "rating_positive": "",
+                        "brands": "",
+                        "feedbacks_percentages": {
+                            "star_1": "",
+                            "star_2": "",
+                            "star_3": "",
+                            "star_4": "",
+                            "star_5": ""
+                        },
+                        "rating_count_m12": "",
+                        "rating_count_m3": "",
+                        "rating_count_lifetime": "",
+                        "rating_count_m1": "",
+                        "country": "US",
+                        "email": "[REDACTED]",
+                        "timestamp": "2026-10-23",
+                        "html": ""
+                    }
+                }
+            }
+        }
+    ]
+}

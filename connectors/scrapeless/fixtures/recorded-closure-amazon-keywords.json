@@ -1,0 +1,118 @@
+{
+    "name": "recorded-closure-amazon-keywords",
+    "description": "Real response chain, 2026-10-23. Public test inputs; PII and storage links redacted, response arrays/strings trimmed. Native success/error is distinct from connector acceptance and observed balances are not task invoices.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v1/scraper/request",
+                "body": {
+                    "actor": "scraper.amazon",
+                    "input": {
+                        "type": "keywords",
+                        "keywords": "usb c cable",
+                        "page": 1,
+                        "domain": "com",
+                        "zip_code": ""
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "html": "<!doctype html><html lang=\"en-us\" class=\"a-no-js\" data-19ax5a9jf=\"dingo\"><!-- sp:feature:head-start -->\n<head><script>var aPageStart = (new Date()).getTime();</script><meta charset=\"utf-8\"/>\n<!-- sp:end-feature:head-start -->\n<!-- sp:feature:csm:head-open-part1 -->\n\n<script type='text/javascript'>var ue_t0=ue_t0||+new Date();</script>\n<!-- sp:end-feature:csm:head-open-part1 -->\n<!-- sp:feature:cs-optimization -->\n<meta http-equiv='x-dns-prefetch-control' content='on'>\n<link rel=\"preconnect\" href",
+                    "metadata": {
+                        "rawUrl": "https://example.com/redacted-storage",
+                        "type": "keywords"
+                    },
+                    "result": {
+                        "url": "https://www.amazon.com/s?k=usb+c+cable&page=1",
+                        "current_page": 1,
+                        "total_page": 0,
+                        "keyword": "usb c cable",
+                        "result": {
+                            "paid": [
+                                {
+                                    "pos": 1,
+                                    "url": "https://www.amazon.com/dp/B0FWKNZM6L",
+                                    "asin": "B0FWKNZM6L",
+                                    "price": "$15.49",
+                                    "title": "USB C Cable 3A Fast Charging [2 Pack 6FT], USB A to USB C Cable, Upgraded Extra Durable Braided USB to USB C Charger Cord Compatible with iPhone 18 17 16 15 Pro Max, Samsung Galaxy, and More-Black",
+                                    "rating": "4.4 out of 5 stars.",
+                                    "is_prime": false,
+                                    "url_image": "https://m.media-amazon.com/images/I/81l5aBQmOTL._AC_SR160,134_CB1169409_QL70_.jpg",
+                                    "best_seller": false,
+                                    "price_upper": "$15.49",
+                                    "is_sponsored": true,
+                                    "manufacturer": "",
+                                    "pricing_count": 1,
+                                    "reviews_count": 762,
+                                    "price_strikethrough": "$1.29",
+                                    "shipping_information": ""
+                                },
+                                {
+                                    "pos": 2,
+                                    "url": "https://www.amazon.com/dp/B0FWKPKVZQ",
+                                    "asin": "B0FWKPKVZQ",
+                                    "price": "$15.99",
+                                    "title": "USB to USB C Cable 3A Fast Charging [2 Pack 10FT], USB A to USB C Cable, Upgraded Extra Durable Braided USBC Charger Cord Compatible with iPhone 18 17 16 15 Pro Max,Samsung Galaxy,and More-Black",
+                                    "rating": "4.4 out of 5 stars.",
+                                    "is_prime": false,
+                                    "url_image": "https://m.media-amazon.com/images/I/81l5aBQmOTL._AC_SR160,134_CB1169409_QL70_.jpg",
+                                    "best_seller": false,
+                                    "price_upper": "$15.99",
+                                    "is_sponsored": true,
+                                    "manufacturer": "",
+                                    "pricing_count": 1,
+                                    "reviews_count": 762,
+                                    "price_strikethrough": "$0.80",
+                                    "shipping_information": ""
+                                }
+                            ],
+                            "organic": [
+                                {
+                                    "pos": 3,
+                                    "url": "https://www.amazon.com/dp/B088NRLMPV",
+                                    "asin": "B088NRLMPV",
+                                    "price": "$9.99",
+                                    "title": "Anker USB C to USB C Cable, 60W Fast Charging Cable (2-Pack, 6 ft, Black)",
+                                    "rating": "4.7 out of 5 stars",
+                                    "is_prime": false,
+                                    "url_image": "https://m.media-amazon.com/images/I/71IE9dLBduL._AC_UY218_.jpg",
+                                    "best_seller": false,
+                                    "price_upper": "$9.99",
+                                    "is_sponsored": false,
+                                    "manufacturer": "",
+                                    "pricing_count": 1,
+                                    "reviews_count": 0,
+                                    "price_strikethrough": "$5.00",
+                                    "shipping_information": ".prime-brand-color {color: #0064f9; }Join Prime(function(f){var _np=(window.P._namespace(\"udm-kata-sfx-prime-signup-ingress-script\"));if(_np.guardFatal){_np.guardFatal(f)(_np);}else{f(_np);}}(function(P){if(window.udmSfxPrimeSignupInitialized)return;P.when('ready').execute(\"udm-sfx-prime-signup-ingress-handler\",()=>{P.load.js(\"https://d2lbyuknrhysf9.cloudfront.net/SFXInjectableScript.js\");P.when(\"sfx-injectable\").execute(\"udm-sfx-prime-signup-ingress-flow\",async(api)=>{const clientId=\"UdmDeliver"
+                                },
+                                {
+                                    "pos": 4,
+                                    "url": "https://www.amazon.com/dp/B0CG1LGWR6",
+                                    "asin": "B0CG1LGWR6",
+                                    "price": "$8.97",
+                                    "title": "LISEN USB C to USB C Cable, 240W Fast Charging Type C Charger Cord (6.6FT)",
+                                    "rating": "4.5 out of 5 stars",
+                                    "is_prime": false,
+                                    "url_image": "https://m.media-amazon.com/images/I/81afg0W0O8L._AC_UY218_.jpg",
+                                    "best_seller": false,
+                                    "price_upper": "$8.97",
+                                    "is_sponsored": false,
+                                    "manufacturer": "",
+                                    "pricing_count": 1,
+                                    "reviews_count": 0,
+                                    "price_strikethrough": "$4.49$9.99",
+                                    "shipping_information": ".prime-brand-color {color: #0064f9; }Join Prime(function(f){var _np=(window.P._namespace(\"udm-kata-sfx-prime-signup-ingress-script\"));if(_np.guardFatal){_np.guardFatal(f)(_np);}else{f(_np);}}(function(P){if(window.udmSfxPrimeSignupInitialized)return;P.when('ready').execute(\"udm-sfx-prime-signup-ingress-handler\",()=>{P.load.js(\"https://d2lbyuknrhysf9.cloudfront.net/SFXInjectableScript.js\");P.when(\"sfx-injectable\").execute(\"udm-sfx-prime-signup-ingress-flow\",async(api)=>{const clientId=\"UdmDeliver"
+                                }
+                            ]
+                        },
+                        "total_results_count": 16,
+                        "html": ""
+                    }
+                }
+            }
+        }
+    ]
+}

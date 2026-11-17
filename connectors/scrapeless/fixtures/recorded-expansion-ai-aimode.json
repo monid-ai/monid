@@ -1,0 +1,58 @@
+{
+    "name": "recorded-expansion-ai-aimode",
+    "description": "Real Scrapeless responses, 2026-10-22; header allowlist applied; Monid trimCalls caps response arrays at 2 and strings at 500. Full redacted records remain in research/live-expansion-2026-10-22. Replay usage is TEST ONLY, never actual charges.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.scrapeless.com/api/v2/scraper/request",
+                "body": {
+                    "actor": "scraper.aimode",
+                    "input": {
+                        "prompt": "What is the purpose of example.com? Answer briefly and cite a source if available.",
+                        "country": "US",
+                        "shopping": false,
+                        "should_fetch_share_link": false
+                    }
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "status": "pending",
+                    "task_id": "0dd8e625-e1b1-4809-b4d4-ede0aac9e21f"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.scrapeless.com/api/v2/scraper/result/0dd8e625-e1b1-4809-b4d4-ede0aac9e21f"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "success",
+                    "task_result": {
+                        "citations": [
+                            {
+                                "cited_count": 1,
+                                "favicon": "",
+                                "index": 1,
+                                "snippet": "This domain is for use in documentation examples without needing permission.",
+                                "thumbnail": "",
+                                "title": "Example Domain",
+                                "url": "http://example.com#:~:text=This%20domain%20is%20for%20use,documentation%20examples%20without%20needing%20permission.",
+                                "website_name": "example.com"
+                            }
+                        ],
+                        "raw_url": "https://www.google.com/async/folwr?srtst=&garc=ChswYTc4OVRYbjhQZEVwNUpSRjRrYkxUNWpTa2sSF1hOdlphcW4xSFBQdm1MUVA4cDNtdVFnGgtCVUVJNVMzYUdzWQ&mlro=0a52P8iwgo-hRfK6CWewnu3t31qf1t_nMyCHLl1HfofDn503YTEKyIXnkQizG9l0Tkr89gtjp6T2ycjfj0j0w1Un9OLVdWV_M1J7n7YKRu7s3S-4YrIoB2kwNq2MhHvdCHaJK8zHZY8ny2I&mlros=9914ZwtnQQk&ei=XNvZaqn1HPPvmLQP8p3muQg&q=What+is+the+purpose+of+example.com%3F+Answer+briefly+and+cite+a+source+if+available.&yv=3&vet=12ahUKEwipk7_bq82XAxXzN4YAHfKOOYcQ-a4TegYIAggCEAA..i&ved=2ahUKEwipk7_bq8",
+                        "result_html": "<div><div data-container-id=\"XdvZaurfF7WpptQP3fOA-QE\"></div><div eid=\"XdvZaurfF7WpptQP3fOA-QE\"></div><div><div data-session-thread-id=\"XNvZaqn1HPPvmLQP8p3muQg\" style=\"display:none\"> </div><div data-target-container-id=\"XdvZaurfF7WpptQP3fOA-QE\"><div data-msei=\"AUtExfDKf_EcIUc6C8QmzqNhTbPvfRIACNOcTteb68DMRyvAfNgms23UDB4PSd_Ir_1lKGKDPHIwZRfsvZTLKq0gf093Mg51\" data-mseni=\"XNvZaqn1HPPvmLQP8p3muQg\" data-mstk=\"AUtExfDmnv8U1fI9Q8lkHQ6pOEUOg1Me8ivZo8d5MrCvo4a7KP2NfXZ3IKJ1aW8pZaeoYQw9mhbrf4oT7L0pqb-Lw0wEji",
+                        "result_md": "**The purpose of example.com is to provide a domain name for use in documentation and examples** , allowing writers and developers to illustrate web concepts without needing special permission or accidentally using a real, active website. ([example.com][1])\n\nIf you would like to know more, I can explain:\n\n\nThe **organizations** that reserved this domain  \n\nOther **reserved domain names** (like .test or .invalid)  \n\nHow to use them properly in **technical writing**  \n\nLet me know what you'd like ",
+                        "result_text": "**The purpose of example.com is to provide a domain name for use in documentation and examples** , allowing writers and developers to illustrate web concepts without needing special permission or accidentally using a real, active website.\n\nIf you would like to know more, I can explain:\n\n- The **organizations** that reserved this domain  \n- Other **reserved domain names** (like .test or .invalid)  \n- How to use them properly in **technical writing**  \n\nLet me know what you'd like to explore next!"
+                    }
+                }
+            }
+        }
+    ]
+}
