@@ -1,0 +1,27 @@
+{
+    "name": "use-skill-ok",
+    "description": "Recorded 2026-11-03 against POST https://getedge.cc/api/v1/use_skill, loading the skill the find-skill-ok chain recommended (same request_id). instructions trimmed by deno task record (live: the full SKILL.md).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "source": "onewave-ai/claude-skills",
+                    "skill": "cold-email-sequence-generator",
+                    "request_id": "ph27wv1s"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "source": "onewave-ai/claude-skills",
+                    "skill": "cold-email-sequence-generator",
+                    "security_state": "reviewed",
+                    "request_id": "ph27wv1s",
+                    "instructions": "---\nname: cold-email-sequence-generator\ndescription: Generate personalized cold email sequences (7-14 emails) with A/B test subject lines, follow-up timing recommendations, and integrated social proof. Creates multi-touch campaigns optimized for response rates. Use when users need outbound email campaigns, sales sequences, or lead generation emails.\n---\n\n# Cold Email Sequence Generator\n\nCraft personalized, value-driven cold email sequences with optimal timing, A/B-tested subject lines, and integ"
+                }
+            }
+        }
+    ]
+}

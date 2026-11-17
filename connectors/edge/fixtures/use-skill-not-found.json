@@ -1,0 +1,24 @@
+{
+    "name": "use-skill-not-found",
+    "description": "Recorded 2026-11-03 against POST https://getedge.cc/api/v1/use_skill for a skill that is not in the catalog. Vendor 404 {error, outcome, security_state} is DATA: zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "source": "edge-fixtures/none",
+                    "skill": "no-such-skill-zzz"
+                }
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": "Security state: unknown. Current exact-bundle checks are not established; loading is withheld until they complete.\nCould not load edge-fixtures/none@no-such-skill-zzz: it is not in Edge's catalog index. No remaining candidate from that search is available. Run find_skill again for this task.",
+                    "outcome": "unavailable",
+                    "security_state": "unknown"
+                }
+            }
+        }
+    ]
+}

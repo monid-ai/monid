@@ -1,0 +1,21 @@
+{
+    "name": "find-skill-blank-query",
+    "description": "Recorded 2026-11-04 against POST https://getedge.cc/api/v1/find_skill with a query of three spaces: the schema accepts it (3 characters), Edge trims it and answers 400. Vendor 400 {error} is DATA: zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "query": "   "
+                }
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "error": "query is required: the task in plain words, 3 to 500 characters."
+                }
+            }
+        }
+    ]
+}
