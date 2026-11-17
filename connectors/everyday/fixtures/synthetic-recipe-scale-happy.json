@@ -1,0 +1,77 @@
+{
+    "name": "everyday-recipe-scale-happy",
+    "description": "Synthetic anonymous MCP tools/call success preserving an exact fraction, note, and multiline recipe instructions.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": "everyday-recipe-scale",
+                    "method": "tools/call",
+                    "params": {
+                        "name": "everyday_calculate",
+                        "arguments": {
+                            "request": {
+                                "action": "recipe_scale",
+                                "fromServings": "3",
+                                "toServings": "5",
+                                "ingredients": [
+                                    {
+                                        "name": "flour",
+                                        "quantity": "1/2",
+                                        "unit": "US_cup",
+                                        "note": "sifted"
+                                    }
+                                ],
+                                "instructions": "Mix gently.\nRest for 10 minutes."
+                            }
+                        },
+                        "_meta": {
+                            "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+                            "io.modelcontextprotocol/clientCapabilities": {}
+                        }
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": "everyday-recipe-scale",
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "synthetic-recipe-scale-result"
+                            }
+                        ],
+                        "structuredContent": {
+                            "action": "recipe_scale",
+                            "result": {
+                                "text": "Scaled from 3 to 5 servings (factor 5/3).\n- flour: 5/6 US_cup (sifted)",
+                                "fromServings": "3",
+                                "toServings": "5",
+                                "scaleFactor": "5/3",
+                                "ingredients": [
+                                    {
+                                        "name": "flour",
+                                        "quantity": "5/6",
+                                        "quantityMixed": "5/6",
+                                        "unit": "US_cup",
+                                        "note": "sifted"
+                                    }
+                                ],
+                                "instructions": "Mix gently.\nRest for 10 minutes.",
+                                "source": "Exact rational arithmetic over the user-provided serving counts and ingredient quantities.",
+                                "limitations": "Only ingredient quantities are scaled. Notes and instructions are preserved verbatim; cooking times, temperatures, pan sizes, and technique are not interpreted or changed."
+                            }
+                        },
+                        "resultType": "complete"
+                    }
+                }
+            }
+        }
+    ]
+}

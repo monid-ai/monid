@@ -1,0 +1,78 @@
+{
+    "name": "everyday-shopping-merge-happy",
+    "description": "Synthetic anonymous MCP tools/call success preserving an exact fractional ingredient quantity through shopping merge.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": "everyday-shopping-merge",
+                    "method": "tools/call",
+                    "params": {
+                        "name": "everyday_calculate",
+                        "arguments": {
+                            "request": {
+                                "action": "shopping_merge",
+                                "ingredients": [
+                                    {
+                                        "name": "flour",
+                                        "quantity": "5/6",
+                                        "unit": "US_cup",
+                                        "note": "sifted"
+                                    }
+                                ]
+                            }
+                        },
+                        "_meta": {
+                            "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+                            "io.modelcontextprotocol/clientCapabilities": {}
+                        }
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": "everyday-shopping-merge",
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "synthetic-shopping-merge-result"
+                            }
+                        ],
+                        "structuredContent": {
+                            "action": "shopping_merge",
+                            "result": {
+                                "text": "- flour: 5/6 US_cup (1 source item)",
+                                "items": [
+                                    {
+                                        "name": "flour",
+                                        "dimension": "volume",
+                                        "quantity": "5/6",
+                                        "quantityMixed": "5/6",
+                                        "unit": "US_cup",
+                                        "constituentCount": 1,
+                                        "sourceItems": [
+                                            {
+                                                "quantity": "5/6",
+                                                "unit": "US_cup",
+                                                "note": "sifted"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "source": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+                                "limitations": "Names match only after trimming, collapsing whitespace, Unicode NFC normalization, and English lowercase conversion. Synonyms and plural variants are not matched. Mass, volume, and count remain separate, and no ingredient density is guessed."
+                            }
+                        },
+                        "resultType": "complete"
+                    }
+                }
+            }
+        }
+    ]
+}
