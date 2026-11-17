@@ -1,0 +1,24 @@
+{
+    "name": "synthetic-company-empty",
+    "description": "Synthetic company empty; documentation-derived, not a live recording. No real PII or keys.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "domain": "example.com",
+                    "limit": 2,
+                    "multiple_results": true
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "matches": [],
+                    "total": 0
+                }
+            }
+        }
+    ]
+}

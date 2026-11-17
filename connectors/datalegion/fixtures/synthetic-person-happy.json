@@ -1,0 +1,35 @@
+{
+    "name": "synthetic-person-happy",
+    "description": "Synthetic person happy; documentation-derived, not a live recording. No real PII or keys.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "email": "person@example.com",
+                    "limit": 2,
+                    "multiple_results": true
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "matches": [
+                        {
+                            "person": {
+                                "legion_id": "synthetic-1"
+                            }
+                        },
+                        {
+                            "person": {
+                                "legion_id": "synthetic-2"
+                            }
+                        }
+                    ],
+                    "total": 2
+                }
+            }
+        }
+    ]
+}
