@@ -2613,3 +2613,43 @@ Deno.test("MISSING_CREDENTIAL names the variables THIS doc's shape asks for, not
         `no bare alias for a named field, got: ${error.message}`,
     );
 });
+
+Deno.test("lifecycle: run cleans up after poll and sleep failures without replacing the error", async () => {
+    for (const phase of ["poll", "sleep"] as const) {
+        const failure = new EngineError(
+            EngineErrorCode.EXECUTION_FAILED,
+            "original failure",
+        );
+        const seen: string[] = [];
+        const transport: Transport = {
+            execute: async (request) => {
+                seen.push(request.method + " " + request.url);
+                if (request.url.endsWith("/abort")) {
+                    throw new Error("cleanup failed");
+                }
+                if (request.method === "POST") {
+                    return {
+                        status: 201,
+                        headers: {},
+                        body: JSON.stringify({ jobId: "j1" }),
+                    };
+                }
+                throw failure;
+            },
+        };
+        const loaded = await new Engine({
+            transport,
+            sleep: async () => {
+                if (phase === "sleep") throw failure;
+            },
+        }).load(await asyncUnit());
+        const error = await assertRejects(() =>
+            loaded.run({ body: { q: "x" } })
+        );
+        assertEquals(error, failure);
+        assertEquals(
+            seen.filter((url) => url.endsWith("/jobs/j1/abort")).length,
+            1,
+        );
+    }
+});
