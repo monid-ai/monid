@@ -1,0 +1,29 @@
+{
+    "name": "synthetic-crawl",
+    "description": "Synthetic Tavily crawl response based on the public API contract; not a live recording.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "base_url": "https://example.com",
+                    "results": [
+                        {
+                            "url": "https://example.com",
+                            "raw_content": "# Example content"
+                        }
+                    ],
+                    "response_time": 0.5,
+                    "request_id": "synthetic-crawl",
+                    "usage": {
+                        "credits": 0
+                    }
+                }
+            }
+        }
+    ]
+}

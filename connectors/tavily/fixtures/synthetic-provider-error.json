@@ -1,0 +1,20 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "Synthetic Tavily provider-error response based on the public API contract; not a live recording.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "detail": {
+                        "error": "Unauthorized: missing or invalid API key."
+                    }
+                }
+            }
+        }
+    ]
+}

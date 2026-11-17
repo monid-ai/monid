@@ -1,0 +1,34 @@
+{
+    "name": "synthetic-extract",
+    "description": "Synthetic Tavily extract response based on the public API contract; not a live recording.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "results": [
+                        {
+                            "url": "https://example.com",
+                            "raw_content": "# Example content"
+                        }
+                    ],
+                    "failed_results": [
+                        {
+                            "url": "https://example.com/missing",
+                            "error": "Not found"
+                        }
+                    ],
+                    "response_time": 0.5,
+                    "request_id": "synthetic-extract",
+                    "usage": {
+                        "credits": 0
+                    }
+                }
+            }
+        }
+    ]
+}
