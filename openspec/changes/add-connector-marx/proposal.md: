@@ -1,0 +1,7 @@
+# Change Proposal: Add Marx Connector
+
+## Summary
+Add connector for Marx Finance to expose real-time swarm market sentiment, detailed ticker analysis and discussion links for assets via the Market Sentiment API.
+
+## Motivation
+Enable AI agents and MCP consumers on Monid to access consensus market sentiment, confidence percentages, and thesis threads about 500+ Financial Tickers.
