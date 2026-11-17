@@ -1,0 +1,25 @@
+{
+    "name": "synthetic-insufficient",
+    "description": "SYNTHETIC — the balance cannot cover the confirmed total: 402 Insufficient balance (lib/api-handlers/broll.ts), nothing charged.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://dansugc.com/api/v1/broll/purchase",
+                "body": {
+                    "video_ids": [
+                        "7e568b94-329c-4615-a91e-458d2185f83d"
+                    ],
+                    "expected_total_cents": 1100
+                }
+            },
+            "res": {
+                "status": 402,
+                "body": {
+                    "success": false,
+                    "error": "Insufficient balance"
+                }
+            }
+        }
+    ]
+}

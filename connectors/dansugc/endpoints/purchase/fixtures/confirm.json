@@ -1,0 +1,26 @@
+{
+    "name": "confirm",
+    "description": "Recorded 2026-10-20: purchase without expected_total_cents — the free confirmation step: 409 requiresConfirmation + expectedTotalCents 1100 (11 credits), nothing charged.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://dansugc.com/api/v1/broll/purchase",
+                "body": {
+                    "video_ids": [
+                        "7e568b94-329c-4615-a91e-458d2185f83d"
+                    ]
+                }
+            },
+            "res": {
+                "status": 409,
+                "body": {
+                    "success": false,
+                    "error": "The refreshed price totals 11.00 credits. Confirm this amount to continue.",
+                    "requiresConfirmation": true,
+                    "expectedTotalCents": 1100
+                }
+            }
+        }
+    ]
+}

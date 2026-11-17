@@ -1,0 +1,84 @@
+{
+    "name": "semantic",
+    "description": "Recorded 2026-10-20: natural-language semantic_search, limit 2. Free. Signed download_url signatures redacted.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://dansugc.com/api/v1/broll?semantic_search=woman+laughing+at+her+phone&limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "videos": [
+                        {
+                            "id": "c47369b6-4d46-4adf-a500-c7f792cb5667",
+                            "title": "Giggling at Phone in Bed",
+                            "description": "A young woman in bed looks at her phone, then breaks into laughter and covers her face in amusement.",
+                            "duration_seconds": 11,
+                            "difficulty_level": 1,
+                            "price": 11,
+                            "tier_name": "Easy reaction",
+                            "media_type": "video",
+                            "preview_url": "https://media.dansugcmodels.com/previews-lite/broll/previews/1775841156277-tc784pz5.mp4",
+                            "thumbnail_url": "https://media.dansugcmodels.com/broll/thumbnails/1775841154210-g8zbs1vg.jpg",
+                            "download_url": "https://dansugc.com/api/broll/file?p=broll%2Foriginals%2F1775841154562-l0bgzf9r.mp4&m=video&fn=Giggling_at_Phone_in_Bed.mp4&exp=1792514561&sig=REDACTED",
+                            "emotion": "laughing",
+                            "gender": "female",
+                            "location": "Bedroom",
+                            "age_range": "18-24",
+                            "hair_color": "Blonde",
+                            "outfit": "Loungewear",
+                            "virality_score": 80,
+                            "download_count": 0,
+                            "purchase_count": 6,
+                            "featured": false,
+                            "is_daily_drop": false,
+                            "drop_date": null,
+                            "model_id": "943914e9-bb73-4d43-99e5-7b7866f2057b",
+                            "model_name": "Anet",
+                            "created_at": "2026-04-10T17:15:53.855996+00:00"
+                        },
+                        {
+                            "id": "a0535288-fda2-4046-bedd-1599ba9613b6",
+                            "title": "Young Woman Laughing at Her Phone",
+                            "description": "A young woman sits at a wooden desk with an open laptop and checks her smartphone. After adjusting her hair and scrolling, she suddenly covers her mouth as she laughs at something on the screen.",
+                            "duration_seconds": 10,
+                            "difficulty_level": 1,
+                            "price": 11,
+                            "tier_name": "Easy reaction",
+                            "media_type": "video",
+                            "preview_url": "https://media.dansugcmodels.com/broll/previews/a0535288-fda2-4046-bedd-1599ba9613b6.mp4",
+                            "thumbnail_url": "https://media.dansugcmodels.com/broll/thumbnails/a0535288-fda2-4046-bedd-1599ba9613b6.jpg",
+                            "download_url": "https://dansugc.com/api/broll/file?p=broll%2Foriginals%2Fa0535288-fda2-4046-bedd-1599ba9613b6.mp4&m=video&fn=Young_Woman_Laughing_at_Her_Phone.mp4&exp=1792514561&sig=REDACTED",
+                            "emotion": "laughing",
+                            "gender": "female",
+                            "location": "Bedroom",
+                            "age_range": "18-24",
+                            "hair_color": "Brown",
+                            "outfit": "Casual",
+                            "virality_score": 62,
+                            "download_count": 0,
+                            "purchase_count": 1,
+                            "featured": false,
+                            "is_daily_drop": false,
+                            "drop_date": null,
+                            "model_id": "06af9294-6c9b-46f1-a238-585ad7d43709",
+                            "model_name": "Emilia",
+                            "created_at": "2026-10-04T13:32:22.510967+00:00"
+                        }
+                    ],
+                    "total": 240,
+                    "search_type": "semantic",
+                    "pagination": {
+                        "page": 1,
+                        "limit": 2,
+                        "total_pages": 120,
+                        "has_more": true
+                    }
+                }
+            }
+        }
+    ]
+}

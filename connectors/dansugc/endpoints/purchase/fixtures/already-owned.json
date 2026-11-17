@@ -1,0 +1,35 @@
+{
+    "name": "already-owned",
+    "description": "Recorded 2026-10-20: purchase of a clip the account already owns, confirmed at 0: 200, purchases [], already_purchased [the clip], total_amount 0 — zero credits. Signature redacted.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://dansugc.com/api/v1/broll/purchase",
+                "body": {
+                    "video_ids": [
+                        "1166a85d-b967-4fb0-8ed8-6d2f2d22f23b"
+                    ],
+                    "expected_total_cents": 0
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "purchases": [],
+                    "already_purchased": [
+                        {
+                            "video_id": "1166a85d-b967-4fb0-8ed8-6d2f2d22f23b",
+                            "title": "Woman Reacting With Surprise While Online Shopping",
+                            "download_url": "https://dansugc.com/api/broll/file?p=broll%2Foriginals%2F1166a85d-b967-4fb0-8ed8-6d2f2d22f23b.mp4&m=video&fn=Woman_Reacting_With_Surprise_While_Online_Shopping.mp4&exp=1792514561&sig=REDACTED"
+                        }
+                    ],
+                    "not_found": [],
+                    "total_amount": 0,
+                    "remaining_balance": null
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,23 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "SYNTHETIC from a recorded probe (2026-10-20, GET /broll/filters with a bad key answered exactly this): 401 Invalid API key.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://dansugc.com/api/v1/broll/purchase",
+                "body": {
+                    "video_ids": [
+                        "7e568b94-329c-4615-a91e-458d2185f83d"
+                    ]
+                }
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": "Invalid API key"
+                }
+            }
+        }
+    ]
+}
