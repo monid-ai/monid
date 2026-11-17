@@ -1,0 +1,34 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC — not recorded (2026-11-11): the body follows docs.tomba.io's own OpenAPI example for this path; values are placeholders. Sources found: 1 sources credit.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?email=jane.doe%40stripe.com"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "uri": "https://stripe.com/blog/engineering",
+                            "website_url": "stripe.com",
+                            "extracted_on": "2024-06-01T09:14:07+01:00",
+                            "last_seen_on": "2025-01-10T17:02:44+01:00",
+                            "still_on_page": true
+                        },
+                        {
+                            "uri": "https://stripe.com/newsroom",
+                            "website_url": "stripe.com",
+                            "extracted_on": "2024-06-01T09:14:07+01:00",
+                            "last_seen_on": "2025-01-10T17:02:44+01:00",
+                            "still_on_page": false
+                        }
+                    ],
+                    "email": "jane.doe@stripe.com"
+                }
+            }
+        }
+    ]
+}

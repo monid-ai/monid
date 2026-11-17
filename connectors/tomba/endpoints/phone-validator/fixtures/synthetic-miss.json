@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-miss",
+    "description": "SYNTHETIC — not recorded (2026-11-11): the body follows docs.tomba.io's own OpenAPI example for this path; values are placeholders. A number that isn't valid: 200 with empty data — still 1 search credit.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?phone=%2B3312345"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "phone": "+3312345",
+                    "data": []
+                }
+            }
+        }
+    ]
+}

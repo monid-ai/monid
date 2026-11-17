@@ -1,0 +1,72 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC — not recorded (2026-11-11): the body follows docs.tomba.io's own OpenAPI example for this path; values are placeholders. Companies returned: 1 search credit.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "filters": {
+                        "industry": {
+                            "include": [
+                                "financial services"
+                            ]
+                        },
+                        "location_country": {
+                            "include": [
+                                "US"
+                            ]
+                        }
+                    },
+                    "page": 1
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "companies": [
+                            {
+                                "name": "Stripe",
+                                "description": "Stripe is a financial infrastructure platform for businesses.",
+                                "country": "US",
+                                "state": "California",
+                                "industry": "financial services",
+                                "company_size": "5K-10K",
+                                "founded": "2010",
+                                "city": "South San Francisco",
+                                "website_url": "stripe.com",
+                                "total_emails": 1250,
+                                "revenue": "$1B-$10B",
+                                "linkedin_url": "https://linkedin.com/company/stripe",
+                                "total_similar": 25
+                            }
+                        ]
+                    },
+                    "meta": {
+                        "total": 1,
+                        "page": 1,
+                        "limit": 50,
+                        "pages": 1,
+                        "filters": {
+                            "industry": {
+                                "include": [
+                                    "financial services"
+                                ],
+                                "exclude": null
+                            },
+                            "location_country": {
+                                "include": [
+                                    "US"
+                                ],
+                                "exclude": null
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,35 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC — not recorded (2026-11-11): the body follows docs.tomba.io's own OpenAPI example for this path; values are placeholders. A valid number found by email: 5 search credits.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?email=jane.doe%40stripe.com"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "email": "jane.doe@stripe.com",
+                        "valid": true,
+                        "local_format": "(415) 555-0132",
+                        "intl_format": "+1 415-555-0132",
+                        "e164_format": "+14155550132",
+                        "rfc3966_format": "tel:+14155550132",
+                        "country_code": "US",
+                        "line_type": "MOBILE",
+                        "carrier": "AT&T",
+                        "region": {
+                            "name": "California",
+                            "code": "CA"
+                        },
+                        "timezones": [
+                            "America/Los_Angeles"
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

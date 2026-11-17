@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-miss",
+    "description": "SYNTHETIC — not recorded (2026-11-11): the body follows docs.tomba.io's own OpenAPI example for this path; values are placeholders. No sources: 201 with an empty data array — free.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?email=john.roe%40stripe.com"
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "data": [],
+                    "email": "john.roe@stripe.com"
+                }
+            }
+        }
+    ]
+}

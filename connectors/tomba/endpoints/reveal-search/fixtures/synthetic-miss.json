@@ -1,0 +1,36 @@
+{
+    "name": "synthetic-miss",
+    "description": "SYNTHETIC — not recorded (2026-11-11): the body follows docs.tomba.io's own OpenAPI example for this path; values are placeholders. No company matches — free.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "filters": {
+                        "location_city": {
+                            "include": [
+                                "Atlantis"
+                            ]
+                        }
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "companies": []
+                    },
+                    "meta": {
+                        "total": 0,
+                        "page": 1,
+                        "limit": 50,
+                        "pages": 0
+                    }
+                }
+            }
+        }
+    ]
+}

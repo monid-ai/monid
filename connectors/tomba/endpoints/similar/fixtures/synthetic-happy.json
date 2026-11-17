@@ -1,0 +1,35 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC — not recorded (2026-11-11): the body follows docs.tomba.io's own OpenAPI example for this path; values are placeholders. Results returned on limit 10: 1 search credit.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?domain=stripe.com&limit=10"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "website_url": "adyen.com",
+                            "name": "Adyen",
+                            "industries": "financial services"
+                        },
+                        {
+                            "website_url": "checkout.com",
+                            "name": "Checkout.com",
+                            "industries": "financial services"
+                        }
+                    ],
+                    "meta": {
+                        "total": 2,
+                        "pageSize": 25,
+                        "current": 1,
+                        "total_pages": 1
+                    }
+                }
+            }
+        }
+    ]
+}
