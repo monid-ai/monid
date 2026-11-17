@@ -99,11 +99,31 @@ export type ResourceUsage = z.infer<typeof zResourceUsage>;
  * every reconcile tick → [periodStart, now); the period boundary →
  * [periodStart, periodEnd) (the ONLY settle moment); the release tail →
  * [periodStart, cutoff) AFTER teardown — the meter must tolerate
- * post-mortem reads.
+ * post-mortem reads. The host also passes the ACTUAL full period end
+ * as periodEndIso (usagePeriod.periodEnd), even during a partial read.
+ * endIso may exceed periodEndIso when teardown retries cross a boundary;
+ * meters must not clamp that tail or infer a fixed 30-day denominator.
  */
 export const zUsageWindow = z.strictObject({
     startIso: z.iso.datetime(),
     endIso: z.iso.datetime(),
+    periodEndIso: z.iso.datetime(),
+}).superRefine((window, ctx) => {
+    const start = Date.parse(window.startIso);
+    if (Date.parse(window.endIso) < start) {
+        ctx.addIssue({
+            code: "custom",
+            path: ["endIso"],
+            message: "endIso must not precede startIso",
+        });
+    }
+    if (Date.parse(window.periodEndIso) <= start) {
+        ctx.addIssue({
+            code: "custom",
+            path: ["periodEndIso"],
+            message: "periodEndIso must be later than startIso",
+        });
+    }
 });
 export type UsageWindow = z.infer<typeof zUsageWindow>;
 

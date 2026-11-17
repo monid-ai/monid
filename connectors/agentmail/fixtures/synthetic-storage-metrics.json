@@ -1,0 +1,28 @@
+{
+    "name": "synthetic-storage-metrics",
+    "description": "Synthetic unevenly spaced storage samples averaging one binary GiB. Used to verify legacy arithmetic averaging, not time weighting. Not a live provider recording.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v0/inboxes/mbx-1/metrics/usage"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "storage_bytes": [
+                        { "timestamp": "2026-02-01T00:00:00Z", "value": 0 },
+                        {
+                            "timestamp": "2026-02-02T00:00:00Z",
+                            "value": 1073741824
+                        },
+                        {
+                            "timestamp": "2026-02-14T00:00:00Z",
+                            "value": 2147483648
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

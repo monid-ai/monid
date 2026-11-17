@@ -34,11 +34,17 @@ export {
 
 /** `utils` for resource lifecycle/meter/view fns: the pure ABI + `http`
  *  (raw calls against the provider origin) + `sleep` (bounded in-phase
- *  waits). No `external`/view dispatch (design D42): a meter performs
+ *  waits) + deterministic ISO time conversion. No wall-clock reader.
+ *  No `external`/view dispatch (design D42): a meter performs
  *  its own reads. */
 export interface ResourceOpUtils extends FnUtils {
     http: LifecycleHttpFn;
     sleep: LifecycleSleepFn;
+    time: {
+        /** UTC ISO datetime to epoch milliseconds; invalid input throws.
+         *  Pure conversion only: hooks cannot read the current time. */
+        parseIso(iso: string): number;
+    };
 }
 
 // ---------------------------------------------------------------------------

@@ -87,6 +87,7 @@ Deno.test("saperly resource: a fixed line has no reconciler; foreign instances r
             resource.reconcileUsage("rent", ROW, {
                 startIso: "2026-09-01T00:00:00Z",
                 endIso: "2026-09-16T00:00:00Z",
+                periodEndIso: "2026-10-01T00:00:00Z",
             }),
         EngineError,
         "no reconcileUsage",

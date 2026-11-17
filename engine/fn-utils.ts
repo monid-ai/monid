@@ -23,6 +23,7 @@ import {
     zResourceQuery,
 } from "@shared/core";
 import { zRequestOverrides } from "@shared/core";
+import { z } from "zod";
 import type { Logger } from "@shared/logging";
 import { EngineError, EngineErrorCode } from "./errors.ts";
 import type {
@@ -538,6 +539,19 @@ export function makeResourceOpUtils(opts: {
     const utils: ResourceOpUtils = {
         json: jsonUtil,
         money: moneyUtil,
+        time: Object.freeze({
+            parseIso: (iso: string) => {
+                const parsed = z.iso.datetime().safeParse(iso);
+                if (!parsed.success) {
+                    throw new EngineError(
+                        EngineErrorCode.FN_CONTRACT,
+                        doc.id +
+                            ": utils.time.parseIso requires a UTC ISO datetime",
+                    );
+                }
+                return Date.parse(parsed.data);
+            },
+        }),
         sleep: makeBoundedSleep(doc.id, opts.sleep),
         http: async (call) => {
             const parsed = zHttpCall.safeParse(call);
