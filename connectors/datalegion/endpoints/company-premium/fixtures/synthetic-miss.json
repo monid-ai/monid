@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-miss",
+    "description": "Synthetic (no Data Legion key held at port time, 2026-10-22): no company matches — HTTP 404 with the vendor's ErrorResponse shape `{error, message}` (OpenAPI: 'Not found'); message text is a placeholder. Free.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.datalegion.ai/company/enrich"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": "not_found",
+                    "message": "No company matches the provided parameters."
+                }
+            }
+        }
+    ]
+}
