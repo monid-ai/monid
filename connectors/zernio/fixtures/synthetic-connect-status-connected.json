@@ -1,0 +1,28 @@
+{
+    "name": "synthetic-connect-status-connected",
+    "description": "A finished handoff whose accounts all sit on the gated profile: projected to accountId + username.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/connect/handoffs/79c6dbf2-97ba-4f34-b615-5bf9435526db"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "79c6dbf2-97ba-4f34-b615-5bf9435526db",
+                    "status": "connected",
+                    "platform": "instagram",
+                    "accounts": [
+                        {
+                            "id": "cccccccccccccccccccccccc",
+                            "profileId": "aaaaaaaaaaaaaaaaaaaaaaaa",
+                            "username": "acme"
+                        }
+                    ],
+                    "error": null
+                }
+            }
+        }
+    ]
+}

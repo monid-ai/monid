@@ -265,6 +265,15 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "recordings.",
     },
     {
+        // The first WRITE leaf for social networks: every social id above
+        // reads public data; this one publishes as the account owner.
+        id: "social-publishing",
+        displayName: "Social Publishing",
+        description:
+            "Publish and schedule posts to social networks from accounts " +
+            "the owner connected.",
+    },
+    {
         id: "sms",
         displayName: "SMS",
         description: "Send and receive SMS from owned phone numbers.",

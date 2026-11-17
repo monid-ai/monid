@@ -1,0 +1,28 @@
+{
+    "name": "synthetic-connect-status-foreign",
+    "description": "A handoff id from another tenant: its accounts sit on a profile the caller does not own, so the fn answers 404 and leaks nothing.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/connect/handoffs/79c6dbf2-97ba-4f34-b615-5bf9435526db"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "79c6dbf2-97ba-4f34-b615-5bf9435526db",
+                    "status": "connected",
+                    "platform": "instagram",
+                    "accounts": [
+                        {
+                            "id": "dddddddddddddddddddddddd",
+                            "profileId": "ffffffffffffffffffffffff",
+                            "username": "someone-else"
+                        }
+                    ],
+                    "error": null
+                }
+            }
+        }
+    ]
+}

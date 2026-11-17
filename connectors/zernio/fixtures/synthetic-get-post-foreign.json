@@ -1,0 +1,29 @@
+{
+    "name": "synthetic-get-post-foreign",
+    "description": "A post created for another profile (tenancy tag mismatch): uniform 404, nothing projected.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/posts/eeeeeeeeeeeeeeeeeeeeeeee"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "post": {
+                        "_id": "eeeeeeeeeeeeeeeeeeeeeeee",
+                        "userId": "0123456789abcdef01234567",
+                        "content": "We just launched!",
+                        "status": "published",
+                        "scheduledFor": "2026-12-01T10:00:00.000Z",
+                        "timezone": "UTC",
+                        "metadata": {
+                            "monidProfileId": "ffffffffffffffffffffffff"
+                        },
+                        "platforms": []
+                    }
+                }
+            }
+        }
+    ]
+}

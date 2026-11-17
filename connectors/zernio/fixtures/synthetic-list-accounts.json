@@ -1,0 +1,46 @@
+{
+    "name": "synthetic-list-accounts",
+    "description": "GET /accounts filtered upstream by the gated profileId, projected to the fields agents need (no pooled userId).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/accounts?profileId=aaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "accounts": [
+                        {
+                            "_id": "cccccccccccccccccccccccc",
+                            "platform": "twitter",
+                            "profileId": {
+                                "_id": "aaaaaaaaaaaaaaaaaaaaaaaa",
+                                "name": "Acme [run]"
+                            },
+                            "username": "@acme",
+                            "displayName": "Acme",
+                            "profileUrl": "https://x.com/acme",
+                            "isActive": true,
+                            "userId": "0123456789abcdef01234567"
+                        },
+                        {
+                            "_id": "c2c2c2c2c2c2c2c2c2c2c2c2",
+                            "platform": "linkedin",
+                            "profileId": {
+                                "_id": "aaaaaaaaaaaaaaaaaaaaaaaa",
+                                "name": "Acme [run]"
+                            },
+                            "username": "acme-corp",
+                            "displayName": "Acme Corp",
+                            "profileUrl": "https://www.linkedin.com/company/acme-corp",
+                            "isActive": true,
+                            "userId": "0123456789abcdef01234567"
+                        }
+                    ],
+                    "hasAnalyticsAccess": false
+                }
+            }
+        }
+    ]
+}

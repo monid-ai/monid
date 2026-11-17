@@ -1,0 +1,46 @@
+{
+    "name": "synthetic-create-post-foreign-account",
+    "description": "THE tenancy test: the target accountId is not in the gated profile's accounts, so the fn answers 404 before any POST /posts (a POST would fail this replay).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/accounts?profileId=aaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "accounts": [
+                        {
+                            "_id": "cccccccccccccccccccccccc",
+                            "platform": "twitter",
+                            "profileId": {
+                                "_id": "aaaaaaaaaaaaaaaaaaaaaaaa",
+                                "name": "Acme [run]"
+                            },
+                            "username": "@acme",
+                            "displayName": "Acme",
+                            "profileUrl": "https://x.com/acme",
+                            "isActive": true,
+                            "userId": "0123456789abcdef01234567"
+                        },
+                        {
+                            "_id": "c2c2c2c2c2c2c2c2c2c2c2c2",
+                            "platform": "linkedin",
+                            "profileId": {
+                                "_id": "aaaaaaaaaaaaaaaaaaaaaaaa",
+                                "name": "Acme [run]"
+                            },
+                            "username": "acme-corp",
+                            "displayName": "Acme Corp",
+                            "profileUrl": "https://www.linkedin.com/company/acme-corp",
+                            "isActive": true,
+                            "userId": "0123456789abcdef01234567"
+                        }
+                    ],
+                    "hasAnalyticsAccess": false
+                }
+            }
+        }
+    ]
+}

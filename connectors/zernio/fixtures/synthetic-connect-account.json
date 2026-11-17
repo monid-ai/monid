@@ -1,0 +1,24 @@
+{
+    "name": "synthetic-connect-account",
+    "description": "GET /connect/{platform} with handoff=true returns the 30-minute link the agent forwards to the account owner.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/connect/instagram?profileId=aaaaaaaaaaaaaaaaaaaaaaaa&handoff=true"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "authUrl": "https://www.instagram.com/oauth/authorize?client_id=x",
+                    "state": "s",
+                    "handoff": {
+                        "id": "79c6dbf2-97ba-4f34-b615-5bf9435526db",
+                        "url": "https://zernio.com/h/AbCd12",
+                        "expiresAt": "2026-11-11T21:30:00.000Z"
+                    }
+                }
+            }
+        }
+    ]
+}
