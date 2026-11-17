@@ -1,0 +1,172 @@
+{
+    "name": "happy",
+    "description": "recorded 2026-10-27 against api.voygr.tech: GET /skills/concierge/manifest. Public catalog data.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.voygr.tech/skills/concierge/manifest"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "skill_id": "concierge",
+                    "title": "Concierge — info, follow-up, issue resolution",
+                    "description": "Place a phone call to ask a question, collect information, or calmly report a problem and request resolution. NOT for bookings or cancellations — use ``restaurant-reservation`` / ``cancel-booking`` for those. The pre-call analyzer surfaces missing required information as a structured 422 — collect from your user, populate ``pre_filled_slots``, and resubmit.",
+                    "version": "0.1.0",
+                    "phase": "MVP",
+                    "input_schema": {
+                        "description": "Structured input for the concierge skill.\n\nBounds: ``brief`` is the natural-language description of the task — the\nanalyzer reads it. ``pre_filled_slots`` carries anything the consumer\nLLM already extracted (so a re-submission after a 422 doesn't lose\nstate). ``intent_hint`` lets the consumer skip re-classification when\nit already knows the intent.",
+                        "properties": {
+                            "venue_phone": {
+                                "description": "Phone number to dial. E.164 preferred (``+12125551234``); human formats (parens, spaces, dashes) are normalised before Twilio sees them.",
+                                "maxLength": 32,
+                                "minLength": 4,
+                                "pattern": "^\\+?[0-9 ()\\-]+$",
+                                "title": "Venue Phone",
+                                "type": "string"
+                            },
+                            "brief": {
+                                "description": "Free-form natural-language description of the task. The analyzer classifies intent + extracts slots from this. Russian or English (auto-detected).",
+                                "maxLength": 2000,
+                                "minLength": 10,
+                                "title": "Brief",
+                                "type": "string"
+                            },
+                            "language": {
+                                "default": "auto",
+                                "description": "Conversation language (services/language_support.py allow-list). ``auto`` triggers a Cyrillic-vs-Latin character heuristic on the brief (plus the analyzer's own language detection, which also knows Spanish).",
+                                "enum": [
+                                    "ru",
+                                    "en",
+                                    "es",
+                                    "de",
+                                    "fr",
+                                    "it",
+                                    "pt",
+                                    "nl",
+                                    "hi",
+                                    "ja",
+                                    "sr",
+                                    "tr",
+                                    "pl",
+                                    "auto"
+                                ],
+                                "title": "Language",
+                                "type": "string"
+                            },
+                            "caller_display_name": {
+                                "anyOf": [
+                                    {
+                                        "maxLength": 80,
+                                        "type": "string"
+                                    },
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
+                                "default": null,
+                                "description": "Name of the end user on whose behalf the call is made. The bot says ``calling on behalf of {name}`` in its introduction. Optional but strongly recommended.",
+                                "title": "Caller Display Name"
+                            },
+                            "ask_user_webhook_url": {
+                                "anyOf": [
+                                    {
+                                        "type": "string"
+                                    },
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
+                                "default": null,
+                                "description": "Ignored: nothing reads this field. Questions go to the webhook set with ``PUT /users/me/webhook``.",
+                                "title": "Ask User Webhook Url"
+                            },
+                            "ask_user_mode": {
+                                "default": "any",
+                                "description": "How the agent receives mid-call ``ask_user`` questions. Same semantics as restaurant skill.",
+                                "enum": [
+                                    "webhook",
+                                    "any",
+                                    "stream"
+                                ],
+                                "title": "Ask User Mode",
+                                "type": "string"
+                            },
+                            "pre_filled_slots": {
+                                "additionalProperties": true,
+                                "description": "Slots the consumer LLM already collected from its user (after a prior 422). Merged into the analyzer's hints.",
+                                "title": "Pre Filled Slots",
+                                "type": "object"
+                            },
+                            "intent_hint": {
+                                "anyOf": [
+                                    {
+                                        "enum": [
+                                            "inquiry",
+                                            "info_gathering",
+                                            "issue_resolution"
+                                        ],
+                                        "type": "string"
+                                    },
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
+                                "default": null,
+                                "description": "Optional explicit intent type. The analyzer still runs (for slot extraction) but the hint anchors classification.",
+                                "title": "Intent Hint"
+                            }
+                        },
+                        "required": [
+                            "venue_phone",
+                            "brief"
+                        ],
+                        "title": "ConciergeInput",
+                        "type": "object"
+                    },
+                    "ask_user_modes_supported": [
+                        "webhook",
+                        "any",
+                        "stream"
+                    ],
+                    "event_types": [
+                        "status_change",
+                        "ask_user",
+                        "answered",
+                        "outcome",
+                        "recording_ready",
+                        "recording_revoked",
+                        "transcript_ready",
+                        "heartbeat"
+                    ],
+                    "webhook_requirements": {
+                        "required": false,
+                        "metadata_field": "ask_user_webhook_url",
+                        "auth": "Standard Webhooks v1 HMAC-SHA256"
+                    },
+                    "intent_types_supported": [
+                        "inquiry",
+                        "info_gathering",
+                        "issue_resolution"
+                    ],
+                    "intent_types_unsupported": [
+                        "booking",
+                        "cancellation"
+                    ],
+                    "agent_docs_url": "https://api.voygr.tech/docs",
+                    "openapi_url": "https://api.voygr.tech/openapi.json",
+                    "run_url_template": "/skills/{skill_id}/run",
+                    "status_url_template": "/calls/{call_id}",
+                    "answer_url_template": "/calls/{call_id}/answer",
+                    "events_url_template": "/calls/{call_id}/events",
+                    "limits": {
+                        "brief_max_chars": 2000,
+                        "caller_display_name_max_chars": 80,
+                        "phone_max_chars": 32
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-call-422-refused",
+    "description": "synthetic: POST /calls refused before dialling: 422 recording_contradiction (the OpenAPI example body). No call placed. Synthetic, shaped from the public OpenAPI (CallCreateRequest responses and CallDTO). Ids are made up.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.voygr.tech/calls"
+            },
+            "res": {
+                "status": 422,
+                "body": {
+                    "detail": {
+                        "error_code": "recording_contradiction",
+                        "error": "recording_contradiction",
+                        "hint": "`mention_recording: true` says the call is recorded and `record_call: false` means it is not."
+                    }
+                }
+            }
+        }
+    ]
+}

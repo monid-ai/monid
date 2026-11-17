@@ -1,0 +1,25 @@
+{
+    "name": "synthetic-sub-account-suspended",
+    "description": "synthetic: the 403 VOYGR gives a work-creating POST that names a suspended sub-account, with the error under `detail`. Body written to match that shape, not recorded.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.voygr.tech/v1/places/suggest",
+                "body": {
+                    "query": "a quiet coffee shop in Hayes Valley, San Francisco",
+                    "limit": 2
+                }
+            },
+            "res": {
+                "status": 403,
+                "body": {
+                    "detail": {
+                        "error": "sub-account is suspended",
+                        "error_code": "SUB_ACCOUNT_SUSPENDED"
+                    }
+                }
+            }
+        }
+    ]
+}

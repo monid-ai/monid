@@ -1,0 +1,25 @@
+{
+    "name": "no-places-found",
+    "description": "recorded 2026-10-27 against api.voygr.tech: POST /v1/places/suggest for a place that is not open at the hour asked. 422 NO_PLACES_FOUND with a hint; a refused request is free.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.voygr.tech/v1/places/suggest",
+                "body": {
+                    "query": "a vegan bakery in Paradise, Montana open at 4am Sunday",
+                    "limit": 2
+                }
+            },
+            "res": {
+                "status": 422,
+                "body": {
+                    "detail": {
+                        "error_code": "NO_PLACES_FOUND",
+                        "hint": "Nothing we found is open at the requested hours; try another time, or drop the time or 24-hour constraint."
+                    }
+                }
+            }
+        }
+    ]
+}

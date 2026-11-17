@@ -1,0 +1,18 @@
+{
+    "name": "synthetic-not-cancelled",
+    "description": "synthetic: POST /calls/{call_id}/cancel on a call that is unknown, not this sub-account's or already finished. The public API answers 200 with cancelled false and never 404, so a retry is safe.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.voygr.tech/calls/c_synthetic99/cancel"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "cancelled": false
+                }
+            }
+        }
+    ]
+}

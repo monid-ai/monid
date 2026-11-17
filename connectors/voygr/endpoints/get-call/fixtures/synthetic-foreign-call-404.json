@@ -1,0 +1,18 @@
+{
+    "name": "synthetic-foreign-call-404",
+    "description": "synthetic: GET /calls/{call_id} for a call this sub-account does not own, or that does not exist. VOYGR answers 404 {detail: 'Call not found'} for both, so existence never leaks.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.voygr.tech/calls/c_synthetic99"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "detail": "Call not found"
+                }
+            }
+        }
+    ]
+}

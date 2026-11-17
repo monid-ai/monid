@@ -1,0 +1,123 @@
+{
+    "name": "synthetic-sub-account-ops",
+    "description": "Synthetic sub-account exchanges, one call per case, in the shape of the real API (POST /v1/sub-accounts answers 201 for a new reference and 200 for an existing one, unchanged; GET /v1/sub-accounts/{id} answers 200 or 404). Tests pick the call they need by method and status; every id here is made up. Order does not matter, each test replays a one-call chain.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/v1/sub-accounts",
+                "body": {
+                    "reference": "monid:ws-1"
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "id": "sub_00000000000000000000000000000001",
+                    "reference": "monid:ws-1",
+                    "status": "active",
+                    "caps": {
+                        "requests_per_second": 2,
+                        "requests_per_minute": 30,
+                        "max_concurrent_calls": 1,
+                        "max_calls_per_day": 25
+                    },
+                    "created_at": "2026-10-27T09:00:00Z"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/v1/sub-accounts",
+                "body": {
+                    "reference": "monid:ws-1"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "sub_00000000000000000000000000000001",
+                    "reference": "monid:ws-1",
+                    "status": "suspended",
+                    "caps": {
+                        "requests_per_second": 2,
+                        "requests_per_minute": 30,
+                        "max_concurrent_calls": 1,
+                        "max_calls_per_day": 25
+                    },
+                    "created_at": "2026-10-27T09:00:00Z"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/v1/sub-accounts",
+                "body": {
+                    "reference": "monid:ws-1"
+                }
+            },
+            "res": {
+                "status": 403,
+                "body": {
+                    "detail": {
+                        "error_code": "MISSING_ENTITLEMENT",
+                        "entitlements": [
+                            "sub_accounts"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/sub-accounts/sub_00000000000000000000000000000001"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "sub_00000000000000000000000000000001",
+                    "reference": "monid:ws-1",
+                    "status": "suspended",
+                    "caps": {
+                        "requests_per_second": 2,
+                        "requests_per_minute": 30,
+                        "max_concurrent_calls": 1,
+                        "max_calls_per_day": 25
+                    },
+                    "created_at": "2026-10-27T09:00:00Z"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/sub-accounts/sub_00000000000000000000000000000001"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "detail": {
+                        "error_code": "SUB_ACCOUNT_NOT_FOUND"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/sub-accounts/sub_00000000000000000000000000000001"
+            },
+            "res": {
+                "status": 500,
+                "body": {
+                    "detail": {
+                        "error_code": "INTERNAL_ERROR"
+                    }
+                }
+            }
+        }
+    ]
+}

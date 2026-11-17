@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-call-402",
+    "description": "synthetic: POST /calls refused: 402 quota_exceeded for the 30-credit hold (the OpenAPI example body). No call placed. Synthetic, shaped from the public OpenAPI (CallCreateRequest responses and CallDTO). Ids are made up.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.voygr.tech/calls"
+            },
+            "res": {
+                "status": 402,
+                "body": {
+                    "detail": {
+                        "error": "quota_exceeded",
+                        "needed_credits": 30,
+                        "checkout_url": "/checkout/buy"
+                    }
+                }
+            }
+        }
+    ]
+}

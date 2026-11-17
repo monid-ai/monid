@@ -1,0 +1,56 @@
+{
+    "name": "mixed-status-blocks",
+    "description": "recorded 2026-10-27 against api.voygr.tech: POST /v1/enrich, existence and open_closed plus one research field for a place that does not exist. The two standard attributes come back as the top-level status and operational_status blocks, not under attributes, and the research field abstained. Billed 2: the standard lane stays (checked against GET /v1/usage).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.voygr.tech/v1/enrich",
+                "body": {
+                    "poi_name": "Zzyzx Qwertyuiop Emporium",
+                    "address": "1 Nowhere Rd, Fakeville, ZZ 00000",
+                    "country": "US",
+                    "attributes": [
+                        "existence",
+                        "open_closed",
+                        "wheelchair_accessible"
+                    ]
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "id": null,
+                    "attributes": {
+                        "wheelchair_accessible": {
+                            "value": null,
+                            "confidence": null,
+                            "status": "unconfirmed",
+                            "abstain_reason": "failed"
+                        }
+                    },
+                    "meta": {
+                        "steps": 5,
+                        "tool_calls": 6,
+                        "cost_units": 6,
+                        "stopped_reason": "completed",
+                        "estimated_credits": 2
+                    },
+                    "enrichment_timestamp": "2026-10-27T07:52:28.597553Z",
+                    "request_id": "req_c4b7cdc1c57446c48d514ef7",
+                    "status": {
+                        "existence_confidence": 0.0126,
+                        "closure_confidence": null
+                    },
+                    "operational_status": {
+                        "status": "not_exists",
+                        "closure_confidence": null,
+                        "closure_probability": null,
+                        "closure_reason": null
+                    }
+                }
+            }
+        }
+    ]
+}

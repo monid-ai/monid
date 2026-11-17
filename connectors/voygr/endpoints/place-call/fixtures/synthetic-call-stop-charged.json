@@ -1,0 +1,73 @@
+{
+    "name": "synthetic-call-stop-charged",
+    "description": "synthetic: Stop: the call is cancelled 45 seconds after pickup, which is charged; the final read shows failed_cancelled with outcome_charge_cents 10. Synthetic, shaped from the public OpenAPI (CallCreateRequest responses and CallDTO). Ids are made up.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.voygr.tech/calls"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "call_id": "c_synthetic16",
+                    "position": 0,
+                    "status": "queued",
+                    "credits_reserved": 0,
+                    "credits_charge_on_success": 10
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.voygr.tech/calls/c_synthetic16/cancel"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "cancelled": true
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.voygr.tech/calls/c_synthetic16"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "call_id": "c_synthetic16",
+                    "customer_id": "cus_synthetic-0001",
+                    "target_phone": "+14155550102",
+                    "language": "en",
+                    "status": "cancelled",
+                    "started_at": "2026-10-27T10:00:05Z",
+                    "ended_at": "2026-10-27T10:01:00Z",
+                    "duration_sec": 55.0,
+                    "answered_at": "2026-10-27T10:00:15Z",
+                    "result": "aborted",
+                    "ended_by": "customer_cancelled",
+                    "line_kind": null,
+                    "result_reason": "customer_cancelled",
+                    "outcome_type": "failed_cancelled",
+                    "outcome_summary": null,
+                    "outcome_charge_cents": 10,
+                    "created_at": "2026-10-27T10:00:00Z",
+                    "has_recording": false,
+                    "recording_url": null,
+                    "recording_status": "unavailable",
+                    "transcript_full": null,
+                    "transcript_status": null,
+                    "record_call": true,
+                    "voice": {
+                        "gender": null,
+                        "gender_used": "female"
+                    },
+                    "pending_questions": []
+                }
+            }
+        }
+    ]
+}

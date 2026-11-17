@@ -1,0 +1,43 @@
+{
+    "name": "standard-not-found",
+    "description": "recorded 2026-10-27 against api.voygr.tech: POST /v1/enrich, two standard attributes for a place that does not exist (made-up name and address). 200 with both values null (abstain_reason not_found). A standard-only request still bills 1 credit (checked against GET /v1/usage).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.voygr.tech/v1/enrich",
+                "body": {
+                    "poi_name": "Zzyzx Qwertyuiop Emporium",
+                    "address": "1 Nowhere Rd, Fakeville, ZZ 00000",
+                    "country": "US",
+                    "attributes": [
+                        "phone",
+                        "website"
+                    ]
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "attributes": {
+                        "phone": {
+                            "value": null,
+                            "as_of": null,
+                            "confidence": null,
+                            "abstain_reason": "not_found"
+                        },
+                        "website": {
+                            "value": null,
+                            "as_of": null,
+                            "confidence": null,
+                            "abstain_reason": "not_found"
+                        }
+                    },
+                    "enrichment_timestamp": "2026-10-27T07:39:57.024621Z",
+                    "request_id": "req_1f2d87cd738047b4acc2d1b3"
+                }
+            }
+        }
+    ]
+}

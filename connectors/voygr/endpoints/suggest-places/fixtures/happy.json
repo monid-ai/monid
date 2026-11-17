@@ -1,0 +1,103 @@
+{
+    "name": "happy",
+    "description": "recorded 2026-10-27 against api.voygr.tech: POST /v1/places/suggest, a plain-English coffee-shop request with limit 2. Answers 200 with two cards (public cafes in San Francisco); an answered request bills 5 credits.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.voygr.tech/v1/places/suggest",
+                "body": {
+                    "query": "a quiet coffee shop in Hayes Valley, San Francisco, open Saturday morning",
+                    "limit": 2
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "request_id": "sugreq_b17a39ae4f484be9abb3a8f7cc61fc96",
+                    "intent": {
+                        "call_intent": "general_inquiry",
+                        "category": "cafe",
+                        "geo": {
+                            "city": "San Francisco",
+                            "area": "Hayes Valley",
+                            "near_me": false
+                        },
+                        "place_level": [
+                            "quiet",
+                            "Hayes Valley",
+                            "San Francisco"
+                        ],
+                        "product_level": [],
+                        "moment_level": [
+                            "open Saturday morning"
+                        ],
+                        "party_size": null,
+                        "target_datetime": "2026-11-01",
+                        "specificity": "indexed",
+                        "unsatisfiable": []
+                    },
+                    "suggestions": [
+                        {
+                            "suggestion_id": "sug_70a8fcec4fd64553bf0244f16eb357b0",
+                            "rank": 1,
+                            "name": "Blue Bottle Coffee",
+                            "address": "315 Linden St, San Francisco, CA 94102",
+                            "phone_e164": "+15106613510",
+                            "website": "https://bluebottlecoffee.com/us/eng/northern-california-cafes?utm_source=google&utm_medium=organic&utm_campaign=cafe_business_listing_norcal",
+                            "confidence": "high",
+                            "price_band": "$",
+                            "open_at_target": true,
+                            "why": "Reviewers describe this Blue Bottle location as a quiet coffee spot tucked away on a quiet street offering a calm environment.",
+                            "product_match": null,
+                            "verify_on_call": [
+                                "Are you open on Saturday morning?"
+                            ],
+                            "verify_items": [
+                                {
+                                    "question": "Are you open on Saturday morning?",
+                                    "state": "unknown"
+                                }
+                            ],
+                            "call_needed": true,
+                            "online_route": "delivers",
+                            "fit_note": "Located on Linden St in Hayes Valley",
+                            "call_brief": "Call Blue Bottle Coffee. Also confirm/ask: Are you open on Saturday morning?",
+                            "call_ready": true
+                        },
+                        {
+                            "suggestion_id": "sug_43daa55648c24e7181c9e9b845b0dc4f",
+                            "rank": 2,
+                            "name": "Ritual Coffee Roasters",
+                            "address": "432 Octavia St B, San Francisco, CA 94102",
+                            "phone_e164": "+14158650989",
+                            "website": "http://ritualcoffee.com/",
+                            "confidence": "high",
+                            "price_band": "$",
+                            "open_at_target": true,
+                            "why": "Reviewers note it is a popular cafe option in the Hayes Valley area with artisanal roasts and espresso.",
+                            "product_match": null,
+                            "verify_on_call": [
+                                "Are you open on Saturday morning?"
+                            ],
+                            "verify_items": [
+                                {
+                                    "question": "Are you open on Saturday morning?",
+                                    "state": "unknown"
+                                }
+                            ],
+                            "call_needed": true,
+                            "online_route": "takeout",
+                            "fit_note": "Located on Octavia St in Hayes Valley",
+                            "call_brief": "Call Ritual Coffee Roasters. Also confirm/ask: Are you open on Saturday morning?",
+                            "call_ready": true
+                        }
+                    ],
+                    "degraded": false,
+                    "degradation_reason": null,
+                    "short_list_reason": null
+                }
+            }
+        }
+    ]
+}

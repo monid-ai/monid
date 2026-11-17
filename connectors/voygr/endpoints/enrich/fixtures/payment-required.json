@@ -1,0 +1,36 @@
+{
+    "name": "payment-required",
+    "description": "recorded 2026-10-27 against api.voygr.tech: POST /v1/enrich with max_credits below the estimate. The gateway refuses with 402 MAX_CREDITS_EXCEEDED before any work runs; free.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.voygr.tech/v1/enrich",
+                "body": {
+                    "poi_name": "Tartine Bakery",
+                    "address": "600 Guerrero St, San Francisco, CA 94110",
+                    "country": "US",
+                    "attributes": [
+                        "phone",
+                        "wheelchair_accessible"
+                    ],
+                    "max_credits": 1
+                }
+            },
+            "res": {
+                "status": 402,
+                "body": {
+                    "success": false,
+                    "error": "max_credits_exceeded",
+                    "error_code": "MAX_CREDITS_EXCEEDED",
+                    "detail": "Estimated cost 2 credits exceeds max_credits 1.",
+                    "estimated_credits": 2,
+                    "run_estimate": 2,
+                    "max_credits": 1,
+                    "validation_timestamp": "2026-10-27T07:18:04.694152Z",
+                    "request_id": "req_4d62624665114388abe070d5"
+                }
+            }
+        }
+    ]
+}

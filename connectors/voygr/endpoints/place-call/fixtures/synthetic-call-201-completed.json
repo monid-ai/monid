@@ -1,0 +1,150 @@
+{
+    "name": "synthetic-call-201-completed",
+    "description": "synthetic: POST /calls answers 201 with the call dialing (CallResponse, call.call_id), then the call runs and completes charged 10. Synthetic, shaped from the public OpenAPI (CallCreateRequest responses and CallDTO). Ids are made up.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.voygr.tech/calls"
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "call": {
+                        "call_id": "c_synthetic11",
+                        "customer_id": "cus_synthetic-0001",
+                        "target_phone": "+14155550102",
+                        "language": "en",
+                        "status": "dialing",
+                        "started_at": null,
+                        "ended_at": null,
+                        "duration_sec": null,
+                        "answered_at": null,
+                        "result": null,
+                        "ended_by": null,
+                        "line_kind": null,
+                        "result_reason": null,
+                        "outcome_type": null,
+                        "outcome_summary": null,
+                        "outcome_charge_cents": 0,
+                        "created_at": "2026-10-27T10:00:00Z",
+                        "has_recording": false,
+                        "recording_url": null,
+                        "recording_status": "pending",
+                        "transcript_full": null,
+                        "transcript_status": null,
+                        "record_call": true,
+                        "voice": {
+                            "gender": null,
+                            "gender_used": null
+                        },
+                        "pending_questions": []
+                    },
+                    "credits_reserved": 0,
+                    "credits_charge_on_success": 10
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.voygr.tech/calls/c_synthetic11"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "call_id": "c_synthetic11",
+                    "customer_id": "cus_synthetic-0001",
+                    "target_phone": "+14155550102",
+                    "language": "en",
+                    "status": "in_progress",
+                    "started_at": "2026-10-27T10:00:05Z",
+                    "ended_at": null,
+                    "duration_sec": null,
+                    "answered_at": "2026-10-27T10:00:14Z",
+                    "result": null,
+                    "ended_by": null,
+                    "line_kind": null,
+                    "result_reason": null,
+                    "outcome_type": null,
+                    "outcome_summary": null,
+                    "outcome_charge_cents": 0,
+                    "created_at": "2026-10-27T10:00:00Z",
+                    "has_recording": false,
+                    "recording_url": null,
+                    "recording_status": "pending",
+                    "transcript_full": null,
+                    "transcript_status": null,
+                    "record_call": true,
+                    "voice": {
+                        "gender": null,
+                        "gender_used": "female"
+                    },
+                    "pending_questions": []
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.voygr.tech/calls/c_synthetic11"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "call_id": "c_synthetic11",
+                    "customer_id": "cus_synthetic-0001",
+                    "target_phone": "+14155550102",
+                    "language": "en",
+                    "status": "completed",
+                    "started_at": "2026-10-27T10:00:05Z",
+                    "ended_at": "2026-10-27T10:01:05Z",
+                    "duration_sec": 60.0,
+                    "answered_at": "2026-10-27T10:00:14Z",
+                    "result": "goal_met",
+                    "ended_by": "agent_hangup",
+                    "line_kind": "human",
+                    "result_reason": null,
+                    "outcome_type": "success_no_booking",
+                    "outcome_summary": "The kitchen closes at 10pm tonight.",
+                    "outcome_charge_cents": 10,
+                    "created_at": "2026-10-27T10:00:00Z",
+                    "has_recording": true,
+                    "recording_url": "/calls/c_synthetic11/recording",
+                    "recording_status": "available",
+                    "transcript_full": [
+                        {
+                            "ts": 1792404010.0,
+                            "role": "bot",
+                            "text": "Hi, this is PlaceCall's AI assistant, calling for a client on a recorded line."
+                        },
+                        {
+                            "ts": 1792404016.0,
+                            "role": "operator",
+                            "text": "Hello, how can I help?",
+                            "confidence": 0.92
+                        },
+                        {
+                            "ts": 1792404020.0,
+                            "role": "bot",
+                            "text": "What time does the kitchen close tonight?"
+                        },
+                        {
+                            "ts": 1792404026.0,
+                            "role": "operator",
+                            "text": "Ten o'clock.",
+                            "confidence": 0.9
+                        }
+                    ],
+                    "transcript_status": "live",
+                    "record_call": true,
+                    "voice": {
+                        "gender": null,
+                        "gender_used": "female"
+                    },
+                    "pending_questions": []
+                }
+            }
+        }
+    ]
+}

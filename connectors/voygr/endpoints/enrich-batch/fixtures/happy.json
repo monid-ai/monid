@@ -1,0 +1,120 @@
+{
+    "name": "happy",
+    "description": "recorded 2026-10-27 against api.voygr.tech: POST /v1/jobs/enrich with three public places in San Francisco (Blue Bottle Coffee, Tartine Bakery, Philz Coffee), every row asking for opening_hours, phone and website, then GET /v1/jobs/{batch_id}: the first read (running) and the read that found it completed (3 succeeded). Billed 3 credits, 1 per row. The presigned download link's host and query are replaced with a placeholder.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.voygr.tech/v1/jobs/enrich",
+                "body": {
+                    "pois": [
+                        {
+                            "id": "blue-bottle-mint",
+                            "poi_name": "Blue Bottle Coffee",
+                            "address": "66 Mint St, San Francisco, CA 94103",
+                            "country": "US",
+                            "attributes": [
+                                "opening_hours",
+                                "phone",
+                                "website"
+                            ]
+                        },
+                        {
+                            "id": "tartine-guerrero",
+                            "poi_name": "Tartine Bakery",
+                            "address": "600 Guerrero St, San Francisco, CA 94110",
+                            "country": "US",
+                            "attributes": [
+                                "opening_hours",
+                                "phone",
+                                "website"
+                            ]
+                        },
+                        {
+                            "id": "philz-24th",
+                            "poi_name": "Philz Coffee",
+                            "address": "3101 24th St, San Francisco, CA 94110",
+                            "country": "US",
+                            "attributes": [
+                                "opening_hours",
+                                "phone",
+                                "website"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "batch_id": "batch_01M5YB5YDK0RCJ5B6GZ018V33F",
+                    "type": "enrich",
+                    "status": "queued",
+                    "created_at": "2026-10-27T09:31:06Z",
+                    "total_items": 3,
+                    "eta_seconds": 1,
+                    "eta_completion_at": "2026-10-27T09:31:07Z"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.voygr.tech/v1/jobs/batch_01M5YB5YDK0RCJ5B6GZ018V33F"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "batch_id": "batch_01M5YB5YDK0RCJ5B6GZ018V33F",
+                    "type": "enrich",
+                    "status": "running",
+                    "created_at": "2026-10-27T09:31:06Z",
+                    "started_at": "2026-10-27T09:31:06Z",
+                    "total_items": 3,
+                    "progress": {
+                        "processed": 0,
+                        "succeeded": 0,
+                        "failed": 0
+                    },
+                    "eta_seconds": 1,
+                    "eta_completion_at": "2026-10-27T09:31:07Z"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.voygr.tech/v1/jobs/batch_01M5YB5YDK0RCJ5B6GZ018V33F"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "batch_id": "batch_01M5YB5YDK0RCJ5B6GZ018V33F",
+                    "type": "enrich",
+                    "status": "completed",
+                    "created_at": "2026-10-27T09:31:06Z",
+                    "started_at": "2026-10-27T09:31:06Z",
+                    "completed_at": "2026-10-27T09:31:14Z",
+                    "total_items": 3,
+                    "progress": {
+                        "processed": 3,
+                        "succeeded": 3,
+                        "failed": 0
+                    },
+                    "results": {
+                        "format": "jsonl.gz",
+                        "total_items": 3,
+                        "files": [
+                            {
+                                "url": "https://results.example.invalid/batches/batch_01M5YB5YDK0RCJ5B6GZ018V33F/result.jsonl.gz",
+                                "size_bytes": 455,
+                                "sha256": "dc04705863d81e2ad03d6c39fbb5a40458898bd0bceebb56fd13c98109495ac0",
+                                "expires_at": "2026-10-27T09:46:14Z"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

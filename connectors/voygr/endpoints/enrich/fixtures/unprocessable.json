@@ -1,0 +1,30 @@
+{
+    "name": "unprocessable",
+    "description": "recorded 2026-10-27 against api.voygr.tech: POST /v1/enrich with coordinates that resolve to no location (0, 0) and no address. 422 VALIDATION_ERROR; free.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.voygr.tech/v1/enrich",
+                "body": {
+                    "poi_name": "Tartine Bakery",
+                    "latitude": 0.0,
+                    "longitude": 0.0,
+                    "attributes": [
+                        "phone"
+                    ]
+                }
+            },
+            "res": {
+                "status": 422,
+                "body": {
+                    "success": false,
+                    "error": "Could not resolve the given coordinates to a location.",
+                    "error_code": "VALIDATION_ERROR",
+                    "request_id": "req_f9b83f3a398b4eb1825d5203",
+                    "validation_timestamp": "2026-10-27T07:18:05.032572Z"
+                }
+            }
+        }
+    ]
+}
