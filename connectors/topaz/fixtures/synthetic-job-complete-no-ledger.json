@@ -1,0 +1,124 @@
+{
+    "name": "synthetic-job-complete-no-ledger",
+    "description": "SYNTHETIC: body shapes are the monid-services 2026-09-16 drill records (adaptors/topaz/provider.test.ts); ids, timestamps and URLs are placeholders. Every Topaz video endpoint posts to the SAME /video/express and polls the same paths, so each chain serves all twelve endpoints. Complete, but the record's ledger holds only the reserve row (no commit): the evidence falls back to Topaz's own low estimate, estimates.cost[0] = 3, and no vendor claim exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.topazlabs.com/video/express"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "requestId": "01a0a7f9-c9ad-76af-a1e7-6fafd2175069",
+                    "estimates": {
+                        "cost": [
+                            3,
+                            4
+                        ],
+                        "time": [
+                            1128,
+                            1144
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.topazlabs.com/video/01a0a7f9-c9ad-76af-a1e7-6fafd2175069/status"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "complete",
+                    "message": "Processing complete!",
+                    "progress": 100
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.topazlabs.com/video/01a0a7f9-c9ad-76af-a1e7-6fafd2175069"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "01a0a7f9-c9ad-76af-a1e7-6fafd2175069",
+                    "userId": 11056569,
+                    "adminId": 0,
+                    "status": "complete",
+                    "ts": {
+                        "requested": 1789540454,
+                        "accepted": 1789540455,
+                        "initializing": 1789540456,
+                        "processing": 1789540470,
+                        "complete": 1789541580
+                    },
+                    "lastEventTs": 1789541580,
+                    "version": "api",
+                    "processing": {
+                        "topserving": {
+                            "lastUpdated": 1789541580
+                        }
+                    },
+                    "source": {
+                        "container": "mp4",
+                        "frameCount": 300,
+                        "frameRate": 30,
+                        "resolution": {
+                            "width": 640,
+                            "height": 360
+                        },
+                        "download": {
+                            "url": "https://videocloud.example.test/source/01a0a7f9-c9ad-76af-a1e7-6fafd2175069.mp4",
+                            "expiresAt": 1790146380
+                        }
+                    },
+                    "filters": [
+                        {
+                            "model": "prob-4"
+                        }
+                    ],
+                    "output": {
+                        "resolution": {
+                            "width": 1280,
+                            "height": 720
+                        }
+                    },
+                    "destination": {
+                        "container": "mp4",
+                        "frameCount": 300,
+                        "frameRate": 30,
+                        "duration": 10,
+                        "size": 19425240,
+                        "download": {
+                            "url": "https://videocloud.example.test/output/01a0a7f9-c9ad-76af-a1e7-6fafd2175069.mp4",
+                            "expiresIn": 604800000,
+                            "expiresAt": 1790146380
+                        }
+                    },
+                    "estimates": {
+                        "cost": [
+                            3,
+                            4
+                        ],
+                        "time": [
+                            1128,
+                            1144
+                        ]
+                    },
+                    "transactions": [
+                        {
+                            "operation": "reserve",
+                            "amount": 3
+                        }
+                    ],
+                    "overrides": {}
+                }
+            }
+        }
+    ]
+}

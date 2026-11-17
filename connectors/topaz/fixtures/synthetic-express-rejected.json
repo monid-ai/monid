@@ -1,0 +1,26 @@
+{
+    "name": "synthetic-express-rejected",
+    "description": "SYNTHETIC: body shapes are the monid-services 2026-09-16 drill records (adaptors/topaz/provider.test.ts); ids, timestamps and URLs are placeholders. Every Topaz video endpoint posts to the SAME /video/express and polls the same paths, so each chain serves all twelve endpoints. Topaz rejects the express request with field errors: the vendor 400 as data, zero-billed.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.topazlabs.com/video/express"
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "message": "Invalid input",
+                    "errorCode": "INVALID_INPUT",
+                    "errors": [
+                        {
+                            "type": "field",
+                            "msg": "frameCount is required",
+                            "path": "source.frameCount"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
