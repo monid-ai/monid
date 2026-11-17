@@ -1,0 +1,28 @@
+{
+    "name": "synthetic-systemone-unknown-model",
+    "description": "SYNTHETIC \u2014 not recorded. A model TypeSafe does not serve: the free-string `model` passes local validation and TypeSafe answers 422 (error body shape from the monid-services provider tests).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "state": "x",
+                    "model": "jev-99.0.0",
+                    "questions": {
+                        "q": {
+                            "type": "noul",
+                            "instructions": "?"
+                        }
+                    }
+                }
+            },
+            "res": {
+                "status": 422,
+                "body": {
+                    "error": "unknown model: jev-99.0.0"
+                }
+            }
+        }
+    ]
+}
