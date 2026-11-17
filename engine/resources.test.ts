@@ -446,6 +446,79 @@ Deno.test("resources: utils.sleep is bounded — a per-call breach is FN_CONTRAC
     assertEquals(error.code, EngineErrorCode.FN_CONTRACT);
 });
 
+Deno.test("resources: undeclared views and meters reject inherited properties", async (t) => {
+    const unit = sealResourceUnit(await bundleOf(), "resdemo/widget");
+    const loaded = await new Engine({ transport: scripted([]) }).loadResource(
+        unit,
+    );
+    const window = {
+        startIso: "2026-01-01T00:00:00Z",
+        endIso: "2026-02-01T00:00:00Z",
+    };
+    for (
+        const name of [
+            "missing",
+            "constructor",
+            "toString",
+            "valueOf",
+            "hasOwnProperty",
+            "__proto__",
+        ]
+    ) {
+        await t.step(`view ${name}`, async () => {
+            const viewError = await assertRejects(
+                () => loaded.view(name, OWNED[0]),
+                EngineError,
+                `declares no view "${name}"`,
+            );
+            assertEquals(viewError.code, EngineErrorCode.NOT_ASYNC);
+        });
+        await t.step(`meter ${name}`, async () => {
+            const meterError = await assertRejects(
+                () => loaded.reconcileUsage(name, OWNED[0], window),
+                EngineError,
+                `declares no reconcileUsage for line "${name}"`,
+            );
+            assertEquals(meterError.code, EngineErrorCode.NOT_ASYNC);
+        });
+    }
+});
+
+Deno.test("resources: declared views and meters dispatch their linked functions", async () => {
+    const bundle = await bundleOf((connectors) => {
+        const def = connectors[0].resources![0].def;
+        def.views = {
+            details: { read: async ({ data }) => data.resource.data },
+        };
+        def.usage.lines.storage = {
+            price: {
+                unit: "RESULT",
+                every: 1,
+                consumes: { credit: "default", amount: 0.5 },
+            },
+        };
+        def.reconcileUsage = {
+            storage: {
+                everyMs: 3_600_000,
+                get: async () => ({
+                    consumes: { credit: "default", amount: 2 },
+                }),
+            },
+        };
+    });
+    const loaded = await new Engine({ transport: scripted([]) }).loadResource(
+        sealResourceUnit(bundle, "resdemo/widget"),
+    );
+    assertEquals(await loaded.view("details", OWNED[0]), { color: "red" });
+    assertEquals(
+        await loaded.reconcileUsage("storage", OWNED[0], {
+            startIso: "2026-01-01T00:00:00Z",
+            endIso: "2026-02-01T00:00:00Z",
+        }),
+        { consumes: { credit: "default", amount: 2 } },
+    );
+});
+
 Deno.test("resources: refresh patch is validated against the doc's data schema", async () => {
     const bundle = await bundleOf();
     const unit = sealResourceUnit(bundle, "resdemo/widget");
