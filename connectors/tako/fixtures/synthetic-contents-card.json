@@ -1,0 +1,47 @@
+{
+    "name": "synthetic-contents-card",
+    "description": "Synthetic /v1/contents 200, shaped from Tako's public ContentsResponse schema: a two-row inline card export. usage reports the $0.001 export baseline plus two rows at $0.01 per 1,000, $0.00102 in all.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "request_id": "req_synthetic_contents_1",
+                    "contents": [
+                        {
+                            "source_url": "https://tako.com/card/def456",
+                            "content_format": "json_records",
+                            "delivery": "inline",
+                            "cost": 0.00102,
+                            "total_rows": 2,
+                            "truncated": false,
+                            "records": [
+                                {
+                                    "date": "2026-07-01",
+                                    "unemployment_rate": 4.1
+                                },
+                                {
+                                    "date": "2026-08-01",
+                                    "unemployment_rate": 4.2
+                                }
+                            ],
+                            "export_pricing": {
+                                "baseline_usd": 0.001,
+                                "row_cpm_usd": 0.01,
+                                "max_rows_ceiling": 100000
+                            }
+                        }
+                    ],
+                    "usage": {
+                        "total_cost_usd": 0.00102,
+                        "data": { "cost_usd": 0.00102, "datasets": 1 }
+                    }
+                }
+            }
+        }
+    ]
+}

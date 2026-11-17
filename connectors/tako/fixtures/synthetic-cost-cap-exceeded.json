@@ -1,0 +1,21 @@
+{
+    "name": "synthetic-cost-cap-exceeded",
+    "description": "Synthetic /v1/contents 422, shaped from Tako's CostCapExceededError: the export's price is above max_cost_usd, so Tako reads no data and charges nothing.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 422,
+                "body": {
+                    "error_type": "COST_CAP_EXCEEDED",
+                    "error_message": "This export would cost up to $1.001, above max_cost_usd $0.01.",
+                    "quoted_cost_usd": 1.001,
+                    "max_cost_usd": 0.01
+                }
+            }
+        }
+    ]
+}

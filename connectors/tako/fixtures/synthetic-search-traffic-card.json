@@ -1,0 +1,40 @@
+{
+    "name": "synthetic-search-traffic-card",
+    "description": "Synthetic /v3/search 200, shaped from Tako's public SearchResponse schema: one website traffic card served with its data and one web result. usage reports the $0.007 base price plus a $0.128 variable-cost charge, $0.135 in all.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "request_id": "req_synthetic_search_1",
+                    "cards": [
+                        {
+                            "card_id": "abc123",
+                            "title": "stripe.com monthly visits",
+                            "description": "Monthly visits to stripe.com, January to August 2026.",
+                            "webpage_url": "https://tako.com/card/abc123",
+                            "card_type": "timeseries",
+                            "exportable": true
+                        }
+                    ],
+                    "web_results": [
+                        {
+                            "title": "Stripe traffic analytics",
+                            "url": "https://example.com/stripe-traffic",
+                            "snippet": "Stripe drew about 60 million visits in August."
+                        }
+                    ],
+                    "usage": {
+                        "total_cost_usd": 0.135,
+                        "compute": { "cost_usd": 0.007 },
+                        "variable_cost": { "cost_usd": 0.128 }
+                    }
+                }
+            }
+        }
+    ]
+}
