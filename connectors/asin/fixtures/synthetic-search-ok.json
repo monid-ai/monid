@@ -1,0 +1,28 @@
+{
+    "name": "synthetic-search-ok",
+    "description": "SYNTHETIC happy chain for asin#search. Body shape from Asin's OpenAPI spec and a live call made for the Treg catalog (2026-11-09), trimmed; the URL is the query string the engine emits. Replace via `deno task record` when ASIN_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://www.asin.dev/api/v1/search?query=kindle&marketplace=com"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "results": [
+                        {
+                            "asin": "B0CZY1LRT4",
+                            "title": "Kindle Colorsoft",
+                            "image": null,
+                            "price": 177.99,
+                            "currency": "USD",
+                            "rating": 4.5,
+                            "reviews_count": 2377
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

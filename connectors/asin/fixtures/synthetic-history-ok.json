@@ -1,0 +1,29 @@
+{
+    "name": "synthetic-history-ok",
+    "description": "SYNTHETIC happy chain for asin#history. Body shape from Asin's OpenAPI spec and a live call made for the Treg catalog (2026-11-09), trimmed; the URL is the query string the engine emits. Replace via `deno task record` when ASIN_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://www.asin.dev/api/v1/history?asin=B0CZY1LRT4&marketplace=com"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "asin": "B0CZY1LRT4",
+                    "marketplace": "com",
+                    "currency": "USD",
+                    "lowest_price": 149.99,
+                    "highest_price": 189.99,
+                    "average_price": 171.2,
+                    "history": [
+                        {
+                            "date": "2026-11-01",
+                            "price": 177.99
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

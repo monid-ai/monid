@@ -1,0 +1,26 @@
+{
+    "name": "synthetic-offers-ok",
+    "description": "SYNTHETIC happy chain for asin#offers. Body shape from Asin's OpenAPI spec and a live call made for the Treg catalog (2026-11-09), trimmed; the URL is the query string the engine emits. Replace via `deno task record` when ASIN_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://www.asin.dev/api/v1/offers?asin=B0CZY1LRT4&marketplace=com"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "asin": "B0CZY1LRT4",
+                    "marketplace": "com",
+                    "currency": "USD",
+                    "fetched_at": "2026-11-09T10:00:00.000Z",
+                    "charged": false,
+                    "amazon_price": 177.99,
+                    "lowest_new_price": 169.99,
+                    "lowest_used_price": 120.0,
+                    "offers": []
+                }
+            }
+        }
+    ]
+}
