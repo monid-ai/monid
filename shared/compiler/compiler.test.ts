@@ -227,6 +227,64 @@ Deno.test("compile produces doc maps + interned table; ids inferred; closure hol
     });
 });
 
+Deno.test("duplicate provider names are DOC_MALFORMED even with distinct endpoints", async (t) => {
+    const connectors = [
+        ...source(
+            [{
+                name: "one",
+                def: makeEndpoint({ request: { method: "GET", path: "/one" } }),
+            }],
+            makeProvider({
+                meta: { displayName: "First", summary: "First provider." },
+            }),
+        ),
+        ...source(
+            [{
+                name: "two",
+                def: makeEndpoint({ request: { method: "GET", path: "/two" } }),
+            }],
+            makeProvider({
+                meta: { displayName: "Second", summary: "Second provider." },
+            }),
+        ),
+    ];
+    for (
+        const [name, sources] of [
+            ["forward", connectors],
+            ["reverse", [...connectors].reverse()],
+        ] as const
+    ) {
+        await t.step(name, async () => {
+            const error = await assertRejects(
+                () => compileBundle(sources, OPTS),
+                CompileError,
+                'duplicate provider name "demo"',
+            );
+            assertEquals(error.code, CompileErrorCode.DOC_MALFORMED);
+        });
+    }
+});
+
+Deno.test("distinct provider names compile in either input order", async () => {
+    const connectors = [
+        ...source([{ name: "search", def: makeEndpoint() }]),
+        ...source(
+            [{ name: "search", def: makeEndpoint() }],
+            makeProvider({ name: "other" }),
+        ),
+    ];
+    const bundle = await compileBundle(connectors, OPTS);
+    assertEquals(Object.keys(bundle.providers), ["demo", "other"]);
+    assertEquals(Object.keys(bundle.endpoints), [
+        "demo#search",
+        "other#search",
+    ]);
+    assertEquals(
+        stableStringify(await compileBundle([...connectors].reverse(), OPTS)),
+        stableStringify(bundle),
+    );
+});
+
 Deno.test("coded rejections: a malformed def at the compiler boundary is DOC_MALFORMED", async () => {
     // hand-built sources bypass defineEndpoint's author-time validation —
     // the COMPILER boundary must still emit a coded CompileError (build
