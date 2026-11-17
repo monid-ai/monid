@@ -1,0 +1,41 @@
+{
+    "name": "synthetic-search-paged",
+    "description": "SYNTHETIC, not recorded against a live key. A `searchCount: 30` Google search that collected its results from three pages, built from the `paging` example in \"Result count and paging\" on portal.usestring.ai/docs/api-reference/search ({ pages: 3, complete: true, stoppedBy: \"search_count\" }); results trimmed to two. Replace via `deno task record` with a real capture.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "results": [
+                        {
+                            "position": 1,
+                            "rank": 1,
+                            "title": "How to Choose Running Shoes",
+                            "url": "https://www.rei.com/learn/expert-advice/running-shoes.html",
+                            "displayUrl": "https://www.rei.com › learn",
+                            "snippet": "A short description of the page as shown on the results page."
+                        },
+                        {
+                            "position": 2,
+                            "rank": 2,
+                            "title": "Best Running Shoes of 2026",
+                            "url": "https://example.org/best-running-shoes-2026",
+                            "displayUrl": "https://example.org › best-running-shoes-2026",
+                            "snippet": "A roundup of top running shoes for every gait and terrain."
+                        }
+                    ],
+                    "zeroResults": false,
+                    "paging": {
+                        "pages": 3,
+                        "complete": true,
+                        "stoppedBy": "search_count"
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,32 @@
+{
+    "name": "synthetic-request-premium",
+    "description": "SYNTHETIC, not recorded against a live key. The envelope from request-post.json (a real 2026-10-24 recording), for a destination served on a premium proxy: `x-billed-request-type: request_premium`, which the estimate's standard-line floor cannot see coming. A real capture needs a destination String serves on a premium proxy.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "headers": {
+                    "x-billed-request-type": "request_premium"
+                },
+                "body": {
+                    "statusCode": 201,
+                    "headers": {
+                        "Content-Type": "application/json; charset=utf-8",
+                        "Location": "https://jsonplaceholder.typicode.com/posts/101"
+                    },
+                    "data": {
+                        "title": "widget",
+                        "body": "one widget",
+                        "userId": 1,
+                        "id": 101
+                    },
+                    "finalUrl": "https://jsonplaceholder.typicode.com/posts"
+                }
+            }
+        }
+    ]
+}

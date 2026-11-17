@@ -1,0 +1,20 @@
+{
+    "name": "synthetic-fetch-error",
+    "description": "SYNTHETIC, not recorded against a live key. The documented failed-fetch example on portal.usestring.ai/docs/api-reference/errors (retrieved 2026-10-24): HTTP 502 with {error, statusCode, message}, where `statusCode` is the 403 the destination answered. No x-billed-request-type header — the engine forces zero usage on any non-2xx httpStatus before evidence ever runs, so this fixture also proves that path never needs the header. Serves string#fetch and string#request, which bind the same url. Replace via `deno task record` with a real capture.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 502,
+                "body": {
+                    "error": "Request failed",
+                    "statusCode": 403,
+                    "message": "The request to the destination failed"
+                }
+            }
+        }
+    ]
+}

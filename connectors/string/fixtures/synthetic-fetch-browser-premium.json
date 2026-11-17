@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-fetch-browser-premium",
+    "description": "SYNTHETIC. Same Markdown body as fetch-example.json (a real 2026-10-24 recording), for a request that forced browser rendering (`executeJS: true`) against a destination served on a premium proxy — the `x-billed-request-type: browser_premium` case from portal.usestring.ai/docs/api-reference/overview, which the estimate's cheaper-floor promise cannot see coming. A real capture needs a destination String serves on a premium proxy.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "headers": {
+                    "x-billed-request-type": "browser_premium"
+                },
+                "body": "# Example Domain\n\nThis domain is for use in documentation examples without needing permission. This is not a service; avoid relying on it for testing and monitoring purposes."
+            }
+        }
+    ]
+}

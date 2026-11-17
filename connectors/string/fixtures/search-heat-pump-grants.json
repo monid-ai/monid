@@ -1,0 +1,66 @@
+{
+    "name": "search-heat-pump-grants",
+    "description": "Recorded 2026-10-24 against POST https://request.usestring.ai/v1/search for {query: \"heat pump grants\"}, with the google engine default the binding sends. Trimmed by the recorder to two results and two of each surface; no `paging`, as for any search without searchCount. Url bound to {{request.url}} (fixture strategy v2).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "query": "heat pump grants",
+                    "engine": "google"
+                }
+            },
+            "res": {
+                "status": 200,
+                "headers": {
+                    "x-billed-request-type": "search"
+                },
+                "body": {
+                    "results": [
+                        {
+                            "position": 1,
+                            "title": "Apply for the Boiler Upgrade Scheme: What you can get",
+                            "url": "https://www.gov.uk/apply-boiler-upgrade-scheme/what-you-can-get",
+                            "snippet": "Current grants are available for: £7,500 towards an air source heat pump (sometimes called an air-to-water heat pump) £7,500 towards a ground source heat pump",
+                            "displayUrl": "https://www.gov.uk › ... › Household energy",
+                            "displayText": "https://www.gov.uk › ... › Household energy",
+                            "source": "GOV.UK",
+                            "rank": 1
+                        },
+                        {
+                            "position": 2,
+                            "title": "Incentives, Grants, and Financing",
+                            "url": "https://www.energysmartcny.org/incentives/",
+                            "snippet": "Grants, rebates, low-interest financing, and more available to switch to green energy and heat pumps! EnergySmart CNY helps you apply.",
+                            "displayUrl": "https://www.energysmartcny.org › incentives",
+                            "displayText": "https://www.energysmartcny.org › incentives",
+                            "source": "EnergySmart CNY",
+                            "rank": 2
+                        }
+                    ],
+                    "zeroResults": false,
+                    "relatedSearches": [
+                        "Heat pump grants Scotland",
+                        "Heat pump grants california"
+                    ],
+                    "peopleAlsoAsk": [
+                        {
+                            "question": "How can I get a heat pump for free?"
+                        },
+                        {
+                            "question": "Will there be a HVAC tax credit in 2026?"
+                        }
+                    ],
+                    "overviews": [
+                        {
+                            "declined": true,
+                            "text": "",
+                            "sources": []
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

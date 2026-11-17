@@ -1,0 +1,16 @@
+{
+    "name": "synthetic-fetch-header-absent",
+    "description": "SYNTHETIC. Same 200 body as fetch-example.json (a real 2026-10-24 recording), but with no x-billed-request-type response header at all — proves a transport that does not surface the header settles zero usage rather than guessing which billed type applies. String always sends the header on a billed response, so this case cannot be recorded.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": "# Example Domain\n\nThis domain is for use in documentation examples without needing permission. This is not a service; avoid relying on it for testing and monitoring purposes."
+            }
+        }
+    ]
+}
