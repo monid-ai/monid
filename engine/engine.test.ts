@@ -2613,3 +2613,28 @@ Deno.test("MISSING_CREDENTIAL names the variables THIS doc's shape asks for, not
         `no bare alias for a named field, got: ${error.message}`,
     );
 });
+
+Deno.test("lifecycle: failed settlement of a completed stop remains unresolved", async () => {
+    for (const broken of [true, false]) {
+        const unit = await asyncUnit((connectors) => {
+            connectors[0].provider.lifecycle!.stop = async () => ({
+                kind: "COMPLETED",
+                httpStatus: 200,
+                output: [1, 2],
+            });
+            if (broken) {
+                connectors[0].endpoints[0].def.output = {
+                    schema: z.object({ required: z.string() }),
+                };
+            }
+        });
+        const loaded = await new Engine({ transport: scriptTransport([]) })
+            .load(unit);
+        const state = testState({ externalRunId: "j1" });
+        const result = await loaded.stop({ body: { q: "x" } }, state);
+        assertEquals(result.kind, broken ? "UNRESOLVED" : "COMPLETED");
+        if (result.kind === "UNRESOLVED") {
+            assertEquals(result.state.externalRunId, "j1");
+        }
+    }
+});
