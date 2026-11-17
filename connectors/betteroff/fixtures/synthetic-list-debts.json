@@ -1,0 +1,78 @@
+{
+    "name": "synthetic-list-debts",
+    "description": "Synthetic schema fixture, not a recording of provider authorization or financial execution.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "structuredContent": {
+                            "ok": true,
+                            "schemaVersion": "4",
+                            "data": {
+                                "asOf": "synthetic",
+                                "baseCurrency": "synthetic",
+                                "count": 0,
+                                "totalDebt": "10.25",
+                                "knownDebtSubtotal": "10.25",
+                                "totalMinPayment": "10.25",
+                                "avgApr": 0,
+                                "aprKnownCount": 0,
+                                "totalYtdInterest": "10.25",
+                                "ytdInterestKnownCount": 0,
+                                "debts": [
+                                    {
+                                        "id": "11111111-1111-4111-8111-111111111111",
+                                        "name": "synthetic",
+                                        "displayName": "synthetic",
+                                        "mask": "synthetic",
+                                        "balance": "10.25",
+                                        "balanceAsOf": "synthetic",
+                                        "balanceAsOfSource": "institution",
+                                        "apr": 0,
+                                        "minimumPayment": "10.25"
+                                    }
+                                ],
+                                "valuation": {},
+                                "unknownBalanceCount": 0
+                            },
+                            "currency": "USD",
+                            "timezone": "America/Los_Angeles",
+                            "asOf": "2026-10-25",
+                            "revision": 1,
+                            "householdRevision": 1,
+                            "quality": {
+                                "state": "complete",
+                                "reasons": []
+                            },
+                            "evidence": [
+                                {
+                                    "source": "synthetic-fixture",
+                                    "observedAt": "2026-10-25T12:00:00Z"
+                                }
+                            ],
+                            "page": {
+                                "returnedCount": 1,
+                                "totalCount": 1,
+                                "truncated": false,
+                                "nextCursor": null
+                            },
+                            "warnings": [
+                                "Synthetic fixture; not a live provider result."
+                            ],
+                            "requestId": "synthetic-request"
+                        },
+                        "content": []
+                    }
+                }
+            }
+        }
+    ]
+}

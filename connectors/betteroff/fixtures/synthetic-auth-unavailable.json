@@ -1,0 +1,24 @@
+{
+    "name": "synthetic-auth-unavailable",
+    "description": "Synthetic authorization lookup failure; a temporary failure must not become a successful result or a revocation. No household records or credentials.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 503,
+                "body": {
+                    "type": "about:blank",
+                    "title": "Service Unavailable",
+                    "status": 503,
+                    "detail": "BetterOff couldn\u2019t check this agent connection. Retry shortly.",
+                    "code": "AGENT_AUTHZ_UNAVAILABLE",
+                    "error": "BetterOff couldn\u2019t check this agent connection. Retry shortly.",
+                    "message": "BetterOff couldn\u2019t check this agent connection. Retry shortly."
+                }
+            }
+        }
+    ]
+}

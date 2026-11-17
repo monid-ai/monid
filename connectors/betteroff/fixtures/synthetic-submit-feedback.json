@@ -1,0 +1,30 @@
+{
+    "name": "synthetic-submit-feedback",
+    "description": "Synthetic schema fixture, not a recording of provider authorization or financial execution.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "structuredContent": {
+                            "ok": true,
+                            "schemaVersion": "4",
+                            "receiptId": "11111111-1111-4111-8111-111111111111",
+                            "status": "submitted",
+                            "duplicate": false,
+                            "requestId": "synthetic-request"
+                        },
+                        "content": []
+                    }
+                }
+            }
+        }
+    ]
+}

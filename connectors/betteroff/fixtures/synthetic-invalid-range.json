@@ -1,0 +1,31 @@
+{
+    "name": "synthetic-invalid-range",
+    "description": "Synthetic error; contains no household records or credentials.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "isError": true,
+                        "structuredContent": {
+                            "ok": false,
+                            "code": "INVALID_INPUT",
+                            "error": "The cash-flow date range must run forward and span 1 to 366 days.",
+                            "retryable": false,
+                            "nextStep": "Correct the date range and try again.",
+                            "field": "startDate"
+                        },
+                        "content": []
+                    }
+                }
+            }
+        }
+    ]
+}

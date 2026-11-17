@@ -1,0 +1,116 @@
+{
+    "name": "synthetic-get-defi-positions",
+    "description": "Synthetic schema fixture, not a recording of provider authorization or financial execution.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "structuredContent": {
+                            "ok": true,
+                            "schemaVersion": "4",
+                            "data": {
+                                "dataSource": "canonical_wallet_positions",
+                                "totalValueUsd": "10.25",
+                                "grossAssetValueUsd": "10.25",
+                                "grossLiabilityValueUsd": "10.25",
+                                "netValueUsd": "10.25",
+                                "positionCount": 0,
+                                "protocolCount": 0,
+                                "protocols": [
+                                    {
+                                        "protocol": "synthetic",
+                                        "chains": [
+                                            "synthetic"
+                                        ],
+                                        "positionCount": 0,
+                                        "grossAssetValueUsd": "10.25",
+                                        "grossLiabilityValueUsd": "10.25",
+                                        "netValueUsd": "10.25",
+                                        "positions": [
+                                            {
+                                                "id": "synthetic",
+                                                "name": "synthetic",
+                                                "kind": "synthetic",
+                                                "chain": "synthetic",
+                                                "grossAssetValueUsd": "10.25",
+                                                "grossLiabilityValueUsd": "10.25",
+                                                "netValueUsd": "10.25",
+                                                "inRange": false,
+                                                "maturesAt": "synthetic",
+                                                "marketFixedApy": 0,
+                                                "protocolContext": {},
+                                                "legs": [
+                                                    {
+                                                        "assetId": "synthetic",
+                                                        "contractAddress": "synthetic",
+                                                        "role": "synthetic",
+                                                        "economicSide": "asset",
+                                                        "contributesToNetWorth": false,
+                                                        "symbol": "synthetic",
+                                                        "name": "synthetic",
+                                                        "quantity": "synthetic",
+                                                        "priceUsd": "10.25",
+                                                        "valueUsd": "10.25",
+                                                        "verified": false,
+                                                        "valuationKnown": false,
+                                                        "observedValueUsd": "synthetic"
+                                                    }
+                                                ],
+                                                "risk": {},
+                                                "provenance": {
+                                                    "provider": "synthetic",
+                                                    "providerPositionId": "synthetic",
+                                                    "observedAt": "synthetic",
+                                                    "observedAtBlock": "synthetic",
+                                                    "completeness": "synthetic",
+                                                    "freshness": "synthetic",
+                                                    "evidenceRef": "synthetic"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "coverage": {},
+                                "filters": {}
+                            },
+                            "currency": "USD",
+                            "timezone": "America/Los_Angeles",
+                            "asOf": "2026-10-25",
+                            "revision": 1,
+                            "householdRevision": 1,
+                            "quality": {
+                                "state": "complete",
+                                "reasons": []
+                            },
+                            "evidence": [
+                                {
+                                    "source": "synthetic-fixture",
+                                    "observedAt": "2026-10-25T12:00:00Z"
+                                }
+                            ],
+                            "page": {
+                                "returnedCount": 1,
+                                "totalCount": 1,
+                                "truncated": false,
+                                "nextCursor": null
+                            },
+                            "warnings": [
+                                "Synthetic fixture; not a live provider result."
+                            ],
+                            "requestId": "synthetic-request"
+                        },
+                        "content": []
+                    }
+                }
+            }
+        }
+    ]
+}

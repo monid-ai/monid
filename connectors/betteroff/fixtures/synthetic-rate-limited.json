@@ -1,0 +1,18 @@
+{
+    "name": "synthetic-rate-limited",
+    "description": "Synthetic error; contains no household records or credentials.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 429,
+                "body": {
+                    "error": "Synthetic rate limit."
+                }
+            }
+        }
+    ]
+}
