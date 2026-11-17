@@ -45,10 +45,12 @@ export default defineEndpoint({
     },
     input: {
         schema: {
-            body: z.union([
+            // Apply shared defaults outside anyOf, where the runtime validator
+            // can materialize them before checking identifier alternatives.
+            body: zBody.and(z.union([
                 zBody.required({ url_path: true }),
                 zBody.required({ keyword: true }),
-            ]).describe(
+            ])).describe(
                 "Provide at least one of url_path or keyword.",
             ),
         },

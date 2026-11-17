@@ -120,14 +120,21 @@ const round6 = (n: number) => Math.round(n * 1e6) / 1e6;
 
 type Prop = { description?: string; default?: Json };
 /** A compiled input part's fields: its own `properties`, or those of its
- *  `anyOf` arms merged (an "at least one of" body is a union of
+ *  `anyOf`/`allOf` arms merged (an "at least one of" body is a union of
  *  `.required` arms over the same fields). */
 const propsOf = (part: unknown): Record<string, Prop> => {
     const p = part as
-        | { properties?: Record<string, Prop>; anyOf?: unknown[] }
+        | {
+            properties?: Record<string, Prop>;
+            anyOf?: unknown[];
+            allOf?: unknown[];
+        }
         | undefined;
     if (p?.properties !== undefined) return p.properties;
-    return Object.assign({}, ...(p?.anyOf ?? []).map(propsOf));
+    return Object.assign(
+        {},
+        ...[...(p?.anyOf ?? []), ...(p?.allOf ?? [])].map(propsOf),
+    );
 };
 
 /**
@@ -1287,6 +1294,46 @@ Deno.test("dataforseo holds: every documented surcharge a metered doc takes rais
     assertEquals(round6(seznam.credits.default), 0.0048);
 });
 
+Deno.test("dataforseo: selector bodies materialize default pages for estimates and the wire", async () => {
+    const cases = [
+        ["google-business/reviews", "depth", 10],
+        ["google-business/extended-reviews", "depth", 20],
+        ["tripadvisor/reviews", "depth", 10],
+        ["google-shopping/sellers", "depth", 10],
+        ["domain/domains-by-technology", "limit", 100],
+    ] as const;
+    for (const [path, knob, amount] of cases) {
+        const id = `dataforseo#${path}`;
+        const input = inputFor(id);
+        const body = { ...(input.body as Record<string, Json>) };
+        delete body[knob];
+        assertEquals(
+            await validates(id, { ...input, body }),
+            await validates(id, {
+                ...input,
+                body: { ...body, [knob]: amount },
+            }),
+            id,
+        );
+        for (const value of [undefined, amount + 1]) {
+            const supplied = value === undefined
+                ? body
+                : { ...body, [knob]: value };
+            // A terminal vendor error ends queued runs after one request;
+            // the assertion concerns the submitted body, before settlement.
+            const seen = await wire(id, { ...input, body: supplied }, {
+                status_code: 40501,
+                tasks: [{ status_code: 40501, cost: 0, result: null }],
+                cost: 0,
+            });
+            assertEquals(seen.length, 1, id);
+            const tasks = seen[0].body as Record<string, Json>[];
+            assertEquals(tasks[0][knob], value ?? amount, id);
+        }
+        assertEquals(body[knob], undefined, "caller input is not mutated");
+    }
+});
+
 /** The docs whose vendor contract needs one of several identifiers. */
 const AT_LEAST_ONE = [
     "dataforseo#domain/domains-by-technology",
@@ -1303,9 +1350,15 @@ Deno.test("dataforseo gates: an 'at least one of' body passes with one identifie
     const ids = await dataforseoIds();
     const unions: string[] = [];
     for (const id of ids) {
-        const arms = (bundle.endpoints[id].input.schema.body as
-            | { anyOf?: { required?: string[] }[] }
-            | undefined)?.anyOf;
+        type SelectorSchema = {
+            anyOf?: { required?: string[] }[];
+            allOf?: SelectorSchema[];
+        };
+        const bodySchema = bundle.endpoints[id].input.schema.body as
+            | SelectorSchema
+            | undefined;
+        const arms = bodySchema?.anyOf ??
+            bodySchema?.allOf?.find((part) => part.anyOf)?.anyOf;
         if (arms === undefined) continue;
         unions.push(id);
         const shared = arms.map((arm) => new Set(arm.required ?? []))
