@@ -33,7 +33,19 @@ export default defineEndpoint({
     },
     endpoint: "/episodes/search",
     request: { method: "GET", path: "/api/open/v1/episodes/search" },
-    input: { schema: { queryParams: zSearchEpisodesQueryParams } },
+    input: {
+        schema: {
+            // connector policy, not the vendor's default (10): one paid
+            // call should return a useful page
+            queryParams: zSearchEpisodesQueryParams.extend({
+                page: zSearchEpisodesQueryParams.shape.page.unwrap().default(0)
+                    .describe("Zero-based page index. Defaults to 0."),
+                hitsPerPage: zSearchEpisodesQueryParams.shape.hitsPerPage
+                    .unwrap().default(20)
+                    .describe("Results per page, 1-30. Defaults to 20."),
+            }),
+        },
+    },
     usage: {
         model: {
             kind: UsageModelKind.PER_CALL,

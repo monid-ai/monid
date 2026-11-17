@@ -1,0 +1,19 @@
+{
+    "name": "provider-error",
+    "description": "recorded live 2026-11-18 against the Podwise Open API v1 (podwise#podcasts/search, scenario 'provider-error', a deliberately invalid token); headers never captured",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://app.podwise.ai/api/open/v1/podcasts/search?q=Dwarkesh+Podcast&hitsPerPage=3&page=0"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "success": false,
+                    "message": "Invalid token"
+                }
+            }
+        }
+    ]
+}

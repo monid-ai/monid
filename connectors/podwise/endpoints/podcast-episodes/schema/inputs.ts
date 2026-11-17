@@ -8,7 +8,7 @@ export const zPodcastEpisodesPathParams = z.object({
 });
 
 export const zPodcastEpisodesQueryParams = z.object({
-    date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional().describe(
+    date: z.iso.date().optional().describe(
         "Last day of the window, YYYY-MM-DD. Defaults to today.",
     ),
     days: z.number().int().min(1).max(365).optional().describe(

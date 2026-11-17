@@ -31,7 +31,17 @@ export default defineEndpoint({
     },
     endpoint: "/podcasts/search",
     request: { method: "GET", path: "/api/open/v1/podcasts/search" },
-    input: { schema: { queryParams: zSearchPodcastsQueryParams } },
+    input: {
+        schema: {
+            queryParams: zSearchPodcastsQueryParams.extend({
+                page: zSearchPodcastsQueryParams.shape.page.unwrap().default(0)
+                    .describe("Zero-based page index. Defaults to 0."),
+                hitsPerPage: zSearchPodcastsQueryParams.shape.hitsPerPage
+                    .unwrap().default(10)
+                    .describe("Results per page, 1-30. Defaults to 10."),
+            }),
+        },
+    },
     usage: {
         model: { kind: UsageModelKind.FREE },
     },
