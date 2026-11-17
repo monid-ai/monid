@@ -1,0 +1,38 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-11-02 against API Indonesia production (GET /api/v1/wilayah/search?q=pontianak&per_page=3) with a vendor key. Response trimmed by the recorder; real public-registry data.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?q=pontianak&per_page=3"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": [
+                        {
+                            "id": "6171",
+                            "name": "Kota Pontianak",
+                            "alt_name": "Pontianak",
+                            "level": "kabupaten"
+                        },
+                        {
+                            "id": "617101",
+                            "name": "Pontianak Selatan",
+                            "alt_name": "Pontianak Selatan",
+                            "level": "kecamatan"
+                        }
+                    ],
+                    "meta": {
+                        "total": 8,
+                        "page": 1,
+                        "per_page": 3,
+                        "total_pages": 3
+                    }
+                }
+            }
+        }
+    ]
+}

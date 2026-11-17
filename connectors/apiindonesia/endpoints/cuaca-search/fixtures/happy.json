@@ -1,0 +1,44 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-11-02 against API Indonesia production (GET /api/v1/cuaca/search?q=pontianak) with a vendor key. Response trimmed by the recorder; real public-registry data.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?q=pontianak"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": [
+                        {
+                            "adm4": "6171031001",
+                            "provinsi": "Kalimantan Barat",
+                            "kotkab": "Kota Pontianak",
+                            "kecamatan": "Pontianak Barat",
+                            "desa": "Pallima",
+                            "lat": null,
+                            "lng": null
+                        },
+                        {
+                            "adm4": "6171031004",
+                            "provinsi": "Kalimantan Barat",
+                            "kotkab": "Kota Pontianak",
+                            "kecamatan": "Pontianak Barat",
+                            "desa": "Sungaibeliung",
+                            "lat": null,
+                            "lng": null
+                        }
+                    ],
+                    "meta": {
+                        "total": 30,
+                        "page": 1,
+                        "per_page": 20,
+                        "total_pages": 2
+                    }
+                }
+            }
+        }
+    ]
+}

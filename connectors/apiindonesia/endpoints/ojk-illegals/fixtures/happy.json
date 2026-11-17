@@ -1,0 +1,58 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-11-02 against API Indonesia production (GET /api/v1/ojk/illegals?name=binomo&limit=2) with a vendor key. Response trimmed by the recorder; real public-registry data.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?name=binomo&limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": [
+                        {
+                            "id": 4257,
+                            "name": "www.binomo.com",
+                            "alias": [],
+                            "address": [],
+                            "phone": [],
+                            "email": [],
+                            "web": [],
+                            "entity_type": "Investasi Ilegal",
+                            "activity_type": [
+                                "Forex",
+                                "Futures"
+                            ],
+                            "input_date": "01/06/2022",
+                            "description": "SP 04/VII/SWI/2019 Trading Forex"
+                        },
+                        {
+                            "id": 4411,
+                            "name": "Binomo 100% Bonus Code and Forex Trading Guide",
+                            "alias": [],
+                            "address": [],
+                            "phone": [],
+                            "email": [],
+                            "web": [],
+                            "entity_type": "Investasi Ilegal",
+                            "activity_type": [
+                                "Forex",
+                                "Futures"
+                            ],
+                            "input_date": "01/06/2022",
+                            "description": "SP 10/XII/SWI/2019 Forex ilegal"
+                        }
+                    ],
+                    "meta": {
+                        "total": 9,
+                        "page": 1,
+                        "per_page": 2,
+                        "total_pages": 5
+                    }
+                }
+            }
+        }
+    ]
+}

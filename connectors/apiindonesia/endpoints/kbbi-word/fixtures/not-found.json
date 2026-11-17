@@ -1,0 +1,22 @@
+{
+    "name": "not-found",
+    "description": "Recorded 2026-11-02: API Indonesia answers 404 `{success:false, error:{code:'NOT_FOUND', message}}` for a word not in KBBI. Vendor refunds non-2xx; the engine settles it at zero.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://use.apiindonesia.id/api/v1/kbbi/word/zzqxv"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "success": false,
+                    "error": {
+                        "code": "NOT_FOUND",
+                        "message": "Word 'zzqxv' not found in KBBI"
+                    }
+                }
+            }
+        }
+    ]
+}

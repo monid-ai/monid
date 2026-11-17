@@ -1,0 +1,41 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-11-02 against API Indonesia production (GET /api/v1/kurs-bi/latest?currencies=USD%2CSGD) with a vendor key. Response trimmed by the recorder; real public-registry data.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?currencies=USD%2CSGD"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "date": "2026-11-02",
+                            "currency": "USD",
+                            "rate_type": "transaksi",
+                            "buy_rate": 18047.31,
+                            "sell_rate": 18228.69,
+                            "mid_rate": 18138
+                        },
+                        {
+                            "date": "2026-11-02",
+                            "currency": "SGD",
+                            "rate_type": "transaksi",
+                            "buy_rate": 14122.63,
+                            "sell_rate": 14265.68,
+                            "mid_rate": 14194.16
+                        }
+                    ],
+                    "meta": {
+                        "attribution": "Sumber: Bank Indonesia",
+                        "date": "2026-11-02",
+                        "source": "Bank Indonesia",
+                        "rate_type": "transaksi"
+                    }
+                }
+            }
+        }
+    ]
+}

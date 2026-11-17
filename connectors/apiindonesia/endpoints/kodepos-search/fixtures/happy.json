@@ -1,0 +1,82 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-11-02 against API Indonesia production (GET /api/v1/kodepos/search?q=78124&per_page=2) with a vendor key. Response trimmed by the recorder; real public-registry data.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?q=78124&per_page=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": [
+                        {
+                            "id": "kp_6171061001",
+                            "village_code": "6171061001",
+                            "village_name": "Bansir Laut",
+                            "district_code": "617106",
+                            "district_name": "Pontianak Tenggara",
+                            "regency_code": "6171",
+                            "regency_name": "Kota Pontianak",
+                            "province_code": "61",
+                            "province_name": "Kalimantan Barat",
+                            "postal_code": "78124",
+                            "is_active": 1,
+                            "kode_pos": "78124",
+                            "bps_province_code": "61",
+                            "bps_regency_code": "6171",
+                            "bps_district_code": "6171011",
+                            "bps_village_code": "6171011003",
+                            "kemendagri_province_code": "61",
+                            "kemendagri_regency_code": "6171",
+                            "kemendagri_district_code": "617106",
+                            "kemendagri_village_code": "6171061001",
+                            "source_year": null,
+                            "source_version": "legacy-v1",
+                            "source_checksum": null,
+                            "crosswalk_source_year": null,
+                            "crosswalk_source_version": null,
+                            "crosswalk_source_checksum": null
+                        },
+                        {
+                            "id": "kp_6171061002",
+                            "village_code": "6171061002",
+                            "village_name": "Bansir Darat",
+                            "district_code": "617106",
+                            "district_name": "Pontianak Tenggara",
+                            "regency_code": "6171",
+                            "regency_name": "Kota Pontianak",
+                            "province_code": "61",
+                            "province_name": "Kalimantan Barat",
+                            "postal_code": "78124",
+                            "is_active": 1,
+                            "kode_pos": "78124",
+                            "bps_province_code": "61",
+                            "bps_regency_code": "6171",
+                            "bps_district_code": "6171011",
+                            "bps_village_code": "6171011004",
+                            "kemendagri_province_code": "61",
+                            "kemendagri_regency_code": "6171",
+                            "kemendagri_district_code": "617106",
+                            "kemendagri_village_code": "6171061002",
+                            "source_year": null,
+                            "source_version": "legacy-v1",
+                            "source_checksum": null,
+                            "crosswalk_source_year": null,
+                            "crosswalk_source_version": null,
+                            "crosswalk_source_checksum": null
+                        }
+                    ],
+                    "meta": {
+                        "total": 4,
+                        "page": 1,
+                        "per_page": 2,
+                        "total_pages": 2
+                    }
+                }
+            }
+        }
+    ]
+}

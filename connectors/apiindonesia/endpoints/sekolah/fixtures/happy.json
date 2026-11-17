@@ -1,0 +1,76 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-11-02 against API Indonesia production (GET /api/v1/sekolah?kabupaten_id=6171&jenis=SMA&status=Negeri&per_page=2) with a vendor key. Response trimmed by the recorder; real public-registry data.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?kabupaten_id=6171&jenis=SMA&status=Negeri&per_page=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": [
+                        {
+                            "npsn": "70011405",
+                            "name": "SMA NEGERI 12 PONTIANAK",
+                            "jenis": "SMA",
+                            "status": "Negeri",
+                            "province_id": "61",
+                            "regency_id": "6171",
+                            "district_id": "617104",
+                            "village_id": null,
+                            "address": "JL.KHATULISTIWA JL. FLORA",
+                            "postal_code": null,
+                            "lat": 0.0063,
+                            "lng": 109.3509,
+                            "phone": "081345085801",
+                            "email": "user@example.com",
+                            "website": "http://sman12pontianak.sch.id",
+                            "accreditation": "A",
+                            "is_active": 1,
+                            "created_at": "2026-07-01 11:00:36",
+                            "updated_at": "2026-09-18 16:15:02",
+                            "source_name": "kemendikbud-reference",
+                            "source_url": "https://referensi.data.kemdikbud.go.id/",
+                            "source_synced_at": null,
+                            "source_record_hash": "312f5aeeecba595b3decb56dece9f3f424d40f20aa054aca758aa477ed86ebe9"
+                        },
+                        {
+                            "npsn": "30105071",
+                            "name": "SMA NEGERI 13 PONTIANAK",
+                            "jenis": "SMA",
+                            "status": "Negeri",
+                            "province_id": "61",
+                            "regency_id": "6171",
+                            "district_id": "617105",
+                            "village_id": null,
+                            "address": "JL. ALIANYANG NO. 123",
+                            "postal_code": null,
+                            "lat": -0.0337,
+                            "lng": 109.3203,
+                            "phone": null,
+                            "email": "user@example.com",
+                            "website": null,
+                            "accreditation": "B",
+                            "is_active": 1,
+                            "created_at": "2026-07-01 11:00:36",
+                            "updated_at": "2026-09-18 16:14:50",
+                            "source_name": "kemendikbud-reference",
+                            "source_url": "https://referensi.data.kemdikbud.go.id/",
+                            "source_synced_at": null,
+                            "source_record_hash": "003131a99360fd317302930be7622826613c3c46609e7a84c1fc686429ee0971"
+                        }
+                    ],
+                    "meta": {
+                        "total": 14,
+                        "page": 1,
+                        "per_page": 2,
+                        "total_pages": 7
+                    }
+                }
+            }
+        }
+    ]
+}

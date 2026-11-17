@@ -1,0 +1,59 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-11-02 against API Indonesia production (GET /api/v1/bpom?q=indomie) with a vendor key. Response trimmed by the recorder; real public-registry data.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?q=indomie"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "nie": "MD 231528212001",
+                            "product_name": "Chicken Flavour Instant Noodle",
+                            "brand": "INDOMIE (Export Only)",
+                            "status": "Berlaku",
+                            "category": "Makanan » Diproduksi Sendiri » Perubahan",
+                            "registrar": "PT. Indofood CBP Sukses Makmur Tbk",
+                            "product_form": null,
+                            "product_package": "Plastic (70 g)",
+                            "ingredients": null,
+                            "registered_at": "2021-04-05",
+                            "expired_at": "2026-01-20",
+                            "fetched_at": "2026-11-02T07:44:27.735Z"
+                        },
+                        {
+                            "nie": "MD 242811002100462",
+                            "product_name": "Es Krim Rasa Mi Ayam Bawang (Indomie Ayam Bawang)",
+                            "brand": "CHOC ROCKS",
+                            "status": "Berlaku",
+                            "category": "Pangan Olahan",
+                            "registrar": "INDOLAKTO",
+                            "product_form": "N/A",
+                            "product_package": "Kertas Laminat (100 ml, 110 ml)",
+                            "ingredients": null,
+                            "registered_at": "2024-08-05",
+                            "expired_at": "2029-08-05",
+                            "fetched_at": "2026-11-02T07:44:27.735Z"
+                        }
+                    ],
+                    "meta": {
+                        "total": 149,
+                        "page": 1,
+                        "per_page": 50,
+                        "total_pages": 3,
+                        "attribution": "Sumber: BPOM RI (cekbpom.pom.go.id)",
+                        "source": "BPOM RI",
+                        "cache_ttl_hours": 24,
+                        "refreshed": false,
+                        "cached_at": "2026-11-02T07:44:27.735Z",
+                        "upstream_error": null
+                    }
+                }
+            }
+        }
+    ]
+}

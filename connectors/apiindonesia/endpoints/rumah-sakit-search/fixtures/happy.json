@@ -1,0 +1,56 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-11-02 against API Indonesia production (GET /api/v1/rumah-sakit/search?q=soedarso) with a vendor key. Response trimmed by the recorder; real public-registry data.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?q=soedarso"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": [
+                        {
+                            "id": "rs-3575013",
+                            "code": "3575013",
+                            "name": "RS UMUM DAERAH DR. R. SOEDARSONO KOTA PASURUAN",
+                            "jenis": "RSUM",
+                            "hospital_type": "RS_RUJUKAN_PROVINSI",
+                            "kelas": null,
+                            "ownership": null,
+                            "is_blu": 0,
+                            "blu_status": null,
+                            "province_id": "35",
+                            "regency_id": "3575",
+                            "lat": -7.663591,
+                            "lng": 112.899333,
+                            "beds_total": 301,
+                            "province_name": "Jawa Timur",
+                            "regency_name": "Kota Pasuruan"
+                        },
+                        {
+                            "id": "rs-6171011",
+                            "code": "6171011",
+                            "name": "RS UMUM DAERAH DR. SOEDARSO PONTIANAK",
+                            "jenis": "RSUM",
+                            "hospital_type": "RS_RUJUKAN_NASIONAL",
+                            "kelas": null,
+                            "ownership": null,
+                            "is_blu": 0,
+                            "blu_status": null,
+                            "province_id": "61",
+                            "regency_id": "6171",
+                            "lat": -0.06059272,
+                            "lng": 109.36493711,
+                            "beds_total": 484,
+                            "province_name": "Kalimantan Barat",
+                            "regency_name": "Kota Pontianak"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

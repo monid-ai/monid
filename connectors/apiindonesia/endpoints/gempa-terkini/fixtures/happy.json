@@ -1,0 +1,48 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-11-02 against API Indonesia production (GET /api/v1/gempa/terkini) with a vendor key. Response trimmed by the recorder; real public-registry data.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": [
+                        {
+                            "id": "2026-11-02T00-53-11-00-00-5-5-130-07-BT",
+                            "datetime": "2026-11-02T00:53:11+00:00",
+                            "magnitude": 5.5,
+                            "depth_km": 130,
+                            "lat": -7.08,
+                            "lng": 130.07,
+                            "region": "169 km BaratLaut TANIMBAR",
+                            "potential": "Tidak berpotensi tsunami",
+                            "is_felt": 1,
+                            "felt_areas": "II Saumlaki",
+                            "source": "BMKG",
+                            "created_at": "2026-11-02 01:00:40"
+                        },
+                        {
+                            "id": "2026-11-01T05-38-59-00-00-4-1-96-20-BT",
+                            "datetime": "2026-11-01T05:38:59+00:00",
+                            "magnitude": 4.1,
+                            "depth_km": 6,
+                            "lat": 4.79,
+                            "lng": 96.2,
+                            "region": "Pusat gempa berada di darat 24 km Barat Daya Kab. Pidie Jaya-Aceh",
+                            "potential": "",
+                            "is_felt": 0,
+                            "felt_areas": "",
+                            "source": "BMKG",
+                            "created_at": "2026-11-01 07:00:35"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

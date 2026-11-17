@@ -1,0 +1,41 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-11-02 against API Indonesia production (GET /api/v1/merek/search?q=indomie&limit=2) with a vendor key. Response trimmed by the recorder; real public-registry data. consultant names replaced with placeholder personas.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?q=indomie&limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": [
+                        {
+                            "app_number": "D002017064243",
+                            "mark_name": "WARUNG MAKAN INDOMIE (WARMINDO)",
+                            "class": "30",
+                            "owner": "PT. Indofood Sukses Makmur Tbk",
+                            "consultant": "Budi Contoh, S.H.",
+                            "reg_date": "06/12/2017"
+                        },
+                        {
+                            "app_number": "DID2024022749",
+                            "mark_name": "INDOMIE TORI MECHA KARA",
+                            "class": "30",
+                            "owner": "PT Indofood Sukses Makmur, Tbk",
+                            "consultant": "Ani Contoh, S.H., M.H.",
+                            "reg_date": "07/03/2024"
+                        }
+                    ],
+                    "pagination": {
+                        "page": 1,
+                        "limit": 2,
+                        "total": 45
+                    }
+                }
+            }
+        }
+    ]
+}
