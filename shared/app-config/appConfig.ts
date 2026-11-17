@@ -73,7 +73,9 @@ export class AppConfig {
         ): Primitive | undefined => {
             let current: AppConfigRecord | Primitive | undefined = root;
             for (const segment of configPath.split(".")) {
-                if (!isRecord(current)) return undefined;
+                if (!isRecord(current) || !Object.hasOwn(current, segment)) {
+                    return undefined;
+                }
                 current = current[segment];
             }
             return isRecord(current) ? undefined : current;

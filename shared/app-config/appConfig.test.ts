@@ -51,3 +51,28 @@ Deno.test("type coercion errors are loud", async () => {
         assert(config.getString("flag").length > 0);
     });
 });
+
+Deno.test("lookup: inherited names are missing; declared names and stage fallback work", async () => {
+    await withTempConfig(
+        `section: {}\nlocal:\n    section: {}\nconstructor: explicit\n`,
+        async (dir) => {
+            const config = await AppConfig.init(dir, AppStage.LOCAL);
+            for (
+                const key of [
+                    "toString",
+                    "valueOf",
+                    "section.toString",
+                    "section.constructor",
+                ]
+            ) {
+                assertEquals(config.getOptionalString(key), undefined);
+                assertThrows(
+                    () => config.getString(key),
+                    ConfigError,
+                    "missing config value",
+                );
+            }
+            assertEquals(config.getString("constructor"), "explicit");
+        },
+    );
+});
