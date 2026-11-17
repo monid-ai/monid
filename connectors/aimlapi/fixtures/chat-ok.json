@@ -1,0 +1,79 @@
+{
+    "name": "chat-ok",
+    "description": "AI/ML API POST /chat/completions happy path, recorded 2026-10-15 (openai/gpt-4o-mini, max_tokens 40). Carries the gateway's own meter at meta.usage {credits_used: 21, usd_spent: 1.05e-05} — 2,000,000 credits per dollar — which the provider consolidate claims and the endpoint's CREDIT line evidences; the TOP-LEVEL usage (token counts) must survive, since pluck is exact.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "model": "openai/gpt-4o-mini",
+                    "messages": [
+                        {
+                            "role": "system",
+                            "content": "Answer in one short sentence."
+                        },
+                        {
+                            "role": "user",
+                            "content": "What is the capital of Portugal?"
+                        }
+                    ],
+                    "max_tokens": 40,
+                    "n": 1
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "chatcmpl-EYzOD4rVdQCtwBrJymYP7XGYF1dvV",
+                    "object": "chat.completion",
+                    "created": 1792007841,
+                    "model": "gpt-4o-mini-2024-07-18",
+                    "choices": [
+                        {
+                            "index": 0,
+                            "message": {
+                                "role": "assistant",
+                                "content": "The capital of Portugal is Lisbon.",
+                                "refusal": null,
+                                "annotations": []
+                            },
+                            "logprobs": null,
+                            "finish_reason": "stop"
+                        }
+                    ],
+                    "usage": {
+                        "prompt_tokens": 24,
+                        "completion_tokens": 7,
+                        "total_tokens": 31,
+                        "prompt_tokens_details": {
+                            "cached_tokens": 0,
+                            "audio_tokens": 0
+                        },
+                        "completion_tokens_details": {
+                            "reasoning_tokens": 0,
+                            "audio_tokens": 0,
+                            "accepted_prediction_tokens": 0,
+                            "rejected_prediction_tokens": 0
+                        }
+                    },
+                    "service_tier": "default",
+                    "system_fingerprint": "fp_d8c1b53062",
+                    "meta": {
+                        "model": "openai/gpt-4o-mini",
+                        "provider": "openai-verified",
+                        "usage": {
+                            "credits_used": 21,
+                            "usd_spent": 1.05e-05
+                        },
+                        "metrics": {
+                            "duration_ms": 786,
+                            "ttft_ms": 785,
+                            "tps": 8.91
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

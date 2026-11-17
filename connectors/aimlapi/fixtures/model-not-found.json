@@ -1,0 +1,38 @@
+{
+    "name": "model-not-found",
+    "description": "AI/ML API 404 envelope, recorded 2026-10-15 with an unknown model id: {title, status, message, instance, requestId, timestamp, error: {name, message}}. Zero-billed, and output.fromError digests the flat `message`.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "model": "nope/not-a-model",
+                    "messages": [
+                        {
+                            "role": "user",
+                            "content": "hi"
+                        }
+                    ],
+                    "max_tokens": 10,
+                    "n": 1
+                }
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "title": "Not Found",
+                    "status": 404,
+                    "message": "Model not found",
+                    "instance": "/v1/chat/completions",
+                    "requestId": "dbBKBKp9h0I4_ZTZgxeoN",
+                    "timestamp": "2026-10-14T19:57:45.260Z",
+                    "error": {
+                        "name": "NotFoundException",
+                        "message": "Model not found"
+                    }
+                }
+            }
+        }
+    ]
+}

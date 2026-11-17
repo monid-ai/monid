@@ -1,0 +1,38 @@
+{
+    "name": "unauthorized",
+    "description": "AI/ML API 401 envelope, captured 2026-10-15 against /chat/completions with a deliberately invalid key (the recorder always uses the configured one). /images/generations, /models and /key answer the identical shape, so this is ONE shared chain for every endpoint's provider-error test. The requestId is from that capture.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "model": "openai/gpt-4o-mini",
+                    "messages": [
+                        {
+                            "role": "user",
+                            "content": "hi"
+                        }
+                    ],
+                    "max_tokens": 40,
+                    "n": 1
+                }
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "title": "Unauthorized",
+                    "status": 401,
+                    "message": "This request requires a valid API key. You can create a new API key on the Billing page: https://aimlapi.com/app/keys",
+                    "instance": "/v1/chat/completions",
+                    "requestId": "okzowoh_d2xdp36L2mWPs",
+                    "timestamp": "2026-10-14T19:44:48.651Z",
+                    "error": {
+                        "name": "UnauthorizedException",
+                        "message": "This request requires a valid API key. You can create a new API key on the Billing page: https://aimlapi.com/app/keys"
+                    }
+                }
+            }
+        }
+    ]
+}

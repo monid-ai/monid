@@ -1,0 +1,38 @@
+{
+    "name": "image-ok",
+    "description": "AI/ML API POST /images/generations happy path, recorded 2026-10-15 (blackforestlabs/flux-dev, one image). Response is a hosted URL, not base64. meta.usage {credits_used: 65000, usd_spent: 0.0325} is the same 2,000,000-credits-per-dollar rate the chat chain shows.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "model": "blackforestlabs/flux-dev",
+                    "prompt": "a single red cube on a white background",
+                    "num_images": 1
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "url": "https://s3.aimlapi.com/files/file-01a13bfd-f9f4-7008-80f4-17d761259ae8"
+                        }
+                    ],
+                    "meta": {
+                        "model": "blackforestlabs/flux-dev",
+                        "provider": "blackforestlabs",
+                        "usage": {
+                            "credits_used": 65000,
+                            "usd_spent": 0.0325
+                        },
+                        "metrics": {
+                            "duration_ms": 11454
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

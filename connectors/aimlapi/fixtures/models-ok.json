@@ -1,0 +1,1633 @@
+{
+    "name": "models-ok",
+    "description": "AI/ML API GET /v1/models?include=pricing, hand-minimized from a real recording (2026-10-15): 11 of the 932 published rows with their REAL pricing objects, chosen so the family filter and the price projection are both exercised. anthropic/claude-haiku-5-5 appears as BOTH openai/chat-completions and anthropic/messages (one chat model, two rows -> merged by id) and again as anthropic/batches (not chat); openai/gpt-6.1-sol appears as openai/chat-completions and openai/responses/submit (the openai/ prefix is not the discriminator); x-ai/grok-imagine-image-2.0 as openai/image-generations and openai/image-editing, and it is the kind=variants shape whose unit carries price: null. openai/embeddings and internal/* rows must be dropped. One 12th row is SYNTHETIC - synthetic/unpriced-chat-model, with no pricing key at all - because every real row is priced and the unpriced path needs a case. Expect chat 4 ids from 5 rows, image 2 ids from 2 rows.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?include=pricing"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "object": "list",
+                    "data": [
+                        {
+                            "id": "openai/gpt-4o-mini",
+                            "info": {
+                                "releasedAt": "2024-07-18",
+                                "name": "GPT-4o Mini",
+                                "developer": "Open AI",
+                                "description": "GPT-4o Mini: Cost-efficient, advanced model for diverse AI applications.",
+                                "contextLength": 128000,
+                                "url": "https://aimlapi.com/models/chat-gpt-4o-mini",
+                                "docsUrl": "https://docs.aimlapi.com/api-references/text-models-llm/openai/gpt-4o-mini"
+                            },
+                            "type": "openai/chat-completions",
+                            "aliases": [
+                                "gpt-4o-mini"
+                            ],
+                            "tags": [
+                                "playground:chat",
+                                "tier:tier_2"
+                            ],
+                            "pricing": {
+                                "currency": "USD",
+                                "kind": "fixed",
+                                "units": [
+                                    {
+                                        "type": "charge",
+                                        "name": "token",
+                                        "content": "text",
+                                        "measure": "output",
+                                        "origin": "provided",
+                                        "phase": "inference",
+                                        "author": "user",
+                                        "price": 0.195,
+                                        "per": 1000000,
+                                        "default": 256,
+                                        "variable": false
+                                    },
+                                    {
+                                        "type": "charge",
+                                        "name": "token",
+                                        "content": "text",
+                                        "measure": "output",
+                                        "origin": "generated",
+                                        "phase": "inference",
+                                        "author": "model",
+                                        "price": 0.78,
+                                        "per": 1000000,
+                                        "default": 256,
+                                        "variable": false
+                                    },
+                                    {
+                                        "type": "charge",
+                                        "name": "token",
+                                        "content": "text",
+                                        "measure": "output",
+                                        "origin": "cached",
+                                        "phase": "inference",
+                                        "author": "user",
+                                        "price": 0.0975,
+                                        "per": 1000000,
+                                        "default": 256,
+                                        "variable": false
+                                    },
+                                    {
+                                        "type": "charge",
+                                        "name": "call",
+                                        "content": "structured",
+                                        "measure": "count",
+                                        "origin": "generated",
+                                        "phase": "inference",
+                                        "author": "tool",
+                                        "price": 0,
+                                        "per": 1,
+                                        "default": 10000,
+                                        "variable": false
+                                    }
+                                ],
+                                "thresholds": [],
+                                "dimensions": [],
+                                "variants": [],
+                                "variable": false
+                            }
+                        },
+                        {
+                            "id": "anthropic/claude-haiku-5-5",
+                            "info": {
+                                "releasedAt": "2026-10-07",
+                                "name": "Claude Haiku 5.5",
+                                "developer": "Anthropic",
+                                "description": "Claude Haiku 5.5 is Anthropic's fastest model for high-volume, latency-sensitive",
+                                "contextLength": 1000000,
+                                "outputMax": 128000,
+                                "isHottest": true
+                            },
+                            "type": "openai/chat-completions",
+                            "aliases": [
+                                "claude-haiku-5-5"
+                            ],
+                            "tags": [
+                                "playground:chat",
+                                "tier:tier_2",
+                                "playground:code"
+                            ],
+                            "pricing": {
+                                "currency": "USD",
+                                "kind": "fixed",
+                                "units": [
+                                    {
+                                        "type": "charge",
+                                        "name": "token",
+                                        "content": "text",
+                                        "measure": "output",
+                                        "origin": "provided",
+                                        "phase": "inference",
+                                        "author": "user",
+                                        "price": 0.13,
+                                        "per": 1000000,
+                                        "default": 256,
+                                        "variable": false
+                                    },
+                                    {
+                                        "type": "charge",
+                                        "name": "token",
+                                        "content": "text",
+                                        "measure": "output",
+                                        "origin": "cache_write",
+                                        "phase": "inference",
+                                        "author": "user",
+                                        "price": 0.1625,
+                                        "per": 1000000,
+                                        "default": 256,
+                                        "variable": false
+                                    },
+                                    {
+                                        "type": "charge",
+                                        "name": "token",
+                                        "content": "text",
+                                        "measure": "output",
+                                        "origin": "cache_write_1h",
+                                        "phase": "inference",
+                                        "author": "user",
+                                        "price": 0.26,
+                                        "per": 1000000,
+                                        "default": 256,
+                                        "variable": false
+                                    },
+                                    {
+                                        "type": "charge",
+                                        "name": "token",
+                                        "content": "text",
+                                        "measure": "output",
+                                        "origin": "cached",
+                                        "phase": "inference",
+                                        "author": "user",
+                                        "price": 0.013,
+                                        "per": 1000000,
+                                        "default": 256,
+                                        "variable": false
+                                    },
+                                    {
+                                        "type": "charge",
+                                        "name": "token",
+                                        "content": "text",
+                                        "measure": "output",
+                                        "origin": "generated",
+                                        "phase": "inference",
+                                        "author": "model",
+                                        "price": 0.65,
+                                        "per": 1000000,
+                                        "default": 256,
+                                        "variable": false
+                                    },
+                                    {
+                                        "type": "charge",
+                                        "name": "call",
+                                        "content": "structured",
+                                        "measure": "output",
+                                        "origin": "generated",
+                                        "phase": "inference",
+                                        "author": "tool",
+                                        "price": 0.065,
+                                        "per": 1,
+                                        "default": 0,
+                                        "variable": false,
+                                        "tag": {
+                                            "type": "tool",
+                                            "name": "code_execution"
+                                        }
+                                    },
+                                    {
+                                        "type": "charge",
+                                        "name": "call",
+                                        "content": "structured",
+                                        "measure": "output",
+                                        "origin": "generated",
+                                        "phase": "inference",
+                                        "author": "tool",
+                                        "price": 0.013,
+                                        "per": 1,
+                                        "default": 0,
+                                        "variable": false,
+                                        "tag": {
+                                            "type": "tool",
+                                            "name": "websearch_tool"
+                                        }
+                                    },
+                                    {
+                                        "type": "charge",
+                                        "name": "call",
+                                        "content": "structured",
+                                        "measure": "output",
+                                        "origin": "generated",
+                                        "phase": "inference",
+                                        "author": "tool",
+                                        "price": 0,
+                                        "per": 1,
+                                        "default": 0,
+                                        "variable": false,
+                                        "tag": {
+                                            "type": "tool",
+                                            "name": "web_fetch"
+                                        }
+                                    }
+                                ],
+                                "thresholds": [
+                                    {
+                                        "from": 0,
+                                        "units": [
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "provided",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 0.13,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "cache_write",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 0.1625,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "cache_write_1h",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 0.26,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "cached",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 0.013,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "generated",
+                                                "phase": "inference",
+                                                "author": "model",
+                                                "price": 0.65,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "from": 100000,
+                                        "units": [
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "provided",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 0.65,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "cache_write",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 0.8125,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "cache_write_1h",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 1.3,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "cached",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 0.065,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "generated",
+                                                "phase": "inference",
+                                                "author": "model",
+                                                "price": 3.25,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "dimensions": [],
+                                "variants": [],
+                                "variable": false
+                            }
+                        },
+                        {
+                            "id": "anthropic/claude-haiku-5-5",
+                            "info": {
+                                "releasedAt": "2026-10-07",
+                                "name": "Claude Haiku 5.5",
+                                "developer": "Anthropic",
+                                "description": "Claude Haiku 5.5 is Anthropic's fastest model for high-volume, latency-sensitive",
+                                "contextLength": 1000000,
+                                "outputMax": 128000,
+                                "isHottest": true
+                            },
+                            "type": "anthropic/messages",
+                            "aliases": [
+                                "claude-haiku-5-5"
+                            ],
+                            "tags": [
+                                "playground:chat",
+                                "tier:tier_2",
+                                "playground:code"
+                            ],
+                            "pricing": {
+                                "currency": "USD",
+                                "kind": "fixed",
+                                "units": [
+                                    {
+                                        "type": "charge",
+                                        "name": "token",
+                                        "content": "text",
+                                        "measure": "output",
+                                        "origin": "provided",
+                                        "phase": "inference",
+                                        "author": "user",
+                                        "price": 0.13,
+                                        "per": 1000000,
+                                        "default": 256,
+                                        "variable": false
+                                    },
+                                    {
+                                        "type": "charge",
+                                        "name": "token",
+                                        "content": "text",
+                                        "measure": "output",
+                                        "origin": "cache_write",
+                                        "phase": "inference",
+                                        "author": "user",
+                                        "price": 0.1625,
+                                        "per": 1000000,
+                                        "default": 256,
+                                        "variable": false
+                                    },
+                                    {
+                                        "type": "charge",
+                                        "name": "token",
+                                        "content": "text",
+                                        "measure": "output",
+                                        "origin": "cache_write_1h",
+                                        "phase": "inference",
+                                        "author": "user",
+                                        "price": 0.26,
+                                        "per": 1000000,
+                                        "default": 256,
+                                        "variable": false
+                                    },
+                                    {
+                                        "type": "charge",
+                                        "name": "token",
+                                        "content": "text",
+                                        "measure": "output",
+                                        "origin": "cached",
+                                        "phase": "inference",
+                                        "author": "user",
+                                        "price": 0.013,
+                                        "per": 1000000,
+                                        "default": 256,
+                                        "variable": false
+                                    },
+                                    {
+                                        "type": "charge",
+                                        "name": "token",
+                                        "content": "text",
+                                        "measure": "output",
+                                        "origin": "generated",
+                                        "phase": "inference",
+                                        "author": "model",
+                                        "price": 0.65,
+                                        "per": 1000000,
+                                        "default": 256,
+                                        "variable": false
+                                    },
+                                    {
+                                        "type": "charge",
+                                        "name": "call",
+                                        "content": "structured",
+                                        "measure": "output",
+                                        "origin": "generated",
+                                        "phase": "inference",
+                                        "author": "tool",
+                                        "price": 0.065,
+                                        "per": 1,
+                                        "default": 0,
+                                        "variable": false,
+                                        "tag": {
+                                            "type": "tool",
+                                            "name": "code_execution"
+                                        }
+                                    },
+                                    {
+                                        "type": "charge",
+                                        "name": "call",
+                                        "content": "structured",
+                                        "measure": "output",
+                                        "origin": "generated",
+                                        "phase": "inference",
+                                        "author": "tool",
+                                        "price": 0.013,
+                                        "per": 1,
+                                        "default": 0,
+                                        "variable": false,
+                                        "tag": {
+                                            "type": "tool",
+                                            "name": "websearch_tool"
+                                        }
+                                    },
+                                    {
+                                        "type": "charge",
+                                        "name": "call",
+                                        "content": "structured",
+                                        "measure": "output",
+                                        "origin": "generated",
+                                        "phase": "inference",
+                                        "author": "tool",
+                                        "price": 0,
+                                        "per": 1,
+                                        "default": 0,
+                                        "variable": false,
+                                        "tag": {
+                                            "type": "tool",
+                                            "name": "web_fetch"
+                                        }
+                                    }
+                                ],
+                                "thresholds": [
+                                    {
+                                        "from": 0,
+                                        "units": [
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "provided",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 0.13,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "cache_write",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 0.1625,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "cache_write_1h",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 0.26,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "cached",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 0.013,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "generated",
+                                                "phase": "inference",
+                                                "author": "model",
+                                                "price": 0.65,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "from": 100000,
+                                        "units": [
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "provided",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 0.65,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "cache_write",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 0.8125,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "cache_write_1h",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 1.3,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "cached",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 0.065,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "generated",
+                                                "phase": "inference",
+                                                "author": "model",
+                                                "price": 3.25,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "dimensions": [],
+                                "variants": [],
+                                "variable": false
+                            }
+                        },
+                        {
+                            "id": "anthropic/claude-haiku-5-5",
+                            "info": {
+                                "releasedAt": "2026-10-07",
+                                "name": "Claude Haiku 5.5",
+                                "developer": "Anthropic",
+                                "description": "Claude Haiku 5.5 is Anthropic's fastest model for high-volume, latency-sensitive",
+                                "contextLength": 1000000,
+                                "outputMax": 128000,
+                                "isHottest": true
+                            },
+                            "type": "anthropic/batches",
+                            "aliases": [
+                                "claude-haiku-5-5"
+                            ],
+                            "tags": [
+                                "playground:chat",
+                                "tier:tier_2",
+                                "playground:code"
+                            ],
+                            "pricing": {
+                                "currency": "USD",
+                                "kind": "fixed",
+                                "units": [
+                                    {
+                                        "type": "charge",
+                                        "name": "token",
+                                        "content": "text",
+                                        "measure": "output",
+                                        "origin": "generated",
+                                        "phase": "inference",
+                                        "author": "model",
+                                        "price": 0.65,
+                                        "per": 1000000,
+                                        "default": 256,
+                                        "variable": false
+                                    }
+                                ],
+                                "thresholds": [
+                                    {
+                                        "from": 0,
+                                        "units": [
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "provided",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 0.13,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "cache_write",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 0.1625,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "cache_write_1h",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 0.26,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "cached",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 0.013,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "generated",
+                                                "phase": "inference",
+                                                "author": "model",
+                                                "price": 0.65,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "from": 100000,
+                                        "units": [
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "provided",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 0.65,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "cache_write",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 0.8125,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "cache_write_1h",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 1.3,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "cached",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 0.065,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "generated",
+                                                "phase": "inference",
+                                                "author": "model",
+                                                "price": 3.25,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "dimensions": [],
+                                "variants": [],
+                                "variable": false
+                            }
+                        },
+                        {
+                            "id": "openai/gpt-6.1-sol",
+                            "info": {
+                                "releasedAt": "2026-09-29",
+                                "name": "GPT-6.1 Sol",
+                                "developer": "Open AI",
+                                "description": "GPT-6.1 model from OpenAI with near-Astra performance at a lower cost for comple",
+                                "contextLength": 1050000,
+                                "outputMax": 128000,
+                                "isHottest": true
+                            },
+                            "type": "openai/chat-completions",
+                            "aliases": [
+                                "gpt-6.1-sol"
+                            ],
+                            "tags": [
+                                "playground:chat",
+                                "tier:tier_2"
+                            ],
+                            "pricing": {
+                                "currency": "USD",
+                                "kind": "fixed",
+                                "units": [
+                                    {
+                                        "type": "charge",
+                                        "name": "token",
+                                        "content": "text",
+                                        "measure": "output",
+                                        "origin": "provided",
+                                        "phase": "inference",
+                                        "author": "user",
+                                        "price": 2.6,
+                                        "per": 1000000,
+                                        "default": 256,
+                                        "variable": false
+                                    },
+                                    {
+                                        "type": "charge",
+                                        "name": "token",
+                                        "content": "text",
+                                        "measure": "output",
+                                        "origin": "generated",
+                                        "phase": "inference",
+                                        "author": "model",
+                                        "price": 13,
+                                        "per": 1000000,
+                                        "default": 256,
+                                        "variable": false
+                                    },
+                                    {
+                                        "type": "charge",
+                                        "name": "token",
+                                        "content": "text",
+                                        "measure": "output",
+                                        "origin": "generated",
+                                        "phase": "reasoning",
+                                        "author": "model",
+                                        "price": 13,
+                                        "per": 1000000,
+                                        "default": 256,
+                                        "variable": false
+                                    },
+                                    {
+                                        "type": "charge",
+                                        "name": "token",
+                                        "content": "text",
+                                        "measure": "output",
+                                        "origin": "cached",
+                                        "phase": "inference",
+                                        "author": "user",
+                                        "price": 0.13,
+                                        "per": 1000000,
+                                        "default": 256,
+                                        "variable": false
+                                    },
+                                    {
+                                        "type": "charge",
+                                        "name": "token",
+                                        "content": "text",
+                                        "measure": "output",
+                                        "origin": "cache_write",
+                                        "phase": "inference",
+                                        "author": "user",
+                                        "price": 3.25,
+                                        "per": 1000000,
+                                        "default": 256,
+                                        "variable": false
+                                    }
+                                ],
+                                "thresholds": [
+                                    {
+                                        "from": 0,
+                                        "units": [
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "provided",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 2.6,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "generated",
+                                                "phase": "inference",
+                                                "author": "model",
+                                                "price": 13,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "generated",
+                                                "phase": "reasoning",
+                                                "author": "model",
+                                                "price": 13,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "cached",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 0.13,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "cache_write",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 3.25,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "from": 272000,
+                                        "units": [
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "provided",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 5.2,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "generated",
+                                                "phase": "inference",
+                                                "author": "model",
+                                                "price": 19.5,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "generated",
+                                                "phase": "reasoning",
+                                                "author": "model",
+                                                "price": 19.5,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "cached",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 0.26,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "cache_write",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 6.5,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "dimensions": [],
+                                "variants": [],
+                                "variable": false
+                            }
+                        },
+                        {
+                            "id": "openai/gpt-6.1-sol",
+                            "info": {
+                                "releasedAt": "2026-09-29",
+                                "name": "GPT-6.1 Sol",
+                                "developer": "Open AI",
+                                "description": "GPT-6.1 model from OpenAI with near-Astra performance at a lower cost for comple",
+                                "contextLength": 1050000,
+                                "outputMax": 128000,
+                                "isHottest": true
+                            },
+                            "type": "openai/responses/submit",
+                            "aliases": [
+                                "gpt-6.1-sol"
+                            ],
+                            "tags": [
+                                "playground:chat",
+                                "tier:tier_2"
+                            ],
+                            "pricing": {
+                                "currency": "USD",
+                                "kind": "fixed",
+                                "units": [
+                                    {
+                                        "type": "charge",
+                                        "name": "token",
+                                        "content": "text",
+                                        "measure": "output",
+                                        "origin": "generated",
+                                        "phase": "inference",
+                                        "author": "model",
+                                        "price": 13,
+                                        "per": 1000000,
+                                        "default": 256,
+                                        "variable": false
+                                    },
+                                    {
+                                        "type": "charge",
+                                        "name": "token",
+                                        "content": "text",
+                                        "measure": "output",
+                                        "origin": "generated",
+                                        "phase": "reasoning",
+                                        "author": "model",
+                                        "price": 13,
+                                        "per": 1000000,
+                                        "default": 256,
+                                        "variable": false
+                                    }
+                                ],
+                                "thresholds": [
+                                    {
+                                        "from": 0,
+                                        "units": [
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "provided",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 2.6,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "generated",
+                                                "phase": "inference",
+                                                "author": "model",
+                                                "price": 13,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "generated",
+                                                "phase": "reasoning",
+                                                "author": "model",
+                                                "price": 13,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "cached",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 0.13,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "cache_write",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 3.25,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "from": 272000,
+                                        "units": [
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "provided",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 5.2,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "generated",
+                                                "phase": "inference",
+                                                "author": "model",
+                                                "price": 19.5,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "generated",
+                                                "phase": "reasoning",
+                                                "author": "model",
+                                                "price": 19.5,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "cached",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 0.26,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            },
+                                            {
+                                                "type": "charge",
+                                                "name": "token",
+                                                "content": "text",
+                                                "measure": "output",
+                                                "origin": "cache_write",
+                                                "phase": "inference",
+                                                "author": "user",
+                                                "price": 6.5,
+                                                "per": 1000000,
+                                                "default": 256,
+                                                "variable": false
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "dimensions": [],
+                                "variants": [],
+                                "variable": false
+                            }
+                        },
+                        {
+                            "id": "blackforestlabs/flux-dev",
+                            "info": {
+                                "releasedAt": "2026-06-12",
+                                "name": "FLUX.1 Dev",
+                                "developer": "Black Forest Labs",
+                                "description": "Development-oriented FLUX.1 image generation model."
+                            },
+                            "type": "openai/image-generations",
+                            "aliases": [],
+                            "tags": [
+                                "playground:image",
+                                "tier:tier_2"
+                            ],
+                            "pricing": {
+                                "currency": "USD",
+                                "kind": "fixed",
+                                "units": [
+                                    {
+                                        "type": "charge",
+                                        "name": "generation",
+                                        "content": "image",
+                                        "measure": "count",
+                                        "origin": "generated",
+                                        "phase": "inference",
+                                        "author": "model",
+                                        "price": 0.0325,
+                                        "per": 1,
+                                        "default": 1,
+                                        "variable": false
+                                    }
+                                ],
+                                "thresholds": [],
+                                "dimensions": [],
+                                "variants": [],
+                                "variable": false
+                            }
+                        },
+                        {
+                            "id": "x-ai/grok-imagine-image-2.0",
+                            "info": {
+                                "releasedAt": "2026-10-14",
+                                "name": "Grok Imagine Image 2.0",
+                                "developer": "X AI",
+                                "description": "Grok Imagine Image 2.0 is the second generation of the xAI image model, for imag",
+                                "docsUrl": "https://docs.aimlapi.com/api-references/image-models/xai"
+                            },
+                            "type": "openai/image-generations",
+                            "aliases": [
+                                "grok-imagine-image-2.0"
+                            ],
+                            "tags": [
+                                "playground:image",
+                                "tier:tier_2"
+                            ],
+                            "pricing": {
+                                "currency": "USD",
+                                "kind": "variants",
+                                "units": [
+                                    {
+                                        "type": "charge",
+                                        "name": "generation",
+                                        "content": "image",
+                                        "measure": "count",
+                                        "origin": "generated",
+                                        "phase": "inference",
+                                        "author": "model",
+                                        "price": null,
+                                        "per": 1,
+                                        "default": 1,
+                                        "variable": true
+                                    }
+                                ],
+                                "thresholds": [],
+                                "dimensions": [
+                                    "quality",
+                                    "resolution"
+                                ],
+                                "variants": [
+                                    {
+                                        "when": {
+                                            "quality": "low",
+                                            "resolution": "1k"
+                                        },
+                                        "price": 0.052,
+                                        "unit": "generation",
+                                        "per": 1
+                                    },
+                                    {
+                                        "when": {
+                                            "quality": "low",
+                                            "resolution": "1.5k"
+                                        },
+                                        "price": 0.065,
+                                        "unit": "generation",
+                                        "per": 1
+                                    },
+                                    {
+                                        "when": {
+                                            "quality": "low",
+                                            "resolution": "2k"
+                                        },
+                                        "price": 0.078,
+                                        "unit": "generation",
+                                        "per": 1
+                                    },
+                                    {
+                                        "when": {
+                                            "quality": "medium",
+                                            "resolution": "1k"
+                                        },
+                                        "price": 0.078,
+                                        "unit": "generation",
+                                        "per": 1
+                                    },
+                                    {
+                                        "when": {
+                                            "quality": "medium",
+                                            "resolution": "1.5k"
+                                        },
+                                        "price": 0.091,
+                                        "unit": "generation",
+                                        "per": 1
+                                    },
+                                    {
+                                        "when": {
+                                            "quality": "medium",
+                                            "resolution": "2k"
+                                        },
+                                        "price": 0.104,
+                                        "unit": "generation",
+                                        "per": 1
+                                    }
+                                ],
+                                "variable": true
+                            }
+                        },
+                        {
+                            "id": "x-ai/grok-imagine-image-2.0",
+                            "info": {
+                                "releasedAt": "2026-10-14",
+                                "name": "Grok Imagine Image 2.0",
+                                "developer": "X AI",
+                                "description": "Grok Imagine Image 2.0 is the second generation of the xAI image model, for imag",
+                                "docsUrl": "https://docs.aimlapi.com/api-references/image-models/xai"
+                            },
+                            "type": "openai/image-editing",
+                            "aliases": [
+                                "grok-imagine-image-2.0"
+                            ],
+                            "tags": [
+                                "playground:image",
+                                "tier:tier_2"
+                            ],
+                            "pricing": {
+                                "currency": "USD",
+                                "kind": "variants",
+                                "units": [
+                                    {
+                                        "type": "charge",
+                                        "name": "generation",
+                                        "content": "image",
+                                        "measure": "count",
+                                        "origin": "generated",
+                                        "phase": "inference",
+                                        "author": "model",
+                                        "price": null,
+                                        "per": 1,
+                                        "default": 1,
+                                        "variable": true
+                                    },
+                                    {
+                                        "type": "charge",
+                                        "name": "payload",
+                                        "content": "image",
+                                        "measure": "count",
+                                        "origin": "provided",
+                                        "phase": "inference",
+                                        "author": "user",
+                                        "price": 0.013,
+                                        "per": 1,
+                                        "default": 0,
+                                        "variable": true
+                                    }
+                                ],
+                                "thresholds": [],
+                                "dimensions": [
+                                    "quality",
+                                    "resolution"
+                                ],
+                                "variants": [
+                                    {
+                                        "when": {
+                                            "quality": "low",
+                                            "resolution": "1k"
+                                        },
+                                        "price": 0.052,
+                                        "unit": "generation",
+                                        "per": 1
+                                    },
+                                    {
+                                        "when": {
+                                            "quality": "low",
+                                            "resolution": "1.5k"
+                                        },
+                                        "price": 0.065,
+                                        "unit": "generation",
+                                        "per": 1
+                                    },
+                                    {
+                                        "when": {
+                                            "quality": "low",
+                                            "resolution": "2k"
+                                        },
+                                        "price": 0.078,
+                                        "unit": "generation",
+                                        "per": 1
+                                    },
+                                    {
+                                        "when": {
+                                            "quality": "medium",
+                                            "resolution": "1k"
+                                        },
+                                        "price": 0.078,
+                                        "unit": "generation",
+                                        "per": 1
+                                    },
+                                    {
+                                        "when": {
+                                            "quality": "medium",
+                                            "resolution": "1.5k"
+                                        },
+                                        "price": 0.091,
+                                        "unit": "generation",
+                                        "per": 1
+                                    },
+                                    {
+                                        "when": {
+                                            "quality": "medium",
+                                            "resolution": "2k"
+                                        },
+                                        "price": 0.104,
+                                        "unit": "generation",
+                                        "per": 1
+                                    }
+                                ],
+                                "variable": true
+                            }
+                        },
+                        {
+                            "id": "alibaba/qwen-text-embedding-v3",
+                            "info": {
+                                "releasedAt": "2025-12-13",
+                                "name": "Qwen Text Embedding v3",
+                                "developer": "Alibaba Cloud",
+                                "description": "High-quality text embedding model with support for custom dimensions (512-1024) ",
+                                "docsUrl": "https://docs.aimlapi.com/api-references/embedding-models/alibaba-cloud/qwen-text-embedding-v3",
+                                "contextLength": 8192
+                            },
+                            "type": "openai/embeddings",
+                            "aliases": [],
+                            "tags": [
+                                "playground:embeddings",
+                                "tier:tier_2"
+                            ],
+                            "pricing": {
+                                "currency": "USD",
+                                "kind": "fixed",
+                                "units": [
+                                    {
+                                        "type": "charge",
+                                        "name": "token",
+                                        "content": "text",
+                                        "measure": "output",
+                                        "origin": "provided",
+                                        "phase": "inference",
+                                        "author": "user",
+                                        "price": 0.091,
+                                        "per": 1000000,
+                                        "default": 256,
+                                        "variable": false
+                                    }
+                                ],
+                                "thresholds": [],
+                                "dimensions": [],
+                                "variants": [],
+                                "variable": false
+                            }
+                        },
+                        {
+                            "id": "elevenlabs/scribe_v2",
+                            "info": {
+                                "releasedAt": "2026-10-14",
+                                "name": "Scribe v2",
+                                "developer": "Elevenlabs",
+                                "description": "ElevenLabs Scribe v2 is a high-accuracy speech-to-text model for recorded audio "
+                            },
+                            "type": "internal/speech-to-text/submit",
+                            "aliases": [],
+                            "tags": [
+                                "playground:stt",
+                                "tier:tier_2"
+                            ],
+                            "pricing": {
+                                "currency": "USD",
+                                "kind": "fixed",
+                                "units": [
+                                    {
+                                        "type": "charge",
+                                        "name": "second",
+                                        "content": "audio",
+                                        "measure": "computation",
+                                        "origin": "generated",
+                                        "phase": "inference",
+                                        "author": "model",
+                                        "price": 7.9444e-05,
+                                        "per": 1,
+                                        "default": 10,
+                                        "variable": false
+                                    }
+                                ],
+                                "thresholds": [],
+                                "dimensions": [],
+                                "variants": [],
+                                "variable": false
+                            }
+                        },
+                        {
+                            "id": "synthetic/unpriced-chat-model",
+                            "type": "openai/chat-completions",
+                            "info": {
+                                "name": "Unpriced (synthetic)",
+                                "developer": "synthetic"
+                            },
+                            "aliases": [],
+                            "tags": []
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
