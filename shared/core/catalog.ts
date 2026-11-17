@@ -63,7 +63,9 @@ export function listCategories(
 ): (LeafCategory & { endpointCount: number })[] {
     return bundle.taxonomy.leaves.map((leaf) => ({
         ...leaf,
-        endpointCount: bundle.taxonomy.membership[leaf.id]?.length ?? 0,
+        endpointCount: Object.hasOwn(bundle.taxonomy.membership, leaf.id)
+            ? bundle.taxonomy.membership[leaf.id].length
+            : 0,
     }));
 }
 
@@ -72,7 +74,9 @@ export function inspectEndpoint(
     bundle: Bundle,
     endpointId: string,
 ): EndpointDoc {
-    const doc = bundle.endpoints[endpointId];
+    const doc = Object.hasOwn(bundle.endpoints, endpointId)
+        ? bundle.endpoints[endpointId]
+        : undefined;
     if (!doc) throw new Error(`endpoint not in bundle: ${endpointId}`);
     return doc;
 }
@@ -107,7 +111,10 @@ export function inspectResource(
     bundle: Bundle,
     resourceId: string,
 ): ResourceDoc {
-    const doc = (bundle.resources ?? {})[resourceId];
+    const resources = bundle.resources ?? {};
+    const doc = Object.hasOwn(resources, resourceId)
+        ? resources[resourceId]
+        : undefined;
     if (!doc) throw new Error(`resource not in bundle: ${resourceId}`);
     return doc;
 }
