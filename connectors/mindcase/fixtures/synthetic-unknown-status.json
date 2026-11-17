@@ -1,0 +1,104 @@
+{
+    "name": "synthetic-unknown-status",
+    "description": "SYNTHETIC: an undocumented status keeps the run polling; the next tick completes normally.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "job_id": "bafa10a0-d425-4467-9c36-8efe6202cbe7",
+                    "agent": "zepto/products",
+                    "status": "queued",
+                    "created_at": "2026-10-23T15:50:46.900000+00:00"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/jobs/bafa10a0-d425-4467-9c36-8efe6202cbe7"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "bafa10a0-d425-4467-9c36-8efe6202cbe7",
+                    "agent": "zepto/products",
+                    "status": "paused",
+                    "row_count": 0,
+                    "usd_used": 0.0,
+                    "error": null,
+                    "started_at": "2026-10-23T15:50:46.910000+00:00",
+                    "completed_at": null,
+                    "created_at": "2026-10-23T15:50:46.900000+00:00",
+                    "expires_at": null
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/jobs/bafa10a0-d425-4467-9c36-8efe6202cbe7"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "bafa10a0-d425-4467-9c36-8efe6202cbe7",
+                    "agent": "zepto/products",
+                    "status": "completed",
+                    "row_count": 2,
+                    "usd_used": 0.002,
+                    "error": null,
+                    "started_at": "2026-10-23T15:50:46.910000+00:00",
+                    "completed_at": null,
+                    "created_at": "2026-10-23T15:50:46.900000+00:00",
+                    "expires_at": null
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/jobs/bafa10a0-d425-4467-9c36-8efe6202cbe7/results"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "completed",
+                    "row_count": 2,
+                    "data": [
+                        {
+                            "productName": "Cadbury 5 Star Kitted Pack Chocolatey Bars",
+                            "brand": "Cadbury",
+                            "price": 41,
+                            "mrp": 53,
+                            "discount": 22.64,
+                            "inStock": true,
+                            "stockCount": 15,
+                            "rank": 2,
+                            "sponsored": true,
+                            "storeId": "9a3a478d-31f5-468f-b32a-d4324844b5b2",
+                            "productUrl": "https://www.zepto.com/pn/x/pvid/0c986c9d-63c7-4873-a18e-5a6b59c0159a"
+                        },
+                        {
+                            "productName": "Cadbury Dairy Milk Chocolate Bar",
+                            "brand": "Cadbury",
+                            "price": 1,
+                            "mrp": 20,
+                            "discount": 95.0,
+                            "inStock": true,
+                            "stockCount": 40,
+                            "rank": 1,
+                            "sponsored": false,
+                            "storeId": "9a3a478d-31f5-468f-b32a-d4324844b5b2",
+                            "productUrl": "https://www.zepto.com/pn/x/pvid/a6211a78-c723-4b95-8a1e-864d609e7175"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

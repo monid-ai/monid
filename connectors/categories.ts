@@ -385,4 +385,71 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "Tools to pull public government records, including financial " +
             "disclosures, filings, registries, and more.",
     },
+    {
+        id: "quick-commerce",
+        displayName: "Quick Commerce",
+        description:
+            "Indian 10-minute delivery apps: store-level prices, stock and search rank.",
+    },
+    {
+        id: "blinkit",
+        displayName: "Blinkit",
+        description: "Blinkit data: products, prices, and availability.",
+    },
+    {
+        id: "instamart",
+        displayName: "Swiggy Instamart",
+        description:
+            "Swiggy Instamart data: products, prices, and availability.",
+    },
+    {
+        id: "bigbasket",
+        displayName: "BigBasket",
+        description: "BigBasket data: products, prices, and availability.",
+    },
+    {
+        id: "flipkart-minutes",
+        displayName: "Flipkart Minutes",
+        description:
+            "Flipkart Minutes data: products, prices, and availability.",
+    },
+    {
+        id: "amazon-now",
+        displayName: "Amazon Now",
+        description: "Amazon Now data: products, prices, and availability.",
+    },
+    {
+        id: "ecommerce",
+        displayName: "E-commerce",
+        description:
+            "Product listings, prices, and stock from online stores and marketplaces.",
+    },
+    {
+        id: "ads",
+        displayName: "Ad Libraries",
+        description:
+            "Public ad library data: advertisers, creatives, and run dates.",
+    },
+    {
+        id: "web-traffic",
+        displayName: "Web Traffic",
+        description: "Website traffic estimates, sources, and engagement.",
+    },
+    {
+        id: "local-business",
+        displayName: "Local Business",
+        description:
+            "Local business listings and reviews: restaurants, attractions, and services.",
+    },
+    {
+        id: "social-media",
+        displayName: "Social Media",
+        description:
+            "Posts, profiles, and engagement from social networks without a dedicated category.",
+    },
+    {
+        id: "real-estate",
+        displayName: "Real Estate",
+        description: "Property listings, rentals, prices, and agents.",
+    },
 ]);

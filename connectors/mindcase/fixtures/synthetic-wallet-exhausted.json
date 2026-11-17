@@ -1,0 +1,71 @@
+{
+    "name": "synthetic-wallet-exhausted",
+    "description": "SYNTHETIC: the wallet runs out mid-run; the job still completes with the rows collected so far plus a notice, and bills what it delivered.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "job_id": "bafa10a0-d425-4467-9c36-8efe6202cbe7",
+                    "agent": "zepto/products",
+                    "status": "queued",
+                    "created_at": "2026-10-23T15:50:46.900000+00:00"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/jobs/bafa10a0-d425-4467-9c36-8efe6202cbe7"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "bafa10a0-d425-4467-9c36-8efe6202cbe7",
+                    "agent": "zepto/products",
+                    "status": "completed",
+                    "row_count": 1,
+                    "usd_used": 0.001,
+                    "error": null,
+                    "started_at": "2026-10-23T15:50:46.910000+00:00",
+                    "completed_at": null,
+                    "created_at": "2026-10-23T15:50:46.900000+00:00",
+                    "expires_at": null
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/jobs/bafa10a0-d425-4467-9c36-8efe6202cbe7/results"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "completed",
+                    "row_count": 1,
+                    "data": [
+                        {
+                            "productName": "Cadbury 5 Star Kitted Pack Chocolatey Bars",
+                            "brand": "Cadbury",
+                            "price": 41,
+                            "mrp": 53,
+                            "discount": 22.64,
+                            "inStock": true,
+                            "stockCount": 15,
+                            "rank": 2,
+                            "sponsored": true,
+                            "storeId": "9a3a478d-31f5-468f-b32a-d4324844b5b2",
+                            "productUrl": "https://www.zepto.com/pn/x/pvid/0c986c9d-63c7-4873-a18e-5a6b59c0159a"
+                        }
+                    ],
+                    "notice": "Wallet balance exhausted; returning the rows collected so far."
+                }
+            }
+        }
+    ]
+}

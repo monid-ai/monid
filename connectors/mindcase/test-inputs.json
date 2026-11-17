@@ -1,0 +1,1932 @@
+{
+    "address/verify": {
+        "addresses": [
+            "1600 Amphitheatre Pkwy, Mountain View, CA 94043",
+            "350 5th ave new york ny",
+            "10 downing st london",
+            "東京都千代田区丸の内1丁目9-1",
+            "Apollo Bunder, Colaba, Mumbai 400001",
+            "Unter den Linden 77, 10117 Berlin",
+            "1600 Pennsylvania Ave NW, Washington, DC 90210",
+            "99999 Main St, Springfield, IL 62701",
+            "asdkjh qwe zzzz 00000"
+        ]
+    },
+    "ahrefs/serp-overview": {
+        "keyword": [
+            "project management software"
+        ],
+        "country": "us",
+        "maxResults": 2
+    },
+    "ai/answers": {
+        "prompts": [
+            "What is the best CRM for small business?",
+            "What are the best project management tools for remote teams?",
+            "Which running shoes are best for beginners?",
+            "What is the best way to learn Python?",
+            "Which laptop is best for video editing?",
+            "What are the best budget noise-cancelling headphones?",
+            "What is the best email marketing platform for ecommerce?",
+            "Which electric car has the longest range?",
+            "What are the best note-taking apps?",
+            "Which cloud provider is best for startups?"
+        ],
+        "assistants": [
+            "chatgpt"
+        ],
+        "country": "US"
+    },
+    "airbnb/listings": {
+        "urls": [
+            "https://www.airbnb.com/rooms/37879131",
+            "https://www.airbnb.com/rooms/1010503905929192028",
+            "https://www.airbnb.com/rooms/1404403902815216178",
+            "https://www.airbnb.com/rooms/1675554791743847017",
+            "https://www.airbnb.com/rooms/1285887172744396690",
+            "https://www.airbnb.com/rooms/1667608485035315996",
+            "https://www.airbnb.com/rooms/1643351505460876003",
+            "https://www.airbnb.com/rooms/993759176942173865",
+            "https://www.airbnb.com/rooms/700888293266225258",
+            "https://www.airbnb.com/rooms/934107469692156357"
+        ],
+        "locale": "en-US",
+        "currency": "USD",
+        "maxResults": 2
+    },
+    "airbnb/reviews": {
+        "urls": "https://www.airbnb.com/rooms/12937",
+        "locale": "en-US",
+        "maxResults": 2
+    },
+    "aliexpress/products": {
+        "query": "mechanical keyboard",
+        "maxResults": 2
+    },
+    "aliexpress/reviews": {
+        "productUrls": [
+            "https://www.aliexpress.com/item/1005006255429323.html",
+            "https://es.aliexpress.com/item/1005006853596517.html",
+            "https://www.aliexpress.us/item/1005006976494502.html?spm=a2g0o.productlist.main.1",
+            "https://www.aliexpress.com/item/1005009986162168.html",
+            "https://www.aliexpress.com/item/1005006401040219.html",
+            "https://www.aliexpress.com/item/1000000000000.html"
+        ],
+        "maxReviewsPerProduct": 2
+    },
+    "amazon-now/products": {
+        "category": "Dairy, Bread & Eggs",
+        "sub_category": "Cheese",
+        "pincode": "560037",
+        "maxResults": 2
+    },
+    "amazon/products": {
+        "urls": [
+            "https://www.amazon.com/dp/B0G4SW3XXP",
+            "https://www.amazon.com/dp/B0FXY18C1J",
+            "https://www.amazon.com/dp/B0FXY1DZ78",
+            "https://www.amazon.com/dp/B0GRVMYCB6",
+            "https://www.amazon.com/dp/B0GHRHXVN1",
+            "https://www.amazon.com/dp/B0FFTV1LXZ",
+            "https://www.amazon.com/dp/B0F7JZFKMQ",
+            "https://www.amazon.com/dp/B0FSCRCDYC",
+            "https://www.amazon.com/dp/B0DM1RCBHR",
+            "https://www.amazon.com/dp/B0CT6BQV81"
+        ],
+        "maxResults": 2
+    },
+    "amazon/reviews": {
+        "urls": "https://www.amazon.com/dp/B0G4SW3XXP",
+        "maxResults": 2
+    },
+    "app-store/app-keywords": {
+        "apps": [
+            "https://apps.apple.com/us/app/headspace-meditation-sleep/id493145008"
+        ],
+        "maxResults": 2
+    },
+    "app-store/apps": {
+        "appIds": [
+            "310633997",
+            "425073498",
+            "904237743",
+            "6748180011",
+            "9999999999"
+        ],
+        "country": "us",
+        "language": "en",
+        "maxResults": 2
+    },
+    "app-store/keyword-rankings": {
+        "keywords": [
+            "meditation"
+        ],
+        "country": "US",
+        "maxResults": 2
+    },
+    "app-store/reviews": {
+        "inputs": [
+            "284882215"
+        ],
+        "country": "us",
+        "maxResults": 2
+    },
+    "asos/products": {
+        "query": "levis 501",
+        "maxResults": 2
+    },
+    "autozone/products": {
+        "url": "https://www.autozone.com/brakes-and-traction-control/brake-pads",
+        "maxResults": 2
+    },
+    "bestbuy/products": {
+        "searchQuery": "airpods pro 3",
+        "maxResults": 2
+    },
+    "bigbasket/products": {
+        "query": "chocolate",
+        "city": "Bengaluru",
+        "pincode": "560095",
+        "maxResults": 2
+    },
+    "bilibili/posts": {
+        "queries": [
+            "原神",
+            "qzxvbnmplkjh9137"
+        ],
+        "maxResults": 2
+    },
+    "blinkit/products": {
+        "query": "chocolate",
+        "city": "Agra",
+        "pincode": "282003",
+        "store_id": "44371",
+        "maxResults": 2
+    },
+    "bluesky/profile": {
+        "handles": [
+            "bsky.app",
+            "nytimes.com",
+            "theonion.com",
+            "jay.bsky.team",
+            "pfrazee.com",
+            "washingtonpost.com",
+            "npr.org",
+            "theverge.com",
+            "aoc.bsky.social",
+            "atproto.com"
+        ]
+    },
+    "booking/listings": {
+        "location": "Paris",
+        "checkIn": "2026-12-17",
+        "checkOut": "2026-12-19",
+        "maxResults": 2,
+        "currency": "EUR"
+    },
+    "booking/reviews": {
+        "urls": "https://www.booking.com/hotel/us/the-plaza.en-gb.html",
+        "maxReviewsPerHotel": 2
+    },
+    "builtwith/techstack": {
+        "domains": [
+            "vercel.com",
+            "allbirds.com",
+            "paulgraham.com",
+            "plausible.io",
+            "zerodha.com",
+            "example.com",
+            "basecamp.com",
+            "daringfireball.net",
+            "craigslist.org",
+            "sentry.io"
+        ]
+    },
+    "capterra/reviews": {
+        "url": "https://www.capterra.com/p/135003/Slack/reviews/",
+        "sortBy": "MOST_RECENT",
+        "maxResults": 2
+    },
+    "coingecko/coins": {
+        "coinIds": [
+            "bitcoin",
+            "ethereum",
+            "tether",
+            "ripple",
+            "solana",
+            "dogecoin",
+            "chainlink",
+            "jasmycoin",
+            "ravencoin",
+            "garlicoin"
+        ],
+        "maxResults": 2
+    },
+    "companies/by-technology": {
+        "technologies": [
+            "Shopify"
+        ],
+        "maxResults": 2
+    },
+    "companies/domain-lookup": {
+        "companyNames": [
+            "Stripe",
+            "Y Combinator",
+            "Airbnb",
+            "Shopify",
+            "Figma",
+            "Spotify",
+            "Canva",
+            "Zerodha",
+            "Atlassian",
+            "Dropbox"
+        ],
+        "limit": 1
+    },
+    "companies/emails": {
+        "domains": [
+            "stripe.com"
+        ],
+        "maxResults": 2
+    },
+    "companies/enrichment": {
+        "domains": [
+            "calendly.com",
+            "hashicorp.com",
+            "personio.com",
+            "razorpay.com",
+            "stripe.com",
+            "canva.com",
+            "gitlab.com",
+            "figma.com",
+            "zapier.com",
+            "notion.so"
+        ]
+    },
+    "congress/trades": {
+        "member": "Nancy Pelosi",
+        "maxResults": 2
+    },
+    "crypto/etf-flows": {
+        "asset": [
+            "BTC",
+            "ETH"
+        ],
+        "startDate": "2026-12-17",
+        "endDate": "2026-12-21",
+        "maxResults": 2
+    },
+    "crypto/exchange-listings": {
+        "startDate": "2026-12-17",
+        "maxResults": 2
+    },
+    "crypto/news": {
+        "query": "bitcoin ETF",
+        "maxResults": 2
+    },
+    "crypto/projects": {
+        "project": [
+            "uniswap",
+            "arbitrum",
+            "jupiter",
+            "aave",
+            "chainlink",
+            "solana",
+            "ethereum",
+            "polygon",
+            "lido",
+            "bitcoin"
+        ]
+    },
+    "crypto/token-holders": {
+        "tokenAddress": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "chain": "ethereum",
+        "maxResults": 2
+    },
+    "crypto/wallet-transfers": {
+        "address": [
+            "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"
+        ],
+        "maxResults": 2
+    },
+    "crypto/wallets": {
+        "addresses": [
+            "0x28C6c06298d514Db089934071355E5743bf21d60",
+            "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
+            "0x71660c4005BA85c37ccec55d0C4493E66Fe775d3",
+            "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
+            "0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe",
+            "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+            "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+            "0x2910543Af39abA0Cd09dBb2D50200b3E800A63D2",
+            "0x8315177aB297bA92A06054cE80a67Ed4DBd7ed3a",
+            "0x40B38765696e3d5d8d9d834D8AaD4bB6e418E489"
+        ]
+    },
+    "customs/companies": {
+        "hsCode": "0901",
+        "originCountries": [
+            "COL"
+        ],
+        "direction": "importers",
+        "maxResults": 2
+    },
+    "customs/shipments": {
+        "direction": "exports",
+        "exporter": [
+            "Dr Reddys Laboratories"
+        ],
+        "destinationCountry": [
+            "USA"
+        ],
+        "startDate": "2026-12-17",
+        "endDate": "2027-12-16",
+        "maxResults": 2
+    },
+    "customs/trade-stats": {
+        "groupBy": "originCountry",
+        "direction": "imports",
+        "product": [
+            "coffee"
+        ],
+        "destinationCountry": [
+            "USA"
+        ],
+        "maxResults": 2
+    },
+    "discord/servers": {
+        "queries": [
+            "minecraft",
+            "python",
+            "midjourney",
+            "brasil",
+            "chess",
+            "zxqvbnmplkjhgf"
+        ],
+        "maxResults": 2
+    },
+    "discord/username-check": {
+        "usernames": [
+            "mrbeast",
+            "discord",
+            "müller",
+            "a",
+            "sakura",
+            "xk9q2v7mzpl4wr8",
+            "nike",
+            "ninja",
+            "jason",
+            "qzv7mx2kq9wlr3xt"
+        ]
+    },
+    "douyin/search": {
+        "queries": [
+            "人民日报",
+            "螺蛳粉",
+            "Tesla Model Y",
+            "景德镇拉坯",
+            "zxqvkjwpqzxqvkj9137"
+        ],
+        "maxResults": 2
+    },
+    "ebay/listings": {
+        "queries": [
+            "lego 75192"
+        ],
+        "marketplace": "ebay.co.uk",
+        "maxResults": 2
+    },
+    "ebay/sold": {
+        "keywords": "nintendo switch oled",
+        "maxResults": 2
+    },
+    "email/role": {
+        "domains": [
+            "wikimediafoundation.org",
+            "plausible.io",
+            "ghost.org"
+        ],
+        "maxResults": 2
+    },
+    "email/verify": {
+        "emails": [
+            "media@stripe.com",
+            "presse@wuerth.com",
+            "press@kuka.com",
+            "presse@baywa.de",
+            "security@mozilla.org",
+            "zq8x7k2m4v9p1w3r6t5y0nq@gmail.com",
+            "qx7v2m9k4p1z8w3n6r5t0yb@yahoo.com",
+            "someone@gmial.com",
+            "h2h-probe-7731@guerrillamail.com",
+            "hello@example.com"
+        ]
+    },
+    "espn/scores": {
+        "leagues": [
+            "nba"
+        ],
+        "date": "2026-12-17",
+        "maxResults": 2
+    },
+    "etsy/listings": {
+        "queries": [
+            "Keramik Tasse handgemacht"
+        ],
+        "maxResults": 2
+    },
+    "facebook/ads": {
+        "urls": "https://www.facebook.com/nike",
+        "maxResults": 2,
+        "activeStatus": "active",
+        "isDetailsPerAd": true
+    },
+    "facebook/comments": {
+        "post_url": "https://www.facebook.com/Cristiano/posts/pfbid0...",
+        "maxResults": 2,
+        "includeNestedComments": true
+    },
+    "facebook/events": {
+        "searchQueries": "Concert New York",
+        "maxResults": 2
+    },
+    "facebook/followers": {
+        "page_urls": "https://www.facebook.com/cocacola",
+        "followType": "follower",
+        "limit": 2
+    },
+    "facebook/marketplace": {
+        "url": "https://www.facebook.com/marketplace/nyc/electronics",
+        "maxResults": 2
+    },
+    "facebook/pages": {
+        "pageUrls": [
+            "https://www.facebook.com/Microsoft/",
+            "https://www.facebook.com/Apple/",
+            "https://www.facebook.com/NASA/",
+            "https://www.facebook.com/amazon/",
+            "https://www.facebook.com/cocacola/",
+            "https://www.facebook.com/google/",
+            "https://www.facebook.com/netflix/",
+            "https://www.facebook.com/disney/",
+            "https://www.facebook.com/nike/",
+            "https://www.facebook.com/Tesla/"
+        ]
+    },
+    "facebook/photos": {
+        "urls": [
+            "https://www.facebook.com/humansofnewyork",
+            "https://www.facebook.com/lemonde.fr",
+            "https://www.facebook.com/amul.coop",
+            "https://www.facebook.com/thebookshopwigtown",
+            "https://www.facebook.com/profile.php?id=100064830872783",
+            "https://www.facebook.com/thispagedoesnotexistzz9q8x7"
+        ],
+        "maxResults": 2
+    },
+    "facebook/posts": {
+        "urls": "https://www.facebook.com/nike",
+        "maxResults": 2
+    },
+    "facebook/posts-search": {
+        "queries": [
+            "Tesla Cybertruck",
+            "NASA Artemis",
+            "Oktoberfest München",
+            "Mindcase data API",
+            "zqxjvkwplfzqrt vbnmxk"
+        ],
+        "maxResults": 2
+    },
+    "facebook/reels": {
+        "startUrls": "https://www.facebook.com/9gag",
+        "maxReels": 2
+    },
+    "facebook/reviews": {
+        "urls": "https://www.facebook.com/disneylandparis",
+        "maxResults": 2
+    },
+    "farfetch/products": {
+        "listing_url": "https://www.farfetch.com/shopping/men/gucci/items.aspx",
+        "maxResults": 2
+    },
+    "finviz/metrics": {
+        "tickers": [
+            "AAPL",
+            "MSFT",
+            "JPM",
+            "BRK.B",
+            "TSM",
+            "AREC",
+            "ZZZQX"
+        ]
+    },
+    "fiverr/gigs": {
+        "query": "logo design",
+        "maxResults": 2
+    },
+    "flipkart-minutes/products": {
+        "query": "chocolate",
+        "city": "New Delhi",
+        "pincode": "110001",
+        "maxResults": 2
+    },
+    "g2/products": {
+        "queries": [
+            "crm"
+        ],
+        "maxResults": 2
+    },
+    "g2/reviews": {
+        "products": [
+            "https://www.g2.com/products/notion/reviews",
+            "https://www.g2.com/products/pipedrive/reviews",
+            "https://www.g2.com/products/zoho-crm/reviews",
+            "https://www.g2.com/products/grist/reviews",
+            "https://www.g2.com/products/2do/reviews"
+        ],
+        "maxResults": 2
+    },
+    "gartner/reviews": {
+        "products": [
+            "https://www.gartner.com/reviews/product/microsoft-teams",
+            "https://www.gartner.com/reviews/product/crowdstrike-falcon",
+            "https://www.gartner.com/reviews/product/zoho-crm",
+            "https://www.gartner.com/reviews/product/pexip-infinity",
+            "https://www.gartner.com/reviews/product/slack-1244000344"
+        ],
+        "maxResults": 2
+    },
+    "github/repositories": {
+        "query": "language:rust stars:>50000",
+        "sort": "stars",
+        "order": "desc",
+        "maxResults": 2
+    },
+    "github/repositories-trending": {
+        "language": "python",
+        "period": "weekly",
+        "maxResults": 2
+    },
+    "glassdoor/jobs": {
+        "query": "Registered Nurse",
+        "location": "Houston, TX",
+        "maxResults": 2
+    },
+    "glassdoor/reviews": {
+        "urls": [
+            "https://www.glassdoor.com/Reviews/Stripe-Reviews-E671932.htm"
+        ],
+        "maxResults": 2,
+        "sortBy": "DATE"
+    },
+    "goat/products": {
+        "listing_url": "https://www.goat.com/brand/salomon",
+        "maxResults": 2
+    },
+    "google-ads/ads": {
+        "domains": [
+            "nike.com",
+            "basecamp.com",
+            "zalando.de"
+        ],
+        "maxResults": 2
+    },
+    "google-hotels/hotels": {
+        "location": "New York",
+        "checkInDate": "2026-12-17",
+        "checkOutDate": "2026-12-19",
+        "maxResults": 2
+    },
+    "google-maps/places": {
+        "keywords": "dental clinic",
+        "location": "Austin, Texas",
+        "maxResults": 2
+    },
+    "google-maps/reviews": {
+        "urls": "https://www.google.com/maps?cid=12441467956046586299",
+        "maxReviews": 2,
+        "sortBy": "mostRelevant"
+    },
+    "google-patents/patents": {
+        "query": "attention-based sequence transduction",
+        "assignee": "Google",
+        "maxResults": 2
+    },
+    "google-play/app-keywords": {
+        "apps": [
+            "com.getsomeheadspace.android"
+        ],
+        "maxResults": 2
+    },
+    "google-play/apps": {
+        "inputs": [
+            "com.whatsapp",
+            "com.ticktick.task",
+            "com.spotify.music",
+            "com.duolingo",
+            "org.mozilla.firefox",
+            "com.instagram.android",
+            "com.google.android.apps.maps",
+            "com.netflix.mediaclient",
+            "com.microsoft.teams",
+            "com.zhiliaoapp.musically"
+        ],
+        "country": "US",
+        "language": "en",
+        "maxResults": 2
+    },
+    "google-play/keyword-rankings": {
+        "keywords": [
+            "meditation"
+        ],
+        "country": "US",
+        "maxResults": 2
+    },
+    "google-trends/trends": {
+        "queries": [
+            "super bowl"
+        ],
+        "country": "US",
+        "timeRange": "today 12-m"
+    },
+    "google/images": {
+        "queries": "LeBron James",
+        "maxResults": 2
+    },
+    "google/news": {
+        "maxResults": 2,
+        "query": "artificial intelligence",
+        "timeframe": "7d",
+        "region_language": "US:en"
+    },
+    "google/play/reviews": {
+        "inputs": "https://play.google.com/store/apps/details?id=com.instagram.android",
+        "maxResults": 2
+    },
+    "google/search": {
+        "queries": "best CRM tools 2026",
+        "maxPages": 2
+    },
+    "google/shopping": {
+        "queries": "PlayStation 5",
+        "country": "us",
+        "language": "en",
+        "maxResults": 2,
+        "dateRange": "anytime"
+    },
+    "google/videos": {
+        "queries": [
+            "rick astley never gonna give you up",
+            "gangnam style",
+            "米津玄師 Lemon",
+            "do schools kill creativity ken robinson",
+            "vimeo new player you know for videos",
+            "qzxjvwpk ynbvtrmhq flzpqwxkj"
+        ],
+        "maxResults": 2
+    },
+    "greenhouse/jobs": {
+        "boards": [
+            "stripe",
+            "lattice",
+            "trivago",
+            "ramp",
+            "zzqx-not-a-company-9481",
+            "https://boards.greenhouse.io/airbnb"
+        ],
+        "maxJobsPerBoard": 2
+    },
+    "gst-info/taxpayer": {
+        "gstins": [
+            "27AAECF2014J1ZW"
+        ],
+        "maxResults": 2
+    },
+    "h1b/salaries": {
+        "employers": [
+            "Stripe"
+        ],
+        "jobTitle": "software engineer",
+        "year": "2024",
+        "maxResults": 2
+    },
+    "hackernews/stories": {
+        "feed": "top",
+        "maxResults": 2
+    },
+    "homedepot/products": {
+        "url": "https://www.homedepot.com/p/DEWALT-20V-MAX-Cordless-1-2-in-Drill-Driver-2-20V-1-3Ah-Batteries-Charger-and-Bag-DCD771C2/204279858",
+        "zipCode": "30339"
+    },
+    "ikea/products": {
+        "urls": [
+            "https://www.ikea.com/us/en/p/billy-bookcase-white-20522046/",
+            "https://www.ikea.com/de/de/p/kallax-regal-weiss-80275887/",
+            "https://www.ikea.com/us/en/cat/bookcases-10382/"
+        ],
+        "maxResults": 2
+    },
+    "imdb/videos": {
+        "searchQueries": [
+            "The Shawshank Redemption",
+            "Dune",
+            "RRR"
+        ],
+        "titleIds": [],
+        "maxResults": 2
+    },
+    "indeed/jobs": {
+        "keyword": "warehouse associate",
+        "location": "Houston, TX",
+        "country": "US",
+        "maxItems": 2
+    },
+    "instagram/comments": {
+        "urls": "https://www.instagram.com/p/DZcGyUBjrSb/",
+        "maxResults": 2
+    },
+    "instagram/followers": {
+        "usernames": "natgeo",
+        "dataToScrape": "Followers",
+        "maxResults": 50
+    },
+    "instagram/hashtags": {
+        "hashtags": [
+            "travel",
+            "nike",
+            "ラーメン",
+            "mumbaifood",
+            "specialtycoffeeindia",
+            "fitness",
+            "nature",
+            "photography",
+            "art",
+            "football"
+        ],
+        "postsToInclude": "top_and_recent"
+    },
+    "instagram/highlights": {
+        "usernames": [
+            "natgeo",
+            "nike",
+            "github"
+        ],
+        "maxResults": 2
+    },
+    "instagram/likers": {
+        "urls": [
+            "https://www.instagram.com/p/DeuOR-CjKE9/",
+            "https://www.instagram.com/reel/DeTUk4sDSp-/",
+            "https://www.instagram.com/p/DfMXEZ9gUUP/",
+            "https://www.instagram.com/reel/DfC9fProvMm/",
+            "https://www.instagram.com/p/DbeUtYUHB0R/",
+            "https://www.instagram.com/p/AAAAAAAAAAA/"
+        ],
+        "maxResults": 2
+    },
+    "instagram/posts": {
+        "handles": "natgeo",
+        "tab": "posts",
+        "maxResults": 2
+    },
+    "instagram/profiles": {
+        "usernames": [
+            "nike",
+            "neymarjr",
+            "natgeo",
+            "kingjames",
+            "therock",
+            "nasa",
+            "selenagomez",
+            "kyliejenner",
+            "instagram",
+            "cristiano"
+        ],
+        "maxResults": 2
+    },
+    "instagram/stories": {
+        "usernames": [
+            "natgeo"
+        ],
+        "maxResults": 2
+    },
+    "instamart/products": {
+        "query": "chocolate",
+        "city": "Agra",
+        "pincode": "282002",
+        "store_id": "1401076",
+        "maxResults": 2
+    },
+    "internshala/jobs": {
+        "query": "python",
+        "city": "bangalore",
+        "maxResults": 2
+    },
+    "ip/company": {
+        "ips": [
+            "8.8.8.8",
+            "1.1.1.1",
+            "17.253.144.10",
+            "13.107.42.14",
+            "54.239.28.85",
+            "140.82.112.3",
+            "151.101.1.140",
+            "157.240.22.35",
+            "104.244.42.1",
+            "2a03:2880:f10c:83:face:b00c:0:25de"
+        ]
+    },
+    "ipos/india": {
+        "board": "all",
+        "maxResults": 2
+    },
+    "kick/clips": {
+        "channels": [
+            "xqc",
+            "westcol",
+            "gaules",
+            "alex",
+            "kickstreaming",
+            "zzzznotarealchannel999"
+        ],
+        "sortBy": "views",
+        "period": "all",
+        "maxResults": 2
+    },
+    "kuaishou/posts": {
+        "queries": [
+            "人民日报",
+            "螺蛳粉",
+            "小米SU7",
+            "景德镇拉坯",
+            "zxqvkjwpqzxqvkj9137"
+        ],
+        "maxResults": 2
+    },
+    "lazada/products": {
+        "query": "anker power bank",
+        "country": "sg",
+        "sortBy": "popularity",
+        "maxResults": 2
+    },
+    "leads/company-research": {
+        "domains": [
+            "monzo.com",
+            "stripe.com",
+            "plausible.io",
+            "basecamp.com",
+            "allbirds.com",
+            "alan.com",
+            "zerodha.com",
+            "gitlab.com",
+            "zapier.com",
+            "figma.com"
+        ]
+    },
+    "leads/contacts": {
+        "websites": [
+            "https://monzo.com",
+            "https://www.fairphone.com",
+            "https://www.mozilla.org",
+            "https://www.zoho.com",
+            "https://katzsdelicatessen.com",
+            "https://www.decathlon.in",
+            "https://basecamp.com",
+            "https://www.ikea.com",
+            "https://www.allbirds.com",
+            "https://www.patagonia.com"
+        ],
+        "maxResults": 2
+    },
+    "leads/creator-contacts": {
+        "profileUrls": [
+            "https://www.youtube.com/@TechnicalGuruji",
+            "https://www.youtube.com/@veritasium",
+            "https://www.youtube.com/@LinusTechTips",
+            "https://www.youtube.com/@mkbhd",
+            "https://www.tiktok.com/@mkbhd",
+            "https://www.youtube.com/@MrBeast",
+            "https://www.youtube.com/@kurzgesagt",
+            "https://www.youtube.com/@CarryMinati",
+            "https://www.youtube.com/@NatGeo",
+            "https://www.tiktok.com/@zachking"
+        ]
+    },
+    "lemon8/posts": {
+        "queries": [
+            "skincare routine"
+        ],
+        "country": "us",
+        "maxResults": 2
+    },
+    "linkedin/ads-library": {
+        "urls": "https://www.linkedin.com/ad-library/search?accountOwner=nvidia&countries=BR&dateOption=last-30-days",
+        "maxResults": 2
+    },
+    "linkedin/companies": {
+        "companies": [
+            "https://www.linkedin.com/company/openai/",
+            "https://www.linkedin.com/company/meta/",
+            "https://www.linkedin.com/company/google/",
+            "https://www.linkedin.com/company/salesforce/",
+            "https://www.linkedin.com/company/stripe/",
+            "https://www.linkedin.com/company/netflix/",
+            "https://www.linkedin.com/company/apple/",
+            "https://www.linkedin.com/company/tesla-motors/",
+            "https://www.linkedin.com/company/microsoft/",
+            "https://www.linkedin.com/company/adobe/"
+        ],
+        "maxResults": 2
+    },
+    "linkedin/company-employees": {
+        "maxResults": 2,
+        "companies": [
+            "https://www.linkedin.com/company/google"
+        ]
+    },
+    "linkedin/domain-lookup": {
+        "domains": [
+            "stripe.com",
+            "gumloop.com",
+            "awarathon.com",
+            "shopify.com",
+            "canva.com",
+            "airbnb.com",
+            "github.com",
+            "vercel.com",
+            "atlassian.com",
+            "datadoghq.com"
+        ],
+        "maxResults": 2
+    },
+    "linkedin/emails": {
+        "urls": [
+            "https://www.linkedin.com/in/satyanadella",
+            "https://www.linkedin.com/in/sundarpichai"
+        ]
+    },
+    "linkedin/jobs": {
+        "jobTitles": "AI Engineer",
+        "locations": "San Francisco",
+        "maxResults": 2
+    },
+    "linkedin/post-comments": {
+        "posts": "https://www.linkedin.com/posts/satyanadella_to-mark-the-broad-rollout-of-agent-mode-in-activity-7452924970042826753-r6bz",
+        "maxResults": 2,
+        "includeReplies": false
+    },
+    "linkedin/post-reactions": {
+        "posts": "https://www.linkedin.com/posts/reidhoffman_ten-years-ago-if-youd-told-me-a-pope-would-activity-7455254577534107648-o-Gf",
+        "maxResults": 2
+    },
+    "linkedin/posts": {
+        "urls": "https://www.linkedin.com/in/satyanadella/",
+        "maxResults": 2
+    },
+    "linkedin/posts-group": {
+        "urls": [
+            "https://www.linkedin.com/groups/12871280/"
+        ],
+        "maxResults": 2
+    },
+    "linkedin/profile-comments": {
+        "profiles": "https://www.linkedin.com/in/satyanadella",
+        "maxResults": 2
+    },
+    "linkedin/profile-reactions": {
+        "profiles": "https://www.linkedin.com/in/satyanadella",
+        "maxResults": 2
+    },
+    "linkedin/profiles": {
+        "queries": [
+            "https://www.linkedin.com/in/adammgrant",
+            "https://www.linkedin.com/in/sundarpichai",
+            "https://www.linkedin.com/in/ariannahuffington",
+            "https://www.linkedin.com/in/andrewyng",
+            "https://www.linkedin.com/in/dharmesh",
+            "https://www.linkedin.com/in/satyanadella",
+            "https://www.linkedin.com/in/jasonlk",
+            "https://www.linkedin.com/in/jeffweiner08",
+            "https://www.linkedin.com/in/nigriffith",
+            "https://www.linkedin.com/in/hnshah"
+        ]
+    },
+    "linkedin/profiles/search": {
+        "searchQuery": "founder",
+        "locations": [
+            "Bengaluru"
+        ],
+        "maxProfiles": 25
+    },
+    "linktree/profiles": {
+        "profiles": [
+            "https://linktr.ee/esportsworldcup",
+            "https://linktr.ee/garyvee",
+            "https://linktr.ee/tonyhawk",
+            "https://linktr.ee/billieeilish",
+            "https://linktr.ee/spotify",
+            "https://linktr.ee/redbull",
+            "https://linktr.ee/linktree",
+            "https://linktr.ee/selenagomez",
+            "https://linktr.ee/lemonde",
+            "https://linktr.ee/thenewyorktimes"
+        ]
+    },
+    "llm/brand-mentions": {
+        "prompts": [
+            "What are the best CRM tools for small businesses?",
+            "Quels sont les meilleurs logiciels CRM pour les PME ?",
+            "Who founded HubSpot and in what year?",
+            "What are good alternatives to Pipedrive for a 5-person sales team?",
+            "What are the best running shoes for flat feet?",
+            "   "
+        ],
+        "brand": "HubSpot",
+        "brandWebsite": "hubspot.com",
+        "competitors": [
+            "Salesforce",
+            "Pipedrive",
+            "Zoho CRM"
+        ],
+        "assistants": [
+            "chatgpt",
+            "gemini"
+        ],
+        "country": "US"
+    },
+    "mca/company": {
+        "queries": [
+            "L23201MH1952GOI008858"
+        ],
+        "maxResults": 2
+    },
+    "mca/company-financials": {
+        "queries": [
+            "L23201MH1952GOI008858"
+        ],
+        "maxResults": 2
+    },
+    "mca/director": {
+        "queries": [
+            "00000001"
+        ],
+        "maxResults": 2
+    },
+    "medium/posts": {
+        "queries": [
+            "retrieval augmented generation"
+        ],
+        "maxResults": 2
+    },
+    "mercadolibre/listings": {
+        "query": "iphone 15 128gb",
+        "country": "MX",
+        "maxResults": 2
+    },
+    "naukri/job": {
+        "inputs": "data analyst",
+        "maxResults": 50,
+        "fetchDetails": true
+    },
+    "naver/blogs": {
+        "queries": [
+            "강남 맛집"
+        ],
+        "maxResults": 2,
+        "sort": "relevance"
+    },
+    "news/mentions": {
+        "query": [
+            "Boeing"
+        ],
+        "maxResults": 2
+    },
+    "people/enrichment": {
+        "linkedinUrls": [
+            "https://www.linkedin.com/in/satyanadella",
+            "https://www.linkedin.com/in/ashtom",
+            "https://www.linkedin.com/in/fidjisimo",
+            "https://www.linkedin.com/in/jasonmlemkin",
+            "https://www.linkedin.com/in/williamhgates",
+            "https://www.linkedin.com/in/jeffweiner08",
+            "https://www.linkedin.com/in/reidhoffman",
+            "https://www.linkedin.com/in/sundarpichai",
+            "https://www.linkedin.com/in/garrytan",
+            "https://www.linkedin.com/in/rbranson"
+        ]
+    },
+    "people/personal-email": {
+        "linkedinUrls": [
+            "https://www.linkedin.com/in/demo-john-doe",
+            "https://www.linkedin.com/in/demo-jane-roe"
+        ]
+    },
+    "people/phone-lookup": {
+        "linkedinUrls": [
+            "https://www.linkedin.com/in/patrickmckenzie",
+            "https://www.linkedin.com/in/jason-fried",
+            "https://www.linkedin.com/in/dinesh-joshi-44244b35"
+        ]
+    },
+    "people/professional-email": {
+        "linkedinUrls": [
+            "https://www.linkedin.com/in/satyanadella",
+            "https://www.linkedin.com/in/sundarpichai"
+        ]
+    },
+    "pexels/photos": {
+        "query": "eiffel tower",
+        "maxResults": 2
+    },
+    "pf-info/establishment": {
+        "est_ids": [
+            "KDMAL2220876000"
+        ],
+        "maxResults": 2
+    },
+    "pf-info/listing": {
+        "names": [
+            "INFOSYS"
+        ],
+        "maxResults": 2
+    },
+    "pinterest/posts": {
+        "query": "chocolate chip cookies",
+        "maxResults": 2
+    },
+    "pipixia/posts": {
+        "queries": [
+            "猫",
+            "搞笑",
+            "原神",
+            "小米SU7",
+            "景德镇拉坯",
+            "cat",
+            "zxqvkjwpqzxqvkj9137"
+        ],
+        "maxResults": 2
+    },
+    "polymarket/markets": {
+        "category": "politics",
+        "sortBy": "volume",
+        "maxResults": 2
+    },
+    "realtor/listings": {
+        "location": "Austin, TX",
+        "listingType": "BUY",
+        "maxResults": 2
+    },
+    "reddit/comments": {
+        "inputs": "https://www.reddit.com/r/technology/comments/1ub7r1y/morale_is_so_bad_at_mark_zuckerbergs_meta_even/",
+        "maxResults": 2,
+        "includeComments": true
+    },
+    "reddit/posts": {
+        "urls": "https://www.reddit.com/r/technology/",
+        "sortBy": "top",
+        "maxResults": 2,
+        "timeRange": "week"
+    },
+    "reddit/profiles": {
+        "usernames": [
+            "thisisbillgates",
+            "AutoModerator",
+            "nasa",
+            "GovSchwarzenegger",
+            "GallowBoob",
+            "spez",
+            "npr",
+            "kn0thing",
+            "nytimes",
+            "washingtonpost"
+        ]
+    },
+    "redfin/listings": {
+        "location": "Austin, TX",
+        "maxResults": 2
+    },
+    "redfin/rentals": {
+        "location": "Denver, CO",
+        "maxResults": 2
+    },
+    "rumble/videos": {
+        "queries": [
+            "bitcoin"
+        ],
+        "maxResults": 2
+    },
+    "samsclub/products": {
+        "query": [
+            "paper towels"
+        ],
+        "maxResults": 2
+    },
+    "sec/beneficial-ownership": {
+        "tickers": [
+            "AAPL",
+            "GME",
+            "TSM",
+            "CLAR",
+            "ZZZZQ"
+        ],
+        "lookbackDays": 730,
+        "scheduleType": "all",
+        "minPercent": 0,
+        "maxResults": 2
+    },
+    "sec/cashflow-as-reported": {
+        "tickers": [
+            "AAPL",
+            "MSFT"
+        ],
+        "maxResults": 2
+    },
+    "sec/filings": {
+        "company": "AAPL",
+        "formTypes": [
+            "10-K"
+        ],
+        "maxResults": 2
+    },
+    "sec/financials-as-reported": {
+        "tickers": [
+            "AAPL",
+            "MSFT",
+            "BRK-B",
+            "TSM",
+            "CODA",
+            "ZZZZQ"
+        ],
+        "statement": "custom",
+        "periods": 1,
+        "concepts": [
+            "RevenueFromContractWithCustomerExcludingAssessedTax",
+            "Revenues",
+            "NetIncomeLoss",
+            "Assets"
+        ],
+        "maxResults": 2
+    },
+    "sec/insider-ownership": {
+        "tickers": [
+            "AAPL",
+            "NVDA",
+            "ACN"
+        ],
+        "daysBack": 30,
+        "transactionTypes": [
+            "ALL"
+        ],
+        "maxResults": 2
+    },
+    "sec/insider-trades": {
+        "tickers": [
+            "MSFT",
+            "NVDA",
+            "SPOT",
+            "BRK-B",
+            "LULU",
+            "OPEN",
+            "TSLA",
+            "ZZZZQ"
+        ],
+        "daysBack": 31,
+        "transactionCodes": [
+            "ALL"
+        ],
+        "includeDerivatives": true,
+        "maxResults": 2
+    },
+    "sec/kpi-guidance": {
+        "tickers": [
+            "NVDA",
+            "WMT",
+            "DAL",
+            "TSM",
+            "NTIC",
+            "AAPL",
+            "MSFT",
+            "KO",
+            "JPM",
+            "NKE"
+        ],
+        "maxReleasesPerTicker": 1,
+        "maxResults": 2
+    },
+    "shopee/products": {
+        "query": "anker power bank",
+        "country": "SG",
+        "maxResults": 2
+    },
+    "shopify/products": {
+        "urls": "https://undefeated.com",
+        "maxResults": 2
+    },
+    "similarweb/similar-sites": {
+        "domains": [
+            "netflix.com",
+            "zapier.com",
+            "zomato.com"
+        ],
+        "maxResults": 2
+    },
+    "similarweb/traffic": {
+        "domains": [
+            "shopify.com",
+            "stripe.com",
+            "github.com",
+            "booking.com",
+            "notion.so",
+            "airbnb.com",
+            "canva.com",
+            "figma.com",
+            "spotify.com",
+            "reddit.com"
+        ],
+        "maxResults": 2
+    },
+    "slack/apps": {
+        "category": "Finance",
+        "maxResults": 2
+    },
+    "snapchat/profiles": {
+        "usernames": [
+            "nfl",
+            "lemonde",
+            "fcbarcelona",
+            "mtv",
+            "cnn",
+            "nike",
+            "mohsenalnssar",
+            "redbull",
+            "nba",
+            "realmadrid"
+        ]
+    },
+    "soundcloud/tracks": {
+        "queries": [
+            "lofi hip hop"
+        ],
+        "maxResults": 2
+    },
+    "spotify/plays": {
+        "urls": [
+            "https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMi3b?si=abc123",
+            "https://open.spotify.com/track/6habFhsOp2NvshLv26DqMb",
+            "https://open.spotify.com/intl-hi/track/6VBhH7CyP56BXjp8VsDFPZ",
+            "https://open.spotify.com/track/0rQtoQXQfwpDW0c7Fw1NeM",
+            "https://open.spotify.com/track/0000000000000000000000"
+        ],
+        "maxResults": 2
+    },
+    "stockx/products": {
+        "listing_url": "https://stockx.com/brands/adidas",
+        "maxResults": 2
+    },
+    "target/products": {
+        "queries": [
+            "air fryer"
+        ],
+        "maxResults": 2
+    },
+    "telegram/channels": {
+        "channels": [
+            "durov",
+            "rian_ru",
+            "telegram",
+            "tginfo",
+            "bbcrussian",
+            "meduzalive",
+            "binance_announcements",
+            "toncoin",
+            "nytimes",
+            "cnnbrk"
+        ]
+    },
+    "telegram/posts": {
+        "channels": [
+            "durov"
+        ],
+        "maxResults": 2
+    },
+    "telegram/search": {
+        "queries": [
+            "privacy"
+        ],
+        "channels": [
+            "durov"
+        ],
+        "maxResults": 2
+    },
+    "threads/posts": {
+        "handles": [
+            "nasa"
+        ],
+        "maxResults": 2
+    },
+    "threads/profiles": {
+        "usernames": [
+            "nasa",
+            "zuck",
+            "lemondefr",
+            "simonwillison",
+            "mosseri",
+            "instagram",
+            "threads",
+            "nytimes",
+            "natgeo",
+            "nike"
+        ]
+    },
+    "tiktok-shop/reviews": {
+        "productUrls": [
+            "https://www.tiktok.com/shop/pdp/natural-miswak-stick-by-zenia-hygiene-tool-6-inches/1729412010293957590",
+            "https://shop.tiktok.com/us/pdp/coq10-softgels-100mg-200mg-micro-ingredients-with-coconut-mct-oil-240-count/1730213941645972141",
+            "https://shop.tiktok.com/view/product/1729684827500810371",
+            "https://www.tiktok.com/shop/pdp/1729000000000000999"
+        ],
+        "region": "US",
+        "sort": "most_recent",
+        "maxResults": 2
+    },
+    "tiktok-shop/storefronts": {
+        "storeUrls": [
+            "https://shop.tiktok.com/us/store/hallee-bob/7495759925640530518"
+        ],
+        "region": "us",
+        "maxResults": 2
+    },
+    "tiktok/ads": {
+        "urls": [
+            "https://library.tiktok.com/ads?region=DE&start_time=1790899200000&end_time=1793577599000&adv_name=nike&adv_biz_ids=&query_type=1&sort_type=last_shown_date%2Cdesc"
+        ],
+        "maxResults": 2
+    },
+    "tiktok/comments": {
+        "postURLs": "https://www.tiktok.com/@looooooooch/video/7332342275151760642",
+        "commentsPerPost": 2
+    },
+    "tiktok/download": {
+        "urls": [
+            "https://www.tiktok.com/@billieeilish/video/7050551461734042926",
+            "https://www.tiktok.com/@mrbeast/video/7582653507375746334",
+            "https://www.tiktok.com/@cznburak/video/7120985110991604993",
+            "https://www.tiktok.com/@arianagrande/video/7405998771772984606",
+            "https://www.tiktok.com/@seuamigopitbull/video/7137451371405561093",
+            "https://www.tiktok.com/@espn/video/7655361636521299231",
+            "https://www.tiktok.com/@gordonramsayofficial/video/7510682972576746775",
+            "https://www.tiktok.com/@khaby.lame/video/7262742676338937121",
+            "https://www.tiktok.com/@pepsi/video/7334387564222385450",
+            "https://www.tiktok.com/@gordonramsayofficial/video/7058382268145913094",
+            "https://www.tiktok.com/@espn/video/7225986912610258218"
+        ]
+    },
+    "tiktok/followers": {
+        "profiles": "khaby.lame",
+        "maxFollowersPerProfile": 2,
+        "maxFollowingPerProfile": 0
+    },
+    "tiktok/live-rooms": {
+        "keywords": [
+            "makeup"
+        ],
+        "maxResults": 2
+    },
+    "tiktok/posts": {
+        "profiles": "khaby.lame",
+        "resultsPerPage": 2
+    },
+    "tiktok/profiles": {
+        "searchQueries": "nasa",
+        "maxProfilesPerQuery": 2
+    },
+    "tiktok/shop": {
+        "keywords": "phone case",
+        "productsPerSearch": 2
+    },
+    "tiktok/sounds": {
+        "keywords": [
+            "Espresso Sabrina Carpenter",
+            "YOASOBI アイドル",
+            "Blinding Lights The Weeknd"
+        ],
+        "maxResults": 2
+    },
+    "tiktok/video-analytics": {
+        "videoUrls": [
+            "https://www.tiktok.com/@nba/video/7702956518437702942",
+            "https://www.tiktok.com/@nba/video/7702677121671597342",
+            "https://www.tiktok.com/@nba/video/7699659604275334431",
+            "https://www.tiktok.com/@espn/video/7704965867662052621",
+            "https://www.tiktok.com/@espn/video/7704935632627387679",
+            "https://www.tiktok.com/@espn/video/7704919818683698463",
+            "https://www.tiktok.com/@nasa/video/7702504724049743117",
+            "https://www.tiktok.com/@nasa/video/7701866987609197837",
+            "https://www.tiktok.com/@nasa/video/7700397098994273549",
+            "https://www.tiktok.com/@mrbeast/video/7582653507375746334"
+        ]
+    },
+    "toutiao/trending": {
+        "maxResults": 2
+    },
+    "treasury/rates": {
+        "series": "parYield",
+        "startDate": "2026-12-17",
+        "endDate": "2026-12-21",
+        "maxResults": 2
+    },
+    "tripadvisor/attractions": {
+        "query": "Rome",
+        "maxResults": 2,
+        "language": "en",
+        "currency": "USD"
+    },
+    "tripadvisor/hotels": {
+        "query": "Lisbon",
+        "maxResults": 2,
+        "language": "en",
+        "currency": "USD"
+    },
+    "tripadvisor/restaurants": {
+        "query": "Rome",
+        "maxResults": 2,
+        "language": "en",
+        "currency": "USD"
+    },
+    "tripadvisor/reviews": {
+        "urls": "https://www.tripadvisor.com/Hotel_Review-g60763-d113317-Reviews-The_Plaza-New_York_City_New_York.html",
+        "maxResults": 2
+    },
+    "trustpilot/reviews": {
+        "companies": [
+            "nordvpn.com"
+        ],
+        "maxResults": 2
+    },
+    "truth-social/post": {
+        "handles": [
+            "realDonaldTrump",
+            "bolsonarojair",
+            "@WhiteHouse",
+            "DevinNunes",
+            "mc_no_such_user_8812"
+        ],
+        "maxResults": 2
+    },
+    "twitch/clips": {
+        "channels": [
+            "xqc",
+            "shroud",
+            "ibai",
+            "gaules",
+            "twitchdev",
+            "tsm_zero",
+            "zzzznotarealchannel999"
+        ],
+        "period": "all",
+        "maxResults": 2
+    },
+    "twitch/profiles": {
+        "channels": [
+            "shroud",
+            "pokimane",
+            "ibai",
+            "kato_junichi0817",
+            "eliasn97",
+            "aussiechessnoob",
+            "twitchdev",
+            "xqc",
+            "kaicenat",
+            "ninja"
+        ]
+    },
+    "twitter/articles": {
+        "urls": [
+            "https://x.com/github/status/2082201573976056245",
+            "https://twitter.com/karpathy/status/2002118205729562949",
+            "https://x.com/thedankoe/status/2010751592346030461"
+        ]
+    },
+    "twitter/followers": {
+        "handle": "NASA",
+        "listType": "followers",
+        "maxResults": 2
+    },
+    "twitter/profiles": {
+        "inputs": [
+            "NASA",
+            "elonmusk",
+            "BarackObama",
+            "nytimes",
+            "Cristiano",
+            "narendramodi",
+            "BillGates",
+            "Google",
+            "NBA",
+            "Tesla"
+        ],
+        "maxResults": 2
+    },
+    "twitter/replies": {
+        "conversation_id": "https://x.com/i/status/2070026154589782256",
+        "maxResults": 2
+    },
+    "twitter/retweeters": {
+        "tweet_ids": "https://x.com/NASA/status/2039473910987534599",
+        "max_items_per_tweet": 2
+    },
+    "twitter/trends": {
+        "locations": [
+            "Worldwide"
+        ],
+        "maxResults": 2
+    },
+    "twitter/tweets": {
+        "maxResults": 2,
+        "inputs": "elonmusk"
+    },
+    "ubereats/products": {
+        "urls": [
+            "https://www.ubereats.com/store/original-broadway-joes-pizza/p3ubP8STXj2tKA4W8jqW6w",
+            "https://www.ubereats.com/mx/store/taqueria-puerto-mixe-oaxaca/wxECt2jYQAezSsLJUeI_NQ",
+            "https://www.ubereats.com/gb/store/amelia-seven-dials/b9vgQmtnXGm2M48CnVjL0w",
+            "https://www.ubereats.com/store/no-such-store-xyz/AAAAAAAAAAAAAAAAAAAAAA"
+        ],
+        "maxResults": 2
+    },
+    "ubereats/stores": {
+        "location": "1600 Pennsylvania Avenue NW, Washington, DC 20500",
+        "query": "Pizza",
+        "country": "US",
+        "maxResults": 2
+    },
+    "upwork/jobs": {
+        "inputs": "python developer",
+        "limit": 5
+    },
+    "walmart/products": {
+        "queries": [
+            "airpods pro"
+        ],
+        "maxResults": 2
+    },
+    "web/backlinks": {
+        "domains": [
+            "stripe.com",
+            "lemonde.fr",
+            "zerodha.com",
+            "mindcase.co",
+            "qzx-nonexistent-domain-8812.com"
+        ],
+        "maxResults": 2
+    },
+    "web/brand-styleguide": {
+        "urls": [
+            "https://plausible.io",
+            "https://github.com",
+            "https://www.mercadolibre.com.ar",
+            "https://stripe.com",
+            "https://www.duolingo.com",
+            "https://www.notion.com/",
+            "https://www.airbnb.com",
+            "https://linear.app",
+            "https://www.figma.com",
+            "https://www.ikea.com/de/de/"
+        ]
+    },
+    "web/crawl": {
+        "url": "https://docs.firecrawl.dev",
+        "maxPages": 2
+    },
+    "web/extract": {
+        "urls": [
+            "https://news.ycombinator.com/",
+            "https://www.firecrawl.dev/pricing"
+        ],
+        "fields": [
+            "top story title",
+            "top story points"
+        ]
+    },
+    "web/map": {
+        "urls": [
+            "https://www.mindcase.co",
+            "https://wireguard.com",
+            "https://no-such-site-zq9x7.com"
+        ]
+    },
+    "web/scrape": {
+        "urls": [
+            "https://www.python.org/this-page-does-not-exist-h2h",
+            "https://news.ycombinator.com/",
+            "https://quotes.toscrape.com/js/",
+            "https://this-domain-does-not-exist-h2h-9z.com/",
+            "https://books.toscrape.com/",
+            "https://example.com",
+            "https://www.flipkart.com/apple-iphone-15-black-128-gb/p/itm6ac6485515ae4",
+            "https://www.theguardian.com/technology/2016/mar/15/googles-alphago-seals-4-1-victory-over-grandmaster-lee-sedol",
+            "https://arxiv.org/pdf/1706.03762",
+            "https://www.g2.com/products/slack/reviews"
+        ],
+        "maxResults": 2
+    },
+    "web/search": {
+        "query": [
+            "best open source vector database",
+            "RBI repo rate decision"
+        ],
+        "maxResults": 2,
+        "freshness": "year"
+    },
+    "wechat/articles": {
+        "queries": [
+            "瑞幸咖啡"
+        ],
+        "maxResults": 2
+    },
+    "wechat/channels": {
+        "queries": [
+            "人民日报",
+            "人工智能",
+            "iPhone 17",
+            "景德镇陶瓷",
+            "qzxwvkjh9381plm"
+        ],
+        "sortBy": "relevance",
+        "maxResults": 2
+    },
+    "weibo/posts": {
+        "query": [
+            "小米"
+        ],
+        "maxResults": 2
+    },
+    "wellfound/jobs": {
+        "query": "software engineer",
+        "remote": false,
+        "maxResults": 2
+    },
+    "whatsapp/numbers": {
+        "phoneNumbers": [
+            "+917070022222",
+            "+918640086400",
+            "+31206490787"
+        ]
+    },
+    "xigua/posts": {
+        "queries": [
+            "美食",
+            "华农兄弟",
+            "阿星探店",
+            "iPhone 16",
+            "qzxvjwkq9h7tb"
+        ],
+        "maxResults": 2
+    },
+    "yahoo-finance/income-statements": {
+        "tickers": [
+            "AAPL",
+            "MSFT",
+            "NVDA",
+            "BRK-B",
+            "LWAY",
+            "7203.T",
+            "ZZZZQX"
+        ],
+        "maxResults": 2
+    },
+    "yahoo-finance/index-funds": {
+        "tickers": [
+            "SPY",
+            "VOO",
+            "QQQ",
+            "VFIAX",
+            "IVV",
+            "VTI",
+            "DIA",
+            "IWM",
+            "VXUS",
+            "AGG"
+        ]
+    },
+    "yahoo-finance/prices": {
+        "tickers": [
+            "AAPL",
+            "MSFT",
+            "BRK-B",
+            "SPY",
+            "AREC",
+            "RELIANCE.NS",
+            "7203.T",
+            "ZZZQX"
+        ]
+    },
+    "yahoo-finance/quotes": {
+        "tickers": [
+            "AAPL",
+            "MSFT",
+            "BRK-B",
+            "SPY",
+            "AREC",
+            "RELIANCE.NS",
+            "7203.T",
+            "ZZZQX"
+        ],
+        "range": "5d",
+        "interval": "1d",
+        "maxResults": 2
+    },
+    "ycombinator/companies": {
+        "batch": "W25",
+        "maxResults": 2
+    },
+    "ycombinator/founders": {
+        "batch": "W25",
+        "maxResults": 2
+    },
+    "ycombinator/founders-dataset": {
+        "batch": "W25",
+        "maxResults": 2
+    },
+    "yelp/business": {
+        "urls": [
+            "https://www.yelp.com/biz/molinari-delicatessen-san-francisco",
+            "https://www.yelp.com/biz/gary-danko-san-francisco",
+            "https://www.yelp.com/biz/tartine-bakery-san-francisco-3",
+            "https://www.yelp.com/biz/the-slanted-door-san-francisco",
+            "https://www.yelp.com/biz/state-bird-provisions-san-francisco",
+            "https://www.yelp.com/biz/foreign-cinema-san-francisco",
+            "https://www.yelp.com/biz/zuni-café-san-francisco-3",
+            "https://www.yelp.com/biz/bix-san-francisco",
+            "https://www.yelp.com/biz/flour-water-san-francisco",
+            "https://www.yelp.com/biz/nopalito-san-francisco"
+        ],
+        "limit": 2
+    },
+    "yelp/reviews": {
+        "urls": "https://www.yelp.com/biz/molinari-delicatessen-san-francisco",
+        "maxReviews": 2
+    },
+    "youku/videos": {
+        "queries": [
+            "庆余年",
+            "舌尖上的中国",
+            "故宫",
+            "景德镇 拉坯",
+            "iPhone 17 评测",
+            "qxzvbnmkjhg9973"
+        ],
+        "maxResults": 2
+    },
+    "youtube/channels": {
+        "urls": [
+            "https://www.youtube.com/@MrBeast"
+        ]
+    },
+    "youtube/comments": {
+        "videoUrl": "https://www.youtube.com/watch?v=UF8uR6Z6KLc",
+        "maxResults": 100
+    },
+    "youtube/community-posts": {
+        "channels": [
+            "UCBJycsmduvYEL83R_U4JriQ",
+            "UCX6OQ3DkcsbYNE6H8uQQuVA",
+            "UCXuqSBlHAE6Xw-yeJA0Tunw",
+            "UCLA_DiR1FfKNvjuUpBHmylQ",
+            "UCHnyfMqiRRG1u-2MsSQLbXA"
+        ],
+        "maxResults": 2
+    },
+    "youtube/videos": {
+        "urls": [
+            "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "https://www.youtube.com/watch?v=hT_nvWreIhg",
+            "https://www.youtube.com/watch?v=9bZkp7q19f0",
+            "https://www.youtube.com/watch?v=YQHsXMglC9A",
+            "https://www.youtube.com/watch?v=RgKAFK5djSk",
+            "https://www.youtube.com/watch?v=OPf0YbXqDm0",
+            "https://www.youtube.com/watch?v=e-ORhEE9VVg",
+            "https://www.youtube.com/watch?v=2Vv-BfVoq4g",
+            "https://www.youtube.com/watch?v=JGwWNGJdvx8",
+            "https://www.youtube.com/watch?v=CevxZvSJLk8"
+        ],
+        "maxResults": 2
+    },
+    "zepto/products": {
+        "query": "chocolate",
+        "city": "Pune",
+        "pincode": "412307",
+        "store_id": "9a3a478d-31f5-468f-b32a-d4324844b5b2",
+        "maxResults": 2
+    },
+    "zillow/agents": {
+        "location": "Austin, TX",
+        "maxResults": 2
+    },
+    "zillow/listings": {
+        "location": "Austin, TX",
+        "listingType": "forSale",
+        "maxResults": 2
+    }
+}
