@@ -1,0 +1,24 @@
+{
+    "name": "preview-ok",
+    "description": "Real 2026-10-26 recording: a one-hour preview of port 8080 (the URL's bearer hostname replaced; that preview was closed right after).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/api/v2/sandboxes/sbx_224ff457bf3f4724841f4ccf343f1fcd/previews"
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "preview": {
+                        "previewId": "2cc3b0883a7740849359122904aa45a1",
+                        "sandboxId": "sbx_224ff457bf3f4724841f4ccf343f1fcd",
+                        "port": 8080,
+                        "url": "https://0123456789abcdef0123456789abcdef.bxcpreview.site",
+                        "expiresAt": "2026-10-26T08:42:40.000Z"
+                    }
+                }
+            }
+        }
+    ]
+}

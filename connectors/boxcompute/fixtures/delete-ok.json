@@ -1,0 +1,16 @@
+{
+    "name": "delete-ok",
+    "description": "Real 2026-10-26 recording: DELETE answers 204 with no body. Its replay fails until monid-ai/monid#199.",
+    "calls": [
+        {
+            "req": {
+                "method": "DELETE",
+                "url": "{{request.origin}}/api/v2/sandboxes/sbx_ed730f785e584b43982a8ada3722af1b"
+            },
+            "res": {
+                "status": 204,
+                "body": null
+            }
+        }
+    ]
+}

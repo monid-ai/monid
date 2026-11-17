@@ -1,0 +1,19 @@
+{
+    "name": "stop-busy",
+    "description": "Real 2026-10-26 recording: a stop sent right after a command answers 409 SANDBOX_UNAVAILABLE.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/api/v2/sandboxes/sbx_224ff457bf3f4724841f4ccf343f1fcd/stop"
+            },
+            "res": {
+                "status": 409,
+                "body": {
+                    "code": "SANDBOX_UNAVAILABLE",
+                    "error": "The VM is still stopping or in use. Try again in a moment."
+                }
+            }
+        }
+    ]
+}

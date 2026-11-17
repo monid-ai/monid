@@ -1,0 +1,25 @@
+{
+    "name": "execute-exit-code",
+    "description": "Real 2026-10-26 recording: a command exiting 3 still answers 200, with exitCode 3 and its stderr.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/api/v2/sandboxes/sbx_224ff457bf3f4724841f4ccf343f1fcd/execute"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "result": {
+                        "stdout": "",
+                        "stderr": "failing\n",
+                        "exitCode": 3,
+                        "timedOut": false,
+                        "stdoutTruncated": false,
+                        "stderrTruncated": false
+                    }
+                }
+            }
+        }
+    ]
+}

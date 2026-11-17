@@ -385,4 +385,13 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "Tools to pull public government records, including financial " +
             "disclosures, filings, registries, and more.",
     },
+    {
+        // Not data and not a generated artifact: a computer the agent
+        // keeps, runs programs on, and pays for while it runs.
+        id: "code-execution",
+        displayName: "Code Execution",
+        description:
+            "Cloud computers and sandboxes where an agent runs commands, " +
+            "code, builds, and servers.",
+    },
 ]);

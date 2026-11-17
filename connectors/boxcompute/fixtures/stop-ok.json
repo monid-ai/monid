@@ -1,0 +1,32 @@
+{
+    "name": "stop-ok",
+    "description": "Real 2026-10-26 recording: stopping the running VM answers 200 with stopped: true and state 'cold'.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/api/v2/sandboxes/sbx_224ff457bf3f4724841f4ccf343f1fcd/stop"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "sandbox": {
+                        "id": "sbx_224ff457bf3f4724841f4ccf343f1fcd",
+                        "workspaceId": "ws_0123456789abcdef0123456789abcdef",
+                        "name": "new-vm",
+                        "state": "cold",
+                        "vmSandbox": true,
+                        "blockNetwork": false,
+                        "size": "small",
+                        "diskGiB": 30,
+                        "metadata": {},
+                        "autoResume": true,
+                        "createdAt": 1792421587941,
+                        "lastUsedAt": 1793000612327
+                    },
+                    "stopped": true
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-delete-busy",
+    "description": "Synthetic, with the body of a real 409 from stop: DELETE refused while the VM is still stopping.",
+    "calls": [
+        {
+            "req": {
+                "method": "DELETE",
+                "url": "{{request.origin}}/api/v2/sandboxes/sbx_ed730f785e584b43982a8ada3722af1b"
+            },
+            "res": {
+                "status": 409,
+                "body": {
+                    "code": "SANDBOX_UNAVAILABLE",
+                    "error": "The VM is still stopping or in use. Try again in a moment."
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,27 @@
+{
+    "name": "list-files-ok",
+    "description": "Real 2026-10-26 recording: one page listing the single file the execute-ok script wrote.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v2/sandboxes/sbx_224ff457bf3f4724841f4ccf343f1fcd/files/list?path=%2Fworkspace%2F.monid-fixture"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "entries": [
+                        {
+                            "name": "hello.txt",
+                            "path": "/workspace/.monid-fixture/hello.txt",
+                            "kind": "file",
+                            "size": 5,
+                            "mtimeMs": 0
+                        }
+                    ],
+                    "nextCursor": null
+                }
+            }
+        }
+    ]
+}
