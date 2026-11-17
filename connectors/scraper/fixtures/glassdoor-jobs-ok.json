@@ -1,0 +1,112 @@
+{
+    "name": "glassdoor-jobs-ok",
+    "description": "Scraper POST /glassdoor/jobs: a real recording, trimmed and PII-scrubbed by the recorder. The url is bound, so the chain does not pin the host.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "keyword": "software engineer",
+                    "maxJobs": 3
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "data": {
+                        "jobs": [
+                            {
+                                "jobId": 1010211603604,
+                                "url": "https://www.glassdoor.com/job-listing/software-engineer-i-rocket-companies-JV_IC1134644_KO0,19_KE20,36.htm?jl=1010211603604",
+                                "profile": {
+                                    "title": "Software Engineer I",
+                                    "normalizedTitle": "software engineer",
+                                    "descriptionSnippet": "The company provides reasonable accommodations to qualified individuals with disabilities in accordance with applicable state and federal laws.",
+                                    "ageInDays": 86,
+                                    "postedDate": "2026-07-28",
+                                    "expired": false,
+                                    "easyApply": false,
+                                    "isSponsored": false
+                                },
+                                "location": {
+                                    "name": "Detroit, MI",
+                                    "type": "C"
+                                },
+                                "compensation": {
+                                    "salaryMin": 84000,
+                                    "salaryMax": 207000,
+                                    "salaryMedian": 145500,
+                                    "currency": "USD",
+                                    "period": "ANNUAL",
+                                    "source": "EMPLOYER_PROVIDED"
+                                },
+                                "employer": {
+                                    "id": 7856,
+                                    "name": "Rocket Companies, Inc.",
+                                    "shortName": "Rocket",
+                                    "logoUrl": "https://media.glassdoor.com/sql/7856/rocket-companies-squareLogo-1736880869351.png",
+                                    "industry": "Banking & Lending",
+                                    "sector": "Financial Services",
+                                    "rating": 3.5
+                                },
+                                "meta": {
+                                    "seoJobLink": "https://www.glassdoor.com/job-listing/software-engineer-i-rocket-companies-JV_IC1134644_KO0,19_KE20,36.htm?jl=1010211603604",
+                                    "scrapedAt": "2026-10-22T22:02:17.392Z"
+                                }
+                            },
+                            {
+                                "jobId": 1010288661361,
+                                "url": "https://www.glassdoor.com/job-listing/software-engineer-product-prelim-JV_IC1132348_KO0,25_KE26,32.htm?jl=1010288661361",
+                                "profile": {
+                                    "title": "Software Engineer, Product",
+                                    "normalizedTitle": "software engineer",
+                                    "descriptionSnippet": "You'll work directly with our customers, product team, and engineering leadership to build systems that handle everything from online deposit account opening to…",
+                                    "ageInDays": 15,
+                                    "postedDate": "2026-10-07",
+                                    "expired": false,
+                                    "easyApply": false,
+                                    "isSponsored": false
+                                },
+                                "location": {
+                                    "name": "New York, NY",
+                                    "type": "C"
+                                },
+                                "compensation": {
+                                    "salaryMin": 140000,
+                                    "salaryMax": 230000,
+                                    "salaryMedian": 185000,
+                                    "currency": "USD",
+                                    "period": "ANNUAL",
+                                    "source": "EMPLOYER_PROVIDED"
+                                },
+                                "employer": {
+                                    "id": 6094091,
+                                    "name": "Prelim",
+                                    "shortName": "Prelim",
+                                    "logoUrl": "https://media.glassdoor.com/sql/6094091/prelim-squareLogo-1649301984676.png",
+                                    "industry": "Enterprise Software & Network Solutions",
+                                    "sector": "Information Technology",
+                                    "rating": 4.3
+                                },
+                                "meta": {
+                                    "seoJobLink": "https://www.glassdoor.com/job-listing/software-engineer-product-prelim-JV_IC1132348_KO0,25_KE26,32.htm?jl=1010288661361",
+                                    "scrapedAt": "2026-10-22T22:02:17.392Z"
+                                }
+                            }
+                        ],
+                        "totalJobsCount": 89700,
+                        "status": "complete",
+                        "failedSections": [],
+                        "scrapedAt": "2026-10-22T22:02:17.392Z"
+                    },
+                    "meta": {
+                        "tool": "glassdoor-jobs",
+                        "creditsUsed": 2,
+                        "requestId": "req_da5f8f904c34a962bf715b29"
+                    }
+                }
+            }
+        }
+    ]
+}

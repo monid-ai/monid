@@ -1,0 +1,74 @@
+{
+    "name": "linkedin-jobs-ok",
+    "description": "Scraper POST /linkedin/jobs: a real recording, trimmed and PII-scrubbed by the recorder. The url is bound, so the chain does not pin the host.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "keyword": "platform engineer",
+                    "location": "Stockholm",
+                    "maxItems": 3
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "data": {
+                        "jobs": [
+                            {
+                                "jobId": "4412492273",
+                                "jobSlug": "platform-engineer-at-tandem-health-4412492273",
+                                "title": "Platform Engineer",
+                                "company": "Tandem Health",
+                                "companySlug": "tandem-health",
+                                "companyUrl": "https://se.linkedin.com/company/tandem-health",
+                                "companyLogoUrl": "https://media.licdn.com/dms/image/v2/D4D0BAQGJnhLs7tbL9w/company-logo_100_100/B4DZqRV3ehGgAQ-/0/1763375020406/tandem_health_logo",
+                                "location": "Stockholm, Stockholm County, Sweden",
+                                "jobUrl": "https://www.linkedin.com/jobs/view/platform-engineer-at-tandem-health-4412492273",
+                                "position": 1,
+                                "postedDate": "2026-05-12",
+                                "postedTimeAgo": "5 months ago",
+                                "isNew": false,
+                                "salary": null,
+                                "badge": null,
+                                "hiringSignal": null,
+                                "benefitsSummary": null
+                            },
+                            {
+                                "jobId": "4456874869",
+                                "jobSlug": "senior-platform-engineer-at-doktor-se-4456874869",
+                                "title": "Senior Platform Engineer",
+                                "company": "Doktor.Se",
+                                "companySlug": "doktor.se",
+                                "companyUrl": "https://se.linkedin.com/company/doktor.se",
+                                "companyLogoUrl": "https://media.licdn.com/dms/image/v2/D4D0BAQGh4sL-QJNtVw/company-logo_100_100/B4DZpTV_7XJEAU-/0/1762334867632/doktorse_logo",
+                                "location": "Stockholm, Stockholm County, Sweden",
+                                "jobUrl": "https://www.linkedin.com/jobs/view/senior-platform-engineer-at-doktor-se-4456874869",
+                                "position": 2,
+                                "postedDate": "2026-09-01",
+                                "postedTimeAgo": "1 month ago",
+                                "isNew": false,
+                                "salary": null,
+                                "badge": null,
+                                "hiringSignal": null,
+                                "benefitsSummary": null
+                            }
+                        ],
+                        "count": 3,
+                        "truncated": false,
+                        "partial": false,
+                        "warnings": [],
+                        "scrapedAt": "2026-10-22T22:01:32.972Z"
+                    },
+                    "meta": {
+                        "tool": "linkedin-jobs",
+                        "creditsUsed": 1,
+                        "requestId": "req_194027f1520d04b73f3fb68d"
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,426 @@
+{
+    "name": "naukri-jobs-ok",
+    "description": "Scraper POST /naukri/jobs: a real recording, trimmed and PII-scrubbed by the recorder. The url is bound, so the chain does not pin the host.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "keyword": "data analyst",
+                    "location": "Bengaluru",
+                    "maxItems": 2
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "jobs": [
+                            {
+                                "id": "221026501100",
+                                "title": {
+                                    "text": "Data Analyst"
+                                },
+                                "urls": {
+                                    "naukri": "https://www.naukri.com/job-listings-data-analyst-rarr-technologies-bengaluru-8-to-12-years-221026501100",
+                                    "apply": "https://atsmantra.com/job-detail-rarr-technologies-data-analyst-bangalore-bengaluru-8-12-years-176414",
+                                    "external": "https://atsmantra.com/job-detail-rarr-technologies-data-analyst-bangalore-bengaluru-8-12-years-176414"
+                                },
+                                "description": {
+                                    "snippet": "Experience in finance or business reporting. . Ability to analyze complex datasets and communicate findings clearly. . Strong analytical,problem-solving,and communication skills. . Disclaimer: This job posting has been aggregated from external source Required Skills Preferred Experience and Attributes",
+                                    "text": null,
+                                    "html": null
+                                },
+                                "company": {
+                                    "id": "5761892",
+                                    "groupId": "4653200",
+                                    "name": "Rarr Technologies",
+                                    "url": "https://www.naukri.com/rarr-technologies-jobs-careers-5480988",
+                                    "logoUrl": "https://img.naukimg.com/logo_images/groups/v1/mobile/4653200.gif",
+                                    "website": null,
+                                    "address": null,
+                                    "isKycVerified": null,
+                                    "isCustomName": null,
+                                    "hiringFor": null,
+                                    "description": null,
+                                    "industry": null,
+                                    "rating": {
+                                        "value": 4.1,
+                                        "count": 38,
+                                        "source": "ambitionbox",
+                                        "url": "https://www.ambitionbox.com/reviews/rarr-technologies-reviews",
+                                        "title": "RARR Technologies Reviews by Employees"
+                                    },
+                                    "media": {
+                                        "photos": [],
+                                        "videos": [],
+                                        "presentations": []
+                                    },
+                                    "branding": {
+                                        "bannerUrl": null
+                                    },
+                                    "ambitionBox": {
+                                        "benefits": {
+                                            "names": [],
+                                            "reportedBy": null,
+                                            "url": null
+                                        },
+                                        "salaryInsights": {
+                                            "role": null,
+                                            "minCtcText": null,
+                                            "averageCtcText": null,
+                                            "maxCtcText": null,
+                                            "url": null
+                                        },
+                                        "award": {
+                                            "title": null,
+                                            "url": null
+                                        }
+                                    }
+                                },
+                                "location": {
+                                    "text": "Bengaluru",
+                                    "places": [
+                                        "Bengaluru"
+                                    ],
+                                    "countryCode": "IN",
+                                    "details": [
+                                        {
+                                            "id": null,
+                                            "label": "Bengaluru",
+                                            "url": null,
+                                            "localities": []
+                                        }
+                                    ]
+                                },
+                                "workArrangement": {
+                                    "type": "unknown",
+                                    "label": null,
+                                    "hybridDetail": null
+                                },
+                                "experience": {
+                                    "text": "8-12 Yrs",
+                                    "minYears": 8,
+                                    "maxYears": 12
+                                },
+                                "salary": {
+                                    "text": "Not disclosed",
+                                    "min": null,
+                                    "max": null,
+                                    "currency": null,
+                                    "period": null,
+                                    "disclosed": false,
+                                    "monthlyMin": null,
+                                    "monthlyMax": null,
+                                    "variablePercentage": null,
+                                    "breakdown": []
+                                },
+                                "classification": {
+                                    "skills": [
+                                        "Analytical",
+                                        "SQL"
+                                    ],
+                                    "preferredSkills": [],
+                                    "otherSkills": [],
+                                    "department": null,
+                                    "roleCategory": null,
+                                    "role": null,
+                                    "industry": null,
+                                    "jobType": null,
+                                    "employmentTypes": [],
+                                    "education": {
+                                        "undergraduate": [],
+                                        "postgraduate": [],
+                                        "postPostgraduate": [],
+                                        "tenth": [],
+                                        "twelfth": [],
+                                        "doesNotMatter": null,
+                                        "requirementText": null,
+                                        "degreeCombination": null
+                                    }
+                                },
+                                "apply": {
+                                    "url": "https://atsmantra.com/job-detail-rarr-technologies-data-analyst-bangalore-bengaluru-8-12-years-176414",
+                                    "method": "external",
+                                    "count": null,
+                                    "vacancies": null,
+                                    "deadline": null,
+                                    "referenceCode": null,
+                                    "isAvailable": null,
+                                    "requiresQuestionnaire": false,
+                                    "hasMultipleMethods": false
+                                },
+                                "dates": {
+                                    "posted": "2026-10-22T10:07:55.000Z",
+                                    "postedText": "1 Day Ago",
+                                    "validThrough": null
+                                },
+                                "signals": {
+                                    "status": "unknown",
+                                    "isSponsored": null,
+                                    "postedBy": "unknown",
+                                    "isWalkIn": false,
+                                    "viewCount": null,
+                                    "isPostedToday": false,
+                                    "isBranded": null,
+                                    "tags": [],
+                                    "diversity": {
+                                        "gender": null,
+                                        "label": null,
+                                        "url": null,
+                                        "bannerUrl": null
+                                    }
+                                },
+                                "walkIn": {
+                                    "start": null,
+                                    "end": null,
+                                    "timing": null,
+                                    "venue": null,
+                                    "mapUrl": null,
+                                    "workingDays": []
+                                },
+                                "source": {
+                                    "board": "1",
+                                    "mode": "crawled",
+                                    "roleCategoryId": "1018",
+                                    "isTopGroup": false
+                                },
+                                "internship": {
+                                    "isInternship": null,
+                                    "duration": null,
+                                    "stipend": {
+                                        "text": null,
+                                        "currency": null
+                                    },
+                                    "startDate": null,
+                                    "endDate": null,
+                                    "applyBy": null,
+                                    "hasPrePlacementOffer": null,
+                                    "perks": []
+                                },
+                                "meta": {
+                                    "schemaVersion": "2.1",
+                                    "source": "naukri",
+                                    "scrapedAt": "2026-10-22T22:00:25.064Z",
+                                    "detailStatus": "not_requested",
+                                    "search": {
+                                        "keyword": "data analyst",
+                                        "location": "Bengaluru",
+                                        "totalResults": 6535
+                                    },
+                                    "page": 1,
+                                    "position": 0
+                                }
+                            },
+                            {
+                                "id": "211026008406",
+                                "title": {
+                                    "text": "Data Analyst"
+                                },
+                                "urls": {
+                                    "naukri": "https://www.naukri.com/job-listings-data-analyst-cimpress-india-bengaluru-1-to-3-years-211026008406",
+                                    "apply": null,
+                                    "external": null
+                                },
+                                "description": {
+                                    "snippet": "We heard from our team members that having the freedom,autonomy,and trust in each other to work from home and the ability to operate when they are most productive empowers them to be their best Experience with any data visualization tool (preferably Looker),building data science models,and experience with dbt models. . Why Youll Love Working Here: .",
+                                    "text": null,
+                                    "html": null
+                                },
+                                "company": {
+                                    "id": "1464596",
+                                    "groupId": "1410430",
+                                    "name": "Cimpress",
+                                    "url": "https://www.naukri.com/cimpress-jobs-careers-749965",
+                                    "logoUrl": "https://img.naukimg.com/logo_images/groups/v1/mobile/1410430.gif",
+                                    "website": null,
+                                    "address": null,
+                                    "isKycVerified": null,
+                                    "isCustomName": null,
+                                    "hiringFor": null,
+                                    "description": null,
+                                    "industry": null,
+                                    "rating": {
+                                        "value": 3.8,
+                                        "count": 496,
+                                        "source": "ambitionbox",
+                                        "url": "https://www.ambitionbox.com/reviews/cimpress-reviews",
+                                        "title": "Cimpress Reviews by Employees"
+                                    },
+                                    "media": {
+                                        "photos": [],
+                                        "videos": [],
+                                        "presentations": []
+                                    },
+                                    "branding": {
+                                        "bannerUrl": null
+                                    },
+                                    "ambitionBox": {
+                                        "benefits": {
+                                            "names": [],
+                                            "reportedBy": null,
+                                            "url": null
+                                        },
+                                        "salaryInsights": {
+                                            "role": null,
+                                            "minCtcText": null,
+                                            "averageCtcText": null,
+                                            "maxCtcText": null,
+                                            "url": null
+                                        },
+                                        "award": {
+                                            "title": null,
+                                            "url": null
+                                        }
+                                    }
+                                },
+                                "location": {
+                                    "text": "Remote",
+                                    "places": [
+                                        "Remote"
+                                    ],
+                                    "countryCode": "IN",
+                                    "details": [
+                                        {
+                                            "id": null,
+                                            "label": "Remote",
+                                            "url": null,
+                                            "localities": []
+                                        }
+                                    ]
+                                },
+                                "workArrangement": {
+                                    "type": "unknown",
+                                    "label": null,
+                                    "hybridDetail": null
+                                },
+                                "experience": {
+                                    "text": "1-3 Yrs",
+                                    "minYears": 1,
+                                    "maxYears": 3
+                                },
+                                "salary": {
+                                    "text": "Not disclosed",
+                                    "min": null,
+                                    "max": null,
+                                    "currency": null,
+                                    "period": null,
+                                    "disclosed": false,
+                                    "monthlyMin": null,
+                                    "monthlyMax": null,
+                                    "variablePercentage": null,
+                                    "breakdown": []
+                                },
+                                "classification": {
+                                    "skills": [
+                                        "Looker",
+                                        "SQL"
+                                    ],
+                                    "preferredSkills": [],
+                                    "otherSkills": [],
+                                    "department": null,
+                                    "roleCategory": null,
+                                    "role": null,
+                                    "industry": null,
+                                    "jobType": null,
+                                    "employmentTypes": [],
+                                    "education": {
+                                        "undergraduate": [],
+                                        "postgraduate": [],
+                                        "postPostgraduate": [],
+                                        "tenth": [],
+                                        "twelfth": [],
+                                        "doesNotMatter": null,
+                                        "requirementText": null,
+                                        "degreeCombination": null
+                                    }
+                                },
+                                "apply": {
+                                    "url": null,
+                                    "method": "naukri",
+                                    "count": null,
+                                    "vacancies": null,
+                                    "deadline": null,
+                                    "referenceCode": null,
+                                    "isAvailable": null,
+                                    "requiresQuestionnaire": true,
+                                    "hasMultipleMethods": false
+                                },
+                                "dates": {
+                                    "posted": "2026-10-21T07:00:31.369Z",
+                                    "postedText": "1 Day Ago",
+                                    "validThrough": null
+                                },
+                                "signals": {
+                                    "status": "unknown",
+                                    "isSponsored": null,
+                                    "postedBy": "unknown",
+                                    "isWalkIn": false,
+                                    "viewCount": null,
+                                    "isPostedToday": false,
+                                    "isBranded": null,
+                                    "tags": [],
+                                    "diversity": {
+                                        "gender": null,
+                                        "label": null,
+                                        "url": null,
+                                        "bannerUrl": null
+                                    }
+                                },
+                                "walkIn": {
+                                    "start": null,
+                                    "end": null,
+                                    "timing": null,
+                                    "venue": null,
+                                    "mapUrl": null,
+                                    "workingDays": []
+                                },
+                                "source": {
+                                    "board": "1",
+                                    "mode": "jp",
+                                    "roleCategoryId": "1018",
+                                    "isTopGroup": false
+                                },
+                                "internship": {
+                                    "isInternship": null,
+                                    "duration": null,
+                                    "stipend": {
+                                        "text": null,
+                                        "currency": null
+                                    },
+                                    "startDate": null,
+                                    "endDate": null,
+                                    "applyBy": null,
+                                    "hasPrePlacementOffer": null,
+                                    "perks": []
+                                },
+                                "meta": {
+                                    "schemaVersion": "2.1",
+                                    "source": "naukri",
+                                    "scrapedAt": "2026-10-22T22:00:25.064Z",
+                                    "detailStatus": "not_requested",
+                                    "search": {
+                                        "keyword": "data analyst",
+                                        "location": "Bengaluru",
+                                        "totalResults": 6535
+                                    },
+                                    "page": 1,
+                                    "position": 1
+                                }
+                            }
+                        ],
+                        "count": 2,
+                        "totalResults": 6535,
+                        "truncated": false
+                    },
+                    "meta": {
+                        "tool": "naukri-jobs",
+                        "creditsUsed": 1,
+                        "requestId": "req_33a959d4c2303b5ce5df962c"
+                    }
+                }
+            }
+        }
+    ]
+}

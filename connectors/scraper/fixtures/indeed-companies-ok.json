@@ -1,0 +1,126 @@
+{
+    "name": "indeed-companies-ok",
+    "description": "Scraper POST /indeed/companies: a real recording, trimmed and PII-scrubbed by the recorder. The url is bound, so the chain does not pin the host.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "keyword": "surgery partners",
+                    "maxItems": 2
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "data": {
+                        "mode": "search",
+                        "profiles": [
+                            {
+                                "key": "Surgery-Partners",
+                                "name": "Surgery Partners",
+                                "industry": "Hospitals & Health Clinics",
+                                "size": null,
+                                "revenue": null,
+                                "description": "We see value in individuality. Surgery Partners doesn't take a \"one-size-fits-all\" approach to healthcare. We're about meeting the diverse healthcare needs of the communities we serve.  We are a leading operator of surgical facilities across the United States. Additionally, through our portfolio of companies, we provide ancillary services focused on developing innovative solutions for our physicians and patients. We are dedicated to improving quality of care in a convenient and cost-effective ma",
+                                "claimed": true,
+                                "ratings": {
+                                    "overall": 2.7,
+                                    "reviewCount": 234,
+                                    "categoryRatings": {
+                                        "compensationBenefits": 2.9,
+                                        "culture": 2.6,
+                                        "jobSecurityAdvancement": 2.5,
+                                        "management": 2.4,
+                                        "workLifeBalance": 2.9
+                                    },
+                                    "yearlyRatings": [
+                                        {
+                                            "year": 2026,
+                                            "rating": 1
+                                        },
+                                        {
+                                            "year": 2025,
+                                            "rating": 3.0833332538604736
+                                        }
+                                    ]
+                                },
+                                "urls": {
+                                    "indeed": "https://www.indeed.com/cmp/Surgery-Partners",
+                                    "website": "http://www.surgery-partners.com/"
+                                },
+                                "headquarters": "Nashville",
+                                "totalJobCount": 105,
+                                "meta": {
+                                    "country": "US",
+                                    "scrapedAt": "2026-10-22T21:58:40.737Z"
+                                }
+                            },
+                            {
+                                "key": "The-Medical-Team",
+                                "name": "The Medical Team",
+                                "industry": "Healthcare",
+                                "size": null,
+                                "revenue": null,
+                                "description": "THE MEDICAL TEAM, INC. is a privately held company established in 1978 and headquartered in suburban Washington, DC (Reston, VA). Our family of companies includes: THE MEDICAL TEAM, INC., Med Team, Inc., THE MEDICAL TEAM Personal Care Services and Catastrophic Care Solutions. The company has operated home care agencies in Louisiana since 1979, in Texas and Michigan since 1983, and in Virginia since 1985. Each is licensed and certified to provide services under Medicare and Medicaid. All agencies",
+                                "claimed": true,
+                                "ratings": {
+                                    "overall": 4,
+                                    "reviewCount": 914,
+                                    "categoryRatings": {
+                                        "compensationBenefits": 3.8,
+                                        "culture": 3.9,
+                                        "jobSecurityAdvancement": 3.8,
+                                        "management": 3.8,
+                                        "workLifeBalance": 4
+                                    },
+                                    "yearlyRatings": [
+                                        {
+                                            "year": 2026,
+                                            "rating": 4.839285850524902
+                                        },
+                                        {
+                                            "year": 2025,
+                                            "rating": 4.445945739746094
+                                        }
+                                    ]
+                                },
+                                "urls": {
+                                    "indeed": "https://www.indeed.com/cmp/The-Medical-Team",
+                                    "website": "http://www.medicalteam.com/"
+                                },
+                                "headquarters": "1902 Campus Commons Dr., Ste. 650\r\nReston, VA 20191",
+                                "totalJobCount": 57,
+                                "meta": {
+                                    "country": "US",
+                                    "scrapedAt": "2026-10-22T21:58:40.718Z"
+                                }
+                            }
+                        ],
+                        "count": 2,
+                        "requestedCount": 2,
+                        "outcomes": [
+                            {
+                                "input": "Surgery-Partners",
+                                "status": "ok",
+                                "profileIndex": 0
+                            },
+                            {
+                                "input": "The-Medical-Team",
+                                "status": "ok",
+                                "profileIndex": 1
+                            }
+                        ],
+                        "truncated": true
+                    },
+                    "meta": {
+                        "tool": "indeed-companies",
+                        "creditsUsed": 1,
+                        "requestId": "req_7f9e9e67740bd5cde91f4e9c"
+                    }
+                }
+            }
+        }
+    ]
+}

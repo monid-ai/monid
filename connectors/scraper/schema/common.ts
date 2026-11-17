@@ -1,0 +1,77 @@
+import { z } from "zod";
+
+/**
+ * Indeed country domains served by both Indeed tools (the company tool's
+ * documented 56). The jobs tool serves eight more, listed beside it.
+ */
+export const indeedCompanyCountryCodes = [
+    "US",
+    "UK",
+    "CA",
+    "AU",
+    "IN",
+    "DE",
+    "FR",
+    "JP",
+    "BR",
+    "MX",
+    "IT",
+    "ES",
+    "NL",
+    "BE",
+    "CH",
+    "AT",
+    "SG",
+    "HK",
+    "IE",
+    "NZ",
+    "AR",
+    "BH",
+    "CL",
+    "CN",
+    "CO",
+    "CZ",
+    "DK",
+    "FI",
+    "GR",
+    "HU",
+    "ID",
+    "IL",
+    "KW",
+    "LU",
+    "MY",
+    "MA",
+    "NO",
+    "OM",
+    "PE",
+    "PH",
+    "PL",
+    "PT",
+    "QA",
+    "RO",
+    "SA",
+    "ZA",
+    "KR",
+    "SE",
+    "TW",
+    "TR",
+    "UA",
+    "AE",
+    "VE",
+    "VN",
+] as const;
+
+export const indeedJobCountryCodes = [
+    ...indeedCompanyCountryCodes,
+    "CR",
+    "EC",
+    "EG",
+    "NG",
+    "PA",
+    "PK",
+    "TH",
+    "UY",
+] as const;
+
+export const zIndeedJobCountry = z.enum(indeedJobCountryCodes);
+export const zIndeedCompanyCountry = z.enum(indeedCompanyCountryCodes);

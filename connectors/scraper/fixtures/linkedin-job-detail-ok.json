@@ -1,0 +1,64 @@
+{
+    "name": "linkedin-job-detail-ok",
+    "description": "Scraper POST /linkedin/job-detail: a real recording, trimmed and PII-scrubbed by the recorder. The url is bound, so the chain does not pin the host.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "jobId": "4456874869"
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "data": {
+                        "job": {
+                            "jobId": "4456874869",
+                            "jobUrl": "https://www.linkedin.com/jobs/view/senior-platform-engineer-at-doktor-se-4456874869",
+                            "jobSlug": "senior-platform-engineer-at-doktor-se-4456874869",
+                            "title": "Senior Platform Engineer",
+                            "company": "Doktor.Se",
+                            "companyId": "11106345",
+                            "companySlug": "doktor.se",
+                            "companyUrl": "https://se.linkedin.com/company/doktor.se",
+                            "companyLogoUrl": "https://media.licdn.com/dms/image/v2/D4D0BAQGh4sL-QJNtVw/company-logo_100_100/B4DZpTV_7XJEAU-/0/1762334867632/doktorse_logo",
+                            "location": "Stockholm, Stockholm County, Sweden",
+                            "postedDate": null,
+                            "postedTimeAgo": "1 month ago",
+                            "isNew": false,
+                            "description": "Why Doktor.seDoktor.se is Sweden's largest digital healthcare provider. We combine physical clinics with a digital platform serving millions of consultations per year across Sweden, Germany, and Norway. Our 25-person engineering team has startup autonomy inside a profitable, international organization with 1,000+ employees and over 1B SEK in revenue.We run OpenAI and Anthropic models in production across patient and clinician workflows, and that footprint is growing fast.What you'll doOur infras",
+                            "descriptionHtml": "Why Doktor.se<br><br>Doktor.se is Sweden's largest digital healthcare provider. We combine physical clinics with a digital platform serving millions of consultations per year across Sweden, Germany, and Norway. Our 25-person engineering team has startup autonomy inside a profitable, international organization with 1,000+ employees and over 1B SEK in revenue.<br><br>We run OpenAI and Anthropic models in production across patient and clinician workflows, and that footprint is growing fast.<br><br>",
+                            "criteria": {
+                                "Seniority level": "Mid-Senior level",
+                                "Employment type": "Full-time",
+                                "Industries": "Hospitals and Health Care"
+                            },
+                            "experienceLevel": "Mid-Senior level",
+                            "employmentType": "Full-time",
+                            "jobFunction": null,
+                            "industries": "Hospitals and Health Care",
+                            "applicants": "92 applicants",
+                            "applicantsCategory": null,
+                            "compensationSalary": null,
+                            "compensationHeading": null,
+                            "compensationType": null,
+                            "compensationDescription": null,
+                            "featuredBenefits": [],
+                            "featuredBenefitsSource": null,
+                            "applicationMethod": "external",
+                            "closedNotice": null
+                        },
+                        "scrapedAt": "2026-10-22T22:01:41.689Z"
+                    },
+                    "meta": {
+                        "tool": "linkedin-job-detail",
+                        "creditsUsed": 1,
+                        "requestId": "req_7a4d624ad029f8bcf3c13127"
+                    }
+                }
+            }
+        }
+    ]
+}

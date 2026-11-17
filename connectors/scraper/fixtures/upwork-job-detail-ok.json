@@ -1,0 +1,79 @@
+{
+    "name": "upwork-job-detail-ok",
+    "description": "Scraper POST /upwork/job-detail: a real recording, trimmed and PII-scrubbed by the recorder. The url is bound, so the chain does not pin the host.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "jobId": "~022113101893289196200"
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "data": {
+                        "job": {
+                            "id": "~022113101893289196200",
+                            "title": "Senior Full-Stack Engineer | Python, AI & API Development | Long-Term Opportunity",
+                            "url": "https://www.upwork.com/jobs/Upwork-Job_~022113101893289196200/",
+                            "postedText": "2026-10-22T02:55:25.990Z",
+                            "description": {
+                                "snippet": null,
+                                "text": "I'm looking for an experienced, hands-on Senior Full-Stack Engineer to support the development and ongoing improvement of my software projects. I'm looking for someone with strong technical skills, sound engineering judgment, and the ability to take ownership of development tasks from planning through deployment. The ideal candidate has experience building real-world web applications, backend services, APIs, and AI-powered features. You should be comfortable working independently, understanding ",
+                                "html": "I'm looking for an experienced, hands-on Senior Full-Stack Engineer to support the development and ongoing improvement of my software projects. I'm looking for someone with strong technical skills, sound engineering judgment, and the ability to take ownership of development tasks from planning through deployment.\n\nThe ideal candidate has experience building real-world web applications, backend services, APIs, and AI-powered features. You should be comfortable working independently, understanding"
+                            },
+                            "locationEligibility": null,
+                            "contract": {
+                                "type": "hourly",
+                                "hourlyRate": {
+                                    "min": 60,
+                                    "max": 120,
+                                    "currency": "USD"
+                                },
+                                "fixedPrice": null,
+                                "experienceLevel": "Expert",
+                                "duration": "More than 6 months",
+                                "weeklyHours": "Less than 30 hrs/week"
+                            },
+                            "skills": [
+                                "Amazon Web Services",
+                                "API"
+                            ],
+                            "activity": {
+                                "proposals": "66",
+                                "interviewing": 10,
+                                "invitesSent": 0,
+                                "unansweredInvites": 0
+                            },
+                            "client": {
+                                "paymentVerified": true,
+                                "location": "Texas City, United States",
+                                "localTime": null,
+                                "memberSince": "2026-10-02T00:00:00.000Z",
+                                "totalSpentText": null,
+                                "hiresText": "0 hires",
+                                "hoursText": "0 hours",
+                                "rating": 0,
+                                "reviewCount": 0
+                            },
+                            "meta": {
+                                "sourceUrl": "https://www.upwork.com/jobs/Upwork-Job_~022113101893289196200/",
+                                "page": null,
+                                "position": null,
+                                "scrapedAt": "2026-10-22T22:01:02.980Z",
+                                "detailStatus": "fetched"
+                            }
+                        }
+                    },
+                    "meta": {
+                        "tool": "upwork-job-detail",
+                        "creditsUsed": 1,
+                        "requestId": "req_d5c090d36871ce6b3f6e7537"
+                    }
+                }
+            }
+        }
+    ]
+}
