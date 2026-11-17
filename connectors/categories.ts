@@ -324,6 +324,12 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "Tools to analyze search performance, including keywords, backlinks, traffic, and more.",
     },
     {
+        id: "api-benchmarks",
+        displayName: "API Benchmarks",
+        description:
+            "Tools to compare APIs, including who is best for each, plans, prices, and scores.",
+    },
+    {
         id: "geo",
         displayName: "GEO",
         description:

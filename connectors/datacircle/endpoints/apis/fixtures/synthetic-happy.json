@@ -1,0 +1,45 @@
+{
+    "name": "synthetic-happy",
+    "description": "https://api.datacircle.dev/v1/apis trimmed to two items",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.datacircle.dev/v1/apis"
+            },
+            "res": {
+                "status": 200,
+                "body": [
+                    {
+                        "api": "Employee profile",
+                        "slug": "linkedin-profile",
+                        "plans": 4675,
+                        "providers": 420,
+                        "sheetPage": "https://datacircle.dev/linkedin-profile-api-pricing",
+                        "bestPage": "https://datacircle.dev/best-linkedin-profile-api",
+                        "best": {
+                            "provider": "Bridgly",
+                            "plan": "Scale",
+                            "score": 78.4,
+                            "perThousand": 1
+                        }
+                    },
+                    {
+                        "api": "Person enrichment",
+                        "slug": "people-enrichment",
+                        "plans": 1028,
+                        "providers": 157,
+                        "sheetPage": "https://datacircle.dev/people-enrichment-api-pricing",
+                        "bestPage": "https://datacircle.dev/best-people-enrichment-api",
+                        "best": {
+                            "provider": "LeadMCP",
+                            "plan": "LeadMCP",
+                            "score": 71.7,
+                            "perThousand": 0.049
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
