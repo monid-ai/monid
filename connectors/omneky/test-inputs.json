@@ -1,0 +1,48 @@
+{
+    "image-ad": {
+        "body": {
+            "brand_metadata": {
+                "brand_url": "https://example.com",
+                "brand_name": "Acme Co"
+            },
+            "product_metadata": {
+                "product_name": "Cloud Runners",
+                "product_description": "Lightweight running shoes for daily training",
+                "product_images": [
+                    {
+                        "image_url": "https://cdn.example.com/shoe.jpg",
+                        "labels": ["top view"]
+                    }
+                ]
+            },
+            "ad_copies": [
+                {
+                    "copy_type": "headline",
+                    "copy_text": "Run Farther, Feel Lighter"
+                },
+                { "copy_type": "cta", "copy_text": "Shop Now" }
+            ],
+            "generation_metadata": { "aspect_ratios": "1:1" }
+        }
+    },
+    "video-ad": {
+        "body": {
+            "brand_metadata": {
+                "brand_url": "https://example.com",
+                "brand_name": "Acme Co"
+            },
+            "product_metadata": {
+                "product_name": "Cloud Runners",
+                "product_description": "Lightweight running shoes for daily training",
+                "product_images": ["https://cdn.example.com/shoe.jpg"]
+            },
+            "cta": "Shop Now",
+            "generation_metadata": {
+                "aspect_ratio": "9:16",
+                "target_duration": 12,
+                "locale": "en-US",
+                "user_prompt": "Energetic morning run, urban trail setting"
+            }
+        }
+    }
+}

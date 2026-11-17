@@ -1,0 +1,57 @@
+{
+    "name": "synthetic-image-failed",
+    "description": "SYNTHETIC: submit accepted, then the job reaches FAILED with the documented error string. The run must settle zero.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "job_id": "11111111-2222-4333-8444-555555555555",
+                    "type": "image_ad",
+                    "credits_used": 5,
+                    "job_ids": [
+                        "11111111-2222-4333-8444-555555555555"
+                    ]
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/external-api/jobs/11111111-2222-4333-8444-555555555555"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "job_id": "11111111-2222-4333-8444-555555555555",
+                    "type": "image_ad",
+                    "status": "PROCESSING",
+                    "response": null,
+                    "error": null,
+                    "result_url": null
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/external-api/jobs/11111111-2222-4333-8444-555555555555"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "job_id": "11111111-2222-4333-8444-555555555555",
+                    "type": "image_ad",
+                    "status": "FAILED",
+                    "response": null,
+                    "error": "Downstream generation model returned an error",
+                    "result_url": null
+                }
+            }
+        }
+    ]
+}

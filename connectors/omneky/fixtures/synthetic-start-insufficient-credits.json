@@ -1,0 +1,18 @@
+{
+    "name": "synthetic-start-insufficient-credits",
+    "description": "SYNTHETIC: the submit is rejected for lack of credits (402); no poll, no bill.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 402,
+                "body": {
+                    "detail": "Insufficient credits"
+                }
+            }
+        }
+    ]
+}
