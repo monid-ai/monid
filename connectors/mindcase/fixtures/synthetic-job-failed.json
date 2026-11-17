@@ -1,0 +1,63 @@
+{
+    "name": "synthetic-job-failed",
+    "description": "SYNTHETIC: the agent fails; the connector synthesizes a 500 error-as-data, zero-billed.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "job_id": "bafa10a0-d425-4467-9c36-8efe6202cbe7",
+                    "agent": "zepto/products",
+                    "status": "queued",
+                    "created_at": "2026-10-23T15:50:46.900000+00:00"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/jobs/bafa10a0-d425-4467-9c36-8efe6202cbe7"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "bafa10a0-d425-4467-9c36-8efe6202cbe7",
+                    "agent": "zepto/products",
+                    "status": "running",
+                    "row_count": 0,
+                    "usd_used": 0.0,
+                    "error": null,
+                    "started_at": "2026-10-23T15:50:46.910000+00:00",
+                    "completed_at": null,
+                    "created_at": "2026-10-23T15:50:46.900000+00:00",
+                    "expires_at": null
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/jobs/bafa10a0-d425-4467-9c36-8efe6202cbe7"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "bafa10a0-d425-4467-9c36-8efe6202cbe7",
+                    "agent": "zepto/products",
+                    "status": "failed",
+                    "row_count": 0,
+                    "usd_used": 0.0,
+                    "error": "Upstream source returned no data for this store.",
+                    "started_at": "2026-10-23T15:50:46.910000+00:00",
+                    "completed_at": null,
+                    "created_at": "2026-10-23T15:50:46.900000+00:00",
+                    "expires_at": null
+                }
+            }
+        }
+    ]
+}

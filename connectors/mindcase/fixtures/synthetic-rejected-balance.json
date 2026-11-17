@@ -1,0 +1,42 @@
+{
+    "name": "synthetic-rejected-balance",
+    "description": "SYNTHETIC: the wallet cannot cover the run; synthesized 402, zero-billed.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "job_id": "bafa10a0-d425-4467-9c36-8efe6202cbe7",
+                    "agent": "zepto/products",
+                    "status": "queued",
+                    "created_at": "2026-10-23T15:50:46.900000+00:00"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/jobs/bafa10a0-d425-4467-9c36-8efe6202cbe7"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "bafa10a0-d425-4467-9c36-8efe6202cbe7",
+                    "agent": "zepto/products",
+                    "status": "rejected_balance",
+                    "row_count": 0,
+                    "usd_used": 0.0,
+                    "error": "Insufficient balance for this run.",
+                    "started_at": "2026-10-23T15:50:46.910000+00:00",
+                    "completed_at": null,
+                    "created_at": "2026-10-23T15:50:46.900000+00:00",
+                    "expires_at": null
+                }
+            }
+        }
+    ]
+}

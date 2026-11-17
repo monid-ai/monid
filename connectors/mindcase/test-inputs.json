@@ -1,0 +1,708 @@
+{
+    "airbnb/listings": {
+        "urls": [
+            "https://www.airbnb.com/rooms/37879131",
+            "https://www.airbnb.com/rooms/1010503905929192028",
+            "https://www.airbnb.com/rooms/1404403902815216178",
+            "https://www.airbnb.com/rooms/1675554791743847017",
+            "https://www.airbnb.com/rooms/1285887172744396690",
+            "https://www.airbnb.com/rooms/1667608485035315996",
+            "https://www.airbnb.com/rooms/1643351505460876003",
+            "https://www.airbnb.com/rooms/993759176942173865",
+            "https://www.airbnb.com/rooms/700888293266225258",
+            "https://www.airbnb.com/rooms/934107469692156357"
+        ],
+        "locale": "en-US",
+        "currency": "USD",
+        "maxResults": 2
+    },
+    "airbnb/reviews": {
+        "urls": "https://www.airbnb.com/rooms/12937",
+        "locale": "en-US",
+        "maxResults": 2
+    },
+    "amazon-now/products": {
+        "category": "Dairy, Bread & Eggs",
+        "sub_category": "Cheese",
+        "pincode": "560037",
+        "maxResults": 2
+    },
+    "amazon/products": {
+        "urls": [
+            "https://www.amazon.com/dp/B0G4SW3XXP",
+            "https://www.amazon.com/dp/B0FXY18C1J",
+            "https://www.amazon.com/dp/B0FXY1DZ78",
+            "https://www.amazon.com/dp/B0GRVMYCB6",
+            "https://www.amazon.com/dp/B0GHRHXVN1",
+            "https://www.amazon.com/dp/B0FFTV1LXZ",
+            "https://www.amazon.com/dp/B0F7JZFKMQ",
+            "https://www.amazon.com/dp/B0FSCRCDYC",
+            "https://www.amazon.com/dp/B0DM1RCBHR",
+            "https://www.amazon.com/dp/B0CT6BQV81"
+        ],
+        "maxResults": 2
+    },
+    "amazon/reviews": {
+        "urls": "https://www.amazon.com/dp/B0G4SW3XXP",
+        "maxResults": 2
+    },
+    "bigbasket/products": {
+        "query": "chocolate",
+        "city": "Bengaluru",
+        "pincode": "560095",
+        "maxResults": 2
+    },
+    "blinkit/products": {
+        "query": "chocolate",
+        "city": "Agra",
+        "pincode": "282003",
+        "store_id": "44371",
+        "maxResults": 2
+    },
+    "booking/listings": {
+        "location": "Paris",
+        "checkIn": "2026-12-17",
+        "checkOut": "2026-12-19",
+        "maxResults": 2,
+        "currency": "EUR"
+    },
+    "booking/reviews": {
+        "urls": "https://www.booking.com/hotel/us/the-plaza.en-gb.html",
+        "maxReviewsPerHotel": 2
+    },
+    "builtwith/techstack": {
+        "domains": [
+            "vercel.com",
+            "allbirds.com",
+            "paulgraham.com",
+            "plausible.io",
+            "zerodha.com",
+            "example.com",
+            "basecamp.com",
+            "daringfireball.net",
+            "craigslist.org",
+            "sentry.io"
+        ]
+    },
+    "companies/by-technology": {
+        "technologies": [
+            "Shopify"
+        ],
+        "maxResults": 2
+    },
+    "companies/domain-lookup": {
+        "companyNames": [
+            "Stripe",
+            "Y Combinator",
+            "Airbnb",
+            "Shopify",
+            "Figma",
+            "Spotify",
+            "Canva",
+            "Zerodha",
+            "Atlassian",
+            "Dropbox"
+        ],
+        "limit": 1
+    },
+    "companies/emails": {
+        "domains": [
+            "stripe.com"
+        ],
+        "maxResults": 2
+    },
+    "companies/enrichment": {
+        "domains": [
+            "calendly.com",
+            "hashicorp.com",
+            "personio.com",
+            "razorpay.com",
+            "stripe.com",
+            "canva.com",
+            "gitlab.com",
+            "figma.com",
+            "zapier.com",
+            "notion.so"
+        ]
+    },
+    "email/role": {
+        "domains": [
+            "wikimediafoundation.org",
+            "plausible.io",
+            "ghost.org"
+        ],
+        "maxResults": 2
+    },
+    "email/verify": {
+        "emails": [
+            "media@stripe.com",
+            "presse@wuerth.com",
+            "press@kuka.com",
+            "presse@baywa.de",
+            "security@mozilla.org",
+            "zq8x7k2m4v9p1w3r6t5y0nq@gmail.com",
+            "qx7v2m9k4p1z8w3n6r5t0yb@yahoo.com",
+            "someone@gmial.com",
+            "h2h-probe-7731@guerrillamail.com",
+            "hello@example.com"
+        ]
+    },
+    "facebook/ads": {
+        "urls": "https://www.facebook.com/nike",
+        "maxResults": 2,
+        "activeStatus": "active",
+        "isDetailsPerAd": true
+    },
+    "facebook/comments": {
+        "post_url": "https://www.facebook.com/Cristiano/posts/pfbid0...",
+        "maxResults": 2,
+        "includeNestedComments": true
+    },
+    "facebook/events": {
+        "searchQueries": "Concert New York",
+        "maxResults": 2
+    },
+    "facebook/followers": {
+        "page_urls": "https://www.facebook.com/cocacola",
+        "followType": "follower",
+        "limit": 2
+    },
+    "facebook/marketplace": {
+        "url": "https://www.facebook.com/marketplace/nyc/electronics",
+        "maxResults": 2
+    },
+    "facebook/pages": {
+        "pageUrls": [
+            "https://www.facebook.com/Microsoft/",
+            "https://www.facebook.com/Apple/",
+            "https://www.facebook.com/NASA/",
+            "https://www.facebook.com/amazon/",
+            "https://www.facebook.com/cocacola/",
+            "https://www.facebook.com/google/",
+            "https://www.facebook.com/netflix/",
+            "https://www.facebook.com/disney/",
+            "https://www.facebook.com/nike/",
+            "https://www.facebook.com/Tesla/"
+        ]
+    },
+    "facebook/posts": {
+        "urls": "https://www.facebook.com/nike",
+        "maxResults": 2
+    },
+    "facebook/reels": {
+        "startUrls": "https://www.facebook.com/9gag",
+        "maxReels": 2
+    },
+    "facebook/reviews": {
+        "urls": "https://www.facebook.com/disneylandparis",
+        "maxResults": 2
+    },
+    "farfetch/products": {
+        "listing_url": "https://www.farfetch.com/shopping/men/gucci/items.aspx",
+        "maxResults": 2
+    },
+    "flipkart-minutes/products": {
+        "query": "chocolate",
+        "city": "New Delhi",
+        "pincode": "110001",
+        "maxResults": 2
+    },
+    "goat/products": {
+        "listing_url": "https://www.goat.com/brand/salomon",
+        "maxResults": 2
+    },
+    "google-maps/places": {
+        "keywords": "dental clinic",
+        "location": "Austin, Texas",
+        "maxResults": 2
+    },
+    "google-maps/reviews": {
+        "urls": "https://www.google.com/maps?cid=12441467956046586299",
+        "maxReviews": 2,
+        "sortBy": "mostRelevant"
+    },
+    "google/images": {
+        "queries": "LeBron James",
+        "maxResults": 2
+    },
+    "google/news": {
+        "maxResults": 2,
+        "query": "artificial intelligence",
+        "timeframe": "7d",
+        "region_language": "US:en"
+    },
+    "google/play/reviews": {
+        "inputs": "https://play.google.com/store/apps/details?id=com.instagram.android",
+        "maxResults": 2
+    },
+    "google/search": {
+        "queries": "best CRM tools 2026",
+        "maxPages": 2
+    },
+    "google/shopping": {
+        "queries": "PlayStation 5",
+        "country": "us",
+        "language": "en",
+        "maxResults": 2,
+        "dateRange": "anytime"
+    },
+    "gst-info/taxpayer": {
+        "gstins": [
+            "27AAECF2014J1ZW"
+        ],
+        "maxResults": 2
+    },
+    "indeed/jobs": {
+        "keyword": "warehouse associate",
+        "location": "Houston, TX",
+        "country": "US",
+        "maxItems": 2
+    },
+    "instagram/comments": {
+        "urls": "https://www.instagram.com/p/DZcGyUBjrSb/",
+        "maxResults": 2
+    },
+    "instagram/followers": {
+        "usernames": "natgeo",
+        "dataToScrape": "Followers",
+        "maxResults": 50
+    },
+    "instagram/posts": {
+        "handles": "natgeo",
+        "tab": "posts",
+        "maxResults": 2
+    },
+    "instagram/profiles": {
+        "usernames": [
+            "nike",
+            "neymarjr",
+            "natgeo",
+            "kingjames",
+            "therock",
+            "nasa",
+            "selenagomez",
+            "kyliejenner",
+            "instagram",
+            "cristiano"
+        ],
+        "maxResults": 2
+    },
+    "instagram/stories": {
+        "usernames": [
+            "natgeo"
+        ],
+        "maxResults": 2
+    },
+    "instamart/products": {
+        "query": "chocolate",
+        "city": "Agra",
+        "pincode": "282002",
+        "store_id": "1401076",
+        "maxResults": 2
+    },
+    "ip/company": {
+        "ips": [
+            "8.8.8.8",
+            "1.1.1.1",
+            "17.253.144.10",
+            "13.107.42.14",
+            "54.239.28.85",
+            "140.82.112.3",
+            "151.101.1.140",
+            "157.240.22.35",
+            "104.244.42.1",
+            "2a03:2880:f10c:83:face:b00c:0:25de"
+        ]
+    },
+    "leads/company-research": {
+        "domains": [
+            "monzo.com",
+            "stripe.com",
+            "plausible.io",
+            "basecamp.com",
+            "allbirds.com",
+            "alan.com",
+            "zerodha.com",
+            "gitlab.com",
+            "zapier.com",
+            "figma.com"
+        ]
+    },
+    "leads/contacts": {
+        "websites": [
+            "https://monzo.com",
+            "https://www.fairphone.com",
+            "https://www.mozilla.org",
+            "https://www.zoho.com",
+            "https://katzsdelicatessen.com",
+            "https://www.decathlon.in",
+            "https://basecamp.com",
+            "https://www.ikea.com",
+            "https://www.allbirds.com",
+            "https://www.patagonia.com"
+        ],
+        "maxResults": 2
+    },
+    "leads/creator-contacts": {
+        "profileUrls": [
+            "https://www.youtube.com/@TechnicalGuruji",
+            "https://www.youtube.com/@veritasium",
+            "https://www.youtube.com/@LinusTechTips",
+            "https://www.youtube.com/@mkbhd",
+            "https://www.tiktok.com/@mkbhd",
+            "https://www.youtube.com/@MrBeast",
+            "https://www.youtube.com/@kurzgesagt",
+            "https://www.youtube.com/@CarryMinati",
+            "https://www.youtube.com/@NatGeo",
+            "https://www.tiktok.com/@zachking"
+        ]
+    },
+    "linkedin/ads-library": {
+        "urls": "https://www.linkedin.com/ad-library/search?accountOwner=nvidia&countries=BR&dateOption=last-30-days",
+        "maxResults": 2
+    },
+    "linkedin/companies": {
+        "companies": [
+            "https://www.linkedin.com/company/openai/",
+            "https://www.linkedin.com/company/meta/",
+            "https://www.linkedin.com/company/google/",
+            "https://www.linkedin.com/company/salesforce/",
+            "https://www.linkedin.com/company/stripe/",
+            "https://www.linkedin.com/company/netflix/",
+            "https://www.linkedin.com/company/apple/",
+            "https://www.linkedin.com/company/tesla-motors/",
+            "https://www.linkedin.com/company/microsoft/",
+            "https://www.linkedin.com/company/adobe/"
+        ],
+        "maxResults": 2
+    },
+    "linkedin/company-employees": {
+        "maxResults": 2,
+        "companies": [
+            "https://www.linkedin.com/company/google"
+        ]
+    },
+    "linkedin/domain-lookup": {
+        "domains": [
+            "stripe.com",
+            "gumloop.com",
+            "awarathon.com",
+            "shopify.com",
+            "canva.com",
+            "airbnb.com",
+            "github.com",
+            "vercel.com",
+            "atlassian.com",
+            "datadoghq.com"
+        ],
+        "maxResults": 2
+    },
+    "linkedin/emails": {
+        "urls": [
+            "https://www.linkedin.com/in/satyanadella",
+            "https://www.linkedin.com/in/sundarpichai"
+        ]
+    },
+    "linkedin/jobs": {
+        "jobTitles": "AI Engineer",
+        "locations": "San Francisco",
+        "maxResults": 2
+    },
+    "linkedin/post-comments": {
+        "posts": "https://www.linkedin.com/posts/satyanadella_to-mark-the-broad-rollout-of-agent-mode-in-activity-7452924970042826753-r6bz",
+        "maxResults": 2,
+        "includeReplies": false
+    },
+    "linkedin/post-reactions": {
+        "posts": "https://www.linkedin.com/posts/reidhoffman_ten-years-ago-if-youd-told-me-a-pope-would-activity-7455254577534107648-o-Gf",
+        "maxResults": 2
+    },
+    "linkedin/posts": {
+        "urls": "https://www.linkedin.com/in/satyanadella/",
+        "maxResults": 2
+    },
+    "linkedin/posts-group": {
+        "urls": [
+            "https://www.linkedin.com/groups/12871280/"
+        ],
+        "maxResults": 2
+    },
+    "linkedin/profile-comments": {
+        "profiles": "https://www.linkedin.com/in/satyanadella",
+        "maxResults": 2
+    },
+    "linkedin/profile-reactions": {
+        "profiles": "https://www.linkedin.com/in/satyanadella",
+        "maxResults": 2
+    },
+    "linkedin/profiles": {
+        "queries": [
+            "https://www.linkedin.com/in/adammgrant",
+            "https://www.linkedin.com/in/sundarpichai",
+            "https://www.linkedin.com/in/ariannahuffington",
+            "https://www.linkedin.com/in/andrewyng",
+            "https://www.linkedin.com/in/dharmesh",
+            "https://www.linkedin.com/in/satyanadella",
+            "https://www.linkedin.com/in/jasonlk",
+            "https://www.linkedin.com/in/jeffweiner08",
+            "https://www.linkedin.com/in/nigriffith",
+            "https://www.linkedin.com/in/hnshah"
+        ]
+    },
+    "linkedin/profiles/search": {
+        "searchQuery": "founder",
+        "locations": [
+            "Bengaluru"
+        ],
+        "maxProfiles": 25
+    },
+    "mca/company": {
+        "queries": [
+            "L23201MH1952GOI008858"
+        ],
+        "maxResults": 2
+    },
+    "mca/company-financials": {
+        "queries": [
+            "L23201MH1952GOI008858"
+        ],
+        "maxResults": 2
+    },
+    "mca/director": {
+        "queries": [
+            "00000001"
+        ],
+        "maxResults": 2
+    },
+    "naukri/job": {
+        "inputs": "data analyst",
+        "maxResults": 50,
+        "fetchDetails": true
+    },
+    "people/enrichment": {
+        "linkedinUrls": [
+            "https://www.linkedin.com/in/satyanadella",
+            "https://www.linkedin.com/in/ashtom",
+            "https://www.linkedin.com/in/fidjisimo",
+            "https://www.linkedin.com/in/jasonmlemkin",
+            "https://www.linkedin.com/in/williamhgates",
+            "https://www.linkedin.com/in/jeffweiner08",
+            "https://www.linkedin.com/in/reidhoffman",
+            "https://www.linkedin.com/in/sundarpichai",
+            "https://www.linkedin.com/in/garrytan",
+            "https://www.linkedin.com/in/rbranson"
+        ]
+    },
+    "people/personal-email": {
+        "linkedinUrls": [
+            "https://www.linkedin.com/in/demo-john-doe",
+            "https://www.linkedin.com/in/demo-jane-roe"
+        ]
+    },
+    "people/phone-lookup": {
+        "linkedinUrls": [
+            "https://www.linkedin.com/in/patrickmckenzie",
+            "https://www.linkedin.com/in/jason-fried",
+            "https://www.linkedin.com/in/dinesh-joshi-44244b35"
+        ]
+    },
+    "people/professional-email": {
+        "linkedinUrls": [
+            "https://www.linkedin.com/in/satyanadella",
+            "https://www.linkedin.com/in/sundarpichai"
+        ]
+    },
+    "pf-info/establishment": {
+        "est_ids": [
+            "KDMAL2220876000"
+        ],
+        "maxResults": 2
+    },
+    "pf-info/listing": {
+        "names": [
+            "INFOSYS"
+        ],
+        "maxResults": 2
+    },
+    "reddit/comments": {
+        "inputs": "https://www.reddit.com/r/technology/comments/1ub7r1y/morale_is_so_bad_at_mark_zuckerbergs_meta_even/",
+        "maxResults": 2,
+        "includeComments": true
+    },
+    "reddit/posts": {
+        "urls": "https://www.reddit.com/r/technology/",
+        "sortBy": "top",
+        "maxResults": 2,
+        "timeRange": "week"
+    },
+    "shopify/products": {
+        "urls": "https://undefeated.com",
+        "maxResults": 2
+    },
+    "similarweb/traffic": {
+        "domains": [
+            "shopify.com",
+            "stripe.com",
+            "github.com",
+            "booking.com",
+            "notion.so",
+            "airbnb.com",
+            "canva.com",
+            "figma.com",
+            "spotify.com",
+            "reddit.com"
+        ],
+        "maxResults": 2
+    },
+    "stockx/products": {
+        "listing_url": "https://stockx.com/brands/adidas",
+        "maxResults": 2
+    },
+    "tiktok/comments": {
+        "postURLs": "https://www.tiktok.com/@looooooooch/video/7332342275151760642",
+        "commentsPerPost": 2
+    },
+    "tiktok/followers": {
+        "profiles": "khaby.lame",
+        "maxFollowersPerProfile": 2,
+        "maxFollowingPerProfile": 0
+    },
+    "tiktok/posts": {
+        "profiles": "khaby.lame",
+        "resultsPerPage": 2
+    },
+    "tiktok/profiles": {
+        "searchQueries": "nasa",
+        "maxProfilesPerQuery": 2
+    },
+    "tiktok/shop": {
+        "keywords": "phone case",
+        "productsPerSearch": 2
+    },
+    "tripadvisor/attractions": {
+        "query": "Rome",
+        "maxResults": 2,
+        "language": "en",
+        "currency": "USD"
+    },
+    "tripadvisor/hotels": {
+        "query": "Lisbon",
+        "maxResults": 2,
+        "language": "en",
+        "currency": "USD"
+    },
+    "tripadvisor/restaurants": {
+        "query": "Rome",
+        "maxResults": 2,
+        "language": "en",
+        "currency": "USD"
+    },
+    "tripadvisor/reviews": {
+        "urls": "https://www.tripadvisor.com/Hotel_Review-g60763-d113317-Reviews-The_Plaza-New_York_City_New_York.html",
+        "maxResults": 2
+    },
+    "trustpilot/reviews": {
+        "companies": [
+            "nordvpn.com"
+        ],
+        "maxResults": 2
+    },
+    "twitter/followers": {
+        "handle": "NASA",
+        "listType": "followers",
+        "maxResults": 2
+    },
+    "twitter/profiles": {
+        "inputs": [
+            "NASA",
+            "elonmusk",
+            "BarackObama",
+            "nytimes",
+            "Cristiano",
+            "narendramodi",
+            "BillGates",
+            "Google",
+            "NBA",
+            "Tesla"
+        ],
+        "maxResults": 2
+    },
+    "twitter/replies": {
+        "conversation_id": "https://x.com/i/status/2070026154589782256",
+        "maxResults": 2
+    },
+    "twitter/retweeters": {
+        "tweet_ids": "https://x.com/NASA/status/2039473910987534599",
+        "max_items_per_tweet": 2
+    },
+    "twitter/tweets": {
+        "maxResults": 2,
+        "inputs": "elonmusk"
+    },
+    "upwork/jobs": {
+        "inputs": "python developer",
+        "limit": 5
+    },
+    "ycombinator/companies": {
+        "batch": "W25",
+        "maxResults": 2
+    },
+    "ycombinator/founders": {
+        "batch": "W25",
+        "maxResults": 2
+    },
+    "ycombinator/founders-dataset": {
+        "batch": "W25",
+        "maxResults": 2
+    },
+    "yelp/business": {
+        "urls": [
+            "https://www.yelp.com/biz/molinari-delicatessen-san-francisco",
+            "https://www.yelp.com/biz/gary-danko-san-francisco",
+            "https://www.yelp.com/biz/tartine-bakery-san-francisco-3",
+            "https://www.yelp.com/biz/the-slanted-door-san-francisco",
+            "https://www.yelp.com/biz/state-bird-provisions-san-francisco",
+            "https://www.yelp.com/biz/foreign-cinema-san-francisco",
+            "https://www.yelp.com/biz/zuni-café-san-francisco-3",
+            "https://www.yelp.com/biz/bix-san-francisco",
+            "https://www.yelp.com/biz/flour-water-san-francisco",
+            "https://www.yelp.com/biz/nopalito-san-francisco"
+        ],
+        "limit": 2
+    },
+    "yelp/reviews": {
+        "urls": "https://www.yelp.com/biz/molinari-delicatessen-san-francisco",
+        "maxReviews": 2
+    },
+    "youtube/channels": {
+        "urls": [
+            "https://www.youtube.com/@MrBeast"
+        ]
+    },
+    "youtube/comments": {
+        "videoUrl": "https://www.youtube.com/watch?v=UF8uR6Z6KLc",
+        "maxResults": 100
+    },
+    "youtube/videos": {
+        "urls": [
+            "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "https://www.youtube.com/watch?v=hT_nvWreIhg",
+            "https://www.youtube.com/watch?v=9bZkp7q19f0",
+            "https://www.youtube.com/watch?v=YQHsXMglC9A",
+            "https://www.youtube.com/watch?v=RgKAFK5djSk",
+            "https://www.youtube.com/watch?v=OPf0YbXqDm0",
+            "https://www.youtube.com/watch?v=e-ORhEE9VVg",
+            "https://www.youtube.com/watch?v=2Vv-BfVoq4g",
+            "https://www.youtube.com/watch?v=JGwWNGJdvx8",
+            "https://www.youtube.com/watch?v=CevxZvSJLk8"
+        ],
+        "maxResults": 2
+    },
+    "zepto/products": {
+        "query": "chocolate",
+        "city": "Pune",
+        "pincode": "412307",
+        "store_id": "9a3a478d-31f5-468f-b32a-d4324844b5b2",
+        "maxResults": 2
+    }
+}
