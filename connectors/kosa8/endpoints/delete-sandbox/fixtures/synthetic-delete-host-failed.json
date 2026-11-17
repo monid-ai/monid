@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-delete-host-failed",
+    "description": "DELETE /v1/sandboxes/{id} when the host fails the delete: 502 host_failed (sandboxes.js deleteSandbox). Constructed by hand from the kosa8 Cloud worker source (workers/cloud-api/src: sandboxes.js and auth.js error paths), not recorded: no live key was used.",
+    "calls": [
+        {
+            "req": {
+                "method": "DELETE",
+                "url": "{{request.origin}}/v1/sandboxes/sbx_4fQm9TzR2kLw8VbN1cXyPa"
+            },
+            "res": {
+                "status": 502,
+                "body": {
+                    "error": "host_failed",
+                    "message": "the host could not delete the sandbox: 500; try again"
+                }
+            }
+        }
+    ]
+}

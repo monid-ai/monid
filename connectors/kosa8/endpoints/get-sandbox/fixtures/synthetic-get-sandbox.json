@@ -1,0 +1,41 @@
+{
+    "name": "synthetic-get-sandbox",
+    "description": "GET /v1/sandboxes/{id}: {sandbox} after an hour of running. Constructed by hand from the kosa8 Cloud worker source (workers/cloud-api/src: sandboxes.js publicSandbox and the route handlers), not recorded: no live key was used.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/sandboxes/sbx_4fQm9TzR2kLw8VbN1cXyPa"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "sandbox": {
+                        "id": "sbx_4fQm9TzR2kLw8VbN1cXyPa",
+                        "state": "running",
+                        "template": "python",
+                        "cpus": 2,
+                        "mem_mb": 4096,
+                        "source": "pool",
+                        "parent_id": null,
+                        "region": "eu-hel1",
+                        "own_host": false,
+                        "created_at": 1793606400000,
+                        "started_at": 1793606400412,
+                        "stopped_at": null,
+                        "deleted_at": null,
+                        "last_error": null,
+                        "host_unreachable": false,
+                        "running_s": 3600,
+                        "asleep_s": 0,
+                        "sleep_bytes": 0,
+                        "cost_usd": 0.1576,
+                        "sleep_after_s": 600,
+                        "delete_after": 1793610000000,
+                        "origin_item_version": null
+                    }
+                }
+            }
+        }
+    ]
+}

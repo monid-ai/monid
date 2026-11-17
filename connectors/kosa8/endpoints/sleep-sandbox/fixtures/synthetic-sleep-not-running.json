@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-sleep-not-running",
+    "description": "POST /v1/sandboxes/{id}/sleep on a stopped sandbox: 409 not_running (sandboxes.js sleepSandbox). Constructed by hand from the kosa8 Cloud worker source (workers/cloud-api/src: sandboxes.js and auth.js error paths), not recorded: no live key was used.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/v1/sandboxes/sbx_4fQm9TzR2kLw8VbN1cXyPa/sleep"
+            },
+            "res": {
+                "status": 409,
+                "body": {
+                    "error": "not_running",
+                    "message": "the sandbox is stopped; only a running sandbox can sleep"
+                }
+            }
+        }
+    ]
+}

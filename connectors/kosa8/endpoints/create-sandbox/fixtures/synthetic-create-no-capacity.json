@@ -1,0 +1,23 @@
+{
+    "name": "synthetic-create-no-capacity",
+    "description": "POST /v1/sandboxes refused: 503 no_capacity (the message format of sandboxes.js createSandbox). Constructed by hand from the kosa8 Cloud worker source (workers/cloud-api/src: sandboxes.js publicSandbox and the route handlers), not recorded: no live key was used.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/v1/sandboxes",
+                "body": {
+                    "template": "python",
+                    "ttl_s": 3600
+                }
+            },
+            "res": {
+                "status": 503,
+                "body": {
+                    "error": "no_capacity",
+                    "message": "no host in eu-hel1 has room for a 4096 MB sandbox right now; try again shortly"
+                }
+            }
+        }
+    ]
+}
