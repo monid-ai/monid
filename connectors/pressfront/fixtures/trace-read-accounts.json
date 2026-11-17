@@ -1,0 +1,97 @@
+{
+    "name": "trace-read-accounts",
+    "description": "A real read of the demo trace's accounts (limit 2), recorded with the demo key. Invented accounts only.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://pressfront.co/api/v1/traces/01JDEM0SAMP1E000000000000T/accounts?limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "trace": {
+                        "id": "01JDEM0SAMP1E000000000000T",
+                        "query": "@quillandclaw.bsky.social",
+                        "link": "https://pressfront.co/developers#try"
+                    },
+                    "total": 187,
+                    "next": "bzoy",
+                    "accounts": [
+                        {
+                            "handle": "@saltmarshreview.bsky.social",
+                            "platform": "bluesky",
+                            "name": "Saltmarsh Review",
+                            "profile": "https://bsky.app/profile/saltmarshreview.bsky.social",
+                            "stance": "with",
+                            "tone": null,
+                            "side": "with",
+                            "followers": 62400,
+                            "following": 329,
+                            "posts": 2160,
+                            "created": "2025-03-11T14:00:00.000Z",
+                            "ageDays": 591,
+                            "newAccount": false,
+                            "firstSeen": "2026-10-21T20:49:00.000Z",
+                            "lastSeen": "2026-10-22T04:49:00.000Z",
+                            "touches": {
+                                "replies": 4,
+                                "quotes": 1,
+                                "mentions": 0,
+                                "likes": 1,
+                                "reposts": 1,
+                                "total": 7
+                            },
+                            "cameThrough": null,
+                            "marks": [
+                                "notable"
+                            ],
+                            "basedIn": null,
+                            "threats": 0,
+                            "personalInfo": 0,
+                            "said": null,
+                            "saidCount": 1
+                        },
+                        {
+                            "handle": "@gravelmouth.bsky.social",
+                            "platform": "bluesky",
+                            "name": "Gravel Mouth",
+                            "profile": "https://bsky.app/profile/gravelmouth.bsky.social",
+                            "stance": "against",
+                            "tone": null,
+                            "side": "against",
+                            "followers": 40200,
+                            "following": 310,
+                            "posts": 61200,
+                            "created": "2022-10-24T14:00:00.000Z",
+                            "ageDays": 1460,
+                            "newAccount": false,
+                            "firstSeen": "2026-10-22T01:40:00.000Z",
+                            "lastSeen": "2026-10-22T10:40:00.000Z",
+                            "touches": {
+                                "replies": 2,
+                                "quotes": 1,
+                                "mentions": 0,
+                                "likes": 1,
+                                "reposts": 0,
+                                "total": 4
+                            },
+                            "cameThrough": null,
+                            "marks": [],
+                            "basedIn": null,
+                            "threats": 0,
+                            "personalInfo": 0,
+                            "said": {
+                                "text": "This is the person who lectured all of us about honesty. Read the replies and decide for yourself.",
+                                "url": "https://bsky.app/profile/gravelmouth.bsky.social/post/3fakesf3bn2",
+                                "at": "2026-10-22T01:40:00.000Z"
+                            },
+                            "saidCount": 1
+                        }
+                    ],
+                    "note": "Stance and tone were read by a language model from each post's text. A reading, not a finding: read the posts yourself before acting on one."
+                }
+            }
+        }
+    ]
+}

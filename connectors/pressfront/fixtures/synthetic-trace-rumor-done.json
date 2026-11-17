@@ -1,0 +1,270 @@
+{
+    "name": "synthetic-trace-rumor-done",
+    "description": "SYNTHETIC chain in Pressfront's real shapes: a story (rumor) trace started from plain words. Submit answers 202 with kind origin and what was understood, one running tick, a done tick (summary, no accounts), then the case and the brief; the story tab is not read (a story trace answers 422 there). Case and brief are built by the API's own code (case-card.mjs) from Pressfront's invented case fixture: no real person. Settles $4.99.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "id": "01JDEM0RVM0R000000000000CS",
+                    "status": "queued",
+                    "kind": "origin",
+                    "query": "Lara went partying after the concert was cancelled",
+                    "understood": {
+                        "kind": "claim",
+                        "goal": "origin",
+                        "query": "Lara went partying after the concert was cancelled",
+                        "handle": null,
+                        "claim": "Lara went partying after the concert was cancelled",
+                        "people": [
+                            "Lara"
+                        ],
+                        "sides": [
+                            "Manon fans"
+                        ],
+                        "lines": [
+                            "Who first said Lara went partying after the concert was cancelled",
+                            "Who is spreading it"
+                        ],
+                        "missing": null,
+                        "from": "model",
+                        "seen": [],
+                        "seeds": [],
+                        "also": [],
+                        "period": {
+                            "days": null,
+                            "words": null
+                        }
+                    },
+                    "since": "2026-08-08",
+                    "link": "https://pressfront.co/trace.html?id=01JDEM0RVM0R000000000000CS",
+                    "etaSec": 300,
+                    "next": "GET /v1/traces/01JDEM0RVM0R000000000000CS?wait=25 (repeat until done), then GET /v1/traces/01JDEM0RVM0R000000000000CS/case; or the trace.done webhook"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}/01JDEM0RVM0R000000000000CS?wait=20"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "01JDEM0RVM0R000000000000CS",
+                    "query": "Lara went partying after the concert was cancelled",
+                    "status": "running",
+                    "kind": "origin",
+                    "createdAt": "2026-11-06T12:00:00.000Z",
+                    "finishedAt": null,
+                    "link": "https://pressfront.co/trace.html?id=01JDEM0RVM0R000000000000CS",
+                    "etaSec": 300,
+                    "secondsLeft": 180,
+                    "waitedSec": 20
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}/01JDEM0RVM0R000000000000CS?wait=20"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "01JDEM0RVM0R000000000000CS",
+                    "query": "Lara went partying after the concert was cancelled",
+                    "status": "done",
+                    "kind": "origin",
+                    "createdAt": "2026-11-06T12:00:00.000Z",
+                    "finishedAt": "2026-11-06T12:05:12.000Z",
+                    "link": "https://pressfront.co/trace.html?id=01JDEM0RVM0R000000000000CS",
+                    "summary": {
+                        "posts": 212,
+                        "relevant": 212,
+                        "sources": null,
+                        "confidence": null,
+                        "earliest": null,
+                        "biggestAmplifier": null
+                    },
+                    "api": {
+                        "case": "https://pressfront.co/api/v1/traces/01JDEM0RVM0R000000000000CS/case",
+                        "brief": "https://pressfront.co/api/v1/traces/01JDEM0RVM0R000000000000CS/brief"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}/01JDEM0RVM0R000000000000CS/case"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "trace": {
+                        "id": "01JDEM0RVM0R000000000000CS",
+                        "query": "Lara went partying after the concert was cancelled",
+                        "kind": "origin",
+                        "link": "https://pressfront.co/trace.html?id=01JDEM0RVM0R000000000000CS"
+                    },
+                    "kind": "origin",
+                    "locked": false,
+                    "headline": "The \"Lara went partying after the concert was cancelled\" story started with one post with no photo or link, and that post is now gone.",
+                    "headlineParts": [
+                        {
+                            "text": "The \"Lara went partying after the concert was cancelled\" story started with ",
+                            "key": false
+                        },
+                        {
+                            "text": "one post with no photo or link",
+                            "key": true
+                        },
+                        {
+                            "text": ", and that post is ",
+                            "key": false
+                        },
+                        {
+                            "text": "now gone",
+                            "key": true
+                        },
+                        {
+                            "text": ".",
+                            "key": false
+                        }
+                    ],
+                    "stops": [
+                        {
+                            "n": 1,
+                            "label": "Started",
+                            "text": "@gossipdesk · Nov 3, 9:14 PM · no photo, no link · now gone · a Community Note says: misleading",
+                            "sub": "The earliest public post we could find.",
+                            "url": "https://x.com/gossipdesk/status/1850000000000000001",
+                            "note": null,
+                            "known": true
+                        },
+                        {
+                            "n": 2,
+                            "label": "Spread",
+                            "text": "190 accounts · 120 repeated it, 40 asked if it was real, 3 said it was not",
+                            "sub": "(we read 180 of 212 posts)",
+                            "url": null,
+                            "note": null,
+                            "known": true
+                        },
+                        {
+                            "n": 3,
+                            "label": "Who",
+                            "text": "7 in 10 have \"manon\" in their name or bio",
+                            "sub": "Out of the 150 accounts we checked.",
+                            "url": null,
+                            "note": null,
+                            "known": true
+                        },
+                        {
+                            "n": 4,
+                            "label": "Before?",
+                            "text": "31 of 140 were in earlier waves (Jul 2, Sep 18)",
+                            "sub": null,
+                            "url": null,
+                            "note": null,
+                            "known": true
+                        }
+                    ],
+                    "huh": {
+                        "big": "14",
+                        "line": "14 accounts posted the exact same sentence.",
+                        "quote": "Lara was out partying while fans were stuck at the venue. Unreal."
+                    },
+                    "saidBack": {
+                        "lines": [
+                            "Who first said Lara went partying after the concert was cancelled",
+                            "Who is spreading it"
+                        ],
+                        "also": [],
+                        "period": null
+                    },
+                    "data": {
+                        "v": 1,
+                        "claim": "Lara went partying after the concert was cancelled",
+                        "started": {
+                            "url": "https://x.com/gossipdesk/status/1850000000000000001",
+                            "platform": "x",
+                            "author": "gossipdesk",
+                            "ts": "2026-11-03T21:14:00Z",
+                            "text": "Heard Lara went partying the night the show got called off.",
+                            "proof": "none",
+                            "gone": true,
+                            "notes": [
+                                {
+                                    "noteId": "n1",
+                                    "classification": "MISINFORMED_OR_POTENTIALLY_MISLEADING",
+                                    "summary": "No source for this."
+                                }
+                            ]
+                        },
+                        "spread": {
+                            "posts": 212,
+                            "accounts": 190,
+                            "read": 180,
+                            "repeats": 120,
+                            "questions": 40,
+                            "denies": 3,
+                            "other": 17,
+                            "withProof": 0
+                        },
+                        "who": {
+                            "checked": 150,
+                            "matches": [
+                                {
+                                    "word": "manon",
+                                    "accounts": 105
+                                }
+                            ]
+                        },
+                        "same": {
+                            "text": "Lara was out partying while fans were stuck at the venue. Unreal.",
+                            "accounts": 14,
+                            "posts": 14,
+                            "urls": []
+                        },
+                        "before": {
+                            "accounts": 140,
+                            "seenBefore": 31,
+                            "earlier": [
+                                {
+                                    "at": "2026-07-02T15:00:00Z",
+                                    "accounts": 20
+                                },
+                                {
+                                    "at": "2026-09-18T15:00:00Z",
+                                    "accounts": 11
+                                }
+                            ],
+                            "firstLook": false
+                        }
+                    },
+                    "note": "We show who said what and when. We never decide who is right. Whether a post repeated, questioned or denied the story, and which side an account took, is read by a language model. Times are UTC."
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}/01JDEM0RVM0R000000000000CS/brief?format=json"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "01JDEM0RVM0R000000000000CS",
+                    "kind": "origin",
+                    "brief": "# Trace: \"Lara went partying after the concert was cancelled\"\n\nSource: Pressfront Trace, trace 01JDEM0RVM0R000000000000CS, https://pressfront.co/trace.html?id=01JDEM0RVM0R000000000000CS.\nWindow: 2026-08-08 to 2026-11-06.\n\n## The answer\nThe \"Lara went partying after the concert was cancelled\" story started with one post with no photo or link, and that post is now gone.\n1. Started: @gossipdesk · Nov 3, 9:14 PM · no photo, no link · now gone · a Community Note says: misleading The earliest public post we could find. [1]\n2. Spread: 190 accounts · 120 repeated it, 40 asked if it was real, 3 said it was not (we read 180 of 212 posts)\n3. Who: 7 in 10 have \"manon\" in their name or bio Out of the 150 accounts we checked.\n4. Before?: 31 of 140 were in earlier waves (Jul 2, Sep 18)\nWorth knowing: 14 accounts posted the exact same sentence. \"Lara was out partying while fans were stuck at the venue. Unreal.\"\n\n## The first post we found\nBy @gossipdesk on X at 2026-11-03T21:14:00.000Z: \"Heard Lara went partying the night the show got called off.\" [1]\nProof in it: no photo, no link.\nIt is no longer up (deleted, edited away, or the account went private: from outside these look the same).\nCommunity Note (misleading): \"No source for this.\"\nThe earliest public post we could find, not proof that nothing came before it.\n\n## How it spread\n212 posts from 190 accounts; we read 180 of the posts.\nOf the posts read: 120 repeated it, 40 asked if it was real, 3 said it was not, 17 were about something else or unclear, 0 showed a photo, video or link. Read by a language model.\n\n## The same words\n14 accounts posted this, word for word: \"Lara was out partying while fans were stuck at the venue. Unreal.\"\n\n## Who\nWe checked 150 accounts' names and bios: 105 have \"manon\".\n\n## Before\n31 of 140 accounts were in earlier waves of it: 2026-07-02 (20), 2026-09-18 (11). From Pressfront's own record.\n\n## Sources\n[1] https://x.com/gossipdesk/status/1850000000000000001\n\nWe show who said what and when. We never decide who is right. Whether a post repeated, questioned or denied the story, and which side an account took, is read by a language model. Times are UTC."
+                }
+            }
+        }
+    ]
+}

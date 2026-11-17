@@ -1,0 +1,34 @@
+{
+    "name": "synthetic-trace-failed",
+    "description": "SYNTHETIC chain: submit answers 202, the trace then reports failed. Settles as a synthesized 500 (providerHttpStatus 200) and is zero-billed.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "id": "01JDEM0SAMP1E000000000000T",
+                    "status": "queued",
+                    "etaSec": 393
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}/01JDEM0SAMP1E000000000000T?wait=20"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "01JDEM0SAMP1E000000000000T",
+                    "status": "failed",
+                    "kind": "target"
+                }
+            }
+        }
+    ]
+}

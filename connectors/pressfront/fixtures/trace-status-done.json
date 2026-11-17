@@ -1,0 +1,43 @@
+{
+    "name": "trace-status-done",
+    "description": "A real status read of the demo trace (done), recorded with the demo key.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://pressfront.co/api/v1/traces/01JDEM0SAMP1E000000000000T"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "01JDEM0SAMP1E000000000000T",
+                    "query": "@quillandclaw.bsky.social",
+                    "status": "done",
+                    "kind": "target",
+                    "createdAt": "2026-10-23T14:00:00.000Z",
+                    "finishedAt": "2026-10-23T14:00:00.000Z",
+                    "link": "https://pressfront.co/developers#try",
+                    "demo": true,
+                    "accounts": {
+                        "total": 187,
+                        "critical": 135,
+                        "supportive": 17,
+                        "neutral": 24,
+                        "notRead": 11
+                    },
+                    "api": {
+                        "brief": "https://pressfront.co/api/v1/traces/01JDEM0SAMP1E000000000000T/brief",
+                        "story": "https://pressfront.co/api/v1/traces/01JDEM0SAMP1E000000000000T/story",
+                        "accounts": "https://pressfront.co/api/v1/traces/01JDEM0SAMP1E000000000000T/accounts",
+                        "posts": "https://pressfront.co/api/v1/traces/01JDEM0SAMP1E000000000000T/posts",
+                        "timeline": "https://pressfront.co/api/v1/traces/01JDEM0SAMP1E000000000000T/timeline",
+                        "groups": "https://pressfront.co/api/v1/traces/01JDEM0SAMP1E000000000000T/groups",
+                        "who": "https://pressfront.co/api/v1/traces/01JDEM0SAMP1E000000000000T/who",
+                        "sites": "https://pressfront.co/api/v1/traces/01JDEM0SAMP1E000000000000T/sites",
+                        "evidence": "https://pressfront.co/api/v1/traces/01JDEM0SAMP1E000000000000T/evidence"
+                    }
+                }
+            }
+        }
+    ]
+}
