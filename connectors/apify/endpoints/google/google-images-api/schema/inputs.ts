@@ -7,6 +7,8 @@ import { z } from "zod";
  * by hand thereafter (re-run the script to refresh; the drift suite
  * flags divergence — deno task drift). Non-strict by policy: the actor
  * accepts supersets — unknown fields pass through.
+ *
+ * 2026-10-22: `maxAgeDays` replaced by `reuseOlderResults` (actor v1.1).
  */
 export const zGoogleImagesApiBody = z.object({
     queries: z.array(z.string()).describe(
@@ -21,7 +23,7 @@ export const zGoogleImagesApiBody = z.object({
     hl: z.string().describe(
         "Set the two-letter interface language code for results, for example 'en', 'es', 'de'. Defaults to 'en'.",
     ).optional(),
-    maxAgeDays: z.number().int().min(0).describe(
-        "Reuse an identical search (same query, country and language) made in the last 24 hours instead of running it again. 1 (default) reuses results up to one day old; 0 always runs a fresh search. Reused images cost the same per image, and every row carries cached, fetchedAt and (when reused) cacheAge...",
+    reuseOlderResults: z.boolean().describe(
+        "Every run reuses an identical search (same query, country and language) made in the last 48 hours instead of running it again. Turn this on to also reuse searches up to 30 days old: faster, and a good fit for stable queries. Reused images cost the same per image, and every row carries cached, fet...",
     ).optional(),
 });
