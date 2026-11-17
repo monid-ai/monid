@@ -1,0 +1,33 @@
+{
+    "name": "synthetic-query-happy",
+    "description": "SYNTHETIC — not recorded. The /query envelope from censusdata.xyz/skill and the monid-services census tests: success, query, summary, raw_data[], and the shared key's quota.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://censusdata.xyz/query?q=What+is+the+poverty+rate+in+Chicago%2C+IL%3F"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "error_details": null,
+                    "query": "What is the poverty rate in Chicago, IL?",
+                    "summary": "The poverty rate in Chicago, IL is 16.9% (ACS 5-year, 2022).",
+                    "raw_data": [
+                        {
+                            "geography": "Chicago city, Illinois",
+                            "variable": "S1701_C03_001E",
+                            "value": 16.9,
+                            "year": 2022
+                        }
+                    ],
+                    "quota": {
+                        "used": 3,
+                        "limit": 10
+                    }
+                }
+            }
+        }
+    ]
+}
