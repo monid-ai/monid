@@ -1,0 +1,23 @@
+{
+    "name": "alternatives-ok",
+    "description": "Recorded 2026-10-22 from POST https://mcp.maxeds.org/v1/tools/find_alternatives (public, keyless; no request headers kept). Two ranked alternatives with rank, evidence grade, website and id; body verbatim.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "company": "Glean",
+                    "limit": 2
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "text": "Top 2 Enterprise-Ready Alternatives to Glean (#6 in horizontal, Evidence Grade 85/100):\n\n1. Sinequa (horizontal #65 · Evidence 60/100 · ranks #65 vs Glean #6) · https://sinequa.com\n   Sinequa gives large enterprises an AI context platform that connects and secures internal knowledge to ground search, assistants and agents. · Agent-ready: MCP no, llms.txt yes · id: sinequa\n2. Cribl (horizontal #36 · Evidence 78/100 · ranks #36 vs Glean #6) · https://cribl.io\n   Data engine for IT and security (observability pipeline, edge agent, search-in-place) bought by SRE and SOC teams at a quarter of the Fortune 500. · Agent-ready: MCP no, llms.txt yes · id: cribl\n\nTip: Call compare_vendors with [\"Glean\",\"Sinequa\"] for a full side-by-side buyer breakdown. (Method v0.2.7)",
+                    "isError": false
+                }
+            }
+        }
+    ]
+}

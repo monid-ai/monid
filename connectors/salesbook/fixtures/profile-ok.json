@@ -1,0 +1,22 @@
+{
+    "name": "profile-ok",
+    "description": "Recorded 2026-10-22 from POST https://mcp.maxeds.org/v1/tools/get_profile (public, keyless; no request headers kept). Sourced profile with checked date and per-field source URLs; body verbatim.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "startup_id": "cohere-health"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "text": "Cohere Health · Rank 5\nAI-driven clinical intelligence platform that digitizes prior authorization and utilization management between health plans and providers.\nMethod v0.2.7\nSourced fields (status: full, checked 2026-10-13):\n- website: https://www.coherehealth.com https://www.coherehealth.com (live; content returned)\n- hq: Boston, US (press release dateline; site footer shows PO Box Portsmouth NH) https://coherehealth.com/news/cohere-health-90m-series-c-ai-platform-expansion (dateline)\n- proof: Series C $90M (May 14 2025) led by Temasek; Cohere Unify connects health plans and providers for prior authorization / UM https://coherehealth.com/news/cohere-health-90m-series-c-ai-platform-expansion (company press release)",
+                    "isError": false
+                }
+            }
+        }
+    ]
+}

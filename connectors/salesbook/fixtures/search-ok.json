@@ -1,0 +1,23 @@
+{
+    "name": "search-ok",
+    "description": "Recorded 2026-10-22 from POST https://mcp.maxeds.org/v1/tools/search_startups (public, keyless; no request headers kept). Two ranked matches, each line with rank, sector, id and source URL; body verbatim.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "query": "prior authorization",
+                    "limit": 2
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "text": "Rank 5 · Cohere Health (healthcare) — AI-driven clinical intelligence platform that digitizes prior authorization and utilization management between health plans and providers. · id: cohere-health · source: https://www.coherehealth.com\nRank 18 · Infinx (healthcare) — AI-driven revenue-cycle management for US healthcare providers — prior authorization, patient access, coding and AR follow-up, combining aut · id: infinx · source: https://www.infinx.com\nMethod v0.2.7",
+                    "isError": false
+                }
+            }
+        }
+    ]
+}

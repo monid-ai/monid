@@ -1,0 +1,20 @@
+{
+    "name": "search-bad-input",
+    "description": "Recorded 2026-10-22 from POST https://mcp.maxeds.org/v1/tools/search_startups (public, keyless; no request headers kept). Body {} (no query) sent straight to the API, bypassing the binding: vendor 400 with isError true; body verbatim. The binding rejects this input before any call.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {}
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "text": "{\"error\":\"query must contain at least one searchable token\"}",
+                    "isError": true
+                }
+            }
+        }
+    ]
+}
