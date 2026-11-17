@@ -1,0 +1,44 @@
+{
+    "name": "google-news-ok",
+    "description": "Stophy /v1/google/news happy path, recorded on the keyless tier 2026-11-02 (record diet: lists trimmed). 1 Stophy call: results non-empty.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "query": "nvidia"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "results": [
+                            {
+                                "url": "https://finance.yahoo.com/markets/stocks/article/nvidia-stock-valuation-gets-torched-by-tech-stock-rout-110145628.html",
+                                "title": "Nvidia stock valuation gets torched by tech stock rout",
+                                "source": "Yahoo! Finance",
+                                "description": "Nvidia trades at just 12.9x forward earnings, below the S&P 500’s 18.7x, on AI cash flow fears.",
+                                "publishedAt": "2026-11-02T11:15:17.000Z",
+                                "position": 1
+                            },
+                            {
+                                "url": "https://www.fool.com/investing/2026/11/01/prediction-nvidia-stock-is-going-to-soar-after-dat/",
+                                "title": "Prediction: Nvidia Stock Is Going to Soar After Nov. 17 | The Motley Fool",
+                                "source": "The Motley Fool",
+                                "description": "With hyperscalers' capital expenditures holding up, Nvidia has a lot working in its favor.",
+                                "publishedAt": "2026-11-01T20:15:17.000Z",
+                                "position": 2
+                            }
+                        ],
+                        "page": 1
+                    },
+                    "creditsUsed": 0,
+                    "requestId": "f1f5353e-c57a-43e2-a182-10fdd586faa6"
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,54 @@
+{
+    "name": "synthetic-google-search-read-pages",
+    "description": "Stophy /v1/google/search with scrapeResults on and scrapeLimit 3: two results came back with their page text (markdown), one with scrapeError. The vendor meter reports creditsUsed 3 (1 call + 2 pages read). Hand-built from the vendor's documented response schema; the keyless tier was used for every recorded chain.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "query": "bun runtime",
+                    "scrapeResults": true,
+                    "scrapeLimit": 3
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "results": [
+                            {
+                                "type": "web",
+                                "url": "https://bun.com/",
+                                "title": "Bun — A fast all-in-one JavaScript runtime",
+                                "description": "Bundle, install, and run JavaScript & TypeScript — all in Bun.",
+                                "position": 1,
+                                "markdown": "# Bun\n\nBun is a fast all-in-one JavaScript runtime."
+                            },
+                            {
+                                "type": "web",
+                                "url": "https://bun.com/docs",
+                                "title": "Bun Docs",
+                                "description": "Documentation for the Bun runtime.",
+                                "position": 2,
+                                "markdown": "# What is Bun?\n\nBun is an all-in-one toolkit for JavaScript and TypeScript apps."
+                            },
+                            {
+                                "type": "web",
+                                "url": "https://github.com/oven-sh/bun",
+                                "title": "oven-sh/bun",
+                                "description": "Incredibly fast JavaScript runtime, bundler, test runner, and package manager.",
+                                "position": 3,
+                                "scrapeError": "The page did not load in time."
+                            }
+                        ],
+                        "page": 1
+                    },
+                    "creditsUsed": 3,
+                    "requestId": "00000000-0000-4000-8000-000000000001"
+                }
+            }
+        }
+    ]
+}

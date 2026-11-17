@@ -1,0 +1,44 @@
+{
+    "name": "google-search-ok",
+    "description": "Stophy /v1/google/search happy path, recorded on the keyless tier 2026-11-02 (record diet: lists trimmed). 1 Stophy call: results non-empty, scrapeResults off.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "query": "bun runtime",
+                    "scrapeResults": false,
+                    "scrapeLimit": 3
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "results": [
+                            {
+                                "type": "web",
+                                "url": "https://bun.com/",
+                                "title": "Bun — A fast all-in-one JavaScript runtime",
+                                "description": "Bundle, install, and run JavaScript & TypeScript — all in Bun. Bun is a fast JavaScript runtime & toolkit with a bundler, test runner, and npm-compatible package manager built in.",
+                                "position": 1
+                            },
+                            {
+                                "type": "web",
+                                "url": "https://github.com/oven-sh/bun",
+                                "title": "GitHub - oven-sh/bun: Incredibly fast JavaScript runtime, bundler, test runner, and package manager – all in one",
+                                "description": "3 days ago - At its core is the Bun runtime, a fast JavaScript runtime designed as a drop-in replacement for Node.js.",
+                                "position": 2
+                            }
+                        ],
+                        "page": 1
+                    },
+                    "creditsUsed": 0,
+                    "requestId": "b6be9175-e9e0-4eb2-a1ac-6058dff944ec"
+                }
+            }
+        }
+    ]
+}
