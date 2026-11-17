@@ -1,0 +1,21 @@
+{
+    "name": "pangolinfo-rate-limit",
+    "description": "Synthetic contract case (not a live recording): rate-limit. Shapes verified against Pangolinfo controllers and public OpenAPI, 2026-10-29.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "code": 4029,
+                    "message": "Rate limit exceeded, please reduce QPS and retry",
+                    "pointCost": 0,
+                    "data": null
+                }
+            }
+        }
+    ]
+}

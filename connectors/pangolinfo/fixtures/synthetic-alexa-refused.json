@@ -1,0 +1,20 @@
+{
+    "name": "pangolinfo-alexa-refused",
+    "description": "Synthetic contract case (not a live recording): alexa-refused. Shapes verified against Pangolinfo controllers and public OpenAPI, 2026-10-29.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "code": 9207,
+                    "message": "Amazon declined to answer this question",
+                    "data": null
+                }
+            }
+        }
+    ]
+}
