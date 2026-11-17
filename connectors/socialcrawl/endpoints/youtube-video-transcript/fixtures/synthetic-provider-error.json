@@ -1,0 +1,28 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "SYNTHETIC chain: the documented 404 for a video with no captions (reason no_captions), which costs 0. Shape from the error envelope plus the reason the transcript page names. Re-record with a key.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DdQw4w9WgXcQ"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "success": false,
+                    "error": {
+                        "type": "RESOURCE_NOT_FOUND",
+                        "message": "No caption track matches this video.",
+                        "status": 404,
+                        "doc_url": "https://www.socialcrawl.dev/docs/errors#resource-not-found",
+                        "details": { "reason": "no_captions" }
+                    },
+                    "credits_used": 0,
+                    "credits_remaining": 9999,
+                    "request_id": "req_example000000"
+                }
+            }
+        }
+    ]
+}

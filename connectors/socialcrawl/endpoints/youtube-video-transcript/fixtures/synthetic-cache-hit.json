@@ -1,0 +1,47 @@
+{
+    "name": "synthetic-cache-hit",
+    "description": "SYNTHETIC chain: the documented YouTube transcript example as published, a cache hit with credits_used 0 and cached true. Re-record with a key.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DdQw4w9WgXcQ"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "platform": "youtube",
+                    "endpoint": "/v1/youtube/video/transcript",
+                    "data": {
+                        "transcript": [
+                            {
+                                "text": "[♪♪♪]",
+                                "duration": 1.68,
+                                "offset": 1.36,
+                                "lang": "en",
+                                "wordCount": 0,
+                                "speechRate": 0
+                            },
+                            {
+                                "text": "♪ We're no strangers to love ♪",
+                                "duration": 3.24,
+                                "offset": 18.64,
+                                "lang": "en",
+                                "wordCount": 5,
+                                "speechRate": 93
+                            }
+                        ]
+                    },
+                    "credits_used": 0,
+                    "request_id": "req_example000000",
+                    "cached": true,
+                    "credits_remaining": 9999,
+                    "source": "captured",
+                    "captured_at": "2026-10-02T12:45:01.380Z",
+                    "redacted": true
+                }
+            }
+        }
+    ]
+}

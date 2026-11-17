@@ -1,0 +1,41 @@
+{
+    "name": "synthetic-cache-hit",
+    "description": "SYNTHETIC chain: the documented Instagram posts example with credits_used 0 and cached true, the cache-hit rule from https://www.socialcrawl.dev/docs/response-schema.md. Re-record with a key.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?handle=instagram"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "platform": "instagram",
+                    "endpoint": "/v1/instagram/profile/posts",
+                    "data": {
+                        "items": [
+                            {
+                                "post": {
+                                    "id": "3998430248382584993",
+                                    "url": "https://www.instagram.com/instagram/p/Dd9RyBWBVih/"
+                                }
+                            }
+                        ],
+                        "dropped": 0
+                    },
+                    "credits_used": 0,
+                    "request_id": "req_example000000",
+                    "cached": true,
+                    "pagination": {
+                        "next_cursor": null,
+                        "has_more": false,
+                        "page_size": 1,
+                        "stopped_at": null
+                    },
+                    "credits_remaining": 9999
+                }
+            }
+        }
+    ]
+}

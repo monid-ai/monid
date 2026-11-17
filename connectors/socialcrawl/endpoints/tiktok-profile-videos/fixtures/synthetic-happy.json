@@ -1,0 +1,145 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC chain for socialcrawl#v1/tiktok/profile/videos, shaped from the documented example on https://www.socialcrawl.dev/platforms/tiktok/profile-videos (captured 2026-10-02, redacted: true). CDN media URLs were shortened to https://example.com/redacted, the sample's own avatar redaction. Re-record with a key.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?handle=charlidamelio"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "platform": "tiktok",
+                    "endpoint": "/v1/tiktok/profile/videos",
+                    "data": {
+                        "items": [
+                            {
+                                "post": {
+                                    "id": "7691446353976691982",
+                                    "url": "https://www.tiktok.com/@charlidamelio/video/7691446353976691982",
+                                    "content": {
+                                        "text": "dc@Dani ",
+                                        "media_urls": "https://example.com/redacted",
+                                        "thumbnail_url": "https://example.com/redacted",
+                                        "duration_seconds": 14.558
+                                    },
+                                    "author": {
+                                        "username": "charlidamelio",
+                                        "display_name": "charli d’amelio",
+                                        "avatar_url": "https://example.com/redacted",
+                                        "verified": true
+                                    },
+                                    "engagement": {
+                                        "views": 1094895,
+                                        "likes": 123934,
+                                        "comments": 1028,
+                                        "shares": 920,
+                                        "saves": 4022
+                                    },
+                                    "flags": {
+                                        "nsfw": null,
+                                        "spoiler": null,
+                                        "pinned": false,
+                                        "deleted": false
+                                    },
+                                    "published_at": "2026-09-30T21:40:16.000Z",
+                                    "ext": {
+                                        "music_id": "7683532796899478294",
+                                        "author_id": "user_3182ec",
+                                        "author_followers": 160315286,
+                                        "download_count": 452,
+                                        "published_at_epoch": 1790804416
+                                    }
+                                },
+                                "computed": {
+                                    "engagement_rate": 0.114972,
+                                    "language": null,
+                                    "content_category": null,
+                                    "estimated_reach": 1313874,
+                                    "vs_creator": {
+                                        "ratio": null,
+                                        "metric": "views",
+                                        "reason": "too_young"
+                                    },
+                                    "labels": {
+                                        "sponsored": {
+                                            "p": 0.06,
+                                            "disclosed": false,
+                                            "undisclosed": false,
+                                            "brand": null
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                "post": {
+                                    "id": "7691427157293239565",
+                                    "url": "https://www.tiktok.com/@charlidamelio/video/7691427157293239565",
+                                    "content": {
+                                        "text": null,
+                                        "media_urls": "https://example.com/redacted",
+                                        "thumbnail_url": "https://example.com/redacted",
+                                        "duration_seconds": 6.967
+                                    },
+                                    "author": {
+                                        "username": "charlidamelio",
+                                        "display_name": "charli d’amelio",
+                                        "avatar_url": "https://example.com/redacted",
+                                        "verified": true
+                                    },
+                                    "engagement": {
+                                        "views": 3599647,
+                                        "likes": 635323,
+                                        "comments": 1222,
+                                        "shares": 14502,
+                                        "saves": 14970
+                                    },
+                                    "flags": {
+                                        "nsfw": null,
+                                        "spoiler": null,
+                                        "pinned": false,
+                                        "deleted": false
+                                    },
+                                    "published_at": "2026-09-30T20:26:01.000Z",
+                                    "ext": {
+                                        "music_id": "7684150368565250075",
+                                        "author_id": "user_3182ec",
+                                        "author_followers": 160315286,
+                                        "download_count": 1260,
+                                        "published_at_epoch": 1790799961,
+                                        "on_screen_texts": ["hehehehhehehe"]
+                                    }
+                                },
+                                "computed": {
+                                    "engagement_rate": 0.180864,
+                                    "language": null,
+                                    "content_category": null,
+                                    "estimated_reach": 4319576,
+                                    "labels": null
+                                }
+                            }
+                        ],
+                        "next_cursor": "sc2.eyJzIjoiaCIsImMiOiIxNzkwMjY2NDczOTMxIn0",
+                        "total": null,
+                        "dropped": 0
+                    },
+                    "credits_used": 1,
+                    "request_id": "req_example000000",
+                    "cached": false,
+                    "pagination": {
+                        "next_cursor": "sc.eyJ2IjoyLCJjIjoic2MyLmV5SnpJam9pYUNJc0ltTWlPaUl4Tnprd01qWTJORGN6T1RNeEluMCIsImUiOiJ0aWt0b2svcHJvZmlsZS92aWRlb3MiLCJwIjoibWF4X2N1cnNvciJ9",
+                        "has_more": true,
+                        "page_size": 10,
+                        "stopped_at": null
+                    },
+                    "credits_remaining": 9999,
+                    "source": "captured",
+                    "captured_at": "2026-10-02T07:22:27.000Z",
+                    "redacted": true
+                }
+            }
+        }
+    ]
+}

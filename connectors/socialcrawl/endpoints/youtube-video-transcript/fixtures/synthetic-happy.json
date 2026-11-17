@@ -1,0 +1,47 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC chain for socialcrawl#v1/youtube/video/transcript. The segment body is the documented example on https://www.socialcrawl.dev/platforms/youtube/video-transcript. That sample is a cache hit (credits_used 0, cached true); this chain uses the same body with the lane's documented 3-credit live price and cached false. Re-record with a key.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DdQw4w9WgXcQ"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "platform": "youtube",
+                    "endpoint": "/v1/youtube/video/transcript",
+                    "data": {
+                        "transcript": [
+                            {
+                                "text": "[♪♪♪]",
+                                "duration": 1.68,
+                                "offset": 1.36,
+                                "lang": "en",
+                                "wordCount": 0,
+                                "speechRate": 0
+                            },
+                            {
+                                "text": "♪ We're no strangers to love ♪",
+                                "duration": 3.24,
+                                "offset": 18.64,
+                                "lang": "en",
+                                "wordCount": 5,
+                                "speechRate": 93
+                            }
+                        ]
+                    },
+                    "credits_used": 3,
+                    "request_id": "req_example000000",
+                    "cached": false,
+                    "credits_remaining": 9999,
+                    "source": "captured",
+                    "captured_at": "2026-10-02T12:45:01.380Z",
+                    "redacted": true
+                }
+            }
+        }
+    ]
+}

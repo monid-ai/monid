@@ -1,0 +1,27 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "SYNTHETIC chain: the documented error envelope for INVALID_API_KEY (HTTP 401). Re-record with a key.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?handle=charlidamelio"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "success": false,
+                    "error": {
+                        "type": "INVALID_API_KEY",
+                        "message": "The key is malformed, revoked, or unknown.",
+                        "status": 401,
+                        "doc_url": "https://www.socialcrawl.dev/docs/errors#invalid-api-key"
+                    },
+                    "credits_used": 0,
+                    "credits_remaining": 0,
+                    "request_id": "req-abc123"
+                }
+            }
+        }
+    ]
+}

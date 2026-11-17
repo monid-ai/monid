@@ -1,0 +1,110 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC chain for socialcrawl#v1/instagram/profile/posts, shaped from the documented example on https://www.socialcrawl.dev/platforms/instagram/profile-posts (captured 2026-10-02, redacted: true). CDN media URLs in that sample were shortened to the same https://example.com/redacted the sample already uses for avatars. Re-record with deno task record once a SOCIALCRAWL_CREDENTIALS_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?handle=instagram"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "platform": "instagram",
+                    "endpoint": "/v1/instagram/profile/posts",
+                    "data": {
+                        "items": [
+                            {
+                                "post": {
+                                    "id": "3998430248382584993",
+                                    "url": "https://www.instagram.com/instagram/p/Dd9RyBWBVih/",
+                                    "content": {
+                                        "text": "DIY fish squishy",
+                                        "media_urls": "https://example.com/redacted",
+                                        "thumbnail_url": "https://example.com/redacted",
+                                        "duration_seconds": 16.74
+                                    },
+                                    "author": {
+                                        "username": "instagram",
+                                        "display_name": "Instagram",
+                                        "avatar_url": "https://example.com/redacted",
+                                        "verified": true
+                                    },
+                                    "engagement": {
+                                        "views": 72071593,
+                                        "likes": 328198,
+                                        "comments": 4498,
+                                        "shares": null,
+                                        "saves": null
+                                    },
+                                    "flags": {
+                                        "nsfw": null,
+                                        "spoiler": null,
+                                        "pinned": false,
+                                        "deleted": false
+                                    },
+                                    "published_at": "2026-10-01T15:59:45.000Z",
+                                    "ext": {
+                                        "author_id": "user_040e32",
+                                        "media_type": "video",
+                                        "published_at_epoch": 1790870385,
+                                        "coauthors": []
+                                    }
+                                },
+                                "computed": {
+                                    "engagement_rate": 0.004616,
+                                    "language": "en",
+                                    "content_category": "lifestyle",
+                                    "estimated_reach": 86485912,
+                                    "vs_creator": {
+                                        "ratio": null,
+                                        "metric": "views",
+                                        "reason": "too_young"
+                                    },
+                                    "labels": {
+                                        "sponsored": {
+                                            "p": 0.03,
+                                            "disclosed": false,
+                                            "undisclosed": false,
+                                            "brand": null
+                                        },
+                                        "intent": {
+                                            "label": null,
+                                            "confidence": 0.45,
+                                            "buyer": false,
+                                            "seller": 0.18,
+                                            "fits_offer": null,
+                                            "urgency": 0.01
+                                        },
+                                        "niche": {
+                                            "label": "diy_crafts",
+                                            "confidence": 1,
+                                            "taxonomy": "sc-niche-v1"
+                                        }
+                                    }
+                                }
+                            }
+                        ],
+                        "next_cursor": "sc2.eyJzIjoiYiIsImMiOiIzOTkzNTU4MTg3MDAxMTkxMDc5XzI1MDI1MzIwIn0",
+                        "total": null,
+                        "dropped": 0
+                    },
+                    "credits_used": 1,
+                    "request_id": "req_example000000",
+                    "cached": false,
+                    "pagination": {
+                        "next_cursor": "sc.eyJ2IjoyLCJjIjoic2MyLmV5SnpJam9pWWlJc0ltTWlPaUl6T1Rrek5UVTRNVGczTURBeE1Ua3hNRGM1WHpJMU1ESTFNekl3SW4wIiwiZSI6Imluc3RhZ3JhbS9wcm9maWxlL3Bvc3RzIiwicCI6Im5leHRfbWF4X2lkIn0",
+                        "has_more": true,
+                        "page_size": 12,
+                        "stopped_at": null
+                    },
+                    "credits_remaining": 9999,
+                    "source": "captured",
+                    "captured_at": "2026-10-02T07:22:40.039Z",
+                    "redacted": true
+                }
+            }
+        }
+    ]
+}
