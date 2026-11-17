@@ -1,0 +1,31 @@
+{
+    "name": "ok",
+    "description": "Recorded 2026-10-15 against a real deliverable personal mailbox (ok / email_ok); the address in the request url and canonical are replaced with a placeholder so no PII is committed. Billed: 1 credit.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.truelist.io/api/v1/verify_inline?email=jane.doe%40example.com"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "emails": [
+                        {
+                            "address": "user@example.com",
+                            "domain": null,
+                            "first_name": null,
+                            "last_name": null,
+                            "canonical": "jane.doe",
+                            "mx_record": null,
+                            "email_state": "ok",
+                            "email_sub_state": "email_ok",
+                            "verified_at": "2026-10-15T20:35:55.813Z",
+                            "did_you_mean": null
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

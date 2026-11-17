@@ -1,0 +1,31 @@
+{
+    "name": "catch-all",
+    "description": "Recorded 2026-10-15: a catch-all domain answers risky with email_sub_state accept_all (the OpenAPI puts accept_all in email_state). Free.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.truelist.io/api/v1/verify_inline?email=abcxyz123%40truelist.io"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "emails": [
+                        {
+                            "address": "user@example.com",
+                            "domain": null,
+                            "first_name": null,
+                            "last_name": null,
+                            "canonical": "abcxyz123",
+                            "mx_record": null,
+                            "email_state": "risky",
+                            "email_sub_state": "accept_all",
+                            "verified_at": "2026-10-15T20:34:33.084Z",
+                            "did_you_mean": null
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

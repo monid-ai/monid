@@ -1,0 +1,31 @@
+{
+    "name": "invalid",
+    "description": "Recorded 2026-10-15: a nonexistent Gmail mailbox answers email_invalid / failed_no_mailbox (a sub-state the OpenAPI enum does not list). Billed: 1 credit.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.truelist.io/api/v1/verify_inline?email=zzqx-no-such-user-8812%40gmail.com"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "emails": [
+                        {
+                            "address": "user@example.com",
+                            "domain": null,
+                            "first_name": null,
+                            "last_name": null,
+                            "canonical": "zzqx-no-such-user-8812",
+                            "mx_record": null,
+                            "email_state": "email_invalid",
+                            "email_sub_state": "failed_no_mailbox",
+                            "verified_at": "2026-10-15T20:36:06.518Z",
+                            "did_you_mean": null
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

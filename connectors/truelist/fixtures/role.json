@@ -1,0 +1,31 @@
+{
+    "name": "role",
+    "description": "Recorded 2026-10-15: a role address answers risky / is_role. Billed: 1 credit.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.truelist.io/api/v1/verify_inline?email=support%40github.com"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "emails": [
+                        {
+                            "address": "user@example.com",
+                            "domain": null,
+                            "first_name": null,
+                            "last_name": null,
+                            "canonical": "support",
+                            "mx_record": null,
+                            "email_state": "risky",
+                            "email_sub_state": "is_role",
+                            "verified_at": "2026-10-15T20:34:33.300Z",
+                            "did_you_mean": null
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
