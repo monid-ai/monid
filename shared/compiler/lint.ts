@@ -6,9 +6,9 @@ import ts from "typescript";
  * (module imports, captured closure variables) are compile errors — the engine
  * reinstantiates sources in an empty scope, so capture would silently break.
  *
- * Scope model is a per-function over-approximation (any name declared anywhere
- * inside the fn counts as bound everywhere inside it) — sound for catching
- * genuine captures, lenient on shadowing corner cases.
+ * Names resolve lexically (a declaration binds only inside its own scope), and
+ * the routes from a whitelisted global to `Function`/module loading
+ * (`.constructor`, `.prototype`, `.__proto__`, `import()`) are compile errors.
  */
 const GLOBAL_WHITELIST = new Set([
     "undefined",
@@ -31,6 +31,8 @@ const GLOBAL_WHITELIST = new Set([
     "Promise",
 ]);
 
+const FORBIDDEN_MEMBERS = new Set(["constructor", "prototype", "__proto__"]);
+
 export function lintClosedTerm(canonicalSrc: string, label: string): void {
     const source = ts.createSourceFile(
         "fn.ts",
@@ -39,20 +41,29 @@ export function lintClosedTerm(canonicalSrc: string, label: string): void {
         true,
     );
 
-    const declared = new Set<string>(["__fn"]);
-    const references: string[] = [];
+    const scopes = new Map<ts.Node, Set<string>>();
+    const references: ts.Identifier[] = [];
+    const violations: string[] = [];
 
-    const collectBinding = (
-        name: ts.BindingName | ts.PropertyName | undefined,
-    ) => {
+    const isFnScope = (node: ts.Node) =>
+        ts.isFunctionLike(node) || ts.isSourceFile(node) ||
+        ts.isClassStaticBlockDeclaration(node);
+    const isBlockScope = (node: ts.Node) =>
+        ts.isBlock(node) || ts.isCaseBlock(node) || ts.isCatchClause(node) ||
+        ts.isIterationStatement(node, false) || ts.isSourceFile(node);
+    const enclosing = (node: ts.Node, test: (n: ts.Node) => boolean) => {
+        let current = node.parent;
+        while (!test(current)) current = current.parent;
+        return current;
+    };
+    const bind = (scope: ts.Node, name: ts.BindingName | undefined) => {
         if (!name) return;
         if (ts.isIdentifier(name)) {
-            declared.add(name.text);
-        } else if (
-            ts.isObjectBindingPattern(name) || ts.isArrayBindingPattern(name)
-        ) {
+            const names = scopes.get(scope) ?? new Set<string>();
+            scopes.set(scope, names.add(name.text));
+        } else {
             for (const element of name.elements) {
-                if (ts.isBindingElement(element)) collectBinding(element.name);
+                if (ts.isBindingElement(element)) bind(scope, element.name);
             }
         }
     };
@@ -91,30 +102,84 @@ export function lintClosedTerm(canonicalSrc: string, label: string): void {
         return false;
     };
 
+    const forbidden = (name: string | undefined) =>
+        name !== undefined && FORBIDDEN_MEMBERS.has(name);
+
     const walk = (node: ts.Node) => {
-        if (ts.isParameter(node) || ts.isVariableDeclaration(node)) {
-            collectBinding(node.name);
+        if (ts.isVariableDeclaration(node)) {
+            bind(
+                ts.isCatchClause(node.parent)
+                    ? node.parent
+                    : ts.getCombinedNodeFlags(node) & ts.NodeFlags.BlockScoped
+                    ? enclosing(node, isBlockScope)
+                    : enclosing(node, isFnScope),
+                node.name,
+            );
+        } else if (ts.isParameter(node)) {
+            bind(node.parent, node.name);
         } else if (
-            (ts.isFunctionDeclaration(node) || ts.isFunctionExpression(node) ||
-                ts.isClassDeclaration(node)) && node.name
+            ts.isFunctionDeclaration(node) || ts.isClassDeclaration(node)
         ) {
-            declared.add(node.name.text);
-        } else if (ts.isCatchClause(node) && node.variableDeclaration) {
-            collectBinding(node.variableDeclaration.name);
+            bind(enclosing(node, isBlockScope), node.name);
+        } else if (
+            ts.isFunctionExpression(node) || ts.isClassExpression(node)
+        ) {
+            bind(node, node.name);
+        } else if (
+            ts.isPropertyAccessExpression(node) && forbidden(node.name.text)
+        ) {
+            violations.push(`.${node.name.text}`);
+        } else if (
+            ts.isElementAccessExpression(node) &&
+            ts.isStringLiteralLike(node.argumentExpression) &&
+            forbidden(node.argumentExpression.text)
+        ) {
+            violations.push(`["${node.argumentExpression.text}"]`);
+        } else if (ts.isBindingElement(node)) {
+            const key = node.propertyName ?? node.name;
+            if (
+                (ts.isIdentifier(key) || ts.isStringLiteralLike(key)) &&
+                forbidden(key.text)
+            ) violations.push(`{ ${key.text} }`);
+        } else if (
+            (ts.isCallExpression(node) &&
+                node.expression.kind === ts.SyntaxKind.ImportKeyword) ||
+            (ts.isMetaProperty(node) &&
+                node.keywordToken === ts.SyntaxKind.ImportKeyword)
+        ) {
+            violations.push("import");
         }
         if (
             ts.isIdentifier(node) && !isDeclarationName(node) &&
             !isNonReferencePosition(node)
         ) {
-            references.push(node.text);
+            references.push(node);
         }
         ts.forEachChild(node, walk);
     };
     walk(source);
 
-    const free = [...new Set(references)].filter(
-        (name) => !declared.has(name) && !GLOBAL_WHITELIST.has(name),
-    );
+    if (violations.length > 0) {
+        throw new Error(
+            `${label}: fn reaches for the Function constructor or module loader (${
+                [...new Set(violations)].join(", ")
+            }) — not allowed in a closed term.`,
+        );
+    }
+
+    const isBound = (id: ts.Identifier) => {
+        for (let n: ts.Node | undefined = id.parent; n; n = n.parent) {
+            if (scopes.get(n)?.has(id.text)) return true;
+        }
+        return false;
+    };
+    const free = [
+        ...new Set(
+            references.filter((id) =>
+                !GLOBAL_WHITELIST.has(id.text) && !isBound(id)
+            ).map((id) => id.text),
+        ),
+    ];
     if (free.length > 0) {
         throw new Error(
             `${label}: fn is not a closed term — free identifier(s): ${

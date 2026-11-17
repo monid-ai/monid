@@ -175,6 +175,42 @@ Deno.test("closed-term lint rejects free identifiers, allows params/locals/white
     assert(threw, "expected free-identifier error");
 });
 
+Deno.test("closed-term lint rejects Function-constructor and module-loader routes", () => {
+    for (
+        const src of [
+            `(d) => [].constructor.constructor("return 1")()`,
+            `(d) => Object["constructor"]("return 1")()`,
+            `(d) => { const { constructor: F } = Object; return F; }`,
+            `(d) => Object.getPrototypeOf(d).__proto__`,
+            `(d) => String.prototype`,
+            `(d) => import("data:text/javascript,1")`,
+        ]
+    ) {
+        assertThrows(
+            () => lintClosedTerm(src, "escape"),
+            Error,
+            "Function constructor",
+        );
+    }
+});
+
+Deno.test("closed-term lint scopes names lexically", () => {
+    for (
+        const src of [
+            `(d) => { const f = () => { const fetch = 1; return fetch; }; return fetch; }`,
+            `(d) => { { let fetch = 1; } return fetch; }`,
+            `(d) => { try { 1; } catch (fetch) { } return fetch; }`,
+            `(fetch = process) => { const process = 1; return fetch; }`,
+        ]
+    ) {
+        assertThrows(() => lintClosedTerm(src, "scope"), Error, "free");
+    }
+    lintClosedTerm(
+        `(d) => { var a = 1; for (let i = 0; i < 2; i++) { const k = i; a += k; } try { a; } catch (e) { return e; } const g = function h() { return h; }; return [a, g]; }`,
+        "ok",
+    );
+});
+
 // ---------------------------------------------------------------------------
 // compilation
 // ---------------------------------------------------------------------------

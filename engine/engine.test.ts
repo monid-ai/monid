@@ -10,6 +10,7 @@ import {
     sealUnit,
 } from "@shared/core";
 import { compileBundle } from "@shared/compiler";
+import { instantiate } from "./link.ts";
 import {
     credentialEnvVarFor,
     credentialEnvVarsFor,
@@ -184,6 +185,21 @@ Deno.test("LINK_INTEGRITY: tampered fn source", async () => {
     };
     const engine = new Engine({ transport: jsonTransport(200, {}) });
     await expectCode(engine.load(unit), EngineErrorCode.LINK_INTEGRITY);
+});
+
+Deno.test("instantiate: a computed .constructor chain cannot reach Function", () => {
+    const entry = {
+        api: "0.0.0",
+        kind: "fn",
+        src: `() => { const k = "constr" + "uctor"; return [][k][k]; }`,
+        provenance: "t",
+    } as const;
+    const ref = { $fn: { key: "k" } };
+    assertEquals((instantiate(entry, ref, "t") as () => unknown)(), undefined);
+    assertEquals(
+        typeof Object.getPrototypeOf(async () => {}).constructor,
+        "undefined",
+    );
 });
 
 Deno.test("UNSUPPORTED_FN_ABI: entry targets a newer ABI", async () => {
