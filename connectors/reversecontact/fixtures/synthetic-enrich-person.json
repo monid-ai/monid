@@ -1,0 +1,93 @@
+{
+    "name": "synthetic-enrich-person",
+    "description": "A resolved person: `data.person` with `isFullProfile`, 2 credits on the receipt. Synthetic, shaped on the public v2 contract (gateway envelope and OpenAPI document of 2026-10-21); values are placeholders.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "person": {
+                            "id": "prs_01jexample0person00000000",
+                            "publicId": "janedoe",
+                            "linkedinUrl": "https://www.linkedin.com/in/janedoe",
+                            "firstName": "Jane",
+                            "lastName": "Doe",
+                            "headline": "VP Sales at Example Corp",
+                            "isOpenToWork": false,
+                            "followersCount": 1200,
+                            "location": {
+                                "city": "Paris",
+                                "country": "France",
+                                "countryCode": "FR"
+                            },
+                            "currentPosition": {
+                                "title": "VP Sales",
+                                "companyName": "Example Corp",
+                                "companyId": "com_01jexample0company0000000",
+                                "startDate": "2023-03"
+                            },
+                            "experience": [
+                                {
+                                    "title": "VP Sales",
+                                    "companyName": "Example Corp",
+                                    "startDate": "2023-03"
+                                }
+                            ],
+                            "education": [
+                                {
+                                    "schoolName": "Example University",
+                                    "degreeName": "MSc"
+                                }
+                            ],
+                            "skills": [
+                                "Sales",
+                                "Negotiation"
+                            ],
+                            "metadata": {
+                                "updatedAt": "2026-10-01T08:00:00.000Z"
+                            }
+                        },
+                        "alternativePersons": [],
+                        "isFullProfile": true
+                    },
+                    "error": null,
+                    "quotas": {
+                        "creditsConsumed": 2,
+                        "workspace": {
+                            "id": "00000000-0000-4000-8000-000000000001",
+                            "credits": {
+                                "total": 10000,
+                                "used": 1236,
+                                "left": 8764
+                            },
+                            "hasUnlimitedCredits": false,
+                            "allowDailyOvercost": false,
+                            "dailyLimit": null,
+                            "minuteRateLimit": {
+                                "limit": 300,
+                                "used": 1,
+                                "left": 299,
+                                "nextReset": "2026-10-21T12:01:00.000Z"
+                            }
+                        },
+                        "key": {
+                            "id": "00000000-0000-4000-8000-000000000002",
+                            "dailyLimit": null,
+                            "minuteRateLimit": null
+                        }
+                    },
+                    "metadata": {
+                        "requestId": "req_01jexample0000000000000000",
+                        "executionTimeMs": 412
+                    }
+                }
+            }
+        }
+    ]
+}

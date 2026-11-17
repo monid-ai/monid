@@ -1,0 +1,117 @@
+{
+    "name": "synthetic-organizations-prompt-page",
+    "description": "An Organization Search by prompt: two companies plus the base credit, so 3 credits for 2 rows. Synthetic, shaped on the public v2 contract (gateway envelope and OpenAPI document of 2026-10-21); values are placeholders.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "data": [
+                            {
+                                "id": "com_01jexample0company0000000",
+                                "companyName": "Example Corp",
+                                "linkedinId": "1000",
+                                "publicId": "examplecorp",
+                                "linkedinUrl": "https://www.linkedin.com/company/examplecorp",
+                                "employeesCount": 140,
+                                "employeeCountRange": {
+                                    "start": 51,
+                                    "end": 200
+                                },
+                                "websiteUrl": "https://examplecorp.com",
+                                "industry": "Software Development",
+                                "specialities": [
+                                    "Payments"
+                                ],
+                                "headquarter": {
+                                    "city": "Paris",
+                                    "country": "FR"
+                                },
+                                "foundedOn": {
+                                    "year": 2016
+                                }
+                            },
+                            {
+                                "id": "com_01jexample1company0000000",
+                                "companyName": "Sample Labs",
+                                "linkedinId": "1001",
+                                "publicId": "samplelabs",
+                                "linkedinUrl": "https://www.linkedin.com/company/samplelabs",
+                                "employeesCount": 141,
+                                "employeeCountRange": {
+                                    "start": 51,
+                                    "end": 200
+                                },
+                                "websiteUrl": "https://samplelabs.com",
+                                "industry": "Software Development",
+                                "specialities": [
+                                    "Payments"
+                                ],
+                                "headquarter": {
+                                    "city": "Paris",
+                                    "country": "FR"
+                                },
+                                "foundedOn": {
+                                    "year": 2016
+                                }
+                            }
+                        ],
+                        "metadata": {
+                            "perPage": 25,
+                            "count": 312,
+                            "nextCursor": "eyJwYWdlIjoyfQ"
+                        },
+                        "interpretation": {
+                            "filters": {
+                                "industry": [
+                                    "Software Development"
+                                ],
+                                "employeeCountRange": {
+                                    "min": 50,
+                                    "max": 200
+                                }
+                            },
+                            "warnings": []
+                        }
+                    },
+                    "error": null,
+                    "quotas": {
+                        "creditsConsumed": 3,
+                        "workspace": {
+                            "id": "00000000-0000-4000-8000-000000000001",
+                            "credits": {
+                                "total": 10000,
+                                "used": 1237,
+                                "left": 8763
+                            },
+                            "hasUnlimitedCredits": false,
+                            "allowDailyOvercost": false,
+                            "dailyLimit": null,
+                            "minuteRateLimit": {
+                                "limit": 300,
+                                "used": 1,
+                                "left": 299,
+                                "nextReset": "2026-10-21T12:01:00.000Z"
+                            }
+                        },
+                        "key": {
+                            "id": "00000000-0000-4000-8000-000000000002",
+                            "dailyLimit": null,
+                            "minuteRateLimit": null
+                        }
+                    },
+                    "metadata": {
+                        "requestId": "req_01jexample0000000000000000",
+                        "executionTimeMs": 412
+                    }
+                }
+            }
+        }
+    ]
+}

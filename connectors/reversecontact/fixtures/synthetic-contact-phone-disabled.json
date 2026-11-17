@@ -1,0 +1,23 @@
+{
+    "name": "synthetic-contact-phone-disabled",
+    "description": "Phone finding turned off for the account: a bare 410 body, not the v2 envelope, 0 credits. Synthetic, shaped on the public v2 contract (gateway envelope and OpenAPI document of 2026-10-21); values are placeholders.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 410,
+                "body": {
+                    "error": "endpoint_unavailable",
+                    "message": "Phone finding is not enabled for this workspace. Use /v2/contact/email to find professional email addresses, or contact your workspace administrator to enable contact phone finding.",
+                    "alternative": {
+                        "endpoint": "/v2/contact/email",
+                        "docs": "/docs/endpoints/contact-email"
+                    }
+                }
+            }
+        }
+    ]
+}
