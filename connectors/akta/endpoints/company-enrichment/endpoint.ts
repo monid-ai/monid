@@ -94,7 +94,7 @@ export default defineEndpoint({
                 management_profile: {
                     kind: UsageModelKind.PER_UNIT,
                     unit: Unit.RESULT,
-                    consumes: { credit: "default", amount: 1.5 },
+                    consumes: { credit: "default", amount: 1 },
                 },
                 product_offering: {
                     kind: UsageModelKind.PER_UNIT,

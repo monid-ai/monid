@@ -1,0 +1,34 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC — not recorded. Shape from the agent-docs OpenAPI response schema (agent-docs.akta.pro/openapi.json, 2026-10-21); credits_consumed is the published flat 0.5-credit rate",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.akta.pro/api/v1/company/enrichment/peers/canva.com/"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "peers": [
+                            {
+                                "name": "Figma",
+                                "uuid": "0000def",
+                                "description": "Collaborative interface design",
+                                "peer_type": "direct peer"
+                            },
+                            {
+                                "name": "Adobe",
+                                "uuid": "0000ghi",
+                                "description": "Creative software",
+                                "peer_type": "broad incumbent"
+                            }
+                        ]
+                    },
+                    "credits_consumed": 0.5
+                }
+            }
+        }
+    ]
+}

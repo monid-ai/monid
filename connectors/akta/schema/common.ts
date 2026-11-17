@@ -8,6 +8,17 @@ export const zCompany = z.string().min(1).describe(
         "is NOT accepted here — resolve it via company-search first.",
 );
 
+/** Path-param form of the same identifier, shared by the single-section
+ *  readers (`/v1/company/enrichment/<reader>/{company}`). The vendor's own
+ *  examples use a bare domain here ('canva.com'). */
+export const zCompanyPathParams = z.object({
+    company: z.string().min(1).describe(
+        "Company website (e.g. 'canva.com') or the company uuid returned by " +
+            "the Akta Company Search endpoint. A bare company name is NOT " +
+            "accepted here — resolve it via company-search first.",
+    ),
+}).strict();
+
 // z.iso.date() compiles to a calendar-aware pattern (month/day bounds, leap
 // years) — real validation survives into the compiled doc, unlike a .refine.
 export const zDate = z.iso.date().describe(

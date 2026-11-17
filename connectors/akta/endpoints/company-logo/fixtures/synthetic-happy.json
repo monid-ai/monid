@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC — not recorded. Shape from the agent-docs OpenAPI response schema (agent-docs.akta.pro/openapi.json, 2026-10-21); a free endpoint reports credits_consumed 0; the logo URL is a placeholder",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.akta.pro/api/v1/company/enrichment/logo/canva.com/"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "uuid": "00000l1",
+                        "logo_url": "https://logos.example.com/00000l1.png"
+                    },
+                    "credits_consumed": 0
+                }
+            }
+        }
+    ]
+}

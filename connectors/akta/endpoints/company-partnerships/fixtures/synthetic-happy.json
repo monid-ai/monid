@@ -1,0 +1,33 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC — not recorded. Shape from the agent-docs OpenAPI response schema (agent-docs.akta.pro/openapi.json, 2026-10-21); credits_consumed is the published flat 0.5-credit rate",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.akta.pro/api/v1/company/enrichment/partnerships/canva.com/"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "partnerships": [
+                            {
+                                "partner_name": "Salesforce",
+                                "partner_uuid": "0000abc",
+                                "partnership_type": "technology integration",
+                                "strategic_tier": "high",
+                                "announcement_date": "2024-03-01",
+                                "description": "Canva for Salesforce",
+                                "sources": [
+                                    "https://www.example.com/canva-salesforce"
+                                ]
+                            }
+                        ]
+                    },
+                    "credits_consumed": 0.5
+                }
+            }
+        }
+    ]
+}
