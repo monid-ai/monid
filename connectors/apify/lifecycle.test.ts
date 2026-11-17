@@ -164,6 +164,13 @@ const CHAIN_COUNTS: Record<string, Record<string, number>> = {
         videoprocessed: 2,
         default_dataset_item: 2,
     },
+    // ---- benthepythondev actors (add-apify-benthepythondev-actors) ----
+    // the published salary-extracted event is never charged by the actor
+    // (its src/main.py charges dataset rows only) → evidenced as 0
+    "benthepythondev/remote-jobs-aggregator": {
+        default_dataset_item: 2,
+        salary_extracted: 0,
+    },
 };
 
 const inputFor = (id: string): RunInput => {
