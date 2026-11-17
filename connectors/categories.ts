@@ -46,6 +46,14 @@ export const LEAF_CATEGORIES = defineLeafCategories([
         description: "Employee and product review data for companies.",
     },
     {
+        id: "market-trends",
+        displayName: "Tech & Market Trends",
+        description:
+            "Tools to track what is growing in tech, including product " +
+            "usage, downloads, installs, adoption, hiring, research " +
+            "momentum, and more.",
+    },
+    {
         id: "funding-data",
         displayName: "Funding Data",
         description: "Fundraising, investors, valuations, and deal activity.",

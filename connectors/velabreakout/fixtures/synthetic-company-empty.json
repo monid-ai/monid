@@ -1,0 +1,23 @@
+{
+    "name": "synthetic-company-empty",
+    "description": "SYNTHETIC chain for velabreakout#company: a known company with no signals (200 + signals: []) — free to the buyer (zero usage). Hand-built from the shape of synthetic-company-ok; not yet observed live (an unknown company is a 404).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?name_or_domain=example.com"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "name": "Example",
+                    "domain": "example.com",
+                    "summary": "Example is rising on 0 of 0 measures.",
+                    "measured_as_of": "2026-10-28",
+                    "page": "https://breakout.vela.partners/company/example.com",
+                    "signals": []
+                }
+            }
+        }
+    ]
+}
