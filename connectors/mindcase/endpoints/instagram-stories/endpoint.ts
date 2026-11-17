@@ -32,7 +32,13 @@ export default defineEndpoint({
     request: { method: "POST", path: "/v1/data/instagram/stories/run" },
     input: {
         schema: {
-            body: zInstagramStoriesBody,
+            body: zInstagramStoriesBody.extend({
+                maxResults: zInstagramStoriesBody.shape.maxResults.unwrap().min(
+                    1,
+                ).default(100).describe(
+                    "How many stories to return in total across all accounts. Defaults to 100; at most 10,000.",
+                ),
+            }),
         },
     },
     usage: {
@@ -43,8 +49,7 @@ export default defineEndpoint({
         },
         estimate: ({ data }) => {
             const body = data.input.body;
-            const capped = body.usernames.length;
-            const rows = capped;
+            const rows = body.maxResults;
             return { counts: { RESULT: rows } };
         },
     },

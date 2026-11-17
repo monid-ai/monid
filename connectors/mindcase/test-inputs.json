@@ -51,7 +51,8 @@
             "https://www.airbnb.com/rooms/934107469692156357"
         ],
         "locale": "en-US",
-        "currency": "USD"
+        "currency": "USD",
+        "maxResults": 2
     },
     "airbnb/reviews": {
         "urls": "https://www.airbnb.com/rooms/12937",
@@ -807,7 +808,8 @@
     "instagram/stories": {
         "usernames": [
             "natgeo"
-        ]
+        ],
+        "maxResults": 2
     },
     "instamart/products": {
         "query": "chocolate",
