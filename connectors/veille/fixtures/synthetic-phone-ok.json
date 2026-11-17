@@ -1,0 +1,23 @@
+{
+    "name": "synthetic-phone-ok",
+    "description": "SYNTHETIC happy chain for veille#v1/intelligence/phone. Body shape from Veille's OpenAPI spec and a live call made for the Treg catalog (2026-11-09), trimmed; the URL is the query string the engine emits. Replace via `deno task record` when VEILLE_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.veille.io/v1/intelligence/phone?query=%2B33612345678"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "is_valid": true,
+                    "country": "FR",
+                    "line_type": "mobile",
+                    "carrier": "SFR",
+                    "risk_score": 30,
+                    "e164_format": "+33612345678"
+                }
+            }
+        }
+    ]
+}

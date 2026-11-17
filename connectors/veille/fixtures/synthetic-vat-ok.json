@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-vat-ok",
+    "description": "SYNTHETIC happy chain for veille#v1/vat. Body shape from Veille's OpenAPI spec and a live call made for the Treg catalog (2026-11-09), trimmed; the URL is the query string the engine emits. Replace via `deno task record` when VEILLE_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.veille.io/v1/vat?query=FR40303265045"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "valid": true,
+                    "vat_number": "40303265045",
+                    "company_name": null,
+                    "country_code": "FR",
+                    "company_address": null
+                }
+            }
+        }
+    ]
+}

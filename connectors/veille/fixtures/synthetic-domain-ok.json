@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-domain-ok",
+    "description": "SYNTHETIC happy chain for veille#v1/intelligence/domain. Body shape from Veille's OpenAPI spec and a live call made for the Treg catalog (2026-11-09), trimmed; the URL is the query string the engine emits. Replace via `deno task record` when VEILLE_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.veille.io/v1/intelligence/domain?query=example.com"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "domain": "example.com",
+                    "disposable": false,
+                    "dns": {
+                        "mx": true
+                    }
+                }
+            }
+        }
+    ]
+}

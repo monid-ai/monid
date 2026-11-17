@@ -1,0 +1,23 @@
+{
+    "name": "synthetic-iban-ok",
+    "description": "SYNTHETIC happy chain for veille#v1/vat/iban. Body shape from Veille's OpenAPI spec and a live call made for the Treg catalog (2026-11-09), trimmed; the URL is the query string the engine emits. Replace via `deno task record` when VEILLE_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.veille.io/v1/vat/iban?query=FR7630006000011234567890189"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "valid": true,
+                    "iban": "FR7630006000011234567890189",
+                    "bic": "AGRIFRPPXXX",
+                    "bank_name": "CREDIT AGRICOLE SA",
+                    "country_code": "FR",
+                    "in_sepa_zone": true
+                }
+            }
+        }
+    ]
+}
