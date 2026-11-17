@@ -124,6 +124,7 @@
         "apollo#organizations/show",
         "apollo#people/match",
         "apollo#people/show",
+        "appear#how-ai-sees-you",
         "bytedance#seedance-2.0",
         "bytedance#seedance-2.0-fast",
         "bytedance#seedance-2.0-mini",
