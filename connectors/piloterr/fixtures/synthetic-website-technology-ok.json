@@ -1,0 +1,25 @@
+{
+    "name": "synthetic-website-technology-ok",
+    "description": "SYNTHETIC happy chain for piloterr#v2/website/technology. Body shape from Piloterr's OpenAPI spec and a live call made for the Treg catalog (2026-11-09), trimmed; the URL is the query string the engine emits. Replace via `deno task record` when PILOTERR_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.piloterr.com/v2/website/technology?query=example.com"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "technologies": [
+                        {
+                            "name": "Nginx",
+                            "categories": [
+                                "Web servers"
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
