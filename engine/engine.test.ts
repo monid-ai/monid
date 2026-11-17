@@ -826,6 +826,64 @@ Deno.test("consolidate.output strip applies even with an EMPTY claim (the octen 
     assertEquals(result.output, { results: [{ id: "a" }], meta: {} });
 });
 
+Deno.test("consolidate.output: explicit null stands; only an ABSENT output keeps raw (#104)", async () => {
+    // null is valid JSON and a valid Consolidated.output: a hook returning
+    // {credits: {}, output: null} has REMOVED the payload (e.g. stripped a
+    // vendor billing field). Restoring raw there would re-expose it; only
+    // an omitted/undefined output means "payload unchanged".
+    const engine = new Engine({
+        transport: jsonTransport(200, {
+            results: [{ id: "a" }],
+            vendorTotal: 0,
+        }),
+    });
+    const loaded = await engine.load(
+        await usageUnit({
+            model: {
+                kind: "PER_UNIT",
+                unit: "RESULT",
+                every: 1,
+                consumes: { credit: "default", amount: 0.5 },
+            },
+            evidence: ({ data, utils }) => ({
+                counts: {
+                    "RESULT": utils.json.len(data.output, "$.results"),
+                },
+            }),
+            consolidate: () => ({ credits: {}, output: null }),
+        }),
+    );
+    const result = await loaded.run({ body: { q: "x" } });
+    assertEquals(result.usage, {
+        credits: { default: 0.5 },
+        evidence: { "RESULT": 1 },
+    });
+    assertEquals(result.output, null);
+
+    // absent output: the raw payload still passes through unchanged
+    const loaded2 = await engine.load(
+        await usageUnit({
+            model: {
+                kind: "PER_UNIT",
+                unit: "RESULT",
+                every: 1,
+                consumes: { credit: "default", amount: 0.5 },
+            },
+            evidence: ({ data, utils }) => ({
+                counts: {
+                    "RESULT": utils.json.len(data.output, "$.results"),
+                },
+            }),
+            consolidate: () => ({ credits: {} }),
+        }),
+    );
+    const result2 = await loaded2.run({ body: { q: "x" } });
+    assertEquals(result2.output, {
+        results: [{ id: "a" }],
+        vendorTotal: 0,
+    });
+});
+
 Deno.test("error settles: zeroUsage forced — neither evidence nor consolidate runs", async () => {
     // both settle fns would THROW on this error body if invoked; a clean
     // zero-usage settle proves the engine never ran them
