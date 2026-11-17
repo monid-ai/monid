@@ -1,0 +1,187 @@
+{
+    "name": "synthetic-job-transient",
+    "description": "A 503 on the status lookup and a 503 on the download link must keep the run alive rather than settle it. Same terminal data as job-succeeded: 2 leads.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "id": "JOB1",
+                    "status": "queued",
+                    "progress": 0,
+                    "query": "Plumber",
+                    "list_name": "Plumber",
+                    "country": "us",
+                    "states": [],
+                    "cities": [
+                        {
+                            "city": "Austin",
+                            "state": "Texas"
+                        }
+                    ],
+                    "total_limit": 50,
+                    "lead_count": 0,
+                    "email_count": 0,
+                    "stop_reason": null,
+                    "error_message": null,
+                    "export_error": null,
+                    "created_at": "2026-10-09T18:00:00+00:00",
+                    "started_at": null,
+                    "completed_at": null,
+                    "downloads": {
+                        "csv": false,
+                        "xlsx": false,
+                        "csv_all": false,
+                        "xlsx_all": false,
+                        "filtered_csv": false,
+                        "filtered_xlsx": false
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}/JOB1"
+            },
+            "res": {
+                "status": 503,
+                "body": {
+                    "error": {
+                        "code": "service_unavailable",
+                        "message": "Temporarily unavailable.",
+                        "details": {}
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}/JOB1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "JOB1",
+                    "status": "completed",
+                    "progress": 100,
+                    "query": "Plumber",
+                    "list_name": "Plumber",
+                    "country": "us",
+                    "states": [],
+                    "cities": [
+                        {
+                            "city": "Austin",
+                            "state": "Texas"
+                        }
+                    ],
+                    "total_limit": 50,
+                    "lead_count": 6,
+                    "email_count": 2,
+                    "stop_reason": "coverage_exhausted",
+                    "error_message": null,
+                    "export_error": null,
+                    "created_at": "2026-10-09T18:00:00+00:00",
+                    "started_at": "2026-10-09T18:00:05+00:00",
+                    "completed_at": "2026-10-09T18:06:40+00:00",
+                    "downloads": {
+                        "csv": true,
+                        "xlsx": true,
+                        "csv_all": true,
+                        "xlsx_all": true,
+                        "filtered_csv": false,
+                        "filtered_xlsx": false
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}/JOB1/download?format=csv&scope=emails"
+            },
+            "res": {
+                "status": 503,
+                "body": {
+                    "error": {
+                        "code": "download_unavailable",
+                        "message": "Could not produce a download link. Please retry.",
+                        "details": {}
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}/JOB1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "JOB1",
+                    "status": "completed",
+                    "progress": 100,
+                    "query": "Plumber",
+                    "list_name": "Plumber",
+                    "country": "us",
+                    "states": [],
+                    "cities": [
+                        {
+                            "city": "Austin",
+                            "state": "Texas"
+                        }
+                    ],
+                    "total_limit": 50,
+                    "lead_count": 6,
+                    "email_count": 2,
+                    "stop_reason": "coverage_exhausted",
+                    "error_message": null,
+                    "export_error": null,
+                    "created_at": "2026-10-09T18:00:00+00:00",
+                    "started_at": "2026-10-09T18:00:05+00:00",
+                    "completed_at": "2026-10-09T18:06:40+00:00",
+                    "downloads": {
+                        "csv": true,
+                        "xlsx": true,
+                        "csv_all": true,
+                        "xlsx_all": true,
+                        "filtered_csv": false,
+                        "filtered_xlsx": false
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}/JOB1/download?format=csv&scope=emails"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "url": "https://files.example.com/exports/JOB1.csv?signature=REDACTED",
+                    "expires_at": "2026-10-09T18:22:00Z",
+                    "format": "csv",
+                    "scope": "emails",
+                    "filename": "Plumber.csv"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://files.example.com/exports/JOB1.csv?signature=REDACTED"
+            },
+            "res": {
+                "status": 200,
+                "body": "﻿query,name,phone,review_count,rating,categories,city,state,website,domain,email,address,business_status,claimed,working_hours,google_maps_url,zip_code\r\nPlumber,Example Plumbing Co,(512) 555-0100,128,4.8,\"Plumber, Water heater installation service\",Austin,Texas,https://example-plumbing.example.com,example-plumbing.example.com,info@example-plumbing.example.com,\"100 Example St, Austin, TX 78701\",OPERATIONAL,true,\"Mon: 8AM-6PM\",https://maps.google.com/?cid=1,78701\r\nPlumber,\"The \"\"Best\"\" Drains\",(512) 555-0101,9,5,Plumber,Austin,Texas,https://drains.example.com,drains.example.com,hello@drains.example.com,\"200 Sample Ave\nSuite 4, Austin, TX 78702\",OPERATIONAL,false,,https://maps.google.com/?cid=2,78702\r\n"
+            }
+        }
+    ]
+}

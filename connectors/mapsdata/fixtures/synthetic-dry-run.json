@@ -1,0 +1,34 @@
+{
+    "name": "synthetic-dry-run",
+    "description": "dry_run=true answers 200 with the resolved plan and creates no job. Settles at once, bills 0.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "would_create": true,
+                    "query_terms": [
+                        "Plumber"
+                    ],
+                    "states": [],
+                    "cities": [
+                        {
+                            "city": "Austin",
+                            "state": "Texas"
+                        }
+                    ],
+                    "country": "us",
+                    "scrape_mode": "cities",
+                    "total_limit": 50,
+                    "requested_total_limit": 50,
+                    "clamped_to_allowance": false,
+                    "email_only": false
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "name": "synthetic-submit-rejected",
+    "description": "The submit gate rejects a free-text query with 400 unsupported_query and suggestions. Data, never a job: zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "error": {
+                        "code": "unsupported_query",
+                        "message": "'plumbers near me' is not a Google Maps category, so it cannot be scraped. Did you mean: Plumber, Plumbing supply store? Use GET /api/v1/categories to search valid categories.",
+                        "field": "query",
+                        "details": {
+                            "term": "plumbers near me",
+                            "suggestions": [
+                                "Plumber",
+                                "Plumbing supply store"
+                            ]
+                        },
+                        "request_id": "req_test"
+                    }
+                }
+            }
+        }
+    ]
+}

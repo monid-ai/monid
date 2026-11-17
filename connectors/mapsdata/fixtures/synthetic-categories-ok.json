@@ -1,0 +1,25 @@
+{
+    "name": "synthetic-categories-ok",
+    "description": "Category search for q=plumb.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?q=plumb"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "name": "Plumber"
+                        },
+                        {
+                            "name": "Plumbing supply store"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
