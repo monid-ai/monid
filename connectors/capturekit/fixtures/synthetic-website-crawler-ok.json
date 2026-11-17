@@ -1,0 +1,16 @@
+{
+    "name": "synthetic-website-crawler-ok",
+    "description": "SYNTHETIC happy chain for capturekit#v1/website/crawler. Body shape from CaptureKit's OpenAPI spec and a live call made for the Treg catalog (2026-11-09), trimmed; the URL is the query string the engine emits. Replace via `deno task record` when CAPTUREKIT_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.capturekit.dev/v1/website/crawler?query=https%3A%2F%2Fexample.com"
+            },
+            "res": {
+                "status": 200,
+                "body": "<!doctype html><html><head><title>Example Domain</title></head><body></body></html>"
+            }
+        }
+    ]
+}
