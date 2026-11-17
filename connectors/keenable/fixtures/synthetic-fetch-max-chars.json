@@ -1,6 +1,6 @@
 {
     "name": "synthetic-fetch-max-chars",
-    "description": "SYNTHETIC bounded fetch for keenable#v1/fetch with max_chars=1 (schema-gate near-twin of max_chars: 0). Response shape matches the indexed-fetch public twin; query string is the engine's URLSearchParams encoding.",
+    "description": "SYNTHETIC bounded fetch for keenable#v1/fetch with max_chars=1 (schema-gate near-twin of max_chars: 0). Response shape matches the indexed-fetch public twin; query string is the engine's URLSearchParams encoding. Body carries the truncated and total_chars fields of keenable-backend-ts#691; max_chars of 1 cuts without the '...' marker.",
     "calls": [
         {
             "req": {
@@ -13,7 +13,9 @@
                     "url": "https://example.com/",
                     "title": "Example Domain",
                     "content": "#",
-                    "description": ""
+                    "description": "",
+                    "truncated": true,
+                    "total_chars": 156
                 }
             }
         }

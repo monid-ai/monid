@@ -1,0 +1,33 @@
+{
+    "name": "synthetic-search-contents",
+    "description": "SYNTHETIC search-and-read preset for keenable#v1/search-contents. Shape matches synthetic-search-ok; snippet_max_length defaults to 10000 at the binding. Replay matches method+URL, not body.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "query": "latest EU AI Act enforcement guidance",
+                    "snippet_max_length": 10000
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "query": "latest EU AI Act enforcement guidance",
+                    "mode": "pro",
+                    "results": [
+                        {
+                            "title": "EU AI Act enforcement guidance",
+                            "url": "https://example.com/eu-ai-act",
+                            "description": "",
+                            "snippet": "A long page-text extract of enforcement changes, included in the search response so a second contents call is not required.",
+                            "published_at": "2026-07-02T00:00:00Z",
+                            "acquired_at": "2026-07-02T01:00:00Z"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
