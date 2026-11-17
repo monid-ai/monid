@@ -9,8 +9,11 @@ export default defineEndpoint({
         displayName: "News Article Detail",
         summary: "Returns the full content of a single news article by " +
             "its ID (returned as id in feed and search results).",
-        description: "Returns the full content of a single news article by " +
-            "its ID (returned as id in feed and search results).",
+        description: "Returns the full content of one crypto news article by " +
+            "its id: the id field returned by /news/feed and /search/news. " +
+            "Use it after a feed or search call when the snippet is not " +
+            "enough. It does not search or list articles itself; for " +
+            "arbitrary web pages outside Surf's news index use /web/fetch.",
         docsUrl: "https://docs.asksurf.ai/data-api/news/detail",
         categories: ["news-search"],
     },

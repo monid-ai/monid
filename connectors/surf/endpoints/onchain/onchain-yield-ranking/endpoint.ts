@@ -8,9 +8,14 @@ export default defineEndpoint({
     meta: {
         displayName: "Yield Pool Ranking",
         summary: "List individual DeFi yield pools ranked by APY or TVL.",
-        description: "List individual DeFi yield pools ranked by APY or TVL. " +
-            "Example: filter by protocol like lido or aave for " +
-            "pool-level yield data.",
+        description: "Lists individual DeFi yield pools ranked by APY " +
+            "(default) or TVL in USD, descending by default, paginated " +
+            "(limit up to 100, default 20; offset). Filter to one protocol " +
+            "by name (project, e.g. lido, aave, uniswap). When ranked by APY " +
+            "only pools with at least $100k TVL are included. This is " +
+            "pool-level data; for a protocol leaderboard by TVL, fees or " +
+            "revenue use /project/defi/ranking, and for one protocol's " +
+            "metrics use /project/defi/metrics.",
         docsUrl: "https://docs.asksurf.ai/data-api/onchain/yield-ranking",
         categories: ["yields"],
     },

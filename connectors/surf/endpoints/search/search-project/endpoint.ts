@@ -8,8 +8,14 @@ export default defineEndpoint({
     meta: {
         displayName: "Project Search",
         summary: "Searches crypto projects by keyword.",
-        description: "Searches crypto projects by keyword. Included fields: " +
-            "name, description, chains, logo.",
+        description: "Searches crypto projects by name or ticker (e.g. " +
+            "uniswap, bitcoin, ETH; 2-100 characters) and returns paginated " +
+            "matches with name, description, chains and logo (limit up to " +
+            "100, default 20; offset). Use it to see which projects match a " +
+            "keyword. You often do not need it first: /project/detail, " +
+            "/market/tge and /market/public-sale accept a project name " +
+            "directly via q. For a token's contract address use " +
+            "/search/token; for VC funds use /search/fund.",
         docsUrl: "https://docs.asksurf.ai/data-api/search/project",
         categories: ["company-enrichment"],
         notes: [

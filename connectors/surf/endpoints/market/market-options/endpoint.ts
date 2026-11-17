@@ -8,9 +8,13 @@ export default defineEndpoint({
     meta: {
         displayName: "Options Market Data",
         summary: "Returns options market data for a symbol.",
-        description: "Returns options market data for a symbol. Included " +
-            "fields: open interest, volume, put/call ratio, max pain " +
-            "price.",
+        description: "Returns crypto options market data for one underlying " +
+            "(BTC, ETH, SOL, XRP, BNB, DOGE, ADA or AVAX; other symbols are " +
+            "rejected): open interest, volume, put/call ratio and max pain " +
+            "price. Results sort by volume_24h (default) or open_interest, " +
+            "descending by default. For perpetual futures (open interest, " +
+            "funding rate, long/short ratio) use /market/futures; for spot " +
+            "ETF flows use /market/etf.",
         docsUrl: "https://docs.asksurf.ai/data-api/market/options",
         categories: ["derivatives"],
     },
