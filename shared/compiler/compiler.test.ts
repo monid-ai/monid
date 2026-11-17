@@ -179,6 +179,85 @@ Deno.test("closed-term lint rejects free identifiers, allows params/locals/white
 // compilation
 // ---------------------------------------------------------------------------
 
+Deno.test("parameter schemas: reject types that cannot accept objects after fallback", async () => {
+    const invalid = [
+        z.string(),
+        z.array(z.string()),
+        z.number(),
+        z.boolean(),
+        z.null(),
+        z.union([z.string(), z.array(z.string())]),
+        z.intersection(z.object({}), z.string()),
+    ];
+    for (const section of ["queryParams", "pathParams"] as const) {
+        for (const schema of invalid) {
+            for (const scope of ["endpoint", "provider"]) {
+                const input = { schema: { [section]: schema } };
+                const error = await assertRejects(
+                    () =>
+                        compileBundle(
+                            source(
+                                [{
+                                    name: "search",
+                                    def: makeEndpoint(
+                                        scope === "endpoint" ? { input } : {},
+                                    ),
+                                }],
+                                makeProvider(
+                                    scope === "provider" ? { input } : {},
+                                ),
+                            ),
+                            OPTS,
+                        ),
+                    CompileError,
+                    `input.schema.${section} must allow object values`,
+                );
+                assertEquals(error.code, CompileErrorCode.DOC_MALFORMED);
+            }
+        }
+    }
+});
+
+Deno.test("parameter schemas: preserve object compositions, unconstrained schemas, and overrides", async () => {
+    const object = z.object({ id: z.string() });
+    for (
+        const schema of [
+            object,
+            z.record(z.string(), z.string()),
+            z.union([object, z.object({ name: z.string() })]),
+            z.intersection(object, z.object({ name: z.string() })),
+            object.nullable(),
+            z.unknown(),
+        ]
+    ) {
+        await compileBundle(
+            source(
+                [{
+                    name: "search",
+                    def: makeEndpoint({
+                        input: {
+                            schema: {
+                                queryParams: schema,
+                                pathParams: schema,
+                                body: z.string(),
+                            },
+                        },
+                    }),
+                }],
+                makeProvider({
+                    input: {
+                        schema: {
+                            queryParams: z.string(),
+                            pathParams: z.array(z.string()),
+                        },
+                    },
+                }),
+            ),
+            OPTS,
+        );
+    }
+});
+
 Deno.test("compile produces doc maps + interned table; ids inferred; closure holds", async () => {
     const bundle = await compileBundle(
         source([
