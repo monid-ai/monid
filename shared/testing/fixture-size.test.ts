@@ -151,6 +151,36 @@ Deno.test("recordingFetch: an allowlisted header is captured AND relayed", async
     assertEquals(relayed.headers.get("set-cookie"), null);
 });
 
+Deno.test("recordingFetch: JSON null and other payloads retain their values through replay", async () => {
+    for (
+        const [raw, expected] of [
+            ["null", null],
+            ["  null\n", null],
+            ['"null"', "null"],
+            ["false", false],
+            ["0", 0],
+            ['""', ""],
+            ['{"value":null}', { value: null }],
+            ["[null]", [null]],
+            ["plain text", "plain text"],
+        ] as const
+    ) {
+        const calls: Parameters<typeof scrubCalls>[0] = [];
+        const response = await recordingFetch(
+            () => Promise.resolve(new Response(raw)),
+            calls,
+        )("https://api.test/value");
+        assertEquals(await response.text(), raw, "live payload is preserved");
+        assertEquals<unknown>(calls[0].res.body, expected, raw);
+        const replayed = await replayFetch({
+            name: "payload",
+            description: "Recorded payload preserves its decoded value.",
+            calls,
+        })("https://api.test/value");
+        assertEquals(await replayed.json(), expected, raw);
+    }
+});
+
 Deno.test("replayFetch: recorded headers are served back; absent ⇒ none", async () => {
     const serve = replayFetch({
         name: "redirect",
