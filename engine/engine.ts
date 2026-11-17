@@ -514,6 +514,7 @@ export class LoadedEndpoint implements RunnableEndpoint {
         }
         const prevState = this.parseThreadedState(state);
         const t0 = this.now();
+        let settlingCompleted = false;
         try {
             const input = this.deriveInput(runInput);
             const request = this.requestInfo(input);
@@ -539,6 +540,7 @@ export class LoadedEndpoint implements RunnableEndpoint {
                 return { kind: StopKind.STOPPED_UNSETTLED };
             }
             if (outcome.kind === RunKind.COMPLETED) {
+                settlingCompleted = true;
                 return this.fromOutcome(
                     outcome,
                     input,
@@ -569,7 +571,10 @@ export class LoadedEndpoint implements RunnableEndpoint {
                 error: String(error),
             });
             // a metered doc's failed teardown is a money question — flag it
-            if (this.doc.usage.updateEstimateEveryMs !== undefined) {
+            if (
+                settlingCompleted ||
+                this.doc.usage.updateEstimateEveryMs !== undefined
+            ) {
                 return {
                     kind: StopKind.UNRESOLVED,
                     reason: `lifecycle.stop failed: ${error}`,
