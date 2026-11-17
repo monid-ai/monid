@@ -1,0 +1,109 @@
+{
+    "name": "happy",
+    "description": "recorded chain for exa#search/deep, scenario 'happy' (live 2026-11-02; trimmed, vendor request diagnostics removed)",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.exa.ai/search",
+                "body": {
+                    "query": "Which three EU countries had the highest solar capacity additions in 2025, and by how much?",
+                    "numResults": 3,
+                    "outputSchema": {
+                        "type": "object",
+                        "properties": {
+                            "countries": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "country": {
+                                            "type": "string"
+                                        },
+                                        "gigawatts": {
+                                            "type": "number"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "type": "deep",
+                    "moderation": false
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "requestId": "aee11bcb1022424876dfef906895261c",
+                    "resolvedSearchType": "",
+                    "results": [
+                        {
+                            "id": "https://helapco.gr/xoorigle/2025/12/Report_EU_Solar_Market_Outlook_2025_2030_215fab8c9d.pdf",
+                            "title": "EU Solar Market Outlook 2025-2030",
+                            "url": "https://helapco.gr/xoorigle/2025/12/Report_EU_Solar_Market_Outlook_2025_2030_215fab8c9d.pdf",
+                            "publishedDate": "2025-12-15T00:00:00.000Z"
+                        },
+                        {
+                            "id": "https://taiyangnews.info/markets/eu-solar-growth-slows-with-first-annual-dip-since-2016",
+                            "title": "SolarPower Europe: EU Solar Growth Slows With First Annual Dip Since 2016",
+                            "url": "https://taiyangnews.info/markets/eu-solar-growth-slows-with-first-annual-dip-since-2016",
+                            "publishedDate": "2025-12-11T14:42:30.000Z",
+                            "author": "Anu Bhambhani",
+                            "image": "https://media.assettype.com/taiyangnews%2F2025-12-11%2Fq2yybor0%2FEU-2025-2030.jpg?w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&enlarge=true&overlay=false&overlay_position=bottom&overlay_width=100"
+                        }
+                    ],
+                    "numSearches": 3,
+                    "searchTime": 4586.2,
+                    "costDollars": {
+                        "total": 0.012
+                    },
+                    "output": {
+                        "content": {
+                            "countries": [
+                                {
+                                    "country": "Germany",
+                                    "gigawatts": 17.6
+                                },
+                                {
+                                    "country": "Spain",
+                                    "gigawatts": 9.2
+                                }
+                            ]
+                        },
+                        "grounding": [
+                            {
+                                "field": "countries[0].country",
+                                "citations": [
+                                    {
+                                        "url": "https://helapco.gr/xoorigle/2025/12/Report_EU_Solar_Market_Outlook_2025_2030_215fab8c9d.pdf",
+                                        "title": "EU Solar Market Outlook 2025-2030"
+                                    },
+                                    {
+                                        "url": "https://taiyangnews.info/markets/eu-solar-growth-slows-with-first-annual-dip-since-2016",
+                                        "title": "SolarPower Europe: EU Solar Growth Slows With First Annual Dip Since 2016"
+                                    }
+                                ],
+                                "confidence": "high"
+                            },
+                            {
+                                "field": "countries[0].gigawatts",
+                                "citations": [
+                                    {
+                                        "url": "https://helapco.gr/xoorigle/2025/12/Report_EU_Solar_Market_Outlook_2025_2030_215fab8c9d.pdf",
+                                        "title": "EU Solar Market Outlook 2025-2030"
+                                    },
+                                    {
+                                        "url": "https://taiyangnews.info/markets/eu-solar-growth-slows-with-first-annual-dip-since-2016",
+                                        "title": "SolarPower Europe: EU Solar Growth Slows With First Annual Dip Since 2016"
+                                    }
+                                ],
+                                "confidence": "high"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

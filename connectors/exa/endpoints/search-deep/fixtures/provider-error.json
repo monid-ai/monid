@@ -1,0 +1,26 @@
+{
+    "name": "provider-error",
+    "description": "recorded chain for exa#search/deep, scenario 'provider-error' (live 2026-11-02; trimmed, vendor request diagnostics removed)",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.exa.ai/search",
+                "body": {
+                    "query": "anything",
+                    "type": "deep",
+                    "numResults": 10,
+                    "moderation": false
+                }
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "requestId": "fd8625c1901667bb409c845a6e02f17d",
+                    "error": "Invalid API key. Provide a valid key using 'Authorization: Bearer <key>' or 'x-api-key: <key>'. Create a key at https://dashboard.exa.ai/api-keys",
+                    "tag": "INVALID_API_KEY"
+                }
+            }
+        }
+    ]
+}

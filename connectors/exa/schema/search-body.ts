@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { zContentsOptions } from "../../../schema/contents-options.ts";
+import { zContentsOptions } from "./contents-options.ts";
 
 /**
  * Exa /search request body — ported from the v1 adaptor, with the known drift
@@ -15,6 +15,7 @@ export const zExaSearchBody = z.object({
     query: z.string().min(1).describe("Natural-language search query."),
     type: z.enum([
         "auto",
+        "lite",
         "instant",
         "fast",
         "neural",

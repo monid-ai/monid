@@ -1,0 +1,55 @@
+{
+    "name": "happy",
+    "description": "recorded chain for exa#search/lite, scenario 'happy' (live 2026-11-02; trimmed, vendor request diagnostics removed)",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.exa.ai/search",
+                "body": {
+                    "query": "latest developments in LLMs",
+                    "numResults": 3,
+                    "contents": {
+                        "highlights": true
+                    },
+                    "moderation": false,
+                    "type": "lite"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "requestId": "14e9cd5051ab44f02a96dedf8ddc33ed",
+                    "resolvedSearchType": "",
+                    "results": [
+                        {
+                            "id": "https://whatisthelatest.ai/digest/",
+                            "title": "What's the latest in AI today: Nov 2, 2026",
+                            "url": "https://whatisthelatest.ai/digest/",
+                            "highlights": [
+                                "# What's the latest today\n\nNov 2, 2026. 1 new model listing, 4 lab posts, 3 funding stories, 8 launches and releases. Built from the day's sources and updated through the day.\n\n## New models\n\n1. Z.ai: GLM 5.3 FlashX Legal is now listed on OpenRouter openrouter.ai\n\n## From the labs\n\n1. Google: The latest AI news we announced in October 2026 blog.google\n2. OpenAI: Introducing the Grid Protectors Program openai.com\n3. OpenAI: LifeVal openai.com\n4. OpenAI: Qodo builds context into AI code review wit"
+                            ],
+                            "image": "https://whatisthelatest.ai/og/digest.png"
+                        },
+                        {
+                            "id": "https://aiweekly.co/ai-news-today",
+                            "title": "AI News Today, November 2: Top Stories | AI Weekly",
+                            "url": "https://aiweekly.co/ai-news-today",
+                            "highlights": [
+                                "### GPT-6 edits Qwen weights directly, lifts MATH-500 by 40 points \n\nMIT CSAIL researchers Rikiya Takehi, Jayden Teoh, Alex Zhang and Omar Khattab published 'Weight-Space Programming' showing GPT-6 Astra can read and edit a model's weights from a natural-language spec, no gradient descent required. Pointed at Qwen3.5-0.8B, Astra traced a looping failure to directi…\n\n...\n\n### Meituan launches 1.6T-param LongCat-2.5 multimodal agentic model \n\nMeituan released LongCat-2.5 Preview, a 1.6-trillion-to"
+                            ],
+                            "image": "https://dxj7eshgz03ln.cloudfront.net/production/publication/logo/1475/8f402391-cd29-43a4-9695-35d930a59660.png"
+                        }
+                    ],
+                    "searchTime": 327.3,
+                    "costDollars": {
+                        "total": 0.004,
+                        "search": {
+                            "neural": 0.004
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

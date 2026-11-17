@@ -1,0 +1,170 @@
+import { assert, assertEquals, assertRejects } from "@std/assert";
+import { fromFileUrl } from "@std/path";
+import type { Json } from "@shared/core";
+import {
+    assertInputAccepted,
+    estimateEndpoint,
+    liveSkip,
+    loadFixture,
+    runEndpoint,
+    testSealedUnit,
+} from "@shared/testing";
+
+const ID = "exa#search/deep";
+const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
+
+Deno.test(`${ID} compiled schema advertises the 10-result limit`, async () => {
+    const unit = await testSealedUnit(ID);
+    const properties = unit.doc.input.schema.body?.properties as Record<
+        string,
+        { maximum?: number; description?: string }
+    >;
+    assertEquals(properties.numResults.maximum, 10);
+    assertEquals(
+        properties.numResults.description,
+        "Number of results (1-10).",
+    );
+});
+
+Deno.test(`${ID} happy: structured output with grounding, $0.012 claim equals the fold`, async () => {
+    const unit = await testSealedUnit(ID);
+    assertEquals(unit.doc.id, ID);
+    const fixture = await loadFixture(`${fixturesDir}happy.json`);
+    const result = await runEndpoint({
+        unit,
+        input: {
+            body: {
+                query: "Which three EU countries had the highest solar " +
+                    "capacity additions in 2025, and by how much?",
+                numResults: 3,
+                outputSchema: {
+                    type: "object",
+                    properties: {
+                        countries: {
+                            type: "array",
+                            items: {
+                                type: "object",
+                                properties: {
+                                    country: { type: "string" },
+                                    gigawatts: { type: "number" },
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+        mode: "replay",
+        fixture,
+    });
+
+    assertEquals(result.httpStatus, 200);
+    assertEquals(result.isProviderError, false);
+    // recorded live 2026-11-02: the default deep search matches the flat rate.
+    assertEquals(result.usage, {
+        credits: { default: 0.012 },
+        evidence: { CALL: 1 },
+    });
+    const output = result.output as {
+        costDollars?: unknown;
+        output: { content: unknown; grounding: unknown[] };
+    };
+    assertEquals(output.costDollars, undefined);
+    assertEquals(typeof output.output.content, "object");
+    assertEquals(output.output.grounding.length > 0, true);
+});
+
+Deno.test(`${ID} provider error: 401 is data, zero usage`, async () => {
+    const unit = await testSealedUnit(ID);
+    const fixture = await loadFixture(`${fixturesDir}provider-error.json`);
+    const result = await runEndpoint({
+        unit,
+        input: { body: { query: "anything" } },
+        mode: "replay",
+        fixture,
+    });
+
+    assertEquals(result.httpStatus, 401);
+    assertEquals(result.isProviderError, true);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
+});
+
+Deno.test(`${ID} schema gate: flat-price limits are enforced`, async () => {
+    const unit = await testSealedUnit(ID);
+    const invalidBodies: Json[] = [
+        ...["auto", "lite", "fast", "deep-reasoning"].map((type) => ({
+            query: "q",
+            type,
+        })),
+        { query: "q", numResults: 11 },
+        { query: "q", contents: { summary: {} } },
+    ];
+    for (const body of invalidBodies) {
+        await assertRejects(
+            () => runEndpoint({ unit, input: { body }, mode: "replay" }),
+            Error,
+            "INVALID_INPUT",
+        );
+    }
+    await assertInputAccepted({
+        unit,
+        input: {
+            body: {
+                query: "q",
+                type: "deep-lite",
+                numResults: 10,
+                contents: { highlights: true },
+            },
+        },
+        mode: "replay",
+    });
+});
+
+Deno.test(`${ID} estimate: $0.012 flat for accepted inputs`, async () => {
+    const unit = await testSealedUnit(ID);
+    // Search rate sources and dates: see ../../provider.ts.
+    for (const type of [undefined, "deep-lite", "deep"]) {
+        for (const numResults of [undefined, 1, 3, 10]) {
+            const usage = await estimateEndpoint(unit, {
+                body: {
+                    query: "q",
+                    ...(type ? { type } : {}),
+                    ...(numResults === undefined ? {} : { numResults }),
+                },
+            });
+            assertEquals(usage, {
+                credits: { default: 0.012 },
+                evidence: { CALL: 1 },
+            });
+        }
+    }
+});
+
+Deno.test({
+    name: `${ID} live (gated on EXA_API_KEY)`,
+    ignore: liveSkip("exa"),
+    fn: async () => {
+        const unit = await testSealedUnit(ID);
+        const result = await runEndpoint({
+            unit,
+            input: {
+                body: {
+                    query: "latest developments in LLMs",
+                    type: "deep",
+                    numResults: 3,
+                },
+            },
+            mode: "live",
+        });
+        assertEquals(
+            result.isProviderError,
+            false,
+            JSON.stringify(result.output),
+        );
+        assertEquals(result.usage.evidence, { CALL: 1 });
+        assert(Number.isFinite(result.usage.credits.default));
+        assert(result.usage.credits.default >= 0);
+        assert(!("costDollars" in (result.output as Record<string, unknown>)));
+        assertEquals(result.usage.mismatch, undefined);
+    },
+});

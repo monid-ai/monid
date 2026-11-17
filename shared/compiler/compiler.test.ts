@@ -1158,7 +1158,7 @@ Deno.test("golden: compiled exa#search doc shape (zBundle round-trip)", async ()
         "connectors/exa/provider.ts#usage.consolidate",
     );
     assertEquals(doc.usage.credits, { default: { label: "US dollars" } });
-    assertEquals(doc.timeouts, { requestMs: 30_000, runMs: 30_000 });
+    assertEquals(doc.timeouts, { requestMs: 180_000, runMs: 190_000 });
     // meta roles: one-line summary + full description
     assert(doc.meta.summary.length < 200);
     assert((doc.meta.description ?? "").includes("search types"));

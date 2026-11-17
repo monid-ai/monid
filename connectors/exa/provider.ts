@@ -1,3 +1,9 @@
+/** Search rate table, checked 2026-11-03: https://exa.ai/pricing
+ *  lite $0.004, auto $0.007, deep $0.012 per call (first 10 results),
+ *  $0.001 per result above 10 and per result summary. Types the page
+ *  does not list were checked against live costDollars.total on
+ *  2026-11-02: instant and neural $0.004, fast $0.007, deep-lite $0.012,
+ *  deep-reasoning $0.015. */
 import { defineProvider, presets } from "@shared/core";
 
 export default defineProvider({

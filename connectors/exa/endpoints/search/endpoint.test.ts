@@ -1,6 +1,7 @@
-import { assert, assertEquals } from "@std/assert";
+import { assert, assertAlmostEquals, assertEquals } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import {
+    estimateEndpoint,
     liveSkip,
     loadFixture,
     runEndpoint,
@@ -8,6 +9,11 @@ import {
 } from "@shared/testing";
 
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
+
+Deno.test("exa#search allows time for deep search types", async () => {
+    const unit = await testSealedUnit("exa#search");
+    assertEquals(unit.doc.timeouts, { requestMs: 180_000, runMs: 190_000 });
+});
 
 Deno.test("exa#search happy: costDollars claim wins (fold rides as mismatch), receipt consolidated away", async () => {
     const unit = await testSealedUnit("exa#search");
@@ -28,12 +34,13 @@ Deno.test("exa#search happy: costDollars claim wins (fold rides as mismatch), re
     assertEquals(result.isProviderError, false);
     // D27 claim-wins: the fixture's costDollars.total ($0.005) is the
     // vendor's own meter — usage.credits IS that claim. Our pinned fold
-    // says $0.007 (3 results inside the included 10 ⇒ base fee only,
-    // flat call 1 engine-appended), which disagrees beyond 1e-9 — the
-    // fold rides out as mismatch.derived, said, never failing the run.
+    // says $0.007 (no `type` ⇒ the binding's "auto" ⇒ the standard_search
+    // cell; 3 results inside the included 10), which disagrees beyond
+    // 1e-9 — the fold rides out as mismatch.derived, said, never failing
+    // the run.
     assertEquals(result.usage, {
         credits: { default: 0.005 },
-        evidence: { call: 1 },
+        evidence: { standard_search: 1 },
         mismatch: { derived: { default: 0.007 } },
     });
     // usage.consolidate ran (engine-executed, same for every operator):
@@ -114,13 +121,56 @@ Deno.test({
             false,
             JSON.stringify(result.output),
         );
-        // 2 results ⇒ nothing above the included 10 (evidence is the
-        // engine-appended flat call 1). credits can't be pinned live:
-        // exa's own costDollars claim WINS (D27) and its live total
-        // varies by search type — assert the pool settled instead.
-        assertEquals(result.usage.evidence, { call: 1 });
+        // no `type` ⇒ "auto" ⇒ the standard_search cell; 2 results ⇒
+        // nothing above the included 10. credits can't be pinned live:
+        // exa's own costDollars claim WINS (D27) — assert the pool
+        // settled instead.
+        assertEquals(result.usage.evidence, { standard_search: 1 });
         assertEquals(typeof result.usage.credits.default, "number");
         // consolidated — the vendor billing field left the payload
         assert(!("costDollars" in (result.output as Record<string, unknown>)));
     },
+});
+
+Deno.test("exa#search estimate: the base price follows `type`", async () => {
+    const unit = await testSealedUnit("exa#search");
+    // Search rates: https://exa.ai/pricing, checked 2026-11-03; see provider.ts for live-only types.
+    const cases: Array<[string | undefined, string, number]> = [
+        [undefined, "standard_search", 0.007], // binding default "auto"
+        ["auto", "standard_search", 0.007],
+        ["fast", "standard_search", 0.007],
+        ["lite", "lite_search", 0.004],
+        ["instant", "lite_search", 0.004],
+        ["neural", "lite_search", 0.004],
+        ["deep-lite", "deep_search", 0.012],
+        ["deep", "deep_search", 0.012],
+        ["deep-reasoning", "deep_reasoning_search", 0.015],
+    ];
+    for (const [type, cell, dollars] of cases) {
+        const usage = await estimateEndpoint(unit, {
+            body: { query: "q", ...(type ? { type } : {}) },
+        });
+        assertEquals(usage.evidence, { [cell]: 1 }, String(type));
+        assertAlmostEquals(usage.credits.default, dollars, 1e-9, String(type));
+    }
+});
+
+Deno.test("exa#search estimate: extra results and summaries add $0.001 each", async () => {
+    const unit = await testSealedUnit("exa#search");
+    // instant, 12 results, a summary on each: 0.004 + 2 × 0.001 + 12 × 0.001
+    // (matches the vendor's live costDollars.total of $0.018, 2026-11-02)
+    const usage = await estimateEndpoint(unit, {
+        body: {
+            query: "q",
+            type: "instant",
+            numResults: 12,
+            contents: { summary: {} },
+        },
+    });
+    assertEquals(usage.evidence, {
+        lite_search: 1,
+        additional_result: 2,
+        summary: 12,
+    });
+    assertAlmostEquals(usage.credits.default, 0.018, 1e-9);
 });
