@@ -185,6 +185,48 @@ export const discoverFilterFields = {
             to: z.string().describe("YYYY-MM-DD").optional(),
         }).describe("Last funding date range.").optional(),
     }).describe("Funding series, amount, and date filters.").optional(),
+    // minProperties, not `.refine()` (dropped by `z.toJSONSchema`) or
+    // per-key unions (copied into every top-level filter arm)
+    job_openings: z.object({
+        hiring: z.boolean().describe(
+            "Set true to select companies currently hiring.",
+        ).optional(),
+        department: z.array(z.string().min(1)).describe(
+            "Exact, case-sensitive department names from Hunter's Discover " +
+                "filter, e.g. sales, engineering, marketing.",
+        ).optional(),
+        job_title: z.object({
+            include: z.array(z.string().min(1)).max(100).describe(
+                "Job-title keywords to include; at most 100.",
+            ).optional(),
+            exclude: z.array(z.string().min(1)).max(100).describe(
+                "Job-title keywords to exclude; at most 100.",
+            ).optional(),
+        }).meta({ minProperties: 1 }).describe(
+            "Keywords matched against open job titles; provide include " +
+                "and/or exclude.",
+        ).optional(),
+        posted_date: z.enum(["last7d", "last30d", "last90d"]).describe(
+            "Job-posting date window.",
+        ).optional(),
+        open_roles: z.object({
+            from: z.number().int().min(0).describe(
+                "Minimum number of open roles.",
+            ).optional(),
+            to: z.number().int().min(0).describe(
+                "Maximum number of open roles; must be at least from.",
+            ).optional(),
+        }).meta({ minProperties: 1 }).describe(
+            "Open-role count range; provide from and/or to.",
+        ).optional(),
+        include_closed_roles: z.boolean().describe(
+            "Also match roles that are no longer open. Vendor default false.",
+        ).optional(),
+    }).meta({ minProperties: 1 }).describe(
+        "Filter by hiring activity; provide at least one field. Department, " +
+            "job_title, posted_date, or open_roles also select companies " +
+            "currently hiring.",
+    ).optional(),
 } as const;
 
 /** Discover pagination (max offset 10,000 upstream). */

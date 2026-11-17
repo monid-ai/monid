@@ -1,0 +1,50 @@
+{
+    "name": "hiring-empty",
+    "description": "Recorded from Hunter POST /v2/discover on 2026-10-14; an impossible job-title keyword returns zero companies. Shared discovery response shape; endpoint-specific aggregate fields are omitted. Both discovery routes were also verified live with these inputs.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "job_openings": {
+                        "hiring": true,
+                        "department": [
+                            "engineering"
+                        ],
+                        "posted_date": "last30d",
+                        "job_title": {
+                            "include": [
+                                "zz_monid_filter_probe_20261014_zz"
+                            ]
+                        }
+                    },
+                    "limit": 1
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [],
+                    "meta": {
+                        "results": 0,
+                        "filters": {
+                            "job_openings": {
+                                "hiring": true,
+                                "department": [
+                                    "engineering"
+                                ],
+                                "posted_date": "last30d",
+                                "job_title": {
+                                    "include": [
+                                        "zz_monid_filter_probe_20261014_zz"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}
