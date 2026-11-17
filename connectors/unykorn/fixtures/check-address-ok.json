@@ -1,0 +1,50 @@
+{
+    "name": "check-address-ok",
+    "description": "UnyKorn /check/address happy path: valid clean address returns pass verdict with signed receipt.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "params": {
+                        "value": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                        "chain": "base"
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "ok": true,
+                    "check": "address",
+                    "check_version": "1.0.0",
+                    "subject": {
+                        "kind": "address",
+                        "value": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                        "normalized": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+                        "chain": "base"
+                    },
+                    "verdict": "pass",
+                    "verdict_meaning": "No sanctions or scam flags identified",
+                    "coverage": "full",
+                    "reasons": [],
+                    "sources": [
+                        {
+                            "id": "ofac-sdn",
+                            "publisher": "U.S. Department of the Treasury",
+                            "status": "ok"
+                        }
+                    ],
+                    "as_of": "2026-10-14T19:00:00Z",
+                    "evidence_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                    "receipt": {
+                        "receipt_id": "rcpt_7332_001",
+                        "status": "signed"
+                    },
+                    "notice": "Screening signal only; not legal advice."
+                }
+            }
+        }
+    ]
+}
