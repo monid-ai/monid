@@ -1,0 +1,19 @@
+{
+    "name": "provider-error",
+    "description": "recorded chain for xquik#x/tweets/{id}, scenario 'provider-error', recorded against the live API on 2026-11-14",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://xquik.com/api/v1/x/tweets/1"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": "tweet_not_found",
+                    "message": "Tweet not found. Check the tweet ID."
+                }
+            }
+        }
+    ]
+}

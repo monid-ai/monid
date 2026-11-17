@@ -1,0 +1,49 @@
+{
+    "name": "cursor-page",
+    "description": "recorded chain for xquik#x/users/{id}/tweets, scenario 'cursor-page'. Page 2 of the NASA timeline at pageSize=2, sent once, recorded against the live API on 2026-11-15 with its X-Xquik-Credits-Charged header. Tweet bodies are minimized to the fields under test.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://xquik.com/api/v1/x/users/NASA/tweets?retweets=exclude&pageSize=2&cursor=xqcv1_ENbu9Q_YOWF9uFW5R1a9JGCS8T5TAxGpMIfkMQ4_fwk.1"
+            },
+            "res": {
+                "status": 200,
+                "headers": {
+                    "x-xquik-credits-charged": "2"
+                },
+                "body": {
+                    "tweets": [
+                        {
+                            "id": "2120910178711466211",
+                            "text": "What does sci-fi get right and wrong about outer space? \n\nAt 2pm ET (1800 UTC), our Astrophysics Division Director Dr. Shawn Domagal-Goldman will answer this question and others during a @Reddit Ask Me Anything. \n\nhttps://t.co/3Ts9wZ3C1z https://t.co/nmhlQjesVG",
+                            "createdAt": "Thu Nov 12 16:02:45 +0000 2026",
+                            "isPinned": false,
+                            "author": {
+                                "id": "11348282",
+                                "username": "NASA",
+                                "name": "NASA"
+                            },
+                            "url": "https://x.com/NASA/status/2120910178711466211"
+                        },
+                        {
+                            "id": "2120305504295510080",
+                            "text": "How’s that for a starburst?\n\nFound in this distant spiral galaxy is a giant star prone to mysterious outbursts. Thanks to @ChandraXray, scientists identified the culprit behind the eruptions—a hidden companion to the volatile star. https://t.co/Q3J9uOmEVM https://t.co/bB3nIrowVZ",
+                            "createdAt": "Wed Nov 11 00:00:00 +0000 2026",
+                            "isPinned": false,
+                            "author": {
+                                "id": "11348282",
+                                "username": "NASA",
+                                "name": "NASA"
+                            },
+                            "url": "https://x.com/NASA/status/2120305504295510080"
+                        }
+                    ],
+                    "has_next_page": true,
+                    "next_cursor": "xqcv1_ENbu9Q_YOWF9uFW5R1a9JGCS8T5TAxGpMIfkMQ4_fwk.2",
+                    "filtered_count": 5
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+{
+    "name": "provider-error",
+    "description": "recorded chain for xquik#x/users/search, scenario 'provider-error', recorded against the live API on 2026-11-14",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://xquik.com/api/v1/x/users/search?q=NASA&pageSize=20"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": "unauthenticated",
+                    "message": "Authentication required. Provide a valid API key or bearer token."
+                }
+            }
+        }
+    ]
+}

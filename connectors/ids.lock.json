@@ -659,7 +659,14 @@
         "suzanne#v1/models/download",
         "suzanne#v1/uploads",
         "tinyfish#fetch",
-        "tinyfish#search"
+        "tinyfish#search",
+        "xquik#x/tweets/search",
+        "xquik#x/tweets/{id}",
+        "xquik#x/users/search",
+        "xquik#x/users/{id}",
+        "xquik#x/users/{id}/followers",
+        "xquik#x/users/{id}/following",
+        "xquik#x/users/{id}/tweets"
     ],
     "resources": [
         "saperly/phone-number"

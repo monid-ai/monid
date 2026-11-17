@@ -1,0 +1,145 @@
+{
+    "name": "happy",
+    "description": "recorded chain for xquik#x/users/search, scenario 'happy', 2 rows or fewer, recorded against the live API on 2026-11-14",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://xquik.com/api/v1/x/users/search?q=NASA&pageSize=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "users": [
+                        {
+                            "id": "11348282",
+                            "username": "NASA",
+                            "name": "NASA",
+                            "followers": 92250664,
+                            "contactInfo": {
+                                "links": [
+                                    {
+                                        "network": "website",
+                                        "source": "url",
+                                        "url": "http://www.nasa.gov/"
+                                    }
+                                ]
+                            },
+                            "following": 115,
+                            "verified": true,
+                            "isBlueVerified": true,
+                            "isVerified": true,
+                            "profilePicture": "https://pbs.twimg.com/profile_images/1321163587679784960/0ZxKlEKB_normal.jpg",
+                            "profilePictureOriginal": "https://pbs.twimg.com/profile_images/1321163587679784960/0ZxKlEKB.jpg",
+                            "coverPicture": "https://pbs.twimg.com/profile_banners/11348282/1788992290",
+                            "profileBannerUrl": "https://pbs.twimg.com/profile_banners/11348282/1788992290",
+                            "description": "Making the seemingly impossible, possible. ✨",
+                            "location": "Pale Blue Dot",
+                            "createdAt": "Wed Dec 19 20:20:32 +0000 2007",
+                            "statusesCount": 74542,
+                            "mediaCount": 28249,
+                            "protected": false,
+                            "url": "http://www.nasa.gov/",
+                            "favouritesCount": 17110,
+                            "possiblySensitive": false,
+                            "verifiedType": "Government",
+                            "profile_bio": {
+                                "description": "Making the seemingly impossible, possible. ✨",
+                                "entities": {
+                                    "description": {},
+                                    "url": {
+                                        "urls": [
+                                            {
+                                                "display_url": "nasa.gov",
+                                                "expanded_url": "http://www.nasa.gov/",
+                                                "indices": [
+                                                    0,
+                                                    23
+                                                ],
+                                                "url": "https://t.co/9NkQJKAnuU"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "hasGraduatedAccess": true,
+                            "parodyCommentaryFanLabel": "None",
+                            "profileDescriptionLanguage": "en",
+                            "profileImageShape": "Square",
+                            "profileTranslatorType": "regular",
+                            "superFollowEligible": false
+                        },
+                        {
+                            "id": "14091091",
+                            "username": "NASAHubble",
+                            "name": "Hubble",
+                            "followers": 8892814,
+                            "contactInfo": {
+                                "links": [
+                                    {
+                                        "network": "website",
+                                        "source": "url",
+                                        "url": "http://www.nasa.gov/mission_pages/hubble/main/index.html"
+                                    }
+                                ]
+                            },
+                            "following": 44,
+                            "verified": true,
+                            "isBlueVerified": true,
+                            "isVerified": true,
+                            "profilePicture": "https://pbs.twimg.com/profile_images/3468011581/efb985f24af0a814a722457a768f3cc5_normal.jpeg",
+                            "profilePictureOriginal": "https://pbs.twimg.com/profile_images/3468011581/efb985f24af0a814a722457a768f3cc5.jpeg",
+                            "coverPicture": "https://pbs.twimg.com/profile_banners/14091091/1669391293",
+                            "profileBannerUrl": "https://pbs.twimg.com/profile_banners/14091091/1669391293",
+                            "description": "The official X account for the NASA Hubble Space Telescope, managed and operated by NASA's Goddard Space Flight Center.",
+                            "location": "Goddard Space Flight Center",
+                            "createdAt": "Thu Mar 06 20:15:02 +0000 2008",
+                            "statusesCount": 8518,
+                            "mediaCount": 3166,
+                            "protected": false,
+                            "url": "http://www.nasa.gov/mission_pages/hubble/main/index.html",
+                            "favouritesCount": 1243,
+                            "possiblySensitive": false,
+                            "verifiedType": "Government",
+                            "profile_bio": {
+                                "description": "The official X account for the NASA Hubble Space Telescope, managed and operated by NASA's Goddard Space Flight Center.",
+                                "entities": {
+                                    "description": {},
+                                    "url": {
+                                        "urls": [
+                                            {
+                                                "display_url": "nasa.gov/mission_pages/…",
+                                                "expanded_url": "http://www.nasa.gov/mission_pages/hubble/main/index.html",
+                                                "indices": [
+                                                    0,
+                                                    23
+                                                ],
+                                                "url": "https://t.co/3bfzzswzV0"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "affiliatesHighlightedLabel": {
+                                "badgeUrl": "https://pbs.twimg.com/profile_images/1321163587679784960/0ZxKlEKB_bigger.jpg",
+                                "description": "NASA",
+                                "url": "https://twitter.com/NASA",
+                                "urlType": "DeepLink",
+                                "userLabelDisplayType": "Badge",
+                                "userLabelType": "BusinessLabel"
+                            },
+                            "hasGraduatedAccess": true,
+                            "parodyCommentaryFanLabel": "None",
+                            "profileDescriptionLanguage": "en",
+                            "profileImageShape": "Square",
+                            "profileTranslatorType": "none",
+                            "superFollowEligible": false
+                        }
+                    ],
+                    "has_next_page": true,
+                    "next_cursor": "DAAFCgABHXHvAKQ___MLAAIAAAAwRW1QQzZ3QUFBZlEvZ0dKTjB2R3AvQUFBQUFJQUFBQUFBTmNEVXdBQUFBQUFyU2s2CAADAAAAAgAA"
+                }
+            }
+        }
+    ]
+}
