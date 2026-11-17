@@ -1,0 +1,29 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC chain for fundable#deals/{id} (replace via `deno task record`): GET /deals/{id} returns one object under data.deal; meta reports the flat 1 credit.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://www.tryfundable.ai/api/v1/deals/cca72384-d735-42f8-99d6-b3e14179c4c1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "deal": {
+                            "id": "cca72384-d735-42f8-99d6-b3e14179c4c1",
+                            "round_type": "SERIES_B",
+                            "date": "2026-09-01",
+                            "total_round_raised": 40000000
+                        }
+                    },
+                    "meta": {
+                        "credits_used": 1
+                    }
+                }
+            }
+        }
+    ]
+}

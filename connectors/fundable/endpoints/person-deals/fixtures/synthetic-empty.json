@@ -1,0 +1,27 @@
+{
+    "name": "synthetic-empty",
+    "description": "SYNTHETIC chain for fundable#person/deals (replace via `deno task record`): an entity with no deal history returns zero rows and credits_used 0 — nothing delivered, nothing billed.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://www.tryfundable.ai/api/v1/person/deals?id=5b6c7d8e-1f2a-4b3c-8d4e-5f6a7b8c9d0e&page_size=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "deals": []
+                    },
+                    "meta": {
+                        "total_count": 0,
+                        "page": 0,
+                        "page_size": 2,
+                        "credits_used": 0
+                    }
+                }
+            }
+        }
+    ]
+}

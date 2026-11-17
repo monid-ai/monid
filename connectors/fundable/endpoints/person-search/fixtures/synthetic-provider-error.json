@@ -1,0 +1,23 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "SYNTHETIC chain for fundable#person/search (replace via `deno task record`): a rejected API key answers 401 UNAUTHORIZED — vendor non-2xx is DATA, zero usage (the 0.1-credit search bills nothing on an error).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://www.tryfundable.ai/api/v1/person/search?name=jane+example"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "success": false,
+                    "error": {
+                        "code": "UNAUTHORIZED",
+                        "message": "Invalid API key"
+                    },
+                    "statusCode": 401
+                }
+            }
+        }
+    ]
+}

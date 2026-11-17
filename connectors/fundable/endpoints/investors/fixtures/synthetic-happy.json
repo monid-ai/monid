@@ -1,0 +1,51 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC chain for fundable#investors (replace via `deno task record`): POST /investors with page_size 2 returns 2 rows under data.investors; meta reports credits_used 2 plus the non-API-tier account fields the provider strips.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://www.tryfundable.ai/api/v1/investors",
+                "body": {
+                    "investor": {
+                        "locations": [
+                            "san-francisco-california"
+                        ]
+                    },
+                    "page_size": 2
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": {
+                        "investors": [
+                            {
+                                "id": "10a4d2e0-7b3c-4e5f-9a1b-2c3d4e5f6a71",
+                                "name": "Example Ventures",
+                                "domain": "example-ventures.example",
+                                "total_deal_count": 210
+                            },
+                            {
+                                "id": "20a4d2e0-7b3c-4e5f-9a1b-2c3d4e5f6a72",
+                                "name": "Sample Capital",
+                                "domain": "sample-capital.example",
+                                "total_deal_count": 95
+                            }
+                        ]
+                    },
+                    "meta": {
+                        "total_count": 57,
+                        "page": 0,
+                        "page_size": 2,
+                        "credits_used": 2,
+                        "credit_source": "purchased",
+                        "monthly_credits_remaining": 0,
+                        "purchased_credits_remaining": 198
+                    }
+                }
+            }
+        }
+    ]
+}
