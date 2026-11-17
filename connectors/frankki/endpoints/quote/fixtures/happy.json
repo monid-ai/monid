@@ -1,0 +1,77 @@
+{
+    "name": "happy",
+    "description": "recorded 2026-10-27 against the live Monid lane: frankki#quote happy path with a test letter that was never paid",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://backend.frankki.app/api/v1/public/monid/letter/quote",
+                "body": {
+                    "pageCount": 1,
+                    "country": "DE"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "success",
+                    "code": "OK",
+                    "data": {
+                        "userCents": 349,
+                        "userPriceCents": 349,
+                        "userEuros": "3,49 EUR",
+                        "letterFormat": "standardbrief",
+                        "estimatedDeliveryRange": "ungefähr 1 bis 3 Werktage EN: approximately 1 to 3 working days",
+                        "legalWeight": "Standardbrief ohne Zustellnachweis. Günstig und zuverlässig, aber ohne dokumentierten Zustellbeleg. EN: Standard letter without proof of delivery. Affordable and reliable, but without a documented delivery receipt.",
+                        "quoteAuthority": "live",
+                        "source": "catalog",
+                        "priceVersion": "72ba187b05e705de",
+                        "country": "DE",
+                        "deliveryType": "standard",
+                        "color": false,
+                        "method": {
+                            "code": "standard",
+                            "nameDe": "Standardbrief",
+                            "nameEn": "Standard letter",
+                            "estimatedDeliveryRange": "ungefähr 1 bis 3 Werktage EN: approximately 1 to 3 working days",
+                            "deliveryTimeDe": "ungefähr 1 bis 3 Werktage",
+                            "deliveryTimeEn": "approximately 1 to 3 working days",
+                            "tracked": false,
+                            "proofOfDelivery": false
+                        },
+                        "shipping": "Versand als Standardbrief, schwarz-weiss gedruckt. EN: Sent as Standard letter, printed in black and white.",
+                        "methods": [
+                            {
+                                "code": "standard",
+                                "nameDe": "Standardbrief",
+                                "nameEn": "Standard letter",
+                                "estimatedDeliveryRange": "ungefähr 1 bis 3 Werktage EN: approximately 1 to 3 working days",
+                                "deliveryTimeDe": "ungefähr 1 bis 3 Werktage",
+                                "deliveryTimeEn": "approximately 1 to 3 working days",
+                                "tracked": false,
+                                "proofOfDelivery": false,
+                                "available": true,
+                                "priceCents": 349,
+                                "price": "3,49 EUR"
+                            },
+                            {
+                                "code": "einschreiben_einwurf",
+                                "nameDe": "Einschreiben Einwurf",
+                                "nameEn": "Registered (drop-in)",
+                                "estimatedDeliveryRange": "ungefähr 1 bis 3 Werktage EN: approximately 1 to 3 working days",
+                                "deliveryTimeDe": "ungefähr 1 bis 3 Werktage",
+                                "deliveryTimeEn": "approximately 1 to 3 working days",
+                                "tracked": true,
+                                "proofOfDelivery": true,
+                                "available": true,
+                                "priceCents": 759,
+                                "price": "7,59 EUR"
+                            }
+                        ]
+                    },
+                    "requestId": "req_recorded_quote_happy"
+                }
+            }
+        }
+    ]
+}

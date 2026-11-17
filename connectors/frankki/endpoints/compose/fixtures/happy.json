@@ -1,0 +1,85 @@
+{
+    "name": "happy",
+    "description": "recorded 2026-10-27 against the live Monid lane: frankki#compose happy path with a test letter that was never paid",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://backend.frankki.app/api/v1/public/monid/letter/compose",
+                "body": {
+                    "subject": "Monid Testbrief",
+                    "content": "Hallo,\ndies ist ein Testbrief. Bitte nicht versenden.\nViele Gruesse",
+                    "sender": {
+                        "name": "FrankKi Test",
+                        "street": "Teststrasse",
+                        "houseNumber": "1",
+                        "zip": "10115",
+                        "city": "Berlin",
+                        "country": "DE"
+                    },
+                    "recipient": {
+                        "name": "FrankKi Test",
+                        "street": "Teststrasse",
+                        "houseNumber": "1",
+                        "zip": "10115",
+                        "city": "Berlin",
+                        "country": "DE"
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "success",
+                    "code": "OK",
+                    "data": {
+                        "draftToken": "dft_recorded000000000000000000000000",
+                        "trackingToken": "trk_recorded000000000000000000000000",
+                        "version": 1,
+                        "contentHash": "8c79699a3a033b13a7086f1ae3e822e5db8b343769161b6403aeeff22fdcf1a4",
+                        "recipient": {
+                            "name": "FrankKi Test",
+                            "street": "Teststrasse",
+                            "houseNumber": "1",
+                            "zip": "10115",
+                            "city": "Berlin",
+                            "country": "DE",
+                            "house_number": "1",
+                            "postal_code": "10115"
+                        },
+                        "sender": {
+                            "name": "FrankKi Test",
+                            "street": "Teststrasse",
+                            "houseNumber": "1",
+                            "zip": "10115",
+                            "city": "Berlin",
+                            "country": "DE",
+                            "house_number": "1",
+                            "postal_code": "10115"
+                        },
+                        "deliveryType": "standard",
+                        "color": false,
+                        "method": {
+                            "code": "standard",
+                            "nameDe": "Standardbrief",
+                            "nameEn": "Standard letter",
+                            "estimatedDeliveryRange": "ungefähr 1 bis 3 Werktage EN: approximately 1 to 3 working days",
+                            "deliveryTimeDe": "ungefähr 1 bis 3 Werktage",
+                            "deliveryTimeEn": "approximately 1 to 3 working days",
+                            "tracked": false,
+                            "proofOfDelivery": false
+                        },
+                        "shipping": "Versand als Standardbrief, schwarz-weiss gedruckt. EN: Sent as Standard letter, printed in black and white.",
+                        "pageCount": 1,
+                        "letterPageCount": 1,
+                        "attachments": [],
+                        "previewReady": false,
+                        "reviewPending": false,
+                        "estimatedDeliveryRange": "ungefähr 1 bis 3 Werktage EN: approximately 1 to 3 working days"
+                    },
+                    "requestId": "req_recorded_compose_happy"
+                }
+            }
+        }
+    ]
+}

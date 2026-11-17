@@ -1,0 +1,32 @@
+{
+    "name": "happy",
+    "description": "recorded 2026-10-27 against the live Monid lane: frankki#address-check happy path with a test letter that was never paid",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://backend.frankki.app/api/v1/public/monid/letter/address-check",
+                "body": {
+                    "name": "FrankKi Test",
+                    "street": "Teststrasse",
+                    "houseNumber": "1",
+                    "zip": "10115",
+                    "city": "Berlin",
+                    "country": "DE"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "success",
+                    "code": "OK",
+                    "data": {
+                        "valid": true,
+                        "missingFields": []
+                    },
+                    "requestId": "req_recorded_address-check_happy"
+                }
+            }
+        }
+    ]
+}

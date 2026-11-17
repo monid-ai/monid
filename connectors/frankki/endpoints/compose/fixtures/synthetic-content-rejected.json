@@ -1,0 +1,38 @@
+{
+    "name": "synthetic-compose-rejected",
+    "description": "frankki#compose refused by the content screen: HTTP 422 CONTENT_REJECTED",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://backend.frankki.app/api/v1/public/monid/letter/compose",
+                "body": {
+                    "subject": "Letzte Warnung",
+                    "content": "blocked text",
+                    "sender": {
+                        "name": "A",
+                        "street": "B",
+                        "city": "C",
+                        "country": "DE"
+                    },
+                    "recipient": {
+                        "name": "D",
+                        "street": "E",
+                        "city": "F",
+                        "country": "DE"
+                    }
+                }
+            },
+            "res": {
+                "status": 422,
+                "body": {
+                    "status": "error",
+                    "code": "CONTENT_REJECTED",
+                    "message": "Der gewünschte Briefinhalt kann nicht erstellt werden. EN: The requested letter content cannot be created.",
+                    "data": null,
+                    "requestId": "req_synthetic_rejected"
+                }
+            }
+        }
+    ]
+}

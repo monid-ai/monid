@@ -1,0 +1,26 @@
+{
+    "name": "happy",
+    "description": "recorded 2026-10-27 against the live Monid lane: frankki#track happy path with a test letter that was never paid",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://backend.frankki.app/api/v1/public/monid/letter/track",
+                "body": {
+                    "trackingToken": "trk_recorded000000000000000000000000"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "success",
+                    "code": "OK",
+                    "data": {
+                        "status": "not_found"
+                    },
+                    "requestId": "req_recorded_track_happy"
+                }
+            }
+        }
+    ]
+}

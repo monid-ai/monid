@@ -1,0 +1,30 @@
+{
+    "name": "provider-error",
+    "description": "recorded 2026-10-27 against the live Monid lane: frankki#address-check called with a wrong X-FrankKi-Lane-Key, HTTP 401 UNAUTHORIZED",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://backend.frankki.app/api/v1/public/monid/letter/address-check",
+                "body": {
+                    "name": "FrankKi Test",
+                    "street": "Teststrasse",
+                    "houseNumber": "1",
+                    "zip": "10115",
+                    "city": "Berlin",
+                    "country": "DE"
+                }
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "status": "error",
+                    "code": "UNAUTHORIZED",
+                    "message": "Der Schluessel fehlt oder ist ungueltig. EN: The key is missing or invalid.",
+                    "data": null,
+                    "requestId": "req_recorded_address-check_provider-error"
+                }
+            }
+        }
+    ]
+}
