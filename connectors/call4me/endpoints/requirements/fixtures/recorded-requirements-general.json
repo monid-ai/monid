@@ -1,0 +1,37 @@
+{
+    "name": "recorded-requirements-general",
+    "description": "Real recording (2026-10-17) of GET /api/requirements/general, trimmed to two fields. full_name reads known: true from the review account's saved profile, which is what the endpoint projects away.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://call4.me/api/requirements/general"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "category": "general",
+                    "name": "Questions for a business",
+                    "fields": [
+                        {
+                            "key": "questions",
+                            "label": "what to find out",
+                            "required": true,
+                            "ask": "What exactly should the caller find out?",
+                            "from_profile": null,
+                            "known": false
+                        },
+                        {
+                            "key": "full_name",
+                            "label": "full name",
+                            "required": false,
+                            "ask": "What name should the caller give if asked?",
+                            "from_profile": "full_name",
+                            "known": true
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

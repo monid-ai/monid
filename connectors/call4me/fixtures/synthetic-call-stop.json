@@ -1,0 +1,112 @@
+{
+    "name": "call4me stop settles (synthetic)",
+    "description": "Synthetic chain for STOP: POST /api/calls parks RUNNING; the hang-up answers 200; the first long-wait read is not finished yet; the second is finished with cost_cents 25, so the stop returns a COMPLETED envelope and the run bills at stop.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "id": "call_test1",
+                    "status": "dialing",
+                    "finished": false,
+                    "direction": "outbound",
+                    "business": "Example Bistro",
+                    "number": "(555) 000-0000",
+                    "calling_number": "(555) 000-0001",
+                    "goal": "Book a table for 2 tonight at 7pm.",
+                    "outcome": null,
+                    "open_questions": [],
+                    "answered_questions": [],
+                    "talk_minutes": 0,
+                    "cost": "$0.00",
+                    "cost_cents": 0,
+                    "ended": null,
+                    "error": null,
+                    "created_at": "2026-10-17T06:00:00.000Z",
+                    "transcript": []
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}/call_test1/hang-up"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "call_id": "call_test1",
+                    "message": "Hanging up."
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}/call_test1?wait_seconds=20"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "call_test1",
+                    "status": "completed",
+                    "finished": false,
+                    "direction": "outbound",
+                    "business": "Example Bistro",
+                    "number": "(555) 000-0000",
+                    "calling_number": "(555) 000-0001",
+                    "goal": "Book a table for 2 tonight at 7pm.",
+                    "outcome": {
+                        "result": "not_done",
+                        "summary": "Hung up before the table was booked."
+                    },
+                    "open_questions": [],
+                    "answered_questions": [],
+                    "talk_minutes": 1,
+                    "cost": "$0.25",
+                    "cost_cents": 25,
+                    "ended": "hung up via the API",
+                    "error": null,
+                    "created_at": "2026-10-17T06:00:00.000Z",
+                    "transcript": []
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}/call_test1?wait_seconds=20"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "call_test1",
+                    "status": "completed",
+                    "finished": true,
+                    "direction": "outbound",
+                    "business": "Example Bistro",
+                    "number": "(555) 000-0000",
+                    "calling_number": "(555) 000-0001",
+                    "goal": "Book a table for 2 tonight at 7pm.",
+                    "outcome": {
+                        "result": "not_done",
+                        "summary": "Hung up before the table was booked."
+                    },
+                    "open_questions": [],
+                    "answered_questions": [],
+                    "talk_minutes": 1,
+                    "cost": "$0.25",
+                    "cost_cents": 25,
+                    "ended": "hung up via the API",
+                    "error": null,
+                    "created_at": "2026-10-17T06:00:00.000Z",
+                    "transcript": []
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,133 @@
+{
+    "name": "recorded-nist-clock",
+    "description": "Real recording (2026-10-17, call4me review account): a live call to NIST's public talking clock with max_minutes 1, hand-minimized from 10 exchanges to 3 (the POST, one in-progress long-wait poll, the finished read; the 7 identical in-progress polls between are dropped). The call ran past its cap (call4me gives a call still mid-conversation 2 more minutes at a time) and settled at cost_cents 50. Phone numbers replaced with placeholders.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://call4.me/api/calls",
+                "body": {
+                    "to": "+15550000000",
+                    "business": "NIST time of day line",
+                    "goal": "Listen to the NIST time announcement and note the current UTC time it reads out.",
+                    "category": "general",
+                    "details": {
+                        "questions": "What UTC time does the announcement read?"
+                    },
+                    "on_behalf_of": "monid review",
+                    "max_minutes": 1
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "id": "call_71uur40tnucnh2vd",
+                    "status": "dialing",
+                    "finished": false,
+                    "direction": "outbound",
+                    "business": "NIST time of day line",
+                    "number": "(555) 000-0000",
+                    "calling_number": "(555) 000-0001",
+                    "calling_number_e164": "+15550000000",
+                    "own_number": null,
+                    "goal": "Listen to the NIST time announcement and note the current UTC time it reads out.",
+                    "outcome": null,
+                    "callback_for": null,
+                    "callbacks": [],
+                    "open_questions": [],
+                    "answered_questions": [],
+                    "talk_minutes": 0,
+                    "cost": "$0.00",
+                    "cost_cents": 0,
+                    "hangup_cause": null,
+                    "ended": null,
+                    "error": null,
+                    "created_at": "2026-10-17T06:03:39.288Z",
+                    "transcript": []
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://call4.me/api/calls/call_71uur40tnucnh2vd?wait_seconds=20"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "call_71uur40tnucnh2vd",
+                    "status": "in_progress",
+                    "finished": false,
+                    "direction": "outbound",
+                    "business": "NIST time of day line",
+                    "number": "(555) 000-0000",
+                    "calling_number": "(555) 000-0001",
+                    "calling_number_e164": "+15550000000",
+                    "own_number": null,
+                    "goal": "Listen to the NIST time announcement and note the current UTC time it reads out.",
+                    "outcome": null,
+                    "callback_for": null,
+                    "callbacks": [],
+                    "open_questions": [],
+                    "answered_questions": [],
+                    "talk_minutes": 0,
+                    "cost": "$0.00",
+                    "cost_cents": 0,
+                    "hangup_cause": null,
+                    "ended": null,
+                    "error": null,
+                    "created_at": "2026-10-17T06:03:39.288Z",
+                    "transcript": [
+                        "caller: Hi! Hello?",
+                        "them: 23, 46 Coordinated Universal Time"
+                    ]
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://call4.me/api/calls/call_71uur40tnucnh2vd?wait_seconds=20"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "call_71uur40tnucnh2vd",
+                    "status": "completed",
+                    "finished": true,
+                    "direction": "outbound",
+                    "business": "NIST time of day line",
+                    "number": "(555) 000-0000",
+                    "calling_number": "(555) 000-0001",
+                    "calling_number_e164": "+15550000000",
+                    "own_number": null,
+                    "goal": "Listen to the NIST time announcement and note the current UTC time it reads out.",
+                    "outcome": {
+                        "result": "done",
+                        "summary": "The NIST time announcement was reached and read out the current UTC time. It announced 06:06 Coordinated Universal Time at the tone (after previously announcing 06:05 UTC).",
+                        "details": {
+                            "service_called": "NIST time of day line",
+                            "announced_time_utc": "06:06 Coordinated Universal Time",
+                            "previous_announcement": "06:05 Coordinated Universal Time"
+                        }
+                    },
+                    "callback_for": null,
+                    "callbacks": [],
+                    "open_questions": [],
+                    "answered_questions": [],
+                    "talk_minutes": 3,
+                    "cost": "$0.50",
+                    "cost_cents": 50,
+                    "hangup_cause": "normal_clearing",
+                    "ended": "the business hung up",
+                    "error": null,
+                    "created_at": "2026-10-17T06:03:39.288Z",
+                    "transcript": [
+                        "caller: Hi! Hello?",
+                        "them: 23, 46 Coordinated Universal Time. Beginning November  fifteenth, twenty twenty one, NIST will be broadcasting a test signal on minute eight of each hour on WWV, and minute forty eight on WWVH. This signal has been created to assist in ionospheric research, and is a joint effort of the Ham Radio Citizen Science Investigation, and NIST. The signal consists of various tones, chirps, and noise bursts. The signal will be broadcast for several weeks. For more information on Ham SCI and the WWV WWVH project, please visit www dot hamsci dot org slash WWV At the tone, six hours, five minutes. Coordinated Universal Time At the tone, six hours, six minutes. Coordinated Universal Time"
+                    ]
+                }
+            }
+        }
+    ]
+}
