@@ -1,0 +1,42 @@
+{
+    "name": "synthetic-happy",
+    "description": "SYNTHETIC chain for datahyena#investors (shape from the published OpenAPI; replace via `deno task record` once a key is held): 2 rows, meta.creditsUsed 2 plus the account-level creditsRemaining the provider strips.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.datahyena.com/v1/investors?type=vc&limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "data": [
+                        {
+                            "id": "01a0f60c-793b-76c8-a4d9-d4ff6b99c9b1",
+                            "name": "Example Ventures 1",
+                            "domain": "examplevc1.com",
+                            "type": "vc",
+                            "country": "US"
+                        },
+                        {
+                            "id": "01a0f60c-793b-76c8-a4d9-d4ff6b99c9b2",
+                            "name": "Example Ventures 2",
+                            "domain": "examplevc2.com",
+                            "type": "vc",
+                            "country": "US"
+                        }
+                    ],
+                    "pagination": {
+                        "nextCursor": null,
+                        "hasMore": false
+                    },
+                    "meta": {
+                        "creditsUsed": 2,
+                        "creditsRemaining": 498
+                    }
+                }
+            }
+        }
+    ]
+}
