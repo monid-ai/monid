@@ -235,6 +235,8 @@ export default defineProvider({
     },
     auth: { inject: presets.auth.bearer() },
     request: { baseUrl: "https://api.apify.com" },
+    // Actor run controls belong to the connector, never caller query input.
+    input: { schema: { queryParams: z.strictObject({}) } },
     // mirrors services/workflows/endpointExecution/config.yml (apify):
     // request 30s, run 300s, poll every 2s
     timeouts: { requestMs: 30_000, runMs: 300_000, pollMs: 2_000 },
