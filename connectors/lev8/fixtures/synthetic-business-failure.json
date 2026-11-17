@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-business-failure",
+    "description": "SYNTHETIC (no Lev8 key was available on 2026-10-16): shape from docs.lev8.com/openapi.yaml and Lev8's response structs; values are placeholders. Replace via `deno task record` when LEV8_API_KEY exists. A business-level failure on a synchronous workflow (deep-search / enrich): HTTP 200, `success: false`, a non-null explanatory `answer`. Lev8 settles it at 0 credits.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": false,
+                    "answer": "No reliable answer could be produced for this request."
+                }
+            }
+        }
+    ]
+}

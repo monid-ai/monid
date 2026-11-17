@@ -1,0 +1,26 @@
+{
+    "name": "enrich-ok",
+    "description": "Recorded 2026-10-16 against https://app.lev8.com with a live token. POST /v1/enrich, 2 credits (Lev8 balance delta 2).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "answer": {
+                        "Citations": [
+                            "https://en.wikipedia.org/wiki/OpenAI",
+                            "https://openai.com/about/"
+                        ],
+                        "ceo": "Sam Altman",
+                        "company_summary": "OpenAI is an American artificial intelligence (AI) public benefit corporation (PBC) headquartered in San Francisco, California. Its mission is to ensure that artificial general intelligence (AGI) benefits all of humanity. The company develo…"
+                    }
+                }
+            }
+        }
+    ]
+}

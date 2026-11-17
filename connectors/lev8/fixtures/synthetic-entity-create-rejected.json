@@ -1,0 +1,24 @@
+{
+    "name": "synthetic-entity-create-rejected",
+    "description": "SYNTHETIC (no Lev8 key was available on 2026-10-16): shape from docs.lev8.com/openapi.yaml and Lev8's response structs; values are placeholders. Replace via `deno task record` when LEV8_API_KEY exists. create_task rejected before any reservation (422 invalid_request_error — e.g. wechat without enable_web_search). Data, zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 422,
+                "body": {
+                    "object": "error",
+                    "error": {
+                        "type": "invalid_request_error",
+                        "message": "enable_web_search must be true for wechat",
+                        "param": "enable_web_search",
+                        "request_id": null
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "name": "unauthorized",
+    "description": "Recorded 2026-10-16 against POST https://app.lev8.com/v1/deep-search with a malformed lev8_live_ token. Lev8's 401 error envelope is DATA: zero usage. Every Lev8 route authenticates the same way, so {{request.url}} binds this one chain to every endpoint.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "object": "error",
+                    "error": {
+                        "type": "authentication_error",
+                        "message": "Invalid or unauthorized API credential"
+                    }
+                }
+            }
+        }
+    ]
+}
