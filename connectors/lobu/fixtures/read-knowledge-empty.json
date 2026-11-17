@@ -1,0 +1,30 @@
+{
+    "name": "read-knowledge-empty",
+    "description": "Recorded 2026-10-24 from POST https://app.lobu.ai/api/market/read_knowledge (public, keyless; no request headers kept). Unknown content_id returns 200 with content: [] and total: 0.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "content_ids": [
+                        999999999
+                    ]
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "content": [],
+                    "total": 0,
+                    "page": {
+                        "limit": 50,
+                        "offset": 0,
+                        "has_more": false
+                    },
+                    "chain_total": 0
+                }
+            }
+        }
+    ]
+}

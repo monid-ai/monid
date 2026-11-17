@@ -1,0 +1,23 @@
+{
+    "name": "synthetic-maintenance",
+    "description": "Synthetic 503 maintenance response shape from Lobu's REST gateway.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "query": "Anthropic",
+                    "limit": 1
+                }
+            },
+            "res": {
+                "status": 503,
+                "body": {
+                    "error": "service_unavailable",
+                    "error_description": "Service temporarily unavailable."
+                }
+            }
+        }
+    ]
+}
