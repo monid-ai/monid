@@ -1,0 +1,70 @@
+{
+    "name": "recorded-happy",
+    "description": "TwittrAPI /tweet/{tweetId}/retweets: accounts that retweeted an XDevelopers tweet (flat users). PAGE 1. Recorded 2026-10-15 with a vendor key via `deno task record` (arrays trimmed; request headers never captured). Individual (non-organization) accounts and their tweet text are pseudonymized (example_user_N, synthetic ids); shape, counts and timestamps are as recorded.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.twittrapi.com/tweet/2019881223666233717/retweets?count=5&format=simple"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "id": "1000000000000000003",
+                            "username": "example_user_3",
+                            "name": "Example User 3",
+                            "description": "",
+                            "location": "",
+                            "url": null,
+                            "createdAt": "2022-08-31T12:05:47Z",
+                            "avatarUrl": "https://abs.twimg.com/sticky/default_profile_images/default_profile.png",
+                            "bannerUrl": null,
+                            "verified": false,
+                            "verifiedType": null,
+                            "protected": false,
+                            "counts": {
+                                "followers": 1405,
+                                "following": 7023,
+                                "tweets": 602,
+                                "likes": 4626,
+                                "media": 0,
+                                "listed": 1
+                            },
+                            "pinnedTweetIds": [],
+                            "isAutomated": false
+                        },
+                        {
+                            "id": "1000000000000000004",
+                            "username": "example_user_4",
+                            "name": "Example User 4",
+                            "description": "",
+                            "location": "",
+                            "url": null,
+                            "createdAt": "2026-10-11T20:57:08Z",
+                            "avatarUrl": "https://abs.twimg.com/sticky/default_profile_images/default_profile.png",
+                            "bannerUrl": null,
+                            "verified": false,
+                            "verifiedType": null,
+                            "protected": false,
+                            "counts": {
+                                "followers": 0,
+                                "following": 14,
+                                "tweets": 3,
+                                "likes": 0,
+                                "media": 1,
+                                "listed": 0
+                            },
+                            "pinnedTweetIds": [],
+                            "isAutomated": false
+                        }
+                    ],
+                    "nextCursor": "HBaAgICOvsPkkDQAAA==",
+                    "previousCursor": "HCaAgICxioDKkzQAAA==",
+                    "hasNextPage": true
+                }
+            }
+        }
+    ]
+}

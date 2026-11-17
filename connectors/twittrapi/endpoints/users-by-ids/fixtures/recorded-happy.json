@@ -1,0 +1,74 @@
+{
+    "name": "recorded-happy",
+    "description": "TwittrAPI /user/users/by/ids for XDevelopers + NASA — the provider's toRequest joins `ids` into one comma-separated value. PAGE 1 (one call for both). Recorded 2026-10-15 with a vendor key via `deno task record` (arrays trimmed; request headers never captured).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.twittrapi.com/user/users/by/ids?ids=2244994945%2C11348282&format=simple"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "id": "2244994945",
+                            "username": "XDevelopers",
+                            "name": "Developers",
+                            "description": "The voice of the X Dev team and your official source for updates, news, and events, related to the X API.",
+                            "location": "127.0.0.1",
+                            "url": "https://docs.x.com/",
+                            "createdAt": "2013-12-14T04:35:55Z",
+                            "avatarUrl": "https://pbs.twimg.com/profile_images/1683501992314798080/xl1POYLw.jpg",
+                            "bannerUrl": "https://pbs.twimg.com/profile_banners/2244994945/1690213128",
+                            "verified": true,
+                            "verifiedType": "Business",
+                            "protected": false,
+                            "counts": {
+                                "followers": 698642,
+                                "following": 770,
+                                "tweets": 4377,
+                                "likes": 2760,
+                                "media": 832,
+                                "listed": 2977
+                            },
+                            "pinnedTweetIds": [
+                                "2019881223666233717"
+                            ],
+                            "isAutomated": false
+                        },
+                        {
+                            "id": "11348282",
+                            "username": "NASA",
+                            "name": "NASA",
+                            "description": "Making the seemingly impossible, possible. ✨",
+                            "location": "Pale Blue Dot",
+                            "url": "http://www.nasa.gov/",
+                            "createdAt": "2007-12-19T20:20:32Z",
+                            "avatarUrl": "https://pbs.twimg.com/profile_images/1321163587679784960/0ZxKlEKB.jpg",
+                            "bannerUrl": "https://pbs.twimg.com/profile_banners/11348282/1788992290",
+                            "verified": true,
+                            "verifiedType": "Government",
+                            "protected": false,
+                            "counts": {
+                                "followers": 92323369,
+                                "following": 115,
+                                "tweets": 74431,
+                                "likes": 17030,
+                                "media": 28198,
+                                "listed": 96889
+                            },
+                            "pinnedTweetIds": [
+                                "2110717473372749989"
+                            ],
+                            "isAutomated": false
+                        }
+                    ],
+                    "nextCursor": null,
+                    "previousCursor": null,
+                    "hasNextPage": false
+                }
+            }
+        }
+    ]
+}

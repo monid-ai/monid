@@ -1,0 +1,21 @@
+{
+    "name": "recorded-happy",
+    "description": "TwittrAPI /tweet/{tweetId}/quotes on the default Top tab answered 200 with an empty page (`data: []`, hasNextPage false) — charged by the vendor, PAGE 0 here. Recorded 2026-10-15 with a vendor key via `deno task record` (arrays trimmed; request headers never captured).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.twittrapi.com/tweet/2019881223666233717/quotes?count=5&format=simple"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [],
+                    "nextCursor": null,
+                    "previousCursor": "DAACCgACHUsSPBUAJxAKAAMdSxI8FP_Y8AgABAAAAAELAAUAAAAcRW1QQzZ3QUFBZlEvZ0dKTjB2R3AvQUFBQUFBPQgABgAAAAAIAAcAAAAAAAA",
+                    "hasNextPage": false
+                }
+            }
+        }
+    ]
+}

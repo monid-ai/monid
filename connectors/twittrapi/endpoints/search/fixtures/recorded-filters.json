@@ -1,0 +1,141 @@
+{
+    "name": "recorded-filters",
+    "description": "TwittrAPI /search with a `filters` object (lang en, minimumLikesCount 100, removeReplies) — the provider's toRequest sends it JSON-encoded. PAGE 1. Recorded 2026-10-15 with a vendor key via `deno task record` (arrays trimmed; request headers never captured).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.twittrapi.com/search?searchItem=nasa&count=5&filters=%7B%22lang%22%3A%22en%22%2C%22minimumLikesCount%22%3A100%2C%22removeReplies%22%3Atrue%7D&format=simple"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "id": "2109320622882873464",
+                            "url": "https://x.com/NASA/status/2109320622882873464",
+                            "text": "While observing the universe, @NASAHubble caught a galaxy cluster smiling for the camera. 😊\n\nThe smile lines are arcs caused by an effect known as gravitational lensing, where massive structures warp spacetime with their powerful gravitational forces and act as a cosmic lens.",
+                            "createdAt": "2026-10-11T16:30:00Z",
+                            "lang": "en",
+                            "author": {
+                                "id": "11348282",
+                                "username": "NASA",
+                                "name": "NASA",
+                                "description": "Making the seemingly impossible, possible. ✨",
+                                "location": "Pale Blue Dot",
+                                "url": "http://www.nasa.gov/",
+                                "createdAt": "2007-12-19T20:20:32Z",
+                                "avatarUrl": "https://pbs.twimg.com/profile_images/1321163587679784960/0ZxKlEKB.jpg",
+                                "bannerUrl": "https://pbs.twimg.com/profile_banners/11348282/1788992290",
+                                "verified": true,
+                                "verifiedType": "Government",
+                                "protected": false,
+                                "counts": {
+                                    "followers": 92323369,
+                                    "following": 115,
+                                    "tweets": 74431,
+                                    "likes": 17030,
+                                    "media": 28198,
+                                    "listed": 0
+                                },
+                                "pinnedTweetIds": [
+                                    "2110717473372749989"
+                                ],
+                                "isAutomated": false
+                            },
+                            "counts": {
+                                "likes": 20490,
+                                "retweets": 3710,
+                                "replies": 774,
+                                "quotes": 696,
+                                "bookmarks": 1638,
+                                "views": 2117958
+                            },
+                            "media": [
+                                {
+                                    "type": "photo",
+                                    "url": "https://pbs.twimg.com/media/HUTdtrPWYAA04bd.jpg",
+                                    "previewUrl": "https://pbs.twimg.com/media/HUTdtrPWYAA04bd.jpg",
+                                    "width": 1280,
+                                    "height": 1263,
+                                    "altText": null,
+                                    "durationMs": null
+                                }
+                            ],
+                            "urls": [],
+                            "hashtags": [],
+                            "mentions": [
+                                {
+                                    "id": "14091091",
+                                    "username": "NASAHubble"
+                                }
+                            ],
+                            "replyTo": null,
+                            "quoted": null,
+                            "retweetOf": null,
+                            "conversationId": "2109320622882873464",
+                            "isPinned": false,
+                            "source": null,
+                            "article": null
+                        },
+                        {
+                            "id": "2109646380515897759",
+                            "url": "https://x.com/Polymarket/status/2109646380515897759",
+                            "text": "JUST IN: NASA investigates massive hole on the Moon that scientists believe could lead into an enormous cave potentially suitable for future astronaut bases.",
+                            "createdAt": "2026-10-12T14:04:27Z",
+                            "lang": "en",
+                            "author": {
+                                "id": "1261335549215989760",
+                                "username": "Polymarket",
+                                "name": "Polymarket",
+                                "description": "The World's Largest Prediction Market. Trade politics, news, crypto, sports, & more. Available in the US: https://polymarket.us - DM @PolymarketHelp for support",
+                                "location": "",
+                                "url": "https://polymarket.com",
+                                "createdAt": "2020-05-15T16:40:13Z",
+                                "avatarUrl": "https://pbs.twimg.com/profile_images/2005664281002491904/bz2ZO_nU.jpg",
+                                "bannerUrl": "https://pbs.twimg.com/profile_banners/1261335549215989760/1773844633",
+                                "verified": true,
+                                "verifiedType": "Business",
+                                "protected": false,
+                                "counts": {
+                                    "followers": 2018710,
+                                    "following": 5641,
+                                    "tweets": 43223,
+                                    "likes": 93316,
+                                    "media": 6477,
+                                    "listed": 0
+                                },
+                                "pinnedTweetIds": [
+                                    "2110385460870856966"
+                                ],
+                                "isAutomated": false
+                            },
+                            "counts": {
+                                "likes": 6518,
+                                "retweets": 475,
+                                "replies": 303,
+                                "quotes": 210,
+                                "bookmarks": 481,
+                                "views": 442487
+                            },
+                            "media": [],
+                            "urls": [],
+                            "hashtags": [],
+                            "mentions": [],
+                            "replyTo": null,
+                            "quoted": null,
+                            "retweetOf": null,
+                            "conversationId": "2109646380515897759",
+                            "isPinned": false,
+                            "source": null,
+                            "article": null
+                        }
+                    ],
+                    "nextCursor": "DAACCgACHUsSR94AJxAKAAMdSxJH3f_Y8AgABAAAAAILAAUAAABQRW1QQzZ3QUFBZlEvZ0dKTjB2R3AvQUFBQUFVZFJjL3VURmJnZUIxRjNUU1ptOUJpSFViNE5LaFdzWjhkU0ZtNXZsdFFCaGRucnFRbkZ4QUIIAAYAAAAACAAHAAAAAAwACAoAARdnrqQnFxABAAAA",
+                    "previousCursor": "DAACCgACHUsSR94AJxAKAAMdSxJH3f_Y8AgABAAAAAELAAUAAABQRW1QQzZ3QUFBZlEvZ0dKTjB2R3AvQUFBQUFVZFJjL3VURmJnZUIxRjNUU1ptOUJpSFViNE5LaFdzWjhkU0ZtNXZsdFFCaGRucnFRbkZ4QUIIAAYAAAAACAAHAAAAAAwACAoAARdnrqQnFxABAAAA",
+                    "hasNextPage": true
+                }
+            }
+        }
+    ]
+}

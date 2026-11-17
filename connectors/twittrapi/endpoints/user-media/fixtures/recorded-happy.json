@@ -1,0 +1,155 @@
+{
+    "name": "recorded-happy",
+    "description": "TwittrAPI /user/{userId}/media by handle (userId -1, username nasa): tweets with photos or videos. PAGE 1. Recorded 2026-10-15 with a vendor key via `deno task record` (arrays trimmed; request headers never captured).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.twittrapi.com/user/-1/media?username=nasa&count=5&format=simple"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "id": "2110798512795377741",
+                            "url": "https://x.com/NASA/status/2110798512795377741",
+                            "text": "Did you know we have a newsletter?\n\nWe send out weekly updates straight to your inbox about all that’s happening at NASA—free of charge. From space science to technology on the ground, never miss a NASA update: https://bit.ly/3TzoW6w",
+                            "createdAt": "2026-10-15T18:22:36Z",
+                            "lang": "en",
+                            "author": {
+                                "id": "11348282",
+                                "username": "NASA",
+                                "name": "NASA",
+                                "description": "Making the seemingly impossible, possible. ✨",
+                                "location": "Pale Blue Dot",
+                                "url": "http://www.nasa.gov/",
+                                "createdAt": "2007-12-19T20:20:32Z",
+                                "avatarUrl": "https://pbs.twimg.com/profile_images/1321163587679784960/0ZxKlEKB.jpg",
+                                "bannerUrl": "https://pbs.twimg.com/profile_banners/11348282/1788992290",
+                                "verified": true,
+                                "verifiedType": "Government",
+                                "protected": false,
+                                "counts": {
+                                    "followers": 92323214,
+                                    "following": 115,
+                                    "tweets": 74431,
+                                    "likes": 17030,
+                                    "media": 28198,
+                                    "listed": 96890
+                                },
+                                "pinnedTweetIds": [
+                                    "2110717473372749989"
+                                ],
+                                "isAutomated": false
+                            },
+                            "counts": {
+                                "likes": 160,
+                                "retweets": 16,
+                                "replies": 19,
+                                "quotes": 0,
+                                "bookmarks": 10,
+                                "views": 48366
+                            },
+                            "media": [
+                                {
+                                    "type": "photo",
+                                    "url": "https://pbs.twimg.com/media/HUsQD3lXQAA0qIK.jpg",
+                                    "previewUrl": "https://pbs.twimg.com/media/HUsQD3lXQAA0qIK.jpg",
+                                    "width": 2048,
+                                    "height": 1365,
+                                    "altText": "A long-exposure photo of Earth taken from aboard the International Space Station. The nighttime view of Earth shows long streaks of city lights and a soft, green airglow outlining the planet. Blurry stars fill the background, and space station hardware appears in the foreground.",
+                                    "durationMs": null
+                                }
+                            ],
+                            "urls": [
+                                "https://bit.ly/3TzoW6w"
+                            ],
+                            "hashtags": [],
+                            "mentions": [],
+                            "replyTo": null,
+                            "quoted": null,
+                            "retweetOf": null,
+                            "conversationId": "2110798512795377741",
+                            "isPinned": false,
+                            "source": null,
+                            "article": null
+                        },
+                        {
+                            "id": "2110491624337760703",
+                            "url": "https://x.com/NASA/status/2110491624337760703",
+                            "text": "There's work to be done 🛠️\n\nJoin us on Oct. 20 for a preview of two upcoming spacewalks in which astronauts will install solar arrays to give the @Space_Station more power: https://go.nasa.gov/4i6Xa9I",
+                            "createdAt": "2026-10-14T22:03:08Z",
+                            "lang": "en",
+                            "author": {
+                                "id": "11348282",
+                                "username": "NASA",
+                                "name": "NASA",
+                                "description": "Making the seemingly impossible, possible. ✨",
+                                "location": "Pale Blue Dot",
+                                "url": "http://www.nasa.gov/",
+                                "createdAt": "2007-12-19T20:20:32Z",
+                                "avatarUrl": "https://pbs.twimg.com/profile_images/1321163587679784960/0ZxKlEKB.jpg",
+                                "bannerUrl": "https://pbs.twimg.com/profile_banners/11348282/1788992290",
+                                "verified": true,
+                                "verifiedType": "Government",
+                                "protected": false,
+                                "counts": {
+                                    "followers": 92323214,
+                                    "following": 115,
+                                    "tweets": 74431,
+                                    "likes": 17030,
+                                    "media": 28198,
+                                    "listed": 96890
+                                },
+                                "pinnedTweetIds": [
+                                    "2110717473372749989"
+                                ],
+                                "isAutomated": false
+                            },
+                            "counts": {
+                                "likes": 2332,
+                                "retweets": 316,
+                                "replies": 141,
+                                "quotes": 168,
+                                "bookmarks": 103,
+                                "views": 782852
+                            },
+                            "media": [
+                                {
+                                    "type": "photo",
+                                    "url": "https://pbs.twimg.com/media/HUn48qSW8AEmiHh.jpg",
+                                    "previewUrl": "https://pbs.twimg.com/media/HUn48qSW8AEmiHh.jpg",
+                                    "width": 1920,
+                                    "height": 1280,
+                                    "altText": "An astronaut on a spacewalk outside the International Space Station raises their arm in the direction of the camera. Equipment and hardware surround them.",
+                                    "durationMs": null
+                                }
+                            ],
+                            "urls": [
+                                "https://go.nasa.gov/4i6Xa9I"
+                            ],
+                            "hashtags": [],
+                            "mentions": [
+                                {
+                                    "id": "1451773004",
+                                    "username": "Space_Station"
+                                }
+                            ],
+                            "replyTo": null,
+                            "quoted": null,
+                            "retweetOf": null,
+                            "conversationId": "2110491624337760703",
+                            "isPinned": false,
+                            "source": null,
+                            "article": null
+                        }
+                    ],
+                    "nextCursor": "DAABCgABHUsSaJK___0KAAIdSfjzUhbhvwgAAwAAAAIAAA",
+                    "previousCursor": "DAABCgABHUsSaJLAJxEKAAIdSfjzUhbhvwgAAwAAAAEAAA",
+                    "hasNextPage": true
+                }
+            }
+        }
+    ]
+}

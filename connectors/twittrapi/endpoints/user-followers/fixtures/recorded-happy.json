@@ -1,0 +1,70 @@
+{
+    "name": "recorded-happy",
+    "description": "TwittrAPI /user/{userId}/followers for XDevelopers (count 5): a page of flat users plus nextCursor. PAGE 1. Recorded 2026-10-15 with a vendor key via `deno task record` (arrays trimmed; request headers never captured). Individual (non-organization) accounts and their tweet text are pseudonymized (example_user_N, synthetic ids); shape, counts and timestamps are as recorded.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.twittrapi.com/user/2244994945/followers?count=5&format=simple"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "id": "1000000000000000006",
+                            "username": "example_user_6",
+                            "name": "Example User 6",
+                            "description": "",
+                            "location": "",
+                            "url": null,
+                            "createdAt": "2011-01-10T02:06:34Z",
+                            "avatarUrl": "https://abs.twimg.com/sticky/default_profile_images/default_profile.png",
+                            "bannerUrl": null,
+                            "verified": true,
+                            "verifiedType": null,
+                            "protected": false,
+                            "counts": {
+                                "followers": 129196,
+                                "following": 3806,
+                                "tweets": 11761,
+                                "likes": 15959,
+                                "media": 1217,
+                                "listed": 890
+                            },
+                            "pinnedTweetIds": [],
+                            "isAutomated": false
+                        },
+                        {
+                            "id": "1000000000000000007",
+                            "username": "example_user_7",
+                            "name": "Example User 7",
+                            "description": "",
+                            "location": "",
+                            "url": null,
+                            "createdAt": "2011-07-19T00:21:48Z",
+                            "avatarUrl": "https://abs.twimg.com/sticky/default_profile_images/default_profile.png",
+                            "bannerUrl": null,
+                            "verified": false,
+                            "verifiedType": null,
+                            "protected": false,
+                            "counts": {
+                                "followers": 15000,
+                                "following": 3342,
+                                "tweets": 11059,
+                                "likes": 11266,
+                                "media": 6619,
+                                "listed": 141
+                            },
+                            "pinnedTweetIds": [],
+                            "isAutomated": false
+                        }
+                    ],
+                    "nextCursor": "1879067090656546494|2110801107256082361",
+                    "previousCursor": null,
+                    "hasNextPage": true
+                }
+            }
+        }
+    ]
+}
