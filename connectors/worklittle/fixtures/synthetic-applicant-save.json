@@ -1,0 +1,27 @@
+{
+    "name": "synthetic-applicant-save",
+    "description": "SYNTHETIC POST /v1/apply/profile {action: save}: 201 {applicant_id, applicant, resume_uploaded, note} (jobs-api routes/applyApi.ts handleApplicantAction \u2192 handleCreateApplicant, 2026-10-30). Fields trimmed.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.worklittle.com/v1/apply/profile"
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "applicant_id": "usr_synthetic_applicant",
+                    "applicant": {
+                        "id": "usr_synthetic_applicant",
+                        "email": "jordan@example.com",
+                        "name": "Jordan Rivera",
+                        "city": "Austin",
+                        "country": "US"
+                    },
+                    "resume_uploaded": true,
+                    "note": "Save applicant_id permanently with this person's record and send it on every future apply and profile edit. We also emailed it to them."
+                }
+            }
+        }
+    ]
+}

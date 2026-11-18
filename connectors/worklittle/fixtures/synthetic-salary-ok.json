@@ -1,0 +1,39 @@
+{
+    "name": "synthetic-salary-ok",
+    "description": "SYNTHETIC happy chain for worklittle#jobs/salary-average: {data: getJobSalaryStats(...), meta: {billing}} (jobs-api routes/jobSalaryAverage.ts + db/queries.ts, 2026-10-29).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.worklittle.com/jobs/salary-average?title=data+engineer&country=US"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "query": "data engineer",
+                        "currency": "USD",
+                        "period": "year",
+                        "matching_jobs": 4210,
+                        "jobs_with_salary": 1873,
+                        "jobs_in_average": 1851,
+                        "average_salary": 152340,
+                        "salary_min": 61000,
+                        "salary_max": 310000
+                    },
+                    "meta": {
+                        "billing": {
+                            "charged_usd": 0,
+                            "balance_after_usd": null,
+                            "already_charged": false,
+                            "quota_units": 1,
+                            "quota_used": 12,
+                            "quota_limit": 300000,
+                            "quota_remaining": 299988
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

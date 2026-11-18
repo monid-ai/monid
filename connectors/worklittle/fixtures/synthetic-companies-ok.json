@@ -1,0 +1,42 @@
+{
+    "name": "synthetic-companies-ok",
+    "description": "SYNTHETIC GET /companies: {data, meta: {query, limit, returned, billing}} (jobs-api routes/companies.ts, 2026-10-29). meta.billing is the $0 companies.search quota receipt the consolidate strips.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.worklittle.com/companies?q=stripe&limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "id": "cmp_synthetic01",
+                            "name": "Stripe",
+                            "slug": "stripe",
+                            "logo_url": null,
+                            "website_url": "https://stripe.com",
+                            "description": "Payments infrastructure for the internet.",
+                            "industry": "Financial Services"
+                        }
+                    ],
+                    "meta": {
+                        "query": "stripe",
+                        "limit": 2,
+                        "returned": 1,
+                        "billing": {
+                            "charged_usd": 0,
+                            "balance_after_usd": null,
+                            "already_charged": false,
+                            "quota_units": 1,
+                            "quota_used": 9,
+                            "quota_limit": 3000000,
+                            "quota_remaining": 2999991
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

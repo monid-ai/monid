@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-document-rejected",
+    "description": "SYNTHETIC 402 on submit: the balance preflight (ensureSufficientBalance) refused before any job started. Data, zero usage, no poll.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 402,
+                "body": {
+                    "error": {
+                        "code": "PAYMENT_REQUIRED",
+                        "message": "Add credit to make documents.",
+                        "documentation_url": "https://docs.worklittle.com/help/account/payment-required"
+                    }
+                }
+            }
+        }
+    ]
+}

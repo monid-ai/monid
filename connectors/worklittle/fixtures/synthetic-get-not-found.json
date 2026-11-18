@@ -1,0 +1,21 @@
+{
+    "name": "synthetic-get-not-found",
+    "description": "SYNTHETIC 404 for worklittle#jobs/search with an unknown job_id: Errors.notFound(\"Job\") envelope {error: {code, message}} (jobs-api shared/utils/errors.ts, 2026-10-29). Provider error: data, zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.worklittle.com/jobs?job_id=no-such-job"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": {
+                        "code": "NOT_FOUND",
+                        "message": "Job not found"
+                    }
+                }
+            }
+        }
+    ]
+}

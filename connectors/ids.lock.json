@@ -659,7 +659,15 @@
         "suzanne#v1/models/download",
         "suzanne#v1/uploads",
         "tinyfish#fetch",
-        "tinyfish#search"
+        "tinyfish#search",
+        "worklittle#apply",
+        "worklittle#apply/profile",
+        "worklittle#apply/{id}",
+        "worklittle#companies/search",
+        "worklittle#cover-letters",
+        "worklittle#jobs/salary-average",
+        "worklittle#jobs/search",
+        "worklittle#resumes"
     ],
     "resources": [
         "saperly/phone-number"

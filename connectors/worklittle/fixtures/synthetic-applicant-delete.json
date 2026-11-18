@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-applicant-delete",
+    "description": "SYNTHETIC POST /v1/apply/profile {action: delete} (handleDeleteApplicant, 2026-10-30).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.worklittle.com/v1/apply/profile"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "deleted",
+                    "id": "usr_synthetic_applicant"
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,35 @@
+{
+    "name": "synthetic-document-replay",
+    "description": "SYNTHETIC synchronous 200 on submit: a repeated Idempotency-Key whose document already finished is replayed from KV (replayDocument) instead of starting a job \u2014 the stored body of the first call, billing receipt included (jobs-api routes/documentGeneration.ts, 2026-10-29). Terminal on start; no poll.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "document_type": "resume",
+                    "mode": "ready",
+                    "formats": [
+                        "html",
+                        "pdf"
+                    ],
+                    "html": "<article><h1>Jordan Rivera</h1><p>Senior Product Manager</p></article>",
+                    "pdf_base64": "JVBERi0xLjcKJSDigJMgc3ludGhldGljCg==",
+                    "pdf_mime": "application/pdf",
+                    "pdf_filename": "jordan-rivera-resume.pdf",
+                    "docx_base64": null,
+                    "docx_mime": null,
+                    "docx_filename": null,
+                    "billing": {
+                        "charged_usd": 0.01,
+                        "balance_after_usd": 41.27,
+                        "already_charged": false
+                    }
+                }
+            }
+        }
+    ]
+}

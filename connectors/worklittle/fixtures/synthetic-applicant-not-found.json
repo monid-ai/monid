@@ -1,0 +1,21 @@
+{
+    "name": "synthetic-applicant-not-found",
+    "description": "SYNTHETIC POST /v1/apply/profile {action: get} for an unknown id: 404 (2026-10-30).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.worklittle.com/v1/apply/profile"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": {
+                        "code": "NOT_FOUND",
+                        "message": "Applicant not found"
+                    }
+                }
+            }
+        }
+    ]
+}

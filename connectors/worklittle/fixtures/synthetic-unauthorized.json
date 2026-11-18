@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-unauthorized",
+    "description": "SYNTHETIC 401 shared chain (any GET endpoint called with no query/path params, via {{request.url}}). jsonError(\"UNAUTHORIZED\", ...) carries documentation_url (jobs-api shared/utils/errors.ts, 2026-10-29).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": {
+                        "code": "UNAUTHORIZED",
+                        "message": "Invalid API key",
+                        "documentation_url": "https://docs.worklittle.com/help/api/api-key-not-working"
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,71 @@
+{
+    "name": "synthetic-cover-letter-async",
+    "description": "SYNTHETIC async chain for worklittle#cover-letters: 202 submit -> one working tick -> done. Same shape as the resume chain with document_type cover_letter (jobs-api routes/documentJobs.ts, 2026-10-29).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "id": "doc_cccccccccccccccccccccccccccccccc",
+                    "status": "working",
+                    "status_url": "https://api.worklittle.com/v1/documents/doc_cccccccccccccccccccccccccccccccc",
+                    "poll_after_seconds": 5,
+                    "billing": {
+                        "charged_usd": 0,
+                        "note": "Charged when the document is ready; failures are free."
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/documents/doc_cccccccccccccccccccccccccccccccc"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "doc_cccccccccccccccccccccccccccccccc",
+                    "status": "working",
+                    "status_url": "https://api.worklittle.com/v1/documents/doc_cccccccccccccccccccccccccccccccc",
+                    "poll_after_seconds": 5
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/documents/doc_cccccccccccccccccccccccccccccccc"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "doc_cccccccccccccccccccccccccccccccc",
+                    "status": "done",
+                    "document_type": "cover_letter",
+                    "mode": "ready",
+                    "formats": [
+                        "html",
+                        "pdf"
+                    ],
+                    "html": "<article><h1>Jordan Rivera</h1><p>Dear Acme Pay hiring team,</p></article>",
+                    "pdf_base64": "JVBERi0xLjcKJSDigJMgc3ludGhldGljCg==",
+                    "pdf_mime": "application/pdf",
+                    "pdf_filename": "jordan-rivera-cover-letter.pdf",
+                    "docx_base64": null,
+                    "docx_mime": null,
+                    "docx_filename": null,
+                    "billing": {
+                        "charged_usd": 0.01,
+                        "balance_after_usd": 41.27,
+                        "already_charged": false
+                    }
+                }
+            }
+        }
+    ]
+}
