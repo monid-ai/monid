@@ -1,0 +1,18 @@
+{
+    "name": "not-found",
+    "description": "recorded 2026-11-18 (ecommerce-leads#stores/lookup): a domain with no tracked store answers 404 with the vendor's error envelope.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://getecommerceleads.com/api/stores/lookup?domain=no-such-store-example.com"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": "No store found for that domain."
+                }
+            }
+        }
+    ]
+}

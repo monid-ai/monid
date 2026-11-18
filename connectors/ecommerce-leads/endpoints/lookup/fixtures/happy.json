@@ -1,0 +1,62 @@
+{
+    "name": "happy",
+    "description": "recorded 2026-11-18 (ecommerce-leads#stores/lookup, domain=gymshark.com): a tracked store, 200, relayed verbatim.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://getecommerceleads.com/api/stores/lookup?domain=gymshark.com"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "basedomain": "gymshark.com",
+                    "revealed": false,
+                    "fields": {
+                        "Name": "Gymshark",
+                        "Domain": "https://fi.gymshark.com",
+                        "Industry": "gym clothing",
+                        "Est. Monthly Revenue (USD)": 42154355,
+                        "Likely to Outsource": [
+                            "Paid Search (Google)",
+                            "Meta Ads"
+                        ],
+                        "Buying Signals": "You're getting this lead because their revenue is down by 46% over the last 3 months compared to the same period last year.\n\nThey're getting 15527 Paid Media visitors/month in the last 3 months, they invest a lot in Meta Ads, and they have a lot of followers on social with an active posting cadence.\n\nWe've detected that:\n- Their Google Search CPC increased by 100% from 09/2026 to 11/2026\n- Their Google Search CPC has gradually increased by 209% over the past 6 months\n- Their Google Search Spend ",
+                        "Store Phone Numbers": null,
+                        "Country": "FI",
+                        "Date Founded": "2018",
+                        "SKUs": 3287,
+                        "Est. Marketing Budget (USD)": "Over USD 500K/Year",
+                        "Facebook": "https://www.facebook.com/GymShark",
+                        "Instagram": "https://www.instagram.com/gymshark",
+                        "Tiktok": "https://www.tiktok.com/@gymshark",
+                        "LinkedIn": "https://www.linkedin.com/company/gymshark",
+                        "Google Ads Library": "https://adstransparency.google.com/?region=anywhere&domain=gymshark.com",
+                        "Meta Ads Library": "https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&is_targeted_country=false&media_type=all&search_type=page&view_all_page_id=129669023798560",
+                        "Total Traffic": 50340051,
+                        "Organic Traffic": 17653652,
+                        "Google Paid Traffic": 55,
+                        "Paid Social Traffic": 2851,
+                        "Organic Social Traffic": 43633,
+                        "Platform": "Shopify",
+                        "Estimated Google Ad Spend": 90,
+                        "Estimated Meta Ad Spend": 1315,
+                        "Total Meta Ads": 50001,
+                        "Active Meta Ads": 10,
+                        "Number of Video Ads": 8,
+                        "Buying Signals List": [
+                            "Google Search CPC increased over 10%",
+                            "Google Search CPC steadily increasing over the last 6 months"
+                        ],
+                        "Conversion Rate Score": 90
+                    },
+                    "decisionMakers": {
+                        "contacts": {},
+                        "pendingTypes": [],
+                        "missedTypes": []
+                    }
+                }
+            }
+        }
+    ]
+}
