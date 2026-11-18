@@ -1,5 +1,5 @@
 import { defineEndpoint, UsageModelKind } from "@shared/core";
-import { zPhishingCheckQueryParams } from "./schema/inputs.ts";
+import { zPhishingCheckInput } from "./schema/inputs.ts";
 
 /** GET /phishing/check - $0.002 per successful call; errors are free. */
 export default defineEndpoint({
@@ -25,7 +25,7 @@ export default defineEndpoint({
         ],
     },
     request: { method: "GET", path: "/phishing/check" },
-    input: { schema: { queryParams: zPhishingCheckQueryParams } },
+    input: { schema: { queryParams: zPhishingCheckInput.required({ url: true }) } },
     usage: {
         model: {
             kind: UsageModelKind.PER_CALL,

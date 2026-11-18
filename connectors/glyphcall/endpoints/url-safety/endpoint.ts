@@ -1,5 +1,5 @@
 import { defineEndpoint, UsageModelKind } from "@shared/core";
-import { zUrlSafetyQueryParams } from "./schema/inputs.ts";
+import { zUrlSafetyInput } from "./schema/inputs.ts";
 
 /** GET /pack/url-safety - $0.01 per successful call; errors are free. */
 export default defineEndpoint({
@@ -24,7 +24,7 @@ export default defineEndpoint({
         ],
     },
     request: { method: "GET", path: "/pack/url-safety" },
-    input: { schema: { queryParams: zUrlSafetyQueryParams } },
+    input: { schema: { queryParams: zUrlSafetyInput.required({ url: true }) } },
     usage: {
         model: {
             kind: UsageModelKind.PER_CALL,

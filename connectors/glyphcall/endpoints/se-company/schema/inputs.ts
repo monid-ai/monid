@@ -2,19 +2,19 @@ import { z } from "zod";
 
 /** `GET /se/company` query params (api.glyphcall.com/openapi.json,
  *  2026-11-18). Optionality mirrors the vendor (D25); vendor-stated
- *  bounds stay here. "At least one of" is a union of
- *  .required arms: Give orgnr or name. */
+ *  bounds stay here. Selectors reject the empty string. "At least one
+ *  of" is a union of .required arms: Give orgnr or name. */
 const base = z.object({
-    orgnr: z.string().describe(
+    orgnr: z.string().min(1).describe(
         "Swedish organisationsnummer (10 digits, with or without the hyphen) or Swedish VAT number.",
     ).optional(),
-    name: z.string().describe(
+    name: z.string().min(1).describe(
         "Company name to search for instead of orgnr.",
     ).optional(),
     checkVat: z.string().describe(
         "true to also check the VAT number live in VIES.",
     ).optional(),
-    city: z.string().describe(
+    city: z.string().min(1).describe(
         "With name: only companies whose postal address is in this city.",
     ).optional(),
     limit: z.number().int().min(1).max(10).describe(
