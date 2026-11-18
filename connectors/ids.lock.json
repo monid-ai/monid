@@ -399,6 +399,7 @@
         "dataforseo#tripadvisor/search",
         "dataforseo#trustpilot/reviews",
         "dataforseo#trustpilot/search",
+        "ecommerce-leads#stores/lookup",
         "exa#contents",
         "exa#search",
         "firecrawl#agent",
