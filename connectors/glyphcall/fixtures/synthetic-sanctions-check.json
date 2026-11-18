@@ -1,0 +1,81 @@
+{
+    "name": "synthetic-sanctions-check",
+    "description": "SYNTHETIC: the published example answer of GET https://api.glyphcall.com/sanctions/check (its sample=1 body, 18 Nov 2026). Replace via `deno task record` when GLYPHCALL_CREDENTIALS_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.glyphcall.com/sanctions/check?address=0x8576acc5c05d6ce88f4e49bf65bdf0c62f91353c"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "query": {
+                        "address": "0x098B716B8Aaf21512996dC57EB0615e2383E2f96",
+                        "name": "Lazarus Group"
+                    },
+                    "verdict": "block",
+                    "listed": true,
+                    "matches": [
+                        {
+                            "sdnId": "…",
+                            "name": "LAZARUS GROUP",
+                            "type": "entity",
+                            "programs": [
+                                "DPRK3"
+                            ],
+                            "matchedOn": "address",
+                            "currency": "ETH",
+                            "address": "0x098B716B8Aaf21512996dC57EB0615e2383E2f96"
+                        },
+                        {
+                            "sdnId": "…",
+                            "name": "LAZARUS GROUP",
+                            "type": "entity",
+                            "programs": [
+                                "DPRK3"
+                            ],
+                            "matchedOn": "name",
+                            "matchedName": "LAZARUS GROUP",
+                            "score": 1
+                        }
+                    ],
+                    "list": "OFAC Specially Designated Nationals (SDN)",
+                    "listDate": "2026-10-17T20:15:00.000Z",
+                    "entries": 18000,
+                    "lists": [
+                        {
+                            "list": "ofac",
+                            "name": "OFAC Specially Designated Nationals (SDN)",
+                            "date": "2026-10-17T20:15:00.000Z",
+                            "entries": 18000,
+                            "checked": true
+                        },
+                        {
+                            "list": "eu",
+                            "name": "EU consolidated financial sanctions list",
+                            "date": "2026-10-23T15:05:43.888Z",
+                            "entries": 6269,
+                            "checked": true
+                        },
+                        {
+                            "list": "un",
+                            "name": "UN Security Council Consolidated List",
+                            "date": "2026-11-14T00:00:05.893Z",
+                            "entries": 1007,
+                            "checked": true
+                        },
+                        {
+                            "list": "uk",
+                            "name": "UK Sanctions List (FCDO)",
+                            "date": "2026-11-12T00:00:00.000Z",
+                            "entries": 6440,
+                            "checked": true
+                        }
+                    ],
+                    "note": "Screening aid only: confirm any match against the official record of its list before acting."
+                }
+            }
+        }
+    ]
+}

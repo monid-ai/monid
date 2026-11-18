@@ -1,0 +1,33 @@
+{
+    "name": "synthetic-phishing-check-block",
+    "description": "SYNTHETIC: shape of a real 18 Nov 2026 answer of GET https://api.glyphcall.com/phishing/check for a host on MetaMask's list (opensea.support, checked against the production lists that day). Replace via `deno task record` when GLYPHCALL_CREDENTIALS_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.glyphcall.com/phishing/check?url=https%3A%2F%2Flogin.opensea.support%2Fclaim"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "url": "https://login.opensea.support/claim",
+                    "domain": "login.opensea.support",
+                    "verdict": "block",
+                    "listed": true,
+                    "matchedOn": "opensea.support",
+                    "sources": ["MetaMask eth-phishing-detect"],
+                    "lookalikeOf": null,
+                    "whitelisted": false,
+                    "listDate": "2026-11-18",
+                    "listedDomains": {
+                        "phishingDatabase": 391546,
+                        "metamask": 119351,
+                        "total": 510425
+                    },
+                    "note": "opensea.support is on MetaMask eth-phishing-detect: do not open, sign or pay here.",
+                    "attribution": "Phishing.Database, https://github.com/Phishing-Database/Phishing.Database (MIT); MetaMask eth-phishing-detect, https://github.com/MetaMask/eth-phishing-detect (DBAD public licence)"
+                }
+            }
+        }
+    ]
+}

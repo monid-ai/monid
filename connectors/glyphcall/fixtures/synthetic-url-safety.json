@@ -1,0 +1,46 @@
+{
+    "name": "synthetic-url-safety",
+    "description": "SYNTHETIC: the published example answer of GET https://api.glyphcall.com/pack/url-safety (its sample=1 body, 18 Nov 2026). Replace via `deno task record` when GLYPHCALL_CREDENTIALS_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.glyphcall.com/pack/url-safety?url=http%3A%2F%2Fgithub.com"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "pack": "url-safety",
+                    "url": "http://github.com/",
+                    "finalUrl": "https://github.com/",
+                    "risk": "low",
+                    "signals": [],
+                    "redirects": {
+                        "count": 1,
+                        "hosts": [
+                            "github.com"
+                        ],
+                        "hops": [
+                            {
+                                "url": "http://github.com/",
+                                "status": 301
+                            }
+                        ]
+                    },
+                    "domain": {
+                        "domain": "github.com",
+                        "trust": "high",
+                        "ageDays": 6600,
+                        "registrar": "MarkMonitor Inc."
+                    },
+                    "security": {
+                        "https": true,
+                        "score": 80,
+                        "grade": "B"
+                    },
+                    "failed": {}
+                }
+            }
+        }
+    ]
+}

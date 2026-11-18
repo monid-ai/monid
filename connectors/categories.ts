@@ -385,4 +385,18 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "Tools to pull public government records, including financial " +
             "disclosures, filings, registries, and more.",
     },
+    {
+        id: "web-security",
+        displayName: "Web Security",
+        description:
+            "Tools to check links and domains before opening or paying them, " +
+            "including phishing blocklists, redirects, and domain trust.",
+    },
+    {
+        id: "compliance",
+        displayName: "Compliance",
+        description:
+            "Tools to screen counterparties, including sanctions lists, " +
+            "VAT number validation, and company verification (KYB).",
+    },
 ]);

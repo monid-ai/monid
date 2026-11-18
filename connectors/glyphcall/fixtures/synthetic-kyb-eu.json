@@ -1,0 +1,95 @@
+{
+    "name": "synthetic-kyb-eu",
+    "description": "SYNTHETIC: the published example answer of GET https://api.glyphcall.com/pack/kyb-eu (its sample=1 body, 18 Nov 2026). Replace via `deno task record` when GLYPHCALL_CREDENTIALS_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.glyphcall.com/pack/kyb-eu?q=Spotify"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "query": {
+                        "q": "Spotify",
+                        "vat": null,
+                        "lei": null,
+                        "country": "SE"
+                    },
+                    "verdict": "pass",
+                    "flags": [],
+                    "company": {
+                        "name": "Spotify AB",
+                        "country": "SE",
+                        "idType": "organisationsnummer",
+                        "id": "556703-7485",
+                        "legalForm": "Aktiebolag (limited company)",
+                        "city": "STOCKHOLM",
+                        "exact": true,
+                        "url": null,
+                        "details": "/se/company?orgnr=556703-7485",
+                        "lei": "5493004INDUJX1TDHI57",
+                        "source": "Bolagsverket and SCB (Sweden)"
+                    },
+                    "groupParent": null,
+                    "alternatives": [],
+                    "lei": {
+                        "lei": "5493004INDUJX1TDHI57",
+                        "legalName": "Spotify AB",
+                        "entityStatus": "ACTIVE",
+                        "jurisdiction": "SE",
+                        "registration": {
+                            "status": "ISSUED",
+                            "nextRenewal": "2027-05-30"
+                        },
+                        "url": "https://search.gleif.org/#/record/5493004INDUJX1TDHI57"
+                    },
+                    "vat": {
+                        "vat": "SE556703748501",
+                        "country": "SE",
+                        "number": "556703748501",
+                        "valid": true,
+                        "name": "Spotify AB",
+                        "address": "REGERINGSGATAN 19, 111 53 STOCKHOLM",
+                        "checkedAt": "2026-11-15T08:00:00.000Z",
+                        "source": "EU VIES (European Commission)",
+                        "given": false,
+                        "derived": true
+                    },
+                    "sanctions": {
+                        "verdict": "pass",
+                        "screenedNames": [
+                            "Spotify"
+                        ],
+                        "matches": [],
+                        "lists": [
+                            {
+                                "list": "ofac",
+                                "name": "OFAC Specially Designated Nationals (SDN)",
+                                "date": "2026-11-14T18:00:00.000Z",
+                                "entries": 18000,
+                                "checked": true
+                            },
+                            {
+                                "list": "eu",
+                                "name": "EU consolidated financial sanctions list",
+                                "date": "2026-10-23T15:05:43.888Z",
+                                "entries": 6269,
+                                "checked": true
+                            }
+                        ]
+                    },
+                    "sources": [
+                        "Bolagsverket and SCB (Sweden)",
+                        "GLEIF (CC0)",
+                        "EU VIES (European Commission)",
+                        "OFAC, EU, UN and UK sanctions lists"
+                    ],
+                    "failed": {},
+                    "checkedAt": "2026-11-15T08:00:00.000Z",
+                    "note": "Official records only, each read live from its source. A screening and verification aid, not legal advice or a credit view: confirm any match against the official record before acting."
+                }
+            }
+        }
+    ]
+}
