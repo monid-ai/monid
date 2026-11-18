@@ -1,0 +1,20 @@
+{
+    "name": "provider-error-sanctions-check",
+    "description": "Shape of the real 18 Nov 2026 answer of api.glyphcall.com/sanctions/check to an unknown key (Authorization: Bearer adt_doesnotexist): 402 with error \"Payment required\" (trimmed to the fields the connector reads).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?address=0x098B716B8Aaf21512996dC57EB0615e2383E2f96"
+            },
+            "res": {
+                "status": 402,
+                "body": {
+                    "x402Version": 2,
+                    "error": "Payment required",
+                    "hint": "Send a valid key as Authorization: Bearer adt_..."
+                }
+            }
+        }
+    ]
+}

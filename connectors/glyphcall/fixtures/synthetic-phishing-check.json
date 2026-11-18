@@ -1,0 +1,33 @@
+{
+    "name": "synthetic-phishing-check",
+    "description": "SYNTHETIC: the published example of GET https://api.glyphcall.com/phishing/check: request = the example input its live 402 names, response = the example answer its Bazaar extension publishes (18 Nov 2026). Replace via `deno task record` when GLYPHCALL_CREDENTIALS_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?url=https%3A%2F%2Fgithub.com"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "url": "https://github.com",
+                    "domain": "github.com",
+                    "verdict": "not_listed",
+                    "listed": false,
+                    "matchedOn": null,
+                    "sources": [],
+                    "lookalikeOf": null,
+                    "whitelisted": false,
+                    "listDate": "2026-11-18",
+                    "listedDomains": {
+                        "phishingDatabase": 391546,
+                        "metamask": 119351,
+                        "total": 510425
+                    },
+                    "note": "Not on either list. A list checks known phishing hosts only; use /pack/url-safety to also follow redirects and read the domain's age.",
+                    "attribution": "Phishing.Database, https://github.com/Phishing-Database/Phishing.Database (MIT); MetaMask eth-phishing-detect, https://github.com/MetaMask/eth-phishing-detect (DBAD public licence)"
+                }
+            }
+        }
+    ]
+}

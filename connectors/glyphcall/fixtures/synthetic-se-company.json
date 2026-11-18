@@ -1,11 +1,11 @@
 {
     "name": "synthetic-se-company",
-    "description": "SYNTHETIC: the published example answer of GET https://api.glyphcall.com/se/company (its sample=1 body, 18 Nov 2026). Replace via `deno task record` when GLYPHCALL_CREDENTIALS_API_KEY exists.",
+    "description": "SYNTHETIC: the published example of GET https://api.glyphcall.com/se/company: request = the example input its live 402 names, response = the example answer its Bazaar extension publishes (18 Nov 2026). Replace via `deno task record` when GLYPHCALL_CREDENTIALS_API_KEY exists.",
     "calls": [
         {
             "req": {
                 "method": "GET",
-                "url": "https://api.glyphcall.com/se/company?orgnr=5567037485"
+                "url": "{{request.url}}?orgnr=556703-7485"
             },
             "res": {
                 "status": 200,

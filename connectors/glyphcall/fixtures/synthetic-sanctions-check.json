@@ -1,11 +1,11 @@
 {
     "name": "synthetic-sanctions-check",
-    "description": "SYNTHETIC: the published example answer of GET https://api.glyphcall.com/sanctions/check (its sample=1 body, 18 Nov 2026). Replace via `deno task record` when GLYPHCALL_CREDENTIALS_API_KEY exists.",
+    "description": "SYNTHETIC: the published example of GET https://api.glyphcall.com/sanctions/check: request = the example input its live 402 names, response = the example answer its Bazaar extension publishes (18 Nov 2026). Replace via `deno task record` when GLYPHCALL_CREDENTIALS_API_KEY exists.",
     "calls": [
         {
             "req": {
                 "method": "GET",
-                "url": "https://api.glyphcall.com/sanctions/check?address=0x8576acc5c05d6ce88f4e49bf65bdf0c62f91353c"
+                "url": "{{request.url}}?address=0x098B716B8Aaf21512996dC57EB0615e2383E2f96"
             },
             "res": {
                 "status": 200,
@@ -41,13 +41,13 @@
                         }
                     ],
                     "list": "OFAC Specially Designated Nationals (SDN)",
-                    "listDate": "2026-10-17T20:15:00.000Z",
+                    "listDate": "2026-10-17T20:15:00Z",
                     "entries": 18000,
                     "lists": [
                         {
                             "list": "ofac",
                             "name": "OFAC Specially Designated Nationals (SDN)",
-                            "date": "2026-10-17T20:15:00.000Z",
+                            "date": "2026-10-17T20:15:00Z",
                             "entries": 18000,
                             "checked": true
                         },
@@ -68,7 +68,7 @@
                         {
                             "list": "uk",
                             "name": "UK Sanctions List (FCDO)",
-                            "date": "2026-11-12T00:00:00.000Z",
+                            "date": "2026-11-12T00:00:00Z",
                             "entries": 6440,
                             "checked": true
                         }

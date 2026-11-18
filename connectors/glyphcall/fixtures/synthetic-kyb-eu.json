@@ -1,11 +1,11 @@
 {
     "name": "synthetic-kyb-eu",
-    "description": "SYNTHETIC: the published example answer of GET https://api.glyphcall.com/pack/kyb-eu (its sample=1 body, 18 Nov 2026). Replace via `deno task record` when GLYPHCALL_CREDENTIALS_API_KEY exists.",
+    "description": "SYNTHETIC: the published example of GET https://api.glyphcall.com/pack/kyb-eu: request = the example input its live 402 names, response = the example answer its Bazaar extension publishes (18 Nov 2026). Replace via `deno task record` when GLYPHCALL_CREDENTIALS_API_KEY exists.",
     "calls": [
         {
             "req": {
                 "method": "GET",
-                "url": "https://api.glyphcall.com/pack/kyb-eu?q=Spotify"
+                "url": "{{request.url}}?q=Spotify"
             },
             "res": {
                 "status": 200,
@@ -51,7 +51,7 @@
                         "valid": true,
                         "name": "Spotify AB",
                         "address": "REGERINGSGATAN 19, 111 53 STOCKHOLM",
-                        "checkedAt": "2026-11-15T08:00:00.000Z",
+                        "checkedAt": "2026-11-15T08:00:00Z",
                         "source": "EU VIES (European Commission)",
                         "given": false,
                         "derived": true
@@ -66,7 +66,7 @@
                             {
                                 "list": "ofac",
                                 "name": "OFAC Specially Designated Nationals (SDN)",
-                                "date": "2026-11-14T18:00:00.000Z",
+                                "date": "2026-11-14T18:00:00Z",
                                 "entries": 18000,
                                 "checked": true
                             },
@@ -86,7 +86,7 @@
                         "OFAC, EU, UN and UK sanctions lists"
                     ],
                     "failed": {},
-                    "checkedAt": "2026-11-15T08:00:00.000Z",
+                    "checkedAt": "2026-11-15T08:00:00Z",
                     "note": "Official records only, each read live from its source. A screening and verification aid, not legal advice or a credit view: confirm any match against the official record before acting."
                 }
             }
