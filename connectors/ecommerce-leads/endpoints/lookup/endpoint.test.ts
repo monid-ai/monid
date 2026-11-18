@@ -1,4 +1,4 @@
-import { assert, assertEquals } from "@std/assert";
+import { assert, assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import {
     liveSkip,
@@ -82,22 +82,20 @@ Deno.test("ecommerce-leads#stores/lookup 401 (recorded 2026-11-18): bad key is d
     assertEquals(result.usage, { credits: {}, evidence: {} });
 });
 
-Deno.test("ecommerce-leads#stores/lookup rejects unknown params before the wire", async () => {
+Deno.test("ecommerce-leads#stores/lookup strict mirror: an unknown key is INVALID_INPUT, its near twin passes", async () => {
     const unit = await testSealedUnit(ID);
     const fixture = await loadFixture(`${fixturesDir}happy.json`);
-    let rejected = false;
-    try {
-        const result = await runEndpoint({
-            unit,
-            input: { queryParams: { domain: "gymshark.com", tab: "all" } },
-            mode: "replay",
-            fixture,
-        });
-        rejected = result.httpStatus !== 200;
-    } catch {
-        rejected = true;
-    }
-    assert(rejected, "strict mirror: an unknown key is INVALID_INPUT");
+    const run = (queryParams: Record<string, string>) =>
+        runEndpoint({ unit, input: { queryParams }, mode: "replay", fixture });
+    // the gate fires on validation, before any replayed call is matched
+    await assertRejects(
+        () => run({ domain: "gymshark.com", tab: "all" }),
+        Error,
+        "INVALID_INPUT",
+    );
+    // passing near twin: the same input without the unknown key
+    const ok = await run({ domain: "gymshark.com" });
+    assertEquals(ok.httpStatus, 200);
 });
 
 Deno.test({
@@ -119,6 +117,10 @@ Deno.test({
         assertEquals(result.usage, { credits: {}, evidence: {} });
         const output = result.output as Record<string, unknown>;
         assertEquals(output.basedomain, "gymshark.com");
-        assert(typeof output.fields === "object", "fields object present");
+        assert(
+            typeof output.fields === "object" && output.fields !== null &&
+                !Array.isArray(output.fields),
+            "fields is a non-null, non-array object",
+        );
     },
 });

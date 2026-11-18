@@ -28,7 +28,7 @@ export default defineEndpoint({
             "size a prospect's ad budget, or explain why a store is a lead. " +
             "Does not search or list stores: you must already know the " +
             "domain.",
-        docsUrl: "https://getecommerceleads.com/docs/",
+        docsUrl: "https://getecommerceleads.com/docs/guide.md",
         categories: ["company-enrichment"],
         notes: [
             'A domain with no tracked store answers 404 `{error: "No ' +
