@@ -7,9 +7,9 @@ import {
     zStrings,
 } from "../../../schema/common.ts";
 
-/** POST /v2/jobs/salary-benchmark body. One of public_url / job_title is
- *  required (a cross-field rule the compiled schema cannot carry — it is
- *  stated in the endpoint notes; Hirebase answers 422 otherwise). */
+/** POST /v2/jobs/salary-benchmark body — the faithful mirror, every field
+ *  optional. "One of public_url / job_title" is stated at the binding in
+ *  endpoint.ts, as a union of two `.required` arms. */
 export const zSalaryBenchmarkBody = z.strictObject({
     public_url: z.string().describe(
         "Public URL of a job posting to benchmark; the role's attributes " +
@@ -33,9 +33,9 @@ export const zSalaryBenchmarkBody = z.strictObject({
         "Job description or notes, used to find comparable postings.",
     ).optional(),
     salary_range: z.strictObject({
-        min: z.number().describe("Low end of the proposed range.")
+        min: z.number().min(0).describe("Low end of the proposed range.")
             .optional(),
-        max: z.number().describe("High end of the proposed range.")
+        max: z.number().min(0).describe("High end of the proposed range.")
             .optional(),
         currency: z.string().length(3).describe(
             "Three-letter currency code. Must match the market's currency " +

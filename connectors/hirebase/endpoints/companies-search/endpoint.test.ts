@@ -1,4 +1,4 @@
-import { assert, assertEquals } from "@std/assert";
+import { assert, assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import {
     liveSkip,
@@ -8,13 +8,15 @@ import {
 } from "@shared/testing";
 
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
-
 const ID = "hirebase#companies/search";
 const INPUT = {
-    body: {
-        query: "climate tech",
-        company_types: ["11-50", "51-200"],
-        limit: 2,
+    "body": {
+        "query": "climate tech",
+        "company_types": [
+            "11-50",
+            "51-200",
+        ],
+        "limit": 2,
     },
 };
 
@@ -30,10 +32,90 @@ Deno.test(`${ID} happy`, async () => {
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
     assertEquals(result.usage, {
-        credits: { companies: 2 },
-        evidence: { RESULT: 2 },
+        "credits": {
+            "companies": 2,
+        },
+        "evidence": {
+            "RESULT": 2,
+        },
     });
-    assert(result.output !== null && typeof result.output === "object");
+    // nothing is consolidated out of a Hirebase body (the meter rides
+    // headers), so the output is the response as recorded
+    assertEquals(
+        result.output,
+        fixture.calls[fixture.calls.length - 1].res.body,
+    );
+});
+
+Deno.test(`${ID} provider error (recorded 401): data, zero usage, readable message`, async () => {
+    const unit = await testSealedUnit(ID);
+    const fixture = await loadFixture(`${fixturesDir}unauthorized.json`);
+    const result = await runEndpoint({
+        unit,
+        input: INPUT,
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(result.httpStatus, 401);
+    assertEquals(result.isProviderError, true);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
+    assertEquals(result.output, {
+        message: "Invalid API key",
+        raw: { detail: "Invalid API key" },
+    });
+});
+
+Deno.test(`${ID} schema gate: near-valid inputs fail INVALID_INPUT, the valid twin passes`, async () => {
+    const unit = await testSealedUnit(ID);
+    const fixture = await loadFixture(`${fixturesDir}happy.json`);
+    const rejected: [string, Record<string, unknown>][] = [
+        ["size_range instead of company_types", {
+            "body": {
+                "query": "climate tech",
+                "company_types": [
+                    "11-50",
+                    "51-200",
+                ],
+                "limit": 2,
+                "size_range": "11-50",
+            },
+        }],
+        ["limit above the cap", {
+            "body": {
+                "query": "climate tech",
+                "company_types": [
+                    "11-50",
+                    "51-200",
+                ],
+                "limit": 101,
+            },
+        }],
+        ["an unknown headcount bucket", {
+            "body": {
+                "query": "climate tech",
+                "company_types": [
+                    "11-49",
+                ],
+                "limit": 2,
+            },
+        }],
+    ];
+    for (const [why, input] of rejected) {
+        await assertRejects(
+            () => runEndpoint({ unit, input, mode: "replay", fixture }),
+            Error,
+            "INVALID_INPUT",
+            why,
+        );
+    }
+    // the gate is not too wide: the valid twin of every case above runs
+    const ok = await runEndpoint({
+        unit,
+        input: INPUT,
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(ok.isProviderError, false);
 });
 
 Deno.test({
@@ -51,6 +133,12 @@ Deno.test({
             false,
             JSON.stringify(result.output),
         );
-        assertEquals(result.usage.credits, { companies: 2 });
+        // shape, not amounts: live counts move
+        assert(
+            Array.isArray(
+                (result.output as { companies: unknown[] }).companies,
+            ),
+        );
+        assertEquals(Object.keys(result.usage.evidence), ["RESULT"]);
     },
 });

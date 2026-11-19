@@ -44,15 +44,21 @@ with search by filters or by meaning, market aggregates and salary benchmarks.
 - **Inputs** — strict bodies (Hirebase answers 422 for unknown fields; inside
   neural search's `lexical` object it silently ignores them, so strictness
   there turns a silent unfiltered result into an error before the wire).
-  `limit` is required and capped at 100 at each per-result binding.
+  `limit` is required and capped at 100 at each per-result binding. The mirror
+  is no stricter than the vendor: yes/no flags take a boolean or the strings
+  `"true"` / `"false"`, and `company_domain`, `company_slug`, `industry` and
+  `sub_industry` take one string or a list (both forms verified live).
+  Single-field bounds stay in the mirror (`.min(0)` on money and count ranges,
+  `z.iso.date()` on dates). The salary benchmark's "one of `public_url` /
+  `job_title`" is a union of two `.required` arms at the binding.
 - **Output** — provider `output.fromError` turns the `{detail}` envelope
   (a sentence, or a list on 422) into one message beside the raw body. The
   salary benchmark's `output.fromResponse` returns the report itself and drops
   the task's queue bookkeeping.
 - **Fixtures** — recorded against the live API on 2026-11-18 (trimmed by the
   recorder; the salary benchmark chain hand-minimized): a happy path per
-  endpoint, an empty search, an unknown company slug, a 401, a 422, a 400 and
-  a 404.
+  endpoint, an empty search, an unknown company slug, a 401 per endpoint, a
+  422, a 400 and a 404.
 - **openspec/changes/add-connector-hirebase** — this proposal; no `design.md`
   (no schema or engine contract change, no new Units, no new category).
 

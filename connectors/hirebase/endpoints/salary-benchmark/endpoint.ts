@@ -1,3 +1,4 @@
+import { z } from "zod";
 import { defineEndpoint, UsageModelKind } from "@shared/core";
 import { zSalaryBenchmarkBody } from "./schema/inputs.ts";
 
@@ -41,7 +42,17 @@ export default defineEndpoint({
     },
     request: { method: "POST", path: "/jobs/salary-benchmark" },
     timeouts: { requestMs: 30_000, runMs: 600_000, pollMs: 5_000 },
-    input: { schema: { body: zSalaryBenchmarkBody } },
+    // "At least one of public_url / job_title" (Hirebase answers 422
+    // otherwise): a union of two `.required` arms, so an empty body fails
+    // with INVALID_INPUT before the wire. A body carrying both passes.
+    input: {
+        schema: {
+            body: z.union([
+                zSalaryBenchmarkBody.required({ public_url: true }),
+                zSalaryBenchmarkBody.required({ job_title: true }),
+            ]),
+        },
+    },
     /**
      * WHY THIS ENDPOINT OWNS ITS LIFECYCLE: the POST only QUEUES the
      * report and answers a task `{id, state: "queued"}`; the report is

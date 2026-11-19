@@ -1,10 +1,10 @@
 import { z } from "zod";
-import { jobFilterShape, zSortOrder } from "../../../schema/common.ts";
+import { jobFilterShape, zFlag, zSortOrder } from "../../../schema/common.ts";
 
 /** POST /v2/jobs/search body — every field optional, unknown fields 422. */
 export const zJobsSearchBody = z.strictObject({
     ...jobFilterShape,
-    return_raw_description: z.boolean().describe(
+    return_raw_description: zFlag.describe(
         "true to add description_raw to each job: the full original HTML " +
             "posting (often 5,000+ characters). Without it each job " +
             "carries only the cleaned, shortened description.",

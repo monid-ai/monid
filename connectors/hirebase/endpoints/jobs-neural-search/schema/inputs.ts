@@ -2,11 +2,13 @@ import { z } from "zod";
 import {
     zCompanySize,
     zExperience,
+    zFlag,
     zGeoLocations,
     zJobType,
     zLocationType,
     zRange,
     zSortOrder,
+    zStringOrStrings,
     zStrings,
 } from "../../../schema/common.ts";
 
@@ -47,10 +49,11 @@ export const zNeuralLexical = z.strictObject({
     company_name: z.string().min(1).describe(
         "Company name, case-insensitive.",
     ).optional(),
-    company_domain: zStrings.describe(
+    company_domain: zStringOrStrings.describe(
         'Company websites, e.g. ["ford.com"].',
     ).optional(),
-    company_slug: zStrings.describe("Hirebase company slugs.").optional(),
+    company_slug: zStringOrStrings.describe("Hirebase company slugs.")
+        .optional(),
     location_types: z.array(zLocationType).min(1).describe(
         "Work arrangements to include.",
     ).optional(),
@@ -61,7 +64,7 @@ export const zNeuralLexical = z.strictObject({
         "Experience levels to include.",
     ).optional(),
     yoe: zRange.describe("Years of experience required.").optional(),
-    include_yoe: z.boolean().describe(
+    include_yoe: zFlag.describe(
         "With a yoe filter: true to also keep jobs with no stated years.",
     ).optional(),
     company_types: z.array(zCompanySize).min(1).describe(
@@ -77,7 +80,7 @@ export const zNeuralLexical = z.strictObject({
         "ISO-8601 datetime. Only jobs first saved before this time.",
     ).optional(),
     salary: zRange.describe("Posted salary range.").optional(),
-    include_no_salary: z.boolean().describe(
+    include_no_salary: zFlag.describe(
         "With a salary filter: true to also keep jobs with no posted " +
             "salary.",
     ).optional(),
@@ -88,15 +91,15 @@ export const zNeuralLexical = z.strictObject({
         "Employment types to include.",
     ).optional(),
     job_category: zStrings.describe("Job category tags.").optional(),
-    industry: zStrings.describe("Industries of the hiring company.")
+    industry: zStringOrStrings.describe("Industries of the hiring company.")
         .optional(),
-    sub_industry: zStrings.describe(
+    sub_industry: zStringOrStrings.describe(
         "Sub-industries of the hiring company.",
     ).optional(),
-    visa: z.boolean().describe(
+    visa: zFlag.describe(
         "true for only jobs that offer visa sponsorship.",
     ).optional(),
-    filter_incomplete_jobs: z.boolean().describe(
+    filter_incomplete_jobs: zFlag.describe(
         "true to leave out jobs with incomplete listing data.",
     ).optional(),
     job_board: zStrings.describe("Only jobs from these sources.").optional(),

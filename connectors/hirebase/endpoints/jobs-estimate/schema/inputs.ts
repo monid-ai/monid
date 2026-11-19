@@ -4,6 +4,9 @@ import { jobFilterShape } from "../../../schema/common.ts";
 /** POST /v2/jobs/estimate body — every Search Jobs filter plus `limit`. */
 export const zJobsEstimateBody = z.strictObject({
     ...jobFilterShape,
+    page: z.number().int().min(1).describe(
+        "Page number (default 1). Only matters with a non-zero limit.",
+    ).optional(),
     limit: z.number().int().min(0).describe(
         "0 (recommended) returns the total number of matching jobs. Any " +
             "other value returns what a search page of that size would " +
