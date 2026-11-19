@@ -81,6 +81,41 @@ Deno.test("glyphcall#pack/url-safety input gate: a near-valid bad input is INVAL
     );
 });
 
+Deno.test("glyphcall#pack/url-safety input gate: the scheme check is case-insensitive in the compiled schema, and non-http schemes are refused", async () => {
+    const unit = await testSealedUnit("glyphcall#pack/url-safety");
+    const fixture = await loadFixture(
+        `${fixturesDir}synthetic-url-safety.json`,
+    );
+    // an uppercase scheme passes the compiled input gate and fails only later, at replay URL matching
+    for (const url of ["HTTPS://example.org", "Http://example.org"]) {
+        const error = await assertRejects(() =>
+            runEndpoint({
+                unit,
+                input: { queryParams: { url } },
+                mode: "replay",
+                fixture,
+            })
+        );
+        assert(
+            !String((error as Error).message).includes("INVALID_INPUT"),
+            `${url}: ${String(error)}`,
+        );
+    }
+    for (const url of ["ftp://example.org", "javascript:alert(1)"]) {
+        await assertRejects(
+            () =>
+                runEndpoint({
+                    unit,
+                    input: { queryParams: { url } },
+                    mode: "replay",
+                    fixture,
+                }),
+            Error,
+            "INVALID_INPUT",
+        );
+    }
+});
+
 Deno.test({
     name: "glyphcall#pack/url-safety live (gated on GLYPHCALL credentials)",
     ignore: liveSkip("glyphcall"),
