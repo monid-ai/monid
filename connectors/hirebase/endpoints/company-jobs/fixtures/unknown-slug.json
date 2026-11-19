@@ -1,0 +1,23 @@
+{
+    "name": "unknown-slug",
+    "description": "Recorded 2026-11-19 against the live API: an unknown slug answers 200 with an empty jobs array, not 404, and bills nothing.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.hirebase.org/v2/hirebase/companies/zzz-not-a-company-qq/jobs?limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jobs": [],
+                    "job_categories": [],
+                    "total_count": 0,
+                    "page": 1,
+                    "limit": 2,
+                    "total_pages": 0
+                }
+            }
+        }
+    ]
+}

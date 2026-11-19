@@ -1,0 +1,239 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-11-18 against the live API (response trimmed by the recorder): a plain-English query with a remote filter and limit 2 returns 2 jobs, 2 units.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.hirebase.org/v2/jobs/neural-search",
+                "body": {
+                    "vector": {
+                        "query": "backend engineer at an early-stage climate startup"
+                    },
+                    "lexical": {
+                        "location_types": [
+                            "Remote"
+                        ]
+                    },
+                    "limit": 2
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jobs": [
+                        {
+                            "_id": "6afe013aa51481310c733297",
+                            "company_name": "Vantora",
+                            "job_title": "Tech Lead/ Founding Engineer (LATAM Remote)",
+                            "description": "<h2>Role Overview</h2><p>Vantora is a dynamic venture studio dedicated to building innovative startup companies from the ground up. We\u2019re looking for a hands-on Tech Lead to join one of our active ventures.</p><h2>What You Will Do</h2><p>You\u2019ll set the technical direction, raise the bar on engineering quality, and lead the team through the venture\u2019s next stage of growth.</p><h2>Why It Might Be a Fit</h2><p>You\u2019ll lead development across the front end and back end, writing code yourself while gui",
+                            "application_link": "https://jobs.gem.com/vantora/am9icG9zdDoosKC7eQAjkeemvrAq4UOt",
+                            "job_type": "Full Time",
+                            "location_type": "Remote",
+                            "date_posted": "2026-11-18",
+                            "first_ingested": "2026-11-18T19:49:14.706000",
+                            "updated_at": null,
+                            "company_link": "vantora.us",
+                            "company_logo": "https://logos.hirebase.org/b45ac6ce-3a1a-4c15-82b8-515458b196c0/vantora-us-320x320-q95.jpg",
+                            "job_board": "gem",
+                            "job_board_link": "https://jobs.gem.com/vantora",
+                            "requirements_summary": "Proven experience in front-end and back-end development, DevOps, and leadership",
+                            "visa_sponsored": false,
+                            "company_data": {
+                                "description_summary": "Vantora builds AI ventures for physical industries such as energy, aviation, manufacturing, logistics, and automotive. It was founded in 2022 and is based in Santa Monica, California. The company partners with Fortune 500 operators to create AI-native companies. It has launched 17 ventures.",
+                                "linkedin_link": "https://www.linkedin.com/company/vantora-us",
+                                "size_range": {
+                                    "min": 51,
+                                    "max": 200
+                                },
+                                "industries": [
+                                    "Tech, Software & IT Services",
+                                    "Corporate Services"
+                                ],
+                                "subindustries": [
+                                    "AI & ML",
+                                    "Enterprise Software & Solutions"
+                                ],
+                                "type": "Startup",
+                                "is_recruiting_agency": false,
+                                "is_3rd_party_agency": false,
+                                "funding_info": {
+                                    "type": "Series unknown",
+                                    "total_funding": 100000000,
+                                    "last_funding_date": "2026-09-15T00:00:00"
+                                }
+                            },
+                            "job_slug": "tech-lead-founding-engineer-latam-remote-e64d0df8",
+                            "company_slug": "vantora-us",
+                            "locations": [
+                                {
+                                    "city": null,
+                                    "region": null,
+                                    "country": "Mexico",
+                                    "coordinates": {
+                                        "type": "Point",
+                                        "coordinates": [
+                                            -102.0077097,
+                                            23.6585116
+                                        ]
+                                    },
+                                    "bbox": [
+                                        14.3811832,
+                                        32.7187133
+                                    ],
+                                    "address": "Mexico"
+                                }
+                            ],
+                            "job_categories": [
+                                "Engineering Jobs",
+                                "Software Engineer Jobs"
+                            ],
+                            "location_raw": "Guadalajara, Mexico; Remote",
+                            "expired": null,
+                            "salary_range": null,
+                            "offers_equity": null,
+                            "equity": null,
+                            "yoe_range": {
+                                "min": 4,
+                                "max": null
+                            },
+                            "experience_level": null,
+                            "description_raw": null,
+                            "recruiter_agency": false,
+                            "signals": [],
+                            "technologies": [
+                                "TypeScript",
+                                "React"
+                            ],
+                            "technologies_tracked": null,
+                            "skills": [
+                                "Front-end development",
+                                "Back-end development"
+                            ],
+                            "education_level": null,
+                            "team": "Engineering",
+                            "benefits": null,
+                            "contact_email": null,
+                            "contact_phone": null,
+                            "coolness_score": 6.9,
+                            "flexibility_score": 5.6,
+                            "compensation_value_score": 6.7,
+                            "benefits_score": 5.5,
+                            "impact_autonomy_score": 7.6,
+                            "prestige_score": 5.9,
+                            "growth_score": 6.8,
+                            "meta_completeness": false,
+                            "meta_targetability": null
+                        },
+                        {
+                            "_id": "6afdae3ddd7cc5432c86ec3e",
+                            "company_name": "edenity",
+                            "job_title": "Back End Developer",
+                            "description": "<h2>Role Overview</h2><p>The company is bringing its regional platforms together onto one Java and Kotlin platform, built as a modular monolith. The role suits engineers who have done a replatforming or migration before and are comfortable starting without a playbook.</p><h2>What You Will Do</h2><p>Design and build self-contained modules within a modular monolith, bring regional systems onto the shared platform, model complex data relationships, build and maintain scalable REST APIs.</p><h2>Why ",
+                            "application_link": "https://www.linkedin.com/jobs/view/4490876379",
+                            "job_type": "Full Time",
+                            "location_type": "Remote",
+                            "date_posted": "2026-11-18",
+                            "first_ingested": "2026-11-18T13:53:24.493000",
+                            "updated_at": null,
+                            "company_link": "edenity.co",
+                            "company_logo": "https://logos.hirebase.org/eaa2bc2d-c1b7-4ef4-ac13-51f6a9725a01/edenity-talent-320x320-q95.jpg",
+                            "job_board": "linkedin",
+                            "job_board_link": "https://www.linkedin.com/jobs/search?f_C=105530927",
+                            "requirements_summary": "4-6 years of backend engineering experience, deep Java and Spring skills, strong relational database design, and CI/CD best practice",
+                            "visa_sponsored": false,
+                            "company_data": {
+                                "description_summary": "edenity helps early-stage technology companies build product, engineering, data, and AI organizations. It operates in the UK, Germany, the Netherlands, and the Nordics. The company was founded in 2024 and is headquartered in London, England. Its services include Python, data, backend and frontend engineering, product management, UX/UI design, recruitment, and executive search.",
+                                "linkedin_link": "https://www.linkedin.com/company/edenity-talent",
+                                "size_range": {
+                                    "min": 2,
+                                    "max": 10
+                                },
+                                "industries": [
+                                    "Corporate Services",
+                                    "Tech, Software & IT Services"
+                                ],
+                                "subindustries": [
+                                    "Staffing & Recruiting",
+                                    "Management Consulting"
+                                ],
+                                "services": [
+                                    "Python",
+                                    "Data"
+                                ],
+                                "type": "Small Business",
+                                "is_recruiting_agency": true,
+                                "is_3rd_party_agency": false
+                            },
+                            "job_slug": "back-end-developer-5c90a500",
+                            "company_slug": "edenity-talent",
+                            "locations": [
+                                {
+                                    "city": null,
+                                    "region": null,
+                                    "country": "Belgium",
+                                    "coordinates": {
+                                        "type": "Point",
+                                        "coordinates": [
+                                            4.6667145,
+                                            50.6402809
+                                        ]
+                                    },
+                                    "bbox": [
+                                        49.4969821,
+                                        51.550781
+                                    ],
+                                    "address": "Belgium"
+                                }
+                            ],
+                            "job_categories": [
+                                "Software Engineer Jobs",
+                                "Information Technology Jobs"
+                            ],
+                            "location_raw": "Belgium",
+                            "expired": null,
+                            "salary_range": null,
+                            "offers_equity": null,
+                            "equity": null,
+                            "yoe_range": {
+                                "min": 4,
+                                "max": 6
+                            },
+                            "experience_level": null,
+                            "description_raw": null,
+                            "recruiter_agency": true,
+                            "signals": [],
+                            "technologies": [
+                                "Java",
+                                "Kotlin"
+                            ],
+                            "technologies_tracked": null,
+                            "skills": [
+                                "Autonomy",
+                                "Quality-first approach"
+                            ],
+                            "education_level": null,
+                            "team": null,
+                            "benefits": null,
+                            "contact_email": null,
+                            "contact_phone": null,
+                            "coolness_score": 6.6,
+                            "flexibility_score": 6.6,
+                            "compensation_value_score": 6.2,
+                            "benefits_score": 5.7,
+                            "impact_autonomy_score": 7.2,
+                            "prestige_score": 5.6,
+                            "growth_score": 6.3,
+                            "meta_completeness": false,
+                            "meta_targetability": null
+                        }
+                    ],
+                    "total_count": 2500,
+                    "page": 1,
+                    "limit": 2,
+                    "total_pages": 1250
+                }
+            }
+        }
+    ]
+}

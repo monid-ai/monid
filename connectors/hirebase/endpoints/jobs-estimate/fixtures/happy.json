@@ -1,0 +1,28 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-11-19 against the live API: limit 0 returns {cost: n}, the total match count for a remote data-engineer search over 7 days. Free.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.hirebase.org/v2/jobs/estimate",
+                "body": {
+                    "job_titles": [
+                        "data engineer"
+                    ],
+                    "location_types": [
+                        "Remote"
+                    ],
+                    "days_ago": 7,
+                    "limit": 0
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "cost": 374
+                }
+            }
+        }
+    ]
+}

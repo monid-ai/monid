@@ -1,0 +1,161 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-11-18 against the live API (response trimmed by the recorder): one job by _id, 1 unit of the jobs allowance.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.hirebase.org/v2/jobs/6abfb8b9af3beb28eb871949"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "_id": "6abfb8b9af3beb28eb871949",
+                    "company_name": "Unison Consulting Pte Ltd",
+                    "job_title": "Data Engineer - Data Engineer Data Platform",
+                    "description": "<h2>Role Overview</h2><p>The role requires 4\u20136 years of experience in data engineering or software development. The candidate should have hands-on experience with Apache Spark / PySpark, proficiency in Python programming, and a solid understanding of distributed computing concepts.</p><h2>What You Will Do</h2><p>The Data Engineer will be responsible for data engineering, data modeling, and data manipulation. The candidate will work on debugging, performance tuning, and analytical skills.</p><h2>",
+                    "application_link": "https://jobs.workable.com/view/m4PPnksadG2GGj67XaWfNc/data-engineer--data-engineer-data-platform-in-hyderabad-at-unison-group",
+                    "job_type": "Full Time",
+                    "location_type": "In-Person",
+                    "date_posted": "2026-09-29",
+                    "first_ingested": "2026-10-02T13:59:19.847000",
+                    "updated_at": 1794301511327,
+                    "company_link": "unisongroup.com",
+                    "company_logo": "https://logos.hirebase.org/a77fff25-58e5-4f74-8a55-5c7df92aa97d/unison-group-sg-320x320-q95.jpg",
+                    "job_board": "workable",
+                    "job_board_link": "https://jobs.workable.com/company/deKpPhPMtQZga7XoPG1tSo/jobs-at-unison-group",
+                    "requirements_summary": "The candidate should have strong hands-on experience with Apache Spark / PySpark, proficiency in Python programming, and a solid understanding of distributed computing concepts",
+                    "visa_sponsored": false,
+                    "company_data": {
+                        "description_summary": "Unison Consulting Pte Ltd is a Singapore-based boutique technology firm founded in 2012 that delivers end-to-end risk management solutions to financial institutions. The company specializes in liquidity, market, credit, and regulatory risk, offering services such as ALM implementation, risk MIS systems, enterprise data warehousing, treasury solutions, and AI-driven analytics. Leveraging cutting-edge technology and a strong focus on total cost of ownership, Unison helps clients optimize risk appe",
+                        "linkedin_link": "https://www.linkedin.com/company/unison-group-sg",
+                        "size_range": {
+                            "min": 201,
+                            "max": 500
+                        },
+                        "industries": [
+                            "Tech, Software & IT Services"
+                        ],
+                        "subindustries": [
+                            "Software Development & Engineering",
+                            "IT Services"
+                        ],
+                        "services": [
+                            "Fermat ALM Implementation",
+                            "Risk Management Systems Integrators"
+                        ],
+                        "type": "Mid-Size",
+                        "is_recruiting_agency": false,
+                        "is_3rd_party_agency": false
+                    },
+                    "job_slug": "data-engineer-data-engineer-data-platform-5074e9b6",
+                    "company_slug": "unison-group-sg",
+                    "locations": [
+                        {
+                            "city": "Hyderabad",
+                            "region": "Telangana",
+                            "country": "India",
+                            "coordinates": {
+                                "type": "Point",
+                                "coordinates": [
+                                    78.4740613,
+                                    17.360589
+                                ]
+                            },
+                            "bbox": [
+                                17.2916377,
+                                17.5608321
+                            ],
+                            "address": "Hyderabad, Bahadurpura mandal, Hyderabad, Telangana, India"
+                        }
+                    ],
+                    "job_categories": [
+                        "Engineering Jobs",
+                        "Information Technology Jobs"
+                    ],
+                    "location_raw": "Hyderabad, Telangana, India",
+                    "expired": null,
+                    "salary_range": null,
+                    "offers_equity": false,
+                    "equity": null,
+                    "yoe_range": {
+                        "min": 4,
+                        "max": 6
+                    },
+                    "experience_level": "Mid-Level",
+                    "description_raw": "<p>Experience: 4\u20136 years of experience in data engineering or software development.<br> Technical Expertise:<br> \u2022 Strong hands-on experience with Apache Spark / PySpark.<br> \u2022 Proficiency in Python programming (data manipulation, error handling, packaging).<br> \u2022 Solid understanding of distributed computing concepts (RDDs, DataFrames, partitions, shuffles).<br> \u2022 Proficient in SQL and data modeling for both structured and semi-structured data.<br> \u2022 Understanding of version control (Git), CI/CD",
+                    "recruiter_agency": false,
+                    "signals": [],
+                    "technologies": [
+                        "Apache Spark",
+                        "PySpark"
+                    ],
+                    "technologies_tracked": [
+                        {
+                            "technology_id": "6adb014b4a893310d48bdf01",
+                            "technology_slug": "apache-spark",
+                            "surface": "Apache Spark",
+                            "start": 136,
+                            "end": 148,
+                            "in_title": false,
+                            "section": "body",
+                            "confidence": 0.9982,
+                            "self_mention": false
+                        },
+                        {
+                            "technology_id": "6adb014b4a893310d48c1d19",
+                            "technology_slug": "pyspark",
+                            "surface": "PySpark",
+                            "start": 151,
+                            "end": 158,
+                            "in_title": false,
+                            "section": "body",
+                            "confidence": 0.9982,
+                            "self_mention": false
+                        }
+                    ],
+                    "skills": [
+                        "data engineering",
+                        "software development"
+                    ],
+                    "education_level": null,
+                    "team": null,
+                    "benefits": null,
+                    "contact_email": null,
+                    "contact_phone": null,
+                    "coolness_score": 3.9,
+                    "flexibility_score": 3.5,
+                    "compensation_value_score": 4.2,
+                    "benefits_score": 2.5,
+                    "impact_autonomy_score": 4.3,
+                    "prestige_score": 4.5,
+                    "growth_score": 4,
+                    "meta_completeness": false,
+                    "meta_targetability": 0.8,
+                    "detected_technologies": [
+                        {
+                            "slug": "apache-spark",
+                            "name": "Apache Spark",
+                            "category": {
+                                "slug": "data.processing",
+                                "name": "Data Engineering > Distributed processing engines"
+                            },
+                            "required": false,
+                            "in_title": false
+                        },
+                        {
+                            "slug": "pyspark",
+                            "name": "PySpark",
+                            "category": {
+                                "slug": "data.processing",
+                                "name": "Data Engineering > Distributed processing engines"
+                            },
+                            "required": false,
+                            "in_title": false
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

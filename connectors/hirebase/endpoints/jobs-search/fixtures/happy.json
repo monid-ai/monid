@@ -1,0 +1,237 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-11-18 against the live API (response trimmed by the recorder): a remote data-engineer search with limit 2 returns 2 jobs, so 2 units of the jobs allowance.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.hirebase.org/v2/jobs/search",
+                "body": {
+                    "job_titles": [
+                        "data engineer"
+                    ],
+                    "location_types": [
+                        "Remote"
+                    ],
+                    "limit": 2
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jobs": [
+                        {
+                            "_id": "6afda96c977d06b34573b00d",
+                            "job_title": "Data Engineer",
+                            "description": "<h2>Role Overview</h2><p>The employer is seeking a skilled data engineer to build and scale modern cloud data solutions.</p><h2>What You Will Do</h2><p>Design and develop scalable cloud-based data engineering architectures, implement advanced generative AI models, and collaborate with cross-functional teams.</p><h2>Why It Might Be a Fit</h2><p>The successful candidate will need strong expertise in cloud data engineering and artificial intelligence technologies, as well as proficiency with genera",
+                            "application_link": "https://www.linkedin.com/jobs/view/4491806908",
+                            "location_raw": "United States",
+                            "location_type": "Remote",
+                            "job_type": "Full Time",
+                            "date_posted": "2026-11-18",
+                            "job_board": "linkedin",
+                            "job_board_link": "https://www.linkedin.com/jobs/search?f_C=28483663",
+                            "platform_job_id": "4491806908",
+                            "company_name": "Haystack",
+                            "company_slug": "wearehaystack",
+                            "company_link": "haystackapp.io",
+                            "company_logo": "https://logos.hirebase.org/7be34627-6000-4d10-9c95-f27281275313/wearehaystack-320x320-q95.jpg",
+                            "language": "en",
+                            "requirements_summary": "The candidate should have 10-15 years of experience in data engineering, strong expertise in cloud data engineering and AI technologies, and proficiency with generative AI frameworks",
+                            "benefits": [
+                                "Competitive salary",
+                                "Flexible remote working arrangements"
+                            ],
+                            "job_categories": [
+                                "Engineering Jobs",
+                                "Information Technology Jobs"
+                            ],
+                            "experience_level": "Senior",
+                            "yoe_range": {
+                                "min": 10,
+                                "max": 15
+                            },
+                            "visa_sponsored": false,
+                            "technologies": [
+                                "cloud data engineering",
+                                "artificial intelligence"
+                            ],
+                            "skills": [
+                                "data engineering",
+                                "machine learning"
+                            ],
+                            "recruiter_agency": true,
+                            "offers_equity": false,
+                            "equity": null,
+                            "job_title_raw": "Data Engineer",
+                            "company_data": {
+                                "description_summary": "Haystack is a recruitment platform that uses AI and expert vetting to connect employers with tech candidates. It works with over 400,000 candidates in fields including software engineering, data, design, DevOps, cloud, tech management, testing, product and delivery, and architecture. Employers such as Atom Bank, DuckDuckGo, Goodlord, American Express, Dunelm, and AWS use Haystack to find tech talent. The company was founded in 2021 and is headquartered in Newcastle upon Tyne, England.",
+                                "linkedin_link": "https://www.linkedin.com/company/wearehaystack",
+                                "size_range": {
+                                    "min": 51,
+                                    "max": 200
+                                },
+                                "industries": [
+                                    "Tech, Software & IT Services"
+                                ],
+                                "subindustries": [
+                                    "Software Development & Engineering",
+                                    "AI & ML"
+                                ],
+                                "type": "Startup",
+                                "is_recruiting_agency": true,
+                                "is_3rd_party_agency": false,
+                                "funding_info": {
+                                    "type": "Seed",
+                                    "total_funding": null,
+                                    "last_funding_date": "2022-08-17T00:00:00"
+                                }
+                            },
+                            "md5_hash": "834b35de9a8e4735aa521ebe5fc8e1b6",
+                            "job_slug": "data-engineer-ecf08939",
+                            "flexibility_score": 5.6,
+                            "compensation_value_score": 6.9,
+                            "benefits_score": 5.6,
+                            "impact_autonomy_score": 7.8,
+                            "prestige_score": 6.6,
+                            "growth_score": 6.8,
+                            "coolness_score": 7.2,
+                            "salary_range": null,
+                            "education_level": null,
+                            "meta_completeness": false,
+                            "first_ingested": "2026-11-18T13:34:36.812000",
+                            "signals": [],
+                            "locations": [
+                                {
+                                    "city": null,
+                                    "region": null,
+                                    "country": "United States",
+                                    "coordinates": {
+                                        "type": "Point",
+                                        "coordinates": [
+                                            -100.445882,
+                                            39.7837304
+                                        ]
+                                    },
+                                    "bbox": [
+                                        -14.7608358,
+                                        71.5889534
+                                    ],
+                                    "address": "United States"
+                                }
+                            ],
+                            "detected_technologies": null
+                        },
+                        {
+                            "_id": "6afdaedeb0f0016f3631bd08",
+                            "job_title": "Data Engineer",
+                            "description": "<h2>Role Overview</h2><p>We are looking for a Data Engineer to work with one of our partners, with solid experience in data engineering, a collaborative profile, analytical thinking, and the ability to contribute technically to the evolution of architectures, processes, and business solutions.</p><h2>What You Will Do</h2><p>Design, build, and maintain efficient data pipelines, implement and optimize ETL processes, collaborate with multi-functional teams, monitor and resolve performance and data ",
+                            "application_link": "https://softdesign.gupy.io/jobs/12908225",
+                            "location_raw": "Brasil",
+                            "location_type": "Remote",
+                            "job_type": "Full Time",
+                            "date_posted": "2026-11-18",
+                            "job_board": "gupy",
+                            "job_board_link": "https://softdesign.gupy.io",
+                            "platform_job_id": "12908225",
+                            "company_name": "Soft Design",
+                            "company_slug": "softdesignbrasil",
+                            "company_link": "softdesign.com.br",
+                            "company_logo": "https://logos.hirebase.org/b71fddf3-53a9-459d-91e3-05a9b181277a/softdesignbrasil-320x320-q95.jpg",
+                            "language": "pt",
+                            "requirements_summary": "Proven experience in data engineering, Power BI mastery, and mastery of programming languages and data manipulation tools",
+                            "benefits": [
+                                "Flexible VA/VR",
+                                "Unimed health plan"
+                            ],
+                            "job_categories": [
+                                "Information Technology Jobs",
+                                "Data Analyst Jobs"
+                            ],
+                            "experience_level": "Junior / Associate",
+                            "visa_sponsored": false,
+                            "technologies": [
+                                "Databricks",
+                                "PowerBI"
+                            ],
+                            "skills": [
+                                "data engineering",
+                                "data visualization"
+                            ],
+                            "recruiter_agency": false,
+                            "offers_equity": false,
+                            "equity": null,
+                            "job_title_raw": "Data Engineer",
+                            "company_data": {
+                                "description_summary": "Soft Design is a Brazil\u2011based technology firm with over 28 years of experience delivering product design and software development solutions to startups and established enterprises worldwide. Leveraging a mature, end\u2011to\u2011end agile process, the company transforms ideas into market\u2011ready products through rapid ideation (4\u2011week release planning), fast\u2011track experimentation (1\u20113\u202fmonths from hypothesis to insight), and two\u2011week sprint cycles for production\u2011ready software.\n\nIts multidisciplinary, high\u2011s",
+                                "linkedin_link": "https://www.linkedin.com/company/softdesignbrasil",
+                                "size_range": {
+                                    "min": 201,
+                                    "max": 500
+                                },
+                                "industries": [
+                                    "Design",
+                                    "Tech, Software & IT Services"
+                                ],
+                                "subindustries": [
+                                    "UX/UI Design",
+                                    "Service Design"
+                                ],
+                                "services": [
+                                    "Concept",
+                                    "Software Development"
+                                ],
+                                "type": "Mid-Size",
+                                "is_recruiting_agency": false,
+                                "is_3rd_party_agency": false
+                            },
+                            "md5_hash": "c9bc927b9f3754e528bd96fc9ed32af0",
+                            "job_slug": "data-engineer-d1958684",
+                            "yoe_range": {
+                                "min": 1,
+                                "max": null
+                            },
+                            "flexibility_score": 5.1,
+                            "compensation_value_score": 5.9,
+                            "benefits_score": 4.9,
+                            "impact_autonomy_score": 6.9,
+                            "prestige_score": 5.2,
+                            "growth_score": 6,
+                            "coolness_score": 6,
+                            "salary_range": null,
+                            "education_level": null,
+                            "meta_completeness": false,
+                            "first_ingested": "2026-11-18T13:54:41.437000",
+                            "signals": [],
+                            "locations": [
+                                {
+                                    "city": null,
+                                    "region": null,
+                                    "country": "Brazil",
+                                    "coordinates": {
+                                        "type": "Point",
+                                        "coordinates": [
+                                            -53.2,
+                                            -10.3333333
+                                        ]
+                                    },
+                                    "bbox": [
+                                        -33.8694284,
+                                        5.2695808
+                                    ],
+                                    "address": "Brazil"
+                                }
+                            ],
+                            "detected_technologies": null
+                        }
+                    ],
+                    "total_count": 3118,
+                    "company_count": 1000,
+                    "page": 1,
+                    "limit": 2,
+                    "total_pages": 1559
+                }
+            }
+        }
+    ]
+}
