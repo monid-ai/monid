@@ -1,0 +1,46 @@
+{
+    "name": "synthetic-se-company",
+    "description": "SYNTHETIC: the published example of GET https://api.glyphcall.com/se/company: request = the example input its live 402 names, response = the example answer its Bazaar extension publishes (18 Nov 2026). Replace via `deno task record` when GLYPHCALL_CREDENTIALS_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?orgnr=556703-7485"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "orgnr": "556703-7485",
+                    "vatNumber": "SE556703748501",
+                    "name": "Spotify AB",
+                    "otherNames": [],
+                    "legalForm": {
+                        "code": "AB",
+                        "name": "Aktiebolag (limited company)"
+                    },
+                    "status": "registered",
+                    "registered": "2006-05-10",
+                    "deregistered": null,
+                    "proceedings": [],
+                    "taxActive": true,
+                    "industries": [
+                        {
+                            "sni": "60.100"
+                        }
+                    ],
+                    "businessDescription": "Bolaget har till föremål för sin verksamhet att bedriva Internetrelaterade tjänster inom digitala medier som musik, spel och TV, samt att, direkt eller indirekt, äga och förvalta fast och lös egendom, äga aktier och andelar i dotterbolag och andra bolag samt tillhandahålla administrativa tjänster för dessa bolag och därmed förenlig verksamhet.",
+                    "address": {
+                        "street": "Regeringsgatan 19",
+                        "postcode": "11153",
+                        "city": "STOCKHOLM",
+                        "country": "SE"
+                    },
+                    "vat": null,
+                    "dataAsOf": "2026-11-09",
+                    "source": "Bolagsverket and SCB open data (värdefulla datamängder), weekly bulk files",
+                    "note": "Register facts only. This is not a credit report, credit score or rating."
+                }
+            }
+        }
+    ]
+}

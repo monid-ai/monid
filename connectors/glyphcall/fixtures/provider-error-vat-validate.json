@@ -1,0 +1,20 @@
+{
+    "name": "provider-error-vat-validate",
+    "description": "Shape of the real 18 Nov 2026 answer of api.glyphcall.com/vat/validate to an unknown key (Authorization: Bearer adt_doesnotexist): 402 with error \"Payment required\" (trimmed to the fields the connector reads).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?vat=SE556703748501"
+            },
+            "res": {
+                "status": 402,
+                "body": {
+                    "x402Version": 2,
+                    "error": "Payment required",
+                    "hint": "Send a valid key as Authorization: Bearer adt_..."
+                }
+            }
+        }
+    ]
+}

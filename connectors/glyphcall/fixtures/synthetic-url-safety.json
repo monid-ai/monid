@@ -1,0 +1,59 @@
+{
+    "name": "synthetic-url-safety",
+    "description": "SYNTHETIC: the published example of GET https://api.glyphcall.com/pack/url-safety: request = the example input its live 402 names, response = the example answer its Bazaar extension publishes (18 Nov 2026). Replace via `deno task record` when GLYPHCALL_CREDENTIALS_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?url=http%3A%2F%2Fgithub.com"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "pack": "url-safety",
+                    "url": "http://github.com/",
+                    "finalUrl": "https://github.com/",
+                    "risk": "low",
+                    "signals": [],
+                    "blocklist": {
+                        "listed": false,
+                        "hosts": [
+                            {
+                                "host": "github.com",
+                                "listed": false,
+                                "matchedOn": null,
+                                "sources": [],
+                                "lookalikeOf": null
+                            }
+                        ],
+                        "listDate": "2026-11-18"
+                    },
+                    "redirects": {
+                        "count": 1,
+                        "hosts": [
+                            "github.com"
+                        ],
+                        "hops": [
+                            {
+                                "url": "http://github.com/",
+                                "status": 301
+                            }
+                        ]
+                    },
+                    "domain": {
+                        "domain": "github.com",
+                        "trust": "high",
+                        "ageDays": 6600,
+                        "registrar": "MarkMonitor Inc."
+                    },
+                    "security": {
+                        "https": true,
+                        "score": 80,
+                        "grade": "B"
+                    },
+                    "failed": {}
+                }
+            }
+        }
+    ]
+}

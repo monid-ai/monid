@@ -1,0 +1,36 @@
+import { defineEndpoint, UsageModelKind } from "@shared/core";
+import { zPhishingCheckInput } from "./schema/inputs.ts";
+
+/** GET /phishing/check - $0.002 per successful call; errors are free. */
+export default defineEndpoint({
+    meta: {
+        displayName: "Glyphcall Phishing Check",
+        summary:
+            "Is this link or domain on a phishing blocklist? Checked without opening it.",
+        description:
+            "Looks the link's host and every parent domain up in two public " +
+            "phishing blocklists - Phishing.Database (about 390,000 active " +
+            "phishing hosts) and MetaMask's eth-phishing-detect (about 120,000 " +
+            "crypto scam domains) - and flags one-letter look-alikes of brands " +
+            "MetaMask watches. Returns verdict block, warn or not_listed with " +
+            "the matching list, the matched domain and the list date. The link " +
+            "is never requested, so it is safe on a live phishing URL and fast " +
+            "enough for long lists. Will not: judge a page that is on neither " +
+            "list; use glyphcall#pack/url-safety to also follow redirects and " +
+            "read the domain's age.",
+        docsUrl: "https://glyphcall.com/tools/phishing-check",
+        categories: ["web-security"],
+        notes: [
+            "$0.002 per successful call. Refused inputs and unanswered sources are free.",
+        ],
+    },
+    request: { method: "GET", path: "/phishing/check" },
+    input: { schema: { queryParams: zPhishingCheckInput.required({ url: true }) } },
+    usage: {
+        model: {
+            kind: UsageModelKind.PER_CALL,
+            label: "check",
+            consumes: { credit: "default", amount: 0.002 },
+        },
+    },
+});

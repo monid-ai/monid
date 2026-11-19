@@ -1,0 +1,25 @@
+{
+    "name": "synthetic-vat-validate",
+    "description": "SYNTHETIC: the published example of GET https://api.glyphcall.com/vat/validate: request = the example input its live 402 names, response = the example answer its Bazaar extension publishes (18 Nov 2026). Replace via `deno task record` when GLYPHCALL_CREDENTIALS_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?vat=SE556703748501"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "vat": "SE556703748501",
+                    "country": "SE",
+                    "number": "556703748501",
+                    "valid": true,
+                    "name": "Spotify AB",
+                    "address": "REGERINGSGATAN 19, 111 53 STOCKHOLM",
+                    "checkedAt": "2026-11-06T14:36:47.903Z",
+                    "source": "EU VIES (European Commission)"
+                }
+            }
+        }
+    ]
+}
