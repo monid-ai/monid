@@ -659,7 +659,11 @@
         "suzanne#v1/models/download",
         "suzanne#v1/uploads",
         "tinyfish#fetch",
-        "tinyfish#search"
+        "tinyfish#search",
+        "vidcrawl#v1/agent",
+        "vidcrawl#v1/frames",
+        "vidcrawl#v1/scrape",
+        "vidcrawl#v1/search"
     ],
     "resources": [
         "saperly/phone-number"

@@ -1,0 +1,57 @@
+{
+    "name": "synthetic-agent-medium-ok",
+    "description": "SYNTHETIC happy chain for vidcrawl#v1/agent at effort 'medium' (usage.credits_used = 5 -> consolidate settles $0.045).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "prompt": "Extract structured pricing tiers.",
+                    "urls": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+                    "effort": "medium",
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "starter_usd": { "type": "number" }
+                        }
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "ok": true,
+                    "summary": "Extracted Starter tier at $9.",
+                    "visual_hook": "Pricing table on screen.",
+                    "on_screen_ocr": [],
+                    "scenes": [],
+                    "data": {
+                        "starter_usd": 9
+                    },
+                    "citations": [
+                        {
+                            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                            "timestamp": "01:15",
+                            "claim": "Starter pack is $9."
+                        }
+                    ],
+                    "usage": {
+                        "effort": "medium",
+                        "credits_used": 5,
+                        "latency_ms": 5100,
+                        "scrape_latency_ms": 810,
+                        "llm_latency_ms": 4290,
+                        "network_bytes": 195000,
+                        "model": "gemini-2.5-flash",
+                        "model_tokens": {
+                            "input": 4100,
+                            "output": 420
+                        },
+                        "estimated_cost_usd": 0.004
+                    }
+                }
+            }
+        }
+    ]
+}

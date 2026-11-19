@@ -1,0 +1,54 @@
+{
+    "name": "synthetic-search-ok",
+    "description": "SYNTHETIC happy chain for vidcrawl#v1/search mirroring SearchResponseSchema (results[], metrics.credits_used = 1).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "query": "tanstack start tutorial",
+                    "platform": "youtube",
+                    "limit": 2,
+                    "scrape": false,
+                    "source": "live"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "ok": true,
+                    "query": "tanstack start tutorial",
+                    "platform": "youtube",
+                    "results": [
+                        {
+                            "video_id": "abc123def45",
+                            "url": "https://www.youtube.com/watch?v=abc123def45",
+                            "title": "TanStack Start Full Walkthrough",
+                            "author": "Dev Channel",
+                            "duration_sec": 920,
+                            "duration": "15:20",
+                            "views": 42000,
+                            "thumbnail_url": "https://i.ytimg.com/vi/abc123def45/hqdefault.jpg"
+                        },
+                        {
+                            "video_id": "xyz987uvw65",
+                            "url": "https://www.youtube.com/watch?v=xyz987uvw65",
+                            "title": "Deploying SSR Apps on Bun",
+                            "author": "Runtime Lab",
+                            "duration_sec": 605,
+                            "duration": "10:05",
+                            "views": 18500,
+                            "thumbnail_url": "https://i.ytimg.com/vi/xyz987uvw65/hqdefault.jpg"
+                        }
+                    ],
+                    "metrics": {
+                        "latency_ms": 690,
+                        "network_bytes": 14320,
+                        "credits_used": 1
+                    }
+                }
+            }
+        }
+    ]
+}

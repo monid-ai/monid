@@ -1,0 +1,75 @@
+{
+    "name": "synthetic-scrape-ok",
+    "description": "SYNTHETIC happy chain for vidcrawl#v1/scrape mirroring ScrapeResponseSchema (metadata, transcript, 3x3 storyboard grid, markdown, metrics.credits_used = 1).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                    "formats": ["markdown", "segments", "storyboard"],
+                    "lang": "en"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "ok": true,
+                    "platform": "youtube",
+                    "video_id": "dQw4w9WgXcQ",
+                    "canonical_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                    "metadata": {
+                        "title": "Sample Video Title",
+                        "author": "Sample Channel",
+                        "duration_sec": 212,
+                        "views": 1000000,
+                        "published_at": "2026-01-15",
+                        "description": "Walkthrough with links: https://vidcrawl.com",
+                        "description_links": ["https://vidcrawl.com"],
+                        "thumbnail_url": "https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
+                        "chapters": [
+                            { "start_sec": 0, "title": "Intro" },
+                            { "start_sec": 60, "title": "Demo" }
+                        ]
+                    },
+                    "transcript": {
+                        "source": "youtube_json3",
+                        "language": "en",
+                        "full_text": "Welcome to the walkthrough.",
+                        "segments": [
+                            {
+                                "start_sec": 0,
+                                "end_sec": 3.5,
+                                "text": "Welcome to the walkthrough."
+                            }
+                        ]
+                    },
+                    "storyboard": {
+                        "strategy": "youtube_storyboard_grid",
+                        "interval_sec": 2,
+                        "total_tiles": 9,
+                        "sheets": [
+                            {
+                                "index": 0,
+                                "cols": 3,
+                                "rows": 3,
+                                "start_sec": 0,
+                                "end_sec": 18,
+                                "tile_count": 9,
+                                "image_data_url": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQ=="
+                            }
+                        ]
+                    },
+                    "markdown": "# Sample Video Title\n\n[00:00] Welcome to the walkthrough.",
+                    "metrics": {
+                        "latency_ms": 840,
+                        "network_bytes": 18240,
+                        "credits_used": 1,
+                        "estimated_cost_usd": 0.0005
+                    }
+                }
+            }
+        }
+    ]
+}
