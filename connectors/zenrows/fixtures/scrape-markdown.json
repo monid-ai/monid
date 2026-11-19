@@ -1,0 +1,19 @@
+{
+    "name": "scrape-markdown",
+    "description": "zenrows#scrape, 200 with the page as Markdown. Captured from api.zenrows.com. THE billable metered chain, and the one every billing test replays: its x-request-credits header is what the x-request-credits entry in RECORDED_RES_HEADERS exists for, so this fixture must stay.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?url=https%3A%2F%2Fexample.com%2F&response_type=markdown"
+            },
+            "res": {
+                "status": 200,
+                "headers": {
+                    "x-request-credits": "1"
+                },
+                "body": "This domain is for use in documentation examples without needing permission. This is not a service; avoid relying on it for testing and monitoring purposes."
+            }
+        }
+    ]
+}

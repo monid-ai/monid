@@ -1,0 +1,24 @@
+{
+    "name": "scrape-unauthorized",
+    "description": "zenrows#scrape with a key the API rejects: 401 AUTH002, RFC 7807 problem+json, and not charged. Captured from api.zenrows.com.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?url=https%3A%2F%2Fexample.com%2F&response_type=markdown"
+            },
+            "res": {
+                "status": 401,
+                "headers": {},
+                "body": {
+                    "code": "AUTH002",
+                    "detail": "Invalid API key.",
+                    "instance": "/v1",
+                    "status": 401,
+                    "title": "Invalid apikey provided (AUTH002)",
+                    "type": "https://docs.zenrows.com/api-error-codes#AUTH002"
+                }
+            }
+        }
+    ]
+}
