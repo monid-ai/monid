@@ -1,0 +1,22 @@
+{
+    "name": "not-requested",
+    "description": "recorded live 2026-11-17 against the Podwise Open API v1 (podwise#episodes/status, scenario 'not-requested'); response bodies trimmed and scrubbed by the recorder, headers never captured",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://app.podwise.ai/api/open/v1/episodes/9354876/status"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "result": {
+                        "status": "not_requested",
+                        "progress": null
+                    }
+                }
+            }
+        }
+    ]
+}

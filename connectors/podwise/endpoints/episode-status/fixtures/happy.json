@@ -1,0 +1,22 @@
+{
+    "name": "happy",
+    "description": "recorded live 2026-11-17 against the Podwise Open API v1 (podwise#episodes/status, scenario 'happy'); response bodies trimmed and scrubbed by the recorder, headers never captured",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://app.podwise.ai/api/open/v1/episodes/9480205/status"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "result": {
+                        "status": "done",
+                        "progress": 100
+                    }
+                }
+            }
+        }
+    ]
+}

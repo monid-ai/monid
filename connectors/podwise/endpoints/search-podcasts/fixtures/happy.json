@@ -1,0 +1,43 @@
+{
+    "name": "happy",
+    "description": "recorded live 2026-11-17 against the Podwise Open API v1 (podwise#podcasts/search, scenario 'happy'); response bodies trimmed and scrubbed by the recorder, headers never captured",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://app.podwise.ai/api/open/v1/podcasts/search?q=Dwarkesh+Podcast&hitsPerPage=3&page=0"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "result": [
+                        {
+                            "podcastId": "eb34e2efe550f306b8ae56d22d83afd226123d493aeb883ffe4b781e624bf4ba",
+                            "seq": 14583,
+                            "name": "Dwarkesh Podcast",
+                            "owner": "Dwarkesh Patel",
+                            "cover": "https://substackcdn.com/feed/podcast/69345/ea794fae1ba918a3ca2c0c2867bf5457.jpg",
+                            "description": "Deeply researched interviews <br/><br/><a href=\"https://www.dwarkesh.com?utm_medium=podcast\">www.dwarkesh.com</a>",
+                            "genre": "Philosophy",
+                            "lastPublishTime": 1794851188
+                        },
+                        {
+                            "podcastId": "778e68b839169c36b5bce40302b4c91265d02338034cdd5c686178eb825ce180",
+                            "seq": 1396,
+                            "name": "Dwarkesh Podcast",
+                            "owner": "",
+                            "cover": "https://apple.dwarkesh-podcast.workers.dev/art/v1/show.jpg",
+                            "description": "Deeply researched interviews <br/><br/><a href=\"https://www.dwarkesh.com?utm_medium=podcast\">www.dwarkesh.com</a>",
+                            "genre": "Philosophy",
+                            "lastPublishTime": 1794851188
+                        }
+                    ],
+                    "estimatedTotalHits": 5,
+                    "page": 0,
+                    "hitsPerPage": 3
+                }
+            }
+        }
+    ]
+}
