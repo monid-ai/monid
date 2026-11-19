@@ -1,0 +1,29 @@
+{
+    "name": "unauthorized",
+    "description": "Recorded 2026-11-19 against the live API with an invalid key: 401 {detail} is data, zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.hirebase.org/v2/jobs/neural-search",
+                "body": {
+                    "vector": {
+                        "query": "backend engineer at an early-stage climate startup"
+                    },
+                    "lexical": {
+                        "location_types": [
+                            "Remote"
+                        ]
+                    },
+                    "limit": 2
+                }
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "detail": "Invalid API key"
+                }
+            }
+        }
+    ]
+}

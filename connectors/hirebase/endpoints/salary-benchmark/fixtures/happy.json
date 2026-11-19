@@ -1,0 +1,516 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-11-18 against the live API, then hand-minimized: the POST queues a task, one poll still processing, one poll finished. The report is cut to market, confidence, proposed and two sample listings; the account's user_id and worker_id are replaced with placeholders.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.hirebase.org/v2/jobs/salary-benchmark",
+                "body": {
+                    "job_title": "Data Engineer",
+                    "yoe_range": {
+                        "min": 3,
+                        "max": 6
+                    },
+                    "geo_locations": [
+                        {
+                            "country": "United States"
+                        }
+                    ],
+                    "salary_range": {
+                        "min": 130000,
+                        "max": 160000,
+                        "currency": "USD",
+                        "period": "yearly"
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "15f9fe4a-e168-482a-a52d-5915b3ab7918",
+                    "type": "salary_benchmark",
+                    "state": "queued",
+                    "progress": 0,
+                    "created_at": "2026-11-18T23:43:48.680585",
+                    "updated_at": "2026-11-18T23:43:48.680592",
+                    "started_at": null,
+                    "completed_at": null,
+                    "user_id": "000000000000000000000000",
+                    "error": null,
+                    "error_code": null,
+                    "retryable": null,
+                    "worker_id": "worker",
+                    "priority": 0,
+                    "notify": false,
+                    "input": {
+                        "job_title": "Data Engineer",
+                        "yoe_range": {
+                            "min": 3,
+                            "max": 6
+                        },
+                        "salary_range": {
+                            "min": 130000,
+                            "max": 160000,
+                            "currency": "USD",
+                            "period": "yearly"
+                        },
+                        "geo_locations": [
+                            {
+                                "country": "United States"
+                            }
+                        ],
+                        "days_ago": 90,
+                        "include_expired": true,
+                        "notify": false,
+                        "job_titles": [
+                            "Data Engineer"
+                        ]
+                    },
+                    "result": null
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.hirebase.org/v2/tasks/15f9fe4a-e168-482a-a52d-5915b3ab7918"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "15f9fe4a-e168-482a-a52d-5915b3ab7918",
+                    "type": "salary_benchmark",
+                    "state": "processing",
+                    "progress": 0.05,
+                    "created_at": "2026-11-18T23:43:48.680000",
+                    "updated_at": "2026-11-18T23:43:49.962000",
+                    "started_at": "2026-11-18T23:43:49.706000",
+                    "completed_at": null,
+                    "user_id": "000000000000000000000000",
+                    "error": null,
+                    "error_code": null,
+                    "retryable": null,
+                    "worker_id": "worker",
+                    "priority": 0,
+                    "notify": false,
+                    "input": {
+                        "job_title": "Data Engineer",
+                        "yoe_range": {
+                            "min": 3,
+                            "max": 6
+                        },
+                        "salary_range": {
+                            "min": 130000,
+                            "max": 160000,
+                            "currency": "USD",
+                            "period": "yearly"
+                        },
+                        "geo_locations": [
+                            {
+                                "country": "United States"
+                            }
+                        ],
+                        "days_ago": 90,
+                        "include_expired": true,
+                        "notify": false,
+                        "job_titles": [
+                            "Data Engineer"
+                        ]
+                    },
+                    "result": null
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.hirebase.org/v2/tasks/15f9fe4a-e168-482a-a52d-5915b3ab7918"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "15f9fe4a-e168-482a-a52d-5915b3ab7918",
+                    "type": "salary_benchmark",
+                    "state": "finished",
+                    "progress": 1,
+                    "created_at": "2026-11-18T23:43:48.680000",
+                    "updated_at": "2026-11-18T23:44:48.269000",
+                    "started_at": "2026-11-18T23:43:49.706000",
+                    "completed_at": "2026-11-18T23:44:46.186000",
+                    "user_id": "000000000000000000000000",
+                    "error": null,
+                    "error_code": null,
+                    "retryable": null,
+                    "worker_id": "worker",
+                    "priority": 0,
+                    "notify": false,
+                    "input": {
+                        "job_title": "Data Engineer",
+                        "yoe_range": {
+                            "min": 3,
+                            "max": 6
+                        },
+                        "salary_range": {
+                            "min": 130000,
+                            "max": 160000,
+                            "currency": "USD",
+                            "period": "yearly"
+                        },
+                        "geo_locations": [
+                            {
+                                "country": "United States"
+                            }
+                        ],
+                        "days_ago": 90,
+                        "include_expired": true,
+                        "notify": false,
+                        "job_titles": [
+                            "Data Engineer"
+                        ]
+                    },
+                    "result": {
+                        "version": 2,
+                        "generated_at": "2026-11-18T23:44:45.908775+00:00",
+                        "params": {
+                            "title": "Data Engineer",
+                            "job_titles": [
+                                "Data Engineer",
+                                "Senior Data Engineer"
+                            ],
+                            "public_url": null,
+                            "description": null,
+                            "requested_yoe": {
+                                "min": 3,
+                                "max": 6
+                            },
+                            "applied_yoe": {
+                                "min": 3,
+                                "max": 6
+                            },
+                            "requested_geo": [
+                                {
+                                    "country": "United States"
+                                }
+                            ],
+                            "applied_geo": [
+                                {
+                                    "country": "United States"
+                                }
+                            ],
+                            "location_types": null,
+                            "industry": null,
+                            "sub_industry": null,
+                            "days_ago": 90,
+                            "include_expired": true,
+                            "salary_range": {
+                                "min": 130000,
+                                "max": 160000,
+                                "currency": "USD",
+                                "period": "yearly"
+                            }
+                        },
+                        "confidence": {
+                            "grade": "high",
+                            "label": "High \u2014 defensible for a posted-range decision",
+                            "salary_n": 722,
+                            "sample_size": 800,
+                            "reasons": [],
+                            "widen_axes": []
+                        },
+                        "market": {
+                            "total_count": 800,
+                            "sample_size": 722,
+                            "pct_disclosing_salary": 90.2,
+                            "pct_remote": 17.2,
+                            "top_company": "Amazon",
+                            "top_technology": null,
+                            "dominant_experience_level": "Entry-Level",
+                            "new_this_week": null,
+                            "salary": {
+                                "count": 722,
+                                "min": 51001.6,
+                                "p5": 95504.52,
+                                "p25": 122344.5,
+                                "p50": 147353,
+                                "p75": 172687.5,
+                                "p90": 202000,
+                                "p95": 218990.25,
+                                "max": 565760,
+                                "fitted_normal": {
+                                    "mu": 147768.98,
+                                    "sigma": 35945.22
+                                },
+                                "currency": "USD"
+                            },
+                            "posted_range": {
+                                "min": {
+                                    "count": 719,
+                                    "p25": 97926,
+                                    "p50": 120000,
+                                    "p75": 143700
+                                },
+                                "max": {
+                                    "count": 719,
+                                    "p25": 143750,
+                                    "p50": 175000,
+                                    "p75": 206893
+                                }
+                            },
+                            "live_count": 363,
+                            "expired_count": 359,
+                            "salary_by_source": [
+                                {
+                                    "key": "live",
+                                    "count": 363,
+                                    "min": 51001.6,
+                                    "p5": 97500,
+                                    "p25": 123084,
+                                    "p50": 150000,
+                                    "p75": 177125,
+                                    "p90": 204790,
+                                    "p95": 216300,
+                                    "max": 313000
+                                },
+                                {
+                                    "key": "expired",
+                                    "count": 359,
+                                    "min": 52000,
+                                    "p5": 95000,
+                                    "p25": 121070.8,
+                                    "p50": 143600,
+                                    "p75": 167625,
+                                    "p90": 199640,
+                                    "p95": 221640,
+                                    "max": 565760
+                                }
+                            ],
+                            "salary_by_month": [
+                                {
+                                    "key": "2024-06",
+                                    "count": 1,
+                                    "min": 93000,
+                                    "p5": 93000,
+                                    "p25": 93000,
+                                    "p50": 93000,
+                                    "p75": 93000,
+                                    "p90": 93000,
+                                    "p95": 93000,
+                                    "max": 93000
+                                },
+                                {
+                                    "key": "2024-08",
+                                    "count": 2,
+                                    "min": 135000,
+                                    "p5": 137750,
+                                    "p25": 148750,
+                                    "p50": 162500,
+                                    "p75": 176250,
+                                    "p90": 184500,
+                                    "p95": 187250,
+                                    "max": 190000
+                                }
+                            ],
+                            "pay_basis_split": [
+                                {
+                                    "key": "year",
+                                    "count": 703
+                                },
+                                {
+                                    "key": "hour",
+                                    "count": 17
+                                }
+                            ],
+                            "salary_by_level": [
+                                {
+                                    "key": "Entry-Level",
+                                    "count": 1,
+                                    "min": 117650,
+                                    "p5": 117650,
+                                    "p25": 117650,
+                                    "p50": 117650,
+                                    "p75": 117650,
+                                    "p90": 117650,
+                                    "p95": 117650,
+                                    "max": 117650
+                                },
+                                {
+                                    "key": "Junior / Associate",
+                                    "count": 84,
+                                    "min": 72750,
+                                    "p5": 85732.5,
+                                    "p25": 107373.75,
+                                    "p50": 132175,
+                                    "p75": 160703,
+                                    "p90": 170965,
+                                    "p95": 191750,
+                                    "max": 227650
+                                }
+                            ],
+                            "salary_by_location_type": [
+                                {
+                                    "key": "In-Person",
+                                    "count": 375,
+                                    "min": 51001.6,
+                                    "p5": 94850,
+                                    "p25": 125000,
+                                    "p50": 148700,
+                                    "p75": 169050,
+                                    "p90": 195400,
+                                    "p95": 213450,
+                                    "max": 565760
+                                },
+                                {
+                                    "key": "Hybrid",
+                                    "count": 223,
+                                    "min": 70000,
+                                    "p5": 98425,
+                                    "p25": 122084,
+                                    "p50": 147456,
+                                    "p75": 187550,
+                                    "p90": 214780,
+                                    "p95": 229458.28,
+                                    "max": 310000
+                                }
+                            ],
+                            "company_size_split": [],
+                            "industry_split": [],
+                            "top_companies": [
+                                {
+                                    "key": "Amazon",
+                                    "count": 65
+                                },
+                                {
+                                    "key": "Booz Allen Hamilton",
+                                    "count": 15
+                                }
+                            ],
+                            "company_count": 434,
+                            "top_locations": [
+                                {
+                                    "key": "Remote",
+                                    "count": 80
+                                },
+                                {
+                                    "key": "Virginia",
+                                    "count": 55
+                                }
+                            ],
+                            "top_technologies": [],
+                            "widened": false,
+                            "cuts": [
+                                {
+                                    "cut": "area",
+                                    "source": "live",
+                                    "label": "United States, all work modes",
+                                    "fetched": 400,
+                                    "unique": 400,
+                                    "pages": 4,
+                                    "searchmeta_count": 2989
+                                },
+                                {
+                                    "cut": "area",
+                                    "source": "expired",
+                                    "label": "United States, all work modes",
+                                    "fetched": 400,
+                                    "unique": 400,
+                                    "pages": 4,
+                                    "searchmeta_count": 12987
+                                }
+                            ]
+                        },
+                        "listings": [
+                            {
+                                "id": "6afcfae4b11db3d8815777ab",
+                                "cut": "area",
+                                "expired": false,
+                                "date_expired": null,
+                                "job_title": "Data Center Engineer",
+                                "company_name": "Leaseweb",
+                                "company_slug": "leaseweb",
+                                "company_logo": "https://logos.hirebase.org/6d58ec06-34c5-4173-8dd9-7d62189b7958/leaseweb-320x320-q95.jpg",
+                                "location": "Manassas, VA, 20109",
+                                "city": "Manassas",
+                                "region": "Virginia",
+                                "country": "United States",
+                                "locations": [
+                                    {
+                                        "city": "Manassas",
+                                        "region": "Virginia",
+                                        "country": "United States"
+                                    }
+                                ],
+                                "location_type": "In-Person",
+                                "experience_level": "Mid-Level",
+                                "experience_level_source": "api",
+                                "company_size_bucket": "501-1000",
+                                "yoe_min": 2,
+                                "yoe_max": null,
+                                "salary_min": 21.44,
+                                "salary_max": 27.6,
+                                "salary_mid": 51001.600000000006,
+                                "salary_annual_min": 44595.200000000004,
+                                "salary_annual_max": 57408,
+                                "salary_basis": "hour",
+                                "salary_period": "hourly",
+                                "currency": "USD",
+                                "date_posted": "2026-11-13",
+                                "exclude_reasons": []
+                            },
+                            {
+                                "id": "6a880f9db276f65fb7e65d1a",
+                                "cut": "area",
+                                "expired": true,
+                                "date_expired": "2026-11-16",
+                                "job_title": "Data Solutions Architect",
+                                "company_name": "JANUS Research Group",
+                                "company_slug": "janus-research-group",
+                                "company_logo": "https://logos.hirebase.org/9c3a9511-28c1-45e0-bc11-7d144754fb96/janus-research-group-320x320-q95.jpg",
+                                "location": "United States",
+                                "city": null,
+                                "region": null,
+                                "country": "United States",
+                                "locations": [
+                                    {
+                                        "city": null,
+                                        "region": null,
+                                        "country": "United States"
+                                    }
+                                ],
+                                "location_type": "Remote",
+                                "experience_level": "Senior",
+                                "experience_level_source": "api",
+                                "company_size_bucket": "201-500",
+                                "yoe_min": 3,
+                                "yoe_max": 3,
+                                "salary_min": 90000,
+                                "salary_max": 95000,
+                                "salary_mid": 92500,
+                                "salary_annual_min": 90000,
+                                "salary_annual_max": 95000,
+                                "salary_basis": "year",
+                                "salary_period": "yearly",
+                                "currency": "USD",
+                                "date_posted": "2026-08-21",
+                                "exclude_reasons": []
+                            }
+                        ],
+                        "listings_total": 722,
+                        "proposed": {
+                            "min": 130000,
+                            "max": 160000,
+                            "mid": 145000,
+                            "percentile": 49.2,
+                            "percentile_from_listings": 49.2,
+                            "percentile_from_histogram": null,
+                            "verdict": "competitive (low)",
+                            "vs_p25": 22655.5,
+                            "vs_p50": -2353,
+                            "vs_p75": -27687.5
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

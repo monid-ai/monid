@@ -1,0 +1,29 @@
+{
+    "name": "empty",
+    "description": "Recorded 2026-11-18 against the live API: an exact-phrase title nothing matches returns an empty jobs array and bills nothing.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.hirebase.org/v2/jobs/search",
+                "body": {
+                    "job_titles": [
+                        "\"zzqx nonexistent title qqq\""
+                    ],
+                    "limit": 5
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jobs": [],
+                    "total_count": 0,
+                    "company_count": 0,
+                    "page": 1,
+                    "limit": 5,
+                    "total_pages": 0
+                }
+            }
+        }
+    ]
+}

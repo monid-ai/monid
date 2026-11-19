@@ -1,0 +1,157 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-11-18 against the live API (response trimmed by the recorder): a full-text company search with two size buckets and limit 2 returns 2 companies, 2 units of the companies allowance.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.hirebase.org/v2/hirebase/companies/search",
+                "body": {
+                    "query": "climate tech",
+                    "company_types": [
+                        "11-50",
+                        "51-200"
+                    ],
+                    "limit": 2
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "companies": [
+                        {
+                            "company_name": "Ad Hoc Group",
+                            "company_slug": "the-ad-hoc-group-inc",
+                            "company_logo": "https://logos.hirebase.org/d827e249-c75e-4234-82c1-a802f768cbad/the-ad-hoc-group-inc-320x320-q95.jpg",
+                            "company_link": "theadhocgroup.com",
+                            "linkedin_link": "https://www.linkedin.com/company/the-ad-hoc-group-inc",
+                            "description_summary": "Ad Hoc Group specializes in accelerating climate-tech and mobility startups within highly regulated sectors such as energy, smart cities, and transportation. By combining deep policy expertise with business strategy, the firm translates social entrepreneurship concepts into market-ready solutions that deliver measurable returns. Its services span climate-tech policy advisory, tailored go-to-market strategies, and specialized recruiting for high-impact roles. Ad Hoc Group\u2019s distinctive edge lies ",
+                            "culture_summary": "Mission-driven and collaborative, focused on accelerating climate\u2011tech and mobility startups by leveraging deep policy expertise and navigating complex regulatory environments.",
+                            "services": [
+                                "Climate Tech",
+                                "Policy"
+                            ],
+                            "industries": [
+                                "Corporate Services"
+                            ],
+                            "subindustries": [
+                                "Management Consulting",
+                                "Public Affairs & Lobbying"
+                            ],
+                            "size_range": {
+                                "min": 11,
+                                "max": 50
+                            },
+                            "clout": 3.58,
+                            "headquarters": {
+                                "city": "Alexandria",
+                                "region": "Virginia",
+                                "country": "United States",
+                                "address": "Alexandria, Virginia, United States",
+                                "coordinates": {
+                                    "type": "Point",
+                                    "coordinates": [
+                                        -77.0470229,
+                                        38.8051095
+                                    ]
+                                },
+                                "bbox": [
+                                    38.7851837,
+                                    38.8449229
+                                ]
+                            },
+                            "founded": 2016,
+                            "stock_info": {
+                                "stock_type": "Private",
+                                "index": null,
+                                "symbol": null
+                            },
+                            "funding_info": null,
+                            "type": "Small Business",
+                            "is_3rd_party_agency": false,
+                            "is_recruiting_agency": false,
+                            "mean_opinion_score": 4,
+                            "aliases": [
+                                "Ad Hoc Group",
+                                "The Ad Hoc Group"
+                            ],
+                            "parent_company": null,
+                            "subsidiaries": null,
+                            "score": 187.98751831054688,
+                            "technologies": null
+                        },
+                        {
+                            "company_name": "Capso",
+                            "company_slug": "capso-technologies",
+                            "company_logo": "https://logos.hirebase.org/fc5cc488-d612-4c29-99ad-5efe02171ff3/capso-technologies-320x320-q95.jpg",
+                            "company_link": "capso.com",
+                            "linkedin_link": "https://www.linkedin.com/company/capso-technologies",
+                            "description_summary": "Capso is a Canadian multinational company specializing in carbon capture technologies and CO2 utilization. It was founded in 1984 and is headquartered in Toronto, Ontario. The company focuses on climate tech and carbon capture services.",
+                            "culture_summary": "Capso is a specialized climate tech company focused on carbon capture and CO2 utilization, likely fostering a culture of innovation and environmental impact.",
+                            "services": [
+                                "Climate Tech",
+                                "Carbon Capture"
+                            ],
+                            "industries": [
+                                "Energy & Mining",
+                                "Manufacturing"
+                            ],
+                            "subindustries": [
+                                "Alternative Energy Sources",
+                                "Energy Equipment & Services"
+                            ],
+                            "size_range": {
+                                "min": 51,
+                                "max": 200
+                            },
+                            "clout": null,
+                            "headquarters": {
+                                "city": "Toronto",
+                                "region": "Ontario",
+                                "country": "Canada",
+                                "address": "Toronto, Golden Horseshoe, Ontario, Canada",
+                                "coordinates": {
+                                    "type": "Point",
+                                    "coordinates": [
+                                        -79.3839347,
+                                        43.6534817
+                                    ]
+                                },
+                                "bbox": [
+                                    43.5796082,
+                                    43.8554425
+                                ]
+                            },
+                            "founded": 1984,
+                            "stock_info": {
+                                "stock_type": "Private",
+                                "index": null,
+                                "symbol": null
+                            },
+                            "funding_info": {
+                                "type": "Series unknown",
+                                "total_rounds": 1,
+                                "last_funding_round": "Jan 8, 2014",
+                                "total_funding": null,
+                                "investors": null
+                            },
+                            "type": "Mid-Size",
+                            "is_3rd_party_agency": false,
+                            "is_recruiting_agency": false,
+                            "mean_opinion_score": 5,
+                            "aliases": null,
+                            "parent_company": null,
+                            "subsidiaries": null,
+                            "score": 175.07662963867188,
+                            "technologies": null
+                        }
+                    ],
+                    "total_count": 1001,
+                    "page": 1,
+                    "limit": 2,
+                    "total_pages": 501
+                }
+            }
+        }
+    ]
+}

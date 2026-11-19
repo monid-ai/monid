@@ -1,0 +1,316 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-11-18 against the live API (response trimmed by the recorder): aggregates for US data-engineer jobs posted in the last 30 days, 1 unit of the insights allowance.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.hirebase.org/v2/jobs/insights",
+                "body": {
+                    "job_titles": [
+                        "data engineer"
+                    ],
+                    "geo_locations": [
+                        {
+                            "country": "United States"
+                        }
+                    ],
+                    "days_ago": 30,
+                    "top_companies_limit": 3
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "headline": {
+                        "total_count": 3069,
+                        "sample_size": 500,
+                        "median_salary": 143267.5,
+                        "salary_currency": "USD",
+                        "pct_disclosing_salary": 60.2,
+                        "pct_remote": 22.2,
+                        "top_company": "RemoteHunter",
+                        "top_technology": "Python",
+                        "dominant_experience_level": "Senior",
+                        "new_this_week": 500
+                    },
+                    "salary": {
+                        "count": 298,
+                        "avg": 149551.95226510067,
+                        "p25": 116225,
+                        "p50": 143267.5,
+                        "p75": 175750,
+                        "p90": 205950.00000000003,
+                        "min": 18000,
+                        "max": 350000,
+                        "currency": "USD",
+                        "histogram": [
+                            {
+                                "lower": 60000,
+                                "upper": 80000,
+                                "count": 12
+                            },
+                            {
+                                "lower": 80000,
+                                "upper": 100000,
+                                "count": 19
+                            }
+                        ],
+                        "fitted_normal": {
+                            "mu": 149551.95226510067,
+                            "sigma": 48207.558126601594
+                        }
+                    },
+                    "salary_by_level": [
+                        {
+                            "key": "Entry-Level",
+                            "count": 9,
+                            "p25": 105000,
+                            "p50": 107850,
+                            "p75": 116000
+                        },
+                        {
+                            "key": "Junior / Associate",
+                            "count": 17,
+                            "p25": 88000,
+                            "p50": 97500,
+                            "p75": 143035
+                        }
+                    ],
+                    "salary_by_location_type": [
+                        {
+                            "key": "Hybrid",
+                            "count": 73,
+                            "p25": 115700,
+                            "p50": 145500,
+                            "p75": 187500
+                        },
+                        {
+                            "key": "Remote",
+                            "count": 77,
+                            "p25": 112658,
+                            "p50": 140000,
+                            "p75": 150000
+                        }
+                    ],
+                    "level_breakdown": [
+                        {
+                            "key": "Entry-Level",
+                            "count": 16,
+                            "percent": 3.2
+                        },
+                        {
+                            "key": "Junior / Associate",
+                            "count": 30,
+                            "percent": 6
+                        }
+                    ],
+                    "location_type_split": [
+                        {
+                            "key": "On-site",
+                            "count": 271,
+                            "percent": 54.2
+                        },
+                        {
+                            "key": "Hybrid",
+                            "count": 118,
+                            "percent": 23.6
+                        }
+                    ],
+                    "job_type_split": [
+                        {
+                            "key": "Full Time",
+                            "count": 497,
+                            "percent": 99.4
+                        },
+                        {
+                            "key": "Internship",
+                            "count": 2,
+                            "percent": 0.4
+                        }
+                    ],
+                    "top_locations": [
+                        {
+                            "label": "United States",
+                            "region": null,
+                            "country": "United States",
+                            "count": 109,
+                            "percent": 21.8
+                        },
+                        {
+                            "label": "California, United States",
+                            "region": "California",
+                            "country": "United States",
+                            "count": 55,
+                            "percent": 11
+                        }
+                    ],
+                    "top_companies": [
+                        {
+                            "company_name": "RemoteHunter",
+                            "company_slug": "remotehunter",
+                            "company_logo": "https://logos.hirebase.org/45ae028d-d05c-4d06-824b-92f24f6af3a3/remotehunter-320x320-q95.jpg",
+                            "count": 29,
+                            "percent": 5.8
+                        },
+                        {
+                            "company_name": "Haystack",
+                            "company_slug": "wearehaystack",
+                            "company_logo": "https://logos.hirebase.org/7be34627-6000-4d10-9c95-f27281275313/wearehaystack-320x320-q95.jpg",
+                            "count": 16,
+                            "percent": 3.2
+                        }
+                    ],
+                    "top_technologies": [
+                        {
+                            "key": "Python",
+                            "count": 253,
+                            "percent": 50.6
+                        },
+                        {
+                            "key": "SQL",
+                            "count": 154,
+                            "percent": 30.8
+                        }
+                    ],
+                    "top_skills": [
+                        {
+                            "key": "data engineering",
+                            "count": 97,
+                            "percent": 19.4
+                        },
+                        {
+                            "key": "SQL",
+                            "count": 80,
+                            "percent": 16
+                        }
+                    ],
+                    "top_benefits": [
+                        {
+                            "key": "Paid time off",
+                            "count": 36,
+                            "percent": 7.2
+                        },
+                        {
+                            "key": "Parental leave",
+                            "count": 25,
+                            "percent": 5
+                        }
+                    ],
+                    "education_split": [
+                        {
+                            "key": "Bachelor's degree",
+                            "count": 158,
+                            "percent": 31.6
+                        },
+                        {
+                            "key": "Master's degree",
+                            "count": 5,
+                            "percent": 1
+                        }
+                    ],
+                    "company_size_split": [
+                        {
+                            "key": "Global Enterprise (5001+)",
+                            "count": 189,
+                            "percent": 37.8
+                        },
+                        {
+                            "key": "Startup (51-250)",
+                            "count": 114,
+                            "percent": 22.8
+                        }
+                    ],
+                    "industry_split": [
+                        {
+                            "key": "Tech, Software & IT Services",
+                            "count": 308,
+                            "percent": 61.6
+                        },
+                        {
+                            "key": "Corporate Services",
+                            "count": 92,
+                            "percent": 18.4
+                        }
+                    ],
+                    "subindustry_split": [
+                        {
+                            "key": "AI & ML",
+                            "count": 165,
+                            "percent": 33
+                        },
+                        {
+                            "key": "Software Development & Engineering",
+                            "count": 163,
+                            "percent": 32.6
+                        }
+                    ],
+                    "visa_sponsorship_rate": 3.8,
+                    "recruiter_agency_rate": 19.6,
+                    "yoe_median": 5,
+                    "freshness": {
+                        "histogram": [
+                            {
+                                "lower": 0,
+                                "upper": 0.5,
+                                "count": 82
+                            },
+                            {
+                                "lower": 0.5,
+                                "upper": 1,
+                                "count": 0
+                            }
+                        ],
+                        "avg_days_posted": 1.592,
+                        "new_this_week": 500,
+                        "new_this_month": 500
+                    },
+                    "scores": [
+                        {
+                            "name": "novelty_score",
+                            "mean": null,
+                            "stdev": null,
+                            "count": 0
+                        },
+                        {
+                            "name": "flexibility_score",
+                            "mean": 4.8004,
+                            "stdev": 0.7024433737937696,
+                            "count": 500
+                        }
+                    ],
+                    "scores_by_level": [
+                        {
+                            "level": "Entry-Level",
+                            "scores": {
+                                "flexibility_score": 4.681,
+                                "compensation_value_score": 6.469,
+                                "benefits_score": 5.713,
+                                "impact_autonomy_score": 7.031,
+                                "prestige_score": 6.2,
+                                "growth_score": 6.35,
+                                "coolness_score": 6.431
+                            },
+                            "count": 16
+                        },
+                        {
+                            "level": "Junior / Associate",
+                            "scores": {
+                                "flexibility_score": 4.543,
+                                "compensation_value_score": 6.177,
+                                "benefits_score": 5.6,
+                                "impact_autonomy_score": 6.733,
+                                "prestige_score": 5.783,
+                                "growth_score": 6.073,
+                                "coolness_score": 6.1
+                            },
+                            "count": 30
+                        }
+                    ],
+                    "cached": false,
+                    "generated_at": "2026-11-18T23:43:45.912564"
+                }
+            }
+        }
+    ]
+}
