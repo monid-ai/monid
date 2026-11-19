@@ -1,0 +1,51 @@
+{
+    "name": "synthetic-frames-ok",
+    "description": "SYNTHETIC happy chain for vidcrawl#v1/frames mirroring FramesResponseSchema (timestamp_sec, timestamp, JPEG data_url, metrics.credits_used = 1).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                    "timestamps_sec": [12.5, 45],
+                    "max_width": 1280
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "ok": true,
+                    "platform": "youtube",
+                    "video_id": "dQw4w9WgXcQ",
+                    "frames": [
+                        {
+                            "timestamp_sec": 12.5,
+                            "timestamp": "00:12",
+                            "source": "youtube_stream_sidx",
+                            "mime_type": "image/jpeg",
+                            "width": 1280,
+                            "height": 720,
+                            "data_url": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQ==",
+                            "byte_length": 48120
+                        },
+                        {
+                            "timestamp_sec": 45,
+                            "timestamp": "00:45",
+                            "source": "youtube_stream_sidx",
+                            "mime_type": "image/jpeg",
+                            "width": 1280,
+                            "height": 720,
+                            "data_url": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQ==",
+                            "byte_length": 51040
+                        }
+                    ],
+                    "metrics": {
+                        "latency_ms": 1120,
+                        "credits_used": 1
+                    }
+                }
+            }
+        }
+    ]
+}

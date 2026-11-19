@@ -1,0 +1,25 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "SYNTHETIC 401 unauthorized envelope matching ErrorResponseSchema ({ok: false, error: {code, message}}). Vendor non-2xx is DATA and bills 0 credits.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                }
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "ok": false,
+                    "error": {
+                        "code": "UNAUTHORIZED",
+                        "message": "A valid API key is required."
+                    }
+                }
+            }
+        }
+    ]
+}

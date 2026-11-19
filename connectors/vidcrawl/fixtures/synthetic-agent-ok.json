@@ -1,0 +1,60 @@
+{
+    "name": "synthetic-agent-ok",
+    "description": "SYNTHETIC happy chain for vidcrawl#v1/agent mirroring AgentResponseSchema at effort 'low' (usage.credits_used = 3 = $0.027).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "prompt": "Summarize the pricing tiers shown in this video.",
+                    "urls": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+                    "effort": "low"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "ok": true,
+                    "summary": "The speaker compares Starter ($9) and Growth ($29) plans at 01:15.",
+                    "visual_hook": "Terminal benchmark slide overlays comparison numbers in frame 1.",
+                    "on_screen_ocr": [
+                        {
+                            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                            "timestamp": "01:15",
+                            "text": "Starter $9 / 1,000 credits | Growth $29 / 4,000 credits"
+                        }
+                    ],
+                    "scenes": [
+                        {
+                            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                            "timestamp": "01:15",
+                            "description": "Pricing comparison table on dark slate UI"
+                        }
+                    ],
+                    "citations": [
+                        {
+                            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                            "timestamp": "01:15",
+                            "claim": "Starter pack is $9 for 1,000 non-expiring credits."
+                        }
+                    ],
+                    "usage": {
+                        "effort": "low",
+                        "credits_used": 3,
+                        "latency_ms": 3920,
+                        "scrape_latency_ms": 780,
+                        "llm_latency_ms": 3140,
+                        "network_bytes": 124000,
+                        "model": "gemini-2.5-flash",
+                        "model_tokens": {
+                            "input": 2100,
+                            "output": 290
+                        },
+                        "estimated_cost_usd": 0.002
+                    }
+                }
+            }
+        }
+    ]
+}
