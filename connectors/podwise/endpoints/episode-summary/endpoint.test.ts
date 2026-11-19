@@ -2,6 +2,7 @@ import { assert, assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import type { RunInput } from "@shared/core";
 import {
+    assertInputAccepted,
     liveSkip,
     loadFixture,
     runEndpoint,
@@ -65,17 +66,14 @@ Deno.test("podwise#episodes/summary schema gate: seq must be a positive decimal 
             JSON.stringify(input),
         );
     }
-    // near-twin: valid, so it passes the schema and fails later, at replay
-    // URL matching (it is not the recorded request)
-    const error = await assertRejects(() =>
-        runEndpoint({
-            unit,
-            input: { pathParams: { seq: "9480206" } },
-            mode: "replay",
-            fixture,
-        })
-    );
-    assertEquals(String(error).includes("INVALID_INPUT"), false, String(error));
+    // near-twin: valid, so it must clear the schema gate (replay may still
+    // fail later on URL matching: it is not the recorded request)
+    await assertInputAccepted({
+        unit,
+        input: { pathParams: { seq: "9480206" } },
+        mode: "replay",
+        fixture,
+    });
 });
 
 Deno.test("podwise#episodes/summary: translation is refused, never forwarded", async () => {
