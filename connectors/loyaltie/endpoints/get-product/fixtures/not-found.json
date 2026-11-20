@@ -1,6 +1,6 @@
 {
     "name": "not-found",
-    "description": "raw recording (loyaltie#get-product, scenario not-found) — hand-minimize into a shared chain before committing",
+    "description": "recorded 2026-11-17 against https://loyaltie.com/api/ucp/mcp (loyaltie#get-product, an unknown product id): HTTP 200 with a UCP not_found message",
     "calls": [
         {
             "req": {
