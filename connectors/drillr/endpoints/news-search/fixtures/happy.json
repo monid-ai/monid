@@ -1,0 +1,152 @@
+{
+    "name": "happy",
+    "description": "Recorded live 2026-11-20 with `deno task record`, then hand-minimized (one event per storyline, one claim; strings truncated at 500 chars): POST /news-search with a JSON body returns storylines under results and attributed claims under claims, with no data wrapper. Flat 0.2 credits.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://gateway.drillr.ai/api/v2/news-search",
+                "body": {
+                    "query": "export controls",
+                    "ticker": "NVDA",
+                    "top_k": 2
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "query": "export controls",
+                    "theme": null,
+                    "theme_resolved": null,
+                    "ticker": [
+                        "NVDA"
+                    ],
+                    "since": null,
+                    "until": null,
+                    "order_by": "relevance",
+                    "count": 2,
+                    "results": [
+                        {
+                            "story_id": 155620,
+                            "title": "US AI Chip Export Licences to China",
+                            "summary": "The US tightened restrictions on China’s access to advanced AI chips while approving licences for hundreds of thousands of NVIDIA and AMD chips, including allocations to Alibaba and Tencent, and requiring a licence for certain remote GPU access.",
+                            "tags": {
+                                "regions": [
+                                    "us",
+                                    "china"
+                                ],
+                                "version": 1,
+                                "event_types": [
+                                    "geopolitical",
+                                    "political_event"
+                                ],
+                                "sectors_gics": [
+                                    "information_technology"
+                                ],
+                                "primary_class": "macro_event"
+                            },
+                            "node_count": 44,
+                            "first_seen_at": "2026-08-25T11:45:00+00:00",
+                            "last_seen_at": "2026-11-20T20:30:16+00:00",
+                            "created_at": "2026-08-25T11:51:31.350704+00:00",
+                            "sim": 0.48017666512452006,
+                            "events": [
+                                {
+                                    "id": 751290,
+                                    "time_event": "2026-11-19T23:45:01+00:00",
+                                    "summary": "The US Department of Commerce's Bureau of Industry and Security tightened export controls, requiring prior approval for exports, reexports, or transfers of advanced AI chips.",
+                                    "event_type": "regulatory_action",
+                                    "event_subtype": null,
+                                    "primary_entity_name": "Bureau of Industry and Security",
+                                    "object_name": "AI chips",
+                                    "score": 4.4,
+                                    "sim": 0.48017666512452006,
+                                    "sources_total": 1,
+                                    "first_reported": "2026-11-19T23:45:01+00:00",
+                                    "last_reported": "2026-11-19T23:45:01+00:00",
+                                    "source": {
+                                        "name": "digitimes",
+                                        "url": "https://www.digitimes.com/news/a20261118PD219/data-nvidia-chips-licensing.html",
+                                        "time": "2026-11-19T23:45:01+00:00",
+                                        "headline": "US AI chip curbs hit Southeast Asian data centers"
+                                    }
+                                }
+                            ],
+                            "events_in_window": 11
+                        },
+                        {
+                            "story_id": 84,
+                            "title": "U.S. Curbs on AI Chip Access to China",
+                            "summary": "Chinese firms and the PLA have sought advanced NVIDIA chips, while NVIDIA says licensed and Hopper shipments to China have stopped and is restricting sales tied to rentals for Chinese customers; a major Southeast Asian chip-rental deal was also canceled.",
+                            "tags": {
+                                "regions": [
+                                    "us",
+                                    "china"
+                                ],
+                                "version": 1,
+                                "event_types": [
+                                    "capex_expansion",
+                                    "contract_award"
+                                ],
+                                "sectors_gics": [
+                                    "information_technology"
+                                ],
+                                "primary_class": "stock_event"
+                            },
+                            "node_count": 105,
+                            "first_seen_at": "2026-05-30T23:59:59+00:00",
+                            "last_seen_at": "2026-11-20T03:26:25+00:00",
+                            "created_at": "2026-06-30T15:52:43.423501+00:00",
+                            "sim": 0.3837852030614819,
+                            "events": [
+                                {
+                                    "id": 18025,
+                                    "time_event": "2026-05-31T20:09:53+00:00",
+                                    "summary": "The U.S. Department of Commerce moved to close a loophole that may have allowed exports of advanced AI chips, including Nvidia's Rubin and Blackwell processors and AMD's MI350x, to Chinese entities located outside China.",
+                                    "event_type": "regulatory_action",
+                                    "event_subtype": null,
+                                    "primary_entity_name": "U.S. Department of Commerce",
+                                    "object_name": null,
+                                    "score": 5,
+                                    "sim": 0.3837852030614819,
+                                    "sources_total": 7,
+                                    "first_reported": "2026-05-31T20:09:53+00:00",
+                                    "last_reported": "2026-11-16T19:10:09+00:00",
+                                    "source": {
+                                        "name": "reuters.com",
+                                        "url": "https://www.reuters.com/world/china/us-takes-step-halt-nvidia-ai-chip-shipments-chinese-firms-outside-china-2026-05-31/",
+                                        "time": "2026-05-31T20:09:53+00:00",
+                                        "headline": "US takes step to halt Nvidia AI chip shipments to Chinese firms outside China"
+                                    }
+                                }
+                            ],
+                            "events_in_window": 36
+                        }
+                    ],
+                    "claims": [
+                        {
+                            "id": 1111830,
+                            "time_event": "2026-11-17T23:25:54+00:00",
+                            "claim_type": "corporate_disclosure",
+                            "claim_subtype": null,
+                            "claimant_name": "Colette Kress",
+                            "target_name": "NVIDIA CORP",
+                            "summary": "NVIDIA CORP interim CEO Colette Kress said the company was still assessing the potential effects of new U.S. export controls.",
+                            "sources_total": 1,
+                            "first_reported": "2026-11-17T23:25:54+00:00",
+                            "last_reported": "2026-11-17T23:25:54+00:00",
+                            "source": {
+                                "name": "sina_724",
+                                "url": "https://finance.sina.cn/7x24/2026-11-18/detail-inizcexm4911153.d.html",
+                                "time": "2026-11-17T23:25:54+00:00",
+                                "headline": "英伟达：仍在评估新出口管制的潜在影响"
+                            }
+                        }
+                    ],
+                    "next_cursor": null,
+                    "claims_skipped": null
+                }
+            }
+        }
+    ]
+}

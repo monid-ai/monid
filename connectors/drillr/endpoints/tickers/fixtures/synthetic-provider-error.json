@@ -1,0 +1,20 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "SYNTHETIC (no live call was spent on it; replace via `deno task record`): GET /tickers answers the documented 429 rate_limit_exceeded envelope with retry_after_seconds (drillr.ai/docs/api, Rate limits); the message text is illustrative. Vendor non-2xx is DATA, zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://gateway.drillr.ai/api/v2/tickers?query=Apple+Inc."
+            },
+            "res": {
+                "status": 429,
+                "body": {
+                    "error": "rate_limit_exceeded",
+                    "message": "Rate limit exceeded.",
+                    "retry_after_seconds": 30
+                }
+            }
+        }
+    ]
+}

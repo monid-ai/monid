@@ -1,0 +1,60 @@
+{
+    "name": "happy",
+    "description": "Recorded live 2026-11-20 with `deno task record`: GET /events?ticker=BA&event_class=capital&limit=2 returns the shared event fields with the 8-K items in source_category. Flat 0.02 credits.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://gateway.drillr.ai/api/v2/events?ticker=BA&event_class=capital&limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "event_id": "2ab01e9be7acdb60d1fa9fdb1a50d66099f571c6",
+                            "ticker": "BA",
+                            "market": "US",
+                            "event_class": "capital",
+                            "event_type": "debt_issuance",
+                            "axis": {
+                                "action": "amend"
+                            },
+                            "source_category": "8-K:1.01,2.03",
+                            "event_date": "2026-08-24",
+                            "title": "Debt Issuance: 2023 Five-Year Credit Agreement",
+                            "stage": "amended",
+                            "event_group_id": "17f96e213777c218efe4",
+                            "is_current": true,
+                            "accession_number": "0001628280-26-059427",
+                            "form_type": "8-K",
+                            "filing_url": "https://www.sec.gov/Archives/edgar/data/12927/000162828026059427/0001628280-26-059427.txt",
+                            "filing_date": "2026-08-28"
+                        },
+                        {
+                            "event_id": "390e1b7da4ca7cdad4732d8d2b477722e032da84",
+                            "ticker": "BA",
+                            "market": "US",
+                            "event_class": "capital",
+                            "event_type": "debt_issuance",
+                            "axis": {
+                                "action": "amend",
+                                "instrument": "revolver"
+                            },
+                            "source_category": "8-K:1.01,2.03",
+                            "event_date": "2026-08-24",
+                            "title": "USD 4,000,000,000 credit facility",
+                            "stage": "amended",
+                            "event_group_id": "4d7cccfcffa40d3df5d5",
+                            "is_current": true,
+                            "accession_number": "0001628280-26-059427",
+                            "form_type": "8-K",
+                            "filing_url": "https://www.sec.gov/Archives/edgar/data/12927/000162828026059427/0001628280-26-059427.txt",
+                            "filing_date": "2026-08-28"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

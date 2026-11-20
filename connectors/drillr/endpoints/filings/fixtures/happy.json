@@ -1,0 +1,39 @@
+{
+    "name": "happy",
+    "description": "Recorded live 2026-11-20 with `deno task record` (rows capped at 2 by the recorder): GET /filings?ticker=AAPL&limit=3 returns filings newest first; US rows carry title null. Flat 0.02 credits.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://gateway.drillr.ai/api/v2/filings?ticker=AAPL&limit=3"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "ticker": "AAPL",
+                            "market": "US",
+                            "form_type": "144",
+                            "title": null,
+                            "filing_date": "2026-11-16",
+                            "period_of_report": null,
+                            "accession_number": "0001921094-26-001188",
+                            "filing_url": "https://www.sec.gov/Archives/edgar/data/320193/000192109426001188/0001921094-26-001188.txt"
+                        },
+                        {
+                            "ticker": "AAPL",
+                            "market": "US",
+                            "form_type": "8-K",
+                            "title": null,
+                            "filing_date": "2026-11-09",
+                            "period_of_report": "2026-11-09",
+                            "accession_number": "0001140361-26-042798",
+                            "filing_url": "https://www.sec.gov/Archives/edgar/data/320193/000114036126042798/0001140361-26-042798.txt"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
