@@ -1,0 +1,13 @@
+{
+    "name": "synthetic-no-results",
+    "description": "Saleshandy's documented no-match response for people and company search.",
+    "calls": [
+        {
+            "req": { "method": "POST", "url": "{{request.url}}" },
+            "res": {
+                "status": 201,
+                "body": { "message": "Success", "payload": [] }
+            }
+        }
+    ]
+}
