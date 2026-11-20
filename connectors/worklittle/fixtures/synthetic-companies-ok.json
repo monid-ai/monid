@@ -1,0 +1,39 @@
+{
+    "name": "synthetic-companies-ok",
+    "description": "SYNTHETIC GET /companies: {data, meta: {query, limit, returned, quota}} (jobs-api routes/companies.ts, 2026-11-20). meta.quota is the shared companies.search quota count the consolidate strips.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?q=stripe&limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "id": "cmp_synthetic01",
+                            "name": "Stripe",
+                            "slug": "stripe",
+                            "logo_url": null,
+                            "website_url": "https://stripe.com",
+                            "description": "Payments infrastructure for the internet.",
+                            "industry": "Financial Services"
+                        }
+                    ],
+                    "meta": {
+                        "query": "stripe",
+                        "limit": 2,
+                        "returned": 1,
+                        "quota": {
+                            "units": 1,
+                            "used": 9,
+                            "limit": 3000000,
+                            "remaining": 2999991
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

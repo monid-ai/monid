@@ -1,0 +1,21 @@
+{
+    "name": "synthetic-salary-unauthorized",
+    "description": "SYNTHETIC 401 on GET /jobs/salary-average (revoked key): data, zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?title=data+engineer&country=US"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": {
+                        "code": "UNAUTHORIZED",
+                        "message": "Invalid API key"
+                    }
+                }
+            }
+        }
+    ]
+}

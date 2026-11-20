@@ -1,0 +1,62 @@
+{
+    "name": "synthetic-resume-async",
+    "description": "SYNTHETIC async chain for worklittle#resumes: 202 submit -> one working tick -> done (jobs-api routes/documentJobs.ts startDocumentJob + handleGetDocumentJob, 2026-10-29). The done body spreads the synchronous document response; it bills $0.01 through the derived fold. pdf_base64 hand-truncated.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "id": "doc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                    "status": "working",
+                    "status_url": "https://api.worklittle.com/v1/documents/doc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                    "poll_after_seconds": 5
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/documents/doc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "doc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                    "status": "working",
+                    "status_url": "https://api.worklittle.com/v1/documents/doc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                    "poll_after_seconds": 5
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/documents/doc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "doc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                    "status": "done",
+                    "document_type": "resume",
+                    "mode": "ready",
+                    "formats": [
+                        "html",
+                        "pdf"
+                    ],
+                    "html": "<article><h1>Jordan Rivera</h1><p>Senior Product Manager</p></article>",
+                    "pdf_base64": "JVBERi0xLjcKJSDigJMgc3ludGhldGljCg==",
+                    "pdf_mime": "application/pdf",
+                    "pdf_filename": "jordan-rivera-resume.pdf",
+                    "docx_base64": null,
+                    "docx_mime": null,
+                    "docx_filename": null
+                }
+            }
+        }
+    ]
+}

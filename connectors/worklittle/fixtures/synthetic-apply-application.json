@@ -1,0 +1,20 @@
+{
+    "name": "synthetic-apply-application",
+    "description": "SYNTHETIC POST /v1/apply/{id} {action: continue} reply (handlePublicContinueApplyWithAi, 2026-10-29).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.worklittle.com/v1/apply/aas_synthetic01"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "ok": true,
+                    "session_id": "aas_synthetic01",
+                    "continued": true
+                }
+            }
+        }
+    ]
+}

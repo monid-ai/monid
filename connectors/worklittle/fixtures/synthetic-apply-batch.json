@@ -1,0 +1,110 @@
+{
+    "name": "synthetic-apply-batch",
+    "description": "SYNTHETIC batch (jobs-api handlePublicBatchApplyWithAi, 2026-10-29): three jobs — two started, one refused 410 JOB_CLOSED, plus one already applied. The start answers only starts; the poll reads each session until none is in flight. Settles the two outcomes at $0.20 each (the derived fold).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "results": [
+                        {
+                            "job_id": "synthetic-job-1",
+                            "ok": true,
+                            "session_id": "aas_b1",
+                            "status_url": "https://api.worklittle.com/v1/apply/aas_b1",
+                            "status": "queued",
+                            "already_applied": false
+                        },
+                        {
+                            "job_id": "synthetic-job-2",
+                            "ok": true,
+                            "session_id": "aas_b2",
+                            "status_url": "https://api.worklittle.com/v1/apply/aas_b2",
+                            "status": "queued",
+                            "already_applied": false
+                        },
+                        {
+                            "job_id": "synthetic-job-3",
+                            "ok": false,
+                            "error": {
+                                "code": "JOB_CLOSED",
+                                "message": "This job is closed."
+                            }
+                        },
+                        {
+                            "job_id": "synthetic-job-4",
+                            "ok": true,
+                            "session_id": null,
+                            "status_url": null,
+                            "status": null,
+                            "already_applied": true
+                        }
+                    ],
+                    "started": 2,
+                    "already_applied": 1,
+                    "failed": 1,
+                    "applicant_id": "usr_synthetic_applicant",
+                    "next_step": "Poll each status_url."
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/apply/aas_b1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "session": {
+                        "id": "aas_b1",
+                        "status": "running",
+                        "applicant_id": "usr_synthetic_applicant"
+                    },
+                    "next_step": "",
+                    "final_fields": {}
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/apply/aas_b2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "session": {
+                        "id": "aas_b2",
+                        "status": "completed",
+                        "applicant_id": "usr_synthetic_applicant"
+                    },
+                    "next_step": "",
+                    "final_fields": {}
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/apply/aas_b1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "session": {
+                        "id": "aas_b1",
+                        "status": "completed",
+                        "applicant_id": "usr_synthetic_applicant"
+                    },
+                    "next_step": "",
+                    "final_fields": {}
+                }
+            }
+        }
+    ]
+}

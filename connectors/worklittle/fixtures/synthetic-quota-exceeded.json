@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-quota-exceeded",
+    "description": "SYNTHETIC 429 QUOTA_EXCEEDED for worklittle#jobs/search: the shared monthly jobs.list quota is spent (jobs-api publicApiMonthlyQuota.ts). Never a charge.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.worklittle.com/jobs?title=nurse"
+            },
+            "res": {
+                "status": 429,
+                "body": {
+                    "error": {
+                        "code": "QUOTA_EXCEEDED",
+                        "message": "Free jobs.list quota used: 3000000 of 3000000 this month.",
+                        "documentation_url": "https://docs.worklittle.com/help/api/rate-limits-and-429"
+                    }
+                }
+            }
+        }
+    ]
+}

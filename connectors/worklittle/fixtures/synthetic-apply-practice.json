@@ -1,0 +1,26 @@
+{
+    "name": "synthetic-apply-practice",
+    "description": "SYNTHETIC practice run (jobs-api applyWithAiBrowser test mode): { test: true } alone answers a test session; nothing opens or bills.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "test": true,
+                    "session_id": "aas_test_synthetic",
+                    "status_url": "https://api.worklittle.com/v1/apply/aas_test_synthetic",
+                    "next_step": "Poll status_url.",
+                    "session": {
+                        "id": "aas_test_synthetic",
+                        "status": "queued"
+                    },
+                    "already_applied": false
+                }
+            }
+        }
+    ]
+}

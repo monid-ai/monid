@@ -1,0 +1,58 @@
+{
+    "name": "synthetic-apply-batch-stop-lookup-throws",
+    "description": "SYNTHETIC stop where the second status lookup has no recorded answer, so the transport throws (a timeout): the first application's submit ($0.20) must still settle.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "results": [
+                        {
+                            "job_id": "synthetic-job-1",
+                            "ok": true,
+                            "session_id": "aas_s1",
+                            "status_url": "https://api.worklittle.com/v1/apply/aas_s1",
+                            "status": "queued",
+                            "already_applied": false
+                        },
+                        {
+                            "job_id": "synthetic-job-2",
+                            "ok": true,
+                            "session_id": "aas_s2",
+                            "status_url": "https://api.worklittle.com/v1/apply/aas_s2",
+                            "status": "queued",
+                            "already_applied": false
+                        }
+                    ],
+                    "started": 2,
+                    "already_applied": 0,
+                    "failed": 0,
+                    "applicant_id": "usr_synthetic_applicant",
+                    "next_step": "Poll each status_url."
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/apply/aas_s1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "session": {
+                        "id": "aas_s1",
+                        "status": "completed",
+                        "applicant_id": "usr_synthetic_applicant"
+                    },
+                    "next_step": "",
+                    "final_fields": {}
+                }
+            }
+        }
+    ]
+}

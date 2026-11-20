@@ -1,0 +1,71 @@
+{
+    "name": "synthetic-applicant-get",
+    "description": "SYNTHETIC POST /v1/apply/profile {action: get}: {applicant, applications, emails} (jobs-api routes/applyApi.ts handleApplicantAction, 2026-10-30). Fields trimmed.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.worklittle.com/v1/apply/profile"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "applicant": {
+                        "id": "usr_synthetic_applicant",
+                        "email": "jordan@example.com",
+                        "name": "Jordan Rivera",
+                        "phone": "+1 512 555 0100",
+                        "city": "Austin",
+                        "state": "TX",
+                        "country": "US",
+                        "linkedin": "https://www.linkedin.com/in/example",
+                        "current_title": "Product Manager",
+                        "work_authorization": [
+                            "US"
+                        ],
+                        "experience": [
+                            {
+                                "title": "Product Manager",
+                                "company": "Initech",
+                                "start": "2021-03"
+                            }
+                        ],
+                        "education": [
+                            {
+                                "school": "UT Austin",
+                                "degree": "BS"
+                            }
+                        ],
+                        "resumes": [
+                            {
+                                "id": "res_synthetic01",
+                                "filename": "jordan-rivera.pdf",
+                                "primary": true
+                            }
+                        ]
+                    },
+                    "applications": [
+                        {
+                            "id": "aas_synthetic01",
+                            "job_id": "synthetic-job-1",
+                            "job_title": "Senior Product Manager, Payments",
+                            "company_name": "Acme Pay",
+                            "status": "completed",
+                            "updated_at": "2026-10-28T18:20:00.000Z"
+                        }
+                    ],
+                    "emails": [
+                        {
+                            "id": "eml_synthetic01",
+                            "received_at": 1761700000,
+                            "from": "recruiting@acme-pay.example.com",
+                            "subject": "Interview invitation: Senior Product Manager",
+                            "text": "Hi Jordan, we'd like to schedule a 30-minute call.",
+                            "code": null
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

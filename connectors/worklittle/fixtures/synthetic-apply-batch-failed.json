@@ -1,0 +1,48 @@
+{
+    "name": "synthetic-apply-batch-failed",
+    "description": "SYNTHETIC batch where the one started application fails on Worklittle's side (a bot check; the status carries no reason): every application failed, so the run is a free provider error.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "results": [
+                        {
+                            "job_id": "synthetic-job-1",
+                            "ok": true,
+                            "session_id": "aas_b1",
+                            "status": "queued",
+                            "already_applied": false
+                        }
+                    ],
+                    "started": 1,
+                    "already_applied": 0,
+                    "failed": 0,
+                    "applicant_id": "usr_synthetic_applicant"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/apply/aas_b1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "session": {
+                        "id": "aas_b1",
+                        "status": "failed",
+                        "applicant_id": "usr_synthetic_applicant"
+                    },
+                    "next_step": "",
+                    "final_fields": {}
+                }
+            }
+        }
+    ]
+}

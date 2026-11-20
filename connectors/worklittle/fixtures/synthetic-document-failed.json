@@ -1,0 +1,38 @@
+{
+    "name": "synthetic-document-failed",
+    "description": "SYNTHETIC failed document job: the poll answers HTTP 200 {status: failed, error} — the job's own HTTP status (400 here) is NOT in the body, only its error code, which the lifecycle maps back. Zero usage (jobs-api handleGetDocumentJob, apiResumeWriter 'Not enough resume detail', 2026-10-29).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "id": "doc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                    "status": "working",
+                    "status_url": "https://api.worklittle.com/v1/documents/doc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                    "poll_after_seconds": 5
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/documents/doc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "doc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                    "status": "failed",
+                    "error": {
+                        "code": "BAD_REQUEST",
+                        "message": "Not enough resume detail to write a ready resume. Send resume_text (or an applicant with a resume), or use POST /v1/draft-resumes."
+                    }
+                }
+            }
+        }
+    ]
+}

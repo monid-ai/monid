@@ -1,0 +1,21 @@
+{
+    "name": "synthetic-apply-application-not-found",
+    "description": "SYNTHETIC POST /v1/apply/{id} for an application this key cannot see: 404, zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/v1/apply/aas_nobody"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": {
+                        "code": "NOT_FOUND",
+                        "message": "Session not found"
+                    }
+                }
+            }
+        }
+    ]
+}
