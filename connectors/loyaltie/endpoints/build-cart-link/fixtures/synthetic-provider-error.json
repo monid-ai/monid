@@ -1,0 +1,43 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "synthetic: loyaltie#build-cart-link's own request paired with an HTTP 400. The response body is the one the server returned on 2026-11-20 for an unparseable JSON-RPC body (the only way to make this keyless MCP server answer non-2xx on purpose); tool-level failures come back as HTTP 200 instead.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://loyaltie.com/api/ucp/mcp",
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "method": "tools/call",
+                    "params": {
+                        "name": "build_cart_link",
+                        "arguments": {
+                            "cart": {
+                                "line_items": [
+                                    {
+                                        "id": "00036129-287b-43a6-a426-18bd0d9b2f5f",
+                                        "quantity": 2
+                                    }
+                                ]
+                            },
+                            "src": "api",
+                            "agent_id": "monid"
+                        }
+                    }
+                }
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": null,
+                    "error": {
+                        "code": -32700,
+                        "message": "Parse error"
+                    }
+                }
+            }
+        }
+    ]
+}
