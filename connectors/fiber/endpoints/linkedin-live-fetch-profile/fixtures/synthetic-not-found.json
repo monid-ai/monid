@@ -1,0 +1,21 @@
+{
+    "name": "not-found",
+    "description": "Synthetic: shape follows Fiber's response schema (fiber-ai/backend, 2026-11); no recorded call. Profile no longer served by LinkedIn: 404 {message}.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.fiber.ai/v1/linkedin-live-fetch/profile/single",
+                "body": {
+                    "identifier": "no-such-profile-xyz"
+                }
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "message": "The requested profile was not found. Please check the profile's identifier!"
+                }
+            }
+        }
+    ]
+}

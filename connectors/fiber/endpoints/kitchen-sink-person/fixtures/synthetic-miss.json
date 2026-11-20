@@ -1,0 +1,28 @@
+{
+    "name": "miss",
+    "description": "Synthetic: shape follows Fiber's response schema (fiber-ai/backend, 2026-11); no recorded call. No match: empty data, nothing charged.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.fiber.ai/v1/kitchen-sink/person",
+                "body": {
+                    "emailAddress": "nobody@example.com"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "output": {
+                        "data": [],
+                        "message": "Could not find any profile matching your parameters"
+                    },
+                    "chargeInfo": {
+                        "method": "charged-now",
+                        "creditsCharged": 0
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "name": "provider-error",
+    "description": "Synthetic: shape follows Fiber's response schema (fiber-ai/backend, 2026-11); no recorded call. Bad API key: 401 {message}.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.fiber.ai/v1/linkedin-live-fetch/profile/single",
+                "body": {
+                    "identifier": "williamhgates"
+                }
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "message": "Invalid API key"
+                }
+            }
+        }
+    ]
+}
