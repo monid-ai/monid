@@ -319,6 +319,13 @@
         "getFollowers": true,
         "getFollowing": false
     },
+    "leado/reddit-scraper-pro": {
+        "subreddits": [
+            "SaaS"
+        ],
+        "maxPostsPerSource": 2,
+        "includeComments": false
+    },
     "practicaltools/apify-reddit-api": {
         "searches": [
             "deno"

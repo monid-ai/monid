@@ -84,6 +84,8 @@ const CHAIN_COUNTS: Record<string, Record<string, number>> = {
     // reactions/comments off, profile modes default "short" (free)
     "harvestapi/linkedin-post-search": { post: 2 },
     "harvestapi/linkedin-profile-posts": { post: 2 },
+    // chain items carry no `type` → both count as posts, 0 comments
+    "leado/reddit-scraper-pro": { post: 2, comment: 0 },
     // no oldestPostDate, no AI toggles, no transcription mode; chain
     // items carry no duration → base videos only
     "streamers/youtube-scraper": { result: 2 },

@@ -106,6 +106,7 @@
         "apify#johnvc/yandex-reverse-image-search",
         "apify#johnvc/youtubetranscripts",
         "apify#kaitoeasyapi/premium-x-follower-scraper-following-data",
+        "apify#leado/reddit-scraper-pro",
         "apify#practicaltools/apify-reddit-api",
         "apify#scraptik/tiktok-api",
         "apify#scraptik/tiktok-comments-scraper-api",
