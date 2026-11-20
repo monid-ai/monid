@@ -1,0 +1,36 @@
+{
+    "name": "synthetic-market-snapshot-ok",
+    "description": "SYNTHETIC: hand-written, not recorded. No real member data and no real key; every number is a placeholder, not market data. Shape from QuantGPT's /api/v1 partner door (terminal/api_v1.py partner_call and reply, 2026-11-20): a 200 is {tool, result, disclaimer}, a refusal is {error, ..., disclaimer}. TODO: replace via `deno task record` once a partner key (QUANTGPT_CREDENTIALS_API_KEY) exists. Happy chain for quantgpt#tools/market_snapshot: one 200 with a trimmed overview (indexes and breadth only). Settles the flat US$0.02 call.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "tool": "market_snapshot",
+                    "result": {
+                        "as_of": "2000-01-03",
+                        "cached_seconds": 300,
+                        "indexes": [
+                            {
+                                "symbol": "$SPX",
+                                "close": 1000.0,
+                                "vs_sma50": 0.01,
+                                "vs_sma200": 0.02,
+                                "trend": "up"
+                            }
+                        ],
+                        "breadth": {
+                            "pct_above_sma50": 0.5,
+                            "pct_above_sma200": 0.5
+                        }
+                    },
+                    "disclaimer": "QuantGPT is a research tool. Its results describe what past data did: report the numbers as they come back, losing years included. It gives no investment advice, makes no forecasts or recommendations, and places no trades: no tool sends an order or reaches a broker."
+                }
+            }
+        }
+    ]
+}

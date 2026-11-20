@@ -1,0 +1,53 @@
+{
+    "name": "synthetic-backtest-fast",
+    "description": "SYNTHETIC: hand-written, not recorded. No real member data and no real key; every number is a placeholder, not market data. Shape from QuantGPT's /api/v1 partner door (terminal/api_v1.py partner_call and reply, 2026-11-20): a 200 is {tool, result, disclaimer}, a refusal is {error, ..., disclaimer}. TODO: replace via `deno task record` once a partner key (QUANTGPT_CREDENTIALS_API_KEY) exists. run_backtest finishes inside the submit call: the finished report comes back in one 200 and settles the flat US$0.10 at once, no poll.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "tool": "run_backtest",
+                    "result": {
+                        "meta": {
+                            "study": "custom",
+                            "start_year": 1998,
+                            "rebalance": "monthly",
+                            "benchmark": "$SPXTR",
+                            "split_year": 2015
+                        },
+                        "result": {
+                            "finding": "tradeoff",
+                            "stats": {
+                                "cagr": 0.01,
+                                "sharpe": 0.1,
+                                "max_drawdown": -0.5,
+                                "benchmark_cagr": 0.02
+                            },
+                            "decades": [
+                                {
+                                    "decade": "2000s",
+                                    "cagr": -0.01,
+                                    "benchmark_cagr": 0.01
+                                },
+                                {
+                                    "decade": "2010s",
+                                    "cagr": 0.02,
+                                    "benchmark_cagr": 0.03
+                                }
+                            ],
+                            "walk_forward": {
+                                "in_sample_sharpe": 0.2,
+                                "out_of_sample_sharpe": 0.0
+                            }
+                        }
+                    },
+                    "disclaimer": "QuantGPT is a research tool. Its results describe what past data did: report the numbers as they come back, losing years included. It gives no investment advice, makes no forecasts or recommendations, and places no trades: no tool sends an order or reaches a broker."
+                }
+            }
+        }
+    ]
+}

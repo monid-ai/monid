@@ -1,0 +1,39 @@
+{
+    "name": "synthetic-backtest-failed",
+    "description": "SYNTHETIC: hand-written, not recorded. No real member data and no real key; every number is a placeholder, not market data. Shape from QuantGPT's /api/v1 partner door (terminal/api_v1.py partner_call and reply, 2026-11-20): a 200 is {tool, result, disclaimer}, a refusal is {error, ..., disclaimer}. TODO: replace via `deno task record` once a partner key (QUANTGPT_CREDENTIALS_API_KEY) exists. The job itself fails: fetch_job answers 400 {error: job failed: ...}. Terminal, zero usage, the reason survives into the public message.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "tool": "run_backtest",
+                    "result": {
+                        "status": "running",
+                        "job_id": "JOB1",
+                        "seconds": 20,
+                        "next": "Still computing after 20s. Collect the result with fetch_job using this job_id."
+                    },
+                    "disclaimer": "QuantGPT is a research tool. Its results describe what past data did: report the numbers as they come back, losing years included. It gives no investment advice, makes no forecasts or recommendations, and places no trades: no tool sends an order or reaches a broker."
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/api/v1/tools/fetch_job"
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "error": "job failed: backtest failed: no stock passed the filters in any period",
+                    "tool": "fetch_job",
+                    "disclaimer": "QuantGPT is a research tool. Its results describe what past data did: report the numbers as they come back, losing years included. It gives no investment advice, makes no forecasts or recommendations, and places no trades: no tool sends an order or reaches a broker."
+                }
+            }
+        }
+    ]
+}

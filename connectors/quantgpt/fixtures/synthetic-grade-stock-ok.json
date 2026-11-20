@@ -1,0 +1,37 @@
+{
+    "name": "synthetic-grade-stock-ok",
+    "description": "SYNTHETIC: hand-written, not recorded. No real member data and no real key; every number is a placeholder, not market data. Shape from QuantGPT's /api/v1 partner door (terminal/api_v1.py partner_call and reply, 2026-11-20): a 200 is {tool, result, disclaimer}, a refusal is {error, ..., disclaimer}. TODO: replace via `deno task record` once a partner key (QUANTGPT_CREDENTIALS_API_KEY) exists. Happy chain for quantgpt#tools/grade_stock on the fictional ticker SYNTH: one 200 with a trimmed report card (composite and two of the six dimensions). Settles the flat US$0.03 call.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "tool": "grade_stock",
+                    "result": {
+                        "ticker": "SYNTH",
+                        "as_of": "2000-01-03",
+                        "composite": {
+                            "grade": "C",
+                            "score": 50
+                        },
+                        "dimensions": {
+                            "momentum": {
+                                "grade": "C",
+                                "percentile": 50
+                            },
+                            "value": {
+                                "grade": "C",
+                                "percentile": 50
+                            }
+                        }
+                    },
+                    "disclaimer": "QuantGPT is a research tool. Its results describe what past data did: report the numbers as they come back, losing years included. It gives no investment advice, makes no forecasts or recommendations, and places no trades: no tool sends an order or reaches a broker."
+                }
+            }
+        }
+    ]
+}
