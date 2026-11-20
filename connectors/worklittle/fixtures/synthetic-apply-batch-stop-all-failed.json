@@ -1,0 +1,82 @@
+{
+    "name": "synthetic-apply-batch-stop-all-failed",
+    "description": "SYNTHETIC stop where both applications turn out failed at the final lookup: the same free ALL_APPLICATIONS_FAILED 502 as poll.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "results": [
+                        {
+                            "job_id": "synthetic-job-1",
+                            "ok": true,
+                            "session_id": "aas_s1",
+                            "status_url": "https://api.worklittle.com/v1/apply/aas_s1",
+                            "status": "queued",
+                            "already_applied": false
+                        },
+                        {
+                            "job_id": "synthetic-job-2",
+                            "ok": true,
+                            "session_id": "aas_s2",
+                            "status_url": "https://api.worklittle.com/v1/apply/aas_s2",
+                            "status": "queued",
+                            "already_applied": false
+                        }
+                    ],
+                    "started": 2,
+                    "already_applied": 0,
+                    "failed": 0,
+                    "applicant_id": "usr_synthetic_applicant",
+                    "next_step": "Poll each status_url."
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/apply/aas_s1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "session": {
+                        "id": "aas_s1",
+                        "status": "failed",
+                        "cost_usd": 0,
+                        "applicant_id": "usr_synthetic_applicant",
+                        "error_message": "The job closed while applying."
+                    },
+                    "next_step": "",
+                    "field_fills": [],
+                    "final_fields": {}
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/apply/aas_s2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "session": {
+                        "id": "aas_s2",
+                        "status": "failed",
+                        "cost_usd": 0,
+                        "applicant_id": "usr_synthetic_applicant",
+                        "error_message": "The employer's site showed a bot check."
+                    },
+                    "next_step": "",
+                    "field_fills": [],
+                    "final_fields": {}
+                }
+            }
+        }
+    ]
+}

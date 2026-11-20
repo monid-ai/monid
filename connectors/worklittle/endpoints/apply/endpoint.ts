@@ -355,10 +355,23 @@ export default defineEndpoint({
                     jobs.push(job);
                     continue;
                 }
-                const res = await utils.http({
-                    method: "GET",
-                    path: "/v1/apply/" + encodeURIComponent(job.session_id),
-                });
+                // A lookup that THROWS (timeout, network) must not lose the
+                // rows already read: keep this row as it was and go on.
+                let res;
+                try {
+                    res = await utils.http({
+                        method: "GET",
+                        path: "/v1/apply/" +
+                            encodeURIComponent(job.session_id),
+                    });
+                } catch (error) {
+                    logger.warn("worklittle stop status lookup threw", {
+                        session: job.session_id,
+                        error: String(error),
+                    });
+                    jobs.push(job);
+                    continue;
+                }
                 if (res.status < 200 || res.status >= 300) {
                     // A lookup that failed leaves the row as it was; the
                     // application keeps running upstream.
@@ -392,6 +405,33 @@ export default defineEndpoint({
                 externalRunId: data.lifecycle.state.externalRunId,
                 data: { applicant_id: prior.applicant_id, jobs },
             };
+            // every job refused or failed: the call failed as a whole (free)
+            if (
+                jobs.length > 0 &&
+                jobs.every((j) =>
+                    !j.already_applied && (!j.ok || j.status === "failed")
+                )
+            ) {
+                return {
+                    kind: "COMPLETED",
+                    httpStatus: 502,
+                    providerHttpStatus: 200,
+                    output: {
+                        error: {
+                            code: "ALL_APPLICATIONS_FAILED",
+                            message: "No application went through: " +
+                                jobs.map((j) =>
+                                    j.job_id + ": " +
+                                    (j.error_message ?? j.error_code ??
+                                        "failed")
+                                ).join("; "),
+                        },
+                        applicant_id: prior.applicant_id,
+                        jobs,
+                    } as Json,
+                    state,
+                };
+            }
             return {
                 kind: "COMPLETED",
                 httpStatus: 200,

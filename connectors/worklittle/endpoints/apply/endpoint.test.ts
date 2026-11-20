@@ -138,3 +138,48 @@ Deno.test("worklittle#apply: 1–10 job_ids, applicant required", async () => {
     ];
     for (const body of bad) await rejects(ID, { body }, JSON.stringify(body));
 });
+
+const STOP_INPUT: RunInput = {
+    body: {
+        applicant_id: "usr_synthetic_applicant",
+        job_ids: ["synthetic-job-1", "synthetic-job-2"],
+    },
+};
+const stopWith = async (fixture: string) => {
+    const loaded = await loadEndpoint({
+        unit: await testSealedUnit(ID),
+        input: STOP_INPUT,
+        mode: "replay",
+        fixture: await loadFixture(`${fixturesDir}${fixture}.json`),
+    });
+    const run = { runId: "test-run-stop" };
+    const started = await loaded.start(STOP_INPUT, run);
+    assert(started.kind === "RUNNING");
+    return await loaded.stop(STOP_INPUT, started.state, run);
+};
+
+Deno.test("worklittle#apply: a stop lookup that throws keeps what already finished", async () => {
+    const stopped = await stopWith("synthetic-apply-batch-stop-lookup-throws");
+    assert(stopped.kind === "COMPLETED", "stop still settles");
+    assertEquals(stopped.httpStatus, 200);
+    assertEquals(stopped.usage.credits, { default: 0.2 });
+    assertEquals(stopped.usage.evidence, { RESULT: 1 });
+    const out = stopped.output as {
+        jobs: Array<{ session_id: string; status: string }>;
+    };
+    assertEquals(out.jobs.map((j) => [j.session_id, j.status]), [
+        ["aas_s1", "completed"],
+        ["aas_s2", "queued"],
+    ]);
+});
+
+Deno.test("worklittle#apply: stop with every application failed is the free 502", async () => {
+    const stopped = await stopWith("synthetic-apply-batch-stop-all-failed");
+    assert(stopped.kind === "COMPLETED");
+    assertEquals(stopped.httpStatus, 502);
+    assertEquals(stopped.isProviderError, true);
+    assertEquals(stopped.usage, { credits: {}, evidence: {} });
+    assert(
+        JSON.stringify(stopped.output).includes("ALL_APPLICATIONS_FAILED"),
+    );
+});
