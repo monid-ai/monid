@@ -4,7 +4,10 @@ import { z } from "zod";
  * Shared fragments for the Fiber endpoint schemas — a faithful mirror of
  * the API's own zod (fiber-ai/backend `api/routes/*`, 2026-11): optionality
  * only, no `.default()` (design D25). Fiber's `nullish()` fields are
- * mirrored as `optional()` — a caller never needs to send `null`.
+ * mirrored as `optional()` — a caller never needs to send `null` — except
+ * where a caller may reasonably forward one (e.g. an empty
+ * `emailAddress`), which is mirrored as `nullish()` so a vendor-valid
+ * request never fails locally.
  */
 
 /** Detailed-education toggle shared by the profile endpoints. */

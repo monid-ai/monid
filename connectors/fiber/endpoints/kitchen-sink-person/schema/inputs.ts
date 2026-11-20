@@ -40,7 +40,7 @@ export const zKitchenSinkPersonBody = z.object({
     ]).optional().describe(
         "LinkedIn profile identifier. The most accurate input.",
     ),
-    emailAddress: z.email().optional().describe(
+    emailAddress: z.email().nullish().describe(
         "Email address to look up. Second-best accuracy after " +
             "profileIdentifier.",
     ),

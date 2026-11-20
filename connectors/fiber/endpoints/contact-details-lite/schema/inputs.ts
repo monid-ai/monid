@@ -18,7 +18,7 @@ export const zLiteRevealBody = z.object({
                     "URN (e.g. 'williamhgates', " +
                     "'https://www.linkedin.com/in/williamhgates').",
             ),
-            fullName: z.string().min(1).optional().describe(
+            fullName: z.string().min(1).nullish().describe(
                 "Full name of the person. Optional — improves match " +
                     "accuracy.",
             ),
@@ -49,7 +49,7 @@ export const zLiteRevealBody = z.object({
         ).optional(),
     }).optional(),
     patience: z.enum(["MINIMUM", "LOW", "MEDIUM", "HIGH", "EXTREME", "MAXIMUM"])
-        .optional().describe(
+        .nullish().describe(
             "How long to wait for email deliverability validation after a " +
                 "contact is found. Higher patience is slower but more " +
                 "accurate. Fiber default MEDIUM.",

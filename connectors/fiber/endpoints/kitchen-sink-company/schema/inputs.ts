@@ -19,7 +19,7 @@ export const zKitchenSinkCompanyBody = z.object({
                 "(https, www) are stripped; subdomains and paths are kept " +
                 "(e.g. 'my-company.netlify.app').",
         ),
-    }).describe("The company's domain.").optional(),
+    }).describe("The company's domain.").nullish(),
     companyLocation: zLocation.optional().describe(
         "Headquarters location — disambiguates companies with similar names " +
             "or domains.",

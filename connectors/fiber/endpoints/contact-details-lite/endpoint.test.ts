@@ -2,18 +2,25 @@ import { assert, assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import {
     estimateEndpoint,
+    type Fixture,
     liveSkip,
     loadFixture,
     runEndpoint,
     testSealedUnit,
 } from "@shared/testing";
+import type { Json } from "@shared/core";
 
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
 const ID = "fiber#contact-details/lite";
 const fixture = (name: string) =>
     loadFixture(`${fixturesDir}synthetic-${name}.json`);
+/** What the caller sees: Fiber's body minus the `chargeInfo` receipt. */
+const delivered = (f: Fixture) => ({
+    output: (f.calls[0].res.body as { output: Json }).output,
+});
 
 Deno.test(`${ID} default enrichmentType: one work email draws one email credit`, async () => {
+    const happy = await fixture("work-email");
     const result = await runEndpoint({
         unit: await testSealedUnit(ID),
         input: {
@@ -25,12 +32,16 @@ Deno.test(`${ID} default enrichmentType: one work email draws one email credit`,
             },
         },
         mode: "replay",
-        fixture: await fixture("work-email"),
+        fixture: happy,
     });
+    assertEquals(result.httpStatus, 200);
+    assertEquals(result.isProviderError, false);
     assertEquals(result.usage, {
         credits: { default: 1 },
         evidence: { email: 1, phone: 0 },
     });
+    // the one work email reaches the caller; the receipt does not
+    assertEquals(result.output, delivered(happy));
 });
 
 Deno.test(`${ID} nothing found: 200 with nothing found draws nothing`, async () => {
@@ -140,6 +151,23 @@ Deno.test(`${ID} input gate: name-domain without a domain is rejected before the
     );
 });
 
+Deno.test(`${ID} input gate twin: Fiber's null fullName and patience pass`, async () => {
+    const usage = await estimateEndpoint(await testSealedUnit(ID), {
+        body: {
+            input: {
+                mode: "linkedin",
+                linkedinIdentifier: "williamhgates",
+                fullName: null,
+            },
+            patience: null,
+        },
+    });
+    assertEquals(usage, {
+        credits: { default: 1 },
+        evidence: { email: 1, phone: 0 },
+    });
+});
+
 Deno.test({
     name: `${ID} live (gated on FIBER_API_KEY)`,
     ignore: liveSkip("fiber"),
@@ -161,6 +189,13 @@ Deno.test({
             false,
             JSON.stringify(result.output),
         );
+        // shape, not amounts: either list may be empty on a miss
+        const profile = (result.output as {
+            output?: { profile?: Record<string, unknown> };
+        }).output?.profile;
+        assert(profile, JSON.stringify(result.output));
+        assert(Array.isArray(profile.emails));
+        assert(Array.isArray(profile.phoneNumbers));
     },
 });
 

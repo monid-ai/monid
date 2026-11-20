@@ -2,16 +2,39 @@ import { assert, assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import {
     estimateEndpoint,
+    type Fixture,
     liveSkip,
     loadFixture,
     runEndpoint,
     testSealedUnit,
 } from "@shared/testing";
+import type { Json } from "@shared/core";
 
 const fixturesDir = fromFileUrl(new URL("./fixtures/", import.meta.url));
 const ID = "fiber#email-to-person/single";
 const fixture = (name: string) =>
     loadFixture(`${fixturesDir}synthetic-${name}.json`);
+/** What the caller sees: Fiber's body minus the `chargeInfo` receipt. */
+const delivered = (f: Fixture) => ({
+    output: (f.calls[0].res.body as { output: Json }).output,
+});
+
+Deno.test(`${ID} happy: one profile found draws one lookup, receipt stripped`, async () => {
+    const happy = await fixture("happy");
+    const result = await runEndpoint({
+        unit: await testSealedUnit(ID),
+        input: { body: { email: "bill.gates@example.org" } },
+        mode: "replay",
+        fixture: happy,
+    });
+    assertEquals(result.httpStatus, 200);
+    assertEquals(result.isProviderError, false);
+    assertEquals(result.usage, {
+        credits: { default: 2 },
+        evidence: { RESULT: 1 },
+    });
+    assertEquals(result.output, delivered(happy));
+});
 
 Deno.test(`${ID} miss: 200 with nothing found draws nothing`, async () => {
     const result = await runEndpoint({
@@ -86,5 +109,8 @@ Deno.test({
             false,
             JSON.stringify(result.output),
         );
+        // shape, not amounts: a valid lookup can miss (empty data)
+        const output = result.output as { output?: { data?: unknown } };
+        assert(Array.isArray(output.output?.data), JSON.stringify(output));
     },
 });

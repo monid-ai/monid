@@ -1,0 +1,25 @@
+{
+    "name": "provider-error",
+    "description": "Synthetic: shape follows Fiber's response schema (fiber-ai/backend, 2026-11); no recorded call. Rate limited: 429 {statusCode, error, message} (Fastify's own envelope).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.fiber.ai/v1/kitchen-sink/company",
+                "body": {
+                    "companyName": {
+                        "value": "Stripe"
+                    }
+                }
+            },
+            "res": {
+                "status": 429,
+                "body": {
+                    "statusCode": 429,
+                    "error": "Too Many Requests",
+                    "message": "Rate limit exceeded, retry in 1 minute"
+                }
+            }
+        }
+    ]
+}
