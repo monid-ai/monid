@@ -1,0 +1,115 @@
+{
+    "name": "happy",
+    "description": "raw recording (loyaltie#get-maker, scenario happy) — hand-minimize into a shared chain before committing",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://loyaltie.com/api/ucp/mcp",
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "method": "tools/call",
+                    "params": {
+                        "name": "get_maker",
+                        "arguments": {
+                            "maker": {
+                                "id": "cimmacoffee"
+                            },
+                            "src": "api",
+                            "agent_id": "monid"
+                        }
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "{\"ucp\":{\"version\":\"2026-04-08\"},\"maker\":{\"id\":\"28c25f64-02fa-4e0e-8fa2-d8a9b81ba336\",\"name\":\"CIMMA Coffee\",\"link\":\"cimmacoffee\",\"url\":\"https://loyaltie.com/cimmacoffee?src=api&agent=monid\",\"loc\":\"Magnolia, TX\",\"on_loyaltie_since\":2026,\"one_line\":\"CIMMA Coffee in Magnolia, Texas sells single-origin Honduran coffee grown on their family’s farm.\",\"story\":\"CIMMA Coffee is a coffee business in Magnolia, Texas offering single-origin Honduran coffee. The coffee is grown on the family’s farm in Honduras"
+                            }
+                        ],
+                        "isError": false,
+                        "structuredContent": {
+                            "ucp": {
+                                "version": "2026-04-08"
+                            },
+                            "maker": {
+                                "id": "28c25f64-02fa-4e0e-8fa2-d8a9b81ba336",
+                                "name": "CIMMA Coffee",
+                                "link": "cimmacoffee",
+                                "url": "https://loyaltie.com/cimmacoffee?src=api&agent=monid",
+                                "loc": "Magnolia, TX",
+                                "on_loyaltie_since": 2026,
+                                "one_line": "CIMMA Coffee in Magnolia, Texas sells single-origin Honduran coffee grown on their family’s farm.",
+                                "story": "CIMMA Coffee is a coffee business in Magnolia, Texas offering single-origin Honduran coffee. The coffee is grown on the family’s farm in Honduras, which they say has been in their family for three generations. They sell the coffee directly from them.",
+                                "categories": [
+                                    "drink/coffee/other-coffee"
+                                ],
+                                "policies": {
+                                    "shipping": {
+                                        "ships_to_states": [
+                                            "AL",
+                                            "AZ"
+                                        ],
+                                        "ships_within_days": [
+                                            3,
+                                            5
+                                        ]
+                                    }
+                                },
+                                "products": [
+                                    {
+                                        "id": "00036129-287b-43a6-a426-18bd0d9b2f5f",
+                                        "title": "Peak Espresso – 5 lb Single-Origin Coffee",
+                                        "price": {
+                                            "amount": 9499,
+                                            "currency": "USD"
+                                        },
+                                        "availability": {
+                                            "available": true
+                                        },
+                                        "media": [
+                                            {
+                                                "type": "image",
+                                                "url": "https://cdn.loyaltie.com/ve3cc3ezjt1bs2dz39iw3ccotrh7",
+                                                "alt_text": "Peak Espresso – 5 lb Single-Origin Coffee"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "89b31954-c846-4238-8a22-46f660e518cf",
+                                        "title": "CIMMA Coffee Peak Espresso, Whole Bean, 4 oz",
+                                        "price": {
+                                            "amount": 899,
+                                            "currency": "USD"
+                                        },
+                                        "availability": {
+                                            "available": true
+                                        },
+                                        "media": [
+                                            {
+                                                "type": "image",
+                                                "url": "https://cdn.loyaltie.com/ma4yn2fc7nqlhefywqtgswdvo8ji",
+                                                "alt_text": "CIMMA Coffee Peak Espresso, Whole Bean, 4 oz"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "messages": [],
+                            "next": [
+                                "Call lookup_catalog with these product ids for links and warnings before showing any product."
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}
