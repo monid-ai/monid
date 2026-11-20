@@ -2,7 +2,7 @@
 
 ## 1. Provider + shared schemas
 
-- [x] 1.1 provider.ts: bearer auth, baseUrl, USD pool, receipt-stripping
+- [x] 1.1 provider.ts: bearer auth, baseUrl, USD pool, quota-stripping
       consolidate, `{error: {code, message}}` fromError
 - [x] 1.2 schema/filters.ts (search + salary average), documents.ts,
       applicants.ts, apply.ts (apply + batch options)

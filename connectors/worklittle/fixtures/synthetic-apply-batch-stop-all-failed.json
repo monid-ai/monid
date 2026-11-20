@@ -47,12 +47,9 @@
                     "session": {
                         "id": "aas_s1",
                         "status": "failed",
-                        "cost_usd": 0,
-                        "applicant_id": "usr_synthetic_applicant",
-                        "error_message": "The job closed while applying."
+                        "applicant_id": "usr_synthetic_applicant"
                     },
                     "next_step": "",
-                    "field_fills": [],
                     "final_fields": {}
                 }
             }
@@ -68,12 +65,9 @@
                     "session": {
                         "id": "aas_s2",
                         "status": "failed",
-                        "cost_usd": 0,
-                        "applicant_id": "usr_synthetic_applicant",
-                        "error_message": "The employer's site showed a bot check."
+                        "applicant_id": "usr_synthetic_applicant"
                     },
                     "next_step": "",
-                    "field_fills": [],
                     "final_fields": {}
                 }
             }

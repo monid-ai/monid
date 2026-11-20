@@ -1,6 +1,6 @@
 {
     "name": "synthetic-apply-practice",
-    "description": "SYNTHETIC practice run (jobs-api applyWithAiBrowser test mode): { test: true } alone answers a test session; nothing opens or bills. The billing receipt is stripped.",
+    "description": "SYNTHETIC practice run (jobs-api applyWithAiBrowser test mode): { test: true } alone answers a test session; nothing opens or bills.",
     "calls": [
         {
             "req": {
@@ -16,13 +16,9 @@
                     "next_step": "Poll status_url.",
                     "session": {
                         "id": "aas_test_synthetic",
-                        "status": "queued",
-                        "cost_usd": 0
+                        "status": "queued"
                     },
-                    "already_applied": false,
-                    "billing": {
-                        "charged_usd": 0
-                    }
+                    "already_applied": false
                 }
             }
         }

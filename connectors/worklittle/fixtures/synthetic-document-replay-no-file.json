@@ -19,12 +19,7 @@
                     "pdf_mime": "application/pdf",
                     "pdf_filename": "jordan-rivera-resume.pdf",
                     "docx_mime": null,
-                    "docx_filename": null,
-                    "billing": {
-                        "charged_usd": 0.01,
-                        "balance_after_usd": 41.27,
-                        "already_charged": false
-                    }
+                    "docx_filename": null
                 }
             }
         }

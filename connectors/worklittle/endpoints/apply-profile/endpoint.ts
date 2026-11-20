@@ -23,7 +23,9 @@ export default defineEndpoint({
             "is emailed to that person. `action: get` returns their " +
             "profile with every application (job, employer, status) and " +
             "the emails employers sent them (interview invites, replies). " +
-            "`action: delete` erases their profile and resumes. Free.",
+            "`action: delete` erases their profile and resumes; only the " +
+            "app that created the applicant can delete it (others get " +
+            "403). Free.",
         docsUrl: "https://docs.worklittle.com/jobs/api/apply-for-jobs",
         categories: ["jobs"],
         notes: [

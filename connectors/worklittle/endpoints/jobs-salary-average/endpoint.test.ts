@@ -29,7 +29,7 @@ const rejects = async (id: string, input: RunInput, why: string) =>
 
 const ID = "worklittle#jobs/salary-average";
 
-Deno.test("worklittle#jobs/salary-average happy (synthetic): stats, free, receipt stripped", async () => {
+Deno.test("worklittle#jobs/salary-average happy (synthetic): stats, free, quota stripped", async () => {
     const result = await replay(
         ID,
         { queryParams: { title: "data engineer", country: "US" } },

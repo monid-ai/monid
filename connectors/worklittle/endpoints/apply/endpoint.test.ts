@@ -74,9 +74,9 @@ Deno.test("worklittle#apply: a failed application is free", async () => {
     assertEquals(result.usage, { credits: {}, evidence: {} });
     assert(
         JSON.stringify(result.output).includes(
-            "The employer's site showed a bot check.",
+            "synthetic-job-1: failed on Worklittle's side",
         ),
-        "the polled failure reason reaches the output",
+        "a mid-run failure (the status carries no reason) is named plainly",
     );
 });
 
@@ -91,7 +91,6 @@ Deno.test("worklittle#apply: { test: true } alone is a free practice run", async
     assertEquals(result.usage, { credits: {}, evidence: { RESULT: 0 } });
     const out = result.output as Record<string, unknown>;
     assertEquals(out.test, true);
-    assertEquals(out.billing, undefined);
 });
 
 Deno.test("worklittle#apply: stop at runMs settles what finished and cancels nothing", async () => {

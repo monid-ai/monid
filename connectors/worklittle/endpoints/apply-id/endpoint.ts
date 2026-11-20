@@ -12,7 +12,7 @@ export default defineEndpoint({
         description: "Act on one application started by worklittle#apply, " +
             "by its `session_id`. `action: status` returns where it " +
             "stands (queued, running, awaiting_input, awaiting_submit, " +
-            "completed, failed, stopped) with `next_step`. `continue` " +
+            "completed, stopped, cancelled, failed) with `next_step`. `continue` " +
             "sends `answers` when it is waiting on something only the " +
             "person knows (status awaiting_input; the questions are in " +
             "`session.questions`); the answers are saved to the " +

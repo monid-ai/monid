@@ -26,15 +26,15 @@ const zJobRow = z.strictObject({
     session_id: z.string().nullable(),
     status: z.string().nullable(),
     already_applied: z.boolean(),
-    cost_usd: z.number(),
     error_code: z.string().nullable(),
     error_message: z.string().nullable(),
 });
 /**
  * POST /v1/apply with `job_ids` (= /v1/apply/batch) — apply AND SUBMIT one
- * person to one to ten jobs. $0.20 per application that reaches an outcome (the same per-job
- * rule for every job: once per person per job; failures, refusals,
- * already-applied and `test` are free).
+ * person to one to ten jobs. $0.20 per application whose status is
+ * awaiting_input, awaiting_submit, completed or stopped (Worklittle's charged
+ * statuses; once per person per job). cancelled, failed, refusals,
+ * already-applied and `test` are free.
  *
  * ASYNC. Worklittle's batch call only STARTS the applications (one
  * `handlePublicStartApplyWithAi` per job, in order) and answers per-job
@@ -42,14 +42,15 @@ const zJobRow = z.strictObject({
  * exists yet. So `start` records one compact row per job in state and
  * `poll` reads `GET /v1/apply/{id}` for every application still queued or
  * running, until none is. The output is the batch summary with each job's
- * FINAL status and Worklittle's `cost_usd`.
+ * FINAL status.
  *
  * `Idempotency-Key: {runId}:submit` — Worklittle derives `<key>:<job_id>`
  * per job, so a retried start converges on the applications the first
  * attempt made. `use_profile: false` always (shared key).
  *
- * BILLING. Evidence counts jobs whose final status is an outcome; the claim
- * is the sum of the sessions' `cost_usd`.
+ * BILLING. Evidence counts jobs whose final status is one Worklittle
+ * charges; each is $0.20 (Monid's key is a company key: always the
+ * standard price).
  */
 export default defineEndpoint({
     meta: {
@@ -84,8 +85,8 @@ export default defineEndpoint({
             "409 COMPANY_LIMIT_REACHED, already applied) come back as " +
             "`ok: false` or `already_applied: true` rows and cost nothing.",
             "A job whose site blocks applying (captcha, bot check, form " +
-            "unavailable) comes back as an application that already " +
-            "failed, with the reason in `error_message`; it costs nothing.",
+            "unavailable) comes back as an application with status " +
+            "`failed`; it costs nothing.",
             "A bad applicant (400, or 409 APPLICANT_EXISTS) stops the " +
             "call after the first job; a 401/403 fails the whole call.",
             "Most applications finish in a few minutes; the run waits up " +
@@ -142,12 +143,12 @@ export default defineEndpoint({
                     output: res.body,
                 };
             }
-            // practice run: Worklittle's own answer, free, receipt stripped
+            // practice run: Worklittle's own answer, free
             if (!("job_ids" in (data.input.body ?? {}))) {
                 return {
                     kind: "COMPLETED",
                     httpStatus: res.status,
-                    output: utils.json.pluck(res.body, "$.billing").rest,
+                    output: res.body,
                 };
             }
             const results = utils.json.optionalGet(res.body, "$.results");
@@ -176,7 +177,6 @@ export default defineEndpoint({
                         : null,
                     status: typeof r.status === "string" ? r.status : null,
                     already_applied: r.already_applied === true,
-                    cost_usd: 0,
                     error_code: typeof error.code === "string"
                         ? error.code
                         : null,
@@ -219,7 +219,7 @@ export default defineEndpoint({
                                 jobs.map((j) =>
                                     j.job_id + ": " +
                                     (j.error_message ?? j.error_code ??
-                                        "failed")
+                                        "failed on Worklittle's side")
                                 ).join("; "),
                         },
                         applicant_id: state.data.applicant_id,
@@ -279,9 +279,6 @@ export default defineEndpoint({
                     status: typeof s.status === "string"
                         ? s.status
                         : job.status,
-                    cost_usd: typeof s.cost_usd === "number"
-                        ? s.cost_usd
-                        : job.cost_usd,
                     error_message: typeof s.error_message === "string" &&
                             s.error_message !== ""
                         ? s.error_message
@@ -317,7 +314,7 @@ export default defineEndpoint({
                                 jobs.map((j) =>
                                     j.job_id + ": " +
                                     (j.error_message ?? j.error_code ??
-                                        "failed")
+                                        "failed on Worklittle's side")
                                 ).join("; "),
                         },
                         applicant_id: prior.applicant_id,
@@ -337,8 +334,8 @@ export default defineEndpoint({
          *  a real employer application the person asked for, running in
          *  Worklittle's cloud, and it finishes there on its own. Stop reads
          *  every application once more and settles what finished by now
-         *  (submitted, held for review, paused, cancelled bill; rows still
-         *  running carry `cost_usd: 0` and bill nothing). Rows still
+         *  (awaiting_input, awaiting_submit, completed and stopped bill;
+         *  cancelled, failed and rows still running bill nothing). Rows still
          *  running come back with their `session_id` for
          *  worklittle#apply/{id}. */
         stop: async ({ data, utils, logger }) => {
@@ -392,9 +389,6 @@ export default defineEndpoint({
                     status: typeof s.status === "string"
                         ? s.status
                         : job.status,
-                    cost_usd: typeof s.cost_usd === "number"
-                        ? s.cost_usd
-                        : job.cost_usd,
                     error_message: typeof s.error_message === "string" &&
                             s.error_message !== ""
                         ? s.error_message
@@ -423,7 +417,7 @@ export default defineEndpoint({
                                 jobs.map((j) =>
                                     j.job_id + ": " +
                                     (j.error_message ?? j.error_code ??
-                                        "failed")
+                                        "failed on Worklittle's side")
                                 ).join("; "),
                         },
                         applicant_id: prior.applicant_id,
@@ -446,7 +440,8 @@ export default defineEndpoint({
             unit: Unit.RESULT,
             label: "applications",
             description: "applications that reached an outcome that is the " +
-                "person's: submitted, held for review, paused, or cancelled",
+                "person's: awaiting_input, awaiting_submit, completed or " +
+                "stopped (Worklittle's charged statuses)",
             consumes: { credit: "default", amount: 0.2 },
         },
         /** The hold promises one application per job; a test run nothing. */
@@ -465,12 +460,14 @@ export default defineEndpoint({
                     ? job.status
                     : null
             );
+            // Worklittle's public status alone says whether it was charged:
+            // these four are; cancelled (stopped before anything was filled
+            // in) and failed (anything on Worklittle's side) are free.
             const outcomes = [
-                "completed",
-                "awaiting_submit",
                 "awaiting_input",
-                "paused",
-                "cancelled",
+                "awaiting_submit",
+                "completed",
+                "stopped",
             ];
             const count = data.input.body?.test === true
                 ? 0
@@ -478,22 +475,6 @@ export default defineEndpoint({
                     typeof s === "string" && outcomes.includes(s)
                 ).length;
             return { counts: { RESULT: count } };
-        },
-        /** Worklittle's own numbers: the sum of every session's
-         *  `cost_usd`. Zero → the derived fold. */
-        consolidate: ({ data, utils }) => {
-            const jobs = utils.json.optionalGet(data.output, "$.jobs");
-            const costs = (Array.isArray(jobs) ? jobs : []).map((job) =>
-                job !== null && typeof job === "object" &&
-                    !Array.isArray(job) && typeof job.cost_usd === "number"
-                    ? job.cost_usd
-                    : 0
-            );
-            const total = costs.reduce((sum, c) => sum + c, 0);
-            return {
-                credits: { ...(total > 0 ? { default: total } : {}) },
-                output: data.output,
-            };
         },
     },
 });

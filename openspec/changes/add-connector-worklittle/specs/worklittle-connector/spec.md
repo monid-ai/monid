@@ -5,14 +5,13 @@
 ### Requirement: Worklittle provider definition
 The worklittle provider SHALL declare name `worklittle`, `request.baseUrl`
 `https://api.worklittle.com`, bearer auth, one credit pool `default`
-("US dollars"), a consolidate that claims a positive top-level
-`billing.charged_usd` and strips both `billing` and `meta.billing` from
-the output, and a fromError mapping `{error: {code, message}}` to
+("US dollars"), a consolidate that makes no claim and strips the quota
+counts (`meta.quota`, top-level `quota`) from the output, and a fromError mapping `{error: {code, message}}` to
 `{message, code, raw}`.
 
-#### Scenario: A free search strips the quota receipt
-- **WHEN** `GET /jobs` returns 200 with `meta.billing`
-- **THEN** usage is `{credits: {}, evidence: {}}` and `meta.billing` is
+#### Scenario: A free search strips the quota counts
+- **WHEN** `GET /jobs` returns 200 with `meta.quota`
+- **THEN** usage is `{credits: {}, evidence: {}}` and `meta.quota` is
   absent from the output
 
 #### Scenario: A provider error is data
@@ -37,11 +36,10 @@ file comes back.
 `worklittle#apply` SHALL submit with
 `use_profile: false` and `Idempotency-Key: {runId}:submit`, poll
 `GET /v1/apply/{id}` until no application is queued or running, and bill
-$0.20 per application whose final status is a chargeable outcome, with
-the sessions' `cost_usd` as the claim.
+$0.20 per application whose final status is one Worklittle charges (`awaiting_input`, `awaiting_submit`, `completed`, `stopped`).
 
 #### Scenario: A submitted application bills
-- **WHEN** the session reaches `completed` with `cost_usd: 0.2`
+- **WHEN** the session reaches `completed`
 - **THEN** usage is `{credits: {default: 0.2}, evidence: {RESULT: 1}}`
 
 #### Scenario: A failed or test application is free

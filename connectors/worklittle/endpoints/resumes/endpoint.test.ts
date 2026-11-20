@@ -46,7 +46,7 @@ Deno.test("worklittle: resume and cover-letter lifecycles intern to one fnTable 
     assertEquals(resume.lifecycle?.poll, letter.lifecycle?.poll);
 });
 
-Deno.test("worklittle#resumes async (synthetic): 202 -> working -> done settles $0.01, receipt stripped", async () => {
+Deno.test("worklittle#resumes async (synthetic): 202 -> working -> done settles $0.01", async () => {
     const result = await replay(ID, INPUT, "synthetic-resume-async");
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
@@ -58,7 +58,6 @@ Deno.test("worklittle#resumes async (synthetic): 202 -> working -> done settles 
     assertEquals(out.status, "done");
     assertEquals(out.document_type, "resume");
     assert(String(out.pdf_base64).length > 0);
-    assertEquals("billing" in out, false);
 });
 
 Deno.test("worklittle#resumes: a failed job is a free provider error with its status mapped back", async () => {

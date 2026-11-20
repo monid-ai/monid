@@ -1,6 +1,6 @@
 {
     "name": "synthetic-search-ok",
-    "description": "SYNTHETIC happy chain for worklittle#jobs/search. Shape from jobs-api rowToPublicJob + publicJobView (developer keys: no can_apply / apply_with_ai_eligible / job_summary / job_description) and the finalize() meta {total, limit, next_cursor, billing} (2026-10-29). meta.billing is the $0 jobs.list quota receipt the consolidate strips. The url pins the engine's URLSearchParams encoding of the test input. Replace via `deno task record` when WORKLITTLE_API_KEY exists.",
+    "description": "SYNTHETIC happy chain for worklittle#jobs/search. Shape from jobs-api rowToPublicJob + publicJobView (developer keys: can_apply, no apply_with_ai_eligible / visa_sponsorship_source / job_summary / job_description) and the finalize() meta {total, limit, next_cursor, quota} (2026-11-20). meta.quota is the shared jobs.list quota count the consolidate strips. The url pins the engine's URLSearchParams encoding of the test input. Replace via `deno task record` when WORKLITTLE_API_KEY exists.",
     "calls": [
         {
             "req": {
@@ -32,7 +32,6 @@
                                 "period": "year"
                             },
                             "visa_sponsorship": "yes",
-                            "visa_sponsorship_source": "posting",
                             "h1b_filings": null,
                             "experience_years_min": 5,
                             "job_address": null,
@@ -59,7 +58,8 @@
                                     "lng": null
                                 }
                             },
-                            "application": null
+                            "application": null,
+                            "can_apply": true
                         },
                         {
                             "id": "synthetic-job-2",
@@ -82,7 +82,6 @@
                                 "period": "year"
                             },
                             "visa_sponsorship": "yes",
-                            "visa_sponsorship_source": "posting",
                             "h1b_filings": null,
                             "experience_years_min": 5,
                             "job_address": null,
@@ -109,21 +108,19 @@
                                     "lng": null
                                 }
                             },
-                            "application": null
+                            "application": null,
+                            "can_apply": true
                         }
                     ],
                     "meta": {
                         "total": 2,
                         "limit": 2,
                         "next_cursor": "MTc2MTU3NzQ0NTpzeW50aGV0aWMtam9iLTI",
-                        "billing": {
-                            "charged_usd": 0,
-                            "balance_after_usd": null,
-                            "already_charged": false,
-                            "quota_units": 2,
-                            "quota_used": 1042,
-                            "quota_limit": 3000000,
-                            "quota_remaining": 2998958
+                        "quota": {
+                            "units": 2,
+                            "used": 1042,
+                            "limit": 3000000,
+                            "remaining": 2998958
                         }
                     }
                 }

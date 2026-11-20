@@ -27,13 +27,11 @@ import { defineProvider, presets } from "@shared/core";
  *     execution on the sync endpoints too).
  *
  * BILLING. Every Worklittle price is a flat USD amount and token usage is
- * never billed, so the pool is US dollars. Free responses carry a quota
- * receipt at `meta.billing` (`charged_usd: 0`, quota used/limit); a document
- * carries its receipt at top-level `billing` (`charged_usd`,
- * `balance_after_usd`, `already_charged`). The consolidate claims the
- * document receipt's `charged_usd` and strips both receipts from the
- * payload: they describe Monid's shared Worklittle account (its balance and
- * quota), not the caller's.
+ * never billed, so the pool is US dollars. Worklittle responses carry no
+ * money (prices are on `GET /v1/pricing`), so every bill is the derived
+ * fold: evidence × the pinned flat rate. Free reads carry quota counts at
+ * `meta.quota`; the consolidate strips them, since they describe Monid's
+ * shared Worklittle account, not the caller's.
  */
 export default defineProvider({
     name: "worklittle",
@@ -80,26 +78,14 @@ export default defineProvider({
          *  call as one flat USD amount (`GET /v1/pricing`), so the pool IS
          *  dollars — the exa / dataforseo posture. */
         credits: { default: { label: "US dollars" } },
-        /** The vendor's OWN claim (design D27): a document response carries
-         *  `billing.charged_usd`. Free reads carry a $0 quota receipt at
-         *  `meta.billing`, which is stripped and never claimed. Both
-         *  receipts describe Monid's shared account, so neither reaches the
-         *  caller. A zero or absent charge is omitted, so the derived fold
-         *  settles. */
+        /** No vendor claim (design D27): Worklittle answers carry no money,
+         *  so the derived fold settles. The quota counts (`meta.quota`, or
+         *  top-level `quota`) describe Monid's shared account and never
+         *  reach the caller. */
         consolidate: ({ data, utils }) => {
-            const doc = utils.json.pluck(data.output, "$.billing");
-            const charged = doc.value === undefined
-                ? undefined
-                : utils.json.optionalNum(doc.value, "$.charged_usd");
-            const quota = utils.json.pluck(doc.rest, "$.meta.billing");
-            return {
-                credits: {
-                    ...(charged !== undefined && charged > 0
-                        ? { default: charged }
-                        : {}),
-                },
-                output: quota.rest,
-            };
+            const meta = utils.json.pluck(data.output, "$.meta.quota");
+            const top = utils.json.pluck(meta.rest, "$.quota");
+            return { credits: {}, output: top.rest };
         },
     },
     output: {
@@ -112,10 +98,10 @@ export default defineProvider({
                 "$.error.message",
             );
             const code = utils.json.optionalGet(data.output, "$.error.code");
-            // as in consolidate: Monid's shared-account receipts never
-            // reach the caller, on errors either
-            const doc = utils.json.pluck(data.output, "$.billing");
-            const quota = utils.json.pluck(doc.rest, "$.meta.billing");
+            // as in consolidate: Monid's shared-account quota never reaches
+            // the caller, on errors either
+            const meta = utils.json.pluck(data.output, "$.meta.quota");
+            const quota = utils.json.pluck(meta.rest, "$.quota");
             return {
                 message: typeof message === "string" && message !== ""
                     ? message

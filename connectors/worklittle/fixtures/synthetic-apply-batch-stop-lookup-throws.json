@@ -47,11 +47,9 @@
                     "session": {
                         "id": "aas_s1",
                         "status": "completed",
-                        "cost_usd": 0.2,
                         "applicant_id": "usr_synthetic_applicant"
                     },
                     "next_step": "",
-                    "field_fills": [],
                     "final_fields": {}
                 }
             }

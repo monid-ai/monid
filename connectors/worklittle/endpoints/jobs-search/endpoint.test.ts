@@ -72,7 +72,7 @@ Deno.test("worklittle: 8 endpoints, one USD pool, bearer auth, ids pinned", asyn
     );
 });
 
-Deno.test("worklittle#jobs/search happy (synthetic): free, quota receipt stripped", async () => {
+Deno.test("worklittle#jobs/search happy (synthetic): free, quota stripped", async () => {
     const result = await replay(ID, {
         queryParams: {
             title: "product manager",
@@ -93,7 +93,7 @@ Deno.test("worklittle#jobs/search happy (synthetic): free, quota receipt strippe
         "synthetic-job-1",
         "synthetic-job-2",
     ]);
-    assertEquals("billing" in output.meta, false);
+    assertEquals("quota" in output.meta, false);
     assertEquals(
         output.meta.next_cursor,
         "MTc2MTU3NzQ0NTpzeW50aGV0aWMtam9iLTI",

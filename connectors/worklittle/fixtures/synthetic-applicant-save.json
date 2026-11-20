@@ -1,6 +1,6 @@
 {
     "name": "synthetic-applicant-save",
-    "description": "SYNTHETIC POST /v1/apply/profile {action: save}: 201 {applicant_id, applicant, resume_uploaded, note} (jobs-api routes/applyApi.ts handleApplicantAction \u2192 handleCreateApplicant, 2026-10-30). Fields trimmed.",
+    "description": "SYNTHETIC POST /v1/apply/profile {action: save}: 201 {applicant_id, applicant, resume_uploaded, note} (jobs-api routes/applyApi.ts handleApplicantAction → handleCreateApplicant, 2026-10-30). Fields trimmed.",
     "calls": [
         {
             "req": {

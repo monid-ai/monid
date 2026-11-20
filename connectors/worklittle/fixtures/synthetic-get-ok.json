@@ -1,6 +1,6 @@
 {
     "name": "synthetic-get-ok",
-    "description": "SYNTHETIC happy chain for worklittle#jobs/search with job_id. GET /jobs?job_id= answers the job at the TOP LEVEL (not under data) plus meta.billing, the $0 jobs.detail quota receipt (jobs-api routes/job.ts, 2026-10-29).",
+    "description": "SYNTHETIC happy chain for worklittle#jobs/search with job_id. GET /jobs?job_id= answers the job at the TOP LEVEL (not under data) plus meta.quota, the shared jobs.detail quota count (jobs-api routes/job.ts, 2026-11-20).",
     "calls": [
         {
             "req": {
@@ -30,7 +30,6 @@
                         "period": "year"
                     },
                     "visa_sponsorship": "yes",
-                    "visa_sponsorship_source": "posting",
                     "h1b_filings": null,
                     "experience_years_min": 5,
                     "job_address": null,
@@ -60,16 +59,14 @@
                     "application": null,
                     "description_text": "About the role\nYou will own the roadmap for our payments platform.\n\nRequirements\n5+ years of product management experience.",
                     "meta": {
-                        "billing": {
-                            "charged_usd": 0,
-                            "balance_after_usd": null,
-                            "already_charged": false,
-                            "quota_units": 1,
-                            "quota_used": 77,
-                            "quota_limit": 300000,
-                            "quota_remaining": 299923
+                        "quota": {
+                            "units": 1,
+                            "used": 77,
+                            "limit": 300000,
+                            "remaining": 299923
                         }
-                    }
+                    },
+                    "can_apply": true
                 }
             }
         }

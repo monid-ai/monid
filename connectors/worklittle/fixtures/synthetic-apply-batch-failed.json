@@ -1,6 +1,6 @@
 {
     "name": "synthetic-apply-batch-failed",
-    "description": "SYNTHETIC batch where the one started application fails on Worklittle's side (bot check, reason in error_message): every application failed, so the run is a free provider error.",
+    "description": "SYNTHETIC batch where the one started application fails on Worklittle's side (a bot check; the status carries no reason): every application failed, so the run is a free provider error.",
     "calls": [
         {
             "req": {
@@ -37,12 +37,9 @@
                     "session": {
                         "id": "aas_b1",
                         "status": "failed",
-                        "cost_usd": 0,
-                        "applicant_id": "usr_synthetic_applicant",
-                        "error_message": "The employer's site showed a bot check."
+                        "applicant_id": "usr_synthetic_applicant"
                     },
                     "next_step": "",
-                    "field_fills": [],
                     "final_fields": {}
                 }
             }

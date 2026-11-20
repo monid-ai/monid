@@ -1,6 +1,6 @@
 {
     "name": "synthetic-apply-batch",
-    "description": "SYNTHETIC batch (jobs-api handlePublicBatchApplyWithAi, 2026-10-29): three jobs \u2014 two started, one refused 410 JOB_CLOSED, plus one already applied. The start answers only starts; the poll reads each session until none is in flight. Settles the sum of the sessions' cost_usd for the two outcomes.",
+    "description": "SYNTHETIC batch (jobs-api handlePublicBatchApplyWithAi, 2026-10-29): three jobs — two started, one refused 410 JOB_CLOSED, plus one already applied. The start answers only starts; the poll reads each session until none is in flight. Settles the two outcomes at $0.20 each (the derived fold).",
     "calls": [
         {
             "req": {
@@ -63,11 +63,9 @@
                     "session": {
                         "id": "aas_b1",
                         "status": "running",
-                        "cost_usd": 0,
                         "applicant_id": "usr_synthetic_applicant"
                     },
                     "next_step": "",
-                    "field_fills": [],
                     "final_fields": {}
                 }
             }
@@ -83,11 +81,9 @@
                     "session": {
                         "id": "aas_b2",
                         "status": "completed",
-                        "cost_usd": 0.2,
                         "applicant_id": "usr_synthetic_applicant"
                     },
                     "next_step": "",
-                    "field_fills": [],
                     "final_fields": {}
                 }
             }
@@ -103,11 +99,9 @@
                     "session": {
                         "id": "aas_b1",
                         "status": "completed",
-                        "cost_usd": 0.2,
                         "applicant_id": "usr_synthetic_applicant"
                     },
                     "next_step": "",
-                    "field_fills": [],
                     "final_fields": {}
                 }
             }

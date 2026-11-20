@@ -1,6 +1,6 @@
 {
     "name": "synthetic-document-replay",
-    "description": "SYNTHETIC synchronous 200 on submit: a repeated Idempotency-Key whose document already finished is replayed from KV (replayDocument) instead of starting a job \u2014 the stored body of the first call, billing receipt included (jobs-api routes/documentGeneration.ts, 2026-10-29). Terminal on start; no poll.",
+    "description": "SYNTHETIC synchronous 200 on submit: a repeated Idempotency-Key whose document already finished is replayed from KV (replayDocument) instead of starting a job — the stored body of the first call (jobs-api routes/documentGeneration.ts, 2026-11-20). Terminal on start; no poll.",
     "calls": [
         {
             "req": {
@@ -22,12 +22,7 @@
                     "pdf_filename": "jordan-rivera-resume.pdf",
                     "docx_base64": null,
                     "docx_mime": null,
-                    "docx_filename": null,
-                    "billing": {
-                        "charged_usd": 0.01,
-                        "balance_after_usd": 41.27,
-                        "already_charged": false
-                    }
+                    "docx_filename": null
                 }
             }
         }

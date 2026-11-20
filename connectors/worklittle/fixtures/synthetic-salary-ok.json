@@ -1,6 +1,6 @@
 {
     "name": "synthetic-salary-ok",
-    "description": "SYNTHETIC happy chain for worklittle#jobs/salary-average: {data: getJobSalaryStats(...), meta: {billing}} (jobs-api routes/jobSalaryAverage.ts + db/queries.ts, 2026-10-29).",
+    "description": "SYNTHETIC happy chain for worklittle#jobs/salary-average: {data: getJobSalaryStats(...), meta: {quota}} (jobs-api routes/jobSalaryAverage.ts + db/queries.ts, 2026-11-20).",
     "calls": [
         {
             "req": {
@@ -22,14 +22,11 @@
                         "salary_max": 310000
                     },
                     "meta": {
-                        "billing": {
-                            "charged_usd": 0,
-                            "balance_after_usd": null,
-                            "already_charged": false,
-                            "quota_units": 1,
-                            "quota_used": 12,
-                            "quota_limit": 300000,
-                            "quota_remaining": 299988
+                        "quota": {
+                            "units": 1,
+                            "used": 12,
+                            "limit": 300000,
+                            "remaining": 299988
                         }
                     }
                 }

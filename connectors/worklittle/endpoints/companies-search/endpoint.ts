@@ -4,7 +4,7 @@ import { zCompaniesSearchQueryParams } from "./schema/inputs.ts";
 /**
  * GET /companies — resolve an employer name to its slug. FREE (`GET
  * /v1/pricing`; draws the shared `companies.search` quota, one unit per row
- * returned; the $0 receipt at `meta.billing` is stripped by the provider
+ * returned; the quota counts at `meta.quota` are stripped by the provider
  * consolidate).
  */
 export default defineEndpoint({

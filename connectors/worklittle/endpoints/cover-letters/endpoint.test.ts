@@ -44,7 +44,6 @@ Deno.test("worklittle#cover-letters async (synthetic): done settles $0.01", asyn
     });
     const out = result.output as Record<string, unknown>;
     assertEquals(out.document_type, "cover_letter");
-    assertEquals("billing" in out, false);
 });
 
 Deno.test("worklittle#cover-letters: unknown keys and bad formats rejected", async () => {

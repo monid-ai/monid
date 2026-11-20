@@ -1,6 +1,6 @@
 {
     "name": "synthetic-companies-ok",
-    "description": "SYNTHETIC GET /companies: {data, meta: {query, limit, returned, billing}} (jobs-api routes/companies.ts, 2026-10-29). meta.billing is the $0 companies.search quota receipt the consolidate strips.",
+    "description": "SYNTHETIC GET /companies: {data, meta: {query, limit, returned, quota}} (jobs-api routes/companies.ts, 2026-11-20). meta.quota is the shared companies.search quota count the consolidate strips.",
     "calls": [
         {
             "req": {
@@ -25,14 +25,11 @@
                         "query": "stripe",
                         "limit": 2,
                         "returned": 1,
-                        "billing": {
-                            "charged_usd": 0,
-                            "balance_after_usd": null,
-                            "already_charged": false,
-                            "quota_units": 1,
-                            "quota_used": 9,
-                            "quota_limit": 3000000,
-                            "quota_remaining": 2999991
+                        "quota": {
+                            "units": 1,
+                            "used": 9,
+                            "limit": 3000000,
+                            "remaining": 2999991
                         }
                     }
                 }

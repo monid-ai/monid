@@ -29,9 +29,9 @@ Monid user. No new engine capability.
     $0.20 per application that reaches an outcome, failures free. `resumes` / `cover-letters`
     (POST /v1/resumes, /v1/cover-letters, `async: true` + GET
     /v1/documents/{id}): $0.01 per document returned.
-- **Provider consolidate** claims a document's `billing.charged_usd` and
-  strips the `$0` quota receipt at `meta.billing`: both describe Monid's
-  shared Worklittle account (balance, quota), not the caller.
+- **Provider consolidate** makes no claim (responses carry no money, so
+  the derived fold settles) and strips the quota counts at `meta.quota`:
+  they describe Monid's shared Worklittle account, not the caller.
 - **Provider fromError** lifts Worklittle's `{error: {code, message}}`
   into `{message, code, raw}`.
 - Fixtures are all `synthetic-` (no key yet), shaped from the jobs-api

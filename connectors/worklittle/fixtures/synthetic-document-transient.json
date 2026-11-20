@@ -13,11 +13,7 @@
                     "id": "doc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
                     "status": "working",
                     "status_url": "https://api.worklittle.com/v1/documents/doc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-                    "poll_after_seconds": 5,
-                    "billing": {
-                        "charged_usd": 0,
-                        "note": "Charged when the document is ready; failures are free."
-                    }
+                    "poll_after_seconds": 5
                 }
             }
         },
@@ -58,12 +54,7 @@
                     "pdf_filename": "jordan-rivera-resume.pdf",
                     "docx_base64": null,
                     "docx_mime": null,
-                    "docx_filename": null,
-                    "billing": {
-                        "charged_usd": 0.01,
-                        "balance_after_usd": 41.27,
-                        "already_charged": false
-                    }
+                    "docx_filename": null
                 }
             }
         }

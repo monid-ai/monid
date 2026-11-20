@@ -12,13 +12,12 @@ detail, salary average and company search draw free monthly quotas
 (company workspace: 3M list rows, 300k detail calls); over quota is a 429,
 never a charge, so they are `FREE`.
 
-## D2 — Receipts are stripped, the document receipt is claimed
+## D2 — No vendor claim; quota counts are stripped
 
-Free reads carry `meta.billing` (`charged_usd: 0`, quota used/limit);
-documents carry top-level `billing` (`charged_usd`, `balance_after_usd`).
-Both describe Monid's shared account, so the provider consolidate plucks
-both out. Only a positive `billing.charged_usd` is claimed; zero falls
-back to the fold.
+Worklittle responses carry no money (flat prices live on
+`GET /v1/pricing`), so every bill is the derived fold: evidence × the
+pinned rate. Free reads carry quota counts at `meta.quota`; they describe
+Monid's shared account, so the provider consolidate plucks them out.
 
 ## D3 — Documents are async
 
@@ -36,7 +35,7 @@ byte-identical and intern to one fnTable entry each.
 `POST /v1/apply` answers in under a second; `poll` reads
 `GET /v1/apply/{id}` every 10 s until the status leaves queued/running,
 normally `completed`. `failed` is a 502 provider error (free).
-`awaiting_input` / `awaiting_submit` / `paused` / `stopped` / `cancelled`
+`awaiting_input` / `awaiting_submit` / `stopped` / `cancelled`
 complete the run with the session in the output and `next_step`, so the
 agent can use the free management endpoints. When every application in
 the call is refused or failed, the call is one free 502
@@ -49,23 +48,24 @@ applications ran past 45 minutes. Past `runMs` the engine calls `stop`,
 which cancels nothing: the person asked for these applications and they
 finish upstream on their own. `stop` reads each application once more and
 settles through the one pipeline (D34): what reached an outcome bills,
-what is still running carries `cost_usd: 0` and comes back with its
+what is still running bills nothing and comes back with its
 `session_id` for `apply/{id}`.
 
 `Idempotency-Key: {runId}:submit` (Worklittle derives
 `<key>:<job_id>` per batch job). The lifecycle always sends
 `use_profile: false`: Monid's key is shared.
 
-## D5 — Apply billing: status evidence, cost_usd claim
+## D5 — Apply billing: status evidence
 
-PER_UNIT RESULT at $0.20. Evidence counts an application whose final
-status is one Worklittle charges for (`applyPricing.ts`
-`isChargeableOutcome`: completed, awaiting_submit, awaiting_input,
-paused, cancelled); failed / stopped / already-applied / hosted-form /
-`test` count 0. The claim is the session's `cost_usd` (5¢ on an Instant
-payer; also covers a caller stop that Worklittle charges, which status
-alone cannot tell apart from a Worklittle stop). The batch sums both over
-its jobs; per-job rows live in typed lifecycle state.
+PER_UNIT RESULT at $0.20 (Monid's key is a company key, which always pays
+the standard price). Evidence counts an application whose final status is
+one Worklittle charges for. Worklittle's public status alone says whether
+an application was charged: `awaiting_input`, `awaiting_submit`,
+`completed` and `stopped` (the person stopped it after it started filling
+in) are; `cancelled` (stopped before anything was filled in), `failed`
+(anything on Worklittle's side), already-applied, hosted-form and `test`
+count 0. The batch sums
+over its jobs; per-job rows live in typed lifecycle state.
 
 ## D6 — Inputs
 

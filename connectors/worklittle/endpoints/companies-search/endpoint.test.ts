@@ -29,7 +29,7 @@ const rejects = async (id: string, input: RunInput, why: string) =>
 
 const ID = "worklittle#companies/search";
 
-Deno.test("worklittle#companies/search happy (synthetic): slug, free, receipt stripped", async () => {
+Deno.test("worklittle#companies/search happy (synthetic): slug, free, quota stripped", async () => {
     const result = await replay(
         ID,
         { queryParams: { q: "stripe", limit: 2 } },
@@ -43,7 +43,7 @@ Deno.test("worklittle#companies/search happy (synthetic): slug, free, receipt st
     };
     assertEquals(out.data.length, 1);
     assertEquals(out.data[0].slug, "stripe");
-    assertEquals("billing" in out.meta, false);
+    assertEquals("quota" in out.meta, false);
 });
 
 Deno.test("worklittle#companies/search: q 2–80 chars, limit 1–20", async () => {
