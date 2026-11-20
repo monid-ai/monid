@@ -1,6 +1,6 @@
 {
     "name": "happy",
-    "description": "raw recording (loyaltie#get-maker, scenario happy) — hand-minimize into a shared chain before committing",
+    "description": "recorded 2026-11-17 against https://loyaltie.com/api/ucp/mcp (loyaltie#get-maker, tools/call get_maker); the response is the server's unedited JSON-RPC result",
     "calls": [
         {
             "req": {
