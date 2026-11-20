@@ -69,24 +69,81 @@ export default defineEndpoint({
                 },
             },
         },
-        /** maxPostsPerSource (required at the binding) × jobs, where
-         *  subreddits + searchQueries combine multiplicatively when both are
-         *  given, plus urls and usernames. Comments scale by
-         *  maxCommentsPerPost (default 10) when includeComments is true. */
-        estimate: ({ data }) => {
+        /** maxPostsPerSource (required at the binding) × non-post jobs, where
+         *  subreddits + searchQueries (incl. searchQuery/keyword aliases)
+         *  combine multiplicatively when both are given, plus non-post URLs
+         *  (across urls, startUrls, and url aliases) and usernames. Direct
+         *  post URLs (/comments/) yield 1 post and always fetch up to
+         *  maxCommentsPerPost (default 10) comments even when includeComments
+         *  is false. */
+        estimate: ({ data, utils }) => {
             const body = data.input.body;
+            const rawStartUrls = utils.json.optionalGet(body, "$.startUrls");
+            const rawUrl = utils.json.optionalGet(body, "$.url");
+            const allUrls = [
+                ...(body.urls ?? []),
+                ...(Array.isArray(rawStartUrls) ? rawStartUrls : []),
+                ...(typeof rawUrl === "string" && rawUrl.trim()
+                    ? [rawUrl]
+                    : []),
+            ];
+            let directPostUrls = 0;
+            let otherUrls = 0;
+            for (const entry of allUrls) {
+                const nestedUrl = entry !== null && typeof entry === "object"
+                    ? utils.json.optionalGet(entry, "$.url")
+                    : undefined;
+                const u = typeof entry === "string"
+                    ? entry
+                    : typeof nestedUrl === "string"
+                    ? nestedUrl
+                    : "";
+                if (!u.trim()) continue;
+                if (
+                    /reddit\.com\/(?:r\/[^/?#]+\/)?comments\/[a-z0-9]+/i.test(u)
+                ) {
+                    directPostUrls += 1;
+                } else {
+                    otherUrls += 1;
+                }
+            }
             const subCount = body.subreddits?.length ?? 0;
-            const queryCount = body.searchQueries?.length ?? 0;
-            const urlCount = body.urls?.length ?? 0;
+            const rawSearchQuery = utils.json.optionalGet(
+                body,
+                "$.searchQuery",
+            );
+            const rawKeyword = utils.json.optionalGet(body, "$.keyword");
+            const queryCount = (body.searchQueries?.length ?? 0) +
+                (typeof rawSearchQuery === "string" && rawSearchQuery.trim()
+                    ? 1
+                    : 0) +
+                (typeof rawKeyword === "string" && rawKeyword.trim() ? 1 : 0);
             const userCount = body.usernames?.length ?? 0;
             const subQueryJobs = subCount > 0 && queryCount > 0
                 ? subCount * queryCount
                 : subCount + queryCount;
-            const jobs = subQueryJobs + urlCount + userCount;
-            const posts = body.maxPostsPerSource * jobs;
-            const comments = body.includeComments
-                ? posts * (body.maxCommentsPerPost ?? 10)
-                : 0;
+            const nonPostJobs = subQueryJobs + otherUrls + userCount;
+            const effectiveNonPostJobs =
+                nonPostJobs === 0 && directPostUrls === 0 ? 1 : nonPostJobs;
+            const nonPostPosts = body.maxPostsPerSource * effectiveNonPostJobs;
+            const posts = nonPostPosts + directPostUrls;
+            const rawSkipComments = utils.json.optionalGet(
+                body,
+                "$.skipComments",
+            );
+            const includeComments = body.includeComments ??
+                (typeof rawSkipComments === "boolean"
+                    ? !rawSkipComments
+                    : false);
+            const rawMaxComments = utils.json.optionalGet(
+                body,
+                "$.maxComments",
+            );
+            const maxCommentsPerPost = body.maxCommentsPerPost ??
+                (typeof rawMaxComments === "number" ? rawMaxComments : 10);
+            const comments =
+                (directPostUrls + (includeComments ? nonPostPosts : 0)) *
+                maxCommentsPerPost;
             return { counts: { post: posts, comment: comments } };
         },
         /** OVERRIDES the provider evidence: splits dataset items into post
