@@ -1,8 +1,6 @@
 import { defineEndpoint, UsageModelKind } from "@shared/core";
 import { zJobsSearchQueryParams } from "./schema/inputs.ts";
 
-const shape = zJobsSearchQueryParams.shape;
-
 /**
  * GET /jobs — search live listings. FREE (`GET /v1/pricing`: "GET /jobs
  * (search)" is on the free list; it draws the shared `jobs.list` quota, one
@@ -56,18 +54,7 @@ export default defineEndpoint({
     request: { method: "GET", path: "/jobs" },
     input: {
         schema: {
-            queryParams: zJobsSearchQueryParams.extend({
-                near_lat: shape.near_lat.unwrap().min(-90).max(90)
-                    .optional(),
-                near_lng: shape.near_lng.unwrap().min(-180).max(180)
-                    .optional(),
-                radius_km: shape.radius_km.unwrap().min(1).max(500)
-                    .optional(),
-                posted_within_days: shape.posted_within_days.unwrap()
-                    .min(0).optional(),
-                limit: shape.limit.unwrap().min(1).max(50).optional(),
-                cursor: shape.cursor.unwrap().min(1).optional(),
-            }).strict(),
+            queryParams: zJobsSearchQueryParams.strict(),
         },
     },
     usage: { model: { kind: UsageModelKind.FREE } },

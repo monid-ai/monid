@@ -1,7 +1,12 @@
 import { assertEquals, assertRejects } from "@std/assert";
 import type { RunInput } from "@shared/core";
 import { fromFileUrl } from "@std/path";
-import { loadFixture, runEndpoint, testSealedUnit } from "@shared/testing";
+import {
+    liveSkip,
+    loadFixture,
+    runEndpoint,
+    testSealedUnit,
+} from "@shared/testing";
 
 const fixturesDir = fromFileUrl(new URL("../../fixtures/", import.meta.url));
 const replay = async (id: string, input: RunInput, name?: string) =>
@@ -64,6 +69,7 @@ Deno.test("worklittle#apply/profile get: unknown id is a free 404", async () => 
         body: { action: "get", applicant_id: "usr_nobody" },
     }, "synthetic-applicant-not-found");
     assertEquals(result.httpStatus, 404);
+    assertEquals(result.isProviderError, true);
     assertEquals(result.usage, { credits: {}, evidence: {} });
 });
 
@@ -86,6 +92,14 @@ Deno.test("worklittle#apply/profile: action and the right fields are required", 
         { body: { action: "save", email: "j@example.com" } },
         "new without name",
     );
+    await rejects(ID, {
+        body: {
+            action: "save",
+            applicant_id: "",
+            name: "J",
+            email: "j@example.com",
+        },
+    }, "empty applicant_id");
     await rejects(ID, { body: { action: "get" } }, "get without id");
     await rejects(ID, { body: { action: "delete" } }, "delete without id");
     await rejects(
@@ -93,4 +107,22 @@ Deno.test("worklittle#apply/profile: action and the right fields are required", 
         { body: { action: "merge", applicant_id: "a" } },
         "unknown action",
     );
+});
+
+Deno.test({
+    name: "worklittle#apply/profile get live (gated on WORKLITTLE_API_KEY)",
+    ignore: liveSkip("worklittle"),
+    fn: async () => {
+        const result = await runEndpoint({
+            unit: await testSealedUnit(ID),
+            input: {
+                body: { action: "get", applicant_id: "usr_live_test_nobody" },
+            },
+            mode: "live",
+        });
+        // read-only: an id this key never made is a free 404
+        assertEquals(result.httpStatus, 404, JSON.stringify(result.output));
+        assertEquals(result.isProviderError, true);
+        assertEquals(result.usage, { credits: {}, evidence: {} });
+    },
 });

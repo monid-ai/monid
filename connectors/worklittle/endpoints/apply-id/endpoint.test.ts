@@ -1,7 +1,12 @@
 import { assertEquals, assertRejects } from "@std/assert";
 import type { RunInput } from "@shared/core";
 import { fromFileUrl } from "@std/path";
-import { loadFixture, runEndpoint, testSealedUnit } from "@shared/testing";
+import {
+    liveSkip,
+    loadFixture,
+    runEndpoint,
+    testSealedUnit,
+} from "@shared/testing";
 
 const fixturesDir = fromFileUrl(new URL("../../fixtures/", import.meta.url));
 const replay = async (id: string, input: RunInput, name?: string) =>
@@ -32,6 +37,16 @@ Deno.test("worklittle#apply/{id} continue (synthetic): answers sent, free", asyn
     assertEquals((result.output as { continued: boolean }).continued, true);
 });
 
+Deno.test("worklittle#apply/{id}: an unknown application is a free 404", async () => {
+    const result = await replay(ID, {
+        pathParams: { id: "aas_nobody" },
+        body: { action: "status" },
+    }, "synthetic-apply-application-not-found");
+    assertEquals(result.httpStatus, 404);
+    assertEquals(result.isProviderError, true);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
+});
+
 Deno.test("worklittle#apply/{id}: id, a known action, answers for continue", async () => {
     await rejects(ID, { pathParams: {}, body: { action: "status" } }, "no id");
     await rejects(
@@ -48,4 +63,23 @@ Deno.test("worklittle#apply/{id}: id, a known action, answers for continue", asy
         pathParams: { id: "a" },
         body: { action: "stop", answers: {} },
     }, "stray field");
+});
+
+Deno.test({
+    name: "worklittle#apply/{id} status live (gated on WORKLITTLE_API_KEY)",
+    ignore: liveSkip("worklittle"),
+    fn: async () => {
+        const result = await runEndpoint({
+            unit: await testSealedUnit(ID),
+            input: {
+                pathParams: { id: "aas_live_test_nobody" },
+                body: { action: "status" },
+            },
+            mode: "live",
+        });
+        // read-only: an application this key never started is a free 404
+        assertEquals(result.httpStatus, 404, JSON.stringify(result.output));
+        assertEquals(result.isProviderError, true);
+        assertEquals(result.usage, { credits: {}, evidence: {} });
+    },
 });

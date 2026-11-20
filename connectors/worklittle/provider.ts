@@ -112,12 +112,16 @@ export default defineProvider({
                 "$.error.message",
             );
             const code = utils.json.optionalGet(data.output, "$.error.code");
+            // as in consolidate: Monid's shared-account receipts never
+            // reach the caller, on errors either
+            const doc = utils.json.pluck(data.output, "$.billing");
+            const quota = utils.json.pluck(doc.rest, "$.meta.billing");
             return {
                 message: typeof message === "string" && message !== ""
                     ? message
                     : "Worklittle API error",
                 ...(typeof code === "string" ? { code } : {}),
-                raw: data.output,
+                raw: quota.rest,
             };
         },
     },

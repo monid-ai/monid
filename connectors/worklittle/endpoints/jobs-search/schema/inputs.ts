@@ -20,13 +20,13 @@ export const zJobsSearchQueryParams = zWorklittleJobFilters.extend({
     near_lat: z.number().describe(
         "Latitude for a distance search; send with near_lng. Results are " +
             "ordered by distance unless `sort` says otherwise.",
-    ).optional(),
+    ).min(-90).max(90).optional(),
     near_lng: z.number().describe(
         "Longitude for a distance search; send with near_lat.",
-    ).optional(),
+    ).min(-180).max(180).optional(),
     radius_km: z.number().describe(
         "Distance-search radius in km (1–500, default 50).",
-    ).optional(),
+    ).min(1).max(500).optional(),
     exclude_remote: z.boolean().describe(
         "Distance search only: true (default) leaves out remote-only jobs; " +
             "false keeps them.",
@@ -55,9 +55,9 @@ export const zJobsSearchQueryParams = zWorklittleJobFilters.extend({
     ).optional(),
     limit: z.number().int().describe(
         "Results per page (1–50, default 20).",
-    ).optional(),
+    ).min(1).max(50).optional(),
     cursor: z.string().describe(
         "Opaque `meta.next_cursor` from the previous page. Send the same " +
             "filters with it.",
-    ).optional(),
+    ).min(1).optional(),
 });

@@ -27,11 +27,7 @@ export default defineEndpoint({
     request: { method: "GET", path: "/companies" },
     input: {
         schema: {
-            queryParams: zCompaniesSearchQueryParams.extend({
-                q: zCompaniesSearchQueryParams.shape.q.min(2).max(80),
-                limit: zCompaniesSearchQueryParams.shape.limit.unwrap()
-                    .min(1).max(20).optional(),
-            }).strict(),
+            queryParams: zCompaniesSearchQueryParams.strict(),
         },
     },
     usage: { model: { kind: UsageModelKind.FREE } },

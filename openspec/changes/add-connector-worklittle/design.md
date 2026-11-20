@@ -38,8 +38,21 @@ byte-identical and intern to one fnTable entry each.
 normally `completed`. `failed` is a 502 provider error (free).
 `awaiting_input` / `awaiting_submit` / `paused` / `stopped` / `cancelled`
 complete the run with the session in the output and `next_step`, so the
-agent can use the free management endpoints. `runMs` 30 min (45 for a
-batch), `Idempotency-Key: {runId}:submit` (Worklittle derives
+agent can use the free management endpoints. When every application in
+the call is refused or failed, the call is one free 502
+(`ALL_APPLICATIONS_FAILED`, each reason listed).
+
+`runMs` is 2 hours. Each application is a real browser filling a real
+employer form in Worklittle's cloud; most finish in minutes, but in
+Worklittle production (30 days to 2026-11-20) about 6% of submitted
+applications ran past 45 minutes. Past `runMs` the engine calls `stop`,
+which cancels nothing: the person asked for these applications and they
+finish upstream on their own. `stop` reads each application once more and
+settles through the one pipeline (D34): what reached an outcome bills,
+what is still running carries `cost_usd: 0` and comes back with its
+`session_id` for `apply/{id}`.
+
+`Idempotency-Key: {runId}:submit` (Worklittle derives
 `<key>:<job_id>` per batch job). The lifecycle always sends
 `use_profile: false`: Monid's key is shared.
 

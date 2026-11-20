@@ -1,0 +1,32 @@
+{
+    "name": "synthetic-document-replay-no-file",
+    "description": "SYNTHETIC synchronous 200 on submit that carries no file: a broken replay, a free 502 like the same case on poll.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "document_type": "resume",
+                    "mode": "ready",
+                    "formats": [
+                        "html",
+                        "pdf"
+                    ],
+                    "pdf_mime": "application/pdf",
+                    "pdf_filename": "jordan-rivera-resume.pdf",
+                    "docx_mime": null,
+                    "docx_filename": null,
+                    "billing": {
+                        "charged_usd": 0.01,
+                        "balance_after_usd": 41.27,
+                        "already_charged": false
+                    }
+                }
+            }
+        }
+    ]
+}

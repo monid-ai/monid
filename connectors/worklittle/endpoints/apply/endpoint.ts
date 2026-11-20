@@ -1,4 +1,5 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
+import type { Json } from "@shared/core";
 import { z } from "zod";
 import {
     zApplyBatchExistingBody,
@@ -11,6 +12,24 @@ const bounded = {
         .min(1).max(10).optional(),
 };
 
+/** `{ "test": true }` alone: Worklittle's free practice run (no applicant,
+ *  no job, nothing opened, stored or sent). */
+const zPracticeBody = z.strictObject({
+    test: z.literal(true).describe(
+        "Free practice run: nothing opens, nothing is sent or billed.",
+    ),
+});
+
+const zJobRow = z.strictObject({
+    job_id: z.string(),
+    ok: z.boolean(),
+    session_id: z.string().nullable(),
+    status: z.string().nullable(),
+    already_applied: z.boolean(),
+    cost_usd: z.number(),
+    error_code: z.string().nullable(),
+    error_message: z.string().nullable(),
+});
 /**
  * POST /v1/apply with `job_ids` (= /v1/apply/batch) — apply AND SUBMIT one
  * person to one to ten jobs. $0.20 per application that reaches an outcome (the same per-job
@@ -70,7 +89,12 @@ export default defineEndpoint({
             "A bad applicant (400, or 409 APPLICANT_EXISTS) stops the " +
             "call after the first job; a 401/403 fails the whole call.",
             "Most applications finish in a few minutes; the run waits up " +
-            "to 45.",
+            "to 2 hours. Applications run in Worklittle's cloud, so one " +
+            "still running when the run ends keeps going and is not " +
+            "cancelled: the run bills only what finished by then, and " +
+            "worklittle#apply/{id} shows the rest.",
+            "Every application refused or failed comes back as a free " +
+            "provider error (ALL_APPLICATIONS_FAILED) listing each reason.",
         ],
     },
     endpoint: "/apply",
@@ -80,28 +104,25 @@ export default defineEndpoint({
             body: z.union([
                 zApplyBatchExistingBody.extend(bounded).strict(),
                 zApplyBatchNewBody.extend(bounded).strict(),
+                zPracticeBody,
             ]).describe(
                 "Send applicant_id (a returning person) or applicant + a " +
-                    "resume (their first application), plus job_ids.",
+                    "resume (their first application), plus job_ids. " +
+                    '`{ "test": true }` alone is a free practice run.',
             ),
         },
     },
-    /** Applications run concurrently upstream; ten of them plus queueing
-     *  gets a longer whole-run budget than a single apply. */
-    timeouts: { requestMs: 60_000, runMs: 2_700_000, pollMs: 15_000 },
+    /** A real browser filling a real employer form, up to ten of them plus
+     *  queueing: most finish in minutes, but a slow site or a long form
+     *  can take over an hour (Worklittle production, 30 days to
+     *  2026-11-20: ~6% of submitted applications ran past 45 minutes).
+     *  2 hours covers nearly all of them; past it, `stop` settles what
+     *  finished and leaves the rest running upstream. */
+    timeouts: { requestMs: 60_000, runMs: 7_200_000, pollMs: 15_000 },
     lifecycle: {
         state: z.strictObject({
             applicant_id: z.string().nullable(),
-            jobs: z.array(z.strictObject({
-                job_id: z.string(),
-                ok: z.boolean(),
-                session_id: z.string().nullable(),
-                status: z.string().nullable(),
-                already_applied: z.boolean(),
-                cost_usd: z.number(),
-                error_code: z.string().nullable(),
-                error_message: z.string().nullable(),
-            })).describe("One compact row per job."),
+            jobs: z.array(zJobRow).describe("One compact row per job."),
         }),
         start: async ({ data, utils }) => {
             const res = await utils.request({
@@ -119,6 +140,14 @@ export default defineEndpoint({
                     kind: "COMPLETED",
                     httpStatus: res.status,
                     output: res.body,
+                };
+            }
+            // practice run: Worklittle's own answer, free, receipt stripped
+            if (!("job_ids" in (data.input.body ?? {}))) {
+                return {
+                    kind: "COMPLETED",
+                    httpStatus: res.status,
+                    output: utils.json.pluck(res.body, "$.billing").rest,
                 };
             }
             const results = utils.json.optionalGet(res.body, "$.results");
@@ -165,19 +194,47 @@ export default defineEndpoint({
                     jobs,
                 },
             };
-            const live = jobs.some((j) =>
-                j.session_id !== null && !j.already_applied
+            const live = jobs.some((
+                j,
+            ) => (j.session_id !== null && !j.already_applied &&
+                (j.status === null || j.status === "queued" ||
+                    j.status === "running" || j.status === "matched"))
             );
-            if (!live) {
+            if (live) return { kind: "RUNNING", state };
+            // every job refused or failed: the call failed as a whole (free)
+            if (
+                jobs.length > 0 &&
+                jobs.every((j) =>
+                    !j.already_applied && (!j.ok || j.status === "failed")
+                )
+            ) {
                 return {
                     kind: "COMPLETED",
-                    httpStatus: 200,
-                    providerHttpStatus: res.status,
-                    output: { applicant_id: state.data.applicant_id, jobs },
+                    httpStatus: 502,
+                    providerHttpStatus: 200,
+                    output: {
+                        error: {
+                            code: "ALL_APPLICATIONS_FAILED",
+                            message: "No application went through: " +
+                                jobs.map((j) =>
+                                    j.job_id + ": " +
+                                    (j.error_message ?? j.error_code ??
+                                        "failed")
+                                ).join("; "),
+                        },
+                        applicant_id: state.data.applicant_id,
+                        jobs,
+                    } as Json,
                     state,
                 };
             }
-            return { kind: "RUNNING", state };
+            return {
+                kind: "COMPLETED",
+                httpStatus: 200,
+                providerHttpStatus: res.status,
+                output: { applicant_id: state.data.applicant_id, jobs },
+                state,
+            };
         },
         poll: async ({ data, utils, logger }) => {
             const prior = data.lifecycle.state.data;
@@ -225,18 +282,116 @@ export default defineEndpoint({
                     cost_usd: typeof s.cost_usd === "number"
                         ? s.cost_usd
                         : job.cost_usd,
+                    error_message: typeof s.error_message === "string" &&
+                            s.error_message !== ""
+                        ? s.error_message
+                        : job.error_message,
                 });
             }
             const state = {
                 externalRunId: data.lifecycle.state.externalRunId,
                 data: { applicant_id: prior.applicant_id, jobs },
             };
-            const inFlight = jobs.some((j) =>
-                j.session_id !== null && !j.already_applied &&
+            const live = jobs.some((
+                j,
+            ) => (j.session_id !== null && !j.already_applied &&
                 (j.status === null || j.status === "queued" ||
-                    j.status === "running" || j.status === "matched")
+                    j.status === "running" || j.status === "matched"))
             );
-            if (inFlight) return { kind: "RUNNING", state };
+            if (live) return { kind: "RUNNING", state };
+            // every job refused or failed: the call failed as a whole (free)
+            if (
+                jobs.length > 0 &&
+                jobs.every((j) =>
+                    !j.already_applied && (!j.ok || j.status === "failed")
+                )
+            ) {
+                return {
+                    kind: "COMPLETED",
+                    httpStatus: 502,
+                    providerHttpStatus: 200,
+                    output: {
+                        error: {
+                            code: "ALL_APPLICATIONS_FAILED",
+                            message: "No application went through: " +
+                                jobs.map((j) =>
+                                    j.job_id + ": " +
+                                    (j.error_message ?? j.error_code ??
+                                        "failed")
+                                ).join("; "),
+                        },
+                        applicant_id: prior.applicant_id,
+                        jobs,
+                    } as Json,
+                    state,
+                };
+            }
+            return {
+                kind: "COMPLETED",
+                httpStatus: 200,
+                output: { applicant_id: prior.applicant_id, jobs },
+                state,
+            };
+        },
+        /** The run outlived runMs. Applications are NOT cancelled: each is
+         *  a real employer application the person asked for, running in
+         *  Worklittle's cloud, and it finishes there on its own. Stop reads
+         *  every application once more and settles what finished by now
+         *  (submitted, held for review, paused, cancelled bill; rows still
+         *  running carry `cost_usd: 0` and bill nothing). Rows still
+         *  running come back with their `session_id` for
+         *  worklittle#apply/{id}. */
+        stop: async ({ data, utils, logger }) => {
+            const prior = data.lifecycle.state.data;
+            if (prior === undefined) return;
+            const jobs = [];
+            for (const job of prior.jobs) {
+                const pending = job.session_id !== null &&
+                    !job.already_applied &&
+                    (job.status === null || job.status === "queued" ||
+                        job.status === "running" ||
+                        job.status === "matched");
+                if (!pending || job.session_id === null) {
+                    jobs.push(job);
+                    continue;
+                }
+                const res = await utils.http({
+                    method: "GET",
+                    path: "/v1/apply/" + encodeURIComponent(job.session_id),
+                });
+                if (res.status < 200 || res.status >= 300) {
+                    // A lookup that failed leaves the row as it was; the
+                    // application keeps running upstream.
+                    logger.warn("worklittle batch status lookup failed", {
+                        session: job.session_id,
+                        status: res.status,
+                    });
+                    jobs.push(job);
+                    continue;
+                }
+                const session = utils.json.optionalGet(res.body, "$.session");
+                const s = session !== null && typeof session === "object" &&
+                        !Array.isArray(session)
+                    ? session
+                    : {};
+                jobs.push({
+                    ...job,
+                    status: typeof s.status === "string"
+                        ? s.status
+                        : job.status,
+                    cost_usd: typeof s.cost_usd === "number"
+                        ? s.cost_usd
+                        : job.cost_usd,
+                    error_message: typeof s.error_message === "string" &&
+                            s.error_message !== ""
+                        ? s.error_message
+                        : job.error_message,
+                });
+            }
+            const state = {
+                externalRunId: data.lifecycle.state.externalRunId,
+                data: { applicant_id: prior.applicant_id, jobs },
+            };
             return {
                 kind: "COMPLETED",
                 httpStatus: 200,

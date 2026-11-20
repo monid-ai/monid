@@ -1,0 +1,21 @@
+{
+    "name": "synthetic-companies-unauthorized",
+    "description": "SYNTHETIC 401 on GET /companies (revoked key): data, zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?q=stripe&limit=2"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": {
+                        "code": "UNAUTHORIZED",
+                        "message": "Invalid API key"
+                    }
+                }
+            }
+        }
+    ]
+}

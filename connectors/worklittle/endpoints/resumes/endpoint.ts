@@ -85,6 +85,21 @@ export default defineEndpoint({
             });
             // A non-2xx submit is data (zero usage); a 200 is the finished
             // document itself (Idempotency-Key replay, or no async queue).
+            if (res.status === 200) {
+                // the finished document: it must carry a file, as on poll
+                const files = ["$.html", "$.pdf_base64", "$.docx_base64"].map((
+                    path,
+                ) => utils.json.optionalGet(res.body, path));
+                const made = files.some((file) =>
+                    typeof file === "string" && file !== ""
+                );
+                return {
+                    kind: "COMPLETED",
+                    httpStatus: made ? 200 : 502,
+                    providerHttpStatus: res.status,
+                    output: res.body,
+                };
+            }
             if (res.status !== 202) {
                 return {
                     kind: "COMPLETED",

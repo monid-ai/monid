@@ -45,6 +45,7 @@ export const zApplicantBody = z.union([
         action: z.literal("save").describe(
             "Create or update the applicant.",
         ),
+        applicant_id: applicantId.optional(),
         resume_file: resumeFile.optional(),
         resume_text: z.string().describe(
             "Their resume as plain text, when there is no file.",

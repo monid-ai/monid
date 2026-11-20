@@ -5,7 +5,7 @@
         {
             "req": {
                 "method": "GET",
-                "url": "https://api.worklittle.com/companies?q=stripe&limit=2"
+                "url": "{{request.url}}?q=stripe&limit=2"
             },
             "res": {
                 "status": 200,

@@ -2,10 +2,7 @@ import { defineEndpoint, UsageModelKind } from "@shared/core";
 import { z } from "zod";
 import { zJobsSalaryAverageQueryParams } from "./schema/inputs.ts";
 
-const params = zJobsSalaryAverageQueryParams.extend({
-    posted_within_days: zJobsSalaryAverageQueryParams.shape
-        .posted_within_days.unwrap().min(0).optional(),
-}).strict();
+const params = zJobsSalaryAverageQueryParams.strict();
 
 /**
  * GET /jobs/salary-average — annualized pay for a role across live

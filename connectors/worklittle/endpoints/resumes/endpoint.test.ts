@@ -78,6 +78,13 @@ Deno.test("worklittle#resumes: a 200 on submit (Idempotency-Key replay) is termi
     });
 });
 
+Deno.test("worklittle#resumes: a 200 on submit without a file is a free 502", async () => {
+    const result = await replay(ID, INPUT, "synthetic-document-replay-no-file");
+    assertEquals(result.httpStatus, 502);
+    assertEquals(result.isProviderError, true);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
+});
+
 Deno.test("worklittle#resumes: a 402 submit does not poll or bill", async () => {
     const result = await replay(ID, INPUT, "synthetic-document-rejected");
     assertEquals(result.httpStatus, 402);

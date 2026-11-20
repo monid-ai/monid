@@ -1,0 +1,80 @@
+{
+    "name": "synthetic-apply-batch-stop",
+    "description": "SYNTHETIC batch the engine stops at runMs: at stop one application has submitted ($0.20) and one is still running upstream (not cancelled, $0). Stop settles the finished one only.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "results": [
+                        {
+                            "job_id": "synthetic-job-1",
+                            "ok": true,
+                            "session_id": "aas_s1",
+                            "status_url": "https://api.worklittle.com/v1/apply/aas_s1",
+                            "status": "queued",
+                            "already_applied": false
+                        },
+                        {
+                            "job_id": "synthetic-job-2",
+                            "ok": true,
+                            "session_id": "aas_s2",
+                            "status_url": "https://api.worklittle.com/v1/apply/aas_s2",
+                            "status": "queued",
+                            "already_applied": false
+                        }
+                    ],
+                    "started": 2,
+                    "already_applied": 0,
+                    "failed": 0,
+                    "applicant_id": "usr_synthetic_applicant",
+                    "next_step": "Poll each status_url."
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/apply/aas_s1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "session": {
+                        "id": "aas_s1",
+                        "status": "completed",
+                        "cost_usd": 0.2,
+                        "applicant_id": "usr_synthetic_applicant"
+                    },
+                    "next_step": "",
+                    "field_fills": [],
+                    "final_fields": {}
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/apply/aas_s2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "session": {
+                        "id": "aas_s2",
+                        "status": "running",
+                        "cost_usd": 0,
+                        "applicant_id": "usr_synthetic_applicant"
+                    },
+                    "next_step": "",
+                    "field_fills": [],
+                    "final_fields": {}
+                }
+            }
+        }
+    ]
+}

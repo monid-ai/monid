@@ -3,6 +3,7 @@ import type { Json, RunInput } from "@shared/core";
 import { fromFileUrl } from "@std/path";
 import {
     liveSkip,
+    loadEndpoint,
     loadFixture,
     runEndpoint,
     testBundle,
@@ -68,8 +69,61 @@ Deno.test("worklittle#apply: a failed application is free", async () => {
             job_ids: ["synthetic-job-1"],
         },
     }, "synthetic-apply-batch-failed");
+    assertEquals(result.httpStatus, 502);
+    assertEquals(result.isProviderError, true);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
+    assert(
+        JSON.stringify(result.output).includes(
+            "The employer's site showed a bot check.",
+        ),
+        "the polled failure reason reaches the output",
+    );
+});
+
+Deno.test("worklittle#apply: { test: true } alone is a free practice run", async () => {
+    const result = await replay(
+        ID,
+        { body: { test: true } },
+        "synthetic-apply-practice",
+    );
     assertEquals(result.httpStatus, 200);
+    assertEquals(result.isProviderError, false);
     assertEquals(result.usage, { credits: {}, evidence: { RESULT: 0 } });
+    const out = result.output as Record<string, unknown>;
+    assertEquals(out.test, true);
+    assertEquals(out.billing, undefined);
+});
+
+Deno.test("worklittle#apply: stop at runMs settles what finished and cancels nothing", async () => {
+    const input: RunInput = {
+        body: {
+            applicant_id: "usr_synthetic_applicant",
+            job_ids: ["synthetic-job-1", "synthetic-job-2"],
+        },
+    };
+    const loaded = await loadEndpoint({
+        unit: await testSealedUnit(ID),
+        input,
+        mode: "replay",
+        fixture: await loadFixture(
+            `${fixturesDir}synthetic-apply-batch-stop.json`,
+        ),
+    });
+    const run = { runId: "test-run-stop" };
+    const started = await loaded.start(input, run);
+    assert(started.kind === "RUNNING");
+    // the fixture has no cancel call: a DELETE/stop request would fail
+    const stopped = await loaded.stop(input, started.state, run);
+    assert(stopped.kind === "COMPLETED", "stop settles");
+    assertEquals(stopped.usage.credits, { default: 0.2 });
+    assertEquals(stopped.usage.evidence, { RESULT: 1 });
+    const out = stopped.output as {
+        jobs: Array<{ session_id: string; status: string }>;
+    };
+    assertEquals(out.jobs.map((j) => [j.session_id, j.status]), [
+        ["aas_s1", "completed"],
+        ["aas_s2", "running"],
+    ]);
 });
 
 Deno.test("worklittle#apply: 1–10 job_ids, applicant required", async () => {

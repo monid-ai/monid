@@ -42,6 +42,7 @@ Deno.test("worklittle#jobs/salary-average happy (synthetic): stats, free, receip
         meta: Record<string, unknown>;
     };
     assertEquals(out.data.average_salary, 152340);
+    assertEquals(out.data.jobs_in_average, 1851);
     assertEquals(out.meta, {});
 });
 
@@ -52,6 +53,9 @@ Deno.test("worklittle#jobs/salary-average: q or title required; no search-only p
         { title: "x", near_lat: 30 },
         { title: "x", limit: 5 },
         { title: "x", posted_within_days: -1 },
+        { title: "" },
+        { q: "" },
+        { title: "x", salary_min: -1 },
     ];
     for (const queryParams of bad) {
         await rejects(ID, { queryParams }, JSON.stringify(queryParams));
@@ -62,4 +66,38 @@ Deno.test("worklittle#jobs/salary-average: q or title required; no search-only p
         "synthetic-salary-ok",
     );
     assertEquals(ok.isProviderError, false);
+});
+
+Deno.test("worklittle#jobs/salary-average: a provider error is data, zero usage", async () => {
+    const result = await replay(
+        ID,
+        { queryParams: { title: "data engineer", country: "US" } },
+        "synthetic-salary-unauthorized",
+    );
+    assertEquals(result.httpStatus, 401);
+    assertEquals(result.isProviderError, true);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
+});
+
+Deno.test({
+    name: "worklittle#jobs/salary-average live (gated on WORKLITTLE_API_KEY)",
+    ignore: liveSkip("worklittle"),
+    fn: async () => {
+        const result = await runEndpoint({
+            unit: await testSealedUnit(ID),
+            input: {
+                queryParams: { title: "software engineer", country: "US" },
+            },
+            mode: "live",
+        });
+        assertEquals(
+            result.isProviderError,
+            false,
+            JSON.stringify(result.output),
+        );
+        const data = (result.output as { data: Record<string, unknown> })
+            .data;
+        assertEquals(typeof data.jobs_in_average, "number");
+        assertEquals(result.usage, { credits: {}, evidence: {} });
+    },
 });
