@@ -1,0 +1,29 @@
+{
+    "name": "happy",
+    "description": "Recorded live 2026-11-20 with `deno task record` (response arrays capped at 2 by the recorder): GET /company-discovery with a plain-language description returns {ticker, company_name, reason} rows under data. Flat 3 credits.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://gateway.drillr.ai/api/v2/company-discovery?query=US+companies+that+design+GPUs+for+data+centers&market=US"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "ticker": "NVDA",
+                            "company_name": "NVIDIA Corporation",
+                            "reason": "Santa Clara-based NVIDIA provides GPUs and accelerated computing platforms for data centers."
+                        },
+                        {
+                            "ticker": "AMD",
+                            "company_name": "Advanced Micro Devices, Inc.",
+                            "reason": "US-headquartered AMD develops GPUs, including data center variants and high-performance server accelerators."
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

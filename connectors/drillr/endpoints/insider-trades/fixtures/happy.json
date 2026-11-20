@@ -1,0 +1,65 @@
+{
+    "name": "happy",
+    "description": "Recorded live 2026-11-20 with `deno task record`: GET /insider-trades for AAPL sells from original filings returns one row per Form 4 transaction; shares are non-negative on a sale. Flat 0.02 credits.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://gateway.drillr.ai/api/v2/insider-trades?ticker=AAPL&transaction_type=sell&is_amendment=false&limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "ticker": "AAPL",
+                            "insider_name": "Newstead Jennifer",
+                            "insider_title": "SVP, GC and Government Affairs",
+                            "is_director": false,
+                            "is_officer": true,
+                            "record_type": "transaction",
+                            "transaction_type": "sell",
+                            "transaction_code": "S",
+                            "transaction_date": "2026-11-17",
+                            "security_title": "Common Stock",
+                            "ownership_type": "direct",
+                            "shares": 2398,
+                            "price_per_share": 352.77,
+                            "total_value": 845942.46,
+                            "shares_owned_after": 25200,
+                            "form_type": "4",
+                            "is_amendment": false,
+                            "original_filing_date": null,
+                            "accession_number": "0001140361-26-044952",
+                            "filing_url": "https://www.sec.gov/Archives/edgar/data/1780525/000114036126044952/0001140361-26-044952.txt",
+                            "filing_date": "2026-11-19"
+                        },
+                        {
+                            "ticker": "AAPL",
+                            "insider_name": "LEVINSON ARTHUR D",
+                            "insider_title": "",
+                            "is_director": true,
+                            "is_officer": false,
+                            "record_type": "transaction",
+                            "transaction_type": "sell",
+                            "transaction_code": "S",
+                            "transaction_date": "2026-11-16",
+                            "security_title": "Common Stock",
+                            "ownership_type": "direct",
+                            "shares": 36792,
+                            "price_per_share": 352.26,
+                            "total_value": 12960349.92,
+                            "shares_owned_after": 3662784,
+                            "form_type": "4",
+                            "is_amendment": false,
+                            "original_filing_date": null,
+                            "accession_number": "0001140361-26-044773",
+                            "filing_url": "https://www.sec.gov/Archives/edgar/data/1214128/000114036126044773/0001140361-26-044773.txt",
+                            "filing_date": "2026-11-18"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

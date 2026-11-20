@@ -1,0 +1,175 @@
+{
+    "name": "happy",
+    "description": "Recorded live 2026-11-20 with `deno task record`: GET /cash-flow-statements for a China ticker (600519.SH) returns a CN-GAAP row in CNY sourced from cninfo, outflows negative. Flat 0.02 credits.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://gateway.drillr.ai/api/v2/cash-flow-statements?ticker=600519.SH&limit=1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "ticker": "600519.SH",
+                            "market": "CN",
+                            "fiscal_year": 2025,
+                            "period": "FY",
+                            "period_start": "2025-01-01",
+                            "report_period": "2025-12-31",
+                            "currency": "CNY",
+                            "accounting_standard": "CN-GAAP",
+                            "accession_number": "1225114741",
+                            "form_type": "annual_report",
+                            "filing_url": "http://static.cninfo.com.cn/finalpage/2026-04-17/1225114741.PDF",
+                            "filing_date": "2026-04-16",
+                            "derived_fields": [
+                                "capital_expenditures",
+                                "purchases_of_investments"
+                            ],
+                            "derivation": {
+                                "free_cash_flow": {
+                                    "value": 58394610072.94,
+                                    "inputs": [
+                                        {
+                                            "value": 61522204989.35,
+                                            "metric": "operating_cash_flow",
+                                            "currency": "CNY",
+                                            "form_type": "annual_report",
+                                            "operation": "reported",
+                                            "filing_url": "http://static.cninfo.com.cn/finalpage/2026-04-17/1225114741.PDF",
+                                            "filing_date": "2026-04-16",
+                                            "available_at": "2026-04-16",
+                                            "period_start": "2025-01-01",
+                                            "report_period": "2025-12-31",
+                                            "accession_number": "1225114741"
+                                        },
+                                        {
+                                            "value": -3127594916.41,
+                                            "inputs": [
+                                                {
+                                                    "value": 3127594916.41,
+                                                    "metric": "capital_expenditures",
+                                                    "currency": "CNY",
+                                                    "form_type": "annual_report",
+                                                    "operation": "reported",
+                                                    "filing_url": "http://static.cninfo.com.cn/finalpage/2026-04-17/1225114741.PDF",
+                                                    "filing_date": "2026-04-16",
+                                                    "available_at": "2026-04-16",
+                                                    "period_start": "2025-01-01",
+                                                    "report_period": "2025-12-31",
+                                                    "accession_number": "1225114741"
+                                                }
+                                            ],
+                                            "metric": "capital_expenditures",
+                                            "currency": null,
+                                            "operation": "negative_absolute",
+                                            "available_at": "2026-04-16",
+                                            "period_start": null,
+                                            "report_period": null
+                                        }
+                                    ],
+                                    "metric": "free_cash_flow",
+                                    "currency": "CNY",
+                                    "operation": "plus",
+                                    "available_at": "2026-04-16",
+                                    "period_start": "2025-01-01",
+                                    "report_period": "2025-12-31"
+                                },
+                                "income_taxes_paid": {
+                                    "value": -77430597986.28,
+                                    "inputs": [
+                                        {
+                                            "value": 77430597986.28,
+                                            "metric": "income_taxes_paid",
+                                            "currency": "CNY",
+                                            "form_type": "annual_report",
+                                            "operation": "reported",
+                                            "filing_url": "http://static.cninfo.com.cn/finalpage/2026-04-17/1225114741.PDF",
+                                            "filing_date": "2026-04-16",
+                                            "available_at": "2026-04-16",
+                                            "period_start": "2025-01-01",
+                                            "report_period": "2025-12-31",
+                                            "accession_number": "1225114741"
+                                        }
+                                    ],
+                                    "metric": "income_taxes_paid",
+                                    "currency": "CNY",
+                                    "operation": "negative_absolute",
+                                    "available_at": "2026-04-16",
+                                    "period_start": "2025-01-01",
+                                    "report_period": "2025-12-31"
+                                },
+                                "capital_expenditures": {
+                                    "value": -3127594916.41,
+                                    "inputs": [
+                                        {
+                                            "value": 3127594916.41,
+                                            "metric": "capital_expenditures",
+                                            "currency": "CNY",
+                                            "form_type": "annual_report",
+                                            "operation": "reported",
+                                            "filing_url": "http://static.cninfo.com.cn/finalpage/2026-04-17/1225114741.PDF",
+                                            "filing_date": "2026-04-16",
+                                            "available_at": "2026-04-16",
+                                            "period_start": "2025-01-01",
+                                            "report_period": "2025-12-31",
+                                            "accession_number": "1225114741"
+                                        }
+                                    ],
+                                    "metric": "capital_expenditures",
+                                    "currency": "CNY",
+                                    "operation": "negative_absolute",
+                                    "available_at": "2026-04-16",
+                                    "period_start": "2025-01-01",
+                                    "report_period": "2025-12-31"
+                                },
+                                "purchases_of_investments": {
+                                    "value": -62097000000,
+                                    "inputs": [
+                                        {
+                                            "value": 62097000000,
+                                            "metric": "purchases_of_investments",
+                                            "currency": "CNY",
+                                            "form_type": "annual_report",
+                                            "operation": "reported",
+                                            "filing_url": "http://static.cninfo.com.cn/finalpage/2026-04-17/1225114741.PDF",
+                                            "filing_date": "2026-04-16",
+                                            "available_at": "2026-04-16",
+                                            "period_start": "2025-01-01",
+                                            "report_period": "2025-12-31",
+                                            "accession_number": "1225114741"
+                                        }
+                                    ],
+                                    "metric": "purchases_of_investments",
+                                    "currency": "CNY",
+                                    "operation": "negative_absolute",
+                                    "available_at": "2026-04-16",
+                                    "period_start": "2025-01-01",
+                                    "report_period": "2025-12-31"
+                                }
+                            },
+                            "operating_cash_flow": 61522204989.35,
+                            "change_in_working_capital": null,
+                            "capital_expenditures": -3127594916.41,
+                            "acquisitions_net": null,
+                            "purchases_of_investments": -62097000000,
+                            "proceeds_from_investments": 33455136000,
+                            "investing_cash_flow": -31641898948.89,
+                            "share_repurchases": null,
+                            "dividends_paid": null,
+                            "financing_cash_flow": -73427081208.87,
+                            "effect_of_exchange_rate_on_cash": 2295358.3,
+                            "net_change_in_cash": -43544479810.11,
+                            "cash_at_end_of_period": 126425609447.72,
+                            "income_taxes_paid": -77430597986.28,
+                            "interest_paid": null,
+                            "free_cash_flow": 58394610072.94
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

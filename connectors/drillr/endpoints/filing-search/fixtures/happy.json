@@ -1,0 +1,77 @@
+{
+    "name": "happy",
+    "description": "Recorded live 2026-11-20 with `deno task record` (arrays capped at 2, snippets truncated at 500 chars by the recorder): GET /filing-search with include_facts=true returns data.passages and data.facts, an object rather than the array every other GET returns. Flat 0.1 credits.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://gateway.drillr.ai/api/v2/filing-search?query=share+repurchase&ticker=AAPL&form_type=10-K&limit=2&include_facts=true"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "passages": [
+                            {
+                                "ticker": "AAPL",
+                                "market": "US",
+                                "form_type": "10-K",
+                                "filing_date": "2025-10-31",
+                                "language": "en",
+                                "section": "Share Repurchase Program",
+                                "snippet": "Share Repurchase ProgramDuring 2025, the Company repurchased 402 million shares of its common stock for $ 89.3 billion. The Company’s share repurchase programs do not obligate the Company to acquire a minimum amount of shares. Under the programs, shares may be repurchased in privately negotiated or open market transactions, including under plans complying with Rule 10b5-1 under the Exchange Act.\nApple Inc. | 2025 Form 10-K | 44",
+                                "score": 0.0886
+                            },
+                            {
+                                "ticker": "AAPL",
+                                "market": "US",
+                                "form_type": "10-K",
+                                "filing_date": "2024-11-01",
+                                "language": "en",
+                                "section": "Share Repurchase Program",
+                                "snippet": "Share Repurchase ProgramDuring 2024, the Company repurchased 499 million shares of its common stock for $ 95.0 billion. The Company’s share repurchase programs do not obligate the Company to acquire a minimum amount of shares. Under the programs, shares may be repurchased in privately negotiated or open market transactions, including under plans complying with Rule 10b5-1 under the Exchange Act.",
+                                "score": 0.0864
+                            }
+                        ],
+                        "facts": [
+                            {
+                                "fact_id": "8f0defa4589566b51e1917c32e0614bb",
+                                "metric": "Repurchases of common stock",
+                                "value": 94949000000,
+                                "printed_value": "(94,949)",
+                                "unit": "currency",
+                                "currency": "USD",
+                                "fiscal_year": 2024,
+                                "fiscal_period": "FY",
+                                "period_start": "2023-10-01",
+                                "period_end": "2024-09-28",
+                                "xbrl_concept": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+                                "form_type": "10-K",
+                                "filing_date": "2026-11-03",
+                                "accession": "0000320193-26-000026",
+                                "score": 0.0158
+                            },
+                            {
+                                "fact_id": "42fd613b833948afaf567986dd0d650e",
+                                "metric": "Repurchases of common stock",
+                                "value": 94949000000,
+                                "printed_value": "(94,949)",
+                                "unit": "currency",
+                                "currency": "USD",
+                                "fiscal_year": 2024,
+                                "fiscal_period": "FY",
+                                "period_start": "2023-10-01",
+                                "period_end": "2024-09-28",
+                                "xbrl_concept": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+                                "form_type": "10-K",
+                                "filing_date": "2024-11-01",
+                                "accession": "0000320193-24-000123",
+                                "score": 0.0158
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

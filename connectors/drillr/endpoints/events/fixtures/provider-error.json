@@ -1,0 +1,19 @@
+{
+    "name": "provider-error",
+    "description": "Recorded live 2026-11-20 with `deno task record`: /events is US only, so a Japan ticker is outside coverage and drillr answers 404 not_found in its {error, message} envelope. Vendor non-2xx is DATA: provider error, zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://gateway.drillr.ai/api/v2/events?ticker=7203.T"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": "not_found",
+                    "message": "/events does not cover 7203.T."
+                }
+            }
+        }
+    ]
+}

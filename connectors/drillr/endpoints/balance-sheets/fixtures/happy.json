@@ -1,0 +1,117 @@
+{
+    "name": "happy",
+    "description": "Recorded live 2026-11-20 with `deno task record`: GET /balance-sheets for a Japan ticker (7203.T) returns an IFRS row in JPY sourced from EDINET; period_start is null and total_debt is null because a component is missing. Flat 0.02 credits.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://gateway.drillr.ai/api/v2/balance-sheets?ticker=7203.T&limit=1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "ticker": "7203.T",
+                            "market": "JP",
+                            "fiscal_year": 2026,
+                            "period": "FY",
+                            "period_start": null,
+                            "report_period": "2026-03-31",
+                            "currency": "JPY",
+                            "accounting_standard": "IFRS",
+                            "accession_number": "S100Y8NY",
+                            "form_type": "120",
+                            "filing_url": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y8NY",
+                            "filing_date": "2026-06-10",
+                            "derived_fields": [
+                                "equity_attributable_to_parent"
+                            ],
+                            "derivation": {
+                                "equity_attributable_to_parent": {
+                                    "value": 39918854000000,
+                                    "inputs": [
+                                        {
+                                            "value": 41020068000000,
+                                            "metric": "total_equity",
+                                            "currency": "JPY",
+                                            "form_type": "120",
+                                            "operation": "reported",
+                                            "filing_url": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y8NY",
+                                            "filing_date": "2026-06-10",
+                                            "available_at": "2026-06-10",
+                                            "period_start": null,
+                                            "report_period": "2026-03-31",
+                                            "accession_number": "S100Y8NY"
+                                        },
+                                        {
+                                            "value": 1101214000000,
+                                            "metric": "noncontrolling_interests",
+                                            "currency": "JPY",
+                                            "form_type": "120",
+                                            "operation": "reported",
+                                            "filing_url": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y8NY",
+                                            "filing_date": "2026-06-10",
+                                            "available_at": "2026-06-10",
+                                            "period_start": null,
+                                            "report_period": "2026-03-31",
+                                            "accession_number": "S100Y8NY"
+                                        }
+                                    ],
+                                    "metric": "equity_attributable_to_parent",
+                                    "currency": "JPY",
+                                    "operation": "minus_same_vintage",
+                                    "available_at": "2026-06-10",
+                                    "period_start": null,
+                                    "report_period": "2026-03-31"
+                                }
+                            },
+                            "cash_and_cash_equivalents": 12659622000000,
+                            "short_term_investments": null,
+                            "accounts_receivable": 3795986000000,
+                            "inventories": 5134996000000,
+                            "prepaid_expenses": null,
+                            "other_current_assets": 1520330000000,
+                            "current_assets": 42824080999999.99,
+                            "property_plant_equipment": 17067365000000,
+                            "right_of_use_assets": null,
+                            "goodwill": null,
+                            "intangible_assets": 1392755000000,
+                            "long_term_investments": 11135799000000,
+                            "deferred_tax_assets": 555596000000,
+                            "other_non_current_assets": 814773000000,
+                            "non_current_assets": 62698250000000,
+                            "total_assets": 105522331000000,
+                            "accounts_payable": 5856945000000,
+                            "short_term_debt": 17581104000000,
+                            "current_portion_of_long_term_debt": null,
+                            "employee_compensation_payable": null,
+                            "income_taxes_payable": 711675000000,
+                            "accrued_liabilities": 2112571000000,
+                            "deferred_revenue": null,
+                            "other_current_liabilities": 1735034000000,
+                            "current_liabilities": 33605019000000,
+                            "long_term_debt": 25624365000000,
+                            "lease_liabilities": null,
+                            "deferred_tax_liabilities": 1584505000000,
+                            "other_non_current_liabilities": 1010015000000,
+                            "non_current_liabilities": 30897244000000,
+                            "total_liabilities": 64502263000000.01,
+                            "common_stock": 397050000000,
+                            "additional_paid_in_capital": 456742000000,
+                            "retained_earnings": 38709858000000,
+                            "treasury_stock": -4455410000000,
+                            "accumulated_other_comprehensive_income": 4544019000000,
+                            "equity_attributable_to_parent": 39918854000000,
+                            "noncontrolling_interests": 1101214000000,
+                            "total_equity": 41020068000000,
+                            "temporary_equity": null,
+                            "total_debt": null,
+                            "net_debt": null
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

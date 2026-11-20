@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "SYNTHETIC (no live call was spent on it; replace via `deno task record`): GET /income-statements answers the 404 out-of-coverage answer, body shaped on the real recording in events/fixtures/provider-error.json. Vendor non-2xx is DATA, zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://gateway.drillr.ai/api/v2/income-statements?ticker=00700.HK"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": "not_found",
+                    "message": "/income-statements does not cover 00700.HK."
+                }
+            }
+        }
+    ]
+}

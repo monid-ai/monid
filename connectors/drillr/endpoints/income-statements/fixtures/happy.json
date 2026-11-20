@@ -1,0 +1,261 @@
+{
+    "name": "happy",
+    "description": "Recorded live 2026-11-20 with `deno task record`: GET /income-statements?ticker=AAPL&period=FY&limit=2 returns one row per fiscal year with the full line-item key set and derivation trees for the derived fields. Flat 0.02 credits.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://gateway.drillr.ai/api/v2/income-statements?ticker=AAPL&period=FY&limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "ticker": "AAPL",
+                            "market": "US",
+                            "fiscal_year": 2026,
+                            "period": "FY",
+                            "period_start": "2025-09-28",
+                            "report_period": "2026-09-26",
+                            "currency": "USD",
+                            "accounting_standard": "US-GAAP",
+                            "accession_number": "0000320193-26-000026",
+                            "form_type": "10-K",
+                            "filing_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/0000320193-26-000026.txt",
+                            "filing_date": "2026-11-03",
+                            "derived_fields": [
+                                "depreciation_and_amortization",
+                                "ebitda"
+                            ],
+                            "derivation": {
+                                "ebitda": {
+                                    "value": 171486000000,
+                                    "inputs": [
+                                        {
+                                            "value": 158063000000,
+                                            "metric": "operating_income",
+                                            "currency": "USD",
+                                            "form_type": "10-K",
+                                            "operation": "reported",
+                                            "filing_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/0000320193-26-000026.txt",
+                                            "filing_date": "2026-11-03",
+                                            "available_at": "2026-11-03",
+                                            "period_start": "2025-09-28",
+                                            "report_period": "2026-09-26",
+                                            "accession_number": "0000320193-26-000026"
+                                        },
+                                        {
+                                            "value": 13423000000,
+                                            "inputs": [
+                                                {
+                                                    "value": 13423000000,
+                                                    "metric": "depreciation_expense_cf",
+                                                    "currency": "USD",
+                                                    "form_type": "10-K",
+                                                    "operation": "reported",
+                                                    "filing_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/0000320193-26-000026.txt",
+                                                    "filing_date": "2026-11-03",
+                                                    "available_at": "2026-11-03",
+                                                    "period_start": "2025-09-28",
+                                                    "report_period": "2026-09-26",
+                                                    "accession_number": "0000320193-26-000026"
+                                                }
+                                            ],
+                                            "metric": "depreciation_and_amortization",
+                                            "currency": null,
+                                            "operation": "col",
+                                            "available_at": "2026-11-03",
+                                            "period_start": null,
+                                            "report_period": null
+                                        }
+                                    ],
+                                    "metric": "ebitda",
+                                    "currency": "USD",
+                                    "operation": "plus",
+                                    "available_at": "2026-11-03",
+                                    "period_start": "2025-09-28",
+                                    "report_period": "2026-09-26"
+                                },
+                                "depreciation_and_amortization": {
+                                    "value": 13423000000,
+                                    "inputs": [
+                                        {
+                                            "value": 13423000000,
+                                            "metric": "depreciation_expense_cf",
+                                            "currency": "USD",
+                                            "form_type": "10-K",
+                                            "operation": "reported",
+                                            "filing_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/0000320193-26-000026.txt",
+                                            "filing_date": "2026-11-03",
+                                            "available_at": "2026-11-03",
+                                            "period_start": "2025-09-28",
+                                            "report_period": "2026-09-26",
+                                            "accession_number": "0000320193-26-000026"
+                                        }
+                                    ],
+                                    "metric": "depreciation_and_amortization",
+                                    "currency": "USD",
+                                    "operation": "col",
+                                    "available_at": "2026-11-03",
+                                    "period_start": "2025-09-28",
+                                    "report_period": "2026-09-26"
+                                }
+                            },
+                            "revenue": 478834000000,
+                            "cost_of_revenue": 245232000000,
+                            "gross_profit": 233602000000,
+                            "research_and_development_expense": 45765000000,
+                            "selling_and_marketing_expense": 21134000000,
+                            "general_and_administrative_expense": 8640000000,
+                            "selling_general_and_administrative_expense": 29774000000,
+                            "taxes_and_surcharges": null,
+                            "operating_expenses": 75539000000,
+                            "operating_income": 158063000000,
+                            "interest_income": null,
+                            "interest_expense": null,
+                            "other_non_operating_income": null,
+                            "ordinary_income": null,
+                            "extraordinary_gains": null,
+                            "extraordinary_losses": null,
+                            "pretax_income": 159237000000,
+                            "income_tax_expense": 27062000000,
+                            "net_income": null,
+                            "net_income_attributable_to_parent": 132175000000,
+                            "net_income_attributable_to_noncontrolling_interests": null,
+                            "depreciation_and_amortization": 13423000000,
+                            "share_based_compensation": 13789000000,
+                            "eps_basic": 9.01,
+                            "eps_diluted": 8.98,
+                            "dividend_per_share": 1.06,
+                            "weighted_average_shares_basic": 14661935000,
+                            "weighted_average_shares_diluted": 14720306000,
+                            "ebitda": 171486000000
+                        },
+                        {
+                            "ticker": "AAPL",
+                            "market": "US",
+                            "fiscal_year": 2025,
+                            "period": "FY",
+                            "period_start": "2024-09-29",
+                            "report_period": "2025-09-27",
+                            "currency": "USD",
+                            "accounting_standard": "US-GAAP",
+                            "accession_number": "0000320193-26-000026",
+                            "form_type": "10-K",
+                            "filing_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/0000320193-26-000026.txt",
+                            "filing_date": "2026-11-03",
+                            "derived_fields": [
+                                "depreciation_and_amortization",
+                                "ebitda"
+                            ],
+                            "derivation": {
+                                "ebitda": {
+                                    "value": 144748000000,
+                                    "inputs": [
+                                        {
+                                            "value": 133050000000,
+                                            "metric": "operating_income",
+                                            "currency": "USD",
+                                            "form_type": "10-K",
+                                            "operation": "reported",
+                                            "filing_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/0000320193-26-000026.txt",
+                                            "filing_date": "2026-11-03",
+                                            "available_at": "2026-11-03",
+                                            "period_start": "2024-09-29",
+                                            "report_period": "2025-09-27",
+                                            "accession_number": "0000320193-26-000026"
+                                        },
+                                        {
+                                            "value": 11698000000,
+                                            "inputs": [
+                                                {
+                                                    "value": 11698000000,
+                                                    "metric": "depreciation_expense_cf",
+                                                    "currency": "USD",
+                                                    "form_type": "10-K",
+                                                    "operation": "reported",
+                                                    "filing_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/0000320193-26-000026.txt",
+                                                    "filing_date": "2026-11-03",
+                                                    "available_at": "2026-11-03",
+                                                    "period_start": "2024-09-29",
+                                                    "report_period": "2025-09-27",
+                                                    "accession_number": "0000320193-26-000026"
+                                                }
+                                            ],
+                                            "metric": "depreciation_and_amortization",
+                                            "currency": null,
+                                            "operation": "col",
+                                            "available_at": "2026-11-03",
+                                            "period_start": null,
+                                            "report_period": null
+                                        }
+                                    ],
+                                    "metric": "ebitda",
+                                    "currency": "USD",
+                                    "operation": "plus",
+                                    "available_at": "2026-11-03",
+                                    "period_start": "2024-09-29",
+                                    "report_period": "2025-09-27"
+                                },
+                                "depreciation_and_amortization": {
+                                    "value": 11698000000,
+                                    "inputs": [
+                                        {
+                                            "value": 11698000000,
+                                            "metric": "depreciation_expense_cf",
+                                            "currency": "USD",
+                                            "form_type": "10-K",
+                                            "operation": "reported",
+                                            "filing_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/0000320193-26-000026.txt",
+                                            "filing_date": "2026-11-03",
+                                            "available_at": "2026-11-03",
+                                            "period_start": "2024-09-29",
+                                            "report_period": "2025-09-27",
+                                            "accession_number": "0000320193-26-000026"
+                                        }
+                                    ],
+                                    "metric": "depreciation_and_amortization",
+                                    "currency": "USD",
+                                    "operation": "col",
+                                    "available_at": "2026-11-03",
+                                    "period_start": "2024-09-29",
+                                    "report_period": "2025-09-27"
+                                }
+                            },
+                            "revenue": 416161000000,
+                            "cost_of_revenue": 220960000000,
+                            "gross_profit": 195201000000,
+                            "research_and_development_expense": 34550000000,
+                            "selling_and_marketing_expense": 19524000000,
+                            "general_and_administrative_expense": 8077000000,
+                            "selling_general_and_administrative_expense": 27601000000,
+                            "taxes_and_surcharges": null,
+                            "operating_expenses": 62151000000,
+                            "operating_income": 133050000000,
+                            "interest_income": null,
+                            "interest_expense": null,
+                            "other_non_operating_income": null,
+                            "ordinary_income": null,
+                            "extraordinary_gains": null,
+                            "extraordinary_losses": null,
+                            "pretax_income": 132729000000,
+                            "income_tax_expense": 20719000000,
+                            "net_income": null,
+                            "net_income_attributable_to_parent": 112010000000,
+                            "net_income_attributable_to_noncontrolling_interests": null,
+                            "depreciation_and_amortization": 11698000000,
+                            "share_based_compensation": 12863000000,
+                            "eps_basic": 7.49,
+                            "eps_diluted": 7.46,
+                            "dividend_per_share": 1.02,
+                            "weighted_average_shares_basic": 14948500000,
+                            "weighted_average_shares_diluted": 15004697000,
+                            "ebitda": 144748000000
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

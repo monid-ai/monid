@@ -1,0 +1,37 @@
+{
+    "name": "happy",
+    "description": "Recorded live 2026-11-20 with `deno task record` (rows capped at 2 by the recorder): GET /earnings-calendar for a five-day window returns rows sorted by date then ticker across markets, estimates nullable. Flat 0.02 credits.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://gateway.drillr.ai/api/v2/earnings-calendar?from=2026-11-02&to=2026-11-06&limit=3"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "ticker": "000026.SZ",
+                            "date": "2026-11-02",
+                            "eps_actual": 0.12,
+                            "eps_estimated": 0.26,
+                            "revenue_actual": 1173997000,
+                            "revenue_estimated": 1173997000,
+                            "last_updated": "2026-11-09"
+                        },
+                        {
+                            "ticker": "000030.SZ",
+                            "date": "2026-11-02",
+                            "eps_actual": -0.0366,
+                            "eps_estimated": null,
+                            "revenue_actual": 3312643000,
+                            "revenue_estimated": null,
+                            "last_updated": "2026-11-09"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
