@@ -1,0 +1,31 @@
+{
+    "name": "rejected",
+    "description": "Synthetic: shape follows Fiber's response schema (fiber-ai/backend, 2026-11); no recorded call. Role-based address: empty data plus a rejection reason, nothing charged.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.fiber.ai/v1/email-to-person/single",
+                "body": {
+                    "email": "info@example.com"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "output": {
+                        "data": [],
+                        "rejection": {
+                            "reason": "role_based",
+                            "message": "Role-based addresses (info@, sales@) do not belong to one person."
+                        }
+                    },
+                    "chargeInfo": {
+                        "method": "charged-now",
+                        "creditsCharged": 0
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,39 @@
+{
+    "name": "happy",
+    "description": "Synthetic: shape follows Fiber's response schema (fiber-ai/backend, 2026-11); no recorded call. Company found; chargeInfo reports 2 credits.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.fiber.ai/v1/linkedin-live-fetch/company/single",
+                "body": {
+                    "type": "slug",
+                    "value": "microsoft"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "output": {
+                        "company": {
+                            "name": "Microsoft",
+                            "linkedin_slug": "microsoft",
+                            "li_org_id": "1035",
+                            "domains": [
+                                "microsoft.com"
+                            ],
+                            "industry": "Software Development",
+                            "employee_count": 228000,
+                            "hq_locality": "Redmond, Washington"
+                        },
+                        "isCached404": false
+                    },
+                    "chargeInfo": {
+                        "method": "charged-now",
+                        "creditsCharged": 2
+                    }
+                }
+            }
+        }
+    ]
+}

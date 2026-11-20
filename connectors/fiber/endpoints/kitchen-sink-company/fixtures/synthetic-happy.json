@@ -1,0 +1,51 @@
+{
+    "name": "happy",
+    "description": "Synthetic: shape follows Fiber's response schema (fiber-ai/backend, 2026-11); no recorded call. Two companies returned for numCompanies 3: 2 x 2 credits.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.fiber.ai/v1/kitchen-sink/company",
+                "body": {
+                    "companyName": {
+                        "value": "Stripe"
+                    },
+                    "numCompanies": 3
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "output": {
+                        "data": [
+                            {
+                                "name": "Stripe",
+                                "domains": [
+                                    "stripe.com"
+                                ],
+                                "linkedin_slug": "stripe",
+                                "li_org_id": "2135371",
+                                "industry": "Technology, Information and Internet",
+                                "employee_count": 9000
+                            },
+                            {
+                                "name": "Stripe Partners",
+                                "domains": [
+                                    "stripepartners.com"
+                                ],
+                                "linkedin_slug": "stripe-partners",
+                                "li_org_id": "5550001",
+                                "industry": "Technology, Information and Internet",
+                                "employee_count": 9000
+                            }
+                        ]
+                    },
+                    "chargeInfo": {
+                        "method": "charged-now",
+                        "creditsCharged": 4
+                    }
+                }
+            }
+        }
+    ]
+}

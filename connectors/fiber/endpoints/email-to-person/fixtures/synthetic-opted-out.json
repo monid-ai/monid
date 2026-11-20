@@ -1,0 +1,21 @@
+{
+    "name": "opted-out",
+    "description": "Synthetic: shape follows Fiber's response schema (fiber-ai/backend, 2026-11); no recorded call. Email on the opt-out list: 410 {message}, nothing charged.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.fiber.ai/v1/email-to-person/single",
+                "body": {
+                    "email": "optedout@example.com"
+                }
+            },
+            "res": {
+                "status": 410,
+                "body": {
+                    "message": "This person has opted out of Fiber's data. No data is returned and no credits are charged."
+                }
+            }
+        }
+    ]
+}

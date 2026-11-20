@@ -1,0 +1,30 @@
+{
+    "name": "miss",
+    "description": "Synthetic: shape follows Fiber's response schema (fiber-ai/backend, 2026-11); no recorded call. No match: empty data plus a message, nothing charged.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.fiber.ai/v1/kitchen-sink/company",
+                "body": {
+                    "companyDomain": {
+                        "value": "no-such-company.example"
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "output": {
+                        "data": [],
+                        "message": "Could not find any company matching your parameters"
+                    },
+                    "chargeInfo": {
+                        "method": "charged-now",
+                        "creditsCharged": 0
+                    }
+                }
+            }
+        }
+    ]
+}

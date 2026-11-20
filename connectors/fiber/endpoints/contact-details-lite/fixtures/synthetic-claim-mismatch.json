@@ -1,0 +1,58 @@
+{
+    "name": "claim-mismatch",
+    "description": "Synthetic: the all-found chain with a receipt of 3 credits (e.g. a per-org discount) against a card fold of 4 \u2014 the claim wins and the gap rides out as usage.mismatch.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.fiber.ai/v1/contact-details/lite",
+                "body": {
+                    "input": {
+                        "mode": "linkedin",
+                        "linkedinIdentifier": "williamhgates"
+                    },
+                    "enrichmentType": {
+                        "getWorkEmails": true,
+                        "getPersonalEmails": true,
+                        "getPhoneNumbers": true
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "output": {
+                        "profile": {
+                            "emails": [
+                                {
+                                    "emailAddress": "bill.gates@example.org",
+                                    "type": "work",
+                                    "validationStatus": "valid",
+                                    "deliverabilityScore": 92,
+                                    "isCatchAll": false
+                                },
+                                {
+                                    "emailAddress": "bill.gates@example.com",
+                                    "type": "personal",
+                                    "validationStatus": "valid",
+                                    "deliverabilityScore": 92,
+                                    "isCatchAll": false
+                                }
+                            ],
+                            "phoneNumbers": [
+                                {
+                                    "phoneNumber": "+12065550100",
+                                    "type": "mobile"
+                                }
+                            ]
+                        }
+                    },
+                    "chargeInfo": {
+                        "method": "charged-now",
+                        "creditsCharged": 3
+                    }
+                }
+            }
+        }
+    ]
+}
