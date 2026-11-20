@@ -1,0 +1,72 @@
+{
+    "name": "happy",
+    "description": "recorded 2026-11-17 against https://loyaltie.com/api/ucp/mcp (loyaltie#build-cart-link, tools/call build_cart_link); the response is the server's unedited JSON-RPC result",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://loyaltie.com/api/ucp/mcp",
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "method": "tools/call",
+                    "params": {
+                        "name": "build_cart_link",
+                        "arguments": {
+                            "cart": {
+                                "line_items": [
+                                    {
+                                        "id": "00036129-287b-43a6-a426-18bd0d9b2f5f",
+                                        "quantity": 2
+                                    }
+                                ]
+                            },
+                            "src": "api",
+                            "agent_id": "monid"
+                        }
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "{\"ucp\":{\"version\":\"2026-04-08\"},\"cart_link\":\"https://loyaltie.com/cart?products=00036129-287b-43a6-a426-18bd0d9b2f5f:2&src=api&agent=monid&cart_link_id=cl_a4e752f942f0\",\"cart_link_id\":\"cl_a4e752f942f0\",\"line_items\":[{\"id\":\"00036129-287b-43a6-a426-18bd0d9b2f5f\",\"quantity\":2,\"title\":\"Peak Espresso – 5 lb Single-Origin Coffee\",\"price\":{\"amount\":9499,\"currency\":\"USD\"}}],\"note\":\"One-time purchase. The person reviews the cart on loyaltie.com and, to pay, signs in or creates an account there.\",\"message"
+                            }
+                        ],
+                        "isError": false,
+                        "structuredContent": {
+                            "ucp": {
+                                "version": "2026-04-08"
+                            },
+                            "cart_link": "https://loyaltie.com/cart?products=00036129-287b-43a6-a426-18bd0d9b2f5f:2&src=api&agent=monid&cart_link_id=cl_a4e752f942f0",
+                            "cart_link_id": "cl_a4e752f942f0",
+                            "line_items": [
+                                {
+                                    "id": "00036129-287b-43a6-a426-18bd0d9b2f5f",
+                                    "quantity": 2,
+                                    "title": "Peak Espresso – 5 lb Single-Origin Coffee",
+                                    "price": {
+                                        "amount": 9499,
+                                        "currency": "USD"
+                                    }
+                                }
+                            ],
+                            "note": "One-time purchase. The person reviews the cart on loyaltie.com and, to pay, signs in or creates an account there.",
+                            "messages": [],
+                            "next": [
+                                "Give the person cart_link exactly as returned. They review the cart on loyaltie.com and, to pay, sign in or create an account there; tell them that. Ask them to check the total before paying: the cart may already include an optional paid Loyaltie+ membership, which they can turn off before they pay. You never pay or place an order, so never say an order was placed.",
+                                "If the person decides not to buy, tell us why: call share_feedback with stage \"leaving\", the cart id and a short why, with no personal details."
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

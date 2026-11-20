@@ -1,0 +1,61 @@
+{
+    "name": "not-found",
+    "description": "recorded 2026-11-17 against https://loyaltie.com/api/ucp/mcp (loyaltie#get-product, an unknown product id): HTTP 200 with a UCP not_found message",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://loyaltie.com/api/ucp/mcp",
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "method": "tools/call",
+                    "params": {
+                        "name": "get_product",
+                        "arguments": {
+                            "catalog": {
+                                "id": "00000000-0000-0000-0000-000000000000"
+                            },
+                            "src": "api",
+                            "agent_id": "monid"
+                        }
+                    }
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "{\"ucp\":{\"version\":\"2026-04-08\",\"status\":\"error\"},\"messages\":[{\"type\":\"error\",\"code\":\"not_found\",\"content\":\"Product not found: 00000000-0000-0000-0000-000000000000\",\"severity\":\"unrecoverable\",\"path\":\"$.id\"}],\"next\":[\"Report this error and its messages. Do not retry unchanged unless the next hint says to wait and call again; fix only a stated request problem (see path, when given).\"]}"
+                            }
+                        ],
+                        "isError": true,
+                        "structuredContent": {
+                            "ucp": {
+                                "version": "2026-04-08",
+                                "status": "error"
+                            },
+                            "messages": [
+                                {
+                                    "type": "error",
+                                    "code": "not_found",
+                                    "content": "Product not found: 00000000-0000-0000-0000-000000000000",
+                                    "severity": "unrecoverable",
+                                    "path": "$.id"
+                                }
+                            ],
+                            "next": [
+                                "Report this error and its messages. Do not retry unchanged unless the next hint says to wait and call again; fix only a stated request problem (see path, when given)."
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}
