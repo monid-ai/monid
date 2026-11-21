@@ -1,0 +1,29 @@
+{
+    "name": "unauthorized",
+    "description": "RECORDED 2026-10-23 against POST https://api.clawifi.dev/fetch with no API key and `X-Clawifi-Include-Credits: 1` (no key was used or created). /search/free, /scrape and /map answered the same 401 envelope (request_id differs). Clawifi adds `credits_charged: 0` to error bodies too; the engine zero-bills every non-2xx anyway, so consolidate never runs on it.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "detail": "Invalid API key",
+                    "error": {
+                        "code": "http_error",
+                        "message": "Invalid API key",
+                        "details": {
+                            "request_id": "a9e1357a5105407cb55e7c0552157167"
+                        },
+                        "retryable": false,
+                        "suggested_action": "Provide a valid Clawifi API key and retry.",
+                        "request_id": "a9e1357a5105407cb55e7c0552157167"
+                    },
+                    "credits_charged": 0
+                }
+            }
+        }
+    ]
+}

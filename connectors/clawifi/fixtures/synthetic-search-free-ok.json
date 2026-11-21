@@ -1,0 +1,72 @@
+{
+    "name": "synthetic-search-free-ok",
+    "description": "SYNTHETIC happy chain for clawifi#search/free. Body is a real 2026-10-23 response from Clawifi's keyless POST /playground/run (operation 'search', query 'example domain iana'), whose `result` is the /search/free response model: trimmed to 2 rows (result_count adjusted) with each row's engine `data` cut to five keys. `credits_charged: 1` is added as Clawifi 1.7.5 returns it when the request carries `X-Clawifi-Include-Credits: 1` (every 2xx search costs 1). Replace via `deno task record` when CLAWIFI_API_KEY exists.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "success": true,
+                    "query": "example domain iana",
+                    "provider": "free_auto",
+                    "providers_tried": [
+                        "searxng_local"
+                    ],
+                    "paid_providers_used": [],
+                    "result_count": 2,
+                    "results": [
+                        {
+                            "provider": "searxng_local",
+                            "title": "Example Domains",
+                            "url": "https://www.iana.org/help/example-domains",
+                            "snippet": "Sep 27, 2026 ... Further Reading. IANA-managed Reserved Domains · Special-Use Domain Names (RFC 6761); Reserved Top Level DNS Names (RFC 2606).",
+                            "rank": 1,
+                            "data": {
+                                "engine": "google cse",
+                                "engines": [
+                                    "google cse",
+                                    "yandex"
+                                ],
+                                "score": 4.0,
+                                "category": "general",
+                                "publishedDate": null
+                            },
+                            "published_at": null,
+                            "modified_at": null
+                        },
+                        {
+                            "provider": "searxng_local",
+                            "title": "example.com - Wikipedia",
+                            "url": "https://en.wikipedia.org/wiki/Example.com",
+                            "snippet": "The domain names example.com, example.net, example.org, and example.edu are second-level domain names in the Domain Name System of the Internet. They are reserved by the Internet Assigned Numbers Authority (IANA) at the direction of the Internet Engineering Task Force (IETF) as special-use domain names for documentation purposes. [2] The domain names are used widely in books, tutorials, sample ...",
+                            "rank": 2,
+                            "data": {
+                                "engine": "google cse",
+                                "engines": [
+                                    "google cse",
+                                    "yahoo",
+                                    "yandex"
+                                ],
+                                "score": 3.0,
+                                "category": "general",
+                                "publishedDate": null
+                            },
+                            "published_at": null,
+                            "modified_at": null
+                        }
+                    ],
+                    "errors": [],
+                    "browser_fallback_allowed": false,
+                    "filters_applied": {},
+                    "rate_limited": [],
+                    "retry_after": null,
+                    "credits_charged": 1
+                }
+            }
+        }
+    ]
+}
