@@ -1,0 +1,92 @@
+{
+    "name": "synthetic-backtest-job",
+    "description": "SYNTHETIC: hand-written, not recorded. No real member data and no real key; every number is a placeholder, not market data. Shape from QuantGPT's /api/v1 partner door (terminal/api_v1.py partner_call and reply, 2026-11-20): a 200 is {tool, result, disclaimer}, a refusal is {error, ..., disclaimer}. TODO: replace via `deno task record` once a partner key (QUANTGPT_CREDENTIALS_API_KEY) exists. The async chain: the submit answers status running with job_id JOB1 (not billed), one fetch_job poll still running (not billed), then fetch_job delivers the finished report. Settles US$0.10 exactly once.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "tool": "run_backtest",
+                    "result": {
+                        "status": "running",
+                        "job_id": "JOB1",
+                        "seconds": 20,
+                        "next": "Still computing after 20s. Collect the result with fetch_job using this job_id."
+                    },
+                    "disclaimer": "QuantGPT is a research tool. Its results describe what past data did: report the numbers as they come back, losing years included. It gives no investment advice, makes no forecasts or recommendations, and places no trades: no tool sends an order or reaches a broker."
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/api/v1/tools/fetch_job"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "tool": "fetch_job",
+                    "result": {
+                        "status": "running",
+                        "job_id": "JOB1",
+                        "seconds": 30,
+                        "next": "Still computing; call fetch_job again."
+                    },
+                    "disclaimer": "QuantGPT is a research tool. Its results describe what past data did: report the numbers as they come back, losing years included. It gives no investment advice, makes no forecasts or recommendations, and places no trades: no tool sends an order or reaches a broker."
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/api/v1/tools/fetch_job"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "tool": "fetch_job",
+                    "result": {
+                        "meta": {
+                            "study": "custom",
+                            "start_year": 1998,
+                            "rebalance": "monthly",
+                            "benchmark": "$SPXTR",
+                            "split_year": 2015
+                        },
+                        "result": {
+                            "finding": "tradeoff",
+                            "stats": {
+                                "cagr": 0.01,
+                                "sharpe": 0.1,
+                                "max_drawdown": -0.5,
+                                "benchmark_cagr": 0.02
+                            },
+                            "decades": [
+                                {
+                                    "decade": "2000s",
+                                    "cagr": -0.01,
+                                    "benchmark_cagr": 0.01
+                                },
+                                {
+                                    "decade": "2010s",
+                                    "cagr": 0.02,
+                                    "benchmark_cagr": 0.03
+                                }
+                            ],
+                            "walk_forward": {
+                                "in_sample_sharpe": 0.2,
+                                "out_of_sample_sharpe": 0.0
+                            }
+                        },
+                        "job_id": "JOB1"
+                    },
+                    "disclaimer": "QuantGPT is a research tool. Its results describe what past data did: report the numbers as they come back, losing years included. It gives no investment advice, makes no forecasts or recommendations, and places no trades: no tool sends an order or reaches a broker."
+                }
+            }
+        }
+    ]
+}

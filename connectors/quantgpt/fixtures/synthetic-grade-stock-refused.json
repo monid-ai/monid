@@ -1,0 +1,20 @@
+{
+    "name": "synthetic-grade-stock-refused",
+    "description": "SYNTHETIC: hand-written, not recorded. No real member data and no real key; every number is a placeholder, not market data. Shape from QuantGPT's /api/v1 partner door (terminal/api_v1.py partner_call and reply, 2026-11-20): a 200 is {tool, result, disclaimer}, a refusal is {error, ..., disclaimer}. TODO: replace via `deno task record` once a partner key (QUANTGPT_CREDENTIALS_API_KEY) exists. The tool refuses an unknown ticker: a 400 {error, tool, disclaimer}. Data, zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "error": "unknown ticker: NOSUCH",
+                    "tool": "grade_stock",
+                    "disclaimer": "QuantGPT is a research tool. Its results describe what past data did: report the numbers as they come back, losing years included. It gives no investment advice, makes no forecasts or recommendations, and places no trades: no tool sends an order or reaches a broker."
+                }
+            }
+        }
+    ]
+}

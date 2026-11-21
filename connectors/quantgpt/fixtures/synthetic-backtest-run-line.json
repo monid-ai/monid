@@ -1,0 +1,29 @@
+{
+    "name": "synthetic-backtest-run-line",
+    "description": "SYNTHETIC: hand-written, not recorded. No real member data and no real key; every number is a placeholder, not market data. Shape from QuantGPT's /api/v1 partner door (terminal/api_v1.py partner_call and reply, 2026-11-20): a 200 is {tool, result, disclaimer}, a refusal is {error, ..., disclaimer}. TODO: replace via `deno task record` once a partner key (QUANTGPT_CREDENTIALS_API_KEY) exists. The key already has 2 backtests running (its limit): the submit is refused 429 with the running job ids. Data, zero usage, no job.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 429,
+                "body": {
+                    "error": "this key has 2 backtests running (its limit); collect one with fetch_job, then run again",
+                    "running": [
+                        {
+                            "job_id": "JOB1",
+                            "seconds": 40
+                        },
+                        {
+                            "job_id": "JOB2",
+                            "seconds": 12
+                        }
+                    ],
+                    "disclaimer": "QuantGPT is a research tool. Its results describe what past data did: report the numbers as they come back, losing years included. It gives no investment advice, makes no forecasts or recommendations, and places no trades: no tool sends an order or reaches a broker."
+                }
+            }
+        }
+    ]
+}

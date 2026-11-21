@@ -1,0 +1,18 @@
+{
+    "name": "synthetic-not-found",
+    "description": "SYNTHETIC: hand-written, not recorded. No real member data and no real key; every number is a placeholder, not market data. Shape from QuantGPT's /api/v1 partner door (terminal/api_v1.py partner_call and reply, 2026-11-20): a 200 is {tool, result, disclaimer}, a refusal is {error, ..., disclaimer}. TODO: replace via `deno task record` once a partner key (QUANTGPT_CREDENTIALS_API_KEY) exists. A revoked partner key, or the API switched off: every route answers 404 {error: not found} (no disclaimer on this answer). Data, zero usage. {{request.url}} binds it to every endpoint.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": "not found"
+                }
+            }
+        }
+    ]
+}
