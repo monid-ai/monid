@@ -2,7 +2,7 @@
 
 ## Why
 
-[Clawifi](https://clawifi.dev) is a web-reading API for agents: search
+[Clawifi](https://clawifi.dev/?utm_source=monid&utm_medium=integration&utm_campaign=docs) is a web-reading API for agents: search
 through several engines, a page or PDF as markdown (optionally only the
 passages that answer a question, with headings and offsets), a page
 projected into chosen formats, and a site map from robots.txt, sitemaps,
