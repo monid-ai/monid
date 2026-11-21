@@ -32,6 +32,7 @@ async function run(
 
 const CHATGPT = "cloro#monitor/chatgpt";
 const BING_AIMODE = "cloro#monitor/bing/aimode";
+const BING = "cloro#monitor/bing";
 const CHATGPT_BODY = {
     prompt: "What is Example Corp?",
     country: "US",
@@ -203,6 +204,35 @@ const cards: {
         credits: 8,
         evidence: { call: 1, state_targeting: 1 },
     },
+    {
+        id: BING,
+        body: { query: "q", country: "US", include: { html: true } },
+        credits: 5,
+        evidence: { call: 1 },
+    },
+    {
+        // false does not turn on the add-on
+        id: BING,
+        body: { query: "q", country: "US", include: { aioverview: false } },
+        credits: 5,
+        evidence: { call: 1 },
+    },
+    {
+        id: BING,
+        body: { query: "q", country: "DE", include: { aioverview: true } },
+        credits: 7,
+        evidence: { call: 1, ai_overview: 1 },
+    },
+    {
+        id: BING,
+        body: {
+            query: "q",
+            country: "US",
+            include: { aioverview: { markdown: true } },
+        },
+        credits: 7,
+        evidence: { call: 1, ai_overview: 1 },
+    },
 ];
 
 for (const card of cards) {
@@ -252,6 +282,14 @@ Deno.test("cloro estimates: holds match the card before the run", async () => {
         }),
         { default: 8 },
     );
+    assertEquals(
+        await estimate(BING, {
+            query: "q",
+            country: "US",
+            include: { aioverview: {} },
+        }),
+        { default: 7 },
+    );
 });
 
 Deno.test("cloro input: bodies are strict, like the vendor's", async () => {
@@ -280,6 +318,25 @@ Deno.test("cloro input: bodies are strict, like the vendor's", async () => {
     ) {
         await assertRejects(
             () => run(BING_AIMODE, body),
+            Error,
+            "INVALID_INPUT",
+            JSON.stringify(body).slice(0, 80),
+        );
+    }
+    // Bing Search: no Google-only fields, a 3,500-character query cap
+    for (
+        const body of <Record<string, Json>[]> [
+            { query: "q", country: "US", pages: 2 },
+            { query: "q", country: "US", device: "mobile" },
+            { query: "q", country: "US", state: "CA" },
+            { query: "q", gl: "us" },
+            { query: "q", country: "US", include: { paaAioverview: true } },
+            { query: "q".repeat(3_501), country: "US" },
+            { query: "q" },
+        ]
+    ) {
+        await assertRejects(
+            () => run(BING, body),
             Error,
             "INVALID_INPUT",
             JSON.stringify(body).slice(0, 80),
@@ -320,7 +377,8 @@ Deno.test("cloro input: localization is required before the wire", async () => {
 
 // Run mode by measured latency (2026-09-22 drill, 2026-09-23 run): the
 // fast engines stay sync, the slow assistants run async on monid's side.
-const SYNC = ["google", "google/news", "aimode"];
+// Bing Search is not measured yet; it runs sync, as Google Search does.
+const SYNC = ["google", "google/news", "aimode", "bing"];
 const ASYNC = ["chatgpt", "gemini", "bing/aimode"];
 
 Deno.test("cloro: every endpoint shares the meter relay, the claim and the error digest", async () => {
@@ -328,7 +386,7 @@ Deno.test("cloro: every endpoint shares the meter relay, the claim and the error
     const docs = Object.values(bundle.endpoints).filter((doc) =>
         doc.id.startsWith("cloro#")
     );
-    assertEquals(docs.length, 6);
+    assertEquals(docs.length, 7);
     const keys = (pick: (doc: typeof docs[number]) => unknown) =>
         new Set(docs.map(pick)).size;
     const doc = (engine: string) => bundle.endpoints[`cloro#monitor/${engine}`];
