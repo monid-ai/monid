@@ -56,7 +56,7 @@ export default defineProvider({
             "Clawifi's side and any response with status 400 or above cost " +
             "nothing. Clawifi does not bypass bot protection or CAPTCHAs: a " +
             "blocked page comes back with a diagnosis instead.",
-        homepageUrl: "https://clawifi.dev",
+        homepageUrl: "https://clawifi.dev/?utm_source=monid&utm_medium=integration&utm_campaign=connector",
         docsUrl: "https://clawifi.dev/docs",
         categories: ["web-search", "web-scraping", "web-extraction"],
         notes: [
