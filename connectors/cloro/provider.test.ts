@@ -233,6 +233,19 @@ const cards: {
         credits: 7,
         evidence: { call: 1, ai_overview: 1 },
     },
+    {
+        // first does not change the card
+        id: BING,
+        body: {
+            query: "q",
+            country: "US",
+            pages: 3,
+            first: 11,
+            include: { aioverview: true },
+        },
+        credits: 11,
+        evidence: { call: 1, extra_page: 2, ai_overview: 1 },
+    },
 ];
 
 for (const card of cards) {
@@ -290,6 +303,10 @@ Deno.test("cloro estimates: holds match the card before the run", async () => {
         }),
         { default: 7 },
     );
+    assertEquals(
+        await estimate(BING, { query: "q", country: "US", pages: 4 }),
+        { default: 11 },
+    );
 });
 
 Deno.test("cloro input: bodies are strict, like the vendor's", async () => {
@@ -323,10 +340,13 @@ Deno.test("cloro input: bodies are strict, like the vendor's", async () => {
             JSON.stringify(body).slice(0, 80),
         );
     }
-    // Bing Search: no Google-only fields, a 3,500-character query cap
+    // Bing Search: no Google-only fields, 1-10 pages, first from 1, a
+    // 3,500-character query cap
     for (
         const body of <Record<string, Json>[]> [
-            { query: "q", country: "US", pages: 2 },
+            { query: "q", country: "US", pages: 0 },
+            { query: "q", country: "US", pages: 11 },
+            { query: "q", country: "US", first: 0 },
             { query: "q", country: "US", device: "mobile" },
             { query: "q", country: "US", state: "CA" },
             { query: "q", gl: "us" },

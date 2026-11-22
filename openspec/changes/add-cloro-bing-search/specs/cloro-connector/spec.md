@@ -4,20 +4,28 @@
 
 ### Requirement: Bing Search endpoint
 `cloro#monitor/bing` SHALL call `POST /v1/monitor/bing` with a strict body:
-`query` (1 to 3,500 characters), `country`, and optional `include` with
-`html` and `aioverview` (a boolean or `{markdown}`).
+`query` (1 to 3,500 characters), `country`, and optional `pages` (1 to 10,
+default 1), `first` (an integer from 1) and `include` with `html` and
+`aioverview` (a boolean or `{markdown}`).
 
-#### Scenario: The AI Overview is the only add-on
+#### Scenario: The AI Overview is an add-on
 - **WHEN** `cloro#monitor/bing` runs with `include.aioverview` set to
   `true` or to an object
 - **THEN** evidence is `{call: 1, ai_overview: 1}` and the card is 7
 - **AND** with `include.aioverview: false` or no `aioverview`, evidence is
   `{call: 1}` and the card is 5
 
-#### Scenario: Google-only fields and long queries are rejected
-- **WHEN** the body has `pages`, `device`, `state`, `gl`,
-  `include.paaAioverview`, no `country`, or a query longer than 3,500
-  characters
+#### Scenario: Extra pages are an add-on
+- **WHEN** `cloro#monitor/bing` runs with `pages: 3` and
+  `include.aioverview: true`
+- **THEN** evidence is `{call: 1, extra_page: 2, ai_overview: 1}` and the
+  card is 11
+- **AND** `first` does not change the evidence or the card
+
+#### Scenario: Google-only fields and out-of-range values are rejected
+- **WHEN** the body has `device`, `state`, `gl`, `include.paaAioverview`,
+  no `country`, `pages` outside 1 to 10, `first` below 1, or a query longer
+  than 3,500 characters
 - **THEN** the run fails with `INVALID_INPUT` and no request is sent
 
 ## MODIFIED Requirements

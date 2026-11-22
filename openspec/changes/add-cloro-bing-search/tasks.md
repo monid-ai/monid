@@ -3,12 +3,13 @@
 ## 1. Vendor surface
 
 - [x] 1.1 Read the request body, the countries and the card from cloro's
-      `bingSchema` and `calculateCredits` (3 base, +2 for the AI Overview)
+      `bingSchema` and `calculateCredits` (3 base, +2 for the AI Overview,
+      +2 for each page after the first)
 
 ## 2. Connector
 
 - [x] 2.1 Add `endpoints/bing/` (`cloro#monitor/bing`), sync run, card 5
-      plus 2 for the AI Overview
+      plus 2 for the AI Overview and 2 for each page after the first
 - [x] 2.2 `provider.ts`: summary, description and notes name Bing Search
 
 ## 3. Tests and lock

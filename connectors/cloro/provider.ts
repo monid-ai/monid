@@ -17,8 +17,8 @@ import { z } from "zod";
  * BILLING. cloro bills one pool of credits per organization. A sync
  * request costs the engine's base credits, plus a flat 2-credit sync
  * surcharge, plus the add-ons the request turns on (state targeting,
- * ChatGPT raw data, Google and Bing AI Overview, extra Google pages,
- * AI Mode expanded products). Each endpoint states that card as a COMPOSITE: one
+ * ChatGPT raw data, Google and Bing AI Overview, extra Google and Bing
+ * pages, AI Mode expanded products). Each endpoint states that card as a COMPOSITE: one
  * `call` line (base + sync surcharge) and one PER_UNIT line per add-on.
  * Rate card: https://cloro.dev/docs/guides/providers (checked 2026-09-21).
  *
@@ -41,8 +41,8 @@ export default defineProvider({
             "as structured JSON: the answer text, the cited sources, " +
             "shopping cards, brand entities and ads, or the full Google " +
             "SERP with organic results, People Also Ask and the AI " +
-            "Overview, or the Bing results page with organic results and " +
-            "the AI Overview. Use it to measure how a brand or a page shows " +
+            "Overview, or the Bing results page with organic results, ads " +
+            "and the AI Overview. Use it to measure how a brand or a page shows " +
             "up in AI answers (GEO) and in search results (SEO). It returns " +
             "what a real user in that country sees, not a model API " +
             "completion.",
