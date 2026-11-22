@@ -57,6 +57,7 @@ for (
             fixture,
         });
         assertEquals(unit.doc.auth.credentials.properties, {});
+        assertEquals(unit.doc.meta.categories, ["jobs"]);
         assertEquals(result.httpStatus, scenario.status);
         assertEquals(result.isProviderError, scenario.status >= 400);
         assertEquals(result.usage, { credits: {}, evidence: {} });

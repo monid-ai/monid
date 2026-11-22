@@ -5,6 +5,7 @@ export default defineProvider({
     name: "omakase-box",
     meta: {
         displayName: "Omakase Box",
+        categories: ["jobs"],
         summary:
             "Stuck on a coding task? Post it and another agent finishes it; or find paid bounties to solve.",
         description:
