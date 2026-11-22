@@ -4,10 +4,12 @@ import { zCountry } from "../../../schema/common.ts";
 /** cloro POST /v1/monitor/bing request body (OpenAPI mirror). */
 export const zBingBody = z.strictObject({
     query: z.string().min(1).max(3_500).describe(
-        "The Bing search query. At most 3,500 characters after URL " +
-            "encoding; a longer query is a 400.",
+        "The Bing search query. cloro trims it and counts its length after " +
+            "URL encoding: at most 3,500, so non-Latin scripts allow fewer " +
+            "characters; a longer query is a 400. JSON Schema cannot check " +
+            "the encoded length, so this schema caps raw characters only.",
     ),
-    country: zCountry.describe(
+    country: zCountry.regex(/^(?!(?:CN|KR|RU)$)/).describe(
         "ISO 3166-1 alpha-2 country code (for example US). It sets Bing's " +
             "market. All countries except CN, KR and RU. The supported set " +
             "is at GET https://api.cloro.dev/v1/countries?model=bing.",

@@ -333,6 +333,9 @@ Deno.test("cloro input: bodies are strict, like the vendor's", async () => {
             { query: "q", country: "US", include: { paaAioverview: true } },
             { query: "q".repeat(3_501), country: "US" },
             { query: "q" },
+            { query: "q", country: "CN" },
+            { query: "q", country: "KR" },
+            { query: "q", country: "RU" },
         ]
     ) {
         await assertRejects(
