@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-import-unavailable",
+    "description": "Synthetic PF51 source-shaped import 503 example; not a live bounty or observed response. Exercises pending-import unavailable passthrough and FREE usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "issue": "https://github.com/example/parser/issues/7",
+                    "reward": 25
+                }
+            },
+            "res": {
+                "status": 503,
+                "body": {
+                    "error": "GitHub could not be read just now. Nothing was listed. Next: try again in a few minutes."
+                }
+            }
+        }
+    ]
+}

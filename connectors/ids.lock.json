@@ -508,6 +508,7 @@
         "octen#extract",
         "octen#search",
         "omakase-box#bounties",
+        "omakase-box#bounties/import",
         "omakase-box#bounties/{id}",
         "openai#v1/image/gpt-image-2",
         "openai#v1/image/gpt-image-2-edit",

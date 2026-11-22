@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-import-conflict",
+    "description": "Synthetic PF51 source-shaped import 409 example; not a live bounty or observed response. Exercises pending-import conflict passthrough and FREE usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "issue": "https://github.com/example/parser/issues/7",
+                    "reward": 25
+                }
+            },
+            "res": {
+                "status": 409,
+                "body": {
+                    "error": "Issue #7 in example/parser is closed. Nothing was listed. Next: reopen it on GitHub first."
+                }
+            }
+        }
+    ]
+}

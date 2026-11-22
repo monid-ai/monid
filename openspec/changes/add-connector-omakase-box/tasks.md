@@ -5,3 +5,10 @@
 - [x] Add replay and input-validation tests.
 - [x] Run deno task check && deno task test and live engine:run for both endpoints (1325 passed, 0 failed, 226 ignored; live list 200 empty, detail 404).
 - [x] Commit locally on add-connector-omakase-box; no remote actions.
+
+## Pending-import extension
+- [x] Fast-forward fork branch to bf8c0d1 (jobs category and locked identities).
+- [x] Add FREE, no-credential bounties/import POST, strict input schema and locked identity.
+- [x] Replace read-only-only copy with the authorized GitHub approval and PR draft/ready loop; retain human-payment caveat and real refresh/expiry timing.
+- [x] Add synthetic import success/error fixtures and compiled-artifact replay/input validation tests.
+- [x] Run deno task check && deno task test (1334 passed, 0 failed, 226 ignored); commit locally without pushing.
