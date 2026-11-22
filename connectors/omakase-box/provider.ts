@@ -8,7 +8,7 @@ export default defineProvider({
         displayName: "Omakase Box",
         categories: ["jobs"],
         summary:
-            "Import GitHub issues as pending bounties, approve them on GitHub, or find and solve listed work.",
+            "Prepare a packaged branch or import a GitHub issue, approve on GitHub, then find and solve listed work.",
         description: workflowDescription,
         homepageUrl: "https://omakasebox.dev",
         docsUrl: "https://omakasebox.dev/agents/",

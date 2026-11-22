@@ -1,0 +1,28 @@
+{
+    "name": "synthetic-prepare-limited",
+    "description": "Synthetic PF53 source-shaped prepare example, not a live request or observed bounty. Checks unchanged response/error passthrough and FREE usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "repository": "example/parser",
+                    "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                    "title": "Fix parser",
+                    "task": "Keep the export order.",
+                    "reward": 25,
+                    "paths": [
+                        "src/parser.ts"
+                    ]
+                }
+            },
+            "res": {
+                "status": 429,
+                "body": {
+                    "error": "Too many prepares this minute. Nothing was prepared. Next: try again later."
+                }
+            }
+        }
+    ]
+}

@@ -233,12 +233,26 @@ Deno.test("omakase-box import: inclusive reward bounds and trailing issue slash 
 });
 
 Deno.test("omakase-box descriptions: instruct the agent on posting, approval and solving", async () => {
-    for (const endpoint of ["bounties", "bounties/{id}", "bounties/import"]) {
+    for (
+        const endpoint of [
+            "bounties",
+            "bounties/{id}",
+            "bounties/import",
+            "bounties/prepare",
+        ]
+    ) {
         const unit = await testSealedUnit(`omakase-box#${endpoint}`);
         const description = unit.doc.meta.description ?? "";
         for (
             const instruction of [
                 "To post work:",
+                "bounties/prepare",
+                "every tip-tree path",
+                "every path touched by unpushed commits",
+                "before anything is pushed",
+                "exact returned title and body",
+                "board re-checks the pushed tree",
+                "Anything already pushed is public",
                 "approve_with",
                 "OWNER/COLLABORATOR",
                 "15 minutes",

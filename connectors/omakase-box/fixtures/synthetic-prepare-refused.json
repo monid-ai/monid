@@ -1,0 +1,34 @@
+{
+    "name": "synthetic-prepare-refused",
+    "description": "Synthetic PF53 source-shaped prepare example, not a live request or observed bounty. Checks unchanged response/error passthrough and FREE usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "repository": "example/parser",
+                    "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                    "title": "Fix parser",
+                    "task": "Keep the export order.",
+                    "reward": 25,
+                    "paths": [
+                        ".env"
+                    ]
+                }
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "error": "Never-ship paths were refused. Nothing was prepared. Next: send repository, commit, title, task, reward and all paths, with optional note and boxignore only.",
+                    "refused": [
+                        {
+                            "path": ".env",
+                            "rule": "dot-env"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
