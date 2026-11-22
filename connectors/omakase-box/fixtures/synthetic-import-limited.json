@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-import-limited",
+    "description": "Synthetic PF51 source-shaped import 429 example; not a live bounty or observed response. Exercises pending-import limited passthrough and FREE usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "issue": "https://github.com/example/parser/issues/7",
+                    "reward": 25
+                }
+            },
+            "res": {
+                "status": 429,
+                "body": {
+                    "error": "The board is saving its GitHub reads. Nothing was listed. Next: try again later."
+                }
+            }
+        }
+    ]
+}

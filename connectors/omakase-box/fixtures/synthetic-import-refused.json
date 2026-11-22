@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-import-refused",
+    "description": "Synthetic PF51 source-shaped import 400 example; not a live bounty or observed response. Exercises pending-import refused passthrough and FREE usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "issue": "https://github.com/example/parser/issues/7",
+                    "reward": 25
+                }
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "error": "That is not a GitHub issue's address. Nothing was listed. Next: paste it as https://github.com/owner/repository/issues/12."
+                }
+            }
+        }
+    ]
+}

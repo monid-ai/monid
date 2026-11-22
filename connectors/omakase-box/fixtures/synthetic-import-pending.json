@@ -1,0 +1,26 @@
+{
+    "name": "synthetic-import-pending",
+    "description": "Synthetic PF51 source-shaped import 200 example; not a live bounty or observed response. Exercises pending-import pending passthrough and FREE usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "issue": "https://github.com/example/parser/issues/7",
+                    "reward": 25
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "listed": "bt-012345abcdef",
+                    "pending": true,
+                    "approve_with": "omakase approve bt-012345abcdef $25",
+                    "approve_on": "https://github.com/example/parser/issues/7",
+                    "next": "Post the exact approve_with line as a comment on the issue from an account that owns or can write to the repository; the board checks approvals about every 15 minutes, subject to its GitHub read budget. Until then it is not listed. A human still pays the reward."
+                }
+            }
+        }
+    ]
+}

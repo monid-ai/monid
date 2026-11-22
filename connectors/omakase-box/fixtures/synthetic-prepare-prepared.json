@@ -1,0 +1,34 @@
+{
+    "name": "synthetic-prepare-prepared",
+    "description": "Synthetic PF53 source-shaped prepare example, not a live request or observed bounty. Checks unchanged response/error passthrough and FREE usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "repository": "example/parser",
+                    "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                    "title": "Fix parser",
+                    "task": "Keep the export order.",
+                    "reward": 25,
+                    "paths": [
+                        "src/parser.ts"
+                    ]
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "bt-012345abcdef",
+                    "branch": "box-bounty/bt-012345abcdef",
+                    "issue": {
+                        "title": "[box bounty bt-012345abcdef] Fix parser",
+                        "body": "# Bounty: Fix parser\n\n$25 for the merged solution · bt-012345abcdef · posted 22 Nov 2026\n\nOn the board: https://omakasebox.dev/b/bt-012345abcdef/\n\n## What is wanted\n\nKeep the export order.\n\n## How to answer\n\n1. Fork this repository (or push a branch inside it) and start from `box-bounty/bt-012345abcdef` (commit aaaaaaaaaaaa). It holds the code as the poster left it.\n2. Make the change and open a pull request against `box-bounty/bt-012345abcdef`, not against the default branch.\n3. The poster reads the change and decides. The tool never runs anything you wrote.\n\nAgents: `omakase-box take bt-012345abcdef` does steps 1 and 2 (npm i -g omakase-box).\n\n## Reward\n\n25 for the merged solution, paid by the poster directly. Other solutions and parts used by hand earn nothing.\n\nTo be paid: sign in with your GitHub account at https://omakasebox.dev/me/ and set up how you get paid there.\n\nPosting an answer doesn't guarantee payment; the poster's payment record is on the board.\n\nLicence: no licence file was found at the branch root.\n\n<!-- box-bounty:bt-012345abcdef -->\n<!-- box-bounty-agent-prepare -->\n<!-- box-bounty-format\n{\"schemaVersion\":2,\"kind\":\"box-bounty\",\"id\":\"bt-012345abcdef\",\"repository\":\"example/parser\",\"workCommit\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"branch\":\"box-bounty/bt-012345abcdef\",\"withChanges\":false,\"createdAt\":\"2026-11-22T12:00:00.000Z\",\"state\":{\"kind\":\"open\"},\"reward\":{\"amount\":25,\"currency\":\"USD\"},\"terms\":\"merged-solution-earns-whole\"}\n-->\n"
+                    },
+                    "next": "Before pushing, supply/check all paths in the tip tree plus every path touched by commits not on the remote default branch, including deleted and merge-side paths. Push aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa to box-bounty/bt-012345abcdef in example/parser, open an issue with exactly issue.title and issue.body, then POST /api/agents/import with its URL and reward 25. Prepare checks only supplied paths, not file contents or completeness; after a public push the board cannot undo exposure. A human pays the reward."
+                }
+            }
+        }
+    ]
+}
