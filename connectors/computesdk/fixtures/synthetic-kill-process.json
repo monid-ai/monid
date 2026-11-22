@@ -1,0 +1,36 @@
+{
+    "name": "synthetic-kill-process",
+    "description": "SIGKILL a running detached process (live 2026-11-21 response: the process as signalled).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/api/v1/sandboxes/sbx-1/processes/5d8c89d3451365ec317df3d09d/kill",
+                "body": {
+                    "signal": "SIGKILL"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "process": {
+                        "id": "f4a9e719-70e4-4996-b8fe-052615ef42d8",
+                        "jobId": "5d8c89d3451365ec317df3d09d",
+                        "pid": 19774,
+                        "command": "sleep 300",
+                        "cwd": null,
+                        "envNames": [],
+                        "stdin": false,
+                        "status": "running",
+                        "exitCode": null,
+                        "signal": null,
+                        "startedAt": "2026-11-21T21:24:11.501Z",
+                        "exitedAt": null,
+                        "stdout": "",
+                        "stderr": ""
+                    }
+                }
+            }
+        }
+    ]
+}

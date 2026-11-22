@@ -1,0 +1,34 @@
+{
+    "name": "synthetic-start-process",
+    "description": "Start a detached process (live 2026-11-13 response).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/api/v1/sandboxes/sbx-1/processes",
+                "body": {
+                    "command": "sleep 2 && echo done"
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "process": {
+                        "id": "4d6929db-219d-460e-989d-4ae8df2fbb26",
+                        "jobId": "c9b46dc58b7dbd85827ec8d75e8",
+                        "pid": 784,
+                        "command": "sleep 2 && echo done",
+                        "cwd": null,
+                        "envNames": [],
+                        "stdin": false,
+                        "status": "running",
+                        "exitCode": null,
+                        "signal": null,
+                        "startedAt": "2026-11-13T20:46:42.095Z",
+                        "exitedAt": null
+                    }
+                }
+            }
+        }
+    ]
+}

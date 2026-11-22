@@ -214,6 +214,12 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "TikTok data: videos, profiles, comments, and search results.",
     },
     {
+        id: "virtual-machines",
+        displayName: "Virtual Machines",
+        description:
+            "Run shell commands and code in isolated sandboxes and microVMs.",
+    },
+    {
         id: "agents",
         displayName: "Agents",
         description:

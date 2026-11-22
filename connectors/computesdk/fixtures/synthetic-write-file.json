@@ -1,0 +1,23 @@
+{
+    "name": "synthetic-write-file",
+    "description": "Write a file in an owned sandbox (live 2026-11-13 response).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/api/v1/sandboxes/sbx-1/files",
+                "body": {
+                    "path": "/tmp/hello.txt",
+                    "content": "hi from monid"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "path": "/tmp/hello.txt",
+                    "type": "file"
+                }
+            }
+        }
+    ]
+}

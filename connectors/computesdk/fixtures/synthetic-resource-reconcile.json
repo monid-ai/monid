@@ -1,0 +1,100 @@
+{
+    "name": "synthetic-resource-reconcile",
+    "description": "A sandbox that ran 30 min at $0.10/hr, read twice: whole-run window then a window that overlaps 15 min.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/sandboxes/sbx-1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "sandbox": {
+                        "label": "monid-fixture-2",
+                        "provider": "tensorlake",
+                        "status": "destroyed",
+                        "placement": {
+                            "source": "house",
+                            "size": "small",
+                            "rate": {
+                                "usd": 0.1,
+                                "per": "hour"
+                            },
+                            "rateUsd": {
+                                "perSecond": 2.777777777777778e-05,
+                                "perMinute": 0.0016666666666666668,
+                                "perHour": 0.1
+                            }
+                        },
+                        "timeoutMs": 180000,
+                        "createdAt": "2026-11-13T20:00:00.000Z",
+                        "destroyedAt": "2026-11-13T20:30:00.000Z",
+                        "cost": {
+                            "rate": {
+                                "usd": 0.1,
+                                "per": "hour"
+                            },
+                            "rateUsd": {
+                                "perSecond": 2.777777777777778e-05,
+                                "perMinute": 0.0016666666666666668,
+                                "perHour": 0.1
+                            },
+                            "runtimeSeconds": 13,
+                            "costUsd": 0.000357,
+                            "settled": true
+                        },
+                        "id": "sbx-1"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/sandboxes/sbx-1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "sandbox": {
+                        "label": "monid-fixture-2",
+                        "provider": "tensorlake",
+                        "status": "destroyed",
+                        "placement": {
+                            "source": "house",
+                            "size": "small",
+                            "rate": {
+                                "usd": 0.1,
+                                "per": "hour"
+                            },
+                            "rateUsd": {
+                                "perSecond": 2.777777777777778e-05,
+                                "perMinute": 0.0016666666666666668,
+                                "perHour": 0.1
+                            }
+                        },
+                        "timeoutMs": 180000,
+                        "createdAt": "2026-11-13T20:00:00.000Z",
+                        "destroyedAt": "2026-11-13T20:30:00.000Z",
+                        "cost": {
+                            "rate": {
+                                "usd": 0.1,
+                                "per": "hour"
+                            },
+                            "rateUsd": {
+                                "perSecond": 2.777777777777778e-05,
+                                "perMinute": 0.0016666666666666668,
+                                "perHour": 0.1
+                            },
+                            "runtimeSeconds": 13,
+                            "costUsd": 0.000357,
+                            "settled": true
+                        },
+                        "id": "sbx-1"
+                    }
+                }
+            }
+        }
+    ]
+}

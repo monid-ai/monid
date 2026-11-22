@@ -1,0 +1,100 @@
+{
+    "name": "synthetic-resource-ops",
+    "description": "verify (running) then release (DELETE settles).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/sandboxes/sbx-1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "sandbox": {
+                        "label": "monid-fixture-2",
+                        "provider": "tensorlake",
+                        "status": "running",
+                        "placement": {
+                            "source": "house",
+                            "size": "small",
+                            "rate": {
+                                "usd": 0.1,
+                                "per": "hour"
+                            },
+                            "rateUsd": {
+                                "perSecond": 2.777777777777778e-05,
+                                "perMinute": 0.0016666666666666668,
+                                "perHour": 0.1
+                            }
+                        },
+                        "timeoutMs": 180000,
+                        "createdAt": "2026-11-13T20:46:37.761Z",
+                        "destroyedAt": null,
+                        "cost": {
+                            "rate": {
+                                "usd": 0.1,
+                                "per": "hour"
+                            },
+                            "rateUsd": {
+                                "perSecond": 2.777777777777778e-05,
+                                "perMinute": 0.0016666666666666668,
+                                "perHour": 0.1
+                            },
+                            "runtimeSeconds": 12,
+                            "costUsd": 0.000335,
+                            "settled": false
+                        },
+                        "id": "sbx-1"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "DELETE",
+                "url": "{{request.origin}}/api/v1/sandboxes/sbx-1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "sandbox": {
+                        "label": "monid-fixture-2",
+                        "provider": "tensorlake",
+                        "status": "destroyed",
+                        "placement": {
+                            "source": "house",
+                            "size": "small",
+                            "rate": {
+                                "usd": 0.1,
+                                "per": "hour"
+                            },
+                            "rateUsd": {
+                                "perSecond": 2.777777777777778e-05,
+                                "perMinute": 0.0016666666666666668,
+                                "perHour": 0.1
+                            }
+                        },
+                        "timeoutMs": 180000,
+                        "createdAt": "2026-11-13T20:46:37.761Z",
+                        "destroyedAt": "2026-11-13T20:46:50.578Z",
+                        "cost": {
+                            "rate": {
+                                "usd": 0.1,
+                                "per": "hour"
+                            },
+                            "rateUsd": {
+                                "perSecond": 2.777777777777778e-05,
+                                "perMinute": 0.0016666666666666668,
+                                "perHour": 0.1
+                            },
+                            "runtimeSeconds": 13,
+                            "costUsd": 0.000357,
+                            "settled": true
+                        },
+                        "id": "sbx-1"
+                    }
+                }
+            }
+        }
+    ]
+}
