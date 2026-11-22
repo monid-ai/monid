@@ -28,6 +28,8 @@ export default defineEndpoint({
         categories: ["virtual-machines"],
     },
     endpoint: "/run-command",
+    // covers the 290 s command window plus response overhead
+    timeouts: { requestMs: 300_000, runMs: 330_000 },
     request: {
         method: "POST",
         path: "/api/v1/sandboxes/{sandboxId}/commands",

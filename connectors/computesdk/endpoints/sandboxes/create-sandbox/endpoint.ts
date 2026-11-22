@@ -16,9 +16,6 @@ export const zCreateSandboxBody = z.object({
     timeoutMs: z.number().int().positive().optional().describe(
         "Destroy the sandbox automatically after this many ms. Default 30 minutes.",
     ),
-    idempotencyKey: z.string().optional().describe(
-        "Retry-safe key: the same key returns the same sandbox.",
-    ),
 }).strict();
 
 export default defineEndpoint({
@@ -53,7 +50,10 @@ export default defineEndpoint({
                     );
                 }
                 const provider = $.optionalStr(out, "$.sandbox.provider");
-                const label = $.optionalStr(out, "$.sandbox.label");
+                const rawLabel = $.optionalGet(out, "$.sandbox.label");
+                const label = typeof rawLabel === "string" && rawLabel !== ""
+                    ? rawLabel
+                    : undefined;
                 const body = (data.input.body ?? {}) as Record<string, unknown>;
                 return {
                     resource: "computesdk/sandbox",

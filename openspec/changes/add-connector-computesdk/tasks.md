@@ -23,7 +23,8 @@
 - [x] 3.2 Synthetic resource-bound chains from live REST bodies
 - [x] 3.3 Connector tests: free usage, provision / release, foreign 404,
       list from the ownership window, buffered command
-- [x] 3.4 Resource tests: verify, refresh on 404, reconcile window math
+- [x] 3.4 Resource tests: verify, refresh on 404, reconcile window math,
+      a running sandbox, a 404 read that throws
 - [ ] 3.5 Record resource-bound fixtures once the recorder can seed an
       owned resource
 

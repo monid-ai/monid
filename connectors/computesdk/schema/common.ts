@@ -4,8 +4,8 @@ export const zSandboxId = z.string().min(1).describe(
     "The id of a sandbox YOU created (from /create-sandbox).",
 );
 
-export const zAbsolutePath = z.string().min(1).refine(
-    (path) => path.startsWith("/"),
+export const zAbsolutePath = z.string().min(1).regex(
+    /^\//,
     "path must be absolute",
 ).describe("An absolute path inside the sandbox, e.g. /workspace/main.py.");
 

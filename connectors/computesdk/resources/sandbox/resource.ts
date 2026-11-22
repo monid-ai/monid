@@ -15,9 +15,10 @@ export default defineResource({
         summary:
             "An isolated Linux cloud sandbox, billed by the second it runs.",
         description:
-            "An isolated Linux sandbox ComputeSDK placed on a provider " +
-            "(E2B, Daytona, Modal, Blaxel, Tensorlake, Beam, Archil or " +
-            "Sail) for this workspace. It bills by the second from " +
+            "An isolated Linux sandbox ComputeSDK placed on one of over " +
+            "26 providers (E2B, Daytona, Modal, Vercel, Cloudflare, " +
+            "Blaxel, Agent37 and more) for this workspace. It bills by " +
+            "the second from " +
             "creation until it is destroyed or its timeout reaps it, at " +
             "the provider and size rate shown when it was created. " +
             "Commands, file reads and writes, processes and URLs inside " +
@@ -53,9 +54,7 @@ export default defineResource({
                     method: "GET",
                     path: "/api/v1/sandboxes/" + data.resource.externalId,
                 });
-                if (res.status === 404) {
-                    return { consumes: { credit: "default", amount: 0 } };
-                }
+                // a failed read (404 included) retries; it never settles 0
                 if (res.status < 200 || res.status >= 300) {
                     throw new Error(
                         "computesdk sandbox read failed with HTTP " +
@@ -72,13 +71,32 @@ export default defineResource({
                     // BYOK: the org's own provider account bills it
                     return { consumes: { credit: "default", amount: 0 } };
                 }
-                const ended = $.optionalStr(res.body, "$.sandbox.destroyedAt");
+                const endedRaw = $.optionalGet(
+                    res.body,
+                    "$.sandbox.destroyedAt",
+                );
+                if (
+                    endedRaw !== undefined && endedRaw !== null &&
+                    typeof endedRaw !== "string"
+                ) {
+                    throw new Error(
+                        "computesdk sandbox destroyedAt is not a timestamp",
+                    );
+                }
+                const ended = typeof endedRaw === "string" && endedRaw !== ""
+                    ? endedRaw
+                    : undefined;
                 // ISO-8601 -> epoch ms; fns are closed terms (no Date)
                 const isoMs = (iso: string): number => {
                     const m = iso.match(
-                        /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?(Z|[+-]\d{2}:\d{2})$/,
+                        /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::(\d{2})(?:\.(\d+))?)?(Z|[+-]\d{2}:\d{2})$/,
                     );
-                    if (m === null) return NaN;
+                    if (m === null) {
+                        throw new Error(
+                            "computesdk reconcile: unsupported timestamp " +
+                                iso,
+                        );
+                    }
                     let y = Number(m[1]);
                     const mo = Number(m[2]);
                     const d = Number(m[3]);
@@ -103,7 +121,8 @@ export default defineResource({
                             60_000;
                     }
                     return days * 86_400_000 + Number(m[4]) * 3_600_000 +
-                        Number(m[5]) * 60_000 + Number(m[6]) * 1000 + frac -
+                        Number(m[5]) * 60_000 +
+                        (m[6] === undefined ? 0 : Number(m[6])) * 1000 + frac -
                         offset;
                 };
                 const unitMs = per === "second"
@@ -119,9 +138,7 @@ export default defineResource({
                     ended !== undefined ? isoMs(ended) : Infinity,
                     isoMs(data.window.endIso),
                 );
-                const ms = Number.isFinite(from) && !Number.isNaN(to)
-                    ? Math.max(0, to - from)
-                    : 0;
+                const ms = Math.max(0, to - from);
                 const amount = Math.ceil((usd * ms / unitMs) * 1e6) / 1e6;
                 return { consumes: { credit: "default", amount } };
             },

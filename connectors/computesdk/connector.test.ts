@@ -280,3 +280,63 @@ Deno.test("computesdk create-sandbox / get-quote: provider must be a listed prov
         });
     }
 });
+
+Deno.test("computesdk create-sandbox: a null label still provisions, identified by id", async () => {
+    const result = await run(
+        "create-sandbox",
+        { size: "small", timeoutMs: 180000 },
+        "synthetic-create-unlabeled",
+        [],
+    );
+    assertEquals(result.httpStatus, 201);
+    const seed = result.resources?.provisions?.[0];
+    assert(seed !== undefined, "expected a provision seed");
+    assertEquals(seed.identifier, seed.externalId);
+    assertEquals(seed.data, { provider: "tensorlake", size: "small" });
+});
+
+Deno.test("computesdk create-sandbox: no caller idempotency key reaches the shared account", async () => {
+    await assertRejects(
+        async () =>
+            runEndpoint({
+                unit: await testSealedUnit("computesdk#create-sandbox"),
+                input: { body: { idempotencyKey: "k-1" } },
+                mode: "replay",
+                resources: [],
+            }),
+        Error,
+        "INVALID_INPUT",
+    );
+});
+
+Deno.test("computesdk run-command: timeouts cover the 290 s command window", async () => {
+    const { doc } = await testSealedUnit("computesdk#run-command");
+    assert(doc.timeouts.requestMs > 290_000);
+    assert(doc.timeouts.runMs >= doc.timeouts.requestMs);
+});
+
+Deno.test("computesdk files: a relative path is refused by the compiled schema", async () => {
+    for (const endpoint of ["read-file", "write-file", "delete-path"]) {
+        const unit = await testSealedUnit(`computesdk#${endpoint}`);
+        const body: Record<string, Json> = endpoint === "write-file"
+            ? { sandboxId: "sbx-1", content: "x" }
+            : { sandboxId: "sbx-1" };
+        await assertRejects(
+            () =>
+                runEndpoint({
+                    unit,
+                    input: { body: { ...body, path: "tmp/hello.txt" } },
+                    mode: "replay",
+                    resources: OWNED,
+                }),
+            Error,
+            "INVALID_INPUT",
+        );
+        await assertInputAccepted({
+            unit,
+            input: { body: { ...body, path: "/tmp/hello.txt" } },
+            mode: "replay",
+            resources: OWNED,
+        });
+    }
+});

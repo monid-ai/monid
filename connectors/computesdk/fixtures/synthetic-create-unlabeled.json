@@ -1,0 +1,116 @@
+{
+    "name": "synthetic-create-unlabeled",
+    "description": "create without a label: the response carries label null (body from live-create).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/api/v1/sandboxes",
+                "body": {
+                    "size": "small",
+                    "timeoutMs": 180000
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "sandbox": {
+                        "id": "8f458022-5782-47ea-87bd-7d776caae0f1",
+                        "label": null,
+                        "provider": "tensorlake",
+                        "providerSandboxId": "uk7v4dme2855cruehvxwj",
+                        "status": "running",
+                        "placementAttempts": [],
+                        "placement": {
+                            "source": "house",
+                            "size": "small",
+                            "rate": {
+                                "usd": 0.1,
+                                "per": "hour"
+                            },
+                            "rateUsd": {
+                                "perSecond": 2.777777777777778e-05,
+                                "perMinute": 0.0016666666666666668,
+                                "perHour": 0.1
+                            }
+                        },
+                        "requestedImage": null,
+                        "image": null,
+                        "commandCount": 0,
+                        "secrets": [],
+                        "timeoutMs": 180000,
+                        "createdAt": "2026-11-13T20:44:41.476Z",
+                        "lastCommandAt": null,
+                        "destroyedAt": null,
+                        "destroyError": null,
+                        "cost": {
+                            "rate": {
+                                "usd": 0.1,
+                                "per": "hour"
+                            },
+                            "rateUsd": {
+                                "perSecond": 2.777777777777778e-05,
+                                "perMinute": 0.0016666666666666668,
+                                "perHour": 0.1
+                            },
+                            "runtimeSeconds": 0,
+                            "costUsd": 1e-06,
+                            "settled": false
+                        },
+                        "product": "sandboxes",
+                        "actions": null,
+                        "attach": {
+                            "provider": "tensorlake",
+                            "providerSandboxId": "uk7v4dme2855cruehvxwj",
+                            "region": null
+                        },
+                        "disk": null
+                    },
+                    "next": {
+                        "note": "Use the sandbox by its id. It runs (and bills) until it times out or is destroyed \u2014 destroy it when you're done.",
+                        "mcp": [
+                            {
+                                "tool": "run_command",
+                                "args": {
+                                    "id": "8f458022-5782-47ea-87bd-7d776caae0f1",
+                                    "command": "node -v"
+                                },
+                                "does": "run a command and get its output"
+                            },
+                            {
+                                "tool": "start_process",
+                                "args": {
+                                    "id": "8f458022-5782-47ea-87bd-7d776caae0f1",
+                                    "command": "npm run dev"
+                                },
+                                "does": "start a long-running process (a server)"
+                            }
+                        ],
+                        "api": [
+                            {
+                                "method": "POST",
+                                "path": "/api/v1/sandboxes/8f458022-5782-47ea-87bd-7d776caae0f1/commands",
+                                "does": "run a command and get its output"
+                            },
+                            {
+                                "method": "POST",
+                                "path": "/api/v1/sandboxes/8f458022-5782-47ea-87bd-7d776caae0f1/processes",
+                                "does": "start a long-running process"
+                            }
+                        ],
+                        "cli": [
+                            {
+                                "command": "compute sandboxes exec 8f458022-5782-47ea-87bd-7d776caae0f1 -- node -v",
+                                "does": "run a command"
+                            },
+                            {
+                                "command": "compute sandboxes spawn 8f458022-5782-47ea-87bd-7d776caae0f1 -- npm run dev",
+                                "does": "start a server"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

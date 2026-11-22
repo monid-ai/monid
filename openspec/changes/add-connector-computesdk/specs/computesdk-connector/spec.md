@@ -18,12 +18,23 @@ The connector SHALL define resource `computesdk/sandbox` with
 one ESTIMATED `SECOND` line `compute` reconciled every 3 600 000 ms.
 Reconcile SHALL read `GET /api/v1/sandboxes/{id}` and bill
 `cost.rate.usd` per `cost.rate.per` over the overlap of
-[`createdAt`, `destroyedAt` ?? now] with the window, and 0 when no rate is
-reported (BYOK).
+[`createdAt`, `destroyedAt` ?? window end] with the window (a running
+sandbox reports `destroyedAt: null`), and 0 when no rate is reported
+(BYOK). A failed read, a 404 included, or an unparseable timestamp SHALL
+throw so settlement retries; it never settles 0.
 
 #### Scenario: Runtime inside the window bills at the sandbox's rate
 - **WHEN** a sandbox at $0.10/hour ran 30 minutes inside the window
 - **THEN** reconcile consumes 0.05 of `default`
+
+#### Scenario: A running sandbox bills up to the window end
+- **WHEN** a sandbox at $0.10/hour created at 20:00 is still running and the
+  window closes at `20:30Z`
+- **THEN** reconcile consumes 0.05 of `default`
+
+#### Scenario: A failed reconcile read does not settle zero
+- **WHEN** the reconcile read answers 404
+- **THEN** reconcile throws
 
 #### Scenario: A destroyed sandbox verifies inactive
 - **WHEN** verify reads a sandbox whose status is `destroyed`, or the id
@@ -70,3 +81,10 @@ the managed provider ids `/get-options` lists. `/get-quote` SHALL return only
 - **WHEN** `/get-quote` answers
 - **THEN** its `quote` carries the placement and the per-second, per-minute and
   per-hour rate
+
+### Requirement: Request safety
+`/create-sandbox` SHALL NOT accept a caller idempotency key, since every
+workspace shares one ComputeSDK key. A `null` label SHALL provision the
+sandbox identified by its id. `/read-file`, `/write-file` and `/delete-path`
+SHALL refuse a relative `path` in the compiled schema. `/run-command` SHALL
+set timeouts above its 290-second command window.

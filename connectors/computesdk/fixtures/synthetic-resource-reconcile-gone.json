@@ -1,0 +1,18 @@
+{
+    "name": "synthetic-resource-reconcile-gone",
+    "description": "reconcile read returns 404.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/sandboxes/sbx-1"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": "Sandbox not found"
+                }
+            }
+        }
+    ]
+}

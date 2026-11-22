@@ -1,0 +1,53 @@
+{
+    "name": "synthetic-resource-reconcile-running",
+    "description": "reconcile reads a sandbox that is still running (destroyedAt null).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/sandboxes/sbx-1"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "sandbox": {
+                        "label": "monid-fixture-2",
+                        "provider": "tensorlake",
+                        "status": "running",
+                        "placement": {
+                            "source": "house",
+                            "size": "small",
+                            "rate": {
+                                "usd": 0.1,
+                                "per": "hour"
+                            },
+                            "rateUsd": {
+                                "perSecond": 2.777777777777778e-05,
+                                "perMinute": 0.0016666666666666668,
+                                "perHour": 0.1
+                            }
+                        },
+                        "timeoutMs": 180000,
+                        "createdAt": "2026-11-13T20:00:00.000Z",
+                        "destroyedAt": null,
+                        "cost": {
+                            "rate": {
+                                "usd": 0.1,
+                                "per": "hour"
+                            },
+                            "rateUsd": {
+                                "perSecond": 2.777777777777778e-05,
+                                "perMinute": 0.0016666666666666668,
+                                "perHour": 0.1
+                            },
+                            "runtimeSeconds": 13,
+                            "costUsd": 0.000357,
+                            "settled": false
+                        },
+                        "id": "sbx-1"
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,4 +1,4 @@
-import { assertAlmostEquals, assertEquals } from "@std/assert";
+import { assertAlmostEquals, assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import type { OwnedResource } from "@shared/core";
 import { loadFixture, loadResource, testResourceUnit } from "@shared/testing";
@@ -58,4 +58,32 @@ Deno.test("computesdk sandbox: reconcile bills elapsed runtime inside the window
         endIso: "2026-11-14T00:00:00Z",
     });
     assertAlmostEquals(part.consumes.amount, 0.025, 1e-6);
+});
+
+Deno.test("computesdk sandbox: reconcile bills a RUNNING sandbox (destroyedAt null) up to the window end", async () => {
+    const resource = await loadResource({
+        unit: await testResourceUnit("computesdk/sandbox"),
+        mode: "replay",
+        fixture: await fixture("synthetic-resource-reconcile-running"),
+    });
+    // created 20:00 at $0.10/hr; window closes 20:30 (no seconds)
+    const got = await resource.reconcileUsage("compute", ROW, {
+        startIso: "2026-11-13T00:00Z",
+        endIso: "2026-11-13T20:30Z",
+    });
+    assertAlmostEquals(got.consumes.amount, 0.05, 1e-6);
+});
+
+Deno.test("computesdk sandbox: a 404 reconcile read throws instead of settling zero", async () => {
+    const resource = await loadResource({
+        unit: await testResourceUnit("computesdk/sandbox"),
+        mode: "replay",
+        fixture: await fixture("synthetic-resource-reconcile-gone"),
+    });
+    await assertRejects(() =>
+        resource.reconcileUsage("compute", ROW, {
+            startIso: "2026-11-13T00:00:00Z",
+            endIso: "2026-11-14T00:00:00Z",
+        })
+    );
 });
