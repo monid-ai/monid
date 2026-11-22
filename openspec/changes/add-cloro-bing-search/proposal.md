@@ -15,8 +15,10 @@ for the Bing results page.
   (`POST /v1/monitor/bing`). The body is `query` (at most 3,500 characters,
   the same limit as the Bing AI Mode prompt), `country` (all countries
   except CN, KR and RU; the country sets Bing's market), and optional
-  `include.html` and `include.aioverview` (`true` or `{markdown}`). There is
-  no `state`, `device`, `pages`, `location` or `uule`.
+  `include.html` and `include.aioverview` (`true` or `{markdown}`). The
+  endpoint has no `state`, `device`, `location` or `uule`. It also takes
+  `pages` and `first` since 2026-11-22. This change does not add them, so
+  the strict body refuses them.
 - The card is the Google Search card without pages: 5 credits (3 base + 2
   sync surcharge), plus 2 when `include.aioverview` is `true` or an object.
   cloro's `calculateCredits` charges the Google AI Overview add-on for
