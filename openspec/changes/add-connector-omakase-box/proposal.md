@@ -13,7 +13,7 @@ No credentials is supported without engine changes: explicit z.object({}) creden
 
 The detail identity is /bounties/{id}, with wire path /bounties/{id}.json: the existing identity grammar cannot represent a suffix after a placeholder. List identity is /bounties for consistency. No shared schema changes.
 
-The requested human-approval/manual-recording description is retained, but live legend and local source also advertise one-click/on-merge payment options. This connector neither initiates nor guarantees any payment. The live empty feed cannot prove successful detail reads: empty list and 404 are real recordings, populated list/detail are explicitly synthetic source-shaped examples, not observed bounties.
+Every payment way (manual, Stripe one-click, pay on merge) needs a person: one-click and pay on merge exist only for posted bounties after the owner sets up a card and allows them, so the descriptions say a human approves rewards and pays. This connector neither initiates nor guarantees any payment. The live empty feed cannot prove successful detail reads: empty list and 404 are real recordings, populated list/detail are explicitly synthetic source-shaped examples, not observed bounties.
 
 ## Impact
 Connector and OpenSpec files only; no engine, taxonomy, version or shared configuration changes.
