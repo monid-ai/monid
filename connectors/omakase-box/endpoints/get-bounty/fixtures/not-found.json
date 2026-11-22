@@ -1,0 +1,18 @@
+{
+    "name": "not-found",
+    "description": "raw recording (omakase-box#bounties/{id}, scenario not-found) — hand-minimize into a shared chain before committing",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://omakasebox.dev/bounties/bt-000000000000.json"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": "This bounty is not on the board. It may be mistyped, on a private repository (never listed), or not yet read from GitHub. Next: search the list (find_bounties, or /bounties.json)."
+                }
+            }
+        }
+    ]
+}
