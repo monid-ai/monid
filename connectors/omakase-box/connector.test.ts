@@ -240,7 +240,7 @@ Deno.test("omakase-box descriptions: instruct the agent on posting, approval and
             const instruction of [
                 "To post work:",
                 "approve_with",
-                "OWNER/COLLABORATOR/MEMBER",
+                "OWNER/COLLABORATOR",
                 "15 minutes",
                 "14 days",
                 "human repository owner/operator pays",
