@@ -1,0 +1,44 @@
+{
+    "name": "live-quote",
+    "description": "Recorded live 2026-11-13 with `deno task record computesdk#get-quote` (trimmed by the recorder).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/sandboxes/quote?size=small"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "quote": {
+                        "ok": true,
+                        "providerOrder": [
+                            "managed/tensorlake",
+                            "managed/blaxel"
+                        ],
+                        "placement": {
+                            "provider": "tensorlake",
+                            "region": null,
+                            "size": "small",
+                            "box": {
+                                "provider": "tensorlake",
+                                "sizeName": "small"
+                            }
+                        },
+                        "rate": {
+                            "usd": 0.1,
+                            "per": "hour"
+                        },
+                        "rateUsd": {
+                            "perSecond": 2.777777777777778e-05,
+                            "perMinute": 0.0016666666666666668,
+                            "perHour": 0.1
+                        },
+                        "estimatedCostUsd": 0.05,
+                        "requiredHoldUsd": 0.05
+                    }
+                }
+            }
+        }
+    ]
+}

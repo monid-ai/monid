@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-error-read-file",
+    "description": "/read-file upstream error: HTTP 404 for an owned sandbox already gone upstream (platform jsonError shape). Error is data: zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/sandboxes/sbx-1/files?path=%2Ftmp%2Fhello.txt"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": "Sandbox not found",
+                    "requestId": "req_synthetic02"
+                }
+            }
+        }
+    ]
+}

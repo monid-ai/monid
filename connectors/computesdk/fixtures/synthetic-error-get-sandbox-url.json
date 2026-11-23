@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-error-get-sandbox-url",
+    "description": "/get-sandbox-url upstream error: HTTP 404 for an owned sandbox already gone upstream (platform jsonError shape). Error is data: zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/sandboxes/sbx-1/urls?port=3000&protocol=http"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": "Sandbox not found",
+                    "requestId": "req_synthetic02"
+                }
+            }
+        }
+    ]
+}

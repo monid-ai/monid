@@ -1,0 +1,29 @@
+{
+    "name": "synthetic-error-create-sandbox-credit",
+    "description": "/create-sandbox upstream 502 whose message describes the shared account's credit and billing path (platform PlacementFailedError shape). The projection must not pass it through.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/api/v1/sandboxes",
+                "body": {
+                    "size": "small"
+                }
+            },
+            "res": {
+                "status": 502,
+                "body": {
+                    "error": "Every provider rejected the job (tensorlake: insufficient_credits: the tensorlake house account needs $0.05 of prepaid credit and the organization has $0.01 — top up at /shared-org/settings/billing)",
+                    "attempts": [
+                        {
+                            "provider": "tensorlake",
+                            "region": null,
+                            "error": "insufficient_credits: the tensorlake house account needs $0.05 of prepaid credit and the organization has $0.01 — top up at /shared-org/settings/billing"
+                        }
+                    ],
+                    "requestId": "req_synthetic02"
+                }
+            }
+        }
+    ]
+}

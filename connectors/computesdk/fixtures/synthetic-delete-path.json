@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-delete-path",
+    "description": "Delete a file in an owned sandbox (live 2026-11-21 response).",
+    "calls": [
+        {
+            "req": {
+                "method": "DELETE",
+                "url": "{{request.origin}}/api/v1/sandboxes/sbx-1/files?path=%2Ftmp%2Fhello.txt"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "path": "/tmp/hello.txt",
+                    "removed": true
+                }
+            }
+        }
+    ]
+}

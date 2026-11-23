@@ -1,0 +1,66 @@
+{
+    "name": "live-options",
+    "description": "Recorded live 2026-11-13 with `deno task record computesdk#get-options` (trimmed by the recorder).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/sandboxes/options"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "byokMode": "fallback",
+                    "strategy": "computesdk",
+                    "size": "medium",
+                    "options": [
+                        {
+                            "account": "managed",
+                            "provider": "tensorlake",
+                            "sizes": [
+                                {
+                                    "name": "small",
+                                    "label": "1 vCPU \u00b7 2 GB \u00b7 10 GB disk",
+                                    "rate": {
+                                        "usd": 0.1,
+                                        "per": "hour"
+                                    }
+                                },
+                                {
+                                    "name": "medium",
+                                    "label": "2 vCPU \u00b7 4 GB \u00b7 10 GB disk",
+                                    "rate": {
+                                        "usd": 0.2,
+                                        "per": "hour"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "account": "managed",
+                            "provider": "blaxel",
+                            "sizes": [
+                                {
+                                    "name": "small",
+                                    "label": "2 GB",
+                                    "rate": {
+                                        "usd": 0.0828,
+                                        "per": "hour"
+                                    }
+                                },
+                                {
+                                    "name": "medium",
+                                    "label": "4 GB",
+                                    "rate": {
+                                        "usd": 0.1656,
+                                        "per": "hour"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

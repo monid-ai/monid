@@ -1,0 +1,25 @@
+{
+    "name": "synthetic-run-command",
+    "description": "Buffered JSON result of a command in an owned sandbox (shape from a live 2026-11-13 run; the route streams SSE unless Accept: application/json).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/api/v1/sandboxes/sbx-1/commands",
+                "body": {
+                    "command": "echo hello && uname -s"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "commandId": "2c69b213-73ae-4153-b9e3-c3c8aaf85562",
+                    "exitCode": 0,
+                    "durationMs": 124,
+                    "stdout": "hello\nLinux\n",
+                    "stderr": ""
+                }
+            }
+        }
+    ]
+}
