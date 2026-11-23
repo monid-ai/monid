@@ -27,4 +27,36 @@ export default defineProvider({
     },
     auth: { inject: presets.auth.bearer() },
     request: { baseUrl: "https://platform.computesdk.com" },
+    output: {
+        // Every workspace shares one ComputeSDK key, so an upstream error can
+        // describe the shared account (its credit, billing path, key limits).
+        // Only the message, code and request id pass, and account-level
+        // messages are replaced; the raw body is withheld on purpose.
+        fromError: ({ data, utils }) => {
+            const error = utils.json.optionalGet(data.output, "$.error");
+            const code = utils.json.optionalGet(data.output, "$.code");
+            const requestId = utils.json.optionalGet(
+                data.output,
+                "$.requestId",
+            );
+            const text = typeof error === "string" && error !== ""
+                ? error
+                : "ComputeSDK API error";
+            const lower = text.toLowerCase();
+            const account = code === "insufficient_credits" ||
+                lower.includes("insufficient_credits") ||
+                lower.includes("credit") ||
+                lower.includes("billing") ||
+                lower.includes("spend limit") ||
+                lower.includes("organization");
+            return {
+                error: account
+                    ? "ComputeSDK could not place this request right now. " +
+                        "Try again later, or pin another provider."
+                    : text,
+                ...(typeof code === "string" && !account ? { code } : {}),
+                ...(typeof requestId === "string" ? { requestId } : {}),
+            };
+        },
+    },
 });

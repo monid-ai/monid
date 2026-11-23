@@ -64,6 +64,37 @@ Deno.test("computesdk get-quote: a placement quote, free", async () => {
         size: "small",
     });
     assertEquals((quote.rateUsd as Record<string, Json>).perHour, 0.1);
+    // the shared account's balance and billing path never reach a workspace
+    assertEquals("creditBalanceUsd" in quote, false);
+    assertEquals("topUpPath" in quote, false);
+});
+
+Deno.test("computesdk provider error: the shared account's credit and billing path are withheld", async () => {
+    const result = await run(
+        "create-sandbox",
+        { size: "small" },
+        "synthetic-error-create-sandbox-credit",
+        [],
+    );
+    assertEquals(result.httpStatus, 502);
+    assertEquals(result.isProviderError, true);
+    assertEquals(result.usage, FREE);
+    const text = JSON.stringify(result.output);
+    for (
+        const leak of [
+            "$0.0",
+            "settings/billing",
+            "shared-org",
+            "attempts",
+            "insufficient_credits",
+        ]
+    ) {
+        assertEquals(text.includes(leak), false, `leaked ${leak}`);
+    }
+    assertEquals(
+        (result.output as Record<string, Json>).requestId,
+        "req_synthetic02",
+    );
 });
 
 Deno.test("computesdk create-sandbox: provisions the sandbox resource, no call fee", async () => {
@@ -439,6 +470,11 @@ const GATES: [string, Record<string, Json>, Record<string, Json>][] = [
         { label: "x".repeat(200) },
     ],
     ["get-quote", { timeoutMs: 0 }, { timeoutMs: 1 }],
+    // "custom" would use the shared account's saved order, so it is refused
+    ["create-sandbox", { strategy: "custom" }, { strategy: "cheapest" }],
+    ["get-quote", { strategy: "custom" }, { strategy: "cheapest" }],
+    ["create-sandbox", { only: [] }, { only: ["e2b", "daytona"] }],
+    ["get-quote", { ignore: ["nope"] }, { ignore: ["e2b"] }],
 ];
 
 for (const [endpoint, bad, twin] of GATES) {

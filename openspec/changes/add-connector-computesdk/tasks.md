@@ -4,12 +4,16 @@
 
 - [x] 1.1 provider.ts: bearer auth, baseUrl, `virtual-machines`, no credits
 - [x] 1.2 categories.ts: `virtual-machines` leaf
+- [x] 1.4 provider `fromError`: message, code and request id only;
+      shared-account credit / billing messages replaced
 - [x] 1.3 resources/sandbox: data schema, verify / release / refresh,
       DAY rate card with ESTIMATED per-second `compute`, hourly reconcile
 
 ## 2. Endpoints (14, all FREE)
 
-- [x] 2.1 get-options, get-quote
+- [x] 2.1 get-options, get-quote (no balance or billing path)
+- [x] 2.4 create-sandbox and get-quote take `strategy`
+      (`computesdk` | `cheapest`), `only` and `ignore`
 - [x] 2.2 create-sandbox (provisions), get-sandbox (reads),
       list-sandboxes (reads, ownership window only), destroy-sandbox
       (releases)

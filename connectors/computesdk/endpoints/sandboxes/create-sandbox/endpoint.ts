@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { defineEndpoint, UsageModelKind } from "@shared/core";
-import { zProvider } from "../../../schema/common.ts";
+import { zProvider, zProviderList, zStrategy } from "../../../schema/common.ts";
 
 export const zCreateSandboxBody = z.object({
     label: z.string().max(200).optional().describe(
@@ -10,9 +10,16 @@ export const zCreateSandboxBody = z.object({
         "A platform size: small, medium, large or xlarge. Defaults to the smallest.",
     ),
     provider: zProvider.optional().describe(
-        "Pin one provider, e.g. e2b or daytona. Omit to let ComputeSDK pick.",
+        "Pin one provider, e.g. e2b or daytona. Omit to let ComputeSDK route.",
     ),
     region: z.string().optional().describe("A provider region."),
+    strategy: zStrategy.optional(),
+    only: zProviderList.optional().describe(
+        "Only place on these providers. Not with provider.",
+    ),
+    ignore: zProviderList.optional().describe(
+        "Never place on these providers. Not with provider.",
+    ),
     timeoutMs: z.number().int().positive().optional().describe(
         "Destroy the sandbox automatically after this many ms. Default 30 minutes.",
     ),

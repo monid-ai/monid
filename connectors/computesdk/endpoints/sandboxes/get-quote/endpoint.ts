@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { defineEndpoint, UsageModelKind } from "@shared/core";
-import { zProvider } from "../../../schema/common.ts";
+import { zProvider, zProviderList, zStrategy } from "../../../schema/common.ts";
 
 export const zQuoteBody = z.object({
     size: z.string().optional().describe(
@@ -10,6 +10,13 @@ export const zQuoteBody = z.object({
         "One exact provider, e.g. e2b or daytona.",
     ),
     region: z.string().optional().describe("A provider region."),
+    strategy: zStrategy.optional(),
+    only: zProviderList.optional().describe(
+        "Only place on these providers. Not with provider.",
+    ),
+    ignore: zProviderList.optional().describe(
+        "Never place on these providers. Not with provider.",
+    ),
     timeoutMs: z.number().int().positive().optional().describe(
         "How long the sandbox may live, in ms.",
     ),
@@ -53,8 +60,6 @@ export default defineEndpoint({
                     "$.quote.rateUsd",
                     "$.quote.estimatedCostUsd",
                     "$.quote.requiredHoldUsd",
-                    "$.quote.creditBalanceUsd",
-                    "$.quote.topUpPath",
                 ]),
                 placement: utils.json.pick(data.output, [
                     "$.quote.placement.provider",

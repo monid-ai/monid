@@ -42,3 +42,11 @@ export const zProvider = z.enum([
     "upstash",
     "vercel",
 ]);
+
+export const zStrategy = z.enum(["computesdk", "cheapest"]).describe(
+    'How ComputeSDK ranks providers when none is pinned: "computesdk" ' +
+        '(its recommended order, the default) or "cheapest" (the lowest ' +
+        "live price for the size, re-ranked on every request). Not with provider.",
+);
+
+export const zProviderList = z.array(zProvider).min(1);

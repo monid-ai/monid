@@ -16,8 +16,6 @@
                             "managed/tensorlake",
                             "managed/blaxel"
                         ],
-                        "creditBalanceUsd": 24.777857,
-                        "topUpPath": "/computesdk/settings/billing",
                         "placement": {
                             "provider": "tensorlake",
                             "region": null,

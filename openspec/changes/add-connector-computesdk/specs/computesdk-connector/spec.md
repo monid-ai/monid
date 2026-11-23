@@ -67,11 +67,20 @@ in-sandbox endpoint SHALL USE it keyed `$.body.sandboxId`.
 - **THEN** the resource is released and the answer carries the settled
   `sandbox.cost.costUsd`
 
-### Requirement: Provider pinning and quote shape
+### Requirement: Provider pinning, routing and quote shape
 The `provider` input of `/create-sandbox` and `/get-quote` SHALL be one of
-the managed provider ids `/get-options` lists. `/get-quote` SHALL return only
-`ok`, `reason`, `providerOrder`, the placement's `provider`, `region` and
-`size`, the rate, and the cost and balance fields.
+the managed provider ids `/get-options` lists. Both SHALL also accept the
+router's `strategy` (`computesdk`, the default order, or `cheapest`, ranked
+by live price on each request) and `only` / `ignore` provider lists, passed
+upstream unchanged. `custom` SHALL be refused, since it would use the shared
+account's saved order. `/get-quote` SHALL return only `ok`, `reason`,
+`providerOrder`, the placement's `provider`, `region` and `size`, the rate,
+and the estimated cost and required hold; never the shared account's credit
+balance or billing path.
+
+#### Scenario: a custom strategy is refused
+- **WHEN** `/create-sandbox` or `/get-quote` is called with `strategy: "custom"`
+- **THEN** the run fails INVALID_INPUT and nothing is sent upstream
 
 #### Scenario: an unknown provider is refused
 - **WHEN** `/create-sandbox` or `/get-quote` is called with a provider that is
@@ -82,6 +91,16 @@ the managed provider ids `/get-options` lists. `/get-quote` SHALL return only
 - **WHEN** `/get-quote` answers
 - **THEN** its `quote` carries the placement and the per-second, per-minute and
   per-hour rate
+
+### Requirement: Shared-account errors are withheld
+Upstream errors SHALL pass only their message, code and request id. A
+message about the shared account's credit, billing, spend limit or
+organization SHALL be replaced with a generic retry message, and the raw
+body (including placement `attempts`) SHALL NOT reach the workspace.
+
+#### Scenario: a credit failure does not describe the shared account
+- **WHEN** create-sandbox fails because the shared account lacks credit
+- **THEN** the output names no amount, billing path or organization
 
 ### Requirement: Request safety
 `/create-sandbox` SHALL NOT accept a caller idempotency key, since every
