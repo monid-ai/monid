@@ -3,7 +3,7 @@
 ## Why
 
 Elfa indexes social media and web pages, and turns them into high-intent events
-and entities that an agent can query or check a claim against:
+and entities that an agent can query, or check a claim against:
 analyzed events, storylines and arcs, trading calls with each caller's track
 record, long/short positioning, mindshare, trending contracts, ranked
 accounts, a market calendar, and the prediction markets its stories bear on.
