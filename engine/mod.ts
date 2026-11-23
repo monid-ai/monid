@@ -22,6 +22,7 @@ export type {
     TransportResponse,
 } from "./interfaces/mod.ts";
 export { EngineError, EngineErrorCode } from "./errors.ts";
+export type { TimeoutDetails } from "./errors.ts";
 export {
     fnUtils,
     jsonUtil,
