@@ -3,7 +3,8 @@
 ## Why
 
 ComputeSDK (computesdk.com) is one API for isolated Linux cloud sandboxes
-across E2B, Daytona, Modal, Blaxel, Tensorlake, Beam, Archil and Sail. An
+across over 26 providers, including E2B, Daytona, Modal, Vercel,
+Cloudflare, Blaxel and Agent37. An
 agent creates a sandbox, runs commands, reads and writes files, runs
 background processes, exposes a port as a public URL, and destroys it.
 There is no Monid connector that routes sandboxes across providers yet.
