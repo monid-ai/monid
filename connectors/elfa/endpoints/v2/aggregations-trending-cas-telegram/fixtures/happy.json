@@ -1,6 +1,6 @@
 {
     "name": "happy",
-    "description": "Recorded live against api.elfa.ai on 2026-10-30 with deno task record (trimmed and scrubbed). The key's plan is not charged the 1-credit base, and v3 billing starts on 1 November 2026, so x-elfa-credits reads 0 on v3 and on the 1-credit v2 endpoints (the zero claim is pruned and the published card settles) and 4 on the 5-credit v2 endpoints (the claim settles, the card rides out as mismatch.derived).",
+    "description": "Recorded live against api.elfa.ai on 2026-11-23 with deno task record (trimmed and scrubbed). The key's plan is not charged the 1-credit base, so x-elfa-credits reads 0 on the 1-credit v2 endpoints (the zero claim is pruned and the published card settles) and 4 on the 5-credit v2 endpoints (the claim settles, the card rides out as mismatch.derived). v3 reports its list price and x-elfa-credits-detail.",
     "calls": [
         {
             "req": {
@@ -22,12 +22,12 @@
                                 "mentionCount": 57
                             },
                             {
-                                "contractAddress": "5wsjHxT5nW5jQuVupXUNnYszF3WoWCfGGk9LMcsCJzY8",
+                                "contractAddress": "3D7YQcnXi6RMjWxheiE8VLuGXJTtgQkmyugGYvzjpump",
                                 "chain": "solana",
-                                "mentionCount": 32
+                                "mentionCount": 18
                             }
                         ],
-                        "total": 20,
+                        "total": 15,
                         "page": 1,
                         "pageSize": 5
                     }

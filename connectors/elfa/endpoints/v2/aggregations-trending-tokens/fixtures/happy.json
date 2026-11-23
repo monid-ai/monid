@@ -1,6 +1,6 @@
 {
     "name": "happy",
-    "description": "Recorded live against api.elfa.ai on 2026-10-30 with deno task record (trimmed and scrubbed). The key's plan is not charged the 1-credit base, and v3 billing starts on 1 November 2026, so x-elfa-credits reads 0 on v3 and on the 1-credit v2 endpoints (the zero claim is pruned and the published card settles) and 4 on the 5-credit v2 endpoints (the claim settles, the card rides out as mismatch.derived).",
+    "description": "Recorded live against api.elfa.ai on 2026-11-23 with deno task record (trimmed and scrubbed). The key's plan is not charged the 1-credit base, so x-elfa-credits reads 0 on the 1-credit v2 endpoints (the zero claim is pruned and the published card settles) and 4 on the 5-credit v2 endpoints (the claim settles, the card rides out as mismatch.derived). v3 reports its list price and x-elfa-credits-detail.",
     "calls": [
         {
             "req": {
@@ -20,16 +20,16 @@
                         "pageSize": 5,
                         "data": [
                             {
-                                "token": "hype",
-                                "current_count": 1972,
-                                "previous_count": 235,
-                                "change_percent": 739.15
+                                "token": "btc",
+                                "current_count": 1240,
+                                "previous_count": 1720,
+                                "change_percent": -27.91
                             },
                             {
-                                "token": "btc",
-                                "current_count": 1821,
-                                "previous_count": 1157,
-                                "change_percent": 57.39
+                                "token": "nvda",
+                                "current_count": 689,
+                                "previous_count": 618,
+                                "change_percent": 11.49
                             }
                         ]
                     }

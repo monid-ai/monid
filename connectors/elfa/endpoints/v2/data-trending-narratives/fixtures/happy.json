@@ -1,6 +1,6 @@
 {
     "name": "happy",
-    "description": "Recorded live against api.elfa.ai on 2026-10-30 with deno task record (trimmed and scrubbed). The key's plan is not charged the 1-credit base, and v3 billing starts on 1 November 2026, so x-elfa-credits reads 0 on v3 and on the 1-credit v2 endpoints (the zero claim is pruned and the published card settles) and 4 on the 5-credit v2 endpoints (the claim settles, the card rides out as mismatch.derived).",
+    "description": "Recorded live against api.elfa.ai on 2026-11-23 with deno task record (trimmed and scrubbed). The key's plan is not charged the 1-credit base, so x-elfa-credits reads 0 on the 1-credit v2 endpoints (the zero claim is pruned and the published card settles) and 4 on the 5-credit v2 endpoints (the claim settles, the card rides out as mismatch.derived). v3 reports its list price and x-elfa-credits-detail.",
     "calls": [
         {
             "req": {
@@ -17,25 +17,25 @@
                     "data": {
                         "trending_narratives": [
                             {
-                                "narrative": "Posts claim Binance was hacked for billions in crypto assets",
+                                "narrative": "Ukrainian naval drones reportedly hit Russian shipping off Libya",
                                 "source_links": [
-                                    "https://x.com/VexTxs/status/2115907362372370885",
-                                    "https://x.com/CryptoTimes_io/status/2116044596337856613"
+                                    "https://x.com/JayinKyiv/status/2124555421323239612",
+                                    "https://x.com/Breaking911/status/2124608747205017918"
                                 ],
                                 "tweet_ids": [
-                                    "2115907362372370885",
-                                    "2116044596337856613"
+                                    "2124555421323239612",
+                                    "2124608747205017918"
                                 ]
                             },
                             {
-                                "narrative": "Amazon is set to report fiscal Q3 earnings after market close",
+                                "narrative": "Trump blames Democrats for the stock-market decline and warns it will worsen",
                                 "source_links": [
-                                    "https://x.com/arcus_xyz/status/2115774753952919989",
-                                    "https://x.com/CoinbasePredict/status/2115897998051856720"
+                                    "https://x.com/WOLF_Terminal/status/2124574886484234360",
+                                    "https://x.com/WatcherGuru/status/2124555061363921186"
                                 ],
                                 "tweet_ids": [
-                                    "2115774753952919989",
-                                    "2115897998051856720"
+                                    "2124574886484234360",
+                                    "2124555061363921186"
                                 ]
                             }
                         ],

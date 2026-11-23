@@ -34,6 +34,41 @@ export const zV3EventsQueryParams = z.object({
         "What kind of development it is. Anything the model cannot " +
             "place becomes `other`.",
     ).optional(),
+    eventCategory: z.array(z.enum([
+        "earnings",
+        "analystRating",
+        "corporateAction",
+        "acquisition",
+        "financing",
+        "partnership",
+        "product",
+        "personnel",
+        "plansAndMilestones",
+        "ipo",
+        "exchangeListing",
+        "delisting",
+        "tokenLaunch",
+        "tokenomics",
+        "governance",
+        "flows",
+        "marketMove",
+        "metricsAndReports",
+        "economy",
+        "policy",
+        "legal",
+        "securityIncident",
+        "outage",
+        "geopolitics",
+        "disaster",
+        "commentary",
+        "forecast",
+    ])).min(1).max(27).describe(
+        "What kind of thing happened, finer than `eventType`. One or " +
+            "more; matches events in any of them, and combines with " +
+            "`eventType` (`eventType=macro` with `eventCategory` " +
+            "`economy` and `forecast`). An event with no category never " +
+            "matches. Not with `q` or `eventIds`.",
+    ).optional(),
     implication: z.enum(["bullish", "bearish", "mixed", "unclear"]).describe(
         "Which way the event cuts. On a call, derived from the side " +
             "taken.",

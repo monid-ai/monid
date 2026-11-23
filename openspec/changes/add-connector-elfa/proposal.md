@@ -4,10 +4,11 @@
 
 Elfa turns crypto and markets X (Twitter) and Telegram into structured data:
 analyzed events, storylines and arcs, trading calls with each caller's track
-record, long/short positioning, mindshare, trending contracts and ranked
-accounts. Its public API fits the connector standard as is: one base URL, one
-API-key header, synchronous JSON GETs, and an exact per-call charge reported on
-every response. Nothing needs a new engine capability.
+record, long/short positioning, mindshare, trending contracts, ranked
+accounts, a market calendar, the prediction markets its stories bear on, and a
+claim verifier. Its public API fits the connector standard as is: one base URL,
+one API-key header, synchronous JSON calls, and an exact per-call charge
+reported on every response. Nothing needs a new engine capability.
 
 It is also the first connector whose vendor dedups its own bill: a v3 list
 endpoint charges a returned object only the first time the key is billed for it
@@ -16,12 +17,13 @@ meter is the only exact source.
 
 ## What Changes
 
-- **connectors/elfa**: 21 endpoints against `https://api.elfa.ai`, auth header
+- **connectors/elfa**: 24 endpoints against `https://api.elfa.ai`, auth header
   `x-elfa-api-key`, one credit pool (`Elfa credits`).
-  - v3 (13): `events`, `events/storylines`, `events/arcs`, `entities`,
+  - v3 (16): `events`, `events/storylines`, `events/arcs`,
+    `events/calendar`, `events/prediction-markets`, `entities`,
     `market/{crypto,equity}/call-book`, `market/{crypto,equity}/mindshare`,
     `market/crypto/trending-contracts`, `calls`, `calls/episodes`,
-    `calls/positioning`, `people/accounts`.
+    `calls/positioning`, `people/accounts`, and `POST verify`.
   - v2 (8): `aggregations/trending-tokens`, `data/top-mentions`,
     `data/keyword-mentions`, `data/event-summary`, `data/trending-narratives`,
     `data/token-news`, `aggregations/trending-cas/{twitter,telegram}`.
@@ -36,10 +38,13 @@ meter is the only exact source.
   falls back to counting the response and the published card settles.
 - **The published card is the model.**
   - Flat `PER_CALL`: every v2 endpoint at 1 credit, except `event-summary` and
-    `trending-narratives` at 5; v3 `entities` 1, `positioning` 2.
+    `trending-narratives` at 5; v3 `entities` 1, `positioning` 2, `verify` 1.
+  - `FREE`: `events/prediction-markets`, which Elfa does not charge yet. It
+    overrides the provider claim with an empty one, as firecrawl's job reads
+    do.
   - Base plus objects (COMPOSITE: `request` PER_CALL 1 + a `RESULT` line):
-    `events` 1/event, `storylines` 2, `arcs` 2, `calls` 1, `episodes` 2 per
-    position. The estimate holds `ids.length` or `limit`, so it never
+    `events` 1/event, `storylines` 2, `arcs` 2, `calendar` 1/entry, `calls` 1,
+    `episodes` 2 per position. The estimate holds `ids.length` or `limit`, so it never
     under-holds.
   - Select-one bands by `limit` (COMPOSITE of `PAGE` lines, D19): call-book 2/4,
     mindshare 5/10, trending-contracts 5/10 plus a 5-credit `long_range` line
@@ -51,7 +56,8 @@ meter is the only exact source.
 - **Mirrors follow the runtime validators**, which are stricter than the
   published OpenAPI in places: v2 `timeWindow` pattern, at most five keywords,
   `page`/`pageSize`/`minMentions` at most 100; v3 ids are GUIDs, `entities.q` at
-  most 128 characters, `eventType` filter without `spam`.
+  most 128 characters, `eventType` filter without `spam`, `verify` text fields
+  non-blank.
 - **`x-elfa-credits` and `x-elfa-credits-detail` join `RECORDED_RES_HEADERS`**,
   so recorded fixtures carry the real meter.
 
@@ -67,13 +73,15 @@ meter is the only exact source.
   `key-status`, and the endpoints hidden from Elfa's published spec.
 - v3 `key-status`, and `people/accounts/{handle}` (Enterprise only, not in the
   published spec).
+- v3 `monitors`: stateful webhook subscriptions that deliver matches to a
+  caller URL, not a per-call tool.
 - The x402 pay-per-request routes: the hosted platform holds an API key.
 
 ## Impact
 
 - New: `connectors/elfa/**`, `openspec/changes/add-connector-elfa/**`.
 - Modified: `shared/testing/fixtures.ts` (two allowlisted headers),
-  `connectors/ids.lock.json` (21 ids).
+  `connectors/ids.lock.json` (24 ids).
 - No schema, compiler or engine change; no version bump.
 
 ## Billing notes for the platform
@@ -81,9 +89,7 @@ meter is the only exact source.
 - The platform key must be on a credit-billed Elfa plan. On a plan that is not
   charged the base credit, v2 reports `0` on the 1-credit endpoints and `4` on
   the 5-credit ones, and v3 reports list prices that were never charged.
-- v3 charges are effective from 1 November 2026. Before that date Elfa reports
-  `x-elfa-credits: 0` and no detail header on v3; the zero claim is pruned and
-  the published card settles on every returned object, dedup not applied.
+- `verify` needs a PAYG, Grow or Enterprise plan; a Free key gets a 403.
 - Dedup is per Elfa account. Every caller on the platform key shares it, so a
   caller can benefit from another caller's earlier read.
 - v2 charges its 1-credit base on some non-2xx responses after authentication

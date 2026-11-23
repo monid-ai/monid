@@ -1,6 +1,6 @@
 {
     "name": "happy",
-    "description": "Recorded live against api.elfa.ai on 2026-10-30 with deno task record (trimmed and scrubbed). The key's plan is not charged the 1-credit base, and v3 billing starts on 1 November 2026, so x-elfa-credits reads 0 on v3 and on the 1-credit v2 endpoints (the zero claim is pruned and the published card settles) and 4 on the 5-credit v2 endpoints (the claim settles, the card rides out as mismatch.derived).",
+    "description": "Recorded live against api.elfa.ai on 2026-11-23 with deno task record (trimmed and scrubbed). The key's plan is not charged the 1-credit base, so x-elfa-credits reads 0 on the 1-credit v2 endpoints (the zero claim is pruned and the published card settles) and 4 on the 5-credit v2 endpoints (the claim settles, the card rides out as mismatch.derived). v3 reports its list price and x-elfa-credits-detail.",
     "calls": [
         {
             "req": {
@@ -16,32 +16,32 @@
                     "success": true,
                     "data": [
                         {
-                            "summary": "ETF flow posts highlighted a divergence: U.S. spot XRP ETFs recorded $8.43M in net inflows on October 29 while Ethereum ETFs saw $105.48M in outflows and Solana ETFs lost $27.69M. Issuer-level Solana ETF updates showed Bitwise BSOL at -$23.7M and Grayscale GSOL at -$4M, alongside zero-flow updates from several other issuers.",
+                            "summary": "A widely reposted Solana Breakpoint newsletter framed the event around a 'Token Supercycle,' saying tokenized Anthropic ($ANT) debuted on Solana on IPO day, Solana 1.0 marked its graduation from 'mainnet beta' to 'mainnet,' tokenized equities on Solana crossed $1.22B in circulating value with 2M+ holders, and 21Shares marked one year of its Solana ETF ($TSOL).",
                             "sourceLinks": [
-                                "https://x.com/BankXRP/status/2116043284653265308",
-                                "https://x.com/Xaif_Crypto/status/2116041040830627981"
+                                "https://x.com/solana/status/2124495618542604462",
+                                "https://x.com/vibhu/status/2124508387228455244"
                             ],
                             "tweetIds": [
-                                "2116043284653265308",
-                                "2116041040830627981"
+                                "2124495618542604462",
+                                "2124508387228455244"
                             ]
                         },
                         {
-                            "summary": "Posts noted that spot Bitcoin ETF net inflows continued over multiple days—e.g., +$137.33M on October 28 and about $423.6M across October 26–28—while BTC traded near or below $80K, framing ETF demand as positive even as price sentiment remained bearish.",
+                            "summary": "Posts noted U.S. spot Solana ETFs brought in about $4.4M last week, their first positive week after six consecutive weeks of withdrawals, with SOL around $70; one poster said it was too early to call a recovery. Nexo separately cited $644.1M in year-to-date net inflows into U.S. spot Solana ETFs and about $1.14B in net assets.",
                             "sourceLinks": [
-                                "https://x.com/WOLF_Crypto_X/status/2115784364797657243",
-                                "https://x.com/FabiusDefi/status/2115767342378701247"
+                                "https://x.com/Ahmx_web3/status/2124525692478275893",
+                                "https://x.com/potu_eth/status/2124528330536046821"
                             ],
                             "tweetIds": [
-                                "2115784364797657243",
-                                "2115767342378701247"
+                                "2124525692478275893",
+                                "2124528330536046821"
                             ]
                         }
                     ],
                     "metadata": {
-                        "total": 21,
-                        "total_summarized": 21,
-                        "summaries": 5
+                        "total": 47,
+                        "total_summarized": 47,
+                        "summaries": 8
                     }
                 }
             }

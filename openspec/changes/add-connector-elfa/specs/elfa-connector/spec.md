@@ -37,8 +37,16 @@ claim `state.data.credits`, omitting the entry when it is absent.
 Every endpoint SHALL model Elfa's published price: flat `PER_CALL` lines for
 the fixed-price endpoints, a COMPOSITE of a 1-credit `request` line and a
 `RESULT` line for the per-object v3 lists, and select-one COMPOSITEs of `PAGE`
-lines for the limit-banded v3 endpoints. Estimates SHALL hold the largest
-charge the input allows.
+lines for the limit-banded v3 endpoints, and `FREE` for an endpoint Elfa does
+not charge. Estimates SHALL hold the largest charge the input allows.
+
+#### Scenario: An unpriced endpoint stays free
+- **WHEN** `elfa#v3/events/prediction-markets` returns with any meter header
+- **THEN** usage is `{credits: {}}` and no claim is made
+
+#### Scenario: Verify is one flat credit
+- **WHEN** `elfa#v3/verify` is called with a JSON body
+- **THEN** the hold and the card are 1 credit, whatever the verdict
 
 #### Scenario: A topic search still bills its objects
 - **WHEN** `elfa#v3/events/storylines` is estimated with `q` and the default limit

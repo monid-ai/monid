@@ -1,6 +1,6 @@
 {
     "name": "happy",
-    "description": "Recorded live against api.elfa.ai on 2026-10-30 with deno task record (trimmed and scrubbed). The key's plan is not charged the 1-credit base, and v3 billing starts on 1 November 2026, so x-elfa-credits reads 0 on v3 and on the 1-credit v2 endpoints (the zero claim is pruned and the published card settles) and 4 on the 5-credit v2 endpoints (the claim settles, the card rides out as mismatch.derived).",
+    "description": "Recorded live against api.elfa.ai on 2026-11-23 with deno task record (trimmed and scrubbed). The key's plan is not charged the 1-credit base, so x-elfa-credits reads 0 on the 1-credit v2 endpoints (the zero claim is pruned and the published card settles) and 4 on the 5-credit v2 endpoints (the claim settles, the card rides out as mismatch.derived). v3 reports its list price and x-elfa-credits-detail.",
     "calls": [
         {
             "req": {
@@ -10,38 +10,39 @@
             "res": {
                 "status": 200,
                 "headers": {
-                    "x-elfa-credits": "0"
+                    "x-elfa-credits": "5",
+                    "x-elfa-credits-detail": "base=5"
                 },
                 "body": {
                     "assets": [
                         {
                             "rank": 1,
-                            "id": "74839d79-33cc-4f0b-98c0-07322b647de7",
-                            "symbol": "INTC",
-                            "name": "Intel Corp",
-                            "share": 6.646543440242344,
-                            "changePct": 580.3574276838277,
+                            "id": "b66be494-62f6-4c86-bf8d-84841a074345",
+                            "symbol": "NVDA",
+                            "name": "Nvidia Corp",
+                            "share": 19.447126629227064,
+                            "changePct": 2.159706355376804,
                             "hot": false,
-                            "share1h": 11.97015512461291,
-                            "share4h": 11.592213542706856,
-                            "ratio1h4h": 1.0326030555349657,
-                            "capped1h": 31
+                            "share1h": 19.60075358145686,
+                            "share4h": 22.419341961153837,
+                            "ratio1h4h": 0.8742787194833477,
+                            "capped1h": 37
                         },
                         {
                             "rank": 2,
-                            "id": "b4fc0eb8-f461-4422-93ff-5338455cb483",
-                            "symbol": "GOOGL",
-                            "name": "Alphabet Inc. Class A",
-                            "share": 6.315666868550222,
-                            "changePct": -22.492109888768734,
+                            "id": "d50f7660-69d8-4266-9535-3f04195e078f",
+                            "symbol": "TSLA",
+                            "name": "Tesla, Inc.",
+                            "share": 10.155089886509607,
+                            "changePct": -10.424383484333411,
                             "hot": false,
-                            "share1h": 6.173652362441296,
-                            "share4h": 5.146770706455502,
-                            "ratio1h4h": 1.1995196045352856,
+                            "share1h": 8.516140654238345,
+                            "share4h": 7.5445884416942,
+                            "ratio1h4h": 1.1287747131672532,
                             "capped1h": 16
                         }
                     ],
-                    "nextCursor": "5VPhU7th.5:1793354780",
+                    "nextCursor": "Bt-68vyG.5:1795400397",
                     "hasMore": true
                 }
             }

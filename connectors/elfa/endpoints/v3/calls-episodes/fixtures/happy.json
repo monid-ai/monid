@@ -1,101 +1,102 @@
 {
     "name": "happy",
-    "description": "Recorded live against api.elfa.ai on 2026-10-30 with deno task record (trimmed and scrubbed). The key's plan is not charged the 1-credit base, and v3 billing starts on 1 November 2026, so x-elfa-credits reads 0 on v3 and on the 1-credit v2 endpoints (the zero claim is pruned and the published card settles) and 4 on the 5-credit v2 endpoints (the claim settles, the card rides out as mismatch.derived).",
+    "description": "Recorded live against api.elfa.ai on 2026-11-23 with deno task record (trimmed and scrubbed). The key's plan is not charged the 1-credit base, so x-elfa-credits reads 0 on the 1-credit v2 endpoints (the zero claim is pruned and the published card settles) and 4 on the 5-credit v2 endpoints (the claim settles, the card rides out as mismatch.derived). v3 reports its list price and x-elfa-credits-detail.",
     "calls": [
         {
             "req": {
                 "method": "GET",
-                "url": "https://api.elfa.ai/v3/calls/episodes?from=1793232000&to=1793318400&limit=3"
+                "url": "https://api.elfa.ai/v3/calls/episodes?from=1795219200&to=1795305600&limit=3"
             },
             "res": {
                 "status": 200,
                 "headers": {
-                    "x-elfa-credits": "0"
+                    "x-elfa-credits": "7",
+                    "x-elfa-credits-detail": "base=1;objects=6;dedup=0"
                 },
                 "body": {
                     "episodes": [
                         {
-                            "id": "d2c655b0-233c-4049-91f0-f64b0c93f75b",
-                            "handle": "Insidevoicer",
+                            "id": "2c423ff0-e8bf-46ce-9e42-5b2a349f168b",
+                            "handle": "zhengjielimm",
                             "source": "twitter",
                             "channel": null,
                             "asset": {
-                                "id": "944dcaf0-1b0a-44aa-bffc-11c1a80e1839",
-                                "symbol": "HYPE",
-                                "name": "Hyperliquid",
-                                "entityType": "token"
+                                "id": "a70a67b9-da47-45ec-a37c-441a6caef365",
+                                "symbol": "MSFT",
+                                "name": "Microsoft Corp",
+                                "entityType": "equity"
                             },
                             "direction": "long",
                             "horizon": "unspecified",
                             "status": "open",
-                            "openedAt": 1793318342,
+                            "openedAt": 1795305361,
                             "closedAt": null,
-                            "observedAt": 1793318357,
-                            "entryPrice": 90.861,
+                            "observedAt": 1795353861,
+                            "entryPrice": 485.15,
                             "exitPrice": null,
                             "closeReason": null,
-                            "setup": "technical",
+                            "setup": null,
                             "thesis": null,
-                            "statedTarget": 175,
+                            "statedTarget": null,
                             "statedStop": null,
                             "track": {
                                 "alphaScore": null,
                                 "hitRate": null,
                                 "avgReturn": null,
                                 "scoredEpisodes": 0,
-                                "totalEpisodes": 3
+                                "totalEpisodes": 7
                             },
                             "calls": [
                                 {
-                                    "callId": "c8a0b5c1-b719-4338-ba0f-4736cce3825e",
+                                    "callId": "3d8ee026-ba83-4da9-9fcd-693a88d23b6c",
                                     "callAction": "open",
-                                    "occurredAt": 1793318342
+                                    "occurredAt": 1795305361
                                 }
                             ]
                         },
                         {
-                            "id": "1867c4c6-dc37-40f9-b22b-d50b0b917cd7",
-                            "handle": "nknwn_",
+                            "id": "8007aa01-e106-4dec-a9f7-6bc4263a7e3f",
+                            "handle": "zhengjielimm",
                             "source": "twitter",
                             "channel": null,
                             "asset": {
-                                "id": "360fd4a8-46e3-4713-8a91-3627b86029fc",
-                                "symbol": "BTC",
-                                "name": "Bitcoin",
-                                "entityType": "token"
+                                "id": "bbb226d9-0da0-4292-a5e9-0f10bc8c70c7",
+                                "symbol": "AMZN",
+                                "name": "Amazon.Com Inc",
+                                "entityType": "equity"
                             },
-                            "direction": "short",
+                            "direction": "long",
                             "horizon": "unspecified",
                             "status": "open",
-                            "openedAt": 1793318290,
+                            "openedAt": 1795305361,
                             "closedAt": null,
-                            "observedAt": 1793318301,
-                            "entryPrice": 78128.5,
+                            "observedAt": 1795353861,
+                            "entryPrice": 247.115,
                             "exitPrice": null,
                             "closeReason": null,
                             "setup": null,
-                            "thesis": "event",
+                            "thesis": null,
                             "statedTarget": null,
                             "statedStop": null,
                             "track": {
-                                "alphaScore": -0.0007817838222207702,
-                                "hitRate": 0,
-                                "avgReturn": -0.04119228973091354,
-                                "scoredEpisodes": 1,
-                                "totalEpisodes": 3
+                                "alphaScore": null,
+                                "hitRate": null,
+                                "avgReturn": null,
+                                "scoredEpisodes": 0,
+                                "totalEpisodes": 7
                             },
                             "calls": [
                                 {
-                                    "callId": "7ef04338-d580-459a-8b80-c61f0b5cc333",
+                                    "callId": "b56dd661-ac73-4181-bd67-53a5ea0ce46b",
                                     "callAction": "open",
-                                    "occurredAt": 1793318290
+                                    "occurredAt": 1795305361
                                 }
                             ]
                         }
                     ],
-                    "nextCursor": "i8MTTTka.MjAyNi0xMC0yOSAyMzo1NjozMCswMHwxZjIyYTJkYS0wOWE1LTQxNzItYmJhNy0zYjAwOGE3MTdmZWU",
+                    "nextCursor": "crGYRLVm.MjAyNi0xMS0yMSAyMzo1NjowMSswMHxkOGUwM2FlMi00YjM0LTQ1YWQtYmQ5Yi1kZmQyMzZjMWQ5Y2U",
                     "hasMore": true,
-                    "servedFrom": 1793232000
+                    "servedFrom": 1795219200
                 }
             }
         }

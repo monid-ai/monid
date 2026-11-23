@@ -1,6 +1,6 @@
 {
     "name": "happy",
-    "description": "Recorded live against api.elfa.ai on 2026-10-30 with deno task record (trimmed and scrubbed). The key's plan is not charged the 1-credit base, and v3 billing starts on 1 November 2026, so x-elfa-credits reads 0 on v3 and on the 1-credit v2 endpoints (the zero claim is pruned and the published card settles) and 4 on the 5-credit v2 endpoints (the claim settles, the card rides out as mismatch.derived).",
+    "description": "Recorded live against api.elfa.ai on 2026-11-23 with deno task record (trimmed and scrubbed). The key's plan is not charged the 1-credit base, so x-elfa-credits reads 0 on the 1-credit v2 endpoints (the zero claim is pruned and the published card settles) and 4 on the 5-credit v2 endpoints (the claim settles, the card rides out as mismatch.derived). v3 reports its list price and x-elfa-credits-detail.",
     "calls": [
         {
             "req": {
@@ -10,38 +10,39 @@
             "res": {
                 "status": 200,
                 "headers": {
-                    "x-elfa-credits": "0"
+                    "x-elfa-credits": "5",
+                    "x-elfa-credits-detail": "base=5"
                 },
                 "body": {
                     "assets": [
                         {
                             "rank": 1,
-                            "id": "1219aaf7-99e8-4517-9fe4-7cba6b2c7c3c",
-                            "symbol": "BNB",
-                            "name": "BNB",
-                            "share": 18.431554069022418,
-                            "changePct": 814.2038770468266,
-                            "hot": true,
-                            "share1h": 5.527851439766775,
-                            "share4h": 3.946143558718615,
-                            "ratio1h4h": 1.4008237048430567,
-                            "capped1h": 41
-                        },
-                        {
-                            "rank": 2,
                             "id": "360fd4a8-46e3-4713-8a91-3627b86029fc",
                             "symbol": "BTC",
                             "name": "Bitcoin",
-                            "share": 14.657223955555224,
-                            "changePct": -22.910531747195222,
+                            "share": 25.96405697795059,
+                            "changePct": -26.13478357954704,
                             "hot": false,
-                            "share1h": 19.274198497204235,
-                            "share4h": 19.294269401630338,
-                            "ratio1h4h": 0.9989597478915472,
-                            "capped1h": 144
+                            "share1h": 20.339733312353417,
+                            "share4h": 25.412264405714367,
+                            "ratio1h4h": 0.8003904330453799,
+                            "capped1h": 80
+                        },
+                        {
+                            "rank": 2,
+                            "id": "7e735621-f411-49c0-b985-2dddc65ac570",
+                            "symbol": "ETH",
+                            "name": "Ethereum",
+                            "share": 10.485889845086243,
+                            "changePct": -2.4456234307139892,
+                            "hot": false,
+                            "share1h": 10.206182396331656,
+                            "share4h": 10.612614107541324,
+                            "ratio1h4h": 0.9617029596015502,
+                            "capped1h": 40
                         }
                     ],
-                    "nextCursor": "mLCTvAv1.5:1793354778",
+                    "nextCursor": "unIw6ROP.5:1795400390",
                     "hasMore": true
                 }
             }

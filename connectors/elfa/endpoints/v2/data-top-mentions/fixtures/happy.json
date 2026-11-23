@@ -1,6 +1,6 @@
 {
     "name": "happy",
-    "description": "Recorded live against api.elfa.ai on 2026-10-30 with deno task record (trimmed and scrubbed). The key's plan is not charged the 1-credit base, and v3 billing starts on 1 November 2026, so x-elfa-credits reads 0 on v3 and on the 1-credit v2 endpoints (the zero claim is pruned and the published card settles) and 4 on the 5-credit v2 endpoints (the claim settles, the card rides out as mismatch.derived).",
+    "description": "Recorded live against api.elfa.ai on 2026-11-23 with deno task record (trimmed and scrubbed). The key's plan is not charged the 1-credit base, so x-elfa-credits reads 0 on the 1-credit v2 endpoints (the zero claim is pruned and the published card settles) and 4 on the 5-credit v2 endpoints (the claim settles, the card rides out as mismatch.derived). v3 reports its list price and x-elfa-credits-detail.",
     "calls": [
         {
             "req": {
@@ -16,32 +16,32 @@
                     "success": true,
                     "data": [
                         {
-                            "tweetId": "2115909630408757733",
-                            "link": "https://x.com/WatcherGuru/status/2115909630408757733",
-                            "likeCount": 6018,
-                            "repostCount": 783,
-                            "viewCount": 607226,
-                            "quoteCount": 277,
-                            "replyCount": 506,
-                            "bookmarkCount": 298,
-                            "mentionedAt": "2026-10-29T20:52:22+00:00",
-                            "type": "post",
+                            "tweetId": "2124398378805289149",
+                            "link": "https://x.com/soy_muse/status/2124398378805289149",
+                            "likeCount": 3199,
+                            "repostCount": 516,
+                            "viewCount": 348162,
+                            "quoteCount": 47,
+                            "replyCount": 342,
+                            "bookmarkCount": 1158,
+                            "mentionedAt": "2026-11-22T07:03:37+00:00",
+                            "type": "note",
                             "repostBreakdown": {
                                 "smart": 0,
-                                "ct": 19
+                                "ct": 5
                             }
                         },
                         {
-                            "tweetId": "2115854952891592978",
-                            "link": "https://x.com/heybeluga/status/2115854952891592978",
-                            "likeCount": 420,
-                            "repostCount": 13,
-                            "viewCount": 152531,
-                            "quoteCount": 2,
-                            "replyCount": 40,
-                            "bookmarkCount": 24,
-                            "mentionedAt": "2026-10-29T17:15:06+00:00",
-                            "type": "note",
+                            "tweetId": "2124523105951637760",
+                            "link": "https://x.com/AshCrypto/status/2124523105951637760",
+                            "likeCount": 1028,
+                            "repostCount": 93,
+                            "viewCount": 83363,
+                            "quoteCount": 8,
+                            "replyCount": 141,
+                            "bookmarkCount": 33,
+                            "mentionedAt": "2026-11-22T15:19:14+00:00",
+                            "type": "post",
                             "repostBreakdown": {
                                 "smart": 0,
                                 "ct": 0
@@ -49,7 +49,7 @@
                         }
                     ],
                     "metadata": {
-                        "total": 351,
+                        "total": 303,
                         "page": 1,
                         "pageSize": 5
                     }

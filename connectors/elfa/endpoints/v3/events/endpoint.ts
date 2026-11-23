@@ -38,8 +38,9 @@ export default defineEndpoint({
             "`q` search adds no surcharge; returned objects are billed as " +
             "usual.",
             "`from` is required unless `eventIds` or `q` is sent. " +
-            "`eventIds` takes no other filter. `q` and `sort=relevant` " +
-            "each refuse some filters; see the description.",
+            "`eventIds` takes no other filter. `q` refuses `eventCategory`, " +
+            "and `q` and `sort=relevant` each refuse some other filters; " +
+            "see the description.",
         ],
     },
     request: { method: "GET", path: "/v3/events" },

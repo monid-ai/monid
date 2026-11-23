@@ -1,6 +1,6 @@
 {
     "name": "happy",
-    "description": "Recorded live against api.elfa.ai on 2026-10-30 with deno task record (trimmed and scrubbed). The key's plan is not charged the 1-credit base, and v3 billing starts on 1 November 2026, so x-elfa-credits reads 0 on v3 and on the 1-credit v2 endpoints (the zero claim is pruned and the published card settles) and 4 on the 5-credit v2 endpoints (the claim settles, the card rides out as mismatch.derived).",
+    "description": "Recorded live against api.elfa.ai on 2026-11-23 with deno task record (trimmed and scrubbed). The key's plan is not charged the 1-credit base, so x-elfa-credits reads 0 on the 1-credit v2 endpoints (the zero claim is pruned and the published card settles) and 4 on the 5-credit v2 endpoints (the claim settles, the card rides out as mismatch.derived). v3 reports its list price and x-elfa-credits-detail.",
     "calls": [
         {
             "req": {
@@ -10,7 +10,8 @@
             "res": {
                 "status": 200,
                 "headers": {
-                    "x-elfa-credits": "0"
+                    "x-elfa-credits": "5",
+                    "x-elfa-credits-detail": "base=5"
                 },
                 "body": {
                     "accounts": [
@@ -18,22 +19,22 @@
                             "rank": 1,
                             "handle": "blknoiz06",
                             "name": "Ansem 🐂🀄️",
-                            "followerCount": 1445305,
+                            "followerCount": 1443828,
                             "verified": false,
                             "standing": 1,
                             "track": {
-                                "alphaScore": -0.060950000808740884,
-                                "hitRate": 0.7333333333333333,
-                                "avgReturn": 0.035676959997717535,
-                                "scoredEpisodes": 15,
-                                "totalEpisodes": 25
+                                "alphaScore": -0.06611059092510373,
+                                "hitRate": 0.6,
+                                "avgReturn": 0.04350748359634683,
+                                "scoredEpisodes": 10,
+                                "totalEpisodes": 28
                             }
                         },
                         {
                             "rank": 2,
                             "handle": "solana",
                             "name": "Solana",
-                            "followerCount": 4224212,
+                            "followerCount": 4215446,
                             "verified": false,
                             "standing": 1,
                             "track": {
@@ -41,11 +42,11 @@
                                 "hitRate": 1,
                                 "avgReturn": 0.11061756346052092,
                                 "scoredEpisodes": 1,
-                                "totalEpisodes": 2
+                                "totalEpisodes": 1
                             }
                         }
                     ],
-                    "nextCursor": "L__PqMPf.MXwyODgyNzcxNjd8Ng",
+                    "nextCursor": "LtsWPiRt.MXwzMzE2Mzc2MDM4fDY",
                     "hasMore": true
                 }
             }

@@ -26,7 +26,8 @@ type Card =
     | { kind: "flat"; amount: number }
     | { kind: "objects"; key: string; rate: number; q: boolean }
     | { kind: "tier"; small: number; large: number; longRange?: number }
-    | { kind: "accounts" };
+    | { kind: "accounts" }
+    | { kind: "free" };
 
 const CARD: Record<string, Card> = {
     "elfa#v2/aggregations/trending-cas/telegram": { kind: "flat", amount: 1 },
@@ -48,6 +49,13 @@ const CARD: Record<string, Card> = {
     "elfa#v3/entities": { kind: "flat", amount: 1 },
     "elfa#v3/events": { kind: "objects", key: "events", rate: 1, q: true },
     "elfa#v3/events/arcs": { kind: "objects", key: "arcs", rate: 2, q: true },
+    "elfa#v3/events/calendar": {
+        kind: "objects",
+        key: "entries",
+        rate: 1,
+        q: false,
+    },
+    "elfa#v3/events/prediction-markets": { kind: "free" },
     "elfa#v3/events/storylines": {
         kind: "objects",
         key: "storylines",
@@ -65,7 +73,10 @@ const CARD: Record<string, Card> = {
     "elfa#v3/market/equity/call-book": { kind: "tier", small: 2, large: 4 },
     "elfa#v3/market/equity/mindshare": { kind: "tier", small: 5, large: 10 },
     "elfa#v3/people/accounts": { kind: "accounts" },
+    "elfa#v3/verify": { kind: "flat", amount: 1 },
 };
+const FREE = "elfa#v3/events/prediction-markets";
+const POST = "elfa#v3/verify";
 
 const elfaIds = async (): Promise<string[]> => {
     const bundle = await testBundle();
@@ -100,7 +111,7 @@ const estimate = async (id: string, input: RunInput) => {
 
 Deno.test("elfa docs: every endpoint is on the rate card", async () => {
     const ids = await elfaIds();
-    assertEquals(ids.length, 21);
+    assertEquals(ids.length, 24);
     assertEquals(Object.keys(CARD).sort(), ids);
 });
 
@@ -115,15 +126,17 @@ Deno.test("elfa docs: one auth, one meter relay, one claim, one error digest", a
         const doc = bundle.endpoints[id];
         assertEquals(doc.auth.inject.$fn.key, first.auth.inject.$fn.key, id);
         assertEquals(doc.lifecycle?.start, first.lifecycle?.start, id);
-        assertEquals(doc.usage.consolidate, first.usage.consolidate, id);
+        if (id !== FREE) {
+            assertEquals(doc.usage.consolidate, first.usage.consolidate, id);
+        }
         assertEquals(doc.output.fromError, first.output.fromError, id);
         assertEquals(doc.output.fromResponse, undefined, id);
         assertEquals(
             doc.usage.credits,
-            { default: { label: "Elfa credits" } },
+            id === FREE ? {} : { default: { label: "Elfa credits" } },
             id,
         );
-        assertEquals(doc.request.method, "GET", id);
+        assertEquals(doc.request.method, id === POST ? "POST" : "GET", id);
         assert(
             doc.request.url.startsWith("https://api.elfa.ai/v"),
             `${id}: ${doc.request.url}`,
@@ -137,6 +150,10 @@ Deno.test("elfa docs: the model states the published rate card", async () => {
     const bundle = await testBundle();
     for (const [id, card] of Object.entries(CARD)) {
         const model = bundle.endpoints[id].usage.model;
+        if (card.kind === "free") {
+            assertEquals(model, { kind: "FREE" }, id);
+            continue;
+        }
         if (card.kind === "flat") {
             assertEquals(model, {
                 kind: "PER_CALL",
@@ -184,9 +201,19 @@ Deno.test("elfa: a recorded 2xx settles the meter, or the card without one", asy
         assertEquals(result.httpStatus, 200, id);
         assertEquals(result.isProviderError, false, id);
         assertEquals(result.output, fixture.calls[0].res.body, id);
+        if (card.kind === "free") {
+            assertEquals(result.usage.credits, {}, id);
+            continue;
+        }
         const query = input.queryParams ?? {};
         const limit = Number(query.limit ?? 50);
-        const meter = Number(fixture.calls[0].res.headers?.[METER] ?? 0);
+        const headers = fixture.calls[0].res.headers ?? {};
+        const meter = Number(headers[METER] ?? 0);
+        const detail = Object.fromEntries(
+            (headers["x-elfa-credits-detail"] ?? "").split(";").filter(
+                Boolean,
+            ).map((part) => part.split("=")).map(([k, v]) => [k, Number(v)]),
+        );
         let published: number;
         if (card.kind === "flat") {
             published = card.amount;
@@ -204,15 +231,21 @@ Deno.test("elfa: a recorded 2xx settles the meter, or the card without one", asy
         } else {
             published = limit <= 50 ? 5 : 10;
         }
+        const derived = detail.base === undefined
+            ? published
+            : detail.base + (detail.objects ?? 0) + (detail.window ?? 0);
+        if (detail.base !== undefined) {
+            assertEquals(derived, meter, `${id}: detail sums to the meter`);
+        }
         assertEquals(
             result.usage.credits,
-            { default: meter > 0 ? meter : published },
+            { default: meter > 0 ? meter : derived },
             id,
         );
         assertEquals(
             result.usage.mismatch,
-            meter > 0 && meter !== published
-                ? { derived: { default: published } }
+            meter > 0 && meter !== derived
+                ? { derived: { default: derived } }
                 : undefined,
             id,
         );
@@ -422,6 +455,18 @@ Deno.test("elfa: estimates price the hold from the input", async () => {
         ["elfa#v2/data/event-summary", {
             queryParams: { keywords: "solana" },
         }, { default: 5 }],
+        ["elfa#v3/events/calendar", { queryParams: {} }, { default: 11 }],
+        ["elfa#v3/events/calendar", { queryParams: { limit: 30 } }, {
+            default: 31,
+        }],
+        ["elfa#v3/verify", { body: { statement: "BTC hit 100k" } }, {
+            default: 1,
+        }],
+        [
+            "elfa#v3/events/prediction-markets",
+            { queryParams: { ids: ["00000000-0000-4000-8000-000000000001"] } },
+            {},
+        ],
     ];
     for (const [id, input, credits] of cases) {
         const usage = await estimate(id, input);
@@ -435,7 +480,19 @@ Deno.test("elfa: every input schema is strict", async () => {
         await assertRejects(
             () =>
                 estimate(id, {
-                    queryParams: { ...input.queryParams, not_an_elfa_param: 1 },
+                    ...(input.body !== undefined
+                        ? {
+                            body: {
+                                ...(input.body as Record<string, Json>),
+                                not_an_elfa_param: 1,
+                            },
+                        }
+                        : {
+                            queryParams: {
+                                ...input.queryParams,
+                                not_an_elfa_param: 1,
+                            },
+                        }),
                 }),
             Error,
             "INVALID_INPUT",
@@ -625,6 +682,32 @@ Deno.test("elfa: mirrors refuse what Elfa's validators refuse", async () => {
         ["elfa#v2/data/keyword-mentions", { keywords: "a,b,c,d,e,f" }],
         ["elfa#v2/data/keyword-mentions", { keywords: "a", cursor: "next" }],
         ["elfa#v2/data/top-mentions", {}],
+        ["elfa#v3/events", { from: 1, eventCategory: ["rumor"] }],
+        ["elfa#v3/events", { from: 1, eventCategory: [] }],
+        ["elfa#v3/events/calendar", { minImportance: 101 }],
+        ["elfa#v3/events/calendar", { category: ["sports"] }],
+        ["elfa#v3/events/calendar", { limit: 31 }],
+        ["elfa#v3/events/prediction-markets", {}],
+        ["elfa#v3/events/prediction-markets", { ids: ["bitcoin"] }],
+        [
+            "elfa#v3/events/prediction-markets",
+            {
+                ids: Array.from(
+                    { length: 31 },
+                    (_, i) =>
+                        `00000000-0000-4000-8000-${
+                            String(i).padStart(12, "0")
+                        }`,
+                ),
+            },
+        ],
+        ["elfa#v3/events/prediction-markets", {
+            ids: ["00000000-0000-4000-8000-000000000001"],
+            limit: 0,
+        }],
+        ["elfa#v3/events/calendar", { status: [] }],
+        ["elfa#v3/events/calendar", { confidence: ["certain"] }],
+        ["elfa#v3/events/calendar", { minImportance: 1.5 }],
     ];
     for (const [id, queryParams] of refused) {
         await assertRejects(
@@ -637,6 +720,92 @@ Deno.test("elfa: mirrors refuse what Elfa's validators refuse", async () => {
     await estimate("elfa#v2/data/keyword-mentions", {
         queryParams: { keywords: "a,b,c,d,e", cursor: 1793318400000 },
     });
+    const bodies: Record<string, Json>[] = [
+        {},
+        { statement: "  " },
+        { statement: "x".repeat(501) },
+        { statement: "a", context: "x".repeat(4001) },
+        { statement: "a", decision: { type: "maybe" } },
+        { statement: "a", decision: { type: "yesNo", options: [] } },
+        {
+            statement: "a",
+            decision: {
+                type: "choice",
+                options: [{ label: "up", definition: "price rises" }],
+            },
+        },
+        { statement: "a", decision: { type: "score", levels: ["low"] } },
+        {
+            statement: "a",
+            decision: {
+                type: "score",
+                levels: Array.from({ length: 11 }, (_, i) => `level ${i}`),
+            },
+        },
+        {
+            statement: "a",
+            decision: {
+                type: "choice",
+                options: Array.from({ length: 21 }, (_, i) => ({
+                    label: `option ${i}`,
+                    definition: "applies",
+                })),
+            },
+        },
+        {
+            statement: "a",
+            decision: {
+                type: "choice",
+                options: [
+                    { label: "x".repeat(101), definition: "a" },
+                    { label: "b", definition: "b" },
+                ],
+            },
+        },
+        {
+            statement: "a",
+            decision: {
+                type: "choice",
+                options: [
+                    { label: "a", definition: "a", weight: 1 },
+                    { label: "b", definition: "b" },
+                ],
+            },
+        },
+        { statement: "a", asOf: -1 },
+    ];
+    await assertRejects(
+        () =>
+            estimate(POST, {
+                body: { statement: "a" },
+                queryParams: { foo: "bar" },
+            }),
+        Error,
+        "INVALID_INPUT",
+    );
+    for (const body of bodies) {
+        await assertRejects(
+            () => estimate(POST, { body }),
+            Error,
+            "INVALID_INPUT",
+            JSON.stringify(body),
+        );
+    }
+    for (
+        const decision of [
+            { type: "yesNo", yes: "approved by the SEC" } as Json,
+            {
+                type: "choice",
+                options: [
+                    { label: "up", definition: "price rises" },
+                    { label: "down", definition: "price falls" },
+                ],
+            },
+            { type: "score", levels: ["low", "high"] },
+        ]
+    ) {
+        await estimate(POST, { body: { statement: "a", decision } });
+    }
 });
 
 Deno.test("elfa: twin endpoints intern one usage fn", async () => {
@@ -672,4 +841,61 @@ Deno.test({
         assert(Array.isArray((result.output as { events?: Json }).events));
         assertEquals(typeof result.usage.credits.default, "number");
     },
+});
+
+Deno.test("elfa: a free endpoint makes no claim even when Elfa reports a charge", async () => {
+    const fixture = await fixtureFor(FREE, "happy");
+    fixture.calls[0].res.headers = {
+        [METER]: "7",
+        "x-elfa-credits-detail": "base=1;objects=6;dedup=0",
+    };
+    const result = await runEndpoint({
+        unit: await testSealedUnit(FREE),
+        input: inputFor(FREE),
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(result.httpStatus, 200);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
+});
+
+Deno.test("elfa: verify posts its body as JSON with no query string", async () => {
+    const sent: Request[] = [];
+    const engine = new Engine({
+        transport: directTransport({
+            params: () => Promise.resolve({ apiKey: "test-key" }),
+            fetch: (input, init) => {
+                sent.push(new Request(input, init));
+                return Promise.resolve(
+                    new Response(
+                        JSON.stringify({ verdict: "supported" }),
+                        {
+                            status: 200,
+                            headers: {
+                                "content-type": "application/json",
+                                [METER]: "1",
+                                "x-elfa-credits-detail": "base=1",
+                            },
+                        },
+                    ),
+                );
+            },
+        }),
+    });
+    const loaded = await engine.load(await testSealedUnit(POST));
+    const body = {
+        statement: "BTC hit 100k",
+        decision: { type: "yesNo", yes: "it traded above 100k" },
+    };
+    const result = await loaded.run({ body });
+    assertEquals(sent.length, 1);
+    assertEquals(sent[0].method, "POST");
+    assertEquals(sent[0].url, "https://api.elfa.ai/v3/verify");
+    assertEquals(sent[0].headers.get("x-elfa-api-key"), "test-key");
+    assert(sent[0].headers.get("content-type")?.includes("application/json"));
+    assertEquals(await sent[0].json(), body);
+    assertEquals(result.usage, {
+        credits: { default: 1 },
+        evidence: { CALL: 1 },
+    });
 });

@@ -1,103 +1,110 @@
 {
     "name": "happy",
-    "description": "Recorded live against api.elfa.ai on 2026-10-30 with deno task record (trimmed and scrubbed). The key's plan is not charged the 1-credit base, and v3 billing starts on 1 November 2026, so x-elfa-credits reads 0 on v3 and on the 1-credit v2 endpoints (the zero claim is pruned and the published card settles) and 4 on the 5-credit v2 endpoints (the claim settles, the card rides out as mismatch.derived).",
+    "description": "Recorded live against api.elfa.ai on 2026-11-23 with deno task record (trimmed and scrubbed). The key's plan is not charged the 1-credit base, so x-elfa-credits reads 0 on the 1-credit v2 endpoints (the zero claim is pruned and the published card settles) and 4 on the 5-credit v2 endpoints (the claim settles, the card rides out as mismatch.derived). v3 reports its list price and x-elfa-credits-detail.",
     "calls": [
         {
             "req": {
                 "method": "GET",
-                "url": "https://api.elfa.ai/v3/events?from=1793232000&to=1793318400&limit=3"
+                "url": "https://api.elfa.ai/v3/events?from=1795219200&to=1795305600&limit=3"
             },
             "res": {
                 "status": 200,
                 "headers": {
-                    "x-elfa-credits": "0"
+                    "x-elfa-credits": "1",
+                    "x-elfa-credits-detail": "base=1;objects=0;dedup=3"
                 },
                 "body": {
                     "events": [
                         {
-                            "id": "8930fac1-0e59-4ddf-9149-6cd9b650fbd3",
+                            "id": "2d01c0f8-87b4-4754-8d0a-0c2dd56b6db3",
                             "eventClass": "market",
-                            "alertTitle": "Binance-linked exploiter reportedly sells its remaining PEPE stash",
-                            "summary": "Reports say the wallet labeled “Binance Hot Wallet Exploiter 12” sold 7.77 trillion PEPE in 93 transactions, receiving 14,049 ETH, and now holds none. Earlier posts also tracked the wallet swapping PEPE for ETH and described its remaining balance.",
-                            "implication": "bearish",
-                            "eventType": "security",
+                            "alertTitle": "Judge rejects Candace Owens’ bid to dismiss Brian Harpole’s defamation suit tied to Charlie Kirk",
+                            "summary": "A federal judge rejected Candace Owens’ attempt to dismiss Brian Harpole’s defamation lawsuit, which concerns statements about security around Charlie Kirk’s assassination. The case will proceed toward discovery and a possible trial.",
+                            "implication": "unclear",
+                            "eventType": "other",
+                            "eventCategory": "legal",
                             "primaryEntities": [
                                 {
-                                    "id": "4eb745b9-122f-46bc-9e3b-d5a0cb69310a",
-                                    "symbol": "PEPE",
-                                    "name": "Pepe",
-                                    "entityType": "token"
+                                    "id": "1ffd221f-1461-4e69-8016-b88d3733515d",
+                                    "symbol": null,
+                                    "name": "Charlie Kirk",
+                                    "entityType": "person"
                                 }
                             ],
                             "relatedEntities": [],
-                            "alertAction": "monitor",
-                            "originCount": 8,
-                            "impacts": [
-                                {
-                                    "entityId": "4eb745b9-122f-46bc-9e3b-d5a0cb69310a",
-                                    "symbol": "PEPE",
-                                    "priceChange1d": 0.06240487,
-                                    "movedFirst": true,
-                                    "marketWide": true,
-                                    "final": false
-                                }
-                            ],
-                            "analyzedAt": 1793318169,
-                            "firstSeenAt": 1793311359,
-                            "storylineId": "fbc6df01-656e-4076-a5d5-57f3ad5ecd7b",
+                            "alertAction": "alert",
+                            "originCount": 3,
+                            "impacts": [],
+                            "analyzedAt": 1795305579,
+                            "firstSeenAt": 1795285873,
+                            "storylineId": "e704cb10-a533-404f-a881-604dad22d78e",
                             "citedSources": [
                                 {
-                                    "source": "telegram",
-                                    "sourceRecordId": "telegram_group:6fab0982a44df5cd01003147d67f81bf",
-                                    "handle": "hyperdashflows",
-                                    "link": "https://t.me/hyperdashflows/50007"
+                                    "source": "twitter",
+                                    "sourceRecordId": "2124209029962756514",
+                                    "handle": "Hunter_Eagleman",
+                                    "link": "https://x.com/Hunter_Eagleman/status/2124209029962756514"
                                 },
                                 {
                                     "source": "twitter",
-                                    "sourceRecordId": "2115938923809534197",
-                                    "handle": "ANIMEGEMSS",
-                                    "link": "https://x.com/ANIMEGEMSS/status/2115938923809534197"
+                                    "sourceRecordId": "2124276680328188371",
+                                    "handle": "DavidJHarrisJr",
+                                    "link": "https://x.com/DavidJHarrisJr/status/2124276680328188371"
                                 }
                             ],
                             "positions": null,
-                            "novelty": "update"
+                            "novelty": "new"
                         },
                         {
-                            "id": "12ba00f1-963d-4acf-82fa-b683c53bf86d",
+                            "id": "89cb124d-a490-49bd-b459-bed59e36c535",
                             "eventClass": "market",
-                            "alertTitle": "Ukraine’s pause in attacks on Russian energy targets may last beyond U.S. midterms",
-                            "summary": "A report attributed to the Wall Street Journal says Ukraine’s pause on Russian energy attacks is expected to continue beyond the U.S. midterm elections and possibly into November.",
+                            "alertTitle": "Fomo overtakes MetaMask in 30-day Hyperliquid builder-code revenue",
+                            "summary": "A Hyperliquid builder-revenue leaderboard shows Fomo at about $2.48 million over 30 days, ahead of MetaMask at about $2.14 million. The posts describe the same leaderboard comparison.",
                             "implication": "unclear",
-                            "eventType": "macro",
-                            "primaryEntities": [],
-                            "relatedEntities": [],
-                            "alertAction": "monitor",
-                            "originCount": 12,
-                            "impacts": [],
-                            "analyzedAt": 1793318097,
-                            "firstSeenAt": 1793317404,
-                            "storylineId": "0a2d0bb2-d69c-4d23-9290-bbd5f69fdde6",
-                            "citedSources": [
+                            "eventType": "protocol",
+                            "eventCategory": "metricsAndReports",
+                            "primaryEntities": [
                                 {
-                                    "source": "twitter",
-                                    "sourceRecordId": "2115952673203818874",
-                                    "handle": "financialjuice",
-                                    "link": "https://x.com/financialjuice/status/2115952673203818874"
+                                    "id": "5becf1ed-9859-4947-90d9-1a508eadd641",
+                                    "symbol": null,
+                                    "name": "fomo",
+                                    "entityType": "project"
                                 },
                                 {
+                                    "id": "bddc97ad-b2a2-4284-ac6e-e278672f3dce",
+                                    "symbol": null,
+                                    "name": "MetaMask",
+                                    "entityType": "project"
+                                }
+                            ],
+                            "relatedEntities": [],
+                            "alertAction": "monitor",
+                            "originCount": 2,
+                            "impacts": [],
+                            "analyzedAt": 1795304584,
+                            "firstSeenAt": 1795292760,
+                            "storylineId": "7d2a852f-1050-44b8-ad8a-9359ccb4e421",
+                            "citedSources": [
+                                {
                                     "source": "telegram",
-                                    "sourceRecordId": "telegram_group:21900a3f9e21015f0b1de2067069fbc3",
-                                    "handle": "marketfeed",
-                                    "link": "https://t.me/marketfeed/1067445"
+                                    "sourceRecordId": "telegram_group:687873c2b6aecf070655c752d87fd7a2",
+                                    "handle": "chain_alerts",
+                                    "link": "https://t.me/chain_alerts/32071"
+                                },
+                                {
+                                    "source": "twitter",
+                                    "sourceRecordId": "2124235605953630274",
+                                    "handle": "DegenerateNews",
+                                    "link": "https://x.com/DegenerateNews/status/2124235605953630274"
                                 }
                             ],
                             "positions": null,
                             "novelty": "new"
                         }
                     ],
-                    "nextCursor": "PDvEi4cs.MjAyNi0xMC0yOSAyMzo1NDo1NS4xNzI0MjMrMDB8OWYwNDUzMzItYjFiYi00Yzk5LWFlNjYtNjkwOGY5ZGQzYjA0",
+                    "nextCursor": "O2F4dARh.MjAyNi0xMS0yMSAyMzozNjoxNS45NDQxNDkrMDB8NmU0MzM3ZmYtODc3OS00OTM1LTgxMzAtODhlMzYwYmYwNTk4",
                     "hasMore": true,
-                    "servedFrom": 1793232000
+                    "servedFrom": 1795219200
                 }
             }
         }

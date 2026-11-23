@@ -1,0 +1,69 @@
+{
+    "name": "happy",
+    "description": "Recorded live against api.elfa.ai on 2026-11-23 with deno task record (trimmed and scrubbed). The key's plan is not charged the 1-credit base, so x-elfa-credits reads 0 on the 1-credit v2 endpoints (the zero claim is pruned and the published card settles) and 4 on the 5-credit v2 endpoints (the claim settles, the card rides out as mismatch.derived). v3 reports its list price and x-elfa-credits-detail.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.elfa.ai/v3/verify",
+                "body": {
+                    "statement": "The SEC approved a spot Solana ETF in the US"
+                }
+            },
+            "res": {
+                "status": 200,
+                "headers": {
+                    "x-elfa-credits": "1",
+                    "x-elfa-credits-detail": "base=1"
+                },
+                "body": {
+                    "verdict": "supported",
+                    "probabilities": {
+                        "supported": 0.5,
+                        "contradicted": 0.38,
+                        "notEnoughEvidence": 0.12
+                    },
+                    "decision": null,
+                    "evidence": {
+                        "twitter": [
+                            {
+                                "link": "https://x.com/milkroaddaily/status/2124480772946141580",
+                                "decisiveness": 0.38,
+                                "basis": false
+                            },
+                            {
+                                "link": "https://x.com/jaouad2d/status/2124522085691056280",
+                                "decisiveness": 0.37,
+                                "basis": false
+                            }
+                        ],
+                        "telegram": [],
+                        "web": [
+                            {
+                                "link": "https://kanalcoin.com/sec-approved-crypto-etfs-2026",
+                                "decisiveness": 0.78,
+                                "basis": true
+                            },
+                            {
+                                "link": "https://uwuu.ai/blog/solana-etf-approval",
+                                "decisiveness": 0.75,
+                                "basis": true
+                            }
+                        ]
+                    },
+                    "asOf": 1795400401,
+                    "searchedFrom": 1794795601,
+                    "coverage": {
+                        "complete": true,
+                        "sources": {
+                            "twitter": "complete",
+                            "telegram": "complete",
+                            "web": "complete"
+                        },
+                        "captions": "complete"
+                    }
+                }
+            }
+        }
+    ]
+}
