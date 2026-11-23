@@ -8,7 +8,9 @@ import {
     defineProvider,
     presets,
     sealUnit,
+    StopKind,
 } from "@shared/core";
+import type { Logger } from "@shared/logging";
 import { compileBundle } from "@shared/compiler";
 import {
     credentialEnvVarFor,
@@ -1874,6 +1876,158 @@ Deno.test("lifecycle: run() timeout stops the vendor job then throws TIMEOUT", a
     assertEquals(seen[seen.length - 1], {
         method: "POST",
         url: "https://api.asyncdemo.test/jobs/j1/abort",
+    });
+});
+
+/** A run() that outlives its budget DETERMINISTICALLY: runMs 3_500 with a
+ *  clock advancing 1s per read, so TIMEOUT fires after start + one poll,
+ *  whatever the wall clock says. `mutate` shapes the provider (the
+ *  teardown under test, a metered cadence, …); `logger` captures lines. */
+async function timeoutRun(
+    mutate: (connectors: ConnectorSource[]) => void,
+    logger?: Logger,
+) {
+    let fakeMs = 0;
+    const engine = new Engine({
+        transport: scriptTransport([
+            { status: 201, body: { jobId: "j1" } },
+            { status: 200, body: { status: "running" } },
+            { status: 200, body: { status: "running" } },
+            { status: 200, body: { status: "running" } },
+        ]),
+        ...INSTANT_SLEEP,
+        now: () => new Date(fakeMs += 1_000),
+        ...(logger ? { logger } : {}),
+    });
+    return await engine.load(
+        await asyncUnit((connectors) => {
+            connectors[0].provider.timeouts = {
+                requestMs: 1_000,
+                runMs: 3_500,
+                pollMs: 5,
+            };
+            mutate(connectors);
+        }),
+    );
+}
+
+/** Collect log lines (the engine's Logger seam) — level, message, fields. */
+function captureLogger(
+    sink: Array<{ level: string; message: string; fields?: unknown }>,
+): Logger {
+    const at =
+        (level: string) =>
+        (message: string, fields?: Record<string, unknown>) => {
+            sink.push({ level, message, fields });
+        };
+    return {
+        debug: at("debug"),
+        info: at("info"),
+        warn: at("warn"),
+        error: at("error"),
+        child: () => captureLogger(sink),
+    };
+}
+
+Deno.test("lifecycle: run() timeout carries the UNRESOLVED stop verdict and its handle", async () => {
+    const reason = "vendor never reached a terminal state in budget";
+    const loaded = await timeoutRun((connectors) => {
+        // teardown ran but could not observe settlement — UNRESOLVED is
+        // the money-critical verdict (design D34)
+        connectors[0].provider.lifecycle!.stop = async () => ({
+            kind: "UNRESOLVED",
+            reason,
+            state: { externalRunId: "j1", stage: "aborting" },
+        });
+    });
+    const error = await assertRejects(() => loaded.run({ body: { q: "x" } }));
+    assert(error instanceof EngineError);
+    assertEquals(error.code, EngineErrorCode.TIMEOUT);
+    assert(error.details, "a TIMEOUT must carry the stop outcome");
+    assert(error.details.stop.kind === StopKind.UNRESOLVED);
+    // the fn's own last sighting survives verbatim — reason AND state
+    assertEquals(error.details.stop.reason, reason);
+    assertEquals(error.details.stop.state.externalRunId, "j1");
+    assertEquals(error.details.stop.state.stage, "aborting");
+    // …and the last THREADED state rides along beside it
+    assertEquals(error.details.state.externalRunId, "j1");
+    // the message alone is actionable in a log line
+    assert(error.message.includes("stop: UNRESOLVED"));
+    assert(error.message.includes("externalRunId: j1"));
+});
+
+Deno.test("lifecycle: run() timeout on a void teardown still carries externalRunId", async () => {
+    const loaded = await timeoutRun((connectors) => {
+        // fire-and-forget teardown: stop() states STOPPED_UNSETTLED and
+        // has NO state of its own — the threaded state is the only handle
+        connectors[0].provider.lifecycle!.stop = async () => {};
+    });
+    const error = await assertRejects(() => loaded.run({ body: { q: "x" } }));
+    assert(error instanceof EngineError);
+    assertEquals(error.code, EngineErrorCode.TIMEOUT);
+    assert(error.details);
+    assertEquals(error.details.stop.kind, StopKind.STOPPED_UNSETTLED);
+    assertEquals("state" in error.details.stop, false);
+    // the vendor job id is recoverable anyway
+    assertEquals(error.details.state.externalRunId, "j1");
+    // LAST threaded state, not the first: one poll tick was spent
+    assertEquals(error.details.state.timing.attempts, 1);
+    assert(error.message.includes("stop: STOPPED_UNSETTLED"));
+    assert(error.message.includes("externalRunId: j1"));
+});
+
+Deno.test("lifecycle: a throwing teardown on a METERED doc times out as UNRESOLVED", async () => {
+    const logs: Array<{ level: string; message: string; fields?: unknown }> =
+        [];
+    const loaded = await timeoutRun((connectors) => {
+        // mid-run re-pricing (design D40): this doc BILLS while it runs, so
+        // a teardown that throws is a money question, not a cleanup detail
+        connectors[0].provider.usage = {
+            ...connectors[0].provider.usage!,
+            updateEstimateEveryMs: 30_000,
+        };
+        connectors[0].provider.lifecycle!.stop = async () => {
+            throw new Error("vendor abort rejected");
+        };
+    }, captureLogger(logs));
+    const error = await assertRejects(() => loaded.run({ body: { q: "x" } }));
+    assert(error instanceof EngineError);
+    assertEquals(error.code, EngineErrorCode.TIMEOUT);
+    assert(error.details);
+    assert(error.details.stop.kind === StopKind.UNRESOLVED);
+    // stop()'s swallow path states WHY, and merges the last known state
+    assert(String(error.details.stop.reason).includes("lifecycle.stop failed"));
+    assertEquals(error.details.stop.state.externalRunId, "j1");
+    assertEquals(error.details.state.externalRunId, "j1");
+    // money-critical ⇒ an ERROR line naming the handle, never just a warn
+    const line = logs.find((entry) => entry.level === "error");
+    assert(line, "an UNRESOLVED timeout must log at error level");
+    assert(line.message.includes("UNRESOLVED"));
+    const fields = line.fields as Record<string, unknown>;
+    assertEquals(fields.externalRunId, "j1");
+    assertEquals(fields.stop, StopKind.UNRESOLVED);
+});
+
+Deno.test("lifecycle: a timeout whose teardown SETTLES returns the result, not an error", async () => {
+    const loaded = await timeoutRun((connectors) => {
+        // the teardown observed the terminal state inside its budget: the
+        // COMPLETED outcome settles through the one pipeline (metered work
+        // that already happened bills at stop) — the path that must stay
+        // untouched
+        connectors[0].provider.lifecycle!.stop = async () => ({
+            kind: "COMPLETED",
+            httpStatus: 200,
+            output: [{ id: "a" }],
+        });
+    });
+    const result = await loaded.run({ body: { q: "x" } });
+    assertEquals(result.kind, "COMPLETED");
+    assertEquals(result.httpStatus, 200);
+    assertEquals(result.isProviderError, false);
+    // 1 RESULT × 0.5 — the settle ran exactly as it did before
+    assertEquals(result.usage, {
+        credits: { default: 0.5 },
+        evidence: { "RESULT": 1 },
     });
 });
 
