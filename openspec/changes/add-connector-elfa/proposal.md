@@ -51,9 +51,7 @@ meter is the only exact source.
     line starts above 86,700 seconds), people/accounts 5/10 by standing or
     25/50 by track-record metrics.
   - Source: Elfa's pricing page, https://docs.elfa.ai/platform/pricing, and
-    each endpoint's "Costs" line in the OpenAPI, checked 2026-11-23.
-    Prediction markets at 1 credit comes from the 3.15.0 OpenAPI; the pricing
-    page lists it as free until 3.15 ships.
+    each endpoint's "Costs" line in the 3.15.0 OpenAPI, checked 2026-11-23.
 - **Array params are comma-joined** in a provider `input.toRequest`, as akta
   and litescrape do. Elfa accepts both spellings, but repeated keys past 20
   values are not parsed as a list by its query parser.

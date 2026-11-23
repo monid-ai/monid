@@ -1,6 +1,6 @@
 {
     "name": "happy",
-    "description": "Recorded live against api.elfa.ai on 2026-11-23 with deno task record (trimmed and scrubbed). x-elfa-credits reads 0 on this recording and no x-elfa-credits-detail is sent, so the zero claim is pruned and the 1-credit card settles.",
+    "description": "Recorded live against api.elfa.ai on 2026-11-23 with deno task record (trimmed and scrubbed). Prediction markets is a flat 1 credit, reported as x-elfa-credits: 1 with x-elfa-credits-detail base=1.",
     "calls": [
         {
             "req": {
@@ -10,7 +10,8 @@
             "res": {
                 "status": 200,
                 "headers": {
-                    "x-elfa-credits": "0"
+                    "x-elfa-credits": "1",
+                    "x-elfa-credits-detail": "base=1"
                 },
                 "body": {
                     "related": [
