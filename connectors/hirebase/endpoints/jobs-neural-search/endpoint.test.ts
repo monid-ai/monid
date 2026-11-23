@@ -1,6 +1,7 @@
 import { assert, assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import {
+    estimateEndpoint,
     liveSkip,
     loadFixture,
     runEndpoint,
@@ -135,6 +136,22 @@ Deno.test(`${ID} schema gate: near-valid inputs fail INVALID_INPUT, the valid tw
         fixture,
     });
     assertEquals(ok.isProviderError, false);
+    // the misspelled-filter case's corrected twin: lexical.job_types is
+    // accepted (a pure estimate validates the input with no fixture)
+    const twin = await estimateEndpoint(unit, {
+        "body": {
+            "vector": {
+                "query": "backend engineer at an early-stage climate startup",
+            },
+            "lexical": {
+                "job_types": [
+                    "Full Time",
+                ],
+            },
+            "limit": 2,
+        },
+    });
+    assertEquals(twin.credits, { jobs: 2 });
 });
 
 Deno.test({

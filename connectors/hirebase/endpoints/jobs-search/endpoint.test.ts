@@ -2,6 +2,7 @@ import { assert, assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import type { Json } from "@shared/core";
 import {
+    estimateEndpoint,
     liveSkip,
     loadFixture,
     runEndpoint,
@@ -146,6 +147,23 @@ Deno.test(`${ID} schema gate: near-valid inputs fail INVALID_INPUT, the valid tw
         fixture,
     });
     assertEquals(ok.isProviderError, false);
+    // the negative-salary case's corrected twin: a zero bound is accepted
+    // (a pure estimate validates the input with no fixture)
+    const twin = await estimateEndpoint(unit, {
+        "body": {
+            "job_titles": [
+                "data engineer",
+            ],
+            "location_types": [
+                "Remote",
+            ],
+            "limit": 2,
+            "salary": {
+                "min": 0,
+            },
+        },
+    });
+    assertEquals(twin.credits, { jobs: 2 });
 });
 
 Deno.test(`${ID} empty: a search that matches nothing is free`, async () => {
