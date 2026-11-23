@@ -2,9 +2,11 @@ import { assert, assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import type { Json, RunInput } from "@shared/core";
 import type { Fixture } from "@shared/testing";
+import type { Logger } from "@shared/logging";
 import {
     liveSkip,
     loadFixture,
+    replayFetch,
     runEndpoint,
     testBundle,
     testSealedUnit,
@@ -843,20 +845,37 @@ Deno.test({
     },
 });
 
-Deno.test("elfa: a free endpoint makes no claim even when Elfa reports a charge", async () => {
-    const fixture = await fixtureFor(FREE, "happy");
-    fixture.calls[0].res.headers = {
-        [METER]: "7",
-        "x-elfa-credits-detail": "base=1;objects=6;dedup=0",
-    };
-    const result = await runEndpoint({
-        unit: await testSealedUnit(FREE),
-        input: inputFor(FREE),
-        mode: "replay",
-        fixture,
-    });
-    assertEquals(result.httpStatus, 200);
-    assertEquals(result.usage, { credits: {}, evidence: {} });
+Deno.test("elfa: a free endpoint makes no claim and warns when Elfa reports a charge", async () => {
+    for (const [meter, warned] of [["7", true], ["0", false]] as const) {
+        const fixture = await fixtureFor(FREE, "happy");
+        fixture.calls[0].res.headers = { [METER]: meter };
+        const warnings: [string, Record<string, unknown> | undefined][] = [];
+        const logger: Logger = {
+            debug: () => {},
+            info: () => {},
+            warn: (message, fields) => warnings.push([message, fields]),
+            error: () => {},
+            child: () => logger,
+        };
+        const engine = new Engine({
+            transport: directTransport({
+                params: () => Promise.resolve({ apiKey: "test-key" }),
+                fetch: replayFetch(fixture, {}),
+            }),
+            logger,
+        });
+        const loaded = await engine.load(await testSealedUnit(FREE));
+        const result = await loaded.run(inputFor(FREE));
+        assertEquals(result.httpStatus, 200, meter);
+        assertEquals(result.usage, { credits: {}, evidence: {} }, meter);
+        const hits = warnings.filter(([message]) =>
+            message.includes("elfa charged a free endpoint")
+        );
+        assertEquals(hits.length, warned ? 1 : 0, meter);
+        if (warned) {
+            assertEquals(hits[0][1]?.charged, 7);
+        }
+    }
 });
 
 Deno.test("elfa: verify posts its body as JSON with no query string", async () => {

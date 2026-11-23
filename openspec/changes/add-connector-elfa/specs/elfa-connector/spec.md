@@ -42,14 +42,16 @@ not charge. Estimates SHALL hold the largest charge the input allows.
 
 #### Scenario: An unpriced endpoint stays free
 - **WHEN** `elfa#v3/events/prediction-markets` returns with any meter header
-- **THEN** usage is `{credits: {}}` and no claim is made
+- **THEN** usage is `{credits: {}}`, no claim is made, and a warning is
+  logged when the meter is nonzero
 
 #### Scenario: Verify is one flat credit
 - **WHEN** `elfa#v3/verify` is called with a JSON body
 - **THEN** the hold and the card are 1 credit, whatever the verdict
 
 #### Scenario: A topic search still bills its objects
-- **WHEN** `elfa#v3/events/storylines` is estimated with `q` and the default limit
+- **WHEN** `elfa#v3/events/storylines` is estimated with `q` and the default
+  limit
 - **THEN** the hold is 1 + 2 × 10 credits
 
 #### Scenario: Long ranges on trending contracts

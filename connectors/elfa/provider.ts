@@ -9,20 +9,19 @@ export default defineProvider({
             "Crypto and equity social intelligence: events, storylines, calls, mindshare, a market calendar, prediction markets and claim verification.",
         description: "Elfa reads crypto and markets X (Twitter) and " +
             "Telegram in real time and turns it into structured data for " +
-            "agents. The v3 endpoints serve analyzed events (what " +
-            "happened, to which asset, bullish or bearish), storylines " +
-            "and arcs that group events into developing stories, the " +
-            "Polymarket and Kalshi markets those stories bear on, a " +
-            "calendar of scheduled launches, unlocks, listings, earnings " +
-            "and macro releases, trading calls and positions with each " +
-            "caller's track record, long/short positioning per asset, " +
-            "mindshare rankings for crypto and equities, trending " +
-            "contract addresses, ranked accounts to watch, and a " +
-            "fact-check that judges a statement against posts and web " +
-            "pages. The v2 endpoints serve trending tokens by mention " +
-            "count, top and keyword mentions, token news posts, trending " +
-            "narratives and keyword event summaries. Resolve a ticker, " +
-            "name, handle or contract address to an id with " +
+            "agents. The v3 endpoints serve analyzed events (what happened, " +
+            "to which asset, bullish or bearish), storylines and arcs that " +
+            "group events into developing stories, the Polymarket and Kalshi " +
+            "markets those stories bear on, a calendar of scheduled " +
+            "launches, unlocks, listings, earnings and macro releases, " +
+            "trading calls and positions with each caller's track record, " +
+            "long/short positioning per asset, mindshare rankings for crypto " +
+            "and equities, trending contract addresses, ranked accounts to " +
+            "watch, and a fact-check that judges a statement against posts " +
+            "and web pages. The v2 endpoints serve trending tokens by " +
+            "mention count, top and keyword mentions, token news posts, " +
+            "trending narratives and keyword event summaries. Resolve a " +
+            "ticker, name, handle or contract address to an id with " +
             "elfa#v3/entities first, then pass it as `entityIds`.",
         homepageUrl: "https://elfa.ai",
         docsUrl: "https://docs.elfa.ai",
@@ -36,12 +35,12 @@ export default defineProvider({
             "Billed in Elfa credits. Elfa reports the exact charge of every " +
             "successful call, and that figure settles the bill; the rate " +
             "card on each endpoint is the most a call can cost. v3 list " +
-            "endpoints charge per returned object only once per window " +
-            "for the whole Monid platform, so a repeat read often costs " +
-            "less. Errors cost nothing.",
-            "Timestamps (`from`, `to`, `asOf`) are unix seconds. v3 reads are cut " +
-            "to the history window of the Elfa plan behind the platform " +
-            "key; `servedFrom` says where a page actually started.",
+            "endpoints charge per returned object only once per window for " +
+            "the whole Monid platform, so a repeat read often costs less. " +
+            "Errors cost nothing.",
+            "Timestamps (`from`, `to`, `asOf`) are unix seconds. v3 reads " +
+            "are cut to the history window of the Elfa plan behind the " +
+            "platform key; `servedFrom` says where a page actually started.",
         ],
     },
     auth: { inject: presets.auth.header("x-elfa-api-key") },

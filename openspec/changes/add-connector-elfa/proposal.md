@@ -41,11 +41,11 @@ meter is the only exact source.
     `trending-narratives` at 5; v3 `entities` 1, `positioning` 2, `verify` 1.
   - `FREE`: `events/prediction-markets`, which Elfa does not charge yet. It
     overrides the provider claim with an empty one, as firecrawl's job reads
-    do.
+    do, and logs a warning if Elfa ever reports a charge for it.
   - Base plus objects (COMPOSITE: `request` PER_CALL 1 + a `RESULT` line):
     `events` 1/event, `storylines` 2, `arcs` 2, `calendar` 1/entry, `calls` 1,
-    `episodes` 2 per position. The estimate holds `ids.length` or `limit`, so it never
-    under-holds.
+    `episodes` 2 per position. The estimate holds `ids.length` or `limit`, so it
+    never under-holds.
   - Select-one bands by `limit` (COMPOSITE of `PAGE` lines, D19): call-book 2/4,
     mindshare 5/10, trending-contracts 5/10 plus a 5-credit `long_range` line
     when `to - from` exceeds 24 hours and 5 minutes, people/accounts 5/10 by
@@ -94,8 +94,8 @@ meter is the only exact source.
   caller can benefit from another caller's earlier read.
 - v2 charges its 1-credit base on some non-2xx responses after authentication
   (`event-summary` and `trending-narratives` 503s, 429s, validation errors).
-  The engine zero-bills every non-2xx, so the platform absorbs those. Field-level
-  mirrors match Elfa's validators; the cross-field rules of
+  The engine zero-bills every non-2xx, so the platform absorbs those.
+  Field-level mirrors match Elfa's validators; the cross-field rules of
   `v2/data/keyword-mentions` (`keywords` or `accountName`; `from` and `to` 1 to
   30 days apart) are stated in notes, so a caller who ignores them still costs
   one credit.
