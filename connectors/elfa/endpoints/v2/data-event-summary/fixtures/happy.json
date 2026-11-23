@@ -1,0 +1,50 @@
+{
+    "name": "happy",
+    "description": "Recorded live against api.elfa.ai on 2026-11-23 with deno task record (trimmed and scrubbed). The key's plan is not charged the 1-credit base, so x-elfa-credits reads 0 on the 1-credit v2 endpoints (the zero claim is pruned and the published card settles) and 4 on the 5-credit v2 endpoints (the claim settles, the card rides out as mismatch.derived). v3 reports its list price and x-elfa-credits-detail.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.elfa.ai/v2/data/event-summary?keywords=solana+etf&timeWindow=24h&searchType=or"
+            },
+            "res": {
+                "status": 200,
+                "headers": {
+                    "x-elfa-credits": "4"
+                },
+                "body": {
+                    "success": true,
+                    "data": [
+                        {
+                            "summary": "A widely reposted Solana Breakpoint newsletter framed the event around a 'Token Supercycle,' saying tokenized Anthropic ($ANT) debuted on Solana on IPO day, Solana 1.0 marked its graduation from 'mainnet beta' to 'mainnet,' tokenized equities on Solana crossed $1.22B in circulating value with 2M+ holders, and 21Shares marked one year of its Solana ETF ($TSOL).",
+                            "sourceLinks": [
+                                "https://x.com/solana/status/2124495618542604462",
+                                "https://x.com/vibhu/status/2124508387228455244"
+                            ],
+                            "tweetIds": [
+                                "2124495618542604462",
+                                "2124508387228455244"
+                            ]
+                        },
+                        {
+                            "summary": "Posts noted U.S. spot Solana ETFs brought in about $4.4M last week, their first positive week after six consecutive weeks of withdrawals, with SOL around $70; one poster said it was too early to call a recovery. Nexo separately cited $644.1M in year-to-date net inflows into U.S. spot Solana ETFs and about $1.14B in net assets.",
+                            "sourceLinks": [
+                                "https://x.com/Ahmx_web3/status/2124525692478275893",
+                                "https://x.com/potu_eth/status/2124528330536046821"
+                            ],
+                            "tweetIds": [
+                                "2124525692478275893",
+                                "2124528330536046821"
+                            ]
+                        }
+                    ],
+                    "metadata": {
+                        "total": 47,
+                        "total_summarized": 47,
+                        "summaries": 8
+                    }
+                }
+            }
+        }
+    ]
+}

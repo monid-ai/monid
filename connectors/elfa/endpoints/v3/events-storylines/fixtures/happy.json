@@ -1,0 +1,90 @@
+{
+    "name": "happy",
+    "description": "Recorded live against api.elfa.ai on 2026-11-23 with deno task record (trimmed and scrubbed). The key's plan is not charged the 1-credit base, so x-elfa-credits reads 0 on the 1-credit v2 endpoints (the zero claim is pruned and the published card settles) and 4 on the 5-credit v2 endpoints (the claim settles, the card rides out as mismatch.derived). v3 reports its list price and x-elfa-credits-detail.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.elfa.ai/v3/events/storylines?from=1795219200&to=1795305600&limit=3"
+            },
+            "res": {
+                "status": 200,
+                "headers": {
+                    "x-elfa-credits": "7",
+                    "x-elfa-credits-detail": "base=1;objects=6;dedup=0"
+                },
+                "body": {
+                    "storylines": [
+                        {
+                            "id": "e704cb10-a533-404f-a881-604dad22d78e",
+                            "title": "Judge rejects Candace Owens’ bid to dismiss Brian Harpole’s defamation suit tied to Charlie Kirk",
+                            "summary": "A federal judge rejected Candace Owens’ attempt to dismiss Brian Harpole’s defamation lawsuit, which concerns statements about security around Charlie Kirk’s assassination. The case will proceed toward discovery and a possible trial.",
+                            "status": "open",
+                            "entities": [
+                                {
+                                    "id": "1ffd221f-1461-4e69-8016-b88d3733515d",
+                                    "symbol": null,
+                                    "name": "Charlie Kirk",
+                                    "entityType": "person"
+                                }
+                            ],
+                            "startedAt": 1795305579,
+                            "lastEventAt": 1795305579,
+                            "lastMaterialAt": 1795305579,
+                            "arcId": null,
+                            "events": [
+                                {
+                                    "eventId": "2d01c0f8-87b4-4754-8d0a-0c2dd56b6db3",
+                                    "relation": "origin",
+                                    "material": true,
+                                    "occurredAt": 1795305579
+                                }
+                            ]
+                        },
+                        {
+                            "id": "ef77b4a0-96ea-4880-aa39-ae95fefa7a9e",
+                            "title": "Yield Basis expands propAMM from WETH pool design to all BTC pairs",
+                            "summary": "Yield Basis's propAMM design uses market-aware pricing and dynamic fees. After the earlier WETH-pool design and proposed safeguards, Yield Basis says propAMM is now live for all BTC pairs without migration, aiming to increase volume, reduce arbitrage losses and improve potential BTC yield.",
+                            "status": "open",
+                            "entities": [
+                                {
+                                    "id": "d03e9346-b04a-4315-af82-f07c03d6566f",
+                                    "symbol": null,
+                                    "name": "Yield Basis",
+                                    "entityType": "project"
+                                },
+                                {
+                                    "id": "619cb5f1-5dd6-4be2-b429-4b8422bb69b1",
+                                    "symbol": "YB",
+                                    "name": "Yield Basis",
+                                    "entityType": "token"
+                                }
+                            ],
+                            "startedAt": 1792654504,
+                            "lastEventAt": 1795304175,
+                            "lastMaterialAt": 1795304175,
+                            "arcId": null,
+                            "events": [
+                                {
+                                    "eventId": "25d09b72-17c3-45ea-9591-dfa0a488515f",
+                                    "relation": "origin",
+                                    "material": true,
+                                    "occurredAt": 1792654504
+                                },
+                                {
+                                    "eventId": "75d0460e-6d46-4542-87dd-79a716f3d071",
+                                    "relation": "update",
+                                    "material": true,
+                                    "occurredAt": 1793200947
+                                }
+                            ]
+                        }
+                    ],
+                    "nextCursor": "yzlzkMXC.MjAyNi0xMS0yMSAyMzoyMTo1My40MTg4MDErMDB8MTg1YTY0N2QtYmU5Mi00NjQ0LTk0NWQtYzRjM2ExNjEzNjY0",
+                    "hasMore": true,
+                    "servedFrom": 1795219200
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,62 @@
+{
+    "name": "happy",
+    "description": "Recorded live against api.elfa.ai on 2026-11-23 with deno task record (trimmed and scrubbed). The key's plan is not charged the 1-credit base, so x-elfa-credits reads 0 on the 1-credit v2 endpoints (the zero claim is pruned and the published card settles) and 4 on the 5-credit v2 endpoints (the claim settles, the card rides out as mismatch.derived). v3 reports its list price and x-elfa-credits-detail.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.elfa.ai/v3/calls?from=1795219200&to=1795305600&limit=3"
+            },
+            "res": {
+                "status": 200,
+                "headers": {
+                    "x-elfa-credits": "4",
+                    "x-elfa-credits-detail": "base=1;objects=3;dedup=0"
+                },
+                "body": {
+                    "calls": [
+                        {
+                            "id": "935182ce-b8ff-42a6-8950-1d62af6c95de",
+                            "episodeId": "70616b02-4b01-4df8-acd7-d022989a4674",
+                            "handle": "Bird_XRPL",
+                            "source": "twitter",
+                            "channel": null,
+                            "asset": {
+                                "id": "c62a6173-4bbd-4ad3-ba5f-9bfa26b2908c",
+                                "symbol": "XRP",
+                                "name": "XRP",
+                                "entityType": "token"
+                            },
+                            "callAction": "reaffirm",
+                            "setup": null,
+                            "thesis": null,
+                            "sourceRecordId": "2124291428163727469",
+                            "occurredAt": 1795305518
+                        },
+                        {
+                            "id": "0e1f6b86-4a48-4f0c-bb7f-0cde37bb9647",
+                            "episodeId": "1b208ef2-c14e-4704-be2d-f990fd5b4eea",
+                            "handle": "just1nvest",
+                            "source": "twitter",
+                            "channel": null,
+                            "asset": {
+                                "id": "360fd4a8-46e3-4713-8a91-3627b86029fc",
+                                "symbol": "BTC",
+                                "name": "Bitcoin",
+                                "entityType": "token"
+                            },
+                            "callAction": "reaffirm",
+                            "setup": "accumulation",
+                            "thesis": null,
+                            "sourceRecordId": "2124291006820663517",
+                            "occurredAt": 1795305418
+                        }
+                    ],
+                    "nextCursor": "GaNaFcJR.MjAyNi0xMS0yMSAyMzo1NjowMSswMHxkMTY0ZjQ2ZC01MjBmLTRiZTAtYjUwNi1kNTJlM2QxOWNmZjA",
+                    "hasMore": true,
+                    "servedFrom": 1795219200
+                }
+            }
+        }
+    ]
+}

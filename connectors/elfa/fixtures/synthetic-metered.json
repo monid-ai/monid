@@ -1,0 +1,25 @@
+{
+    "name": "elfa metered events response (synthetic)",
+    "description": "Synthetic v3/events body for the billing-header tests: three events, so the derived card is 1 + 3 = 4 credits. Each test sets its own x-elfa-credits header (the documented per-call charge, https://docs.elfa.ai/api/v3/endpoints/list-events) to cover the claim winning over the card, dedup discounts, malformed values and provider errors. No live header recording is claimed.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?from=1793232000&to=1793318400&limit=3"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "events": [
+                        { "id": "event-1" },
+                        { "id": "event-2" },
+                        { "id": "event-3" }
+                    ],
+                    "nextCursor": "cursor-1",
+                    "hasMore": true,
+                    "servedFrom": 1793232000
+                }
+            }
+        }
+    ]
+}

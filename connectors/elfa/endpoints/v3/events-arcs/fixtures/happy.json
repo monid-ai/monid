@@ -1,0 +1,47 @@
+{
+    "name": "happy",
+    "description": "Recorded live against api.elfa.ai on 2026-11-23 with deno task record (trimmed and scrubbed). The key's plan is not charged the 1-credit base, so x-elfa-credits reads 0 on the 1-credit v2 endpoints (the zero claim is pruned and the published card settles) and 4 on the 5-credit v2 endpoints (the claim settles, the card rides out as mismatch.derived). v3 reports its list price and x-elfa-credits-detail.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.elfa.ai/v3/events/arcs?limit=3"
+            },
+            "res": {
+                "status": 200,
+                "headers": {
+                    "x-elfa-credits": "7",
+                    "x-elfa-credits-detail": "base=1;objects=6;dedup=0"
+                },
+                "body": {
+                    "arcs": [
+                        {
+                            "id": "a40e7a87-96f5-4c55-8f5a-df9af53fc4a8",
+                            "name": "Hormuz shipping risk",
+                            "summary": "Reports describe continuing tanker attacks near Hormuz, including two attacks near Khasab, while South Korea plans a non-combat mission to protect commercial shipping. Iran says Qatari mediation shortened a proposed reopening timeline, and U.S. forces are enforcing a blockade.",
+                            "status": "active",
+                            "storylineIds": [
+                                "0aeec10f-b682-41f4-bd8a-bfbbdab5e3cb",
+                                "876d42d5-8a48-4ed7-8393-fd3c46b7f188"
+                            ],
+                            "updatedAt": 1795399317
+                        },
+                        {
+                            "id": "8ba829cf-1fc0-42a0-81ef-7f27a659bd9b",
+                            "name": "Anthropic IPO offering and debut",
+                            "summary": "Anthropic’s shares began trading on Nasdaq after the IPO priced at $83, and the offering raised $93.5 billion after the greenshoe exercise. Shares closed their first day above the offer price, while UK retail demand was reported to exceed 100,000 investors.",
+                            "status": "active",
+                            "storylineIds": [
+                                "5aba4e06-4cca-4479-9f6b-4d0ec536982d",
+                                "8e1a9184-7d52-47b5-b7fc-9237e70dceb5"
+                            ],
+                            "updatedAt": 1795399317
+                        }
+                    ],
+                    "nextCursor": "QAAi4lm7.MjAyNi0xMS0yMyAwMjowMTo1Ny45MjUxMzcrMDB8MTA5NzRhZTgtYzk4Yy00ZDYzLWE1NGUtZTRiOTNmOGFlN2Mz",
+                    "hasMore": true
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,87 @@
+{
+    "name": "happy",
+    "description": "Recorded live against api.elfa.ai on 2026-11-23 with deno task record (trimmed and scrubbed). x-elfa-credits and x-elfa-credits-detail carry the real charge; the three entries returned had already been billed that UTC day (dedup=3), so the call cost its 1-credit base. The recorder trims arrays to two items; the detail counts the untrimmed response.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.elfa.ai/v3/events/calendar?limit=3"
+            },
+            "res": {
+                "status": 200,
+                "headers": {
+                    "x-elfa-credits": "1",
+                    "x-elfa-credits-detail": "base=1;objects=0;dedup=3"
+                },
+                "body": {
+                    "entries": [
+                        {
+                            "id": "956d0333-824e-56cc-8225-0872c5552579",
+                            "title": "sUSDD Incentives Program Launch",
+                            "summary": "sUSDD Incentives Launch for PENDLE, 27 Aug → 27 Nov 2026.",
+                            "startsAt": 1787788800,
+                            "endsAt": 1795737600,
+                            "precision": "day",
+                            "date": "2026-08-27",
+                            "endDate": "2026-11-27",
+                            "timezone": null,
+                            "status": "scheduled",
+                            "importance": 60,
+                            "confidence": "reported",
+                            "outcome": {
+                                "eventId": "a050f644-0532-4591-84ab-d5cc8961866c",
+                                "implication": "bullish"
+                            },
+                            "category": "campaign",
+                            "entities": [
+                                {
+                                    "id": "471f2c71-037a-4467-9418-7c0394ae2462",
+                                    "symbol": "PENDLE",
+                                    "name": "Pendle",
+                                    "entityType": "token"
+                                }
+                            ],
+                            "eventIds": [],
+                            "storylineIds": []
+                        },
+                        {
+                            "id": "40da4d96-0aec-5eda-9653-5f3e71259c8b",
+                            "title": "RWA campaign phase end",
+                            "summary": "RWA Campaign Phase Ends for ASTER, WLFI, 31 Aug → 31 Dec.",
+                            "startsAt": 1788134400,
+                            "endsAt": 1798675200,
+                            "precision": "day",
+                            "date": "2026-08-31",
+                            "endDate": "2026-12-31",
+                            "timezone": null,
+                            "status": "scheduled",
+                            "importance": 60,
+                            "confidence": "reported",
+                            "outcome": null,
+                            "category": "campaign",
+                            "entities": [
+                                {
+                                    "id": "6a9919af-003a-4dc5-9a91-790634dacf8b",
+                                    "symbol": "ASTER",
+                                    "name": "Aster",
+                                    "entityType": "token"
+                                },
+                                {
+                                    "id": "99fe289f-b1b8-4bfc-96c7-d2b5d3d08471",
+                                    "symbol": "WLFI",
+                                    "name": "World Liberty Financial",
+                                    "entityType": "token"
+                                }
+                            ],
+                            "eventIds": [],
+                            "storylineIds": []
+                        }
+                    ],
+                    "nextCursor": "w3QzwgDz.MjAyNi0xMC0wMSAwMDowMDowMCswMHw0MTdmOWZmZi02NWEyLTU4MTktYTE0MS1hZDYwMTJmYTg0ZTg",
+                    "hasMore": true,
+                    "servedFrom": 1795392000
+                }
+            }
+        }
+    ]
+}

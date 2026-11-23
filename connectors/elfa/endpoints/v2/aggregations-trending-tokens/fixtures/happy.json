@@ -1,0 +1,40 @@
+{
+    "name": "happy",
+    "description": "Recorded live against api.elfa.ai on 2026-11-23 with deno task record (trimmed and scrubbed). The key's plan is not charged the 1-credit base, so x-elfa-credits reads 0 on the 1-credit v2 endpoints (the zero claim is pruned and the published card settles) and 4 on the 5-credit v2 endpoints (the claim settles, the card rides out as mismatch.derived). v3 reports its list price and x-elfa-credits-detail.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.elfa.ai/v2/aggregations/trending-tokens?timeWindow=24h&pageSize=5&page=1&minMentions=5"
+            },
+            "res": {
+                "status": 200,
+                "headers": {
+                    "x-elfa-credits": "0"
+                },
+                "body": {
+                    "success": true,
+                    "data": {
+                        "total": 5,
+                        "page": 1,
+                        "pageSize": 5,
+                        "data": [
+                            {
+                                "token": "btc",
+                                "current_count": 1240,
+                                "previous_count": 1720,
+                                "change_percent": -27.91
+                            },
+                            {
+                                "token": "nvda",
+                                "current_count": 689,
+                                "previous_count": 618,
+                                "change_percent": 11.49
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

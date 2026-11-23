@@ -1,0 +1,82 @@
+{
+    "name": "happy",
+    "description": "Recorded live against api.elfa.ai on 2026-11-23 with deno task record (trimmed and scrubbed). Prediction markets is a flat 1 credit, reported as x-elfa-credits: 1 with x-elfa-credits-detail base=1.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.elfa.ai/v3/events/prediction-markets?ids=b59664a3-8135-4adb-b74b-d6a4969ee98a%2C3b5c5441-6fdb-4497-b301-1da512be8ece&limit=3"
+            },
+            "res": {
+                "status": 200,
+                "headers": {
+                    "x-elfa-credits": "1",
+                    "x-elfa-credits-detail": "base=1"
+                },
+                "body": {
+                    "related": [
+                        {
+                            "id": "b59664a3-8135-4adb-b74b-d6a4969ee98a",
+                            "kind": "event",
+                            "markets": [
+                                {
+                                    "provider": "polymarket",
+                                    "marketId": "44955",
+                                    "title": "Will Base launch a token by ___ ?",
+                                    "url": "https://polymarket.com/event/will-base-launch-a-token-in-2025-341",
+                                    "closesAt": 1830315540,
+                                    "eventIds": [
+                                        "b59664a3-8135-4adb-b74b-d6a4969ee98a"
+                                    ],
+                                    "move": {
+                                        "eventId": "b59664a3-8135-4adb-b74b-d6a4969ee98a",
+                                        "outcomeId": "2491315",
+                                        "outcome": "Will Base launch a token by June 30, 2027?",
+                                        "before": 0.16,
+                                        "after": 0.16,
+                                        "unusual": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "id": "3b5c5441-6fdb-4497-b301-1da512be8ece",
+                            "kind": "event",
+                            "markets": [
+                                {
+                                    "provider": "polymarket",
+                                    "marketId": "73056",
+                                    "title": "Ukraine signs peace deal with Russia by...?",
+                                    "url": "https://polymarket.com/event/ukraine-signs-peace-deal-with-russia-before-2027",
+                                    "closesAt": 1798779540,
+                                    "eventIds": [
+                                        "3b5c5441-6fdb-4497-b301-1da512be8ece"
+                                    ],
+                                    "move": {
+                                        "eventId": "3b5c5441-6fdb-4497-b301-1da512be8ece",
+                                        "outcomeId": "6638498",
+                                        "outcome": "Ukraine signs peace deal with Russia by December 31, 2027?",
+                                        "before": 0.345,
+                                        "after": 0.345,
+                                        "unusual": false
+                                    }
+                                },
+                                {
+                                    "provider": "polymarket",
+                                    "marketId": "1373158",
+                                    "title": "Russia x Ukraine any diplomatic meeting by...?",
+                                    "url": "https://polymarket.com/event/russia-x-ukraine-any-diplomatic-meeting-byptptpt-20261111",
+                                    "closesAt": 1798779540,
+                                    "eventIds": [
+                                        "3b5c5441-6fdb-4497-b301-1da512be8ece"
+                                    ],
+                                    "move": null
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

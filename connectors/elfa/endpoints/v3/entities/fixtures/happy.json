@@ -1,0 +1,53 @@
+{
+    "name": "happy",
+    "description": "Recorded live against api.elfa.ai on 2026-11-23 with deno task record (trimmed and scrubbed). The key's plan is not charged the 1-credit base, so x-elfa-credits reads 0 on the 1-credit v2 endpoints (the zero claim is pruned and the published card settles) and 4 on the 5-credit v2 endpoints (the claim settles, the card rides out as mismatch.derived). v3 reports its list price and x-elfa-credits-detail.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.elfa.ai/v3/entities?q=bitcoin&limit=3"
+            },
+            "res": {
+                "status": 200,
+                "headers": {
+                    "x-elfa-credits": "1",
+                    "x-elfa-credits-detail": "base=1"
+                },
+                "body": {
+                    "entities": [
+                        {
+                            "id": "360fd4a8-46e3-4713-8a91-3627b86029fc",
+                            "entityType": "token",
+                            "name": "Bitcoin",
+                            "symbol": "BTC",
+                            "handle": "Bitcoin",
+                            "matchedOn": "externalId",
+                            "score": 0.9,
+                            "externalIds": {
+                                "coingeckoId": "bitcoin",
+                                "figi": null,
+                                "cik": null
+                            }
+                        },
+                        {
+                            "id": "0198df3b-f9ce-4c6a-9bf4-42232ff1e35c",
+                            "entityType": "project",
+                            "name": "Bitcoin",
+                            "symbol": null,
+                            "handle": "Bitcoin",
+                            "matchedOn": "handle",
+                            "score": 0.9,
+                            "externalIds": {
+                                "coingeckoId": null,
+                                "figi": null,
+                                "cik": null
+                            }
+                        }
+                    ],
+                    "nextCursor": "A0PSnhEW.MC4zOTk5OTk5OHwwLjAwMDc3MDQxNjAyNDY1MzMxMjh8NjYyNg",
+                    "hasMore": true
+                }
+            }
+        }
+    ]
+}

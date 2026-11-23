@@ -1,0 +1,60 @@
+{
+    "name": "happy",
+    "description": "Recorded live against api.elfa.ai on 2026-11-23 with deno task record (trimmed and scrubbed). The key's plan is not charged the 1-credit base, so x-elfa-credits reads 0 on the 1-credit v2 endpoints (the zero claim is pruned and the published card settles) and 4 on the 5-credit v2 endpoints (the claim settles, the card rides out as mismatch.derived). v3 reports its list price and x-elfa-credits-detail.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.elfa.ai/v2/data/top-mentions?ticker=%24SOL&timeWindow=24h&pageSize=5&page=1"
+            },
+            "res": {
+                "status": 200,
+                "headers": {
+                    "x-elfa-credits": "0"
+                },
+                "body": {
+                    "success": true,
+                    "data": [
+                        {
+                            "tweetId": "2124398378805289149",
+                            "link": "https://x.com/soy_muse/status/2124398378805289149",
+                            "likeCount": 3199,
+                            "repostCount": 516,
+                            "viewCount": 348162,
+                            "quoteCount": 47,
+                            "replyCount": 342,
+                            "bookmarkCount": 1158,
+                            "mentionedAt": "2026-11-22T07:03:37+00:00",
+                            "type": "note",
+                            "repostBreakdown": {
+                                "smart": 0,
+                                "ct": 5
+                            }
+                        },
+                        {
+                            "tweetId": "2124523105951637760",
+                            "link": "https://x.com/AshCrypto/status/2124523105951637760",
+                            "likeCount": 1028,
+                            "repostCount": 93,
+                            "viewCount": 83363,
+                            "quoteCount": 8,
+                            "replyCount": 141,
+                            "bookmarkCount": 33,
+                            "mentionedAt": "2026-11-22T15:19:14+00:00",
+                            "type": "post",
+                            "repostBreakdown": {
+                                "smart": 0,
+                                "ct": 0
+                            }
+                        }
+                    ],
+                    "metadata": {
+                        "total": 303,
+                        "page": 1,
+                        "pageSize": 5
+                    }
+                }
+            }
+        }
+    ]
+}
