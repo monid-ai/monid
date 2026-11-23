@@ -57,7 +57,7 @@ import type {
     RunnableEndpoint,
     RunnableResource,
 } from "./interfaces/mod.ts";
-import { EngineError, EngineErrorCode } from "./errors.ts";
+import { EngineError, EngineErrorCode, type TimeoutDetails } from "./errors.ts";
 import {
     type LinkedFns,
     type LinkedResourceFns,
@@ -623,10 +623,42 @@ export class LoadedEndpoint implements RunnableEndpoint {
             if (this.now().getTime() > deadline) {
                 const stopped = await this.stop(runInput, tick.state, run);
                 if (stopped.kind === RunKind.COMPLETED) return stopped;
+                // The vendor job may still be BILLING (a metered async
+                // endpoint): the stop verdict AND the last threaded state
+                // ride out on the error, so a caller reconciles (or keeps
+                // watching) instead of retrying into a duplicate paid job.
+                const details: TimeoutDetails = {
+                    stop: stopped,
+                    state: tick.state,
+                };
+                const externalRunId = tick.state.externalRunId ??
+                    (stopped.kind === StopKind.UNRESOLVED
+                        ? stopped.state.externalRunId
+                        : undefined);
+                if (stopped.kind === StopKind.UNRESOLVED) {
+                    // money-critical: a teardown that could not observe
+                    // settlement on work that already spent needs a human,
+                    // not a warn past (stop()'s own warn covers fn throws)
+                    this.logger.error(
+                        "timed-out run left its vendor job UNRESOLVED — " +
+                            "reconcile before money settles",
+                        {
+                            id: this.doc.id,
+                            stop: stopped.kind,
+                            externalRunId,
+                            ...(stopped.reason !== undefined
+                                ? { reason: stopped.reason }
+                                : {}),
+                            state: stopped.state,
+                        },
+                    );
+                }
                 throw new EngineError(
                     EngineErrorCode.TIMEOUT,
                     `${this.doc.id} exceeded runMs ${this.doc.timeouts.runMs}` +
-                        ` (stop: ${stopped.kind})`,
+                        ` (stop: ${stopped.kind}, externalRunId: ` +
+                        `${externalRunId ?? "unknown"})`,
+                    { details },
                 );
             }
             // cap the nap by the remaining budget: a fn requesting a long

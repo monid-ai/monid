@@ -1,3 +1,5 @@
+import type { RunState, RunStopResult } from "@shared/core";
+
 export const EngineErrorCode = {
     /** Doc requires a newer engine (minEngineVersion > ENGINE_VERSION). */
     UNSUPPORTED_DOC: "UNSUPPORTED_DOC",
@@ -27,7 +29,9 @@ export const EngineErrorCode = {
     CONTRACT_VIOLATION: "CONTRACT_VIOLATION",
     /** poll/stop called on a sync endpoint. */
     NOT_ASYNC: "NOT_ASYNC",
-    /** run() exceeded timeouts.runMs. */
+    /** run() exceeded timeouts.runMs. Carries TimeoutDetails: the stop
+     *  verdict + the last threaded state (the vendor handle to reconcile
+     *  with — a metered async job may still be BILLING). */
     TIMEOUT: "TIMEOUT",
     /** Doc declares a `resource` binding but EngineCtx carries no
      *  ResourceReader — a HOST wiring gap, caught at load() (fail-closed:
@@ -57,18 +61,44 @@ const RETRIABLE: ReadonlySet<EngineErrorCode> = new Set([
     EngineErrorCode.RESOURCE_OP_FAILED,
 ]);
 
+/**
+ * What a TIMEOUT carries out of `run()` (design D34's resolution duty,
+ * stated on the throw): the stop verdict AND the last threaded run state.
+ * A metered async endpoint can be BILLING while the run budget expires —
+ * WITHOUT these handles a caller can only retry, which buys the vendor job
+ * a SECOND time. With them a host reconciles (`externalRunId`) or resumes
+ * watching instead.
+ *
+ * Both fields hold engine-validated data only: ids, the fn's dispatch
+ * marker, and the typed billing-signal bag (`state.data`, capped by
+ * `schema.state_max_bytes`) — never credentials, never vendor payloads.
+ */
+export interface TimeoutDetails {
+    /** `stop()`'s verdict — `kind`, plus `reason`/`state` when RESOLVED
+     *  to UNRESOLVED (the fn's own last sighting of the vendor job). */
+    stop: RunStopResult;
+    /** The last threaded state (THE `tick.state` the stop was called
+     *  with). Present even for STOPPED_UNSETTLED, where the stop result
+     *  itself states nothing — `externalRunId` stays recoverable. */
+    state: RunState;
+}
+
 export class EngineError extends Error {
     readonly code: EngineErrorCode;
     readonly retriable: boolean;
+    /** Structured payload for the codes that carry one (TIMEOUT — see
+     *  TimeoutDetails). Absent for every other code. */
+    readonly details?: TimeoutDetails;
 
     constructor(
         code: EngineErrorCode,
         message: string,
-        options?: { cause?: unknown },
+        options?: { cause?: unknown; details?: TimeoutDetails },
     ) {
         super(`[${code}] ${message}`, options);
         this.name = "EngineError";
         this.code = code;
         this.retriable = RETRIABLE.has(code);
+        if (options?.details !== undefined) this.details = options.details;
     }
 }
