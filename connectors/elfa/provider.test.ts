@@ -730,6 +730,12 @@ Deno.test("elfa: mirrors refuse what Elfa's validators refuse", async () => {
     await estimate("elfa#v2/data/keyword-mentions", {
         queryParams: { keywords: "a,b,c,d,e", cursor: 1793318400000 },
     });
+    await estimate("elfa#v2/data/keyword-mentions", {
+        queryParams: { accountName: "elonmusk" },
+    });
+    await estimate("elfa#v2/data/keyword-mentions", {
+        queryParams: { keywords: "solana", accountName: "elonmusk" },
+    });
     const bodies: Record<string, Json>[] = [
         {},
         { statement: "  " },
@@ -891,5 +897,27 @@ Deno.test("elfa: verify posts its body as JSON with no query string", async () =
     assertEquals(result.usage, {
         credits: { default: 1 },
         evidence: { CALL: 1 },
+    });
+});
+
+Deno.test("elfa: track-record rankings settle the wider band", async () => {
+    const result = await runEndpoint({
+        unit: await testSealedUnit("elfa#v3/people/accounts"),
+        input: { queryParams: { metric: "hitRate", limit: 100 } },
+        mode: "replay",
+        fixture: chain(
+            "{{request.url}}?metric=hitRate&limit=100",
+            { accounts: [], nextCursor: null, hasMore: false },
+            { [METER]: "50", "x-elfa-credits-detail": "base=50" },
+        ),
+    });
+    assertEquals(result.usage, {
+        credits: { default: 50 },
+        evidence: {
+            standing_up_to_50: 0,
+            standing_up_to_200: 0,
+            track_up_to_50: 0,
+            track_up_to_200: 1,
+        },
     });
 });

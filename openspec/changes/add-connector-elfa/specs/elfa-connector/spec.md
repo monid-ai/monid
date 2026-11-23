@@ -71,6 +71,12 @@ or descriptions. Array params SHALL be sent comma-joined.
 - **WHEN** any endpoint is called with a key outside its mirror
 - **THEN** the run fails `INVALID_INPUT` without IO
 
+#### Scenario: Keyword mentions needs a selector
+- **WHEN** `elfa#v2/data/keyword-mentions` is called with neither `keywords`
+  nor `accountName`
+- **THEN** the run fails `INVALID_INPUT` without IO; either one alone, or both,
+  is accepted
+
 #### Scenario: Ids are sent as one list
 - **WHEN** `elfa#v3/events` is called with 30 `eventIds`
 - **THEN** the wire query carries one `eventIds` value, comma-joined

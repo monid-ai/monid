@@ -8,12 +8,12 @@ export default defineEndpoint({
             "Open Polymarket and Kalshi markets that given events, storylines or arcs bear on.",
         description:
             "Returns the open Polymarket and Kalshi markets that events, " +
-            "storylines or arcs bear on, grouped under each id in " +
-            "`related`. Each market carries its title, link, close time, " +
-            "the event ids it relates to and, when measured, the odds of " +
-            "one outcome an hour before and after a linked event's first " +
-            "post, and whether that move was unusual. `ids` takes any mix " +
-            "of the three kinds. About one event in eight has a market.",
+            "storylines or arcs bear on, grouped under each id in `related`. " +
+            "Each market carries its title, link, close time, the event ids " +
+            "it relates to and, when measured, the odds of one outcome an " +
+            "hour before and after a linked event's first post, and whether " +
+            "that move was unusual. `ids` takes any mix of the three kinds. " +
+            "About one event in eight has a market.",
         docsUrl:
             "https://docs.elfa.ai/api/v3/endpoints/list-prediction-markets",
         categories: ["prediction-markets", "crypto-signals"],

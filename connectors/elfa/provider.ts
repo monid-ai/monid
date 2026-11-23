@@ -6,7 +6,7 @@ export default defineProvider({
     meta: {
         displayName: "Elfa",
         summary:
-            "High-intent events and entities from social media and web pages: events, storylines, calls, mindshare, a market calendar, prediction markets and claim verification.",
+            "Crypto and equity events and entities from social media and web pages: storylines, calls, mindshare, a market calendar, prediction markets and claim verification.",
         description: "Elfa indexes social media and web pages, and turns " +
             "them into high-intent events and entities. The v3 endpoints " +
             "serve analyzed events (what happened, to which asset, bullish " +
