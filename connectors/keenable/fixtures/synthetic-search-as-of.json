@@ -1,0 +1,32 @@
+{
+    "name": "synthetic-search-as-of",
+    "description": "SYNTHETIC point-in-time search for keenable#v1/search-as-of with query_time required. Shape matches synthetic-search-ok. Replay matches method+URL, not body.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "query": "typescript best practices",
+                    "query_time": "2026-01-01"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "query": "typescript best practices",
+                    "mode": "pro",
+                    "results": [
+                        {
+                            "title": "TypeScript Best Practices",
+                            "url": "https://www.w3schools.com/typescript/typescript_best_practices.php",
+                            "description": "",
+                            "snippet": "Project Configuration Enable Strict Mode Always enable strict mode in your tsconfig.json for maximum type safety.",
+                            "acquired_at": "2025-12-13T02:42:52Z"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

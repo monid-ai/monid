@@ -1,0 +1,33 @@
+{
+    "name": "synthetic-search-news",
+    "description": "SYNTHETIC news-preset search for keenable#v1/search-news. Shape matches synthetic-search-ok; published_after defaults to 2d at the binding. Replay matches method+URL, not body.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}",
+                "body": {
+                    "query": "AI agent web search rankings",
+                    "published_after": "2d"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "query": "AI agent web search rankings",
+                    "mode": "pro",
+                    "results": [
+                        {
+                            "title": "Why search tools rank the way they do",
+                            "url": "https://example.com/search-rankings",
+                            "description": "",
+                            "snippet": "A two-day window of coverage on how agents pick a web search endpoint.",
+                            "published_at": "2026-10-26T12:00:00Z",
+                            "acquired_at": "2026-10-26T12:05:00Z"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
