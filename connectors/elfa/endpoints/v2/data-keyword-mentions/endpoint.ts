@@ -1,4 +1,5 @@
 import { defineEndpoint, UsageModelKind } from "@shared/core";
+import { z } from "zod";
 import { zV2DataKeywordMentionsQueryParams } from "./schema/inputs.ts";
 
 export default defineEndpoint({
@@ -25,12 +26,12 @@ export default defineEndpoint({
     request: { method: "GET", path: "/v2/data/keyword-mentions" },
     input: {
         schema: {
-            queryParams: zV2DataKeywordMentionsQueryParams.extend({
-                timeWindow: zV2DataKeywordMentionsQueryParams.shape.timeWindow
-                    .unwrap().default("7d"),
-                limit: zV2DataKeywordMentionsQueryParams.shape.limit.unwrap()
-                    .default(20),
-            }),
+            queryParams: z.union([
+                zV2DataKeywordMentionsQueryParams.required({ keywords: true }),
+                zV2DataKeywordMentionsQueryParams.required({
+                    accountName: true,
+                }),
+            ]),
         },
     },
     usage: {

@@ -6,17 +6,17 @@ export default defineProvider({
     meta: {
         displayName: "Elfa",
         summary:
-            "Crypto and equity social intelligence: events, storylines, calls, mindshare, a market calendar, prediction markets and claim verification.",
-        description: "Elfa reads crypto and markets X (Twitter) and " +
-            "Telegram in real time and turns it into structured data for " +
-            "agents. The v3 endpoints serve analyzed events (what happened, " +
-            "to which asset, bullish or bearish), storylines and arcs that " +
-            "group events into developing stories, the Polymarket and Kalshi " +
-            "markets those stories bear on, a calendar of scheduled " +
-            "launches, unlocks, listings, earnings and macro releases, " +
-            "trading calls and positions with each caller's track record, " +
-            "long/short positioning per asset, mindshare rankings for crypto " +
-            "and equities, trending contract addresses, ranked accounts to " +
+            "High-intent events and entities from social media and web pages: events, storylines, calls, mindshare, a market calendar, prediction markets and claim verification.",
+        description: "Elfa indexes social media and web pages, and turns " +
+            "them into high-intent events and entities. The v3 endpoints " +
+            "serve analyzed events (what happened, to which asset, bullish " +
+            "or bearish), storylines and arcs that group events into " +
+            "developing stories, the Polymarket and Kalshi markets those " +
+            "stories bear on, a calendar of scheduled launches, unlocks, " +
+            "listings, earnings and macro releases, trading calls and " +
+            "positions with each caller's track record, long/short " +
+            "positioning per asset, mindshare rankings for crypto and " +
+            "equities, trending contract addresses, ranked accounts to " +
             "watch, and a fact-check that judges a statement against posts " +
             "and web pages. The v2 endpoints serve trending tokens by " +
             "mention count, top and keyword mentions, token news posts, " +

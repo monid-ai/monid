@@ -5,7 +5,7 @@
         {
             "req": {
                 "method": "GET",
-                "url": "https://api.elfa.ai/v2/data/keyword-mentions?keywords=solana%2Cetf&limit=5&timeWindow=7d"
+                "url": "https://api.elfa.ai/v2/data/keyword-mentions?keywords=solana%2Cetf&limit=5"
             },
             "res": {
                 "status": 200,
@@ -16,18 +16,18 @@
                     "success": true,
                     "data": [
                         {
-                            "tweetId": "2124684444481282336",
-                            "link": "https://x.com/CryptosR_Us/status/2124684444481282336",
+                            "tweetId": "2124721266880069893",
+                            "link": "https://x.com/TheBlockCo/status/2124721266880069893",
                             "likeCount": 0,
                             "repostCount": 0,
                             "viewCount": 0,
                             "quoteCount": 0,
                             "replyCount": 0,
                             "bookmarkCount": 0,
-                            "mentionedAt": "2026-11-23T02:00:20+00:00",
-                            "type": "article",
+                            "mentionedAt": "2026-11-23T04:26:40+00:00",
+                            "type": "note",
                             "account": {
-                                "username": "CryptosR_Us",
+                                "username": "TheBlockCo",
                                 "isVerified": false
                             },
                             "repostBreakdown": {
@@ -36,18 +36,18 @@
                             }
                         },
                         {
-                            "tweetId": "2124669310249377964",
-                            "link": "https://x.com/CryptoHamsterIO/status/2124669310249377964",
-                            "likeCount": 0,
+                            "tweetId": "2124705580204052569",
+                            "link": "https://x.com/avalonfinance_/status/2124705580204052569",
+                            "likeCount": 1,
                             "repostCount": 0,
-                            "viewCount": 0,
+                            "viewCount": 721,
                             "quoteCount": 0,
                             "replyCount": 0,
                             "bookmarkCount": 0,
-                            "mentionedAt": "2026-11-23T01:00:12+00:00",
-                            "type": "note",
+                            "mentionedAt": "2026-11-23T03:24:20+00:00",
+                            "type": "article",
                             "account": {
-                                "username": "CryptoHamsterIO",
+                                "username": "avalonfinance_",
                                 "isVerified": false
                             },
                             "repostBreakdown": {
@@ -57,8 +57,8 @@
                         }
                     ],
                     "metadata": {
-                        "total": 303,
-                        "cursor": 1795385809000
+                        "total": 305,
+                        "cursor": 1795395612000
                     }
                 }
             }

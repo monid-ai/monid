@@ -2,9 +2,8 @@ import { z } from "zod";
 
 export const zV2DataTopMentionsQueryParams = z.object({
     ticker: z.string().min(1).describe(
-        "The ticker symbol to get mentions for. Use `$` prefix (e.g., " +
-            "`$SOL` or URL-encoded `%24SOL`) for exact cashtag matching " +
-            "only. Without `$`, results include both cashtag mentions and " +
+        "The ticker symbol to get mentions for. Use the `$` prefix " +
+            "(e.g., `$SOL`) for exact cashtag matching only. Without `$`, results include both cashtag mentions and " +
             "general token references.",
     ),
     timeWindow: z.string().regex(/^\d+(m|h|d)$/).describe(

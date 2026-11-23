@@ -2,11 +2,12 @@
 
 ## Why
 
-Elfa turns crypto and markets X (Twitter) and Telegram into structured data:
+Elfa indexes social media and web pages, and turns them into high-intent events
+and entities that an agent can query, ask about, or verify a claim against:
 analyzed events, storylines and arcs, trading calls with each caller's track
 record, long/short positioning, mindshare, trending contracts, ranked
-accounts, a market calendar, the prediction markets its stories bear on, and a
-claim verifier. Its public API fits the connector standard as is: one base URL,
+accounts, a market calendar, and the prediction markets its stories bear on.
+Its public API fits the connector standard as is: one base URL,
 one API-key header, synchronous JSON calls, and an exact per-call charge
 reported on every response. Nothing needs a new engine capability.
 
@@ -38,18 +39,19 @@ meter is the only exact source.
   falls back to counting the response and the published card settles.
 - **The published card is the model.**
   - Flat `PER_CALL`: every v2 endpoint at 1 credit, except `event-summary` and
-    `trending-narratives` at 5; v3 `entities` 1, `positioning` 2, `verify` 1.
-  - `FREE`: `events/prediction-markets`, which Elfa does not charge yet. It
-    overrides the provider claim with an empty one, as firecrawl's job reads
-    do, and logs a warning if Elfa ever reports a charge for it.
+    `trending-narratives` at 5; v3 `entities` 1, `events/prediction-markets` 1
+    however many ids are sent, `positioning` 2, `verify` 1.
   - Base plus objects (COMPOSITE: `request` PER_CALL 1 + a `RESULT` line):
     `events` 1/event, `storylines` 2, `arcs` 2, `calendar` 1/entry, `calls` 1,
     `episodes` 2 per position. The estimate holds `ids.length` or `limit`, so it
     never under-holds.
   - Select-one bands by `limit` (COMPOSITE of `PAGE` lines, D19): call-book 2/4,
     mindshare 5/10, trending-contracts 5/10 plus a 5-credit `long_range` line
-    when `to - from` exceeds 24 hours and 5 minutes, people/accounts 5/10 by
-    standing or 25/50 by track-record metrics.
+    when `to - from` exceeds 24 hours (Elfa allows 5 minutes of grace, so the
+    line starts above 86,700 seconds), people/accounts 5/10 by standing or
+    25/50 by track-record metrics.
+  - Source: Elfa's pricing page, https://docs.elfa.ai/platform/pricing, and
+    each endpoint's "Costs" line in the OpenAPI, checked 2026-11-23.
 - **Array params are comma-joined** in a provider `input.toRequest`, as akta
   and litescrape do. Elfa accepts both spellings, but repeated keys past 20
   values are not parsed as a list by its query parser.
@@ -88,19 +90,19 @@ meter is the only exact source.
 
 ## Billing notes for the platform
 
-- The platform key must be on a credit-billed Elfa plan. On a plan that is not
-  charged the base credit, v2 reports `0` on the 1-credit endpoints and `4` on
-  the 5-credit ones, and v3 reports list prices that were never charged.
-- `verify` needs a PAYG, Grow or Enterprise plan; a Free key gets a 403.
+- The platform key must be on Elfa's PAYG plan, with auto top-up on. Free does
+  not include `verify` (it answers 403). On a plan that is not charged per
+  call, v2 reports `0` on the 1-credit endpoints and `4` on the 5-credit ones,
+  and v3 reports list prices that were never charged.
 - Dedup is per Elfa account. Every caller on the platform key shares it, so a
   caller can benefit from another caller's earlier read.
 - v2 charges its 1-credit base on some non-2xx responses after authentication
   (`event-summary` and `trending-narratives` 503s, 429s, validation errors).
   The engine zero-bills every non-2xx, so the platform absorbs those.
-  Field-level mirrors match Elfa's validators; the cross-field rules of
-  `v2/data/keyword-mentions` (`keywords` or `accountName`; `from` and `to` 1 to
-  30 days apart) are stated in notes, so a caller who ignores them still costs
-  one credit.
+  Field-level mirrors match Elfa's validators, and `v2/data/keyword-mentions`
+  requires `keywords` or `accountName` as union arms. Its other cross-field
+  rule (`from` and `to` 1 to 30 days apart) is stated in notes, so a caller who
+  ignores it still costs one credit.
 - `event-summary` and `trending-narratives` run language-model work and can take
   well over a minute on a cold cache; both carry 180 s timeouts.
 - Elfa rate-limits per key (60 requests per minute by default); a platform key

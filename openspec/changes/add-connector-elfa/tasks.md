@@ -21,8 +21,8 @@
 
 - [x] 3.1 v2: 8 flat endpoints; 180 s timeouts on `event-summary` and
       `trending-narratives`
-- [x] 3.2 v3: 6 per-object lists, 5 limit-banded endpoints, 3 flat (one a
-      POST with a body), 1 metric-banded, 1 free
+- [x] 3.2 v3: 6 per-object lists, 5 limit-banded endpoints, 4 flat (one a
+      POST with a body), 1 metric-banded
 
 ## 4. Tests
 

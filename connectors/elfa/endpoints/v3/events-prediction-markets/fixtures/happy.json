@@ -1,6 +1,6 @@
 {
     "name": "happy",
-    "description": "Recorded live against api.elfa.ai on 2026-11-23 with deno task record (trimmed and scrubbed). Elfa does not price this endpoint yet, so x-elfa-credits reads 0 and no x-elfa-credits-detail is sent; the FREE model settles nothing.",
+    "description": "Recorded live against api.elfa.ai on 2026-11-23 with deno task record (trimmed and scrubbed). x-elfa-credits reads 0 on this recording and no x-elfa-credits-detail is sent, so the zero claim is pruned and the 1-credit card settles.",
     "calls": [
         {
             "req": {
