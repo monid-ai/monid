@@ -14,10 +14,10 @@ export const zBingBody = z.strictObject({
             "market. All countries except CN, KR and RU. The supported set " +
             "is at GET https://api.cloro.dev/v1/countries?model=bing.",
     ),
-    pages: z.number().int().min(1).max(10).optional().describe(
+    pages: z.number().int().min(1).max(10).describe(
         "Result pages to scrape (1-10). Default 1. Each page after the " +
             "first adds 2 credits.",
-    ),
+    ).optional(),
     first: z.number().int().min(1).optional().describe(
         "The result to start at, from 1. Default 1. Bing shows its AI " +
             "summary only on its first page, so there is no AI Overview " +
