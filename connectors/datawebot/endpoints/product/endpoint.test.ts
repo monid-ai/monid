@@ -2,6 +2,7 @@ import { assertEquals } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import {
     estimateEndpoint,
+    liveSkip,
     loadFixture,
     runEndpoint,
     testSealedUnit,
@@ -40,4 +41,26 @@ Deno.test("datawebot#product and #search share one lifecycle fn", async () => {
         JSON.stringify(product.doc.lifecycle),
         JSON.stringify(search.doc.lifecycle),
     );
+});
+
+Deno.test({
+    name: "datawebot#product live (gated on DATAWEBOT_API_KEY)",
+    ignore: liveSkip("datawebot"),
+    fn: async () => {
+        const result = await runEndpoint({
+            unit: await testSealedUnit(ID),
+            input: {
+                body: {
+                    url: "https://www.allbirds.com/products/mens-tree-runners",
+                },
+            },
+            mode: "live",
+        });
+        assertEquals(
+            result.isProviderError,
+            false,
+            JSON.stringify(result.output),
+        );
+        assertEquals(typeof result.usage.credits.default, "number");
+    },
 });

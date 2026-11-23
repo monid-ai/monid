@@ -1,4 +1,4 @@
-import { assert, assertEquals } from "@std/assert";
+import { assert, assertEquals, assertRejects } from "@std/assert";
 import type { Json } from "@shared/core";
 import { fromFileUrl } from "@std/path";
 import {
@@ -110,6 +110,24 @@ Deno.test("datawebot#search requires query and site, and sends capability search
         unknown
     >;
     assert(!("capability" in properties), "capability is set by the connector");
+});
+
+Deno.test("datawebot#search without a shop fails INVALID_INPUT before the wire", async () => {
+    await assertRejects(
+        () => run("synthetic-search-done.json", { query: "air fryer" }),
+        Error,
+        "INVALID_INPUT",
+    );
+    await assertRejects(
+        () =>
+            run("synthetic-search-done.json", {
+                query: "air fryer",
+                site: "walmart.com",
+                capability: "endpoint",
+            }),
+        Error,
+        "INVALID_INPUT",
+    );
 });
 
 Deno.test({
