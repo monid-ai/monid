@@ -19,9 +19,10 @@ one ESTIMATED `SECOND` line `compute` reconciled every 3 600 000 ms.
 Reconcile SHALL read `GET /api/v1/sandboxes/{id}` and bill
 `cost.rate.usd` per `cost.rate.per` over the overlap of
 [`createdAt`, `destroyedAt` ?? window end] with the window (a running
-sandbox reports `destroyedAt: null`), and 0 when no rate is reported
-(BYOK). A failed read, a 404 included, or an unparseable timestamp SHALL
-throw so settlement retries; it never settles 0.
+sandbox reports `destroyedAt: null`; only `null` or an absent field means
+running), and 0 when no rate is reported (BYOK). A failed read, a 404
+included, or an unparseable timestamp, an empty `destroyedAt` included,
+SHALL throw so settlement retries; it never settles 0.
 
 #### Scenario: Runtime inside the window bills at the sandbox's rate
 - **WHEN** a sandbox at $0.10/hour ran 30 minutes inside the window

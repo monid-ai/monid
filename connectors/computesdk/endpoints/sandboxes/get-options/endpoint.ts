@@ -18,6 +18,8 @@ export default defineEndpoint({
     request: { method: "GET", path: "/api/v1/sandboxes/options" },
     input: {
         schema: {},
+        // a GET carries no body, even when the caller sends {}
+        toRequest: () => ({}),
     },
     usage: { model: { kind: UsageModelKind.FREE } },
 });

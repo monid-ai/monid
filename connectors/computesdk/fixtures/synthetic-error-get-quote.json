@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-error-get-quote",
+    "description": "/get-quote upstream error: HTTP 401 for an invalid API key (platform jsonError shape). Error is data: zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/api/v1/sandboxes/quote?size=small"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": "Invalid API key",
+                    "requestId": "req_synthetic01"
+                }
+            }
+        }
+    ]
+}

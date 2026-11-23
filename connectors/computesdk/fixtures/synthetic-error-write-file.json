@@ -1,0 +1,23 @@
+{
+    "name": "synthetic-error-write-file",
+    "description": "/write-file upstream error: HTTP 404 for an owned sandbox already gone upstream (platform jsonError shape). Error is data: zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/api/v1/sandboxes/sbx-1/files",
+                "body": {
+                    "path": "/tmp/hello.txt",
+                    "content": "x"
+                }
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": "Sandbox not found",
+                    "requestId": "req_synthetic02"
+                }
+            }
+        }
+    ]
+}

@@ -24,7 +24,12 @@
 - [x] 3.3 Connector tests: free usage, provision / release, foreign 404,
       list from the ownership window, buffered command
 - [x] 3.4 Resource tests: verify, refresh on 404, reconcile window math,
-      a running sandbox, a 404 read that throws
+      a running sandbox, a 404 read that throws, an empty `destroyedAt`
+      that throws
+- [x] 3.6 Per-endpoint suites: whole `{credits, evidence}` usage on the
+      happy path, a provider-error fixture per upstream endpoint, a schema
+      gate with a near-twin per endpoint that takes input, and live tests
+      gated on `liveSkip("computesdk")` (one sandbox, always destroyed)
 - [ ] 3.5 Record resource-bound fixtures once the recorder can seed an
       owned resource
 

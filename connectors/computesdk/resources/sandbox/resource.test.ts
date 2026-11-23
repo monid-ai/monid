@@ -87,3 +87,20 @@ Deno.test("computesdk sandbox: a 404 reconcile read throws instead of settling z
         })
     );
 });
+
+Deno.test("computesdk sandbox: an empty destroyedAt throws instead of billing as running", async () => {
+    const resource = await loadResource({
+        unit: await testResourceUnit("computesdk/sandbox"),
+        mode: "replay",
+        fixture: await fixture("synthetic-resource-reconcile-empty-ended"),
+    });
+    await assertRejects(
+        () =>
+            resource.reconcileUsage("compute", ROW, {
+                startIso: "2026-11-13T00:00:00Z",
+                endIso: "2026-11-13T21:00:00Z",
+            }),
+        Error,
+        "unsupported timestamp",
+    );
+});

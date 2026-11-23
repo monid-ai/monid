@@ -83,7 +83,8 @@ export default defineResource({
                         "computesdk sandbox destroyedAt is not a timestamp",
                     );
                 }
-                const ended = typeof endedRaw === "string" && endedRaw !== ""
+                // only null/absent means running; "" fails isoMs below
+                const ended = typeof endedRaw === "string"
                     ? endedRaw
                     : undefined;
                 // ISO-8601 -> epoch ms; fns are closed terms (no Date)

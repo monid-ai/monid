@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-error-create-sandbox",
+    "description": "/create-sandbox upstream error: HTTP 401 for an invalid API key (platform jsonError shape). Error is data: zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/api/v1/sandboxes",
+                "body": {
+                    "size": "small"
+                }
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": "Invalid API key",
+                    "requestId": "req_synthetic01"
+                }
+            }
+        }
+    ]
+}
