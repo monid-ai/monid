@@ -1,0 +1,18 @@
+{
+    "name": "not-found",
+    "description": "Recorded 2026-11-18 against the live API: an unknown job id answers 404 {detail}, zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.hirebase.org/v2/jobs/000000000000000000000000"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "detail": "Job with ID 000000000000000000000000 not found"
+                }
+            }
+        }
+    ]
+}

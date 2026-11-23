@@ -1,0 +1,30 @@
+{
+    "name": "unauthorized",
+    "description": "Recorded 2026-11-19 against the live API with an invalid key: 401 {detail} is data, zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.hirebase.org/v2/jobs/insights",
+                "body": {
+                    "job_titles": [
+                        "data engineer"
+                    ],
+                    "geo_locations": [
+                        {
+                            "country": "United States"
+                        }
+                    ],
+                    "days_ago": 30,
+                    "top_companies_limit": 3
+                }
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "detail": "Invalid API key"
+                }
+            }
+        }
+    ]
+}

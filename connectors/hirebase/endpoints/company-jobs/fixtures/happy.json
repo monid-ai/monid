@@ -1,0 +1,259 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-11-19 against the live API (response trimmed by the recorder): two of a company's open jobs by slug, 2 units of the jobs allowance.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.hirebase.org/v2/hirebase/companies/stripe/jobs?limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jobs": [
+                        {
+                            "_id": "6afdf48f83c364466dd0c3d4",
+                            "job_title": "Engineering Manager, Security",
+                            "description": "<h2>Role Overview</h2><p>Lead and scale the security team that owns the security surface of Stripe's platform, which includes API key and provider credential management, user prompt data, billing pipeline, and authentication layer. This is a hands-on technical leadership role.</p><h2>What You Will Do</h2><p>Manage a fast-growing team of software and security engineers, make outsized impact through technical depth, and own the security architecture, including threat-modeling the edge compute laye",
+                            "application_link": "https://stripe.com/jobs/search?gh_jid=8383464",
+                            "location_raw": "New York, New York; Seattle; San Francisco",
+                            "job_type": "Full Time",
+                            "location_type": "Hybrid",
+                            "date_posted": "2026-11-18",
+                            "job_board": "greenhouse",
+                            "job_board_link": "https://job-boards.greenhouse.io/stripe",
+                            "platform_job_id": "8383464",
+                            "company_name": "Stripe",
+                            "company_slug": "stripe",
+                            "company_link": "https://stripe.com",
+                            "company_logo": "https://logos.hirebase.org/e4e62dc3-391b-4f2b-a5ee-4cecfebaa346/stripe-320x320-q95.jpg",
+                            "description_raw": "<h3><strong>About Stripe</strong></h3> <p>Stripe is a financial infrastructure platform for businesses. Millions of companies, from the world's largest enterprises to the most ambitious startups, use Stripe to accept payments, grow their revenue, and accelerate new business opportunities. Our mission is to increase the GDP of the internet.</p> <p><strong>About the team</strong></p> <p>We build the infrastructure layer that routes AI inference at scale. Our platform serves billions of daily reque",
+                            "language": "en",
+                            "requirements_summary": "Minimum 10 years of software engineering experience with deep expertise in API security architecture, credential and secrets management, cloud security, or application security for high-throughput distributed systems",
+                            "job_categories": [
+                                "Other"
+                            ],
+                            "locations": [
+                                {
+                                    "city": "New York",
+                                    "region": "New York",
+                                    "country": "United States",
+                                    "coordinates": {
+                                        "type": "Point",
+                                        "coordinates": [
+                                            -74.0060152,
+                                            40.7127281
+                                        ]
+                                    },
+                                    "bbox": [
+                                        40.476578,
+                                        40.91763
+                                    ],
+                                    "address": "New York, United States"
+                                },
+                                {
+                                    "city": "Seattle",
+                                    "region": "Washington",
+                                    "country": "United States",
+                                    "coordinates": {
+                                        "type": "Point",
+                                        "coordinates": [
+                                            -122.330062,
+                                            47.6038321
+                                        ]
+                                    },
+                                    "bbox": [
+                                        47.4810022,
+                                        47.7341503
+                                    ],
+                                    "address": "Seattle, King County, Washington, United States"
+                                }
+                            ],
+                            "experience_level": "Senior",
+                            "yoe_range": {
+                                "min": 10,
+                                "max": null
+                            },
+                            "visa_sponsored": false,
+                            "technologies": [
+                                "API security architecture",
+                                "credential and secrets management"
+                            ],
+                            "skills": [
+                                "Software engineering",
+                                "security engineering"
+                            ],
+                            "team": "Security team",
+                            "recruiter_agency": false,
+                            "offers_equity": true,
+                            "company_data": {
+                                "description_summary": "Stripe is a leading provider of programmable financial services, enabling companies of all sizes to accept payments, grow revenue, and explore new business opportunities. Headquartered in San Francisco and Dublin, Stripe's platform offers a suite of tools designed to simplify complex financial transactions, making it easier for businesses to operate online. The company's focus on innovation and efficiency has positioned it as a key player in the digital economy.",
+                                "linkedin_link": "https://www.linkedin.com/company/stripe",
+                                "size_range": {
+                                    "min": 5001,
+                                    "max": 10000
+                                },
+                                "industries": [
+                                    "Finance",
+                                    "Tech, Software & IT Services"
+                                ],
+                                "subindustries": [
+                                    "Payment Systems & Services",
+                                    "Fintech"
+                                ],
+                                "type": "Enterprise",
+                                "is_recruiting_agency": false,
+                                "is_3rd_party_agency": false,
+                                "funding_info": {
+                                    "type": "Series unknown",
+                                    "total_funding": 9440247725,
+                                    "last_funding_date": "2025-10-22T00:00:00"
+                                }
+                            },
+                            "job_title_raw": "Engineering Manager, Security",
+                            "md5_hash": "fade8ffb17414dad216c261174fff6c6",
+                            "job_slug": "engineering-manager-security-0d76c889",
+                            "novelty_score": 6.9,
+                            "flexibility_score": 5.3,
+                            "compensation_value_score": 7.5,
+                            "benefits_score": 6.6,
+                            "impact_autonomy_score": 8.2,
+                            "prestige_score": 6.9,
+                            "growth_score": 7.3,
+                            "coolness_score": 7.5,
+                            "salary_range": null,
+                            "education_level": null,
+                            "equity": {
+                                "types": [],
+                                "amount_type": "unknown",
+                                "amount": null
+                            },
+                            "meta_completeness": false,
+                            "meta_targetability": 0.8,
+                            "first_ingested": "2026-11-18T18:34:18.047000",
+                            "updated_at": 1795028111010
+                        },
+                        {
+                            "_id": "6afdf48f83c364466dd0c3d2",
+                            "job_title": "Technical Solutions Engineer",
+                            "description": "<h2>Role Overview</h2><p>The Technical Solutions Engineering (TSE) team is the glue that supports our developer-users and champions developer experience as being central to the overall experience of our users. TSE interacts directly with developer-users more than any other team at Stripe, so your role will have a significant impact on what Stripe is known for and values most.</p><h2>What You Will Do</h2><p>You will do a wide variety of things, including explaining technical concepts about Stripe",
+                            "application_link": "https://stripe.com/jobs/search?gh_jid=7917880",
+                            "location_raw": "Remote - US",
+                            "job_type": "Full Time",
+                            "location_type": "Remote",
+                            "date_posted": "2026-11-18",
+                            "job_board": "greenhouse",
+                            "job_board_link": "https://job-boards.greenhouse.io/stripe",
+                            "platform_job_id": "7917880",
+                            "company_name": "Stripe",
+                            "company_slug": "stripe",
+                            "company_link": "https://stripe.com",
+                            "company_logo": "https://logos.hirebase.org/e4e62dc3-391b-4f2b-a5ee-4cecfebaa346/stripe-320x320-q95.jpg",
+                            "description_raw": "<h1><strong>Technical Solutions Engineer</strong></h1> <h2><strong>Who we are</strong></h2> <h3><strong>About Stripe</strong></h3> <p>Stripe is a financial infrastructure platform for businesses. Millions of companies\u2014from the world\u2019s largest enterprises to the most ambitious startups\u2014use Stripe to accept payments, grow their revenue, and accelerate new business opportunities. Our mission is to increase the GDP of the internet, and we have a staggering amount of work ahead. That means you have a",
+                            "language": "en",
+                            "requirements_summary": "We\u2019re looking for someone with at least 4 years of full-stack software development experience, direct experience explaining technical concepts, and the ability to write good, clean code in multiple programming languages",
+                            "job_categories": [
+                                "Information Technology Jobs",
+                                "Software Engineer Jobs"
+                            ],
+                            "locations": [
+                                {
+                                    "city": null,
+                                    "region": null,
+                                    "country": "United States",
+                                    "coordinates": {
+                                        "type": "Point",
+                                        "coordinates": [
+                                            -100.445882,
+                                            39.7837304
+                                        ]
+                                    },
+                                    "bbox": [
+                                        -14.7608358,
+                                        71.5889534
+                                    ],
+                                    "address": "United States"
+                                }
+                            ],
+                            "education_level": "Bachelor's degree",
+                            "experience_level": "Mid-Level",
+                            "yoe_range": {
+                                "min": 4,
+                                "max": null
+                            },
+                            "visa_sponsored": false,
+                            "technologies": [
+                                "Java",
+                                "Python"
+                            ],
+                            "skills": [
+                                "writing",
+                                "researching"
+                            ],
+                            "team": "Technical Solutions Engineering (TSE) team",
+                            "recruiter_agency": false,
+                            "offers_equity": true,
+                            "company_data": {
+                                "description_summary": "Stripe is a leading provider of programmable financial services, enabling companies of all sizes to accept payments, grow revenue, and explore new business opportunities. Headquartered in San Francisco and Dublin, Stripe's platform offers a suite of tools designed to simplify complex financial transactions, making it easier for businesses to operate online. The company's focus on innovation and efficiency has positioned it as a key player in the digital economy.",
+                                "linkedin_link": "https://www.linkedin.com/company/stripe",
+                                "size_range": {
+                                    "min": 5001,
+                                    "max": 10000
+                                },
+                                "industries": [
+                                    "Finance",
+                                    "Tech, Software & IT Services"
+                                ],
+                                "subindustries": [
+                                    "Payment Systems & Services",
+                                    "Fintech"
+                                ],
+                                "type": "Enterprise",
+                                "is_recruiting_agency": false,
+                                "is_3rd_party_agency": false,
+                                "funding_info": {
+                                    "type": "Series unknown",
+                                    "total_funding": 9440247725,
+                                    "last_funding_date": "2025-10-22T00:00:00"
+                                }
+                            },
+                            "job_title_raw": "Technical Solutions Engineer",
+                            "md5_hash": "731a5588ad1c12927a2f2b65914367d9",
+                            "job_slug": "technical-solutions-engineer-79f65574",
+                            "novelty_score": 6.4,
+                            "flexibility_score": 5.1,
+                            "compensation_value_score": 7,
+                            "benefits_score": 5.6,
+                            "impact_autonomy_score": 7.7,
+                            "prestige_score": 6.7,
+                            "growth_score": 6.8,
+                            "coolness_score": 7,
+                            "salary_range": null,
+                            "equity": {
+                                "types": [],
+                                "amount_type": "unknown",
+                                "amount": null
+                            },
+                            "meta_completeness": false,
+                            "meta_targetability": 0.7111111111111111,
+                            "first_ingested": "2026-11-18T18:34:18.007000",
+                            "updated_at": 1795028111010
+                        }
+                    ],
+                    "job_categories": [
+                        {
+                            "category": "Other"
+                        },
+                        {
+                            "category": "Business Development Jobs"
+                        }
+                    ],
+                    "total_count": 792,
+                    "page": 1,
+                    "limit": 2,
+                    "total_pages": 396
+                }
+            }
+        }
+    ]
+}

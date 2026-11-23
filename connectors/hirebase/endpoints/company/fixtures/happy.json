@@ -1,0 +1,120 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-11-18 against the live API (response trimmed by the recorder): one company by slug with its sample jobs, 1 unit of the companies allowance.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.hirebase.org/v2/hirebase/companies/stripe"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "company": {
+                        "company_slug": "stripe",
+                        "company_name": "Stripe",
+                        "company_logo": "https://logos.hirebase.org/e4e62dc3-391b-4f2b-a5ee-4cecfebaa346/stripe-320x320-q95.jpg",
+                        "job_board": null,
+                        "linkedin_link": "https://www.linkedin.com/company/stripe",
+                        "company_link": "https://stripe.com",
+                        "description_summary": "Stripe is a leading provider of programmable financial services, enabling companies of all sizes to accept payments, grow revenue, and explore new business opportunities. Headquartered in San Francisco and Dublin, Stripe's platform offers a suite of tools designed to simplify complex financial transactions, making it easier for businesses to operate online. The company's focus on innovation and efficiency has positioned it as a key player in the digital economy.",
+                        "culture_summary": "Stripe is known for an engineering\u2011first culture that emphasizes rapid innovation, data\u2011driven decision making, and a collaborative, remote\u2011friendly environment.",
+                        "services": null,
+                        "industries": [
+                            "Finance",
+                            "Tech, Software & IT Services"
+                        ],
+                        "subindustries": [
+                            "Payment Systems & Services",
+                            "Fintech"
+                        ],
+                        "size_range": {
+                            "min": 5001,
+                            "max": 10000
+                        },
+                        "clout": null,
+                        "headquarters": null,
+                        "founded": null,
+                        "stock_info": null,
+                        "funding_info": {
+                            "type": "Series unknown",
+                            "total_rounds": 20,
+                            "last_funding_round": "Oct 22, 2025",
+                            "total_funding": 9440247725,
+                            "investors": [
+                                "Andreessen Horowitz",
+                                "Baillie Gifford"
+                            ]
+                        },
+                        "type": "Enterprise",
+                        "is_3rd_party_agency": false,
+                        "is_recruiting_agency": false,
+                        "mean_opinion_score": 9,
+                        "aliases": [],
+                        "parent_company": null,
+                        "subsidiaries": null
+                    },
+                    "jobs": [
+                        {
+                            "_id": "672db9f1eb0fce869ea2aa6b",
+                            "company_name": "Stripe",
+                            "job_title": "Product Marketing Manager",
+                            "description": "<p>We are looking for a Product Marketing Manager to shape the roadmap, drive launches, and grow adoption for critical products, and develop our go-to-market strategy for key user segments. As a storyteller, data leader, and team player, you will develop messaging and positioning, craft narratives, and engage teams to drive awareness, pipeline, and revenue.</p><h2>Requirements</h2><ul><li>7+ years prior product marketing experience</li><li>Excellent verbal and written communication skills, with ",
+                            "application_link": "https://stripe.com/jobs/search?gh_jid=6348471",
+                            "location_raw": "US",
+                            "job_categories": [
+                                "Marketing Jobs"
+                            ],
+                            "job_type": "Full Time",
+                            "location_type": "In-Person",
+                            "yoe_range": {
+                                "min": 7,
+                                "max": 7
+                            },
+                            "salary_range": null,
+                            "date_posted": "2024-11-07",
+                            "company_link": "stripe.com",
+                            "company_logo": "https://recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/000/000/301/resized/Stripe_Logo_(blue).png?1538676884",
+                            "job_board": "greenhouse",
+                            "job_board_link": "https://job-boards.greenhouse.io/stripe",
+                            "requirements_summary": "7+ years product marketing experience, excellent communication skills, data analysis skills",
+                            "visa_sponsored": false,
+                            "company_data": {
+                                "description_summary": "Stripe is a financial infrastructure platform for businesses."
+                            },
+                            "company_slug": "stripe",
+                            "job_slug": "product-marketing-manager-2",
+                            "expired": false,
+                            "locations": [
+                                {
+                                    "city": null,
+                                    "region": null,
+                                    "country": "United States",
+                                    "coordinates": {
+                                        "type": "Point",
+                                        "coordinates": [
+                                            -100.445882,
+                                            39.7837304
+                                        ]
+                                    },
+                                    "bbox": [
+                                        -14.7608358,
+                                        71.5889534
+                                    ],
+                                    "address": "United States"
+                                }
+                            ],
+                            "meta_completeness": false,
+                            "meta_targetability": 0.4666666666666667,
+                            "first_ingested": "2024-11-08T07:12:49",
+                            "md5_hash": "54fd4599414ec992bbba6194d994d6e7",
+                            "platform_job_id": "6348471",
+                            "technologies_tracked": [],
+                            "updated_at": 1793256154454
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

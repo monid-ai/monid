@@ -1,0 +1,35 @@
+{
+    "name": "happy",
+    "description": "Recorded 2026-11-19 against the live API: two closed-job identifiers since 2026-11-17. Free.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.hirebase.org/v2/jobs/expired-jobs?since=2026-11-17&limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jobs": [
+                        {
+                            "_id": "6ac04ec34e5de060d804b990",
+                            "company_slug": "ymca-of-catawba-valley",
+                            "job_slug": "zumba-instructor-adrian-l-shuford-jr-ymca-74c3bbe3",
+                            "date_expired": "2026-11-18"
+                        },
+                        {
+                            "_id": "6a932424bdf49d519638fcd6",
+                            "company_slug": "open-society-foundations",
+                            "job_slug": "zto-a1-ops-7339f7e6",
+                            "date_expired": "2026-11-18"
+                        }
+                    ],
+                    "total_count": 251417,
+                    "page": 1,
+                    "limit": 2,
+                    "total_pages": 125709
+                }
+            }
+        }
+    ]
+}

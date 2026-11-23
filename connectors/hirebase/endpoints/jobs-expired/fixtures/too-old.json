@@ -1,0 +1,18 @@
+{
+    "name": "too-old",
+    "description": "Recorded 2026-11-19 against the live API: a since older than 14 days answers 400 {detail}, zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://api.hirebase.org/v2/jobs/expired-jobs?since=2026-01-01&limit=2"
+            },
+            "res": {
+                "status": 400,
+                "body": {
+                    "detail": "since must be within the last 14 days (on or after 2026-11-05). The expired-jobs feed is for keeping a live copy in sync hourly or daily; for older postings use the Historical Jobs endpoints."
+                }
+            }
+        }
+    ]
+}

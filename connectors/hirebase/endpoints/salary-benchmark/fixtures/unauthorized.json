@@ -1,0 +1,36 @@
+{
+    "name": "unauthorized",
+    "description": "Recorded 2026-11-19 against the live API with an invalid key: 401 {detail} is data, zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.hirebase.org/v2/jobs/salary-benchmark",
+                "body": {
+                    "job_title": "Data Engineer",
+                    "yoe_range": {
+                        "min": 3,
+                        "max": 6
+                    },
+                    "geo_locations": [
+                        {
+                            "country": "United States"
+                        }
+                    ],
+                    "salary_range": {
+                        "min": 130000,
+                        "max": 160000,
+                        "currency": "USD",
+                        "period": "yearly"
+                    }
+                }
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "detail": "Invalid API key"
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,26 @@
+{
+    "name": "unauthorized",
+    "description": "Recorded 2026-11-19 against the live API with an invalid key: 401 {detail} is data, zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.hirebase.org/v2/hirebase/companies/search",
+                "body": {
+                    "query": "climate tech",
+                    "company_types": [
+                        "11-50",
+                        "51-200"
+                    ],
+                    "limit": 2
+                }
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "detail": "Invalid API key"
+                }
+            }
+        }
+    ]
+}

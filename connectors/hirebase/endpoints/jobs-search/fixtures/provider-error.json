@@ -1,0 +1,21 @@
+{
+    "name": "provider-error",
+    "description": "Recorded 2026-11-18 against the live API with an invalid key: 401 {detail} is data, zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.hirebase.org/v2/jobs/search",
+                "body": {
+                    "limit": 1
+                }
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "detail": "Invalid API key"
+                }
+            }
+        }
+    ]
+}

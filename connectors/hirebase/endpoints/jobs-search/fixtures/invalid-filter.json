@@ -1,0 +1,42 @@
+{
+    "name": "invalid-filter",
+    "description": "Recorded 2026-11-18 against the live API: a sub_industry outside the accepted list answers 422 with a list-shaped detail (message trimmed by the recorder), zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.hirebase.org/v2/jobs/search",
+                "body": {
+                    "experience": [
+                        "Senior"
+                    ],
+                    "sub_industry": [
+                        "Not A Real Subindustry"
+                    ],
+                    "limit": 1
+                }
+            },
+            "res": {
+                "status": 422,
+                "body": {
+                    "detail": [
+                        {
+                            "type": "value_error",
+                            "loc": [
+                                "body",
+                                "sub_industry"
+                            ],
+                            "msg": "Value error, sub_industry must be a list of strings from the valid list of sub-industries. Available sub-industries: \n[\"Crop Production\", \"Animal Production\", \"Forestry & Logging\", \"Fishing & Hunting\", \"Agricultural Support Activities\", \"Agro-Processing\", \"Agricultural Machinery\", \"Agricultural Chemicals\", \"Farm Supplies Wholesaling\", \"Agricultural R&D\", \"Agri-Tech & Digital Agriculture\", \"Agricultural Education & Training\", \"Organic Farming\", \"Sustainable Agriculture\", \"Urban Agriculture\", \"Vis",
+                            "input": [
+                                "Not A Real Subindustry"
+                            ],
+                            "ctx": {
+                                "error": {}
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
