@@ -1930,13 +1930,18 @@ function captureLogger(
 }
 
 Deno.test("lifecycle: run() timeout carries the UNRESOLVED stop verdict and its handle", async () => {
+    // the hook below is a CLOSED TERM (AGENT.md): it may close over NOTHING
+    // from this test, so the reason is a LITERAL in there. This constant is
+    // only the assertion's copy of it — the two MUST stay identical.
     const reason = "vendor never reached a terminal state in budget";
     const loaded = await timeoutRun((connectors) => {
         // teardown ran but could not observe settlement — UNRESOLVED is
-        // the money-critical verdict (design D34)
+        // the money-critical verdict (design D34). Own params + whitelisted
+        // globals only; `kind` is the string literal StopKind.UNRESOLVED
+        // compares equal to.
         connectors[0].provider.lifecycle!.stop = async () => ({
             kind: "UNRESOLVED",
-            reason,
+            reason: "vendor never reached a terminal state in budget",
             state: { externalRunId: "j1", stage: "aborting" },
         });
     });
