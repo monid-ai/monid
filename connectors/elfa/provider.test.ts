@@ -848,7 +848,10 @@ Deno.test({
 Deno.test("elfa: a free endpoint makes no claim and warns when Elfa reports a charge", async () => {
     for (const [meter, warned] of [["7", true], ["0", false]] as const) {
         const fixture = await fixtureFor(FREE, "happy");
-        fixture.calls[0].res.headers = { [METER]: meter };
+        fixture.calls[0].res.headers = {
+            [METER]: meter,
+            "x-elfa-credits-detail": "base=1;objects=6;dedup=0",
+        };
         const warnings: [string, Record<string, unknown> | undefined][] = [];
         const logger: Logger = {
             debug: () => {},
