@@ -32,7 +32,7 @@ operations inside it have no fee.
   label?}`; `verify` / `release` / `refresh` against
   `GET`/`DELETE /api/v1/sandboxes/{id}`. Rate card: period `DAY`
   (`CREATION_TIME`), one ESTIMATED line `compute` priced per `SECOND`
-  (card shows $0.00604/hr, Agent37 medium, the cheapest live managed rate), reconciled every
+  (the card shows a medium managed rate), reconciled every
   hour from the sandbox's own `cost.rate` and its `createdAt` /
   `destroyedAt` overlap with the window. A BYOK sandbox (no rate) reconciles
   to 0.

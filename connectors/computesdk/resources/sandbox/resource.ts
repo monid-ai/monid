@@ -5,8 +5,8 @@ import { defineResource } from "@shared/core";
  * computesdk/sandbox — one cloud sandbox this workspace created. It bills by
  * the second it exists, at the provider/size rate ComputeSDK quoted when it
  * was placed; commands, files and processes in it cost nothing on their own.
- * The `compute` line is ESTIMATED: the card shows the cheapest live rate,
- * and the reconcile reads each sandbox's own rate and runtime.
+ * The `compute` line is ESTIMATED: the card shows a medium (2 vCPU / 4 GB)
+ * managed rate, and the reconcile reads each sandbox's own rate and runtime.
  */
 export default defineResource({
     slug: "sandbox",
@@ -34,8 +34,8 @@ export default defineResource({
     usage: {
         period: { unit: "DAY", count: 1, anchor: "CREATION_TIME" },
         lines: {
-            // $0.00604/hr (Agent37 medium) is the cheapest live managed rate;
-            // card display only — the reconcile bills the sandbox's own rate
+            // a medium managed rate, for the card only; the reconcile bills
+            // the sandbox's own rate
             compute: {
                 price: {
                     unit: "SECOND",
