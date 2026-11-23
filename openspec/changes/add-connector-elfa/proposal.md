@@ -75,7 +75,9 @@ meter is the only exact source.
   published spec).
 - v3 `monitors`: stateful webhook subscriptions that deliver matches to a
   caller URL, not a per-call tool.
-- The x402 pay-per-request routes: the hosted platform holds an API key.
+- x402 pay-per-request, on `/x402/v2` and on the GET `/v3` data routes
+  themselves: the hosted platform holds an API key, and a keyed call never
+  takes the x402 path.
 
 ## Impact
 

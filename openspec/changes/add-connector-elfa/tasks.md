@@ -2,7 +2,7 @@
 
 ## 1. Vendor surface
 
-- [x] 1.1 Pin the published OpenAPI (3.14.0): base url, auth header, the 24
+- [x] 1.1 Pin the OpenAPI (3.15.0): base url, auth header, the 24
       endpoints' params, published costs
 - [x] 1.2 Check every mirror against Elfa's runtime validators; tighten where
       they are narrower than the published spec
