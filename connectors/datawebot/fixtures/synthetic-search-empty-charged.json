@@ -1,0 +1,29 @@
+{
+    "name": "synthetic-search-empty-charged",
+    "description": "SYNTHETIC: not recorded (no datawebot key held by this connector author, 2026-11-23). Shapes follow the public OpenAPI at https://api.datawebot.com/openapi.json (RequestAnswer); values are placeholders. A search across shops loaded its page and found nothing: status failed, no_results, 25 credits used. The vendor charges the page, so this settles as success at 25.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.datawebot.com/v1/requests"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "request_id": "5b0c1f4e-7a2d-4c3b-9e61-2f8a4d7c9b10",
+                    "status": "failed",
+                    "error": {
+                        "code": "no_results",
+                        "message": "Nothing found."
+                    },
+                    "meta": {
+                        "as_of": "2026-11-23T04:10:00.000Z",
+                        "country": "US",
+                        "credits_used": 25,
+                        "credits_left": 9870
+                    }
+                }
+            }
+        }
+    ]
+}

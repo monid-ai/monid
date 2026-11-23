@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "SYNTHETIC: not recorded (no datawebot key held by this connector author, 2026-11-23). Shapes follow the public OpenAPI at https://api.datawebot.com/openapi.json (RequestAnswer); values are placeholders. Invalid key: 401, the vendor error envelope. Zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://api.datawebot.com/v1/requests"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": {
+                        "code": "unauthorized",
+                        "message": "Missing or invalid API key.",
+                        "retryable": false
+                    }
+                }
+            }
+        }
+    ]
+}
