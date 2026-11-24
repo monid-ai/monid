@@ -50,8 +50,10 @@ export default defineEndpoint({
             kind: UsageModelKind.PER_UNIT,
             unit: Unit.RESULT,
             // vendor charge event: "apify-default-dataset-item"
-            // survey-pinned Business-tier event price
-            consumes: { credit: "default", amount: 0.0003 },
+            // Business-tier (GOLD) price, /v2/acts pricingInfo 2026-11-24
+            // (repriced 2026-11-16: the actor introduced plan-based tiers;
+            // it was a flat $0.0003)
+            consumes: { credit: "default", amount: 0.000291 },
         },
         /** maxItems caps the total run output — required at the binding,
          *  so the estimate is pure arithmetic (D24). */
