@@ -1,0 +1,60 @@
+{
+    "name": "synthetic-search-working",
+    "description": "SYNTHETIC: not recorded (no datawebot key held by this connector author, 2026-11-23). Shapes follow the public OpenAPI at https://api.datawebot.com/openapi.json (RequestAnswer); values are placeholders. Search still running after the router wait: working with a request_id, then the free GET finishes it at 5 credits.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/v1/requests"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "request_id": "5b0c1f4e-7a2d-4c3b-9e61-2f8a4d7c9b10",
+                    "status": "working",
+                    "check_after_seconds": 5
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/requests/5b0c1f4e-7a2d-4c3b-9e61-2f8a4d7c9b10"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "request_id": "5b0c1f4e-7a2d-4c3b-9e61-2f8a4d7c9b10",
+                    "status": "done",
+                    "products": [
+                        {
+                            "product_id": "pid-1",
+                            "title": "Ninja Air Fryer 4 Qt",
+                            "url": "https://www.walmart.com/ip/example-1",
+                            "shop": "walmart.com",
+                            "price": {
+                                "amount": 79.0,
+                                "currency": "USD",
+                                "text": "$79.00"
+                            },
+                            "original_price": null,
+                            "rating": 4.6,
+                            "review_count": 1201,
+                            "image_url": "https://images.example.com/1.jpg",
+                            "availability": "in_stock",
+                            "sponsored": false
+                        }
+                    ],
+                    "sponsored": [],
+                    "warnings": [],
+                    "meta": {
+                        "as_of": "2026-11-23T04:10:00.000Z",
+                        "country": "US",
+                        "credits_used": 5,
+                        "credits_left": 9870
+                    }
+                }
+            }
+        }
+    ]
+}

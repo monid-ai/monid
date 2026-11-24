@@ -1,0 +1,30 @@
+{
+    "name": "synthetic-search-failed-free",
+    "description": "SYNTHETIC: not recorded (no datawebot key held by this connector author, 2026-11-23). Shapes follow the public OpenAPI at https://api.datawebot.com/openapi.json (RequestAnswer); values are placeholders. The shop could not be read: status failed, source_unavailable, 0 credits used. Settles as a provider error, zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/v1/requests"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "request_id": "5b0c1f4e-7a2d-4c3b-9e61-2f8a4d7c9b10",
+                    "status": "failed",
+                    "error": {
+                        "code": "source_unavailable",
+                        "reason": "blocked",
+                        "message": "The shop did not answer. Nothing was charged."
+                    },
+                    "meta": {
+                        "as_of": "2026-11-23T04:10:00.000Z",
+                        "country": "US",
+                        "credits_used": 0,
+                        "credits_left": 9870
+                    }
+                }
+            }
+        }
+    ]
+}

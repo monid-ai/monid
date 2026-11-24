@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-sites-error",
+    "description": "SYNTHETIC: not recorded (no datawebot key held by this connector author, 2026-11-23). Shapes follow the public OpenAPI at https://api.datawebot.com/openapi.json; values are placeholders. Invalid key on the free shop check: 401, the vendor error envelope. Zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/sites?site=walmart.com"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": {
+                        "code": "unauthorized",
+                        "message": "Missing or invalid API key.",
+                        "retryable": false
+                    }
+                }
+            }
+        }
+    ]
+}

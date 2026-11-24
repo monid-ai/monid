@@ -1,0 +1,84 @@
+{
+    "name": "synthetic-product-offers",
+    "description": "SYNTHETIC: not recorded (no datawebot key held by this connector author, 2026-11-23). Shapes follow the public OpenAPI at https://api.datawebot.com/openapi.json (RequestAnswer); values are placeholders. Product by a product_id from a cross-shop search: every seller offer, 1 credit.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/v1/requests"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "request_id": "5b0c1f4e-7a2d-4c3b-9e61-2f8a4d7c9b10",
+                    "status": "done",
+                    "product": {
+                        "product_id": "pid-1",
+                        "title": "Ninja Air Fryer 4 Qt",
+                        "url": "https://www.example-shop.com/ip/example-1",
+                        "shop": null,
+                        "price": {
+                            "amount": 74.99,
+                            "currency": "USD",
+                            "text": "$74.99"
+                        },
+                        "original_price": null,
+                        "rating": 4.6,
+                        "review_count": 1201,
+                        "image_url": "https://images.example.com/1.jpg",
+                        "availability": "in_stock",
+                        "sponsored": false,
+                        "price_range": {
+                            "min": 74.99,
+                            "max": 89.0
+                        }
+                    },
+                    "offers": [
+                        {
+                            "shop": "walmart.com",
+                            "price": {
+                                "amount": 79.0,
+                                "currency": "USD"
+                            },
+                            "shipping": {
+                                "amount": 0
+                            },
+                            "total": {
+                                "amount": 79.0
+                            },
+                            "url": "https://www.walmart.com/ip/example-1",
+                            "availability": "in_stock",
+                            "marketplace": false,
+                            "shop_country": "US",
+                            "other_market": false
+                        },
+                        {
+                            "shop": "target.com",
+                            "price": {
+                                "amount": 74.99,
+                                "currency": "USD"
+                            },
+                            "shipping": {
+                                "amount": 0
+                            },
+                            "total": {
+                                "amount": 74.99
+                            },
+                            "url": "https://www.target.com/p/example-1",
+                            "availability": "in_stock",
+                            "marketplace": false,
+                            "shop_country": "US",
+                            "other_market": false
+                        }
+                    ],
+                    "meta": {
+                        "as_of": "2026-11-23T04:10:00.000Z",
+                        "country": "US",
+                        "credits_used": 1,
+                        "credits_left": 9870
+                    }
+                }
+            }
+        }
+    ]
+}
