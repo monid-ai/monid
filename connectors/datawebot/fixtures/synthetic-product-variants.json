@@ -1,0 +1,97 @@
+{
+    "name": "synthetic-product-variants",
+    "description": "SYNTHETIC: not recorded (no datawebot key held by this connector author, 2026-11-23). Shapes follow the public OpenAPI at https://api.datawebot.com/openapi.json; values are placeholders. Product read with more variants than one answer holds: the first answer has two variants and next_cursor variants:2 (the vendor pages 100 at a time; shrunk here), and the free GET with that cursor returns the last one. 1 credit. Its raw shop record has its own credits_left field, which must survive.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/v1/requests"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "request_id": "7c2e9a10-4b3d-4f6a-8e21-9d5b3c1a7f42",
+                    "status": "done",
+                    "product": {
+                        "title": "Example Runner",
+                        "price": 98.0,
+                        "currency": "USD",
+                        "url": "https://www.allbirds.com/products/example-runner",
+                        "details": {
+                            "variant_count": 3,
+                            "variants": [
+                                {
+                                    "sku": "SKU-1",
+                                    "options": {
+                                        "size": "1"
+                                    },
+                                    "price": 49.0,
+                                    "in_stock": true
+                                },
+                                {
+                                    "sku": "SKU-2",
+                                    "options": {
+                                        "size": "2"
+                                    },
+                                    "price": 49.0,
+                                    "in_stock": true
+                                }
+                            ]
+                        }
+                    },
+                    "next_cursor": "variants:2",
+                    "meta": {
+                        "credits_used": 1,
+                        "credits_left": 9999,
+                        "as_of": "2026-11-23T08:00:00Z"
+                    },
+                    "raw": [
+                        {
+                            "sku": "SKU-1",
+                            "credits_left": 3
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/requests/7c2e9a10-4b3d-4f6a-8e21-9d5b3c1a7f42?cursor=variants%3A2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "request_id": "7c2e9a10-4b3d-4f6a-8e21-9d5b3c1a7f42",
+                    "status": "done",
+                    "product": {
+                        "title": "Example Runner",
+                        "price": 98.0,
+                        "currency": "USD",
+                        "url": "https://www.allbirds.com/products/example-runner",
+                        "details": {
+                            "variant_count": 3,
+                            "variants_offset": 2,
+                            "variants": [
+                                {
+                                    "sku": "SKU-3",
+                                    "options": {
+                                        "size": "3"
+                                    },
+                                    "price": 49.0,
+                                    "in_stock": true
+                                }
+                            ]
+                        }
+                    },
+                    "next_cursor": null,
+                    "meta": {
+                        "credits_used": 0,
+                        "credits_left": 9999,
+                        "as_of": "2026-11-23T08:00:00Z"
+                    }
+                }
+            }
+        }
+    ]
+}

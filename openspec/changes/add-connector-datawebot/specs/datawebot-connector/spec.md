@@ -48,9 +48,23 @@ Billed endpoints SHALL be leaf PER_UNIT in CREDIT units with
 
 ### Requirement: The key holder's balance never reaches a caller
 `meta.credits_left` SHALL be removed from every success output and from the
-raw body of every error.
+raw body of every error. Only that path is removed: a shop record in `raw`
+SHALL keep any field of the same name.
 
 #### Scenario: Inline answer
 - **WHEN** a search answers done
 - **THEN** the output `meta` SHALL contain `as_of` and neither `credits_left`
   nor `credits_used`
+
+### Requirement: A product read returns every variant in one answer
+When a finished product answer carries a `next_cursor`, the connector SHALL
+read `GET /v1/requests/{id}?cursor=…` until the cursor is null (at most 50
+pages), join `product.details.variants`, and return `next_cursor: null`. If a
+page cannot be read, it SHALL return the variants read so far with a
+`variants_partial` warning.
+
+#### Scenario: Three variants over two pages
+- **WHEN** the first answer has two variants and a cursor, and the next page
+  has one
+- **THEN** the output SHALL list all three variants with `next_cursor` null,
+  billed once at the first answer's `meta.credits_used`

@@ -5,7 +5,7 @@
         {
             "req": {
                 "method": "POST",
-                "url": "https://api.datawebot.com/v1/requests"
+                "url": "{{request.origin}}/v1/requests"
             },
             "res": {
                 "status": 401,

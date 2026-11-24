@@ -5,7 +5,7 @@
         {
             "req": {
                 "method": "GET",
-                "url": "https://api.datawebot.com/v1/sites?site=walmart.com"
+                "url": "{{request.origin}}/v1/sites?site=walmart.com"
             },
             "res": {
                 "status": 200,

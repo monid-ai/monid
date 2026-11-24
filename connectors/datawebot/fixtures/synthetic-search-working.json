@@ -5,7 +5,7 @@
         {
             "req": {
                 "method": "POST",
-                "url": "https://api.datawebot.com/v1/requests"
+                "url": "{{request.origin}}/v1/requests"
             },
             "res": {
                 "status": 200,
@@ -19,7 +19,7 @@
         {
             "req": {
                 "method": "GET",
-                "url": "https://api.datawebot.com/v1/requests/5b0c1f4e-7a2d-4c3b-9e61-2f8a4d7c9b10"
+                "url": "{{request.origin}}/v1/requests/5b0c1f4e-7a2d-4c3b-9e61-2f8a4d7c9b10"
             },
             "res": {
                 "status": 200,

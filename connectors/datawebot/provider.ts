@@ -92,9 +92,10 @@ export default defineProvider({
     },
     output: {
         /** `meta.credits_left` is the balance of the account behind the key
-         *  Monid holds: never shown to a caller. */
+         *  Monid holds: never shown to a caller. Only that path is removed,
+         *  so a shop record in `raw` keeps any field of the same name. */
         fromResponse: ({ data, utils }) =>
-            utils.json.omit(data.output, ["credits_left"]),
+            utils.json.pluck(data.output, "$.meta.credits_left").rest,
         /** datawebot errors are `{error: {code, message, retryable}}`; a
          *  failed request is `{status: "failed", error: {code, message}}`.
          *  The machine `code` is what an agent branches on
@@ -111,7 +112,7 @@ export default defineProvider({
                     ? message
                     : "datawebot API error",
                 ...(typeof code === "string" ? { code } : {}),
-                raw: utils.json.omit(data.output, ["credits_left"]),
+                raw: utils.json.pluck(data.output, "$.meta.credits_left").rest,
             };
         },
     },

@@ -16,8 +16,10 @@ through one request router, priced in its own credits.
   `POST /v1/requests` (capability `search` / `product`, set by `toRequest` and
   not exposed to callers), each with a `lifecycle.start` / `poll` pair: the
   router answers inline or with `status: "working"` and a `request_id`, and
-  `GET /v1/requests/{id}` (free) finishes it. The two lifecycle sources are
-  byte-identical and intern to one fnTable entry.
+  `GET /v1/requests/{id}` (free) finishes it. A product read with more than
+  100 variants answers the first 100 and a `next_cursor`; the product
+  lifecycle reads the remaining pages (free, at most 50) and joins the
+  variants into one answer, so no request id is handed to callers.
 - Add `datawebot#sites` (`GET /v1/sites`), FREE.
 - Bill on the vendor's own meter: `meta.credits_used` is both the evidence and
   the claim (D27). A `status: "failed"` answer that used no credits settles as

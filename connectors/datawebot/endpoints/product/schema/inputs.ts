@@ -3,7 +3,7 @@ import { z } from "zod";
 /** `POST /v1/requests` with capability `product` — the fields that
  *  capability reads. The vendor's schema is closed. */
 export const zDatawebotProductBody = z.strictObject({
-    url: z.string().max(2048).describe(
+    url: z.url().max(2048).describe(
         "A product page URL on a supported shop.",
     ).optional(),
     product_id: z.string().max(4096).describe(

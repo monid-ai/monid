@@ -1,4 +1,4 @@
-import { assertEquals } from "@std/assert";
+import { assertEquals, assertRejects } from "@std/assert";
 import { fromFileUrl } from "@std/path";
 import {
     estimateEndpoint,
@@ -34,12 +34,47 @@ Deno.test("datawebot#product estimate: 1 credit", async () => {
     assertEquals(estimate.credits, { default: 1 });
 });
 
-Deno.test("datawebot#product and #search share one lifecycle fn", async () => {
-    const product = await testSealedUnit(ID);
-    const search = await testSealedUnit("datawebot#search");
+Deno.test("datawebot#product follows next_cursor and joins every variant", async () => {
+    const result = await runEndpoint({
+        unit: await testSealedUnit(ID),
+        input: {
+            body: {
+                url: "https://www.allbirds.com/products/example-runner",
+                format: "raw",
+            },
+        },
+        mode: "replay",
+        fixture: await loadFixture(`${chains}synthetic-product-variants.json`),
+    });
+    assertEquals(result.httpStatus, 200);
+    assertEquals(result.usage, {
+        credits: { default: 1 },
+        evidence: { CREDIT: 1 },
+    });
+    const output = result.output as Record<string, any>;
     assertEquals(
-        JSON.stringify(product.doc.lifecycle),
-        JSON.stringify(search.doc.lifecycle),
+        output.product.details.variants.map((v: { sku: string }) => v.sku),
+        ["SKU-1", "SKU-2", "SKU-3"],
+    );
+    assertEquals(output.next_cursor, null);
+    assertEquals("variants_offset" in output.product.details, false);
+    assertEquals("credits_left" in output.meta, false);
+    assertEquals(output.raw[0].credits_left, 3);
+});
+
+Deno.test("datawebot#product url that is not a URL fails INVALID_INPUT before the wire", async () => {
+    const unit = await testSealedUnit(ID);
+    const fixture = await loadFixture(`${chains}synthetic-product-offers.json`);
+    await assertRejects(
+        () =>
+            runEndpoint({
+                unit,
+                input: { body: { url: "not-a-url" } },
+                mode: "replay",
+                fixture,
+            }),
+        Error,
+        "INVALID_INPUT",
     );
 });
 

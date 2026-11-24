@@ -25,3 +25,8 @@
 
 - [ ] Run the live tests and replace the synthetic fixtures with sanitized
       recordings (`deno task record`).
+- [x] Follow the product `next_cursor` for variants past the first 100.
+- [x] Remove only `$.meta.credits_left`, keeping shop fields of that name.
+- [x] Validate `url` as a URI, matching the vendor schema.
+- [x] Sites tests: INVALID_INPUT gate, provider-error replay, live shape.
+- [x] Fixtures bind `{{request.origin}}`.
