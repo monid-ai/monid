@@ -55,12 +55,16 @@ export default defineEndpoint({
                 actor_start_gb: {
                     kind: UsageModelKind.PER_CALL,
                     label: "base fee",
-                    // $0.02 per GB × the actor's 2 GB default memory
+                    // $0.02 per GB × the actor's 1 GB default memory
                     // (vendor rate card: the pricing tab on
-                    // https://apify.com/trudax/reddit-scraper-lite) —
-                    // live-confirmed 2026-09-16 (vendor claim $0.0468 =
-                    // 0.04 start + 2 × 0.0034); v1 modeled the same $0.04
-                    consumes: { credit: "default", amount: 0.04 },
+                    // https://apify.com/trudax/reddit-scraper-lite;
+                    // defaultRunOptions.memoryMbytes 1024, /v2/acts
+                    // 2026-11-24). The rate is unchanged: the pin was
+                    // $0.04 while the default was 2 GB (live-confirmed
+                    // 2026-09-16, vendor claim $0.0468 = 0.04 start +
+                    // 2 × 0.0034). SCHEDULED 2026-12-03: the actor drops
+                    // this event and prices `result` at $0.001.
+                    consumes: { credit: "default", amount: 0.02 },
                 },
                 result: {
                     kind: UsageModelKind.PER_UNIT,

@@ -71,16 +71,18 @@ export default defineEndpoint({
                 },
                 result_returned: {
                     // D4: the actor rounds the EVENT COUNT up to a multiple of 10
-                    // (23 rows → 30 events at $0.01 each), so the quantity fns round;
+                    // (23 rows → 30 events at $0.005 each), so the quantity fns round;
                     // `every: 10` is the wrong construct here — it would collapse 10
-                    // events per block into ONE $0.01 charge per block.
+                    // events per block into ONE $0.005 charge per block.
                     kind: UsageModelKind.PER_UNIT,
                     unit: Unit.RESULT,
                     label: "results (blocks of 10)",
                     description: "charged per started block of 10 rows",
                     // vendor charge event: "result_returned"
-                    // Business-tier (GOLD) price, /v2/acts pricingInfo 2026-09-22
-                    consumes: { credit: "default", amount: 0.01 },
+                    // Business-tier (GOLD) price, /v2/acts pricingInfo 2026-11-24
+                    // (repriced 2026-10-31, from $0.01; the blocks of 10
+                    // are unchanged)
+                    consumes: { credit: "default", amount: 0.005 },
                 },
                 default_dataset_item: {
                     kind: UsageModelKind.PER_UNIT,
