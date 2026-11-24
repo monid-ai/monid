@@ -1,5 +1,5 @@
-# PR / main CI — typecheck + tests. Publishing is a TAG (publish-catalog.yml);
-# this workflow never touches releases or AWS.
+# PR / main CI — typecheck + the endpoint-id lock + tests. Publishing is a TAG
+# (publish-catalog.yml); this workflow never touches releases or AWS.
 name: ci
 on:
   pull_request:
@@ -16,4 +16,9 @@ jobs:
         with:
           deno-version: v2.x
       - run: deno task check
+      # Identity guard (design D46): endpoint ids are public API, so a
+      # compiled id missing from connectors/ids.lock.json, or a locked id
+      # missing from the bundle, fails here. New endpoints commit the lock
+      # with `deno task ids:check --update`.
+      - run: deno task ids:check
       - run: deno task test

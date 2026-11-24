@@ -44,6 +44,7 @@ deno task catalog providers|endpoints|inspect <id>
 deno task record <id> ...            # record real fixtures (headers dropped)
 deno task compiler:compile           # full-repo deterministic compile
 deno task version:check              # semver gate for ABI/format changes
+deno task ids:check [--update]       # endpoint-id lock (CI-enforced); --update after adding endpoints
 deno task apify:scaffold <actorId>   # authoring-time actor input-schema scaffold
 ```
 
