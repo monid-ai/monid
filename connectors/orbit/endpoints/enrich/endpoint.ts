@@ -130,7 +130,7 @@ export default defineEndpoint({
                 res.body,
                 "$.billing.status",
             );
-            if (status !== "running" && receipt !== "open") {
+            if (status === "completed" && receipt !== "open") {
                 logger.info("orbit enrich settled on submit", {
                     requestId,
                     status: String(status),
@@ -186,7 +186,10 @@ export default defineEndpoint({
                 res.body,
                 "$.billing.status",
             );
-            if (status === "running" || receipt === "open") {
+            if (
+                (status !== "completed" && status !== "failed") ||
+                receipt === "open"
+            ) {
                 // Two minutes in, this is a full build, and those run for
                 // tens of minutes: fifteen seconds a tick.
                 return data.lifecycle.state.timing.attempts > 24

@@ -104,8 +104,9 @@ export default defineEndpoint({
                 const id = utils.json.optionalGet(row, "$.request_id");
                 if (typeof id !== "string" || id === "") continue;
                 children.push(id);
+                const status = utils.json.optionalGet(row, "$.status");
                 if (
-                    utils.json.optionalGet(row, "$.status") === "running" ||
+                    (status !== "completed" && status !== "failed") ||
                     utils.json.optionalGet(row, "$.billing.status") === "open"
                 ) pending.push(id);
             }
@@ -174,7 +175,7 @@ export default defineEndpoint({
                     ? utils.json.optionalGet(res.body, "$.status")
                     : "failed";
                 if (
-                    status === "running" || status === undefined ||
+                    (status !== "completed" && status !== "failed") ||
                     (ok &&
                         utils.json.optionalGet(res.body, "$.billing.status") ===
                             "open")
@@ -236,22 +237,29 @@ export default defineEndpoint({
                     });
                     continue;
                 }
+                const status = utils.json.optionalGet(res.body, "$.status");
                 if (
-                    utils.json.optionalGet(res.body, "$.status") !== "completed"
+                    (status !== "completed" && status !== "failed") ||
+                    utils.json.optionalGet(res.body, "$.billing.status") ===
+                        "open"
                 ) {
-                    errored = true;
+                    reopened.push(id);
+                    continue;
                 }
+                if (status === "failed") errored = true;
                 results.push(res.body);
             }
             if (reopened.length > 0) {
-                logger.warn("orbit batch final read transient", {
+                logger.warn("orbit batch final read still pending", {
                     reopened: reopened.length,
                     pollAfterMs: finalBackoffMs,
                 });
                 return {
                     kind: "RUNNING",
                     state: { data: { ...previous, pending: reopened } },
-                    pollAfterMs: finalBackoffMs,
+                    ...(finalBackoffMs > 0
+                        ? { pollAfterMs: finalBackoffMs }
+                        : {}),
                 };
             }
             logger.info("orbit batch enrich settled", {

@@ -145,3 +145,27 @@ Deno.test({
         assert("status" in (result.output as Record<string, unknown>));
     },
 });
+
+Deno.test("orbit enrich waits through queued and generating responses", async () => {
+    const fixture = await loadFixture(`${chains}synthetic-enrich-built.json`);
+    const submit = fixture.calls[0].res.body as Record<string, unknown>;
+    const poll = fixture.calls[1].res.body as Record<string, unknown>;
+    submit.status = "queued";
+    delete submit.billing;
+    poll.status = "generating";
+    delete poll.billing;
+    const result = await runEndpoint({
+        unit: await testSealedUnit(ID),
+        input: {
+            pathParams: { profile_id: PROFILE },
+            body: { operation: "full" },
+        },
+        mode: "replay",
+        fixture,
+    });
+    assertEquals((result.output as Record<string, Json>).status, "completed");
+    assertEquals(result.usage, {
+        credits: { default: 10 },
+        evidence: { CREDIT: 10 },
+    });
+});

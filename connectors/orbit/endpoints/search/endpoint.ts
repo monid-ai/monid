@@ -188,7 +188,7 @@ export default defineEndpoint({
                 res.body,
                 "$.billing.status",
             );
-            if (status !== "running" && receipt !== "open") {
+            if (status === "completed" && receipt !== "open") {
                 // A search over people Orbit can already answer for never
                 // goes RUNNING at all.
                 logger.info("orbit search settled on submit", {
@@ -254,7 +254,10 @@ export default defineEndpoint({
                 res.body,
                 "$.billing.status",
             );
-            if (status === "running" || receipt === "open") {
+            if (
+                (status !== "completed" && status !== "failed") ||
+                receipt === "open"
+            ) {
                 // Two minutes in, this is a build rather than a lookup, and
                 // builds run for tens of minutes: fifteen seconds a tick.
                 return data.lifecycle.state.timing.attempts > 24

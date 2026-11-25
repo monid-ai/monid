@@ -150,3 +150,42 @@ Deno.test({
         assertEquals((output.results as unknown[]).length, 1);
     },
 });
+
+Deno.test("orbit batch waits through queued and pending child responses", async () => {
+    const fixture = await loadFixture(`${chains}synthetic-enrich-batch.json`);
+    const submit = fixture.calls[0].res.body as Record<string, unknown>;
+    const child = (submit.results as Record<string, unknown>[])[0];
+    child.status = "queued";
+    delete child.billing;
+    // One extra response before the existing terminal child snapshots.
+    const pending = structuredClone(fixture.calls[1]);
+    const body = pending.res.body as Record<string, unknown>;
+    body.status = "pending";
+    delete body.billing;
+    fixture.calls.splice(1, 0, pending);
+    // Even the final read can return an unfinished snapshot. Reopen the
+    // child and require a terminal poll before the final pair of reads.
+    fixture.calls.splice(
+        3,
+        0,
+        structuredClone(pending),
+        structuredClone(fixture.calls[4]),
+        structuredClone(fixture.calls[2]),
+    );
+    const result = await runEndpoint({
+        unit: await testSealedUnit(ID),
+        input: {
+            body: { profile_ids: ["PROF_A", "PROF_B"], operation: "partial" },
+        },
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(
+        (result.output as Record<string, unknown>).status,
+        "completed",
+    );
+    assertEquals(result.usage, {
+        credits: { default: 5 },
+        evidence: { CREDIT: 5 },
+    });
+});

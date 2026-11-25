@@ -51,9 +51,9 @@ states or from the submit's status code. Rates SHALL appear only in
 - **THEN** `billing` is absent from the output
 
 ### Requirement: A run is terminal when its receipt is
-Each lifecycle SHALL keep a run open while its status is `running` OR its
-receipt's `status` is `open`, so a settle that lands after the status never
-bills a partial figure.
+A success SHALL require explicit `completed` status and no open receipt.
+A run or batch child with a status other than `completed` or `failed` SHALL
+remain pending. An open receipt SHALL keep polling before settlement.
 
 #### Scenario: A terminal status with an open receipt is read again
 - **WHEN** a status read answers `completed` with a receipt still `open`
