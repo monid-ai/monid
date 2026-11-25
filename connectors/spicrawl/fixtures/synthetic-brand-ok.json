@@ -1,0 +1,44 @@
+{
+    "name": "synthetic-brand-ok",
+    "description": "Synthetic /brand happy path (production does not serve /v1/brand yet), shaped from the OpenAPI BrandResponse for include [identity, colors]: credits=3 is the vendor meter. Replace with a recording once the endpoint ships.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "url": "https://example.com",
+                    "final_url": "https://example.com/",
+                    "credits": 3,
+                    "warnings": [],
+                    "identity": {
+                        "name": "Example",
+                        "description": "An example site.",
+                        "language": "en",
+                        "domain": "example.com",
+                        "theme_color": "#1a73e8",
+                        "tagline": "Examples, made simple",
+                        "subtitle": "",
+                        "cta": [
+                            {
+                                "text": "Get started",
+                                "url": "https://example.com/start"
+                            }
+                        ]
+                    },
+                    "colors": [
+                        {
+                            "hex": "#1a73e8",
+                            "role": "primary",
+                            "source": "theme_color",
+                            "confidence": 0.9
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

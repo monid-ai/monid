@@ -1,0 +1,27 @@
+{
+    "name": "provider-error",
+    "description": "Spicrawl rejects the request with an unrecognised API key: 401 RFC 7807 problem+json (type, title, status, code, detail). Vendor non-2xx is DATA: the engine classifies it as a provider error and forces zero usage. Recorded 2026-11-25 with a bogus key; serves all three endpoints via the {{request.url}} binding.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "type": "https://docs.spicrawl.com/docs/errors#AUTH_INVALID_KEY",
+                    "title": "API key not recognised",
+                    "status": 401,
+                    "code": "ERR::AUTH::INVALID_KEY",
+                    "detail": "That API key is not recognised.",
+                    "retryable": false,
+                    "doc_url": "https://docs.spicrawl.com/docs/errors#AUTH_INVALID_KEY",
+                    "request_id": "01HZZZZZZZZZZZZZZZZZZZZZZZ",
+                    "instance": "/v1/scrape",
+                    "target_status": null
+                }
+            }
+        }
+    ]
+}
