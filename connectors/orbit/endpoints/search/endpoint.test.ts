@@ -328,3 +328,24 @@ Deno.test({
         assert(Array.isArray(output.results));
     },
 });
+
+Deno.test("orbit search waits for completion across queued and pending responses", async () => {
+    const fixture = await loadFixture(`${chains}synthetic-search-async.json`);
+    for (const [index, status] of ["queued", "pending"].entries()) {
+        const body = fixture.calls[index].res.body as Record<string, Json>;
+        body.status = status;
+        delete body.billing;
+    }
+    const result = await runEndpoint({
+        unit: await testSealedUnit(ID),
+        input: { body: { query: "machine learning engineers", limit: 12 } },
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(result.httpStatus, 200);
+    assertEquals((result.output as Record<string, Json>).status, "completed");
+    assertEquals(result.usage, {
+        credits: { default: 2 },
+        evidence: { CREDIT: 2 },
+    });
+});
