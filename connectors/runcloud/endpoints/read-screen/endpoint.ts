@@ -21,7 +21,8 @@ export default defineEndpoint({
             "Read the accessibility tree of one of YOUR sessions' current " +
             "screen, flattened in screen order: each element's role " +
             "(button, text, text-field, switch...), label, value, " +
-            "identifier, bounds, enabled/focused state, and `center`, its " +
+            "identifier, bounds, enabled/focused/selected/checked/expanded " +
+            "state, and `center`, its " +
             "normalized tap point (pass center.x and center.y to /tap). " +
             "Structural containers with no text are skipped and the list " +
             "stops at 400 elements (`truncated` says when more exist; " +
@@ -56,7 +57,13 @@ export default defineEndpoint({
                     width: number;
                     height: number;
                 } | null;
-                states?: { enabled?: boolean; focused?: boolean | null };
+                states?: {
+                    enabled?: boolean;
+                    focused?: boolean | null;
+                    selected?: boolean | null;
+                    checked?: boolean | "mixed" | null;
+                    expanded?: boolean | null;
+                };
                 children?: AxNode[];
             };
             const snapshot = data.output as {
@@ -128,6 +135,9 @@ export default defineEndpoint({
                     },
                     enabled: node.states?.enabled ?? null,
                     focused: node.states?.focused ?? null,
+                    selected: node.states?.selected ?? null,
+                    checked: node.states?.checked ?? null,
+                    expanded: node.states?.expanded ?? null,
                 });
             }
             return {

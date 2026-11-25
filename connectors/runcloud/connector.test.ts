@@ -8,7 +8,9 @@ import {
     type PreparedRequest,
 } from "@monid/connector-engine";
 import {
+    assertInputAccepted,
     fixtureReader,
+    liveSkip,
     loadFixture,
     runEndpoint,
     testBundle,
@@ -252,6 +254,20 @@ Deno.test("runcloud start-session: the gate refuses an unbounded idle timeout an
             "INVALID_INPUT",
         );
     }
+    // the near-twin: ten assets is the vendor's limit, not past it
+    await assertInputAccepted({
+        unit,
+        input: {
+            pathParams: { platform: "ios" },
+            body: {
+                installAssets: Array.from(
+                    { length: 10 },
+                    (_, i) => `asset-${i}`,
+                ),
+            },
+        },
+        mode: "replay",
+    });
 });
 
 // ---------------------------------------------------------------------------
@@ -404,6 +420,13 @@ Deno.test("runcloud interactions: the gate enforces the SDK's own bounds", async
         ["runcloud#press-key", { key: "F1" }],
         ["runcloud#press-button", { button: "camera" }],
         ["runcloud#open-url", { url: "not a url" }],
+        ["runcloud#open-url", { url: "file:///tmp/a" }],
+        ["runcloud#open-url", { url: "JavaScript:alert(1)" }],
+        ["runcloud#open-url", { url: "https://example.com/%" }],
+        ["runcloud#open-url", { url: "https://example.com/%zz" }],
+        ["runcloud#open-url", { url: "https:///path" }],
+        ["runcloud#open-url", { url: "https:example.com" }],
+        ["runcloud#open-url", { url: "https://example.com/\u0007" }],
     ];
     for (const [id, body] of rejected) {
         await assertRejects(
@@ -421,6 +444,26 @@ Deno.test("runcloud interactions: the gate enforces the SDK's own bounds", async
     }
 });
 
+Deno.test("runcloud open-url: the gate still lets real links and app schemes through", async () => {
+    const unit = await testSealedUnit("runcloud#open-url");
+    for (
+        const url of [
+            "https://example.com/a%20b?q=1#top",
+            "http://localhost:8081",
+            "myapp://settings",
+            "exp://192.168.1.10:8081",
+            "mailto:someone@example.com",
+        ]
+    ) {
+        await assertInputAccepted({
+            unit,
+            input: { pathParams: SESSION, body: { url } },
+            mode: "replay",
+            resources: OWNED,
+        });
+    }
+});
+
 Deno.test("runcloud read-screen: flat, screen-ordered, containers skipped, tap-ready centers", async () => {
     const result = await runEndpoint({
         unit: await testSealedUnit("runcloud#read-screen"),
@@ -433,12 +476,13 @@ Deno.test("runcloud read-screen: flat, screen-ordered, containers skipped, tap-r
     const out = result.output as Record<string, Json>;
     assertEquals(out.screen, { width: 400, height: 800, unit: "points" });
     assertEquals(out.truncated, false);
-    assertEquals(out.nodeCount, 3);
+    assertEquals(out.nodeCount, 4);
     const nodes = out.nodes as Record<string, Json>[];
     assertEquals(nodes.map((node) => node.label), [
         "Sign in",
         "Email",
         "Continue",
+        "Remember me",
     ]);
     assertEquals(nodes[0], {
         depth: 2,
@@ -451,12 +495,19 @@ Deno.test("runcloud read-screen: flat, screen-ordered, containers skipped, tap-r
         center: { x: 0.301, y: 0.151 },
         enabled: true,
         focused: null,
+        selected: null,
+        checked: null,
+        expanded: null,
     });
     assertEquals(nodes[1].identifier, "email-input");
     assertEquals(nodes[1].focused, true);
     // (100 + 100) / 400, (600 + 25) / 800
     assertEquals(nodes[2].center, { x: 0.5, y: 0.781 });
     assertEquals(nodes[2].enabled, false);
+    // a toggle's state survives the projection, so an agent can verify it
+    assertEquals(nodes[3].role, "switch");
+    assertEquals(nodes[3].checked, true);
+    assertEquals(nodes[3].selected, false);
 });
 
 Deno.test("runcloud read-screen: stops at 400 elements and says so", async () => {
@@ -553,4 +604,71 @@ Deno.test("runcloud device-logs: the vendor's 200-line default rides on the wire
         Error,
         "INVALID_INPUT",
     );
+});
+
+// ---------------------------------------------------------------------------
+// live (gated on RUNCLOUD_API_KEY): shapes only, and the session is always
+// released, so a run costs about a minute of simulator time
+// ---------------------------------------------------------------------------
+
+Deno.test({
+    name: "runcloud live: start, read, read-screen and stop a real iOS session",
+    ignore: liveSkip("runcloud"),
+    fn: async () => {
+        const started = await runEndpoint({
+            unit: await testSealedUnit("runcloud#start-session"),
+            input: {
+                pathParams: { platform: "ios" },
+                body: { inactivityTimeout: "2m", hardTimeout: "5m" },
+            },
+            mode: "live",
+        });
+        assertEquals(
+            started.isProviderError,
+            false,
+            JSON.stringify(started.output),
+        );
+        const session = started.output as Record<string, Json>;
+        const sessionId = session.id as string;
+        assertEquals(typeof sessionId, "string");
+        assertEquals(session.orgId, undefined);
+        const owned: OwnedResource[] = [{
+            resource: "runcloud/simulator-session",
+            externalId: sessionId,
+            data: { platform: "ios" },
+        }];
+        const pathParams = { platform: "ios", sessionId };
+        try {
+            const got = await runEndpoint({
+                unit: await testSealedUnit("runcloud#get-session"),
+                input: { pathParams },
+                mode: "live",
+                resources: owned,
+            });
+            assertEquals(got.isProviderError, false);
+            assertEquals((got.output as Record<string, Json>).id, sessionId);
+            const screen = await runEndpoint({
+                unit: await testSealedUnit("runcloud#read-screen"),
+                input: { pathParams },
+                mode: "live",
+                resources: owned,
+            });
+            assertEquals(screen.isProviderError, false);
+            const out = screen.output as Record<string, Json>;
+            assert(Array.isArray(out.nodes));
+            assertEquals(typeof out.nodeCount, "number");
+        } finally {
+            const stopped = await runEndpoint({
+                unit: await testSealedUnit("runcloud#stop-session"),
+                input: { pathParams },
+                mode: "live",
+                resources: owned,
+            });
+            assertEquals(stopped.isProviderError, false);
+            assertEquals(
+                (stopped.output as Record<string, Json>).status,
+                "released",
+            );
+        }
+    },
 });

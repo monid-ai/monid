@@ -193,6 +193,41 @@
                                                 "help": null
                                             },
                                             "children": []
+                                        },
+                                        {
+                                            "id": "n4",
+                                            "path": "0.0.2",
+                                            "role": "switch",
+                                            "label": "Remember me",
+                                            "value": null,
+                                            "identifier": "remember-switch",
+                                            "bounds": {
+                                                "x": 100,
+                                                "y": 700,
+                                                "width": 200,
+                                                "height": 40
+                                            },
+                                            "states": {
+                                                "enabled": true,
+                                                "focused": false,
+                                                "selected": false,
+                                                "checked": true,
+                                                "expanded": null,
+                                                "focusable": true,
+                                                "clickable": true,
+                                                "scrollable": null,
+                                                "editable": false,
+                                                "secure": false
+                                            },
+                                            "native": {
+                                                "platform": "ios",
+                                                "type": "Button",
+                                                "roleDescription": null,
+                                                "subrole": null,
+                                                "title": null,
+                                                "help": null
+                                            },
+                                            "children": []
                                         }
                                     ]
                                 }

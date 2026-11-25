@@ -5,7 +5,7 @@
         {
             "req": {
                 "method": "POST",
-                "url": "https://api.run.cloud/run-cloud/ios",
+                "url": "{{request.origin}}/run-cloud/ios",
                 "body": {
                     "inactivityTimeout": "2m",
                     "hardTimeout": "5m"
