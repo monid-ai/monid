@@ -1,0 +1,27 @@
+{
+    "v1/image/gpt-image-2": {
+        "prompt": "A cozy bookstore cafe on a rainy evening, cinematic wide shot",
+        "aspect_ratio": "16:9"
+    },
+    "v1/image/nano-banana-2-1": {
+        "prompt": "A cozy bookstore cafe on a rainy evening, warm window light, a hand-painted sign reading OPEN LATE above the door, cinematic wide shot",
+        "aspect_ratio": "16:9"
+    },
+    "v1/image/gemini-3-pro-image": {
+        "prompt": "A cozy bookstore cafe on a rainy evening, cinematic wide shot",
+        "aspect_ratio": "16:9"
+    },
+    "v1/video/veo-3.1-fast-hd": {
+        "prompt": "A paper boat drifting down a rain-filled street gutter at dusk, close tracking shot, soft rain sounds",
+        "aspect_ratio": "16:9"
+    },
+    "v1/video/veo-3.1-fast-fhd": {
+        "prompt": "A paper boat drifting down a rain-filled street gutter at dusk, close tracking shot, soft rain sounds",
+        "aspect_ratio": "16:9"
+    },
+    "v1/video/seedance-2.0": {
+        "prompt": "A paper boat drifting down a rain-filled street gutter at dusk, close tracking shot",
+        "resolution": "480p",
+        "duration": 4
+    }
+}

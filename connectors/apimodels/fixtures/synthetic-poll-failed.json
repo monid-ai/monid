@@ -1,0 +1,39 @@
+{
+    "name": "synthetic-poll-failed",
+    "description": "SYNTHETIC: the create succeeds, then OUR task query answers 503. The task is very likely still generating, so the poll THROWS (retriable) rather than settling a provider error and abandoning it.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "code": 200,
+                    "msg": "success",
+                    "data": {
+                        "taskId": "cmsynth0000000000000000001",
+                        "state": "pending",
+                        "model": "nano-banana-2-1",
+                        "reservedCredits": 0.022,
+                        "currency": "USD"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?task_id=cmsynth0000000000000000001"
+            },
+            "res": {
+                "status": 503,
+                "body": {
+                    "code": 503,
+                    "msg": "Service Unavailable"
+                }
+            }
+        }
+    ]
+}
