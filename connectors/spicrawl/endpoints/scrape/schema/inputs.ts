@@ -18,7 +18,7 @@ import { z } from "zod";
  */
 
 export const zScrapeBody = z.object({
-    url: z.url().max(8192).describe(
+    url: z.url().max(8192).regex(/^https?:\/\/[^\s/?#]+/i).describe(
         "Target URL; required, must be http or https with a host. A private " +
             "or reserved address fails with 400 ERR::SECURITY::SSRF_BLOCKED at " +
             "0 credits.",

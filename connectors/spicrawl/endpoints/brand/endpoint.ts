@@ -4,10 +4,10 @@ import { zBrandBody } from "./schema/inputs.ts";
 /**
  * `POST /v1/brand` — a site's brand assets from one rendered page load.
  *
- * BILLING: one PER_UNIT line on `Unit.CREDIT`. The estimate is the flat
- * ~3-credit render. `screenshot: true` bills the full-browser tier, which the
- * estimate does not deduce (no published figure per request); the vendor's
- * reported `credits` settles the true charge.
+ * BILLING: one PER_UNIT line on `Unit.CREDIT`. A brand request is priced as
+ * full-browser rendering, 8 credits on every request, screenshot or not
+ * (https://docs.spicrawl.com/guides/brand); the vendor's reported `credits`
+ * settles the true charge.
  */
 export default defineEndpoint({
     meta: {
@@ -22,8 +22,9 @@ export default defineEndpoint({
             "the sections you need with `include`. Links only: the API never " +
             "returns asset bytes and never rehosts a file, and it returns " +
             "platform or embed links for video, never direct media files. " +
-            "Costs about 3 credits per call. Set `screenshot` to also get an " +
-            "image of the rendered page, which bills the full-browser tier.",
+            "Costs 8 credits per call (full-browser rendering). Set " +
+            "`screenshot` to also get an image of the rendered page at no " +
+            "extra charge.",
         docsUrl: "https://docs.spicrawl.com",
         categories: ["web-extraction"],
     },
@@ -37,7 +38,7 @@ export default defineEndpoint({
             consumes: { credit: "default", amount: 1 },
             label: "brand",
         },
-        estimate: () => ({ counts: { CREDIT: 3 } }),
+        estimate: () => ({ counts: { CREDIT: 8 } }),
         evidence: ({ data, utils }) => {
             const credits = utils.json.optionalNum(data.output, "$.credits");
             return {

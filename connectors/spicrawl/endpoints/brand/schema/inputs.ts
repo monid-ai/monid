@@ -10,7 +10,7 @@ import { z } from "zod";
  */
 
 export const zBrandBody = z.object({
-    url: z.url().describe(
+    url: z.url().regex(/^https?:\/\/[^\s/?#]+/i).describe(
         "Page to read. Required; must be http or https with a host. Private " +
             "and reserved addresses are refused, as on /v1/scrape.",
     ),

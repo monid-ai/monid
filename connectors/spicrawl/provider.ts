@@ -12,7 +12,7 @@ import { defineProvider, presets } from "@shared/core";
  * Prices (https://docs.spicrawl.com/credits, 2026-11-25): scrape 1 credit
  * plain, 3 with `js_render`, 8 full-browser, +5 for a captcha solve; job
  * search flat 2 (https://docs.spicrawl.com/guides/job-search#pricing); brand
- * about 3 (https://docs.spicrawl.com/guides/brand).
+ * 8, as full-browser rendering (https://docs.spicrawl.com/guides/brand).
  *
  * `usage.consolidate` is the vendor's own meter: `$.credits` (scrape, brand)
  * or `$.credits_used` (jobs/search), both absorbed out of the payload. An

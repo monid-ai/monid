@@ -26,7 +26,7 @@ into `{message, code?, raw}`.
 
 ### Requirement: Scrape estimate is deduced from the request
 `spicrawl#scrape` SHALL estimate 1 credit for a plain fetch, 3 with
-`js_render`, 8 with `mode: "auto"` or `solve_captcha`, plus 5 with
+`js_render`, 8 with `mode: "auto"`, `solve_captcha` or `scroll_pages > 0`, plus 5 with
 `solve_captcha`, capped by a positive `max_cost`, and SHALL send
 `response_format: "json"` on every call.
 
@@ -35,14 +35,28 @@ into `{message, code?, raw}`.
   `{js_render, solve_captcha}` and `{js_render, max_cost: 2}`
 - **THEN** it is 1, 3, 8, 13 and 2 credits
 
+#### Scenario: Scrolling is full-browser
+- **WHEN** the estimate runs for `{js_render, scroll_pages: 1}` and
+  `{js_render, scroll_pages: 0}`
+- **THEN** it is 8 and 3 credits
+
+### Requirement: Brand bills full-browser rendering
+`spicrawl#brand` SHALL estimate 8 credits on every request, with or without
+`screenshot`.
+
+#### Scenario: Flat brand price
+- **WHEN** a brand call settles with the vendor's `credits: 8`
+- **THEN** usage is `{credits: {default: 8}, evidence: {CREDIT: 8}}`
+
 ### Requirement: Bodies are strict and omit shared-key state
 Every body schema SHALL be `.strict()`. `spicrawl#scrape` SHALL NOT accept
 `session_id`, `spicrawl#jobs/search` SHALL NOT accept `find_contacts`, and
-`spicrawl#brand` SHALL reject unknown keys.
+`spicrawl#brand` SHALL reject unknown keys. Both `url` fields SHALL match
+`^https?://` followed by a host.
 
 #### Scenario: Rejected near-valid input
 - **WHEN** a valid body also carries `session_id` (scrape), `find_contacts`
-  (job search) or an unknown key (brand)
+  (job search), an unknown key (brand) or a non-http(s) `url` (scrape, brand)
 - **THEN** the run fails with `INVALID_INPUT`, while the same body without that
   key passes validation
 

@@ -13,7 +13,7 @@
       `usage.consolidate`, RFC 7807 `output.fromError`, price citations
 - [x] 2.2 `scrape` — strict mirror, `toRequest` pins json, deduced estimate
 - [x] 2.3 `jobs-search` — strict mirror without `find_contacts`, flat 2
-- [x] 2.4 `brand` — strict mirror, flat 3
+- [x] 2.4 `brand` — strict mirror, flat 8 (full-browser rendering)
 
 ## 3. Fixtures + tests
 

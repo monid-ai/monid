@@ -21,8 +21,9 @@ and a vendor-reported credit meter, so nothing needs a new engine capability.
   `credits` (scrape, brand) or `credits_used` (job search) out of the payload
   and it becomes the claim; an absent field leaves the derived fold.
 - **Scrape estimate deduced from the request**: plain 1, `js_render` 3,
-  `mode: "auto"` or `solve_captcha` 8 (full browser), +5 for a captcha solve,
-  capped by `max_cost`. `input.toRequest` pins `response_format: "json"` so the
+  `mode: "auto"`, `solve_captcha` or `scroll_pages > 0` 8 (full browser), +5
+  for a captcha solve, capped by `max_cost`. Brand is flat 8: a brand request
+  is priced as full-browser rendering. `input.toRequest` pins `response_format: "json"` so the
   body is always the envelope that carries `credits`.
 - **Strict bodies.** Each `schema/inputs.ts` mirrors the OpenAPI field for field
   but is `.strict()` and omits the fields below, so they cannot be passed.

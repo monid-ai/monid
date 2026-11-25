@@ -6,7 +6,7 @@ import { zScrapeBody } from "./schema/inputs.ts";
  *
  * BILLING (one PER_UNIT line, one credit per unit). The estimate is deduced
  * from the request: a plain fetch is 1 credit; `js_render` is 3; `mode:"auto"`
- * and `solve_captcha` both select full-browser rendering, reserved at 8 (auto
+ * and `solve_captcha` and `scroll_pages > 0` all select full-browser rendering, reserved at 8 (auto
  * may escalate and bills only the rung that succeeded, so 8 is a ceiling);
  * `solve_captcha` adds a 5-credit solve surcharge on top. `max_cost`, when
  * set, caps the estimate. Settle is the vendor's reported `credits`.
@@ -62,7 +62,7 @@ export default defineEndpoint({
         estimate: ({ data }) => {
             const body = data.input.body;
             const browser = body.solve_captcha === true ||
-                body.mode === "auto";
+                body.mode === "auto" || (body.scroll_pages ?? 0) > 0;
             const rung = browser ? 8 : body.js_render === true ? 3 : 1;
             const surcharge = body.solve_captcha === true ? 5 : 0;
             const total = rung + surcharge;

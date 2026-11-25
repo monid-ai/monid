@@ -1,6 +1,6 @@
 {
     "name": "synthetic-brand-ok",
-    "description": "Synthetic /brand happy path (production does not serve /v1/brand yet), shaped from the OpenAPI BrandResponse for include [identity, colors]: credits=3 is the vendor meter. Replace with a recording once the endpoint ships.",
+    "description": "Synthetic /brand happy path (production does not serve /v1/brand yet), shaped from the OpenAPI BrandResponse for include [identity, colors]: credits=8 is the vendor meter. Replace with a recording once the endpoint ships.",
     "calls": [
         {
             "req": {
@@ -12,7 +12,7 @@
                 "body": {
                     "url": "https://example.com",
                     "final_url": "https://example.com/",
-                    "credits": 3,
+                    "credits": 8,
                     "warnings": [],
                     "identity": {
                         "name": "Example",

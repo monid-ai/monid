@@ -25,6 +25,8 @@ const RATE: [Record<string, unknown>, number][] = [
     [{ js_render: true }, 3],
     [{ mode: "auto" }, 8],
     [{ js_render: true, solve_captcha: true }, 13],
+    [{ js_render: true, scroll_pages: 1 }, 8], // scrolling is full-browser
+    [{ js_render: true, scroll_pages: 0 }, 3],
     [{ js_render: true, max_cost: 2 }, 2], // max_cost caps the estimate
     [{ mode: "auto", max_cost: 20 }, 8],
     [{ js_render: true, max_cost: 0 }, 3], // 0 means no ceiling
@@ -89,6 +91,15 @@ Deno.test("spicrawl#scrape: shared-key state (session_id) is rejected, its twin 
         })
     );
     assert(String(err).includes("INVALID_INPUT"), String(err));
+    const ftp = await assertRejects(() =>
+        runEndpoint({
+            unit,
+            input: { body: { url: "ftp://example.com" } },
+            mode: "replay",
+            fixture,
+        })
+    );
+    assert(String(ftp).includes("INVALID_INPUT"), String(ftp));
     await assertInputAccepted({
         unit,
         input: { body: { url, js_render: true, cache: false } },

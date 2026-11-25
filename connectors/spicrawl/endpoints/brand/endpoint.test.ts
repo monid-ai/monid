@@ -23,10 +23,10 @@ Deno.test("spicrawl#brand happy (synthetic): `credits` claim wins and leaves the
     });
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
-    // claim and evidence agree (3), so no mismatch rides out
+    // claim and evidence agree (8), so no mismatch rides out
     assertEquals(result.usage, {
-        credits: { default: 3 },
-        evidence: { CREDIT: 3 },
+        credits: { default: 8 },
+        evidence: { CREDIT: 8 },
     });
     const output = result.output as Record<string, unknown>;
     assertEquals("credits" in output, false);
@@ -60,6 +60,15 @@ Deno.test("spicrawl#brand: the body is strict — an unknown key is rejected, it
         })
     );
     assert(String(err).includes("INVALID_INPUT"), String(err));
+    const ftp = await assertRejects(() =>
+        runEndpoint({
+            unit,
+            input: { body: { ...body, url: "ftp://example.com" } },
+            mode: "replay",
+            fixture,
+        })
+    );
+    assert(String(ftp).includes("INVALID_INPUT"), String(ftp));
     await assertInputAccepted({
         unit,
         input: { body: { ...body, screenshot: true } },
