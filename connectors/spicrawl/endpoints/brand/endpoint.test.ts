@@ -10,11 +10,11 @@ import {
 
 const fixturesDir = fromFileUrl(new URL("../../fixtures/", import.meta.url));
 const ID = "spicrawl#brand";
-const body = { url: "https://example.com", include: ["identity", "colors"] };
+const body = { url: "https://example.com" };
 
-Deno.test("spicrawl#brand happy (synthetic): `credits` claim wins and leaves the payload", async () => {
+Deno.test("spicrawl#brand happy: `credits` claim wins and leaves the payload", async () => {
     const unit = await testSealedUnit(ID);
-    const fixture = await loadFixture(`${fixturesDir}synthetic-brand-ok.json`);
+    const fixture = await loadFixture(`${fixturesDir}brand-ok.json`);
     const result = await runEndpoint({
         unit,
         input: { body },
@@ -30,7 +30,7 @@ Deno.test("spicrawl#brand happy (synthetic): `credits` claim wins and leaves the
     });
     const output = result.output as Record<string, unknown>;
     assertEquals("credits" in output, false);
-    assertEquals((output.colors as unknown[]).length, 1);
+    assertEquals((output.colors as unknown[]).length, 2);
     assertEquals(output.final_url, "https://example.com/");
 });
 
@@ -50,7 +50,7 @@ Deno.test("spicrawl#brand provider error: 401 problem+json is data, zero usage",
 
 Deno.test("spicrawl#brand: the body is strict — an unknown key is rejected, its twin passes", async () => {
     const unit = await testSealedUnit(ID);
-    const fixture = await loadFixture(`${fixturesDir}synthetic-brand-ok.json`);
+    const fixture = await loadFixture(`${fixturesDir}brand-ok.json`);
     const err = await assertRejects(() =>
         runEndpoint({
             unit,

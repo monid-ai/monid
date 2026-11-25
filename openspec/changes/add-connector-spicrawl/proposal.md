@@ -27,8 +27,8 @@ and a vendor-reported credit meter, so nothing needs a new engine capability.
   body is always the envelope that carries `credits`.
 - **Strict bodies.** Each `schema/inputs.ts` mirrors the OpenAPI field for field
   but is `.strict()` and omits the fields below, so they cannot be passed.
-- Real recorded fixtures (scrape, job search, provider error) plus one
-  synthetic brand chain, as provider-level shared chains.
+- Real recorded fixtures (scrape, job search, brand, provider error) as
+  provider-level shared chains.
 
 ## Capabilities
 

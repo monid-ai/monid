@@ -17,9 +17,9 @@
 
 ## 3. Fixtures + tests
 
-- [x] 3.1 Record scrape, job search and a 401 via `deno task record`
+- [x] 3.1 Record scrape, job search, brand and a 401 via `deno task record`
 - [x] 3.2 Minimize into provider-level chains: scrape-ok, jobs-search-ok,
-      provider-error, synthetic-brand-ok (production does not serve brand yet)
+      provider-error, brand-ok
 - [x] 3.3 Per-endpoint tests: happy, provider error, schema gate with twin, live
 - [x] 3.4 Scrape literal rate table; provider fn-provenance test
 
