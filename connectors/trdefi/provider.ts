@@ -18,7 +18,7 @@ export default defineProvider({
             "Live non-custodial stablecoin liquidity catalogue: strategies, chains, quotes — free.",
         description: "TRDEFI Liquidity is a live, read-only roll-up of the " +
             "open non-custodial liquidity catalogue: maker positions quoting " +
-            "on-chain, across 20 networks including Ethereum, Base, " +
+            "on-chain, across 17 networks including Ethereum, Base, " +
             "Arbitrum, Optimism, Polygon and Arc. Six free endpoints " +
             "describe the catalogue at three depths — platform totals " +
             "(strategies, makers, pairs, settled volume), per-network and " +
