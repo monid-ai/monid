@@ -106,3 +106,36 @@ Deno.test("ploid#v1/agent: shared-workspace fields and v1's dollar knob are unkn
         );
     }
 });
+
+Deno.test("ploid agent rejects an in-flight submission without a usable run ID", async () => {
+    const unit = await testSealedUnit("ploid#v1/agent");
+    for (const status of ["queued", "running"]) {
+        for (const run_id of [undefined, "", "   ", 123, null]) {
+            const result = await runEndpoint({
+                unit,
+                input: { body: { prompt: PROMPT, max_acu: 12 } },
+                mode: "replay",
+                fixture: {
+                    name: "missing-run-id",
+                    description: "Accepted submission without a usable handle",
+                    calls: [{
+                        req: { method: "POST", url: unit.doc.request.url },
+                        res: {
+                            status: 202,
+                            body: {
+                                data: {
+                                    status,
+                                    ...(run_id === undefined ? {} : { run_id }),
+                                },
+                            },
+                        },
+                    }],
+                },
+            });
+            assertEquals(result.httpStatus, 502);
+            assertEquals(result.providerHttpStatus, 202);
+            assertEquals(result.isProviderError, true);
+            assertEquals(result.usage, { credits: {}, evidence: {} });
+        }
+    }
+});

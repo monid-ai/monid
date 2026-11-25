@@ -78,7 +78,7 @@ export default defineEndpoint({
             const pollUrl = utils.json.optionalGet(res.body, "$.data.poll_url");
             if (
                 (status === "queued" || status === "running") &&
-                typeof runId === "string" && runId !== ""
+                typeof runId === "string" && runId.trim() !== ""
             ) {
                 return {
                     kind: "RUNNING",
@@ -103,6 +103,18 @@ export default defineEndpoint({
                         : 502,
                     providerHttpStatus: res.status,
                     output: res.body,
+                };
+            }
+            if (status === "queued" || status === "running") {
+                return {
+                    kind: "COMPLETED",
+                    httpStatus: 502,
+                    providerHttpStatus: res.status,
+                    output: {
+                        error: {
+                            message: "Ploid did not return a usable run_id",
+                        },
+                    },
                 };
             }
             return {

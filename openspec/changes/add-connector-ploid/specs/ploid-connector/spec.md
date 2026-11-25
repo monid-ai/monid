@@ -27,7 +27,9 @@ the ACU balance fields from `meta`, drops an emptied `meta`, and keeps
 `POST /v1/agent` SHALL declare endpoint-level `lifecycle.start` and
 `lifecycle.poll` with `timeouts.pollMs` 5000 and `runMs` 600000; a 2xx
 with `data.status` queued/running SHALL park RUNNING with
-`externalRunId = data.run_id`; the poll SHALL GET the stashed
+`externalRunId = data.run_id` when the ID is a nonblank string. An accepted
+queued/running response without a usable ID or a top-level provider error
+SHALL complete as HTTP 502 with the original provider status. The poll SHALL GET the stashed
 `data.poll_url`; a 2xx body with a top-level `error` SHALL complete with
 providerHttpStatus 200 and `httpStatus` = `error.http_status` when that is
 an integer in 400–599, else 502; the
