@@ -1,0 +1,59 @@
+{
+    "name": "brand-ok",
+    "description": "Sync /brand happy path for https://example.com (recorded 2026-11-25, no include filter, so every section is present; the page has no logos, fonts or socials): credits=8 is the vendor meter, as /brand bills full-browser rendering. Settles 8 credits, evidence {CREDIT: 8}.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "colors": [
+                        {
+                            "confidence": 0.5,
+                            "hex": "#000000",
+                            "role": "text",
+                            "source": "computed"
+                        },
+                        {
+                            "confidence": 0.5,
+                            "hex": "#0000ee",
+                            "role": "link",
+                            "source": "computed"
+                        }
+                    ],
+                    "credits": 8,
+                    "engine": "browser",
+                    "final_url": "https://example.com/",
+                    "fonts": [],
+                    "icons": [
+                        {
+                            "rel": "fallback",
+                            "sizes": "",
+                            "type": "",
+                            "url": "https://example.com/favicon.ico"
+                        }
+                    ],
+                    "identity": {
+                        "cta": [],
+                        "description": "",
+                        "domain": "example.com",
+                        "language": "en",
+                        "name": "Example Domain",
+                        "subtitle": "",
+                        "tagline": "",
+                        "theme_color": null
+                    },
+                    "images": [],
+                    "logos": [],
+                    "socials": [],
+                    "url": "https://example.com",
+                    "videos": [],
+                    "warnings": []
+                }
+            }
+        }
+    ]
+}

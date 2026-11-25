@@ -1,0 +1,40 @@
+{
+    "name": "scrape-ok",
+    "description": "Sync /scrape happy path for https://example.com (recorded 2026-11-25, plain fetch): the JSON envelope carries the vendor's own credits=1 meter and the target status. Settles 1 credit, evidence {CREDIT: 1}. The target's response headers are kept as received.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "content": "Example Domain\n\nThis domain is for use in documentation examples without needing permission. This is not a service; avoid relying on it for testing and monitoring purposes.\n",
+                    "credits": 1,
+                    "engine": "fetch",
+                    "final_url": "https://example.com/",
+                    "headers": {
+                        "age": "5670",
+                        "allow": "GET, HEAD",
+                        "alt-svc": "h3=\":443\"; ma=86400",
+                        "cf-cache-status": "HIT",
+                        "cf-ray": "a6003ce57e75ed5c-MXP",
+                        "content-type": "text/html; charset=utf-8",
+                        "date": "Wed, 25 Nov 2026 11:15:51 GMT",
+                        "last-modified": "Tue, 24 Nov 2026 17:35:01 GMT",
+                        "server": "cloudflare"
+                    },
+                    "notes": [
+                        "This page loads scripts, and a plain fetch does not run them, so text the page builds in the browser may be missing. Set `js_render` to true to get the page as a browser shows it."
+                    ],
+                    "proxy_source": "pool",
+                    "status": 200,
+                    "truncated": false,
+                    "url": "https://example.com",
+                    "warnings": []
+                }
+            }
+        }
+    ]
+}

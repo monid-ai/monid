@@ -1,0 +1,73 @@
+{
+    "name": "jobs-search-ok",
+    "description": "Sync /jobs/search happy path for title 'backend engineer' (recorded 2026-11-25, two postings, `people` empty): credits_used=2 is the vendor meter and next_cursor is the paging token. Settles 2 credits, evidence {CREDIT: 2}.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "jobs": [
+                        {
+                            "id": "ashby:feca2297-2530-4596-beb2-38daa7e8a453",
+                            "platform": "ashby",
+                            "title": "Senior Backend Engineer - Money Movements Squad",
+                            "company": "Thndr",
+                            "company_url": "",
+                            "url": "https://jobs.ashbyhq.com/thndr/feca2297-2530-4596-beb2-38daa7e8a453",
+                            "apply_url": "https://jobs.ashbyhq.com/thndr/feca2297-2530-4596-beb2-38daa7e8a453/application",
+                            "location": "Cairo Office",
+                            "country": "Egypt",
+                            "country_code": "EG",
+                            "workplace": "hybrid",
+                            "seniority": "senior",
+                            "employment_type": "full_time",
+                            "skills": [
+                                "csharp",
+                                "dotnet"
+                            ],
+                            "language": "en",
+                            "visa_sponsorship": "unknown",
+                            "posted_at": "2026-11-24T13:49:35Z",
+                            "status": "open",
+                            "first_seen_at": "2026-11-24T14:06:50Z",
+                            "last_seen_at": "2026-11-24T14:06:50Z",
+                            "people": []
+                        },
+                        {
+                            "id": "ashby:63a4b1b3-da9b-4501-88c1-4f635e519339",
+                            "platform": "ashby",
+                            "title": "Senior Backend Engineer - Feed Squad",
+                            "company": "Thndr",
+                            "company_url": "",
+                            "url": "https://jobs.ashbyhq.com/thndr/63a4b1b3-da9b-4501-88c1-4f635e519339",
+                            "apply_url": "https://jobs.ashbyhq.com/thndr/63a4b1b3-da9b-4501-88c1-4f635e519339/application",
+                            "location": "Cairo Office",
+                            "country": "Egypt",
+                            "country_code": "EG",
+                            "workplace": "hybrid",
+                            "seniority": "senior",
+                            "employment_type": "full_time",
+                            "skills": [
+                                "csharp",
+                                "dotnet"
+                            ],
+                            "language": "en",
+                            "visa_sponsorship": "unknown",
+                            "posted_at": "2026-11-24T13:48:19Z",
+                            "status": "open",
+                            "first_seen_at": "2026-11-24T14:06:50Z",
+                            "last_seen_at": "2026-11-24T14:06:50Z",
+                            "people": []
+                        }
+                    ],
+                    "next_cursor": "eyJ0IjoiMjAyNi0xMS0yNFQxOToxNDoyOC4yMTgrMDU6MzAiLCJwIjoiYXNoYnkiLCJlIjoiMzEyNWVjNWYtNGZmMy00ZWQwLTliNzEtYjY5YjUyOTUxNTljIn0",
+                    "credits_used": 2
+                }
+            }
+        }
+    ]
+}
