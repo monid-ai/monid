@@ -10,10 +10,12 @@ on the provider would turn nine synchronous docs into lifecycle docs for
 no reason, so the agent doc declares its own start / poll / state (the
 hunterio email-verifier posture; owner 2026-09-15). `start` relays the
 compiled request, parks RUNNING on a 2xx whose `data.status` is
-queued/running (stashing `data.poll_url` in typed state), completes a 2xx
+queued/running with a nonblank run ID (stashing `data.poll_url` in typed state),
+completes a 2xx
 top-level `error` under its `http_status` (400–599, else 502) over
 providerHttpStatus 200 (D12 of add-async-run-protocol), and relays every
-other answer as data. `poll` GETs the stashed path (falling back to
+other answer as data. An in-flight response with no usable run ID or
+provider error returns 502 with the original provider status. `poll` GETs the stashed path (falling back to
 `/v1/agent/runs/{id}`) with the same terminal mapping; queued/running
 returns RUNNING with no state (carry-forward, D21). No `stop`: the vendor
 documents no cancel operation.
