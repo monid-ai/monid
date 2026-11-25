@@ -1,0 +1,96 @@
+{
+    "name": "recorded-image-task-succeeded",
+    "description": "RECORDED 2026-11-25 with `deno task record` against apimodels#v1/image/nano-banana-2-1 (1K, 16:9; about 25 s). Minimized to create + one processing tick + completed (the live run polled processing four times); the account id inside the task and the API-key id inside the `param` echo are replaced with placeholders. The completed task reports credits 0.0211 USD: the recording account carries a 4% volume discount, so the claim sits below the 0.022 list fold and the run carries mismatch.derived. One chain serves every image endpoint — they share the create/poll contract and differ only in the pinned model and the list rate. {{request.url}} binds per endpoint.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "code": 200,
+                    "msg": "success",
+                    "data": {
+                        "taskId": "cmwvwexh5064lot01juusa2dw",
+                        "state": "pending",
+                        "model": "nano-banana-2-1",
+                        "reservedCredits": 0.0211,
+                        "currency": "USD"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?task_id=cmwvwexh5064lot01juusa2dw"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "code": 200,
+                    "msg": "success",
+                    "data": {
+                        "taskId": "cmwvwexh5064lot01juusa2dw",
+                        "state": "processing",
+                        "model": "nano-banana-2-1",
+                        "userId": "redacted-user-id",
+                        "resultJson": null,
+                        "failCode": null,
+                        "failMsg": null,
+                        "costTime": null,
+                        "createTime": 1795597540601,
+                        "completeTime": null,
+                        "credits": 0,
+                        "currency": "USD",
+                        "param": "{\"input\":{\"prompt\":\"A cozy bookstore cafe on a rainy evening, warm window light, a hand-painted sign reading OPEN LATE above the door, cinematic wide shot\",\"imageSize\":\"1K\",\"aspect_ratio\":\"16:9\"},\"model\":\"nano-banana-2-1\",\"apiKeyId\":\"redacted-api-key-id\",\"entryHost\":\"api.apimodels.app\"}",
+                        "modelDisplayName": "Nano Banana 2.1",
+                        "modelType": "TEXT_TO_IMAGE"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?task_id=cmwvwexh5064lot01juusa2dw"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "code": 200,
+                    "msg": "success",
+                    "data": {
+                        "taskId": "cmwvwexh5064lot01juusa2dw",
+                        "state": "completed",
+                        "model": "nano-banana-2-1",
+                        "userId": "redacted-user-id",
+                        "resultUrls": [
+                            "https://r2.apimodels.app/images/cmwvwexh5064lot01juusa2dw.jpeg"
+                        ],
+                        "images": [
+                            {
+                                "url": "https://r2.apimodels.app/images/cmwvwexh5064lot01juusa2dw.jpeg",
+                                "width": 1376,
+                                "height": 768
+                            }
+                        ],
+                        "resultJson": "{\"images\":[{\"url\":\"https://r2.apimodels.app/images/cmwvwexh5064lot01juusa2dw.jpeg\",\"width\":1376,\"height\":768}],\"resultUrls\":[\"https://r2.apimodels.app/images/cmwvwexh5064lot01juusa2dw.jpeg\"]}",
+                        "failCode": null,
+                        "failMsg": null,
+                        "costTime": 24273,
+                        "createTime": 1795597540601,
+                        "completeTime": 1795597565760,
+                        "credits": 0.0211,
+                        "currency": "USD",
+                        "param": "{\"input\":{\"prompt\":\"A cozy bookstore cafe on a rainy evening, warm window light, a hand-painted sign reading OPEN LATE above the door, cinematic wide shot\",\"imageSize\":\"1K\",\"aspect_ratio\":\"16:9\"},\"model\":\"nano-banana-2-1\",\"apiKeyId\":\"redacted-api-key-id\",\"entryHost\":\"api.apimodels.app\"}",
+                        "modelDisplayName": "Nano Banana 2.1",
+                        "modelType": "TEXT_TO_IMAGE"
+                    }
+                }
+            }
+        }
+    ]
+}

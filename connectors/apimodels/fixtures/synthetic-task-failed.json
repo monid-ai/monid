@@ -1,0 +1,87 @@
+{
+    "name": "synthetic-task-failed",
+    "description": "SYNTHETIC, in the recorded task shape: the task reaches state \"failed\" after automatic retries and channel fallback were exhausted (failCode UPSTREAM_ERROR, retryable true, credits 0). Settles a provider error (500) with zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "code": 200,
+                    "msg": "success",
+                    "data": {
+                        "taskId": "cmsynth0000000000000000001",
+                        "state": "pending",
+                        "model": "nano-banana-2-1",
+                        "reservedCredits": 0.022,
+                        "currency": "USD"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?task_id=cmsynth0000000000000000001"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "code": 200,
+                    "msg": "success",
+                    "data": {
+                        "taskId": "cmsynth0000000000000000001",
+                        "state": "processing",
+                        "model": "nano-banana-2-1",
+                        "userId": "redacted-user-id",
+                        "resultJson": null,
+                        "failCode": null,
+                        "failMsg": null,
+                        "costTime": null,
+                        "createTime": 1795597540601,
+                        "completeTime": null,
+                        "credits": 0,
+                        "currency": "USD",
+                        "param": "{\"input\":{\"prompt\":\"a cat\"},\"model\":\"nano-banana-2-1\"}",
+                        "modelDisplayName": "Nano Banana 2.1",
+                        "modelType": "TEXT_TO_IMAGE"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?task_id=cmsynth0000000000000000001"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "code": 200,
+                    "msg": "success",
+                    "data": {
+                        "taskId": "cmsynth0000000000000000001",
+                        "state": "failed",
+                        "model": "nano-banana-2-1",
+                        "userId": "redacted-user-id",
+                        "resultJson": null,
+                        "failCode": "UPSTREAM_ERROR",
+                        "failMsg": "The service is busy. Please try again later.",
+                        "costTime": 31000,
+                        "createTime": 1795597540601,
+                        "completeTime": 1795597571601,
+                        "credits": 0,
+                        "currency": "USD",
+                        "param": "{\"input\":{\"prompt\":\"a cat\"},\"model\":\"nano-banana-2-1\"}",
+                        "modelDisplayName": "Nano Banana 2.1",
+                        "modelType": "TEXT_TO_IMAGE",
+                        "retryable": true
+                    }
+                }
+            }
+        }
+    ]
+}

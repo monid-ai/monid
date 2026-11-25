@@ -1,0 +1,57 @@
+{
+    "name": "synthetic-task-moderation",
+    "description": "SYNTHETIC, in the recorded task shape: the prompt is refused by content moderation (failCode CONTENT_MODERATION, retryable false, credits 0). A caller-side failure: settles 422 with zero usage.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "code": 200,
+                    "msg": "success",
+                    "data": {
+                        "taskId": "cmsynth0000000000000000001",
+                        "state": "pending",
+                        "model": "nano-banana-2-1",
+                        "reservedCredits": 0.022,
+                        "currency": "USD"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?task_id=cmsynth0000000000000000001"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "code": 200,
+                    "msg": "success",
+                    "data": {
+                        "taskId": "cmsynth0000000000000000001",
+                        "state": "failed",
+                        "model": "nano-banana-2-1",
+                        "userId": "redacted-user-id",
+                        "resultJson": null,
+                        "failCode": "CONTENT_MODERATION",
+                        "failMsg": "The request was blocked by content moderation.",
+                        "costTime": 4000,
+                        "createTime": 1795597540601,
+                        "completeTime": 1795597544601,
+                        "credits": 0,
+                        "currency": "USD",
+                        "param": "{\"input\":{\"prompt\":\"a cat\"},\"model\":\"nano-banana-2-1\"}",
+                        "modelDisplayName": "Nano Banana 2.1",
+                        "modelType": "TEXT_TO_IMAGE",
+                        "retryable": false
+                    }
+                }
+            }
+        }
+    ]
+}

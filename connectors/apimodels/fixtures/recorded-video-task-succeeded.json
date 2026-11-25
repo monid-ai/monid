@@ -1,0 +1,89 @@
+{
+    "name": "recorded-video-task-succeeded",
+    "description": "RECORDED 2026-11-25 with `deno task record` against apimodels#v1/video/veo-3.1-fast-hd (8 s, 720p, 16:9; about 88 s). Minimized to create + one processing tick + completed (the live run polled processing eight times); the account id and the API-key id are replaced with placeholders. The create and completed bodies are verbatim; the processing tick is rebuilt from the same task's fields in the shape the image recording shows, because the raw file was not kept. The completed task reports credits 0.0768 USD: the recording account carries a 4% volume discount, so the claim sits below the 0.08 list price. The same chain serves the other video endpoints (Veo 3.1 Fast Full HD, Seedance 2.0): /v1/video/generations has one create/poll contract for every model, so for those the shape is real while the model name and receipt are the Veo recording's. {{request.url}} binds per endpoint.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "code": 200,
+                    "msg": "success",
+                    "data": {
+                        "taskId": "cmwvwfqh9067bot017q5vurh4",
+                        "state": "pending",
+                        "model": "veo-3.1-fast-hd",
+                        "reservedCredits": 0.0768,
+                        "currency": "USD"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?task_id=cmwvwfqh9067bot017q5vurh4"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "code": 200,
+                    "msg": "success",
+                    "data": {
+                        "taskId": "cmwvwfqh9067bot017q5vurh4",
+                        "state": "processing",
+                        "model": "veo-3.1-fast-hd",
+                        "userId": "redacted-user-id",
+                        "resultJson": null,
+                        "failCode": null,
+                        "failMsg": null,
+                        "costTime": null,
+                        "createTime": 1795597578189,
+                        "completeTime": null,
+                        "credits": 0,
+                        "currency": "USD",
+                        "param": "{\"input\":{\"prompt\":\"A paper boat drifting down a rain-filled street gutter at dusk, close tracking shot, soft rain sounds\",\"aspect_ratio\":\"16:9\"},\"model\":\"veo-3.1-fast-hd\",\"apiKeyId\":\"redacted-api-key-id\",\"entryHost\":\"api.apimodels.app\"}",
+                        "modelDisplayName": "VEO 3.1 Fast HD",
+                        "modelType": "TEXT_TO_VIDEO"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?task_id=cmwvwfqh9067bot017q5vurh4"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "code": 200,
+                    "msg": "success",
+                    "data": {
+                        "taskId": "cmwvwfqh9067bot017q5vurh4",
+                        "state": "completed",
+                        "model": "veo-3.1-fast-hd",
+                        "userId": "redacted-user-id",
+                        "resultUrls": [
+                            "https://r2.apimodels.app/videos/cmwvwfqh9067bot017q5vurh4.mp4"
+                        ],
+                        "resultJson": "{\"resultUrls\":[\"https://r2.apimodels.app/videos/cmwvwfqh9067bot017q5vurh4.mp4\"],\"videoDuration\":8}",
+                        "failCode": null,
+                        "failMsg": null,
+                        "costTime": 86266,
+                        "createTime": 1795597578189,
+                        "completeTime": 1795597666462,
+                        "credits": 0.0768,
+                        "currency": "USD",
+                        "param": "{\"input\":{\"prompt\":\"A paper boat drifting down a rain-filled street gutter at dusk, close tracking shot, soft rain sounds\",\"aspect_ratio\":\"16:9\"},\"model\":\"veo-3.1-fast-hd\",\"apiKeyId\":\"redacted-api-key-id\",\"entryHost\":\"api.apimodels.app\"}",
+                        "modelDisplayName": "VEO 3.1 Fast HD",
+                        "modelType": "TEXT_TO_VIDEO"
+                    }
+                }
+            }
+        }
+    ]
+}

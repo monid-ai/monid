@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-submit-rejected",
+    "description": "SYNTHETIC: the create call is refused with HTTP 402 (insufficient balance) — no task exists, nothing is charged and nothing is polled. The vendor status and envelope pass through as data.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 402,
+                "body": {
+                    "code": 402,
+                    "msg": "Insufficient balance"
+                }
+            }
+        }
+    ]
+}

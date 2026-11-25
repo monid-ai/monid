@@ -1,0 +1,57 @@
+{
+    "name": "synthetic-task-no-result",
+    "description": "SYNTHETIC, in the recorded task shape: a completed task with an empty resultUrls array — a contract violation. Settles a synthesized 502 with zero usage, even though a credits figure is present.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "code": 200,
+                    "msg": "success",
+                    "data": {
+                        "taskId": "cmsynth0000000000000000001",
+                        "state": "pending",
+                        "model": "nano-banana-2-1",
+                        "reservedCredits": 0.022,
+                        "currency": "USD"
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?task_id=cmsynth0000000000000000001"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "code": 200,
+                    "msg": "success",
+                    "data": {
+                        "taskId": "cmsynth0000000000000000001",
+                        "state": "completed",
+                        "model": "nano-banana-2-1",
+                        "userId": "redacted-user-id",
+                        "resultJson": null,
+                        "failCode": null,
+                        "failMsg": null,
+                        "costTime": 20000,
+                        "createTime": 1795597540601,
+                        "completeTime": 1795597560601,
+                        "credits": 0.022,
+                        "currency": "USD",
+                        "param": "{\"input\":{\"prompt\":\"a cat\"},\"model\":\"nano-banana-2-1\"}",
+                        "modelDisplayName": "Nano Banana 2.1",
+                        "modelType": "TEXT_TO_IMAGE",
+                        "resultUrls": []
+                    }
+                }
+            }
+        }
+    ]
+}

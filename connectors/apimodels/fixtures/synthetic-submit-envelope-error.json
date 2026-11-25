@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-submit-envelope-error",
+    "description": "SYNTHETIC: a 2xx create whose envelope code is not 200 — an error dressed as success. Settles a synthesized 502 with zero usage and no poll.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "code": 500,
+                    "msg": "Internal server error"
+                }
+            }
+        }
+    ]
+}
