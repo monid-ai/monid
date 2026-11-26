@@ -1,0 +1,54 @@
+{
+    "name": "live-start-ios",
+    "description": "raw recording (runcloud#start-session, scenario live-start-ios) \u2014 hand-minimize into a shared chain before committing",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.origin}}/run-cloud/ios",
+                "body": {
+                    "inactivityTimeout": "2m",
+                    "hardTimeout": "5m"
+                }
+            },
+            "res": {
+                "status": 201,
+                "body": {
+                    "id": "88b48fe9-596f-4f45-80f7-afda0087e483",
+                    "orgId": "org-1",
+                    "platform": "ios",
+                    "status": "active",
+                    "model": "iphone",
+                    "region": null,
+                    "displayName": null,
+                    "tags": {},
+                    "url": "https://ios-prod-06.run.cloud/?token=REDACTED",
+                    "device": "device-1",
+                    "leaseId": "lease-1",
+                    "codec": "auto",
+                    "osVersion": null,
+                    "runtime": null,
+                    "architecture": "arm64",
+                    "platformVersion": "26.5",
+                    "deviceName": "iPhone 17e",
+                    "capabilities": {
+                        "requested": [],
+                        "enabled": [],
+                        "failed": [],
+                        "standby": []
+                    },
+                    "stream": {
+                        "codec": "auto",
+                        "viewerCodec": "auto",
+                        "hostCodec": "unknown"
+                    },
+                    "inactivityTimeoutSeconds": 120,
+                    "inactivityCountdownSeconds": 10,
+                    "createdAt": "2026-11-16T07:31:41.425Z",
+                    "releasedAt": null,
+                    "expiresAt": "2026-11-16T07:36:41.425Z"
+                }
+            }
+        }
+    ]
+}
