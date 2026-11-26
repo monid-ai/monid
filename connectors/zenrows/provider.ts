@@ -95,9 +95,24 @@ export default defineProvider({
                 parsed !== undefined && Number.isSafeInteger(parsed)
                     ? parsed
                     : undefined;
+            // Zenrows charges only for a request it carried out, and its
+            // rate card counts a 404 or 410 from the target as one: the
+            // fetch got through and the target's honest answer was "gone".
+            // The meter is that verdict, so a positive one means the run
+            // completed and has to settle at it, whatever status came back.
+            // Without this the engine reads any non-2xx as a vendor failure,
+            // forces zero usage, skips the consolidate, and the credit
+            // Zenrows took is never billed on. A zero or absent meter is a
+            // real failure — a bad key, no balance, a page it could not
+            // reach — and keeps the vendor's own status, so it stays the
+            // error it is and bills nothing.
+            const billed = creditsCharged !== undefined && creditsCharged > 0;
             return {
                 kind: "COMPLETED",
-                httpStatus: response.status,
+                // ours: the run completed. theirs: what the target said,
+                // which the caller still needs to see.
+                httpStatus: billed ? 200 : response.status,
+                ...(billed ? { providerHttpStatus: response.status } : {}),
                 output: response.body,
                 ...(creditsCharged !== undefined
                     ? { state: { data: { creditsCharged } } }

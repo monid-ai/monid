@@ -95,7 +95,13 @@ An explicit `0` is different and is kept: Zenrows charges nothing for some
 answers, and a parsed zero is a claim like any other. The engine carries it
 in the evidence and leaves the pool entry off, because nothing was spent.
 
-Non-2xx responses settle at zero regardless: a fn cannot bill an error.
+A non-2xx response settles at zero only when the meter did. Zenrows counts a
+404 or 410 from the target as a request it carried out and charges for it, so
+`lifecycle.start` reports a run with a positive meter as completed and puts the
+vendor's status on `providerHttpStatus`; passing that status through as the
+run's own would have the engine force zero usage and skip the consolidate, and
+the credit Zenrows took would never be billed on. A zero or absent meter keeps
+the vendor's status, so a rejection stays an error that no fn can bill.
 
 ## D7 — Extract returns the fields and drops the page
 

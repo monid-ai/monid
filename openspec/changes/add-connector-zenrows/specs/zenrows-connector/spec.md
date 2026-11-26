@@ -39,6 +39,13 @@ and an `output.fromError` that digests RFC 7807 `problem+json` into
 - **THEN** `isProviderError` is true, `credits` is `{}`, and the output is
   `{message, code, raw}` with `message` taken from `detail`
 
+#### Scenario: A charged non-2xx settles at its meter
+- **WHEN** `zenrows#scrape` receives a 404 RESP002 carrying
+  `X-Request-Credits: 1`, which is how Zenrows answers a target that is gone
+- **THEN** `isProviderError` is false, `httpStatus` is 200,
+  `providerHttpStatus` is 404, and `credits` is `{default: 1}`, because the
+  vendor carried the request out and charged for it
+
 ### Requirement: The hold is the caller's own configuration
 `usage.estimate` SHALL read `js_render`, `premium_proxy` and `mode` off the
 validated input and hold what the published table prices that

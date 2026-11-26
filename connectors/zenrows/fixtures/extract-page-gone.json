@@ -1,0 +1,26 @@
+{
+    "name": "extract-page-gone",
+    "description": "zenrows#extract of a URL whose target answers 404, on a domain Extract serves: Zenrows carried the fetch out, charged one credit for it, and relayed the target's status with a RESP002 envelope. Captured from api.zenrows.com against https://www.scrapingcourse.com/ecommerce/product/nuk-ekziston-xyz/ (X-Request-Id 6b0717916dad2c93c2245254c2e2c917). The recorded request URL is the test's own input rather than the one captured, so the replay matches; the response is the capture, unchanged.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?url=https%3A%2F%2Fwww.scrapingcourse.com%2Fecommerce%2Fproduct%2Fabominable-hoodie%2F&extract=auto"
+            },
+            "res": {
+                "status": 404,
+                "headers": {
+                    "x-request-credits": "1"
+                },
+                "body": {
+                    "code": "RESP002",
+                    "detail": "The requested URL page returned a 404 HTTP Status Code. Please make sure this URL exists and retry your request.",
+                    "instance": "/v1",
+                    "status": 404,
+                    "title": "Page not found (RESP002)",
+                    "type": "https://docs.zenrows.com/api-error-codes#RESP002"
+                }
+            }
+        }
+    ]
+}

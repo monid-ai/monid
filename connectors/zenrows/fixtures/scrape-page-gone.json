@@ -1,0 +1,26 @@
+{
+    "name": "scrape-page-gone",
+    "description": "zenrows#scrape of a URL whose target answers 404: Zenrows carried the fetch out, charged one credit for it, and relayed the target's status with a RESP002 envelope. Captured from api.zenrows.com against https://raw.githubusercontent.com/zenrows/nope-abc123/main/x.txt (X-Request-Id 6b07133e40c3d2145f13848e1dec5822). The recorded request URL is the test's own input rather than the one captured, so the replay matches; the response is the capture, unchanged.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?url=https%3A%2F%2Fexample.com%2F&response_type=markdown"
+            },
+            "res": {
+                "status": 404,
+                "headers": {
+                    "x-request-credits": "1"
+                },
+                "body": {
+                    "code": "RESP002",
+                    "detail": "The requested URL page returned a 404 HTTP Status Code. Please make sure this URL exists and retry your request.",
+                    "instance": "/v1",
+                    "status": 404,
+                    "title": "Page not found (RESP002)",
+                    "type": "https://docs.zenrows.com/api-error-codes#RESP002"
+                }
+            }
+        }
+    ]
+}

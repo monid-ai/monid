@@ -103,7 +103,7 @@ there is to bill from.
 
 - **No dollar conversion in the doc.** Zenrows reports `X-Request-Cost`
   beside the credits, but dollars per credit vary by plan tier: pay-as-you-go
-  is \$0.50 per 1,000 credits while the monthly plans work out lower, down to
+  is $0.50 per 1,000 credits while the monthly plans work out lower, down to
   about \$0.11. The pool is the credit a customer holds and tops up; the
   conversion is the broker card's job.
 

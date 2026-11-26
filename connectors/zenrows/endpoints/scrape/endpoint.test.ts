@@ -71,6 +71,30 @@ Deno.test("zenrows#scrape provider error: digested, and a meter cannot bill it",
     assertEquals(result.usage.credits, {});
 });
 
+Deno.test("zenrows#scrape a charged 404 settles at its meter, not as a failure", async () => {
+    // Zenrows counts a 404 from the target as a request it carried out and
+    // charges for it. The engine would read that status as a vendor failure
+    // and force zero usage, so the credit it took would never be billed on.
+    // A positive meter is Zenrows' own verdict that the fetch completed, so
+    // the run settles at it and the target's status rides on
+    // providerHttpStatus where a caller can still see it.
+    const result = await runEndpoint({
+        unit: await testSealedUnit(SCRAPE),
+        input: { queryParams: { url: URL_ } },
+        mode: "replay",
+        fixture: await loadFixture(fixture("scrape-page-gone")),
+    });
+    assertEquals(result.isProviderError, false);
+    assertEquals(result.httpStatus, 200);
+    assertEquals(result.providerHttpStatus, 404);
+    assertEquals(result.usage, {
+        credits: { default: 1 },
+        evidence: { CREDIT: 1 },
+    });
+    // The caller is not told a page arrived: the envelope says why it did not.
+    assertEquals((result.output as Record<string, unknown>).code, "RESP002");
+});
+
 Deno.test("zenrows#scrape input: the vendor's own parameters, strictly", async () => {
     const unit = await testSealedUnit(SCRAPE);
     const rejects = [
@@ -128,8 +152,12 @@ Deno.test({
         assertEquals(result.httpStatus, 200);
         assertEquals(result.isProviderError, false);
         assertEquals(typeof result.output, "string");
-        // A plain request draws exactly one credit, and the claim comes
-        // from the header rather than the rate card.
-        assertEquals(result.usage.credits, { default: 1 });
+        // Shape, not the amount: a vendor price change must not turn a smoke
+        // test red. That the claim comes from the header rather than the rate
+        // card is pinned in the replay test above, which fixes it at one.
+        const credits = result.usage.credits as Record<string, number>;
+        assertEquals(Object.keys(credits), ["default"]);
+        assertEquals(typeof credits.default, "number");
+        assertEquals(credits.default > 0, true);
     },
 });

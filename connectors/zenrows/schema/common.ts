@@ -37,10 +37,10 @@ export const zFetchParams = z.strictObject({
         "Reuse the same IP across requests for up to 10 minutes. Any integer you choose identifies the session.",
     ).optional(),
     original_status: z.boolean().describe(
-        "Return the target's own HTTP status code instead of the Zenrows one. Be careful pairing it with allowed_status_codes: a non-2xx status is a provider error here, so the page arrives digested as an error and the run records no credits, while Zenrows still charges it.",
+        "Return the target's own HTTP status code instead of the Zenrows one. Zenrows counts a 404 or 410 from the target as a request it carried out, and charges for it. A run settles at the credits it drew whenever Zenrows charged, and reports the target's status beside the result rather than as a failure.",
     ).optional(),
     allowed_status_codes: z.string().describe(
-        "Comma-separated status codes whose body should be returned instead of raising an error, for example `404,500`. Zenrows charges these requests.",
+        "Comma-separated status codes whose body should be returned instead of raising an error, for example `404,500`. A status you allow arrives as a success and is charged.",
     ).optional(),
     wait_for: z.string().describe(
         "CSS selector to wait for before returning. Requires js_render.",
