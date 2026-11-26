@@ -1,0 +1,114 @@
+{
+    "name": "extract-product",
+    "description": "zenrows#extract on a prepared domain, 200. Captured from api.zenrows.com; `parsed` is verbatim, `html` is elided (the real response carried 166604 characters of it beside 2879 bytes of parsed, which is why fromResponse drops it).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?url=https%3A%2F%2Fwww.scrapingcourse.com%2Fecommerce%2Fproduct%2Fabominable-hoodie%2F&extract=auto"
+            },
+            "res": {
+                "status": 200,
+                "headers": {
+                    "x-request-credits": "1"
+                },
+                "body": {
+                    "html": "<!DOCTYPE html><html>… 166604 characters, elided …</html>",
+                    "parsed": {
+                        "breadcrumbs": [
+                            {
+                                "name": "Home",
+                                "position": 1,
+                                "url": "https://www.scrapingcourse.com/ecommerce"
+                            },
+                            {
+                                "name": "Clothing",
+                                "position": 2,
+                                "url": "https://www.scrapingcourse.com/ecommerce/product-category/clothing/"
+                            },
+                            {
+                                "name": "Men",
+                                "position": 3,
+                                "url": "https://www.scrapingcourse.com/ecommerce/product-category/clothing/men/"
+                            },
+                            {
+                                "name": "Tops",
+                                "position": 4,
+                                "url": "https://www.scrapingcourse.com/ecommerce/product-category/clothing/men/tops/"
+                            },
+                            {
+                                "name": "Hoodies & Sweatshirts",
+                                "position": 5,
+                                "url": "https://www.scrapingcourse.com/ecommerce/product-category/clothing/men/tops/hoodies-sweatshirts/"
+                            }
+                        ],
+                        "gallery_images": [
+                            {
+                                "thumbnail_url": "https://www.scrapingcourse.com/ecommerce/wp-content/uploads/2024/03/mh09-blue_main-100x100.jpg",
+                                "url": "https://www.scrapingcourse.com/ecommerce/wp-content/uploads/2024/03/mh09-blue_main.jpg"
+                            },
+                            {
+                                "thumbnail_url": "https://www.scrapingcourse.com/ecommerce/wp-content/uploads/2024/03/mh09-blue_alt1-100x100.jpg",
+                                "url": "https://www.scrapingcourse.com/ecommerce/wp-content/uploads/2024/03/mh09-blue_alt1.jpg"
+                            },
+                            {
+                                "thumbnail_url": "https://www.scrapingcourse.com/ecommerce/wp-content/uploads/2024/03/mh09-blue_back-100x100.jpg",
+                                "url": "https://www.scrapingcourse.com/ecommerce/wp-content/uploads/2024/03/mh09-blue_back.jpg"
+                            }
+                        ],
+                        "product": {
+                            "availability": "out_of_stock",
+                            "category": "Hoodies & Sweatshirts",
+                            "category_url": "https://www.scrapingcourse.com/ecommerce/product-category/clothing/men/tops/hoodies-sweatshirts/",
+                            "currency": null,
+                            "full_description": "Description\nIt took CoolTech™ weather apparel know-how and lots of wind-resistant fabric to get the Abominable Hoodie just right. It’s aggressively warm when it needs to be, while maintaining your comfort in milder climes.\n• Blue heather hoodie. • Relaxed fit. • Moisture-wicking. • Machine wash/dry.",
+                            "main_image_url": "https://www.scrapingcourse.com/ecommerce/wp-content/uploads/2024/03/mh09-blue_main.jpg",
+                            "name": "Abominable Hoodie",
+                            "price": 69,
+                            "short_description": "This is a variable product called a Abominable Hoodie",
+                            "sku": "MH09",
+                            "url": "https://www.scrapingcourse.com/ecommerce/product/abominable-hoodie/"
+                        },
+                        "product_attributes": {
+                            "colors": [
+                                "Blue",
+                                "Green",
+                                "Red"
+                            ],
+                            "sizes": [
+                                "XS",
+                                "S",
+                                "M",
+                                "L",
+                                "XL"
+                            ]
+                        },
+                        "related_products": [
+                            {
+                                "image_url": "https://www.scrapingcourse.com/ecommerce/wp-content/uploads/2024/03/mh08-brown_main.jpg",
+                                "name": "Oslo Trek Hoodie",
+                                "price": 42,
+                                "sku": "MH08",
+                                "url": "https://www.scrapingcourse.com/ecommerce/product/oslo-trek-hoodie/"
+                            },
+                            {
+                                "image_url": "https://www.scrapingcourse.com/ecommerce/wp-content/uploads/2024/03/mh13-blue_main.jpg",
+                                "name": "Marco Lightweight Active Hoodie",
+                                "price": 74,
+                                "sku": "MH13",
+                                "url": "https://www.scrapingcourse.com/ecommerce/product/marco-lightweight-active-hoodie/"
+                            },
+                            {
+                                "image_url": "https://www.scrapingcourse.com/ecommerce/wp-content/uploads/2024/03/mh07-gray_main.jpg",
+                                "name": "Hero Hoodie",
+                                "price": 54,
+                                "sku": "MH07",
+                                "url": "https://www.scrapingcourse.com/ecommerce/product/hero-hoodie/"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

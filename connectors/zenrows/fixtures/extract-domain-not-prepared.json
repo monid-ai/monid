@@ -1,0 +1,25 @@
+{
+    "name": "extract-domain-not-prepared",
+    "description": "zenrows#extract on a domain Extract does not serve: 403 REQS007 with reason domain_not_prepared, and not charged. Captured from api.zenrows.com.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?url=https%3A%2F%2Fexample.com%2F&extract=auto"
+            },
+            "res": {
+                "status": 403,
+                "headers": {},
+                "body": {
+                    "code": "REQS007",
+                    "detail": "Extract has not been prepared for example.com yet. Prepare it with POST /v1/extract/prepared-domains (it takes a few minutes and costs no credits). Send 1 to 5 example URLs: one works, and we recommend 3 or more of the same page type. Then retry once GET /v1/extract/prepared-domains/example.com reports ready. Until then, use css_extractor. GET /v1/extract/domains lists what Extract serves today.",
+                    "instance": "/v1",
+                    "reason": "domain_not_prepared",
+                    "status": 403,
+                    "title": "Extract is not prepared for the requested domain (example.com) (REQS007)",
+                    "type": "https://docs.zenrows.com/api-error-codes#REQS007"
+                }
+            }
+        }
+    ]
+}
