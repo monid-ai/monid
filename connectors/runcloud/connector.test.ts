@@ -309,6 +309,7 @@ Deno.test("runcloud get-session: a live read, no settle marks", async () => {
         resources: OWNED,
     });
     assertEquals(result.httpStatus, 200);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
     assertEquals((result.output as Record<string, Json>).status, "active");
     assertEquals(result.resources, undefined);
 });
@@ -473,6 +474,7 @@ Deno.test("runcloud read-screen: flat, screen-ordered, containers skipped, tap-r
         resources: OWNED,
     });
     assertEquals(result.httpStatus, 200);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
     const out = result.output as Record<string, Json>;
     assertEquals(out.screen, { width: 400, height: 800, unit: "points" });
     assertEquals(out.truncated, false);
@@ -573,6 +575,7 @@ Deno.test("runcloud open-url: acknowledgement without the lease plumbing", async
         resources: OWNED,
     });
     assertEquals(result.httpStatus, 200);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
     assertEquals(result.output, {
         ok: true,
         platform: "ios",
@@ -591,6 +594,7 @@ Deno.test("runcloud device-logs: the vendor's 200-line default rides on the wire
         resources: OWNED,
     });
     assertEquals(result.httpStatus, 200);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
     const out = result.output as Record<string, Json>;
     assertEquals((out.entries as Json[]).length, 2);
     await assertRejects(
@@ -612,7 +616,7 @@ Deno.test("runcloud device-logs: the vendor's 200-line default rides on the wire
 // ---------------------------------------------------------------------------
 
 Deno.test({
-    name: "runcloud live: start, read, read-screen and stop a real iOS session",
+    name: "runcloud live: every endpoint against a real iOS session, then stop",
     ignore: liveSkip("runcloud"),
     fn: async () => {
         const started = await runEndpoint({
@@ -657,6 +661,37 @@ Deno.test({
             const out = screen.output as Record<string, Json>;
             assert(Array.isArray(out.nodes));
             assertEquals(typeof out.nodeCount, "number");
+            // every interaction: shape only, acknowledged by the vendor
+            const calls: Array<[string, Record<string, Json>]> = [
+                ["open-url", { body: { url: "https://example.com" } }],
+                ["tap", { body: { x: 0.5, y: 0.5 } }],
+                ["swipe", {
+                    body: { from: { x: 0.5, y: 0.7 }, to: { x: 0.5, y: 0.3 } },
+                }],
+                ["type-text", { body: { text: "hi" } }],
+                ["press-key", { body: { key: "enter" } }],
+                ["press-button", { body: { button: "home" } }],
+                ["device-logs", { queryParams: { tail: 5 } }],
+            ];
+            for (const [endpoint, extra] of calls) {
+                const result = await runEndpoint({
+                    unit: await testSealedUnit(`runcloud#${endpoint}`),
+                    input: { pathParams, ...extra } as RunInput,
+                    mode: "live",
+                    resources: owned,
+                });
+                assertEquals(
+                    result.isProviderError,
+                    false,
+                    `${endpoint}: ${JSON.stringify(result.output)}`,
+                );
+                assertEquals(result.usage, { credits: {}, evidence: {} });
+                assert(
+                    typeof result.output === "object" &&
+                        result.output !== null,
+                    endpoint,
+                );
+            }
         } finally {
             const stopped = await runEndpoint({
                 unit: await testSealedUnit("runcloud#stop-session"),
