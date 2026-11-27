@@ -1,0 +1,33 @@
+{
+    "name": "synthetic-happy",
+    "description": "Confirmed NYC building owner research across two BBLs resolves 2 distinct human owners at $0.05 each ($0.10).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://app.dealport.com/api/v1/buildings/owners",
+                "body": {
+                    "bbls": [
+                        "1008350041",
+                        "1008400012"
+                    ],
+                    "confirm_max_usd": 0.1
+                }
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "data": {
+                        "quoted_only": false,
+                        "bbl_count": 2,
+                        "distinct_owners": 2,
+                        "total_usd": 0.1,
+                        "status": "started"
+                    },
+                    "cost_usd": 0.1,
+                    "remaining_balance_usd": 4.72
+                }
+            }
+        }
+    ]
+}

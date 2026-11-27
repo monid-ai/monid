@@ -1,0 +1,55 @@
+{
+    "name": "synthetic-happy",
+    "description": "Free ($0.00) batch company list matching with nested and top-level billing receipts.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://app.dealport.com/api/v1/companies/match",
+                "body": {
+                    "items": [
+                        {
+                            "external_id": "crm-101",
+                            "name": "Buckeye Climate Systems LLC",
+                            "domain": "buckeyeclimate-example.com",
+                            "state": "OH"
+                        }
+                    ]
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "total_input": 1,
+                        "matched_count": 1,
+                        "unmatched_count": 0,
+                        "domain_matched_count": 1,
+                        "fuzzy_matched_count": 0,
+                        "cached_owners_count": 1,
+                        "matched_company_ids": [
+                            "11111111-2222-4333-8444-555555555551"
+                        ],
+                        "results": [
+                            {
+                                "external_id": "crm-101",
+                                "matched": true,
+                                "match_method": "domain",
+                                "company_id": "11111111-2222-4333-8444-555555555551",
+                                "name": "Buckeye Climate Systems LLC",
+                                "city": "Columbus",
+                                "state": "OH"
+                            }
+                        ],
+                        "cost_usd": 0,
+                        "credits_charged": 0,
+                        "remaining_balance_usd": 5
+                    },
+                    "cost_usd": 0,
+                    "credits_charged": 0,
+                    "remaining_balance_usd": 5
+                }
+            }
+        }
+    ]
+}

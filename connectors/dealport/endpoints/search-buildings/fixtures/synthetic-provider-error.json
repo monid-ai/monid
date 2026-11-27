@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "401 Unauthorized on GET /api/v1/buildings.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://app.dealport.com/api/v1/buildings?borough=MN&min_units=20&limit=2"
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": "unauthorized",
+                    "message": "Send an active API key as \"Authorization: Bearer dp_live_...\"."
+                }
+            }
+        }
+    ]
+}

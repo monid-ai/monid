@@ -1,0 +1,20 @@
+{
+    "name": "synthetic-empty",
+    "description": "Empty NYC building search returns 0 Records and bills $0.00.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://app.dealport.com/api/v1/buildings?borough=SI&q=zzzz_nonexistent_building&limit=2&min_units=10"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [],
+                    "next_cursor": null,
+                    "credits_charged": 0
+                }
+            }
+        }
+    ]
+}

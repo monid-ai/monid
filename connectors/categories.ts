@@ -385,4 +385,11 @@ export const LEAF_CATEGORIES = defineLeafCategories([
             "Tools to pull public government records, including financial " +
             "disclosures, filings, registries, and more.",
     },
+    {
+        id: "real-estate",
+        displayName: "Real Estate",
+        description: "Tools to pull property data, including commercial and " +
+            "multifamily buildings, deeds, mortgages, ownership records, " +
+            "and more.",
+    },
 ]);

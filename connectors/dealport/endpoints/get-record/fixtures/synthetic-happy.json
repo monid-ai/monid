@@ -1,0 +1,58 @@
+{
+    "name": "synthetic-happy",
+    "description": "Opening a new company Record bills $0.01 and strips receipt metadata.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://app.dealport.com/api/v1/records/11111111-2222-4333-8444-555555555551"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "id": "11111111-2222-4333-8444-555555555551",
+                        "kind": "company",
+                        "name": "Buckeye Climate Systems LLC",
+                        "summary": "Commercial HVAC installation and preventive maintenance contractor in central Ohio.",
+                        "website": "https://buckeyeclimate-example.com",
+                        "phone": "+16145550100",
+                        "facts": [
+                            {
+                                "key": "state_registration",
+                                "label": "Entity Status",
+                                "value": "Active",
+                                "basis": "filed"
+                            }
+                        ],
+                        "people": [
+                            {
+                                "name": "Jordan Blake",
+                                "role": "Managing Member"
+                            }
+                        ],
+                        "identifiers": [
+                            {
+                                "scheme": "oh_sos",
+                                "value": "4829103"
+                            }
+                        ],
+                        "sources": [
+                            {
+                                "url": "https://businesssearch.ohiosos.gov/",
+                                "title": "Ohio Secretary of State Business Filings"
+                            }
+                        ],
+                        "capsule_freshness": {
+                            "status": "fresh"
+                        }
+                    },
+                    "credits_charged": 1,
+                    "cost_usd": 0.01,
+                    "remaining_balance_usd": 4.99,
+                    "record_url": "https://app.dealport.com/companies/11111111-2222-4333-8444-555555555551"
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,46 @@
+{
+    "name": "synthetic-repeat",
+    "description": "Re-opening a Record within 30 days in the same workspace returns 200 at $0.00.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://app.dealport.com/api/v1/records/1008350041"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "id": "1008350041",
+                        "kind": "property",
+                        "name": "350 Fifth Avenue, Manhattan, NY",
+                        "facts": [
+                            {
+                                "key": "residential_units",
+                                "value": 48,
+                                "basis": "filed"
+                            }
+                        ],
+                        "people": [],
+                        "identifiers": [
+                            {
+                                "scheme": "nyc_bbl",
+                                "value": "1008350041"
+                            }
+                        ],
+                        "sources": [
+                            {
+                                "url": "https://a836-acris.nyc.gov/",
+                                "title": "NYC ACRIS Property Records"
+                            }
+                        ]
+                    },
+                    "credits_charged": 0,
+                    "cost_usd": 0,
+                    "remaining_balance_usd": 4.99,
+                    "record_url": "https://app.dealport.com/properties/1008350041"
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,29 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "403 Forbidden when the API key lacks the `watch` capability scope.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://app.dealport.com/api/v1/buildings/owners",
+                "body": {
+                    "bbls": [
+                        "1008350041"
+                    ]
+                }
+            },
+            "res": {
+                "status": 403,
+                "body": {
+                    "error": "insufficient_key_scope",
+                    "required_scope": "watch",
+                    "granted_scopes": [
+                        "read",
+                        "owners"
+                    ],
+                    "message": "This API key does not include the \"watch\" scope."
+                }
+            }
+        }
+    ]
+}

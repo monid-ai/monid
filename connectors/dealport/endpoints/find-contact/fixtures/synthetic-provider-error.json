@@ -1,0 +1,25 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "402 Payment Required when the workspace balance or key cap is exhausted.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://app.dealport.com/api/v1/contacts",
+                "body": {
+                    "company_id": "11111111-2222-4333-8444-555555555551",
+                    "person": "Jordan Blake"
+                }
+            },
+            "res": {
+                "status": 402,
+                "body": {
+                    "error": "insufficient_balance",
+                    "message": "Available workspace USD balance is below $0.09.",
+                    "balance_usd": 0.02,
+                    "needed_usd": 0.09
+                }
+            }
+        }
+    ]
+}
