@@ -78,7 +78,12 @@ Deno.test(`${ID} schema gate: invalid state, bounds, and unknown keys fail INVAL
     }
     assertEquals(
         await estimateEndpoint(unit, {
-            body: { state: "OH", limit: 50, owner_businesses: 2 },
+            body: {
+                state: "OH",
+                limit: 50,
+                owner_businesses: null,
+                min_revenue: null,
+            },
         }),
         { credits: {}, evidence: {} },
     );

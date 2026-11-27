@@ -34,7 +34,9 @@ export default defineEndpoint({
     input: {
         schema: {
             body: z.union([
-                zStatelessMatchBody.required({ items: true }),
+                zStatelessMatchBody.extend({
+                    items: zStatelessMatchBody.shape.items.unwrap().min(1),
+                }),
                 zStatelessMatchBody.required({ csv: true }),
             ]).describe(
                 "Provide at least one of `items` (1 to 250 structured company rows) or `csv` (CSV text with header row).",

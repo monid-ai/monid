@@ -43,11 +43,12 @@ export default defineEndpoint({
             counts: { RESULT: data.input.queryParams.limit },
         }),
         evidence: ({ data, utils }) => {
-            const costUsd = utils.json.optionalNum(data.output, "$.cost_usd");
+            const costUsd = utils.json.optionalNum(data.output, "$.cost_usd") ??
+                utils.json.optionalNum(data.output, "$.data.cost_usd");
             const cents = utils.json.optionalNum(
                 data.output,
                 "$.credits_charged",
-            );
+            ) ?? utils.json.optionalNum(data.output, "$.data.credits_charged");
             if (costUsd === 0 || cents === 0) {
                 return { counts: { RESULT: 0 } };
             }

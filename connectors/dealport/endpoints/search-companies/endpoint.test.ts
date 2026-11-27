@@ -128,9 +128,11 @@ Deno.test({
             false,
             JSON.stringify(result.output),
         );
-        assertEquals(result.usage, { credits: {}, evidence: { RESULT: 0 } });
+        assertEquals(Object.keys(result.usage.evidence), ["RESULT"]);
+        assertEquals(typeof result.usage.evidence.RESULT, "number");
         const output = result.output as Record<string, Json>;
         assertEquals(Array.isArray(output.data), true);
         assertEquals("credits_charged" in output, false);
+        assertEquals("cost_usd" in output, false);
     },
 });

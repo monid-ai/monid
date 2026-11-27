@@ -95,6 +95,12 @@ Deno.test(`${ID} schema gate: requires UUID company_id and rejects unknown field
         );
     }
     assertEquals(
+        await estimateEndpoint(unit, {
+            body: { company_id: COMPANY_ID, person: null },
+        }),
+        { credits: { default: 0.09 }, evidence: { RESULT: 1 } },
+    );
+    assertEquals(
         await estimateEndpoint(unit, { body: { company_id: COMPANY_ID } }),
         { credits: { default: 0.09 }, evidence: { RESULT: 1 } },
     );

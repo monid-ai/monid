@@ -80,6 +80,10 @@ Deno.test(`${ID} schema gate: validates 10-digit NYC BBLs and confirm_max_usd`, 
         { bbls: ["6008350041"] },
         { bbls: ["100835004"] },
         { bbls: ["1008350041"], confirm_max_usd: -0.05 },
+        {
+            bbls: ["1008350041"],
+            project_id: "11111111-2222-4333-8444-555555555551",
+        },
     ];
     for (const bad of badInputs) {
         await assertRejects(
@@ -120,10 +124,13 @@ Deno.test({
         if (result.isProviderError) {
             assertEquals(result.usage, { credits: {}, evidence: {} });
         } else {
-            assertEquals(result.usage, {
-                credits: {},
-                evidence: { RESULT: 0 },
-            });
+            const output = result.output as Record<string, Json>;
+            const data = output.data as Record<string, Json>;
+            assertEquals("cost_usd" in output, false);
+            assertEquals(data.quoted_only, true);
+            assertEquals(typeof data.distinct_owners, "number");
+            assertEquals(typeof data.total_usd, "number");
+            assertEquals(Object.keys(result.usage.evidence), ["RESULT"]);
         }
     },
 });

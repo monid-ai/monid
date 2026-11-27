@@ -182,6 +182,35 @@ Deno.test("dealport: vendor receipt wins on repricing and surfaces derived fold 
     });
 });
 
+Deno.test("dealport: nested zero-charge receipt settles at $0.00 and is stripped", async () => {
+    const id = "dealport#api/v1/buildings/owners";
+    const unit = await testSealedUnit(id);
+    const fixture = await loadFixture(
+        `${HERE}endpoints/research-building-owners/fixtures/synthetic-happy.json`,
+    );
+    const body = fixture.calls[0].res.body as Record<string, Json>;
+    delete body.cost_usd;
+    (body.data as Record<string, Json>).cost_usd = 0;
+    const result = await runEndpoint({
+        unit,
+        input: RATE[id].input,
+        mode: "replay",
+        fixture,
+    });
+    assertEquals(result.usage, {
+        credits: {},
+        evidence: { RESULT: 0 },
+    });
+    assertEquals(
+        "cost_usd" in
+            ((result.output as Record<string, Json>).data as Record<
+                string,
+                Json
+            >),
+        false,
+    );
+});
+
 Deno.test("dealport: an unmetered response falls back to the structural rate-card fold", async () => {
     const id = "dealport#api/v1/records/{id}";
     const unit = await testSealedUnit(id);

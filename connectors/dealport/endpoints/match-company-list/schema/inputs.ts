@@ -3,31 +3,31 @@ import { zDealportUuid, zUsStateCode } from "../../../schema/common.ts";
 
 /**
  * `POST /api/v1/companies/match` JSON request body mirror
- * (https://app.dealport.com/openapi/v1.json). Optionality only; the stateless
- * matching binding in `endpoint.ts` omits the recurring `watch` fields and
- * requires either `items` or `csv`.
+ * (https://app.dealport.com/openapi/v1.json). Optionality and OpenAPI
+ * nullability only; the stateless matching binding in `endpoint.ts` omits the
+ * recurring `watch` fields and requires a non-empty `items` array or `csv`.
  */
 export const zMatchCompanyListBody = z.object({
     items: z.array(
         z.object({
             external_id: z.string().min(1).describe(
                 "Caller identifier echoed back on the match result row.",
-            ).optional(),
+            ).nullable().optional(),
             name: z.string().min(1).describe(
                 "Company legal or operating name.",
-            ).optional(),
+            ).nullable().optional(),
             domain: z.string().min(1).describe(
                 "Company website host or registrable domain.",
-            ).optional(),
+            ).nullable().optional(),
             city: z.string().min(1).describe(
                 "Company city for fuzzy entity disambiguation.",
-            ).optional(),
+            ).nullable().optional(),
             state: zUsStateCode.describe(
                 "Two-letter US state code for fuzzy entity disambiguation.",
-            ).optional(),
+            ).nullable().optional(),
         }).strict(),
-    ).min(1).max(250).describe(
-        "1 to 250 company rows to resolve against Dealport's 28M+ US company graph.",
+    ).max(250).describe(
+        "Up to 250 company rows to resolve against Dealport's 28M+ US company graph.",
     ).optional(),
     csv: z.string().min(1).describe(
         "Raw CSV text with a header row (name/company, website/domain, city, state, id).",
@@ -37,8 +37,8 @@ export const zMatchCompanyListBody = z.object({
     ).optional(),
     project_id: zDealportUuid.describe(
         "Target Project UUID when enabling weekly monitoring.",
-    ).optional(),
+    ).nullable().optional(),
     project_name: z.string().min(1).describe(
         "Target Project name when enabling weekly monitoring.",
-    ).optional(),
+    ).nullable().optional(),
 }).strict();

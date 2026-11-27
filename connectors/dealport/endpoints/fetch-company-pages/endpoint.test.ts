@@ -39,7 +39,11 @@ Deno.test(`${ID} happy (synthetic): 1 cached + 1 live fetch bills $0.01 and stri
     const output = result.output as Record<string, Json>;
     const data = output.data as Record<string, Json>;
     assertEquals("cost_usd" in output, false);
+    assertEquals("credits_charged" in output, false);
+    assertEquals("remaining_balance_usd" in output, false);
     assertEquals("cost_usd" in data, false);
+    assertEquals("credits_charged" in data, false);
+    assertEquals("remaining_balance_usd" in data, false);
     assertEquals(data.cached_count, 1);
     assertEquals(data.live_fetched_count, 1);
     assertEquals((data.items as unknown[]).length, 2);
@@ -101,6 +105,16 @@ Deno.test(`${ID} schema gate and deduplicated estimate: requires targets and ded
             "INVALID_INPUT",
         );
     }
+    assertEquals(
+        await estimateEndpoint(unit, {
+            body: {
+                domains: ["acme.com", "acme.com", "beta.com"],
+                company_ids: [],
+                paths: [],
+            },
+        }),
+        { credits: { default: 0.02 }, evidence: { RESULT: 2 } },
+    );
     assertEquals(
         await estimateEndpoint(unit, {
             body: {

@@ -31,11 +31,18 @@ export default defineEndpoint({
     input: {
         schema: {
             body: z.union([
-                zWithRefreshDefault.required({ company_ids: true }),
-                zWithRefreshDefault.required({ domains: true }),
-                zWithRefreshDefault.required({ targets: true }),
+                zWithRefreshDefault.extend({
+                    company_ids: zWithRefreshDefault.shape.company_ids.unwrap()
+                        .min(1),
+                }),
+                zWithRefreshDefault.extend({
+                    domains: zWithRefreshDefault.shape.domains.unwrap().min(1),
+                }),
+                zWithRefreshDefault.extend({
+                    targets: zWithRefreshDefault.shape.targets.unwrap().min(1),
+                }),
             ]).describe(
-                "Provide at least one target list: `domains`, `company_ids`, or `targets`.",
+                "Provide at least one non-empty target list: `domains`, `company_ids`, or `targets`.",
             ),
         },
     },
@@ -60,11 +67,12 @@ export default defineEndpoint({
             return { counts: { RESULT: unique } };
         },
         evidence: ({ data, utils }) => {
-            const costUsd = utils.json.optionalNum(data.output, "$.cost_usd");
+            const costUsd = utils.json.optionalNum(data.output, "$.cost_usd") ??
+                utils.json.optionalNum(data.output, "$.data.cost_usd");
             const cents = utils.json.optionalNum(
                 data.output,
                 "$.credits_charged",
-            );
+            ) ?? utils.json.optionalNum(data.output, "$.data.credits_charged");
             if (costUsd === 0 || cents === 0) {
                 return { counts: { RESULT: 0 } };
             }

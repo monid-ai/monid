@@ -43,5 +43,6 @@
       live test) plus `provider.test.ts` literal rate table and fnTable
       interning assertions
 - [x] 4.3 Pass `deno task check`, `deno task test`, double deterministic
-      `deno task compiler:compile`, `deno task catalog inspect`, and
+      `deno task compiler:compile`,
+      `deno task catalog inspect 'dealport#api/v1/companies'`, and
       `deno task version:check`

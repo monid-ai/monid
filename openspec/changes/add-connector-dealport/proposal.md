@@ -68,7 +68,8 @@ or compiler changes are required.
   outbound outreach through Avery (Dealport's AI outreach specialist) would mix
   tenant state (same tenancy boundary as `vaquill`'s `/watches`). For that same
   reason, `watch`, `project_id`, and `project_name` are omitted at the binding
-  on `POST /api/v1/companies/match`.
+  on `POST /api/v1/companies/match`, and `project_id` and `project_name` are
+  omitted at the binding on `POST /api/v1/buildings/owners`.
 - **Async deep company research (`/api/v1/research`) is deferred** to a
   follow-up async lifecycle change.
 

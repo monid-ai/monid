@@ -1,12 +1,32 @@
 import { z } from "zod";
-import { companyScalarFilterShape } from "../../../schema/common.ts";
+import { companyFilterFields } from "../../../schema/common.ts";
 
 /**
  * `GET /api/v1/companies` query parameters mirror
  * (https://app.dealport.com/openapi/v1.json). Optionality only.
  */
 export const zSearchCompaniesQueryParams = z.object({
-    ...companyScalarFilterShape,
+    q: companyFilterFields.q.optional(),
+    state: companyFilterFields.state.optional(),
+    domain: companyFilterFields.domain.optional(),
+    min_revenue: companyFilterFields.min_revenue.optional(),
+    max_revenue: companyFilterFields.max_revenue.optional(),
+    filed_revenue_only: companyFilterFields.filed_revenue_only.optional(),
+    min_employees: companyFilterFields.min_employees.optional(),
+    max_employees: companyFilterFields.max_employees.optional(),
+    size_unknown: companyFilterFields.size_unknown.optional(),
+    independent: companyFilterFields.independent.optional(),
+    owner_businesses: companyFilterFields.owner_businesses.optional(),
+    medicare: companyFilterFields.medicare.optional(),
+    owner_operated: companyFilterFields.owner_operated.optional(),
+    owner_contact: companyFilterFields.owner_contact.optional(),
+    licensed: companyFilterFields.licensed.optional(),
+    adviser: companyFilterFields.adviser.optional(),
+    wealth_adviser: companyFilterFields.wealth_adviser.optional(),
+    online_store: companyFilterFields.online_store.optional(),
+    min_reviews: companyFilterFields.min_reviews.optional(),
+    order: companyFilterFields.order.optional(),
+    limit: companyFilterFields.limit.optional(),
     preview: z.boolean().describe(
         "Run a $0.00 market sizing preview instead of unlocking company Records.",
     ).optional(),

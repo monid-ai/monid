@@ -1,6 +1,14 @@
 import { defineEndpoint, Unit, UsageModelKind } from "@shared/core";
 import { zResearchBuildingOwnersBody } from "./schema/inputs.ts";
 
+// Attaching resolved owners to a workspace Project (`project_id`, `project_name`)
+// mutates shared workspace state under a broker credential, so both selectors
+// are omitted at the binding.
+const zStatelessBuildingOwnersBody = zResearchBuildingOwnersBody.omit({
+    project_id: true,
+    project_name: true,
+});
+
 /** POST /api/v1/buildings/owners: quote ($0.00) or resolve ($0.05/owner) NYC building principals. */
 export default defineEndpoint({
     meta: {
@@ -24,7 +32,7 @@ export default defineEndpoint({
         ],
     },
     request: { method: "POST", path: "/api/v1/buildings/owners" },
-    input: { schema: { body: zResearchBuildingOwnersBody } },
+    input: { schema: { body: zStatelessBuildingOwnersBody } },
     usage: {
         model: {
             kind: UsageModelKind.PER_UNIT,
@@ -49,11 +57,12 @@ export default defineEndpoint({
                 data.output,
                 "$.data.quoted_only",
             );
-            const costUsd = utils.json.optionalNum(data.output, "$.cost_usd");
+            const costUsd = utils.json.optionalNum(data.output, "$.cost_usd") ??
+                utils.json.optionalNum(data.output, "$.data.cost_usd");
             const cents = utils.json.optionalNum(
                 data.output,
                 "$.credits_charged",
-            );
+            ) ?? utils.json.optionalNum(data.output, "$.data.credits_charged");
             if (quotedOnly === true || costUsd === 0 || cents === 0) {
                 return { counts: { RESULT: 0 } };
             }
