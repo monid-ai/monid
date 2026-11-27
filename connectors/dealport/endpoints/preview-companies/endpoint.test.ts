@@ -80,6 +80,7 @@ Deno.test(`${ID} schema gate: invalid state, bounds, and unknown keys fail INVAL
         await estimateEndpoint(unit, {
             body: {
                 state: "OH",
+                naics: ["31-33", "238220"],
                 limit: 50,
                 owner_businesses: null,
                 min_revenue: null,

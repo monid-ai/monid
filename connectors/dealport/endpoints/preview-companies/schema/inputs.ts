@@ -46,7 +46,7 @@ export const zPreviewCompaniesBody = z.object({
         "Additional state and county markets to combine in one buy-box filter.",
     ).optional(),
     naics: z.union([
-        z.array(z.string().regex(/^\d{2,6}$/)),
+        z.array(z.string().min(1)),
         z.string().min(2),
     ]).describe(
         "2-to-6 digit NAICS industry codes (array or comma-separated string, e.g. ['238220']).",
