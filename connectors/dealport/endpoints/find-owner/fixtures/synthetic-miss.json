@@ -1,0 +1,36 @@
+{
+    "name": "synthetic-miss",
+    "description": "Owner lookup miss returns phone=null, email=null, and settles at $0.00.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://app.dealport.com/api/v1/owners",
+                "body": {
+                    "company_id": "11111111-2222-4333-8444-555555555552"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "company": {
+                        "id": "11111111-2222-4333-8444-555555555552",
+                        "name": "Cuyahoga Mechanical Group Inc"
+                    },
+                    "person": null,
+                    "phone": null,
+                    "email": null,
+                    "phones": [],
+                    "emails": [],
+                    "profile": null,
+                    "sources": [],
+                    "credits_charged": 0,
+                    "cost_usd": 0,
+                    "remaining_balance_usd": 4.91,
+                    "record_url": "https://app.dealport.com/companies/11111111-2222-4333-8444-555555555552",
+                    "note": "Dealport could not verify a human owner for this company yet; nothing was charged."
+                }
+            }
+        }
+    ]
+}

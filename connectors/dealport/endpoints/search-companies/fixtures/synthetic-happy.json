@@ -1,0 +1,86 @@
+{
+    "name": "synthetic-happy",
+    "description": "Two new US private company Records returned at $0.01 each ($0.02 total).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://app.dealport.com/api/v1/companies?state=OH&naics=238220&limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "id": "11111111-2222-4333-8444-555555555551",
+                            "name": "Buckeye Climate Systems LLC",
+                            "city": "Columbus",
+                            "state": "OH",
+                            "zip": "43215",
+                            "naics": [
+                                "238220"
+                            ],
+                            "industry": [
+                                "Plumbing, Heating, and Air-Conditioning Contractors"
+                            ],
+                            "industryLabel": "Plumbing, Heating, and Air-Conditioning Contractors",
+                            "phone": "+16145550100",
+                            "website": "https://buckeyeclimate-example.com",
+                            "revenue": {
+                                "value": 6400000,
+                                "low": 5000000,
+                                "high": 10000000,
+                                "basis": "observed"
+                            },
+                            "employees": {
+                                "value": 28,
+                                "low": 20,
+                                "high": 49,
+                                "basis": "filed"
+                            },
+                            "owner": {
+                                "name": "Jordan Blake",
+                                "role": "Managing Member"
+                            },
+                            "sources": 4,
+                            "foundedYear": 2004
+                        },
+                        {
+                            "id": "11111111-2222-4333-8444-555555555552",
+                            "name": "Cuyahoga Mechanical Group Inc",
+                            "city": "Cleveland",
+                            "state": "OH",
+                            "zip": "44114",
+                            "naics": [
+                                "238220"
+                            ],
+                            "industry": [
+                                "Plumbing, Heating, and Air-Conditioning Contractors"
+                            ],
+                            "industryLabel": "Plumbing, Heating, and Air-Conditioning Contractors",
+                            "phone": "+12165550140",
+                            "website": "https://cuyahogamechanical-example.com",
+                            "revenue": {
+                                "value": 3800000,
+                                "low": 2500000,
+                                "high": 5000000,
+                                "basis": "estimate"
+                            },
+                            "employees": {
+                                "value": 16,
+                                "low": 10,
+                                "high": 19,
+                                "basis": "filed"
+                            },
+                            "owner": null,
+                            "sources": 3,
+                            "foundedYear": 2011
+                        }
+                    ],
+                    "next_cursor": "2",
+                    "credits_charged": 2
+                }
+            }
+        }
+    ]
+}

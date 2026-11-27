@@ -1,0 +1,26 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "403 Forbidden when the API key lacks the `owners` capability scope.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://app.dealport.com/api/v1/owners",
+                "body": {
+                    "company_id": "11111111-2222-4333-8444-555555555551"
+                }
+            },
+            "res": {
+                "status": 403,
+                "body": {
+                    "error": "insufficient_key_scope",
+                    "required_scope": "owners",
+                    "granted_scopes": [
+                        "read"
+                    ],
+                    "message": "This API key does not include the \"owners\" scope."
+                }
+            }
+        }
+    ]
+}

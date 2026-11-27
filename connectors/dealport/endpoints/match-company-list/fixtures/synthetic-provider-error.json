@@ -1,0 +1,26 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "401 Unauthorized on POST /api/v1/companies/match.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://app.dealport.com/api/v1/companies/match",
+                "body": {
+                    "items": [
+                        {
+                            "name": "Buckeye Climate Systems LLC"
+                        }
+                    ]
+                }
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": "unauthorized",
+                    "message": "Send an active API key as \"Authorization: Bearer dp_live_...\"."
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "404 Not Found when the requested Record UUID or BBL does not exist.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://app.dealport.com/api/v1/records/99999999-9999-4999-8999-999999999999"
+            },
+            "res": {
+                "status": 404,
+                "body": {
+                    "error": "not_found",
+                    "message": "Dealport has no record with that id."
+                }
+            }
+        }
+    ]
+}

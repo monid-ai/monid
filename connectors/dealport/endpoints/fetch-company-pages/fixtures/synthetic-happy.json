@@ -1,0 +1,48 @@
+{
+    "name": "synthetic-happy",
+    "description": "Two domains requested: one served from the 30-day cache ($0.00) and one fetched live ($0.01).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://app.dealport.com/api/v1/pages",
+                "body": {
+                    "domains": [
+                        "buckeyeclimate-example.com",
+                        "cuyahogamechanical-example.com"
+                    ],
+                    "force_refresh": false
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "count": 2,
+                        "cached_count": 1,
+                        "live_fetched_count": 1,
+                        "unreachable_count": 0,
+                        "items": [
+                            {
+                                "domain": "buckeyeclimate-example.com",
+                                "source": "cache",
+                                "markdown": "# Buckeye Climate Systems\n\nCommercial HVAC service across central Ohio."
+                            },
+                            {
+                                "domain": "cuyahogamechanical-example.com",
+                                "source": "live",
+                                "markdown": "# Cuyahoga Mechanical Group\n\nDesign-build mechanical contracting in Cleveland."
+                            }
+                        ],
+                        "cost_usd": 0.01,
+                        "credits_charged": 1,
+                        "remaining_balance_usd": 4.98
+                    },
+                    "cost_usd": 0.01,
+                    "credits_charged": 1,
+                    "remaining_balance_usd": 4.98
+                }
+            }
+        }
+    ]
+}

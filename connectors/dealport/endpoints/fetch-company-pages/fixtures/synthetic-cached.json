@@ -1,0 +1,42 @@
+{
+    "name": "synthetic-cached",
+    "description": "Cached company website Markdown settles at $0.00 when live_fetched_count is 0.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://app.dealport.com/api/v1/pages",
+                "body": {
+                    "domains": [
+                        "buckeyeclimate-example.com"
+                    ],
+                    "force_refresh": false
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "count": 1,
+                        "cached_count": 1,
+                        "live_fetched_count": 0,
+                        "unreachable_count": 0,
+                        "items": [
+                            {
+                                "domain": "buckeyeclimate-example.com",
+                                "source": "cache",
+                                "markdown": "# Buckeye Climate Systems\n\nCommercial HVAC service across central Ohio."
+                            }
+                        ],
+                        "cost_usd": 0,
+                        "credits_charged": 0,
+                        "remaining_balance_usd": 4.98
+                    },
+                    "cost_usd": 0,
+                    "credits_charged": 0,
+                    "remaining_balance_usd": 4.98
+                }
+            }
+        }
+    ]
+}

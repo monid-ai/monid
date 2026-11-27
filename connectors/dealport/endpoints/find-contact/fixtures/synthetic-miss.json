@@ -1,0 +1,40 @@
+{
+    "name": "synthetic-miss",
+    "description": "Principal contact miss returns phone=null, email=null, and settles at $0.00.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://app.dealport.com/api/v1/contacts",
+                "body": {
+                    "company_id": "11111111-2222-4333-8444-555555555552",
+                    "person": "Morgan Vance"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "company": {
+                        "id": "11111111-2222-4333-8444-555555555552",
+                        "name": "Cuyahoga Mechanical Group Inc"
+                    },
+                    "person": {
+                        "name": "Morgan Vance",
+                        "role": "President"
+                    },
+                    "phone": null,
+                    "email": null,
+                    "phones": [],
+                    "emails": [],
+                    "profile": null,
+                    "sources": [],
+                    "credits_charged": 0,
+                    "cost_usd": 0,
+                    "remaining_balance_usd": 4.82,
+                    "record_url": "https://app.dealport.com/companies/11111111-2222-4333-8444-555555555552",
+                    "note": "No phone or email was found for this person; nothing was charged."
+                }
+            }
+        }
+    ]
+}

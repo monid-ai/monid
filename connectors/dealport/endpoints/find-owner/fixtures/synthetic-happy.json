@@ -1,0 +1,81 @@
+{
+    "name": "synthetic-happy",
+    "description": "Verified human company owner hit with business-safe synthetic contact details ($0.09).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://app.dealport.com/api/v1/owners",
+                "body": {
+                    "company_id": "11111111-2222-4333-8444-555555555551"
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "company": {
+                        "id": "11111111-2222-4333-8444-555555555551",
+                        "name": "Buckeye Climate Systems LLC"
+                    },
+                    "person": {
+                        "name": "Jordan Blake",
+                        "role": "Managing Member",
+                        "headline": "Founder & Managing Member at Buckeye Climate Systems LLC",
+                        "linkedin_url": "https://www.linkedin.com/in/jordan-blake-example",
+                        "location": "Columbus, OH",
+                        "seniority": "owner",
+                        "decision_role": "owner"
+                    },
+                    "phone": "+15550102001",
+                    "email": "jordan.blake@buckeyeclimate-example.com",
+                    "phones": [
+                        {
+                            "number": "+15550102001",
+                            "kind": "direct",
+                            "label": "direct",
+                            "dnc": null
+                        }
+                    ],
+                    "emails": [
+                        {
+                            "address": "jordan.blake@buckeyeclimate-example.com",
+                            "kind": "work",
+                            "verified": true,
+                            "status": "valid"
+                        }
+                    ],
+                    "profile": {
+                        "headline": "Founder & Managing Member at Buckeye Climate Systems LLC",
+                        "linkedin_url": "https://www.linkedin.com/in/jordan-blake-example",
+                        "location": "Columbus, OH",
+                        "roles": [
+                            {
+                                "title": "Managing Member",
+                                "company": "Buckeye Climate Systems LLC",
+                                "domain": "buckeyeclimate-example.com",
+                                "start": "2004",
+                                "end": null,
+                                "current": true
+                            }
+                        ],
+                        "education": [],
+                        "skills": [
+                            "Commercial HVAC",
+                            "Mechanical Contracting"
+                        ]
+                    },
+                    "sources": [
+                        {
+                            "url": "https://businesssearch.ohiosos.gov/",
+                            "title": "Ohio Secretary of State Business Filings"
+                        }
+                    ],
+                    "credits_charged": 9,
+                    "cost_usd": 0.09,
+                    "remaining_balance_usd": 4.91,
+                    "record_url": "https://app.dealport.com/companies/11111111-2222-4333-8444-555555555551"
+                }
+            }
+        }
+    ]
+}

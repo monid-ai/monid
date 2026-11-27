@@ -1,0 +1,25 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "401 Unauthorized on POST /api/v1/pages.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://app.dealport.com/api/v1/pages",
+                "body": {
+                    "domains": [
+                        "buckeyeclimate-example.com"
+                    ],
+                    "force_refresh": false
+                }
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": "unauthorized",
+                    "message": "Send an active API key as \"Authorization: Bearer dp_live_...\"."
+                }
+            }
+        }
+    ]
+}

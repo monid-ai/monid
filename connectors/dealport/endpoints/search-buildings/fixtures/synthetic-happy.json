@@ -1,0 +1,51 @@
+{
+    "name": "synthetic-happy",
+    "description": "Two NYC multifamily building Records returned at $0.01 each ($0.02 total).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://app.dealport.com/api/v1/buildings?borough=MN&min_units=20&limit=2"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "bbl": "1008350041",
+                            "borough": "MN",
+                            "address": "350 5 AVENUE",
+                            "owner_of_record": "MIDTOWN HOLDINGS REALTY LLC",
+                            "residential_units": 48,
+                            "building_class": "D7",
+                            "year_built": 1931,
+                            "zoning": "C5-3",
+                            "rent_stabilized_units": 24,
+                            "loan": {
+                                "holder_type": "agency",
+                                "estimated_due_year": 2027
+                            }
+                        },
+                        {
+                            "bbl": "1008400012",
+                            "borough": "MN",
+                            "address": "420 LEXINGTON AVENUE",
+                            "owner_of_record": "GRAMERCY CORRIDOR PARTNERS LP",
+                            "residential_units": 36,
+                            "building_class": "D6",
+                            "year_built": 1928,
+                            "zoning": "C5-3",
+                            "rent_stabilized_units": null,
+                            "loan": {
+                                "holder_type": "bank",
+                                "estimated_due_year": 2028
+                            }
+                        }
+                    ],
+                    "next_cursor": "2",
+                    "credits_charged": 2
+                }
+            }
+        }
+    ]
+}

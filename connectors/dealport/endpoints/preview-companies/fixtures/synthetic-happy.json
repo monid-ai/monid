@@ -1,0 +1,54 @@
+{
+    "name": "synthetic-happy",
+    "description": "Free ($0.00) market sizing count and sample companies for Ohio commercial HVAC contractors.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://app.dealport.com/api/v1/companies/preview",
+                "body": {
+                    "state": "OH",
+                    "naics": [
+                        "238220"
+                    ],
+                    "independent": true
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "matching_count": 3842,
+                    "matching_count_more": false,
+                    "tam_gate_minimum": 750,
+                    "tam_gate_passed": true,
+                    "sample": [
+                        {
+                            "id": "11111111-2222-4333-8444-555555555551",
+                            "name": "Buckeye Climate Systems LLC",
+                            "city": "Columbus",
+                            "state": "OH",
+                            "industry": "Plumbing, Heating, and Air-Conditioning Contractors",
+                            "employee_band": "20-49",
+                            "revenue_band": "$5M-$10M",
+                            "independent": true
+                        },
+                        {
+                            "id": "11111111-2222-4333-8444-555555555552",
+                            "name": "Cuyahoga Mechanical Group Inc",
+                            "city": "Cleveland",
+                            "state": "OH",
+                            "industry": "Plumbing, Heating, and Air-Conditioning Contractors",
+                            "employee_band": "10-19",
+                            "revenue_band": "$2.5M-$5M",
+                            "independent": true
+                        }
+                    ],
+                    "cost_usd": 0,
+                    "credits_charged": 0,
+                    "remaining_balance_usd": 5,
+                    "board_url": "https://app.dealport.com/companies?state=OH&naics=238220"
+                }
+            }
+        }
+    ]
+}

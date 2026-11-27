@@ -1,0 +1,31 @@
+{
+    "name": "synthetic-quote",
+    "description": "Omitting confirm_max_usd returns a 200 quote with quoted_only=true and settles at $0.00.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://app.dealport.com/api/v1/buildings/owners",
+                "body": {
+                    "bbls": [
+                        "1008350041",
+                        "1008400012"
+                    ]
+                }
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": {
+                        "quoted_only": true,
+                        "bbl_count": 2,
+                        "distinct_owners": 2,
+                        "total_usd": 0.1
+                    },
+                    "cost_usd": 0,
+                    "remaining_balance_usd": 4.82
+                }
+            }
+        }
+    ]
+}

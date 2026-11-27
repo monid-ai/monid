@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "422 Unprocessable Entity when a company search filter exceeds bounded limits.",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "https://app.dealport.com/api/v1/companies?state=OH&naics=238220&limit=2"
+            },
+            "res": {
+                "status": 422,
+                "body": {
+                    "error": "search_too_broad",
+                    "message": "Narrow the buy-box filter before unlocking Records."
+                }
+            }
+        }
+    ]
+}

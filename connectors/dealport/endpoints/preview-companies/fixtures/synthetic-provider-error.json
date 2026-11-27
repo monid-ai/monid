@@ -1,0 +1,22 @@
+{
+    "name": "synthetic-provider-error",
+    "description": "401 Unauthorized when the Dealport Bearer API key is invalid or revoked.",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "https://app.dealport.com/api/v1/companies/preview",
+                "body": {
+                    "state": "OH"
+                }
+            },
+            "res": {
+                "status": 401,
+                "body": {
+                    "error": "unauthorized",
+                    "message": "Send an active API key as \"Authorization: Bearer dp_live_...\"."
+                }
+            }
+        }
+    ]
+}
