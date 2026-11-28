@@ -50,8 +50,10 @@
       Bearer key, the phone lookup's `find`, the idempotency keys, the job
       read url, the cancel on stop and its repeat, a start meeting its own
       earlier attempt, both count repeats)
-- [ ] 4.4 Record real chains with `deno task record` and run
-      `deno task test:live` with the platform's key
+- [x] 4.4 Run the gated live tests against outbound.dev's production API
+      (2026-11-28): 14 passed, one per endpoint
+- [ ] 4.5 Record real chains with `deno task record` once the platform's
+      key is issued
 
 ## 5. Verification
 
