@@ -1,0 +1,24 @@
+{
+    "name": "synthetic-people-filters-free-text",
+    "description": "A free-text people filter (`job_title`): no fixed values, and the suggestions query that serves them. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?field=job_title"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "fields": {
+                        "job_title": {
+                            "valueShape": "term",
+                            "values": [],
+                            "autocomplete": "/v1/people/autocomplete?field=title"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

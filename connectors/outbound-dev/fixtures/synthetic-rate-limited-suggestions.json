@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-rate-limited-suggestions",
+    "description": "A suggestions read past the rate limit: 429 with an empty object and Retry-After, nothing charged. The query (`field=company`) is one both suggestion endpoints take, so the chain serves both. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?field=company&q=hald"
+            },
+            "res": {
+                "status": 429,
+                "headers": {
+                    "retry-after": "30"
+                },
+                "body": {}
+            }
+        }
+    ]
+}

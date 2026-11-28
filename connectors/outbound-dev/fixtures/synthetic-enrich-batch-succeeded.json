@@ -1,0 +1,116 @@
+{
+    "name": "synthetic-enrich-batch-succeeded",
+    "description": "A two-person email and phone waterfall job: 202 with the job, one read while running, then succeeded. One person found on both kinds (an email from the package at $0.02, a phone from the waterfall at $0.10), one found nothing; `chargedUsd` is 0.12. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "id": "6a1f0c2b9d4e8a7f3c5b2e14",
+                    "type": "people_enrichment",
+                    "status": "running",
+                    "find": "email_and_phone",
+                    "providers": "waterfall",
+                    "units": [],
+                    "createdAt": "2026-11-28T10:00:00.000Z"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/jobs/6a1f0c2b9d4e8a7f3c5b2e14"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "6a1f0c2b9d4e8a7f3c5b2e14",
+                    "type": "people_enrichment",
+                    "status": "running",
+                    "find": "email_and_phone",
+                    "providers": "waterfall",
+                    "progress": {
+                        "done": 1,
+                        "total": 2
+                    },
+                    "units": [],
+                    "createdAt": "2026-11-28T10:00:00.000Z"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/jobs/6a1f0c2b9d4e8a7f3c5b2e14"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "6a1f0c2b9d4e8a7f3c5b2e14",
+                    "type": "people_enrichment",
+                    "status": "succeeded",
+                    "find": "email_and_phone",
+                    "providers": "waterfall",
+                    "progress": {
+                        "done": 2,
+                        "total": 2
+                    },
+                    "units": [
+                        {
+                            "item": "email_found_package",
+                            "units": 1
+                        },
+                        {
+                            "item": "phone_found_waterfall",
+                            "units": 1
+                        }
+                    ],
+                    "chargedUsd": "0.120000",
+                    "results": [
+                        {
+                            "index": 0,
+                            "personId": "6a1f0c2b9d4e8a7f3c5b2e22",
+                            "emails": [
+                                {
+                                    "email": "ana.ruiz@halden-freight.example",
+                                    "status": "valid"
+                                }
+                            ],
+                            "phones": [
+                                {
+                                    "phoneNumber": "+14155550123",
+                                    "status": "valid"
+                                }
+                            ],
+                            "primaryEmail": "ana.ruiz@halden-freight.example",
+                            "primaryPhone": "+14155550123",
+                            "found": {
+                                "email": {
+                                    "email": "ana.ruiz@halden-freight.example",
+                                    "foundBy": "package"
+                                },
+                                "phone": {
+                                    "phoneNumber": "+14155550123",
+                                    "foundBy": "waterfall"
+                                }
+                            }
+                        },
+                        {
+                            "index": 1,
+                            "personId": "6a1f0c2b9d4e8a7f3c5b2e23",
+                            "emails": [],
+                            "phones": [],
+                            "found": {}
+                        }
+                    ],
+                    "createdAt": "2026-11-28T10:00:00.000Z",
+                    "finishedAt": "2026-11-28T10:02:30.000Z"
+                }
+            }
+        }
+    ]
+}

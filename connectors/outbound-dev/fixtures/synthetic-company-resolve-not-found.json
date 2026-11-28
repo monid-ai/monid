@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-company-resolve-not-found",
+    "description": "A company nothing matches: 200 with status not_found and a null company, never a guess. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "not_found",
+                    "company": null
+                }
+            }
+        }
+    ]
+}

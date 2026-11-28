@@ -1,0 +1,62 @@
+{
+    "name": "synthetic-count-poll-rate-limited",
+    "description": "A count whose repeat is refused once: 202 pending, 429 with Retry-After, then 200 ready. The count kept running, so the run did too. Serves both counts. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "pending",
+                    "filters": {
+                        "job_title_levels": [
+                            "director",
+                            "vp"
+                        ],
+                        "job_title_role": [
+                            "operations"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 429,
+                "headers": {
+                    "retry-after": "2"
+                },
+                "body": {}
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "ready",
+                    "total": 1246019,
+                    "filters": {
+                        "job_title_levels": [
+                            "director",
+                            "vp"
+                        ],
+                        "job_title_role": [
+                            "operations"
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

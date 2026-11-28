@@ -1,0 +1,32 @@
+{
+    "name": "synthetic-enrich-email-found-waterfall",
+    "description": "A waterfall enrichment whose email came from a further provider: `found.email.foundBy` is waterfall, the $0.05 line. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "personId": "6a1f0c2b9d4e8a7f3c5b2e22",
+                    "emails": [
+                        {
+                            "email": "ana.ruiz@halden-freight.example",
+                            "status": "catch-all"
+                        }
+                    ],
+                    "phones": [],
+                    "primaryEmail": "ana.ruiz@halden-freight.example",
+                    "found": {
+                        "email": {
+                            "email": "ana.ruiz@halden-freight.example",
+                            "foundBy": "waterfall"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

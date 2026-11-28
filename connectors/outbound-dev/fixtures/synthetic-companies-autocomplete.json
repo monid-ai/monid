@@ -1,0 +1,24 @@
+{
+    "name": "synthetic-companies-autocomplete",
+    "description": "Company name suggestions for what has been typed, each with its domain. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?field=company&q=hald"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "field": "company",
+                    "suggestions": [
+                        {
+                            "name": "Halden Freight",
+                            "domain": "halden-freight.example"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

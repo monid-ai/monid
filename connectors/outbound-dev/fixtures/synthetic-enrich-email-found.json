@@ -1,0 +1,32 @@
+{
+    "name": "synthetic-enrich-email-found",
+    "description": "An enrichment that finds a valid work email in outbound.dev's own data package: `found.email.foundBy` is package, the $0.02 line. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "personId": "6a1f0c2b9d4e8a7f3c5b2e22",
+                    "emails": [
+                        {
+                            "email": "ana.ruiz@halden-freight.example",
+                            "status": "valid"
+                        }
+                    ],
+                    "phones": [],
+                    "primaryEmail": "ana.ruiz@halden-freight.example",
+                    "found": {
+                        "email": {
+                            "email": "ana.ruiz@halden-freight.example",
+                            "foundBy": "package"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

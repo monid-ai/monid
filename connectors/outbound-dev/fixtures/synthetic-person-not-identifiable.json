@@ -1,0 +1,23 @@
+{
+    "name": "synthetic-person-not-identifiable",
+    "description": "An enrichment of a person with too little to search with: 422 person_not_identifiable, nothing charged. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 422,
+                "body": {
+                    "error": {
+                        "code": "person_not_identifiable",
+                        "message": "There is too little to find this person with. Send a LinkedIn URL, or a name with a company.",
+                        "doc_url": "https://docs.outbound.dev/errors#person_not_identifiable",
+                        "request_id": "req_6a1f0c2b9d4e8a7f3c5b2e10"
+                    }
+                }
+            }
+        }
+    ]
+}

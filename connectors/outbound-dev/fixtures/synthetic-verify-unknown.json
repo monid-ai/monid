@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-verify-unknown",
+    "description": "An email verification that could get no verdict: `unknown`, free. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "email": "ana.ruiz@halden-freight.example",
+                    "status": "unknown"
+                }
+            }
+        }
+    ]
+}

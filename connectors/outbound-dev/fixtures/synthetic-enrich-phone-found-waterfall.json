@@ -1,0 +1,32 @@
+{
+    "name": "synthetic-enrich-phone-found-waterfall",
+    "description": "A waterfall phone enrichment whose number came from a further provider: `found.phone.foundBy` is waterfall, the $0.10 line. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "personId": "6a1f0c2b9d4e8a7f3c5b2e22",
+                    "emails": [],
+                    "phones": [
+                        {
+                            "phoneNumber": "+14155550123",
+                            "status": "unverified"
+                        }
+                    ],
+                    "primaryPhone": "+14155550123",
+                    "found": {
+                        "phone": {
+                            "phoneNumber": "+14155550123",
+                            "foundBy": "waterfall"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}
