@@ -1,0 +1,24 @@
+{
+    "name": "synthetic-count-ready",
+    "description": "A search counted recently: 200 ready at once, no repeat. Serves both counts. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "ready",
+                    "total": 812,
+                    "filters": {
+                        "headquartersCountryCode": [
+                            "PRT"
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

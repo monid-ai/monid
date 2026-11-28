@@ -1,0 +1,23 @@
+{
+    "name": "synthetic-insufficient-balance",
+    "description": "A call the balance cannot cover: 402 insufficient_balance before anything runs, nothing charged. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 402,
+                "body": {
+                    "error": {
+                        "code": "insufficient_balance",
+                        "message": "Your balance cannot cover this call. Add funds and try again.",
+                        "doc_url": "https://docs.outbound.dev/errors#insufficient_balance",
+                        "request_id": "req_6a1f0c2b9d4e8a7f3c5b2e10"
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "name": "synthetic-server-error",
+    "description": "A failure on outbound.dev's side: 500 with an empty object, nothing charged. An email verification that gets no verdict in time answers this way. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 500,
+                "body": {}
+            }
+        }
+    ]
+}

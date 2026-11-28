@@ -1,0 +1,28 @@
+{
+    "name": "synthetic-people-search-empty",
+    "description": "A people search page with no one on it: an empty `data`, no cursor, nothing charged. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [],
+                    "pagination": {},
+                    "filters": {
+                        "job_title_levels": [
+                            "director",
+                            "vp"
+                        ],
+                        "job_title_role": [
+                            "operations"
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

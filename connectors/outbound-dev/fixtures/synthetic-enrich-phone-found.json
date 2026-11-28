@@ -1,0 +1,32 @@
+{
+    "name": "synthetic-enrich-phone-found",
+    "description": "A phone enrichment that finds a number in outbound.dev's own data package: `found.phone.foundBy` is package, the $0.05 line. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "personId": "6a1f0c2b9d4e8a7f3c5b2e22",
+                    "emails": [],
+                    "phones": [
+                        {
+                            "phoneNumber": "+14155550123",
+                            "status": "valid"
+                        }
+                    ],
+                    "primaryPhone": "+14155550123",
+                    "found": {
+                        "phone": {
+                            "phoneNumber": "+14155550123",
+                            "foundBy": "package"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "name": "synthetic-companies-filters",
+    "description": "Every company filter's values, one list per filter. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "industries": [
+                        "Logistics",
+                        "Freight"
+                    ],
+                    "countries": [
+                        {
+                            "name": "Portugal",
+                            "apiCode": "PRT"
+                        }
+                    ],
+                    "fundingStages": [
+                        "seed",
+                        "series_a"
+                    ],
+                    "statuses": [
+                        "active"
+                    ]
+                }
+            }
+        }
+    ]
+}

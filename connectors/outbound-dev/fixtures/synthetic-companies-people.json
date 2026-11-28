@@ -1,0 +1,62 @@
+{
+    "name": "synthetic-companies-people",
+    "description": "Two people at one company, with the company it resolved and a cursor to the next page. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "found",
+                    "company": {
+                        "name": "Halden Freight",
+                        "domain": "halden-freight.example",
+                        "linkedinUrl": "linkedin.com/company/halden-freight",
+                        "logoUrl": "https://logo.example/halden-freight.example.png"
+                    },
+                    "data": [
+                        {
+                            "linkedinMemberId": "ACoAABanaxr",
+                            "linkedin_url": "linkedin.com/in/ana-ruiz-ops",
+                            "full_name": "Ana Ruiz",
+                            "first_name": "Ana",
+                            "last_name": "Ruiz",
+                            "job_title": "Director of Operations",
+                            "job_title_levels": [
+                                "director"
+                            ],
+                            "job_title_role": "operations",
+                            "job_company_name": "Halden Freight",
+                            "job_company_website": "halden-freight.example",
+                            "job_company_linkedin_url": "linkedin.com/company/halden-freight",
+                            "location_name": "lisbon, lisbon, portugal"
+                        },
+                        {
+                            "linkedinMemberId": "ACoAABrafae",
+                            "linkedin_url": "linkedin.com/in/rafael-ortiz-ops",
+                            "full_name": "Rafael Ortiz",
+                            "first_name": "Rafael",
+                            "last_name": "Ortiz",
+                            "job_title": "VP Operations",
+                            "job_title_levels": [
+                                "vp"
+                            ],
+                            "job_title_role": "operations",
+                            "job_company_name": "Halden Freight",
+                            "job_company_website": "halden-freight.example",
+                            "job_company_linkedin_url": "linkedin.com/company/halden-freight",
+                            "location_name": "lisbon, lisbon, portugal"
+                        }
+                    ],
+                    "pagination": {
+                        "nextCursor": "Y29tcGFueV9wZW9wbGVfMg",
+                        "total": 38
+                    }
+                }
+            }
+        }
+    ]
+}

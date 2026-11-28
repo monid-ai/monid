@@ -1,0 +1,53 @@
+{
+    "name": "synthetic-enrich-batch-released",
+    "description": "A three-person job outbound.dev ended as failed at NO charge: it could not prove what the job did, so it released the hold. The job still lists the `units` of its last progress read (three emails), carries `chargedUsd` 0.000000 and has no `results`. Nothing was charged, so nothing is billed. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "id": "6a1f0c2b9d4e8a7f3c5b2e14",
+                    "type": "people_enrichment",
+                    "status": "running",
+                    "find": "email_and_phone",
+                    "providers": "waterfall",
+                    "units": [],
+                    "createdAt": "2026-11-28T10:00:00.000Z"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/jobs/6a1f0c2b9d4e8a7f3c5b2e14"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "6a1f0c2b9d4e8a7f3c5b2e14",
+                    "type": "people_enrichment",
+                    "status": "failed",
+                    "find": "email",
+                    "providers": "package",
+                    "progress": {
+                        "done": 3,
+                        "total": 3
+                    },
+                    "units": [
+                        {
+                            "item": "email_found_package",
+                            "units": 3
+                        }
+                    ],
+                    "chargedUsd": "0.000000",
+                    "createdAt": "2026-11-28T10:00:00.000Z",
+                    "finishedAt": "2026-11-28T12:05:00.000Z"
+                }
+            }
+        }
+    ]
+}

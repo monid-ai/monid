@@ -1,0 +1,73 @@
+{
+    "name": "synthetic-count-pending",
+    "description": "A new count from a `query`: 202 pending with the filters being counted and the part of the query no filter could express, one more 202 on the repeat, then 200 ready. Serves both counts. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "pending",
+                    "filters": {
+                        "job_title_levels": [
+                            "director",
+                            "vp"
+                        ],
+                        "job_title_role": [
+                            "operations"
+                        ]
+                    },
+                    "unresolvedCriteria": [
+                        "fast-growing"
+                    ]
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "status": "pending",
+                    "filters": {
+                        "job_title_levels": [
+                            "director",
+                            "vp"
+                        ],
+                        "job_title_role": [
+                            "operations"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "ready",
+                    "total": 1246019,
+                    "filters": {
+                        "job_title_levels": [
+                            "director",
+                            "vp"
+                        ],
+                        "job_title_role": [
+                            "operations"
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

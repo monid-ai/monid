@@ -1,0 +1,79 @@
+{
+    "name": "synthetic-enrich-batch-transient",
+    "description": "A one-person job whose reads fail twice (429 with Retry-After, then a 503) before it reads succeeded with nothing found. The job kept running, so the run did too; `chargedUsd` is zero. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "id": "6a1f0c2b9d4e8a7f3c5b2e14",
+                    "type": "people_enrichment",
+                    "status": "running",
+                    "find": "email_and_phone",
+                    "providers": "waterfall",
+                    "units": [],
+                    "createdAt": "2026-11-28T10:00:00.000Z"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/jobs/6a1f0c2b9d4e8a7f3c5b2e14"
+            },
+            "res": {
+                "status": 429,
+                "headers": {
+                    "retry-after": "1"
+                },
+                "body": {}
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/jobs/6a1f0c2b9d4e8a7f3c5b2e14"
+            },
+            "res": {
+                "status": 503,
+                "body": {}
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/jobs/6a1f0c2b9d4e8a7f3c5b2e14"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "6a1f0c2b9d4e8a7f3c5b2e14",
+                    "type": "people_enrichment",
+                    "status": "succeeded",
+                    "find": "email_and_phone",
+                    "providers": "waterfall",
+                    "progress": {
+                        "done": 1,
+                        "total": 1
+                    },
+                    "chargedUsd": "0.000000",
+                    "results": [
+                        {
+                            "index": 0,
+                            "emails": [],
+                            "phones": [],
+                            "found": {}
+                        }
+                    ],
+                    "units": [],
+                    "createdAt": "2026-11-28T10:00:00.000Z",
+                    "finishedAt": "2026-11-28T10:02:30.000Z"
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,65 @@
+{
+    "name": "synthetic-companies-search",
+    "description": "A company search page of two companies, with the filters it ran with and a cursor to the next page. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "data": [
+                        {
+                            "preferred_name": "Halden Freight",
+                            "names": [
+                                "Halden Freight",
+                                "Halden Freight Lda"
+                            ],
+                            "domains": [
+                                "halden-freight.example"
+                            ],
+                            "linkedin_primary_slug": "halden-freight",
+                            "standard_industries": [
+                                "Transportation and Logistics"
+                            ],
+                            "status_consensus": "active",
+                            "employee_count_consensus": {
+                                "gte": 201,
+                                "lte": 500
+                            }
+                        },
+                        {
+                            "preferred_name": "Ledgerline Cargo",
+                            "names": [
+                                "Ledgerline Cargo"
+                            ],
+                            "domains": [
+                                "ledgerline-cargo.example"
+                            ],
+                            "linkedin_primary_slug": "ledgerline-cargo",
+                            "standard_industries": [
+                                "Transportation and Logistics"
+                            ],
+                            "status_consensus": "active",
+                            "employee_count_consensus": {
+                                "gte": 51,
+                                "lte": 200
+                            }
+                        }
+                    ],
+                    "pagination": {
+                        "nextCursor": "Y29tcGFueV8y",
+                        "total": 812
+                    },
+                    "filters": {
+                        "headquartersCountryCode": [
+                            "PRT"
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

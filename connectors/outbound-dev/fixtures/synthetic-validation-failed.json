@@ -1,0 +1,24 @@
+{
+    "name": "synthetic-validation-failed",
+    "description": "A request outbound.dev refuses: 422 validation_failed naming the field in `param`, nothing charged. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 422,
+                "body": {
+                    "error": {
+                        "code": "validation_failed",
+                        "message": "Send exactly one of query, filters, savedSearchId or savedSearchName.",
+                        "param": "filters",
+                        "doc_url": "https://docs.outbound.dev/errors#validation_failed",
+                        "request_id": "req_6a1f0c2b9d4e8a7f3c5b2e10"
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "name": "synthetic-company-resolve-found",
+    "description": "A company resolved from its domain: name, domain, LinkedIn page and logo. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "status": "found",
+                    "company": {
+                        "name": "Halden Freight",
+                        "domain": "halden-freight.example",
+                        "linkedinUrl": "linkedin.com/company/halden-freight",
+                        "logoUrl": "https://logo.example/halden-freight.example.png"
+                    }
+                }
+            }
+        }
+    ]
+}

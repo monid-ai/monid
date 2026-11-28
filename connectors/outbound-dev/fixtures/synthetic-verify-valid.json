@@ -1,0 +1,19 @@
+{
+    "name": "synthetic-verify-valid",
+    "description": "An email verification with a verdict: `valid`, the $0.01 line. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "email": "ana.ruiz@halden-freight.example",
+                    "status": "valid"
+                }
+            }
+        }
+    ]
+}

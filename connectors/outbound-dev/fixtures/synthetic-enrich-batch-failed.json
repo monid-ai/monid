@@ -1,0 +1,80 @@
+{
+    "name": "synthetic-enrich-batch-failed",
+    "description": "A two-person job that failed after its first person: the email it found is kept and charged (`chargedUsd` 0.02), and the person it never reached carries `enrichment_not_run`. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 202,
+                "body": {
+                    "id": "6a1f0c2b9d4e8a7f3c5b2e14",
+                    "type": "people_enrichment",
+                    "status": "running",
+                    "find": "email_and_phone",
+                    "providers": "waterfall",
+                    "units": [],
+                    "createdAt": "2026-11-28T10:00:00.000Z"
+                }
+            }
+        },
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.origin}}/v1/jobs/6a1f0c2b9d4e8a7f3c5b2e14"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "id": "6a1f0c2b9d4e8a7f3c5b2e14",
+                    "type": "people_enrichment",
+                    "status": "failed",
+                    "find": "email_and_phone",
+                    "providers": "waterfall",
+                    "progress": {
+                        "done": 1,
+                        "total": 2
+                    },
+                    "units": [
+                        {
+                            "item": "email_found_package",
+                            "units": 1
+                        }
+                    ],
+                    "chargedUsd": "0.020000",
+                    "results": [
+                        {
+                            "index": 0,
+                            "personId": "6a1f0c2b9d4e8a7f3c5b2e22",
+                            "emails": [
+                                {
+                                    "email": "ana.ruiz@halden-freight.example",
+                                    "status": "valid"
+                                }
+                            ],
+                            "phones": [],
+                            "primaryEmail": "ana.ruiz@halden-freight.example",
+                            "found": {
+                                "email": {
+                                    "email": "ana.ruiz@halden-freight.example",
+                                    "foundBy": "package"
+                                }
+                            }
+                        },
+                        {
+                            "index": 1,
+                            "error": {
+                                "code": "enrichment_not_run",
+                                "message": "The job ended before it reached this person."
+                            }
+                        }
+                    ],
+                    "createdAt": "2026-11-28T10:00:00.000Z",
+                    "finishedAt": "2026-11-28T10:02:30.000Z"
+                }
+            }
+        }
+    ]
+}

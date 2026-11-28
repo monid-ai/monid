@@ -1,0 +1,21 @@
+{
+    "name": "synthetic-enrich-nothing-found",
+    "description": "An enrichment that finds nothing: empty `emails` and `phones`, an empty `found`, nothing charged. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "personId": "6a1f0c2b9d4e8a7f3c5b2e23",
+                    "emails": [],
+                    "phones": [],
+                    "found": {}
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,26 @@
+{
+    "name": "synthetic-people-autocomplete",
+    "description": "Job title suggestions for what has been typed. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?field=title&q=head"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "field": "title",
+                    "suggestions": [
+                        {
+                            "name": "head of operations"
+                        },
+                        {
+                            "name": "head of business operations"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

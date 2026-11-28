@@ -1,0 +1,32 @@
+{
+    "name": "synthetic-people-filters",
+    "description": "One people filter (`job_title_levels`) answered with its value shape and values. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "GET",
+                "url": "{{request.url}}?field=job_title_levels"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "fields": {
+                        "job_title_levels": {
+                            "valueShape": "include_exclude",
+                            "values": [
+                                {
+                                    "label": "Director",
+                                    "value": "director"
+                                },
+                                {
+                                    "label": "VP",
+                                    "value": "vp"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

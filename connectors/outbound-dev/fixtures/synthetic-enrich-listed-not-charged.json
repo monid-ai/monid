@@ -1,0 +1,33 @@
+{
+    "name": "synthetic-enrich-listed-not-charged",
+    "description": "An enrichment whose answer lists the person's email and phone while `found` is empty: outbound.dev charged nothing for the call, so nothing is billed. Synthetic, shaped on outbound.dev's published API contract (2026-11-28).",
+    "calls": [
+        {
+            "req": {
+                "method": "POST",
+                "url": "{{request.url}}"
+            },
+            "res": {
+                "status": 200,
+                "body": {
+                    "personId": "6a1f0c2b9d4e8a7f3c5b2e22",
+                    "emails": [
+                        {
+                            "email": "ana.ruiz@halden-freight.example",
+                            "status": "valid"
+                        }
+                    ],
+                    "phones": [
+                        {
+                            "phoneNumber": "+14155550123",
+                            "status": "valid"
+                        }
+                    ],
+                    "primaryEmail": "ana.ruiz@halden-freight.example",
+                    "primaryPhone": "+14155550123",
+                    "found": {}
+                }
+            }
+        }
+    ]
+}
