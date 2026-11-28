@@ -64,7 +64,9 @@ SHALL both send `POST /people/enrich`. The email endpoint SHALL send no
 Neither SHALL accept `find` or `personId` from the caller. Both SHALL drop
 `personId` from the output. Both, and `outbound-dev#emails/verify`, SHALL
 send their one request from a single-shot `lifecycle.start` carrying
-`Idempotency-Key: {runId}:call`, one fn shared by the three.
+`Idempotency-Key: {runId}:call`, one fn shared by the three. That start
+SHALL fail the attempt on `409` `idempotency_in_progress` and end the run
+as data on any other answer.
 
 #### Scenario: The phone lookup states its kind
 - **WHEN** the phone endpoint is called with a `linkedinUrl`
@@ -73,6 +75,15 @@ send their one request from a single-shot `lifecycle.start` carrying
 #### Scenario: A retried start does not pay twice
 - **WHEN** a lookup's start is sent twice for one run
 - **THEN** both requests carry the same `Idempotency-Key`
+
+#### Scenario: A call meets its own earlier attempt
+- **WHEN** a lookup or a verification answers `409`
+  `idempotency_in_progress`
+- **THEN** the attempt fails (retriable) and nothing settles
+
+#### Scenario: Another 409 is an answer
+- **WHEN** a lookup answers `409` `enrichment_in_progress`
+- **THEN** the run ends as zero-billed provider-error data
 
 ### Requirement: A lookup bills what `found` holds, by who found it
 Each lookup SHALL price a `COMPOSITE` of two metered lines: for an email
@@ -124,9 +135,10 @@ hold the run open; any other non-2xx SHALL end it as data. Both SHALL be
 `outbound-dev#people/enrich/batch` SHALL submit with
 `Idempotency-Key: {runId}:submit`, waiting 125 seconds for the answer, then
 read `GET /v1/jobs/{jobId}` until the job's `status` is no longer
-`running`. A submit answering `409` `idempotency_in_progress` SHALL fail
-the attempt, not end the run. A read answering `408`, `429` or any `5xx`
-SHALL hold the run open. It SHALL price a `COMPOSITE` of the four lookup
+`running`. A submit answering `409` `idempotency_in_progress`, `408` or any
+`5xx` SHALL fail the attempt, not end the run; any other non-202 SHALL end
+it as data. A read answering `408`, `429` or any `5xx` SHALL hold the run
+open. It SHALL price a `COMPOSITE` of the four lookup
 lines, with evidence reading the job's `units` and `usage.consolidate`
 claiming `chargedUsd` and removing it from the output. Evidence SHALL count
 nothing when `chargedUsd` is zero.
@@ -153,3 +165,12 @@ nothing when `chargedUsd` is zero.
   refused, reads the job up to eight times 15 seconds apart, and settles on
   the job once it has left `running`; a job still running after that is
   `UNRESOLVED`
+
+#### Scenario: A stop call is lost in transit
+- **WHEN** a cancel or a read fails in transit during the stop
+- **THEN** the watch goes on, and a stop that never reads the job ended
+  returns `UNRESOLVED` instead of throwing
+
+#### Scenario: A submit fails on the vendor's side
+- **WHEN** the submit answers `503`
+- **THEN** the attempt fails (retriable), because the job may have started

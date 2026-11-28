@@ -82,15 +82,21 @@ dollar prices published at `docs.outbound.dev/billing` and `GET /v1/prices`.
   `{runId}:submit`: outbound.dev binds the key to the body and answers a
   repeat with the first answer, so a retried start never pays twice.
   outbound.dev starts a bulk job inside the submit and can take two minutes
-  over it, so the submit waits that long; a repeat that arrives while the
-  first is still being answered (`409 idempotency_in_progress`) fails the
-  attempt instead of ending the run beside a job nobody is watching.
+  over it, so the submit waits that long. A call that meets its own earlier
+  attempt still being answered (`409 idempotency_in_progress`), on any of
+  the four, fails the attempt instead of settling at zero beside a call
+  that may yet charge. So does a bulk submit that fails on outbound.dev's
+  side (`408`, any `5xx`): the job may have started, and a retry under the
+  same key is answered with it. A refusal (any other `4xx`) ends the run as
+  data.
 - **Held runs and a cancelling stop.** A count repeat or a job read
   answering `429` (and, for the job, `408` or any `5xx`) holds the run open
   on `Retry-After`. `lifecycle.stop` posts `/v1/jobs/{jobId}/cancel`, again
   while outbound.dev refuses it, and watches the job wind down for up to
   105 seconds, so the values it found before the stop settle instead of
-  being left unaccounted for.
+  being left unaccounted for. A stop call that fails in transit is caught
+  and the watch goes on; a job still running or unread at the end is
+  `UNRESOLVED`, never a throw, which the engine would read as nothing owed.
 - **Counts keep little state.** A `filters` count repeats its own request,
   as outbound.dev documents, and keeps none. A `query` count repeats with
   the `filters` its first answer returned, never the `query`, and carries
@@ -110,7 +116,7 @@ dollar prices published at `docs.outbound.dev/billing` and `GET /v1/prices`.
   `personId` are not exposed, and `personId` is dropped from enrichment
   answers: each names a record in the outbound.dev workspace that holds the
   key, one workspace shared by every caller on a broker.
-- 34 synthetic fixture chains and 77 replay and wire tests, plus a gated
+- 34 synthetic fixture chains and 80 replay and wire tests, plus a gated
   live test per endpoint.
 
 ## Capabilities

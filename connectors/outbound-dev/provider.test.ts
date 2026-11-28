@@ -33,9 +33,13 @@ const JOB_ID = "6a1f0c2b9d4e8a7f3c5b2e14";
 
 type Sent = { method: string; url: string; headers: Headers; body: unknown };
 
+/** One answer of the fake fetch: a response, or a call that fails in
+ *  transit (`"lost"`), as a dropped connection does. */
+type Answer = { status: number; body: unknown } | "lost";
+
 /** An engine whose fetch answers `responses` in order and records every
  *  request it was asked to send. */
-const fake = (responses: { status: number; body: unknown }[]) => {
+const fake = (responses: Answer[]) => {
     const seen: Sent[] = [];
     const engine = new Engine({
         transport: directTransport({
@@ -52,6 +56,9 @@ const fake = (responses: { status: number; body: unknown }[]) => {
                         : undefined,
                 });
                 const next = responses[seen.length - 1];
+                if (next === "lost") {
+                    return Promise.reject(new TypeError("connection lost"));
+                }
                 return Promise.resolve(
                     new Response(JSON.stringify(next.body), {
                         status: next.status,
@@ -69,7 +76,7 @@ const fake = (responses: { status: number; body: unknown }[]) => {
 const wire = async (
     id: string,
     input: RunInput,
-    responses: { status: number; body: unknown }[],
+    responses: Answer[],
 ) => {
     const { engine, seen } = fake(responses);
     const loaded = await engine.load(await testSealedUnit(id));
@@ -311,4 +318,111 @@ Deno.test("outbound-dev#companies/count: a filters count repeats its own request
     assertEquals(repeat.method, "POST");
     assertEquals(repeat.url, first.url);
     assertEquals(repeat.body, { filters });
+});
+
+const IN_PROGRESS = {
+    status: 409,
+    body: {
+        error: {
+            code: "idempotency_in_progress",
+            message: "A call with this key is still running.",
+        },
+    },
+};
+
+Deno.test("outbound-dev: a paid single call that meets its own earlier attempt still in flight fails, never settles at zero", async () => {
+    for (
+        const [id, body] of [
+            ["outbound-dev#people/enrich/email", ANA],
+            ["outbound-dev#people/enrich/phone", ANA],
+            ["outbound-dev#emails/verify", {
+                email: "ana.ruiz@halden-freight.example",
+            }],
+        ] as const
+    ) {
+        const { engine } = fake([IN_PROGRESS]);
+        const loaded = await engine.load(await testSealedUnit(id));
+        await assertRejects(
+            () => loaded.run({ body }),
+            Error,
+            "earlier call",
+            id,
+        );
+    }
+    // Any other 409 is an answer: another call is enriching this person.
+    const { engine } = fake([{
+        status: 409,
+        body: {
+            error: { code: "enrichment_in_progress", message: "Try again." },
+        },
+    }]);
+    const loaded = await engine.load(
+        await testSealedUnit("outbound-dev#people/enrich/email"),
+    );
+    const result = await loaded.run({ body: ANA });
+    assertEquals(result.httpStatus, 409);
+    assertEquals(result.isProviderError, true);
+    assertEquals(result.usage, { credits: {}, evidence: {} });
+});
+
+Deno.test("outbound-dev#people/enrich/batch: a submit that fails on outbound.dev's side fails the attempt, a refusal ends the run", async () => {
+    for (const status of [500, 503, 408]) {
+        const { engine } = fake([{ status, body: {} }]);
+        const loaded = await engine.load(
+            await testSealedUnit("outbound-dev#people/enrich/batch"),
+        );
+        // The job may have started: a retry under the same key is answered
+        // with it, so the attempt must not settle at zero.
+        await assertRejects(
+            () => loaded.run({ body: { people: [ANA] } }),
+            Error,
+            "may have started",
+            String(status),
+        );
+    }
+    const { engine } = fake([{ status: 429, body: {} }]);
+    const loaded = await engine.load(
+        await testSealedUnit("outbound-dev#people/enrich/batch"),
+    );
+    const refused = await loaded.run({ body: { people: [ANA] } });
+    assertEquals(refused.httpStatus, 429);
+    assertEquals(refused.isProviderError, true);
+});
+
+Deno.test("outbound-dev#people/enrich/batch: a stop call lost in transit keeps the watch going, and a job never read ends UNRESOLVED", async () => {
+    const input = { body: { people: [ANA] } };
+    const ended = job("cancelled", {
+        units: [{ item: "email_found_package", units: 1 }],
+        chargedUsd: "0.020000",
+    });
+    // The cancel is lost, then taken; the first read is lost, the next ends.
+    const drained = fake([
+        { status: 202, body: job("running") },
+        "lost",
+        { status: 202, body: job("running") },
+        "lost",
+        { status: 200, body: ended },
+    ]);
+    const first = await drained.engine.load(
+        await testSealedUnit("outbound-dev#people/enrich/batch"),
+    );
+    const started = await first.start(input);
+    assert(started.kind === "RUNNING");
+    const stopped = await first.stop(input, started.state);
+    assert(stopped.kind === "COMPLETED");
+    assertEquals(stopped.usage.credits, { default: 0.02 });
+
+    // Every call after the start is lost: nothing was read, so nothing can
+    // be called settled. A throw would have read as nothing owed.
+    const unread = fake([
+        { status: 202, body: job("running") },
+        ...Array<Answer>(16).fill("lost"),
+    ]);
+    const second = await unread.engine.load(
+        await testSealedUnit("outbound-dev#people/enrich/batch"),
+    );
+    const begun = await second.start(input);
+    assert(begun.kind === "RUNNING");
+    const unresolved = await second.stop(input, begun.state);
+    assertEquals(unresolved.kind, "UNRESOLVED");
 });

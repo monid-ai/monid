@@ -48,8 +48,9 @@
       endpoint
 - [x] 4.3 Provider test: the id set, the shared hooks, and the wire (the
       Bearer key, the phone lookup's `find`, the idempotency keys, the job
-      read url, the cancel on stop and its repeat, a start meeting its own
-      earlier attempt, both count repeats)
+      read url, the cancel on stop and its repeat, a stop call lost in
+      transit, a start or a paid call meeting its own earlier attempt, a
+      submit failing on the vendor's side, both count repeats)
 - [x] 4.4 Run the gated live tests against outbound.dev's production API
       (2026-11-28): 14 passed, one per endpoint
 - [ ] 4.5 Record real chains with `deno task record` once the platform's

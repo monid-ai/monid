@@ -72,6 +72,19 @@ export default defineEndpoint({
                     "Idempotency-Key": data.run.runId + ":call",
                 },
             });
+            if (
+                res.status === 409 &&
+                utils.json.optionalGet(res.body, "$.error.code") ===
+                    "idempotency_in_progress"
+            ) {
+                // An earlier attempt of this same call is still being
+                // answered and may yet charge. Fail this attempt, so a
+                // retry under the same key meets that answer instead of the
+                // run settling at zero beside it.
+                throw new Error(
+                    "outbound.dev is still answering this run's earlier call",
+                );
+            }
             return {
                 kind: "COMPLETED",
                 httpStatus: res.status,

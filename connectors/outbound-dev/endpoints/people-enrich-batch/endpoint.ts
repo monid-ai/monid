@@ -18,8 +18,11 @@ import { zEnrichBatchBody } from "./schema/inputs.ts";
  * converges on one job instead of paying for a second. It starts the job
  * inside the submit and can take two minutes over it, so the submit waits
  * that long; a repeat that arrives while the first is still being answered
- * gets `409 idempotency_in_progress`, which fails the attempt (retriable)
- * rather than end the run beside a job nobody is watching.
+ * gets `409 idempotency_in_progress`, and a submit that fails on
+ * outbound.dev's side (`408`, any `5xx`) may have started the job all the
+ * same. Both fail the attempt (retriable) rather than end the run beside a
+ * job nobody is watching: a retry under the same key is answered with that
+ * job. A refusal (any other `4xx`) started nothing and ends the run as data.
  *
  * ONE READ-RETRY RULE: a read answering `408`, `429` or any `5xx` is a
  * lookup that failed while the job keeps running, so it holds the run open.
@@ -29,8 +32,9 @@ import { zEnrichBatchBody } from "./schema/inputs.ts";
  * while outbound.dev refuses it), then watches it wind down for up to 105
  * seconds: outbound.dev keeps and charges what the job found before it
  * stopped, so the run settles on the `cancelled` job rather than leave that
- * charge unaccounted for. A job still running after the watch is
- * `UNRESOLVED`.
+ * charge unaccounted for. A stop call that fails in transit is caught and
+ * the watch goes on, and a job still running, or unread, after the watch
+ * is `UNRESOLVED`: a throw would read as nothing owed.
  *
  * BILLING: the job's `units` say how many values it found on each price
  * line (the evidence), and its `chargedUsd` is outbound.dev's own total for
@@ -103,6 +107,17 @@ export default defineEndpoint({
                     "outbound.dev is still answering this run's earlier start",
                 );
             }
+            if (res.status === 408 || res.status >= 500) {
+                // A failure on outbound.dev's side can come after it held
+                // for the job and started it. A retry under the same key
+                // is answered with that job, so fail the attempt rather
+                // than settle the run at zero beside it. A refusal (4xx)
+                // started nothing and ends the run as data, below.
+                throw new Error(
+                    "outbound.dev failed the start (" + res.status +
+                        "): the job may have started",
+                );
+            }
             if (res.status !== 202) {
                 return {
                     kind: "COMPLETED",
@@ -167,27 +182,43 @@ export default defineEndpoint({
             let isCancelTaken = false;
             for (let attempt = 0; attempt < 8; attempt++) {
                 if (attempt > 0) await utils.sleep(15_000);
-                if (!isCancelTaken) {
-                    const cancel = await utils.http({
-                        method: "POST",
-                        path: path + "/cancel",
-                    });
-                    isCancelTaken = cancel.status >= 200 && cancel.status < 300;
-                    logger.info("outbound.dev enrichment job cancel", {
-                        jobId,
-                        status: cancel.status,
-                    });
-                }
-                const res = await utils.http({ method: "GET", path });
-                if (
-                    res.status === 200 &&
-                    utils.json.optionalGet(res.body, "$.status") !== "running"
-                ) {
-                    return {
-                        kind: "COMPLETED",
-                        httpStatus: 200,
-                        output: res.body,
-                    };
+                // A call that fails in transit must not end the stop: a
+                // throw here reads as nothing owed, while the job may have
+                // charged. Keep draining, and end UNRESOLVED if it never
+                // reads.
+                try {
+                    if (!isCancelTaken) {
+                        const cancel = await utils.http({
+                            method: "POST",
+                            path: path + "/cancel",
+                        });
+                        isCancelTaken = cancel.status >= 200 &&
+                            cancel.status < 300;
+                        logger.info("outbound.dev enrichment job cancel", {
+                            jobId,
+                            status: cancel.status,
+                        });
+                    }
+                    const res = await utils.http({ method: "GET", path });
+                    if (
+                        res.status === 200 &&
+                        utils.json.optionalGet(res.body, "$.status") !==
+                            "running"
+                    ) {
+                        return {
+                            kind: "COMPLETED",
+                            httpStatus: 200,
+                            output: res.body,
+                        };
+                    }
+                } catch {
+                    logger.warn(
+                        "outbound.dev enrichment job stop call failed",
+                        {
+                            jobId,
+                            attempt,
+                        },
+                    );
                 }
             }
             return {

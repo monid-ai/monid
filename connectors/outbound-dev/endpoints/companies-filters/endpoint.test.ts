@@ -21,13 +21,20 @@ const run = async (fixture: string, queryParams: Record<string, Json>) =>
     });
 
 Deno.test("outbound-dev#companies/filters: every filter's values, free", async () => {
-    const result = await run("synthetic-companies-filters.json", {});
+    const fixture = await loadFixture(
+        `${chains}synthetic-companies-filters.json`,
+    );
+    const result = await runEndpoint({
+        unit: await testSealedUnit(ID),
+        input: { queryParams: {} },
+        mode: "replay",
+        fixture,
+    });
     assertEquals(result.httpStatus, 200);
     assertEquals(result.isProviderError, false);
     assertEquals(result.usage, { credits: {}, evidence: {} });
-    const output = result.output as Record<string, unknown>;
-    assertEquals(output.fundingStages, ["seed", "series_a"]);
-    assertEquals(output.countries, [{ name: "Portugal", apiCode: "PRT" }]);
+    // Every list passes through untouched: nothing added, nothing dropped.
+    assertEquals(result.output, fixture.calls[0].res.body);
 });
 
 Deno.test("outbound-dev#companies/filters: a refusal is zero-billed data", async () => {
